@@ -3630,3 +3630,2871 @@
 [ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, object given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
 [ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, object given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
 [ error ] 微信支付回调
+---------------------------------------------------------------
+[ 2019-04-29T14:22:35+08:00 ] 140.207.54.76 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.029761s][吞吐率：33.60req/s] [内存消耗：2,739.77kb] [文件加载：75]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, object given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, object given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, object given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] 微信支付回调
+---------------------------------------------------------------
+[ 2019-04-29T14:24:53+08:00 ] 14.18.29.116 GET /index/payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/payment/wxPayNotifyCallBack [运行时间：0.026166s][吞吐率：38.22req/s] [内存消耗：3,329.63kb] [文件加载：83]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'msy.meishangyun.com',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Mobile Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'cookie' => 'PHPSESSID=bmath30hcdcqbq6u02n3v68vn0',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, object given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, object given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, object given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] 微信支付回调
+---------------------------------------------------------------
+[ 2019-04-29T14:26:54+08:00 ] 14.18.29.116 GET /index/payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/payment/wxPayNotifyCallBack [运行时间：0.021895s][吞吐率：45.67req/s] [内存消耗：3,329.61kb] [文件加载：83]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'msy.meishangyun.com',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Mobile Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'cookie' => 'PHPSESSID=bmath30hcdcqbq6u02n3v68vn0',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, object given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, object given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, object given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] 微信支付回调
+---------------------------------------------------------------
+[ 2019-04-29T14:27:25+08:00 ] 140.207.54.77 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.019305s][吞吐率：51.80req/s] [内存消耗：2,739.77kb] [文件加载：75]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, object given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, object given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, object given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] 微信支付回调
+---------------------------------------------------------------
+[ 2019-04-29T14:32:34+08:00 ] 14.18.29.116 GET /index/payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/payment/wxPayNotifyCallBack [运行时间：0.245986s][吞吐率：4.07req/s] [内存消耗：4,523.64kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'msy.meishangyun.com',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'cookie' => 'PHPSESSID=bmath30hcdcqbq6u02n3v68vn0',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T14:33:38+08:00 ] 14.18.29.116 GET /index/payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/payment/wxPayNotifyCallBack [运行时间：0.048611s][吞吐率：20.57req/s] [内存消耗：3,332.34kb] [文件加载：83]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'msy.meishangyun.com',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'cookie' => 'PHPSESSID=bmath30hcdcqbq6u02n3v68vn0',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, object given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, object given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, object given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] 微信支付回调
+---------------------------------------------------------------
+[ 2019-04-29T14:34:41+08:00 ] 14.18.29.116 GET /index/payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/payment/wxPayNotifyCallBack [运行时间：0.042930s][吞吐率：23.29req/s] [内存消耗：3,332.54kb] [文件加载：83]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'msy.meishangyun.com',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'cookie' => 'PHPSESSID=bmath30hcdcqbq6u02n3v68vn0',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, object given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, object given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, object given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] 微信支付回调
+---------------------------------------------------------------
+[ 2019-04-29T14:34:42+08:00 ] 14.18.29.116 GET /index/payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/payment/wxPayNotifyCallBack [运行时间：0.023087s][吞吐率：43.31req/s] [内存消耗：3,332.54kb] [文件加载：83]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'msy.meishangyun.com',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'cookie' => 'PHPSESSID=bmath30hcdcqbq6u02n3v68vn0',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, object given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, object given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, object given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] 微信支付回调
+---------------------------------------------------------------
+[ 2019-04-29T14:34:44+08:00 ] 14.18.29.116 GET /index/payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/payment/wxPayNotifyCallBack [运行时间：0.021838s][吞吐率：45.79req/s] [内存消耗：3,332.54kb] [文件加载：83]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'msy.meishangyun.com',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'cookie' => 'PHPSESSID=bmath30hcdcqbq6u02n3v68vn0',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, object given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, object given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, object given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] 微信支付回调
+---------------------------------------------------------------
+[ 2019-04-29T14:41:52+08:00 ] 14.18.29.116 GET /index/payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/payment/wxPayNotifyCallBack [运行时间：0.277002s][吞吐率：3.61req/s] [内存消耗：4,516.05kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'msy.meishangyun.com',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'cookie' => 'PHPSESSID=bmath30hcdcqbq6u02n3v68vn0',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T14:44:11+08:00 ] 14.18.29.116 GET /index/payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/payment/wxPayNotifyCallBack [运行时间：0.285927s][吞吐率：3.50req/s] [内存消耗：4,516.42kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'msy.meishangyun.com',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'cookie' => 'PHPSESSID=bmath30hcdcqbq6u02n3v68vn0',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T14:47:27+08:00 ] 58.251.80.51 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.247974s][吞吐率：4.03req/s] [内存消耗：4,501.41kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T14:50:38+08:00 ] 58.251.80.51 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.277235s][吞吐率：3.61req/s] [内存消耗：4,501.41kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T14:51:32+08:00 ] 14.18.29.116 GET /index/payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/payment/wxPayNotifyCallBack [运行时间：0.261866s][吞吐率：3.82req/s] [内存消耗：4,517.14kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'msy.meishangyun.com',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'cookie' => 'PHPSESSID=bmath30hcdcqbq6u02n3v68vn0',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T15:35:34+08:00 ] 14.18.29.116 GET /index/payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/payment/wxPayNotifyCallBack [运行时间：0.257503s][吞吐率：3.88req/s] [内存消耗：4,519.85kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'msy.meishangyun.com',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'cookie' => 'PHPSESSID=bmath30hcdcqbq6u02n3v68vn0',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T15:36:50+08:00 ] 140.207.54.76 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.251538s][吞吐率：3.98req/s] [内存消耗：4,504.34kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T15:40:11+08:00 ] 140.207.54.78 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.252565s][吞吐率：3.96req/s] [内存消耗：4,501.27kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T15:40:40+08:00 ] 140.207.54.76 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.247002s][吞吐率：4.05req/s] [内存消耗：4,501.27kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T15:41:15+08:00 ] 183.3.234.63 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.270463s][吞吐率：3.70req/s] [内存消耗：4,501.27kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T15:41:31+08:00 ] 140.207.54.76 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.268706s][吞吐率：3.72req/s] [内存消耗：4,501.27kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T15:41:47+08:00 ] 140.207.54.78 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.254420s][吞吐率：3.93req/s] [内存消耗：4,501.27kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T15:41:55+08:00 ] 14.18.29.116 GET /index/payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/payment/wxPayNotifyCallBack [运行时间：0.279565s][吞吐率：3.58req/s] [内存消耗：4,516.51kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'msy.meishangyun.com',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'cookie' => 'PHPSESSID=bmath30hcdcqbq6u02n3v68vn0',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T15:42:17+08:00 ] 140.207.54.78 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.302922s][吞吐率：3.30req/s] [内存消耗：4,501.27kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T15:45:18+08:00 ] 140.207.54.76 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.256563s][吞吐率：3.90req/s] [内存消耗：4,501.27kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T15:47:29+08:00 ] 140.207.54.77 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.284145s][吞吐率：3.52req/s] [内存消耗：4,501.27kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T15:55:18+08:00 ] 140.207.54.77 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.283369s][吞吐率：3.53req/s] [内存消耗：4,501.27kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T16:10:42+08:00 ] 140.207.54.75 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.248871s][吞吐率：4.02req/s] [内存消耗：4,500.41kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T16:19:12+08:00 ] 14.18.29.116 GET /index/Payment/toPay?system_id=3&payment_type=2&sn=20190429161501626173455846661477
+[ info ] msy.meishangyun.com/index/Payment/toPay?system_id=3&payment_type=2&sn=20190429161501626173455846661477 [运行时间：0.309821s][吞吐率：3.23req/s] [内存消耗：4,519.84kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'msy.meishangyun.com',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Mobile Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'referer' => 'https://hss.meishangyun.com/index/Wallet/index.html',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'cookie' => 'PHPSESSID=bmath30hcdcqbq6u02n3v68vn0',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'system_id' => '3',
+  'payment_type' => '2',
+  'sn' => '20190429161501626173455846661477',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T16:19:36+08:00 ] 14.18.29.116 GET /index/Payment/toPay?system_id=3&payment_type=2&sn=20190429161935789053783447133620
+[ info ] msy.meishangyun.com/index/Payment/toPay?system_id=3&payment_type=2&sn=20190429161935789053783447133620 [运行时间：0.270370s][吞吐率：3.70req/s] [内存消耗：4,519.42kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'msy.meishangyun.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'referer' => 'https://hss.meishangyun.com/index/Wallet/index.html',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'cookie' => 'PHPSESSID=bmath30hcdcqbq6u02n3v68vn0',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'system_id' => '3',
+  'payment_type' => '2',
+  'sn' => '20190429161935789053783447133620',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T16:19:38+08:00 ] 14.18.29.116 GET /index/Payment/toPay?system_id=3&payment_type=2&sn=20190429161935789053783447133620
+[ info ] msy.meishangyun.com/index/Payment/toPay?system_id=3&payment_type=2&sn=20190429161935789053783447133620 [运行时间：0.267402s][吞吐率：3.74req/s] [内存消耗：4,519.45kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'msy.meishangyun.com',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'referer' => 'https://hss.meishangyun.com/index/Wallet/index.html',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'cookie' => 'PHPSESSID=bmath30hcdcqbq6u02n3v68vn0',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'system_id' => '3',
+  'payment_type' => '2',
+  'sn' => '20190429161935789053783447133620',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T16:22:35+08:00 ] 14.18.29.116 GET /index/Payment/toPay?system_id=3&payment_type=1&sn=20190429142820563954132215265327
+[ info ] msy.meishangyun.com/index/Payment/toPay?system_id=3&payment_type=1&sn=20190429142820563954132215265327 [运行时间：0.252404s][吞吐率：3.96req/s] [内存消耗：4,519.35kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'msy.meishangyun.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Mobile Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'referer' => 'https://hss.meishangyun.com/index/order/detail/order_sn/20190429142820563954132215265327.html',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'cookie' => 'PHPSESSID=bmath30hcdcqbq6u02n3v68vn0',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'system_id' => '3',
+  'payment_type' => '1',
+  'sn' => '20190429142820563954132215265327',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T16:22:37+08:00 ] 14.18.29.116 GET /index/Payment/toPay?system_id=3&payment_type=1&sn=20190429142820563954132215265327
+[ info ] msy.meishangyun.com/index/Payment/toPay?system_id=3&payment_type=1&sn=20190429142820563954132215265327 [运行时间：0.300564s][吞吐率：3.33req/s] [内存消耗：4,519.86kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'msy.meishangyun.com',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Mobile Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'referer' => 'https://hss.meishangyun.com/index/order/detail/order_sn/20190429142820563954132215265327.html',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'cookie' => 'PHPSESSID=bmath30hcdcqbq6u02n3v68vn0',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'system_id' => '3',
+  'payment_type' => '1',
+  'sn' => '20190429142820563954132215265327',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T16:22:46+08:00 ] 14.18.29.116 GET /index/Payment/toPay?system_id=3&payment_type=1&sn=20190429142820563954132215265327
+[ info ] msy.meishangyun.com/index/Payment/toPay?system_id=3&payment_type=1&sn=20190429142820563954132215265327 [运行时间：0.274753s][吞吐率：3.64req/s] [内存消耗：4,519.35kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'msy.meishangyun.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Mobile Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'referer' => 'https://hss.meishangyun.com/index/order/detail/order_sn/20190429142820563954132215265327.html',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'cookie' => 'PHPSESSID=bmath30hcdcqbq6u02n3v68vn0',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'system_id' => '3',
+  'payment_type' => '1',
+  'sn' => '20190429142820563954132215265327',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T16:25:16+08:00 ] 14.18.29.116 GET /index/Payment/toPay?system_id=3&payment_type=1&sn=20190429142820563954132215265327
+[ info ] msy.meishangyun.com/index/Payment/toPay?system_id=3&payment_type=1&sn=20190429142820563954132215265327 [运行时间：0.254541s][吞吐率：3.93req/s] [内存消耗：4,519.35kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'msy.meishangyun.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Mobile Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'referer' => 'https://hss.meishangyun.com/index/order/detail/order_sn/20190429142820563954132215265327.html',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'cookie' => 'PHPSESSID=bmath30hcdcqbq6u02n3v68vn0',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'system_id' => '3',
+  'payment_type' => '1',
+  'sn' => '20190429142820563954132215265327',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T16:26:19+08:00 ] 14.18.29.116 GET /index/Payment/toPay?system_id=3&payment_type=1&sn=20190429142820563954132215265327
+[ info ] msy.meishangyun.com/index/Payment/toPay?system_id=3&payment_type=1&sn=20190429142820563954132215265327 [运行时间：0.022767s][吞吐率：43.92req/s] [内存消耗：3,337.27kb] [文件加载：83]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'msy.meishangyun.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Mobile Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'referer' => 'https://hss.meishangyun.com/index/order/detail/order_sn/20190429142820563954132215265327.html',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'cookie' => 'PHPSESSID=bmath30hcdcqbq6u02n3v68vn0',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'system_id' => '3',
+  'payment_type' => '1',
+  'sn' => '20190429142820563954132215265327',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ LOG ] INIT File
+[ error ] [2]file_get_contents(./array1.json): failed to open stream: No such file or directory[/home/www/web/thinkphp5.1/common/component/payment/weixin/weixinpay.php:236]
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, object given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, object given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, object given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] 微信支付回调
+---------------------------------------------------------------
+[ 2019-04-29T16:33:18+08:00 ] 183.3.234.56 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.018781s][吞吐率：53.25req/s] [内存消耗：2,742.53kb] [文件加载：75]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ LOG ] INIT File
+[ error ] [2]file_get_contents(./array1.json): failed to open stream: No such file or directory[/home/www/web/thinkphp5.1/common/component/payment/weixin/weixinpay.php:236]
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, object given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, object given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, object given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] 微信支付回调
+---------------------------------------------------------------
+[ 2019-04-29T16:36:51+08:00 ] 183.3.234.56 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.028321s][吞吐率：35.31req/s] [内存消耗：2,742.53kb] [文件加载：75]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ LOG ] INIT File
+[ error ] [2]file_get_contents(./array1.json): failed to open stream: No such file or directory[/home/www/web/thinkphp5.1/common/component/payment/weixin/weixinpay.php:236]
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, object given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, object given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, object given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] 微信支付回调
+---------------------------------------------------------------
+[ 2019-04-29T16:40:12+08:00 ] 183.3.234.56 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.031023s][吞吐率：32.23req/s] [内存消耗：2,742.53kb] [文件加载：75]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ LOG ] INIT File
+[ error ] [2]file_get_contents(./array1.json): failed to open stream: No such file or directory[/home/www/web/thinkphp5.1/common/component/payment/weixin/weixinpay.php:236]
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, object given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, object given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, object given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] 微信支付回调
+---------------------------------------------------------------
+[ 2019-04-29T16:45:20+08:00 ] 183.3.234.56 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.033310s][吞吐率：30.02req/s] [内存消耗：2,742.53kb] [文件加载：75]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ LOG ] INIT File
+[ error ] [2]file_get_contents(./array1.json): failed to open stream: No such file or directory[/home/www/web/thinkphp5.1/common/component/payment/weixin/weixinpay.php:236]
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, object given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, object given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, object given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] 微信支付回调
+---------------------------------------------------------------
+[ 2019-04-29T16:47:30+08:00 ] 183.3.234.50 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.033307s][吞吐率：30.02req/s] [内存消耗：2,742.53kb] [文件加载：75]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ LOG ] INIT File
+[ error ] [2]file_get_contents(./array1.json): failed to open stream: No such file or directory[/home/www/web/thinkphp5.1/common/component/payment/weixin/weixinpay.php:236]
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, object given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, object given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, object given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] 微信支付回调
+---------------------------------------------------------------
+[ 2019-04-29T16:48:49+08:00 ] 183.3.234.56 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.018501s][吞吐率：54.05req/s] [内存消耗：2,742.53kb] [文件加载：75]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ LOG ] INIT File
+[ error ] [2]file_get_contents(./array1.json): failed to open stream: No such file or directory[/home/www/web/thinkphp5.1/common/component/payment/weixin/weixinpay.php:236]
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, object given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, object given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, object given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] 微信支付回调
+---------------------------------------------------------------
+[ 2019-04-29T16:56:03+08:00 ] 14.18.29.116 GET /index/Payment/toPay?system_id=3&payment_type=1&sn=20190429142820563954132215265327
+[ info ] msy.meishangyun.com/index/Payment/toPay?system_id=3&payment_type=1&sn=20190429142820563954132215265327 [运行时间：0.021895s][吞吐率：45.67req/s] [内存消耗：3,337.81kb] [文件加载：83]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'msy.meishangyun.com',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Mobile Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'referer' => 'https://hss.meishangyun.com/index/order/detail/order_sn/20190429142820563954132215265327.html',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'cookie' => 'PHPSESSID=bmath30hcdcqbq6u02n3v68vn0',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'system_id' => '3',
+  'payment_type' => '1',
+  'sn' => '20190429142820563954132215265327',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ LOG ] INIT File
+[ error ] [2]file_get_contents(./array1.json): failed to open stream: No such file or directory[/home/www/web/thinkphp5.1/common/component/payment/weixin/weixinpay.php:236]
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, object given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, object given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, object given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] 微信支付回调
+---------------------------------------------------------------
+[ 2019-04-29T16:57:39+08:00 ] 14.18.29.116 GET /index/Payment/toPay?system_id=3&payment_type=1&sn=20190429142820563954132215265327
+[ info ] msy.meishangyun.com/index/Payment/toPay?system_id=3&payment_type=1&sn=20190429142820563954132215265327 [运行时间：0.022160s][吞吐率：45.13req/s] [内存消耗：3,339.05kb] [文件加载：83]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'msy.meishangyun.com',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Mobile Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'referer' => 'https://hss.meishangyun.com/index/order/detail/order_sn/20190429142820563954132215265327.html',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'cookie' => 'PHPSESSID=bmath30hcdcqbq6u02n3v68vn0',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'system_id' => '3',
+  'payment_type' => '1',
+  'sn' => '20190429142820563954132215265327',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ LOG ] INIT File
+[ error ] [2]file_get_contents(./array1.json): failed to open stream: No such file or directory[/home/www/web/thinkphp5.1/common/component/payment/weixin/weixinpay.php:236]
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, object given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, object given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, object given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] 微信支付回调
+---------------------------------------------------------------
+[ 2019-04-29T16:59:09+08:00 ] 183.3.234.56 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.041124s][吞吐率：24.32req/s] [内存消耗：2,743.52kb] [文件加载：75]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ LOG ] INIT File
+[ error ] [2]file_get_contents(./array1.json): failed to open stream: No such file or directory[/home/www/web/thinkphp5.1/common/component/payment/weixin/weixinpay.php:236]
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, object given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, object given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, object given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] 微信支付回调
+---------------------------------------------------------------
+[ 2019-04-29T17:07:14+08:00 ] 14.18.29.116 GET /index/Payment/toPay?system_id=3&payment_type=1&sn=20190429142820563954132215265327
+[ info ] msy.meishangyun.com/index/Payment/toPay?system_id=3&payment_type=1&sn=20190429142820563954132215265327 [运行时间：0.030892s][吞吐率：32.37req/s] [内存消耗：3,339.27kb] [文件加载：83]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'msy.meishangyun.com',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Mobile Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'referer' => 'https://hss.meishangyun.com/index/order/detail/order_sn/20190429142820563954132215265327.html',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'cookie' => 'PHPSESSID=bmath30hcdcqbq6u02n3v68vn0',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'system_id' => '3',
+  'payment_type' => '1',
+  'sn' => '20190429142820563954132215265327',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ LOG ] INIT File
+[ error ] [2]file_get_contents(./array1.json): failed to open stream: No such file or directory[/home/www/web/thinkphp5.1/common/component/payment/weixin/weixinpay.php:236]
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, object given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, object given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, object given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] 微信支付回调
+---------------------------------------------------------------
+[ 2019-04-29T17:07:40+08:00 ] 14.18.29.116 GET /index/Payment/toPay?system_id=3&payment_type=1&sn=20190429142820563954132215265327
+[ info ] msy.meishangyun.com/index/Payment/toPay?system_id=3&payment_type=1&sn=20190429142820563954132215265327 [运行时间：0.024858s][吞吐率：40.23req/s] [内存消耗：3,339.84kb] [文件加载：83]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'msy.meishangyun.com',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'referer' => 'https://hss.meishangyun.com/index/order/detail/order_sn/20190429142820563954132215265327.html',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'cookie' => 'PHPSESSID=bmath30hcdcqbq6u02n3v68vn0',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'system_id' => '3',
+  'payment_type' => '1',
+  'sn' => '20190429142820563954132215265327',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ LOG ] INIT File
+[ error ] [2]file_get_contents(./array1.json): failed to open stream: No such file or directory[/home/www/web/thinkphp5.1/common/component/payment/weixin/weixinpay.php:236]
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, object given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, object given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, object given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] 微信支付回调
+---------------------------------------------------------------
+[ 2019-04-29T17:08:07+08:00 ] 14.18.29.116 GET /index/Payment/toPay?system_id=3&payment_type=1&sn=20190429142820563954132215265327
+[ info ] msy.meishangyun.com/index/Payment/toPay?system_id=3&payment_type=1&sn=20190429142820563954132215265327 [运行时间：0.022025s][吞吐率：45.40req/s] [内存消耗：3,340.25kb] [文件加载：83]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'msy.meishangyun.com',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'referer' => 'https://hss.meishangyun.com/index/order/detail/order_sn/20190429142820563954132215265327.html',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'cookie' => 'PHPSESSID=bmath30hcdcqbq6u02n3v68vn0',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'system_id' => '3',
+  'payment_type' => '1',
+  'sn' => '20190429142820563954132215265327',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ LOG ] INIT File
+[ error ] [2]file_get_contents(./array1.json): failed to open stream: No such file or directory[/home/www/web/thinkphp5.1/common/component/payment/weixin/weixinpay.php:236]
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, object given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, object given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, object given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] 微信支付回调
+---------------------------------------------------------------
+[ 2019-04-29T17:08:35+08:00 ] 14.18.29.116 GET /index/Payment/toPay?system_id=3&payment_type=1&sn=20190429142820563954132215265327
+[ info ] msy.meishangyun.com/index/Payment/toPay?system_id=3&payment_type=1&sn=20190429142820563954132215265327 [运行时间：0.022095s][吞吐率：45.26req/s] [内存消耗：3,340.38kb] [文件加载：83]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'msy.meishangyun.com',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'referer' => 'https://hss.meishangyun.com/index/order/detail/order_sn/20190429142820563954132215265327.html',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'cookie' => 'PHPSESSID=bmath30hcdcqbq6u02n3v68vn0',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'system_id' => '3',
+  'payment_type' => '1',
+  'sn' => '20190429142820563954132215265327',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ LOG ] INIT File
+[ error ] [2]file_get_contents(./array1.json): failed to open stream: No such file or directory[/home/www/web/thinkphp5.1/common/component/payment/weixin/weixinpay.php:236]
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, object given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, object given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, object given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] 微信支付回调
+---------------------------------------------------------------
+[ 2019-04-29T17:08:36+08:00 ] 14.18.29.116 GET /index/Payment/toPay?system_id=3&payment_type=1&sn=20190429142820563954132215265327
+[ info ] msy.meishangyun.com/index/Payment/toPay?system_id=3&payment_type=1&sn=20190429142820563954132215265327 [运行时间：0.021569s][吞吐率：46.36req/s] [内存消耗：3,340.38kb] [文件加载：83]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'msy.meishangyun.com',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'referer' => 'https://hss.meishangyun.com/index/order/detail/order_sn/20190429142820563954132215265327.html',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'cookie' => 'PHPSESSID=bmath30hcdcqbq6u02n3v68vn0',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'system_id' => '3',
+  'payment_type' => '1',
+  'sn' => '20190429142820563954132215265327',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ LOG ] INIT File
+[ error ] [2]file_get_contents(./array1.json): failed to open stream: No such file or directory[/home/www/web/thinkphp5.1/common/component/payment/weixin/weixinpay.php:236]
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, object given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, object given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, object given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] 微信支付回调
+---------------------------------------------------------------
+[ 2019-04-29T17:16:03+08:00 ] 14.18.29.116 GET /index/Payment/toPay?system_id=3&payment_type=1&sn=20190429142820563954132215265327
+[ info ] msy.meishangyun.com/index/Payment/toPay?system_id=3&payment_type=1&sn=20190429142820563954132215265327 [运行时间：0.236126s][吞吐率：4.24req/s] [内存消耗：4,529.42kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'msy.meishangyun.com',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'referer' => 'https://hss.meishangyun.com/index/order/detail/order_sn/20190429142820563954132215265327.html',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'cookie' => 'PHPSESSID=bmath30hcdcqbq6u02n3v68vn0',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'system_id' => '3',
+  'payment_type' => '1',
+  'sn' => '20190429142820563954132215265327',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T17:17:03+08:00 ] 14.18.29.116 GET /index/Payment/toPay?system_id=3&payment_type=1&sn=20190429155951661591630632488149
+[ info ] msy.meishangyun.com/index/Payment/toPay?system_id=3&payment_type=1&sn=20190429155951661591630632488149 [运行时间：0.266718s][吞吐率：3.75req/s] [内存消耗：4,529.09kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'msy.meishangyun.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Mobile Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'referer' => 'http://www.hss.cc/index/Order/confirmOrder/order_sn/20190429155951661591630632488149',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'cookie' => 'PHPSESSID=bmath30hcdcqbq6u02n3v68vn0',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'system_id' => '3',
+  'payment_type' => '1',
+  'sn' => '20190429155951661591630632488149',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T17:19:17+08:00 ] 14.18.29.116 GET /index/Payment/toPay?system_id=3&payment_type=1&sn=20190429155951661591630632488149
+[ info ] msy.meishangyun.com/index/Payment/toPay?system_id=3&payment_type=1&sn=20190429155951661591630632488149 [运行时间：0.260065s][吞吐率：3.85req/s] [内存消耗：4,529.09kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'msy.meishangyun.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Mobile Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'referer' => 'http://www.hss.cc/index/Order/confirmOrder/order_sn/20190429155951661591630632488149',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'cookie' => 'PHPSESSID=bmath30hcdcqbq6u02n3v68vn0',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'system_id' => '3',
+  'payment_type' => '1',
+  'sn' => '20190429155951661591630632488149',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T17:22:37+08:00 ] 183.3.234.56 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.256829s][吞吐率：3.89req/s] [内存消耗：4,421.73kb] [文件加载：89]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T17:35:35+08:00 ] 183.3.234.56 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.255356s][吞吐率：3.92req/s] [内存消耗：4,421.73kb] [文件加载：89]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T17:36:20+08:00 ] 183.3.234.56 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.258711s][吞吐率：3.87req/s] [内存消耗：4,421.73kb] [文件加载：89]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T17:37:52+08:00 ] 14.18.29.116 GET /index/Payment/toPay?system_id=3&payment_type=1&sn=20190429142820563954132215265327
+[ info ] msy.meishangyun.com/index/Payment/toPay?system_id=3&payment_type=1&sn=20190429142820563954132215265327 [运行时间：0.286682s][吞吐率：3.49req/s] [内存消耗：4,529.22kb] [文件加载：90]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'host' => 'msy.meishangyun.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'referer' => 'https://hss.meishangyun.com/index/order/detail/order_sn/20190429142820563954132215265327.html',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'cookie' => 'PHPSESSID=bmath30hcdcqbq6u02n3v68vn0',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'system_id' => '3',
+  'payment_type' => '1',
+  'sn' => '20190429142820563954132215265327',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T18:15:24+08:00 ] 183.3.234.56 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.272564s][吞吐率：3.67req/s] [内存消耗：4,421.73kb] [文件加载：89]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T19:33:19+08:00 ] 183.3.234.56 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.316744s][吞吐率：3.16req/s] [内存消耗：4,421.73kb] [文件加载：89]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T19:36:52+08:00 ] 183.3.234.63 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.270593s][吞吐率：3.70req/s] [内存消耗：4,421.73kb] [文件加载：89]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T19:40:13+08:00 ] 183.3.234.63 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.270836s][吞吐率：3.69req/s] [内存消耗：4,421.73kb] [文件加载：89]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T19:47:31+08:00 ] 183.3.234.56 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.253093s][吞吐率：3.95req/s] [内存消耗：4,421.73kb] [文件加载：89]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T19:48:51+08:00 ] 183.3.234.63 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.318403s][吞吐率：3.14req/s] [内存消耗：4,421.73kb] [文件加载：89]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T19:59:11+08:00 ] 101.226.103.60 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.314974s][吞吐率：3.17req/s] [内存消耗：4,421.73kb] [文件加载：89]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T20:10:45+08:00 ] 101.226.103.71 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.270463s][吞吐率：3.70req/s] [内存消耗：4,421.73kb] [文件加载：89]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T20:22:38+08:00 ] 101.226.103.70 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.279523s][吞吐率：3.58req/s] [内存消耗：4,421.73kb] [文件加载：89]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T20:35:36+08:00 ] 101.226.103.71 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.280278s][吞吐率：3.57req/s] [内存消耗：4,421.73kb] [文件加载：89]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T20:36:21+08:00 ] 101.226.103.69 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.269859s][吞吐率：3.71req/s] [内存消耗：4,421.73kb] [文件加载：89]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T21:15:25+08:00 ] 101.226.103.71 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.342053s][吞吐率：2.92req/s] [内存消耗：4,421.73kb] [文件加载：89]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T22:33:20+08:00 ] 101.226.103.71 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.293974s][吞吐率：3.40req/s] [内存消耗：4,421.73kb] [文件加载：89]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T22:36:54+08:00 ] 101.226.103.60 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.249739s][吞吐率：4.00req/s] [内存消耗：4,421.73kb] [文件加载：89]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T22:40:14+08:00 ] 101.226.103.71 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.265696s][吞吐率：3.76req/s] [内存消耗：4,421.73kb] [文件加载：89]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T22:47:32+08:00 ] 101.226.103.70 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.269326s][吞吐率：3.71req/s] [内存消耗：4,421.73kb] [文件加载：89]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T22:48:52+08:00 ] 101.226.103.71 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.254632s][吞吐率：3.93req/s] [内存消耗：4,421.73kb] [文件加载：89]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T22:59:12+08:00 ] 101.226.103.63 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.277051s][吞吐率：3.61req/s] [内存消耗：4,421.73kb] [文件加载：89]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T23:10:46+08:00 ] 101.226.103.71 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.298974s][吞吐率：3.34req/s] [内存消耗：4,421.73kb] [文件加载：89]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T23:22:40+08:00 ] 101.226.103.71 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.332295s][吞吐率：3.01req/s] [内存消耗：4,421.73kb] [文件加载：89]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T23:35:38+08:00 ] 101.226.103.70 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.282347s][吞吐率：3.54req/s] [内存消耗：4,421.73kb] [文件加载：89]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单
+---------------------------------------------------------------
+[ 2019-04-29T23:36:22+08:00 ] 101.226.103.71 POST /index/Payment/wxPayNotifyCallBack
+[ info ] msy.meishangyun.com/index/Payment/wxPayNotifyCallBack [运行时间：0.248299s][吞吐率：4.03req/s] [内存消耗：4,421.73kb] [文件加载：89]
+[ info ] [ LANG ] /home/www/web/thinkphp5.1/framework/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'accept' => '*/*',
+  'connection' => 'Keep-Alive',
+  'pragma' => 'no-cache',
+  'content-length' => '859',
+  'host' => 'msy.meishangyun.com',
+  'user-agent' => 'Mozilla/4.0',
+  'content-type' => 'text/xml',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'common_',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+  'expire' => 43200,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ error ] [4096]Argument 2 passed to think\Log::error() must be of the type array, string given[/home/www/web/thinkphp5.1/framework/library/think/Log.php:331]
+[ error ] [4096]Argument 3 passed to think\Log::log() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 333 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:283]
+[ error ] [4096]Argument 3 passed to think\Log::record() must be of the type array, string given, called in /home/www/web/thinkphp5.1/framework/library/think/Log.php on line 285 and defined[/home/www/web/thinkphp5.1/framework/library/think/Log.php:115]
+[ error ] [2]Invalid argument supplied for foreach()[/home/www/web/thinkphp5.1/framework/library/think/Log.php:123]
+[ error ] 数据库没有此订单

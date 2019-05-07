@@ -1,7 +1,6 @@
 <?php
 namespace app\index\controller;
 class Payment extends \common\controller\UserBase{
-
     //订单-支付
     public function orderPayment(){
         if( empty(input('order_sn')) || empty(input('?pay_code'))){
@@ -17,7 +16,7 @@ class Payment extends \common\controller\UserBase{
                 ['o.user_id', '=', $this->user['id']],
             ],'field' => [
                 'o.id', 'o.sn', 'o.amount','o.actually_amount',
-                'o.user_id','o.type'
+                'o.user_id','o.type','order_status'
             ],
         ];
         $orderInfo = $modelOrder->getInfo($config);
@@ -86,6 +85,7 @@ class Payment extends \common\controller\UserBase{
                 $modelWalletDetail = new \app\index\model\WalletDetail();
                 $orderInfo['pay_sn'] = generateSN();
                 $orderInfo['payment_time'] = time();
+                $orderInfo['type'] = 1;
                 $res = $modelWalletDetail->walletPaymentHandle($orderInfo);
                 if(!$res['status'] ){
                     $modelOrder->rollback();
