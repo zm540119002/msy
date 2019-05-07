@@ -28,12 +28,13 @@ class Scene extends Base {
      * @return array
      */
     public function edit(){
-
         $model = $this->obj;
         if(!request()->isPost()){
             if($id = input('param.id/d')){
                 $condition = ['where' => [['id','=',$id]]];
                 $info = $model->getInfo($condition);
+                $info['intro'] = htmlspecialchars_decode($info['intro']);
+
                 $this->assign('info',$info);
             }
 
@@ -41,55 +42,47 @@ class Scene extends Base {
 
         }
         else{
+
             // 基础处理
             if(!input('param.name/s')) return errorMsg('失败');
-            // code=1
-/*            if( isset($_POST['thumb_img']) && $_POST['thumb_img'] ){
-                $_POST['thumb_img'] = moveImgFromTemp(config('upload_dir.scheme'),basename($_POST['thumb_img']));
+
+            if( isset($_POST['thumb_img']) && $_POST['thumb_img'] ){
+                $_POST['thumb_img'] = moveImgFromTemp(config('upload_dir.scheme'),$_POST['thumb_img']);
             }
-            if( isset($_POST['background_img']) && $_POST['background_img'] ){
-                $_POST['background_img'] = moveImgFromTemp(config('upload_dir.scheme'),basename($_POST['background_img']));
-            }
+/*            if( isset($_POST['background_img']) && $_POST['background_img'] ){
+                $_POST['background_img'] = moveImgFromTemp(config('upload_dir.scheme'),$_POST['background_img']);
+            }*/
             if( isset($_POST['main_img']) && $_POST['main_img'] ){
                 $detailArr = explode(',',input('post.main_img','','string'));
                 $tempArr = array();
                 foreach ($detailArr as $item) {
                     if($item){
-                        $tempArr[] = moveImgFromTemp(config('upload_dir.scheme'),basename($item));
+                        $tempArr[] = moveImgFromTemp(config('upload_dir.scheme'),$item);
                     }
                 }
                 $_POST['main_img'] = implode(',',$tempArr);
 
-            }*/
-
-            // 后面改进
-            if( isset($_POST['type'])&&$_POST['type'] ){
-                switch($_POST['type']){
-                    case 2:$template = 'sort'   ;break;
-                    case 3:$template = 'project';break;
-                    default:
-                        $template = 'detail';
-                }
-                $_POST['template'] = $template;
             }
 
             $data = $_POST;
+            $data['intro'] = htmlspecialchars(input('intro/s'));
             $data['update_time'] = time();
             $data['audit'] = 1; // 暂时没有审核，先固定
 
             if(isset($_POST['id']) && $id=input('post.id/d')){ //修改
 
                 // 编辑
-                $condition = ['where' => ['id' => $id,]];
+                $condition = [
+                    'where' => ['id' => $id,],
+                    'field' => ['thumb_img,logo_img,background_img,main_img','intro']
+                ];
 
-                // code=1
-                ///$info  = $model->getInfo($condition);
+                $info = $model->getinfo($condition);
 
                 $result= $model->edit($data,$condition['where']);
                 if(!$result['status']) return $result;
 
-                // code=1
-/*                //删除旧文件
+                //删除旧文件
                 if($info['thumb_img']){
                     delImgFromPaths($info['thumb_img'],$_POST['thumb_img']);
                 }
@@ -104,7 +97,7 @@ class Scene extends Base {
                     $oldImgArr = explode(',',$info['main_img']);
                     $newImgArr = explode(',',$_POST['main_img']);
                     delImgFromPaths($oldImgArr,$newImgArr);
-                }*/
+                }
 
             }
             else{//新增

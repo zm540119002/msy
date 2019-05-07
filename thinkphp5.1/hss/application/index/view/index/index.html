@@ -54,19 +54,35 @@
 			</section>
 
 			<div class="scene_wrapper">
-				{volist name="sceneLists" id="lists"}
-					{volist name="lists" id="list" }
-					<div class="columns_flex l-r-sides" >
-						{volist name="list" id="vo" }
-						<a href="{:url('Scene'.'/'.$vo.template,['id'=>$vo.id])}" class="graphic_item">
-							<img src="{:show_img_handle($vo.thumb_img)}" alt="{$vo.name}">
-						</a>
-						{/volist}
-					</div>
-					{/volist}
-				{/volist}
-			</div>
+					{php}
+						$s=0;
+						$t=1;
+					{/php}
+				{volist name="sceneList" id="vo"}
+					{if $s==0 }
+						<div class="columns_flex l-r-sides" >
+					{/if}
 
+					{php}
+					++$s;
+					$row = config("custom.scene_arrangement.$t");
+					{/php}
+
+					<a href="{:url('Scene'.'/'.$vo.display_type,['id'=>$vo.id])}" class="graphic_item">
+						<img src="{:show_img_handle($vo.thumb_img)}" alt="{$vo.name}">
+					</a>
+
+					{if $row==$s}
+						</div>
+						{php}
+							++$t;
+							$t = config("custom.scene_arrangement.$t") ? $t :  'default' ;
+							$s = 0;
+						{/php}
+					{/if}
+				{/volist}
+				</div>
+			</div>
 			<div class="project_wrapper">
 				<div class="mod-part-title">
 					<div class="mod-part-title-wrap">

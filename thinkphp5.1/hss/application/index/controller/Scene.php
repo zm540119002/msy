@@ -65,38 +65,40 @@ class Scene extends \common\controller\Base{
 
             // 场景信息
             $model = new\app\index\model\Scene();
-            $config =[
-                'where' => [
-                    ['status', '=', 0],
-                    ['shelf_status', '=', 3],
-                    ['id', '=', $id],
-                ],
+            $condition =[
+                'field' => [
+                    'ss.id','ss.name','ss.main_img','ss.intro','ss.tag_category','ss.display_type'
+                ], 'where' => [
+                    ['s.status', '=', 0],
+                    ['s.shelf_status', '=', 3],
+                    ['s.id', '=', $id],
+                ], 'join' => [
+                    ['scene ss ','s.tag_category=ss.tag_category','left']
+                ],'order' => ['ss.sort desc'],
+
             ];
-            $css = (input('css'));
-            $this->assign('css',$css);
-            $scene = $model->getInfo($config);
-            if(empty($scene)){
-                $this->error('此项目已下架');
+
+            $sceneList = $model->getList($condition);
+
+            if(empty($sceneList)){
+                $this->error('此场景已下架');
             }
-            // code=1
-            //$scene['main_img'] = explode(',',(string)$scene['main_img']);
-            $scene['tag'] = explode(',',(string)$scene['tag']);
+            // 当前的场景
+            $scene = [];
+            foreach($sceneList as $v){
+                if($v['id']==$id){
+                    $scene = $v;
+                    break;
+                }
+            }
+
+            $scene['main_img'] = explode(',',(string)$scene['main_img']);
+            //$scene['tag'] = explode(',',(string)$scene['tag']);
+            $this->assign('sceneList',$sceneList);
             $this->assign('scene',$scene);
 
-            // 同组的各场景的名
-            $config = [
-                'where' => [
-                    ['group','=',$scene['group']],
-                    ['group','>',0],
-                ],
-                'order' => [
-                    'sort' => 'desc',
-                ],
-            ];
-            $sceneList = $model->getList($config);
-            $this->assign('sceneList',$sceneList);
 
-            // 获取场景下的方案
+            // 获取场景下的方案  aj获取
             $modelSceneScheme = new \app\index\model\SceneScheme();
             $config = [
                 'where' => [
@@ -118,7 +120,7 @@ class Scene extends \common\controller\Base{
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
             $this->assign('relation',config('custom.relation_type.scene'));
 
-            return $this->fetch();
+            return $this->fetch('detail_img');
         }
     }
 

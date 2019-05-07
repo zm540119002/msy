@@ -5,9 +5,9 @@
 	<ul class="nav_menu">
 
 		{volist name="sceneList" id="info"}
-			<li data-scene-id="{$info.id}" class="{if $info.id==$scene.id}current{/if}">
-				<a href="{:url(request()->controller().'/'.$info.template,['id'=>$info.id])}" class="category_nav">{$info.name}</a>
-			</li>
+		<li data-scene-id="{$info.id}" class="{if $info.id==$scene.id}current{/if}">
+			<a href="{:url(request()->controller().'/'.$info.display_type,['id'=>$info.id])}" class="category_nav">{$info.name}</a>
+		</li>
 		{/volist}
 
 	</ul>
@@ -24,9 +24,10 @@
 			</div>
 		</div>
 	</section>
+    <!--  -->
 	<section class="content-padding content_main wy_list" style="background:url({:show_img_handle($scene.background_img)});">
-		<div class="">
-			<div class="columns_flex l-r-sides count_down_module">
+
+        <div class="columns_flex l-r-sides count_down_module">
 				<div class="mid_module_left">
 					<img src="{:show_img_handle($scene.logo_img)}" alt="">
 					<div>
@@ -47,7 +48,7 @@
 					<span><span class="item factory"></span>品质工厂</span>
 				</div>
 			</div>
-		</div>
+
 		<!--方案列表-->
 		{notempty name="schemeList"}
 			{volist name="schemeList" id="info"}

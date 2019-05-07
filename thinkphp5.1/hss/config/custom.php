@@ -82,7 +82,7 @@ return [
      * 场景类型 1：场景，2：分类，3：项目
      */
     'scene_type'=>[
-        'scenes' => '场景',
+        'detail' => '场景',
         'sort'   => '分类',
         'project'=> '项目',
     ],

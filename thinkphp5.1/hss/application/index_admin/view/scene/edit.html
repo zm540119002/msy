@@ -20,11 +20,11 @@
                         <div class="type_item">
 
                             {foreach $Think.config.custom.scene_type as $k => $vo }
-                                {if $info.display_type==$k }
-                                <input type="radio" name="type" value="{$k}" checked="checked">{$vo}
-                                {else /}
-                                <input type="radio" name="type" value="{$k}">{$vo}
-                                {/if}
+                            {if $info.display_type==$k }
+                            <input type="radio" name="type" value="{$k}" checked="checked">{$vo}
+                            {else /}
+                            <input type="radio" name="type" value="{$k}">{$vo}
+                            {/if}
                             {/foreach}
 
                         </div>
@@ -41,7 +41,7 @@
                     <td class=dotted_bottom_gray width="89%" align=left>
                         <select name="tag_category">
                             {foreach $Think.config.custom.tag_category as $k => $vo }
-                            <option value="$k" {$k==$info.tag_category ? 'selected' : ''} >{$vo}</option>
+                            <option value="{$k}" {$k==$info.tag_category ? 'selected' : ''} >{$vo}</option>
                             {/foreach}
                         </select>
                     </td>
@@ -49,18 +49,22 @@
                 <tr>
                     <td class=dotted_bottom_gray height=40 width="11%" align=right>场景简介：</td>
                     <td class=dotted_bottom_gray width="89%" align=left>
-                        <div class= width="89%" align=left>
-                            <textarea class="project_description" name="intro" >{$info.intro}</textarea>
-                        </div>
+                        <script id="intro" type="text/plain">
+
+                        </script>
+                        <!--     <div class= width="89%" align=left>
+
+                                 <textarea class="project_description" name="intro" >{$info.intro}</textarea>
+                             </div>-->
                     </td>
                 </tr>
-<!--                <tr>
-                    <td class=dotted_bottom_gray height=40 width="11%" align=right>标签：</td>
-                    <td class=dotted_bottom_gray width="89%" align=left>
-                        <input style="width: 200px; " class="inputboxadmin" name="tag" value="{$info.tag}">
-                        多个标签请用逗号分隔，例如：正品保障,纳晶水光
-                    </td>
-                </tr>-->
+                <!--                <tr>
+                                    <td class=dotted_bottom_gray height=40 width="11%" align=right>标签：</td>
+                                    <td class=dotted_bottom_gray width="89%" align=left>
+                                        <input style="width: 200px; " class="inputboxadmin" name="tag" value="{$info.tag}">
+                                        多个标签请用逗号分隔，例如：正品保障,纳晶水光
+                                    </td>
+                                </tr>-->
                 <tr>
                     <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>缩略图：</td>
                     <td class=dotted_bottom_gray width="89%" align=left>
@@ -69,30 +73,9 @@
                             <div>
                                 <div class="picture-module">
                                     <input type="file" class="uploadImg uploadSingleImg" name="">
-                                    <img class="upload_img " src=" {$info.thumb_img ? public_uploads/.$info.thumb_img : ''}  " />
+                                    <img class="upload_img " src="{:show_img_handle($info.thumb_img,false)}" />
                                     <input type="hidden" class="layer-thumbnail-picture img"  value="{$info.thumb_img}" name="thumb_img"/>
                                 </div>
-                                <!--<p>企业营业执照</p>-->
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>品牌LOGO：</td>
-                    <td class=dotted_bottom_gray width="89%" align=left>
-                        <p class="f20 picture-tipc-box"><span class="friend-tipc">*注意</span>：必须上传图片(格式为jpg、jpeg、png、gif)</p>
-                        <div class="upload-picture-module f24">
-                            <div>
-                                <div class="picture-module">
-                                    <input type="file" class="uploadImg uploadSingleImg" name="">
-                                    {empty name="info.logo_img"}
-                                    <img class="upload_img" src="">
-                                    {else /}
-                                    <img class="upload_img " src="public_uploads/{$info.logo_img}" />
-                                    {/empty}
-                                    <input type="hidden" class="layer-thumbnail-picture img"  value="{$info.logo_img}" name="logo_img"/>
-                                </div>
-                                <!--<p>企业营业执照</p>-->
                             </div>
                         </div>
                     </td>
@@ -103,13 +86,9 @@
                         <p class="f20 picture-tipc-box"><span class="friend-tipc">*注意</span>：必须上传图片(格式为jpg、jpeg、png、gif)</p>
                         <div class="upload-picture-module f24">
                             <div>
-                                <div class="picture-module" style="background:url(public_uploads/{$info.background_img});">
+                                <div class="picture-module" style="background:url({:show_img_handle($info.background_img,false)});">
                                     <input type="file" class="uploadImg uploadSingleImg" name="">
-                                    {empty name="info.background_img"}
-                                    <img class="upload_img" src="">
-                                    {else /}
-                                    <img class="upload_img " src="public_uploads/{$info.background_img}" />
-                                    {/empty}
+                                    <img class="upload_img " src="{:show_img_handle($info.background_img,false)}" />
                                     <input type="hidden" class="layer-thumbnail-picture img"  value="{$info.background_img}" name="background_img"/>
                                 </div>
                             </div>
@@ -159,6 +138,45 @@
         autoFloatEnabled: true,
         initialFrameWidth: '100%'
     });
+    var intro = UE.getEditor('intro', {
+        toolbars: [
+            [
+                'undo', //撤销
+                'bold', //加粗
+                'indent', //首行缩进
+                'italic', //斜体
+                'underline', //下划线
+                'strikethrough', //删除线
+                'subscript', //下标
+                'fontborder', //字符边框
+                'superscript', //上标
+                'formatmatch', //格式刷
+                'source', //源代码
+                'horizontal', //分隔线
+                'removeformat', //清除格式
+                'fontfamily', //字体
+                'fontsize', //字号
+                'paragraph', //段落格式
+                'spechars', //特殊字符
+                'justifyleft', //居左对齐
+                'justifyright', //居右对齐
+                'justifycenter', //居中对齐
+                'justifyjustify', //两端对齐
+                'forecolor', //字体颜色
+                'backcolor', //背景色
+                'imagecenter', //居中
+                'lineheight', //行间距
+                'customstyle', //自定义标题
+                'autotypeset', //自动排版
+                'touppercase', //字母大写
+                'tolowercase', //字母小写
+                'background' //背景
+            ]
+        ],
+        autoHeightEnabled: true,
+        autoFloatEnabled: true,
+        initialFrameWidth: '70%'
+    });
 </script>
 <script type="text/javascript">
     $(function(){
@@ -166,6 +184,11 @@
         main_img.ready(function() {
             main_img.setContent($('#mainImg').val());
         });
+        // 简介
+        intro.ready(function() {
+            intro.setContent("{$info['intro']|raw}");
+        });
+
         // 表单认证
         $('.button_save_black_4').on('click',function(){
             var postData = $('#form1').serializeObject();
@@ -176,19 +199,15 @@
 
             });
 
+            postData.intro = intro.getContent();
+
             var content='';
             if(!postData.name){
                 content='场景名称不能为空';
-            }else if(!parseInt(sum(postData.belong_to))){
-                content='至少要选择一个场景归属';
-            }else if(!postData.row_number){
-                content='场景数量不能为空';
-            }else if(!postData.group){
-                content='场景分组不能为空';
+            }else if(!parseInt(postData.tag_category)){
+                content='标签类别不能为空';
             }else if(!postData.thumb_img){
                 content='缩略图不能为空';
-            }else if(!postData.logo_img){
-                content='品牌LOGO不能为空';
             }else if(!postData.main_img){
                 content='场景主图不能为空';
             }
@@ -209,53 +228,6 @@
                 });
             });
 
-        });
-        // 选择单图片
-        $('body').on('change','.uploadSingleImg',function () {
-            var _this=$(this);
-            uploadsSingleImgFlag = false;
-            var img = event.target.files[0];
-            var uploadfileSize=img.size/1024/1024;
-            var obj=$(this).parent();
-            // 判断是否图片
-            if(!img){
-                return false;
-            }
-            // 判断图片格式
-            var imgRegExp=/\.(?:jpg|jpeg|png|gif)$/;
-            if(!(img.type.indexOf('image')==0 && img.type && imgRegExp.test(img.name)) ){
-                dialog.error('请上传：jpg、jpeg、png、gif格式图片');
-                return false;
-            }
-            if(uploadfileSize>1){
-                dialog.error('图片大小不能超过1M');
-                return false;
-            }
-            var reader = new FileReader();
-            reader.readAsDataURL(img);
-            reader.onload = function(e){
-                var imgUrl=e.target.result;
-                $(obj).addClass('active');
-                var postData = {fileBase64: e.target.result};
-                // postData.imgWidth = 145;
-                // postData.imgHeight = 100;
-                $(obj).find('img').attr('src',imgUrl);
-                var type = _this.data('type');
-                if(type == 'notupload'){
-                    $(obj).find('.img').val(imgUrl);
-                    console.log(1);
-                    return false;
-                }
-                //提交
-                $.post(controller+"uploadFileToTemp",postData,function(msg){
-                    if(msg.status == 1){
-                        uploadsSingleImgFlag = true;
-                        $(obj).find('.img').val(msg.info);
-                    }else{
-                        dialog.error(msg.info)
-                    }
-                })
-            }
         });
         //返回
         $('.button_save_black').click(function(){
