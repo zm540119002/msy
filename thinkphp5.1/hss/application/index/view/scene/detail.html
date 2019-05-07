@@ -106,9 +106,6 @@
 		{notempty name="schemeList"}
 			{volist name="schemeList" id="info"}
 				<div class="apply_item">
-					{if $info.show_name==1}
-						<span class="content-label">{$info.name}</span>
-					{/if}
 					<a data-id="{$info.id}">
 						<img src="{:show_img_handle($info.thumb_img)}" alt="{$info.name}">
 					</a>
