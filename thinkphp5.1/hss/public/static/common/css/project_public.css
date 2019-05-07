@@ -6285,6 +6285,10 @@ div.no_data{
 .franchise_ul li:nth-of-type(3){
     background: #C7AA53;
 }
+.franchise_ul li a::after{
+    border-bottom-color: #fff;
+    border-left-color: #fff;
+}
 .applay_p_item{
     padding:0.15rem;
     background: #fff;
