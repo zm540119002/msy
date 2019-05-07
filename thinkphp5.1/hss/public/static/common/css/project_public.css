@@ -6297,6 +6297,15 @@ div.no_data{
     background-repeat: no-repeat;
     background-size: 0.65rem 2.5rem;
 }
+.franchise_ul span.zh{
+    background-position:0 0;
+}
+.franchise_ul span.ck{
+    background-position:0 -0.5rem;
+}
+.franchise_ul span.zc{
+    background-position:0 0;
+}
 .applay_p_item{
     padding:0.15rem;
     background: #fff;
