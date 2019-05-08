@@ -106,7 +106,7 @@ class Order extends \common\controller\UserBase
                 'where' => [
                     ['user_id','=',$this->user['id']],
                     ['id','=',$fatherOrderId],
-                    ['order_status','=',0],
+                    ['order_status','<',2],
                 ]
             ];
 
@@ -118,7 +118,7 @@ class Order extends \common\controller\UserBase
 
             $data = input('post.');
             $data['order_status'] = 1;
-            $data['payment_code'] = $data['pay_code'];
+            $data['pay_code'] = $data['pay_code'];
 
             $modelOrder ->startTrans();
             $res = $modelOrder -> allowField(true) -> save($data,$condition['where']);
@@ -135,20 +135,18 @@ class Order extends \common\controller\UserBase
             }
 
             $modelOrder -> commit();
-            $orderSn = input('post.order_sn','','string');
-
-            // 各支付方式的处理方式 //做到这里
-            switch($data['pay_code']){
-                // 支付中心处理
-                case config('custom.pay_code.WeChatPay.code') :
-                case config('custom.pay_code.Alipay.code') :
-                case config('custom.pay_code.UnionPay.code') :
-                    $url = config('custom.pay_gateway').$orderSn;
-                    break;
-            }
-
-
-            return successMsg( '成功',['url'=>$url]);
+//            $orderSn = input('post.order_sn','','string');
+//
+//            // 各支付方式的处理方式 //做到这里
+//            switch($data['pay_code']){
+//                // 支付中心处理
+//                case config('custom.pay_code.WeChatPay.code') :
+//                case config('custom.pay_code.Alipay.code') :
+//                case config('custom.pay_code.UnionPay.code') :
+//                    $url = config('custom.pay_gateway').$orderSn;
+//                    break;
+//            }
+            return successMsg( '成功');
 
         }else{
             $modelOrder = new \app\index\model\Order();
@@ -189,53 +187,78 @@ class Order extends \common\controller\UserBase
 
     }
 
-    // 支付
+    // 去支付
     public function toPay()
     {
-        $orderSn = input('order_sn/s');
-        $url = config('custom.pay_gateway');
-
-        p($orderSn);
-        exit;
-
-        return $this->redirect($url.$orderSn);
-
-/*        if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
-            $payOpenId =  session('pay_open_id');
-            if(empty($payOpenId)){
-                $tools = new \common\component\payment\weixin\getPayOpenId(config('wx_config.appid'), config('wx_config.appsecret'));
-                $payOpenId  = $tools->getOpenid();
-                session('pay_open_id',$payOpenId);
-            }
-        }*/
+        if (!request()->isPost()) {
+            return errorMsg('请求方式错误');
+        }
+        $postData = input('post.');
         $modelOrder = new \app\index\model\Order();
-        $orderSn = input('order_sn');
-        $config = [
+        $condition = [
             'where' => [
-                ['o.status', '=', 0],
-                ['o.sn', '=', $orderSn],
-                ['o.user_id', '=', $this->user['id']],
-            ],'field' => [
-                'o.id', 'o.sn', 'o.amount',
-                'o.user_id',
-            ],
+                ['user_id','=',$this->user['id']],
+                ['sn','=',$postData['sn']],
+                ['order_status','=',0],
+            ], 'field'=>[
+                'id','sn','actually_amount'
+            ]
         ];
-        $orderInfo = $modelOrder->getInfo($config);
-        $this->assign('orderInfo', $orderInfo);
-        //钱包
-        $modelWallet = new \app\index\model\Wallet();
-        $config = [
+        $orderInfo  = $modelOrder->getInfo($condition);
+        //先查找支付表是否有数据
+        $modelPay = new \app\index\model\Pay();
+        $condition = [
             'where' => [
-                ['status', '=', 0],
-                ['user_id', '=', $this->user['id']],
-            ],'field' => [
-                'id','amount',
-            ],
+                ['user_id','=',$this->user['id']],
+                ['sn','=',$postData['sn']],
+                ['pay_status','=',1],
+                ['type','=',config('custom.pay_type')['orderPay']['code']]
+            ], 'field'=>[
+                'id','sn','actually_amount'
+            ]
         ];
-        $walletInfo = $modelWallet->getInfo($config);
-        $this->assign('walletInfo', $walletInfo);
-        $this->assign('user',$this->user);
-        return $this->fetch();
+        $payInfo  = $modelPay->getInfo($condition);
+        if(empty($payInfo)){
+            //增加
+            $data = [
+                'sn' => $orderInfo['sn'],
+                'actually_amount' =>$orderInfo['actually_amount'],
+                'user_id' => $this->user['id'],
+                'pay_code' => $postData['pay_code'],
+                'type' => config('custom.pay_type')['orderPay']['code'],
+            ];
+            $result  = $modelPay->isUpdate(false)->save($data);
+            if(!$result){
+                return errorMsg('失败');
+            }
+            // 各支付方式的处理方式 //做到这里
+            switch($data['pay_code']){
+                // 支付中心处理
+                case config('custom.pay_code.WeChatPay.code') :
+                case config('custom.pay_code.Alipay.code') :
+                case config('custom.pay_code.UnionPay.code') :
+                    $url = config('custom.pay_gateway').$orderInfo['sn'];
+                    break;
+            }
+            return successMsg( '成功',['url'=>$url]);
+        }else{
+            //修改
+            $updateData = [
+                'actually_amount' =>$orderInfo['actually_amount'],
+                'pay_code' => $postData['pay_code'],
+            ];
+            $where = [
+                'sn' => $orderInfo['sn'],
+                'user_id' => $this->user['id'],
+            ];
+            $result  = $modelPay->isUpdate(true)->save($updateData,$where);
+            if($result === false){
+                $modelPay ->rollback();
+                return errorMsg('失败');
+            }
+        }
+
+
     }
 
     //订单管理
@@ -260,7 +283,7 @@ class Order extends \common\controller\UserBase
                 ['o.sn', '=', $orderSn],
             ],
             'field'=>[
-                'o.id','o.pay_sn','o.sn','o.order_status','o.payment_code','o.amount','o.actually_amount','o.remark',
+                'o.id','o.pay_sn','o.sn','o.order_status','o.pay_code','o.amount','o.actually_amount','o.remark',
                 'o.consignee','o.mobile','o.province','o.city','o.area','o.detail_address','o.create_time','o.payment_time',
                 'o.finished_time',
                 'u.name','u.mobile_phone'
@@ -424,7 +447,7 @@ class Order extends \common\controller\UserBase
                 ['o.user_id', '=', $this->user['id']],
             ],
             'field'=>[
-                'o.id','o.pay_sn','o.sn','o.order_status','o.payment_code','o.amount','o.actually_amount','o.remark',
+                'o.id','o.pay_sn','o.sn','o.order_status','o.pay_code','o.amount','o.actually_amount','o.remark',
                 'o.consignee','o.mobile','o.province','o.city','o.area','o.detail_address','o.create_time','o.payment_time',
                 'o.finished_time',
             ],'order'=>[
