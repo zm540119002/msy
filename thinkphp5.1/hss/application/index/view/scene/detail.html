@@ -62,6 +62,9 @@
 <script type="text/javascript" src="api_common_js/swiper.min.js"></script>
 <script type="text/javascript" src="index_js/footerCart.js"></script>
 <script type="text/javascript">
+	function getJsonCallBack(data){
+		console.log(data);
+	}
 	$(function(){
 		let param = {
 		};
@@ -75,7 +78,6 @@
 				}
 			}
 		});
-
 		var id = '{$info.id}';
 		var date=getWeek();
 		countDown(date,$('#countDownBox'));
@@ -98,7 +100,8 @@
 		url:module+'Goods/getRelationGoods',
 		requestEnd:false,
 		loadTrigger:false,
-		currentPage:1
+		currentPage:1,
+		callBack:getJsonCallBack
 	};
 	var postData = {
 		pageSize:10,
