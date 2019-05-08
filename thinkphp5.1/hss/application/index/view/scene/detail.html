@@ -77,7 +77,6 @@
 				clickable: true
 			}
 		});
-
 	});
 	// 获取该场景下的商品
 	var config = {
@@ -94,7 +93,7 @@
 	$(function(){
 		//初始化场景商品页面
 		postData.id = '{$info.id}';
-		getJsonList(config,postData);
+		getPagingList(config,postData);
 	});
 </script>
 {/block}
