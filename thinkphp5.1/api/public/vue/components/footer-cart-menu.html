@@ -46,7 +46,7 @@
             </div>
             <div class="middle">
                 <div></div>
-                <div class="red subtotal_amount">￥{{subtotal_amount}}</div>
+                <div class="red subtotal_amount">￥{{ parseFloat(subtotal_amount) }}</div>
             </div>
             <div  class="right">
                 <div  v-if="display_pic" class="product_name">
@@ -156,7 +156,7 @@
                 </div>
                 <!-- 总金额 -->
                 <div v-else-if="menu.class.indexOf('amount')!==-1">
-                    <span class="total_amount">￥{{parseFloat(total_amount)}}</span>
+                    <span class="total_amount">￥{{ parseFloat(total_amount) }}</span>
                 </div>
                 <!-- 购物篮 -->
                 <div v-else-if="menu.class.indexOf('add_cart_icon')!==-1">
