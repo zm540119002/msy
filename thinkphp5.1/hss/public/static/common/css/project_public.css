@@ -6311,4 +6311,9 @@ div.no_data{
     padding:0.15rem;
     background: #fff;
     border-radius:4px;
+    color:#000;
+}
+.top_cols{
+    padding:0;
+    background:#666;
 }

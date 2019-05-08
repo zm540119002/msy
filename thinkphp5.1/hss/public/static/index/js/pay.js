@@ -1,15 +1,25 @@
 
 $(function () {
+    // // 弹出支付方式
+    //     // $('body').on('click','.confirm_order',function(){
+    //     //     var settlementMethod=$('.settlementMethod').html();
+    //     //     layer.open({
+    //     //         type: 1
+    //     //         ,anim: 'up'
+    //     //         ,style: 'position:fixed; bottom:0; left:0; width: 100%; height: 50%; padding:10px 0; border:none;',
+    //     //         className:'settlementMethod bankTransferLayer',
+    //     //         content: settlementMethod
+    //     //     });
+    //     // });
+
     // 弹出支付方式
     $('body').on('click','.confirm_order',function(){
-        var settlementMethod=$('.settlementMethod').html();
-        layer.open({
-            type: 1
-            ,anim: 'up'
-            ,style: 'position:fixed; bottom:0; left:0; width: 100%; height: 50%; padding:10px 0; border:none;',
-            className:'settlementMethod bankTransferLayer',
-            content: settlementMethod
-        });
+        alert(111);return false;
+        var postData = {};
+        postData = addAddress(postData);
+        postData.order_id = $('.order_id').val();
+        postData.order_sn = $('.order_sn').val();
+        submitOrders(_this,postData);
     });
 
     // 选择支付方式
@@ -103,7 +113,7 @@ function addAddress(postData) {
 function submitOrders(_this,postData){
     var url = module + 'Order/confirmOrder';
     _this.addClass("nodisabled");//防止重复提交
-
+    var settlementMethod=$('.settlementMethod').html();
     $.ajax({
         url: url,
         data: postData,
@@ -119,7 +129,13 @@ function submitOrders(_this,postData){
             _this.removeClass("nodisabled");//删除防止重复提交
             $('.loading').hide();
             if(data.status){
-                location.href = data.url;
+                layer.open({
+                    type: 1
+                    ,anim: 'up'
+                    ,style: 'position:fixed; bottom:0; left:0; width: 100%; height: 50%; padding:10px 0; border:none;',
+                    className:'settlementMethod bankTransferLayer',
+                    content: settlementMethod
+                });
 
             }else{
                 dialog.success(data.info);
