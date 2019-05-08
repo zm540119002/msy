@@ -46,7 +46,7 @@ class Franchise extends \common\controller\UserBase {
                 'payment_code' => $postData['pay_code'],
                 'type' => config('custom.pay_type')['franchisePay']['code'],
             ];
-            print_r($data);exit;
+            print_r($postData);exit;
             $result  = $modelPay->isUpdate(false)->save($data);
             if(!$result){
                 $modelPay ->rollback();
