@@ -47,7 +47,6 @@
 		</div>
 		<div class="content" id="list"></div>
 	</div>
-
 </div>
 
 {/block}
@@ -62,7 +61,7 @@
 		var getData = $('#form1').serializeObject();
 		getPagingList(config,getData);
 
-		//翻页 这个需要配置公用???
+		//翻页
 		$('body').on('click','.pager2',function(){
 			var curIndex= $(this).parents('ul.pagination').find('li.active span').text();
 			var selectedPage=$(this).data('page');
@@ -93,9 +92,9 @@
 			location.href = url;
 		});
 		// 去设置场景下的促销方案
-		$('body').on('click','.manageScenePromotion',function(){
+		$('body').on('click','.scenePromotion',function(){
 			var _thisTr = $(this).parents('tr');
-			var url =  controller + 'manageScenePromotion/id/' + _thisTr.data('id');
+			var url =  controller + 'getScenePromotion/id/' + _thisTr.data('id');
 			location.href = url;
 		});
 		// 管理关联的商品
