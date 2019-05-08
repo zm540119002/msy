@@ -262,6 +262,7 @@ class Payment extends \common\controller\Base {
                 'id','user_id', 'sn', 'actually_amount','pay_code','pay_status','type'
             ],
         ];
+        return 122;
         return  $model->getInfo($config);
     }
     /**
