@@ -59,7 +59,6 @@ class Scene extends \common\controller\Base{
     public function detail(){
         if(request()->isAjax()){
         }else{
-            $unlockingFooterCart = unlockingFooterCartConfig([0,2,1,3]);
             $unlockingFooterCart = unlockingFooterCartConfigTest([0,2,1,3]);
             array_push($unlockingFooterCart['menu'][0]['class'],'group_btn30');
             array_push($unlockingFooterCart['menu'][1]['class'],'group_btn30');
