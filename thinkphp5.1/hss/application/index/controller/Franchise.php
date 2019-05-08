@@ -1,7 +1,7 @@
 <?php
 namespace app\index\controller;
 
-class Franchise extends \common\controller\Base {
+class Franchise extends \common\controller\UserBase {
     /**首页
      */
     public function index(){
@@ -25,15 +25,6 @@ class Franchise extends \common\controller\Base {
             $modelFranchise = new \app\index\model\Franchise();
             $modelFranchise -> startTrans();
             $postData = input('post.');
-//            $postData = [
-//                'applicant'=>'ygb',
-//                'name'=>'ygb',
-//                'mobile'=>'18664368697',
-//                'province'=>'1',
-//                'city'=>'1',
-//                'detail_address'=>'hhhhhhh',
-//                'franchise_fee' =>'0.01',
-//            ];
             $sn = generateSN(); //内部支付编号
             $postData['sn'] = $sn;
             $result  = $modelFranchise->isUpdate(false)->save($postData);
@@ -56,12 +47,11 @@ class Franchise extends \common\controller\Base {
             }
             $modelFranchise -> commit();
             return successMsg('成功',['url'=>config('custom.pay_franchise')]);
+        }else{
+            $unlockingFooterCart = unlockingFooterCartConfig([10,0,9]);
+            $this->assign('unlockingFooterCart', $unlockingFooterCart);
+            return $this->fetch();
         }
-//        else{
-//            $unlockingFooterCart = unlockingFooterCartConfig([10,0,9]);
-//            $this->assign('unlockingFooterCart', $unlockingFooterCart);
-//            return $this->fetch();
-//        }
     }
 
 
