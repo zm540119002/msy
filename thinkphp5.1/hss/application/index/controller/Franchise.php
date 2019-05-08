@@ -24,14 +24,16 @@ class Franchise extends \common\controller\UserBase{
         if(request()->isAjax()){
             $modelFranchise = new \app\index\model\Franchise();
             $modelFranchise -> startTrans();
-            $postData = [
-                'name'=>'ygb',
-                'mobile'=>'18664368697',
-                'province'=>'1',
-                'city'=>'1',
-                'detail_address'=>'hhhhhhh',
-                'franchise_fee' =>'0.01',
-            ];
+            $postData = input('post.');
+//            $postData = [
+//                'applicant'=>'ygb',
+//                'name'=>'ygb',
+//                'mobile'=>'18664368697',
+//                'province'=>'1',
+//                'city'=>'1',
+//                'detail_address'=>'hhhhhhh',
+//                'franchise_fee' =>'0.01',
+//            ];
             $sn = generateSN(); //内部支付编号
             $postData['sn'] = $sn;
             $result  = $modelFranchise->isUpdate(false)->save($postData);
