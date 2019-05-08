@@ -52,7 +52,7 @@ class Franchise extends \common\controller\UserBase {
                 return errorMsg('失败');
             }
             $modelFranchise -> commit();
-            return successMsg('成功',['url'=>config('custom.pay_franchise')]);
+            return successMsg('成功',['url'=>config('custom.pay_franchise').$sn]);
         }else{
             $unlockingFooterCart = unlockingFooterCartConfig([10,0,9]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
