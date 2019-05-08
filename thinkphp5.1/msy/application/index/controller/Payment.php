@@ -398,7 +398,7 @@ class Payment extends \common\controller\Base {
             }
             $payModel = new \app\index\model\Pay();
             $payModel ->setConnection(config('custom.system_id')[$systemId]['db']);
-            $data = [
+            $data1 = [
                 'pay_status'=>2,                              // 订单状态
                 'payment_time'=>time(),
                 'pay_sn'=>$data['transaction_id'],                      // 支付单号 退款用
@@ -412,7 +412,7 @@ class Payment extends \common\controller\Base {
             ];
 
             $payModel ->startTrans();
-            $result = $payModel->isUpdate(true)->save($data,$condition);
+            $result = $payModel->isUpdate(true)->save($data1,$condition);
 
             print_r($payModel->getLastSql());exit;
             if($result === false){
