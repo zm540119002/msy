@@ -61,7 +61,6 @@ $(function(){
         postData.applicantData=applicantData; 
         postData.pay_code = $('.pay_code').val();
         _this = $(this);
-        console.log(postData);
         if(!postData.pay_code){
             dialog.error('请选择结算方式');
         }else{

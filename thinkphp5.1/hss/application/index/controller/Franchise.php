@@ -22,7 +22,7 @@ class Franchise extends \common\controller\UserBase {
     public function applyFranchise()
     {
         if(request()->isAjax()){
-            $postData = input('post.');
+            $postData = input('post.applicantData/a');
             print_r($postData);exit;
             $validate = new \app\index\validate\Franchise();
             if(!$validate->scene('add')->check($postData)) {
