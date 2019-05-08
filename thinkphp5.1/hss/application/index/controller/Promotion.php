@@ -13,22 +13,31 @@ class Promotion extends \common\controller\Base{
 
         if(!request()->isAjax()){
 
-            if(!$id=input('id/d')) $this->error('此促销已下架');
+            if(!$id=input('id/d')) $this->error('此套餐已下架');
 
             // 促销信息
             $model = new\app\index\model\Promotion();
-            $condition = [
-                'where' => [['status', '=', 0], ['shelf_status', '=', 3], ['id', '=', $id]],
-                'field' => ['id','name','main_img','intro','background_img','logo_img']
+            $condition =[
+                'field' => [
+                    'id','name','main_img','tag','intro','title'
+                ], 'where' => [
+                    ['status', '=', 0],
+                    ['shelf_status', '=', 3],
+                    ['id', '=', $id],
+                ]
             ];
-            $css = (input('css'));
-            $this->assign('css', $css);
+
             $info = $model->getInfo($condition);
-            if (empty($info)) {
-                $this->error('此项目已下架');
+
+            if(empty($info)){
+                $this->error('此套餐已下架');
             }
-            $info['main_img'] = explode(',', (string)$info['main_img']);
-            $this->assign('info', $info);
+
+            $info['tag'] = explode('|',(string)$info['tag']);
+            $info['main_img'] = explode(',',(string)$info['main_img']);
+            $info['intro'] = $info['intro'] ? htmlspecialchars_decode($info['intro']) : $info['intro'] ;
+
+            $this->assign('info',$info);
 
             $unlockingFooterCart = unlockingFooterCartConfig([0, 2, 1]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);

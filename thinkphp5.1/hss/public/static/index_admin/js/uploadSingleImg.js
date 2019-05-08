@@ -1,4 +1,4 @@
-// 选择单图片
+// 选择上传的单图片
 $('body').on('change','.uploadSingleImg',function () {
     var _this=$(this);
     uploadsSingleImgFlag = false;

@@ -1,0 +1,56 @@
+{extend name="template/base.html" /}
+{block name="content"}
+<div class="f24">
+	<section class="slider_banner">
+		<div class="swiper-container-horizontal swiper-container-ios">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide swiper-slide-active">
+					<img src="public_img/banner/mch_banner1.jpg" alt="" class="common_default_img">
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="content-padding">
+		<div class="columns_flex l-r-sides">
+			<div>
+                <span></span>
+                非黑森森加盟店
+            </div>
+            <div>
+                <a href="{:url('Franchise/applyFranchise')}">加盟店资格申请 ></a>
+            </div>
+		</div>
+        <ul class="franchise_ul">
+            <li>
+                <a href="" class="right-arrow">
+                    <span class="zh"></span>
+                    免费入驻部署美尚云智慧门店
+                </a>
+            </li>
+            <li>
+                <a href="" class="right-arrow">
+                    <span class="ck"></span>
+                    黑森森加盟店新零售创客管理
+                </a>
+            </li>
+            <li>
+                <a href="" class="right-arrow">
+                    <span class="zc"></span>
+                    黑森森加盟门店众创空间管理
+                </a>
+            </li>
+        </ul>
+	</section>
+</div>
+{/block}
+{block name="footer"}
+{include file="template/footer_project.html" /}
+{/block}
+{block name="script"}
+<script type="text/javascript" src="api_common_js/swiper.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+	
+	});
+</script>
+{/block}

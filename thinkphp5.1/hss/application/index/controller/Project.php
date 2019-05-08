@@ -12,6 +12,40 @@ class Project extends \common\controller\Base{
     }
 
     /**
+     * 场景项目列表
+     */
+    public function getSceneProjectList(){
+        if(!request()->isGet()){
+            return errorMsg('参数有误');
+        }
+        $scene_id = input('scene_id/d');
+        if(!$scene_id){
+            return errorMsg('参数有误');
+        }
+
+        $model = new \app\index\model\Project();
+        $condition = [
+            'field' => [
+                'p.id','p.name','p.thumb_img'
+            ],
+            'where' => [
+                ['p.status','=',0],
+                ['p.shelf_status','=',3],
+                ['sp.scene_id','=',$scene_id],
+            ],'join' => [
+                ['scene_project sp','p.id = sp.project_id','left'],
+            ],'order' => ['p.sort desc']
+        ];
+
+        $list = $model -> pageQuery($condition);
+        $this->assign('list',$list);
+
+        return $this->fetch('list_tpl');
+
+
+    }
+
+    /**
      * 查询项目下的相关视频 分页查询 暂时先随机
      */
     public function getVideoList(){

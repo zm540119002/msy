@@ -28,10 +28,10 @@ return [
             'a'    => 'href='.url('Index/index'),
             'icon' => 'store',
         ],
-        'StoreLeague/index' => [
+        'Franchise/index' => [
             'name' => '加盟店家',
             //'a'    => 'href='.url('StoreLeague/index'),
-            'a'    => "href=javascript:void(0) class='async_login' data-jump_url=".url('StoreLeague/index'),
+            'a'    => "href=javascript:void(0) class='async_login' data-jump_url=".url('Franchise/index'),
             'icon' => 'practitioners',
         ],
         'CityPartner/index' => [
@@ -57,7 +57,7 @@ return [
     // 支付链接 充值链接
     'pay_gateway' => 'https://msy.meishangyun.com/index/Payment/toPay?system_id=3&payment_type=1&sn=',
     'pay_recharge'=> 'https://msy.meishangyun.com/index/Payment/toPay?system_id=3&payment_type=2&sn=',
-
+    'pay_franchise'=>'https://msy.meishangyun.com/index/Payment/pay?system_id=3&sn=',
 
     // 支付方式 1 微信 2：支付宝 3：网银 4:钱包
     'pay_code' => [
@@ -98,5 +98,27 @@ return [
             'name' => '线下支付',
         ],
     ],
+
+    // 支付单的类型 1 订单 2：充值 3：加盟
+    'pay_type' => [
+        'orderPay' => [
+            'code' => 1,
+            'name' => '微信支付',
+        ],
+        'rechargePay' => [
+            'code' => 2,
+            'name' => '支付宝',
+        ],
+        'franchisePay' => [
+            'code' => 3,
+            'name' => '银联支付',
+        ],
+    ],
+
+    // 首页场景行排列数 [1=>3,2=>2...] 第一行3个，第二行2个...
+    'scene_arrangement' => [
+        1 => 3,
+        'default' => 2,
+    ]
 ];
 

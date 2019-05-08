@@ -134,7 +134,7 @@ class Goods extends \common\controller\Base{
                 return errorMsg('参数有误');
         }
 
-        $config = [
+        $condition = [
             'where' => [
                 [$field_id,'=',$id], ['g.status','=', 0], ['g.shelf_status','=', 3],
             ],'join' => [
@@ -145,7 +145,7 @@ class Goods extends \common\controller\Base{
             ],
         ];
 
-        $list = $model -> getList($config);
+        $list = $model -> pageQuery($condition);
         $this->assign('list',$list);
 
         return $this->fetch('list_goods_one_column_tpl');
