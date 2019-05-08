@@ -72,7 +72,7 @@ $(function(){
 });
 // 提交申请
 function submitApplicant(_this,postData){
-    var url = module + 'Order/confirmOrder';
+    var url = module + 'Franchise/applyFranchise';
     _this.addClass("nodisabled");//防止重复提交
 
     $.ajax({
