@@ -259,7 +259,7 @@ class Payment extends \common\controller\Base {
                 ['status', '=', 0],
                 ['sn', '=', $sn],
             ],'field' => [
-                'id','user_id', 'sn', 'actually_amount','payment_code','pay_status'
+                'id','user_id', 'sn', 'actually_amount','payment_code','pay_status','type'
             ],
         ];
         return  $model->getInfo($config);
@@ -413,8 +413,6 @@ class Payment extends \common\controller\Base {
 
             $payModel ->startTrans();
             $result = $payModel->isUpdate(true)->save($data1,$condition);
-
-            print_r($payModel->getLastSql());exit;
             if($result === false){
                 $payModel ->rollback();
                 $info['mysql_error'] = $payModel->getError();
