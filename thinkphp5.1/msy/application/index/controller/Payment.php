@@ -375,7 +375,7 @@ class Payment extends \common\controller\Base {
         </xml>
          */
         $data = [
-            'attach'=>"{'system_id:3'}",
+            'attach'=>"{'system_id':3 }",
             'out_trade_no'=>"20190508133552360792209865014610",
             'total_fee'=>1,
             'transaction_id'=>'1004400740201409030005092168',
