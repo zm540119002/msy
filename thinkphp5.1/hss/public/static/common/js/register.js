@@ -65,6 +65,7 @@ $(function(){
         }
         var _this = $(this);
         _this.addClass("nodisabled");
+        console.log(postData);
         $.post(controller + 'register',postData,function(msg){
             _this.removeClass("nodisabled");
             if(msg.status == 0){
