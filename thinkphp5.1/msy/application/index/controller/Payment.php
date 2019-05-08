@@ -412,6 +412,7 @@ class Payment extends \common\controller\Base {
             ];
             $payModel ->startTrans();
             $result = $payModel->isUpdate(true)->save($data,$condition);
+            print_r($result);exit;
             if($result === false){
                 $payModel ->rollback();
                 $info['mysql_error'] = $payModel->getError();
