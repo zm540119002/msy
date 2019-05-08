@@ -67,8 +67,8 @@ class Scene extends \common\controller\Base{
                 'field' => [
                     'ss.id','ss.name','ss.main_img','ss.tag','ss.intro','ss.tag_category','ss.display_type','ss.title'
                 ], 'where' => [
-                    ['s.status', '=', 0],
-                    ['s.shelf_status', '=', 3],
+                    ['ss.status', '=', 0],
+                    ['ss.shelf_status', '=', 3],
                     ['s.id', '=', $id],
                 ], 'join' => [
                     ['scene ss ','s.tag_category=ss.tag_category','left']
