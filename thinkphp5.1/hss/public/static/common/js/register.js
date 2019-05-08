@@ -56,7 +56,7 @@ $(function(){
         $('.pay_code').val(pay_code);
     });
 
-    // 提交订单带地址
+    // 提交数据
     $('body').on('click','.settlement_btn',function () {
 
         var postData = {};
@@ -64,7 +64,12 @@ $(function(){
         postData.pay_code = $('.pay_code').val();
         _this = $(this);
         console.log(postData);
-        submitApplicant(_this,postData);
+        if(!postData.pay_code){
+            dialog.error('请选择支付方式');
+        }else{
+            submitApplicant(_this,postData);
+        }
+        
     });
 });
 // 其它支付方式提交订单
