@@ -1,18 +1,18 @@
 $(function(){
     tab_down('.apply-data-nav .switch-item','.apply-module','click');
     var name,
-        agentName,
+        applicant,
         businessLicense,
         agentAuthorization,
         postData={};
     //填写基本资料
     $('body').on('click','.one-step',function(){
         name=$('.name').val();
-        agentName=$('.agentName').val();
+        applicant=$('.applicant').val();
         var content='';
         if(!name){
             content='请填写店家名称';
-        }else if(!agentName){
+        }else if(!applicant){
             content='请填写申请人姓名';
         }
         if(content){
@@ -27,14 +27,14 @@ $(function(){
     //验证是否上传图片 与 提交申请
     $('body').on('click','.two-step',function(){
         name=trim($('.name').val(),'g');
-        agentName=trim($('.agentName').val(),'g');
+        applicant=trim($('.applicant').val(),'g');
         businessLicense=$('.business-license').val();
         agentAuthorization=$('.agent-authorization').val();
         id = $('.id').val();
         var content='';
         if(!name){
             content='请填写厂商全称';
-        }else if(!agentName){
+        }else if(!applicant){
             content='请填写代办人姓名';
         }else if(!businessLicense){
             content='请上传企业营业执照照片';
@@ -46,7 +46,7 @@ $(function(){
         postData={
             id : id,
             name:name,
-            agent:agentName,
+            agent:applicant,
             business_license:businessLicense,
             auth_letter:agentAuthorization
         };
