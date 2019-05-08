@@ -410,9 +410,11 @@ class Payment extends \common\controller\Base {
                     ['pay_status', '=', 1],
                 ],
             ];
+
             $payModel ->startTrans();
             $result = $payModel->isUpdate(true)->save($data,$condition);
-            print_r($result);exit;
+
+            print_r($payModel->getLastSql());exit;
             if($result === false){
                 $payModel ->rollback();
                 $info['mysql_error'] = $payModel->getError();
