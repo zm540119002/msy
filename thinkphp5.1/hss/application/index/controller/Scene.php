@@ -8,6 +8,9 @@ class Scene extends \common\controller\Base{
     /**首页
      */
     public function index(){
+        echo 2222;
+        exit;
+
         if(request()->isAjax()){
         }else{
             return $this->fetch();
