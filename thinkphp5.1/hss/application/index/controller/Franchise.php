@@ -31,7 +31,7 @@ class Franchise extends \common\controller\UserBase {
             $modelFranchise -> startTrans();
             $sn = generateSN(); //内部支付编号
             $postData['sn'] = $sn;
-            $postData['franchise_fee'] = 0.01;
+            $postData['franchise_fee'] = config('custom.franchise_fee');
             $result  = $modelFranchise->isUpdate(false)->save($postData);
             if(!$result){
                 $modelFranchise ->rollback();
@@ -40,8 +40,8 @@ class Franchise extends \common\controller\UserBase {
             $modelPay = new \app\index\model\Pay();
             $data = [
                 'sn' => $sn,
-                'actually_amount' => 0.01,
-                'user_id' => 1,
+                'actually_amount' =>config('custom.franchise_fee'),
+                'user_id' => $this->user['id'],
                 'payment_code' => $postData['payment_code'],
                 'type' => config('custom.pay_type')['franchisePay']['code'],
             ];
