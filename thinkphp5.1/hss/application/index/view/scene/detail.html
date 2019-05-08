@@ -41,7 +41,18 @@
 		{/notempty}
 		<!--产品列表-->
 		<ul class="goods_list list" id="list">
-
+			<div id="product-select">
+				<product-select
+						v-for="productInfo in productList"
+						:key="productInfo.product_id"
+						:product_id="productInfo.product_id"
+						:deal_price="productInfo.deal_price"
+						:buy_named="buy_named"
+						:init_quantity="init_quantity"
+						:step_quantity="step_quantity"
+						:display_pic="display_pic"
+				></product-select>
+			</div>
 		</ul>
 	</section>
 </article>
@@ -62,6 +73,24 @@
 <script type="text/javascript" src="api_common_js/swiper.min.js"></script>
 <script type="text/javascript" src="index_js/footerCart.js"></script>
 <script type="text/javascript">
+	function getJsonCallBack(data){
+		console.log(data);
+		console.log(data.data);
+		param = {
+			'buy_named':'采购数量',
+			'display_quota':true,
+			'display_pic':true,
+			'init_quantity':2,
+			'step_quantity':10,
+			'productList':data.data
+		};
+		new Vue({
+			el: '#product-select',
+			data:function(){
+				return param;
+			}
+		});
+	}
 	$(function(){
 		let param = {
 		};
@@ -75,7 +104,6 @@
 				}
 			}
 		});
-
 		var id = '{$info.id}';
 		var date=getWeek();
 		countDown(date,$('#countDownBox'));
@@ -98,7 +126,8 @@
 		url:module+'Goods/getRelationGoods',
 		requestEnd:false,
 		loadTrigger:false,
-		currentPage:1
+		currentPage:1,
+		callBack:getJsonCallBack
 	};
 	var postData = {
 		pageSize:10,
