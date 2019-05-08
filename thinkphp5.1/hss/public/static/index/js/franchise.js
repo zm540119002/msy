@@ -1,10 +1,6 @@
 $(function(){
     tab_down('.apply-data-nav .switch-item','.apply-module','click');
-    var name,
-        applicant,
-        mobile,
-        area_address,
-        detail_address,
+    var area_address,
         applicantData={};
     //填写基本资料
     $('body').on('click','.one-step',function(){
@@ -59,10 +55,9 @@ $(function(){
         applicantData.province = area_address[0];
         applicantData.city = area_address[1];
         applicantData.area = area_address[2];
-        applicantData.pay_code = $('.pay_code').val();
+        applicantData.payment_code = $('.pay_code').val();
         _this = $(this);
-        console.log(applicantData);
-        if(!applicantData.pay_code){
+        if(!applicantData.payment_code){
             dialog.error('请选择结算方式');
         }else{
             submitApplicant(_this,applicantData);
@@ -74,7 +69,6 @@ $(function(){
 function submitApplicant(_this,postData){
     var url = module + 'Franchise/applyFranchise';
     _this.addClass("nodisabled");//防止重复提交
-
     $.ajax({
         url: url,
         data: postData,
