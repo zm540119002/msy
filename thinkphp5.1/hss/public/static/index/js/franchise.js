@@ -56,16 +56,16 @@ $(function(){
 
     // 结算
     $('body').on('click','.settlement_btn',function () {
-
-        var postData = {};
-        postData.applicantData=applicantData; 
-        postData.pay_code = $('.pay_code').val();
+        applicantData.province = area_address[0];
+        applicantData.city = area_address[1];
+        applicantData.area = area_address[2];
+        applicantData.pay_code = $('.pay_code').val();
         _this = $(this);
-        console.log(postData);
-        if(!postData.pay_code){
+        console.log(applicantData);
+        if(!applicantData.pay_code){
             dialog.error('请选择结算方式');
         }else{
-            submitApplicant(_this,postData);
+            submitApplicant(_this,applicantData);
         }
         
     });
