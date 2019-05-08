@@ -568,6 +568,7 @@ class Payment extends \common\controller\Base {
             ],
         ];
         $result = $modelFranchise -> allowField(true) -> save($data,$condition);
+        echo $modelFranchise->getLastSql();exit;
         if($result ===false){
             $modelFranchise ->rollback();
             $info['mysql_error'] = $modelFranchise->getError();
