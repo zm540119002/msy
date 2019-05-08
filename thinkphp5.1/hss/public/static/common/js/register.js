@@ -4,6 +4,7 @@ $(function(){
         applicant,
         mobile,
         area_address,
+        detail_address,
         postData={};
     //填写基本资料
     $('body').on('click','.one-step',function(){
@@ -32,31 +33,31 @@ $(function(){
             $('.apply-module:eq(1)').show();
         }
     });
-    //验证是否上传图片 与 提交申请
+    //验证与 提交申请
     $('body').on('click','.two-step',function(){
         name=trim($('.name').val(),'g');
         applicant=trim($('.applicant').val(),'g');
-        businessLicense=$('.business-license').val();
-        agentAuthorization=$('.agent-authorization').val();
         id = $('.id').val();
         var content='';
-        if(!name){
-            content='请填写厂商全称';
-        }else if(!applicant){
-            content='请填写代办人姓名';
-        }else if(!businessLicense){
-            content='请上传企业营业执照照片';
-        }
-        if(!uploadsSingleImgFlag ){
-            dialog.error('图片还没有上传完毕');
-            return false;
+       var content='';
+        if(!postData.name){
+            content='请填写店家名称';
+        }else if(!postData.applicant){
+            content='请填写申请人姓名';
+        }else if(!register.phoneCheck(postData.mobile)){
+            content='请填写手机号码';
+        }else if(!area_address){
+            content='请选择地区';
+        }else if(!postData.detail_address){
+            content='请填写详细地址';
         }
         postData={
             id : id,
             name:name,
-            agent:applicant,
-            business_license:businessLicense,
-            auth_letter:agentAuthorization
+            applicant:applicant,
+            mobile:mobile,
+            area_address:area_address,
+            detail_address:detail_address
         };
         if(content){
             dialog.error(content);
