@@ -8,9 +8,6 @@ class Scene extends \common\controller\Base{
     /**首页
      */
     public function index(){
-        echo 2222;
-        exit;
-
         if(request()->isAjax()){
         }else{
             return $this->fetch();
@@ -60,6 +57,9 @@ class Scene extends \common\controller\Base{
      * 需要同组的各场景的名，场景信息，场景下的商品，场景下的方案
      */
     public function detail(){
+        echo 2222;
+        exit;
+
         if(request()->isAjax()){
         }else{
             $unlockingFooterCart = unlockingFooterCartConfigTest([0,2,1,3]);
