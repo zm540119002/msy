@@ -60,5 +60,14 @@ class Franchise extends \common\controller\UserBase {
         }
     }
 
+    /**
+     * 创客管理
+     * @return mixed
+     */
+    public function makersManage()
+    {
+        return $this->fetch();
+    }
+
 
 }

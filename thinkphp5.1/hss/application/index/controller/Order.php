@@ -189,53 +189,39 @@ class Order extends \common\controller\UserBase
 
     }
 
-    // 支付
+    // 去支付
     public function toPay()
     {
-        $orderSn = input('order_sn/s');
-        $url = config('custom.pay_gateway');
-
-        p($orderSn);
-        exit;
-
-        return $this->redirect($url.$orderSn);
-
-/*        if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
-            $payOpenId =  session('pay_open_id');
-            if(empty($payOpenId)){
-                $tools = new \common\component\payment\weixin\getPayOpenId(config('wx_config.appid'), config('wx_config.appsecret'));
-                $payOpenId  = $tools->getOpenid();
-                session('pay_open_id',$payOpenId);
-            }
-        }*/
+        if (!request()->isPost()) {
+            return errorMsg('请求方式错误');
+        }
+        $postData = input('post.');
         $modelOrder = new \app\index\model\Order();
-        $orderSn = input('order_sn');
-        $config = [
+        $condition = [
             'where' => [
-                ['o.status', '=', 0],
-                ['o.sn', '=', $orderSn],
-                ['o.user_id', '=', $this->user['id']],
-            ],'field' => [
-                'o.id', 'o.sn', 'o.amount',
-                'o.user_id',
-            ],
+                ['user_id','=',$this->user['id']],
+                ['sn','=',$postData['sn']],
+                ['order_status','=',0],
+            ], 'field'=>[
+                'id','sn',''
+            ]
         ];
-        $orderInfo = $modelOrder->getInfo($config);
-        $this->assign('orderInfo', $orderInfo);
-        //钱包
-        $modelWallet = new \app\index\model\Wallet();
-        $config = [
-            'where' => [
-                ['status', '=', 0],
-                ['user_id', '=', $this->user['id']],
-            ],'field' => [
-                'id','amount',
-            ],
+
+        $orderInfo  = $modelOrder->getInfo($condition);
+        $modelPay = new \app\index\model\Pay();
+        $data = [
+            'sn' => $sn,
+            'actually_amount' =>config('custom.franchise_fee'),
+            'user_id' => $this->user['id'],
+            'payment_code' => $postData['payment_code'],
+            'type' => config('custom.pay_type')['franchisePay']['code'],
         ];
-        $walletInfo = $modelWallet->getInfo($config);
-        $this->assign('walletInfo', $walletInfo);
-        $this->assign('user',$this->user);
-        return $this->fetch();
+        $result  = $modelPay->isUpdate(false)->save($data);
+        if(!$result){
+            $modelPay ->rollback();
+            return errorMsg('失败');
+        }
+
     }
 
     //订单管理
