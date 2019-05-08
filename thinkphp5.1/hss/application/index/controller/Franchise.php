@@ -32,6 +32,7 @@ class Franchise extends \common\controller\UserBase {
             $modelFranchise -> startTrans();
             $sn = generateSN(); //内部支付编号
             $postData['sn'] = $sn;
+            $postData['franchise_fee'] = 0.01;
             $result  = $modelFranchise->isUpdate(false)->save($postData);
             if(!$result){
                 $modelFranchise ->rollback();
