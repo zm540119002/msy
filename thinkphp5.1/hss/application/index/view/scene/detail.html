@@ -44,9 +44,10 @@
 			<div id="product-select">
 				<product-select
 						v-for="productInfo in productList"
-						:key="productInfo.product_id"
-						:product_id="productInfo.product_id"
-						:deal_price="productInfo.deal_price"
+						:key="productInfo.id"
+						:product_id="productInfo.id"
+						:deal_price="productInfo.bulk_price"
+						:product_name="productInfo.specification"
 						:buy_named="buy_named"
 						:init_quantity="init_quantity"
 						:step_quantity="step_quantity"

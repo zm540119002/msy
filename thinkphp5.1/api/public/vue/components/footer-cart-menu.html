@@ -22,6 +22,7 @@
 </style>
 <!-- 产品选择器 -->
 <template id="product_select_tpl">
+    <li>
     <div class="product-select">
         <div class="columns_flex l-r-sides">
             <p>
@@ -49,8 +50,7 @@
             </div>
             <div  class="right">
                 <div  v-if="display_pic" class="product_name">
-                    <p class="text-intro">玻尿酸活性肽修护冻干组12组 补水舒敏祛痘淡印修护晒后术后肌肤冻干粉玻尿酸活性肽修护冻干组12组
-                        补水舒敏祛痘淡印修护晒后术后肌肤冻干粉玻尿酸活性肽修护冻干组12组 补水舒敏祛痘淡印修护晒后术后肌肤冻干粉</p>
+                    <p class="text-intro">{{product_name}}</p>
                 </div>
                 <div class="quantity_wrapper selected-number">
                     <a href="javascript:void(0);" class="reduce" @click="reduce">-</a>
@@ -60,6 +60,7 @@
             </div>
         </div>
     </div>
+    </li>
 </template>
 <script type="text/javascript">
     $(function(){
@@ -67,6 +68,7 @@
             template:'#product_select_tpl',
             props: {
                 product_id: {type: Number,default: 0,required: true},
+                product_name: {type: String,default: ''},
                 buy_named: {type: String,default: '购买数量'},
                 step_named: {type: String,default: '起订数量'},
                 quota_named: {type: String,default: '样品购买限额'},
