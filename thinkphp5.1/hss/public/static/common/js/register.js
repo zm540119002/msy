@@ -65,7 +65,7 @@ $(function(){
         _this = $(this);
         console.log(postData);
         if(!postData.pay_code){
-            dialog.error('请选择支付方式');
+            dialog.error('请选择结算方式');
         }else{
             submitApplicant(_this,postData);
         }
