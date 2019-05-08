@@ -190,7 +190,6 @@ class Payment extends \common\controller\Base {
                 $this -> error($msg);
             }
         }else{
-            echo 123;exit;
             $systemId = input('system_id',0,'int');
             $this->assign('system_id',$systemId);
             $sn = input('sn','','string');
