@@ -13,7 +13,7 @@ $(function(){
         if(!name){
             content='请填写店家名称';
         }else if(!agentName){
-            content='请填写代办人姓名';
+            content='请填写申请人姓名';
         }
         if(content){
             dialog.error(content);
