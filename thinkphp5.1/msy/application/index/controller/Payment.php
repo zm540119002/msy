@@ -389,7 +389,7 @@ class Payment extends \common\controller\Base {
                 return $this->writeLog("数据库没有此订单",$payInfo);
             }
             //此订单回调已处理过
-            if($payInfo['order_status']>=2){
+            if($payInfo['pay_status']>=2){
                 echo 'SUCCESS';
                 die;
             }
