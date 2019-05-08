@@ -23,11 +23,11 @@ class Franchise extends \common\controller\UserBase {
     {
         if(request()->isAjax()){
             $postData = input('post.applicantData/a');
-            $validate = new \app\index\validate\Franchise();
-            if(!$validate->scene('add')->check($postData)) {
-                return errorMsg($validate->getError());
-            }
-            return $postData;
+//            $validate = new \app\index\validate\Franchise();
+//            if(!$validate->scene('add')->check($postData)) {
+//                return errorMsg($validate->getError());
+//            }
+//            return $postData;
             $modelFranchise = new \app\index\model\Franchise();
             $modelFranchise -> startTrans();
 
