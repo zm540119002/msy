@@ -59,6 +59,13 @@ class Scene extends \common\controller\Base{
     public function detail(){
         if(request()->isAjax()){
         }else{
+            $unlockingFooterCart = unlockingFooterCartConfigTest([0,2,1,3]);
+            array_push($unlockingFooterCart['menu'][0]['class'],'group_btn30');
+            array_push($unlockingFooterCart['menu'][1]['class'],'group_btn30');
+            array_push($unlockingFooterCart['menu'][2]['class'],'group_btn30');
+            array_push($unlockingFooterCart['menu'][3]['class'],'group_btn30');
+            $this->assign('unlockingFooterCart',json_encode($unlockingFooterCart));
+            
             $id = intval(input('id'));
             if(!$id) $this->error('此项目已下架');
             // 场景信息

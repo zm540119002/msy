@@ -63,6 +63,19 @@
 <script type="text/javascript" src="index_js/footerCart.js"></script>
 <script type="text/javascript">
 	$(function(){
+		let param = {
+		};
+		new Vue({
+			el: '#foot_cart_menu',
+			data:function(){
+				return param;
+			},methods: {
+				add_cart_call_back:function (param) {
+					console.log(param);
+				}
+			}
+		});
+
 		var id = '{$info.id}';
 		var date=getWeek();
 		countDown(date,$('#countDownBox'));
