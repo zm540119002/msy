@@ -1,7 +1,7 @@
 <?php
 namespace app\index\controller;
 
-class Franchise extends \common\controller\UserBase{
+class Franchise extends \common\controller\Base {
     /**首页
      */
     public function index(){
@@ -24,14 +24,7 @@ class Franchise extends \common\controller\UserBase{
         if(request()->isAjax()){
             $modelFranchise = new \app\index\model\Franchise();
             $modelFranchise -> startTrans();
-            $postData = [
-                'name'=>'ygb',
-                'mobile'=>'18664368697',
-                'province'=>'1',
-                'city'=>'1',
-                'detail_address'=>'hhhhhhh',
-                'franchise_fee' =>'0.01',
-            ];
+            $postData = input('post.');
             $sn = generateSN(); //内部支付编号
             $postData['sn'] = $sn;
             $result  = $modelFranchise->isUpdate(false)->save($postData);
@@ -43,8 +36,8 @@ class Franchise extends \common\controller\UserBase{
             $data = [
                 'sn' => $sn,
                 'actually_amount' => $postData['franchise_fee'],
-                'user_id' => $this->user['id'],
-                'payment_code' => $this->user['id'],
+                'user_id' => 1,
+                'payment_code' => $postData['payment_code'],
                 'type' => config('custom.pay_type')['franchisePay']['code'],
             ];
             $result  = $modelPay->isUpdate(false)->save($data);
