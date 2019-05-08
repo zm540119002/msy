@@ -23,11 +23,10 @@ class Franchise extends \common\controller\UserBase {
     {
         if(request()->isAjax()){
             $postData = input('post.');
-//            $validate = new \app\index\validate\Franchise();
-//            if(!$validate->scene('add')->check($postData)) {
-//                return errorMsg($validate->getError());
-//            }
-//            return $postData;
+            $validate = new \app\index\validate\Franchise();
+            if(!$validate->scene('add')->check($postData)) {
+                return errorMsg($validate->getError());
+            }
             $modelFranchise = new \app\index\model\Franchise();
             $modelFranchise -> startTrans();
             $sn = generateSN(); //内部支付编号
