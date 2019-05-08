@@ -8,9 +8,6 @@ class Index extends \common\controller\Base{
      */
     public function index(){
 
-        echo  33333;
-        exit;
-
         // 促销列表 7个
         $modelPromotion = new \app\index\model\Promotion();
         $condition =[
