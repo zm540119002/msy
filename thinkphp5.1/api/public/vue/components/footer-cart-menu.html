@@ -156,7 +156,7 @@
                 </div>
                 <!-- 总金额 -->
                 <div v-else-if="menu.class.indexOf('amount')!==-1">
-                    <span class="total_amount">￥{{total_amount}}</span>
+                    <span class="total_amount">￥{{parseFloat(total_amount)}}</span>
                 </div>
                 <!-- 购物篮 -->
                 <div v-else-if="menu.class.indexOf('add_cart_icon')!==-1">
