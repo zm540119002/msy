@@ -405,14 +405,14 @@ class Scene extends Base {
     }
 
     /**
-     * 场景下的方案
+     * 场景下的促销方案
      */
-    public function manageSceneScheme(){
+    public function manageScenePromotion(){
         // 查询
         if(!$id = input('id/d')){
             $this ->error('参数有误',url('manage'));
         }
-        $sceneModel = new \app\index_admin\model\Scene();
+        $sceneModel = new \app\index_admin\model\Promotion();
 
         $condition = [
             'where'=>[
@@ -476,7 +476,7 @@ class Scene extends Base {
     /**
      * 修改场景下的方案
      */
-    public function editSceneScheme(){
+    public function editScenePromotion(){
 
         if(request()->isPost()){
 
@@ -516,7 +516,7 @@ class Scene extends Base {
     /**
      * 取消关联的方案
      */
-    public function delSceneScheme(){
+    public function delScenePromotion(){
         if(!request()->isPost()){
             return config('custom.not_post');
         }

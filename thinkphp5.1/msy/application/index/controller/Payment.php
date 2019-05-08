@@ -259,7 +259,7 @@ class Payment extends \common\controller\Base {
                 ['status', '=', 0],
                 ['sn', '=', $sn],
             ],'field' => [
-                'id','user_id', 'sn', 'actually_amount','payment_code',
+                'id','user_id', 'sn', 'actually_amount','payment_code','pay_status','type'
             ],
         ];
         return  $model->getInfo($config);
@@ -349,21 +349,21 @@ class Payment extends \common\controller\Base {
     public function wxPayNotifyCallBack(){
         $wxPay = new \common\component\payment\weixin\weixinpay;
         $data  = $wxPay->wxNotify();
+//        $data = [
+//            'attach'=>"{'system_id':3 }",
+//            'out_trade_no'=>"20190508133552360792209865014610",
+//            'total_fee'=>1,
+//            'transaction_id'=>'1004400740201409030005092168',
+//        ];
         if($data){
             $attach = json_decode($data['attach'],true);
             $systemId = $attach['system_id'];
-//            $order['system_id'] = $attach['system_id'];
-//            $order['payment_type'] = $attach['payment_type'];
-//            $order['sn'] = $data['out_trade_no'];
-//            $order['actually_amount'] = $data['total_fee']/100;
-//            $order['payment_code'] = 0;
-//            $order['pay_sn'] = $data['transaction_id'];
             $payInfo = $this->getPayInfo($systemId,$data['out_trade_no']);
             if(empty($payInfo)){
                 return $this->writeLog("数据库没有此订单",$payInfo);
             }
             //此订单回调已处理过
-            if($payInfo['order_status']>=2){
+            if($payInfo['pay_status']>=2){
                 echo 'SUCCESS';
                 die;
             }
@@ -372,43 +372,41 @@ class Payment extends \common\controller\Base {
             }
             $payModel = new \app\index\model\Pay();
             $payModel ->setConnection(config('custom.system_id')[$systemId]['db']);
-            $data = [
-                'order_status'=>2,                              // 订单状态
+            $data1 = [
+                'pay_status'=>2,                              // 订单状态
                 'payment_time'=>time(),
                 'pay_sn'=>$data['transaction_id'],                      // 支付单号 退款用
             ];
             $condition = [
                 'where' => [
                     ['status', '=', 0],
-                    ['sn', '=', $data['sn']],
+                    ['sn', '=', $data['out_trade_no']],
                     ['pay_status', '=', 1],
                 ],
             ];
             $payModel ->startTrans();
-            $result = $payModel->isUpdate(true)->save($data,$condition);
+            $result = $payModel->isUpdate(true)->save($data1,$condition);
             if($result === false){
                 $payModel ->rollback();
                 $info['mysql_error'] = $payModel->getError();
                 return $this->writeLog("支付订单更新失败",$info);
             }
             if($payInfo['type'] == 1){
-                $this->setOrderPayStatusNew($payInfo,$systemId);
+                $this->setOrderPayStatus($payInfo,$systemId);
             }elseif($payInfo['type'] == 2){
-                $this->setRechargePayStatusNew($payInfo,$systemId);
+                $this->setRechargePayStatus($payInfo,$systemId);
             }elseif($payInfo['type'] == 3){
                 $this->setFranchisePayStatus($payInfo,$systemId);
             }
-
-            echo 'SUCCESS';
         }
     }
     /**
      * 订单支付单回调处理
      * @param $info 回调信息
      */
-    public function setOrderPayStatus($info){
+    public function setOrderPayStatus($info,$systemId){
         $modelOrder = new \app\index\model\Order();
-        $modelOrder ->setConnection(config('custom.system_id')[$info['system_id']]['db']);
+        $modelOrder ->setConnection(config('custom.system_id')[$systemId]['db']);
         $condition = [
             'where' => [
                 ['status', '=', 0],
@@ -445,22 +443,22 @@ class Payment extends \common\controller\Base {
             ],
         ];
         $result = $modelOrder -> allowField(true) -> save($data,$condition);
-        if($result ===false){
+        if(!$result){
             $modelOrder->rollback();
             $info['mysql_error'] = $modelOrder->getError();
             return $this->writeLog("订单支付更新失败",$info);
         }
-
         echo 'SUCCESS';
     }
+
 
     /**
      * 充值支付单回调处理
      * @param $info 回调信息
      */
-    public function setRechargePayStatus($info){
+    public function setRechargePayStatus($info,$systemId){
         $modelWalletDetail= new \app\index\model\WalletDetail();
-        $modelWalletDetail ->setConnection(config('custom.system_id')[$info['system_id']]['db']);
+        $modelWalletDetail ->setConnection(config('custom.system_id')[$systemId]['db']);
         $modelWallet = new \app\index\model\Wallet();
         $modelWallet ->setConnection(config('custom.system_id')[$info['system_id']]['db']);
         $condition = [
@@ -542,7 +540,7 @@ class Payment extends \common\controller\Base {
             ],
         ];
         $result = $modelFranchise -> allowField(true) -> save($data,$condition);
-        if($result ===false){
+        if(!$result){
             $modelFranchise ->rollback();
             $info['mysql_error'] = $modelFranchise->getError();
             return $this->writeLog("订单支付更新失败",$info);
