@@ -30,17 +30,10 @@
             {/if}
         </td>
         <td class="w96">
-            {switch $vo.display_type }
-            {case sort }
-            <a href="javascript:void(0);" class="manageSceneGoodsCategory">关联分类</a>
-            {/case}
-            {case project}
-             <a href="javascript:void(0);" class="addSceneProject">关联项目</a>
-            {/case}
-            {default /}
-            <a href="javascript:void(0);" class="relationGoods">关联商品</a>
-            | <a href="javascript:void(0);" class="manageScenePromotion">关联促销</a>
-            {/switch}
+            {if $vo.display_type=='detail'}
+            <a href="javascript:void(0);" class="relationGoods">增加商品</a>
+            | <a href="javascript:void(0);" class="scenePromotion">增加促销</a>
+            {/if}
         </td>
         <td class="w96">
            <!-- 先不做<a href="javascript:void(0);" class="preview">预览</a>-->

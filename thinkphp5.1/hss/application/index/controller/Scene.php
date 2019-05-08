@@ -57,6 +57,7 @@ class Scene extends \common\controller\Base{
      * 需要同组的各场景的名，场景信息，场景下的商品，场景下的方案
      */
     public function detail(){
+        echo 123;exit;
         if(request()->isAjax()){
         }else{
             $unlockingFooterCart = unlockingFooterCartConfigTest([0,2,1,3]);
@@ -106,27 +107,27 @@ class Scene extends \common\controller\Base{
             $this->assign('sceneList',$sceneList);
 
 
-            // 获取场景下的方案
-            $modelSceneScheme = new \app\index\model\SceneScheme();
+            // 获取场景下的促销方案
+            $modelSceneScheme = new \app\index\model\ScenePromotion();
             $config = [
                 'where' => [
-                    ['ss.status', '=', 0],
-                    ['ss.scene_id', '=', $id],
-                    ['s.shelf_status', '=', 3],
+                    ['sp.status', '=', 0],
+                    ['sp.scene_id', '=', $id],
+                    ['p.shelf_status', '=', 3],
                 ],'field'=>[
-                    's.id','s.name','s.thumb_img','ss.show_name'
+                    'p.id','p.name','p.thumb_img'
                 ],'join'=>[
-                    ['scheme s','s.id = ss.scheme_id','left']
+                    ['promotion p','p.id = sp.promotion_id','left']
                 ]
             ];
-            $schemeList= $modelSceneScheme->getList($config);
+            $promotionList= $modelSceneScheme->getList($config);
 
             // 套餐下的商品总价 单个
-            foreach($schemeList as $k => $v){
-                $schemeList[$k]['amount'] = 9000;
+            foreach($promotionList as $k => $v){
+                $promotionList[$k]['amount'] = 9000;
             }
 
-            $this->assign('schemeList',$schemeList);
+            $this->assign('promotionList',$promotionList);
 
             $this->assign('relation',config('custom.relation_type.scene'));
 

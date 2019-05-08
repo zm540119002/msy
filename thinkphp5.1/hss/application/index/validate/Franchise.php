@@ -26,7 +26,7 @@ class Franchise extends \think\Validate
         'detail_address'  => [
             'require', 'max' => 200,
         ],
-        'payment_code'  => [
+        'pay_code'  => [
             'require', 'max' => 1,'integer'
         ],
 

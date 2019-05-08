@@ -46,4 +46,6 @@ class Promotion extends \common\controller\Base{
 
         return $this->fetch();
     }
+
+
 }

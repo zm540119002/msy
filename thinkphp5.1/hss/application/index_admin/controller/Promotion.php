@@ -144,7 +144,19 @@ class Promotion extends Base {
      *  分页查询
      */
     public function getList(){
-        $model = $this->obj;
+
+        $list = $this->getListData();
+
+        $this->assign('list',$list);
+
+        $view = 'list_tpl';
+
+
+        return view($view);
+    }
+
+    public function getListData(){
+        $model = new \app\index_admin\model\Promotion();
         $where = [];
         $where[] = ['status','=',0];
         // 上下架
@@ -162,13 +174,10 @@ class Promotion extends Base {
             'order'=>['id'=>'asc',],
         ];
 
-        $list = $model->pageQuery($config);
-
-        $this->assign('list',$list);
-
-        return view('list_tpl');
-
+        return  $model->pageQuery($config);
     }
+
+
 
     /**
      * @return array|mixed
@@ -219,6 +228,50 @@ class Promotion extends Base {
         $this->assign('relation',config('custom.relation_type.promotion'));
 
         return $this->fetch();
+    }
+
+
+    /**
+     * 取消关联的信息 scene_promotion,goods_category_promotion,project_promotion
+     */
+    public function delRelationPromotion(){
+        if(!request()->isPost()){
+            return config('custom.not_post');
+        }
+
+        $id      = input('post.id/d');
+
+        if (!$id){
+            return errorMsg('失败');
+        }
+
+        $relation= input('post.type/s');
+
+        $model = [];
+        switch($relation){
+            case 'goods':
+                $model = new \app\index_admin\model\SceneGoods();
+                break;
+            case 'category':
+                $model = new \app\index_admin\model\SceneGoodsCategory();
+                break;
+            case 'project':
+                $model = new \app\index_admin\model\SceneProject();
+                break;
+            case 'scene':
+                $model = new \app\index_admin\model\ScenePromotion();
+                break;
+        }
+
+        if(!$model){
+            return errorMsg('参数有误');
+        }
+
+        $condition = [
+            ['id','=',$id],
+        ];
+
+        return $model->del($condition,false);
     }
 
 
