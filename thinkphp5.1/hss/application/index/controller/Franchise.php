@@ -46,6 +46,7 @@ class Franchise extends \common\controller\UserBase {
                 'payment_code' => $postData['pay_code'],
                 'type' => config('custom.pay_type')['franchisePay']['code'],
             ];
+            print_r($data);exit;
             $result  = $modelPay->isUpdate(false)->save($data);
             if(!$result){
                 $modelPay ->rollback();
@@ -53,10 +54,6 @@ class Franchise extends \common\controller\UserBase {
             }
             $modelFranchise -> commit();
             return successMsg('成功',['url'=>config('custom.pay_franchise')]);
-        }else{
-            $unlockingFooterCart = unlockingFooterCartConfig([10,0,9]);
-            $this->assign('unlockingFooterCart', $unlockingFooterCart);
-            return $this->fetch();
         }
     }
 
