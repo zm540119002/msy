@@ -259,7 +259,7 @@ class Payment extends \common\controller\Base {
                 ['status', '=', 0],
                 ['sn', '=', $sn],
             ],'field' => [
-                'id','user_id', 'sn', 'actually_amount','payment_code',
+                'id','user_id', 'sn', 'actually_amount','payment_code','pay_status'
             ],
         ];
         return  $model->getInfo($config);
