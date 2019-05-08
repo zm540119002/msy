@@ -61,9 +61,5 @@ class Franchise extends \think\Validate
             'detail_address',
             'payment_code',
         ],
-
     ];
-
-
-
 }
