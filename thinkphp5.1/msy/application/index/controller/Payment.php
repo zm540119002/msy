@@ -382,8 +382,8 @@ class Payment extends \common\controller\Base {
         ];
         if($data){
             $attach = json_decode($data['attach'],true);
-            print_r($attach);exit;
             $systemId = $attach['system_id'];
+            $systemId = 3;
             $payInfo = $this->getPayInfo($systemId,$data['out_trade_no']);
             if(empty($payInfo)){
                 return $this->writeLog("数据库没有此订单",$payInfo);
