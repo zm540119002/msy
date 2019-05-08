@@ -96,4 +96,11 @@ $(function(){
             content: settlementMethod
         });
     });
+    // 选择支付方式
+    $('body').on('click','.settlementMethod .pay_nav li',function(){
+        $(this).addClass('current').siblings().removeClass('current');
+        var pay_code = $(this).data('paycode');
+        $(this).find('input[type="checkbox"]').prop('checked',true);
+        $('.pay_code').val(pay_code);
+    });
 });
