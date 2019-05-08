@@ -96,7 +96,6 @@ class Order extends \common\controller\UserBase
     // 订单确认页
     public function confirmOrder()
     {
-        echo 123;exit;
         if (request()->isPost()) {
             // 更新订单状态并清除订单里购物车里的商品
             $fatherOrderId = input('post.order_id',0,'int');
