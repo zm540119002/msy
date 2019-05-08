@@ -3,12 +3,13 @@ $(function(){
     var name,
         applicant,
         mobile,
-        agentAuthorization,
+        area_address,
         postData={};
     //填写基本资料
     $('body').on('click','.one-step',function(){
         // name=$('.name').val();
         // applicant=$('.applicant').val();
+        area_address =$('.area-address-name').getArea();
         postData=$('.applicant_form').serializeObject();
         var content='';
         if(!postData.name){
@@ -17,6 +18,10 @@ $(function(){
             content='请填写申请人姓名';
         }else if(!register.phoneCheck(postData.mobile)){
             content='请填写手机号码';
+        }else if(!area_address){
+            content='请选择地区';
+        }else if(!postData.detail_address){
+            content='请填写详细地址';
         }
         if(content){
             dialog.error(content);
