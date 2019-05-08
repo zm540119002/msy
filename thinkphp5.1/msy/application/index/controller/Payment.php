@@ -406,7 +406,7 @@ class Payment extends \common\controller\Base {
             $condition = [
                 'where' => [
                     ['status', '=', 0],
-                    ['sn', '=', $data['sn']],
+                    ['sn', '=', $data['transaction_id']],
                     ['pay_status', '=', 1],
                 ],
             ];
