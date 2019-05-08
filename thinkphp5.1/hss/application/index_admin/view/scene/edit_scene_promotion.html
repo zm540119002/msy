@@ -33,38 +33,22 @@
 {/block}
 
 {block name="script"}
+<script type="text/javascript" src="index_admin_js/sceneAssociation.js"></script>
     <script type="text/javascript">
         $(function () {
             //加载第一页
             var config = {
-                url:module+'scheme/getList'
+                url:module+'Scene/getPromotionList'
             };
             var getData = {
                 id:$('#list').data('id'),
-                pageType:'list_scene_tpl',
                 shelf_status:3
             };
             getPagingList(config,getData);
 
-            //翻页
-            $('body').on('click','.pager2',function(){
-                var curIndex= $(this).parents('ul.pagination').find('li.active span').text();
-                var selectedPage=$(this).data('page');
-                if(selectedPage=='»'){
-                    curIndex++;
-                    selectedPage=curIndex;
-                }
-                if(selectedPage=='«'){
-                    curIndex--;
-                    selectedPage=curIndex;
-                }
-                config.currentPage = selectedPage;
-                getPagingList(config,getData);
-            });
-
-            // 提交选中方案
+            // 提交选中促销方案
             $('body').on('click','.button_save_black_4',function(){
-                var url = module +'Scene/editSceneScheme';
+                var url = module +'Scene/editScenePromotion';
                 var postData={};
                 var ids  = [];
                 postData.scene_id = $('#list').data('id');
@@ -86,8 +70,6 @@
             })
 
         });
-
-
 
     </script>
 {/block}

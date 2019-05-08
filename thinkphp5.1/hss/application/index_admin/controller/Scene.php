@@ -250,6 +250,184 @@ class Scene extends Base {
     }
 
     /**
+     * 展示选中的促销方案
+     */
+    public function getScenePromotion(){
+        // 查询
+        if(!$id = input('id/d')){
+            $this ->error('参数有误',url('manage'));
+        }
+        $modelScene = new \app\index_admin\model\Scene();
+        $condition = [
+            'where'=>[
+                ['id','=',$id],
+            ],'field'=>[
+                'id','name'
+            ]
+        ];
+        $scene = $modelScene->getInfo($condition);
+        $this->assign('scene',$scene);
+
+        $model = new \app\index_admin\model\ScenePromotion();
+        $condition = [
+            'where'=>[
+                ['sp.status','=',0],
+                ['sp.scene_id','=',$id],
+            ],'field' => [
+                'p.id promotion_id','p.name','p.thumb_img','p.sort','p.shelf_status','sp.id '
+            ],'join'  => [
+                ['promotion p','sp.promotion_id=p.id','left']
+            ],'order' => [
+                'sort'=> 'desc'
+            ]
+        ];
+        $list = $model->pageQuery($condition);
+        $this->assign('list',$list);
+
+        return $this->fetch();
+    }
+
+    /**
+     * 关联促销方案
+     */
+    public function editScenePromotion(){
+
+        if(request()->isPost()){
+
+            $scene_id = input('scene_id/d');
+            $ids  = input('ids/a');
+
+            if (!$scene_id){
+                $this ->error('参数有误',url('manage'));
+            }
+
+            if ($ids){
+                foreach($ids as $k => $v){
+                    if ((int)$v){
+                        $data = ['scene_id'=>$scene_id,'promotion_id'=>$v];
+
+                        // 先删后增 -保证唯一
+                        $model = new \app\index_admin\model\ScenePromotion();
+                        $model -> where($data)->delete();
+                        $model -> allowField(true) -> save($data);
+                    }
+                }
+            }
+            return successMsg('成功');
+
+        }else{
+
+            // 后面的页面需要场景id
+            if(!$id = input('param.id/d')){
+                $this ->error('参数有误',url('manage'));
+            }
+
+            $this->assign('id',$id);
+            return $this->fetch();
+        }
+    }
+
+    /**
+     * 获取所有促销方案&&已选中的
+     * @return \think\response\View
+     */
+    public function getPromotionList(){
+        $list = Promotion::getListData();
+
+        // 其它业务 -标记已选中的
+        if($scene_id = input('param.id/d')){
+            $ModelScenePromotion = new \app\index_admin\model\ScenePromotion();
+            $condition = [
+                'where' => [
+                    ['scene_id','=', $scene_id],
+                ],'field'=> [
+                    'promotion_id'
+                ]
+            ];
+            $scenePromotion = $ModelScenePromotion->getlist($condition);
+
+            if ($scenePromotion){
+                $promotionIds = array_column($scenePromotion,'promotion_id');
+                // 取出交差值的数组
+                foreach($list as $k => $v){
+                    if ( in_array($v['id'],$promotionIds) ){
+                        $list[$k]['scene'] = 1;
+                    }
+                }
+            }
+        }
+
+        $this->assign('list',$list);
+
+        return view('/promotion/list_promotion_tpl');
+
+    }
+
+    /**
+     * 获取所有一级OR该分类的子级分类 && 所有已选择的分类
+     */
+    public function getCategory(){
+
+        $scene_id= input('param.id/d');
+        $cat_id  = input('param.cat_id/d');
+
+        if (!$scene_id){
+            $this ->error('参数有误',url('manage'));
+        }
+
+        if ($cat_id){
+            $where = ['gc.parent_id_1', '=', $cat_id];
+            $view  = 'list_child_tpl';
+
+        }else{
+            $where = ['gc.level','=',1];
+            $view  = 'list_layer_tpl';
+
+        }
+
+        $goodsCategoryModel = new \app\index_admin\model\GoodsCategory();
+        $config = [
+            'where' => [
+                ['status','=', 0],
+            ],'field'=> [
+                'id','name','level','parent_id_1','parent_id_2','remark','sort','img'
+            ],'order'=> [
+                'sort' => 'desc'
+            ]
+        ];
+        $config['where'][] = $where;
+        $list = $goodsCategoryModel->getlist($config);
+
+        $sceneGoodsCategoryModel = new \app\index_admin\model\SceneGoodsCategory();
+        $config = [
+            'where' => [
+                ['scene_id','=', $scene_id],
+            ],'field'=> [
+                'goods_category_id'
+            ]
+        ];
+        $sceneCategoryList = $sceneGoodsCategoryModel->getlist($config);
+
+        if ($sceneCategoryList){
+            $sceneCategoryList = array_column($sceneCategoryList,'goods_category_id');
+            // 取出交差值的数组
+            foreach($list as $k => $v){
+                if ( in_array($v['id'],$sceneCategoryList) ){
+                    $list[$k]['scene'] = 1;
+                }
+
+            }
+        }
+
+        $this->assign('list',$list);
+        $this->assign('sceneCategoryList',$sceneCategoryList);
+
+        return view($view);
+    }
+
+    /***************************** 下面的方法没有用到 **************************************/
+
+    /**
      * 添加场景下相关的项目
      * @return array|mixed
      * @throws \Exception
@@ -405,45 +583,6 @@ class Scene extends Base {
     }
 
     /**
-     * 场景下的促销方案
-     */
-    public function manageScenePromotion(){
-        // 查询
-        if(!$id = input('id/d')){
-            $this ->error('参数有误',url('manage'));
-        }
-        $sceneModel = new \app\index_admin\model\Promotion();
-
-        $condition = [
-            'where'=>[
-                ['id','=',$id],
-            ],'field'=>[
-                'id','name'
-            ]
-        ];
-        $scene = $sceneModel->getInfo($condition);
-        $this->assign('scene',$scene);
-
-        $model = new \app\index_admin\model\SceneScheme();
-        $condition = [
-            'where'=>[
-                ['ss.status','=',0],
-                ['ss.scene_id','=',$id],
-            ],'field' => [
-                's.id scheme_id','s.name','s.thumb_img','s.sort','s.shelf_status','ss.id ','ss.show_name'
-            ],'join'  => [
-                ['scheme s','ss.scheme_id=s.id','left']
-            ],'order' => [
-                'sort'=> 'desc'
-            ]
-        ];
-        $list = $model->pageQuery($condition);
-        $this->assign('list',$list);
-
-        return $this->fetch();
-    }
-
-    /**
      * 单字段设置 scene_scheme 表 暂时先放在这里
      */
     public function setSceneSchemeInfo(){
@@ -473,132 +612,9 @@ class Scene extends Base {
         return successMsg('成功');
     }
 
-    /**
-     * 修改场景下的方案
-     */
-    public function editScenePromotion(){
-
-        if(request()->isPost()){
-
-            $ids  = input('post.ids/a');
-            $scene_id = input('post.scene_id/d');
-
-            if (!$scene_id){
-                $this ->error('参数有误',url('manage'));
-            }
-
-            if ($ids){
-                foreach($ids as $k => $v){
-                    if ((int)$v){
-                        $data = ['scene_id'=>$scene_id,'scheme_id'=>$v];
-
-                        // 先删后增 -保证唯一
-                        $model = new \app\index_admin\model\SceneScheme();
-                        $model -> where($data)->delete();
-                        $model -> allowField(true) -> save($data);
-                    }
-                }
-            }
-            return successMsg('成功');
-
-        }else{
-
-            // 后面的页面需要场景id
-            if(!$id = input('param.id/d')){
-                $this ->error('参数有误',url('manage'));
-            }
-
-            $this->assign('id',$id);
-            return $this->fetch();
-        }
-    }
-
-    /**
-     * 取消关联的方案
-     */
-    public function delScenePromotion(){
-        if(!request()->isPost()){
-            return config('custom.not_post');
-        }
-
-        $id = input('post.id/d');
-
-        if (!$id){
-            return errorMsg('失败');
-        }
-
-        $model = new \app\index_admin\model\SceneScheme();
-
-        $condition = [
-            ['id','=',$id],
-        ];
-
-        return $model->del($condition,false);
-    }
-
     // 到时看下需不需要整合在一起 end
 
-    /**
-     * 获取所有一级OR该分类的子级分类 && 所有已选择的分类
-     */
-    public function getCategory(){
 
-        $scene_id= input('param.id/d');
-        $cat_id  = input('param.cat_id/d');
-
-        if (!$scene_id){
-            $this ->error('参数有误',url('manage'));
-        }
-
-        if ($cat_id){
-            $where = ['gc.parent_id_1', '=', $cat_id];
-            $view  = 'list_child_tpl';
-
-        }else{
-            $where = ['gc.level','=',1];
-            $view  = 'list_layer_tpl';
-
-        }
-
-        $goodsCategoryModel = new \app\index_admin\model\GoodsCategory();
-        $config = [
-            'where' => [
-                ['status','=', 0],
-            ],'field'=> [
-                'id','name','level','parent_id_1','parent_id_2','remark','sort','img'
-            ],'order'=> [
-                'sort' => 'desc'
-            ]
-        ];
-        $config['where'][] = $where;
-        $list = $goodsCategoryModel->getlist($config);
-
-        $sceneGoodsCategoryModel = new \app\index_admin\model\SceneGoodsCategory();
-        $config = [
-            'where' => [
-                ['scene_id','=', $scene_id],
-            ],'field'=> [
-                'goods_category_id'
-            ]
-        ];
-        $sceneCategoryList = $sceneGoodsCategoryModel->getlist($config);
-
-        if ($sceneCategoryList){
-            $sceneCategoryList = array_column($sceneCategoryList,'goods_category_id');
-            // 取出交差值的数组
-            foreach($list as $k => $v){
-                if ( in_array($v['id'],$sceneCategoryList) ){
-                    $list[$k]['scene'] = 1;
-                }
-
-            }
-        }
-
-        $this->assign('list',$list);
-        $this->assign('sceneCategoryList',$sceneCategoryList);
-
-        return view($view);
-    }
 
 
 
