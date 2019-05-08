@@ -44,7 +44,7 @@ class Payment extends \common\controller\Base {
                 'attach'=>$attach,
             ];
 
-            switch($info['payment_code']){
+            switch($info['pay_code']){
                 case 1 : // 微信支付
                     $payInfo['notify_url'] = config('wx_config.notify_url');
                     $wxPay = new \common\component\payment\weixin\weixinpay;
@@ -89,7 +89,7 @@ class Payment extends \common\controller\Base {
 
             $this->assign('info', $info);
             //判断为微信支付，并且为微信浏览器
-            if($info['payment_code'] ==1){
+            if($info['pay_code'] ==1){
                 if (!isPhoneSide()) {//pc端微信扫码支付
                     $this ->assign('browser_type',1);
                 }elseif(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false ){
@@ -169,7 +169,7 @@ class Payment extends \common\controller\Base {
                 'attach'=>$attach,
             ];
 
-            switch($info['payment_code']){
+            switch($info['pay_code']){
                 case 1 : // 微信支付
                     $payInfo['notify_url'] = config('wx_config.notify_url');
                     $wxPay = new \common\component\payment\weixin\weixinpay;
@@ -200,7 +200,7 @@ class Payment extends \common\controller\Base {
 
             $this->assign('info', $info);
             //判断为微信支付，并且为微信浏览器
-            if($info['payment_code'] ==1){
+            if($info['pay_code'] ==1){
                 if (!isPhoneSide()) {//pc端微信扫码支付
                     $this ->assign('browser_type',1);
                 }elseif(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false ){
@@ -259,7 +259,7 @@ class Payment extends \common\controller\Base {
                 ['status', '=', 0],
                 ['sn', '=', $sn],
             ],'field' => [
-                'id','user_id', 'sn', 'actually_amount','payment_code','pay_status','type'
+                'id','user_id', 'sn', 'actually_amount','pay_code','pay_status','type'
             ],
         ];
         return  $model->getInfo($config);
@@ -277,7 +277,7 @@ class Payment extends \common\controller\Base {
                 ['status', '=', 0],
                 ['sn', '=', $sn],
             ],'field' => [
-                'id', 'sn', 'amount','actually_amount','payment_code',
+                'id', 'sn', 'amount','actually_amount','pay_code',
                 'user_id',
             ],
         ];
@@ -296,7 +296,7 @@ class Payment extends \common\controller\Base {
                 ['status', '=', 0],
                 ['sn', '=', $sn],
             ],'field' => [
-                'id', 'sn', 'amount','payment_code','type','actually_amount',
+                'id', 'sn', 'amount','pay_code','type','actually_amount',
                 'user_id',
             ],
         ];
@@ -331,7 +331,7 @@ class Payment extends \common\controller\Base {
 //            $order['payment_type'] = $attach['payment_type'];
 //            $order['sn'] = $data['out_trade_no'];
 //            $order['actually_amount'] = $data['total_fee']/100;
-//            $order['payment_code'] = 0;
+//            $order['pay_code'] = 0;
 //            $order['pay_sn'] = $data['transaction_id'];
 //
 //            if($attach['payment_type'] == 1){
@@ -413,7 +413,7 @@ class Payment extends \common\controller\Base {
                 ['sn', '=', $info['sn']],
                 ['order_status', '=', 1],
             ],'field' => [
-                'id', 'sn', 'amount','payment_code','actually_amount',
+                'id', 'sn', 'amount','pay_code','actually_amount',
                 'user_id','order_status'
             ],
         ];
@@ -468,7 +468,7 @@ class Payment extends \common\controller\Base {
                 //['recharge_status', '=', 1],
                 ['recharge_status', '=', 0],
             ],'field' => [
-                'id', 'sn', 'amount','payment_code','type','actually_amount','recharge_status',
+                'id', 'sn', 'amount','pay_code','type','actually_amount','recharge_status',
                 'user_id',
             ],
         ];
