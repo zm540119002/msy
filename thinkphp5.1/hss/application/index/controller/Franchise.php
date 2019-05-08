@@ -43,7 +43,7 @@ class Franchise extends \common\controller\UserBase {
                 'sn' => $sn,
                 'actually_amount' =>config('custom.franchise_fee'),
                 'user_id' => $this->user['id'],
-                'payment_code' => $postData['payment_code'],
+                'pay_code' => $postData['pay_code'],
                 'type' => config('custom.pay_type')['franchisePay']['code'],
             ];
             $result  = $modelPay->isUpdate(false)->save($data);
