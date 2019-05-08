@@ -5,23 +5,23 @@ $(function(){
         mobile,
         area_address,
         detail_address,
-        postData={};
+        applicantData={};
     //填写基本资料
     $('body').on('click','.one-step',function(){
         // name=$('.name').val();
         // applicant=$('.applicant').val();
         area_address =$('.area-address-name').getArea();
-        postData=$('.applicant_form').serializeObject();
+        applicantData=$('.applicant_form').serializeObject();
         var content='';
-        if(!postData.name){
+        if(!applicantData.name){
             content='请填写店家名称';
-        }else if(!postData.applicant){
+        }else if(!applicantData.applicant){
             content='请填写申请人姓名';
-        }else if(!register.phoneCheck(postData.mobile)){
+        }else if(!register.phoneCheck(applicantData.mobile)){
             content='请填写手机号码';
         }else if(!area_address){
             content='请选择地区';
-        }else if(!postData.detail_address){
+        }else if(!applicantData.detail_address){
             content='请填写详细地址';
         }
         if(content){
@@ -51,7 +51,7 @@ $(function(){
         }else if(!postData.detail_address){
             content='请填写详细地址';
         }
-        postData={
+        applicantData={
             id : id,
             name:name,
             applicant:applicant,
@@ -96,11 +96,53 @@ $(function(){
             content: settlementMethod
         });
     });
-    // 选择支付方式
+    // 选择充值支付方式
     $('body').on('click','.settlementMethod .pay_nav li',function(){
         $(this).addClass('current').siblings().removeClass('current');
         var pay_code = $(this).data('paycode');
         $(this).find('input[type="checkbox"]').prop('checked',true);
         $('.pay_code').val(pay_code);
     });
+
+    // 提交订单带地址
+    $('body').on('click','.settlement_btn',function () {
+
+        var postData = {};
+        postData.applicantData=applicantData; 
+        postData.order_id = $('.order_id').val();
+        postData.order_sn = $('.order_sn').val();
+        postData.pay_code = $('.pay_code').val();
+        _this = $(this);
+        console.log(postData);
+        submitApplicant(_this,postData);
+    });
 });
+// 其它支付方式提交订单
+function submitApplicant(_this,postData){
+    var url = module + 'Order/confirmOrder';
+    _this.addClass("nodisabled");//防止重复提交
+
+    $.ajax({
+        url: url,
+        data: postData,
+        type: 'post',
+        beforeSend: function(){
+            $('.loading').show();
+        },
+        error:function(){
+            $('.loading').hide();
+            dialog.error('AJAX错误');
+        },
+        success: function(data){
+            _this.removeClass("nodisabled");//删除防止重复提交
+            $('.loading').hide();
+            if(data.status){
+                location.href = data.url;
+
+            }else{
+                dialog.success(data.info);
+                //dialog.error('结算提交失败!');
+            }
+        }
+    });
+}
