@@ -15,7 +15,7 @@ $(function(){
             content='请填写店家名称';
         }else if(!postData.applicant){
             content='请填写申请人姓名';
-        }else if(!postData.mobile){
+        }else if(!register.phoneCheck(postData.mobile)){
             content='请填写手机号码';
         }
         if(content){
