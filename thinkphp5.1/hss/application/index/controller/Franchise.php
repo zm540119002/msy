@@ -38,7 +38,7 @@ class Franchise extends \common\controller\UserBase {
                 $modelFranchise ->rollback();
                 return errorMsg('失败');
             }
-            $modelPay = new \app\index\model\pay();
+            $modelPay = new \app\index\model\Pay();
             $data = [
                 'sn' => $sn,
                 'actually_amount' => $postData['franchise_fee'],
