@@ -1,16 +1,16 @@
 $(function(){
     tab_down('.apply-data-nav .switch-item','.apply-module','click');
-    var factoryFullName,
+    var name,
         agentName,
         businessLicense,
         agentAuthorization,
         postData={};
     //填写基本资料
     $('body').on('click','.one-step',function(){
-        factoryFullName=$('.factoryFullName').val();
+        name=$('.name').val();
         agentName=$('.agentName').val();
         var content='';
-        if(!factoryFullName){
+        if(!name){
             content='请填写厂商全称';
         }else if(!agentName){
             content='请填写代办人姓名';
@@ -26,13 +26,13 @@ $(function(){
     });
     //验证是否上传图片 与 提交申请
     $('body').on('click','.two-step',function(){
-        factoryFullName=trim($('.factoryFullName').val(),'g');
+        name=trim($('.name').val(),'g');
         agentName=trim($('.agentName').val(),'g');
         businessLicense=$('.business-license').val();
         agentAuthorization=$('.agent-authorization').val();
         id = $('.id').val();
         var content='';
-        if(!factoryFullName){
+        if(!name){
             content='请填写厂商全称';
         }else if(!agentName){
             content='请填写代办人姓名';
@@ -45,7 +45,7 @@ $(function(){
         }
         postData={
             id : id,
-            name:factoryFullName,
+            name:name,
             agent:agentName,
             business_license:businessLicense,
             auth_letter:agentAuthorization
