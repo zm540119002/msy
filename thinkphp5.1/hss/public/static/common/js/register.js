@@ -11,7 +11,7 @@ $(function(){
         agentName=$('.agentName').val();
         var content='';
         if(!name){
-            content='请填写厂商全称';
+            content='请填写店家名称';
         }else if(!agentName){
             content='请填写代办人姓名';
         }
