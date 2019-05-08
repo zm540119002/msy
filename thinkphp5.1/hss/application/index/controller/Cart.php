@@ -7,7 +7,6 @@ class Cart extends \common\controller\UserBase{
 
     // 有结算页面
     public function index(){
-        echo 123;exit;
         if(request()->isAjax()){
         }else{
             $unlockingFooterCart = unlockingFooterCartConfig([10,0,9]);
