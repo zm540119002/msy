@@ -56,11 +56,12 @@ class Franchise extends \common\controller\Base {
             }
             $modelFranchise -> commit();
             return successMsg('成功',['url'=>config('custom.pay_franchise')]);
-        }else{
-            $unlockingFooterCart = unlockingFooterCartConfig([10,0,9]);
-            $this->assign('unlockingFooterCart', $unlockingFooterCart);
-            return $this->fetch();
         }
+//        else{
+//            $unlockingFooterCart = unlockingFooterCartConfig([10,0,9]);
+//            $this->assign('unlockingFooterCart', $unlockingFooterCart);
+//            return $this->fetch();
+//        }
     }
 
 
