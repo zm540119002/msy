@@ -164,9 +164,41 @@ class Promotion extends Base {
 
         $list = $model->pageQuery($config);
 
+        // 其它业务 -标记已选中的
+        if($scene_id = input('param.id/d')){
+            $ModelScenePromotion = new \app\index_admin\model\ScenePromotion();
+            $condition = [
+                'where' => [
+                    ['scene_id','=', $scene_id],
+                ],'field'=> [
+                    'promotion_id'
+                ]
+            ];
+            $scenePromotion = $ModelScenePromotion->getlist($condition);
+
+            if ($scenePromotion){
+                $promotionIds = array_column($scenePromotion,'promotion_id');
+                // 取出交差值的数组
+                foreach($list as $k => $v){
+                    if ( in_array($v['id'],$promotionIds) ){
+                        $list[$k]['scene'] = 1;
+                    }
+                }
+            }
+        }
+
         $this->assign('list',$list);
 
-        return view('list_tpl');
+        $pageType = input('param.pageType/s');
+        if( $pageType ){
+            $view = $pageType;
+        }else{
+            $view = 'list_tpl';
+        }
+
+        return view($view);
+
+
 
     }
 
@@ -219,6 +251,57 @@ class Promotion extends Base {
         $this->assign('relation',config('custom.relation_type.promotion'));
 
         return $this->fetch();
+    }
+
+
+    /**
+     * 取消关联的信息 scene_promotion,goods_category_promotion,project_promotion
+     */
+    public function delRelationPromotion(){
+        if(!request()->isPost()){
+            return config('custom.not_post');
+        }
+
+        $id      = input('post.id/d');
+
+        if (!$id){
+            return errorMsg('失败');
+        }
+
+        $model = $this->getRelationModel();
+        if(!$model){
+            return errorMsg('参数有误');
+        }
+
+        $condition = [
+            ['id','=',$id],
+        ];
+
+        return $model->del($condition,false);
+    }
+
+    /**
+     * 获取关联表的模型
+     */
+    private function getRelationModel(){
+        $relation= input('post.type/s');
+
+        $model = [];
+        switch($relation){
+            case 'goods':
+                $model = new \app\index_admin\model\SceneGoods();
+                break;
+            case 'category':
+                $model = new \app\index_admin\model\SceneGoodsCategory();
+                break;
+            case 'project':
+                $model = new \app\index_admin\model\SceneProject();
+                break;
+            case 'scene':
+                $model = new \app\index_admin\model\ScenePromotion();
+                break;
+        }
+        return $model;
     }
 
 

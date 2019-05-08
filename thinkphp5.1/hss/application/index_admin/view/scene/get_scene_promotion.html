@@ -1,15 +1,16 @@
 ﻿{extend name="template/admin_pc/base.html" /}
 {block name="content"}
 <nav class="breadcrumb">
-	<i class="Hui-iconfont">&#xe67f;</i>场景管理 <span class="c-gray en">&gt;</span>{$scene.name} <span class="c-gray en">&gt;</span>方案列表
+	<i class="Hui-iconfont">&#xe67f;</i>场景管理 <span class="c-gray en">&gt;</span>{$scene.name} <span class="c-gray en">&gt;</span>促销列表
     <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a>
 </nav>
 <div class="page-container">
     <div class="cl pd-5 bg-1 bk-gray">
 			<span class="l">
-				<a class="btn btn-primary radius" id="edit-scene-scheme" data-id="{$scene.id}" href="javascript:;">
-				<i class="Hui-iconfont"></i> 关联方案
+				<a class="btn btn-primary radius" id="edit-scene-promotion" data-id="{$scene.id}" href="javascript:;">
+					<i class="Hui-iconfont"></i> 关联促销
 				</a>
+				<span class="friend-tipc">*注意</span>：已上架的促销才会显示在前台
 			</span>
         <!-- 先不要 -->
 <!--        <span class="r">共有数据：<strong id="count">{:count($list)}</strong> 条</span>-->
@@ -21,10 +22,9 @@
 				<!--<th></th>-->
 				<th>编号</th>
 				<th>排序</th>
-				<th>方案名称</th>
+				<th>促销名称</th>
 				<th>缩略图</th>
 				<th>发布状态</th>
-				<th>名称状态</th>
 				<th>操作</th>
 			</tr>
 			</thead>
@@ -32,7 +32,7 @@
 			{volist name="list" id="vo"}
 			<tr class="hover" data-id="{$vo.id}">
 				<!--<td class="w48"><input type="checkbox" class="checkitem" name="checkbox">-->
-				<td class="w48"><span title="" class="editable">{$vo.scheme_id}</span></td>
+				<td class="w48"><span title="" class="editable">{$vo.promotion_id}</span></td>
 				<td class="w48 sort"><span title="" class="editable ">{$vo.sort}</span></td>
 				<td class="w50pre name"><span title="" class="editable ">{$vo.name}</span></td>
 				<td class="w96">
@@ -49,17 +49,7 @@
 					<span>已发布</span>
 					{/if}
 				</td>
-				<td class="w96 show-name">
-					{if $vo.show_name == 1}
-					<span class="label label-success radius">展示</span>
-					<!--  <a href="javascript:void(0);" class="set-shelf-status" data-shelf-status="3">上架</a>-->
-					{else /}
-					<span class="label label-defaunt radius">不展示</span>
-					<!-- <a href="javascript:void(0);" class="set-shelf-status" data-shelf-status="1">下架</a>-->
-					{/if}
-				</td>
 				<td class="w96">
-					<a href="javascript:void(0);" data-show-name="{$vo.show_name}" class="set-show-name" style="text-decoration:none" title="{$vo.show_name==1 ? '不展示': '展示';}"><i class="Hui-iconfont"></i></a>
 					<a href="javascript:void(0);" class="del"  style="text-decoration:none" title="删除"><i class="Hui-iconfont"></i></a>
 				</td>
 			</tr>
@@ -74,81 +64,32 @@
 
 {/block}
 {block name="script"}
-<script type="text/javascript" src="index_admin_js/commonCrud.js"></script>
+<script type="text/javascript" src="index_admin_js/sceneAssociation.js"></script>
 <script type="text/javascript">
 	$(function () {
-		//加载第一页
-/*		var config = {
-			url:controller+'getList'
-		};
-        var getData = $('#form1').serializeObject();
-		getPagingList(config);*/
-		//翻页
-		$('body').on('click','.pager2',function(){
-			var curIndex= $(this).parents('ul.pagination').find('li.active span').text();
-			var selectedPage=$(this).data('page');
-			if(selectedPage=='»'){
-				curIndex++;
-				selectedPage=curIndex;
-			}
-			if(selectedPage=='«'){
-				curIndex--;
-				selectedPage=curIndex;
-			}
-			config.currentPage = selectedPage;
-			getPagingList(config,getData);
-		});
-
-		// 修改关联方案
-		$("#edit-scene-scheme").click(function () {
+		// 展示修改促销方案
+		$("#edit-scene-promotion").click(function () {
 			var id  = $(this).data('id');
-			var url = controller + 'editSceneScheme/'+'id/'+id;
+			var url = controller+'editScenePromotion/'+'id/'+id;
 			var index = layer.open({
 				type: 2,
-				title: '关联方案',
+				title: '关联促销方案',
 				content: url,
 				id: 1
 			});
-
 			layer.full(index);
 		});
-		// 取消关联方案
+
+		// 取消关联的信息页
 		$('body').on('click','.del',function(){
-			var _this=$(this);
-			var _thisTr = _this.parents('tr');
-			var postData= {};
-			postData.id = _thisTr.data('id');
-			var url =  controller + 'delSceneScheme';
-			$(this).addClass('nodisabled');
-			layer.open({
-				btn: ['确定','取消'],//按钮
-				content:'取消关联选中的方案'+' 编号'+postData.id+'？',
-				yes:function (index) {
-					$.ajax({
-						url:url,
-						data:postData,
-						method:'post',
-						beforeSend:function(){
-
-						},
-						success:function(msg){
-							dialog.msg(msg,'',function(){
-								_thisTr.remove();
-								//$("#count").html($("#count").html()-1);
-							});
-							//_this.removeClass('nodisabled');
-							layer.close(index);
-						},
-
-					})
-				},
-				end:function(){
-					_this.removeClass('nodisabled');
-				}
-			});
+			//var _this     = $(this);
+			var postData  = {};
+			postData.type = 'scene';
+			postData.title= '促销';
+			delRelationPromotion($(this),postData);
 		});
 
-		//上下架
+		//上下架 没用到
 		$('body').on('click','.set-show-name',function(){
 			var _this = $(this);
 			var text = _this.attr('title');

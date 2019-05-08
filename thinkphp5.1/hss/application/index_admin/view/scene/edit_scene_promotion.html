@@ -37,7 +37,7 @@
         $(function () {
             //加载第一页
             var config = {
-                url:module+'scheme/getList'
+                url:module+'promotion/getList'
             };
             var getData = {
                 id:$('#list').data('id'),
@@ -62,9 +62,9 @@
                 getPagingList(config,getData);
             });
 
-            // 提交选中方案
+            // 提交选中促销方案
             $('body').on('click','.button_save_black_4',function(){
-                var url = module +'Scene/editSceneScheme';
+                var url = module +'Scene/editScenePromotion';
                 var postData={};
                 var ids  = [];
                 postData.scene_id = $('#list').data('id');
@@ -86,8 +86,6 @@
             })
 
         });
-
-
 
     </script>
 {/block}
