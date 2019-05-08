@@ -425,7 +425,6 @@ class Payment extends \common\controller\Base {
             }elseif($payInfo['type'] == 3){
                 $this->setFranchisePayStatus($payInfo,$systemId);
             }
-            echo 'SUCCESS';
         }
     }
     /**
@@ -471,7 +470,7 @@ class Payment extends \common\controller\Base {
             ],
         ];
         $result = $modelOrder -> allowField(true) -> save($data,$condition);
-        if($result ===false){
+        if(!$result){
             $modelOrder->rollback();
             $info['mysql_error'] = $modelOrder->getError();
             return $this->writeLog("订单支付更新失败",$info);
@@ -568,8 +567,7 @@ class Payment extends \common\controller\Base {
             ],
         ];
         $result = $modelFranchise -> allowField(true) -> save($data,$condition);
-        echo $modelFranchise->getLastSql();exit;
-        if($result ===false){
+        if(!$result){
             $modelFranchise ->rollback();
             $info['mysql_error'] = $modelFranchise->getError();
             return $this->writeLog("订单支付更新失败",$info);
