@@ -147,7 +147,7 @@ class Goods extends \common\controller\Base{
 
         $list = $model -> pageQuery($condition);
         $this->assign('list',$list);
-
+        $this->assign('goodsList',json_encode($list));
         return $this->fetch('list_goods_one_column_tpl');
     }
 
