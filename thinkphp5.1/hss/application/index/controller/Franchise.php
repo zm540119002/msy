@@ -1,7 +1,7 @@
 <?php
 namespace app\index\controller;
 
-class Franchise extends \common\controller\UserBase{
+class Franchise extends \common\controller\Base {
     /**首页
      */
     public function index(){
@@ -45,8 +45,8 @@ class Franchise extends \common\controller\UserBase{
             $data = [
                 'sn' => $sn,
                 'actually_amount' => $postData['franchise_fee'],
-                'user_id' => $this->user['id'],
-                'payment_code' => $this->user['id'],
+                'user_id' => 1,
+                'payment_code' => $postData['payment_code'],
                 'type' => config('custom.pay_type')['franchisePay']['code'],
             ];
             $result  = $modelPay->isUpdate(false)->save($data);
