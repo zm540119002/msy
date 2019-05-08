@@ -145,7 +145,7 @@ class Payment extends \common\controller\Base {
      */
     public function pay()
     {
-        echo 123;exit;
+        echo 222;exit;
         if(request()->isPost()){
             $postData = input('post.');
             $systemId = $postData['system_id'];
