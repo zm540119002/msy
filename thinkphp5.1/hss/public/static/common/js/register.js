@@ -8,8 +8,6 @@ $(function(){
         applicantData={};
     //填写基本资料
     $('body').on('click','.one-step',function(){
-        // name=$('.name').val();
-        // applicant=$('.applicant').val();
         area_address =$('.area-address-name').getArea();
         applicantData=$('.applicant_form').serializeObject();
         var content='';
@@ -48,7 +46,7 @@ $(function(){
             content: settlementMethod
         });
     });
-    // 选择充值支付方式
+    // 选择充值结算方式
     $('body').on('click','.settlementMethod .pay_nav li',function(){
         $(this).addClass('current').siblings().removeClass('current');
         var pay_code = $(this).data('paycode');
@@ -56,7 +54,7 @@ $(function(){
         $('.pay_code').val(pay_code);
     });
 
-    // 提交数据
+    // 结算
     $('body').on('click','.settlement_btn',function () {
 
         var postData = {};
@@ -72,7 +70,7 @@ $(function(){
         
     });
 });
-// 其它支付方式提交订单
+// 提交申请
 function submitApplicant(_this,postData){
     var url = module + 'Order/confirmOrder';
     _this.addClass("nodisabled");//防止重复提交
