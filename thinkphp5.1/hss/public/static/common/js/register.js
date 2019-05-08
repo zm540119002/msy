@@ -82,5 +82,16 @@ $(function(){
     });
     //确定通过入驻
     $('body').on('click','.three-step',function(){
-    })
+    });
+    // 弹出支付方式
+    $('body').on('click','.recharge_money',function(){
+        var settlementMethod=$('.settlementMethod').html();
+        layer.open({
+            type: 1
+            ,anim: 'up'
+            ,style: 'position:fixed; bottom:0; left:0; width: 100%; height: 50%; padding:10px 0; border:none;',
+            className:'settlementMethod bankTransferLayer',
+            content: settlementMethod
+        });
+    });
 });
