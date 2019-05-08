@@ -2,18 +2,21 @@ $(function(){
     tab_down('.apply-data-nav .switch-item','.apply-module','click');
     var name,
         applicant,
-        businessLicense,
+        mobile,
         agentAuthorization,
         postData={};
     //填写基本资料
     $('body').on('click','.one-step',function(){
-        name=$('.name').val();
-        applicant=$('.applicant').val();
+        // name=$('.name').val();
+        // applicant=$('.applicant').val();
+        postData=$('.applicant_form').serializeObject();
         var content='';
-        if(!name){
+        if(!postData.name){
             content='请填写店家名称';
-        }else if(!applicant){
+        }else if(!postData.applicant){
             content='请填写申请人姓名';
+        }else if(!postData.mobile){
+            content='请填写手机号码';
         }
         if(content){
             dialog.error(content);
