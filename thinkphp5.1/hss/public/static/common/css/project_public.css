@@ -6298,7 +6298,7 @@ div.no_data{
     background-size: 0.65rem 2.5rem;
     vertical-align: middle;
 }
-.franchise_ul span.zh{
+/*.franchise_ul span.zh{
     background-position:0 0;
 }
 .franchise_ul span.ck{
@@ -6311,7 +6311,7 @@ div.no_data{
     padding:0.15rem;
     background: #fff;
     border-radius:4px;
-}
+}*/
 .top_cols{
     padding:0.15rem 0.15rem 0.25rem 0.15rem;
     background:#666;
