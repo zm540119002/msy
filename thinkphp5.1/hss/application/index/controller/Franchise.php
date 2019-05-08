@@ -1,7 +1,7 @@
 <?php
 namespace app\index\controller;
 
-class Franchise extends \common\controller\UserBase {
+class Franchise extends \common\controller\Base {
     /**首页
      */
     public function index(){
