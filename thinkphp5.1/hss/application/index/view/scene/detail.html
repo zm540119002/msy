@@ -41,7 +41,18 @@
 		{/notempty}
 		<!--产品列表-->
 		<ul class="goods_list list" id="list">
-
+			<div id="product-select">
+				<product-select
+						v-for="productInfo in productList"
+						:key="productInfo.product_id"
+						:product_id="productInfo.product_id"
+						:deal_price="productInfo.deal_price"
+						:buy_named="buy_named"
+						:init_quantity="init_quantity"
+						:step_quantity="step_quantity"
+						:display_pic="display_pic"
+				></product-select>
+			</div>
 		</ul>
 	</section>
 </article>
@@ -64,6 +75,37 @@
 <script type="text/javascript">
 	function getJsonCallBack(data){
 		console.log(data);
+		param = {
+			'buy_named':'采购数量',
+			'display_quota':true,
+			'display_pic':true,
+			'init_quantity':2,
+			'step_quantity':10,
+			'productList':[
+				{
+					'product_id':1,
+					'deal_price':168
+				},{
+					'product_id':2,
+					'deal_price':188
+				},{
+					'product_id':3,
+					'deal_price':888
+				},{
+					'product_id':4,
+					'deal_price':128
+				},{
+					'product_id':5,
+					'deal_price':680
+				}
+			]
+		};
+		new Vue({
+			el: '#product-select',
+			data:function(){
+				return param;
+			}
+		});
 	}
 	$(function(){
 		let param = {
