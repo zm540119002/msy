@@ -30,9 +30,8 @@ class Franchise extends \common\controller\UserBase {
 //            return $postData;
             $modelFranchise = new \app\index\model\Franchise();
             $modelFranchise -> startTrans();
-
+            print_r($postData);exit;
             $sn = generateSN(); //内部支付编号
-            print_r($postData);
             $postData['sn'] = $sn;
             $result  = $modelFranchise->isUpdate(false)->save($postData);
             if(!$result){
@@ -47,7 +46,6 @@ class Franchise extends \common\controller\UserBase {
                 'payment_code' => $postData['pay_code'],
                 'type' => config('custom.pay_type')['franchisePay']['code'],
             ];
-            print_r($postData);exit;
             $result  = $modelPay->isUpdate(false)->save($data);
             if(!$result){
                 $modelPay ->rollback();
@@ -55,6 +53,10 @@ class Franchise extends \common\controller\UserBase {
             }
             $modelFranchise -> commit();
             return successMsg('成功',['url'=>config('custom.pay_franchise')]);
+        }else{
+            $unlockingFooterCart = unlockingFooterCartConfig([10,0,9]);
+            $this->assign('unlockingFooterCart', $unlockingFooterCart);
+            return $this->fetch();
         }
     }
 
