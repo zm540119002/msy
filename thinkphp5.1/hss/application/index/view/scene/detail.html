@@ -41,33 +41,77 @@
 		{/notempty}
 		<!--产品列表-->
 		<ul class="goods_list list" id="list">
-
+			<div id="product-select">
+				<product-select
+						v-for="productInfo in productList"
+						:key="parseInt(productInfo.id)"
+						:product_id="parseInt(productInfo.id)"
+						:deal_price="parseFloat(productInfo.bulk_price)"
+						:product_name="productInfo.specification"
+						:buy_named="buy_named"
+						:init_quantity="parseInt(init_quantity)"
+						:step_quantity="parseInt(step_quantity)"
+						:display_pic="display_pic"
+				></product-select>
+			</div>
 		</ul>
-
 	</section>
 </article>
-
 {/block}
 {block name="common"}
     {include file="brand/set_brand" /}
 	{include file="public/sample_layer" /}
+	{include file="../../api/public/vue/components/footer-cart-menu.html" /}
 {/block}
 {block name="footer"}
-
+<div id="foot_cart_menu">
+	<footer-cart-menu
+			:add_cart_call_back="add_cart_call_back"
+	></footer-cart-menu>
+</div>
 {/block}
 {block name="script"}
 <script type="text/javascript" src="api_common_js/swiper.min.js"></script>
 <script type="text/javascript" src="index_js/footerCart.js"></script>
 <script type="text/javascript">
+	function getJsonCallBack(data){
+		console.log(data);
+		console.log(data.data);
+		param = {
+			'buy_named':'采购数量',
+			'display_quota':true,
+			'display_pic':true,
+			'init_quantity':2,
+			'step_quantity':10,
+			'productList':data.data
+		};
+		new Vue({
+			el: '#product-select',
+			data:function(){
+				return param;
+			}
+		});
+	}
 	$(function(){
+		let param = {
+		};
+		new Vue({
+			el: '#foot_cart_menu',
+			data:function(){
+				return param;
+			},methods: {
+				add_cart_call_back:function (param) {
+					console.log(param);
+				}
+			}
+		});
 		var id = '{$info.id}';
 		var date=getWeek();
 		countDown(date,$('#countDownBox'));
-
 		// 后加载简介
 		$('document').ready(function(){
 			$('.intro').html("{$info.intro|raw}");
-		})
+		});
 		//轮播
 		var swiper = new Swiper('.swiper-container', {
 			spaceBetween: 30,
@@ -77,24 +121,23 @@
 				clickable: true
 			}
 		});
-
 	});
 	// 获取该场景下的商品
 	var config = {
 		url:module+'Goods/getRelationGoods',
 		requestEnd:false,
 		loadTrigger:false,
-		currentPage:1
+		currentPage:1,
+		callBack:getJsonCallBack
 	};
 	var postData = {
 		pageSize:10,
 		relation:'{$relation}'
 	};
-
 	$(function(){
 		//初始化场景商品页面
 		postData.id = '{$info.id}';
-		getPagingList(config,postData);
+		getJsonList(config,postData);
 	});
 </script>
 {/block}
