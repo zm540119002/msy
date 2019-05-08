@@ -250,7 +250,7 @@ class Scene extends Base {
     }
 
     /**
-     * 展示场景下的促销方案
+     * 展示选中的促销方案
      */
     public function getScenePromotion(){
         // 查询
@@ -325,6 +325,42 @@ class Scene extends Base {
             $this->assign('id',$id);
             return $this->fetch();
         }
+    }
+
+    /**
+     * 获取所有促销方案&&已选中的
+     * @return \think\response\View
+     */
+    public function getPromotionList(){
+        $list = Promotion::getListData();
+
+        // 其它业务 -标记已选中的
+        if($scene_id = input('param.id/d')){
+            $ModelScenePromotion = new \app\index_admin\model\ScenePromotion();
+            $condition = [
+                'where' => [
+                    ['scene_id','=', $scene_id],
+                ],'field'=> [
+                    'promotion_id'
+                ]
+            ];
+            $scenePromotion = $ModelScenePromotion->getlist($condition);
+
+            if ($scenePromotion){
+                $promotionIds = array_column($scenePromotion,'promotion_id');
+                // 取出交差值的数组
+                foreach($list as $k => $v){
+                    if ( in_array($v['id'],$promotionIds) ){
+                        $list[$k]['scene'] = 1;
+                    }
+                }
+            }
+        }
+
+        $this->assign('list',$list);
+
+        return view('/promotion/list_promotion_tpl');
+
     }
 
     /**

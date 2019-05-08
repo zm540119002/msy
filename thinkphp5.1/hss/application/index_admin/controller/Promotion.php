@@ -144,7 +144,19 @@ class Promotion extends Base {
      *  分页查询
      */
     public function getList(){
-        $model = $this->obj;
+
+        $list = $this->getListData();
+
+        $this->assign('list',$list);
+
+        $view = 'list_tpl';
+
+
+        return view($view);
+    }
+
+    public function getListData(){
+        $model = new \app\index_admin\model\Promotion();
         $where = [];
         $where[] = ['status','=',0];
         // 上下架
@@ -162,45 +174,10 @@ class Promotion extends Base {
             'order'=>['id'=>'asc',],
         ];
 
-        $list = $model->pageQuery($config);
-
-        // 其它业务 -标记已选中的
-        if($scene_id = input('param.id/d')){
-            $ModelScenePromotion = new \app\index_admin\model\ScenePromotion();
-            $condition = [
-                'where' => [
-                    ['scene_id','=', $scene_id],
-                ],'field'=> [
-                    'promotion_id'
-                ]
-            ];
-            $scenePromotion = $ModelScenePromotion->getlist($condition);
-
-            if ($scenePromotion){
-                $promotionIds = array_column($scenePromotion,'promotion_id');
-                // 取出交差值的数组
-                foreach($list as $k => $v){
-                    if ( in_array($v['id'],$promotionIds) ){
-                        $list[$k]['scene'] = 1;
-                    }
-                }
-            }
-        }
-
-        $this->assign('list',$list);
-
-        $pageType = input('param.pageType/s');
-        if( $pageType ){
-            $view = $pageType;
-        }else{
-            $view = 'list_tpl';
-        }
-
-        return view($view);
-
-
-
+        return  $model->pageQuery($config);
     }
+
+
 
     /**
      * @return array|mixed
@@ -268,22 +245,6 @@ class Promotion extends Base {
             return errorMsg('失败');
         }
 
-        $model = $this->getRelationModel();
-        if(!$model){
-            return errorMsg('参数有误');
-        }
-
-        $condition = [
-            ['id','=',$id],
-        ];
-
-        return $model->del($condition,false);
-    }
-
-    /**
-     * 获取关联表的模型
-     */
-    private function getRelationModel(){
         $relation= input('post.type/s');
 
         $model = [];
@@ -301,7 +262,16 @@ class Promotion extends Base {
                 $model = new \app\index_admin\model\ScenePromotion();
                 break;
         }
-        return $model;
+
+        if(!$model){
+            return errorMsg('参数有误');
+        }
+
+        $condition = [
+            ['id','=',$id],
+        ];
+
+        return $model->del($condition,false);
     }
 
 
