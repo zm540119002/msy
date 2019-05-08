@@ -347,43 +347,17 @@ class Payment extends \common\controller\Base {
      * wxPayNotifyCallBack
      * */
     public function wxPayNotifyCallBack(){
-//        $wxPay = new \common\component\payment\weixin\weixinpay;
-//        $data  = $wxPay->wxNotify();
-        /**
-         * <xml>
-        <appid><![CDATA[wx2421b1c4370ec43b]]></appid>
-        <attach><![CDATA[支付测试]]></attach>
-        <bank_type><![CDATA[CFT]]></bank_type>
-        <fee_type><![CDATA[CNY]]></fee_type>
-        <is_subscribe><![CDATA[Y]]></is_subscribe>
-        <mch_id><![CDATA[10000100]]></mch_id>
-        <nonce_str><![CDATA[5d2b6c2a8db53831f7eda20af46e531c]]></nonce_str>
-        <openid><![CDATA[oUpF8uMEb4qRXf22hE3X68TekukE]]></openid>
-        <out_trade_no><![CDATA[1409811653]]></out_trade_no>
-        <result_code><![CDATA[SUCCESS]]></result_code>
-        <return_code><![CDATA[SUCCESS]]></return_code>
-        <sign><![CDATA[B552ED6B279343CB493C5DD0D78AB241]]></sign>
-        <sub_mch_id><![CDATA[10000100]]></sub_mch_id>
-        <time_end><![CDATA[20140903131540]]></time_end>
-        <total_fee>1</total_fee>
-        <coupon_fee_0><![CDATA[10]]></coupon_fee_0>
-        <coupon_count><![CDATA[1]]></coupon_count>
-        <coupon_type><![CDATA[CASH]]></coupon_type>
-        <coupon_id><![CDATA[10000]]></coupon_id>
-        <trade_type><![CDATA[JSAPI]]></trade_type>
-        <transaction_id><![CDATA[1004400740201409030005092168]]></transaction_id>
-        </xml>
-         */
-        $data = [
-            'attach'=>"{'system_id':3 }",
-            'out_trade_no'=>"20190508133552360792209865014610",
-            'total_fee'=>1,
-            'transaction_id'=>'1004400740201409030005092168',
-        ];
+        $wxPay = new \common\component\payment\weixin\weixinpay;
+        $data  = $wxPay->wxNotify();
+//        $data = [
+//            'attach'=>"{'system_id':3 }",
+//            'out_trade_no'=>"20190508133552360792209865014610",
+//            'total_fee'=>1,
+//            'transaction_id'=>'1004400740201409030005092168',
+//        ];
         if($data){
             $attach = json_decode($data['attach'],true);
             $systemId = $attach['system_id'];
-            $systemId = 3;
             $payInfo = $this->getPayInfo($systemId,$data['out_trade_no']);
             if(empty($payInfo)){
                 return $this->writeLog("数据库没有此订单",$payInfo);
@@ -410,7 +384,6 @@ class Payment extends \common\controller\Base {
                     ['pay_status', '=', 1],
                 ],
             ];
-
             $payModel ->startTrans();
             $result = $payModel->isUpdate(true)->save($data1,$condition);
             if($result === false){
@@ -419,9 +392,9 @@ class Payment extends \common\controller\Base {
                 return $this->writeLog("支付订单更新失败",$info);
             }
             if($payInfo['type'] == 1){
-                $this->setOrderPayStatusNew($payInfo,$systemId);
+                $this->setOrderPayStatus($payInfo,$systemId);
             }elseif($payInfo['type'] == 2){
-                $this->setRechargePayStatusNew($payInfo,$systemId);
+                $this->setRechargePayStatus($payInfo,$systemId);
             }elseif($payInfo['type'] == 3){
                 $this->setFranchisePayStatus($payInfo,$systemId);
             }
@@ -431,9 +404,9 @@ class Payment extends \common\controller\Base {
      * 订单支付单回调处理
      * @param $info 回调信息
      */
-    public function setOrderPayStatus($info){
+    public function setOrderPayStatus($info,$systemId){
         $modelOrder = new \app\index\model\Order();
-        $modelOrder ->setConnection(config('custom.system_id')[$info['system_id']]['db']);
+        $modelOrder ->setConnection(config('custom.system_id')[$systemId]['db']);
         $condition = [
             'where' => [
                 ['status', '=', 0],
@@ -478,13 +451,14 @@ class Payment extends \common\controller\Base {
         echo 'SUCCESS';
     }
 
+
     /**
      * 充值支付单回调处理
      * @param $info 回调信息
      */
-    public function setRechargePayStatus($info){
+    public function setRechargePayStatus($info,$systemId){
         $modelWalletDetail= new \app\index\model\WalletDetail();
-        $modelWalletDetail ->setConnection(config('custom.system_id')[$info['system_id']]['db']);
+        $modelWalletDetail ->setConnection(config('custom.system_id')[$systemId]['db']);
         $modelWallet = new \app\index\model\Wallet();
         $modelWallet ->setConnection(config('custom.system_id')[$info['system_id']]['db']);
         $condition = [
