@@ -188,7 +188,7 @@ class Order extends \common\controller\UserBase
 
     // 去支付
     public function toPay()
-    {echo 123;exit;
+    {
         if (!request()->isPost()) {
             return errorMsg('请求方式错误');
         }
