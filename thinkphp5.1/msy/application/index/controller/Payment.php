@@ -351,7 +351,7 @@ class Payment extends \common\controller\Base {
 //        $data  = $wxPay->wxNotify();
         $data = [
             'attach'=>"{'system_id':3 }",
-            'out_trade_no'=>"20190509141436993507780993027171",
+            'out_trade_no'=>"20190509144120853424980986521178",
             'total_fee'=>1,
             'transaction_id'=>'5448756646446',
         ];
@@ -454,7 +454,6 @@ class Payment extends \common\controller\Base {
             ],
         ];
         $result = $modelOrder -> allowField(true) -> save($data,$condition);
-        echo $modelOrder->getLastSql().PHP_EOL;
         if(!$result){
             $modelOrder->rollback();
             $info['mysql_error'] = $modelOrder->getError();
@@ -552,7 +551,7 @@ class Payment extends \common\controller\Base {
             ],
         ];
         $result = $modelFranchise -> allowField(true) -> save($data,$condition);
-        if(!$result){
+        if($result === false){
             $modelFranchise ->rollback();
             $info['mysql_error'] = $modelFranchise->getError();
             return $this->writeLog("订单支付更新失败",$info);
