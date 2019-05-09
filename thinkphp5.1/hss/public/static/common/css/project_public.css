@@ -6345,7 +6345,7 @@ div.no_data{
     margin:0 0 0 -25%;
     position: absolute;
     left:50%;
-    bottom:-0.15rem;
+    bottom:-0.05rem;
     -webkit-transform-origin: left bottom;
     -webkit-transform: scaleY(0.5);
     transform: scaleY(0.5)
