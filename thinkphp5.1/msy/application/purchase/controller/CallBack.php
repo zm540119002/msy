@@ -71,7 +71,7 @@ class CallBack extends \common\controller\Base
         //sign不参与签名算法
         unset($data['sign']);
         $sign = $this->makeSign($data);
-        $data['payment_code'] = 1;//weixin 支付
+        $data['pay_code'] = 1;//weixin 支付
         $data['actually_amount'] = $data['total_fee'];//支付金额
         $data['pay_sn'] = $data['transaction_id'];//服务商返回的交易号
         $data['order_sn'] = $data['out_trade_no'];//系统的订单号
@@ -139,7 +139,7 @@ class CallBack extends \common\controller\Base
         $verify_result = $unionpayNotify->validate($data);
         if ($verify_result) //验证成功
         {
-            $data['payment_code'] = 3;
+            $data['pay_code'] = 3;
             $data['order_sn'] = $data['orderId'];//系统的订单号
             $data['actually_amount'] = $data['txnAmt'];//支付金额
             $data['pay_sn'] = $data['queryId'];//服务商返回的交易号
@@ -187,7 +187,7 @@ class CallBack extends \common\controller\Base
         require_once dirname(__DIR__) . './../../../common/component/payment/alipay/wappay/service/AlipayTradeService.php';
         require_once dirname(__DIR__) . './../../../common/component/payment/alipay/config.php';
         $data = $_POST;
-        $payInfo['payment_code'] = 2; //支付类型
+        $payInfo['pay_code'] = 2; //支付类型
         $payInfo['order_sn'] = $data['out_trade_no'];//系统的订单号
         $payInfo['actually_amount'] = $data['receipt_amount'];//支付金额
         $payInfo['pay_sn'] = $data['trade_no'];//服务商返回的交易号
@@ -335,7 +335,7 @@ class CallBack extends \common\controller\Base
         //更新订单状态
         $data2 = [];
         $data2['logistics_status'] = 2;
-        $data2['payment_code'] = $data['payment_code'];
+        $data2['pay_code'] = $data['pay_code'];
         $data2['pay_sn'] = $data['pay_sn'];
         $data2['payment_time'] = $data['payment_time'];
         $condition = [
