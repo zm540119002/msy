@@ -6324,7 +6324,7 @@ div.no_data{
 .top_ul{
     width:95%;
     padding:0.15rem 0;
-    margin:-0.45rem auto 0;
+    margin:-0.45rem auto 0.8rem;
     background:#fff;
     border:1px solid #d9d9d9;
     border-radius:4px;
