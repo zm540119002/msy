@@ -6333,7 +6333,7 @@ div.no_data{
     padding:0 0.25rem;
     margin-bottom:0;
 }
-.top_ul a{
+.top_ul .current a{
     position:relative;
     color:#EC77A3;
 }
