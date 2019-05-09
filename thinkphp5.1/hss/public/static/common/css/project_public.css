@@ -6314,7 +6314,15 @@ div.no_data{
     color:#000;
 }
 .top_cols{
-    padding:0;
+    padding:0.15rem 0.15rem 0.55rem 0.15rem;
     background:#666;
     color:#fff;
+}
+.top_cols a{
+    color:#fff;
+}
+.top_ul{
+    width:95%;
+    padding:0.15rem 0.25rem;
+    margin:-1rem auto 0;
 }
