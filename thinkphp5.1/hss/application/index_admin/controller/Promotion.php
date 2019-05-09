@@ -239,28 +239,26 @@ class Promotion extends Base {
             return config('custom.not_post');
         }
 
-        $id      = input('post.id/d');
+        $id = input('post.id/d');
 
         if (!$id){
             return errorMsg('失败');
         }
 
-        $relation= input('post.type/s');
-
-        $model = [];
+        $relation = input('get.relation/d');
+        // custom.php relation_type
         switch($relation){
-            case 'goods':
+            case config('custom.relation_type.scene'):
                 $model = new \app\index_admin\model\SceneGoods();
                 break;
-            case 'category':
-                $model = new \app\index_admin\model\SceneGoodsCategory();
+            case config('custom.relation_type.project'):
+                $model = new \app\index_admin\model\ProjectGoods();
                 break;
-            case 'project':
-                $model = new \app\index_admin\model\SceneProject();
+            case config('custom.relation_type.promotion'):
+                $model = new \app\index_admin\model\PromotionGoods();
                 break;
-            case 'scene':
-                $model = new \app\index_admin\model\ScenePromotion();
-                break;
+            default:
+                return errorMsg('参数有误');
         }
 
         if(!$model){

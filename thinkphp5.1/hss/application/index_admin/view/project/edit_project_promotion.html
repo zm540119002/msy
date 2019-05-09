@@ -38,7 +38,7 @@
         $(function () {
             //加载第一页
             var config = {
-                url:module+'Scene/_getPromotionList'
+                url:module+'Project/_getPromotionList'
             };
             var getData = {
                 id:$('#list').data('id'),
@@ -48,7 +48,7 @@
 
             // 提交选中促销方案
             $('body').on('click','.button_save_black_4',function(){
-                var url = module +'Scene/editScenePromotion';
+                var url = module +'Project/editProjectPromotion';
                 var postData={};
                 var ids  = [];
                 postData.id = $('#list').data('id');

@@ -107,7 +107,7 @@
             });
 
             // 去设置场景下的促销方案
-            $('body').on('click','.projectPromotion',function(){
+            $('body').on('click','.relationPromotion',function(){
                 var _thisTr = $(this).parents('tr');
                 var url =  controller + 'getProjectPromotion/id/' + _thisTr.data('id');
                 location.href = url;
