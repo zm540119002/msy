@@ -6351,5 +6351,6 @@ div.no_data{
     transform: scaleY(0.8)
 }
 .maker_qualifications{
+    margin:0 0 0.15rem 0;
     color:#0066cc;
 }
