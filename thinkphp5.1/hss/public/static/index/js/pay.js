@@ -1,17 +1,5 @@
 
 $(function () {
-    // // 弹出支付方式
-    //     // $('body').on('click','.confirm_order',function(){
-    //     //     var settlementMethod=$('.settlementMethod').html();
-    //     //     layer.open({
-    //     //         type: 1
-    //     //         ,anim: 'up'
-    //     //         ,style: 'position:fixed; bottom:0; left:0; width: 100%; height: 50%; padding:10px 0; border:none;',
-    //     //         className:'settlementMethod bankTransferLayer',
-    //     //         content: settlementMethod
-    //     //     });
-    //     // });
-
     // 弹出支付方式
     $('body').on('click','.confirm_order',function(){
         var _this = $(this);
@@ -143,7 +131,7 @@ function submitOrders(_this,postData){
         }
     });
 }
-//
+// 去结算
 function toPay(_this,postData){
     var url = module + 'Order/toPay';
     _this.addClass("nodisabled");//防止重复提交
