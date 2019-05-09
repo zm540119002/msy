@@ -167,6 +167,7 @@ class Goods extends \common\controller\Base{
                 ],
             ];
             $info = $model->getInfo($config);
+
             if(empty($info)) $this->error('此商品已下架');
 
             $info['main_img'] = explode(',',(string)$info['main_img']);
@@ -236,5 +237,30 @@ class Goods extends \common\controller\Base{
         $list = $modelRecommendGoods->getList($config);
         $this->assign('list',$list);
         return view('goods/recommend_list_tpl');
+    }
+
+    /**
+     * 获取套餐商品
+     */
+    public function getPromotionGoods(){
+        if(!request()->isGet()){
+            return errorMsg('参数有误');
+        }
+        if(!$id = input('get.id/d')) return errorMsg('参数有误');
+
+        $model = new \app\index\model\PromotionGoods();
+        $condition = [
+            'field' => [
+                'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity',
+                'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
+            ], 'where' => [
+                ['pg.promotion_id','=',$id], ['g.status','=', 0], ['g.shelf_status','=', 3],
+            ],'join' => [
+                ['goods g','g.id = pg.goods_id','left'],
+            ],
+        ];
+
+        return $model -> pageQuery($condition);
+        return $model->getLastSql();
     }
 }

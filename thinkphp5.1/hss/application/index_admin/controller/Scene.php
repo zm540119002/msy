@@ -249,6 +249,7 @@ class Scene extends Base {
         return $this->fetch();
     }
 
+    // 促销系列方法
     /**
      * 展示选中的促销方案
      */
@@ -266,7 +267,7 @@ class Scene extends Base {
             ]
         ];
         $scene = $modelScene->getInfo($condition);
-        $this->assign('scene',$scene);
+        $this->assign('info',$scene);
 
         $model = new \app\index_admin\model\ScenePromotion();
         $condition = [
@@ -294,17 +295,17 @@ class Scene extends Base {
 
         if(request()->isPost()){
 
-            $scene_id = input('scene_id/d');
-            $ids  = input('ids/a');
+            $id = input('id/d');
+            $promotion_ids  = input('promotion_ids/a');
 
-            if (!$scene_id){
+            if (!$id){
                 $this ->error('参数有误',url('manage'));
             }
 
-            if ($ids){
-                foreach($ids as $k => $v){
+            if ($promotion_ids){
+                foreach($promotion_ids as $k => $v){
                     if ((int)$v){
-                        $data = ['scene_id'=>$scene_id,'promotion_id'=>$v];
+                        $data = ['scene_id'=>$id,'promotion_id'=>$v];
 
                         // 先删后增 -保证唯一
                         $model = new \app\index_admin\model\ScenePromotion();
@@ -331,12 +332,12 @@ class Scene extends Base {
      * 获取所有促销方案&&已选中的
      * @return \think\response\View
      */
-    public function getPromotionList(){
+    public function _getPromotionList(){
         $list = Promotion::getListData();
 
         // 其它业务 -标记已选中的
         if($scene_id = input('param.id/d')){
-            $ModelScenePromotion = new \app\index_admin\model\ScenePromotion();
+            $Model = new \app\index_admin\model\ScenePromotion();
             $condition = [
                 'where' => [
                     ['scene_id','=', $scene_id],
@@ -344,14 +345,14 @@ class Scene extends Base {
                     'promotion_id'
                 ]
             ];
-            $scenePromotion = $ModelScenePromotion->getlist($condition);
+            $PromotionList = $Model->getlist($condition);
 
-            if ($scenePromotion){
-                $promotionIds = array_column($scenePromotion,'promotion_id');
+            if ($PromotionList){
+                $promotionIds = array_column($PromotionList,'promotion_id');
                 // 取出交差值的数组
                 foreach($list as $k => $v){
                     if ( in_array($v['id'],$promotionIds) ){
-                        $list[$k]['scene'] = 1;
+                        $list[$k]['exist'] = 1;
                     }
                 }
             }
@@ -362,6 +363,7 @@ class Scene extends Base {
         return view('/promotion/list_promotion_tpl');
 
     }
+    // 促销系列方法END
 
     /**
      * 获取所有一级OR该分类的子级分类 && 所有已选择的分类

@@ -14,7 +14,7 @@
     {volist name="list" id="vo"}
     <tr class="hover" data-id="{$vo.id}">
         <td class="w48">
-            {if !empty($vo.scene)}
+            {if !empty($vo.exist)}
                 <input type="checkbox" class="checkitem" name="checkbox" checked disabled>
             {else/}
                 <input type="checkbox" class="checkitem" name="checkbox">

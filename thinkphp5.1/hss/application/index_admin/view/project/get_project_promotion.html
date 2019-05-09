@@ -1,21 +1,21 @@
 ﻿{extend name="template/admin_pc/base.html" /}
 {block name="content"}
 <nav class="breadcrumb">
-	<i class="Hui-iconfont">&#xe67f;</i>场景管理 <span class="c-gray en">&gt;</span>{$info.name} <span class="c-gray en">&gt;</span>促销列表
-    <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a>
+	<i class="Hui-iconfont">&#xe67f;</i>项目管理 <span class="c-gray en">&gt;</span>{$info.name} <span class="c-gray en">&gt;</span>促销列表
+	<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a>
 </nav>
 <div class="page-container">
-    <div class="cl pd-5 bg-1 bk-gray">
+	<div class="cl pd-5 bg-1 bk-gray">
 			<span class="l">
-				<a class="btn btn-primary radius" id="edit-scene-promotion" data-id="{$info.id}" href="javascript:;">
+				<a class="btn btn-primary radius" id="edit-promotion" data-id="{$info.id}" href="javascript:;">
 					<i class="Hui-iconfont"></i> 关联促销
 				</a>
 				<span class="friend-tipc">*注意</span>：已上架的促销才会显示在前台
 			</span>
-        <!-- 先不要 -->
-<!--        <span class="r">共有数据：<strong id="count">{:count($list)}</strong> 条</span>-->
-    </div>
-    <div class="content" id="list">
+		<!-- 先不要 -->
+		<!--        <span class="r">共有数据：<strong id="count">{:count($list)}</strong> 条</span>-->
+	</div>
+	<div class="content" id="list">
 		<table class="table tb-type2">
 			<thead>
 			<tr class="thead">
@@ -68,9 +68,9 @@
 <script type="text/javascript">
 	$(function () {
 		// 展示修改促销方案
-		$("#edit-scene-promotion").click(function () {
+		$("#edit-promotion").click(function () {
 			var id  = $(this).data('id');
-			var url = controller+'editScenePromotion/'+'id/'+id;
+			var url = controller+'editProjectPromotion/'+'id/'+id;
 			var index = layer.open({
 				type: 2,
 				title: '关联促销方案',
@@ -84,14 +84,13 @@
 		$('body').on('click','.del',function(){
 			var _this     = $(this);
 			var postData  = {};
-			postData.type = 'scene';
-			postData.title= '促销';
+			postData.relation = 3;
 			var _thisTr   = _this.parents('tr');
 			postData.id   = _thisTr.data('id');
 			$(this).addClass('nodisabled');
 			layer.open({
 				btn: ['确定','取消'],//按钮
-				content:'取消关联选中的'+postData.title+' 编号'+postData.id+'？',
+				content:'取消关联选中的促销 编号'+postData.id+'？',
 				yes:function (index) {
 					$.ajax({
 						url:module+'Promotion/delRelationPromotion',
@@ -111,42 +110,6 @@
 				},
 				end:function(){
 					_this.removeClass('nodisabled');
-				}
-			});
-		});
-
-		//上下架 没用到
-		$('body').on('click','.set-show-name',function(){
-			var _this = $(this);
-			var text = _this.attr('title');
-			var show_name = _this.data('show-name');
-			var _thisTr = $(this).parents('tr');
-			var postData ={};
-			postData.id = _thisTr.data('id');
-			postData.show_name = show_name;
-			var url =  controller + 'setSceneSchemeInfo';
-
-			layer.open({
-				btn: ['确定','取消'],//按钮
-				content:text+'?',
-				yes:function (index) {
-					$.post(url,postData,function(msg){
-						dialog.msg(msg,'',function(){
-							if(msg.status){
-								if(show_name == 1){
-									_thisTr.find(".show-name").html('<span class="label label-defaunt radius">不展示</span>');
-									_this.data('show-name',2);
-									_this.attr('title','展示');
-
-								}else{
-									_thisTr.find(".show-name").html('<span class="label label-success radius">展示</span>');
-									_this.data('show-name',1);
-									_this.attr('title','不展示');
-								}
-							}
-						});
-					});
-					layer.close(index);
 				}
 			});
 		});
