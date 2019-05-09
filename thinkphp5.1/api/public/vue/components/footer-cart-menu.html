@@ -163,16 +163,16 @@
                     <span class="cart_num"></span>
                 </div>
                 <!-- 加入购物车 -->
-                <div v-else-if="menu.class.indexOf('add_cart')!==-1" ref="addCart">
-                    <span class="s_i" @click="addCart"></span>
+                <div v-else-if="menu.class.indexOf('add_cart')!==-1" ref="addCart" @click="addCart">
+                    <span class="s_i"></span>
                 </div>
                 <!-- 立即购买 -->
-                <div v-else-if="menu.class.indexOf('buy_now')!==-1">
-                    <span class="s_i" @click="buyNow"></span>
+                <div v-else-if="menu.class.indexOf('buy_now')!==-1" @click="buyNow">
+                    <span class="s_i"></span>
                 </div>
                 <!-- 提交订单 -->
-                <div v-else-if="menu.class.indexOf('confirm_order')!==-1">
-                    <span class="s_i" @click="confirmOrder"></span>
+                <div v-else-if="menu.class.indexOf('confirm_order')!==-1" @click="confirmOrder">
+                    <span class="s_i"></span>
                 </div>
                 <!-- 默认 -->
                 <div v-else>
