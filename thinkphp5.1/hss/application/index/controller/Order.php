@@ -192,6 +192,7 @@ class Order extends \common\controller\UserBase
             return errorMsg('请求方式错误');
         }
         $postData = input('post.');
+        return $postData;
         $modelOrder = new \app\index\model\Order();
         $condition = [
             'where' => [
