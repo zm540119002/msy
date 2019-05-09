@@ -356,8 +356,8 @@ class Payment extends \common\controller\Base {
             'transaction_id'=>'1004400740201409030005092168',
         ];
         if($data){
-            $attach = json_decode($data['attach'],true);
-            $systemId = $attach['system_id'];
+            //$attach = json_decode($data['attach'],true);
+            //$systemId = $attach['system_id'];
             $systemId = 3;
             $payInfo = $this->getPayInfo($systemId,$data['out_trade_no']);
             if(empty($payInfo)){
