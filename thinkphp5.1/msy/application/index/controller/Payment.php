@@ -351,9 +351,9 @@ class Payment extends \common\controller\Base {
 //        $data  = $wxPay->wxNotify();
         $data = [
             'attach'=>"{'system_id':3 }",
-            'out_trade_no'=>"20190509114513729739306544173310",
+            'out_trade_no'=>"20190509134338359427051430427496",
             'total_fee'=>1,
-            'transaction_id'=>'1004400740201409030005092168',
+            'transaction_id'=>'10044007402014090300050927858',
         ];
         if($data){
             //$attach = json_decode($data['attach'],true);
