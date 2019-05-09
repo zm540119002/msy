@@ -41,7 +41,7 @@
                 </a>
             </div>
             <div  v-else class="left">
-                <p>{{buy_named}}：(单位{{productInfo['step_quantity']}}:{{unit}})</p>
+                <p>{{buy_named}}：(单位:{{unit}})</p>
                 <p>
                     <span class="step-named">{{step_named}}：</span>
                     <span class="step-quantity">{{init_quantity}}</span>
@@ -50,7 +50,7 @@
             </div>
             <div class="middle">
                 <div></div>
-                <div class="red subtotal_amount">￥{{ parseFloat(subtotal_amount).toFixed(2) }}</div>
+                <div class="red subtotal_amount">{{productInfo['step_quantity']}}￥{{ parseFloat(subtotal_amount).toFixed(2) }}</div>
             </div>
             <div  class="right">
                 <div  v-if="display_pic" class="product_name">
