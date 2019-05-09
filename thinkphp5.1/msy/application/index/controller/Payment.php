@@ -388,7 +388,6 @@ class Payment extends \common\controller\Base {
             ];
             $payModel ->startTrans();
             $result = $payModel->isUpdate(true)->save($data1,$condition);
-            echo $result;
             if($result === false){
                 $payModel ->rollback();
                 $payInfo['mysql_error'] = $payModel->getError();
@@ -405,6 +404,7 @@ class Payment extends \common\controller\Base {
             if($payInfo['type'] == 1){
                 $this->setOrderPayStatus($info,$systemId);
             }elseif($payInfo['type'] == 2){
+                echo 123;
                 $this->setRechargePayStatus($info,$systemId);
             }elseif($payInfo['type'] == 3){
                 $this->setFranchisePayStatus($payInfo,$systemId);
