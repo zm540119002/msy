@@ -192,7 +192,6 @@ class Order extends \common\controller\UserBase
             return errorMsg('请求方式错误');
         }
         $postData = input('post.');
-        return $postData;
         $modelOrder = new \app\index\model\Order();
         $condition = [
             'where' => [
@@ -204,6 +203,7 @@ class Order extends \common\controller\UserBase
             ]
         ];
         $orderInfo  = $modelOrder->getInfo($condition);
+        return $orderInfo;
         //先查找支付表是否有数据
         $modelPay = new \app\index\model\Pay();
         $condition = [
