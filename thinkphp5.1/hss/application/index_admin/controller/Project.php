@@ -41,8 +41,15 @@ class Project extends Base {
             if(  isset($_POST['thumb_img']) && $_POST['thumb_img'] ){
                 $_POST['thumb_img'] = moveImgFromTemp(config('upload_dir.project'),$_POST['thumb_img']);
             }
-            if(  isset($_POST['main_img']) && $_POST['main_img'] ){
-                $_POST['main_img'] = moveImgFromTemp(config('upload_dir.project'),$_POST['main_img']);
+            if( isset($_POST['main_img']) && $_POST['main_img'] ){
+                $detailArr = explode(',',input('post.main_img','','string'));
+                $tempArr = array();
+                foreach ($detailArr as $item) {
+                    if($item){
+                        $tempArr[] = moveImgFromTemp(config('upload_dir.project'),$item);
+                    }
+                }
+                $_POST['main_img'] = implode(',',$tempArr);
             }
             if( isset($_POST['detail_img']) && $_POST['detail_img'] ){
                 $detailArr = explode(',',input('post.detail_img','','string'));
@@ -62,8 +69,7 @@ class Project extends Base {
             $data = $_POST;
             $data['update_time'] = time();
             $data['audit'] = 1; // 暂时没有审核，先固定
-            p($data);
-            exit;
+
             if(isset($_POST['id']) && $id=input('post.id/d')){//修改
                 // 编辑
                 $condition = ['where' => ['id' => $id,]];
@@ -187,6 +193,45 @@ class Project extends Base {
         // 暂时先全部写在商品分类里
         GoodsCategory::getGoodsCategory();
         $this->assign('relation',config('custom.relation_type.project'));
+
+        return $this->fetch();
+    }
+
+    /**
+     * 展示选中的促销方案
+     */
+    public function getProjectPromotion(){
+        // 查询
+        if(!$id = input('id/d')){
+            $this ->error('参数有误',url('manage'));
+        }
+        $modelProject = new \app\index_admin\model\Project();
+        $condition = [
+            'where'=>[
+                ['id','=',$id],
+            ],'field'=>[
+                'id','name'
+            ]
+        ];
+        $project = $modelProject->getInfo($condition);
+        $project['custom_title'] = '项目';
+        $this->assign('info',$project);
+
+        $model = new \app\index_admin\model\ProjectPromotion();
+        $condition = [
+            'where'=>[
+                ['pp.status','=',0],
+                ['pp.scene_id','=',$id],
+            ],'field' => [
+                'p.id promotion_id','p.name','p.thumb_img','p.sort','p.shelf_status','pp.id '
+            ],'join'  => [
+                ['promotion p','pp.promotion_id=p.id','left']
+            ],'order' => [
+                'sort'=> 'desc'
+            ]
+        ];
+        $list = $model->pageQuery($condition);
+        $this->assign('list',$list);
 
         return $this->fetch();
     }

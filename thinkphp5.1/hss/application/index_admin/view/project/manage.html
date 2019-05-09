@@ -106,12 +106,20 @@
                 });
             });
 
+            // 去设置场景下的促销方案
+            $('body').on('click','.projectPromotion',function(){
+                var _thisTr = $(this).parents('tr');
+                var url =  controller + 'getProjectPromotion/id/' + _thisTr.data('id');
+                location.href = url;
+            });
+
             // 管理关联的商品
             $('body').on('click','.relationGoods',function(){
                 var _thisTr = $(this).parents('tr');
                 var url =  controller + 'manageRelationGoods/id/' + _thisTr.data('id');
                 location.href = url;
             });
+
         });
     </script>
 {/block}

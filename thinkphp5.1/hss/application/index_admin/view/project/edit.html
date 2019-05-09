@@ -216,12 +216,10 @@
             postData.main_img = '';
             $.each($('#main_img').find('iframe').contents().find('.view img'),function(){
                 postData.main_img += $(this).attr('src') + ',';
-
             });
             postData.detail_img = '';
             $.each($('#detail_img').find('iframe').contents().find('.view img'),function(){
                 postData.detail_img += $(this).attr('src') + ',';
-
             });
 
             postData.intro = intro.getContent();
@@ -247,7 +245,7 @@
                 return false;
             }
 
-            var url = module +'Scene/edit';
+            var url = module +'Project/edit';
             $.post(url,postData,function(msg){
                 dialog.msg(msg,'',function () {
                     if(msg.status){
