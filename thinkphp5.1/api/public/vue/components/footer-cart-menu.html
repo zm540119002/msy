@@ -150,7 +150,7 @@
             <a href="javascript:void(0);" v-for="menu in menus" :data-jump_url="menu.action" :class="menu.class">
                 {{menu.name}}
                 <!-- 全选 -->
-                <div v-if="menu.class.indexOf('checked_all')!==-1">
+                <div v-if="menu.class.indexOf('checked_all')!==-1" @click="addCart">
                     <input type="checkbox" class="check-all">
                     <label for="" class="left">全选</label>
                 </div>
@@ -163,7 +163,7 @@
                     <span class="cart_num"></span>
                 </div>
                 <!-- 加入购物车 -->
-                <div v-else-if="menu.class.indexOf('add_cart')!==-1" ref="addCart" @click="addCart">
+                <div v-else-if="menu.class.indexOf('add_cart')!==-1" ref="addCart">
                     <span class="s_i"></span>
                 </div>
                 <!-- 立即购买 -->
