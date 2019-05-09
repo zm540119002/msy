@@ -398,7 +398,7 @@ class Payment extends \common\controller\Base {
             }elseif($payInfo['type'] == 2){
                 $this->setRechargePayStatus($info,$systemId);
             }elseif($payInfo['type'] == 3){
-                $this->setFranchisePayStatus($payInfo,$systemId);
+                $this->setFranchisePayStatus($info,$systemId);
             }
         }
     }
@@ -533,6 +533,9 @@ class Payment extends \common\controller\Base {
         $modelFranchise ->setConnection(config('custom.system_id')[$systemId]['db']);
         $data = [
             'apply_status'=>2,                              // 状态
+            'payment_time'=>time(),
+            'pay_sn'=>$info['pay_sn'],                      // 支付单号 退款用
+            'pay_code'=>$info['pay_code'],                      // 支付方式
         ];
         $condition = [
             'where' => [
