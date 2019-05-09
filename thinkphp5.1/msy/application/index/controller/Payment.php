@@ -360,7 +360,6 @@ class Payment extends \common\controller\Base {
             //$systemId = $attach['system_id'];
             $systemId = 3;
             $payInfo = $this->getPayInfo($systemId,$data['out_trade_no']);
-            print_r($payInfo);exit;
             if(empty($payInfo)){
                 return $this->writeLog("数据库没有此订单",$payInfo);
             }
@@ -486,6 +485,7 @@ class Payment extends \common\controller\Base {
             ],
         ];
         $walletDetailInfo = $modelWalletDetail->getInfo($condition);
+        print_r($walletDetailInfo);exit;
         if(empty($walletDetailInfo)){
             return $this->writeLog("数据库没有此订单",$info);
         }
