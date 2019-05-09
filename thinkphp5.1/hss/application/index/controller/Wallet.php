@@ -78,11 +78,29 @@ class Wallet extends Base {
         }
 
         $model= new \app\index\model\WalletDetail();
+        $model -> startTrans();
         $res  = $model->isUpdate(false)->save($data);
         if(!$res){
+            $model->rollback();
             return errorMsg('充值失败');
 
         }
+        //生成支付表的数据
+        $modelPay = new \app\index\model\Pay();
+        //增加
+        $data = [
+            'sn' => $walletDetailSn,
+            'actually_amount' =>$amount,
+            'user_id' => $this->user['id'],
+            'pay_code' => $payCode,
+            'type' => config('custom.pay_type')['rechargePay']['code'],
+        ];
+        $result  = $modelPay->isUpdate(false)->save($data);
+        if(!$result){
+            $model->rollback();
+            return errorMsg('失败');
+        }
+        $model->commit();
 
         // 各充值方式的处理
         switch($payCode){
@@ -100,7 +118,6 @@ class Wallet extends Base {
                 break;
         }
     }
-
     /**
      * 充值记录页
      */

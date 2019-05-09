@@ -66,14 +66,6 @@ body{
     background: #f2f2f2 !important;
     border:1px solid #d9d9d9;
 }
-.text-intro{
-    overflow : hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    word-break:break-all;
-}
 .status_icons img{
     max-width:15%;
 }
@@ -1548,7 +1540,7 @@ background-position: 0 -27px;
 .headlines{
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp:2;
+    -webkit-line-clamp:4;
     overflow: hidden;
     font-size:0.20rem;
 }
@@ -2987,7 +2979,7 @@ input[type=text]::-webkit-focus-inner {
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
     font-size:.20rem;
 }
@@ -4355,7 +4347,7 @@ select[name="nodeIds"]{
     overflow : hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
     word-break:break-all;
 }
@@ -5004,7 +4996,7 @@ ul.message_list{
     text-overflow:ellipsis;
     display:-webkit-box; 
     -webkit-box-orient:vertical;
-    -webkit-line-clamp:2; 
+    -webkit-line-clamp:4;
     margin:0 0 0.20rem 0;
 }
 .img0,.img1,.img2{
@@ -5046,7 +5038,7 @@ ul.message_list{
 }
 .wy_list li .p_img{
     display:block;
-    width:45%;
+    width:auto;
 }
 .wy_list .list li img{
     width:100%;

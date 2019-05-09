@@ -216,12 +216,12 @@ class Order extends \common\controller\UserBase
             ];
             $result  = $modelPay->isUpdate(false)->save($data);
             if(!$result){
+                $modelPay ->rollback();
                 return errorMsg('失败');
             }
 
         }else{
             //修改
-
             $updateData = [
                 'actually_amount' =>$orderInfo['actually_amount'],
                 'pay_code' => $postData['pay_code'],

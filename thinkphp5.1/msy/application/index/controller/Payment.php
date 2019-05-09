@@ -3,142 +3,141 @@ namespace app\index\controller;
 
 class Payment extends \common\controller\Base {
 
-    /**
-     * @return mixed // 确定支付页
-     */
-    public function toPay()
-    {
-        if(request()->isPost()){
-            $postData = input('post.');
-            $systemId = $postData['system_id'];
-            $paymentType = $postData['payment_type'];
-            $sn = $postData['sn'];
-            if(!in_array($paymentType,config('custom.payment_types'))){
-                $this->error('提交的支付类型数据有误 !');
-            }
-            switch($paymentType){
-                case 1 : // 订单
-                    $info = $this->getOrderInfo($systemId,$sn);
-                    break;
-                case 2 : // 充值
-                    $info = $this->getWalletDetailInfo($systemId,$sn);
-                    break;
-            }
-            if(empty($info) OR !$info['actually_amount']){
-                $this->error('订单不存在或金额不能为0 !');
-            }
-            $attach = [
-                'system_id' =>$systemId,
-                'payment_type'=>$paymentType
-            ];
-            $attach = json_encode($attach);
-            $jump_url =config('custom.system_id')[$systemId]['jump_url'];
-            $return_url = config('wx_config.return_url');
-            $payInfo = [
-                'sn'=>$info['sn'],
-                'product'=>$info['id'],
-                'actually_amount'=>$info['actually_amount'],
-                'success_url' =>urlencode($return_url.'?pay_status=success&jump_url='.$jump_url),
-                'fail_url' => $return_url.'?pay_status=fail&jump_url='.$jump_url,
-                'notify_url'=>config('wx_config.notify_url'),
-                'attach'=>$attach,
-            ];
-
-            switch($info['pay_code']){
-                case 1 : // 微信支付
-                    $payInfo['notify_url'] = config('wx_config.notify_url');
-                    $wxPay = new \common\component\payment\weixin\weixinpay;
-                    $msg   = $wxPay->wxPay($payInfo);
-                    break;
-                case 2 : // 支付宝
-                    $payInfo['notify_url'] = $this->host."/index.php/index/CallBack/aliBack/type/order";
-                    $model = new \common\component\payment\alipay\alipay;
-                    $model->aliPay($payInfo);
-                    break;
-                case 3 : // 银联
-                    $payInfo['notify_url'] = $this->host."/index.php/index/CallBack/unionBack/type/order";
-                    $model = new \common\component\payment\unionpay\unionpay;
-                    $model->unionPay($payInfo);
-                    break;
-            }
-            if(isset($msg)){
-                $this -> error($msg);
-            }
-        }else{
-
-            $systemId = input('system_id',0,'int');
-            $this->assign('system_id',$systemId);
-            //$paymentType 1:订单支付 2：充值支付
-            $paymentType = input('payment_type',0,'int');
-            $this->assign('payment_type',$paymentType);
-            if(!in_array($paymentType,config('custom.payment_types'))){
-                $this->error('提交的支付类型数据有误 !');
-            }
-            $sn = input('sn','','string');
-            switch($paymentType){
-                case 1 : // 订单
-                    $info = $this->getOrderInfo($systemId,$sn);
-                    break;
-                case 2 : // 充值
-                    $info = $this->getWalletDetailInfo($systemId,$sn);
-                    break;
-            }
-            if(empty($info) OR !$info['actually_amount']){
-                $this->error('订单不存在或金额不能为0 !');
-            }
-
-            $this->assign('info', $info);
-            //判断为微信支付，并且为微信浏览器
-            if($info['pay_code'] ==1){
-                if (!isPhoneSide()) {//pc端微信扫码支付
-                    $this ->assign('browser_type',1);
-                }elseif(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false ){
-                    //手机端非微信浏览器
-                    return $this->fetch();
-                }else{//微信浏览器(手机端)
-                    $this ->assign('browser_type',3);
-                    $payOpenId = session('open_id');
-                    if(!$payOpenId){
-                        $tools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
-                        $payOpenId  = $tools->getOpenid();
-                        session('open_id',$payOpenId);
-                    }
-                }
-                $this->assign('isWxBrowser',1);
-                //自定义参数，微信支付回调原样返回
-                $attach = [
-                    'system_id' =>$systemId,
-                    'payment_type'=>$paymentType
-                ];
-                $attach = json_encode($attach);
-                $jump_url =config('custom.system_id')[$systemId]['jump_url'][$paymentType];
-                $return_url = config('wx_config.return_url');
-                $payInfo = [
-                    'sn'=>$info['sn'],
-                    'product'=>$info['id'],
-                    'actually_amount'=>$info['actually_amount'],
-                    'success_url' => $return_url.'?pay_status=success&jump_url='.$jump_url,
-                    'fail_url' => $return_url.'?pay_status=fail&jump_url='.$jump_url,
-                    'notify_url'=>config('wx_config.notify_url'),
-                    'attach'=>$attach,
-                    'open_id'=>$payOpenId,
-                ];
-                $wxPay = new \common\component\payment\weixin\weixinpay;
-                $jsApiParameters   = $wxPay::wxPay($payInfo);
-                $this -> assign('jsApiParameters',$jsApiParameters);
-                $response = [
-                    'success_url' => $jump_url,
-                    'fail_url' => $return_url.'?pay_status=fail&jump_url='.$jump_url,
-                ];
-/*                $response = [
-                    'success_url' => $jump_url,
-                    'fail_url' => $return_url.'?pay_status=fail&jump_url='.$jump_url,
-                ];*/
-                $this->assign('payInfo',json_encode($response));
-            }
-            return $this->fetch();
-        }
-    }
+//    /**
+//     * @return mixed // 确定支付页
+//     */
+//    public function toPay()
+//    {
+//        if(request()->isPost()){
+//            $postData = input('post.');
+//            $systemId = $postData['system_id'];
+//            $paymentType = $postData['payment_type'];
+//            $sn = $postData['sn'];
+//            if(!in_array($paymentType,config('custom.payment_types'))){
+//                $this->error('提交的支付类型数据有误 !');
+//            }
+//            switch($paymentType){
+//                case 1 : // 订单
+//                    $info = $this->getOrderInfo($systemId,$sn);
+//                    break;
+//                case 2 : // 充值
+//                    $info = $this->getWalletDetailInfo($systemId,$sn);
+//                    break;
+//            }
+//            if(empty($info) OR !$info['actually_amount']){
+//                $this->error('订单不存在或金额不能为0 !');
+//            }
+//            $attach = [
+//                'system_id' =>$systemId,
+//                'payment_type'=>$paymentType
+//            ];
+//            $attach = json_encode($attach);
+//            $jump_url =config('custom.system_id')[$systemId]['jump_url'];
+//            $return_url = config('wx_config.return_url');
+//            $payInfo = [
+//                'sn'=>$info['sn'],
+//                'product'=>$info['id'],
+//                'actually_amount'=>$info['actually_amount'],
+//                'success_url' =>urlencode($return_url.'?pay_status=success&jump_url='.$jump_url),
+//                'fail_url' => $return_url.'?pay_status=fail&jump_url='.$jump_url,
+//                'notify_url'=>config('wx_config.notify_url'),
+//                'attach'=>$attach,
+//            ];
+//
+//            switch($info['pay_code']){
+//                case 1 : // 微信支付
+//                    $payInfo['notify_url'] = config('wx_config.notify_url');
+//                    $wxPay = new \common\component\payment\weixin\weixinpay;
+//                    $msg   = $wxPay->wxPay($payInfo);
+//                    break;
+//                case 2 : // 支付宝
+//                    $payInfo['notify_url'] = $this->host."/index.php/index/CallBack/aliBack/type/order";
+//                    $model = new \common\component\payment\alipay\alipay;
+//                    $model->aliPay($payInfo);
+//                    break;
+//                case 3 : // 银联
+//                    $payInfo['notify_url'] = $this->host."/index.php/index/CallBack/unionBack/type/order";
+//                    $model = new \common\component\payment\unionpay\unionpay;
+//                    $model->unionPay($payInfo);
+//                    break;
+//            }
+//            if(isset($msg)){
+//                $this -> error($msg);
+//            }
+//        }else{
+//            $systemId = input('system_id',0,'int');
+//            $this->assign('system_id',$systemId);
+//            //$paymentType 1:订单支付 2：充值支付
+//            $paymentType = input('payment_type',0,'int');
+//            $this->assign('payment_type',$paymentType);
+//            if(!in_array($paymentType,config('custom.payment_types'))){
+//                $this->error('提交的支付类型数据有误 !');
+//            }
+//            $sn = input('sn','','string');
+//            switch($paymentType){
+//                case 1 : // 订单
+//                    $info = $this->getOrderInfo($systemId,$sn);
+//                    break;
+//                case 2 : // 充值
+//                    $info = $this->getWalletDetailInfo($systemId,$sn);
+//                    break;
+//            }
+//            if(empty($info) OR !$info['actually_amount']){
+//                $this->error('订单不存在或金额不能为0 !');
+//            }
+//
+//            $this->assign('info', $info);
+//            //判断为微信支付，并且为微信浏览器
+//            if($info['pay_code'] ==1){
+//                if (!isPhoneSide()) {//pc端微信扫码支付
+//                    $this ->assign('browser_type',1);
+//                }elseif(strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') == false ){
+//                    //手机端非微信浏览器
+//                    return $this->fetch();
+//                }else{//微信浏览器(手机端)
+//                    $this ->assign('browser_type',3);
+//                    $payOpenId = session('open_id');
+//                    if(!$payOpenId){
+//                        $tools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
+//                        $payOpenId  = $tools->getOpenid();
+//                        session('open_id',$payOpenId);
+//                    }
+//                }
+//                $this->assign('isWxBrowser',1);
+//                //自定义参数，微信支付回调原样返回
+//                $attach = [
+//                    'system_id' =>$systemId,
+//                    'payment_type'=>$paymentType
+//                ];
+//                $attach = json_encode($attach);
+//                $jump_url =config('custom.system_id')[$systemId]['jump_url'][$paymentType];
+//                $return_url = config('wx_config.return_url');
+//                $payInfo = [
+//                    'sn'=>$info['sn'],
+//                    'product'=>$info['id'],
+//                    'actually_amount'=>$info['actually_amount'],
+//                    'success_url' => $return_url.'?pay_status=success&jump_url='.$jump_url,
+//                    'fail_url' => $return_url.'?pay_status=fail&jump_url='.$jump_url,
+//                    'notify_url'=>config('wx_config.notify_url'),
+//                    'attach'=>$attach,
+//                    'open_id'=>$payOpenId,
+//                ];
+//                $wxPay = new \common\component\payment\weixin\weixinpay;
+//                $jsApiParameters   = $wxPay::wxPay($payInfo);
+//                $this -> assign('jsApiParameters',$jsApiParameters);
+//                $response = [
+//                    'success_url' => $jump_url,
+//                    'fail_url' => $return_url.'?pay_status=fail&jump_url='.$jump_url,
+//                ];
+///*                $response = [
+//                    'success_url' => $jump_url,
+//                    'fail_url' => $return_url.'?pay_status=fail&jump_url='.$jump_url,
+//                ];*/
+//                $this->assign('payInfo',json_encode($response));
+//            }
+//            return $this->fetch();
+//        }
+//    }
 
     /**
      * @return mixed // 确定支付页
@@ -349,12 +348,6 @@ class Payment extends \common\controller\Base {
     public function wxPayNotifyCallBack(){
         $wxPay = new \common\component\payment\weixin\weixinpay;
         $data  = $wxPay->wxNotify();
-//        $data = [
-//            'attach'=>"{'system_id':3 }",
-//            'out_trade_no'=>"20190508133552360792209865014610",
-//            'total_fee'=>1,
-//            'transaction_id'=>'1004400740201409030005092168',
-//        ];
         if($data){
             $attach = json_decode($data['attach'],true);
             $systemId = $attach['system_id'];
@@ -388,13 +381,22 @@ class Payment extends \common\controller\Base {
             $result = $payModel->isUpdate(true)->save($data1,$condition);
             if($result === false){
                 $payModel ->rollback();
-                $info['mysql_error'] = $payModel->getError();
-                return $this->writeLog("支付订单更新失败",$info);
+                $payInfo['mysql_error'] = $payModel->getError();
+                return $this->writeLog("支付订单更新失败",$payInfo);
             }
+            echo $result;
+            //组装 回调的数据
+            $info = [
+                'sn' => $data['out_trade_no'],
+                'user_id' => $payInfo['user_id'],
+                'pay_code' => $payInfo['pay_code'],
+                'pay_sn' => $data['transaction_id'],
+                'actually_amount' => $data['total_fee']/100,
+            ];
             if($payInfo['type'] == 1){
-                $this->setOrderPayStatus($payInfo,$systemId);
+                $this->setOrderPayStatus($info,$systemId);
             }elseif($payInfo['type'] == 2){
-                $this->setRechargePayStatus($payInfo,$systemId);
+                $this->setRechargePayStatus($info,$systemId);
             }elseif($payInfo['type'] == 3){
                 $this->setFranchisePayStatus($payInfo,$systemId);
             }
@@ -424,16 +426,18 @@ class Payment extends \common\controller\Base {
 
         //此订单回调已处理过
         if($orderInfo['order_status']>=2){
+            $modelOrder->commit();
             echo 'SUCCESS';
             die;
         }
-        if($orderInfo['amount']!=$info['actually_amount']){
+        if($orderInfo['actually_amount']!=$info['actually_amount']){
             return $this->writeLog("订单支付回调的金额和订单的金额不符",$info);
         }
         $data = [
             'order_status'=>2,                              // 订单状态
             'payment_time'=>time(),
             'pay_sn'=>$info['pay_sn'],                      // 支付单号 退款用
+            'pay_code'=>$info['pay_code'],                      // 支付单号 退款用
         ];
         $condition = [
             'where' => [
@@ -448,6 +452,7 @@ class Payment extends \common\controller\Base {
             $info['mysql_error'] = $modelOrder->getError();
             return $this->writeLog("订单支付更新失败",$info);
         }
+        $modelOrder->commit();
         echo 'SUCCESS';
     }
 
@@ -460,13 +465,12 @@ class Payment extends \common\controller\Base {
         $modelWalletDetail= new \app\index\model\WalletDetail();
         $modelWalletDetail ->setConnection(config('custom.system_id')[$systemId]['db']);
         $modelWallet = new \app\index\model\Wallet();
-        $modelWallet ->setConnection(config('custom.system_id')[$info['system_id']]['db']);
+        $modelWallet ->setConnection(config('custom.system_id')[$systemId]['db']);
         $condition = [
             'where' => [
                 ['status', '=', 0],
                 ['sn', '=', $info['sn']],
-                //['recharge_status', '=', 1],
-                ['recharge_status', '=', 0],
+                ['recharge_status', '=', 1],
             ],'field' => [
                 'id', 'sn', 'amount','pay_code','type','actually_amount','recharge_status',
                 'user_id',
@@ -478,28 +482,28 @@ class Payment extends \common\controller\Base {
         }
         //此订单回调已处理过
         if($walletDetailInfo['recharge_status']>=2){
+            $modelWalletDetail->commit();
             echo 'SUCCESS';
             die;
         }
         if($walletDetailInfo['amount']!=$info['actually_amount']){
             return $this->writeLog("订单支付回调的金额和订单的金额不符",$info);
         }
-        $modelWalletDetail ->startTrans();
         $data = [
             'recharge_status'=>2,                           // 订单状态
             'payment_time'=>time(),
             'pay_sn'=>$info['pay_sn'],                      // 支付单号 退款用
+            'pay_code'=>$info['pay_code'],                      // 支付方式
         ];
         $condition = [
             'where' => [
                 ['status', '=', 0],
                 ['sn', '=', $info['sn']],
-                ['recharge_status', '=', 0],
-                //['recharge_status', '=', 1],
+                ['recharge_status', '=', 1],
             ]
         ];
         $result = $modelWalletDetail -> allowField(true) -> save($data,$condition);
-        if(!$result){
+        if($result === false){
             $modelWalletDetail ->rollback();
             $info['mysql_error'] = $modelWalletDetail->getError();
             return $this->writeLog('充值订单支付更新失败',$info);
@@ -508,17 +512,16 @@ class Payment extends \common\controller\Base {
         $where = [
             ['user_id', '=', $walletDetailInfo['user_id']],
         ];
-        $res = $modelWallet->where($where)->setInc('amount', $walletDetailInfo['amount']);
-        if($res === false){
+        $result = $modelWallet->where($where)->setInc('amount', $walletDetailInfo['amount']);
+
+        if($result === false){
             $modelWallet->rollback();
             $info['mysql_error'] = $modelWallet->getError();
             //返回状态给微信服务器
             return $this->writeLog('充值订单支付更新失败',$info);
         }
-        $modelWalletDetail->commit();//提交事务
-
+        $modelWallet->commit();//提交事务
         echo 'SUCCESS';
-
     }
 
     /**
@@ -540,7 +543,7 @@ class Payment extends \common\controller\Base {
             ],
         ];
         $result = $modelFranchise -> allowField(true) -> save($data,$condition);
-        if(!$result){
+        if($result === false){
             $modelFranchise ->rollback();
             $info['mysql_error'] = $modelFranchise->getError();
             return $this->writeLog("订单支付更新失败",$info);

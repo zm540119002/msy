@@ -1,21 +1,25 @@
 <style>
     .product-select{
-        border-bottom:5px solid #F2F2F2;
+        border-bottom:none;
         padding:0.12rem;
         margin:0.12rem;
         background-color: #ffffff;
     }
     .product-select	div.left{
         width:40%;
-    }.product-select div.middle{
-         width:20%;
-     }.product-select div.right{
-          width:40%;
-      }.product-select div.right div:last-child{
-           height: 20%;
-       }.product-select div.middle div{
-            height: 50%;
-        }
+    }
+    .product-select div.middle{
+        width:20%;
+    }
+    .product-select div.right{
+        width:40%;
+    }
+    .product-select div.right div:last-child{
+        height:20%;
+    }
+    .product-select div.middle div{
+        height:50%;
+    }
     .product-select	img.left{
         width:100%;
     }
@@ -117,6 +121,8 @@
             },created: function(){
                 this.subtotal_amount_calculate();
                 let param = {
+                    product_id:this.product_id,
+                    buy_quantity:this.buy_quantity,
                     subtotal_amount:this.subtotal_amount
                 };
                 //触发-产品选择器初始化-事件
@@ -163,14 +169,15 @@
                     <span class="cart_num"></span>
                 </div>
                 <!-- 加入购物车 -->
-                <div v-else-if="menu.class.indexOf('add_cart')!==-1" @click="addCart" ref="addCart">
+                <div v-else-if="menu.class.indexOf('add_cart')!==-1" ref="addCart" @click="addCart">
                     <span class="s_i"></span>
                 </div>
                 <!-- 立即购买 -->
-                <div v-else-if="menu.class.indexOf('buy_now')!==-1"  @click="buyNow">
+                <div v-else-if="menu.class.indexOf('buy_now')!==-1" @click="buyNow">
                     <span class="s_i"></span>
-                </div><!-- 立即购买 -->
-                <div v-else-if="menu.class.indexOf('confirm_order')!==-1"  @click="addCart">
+                </div>
+                <!-- 提交订单 -->
+                <div v-else-if="menu.class.indexOf('confirm_order')!==-1" @click="confirmOrder">
                     <span class="s_i"></span>
                 </div>
                 <!-- 默认 -->
@@ -207,8 +214,6 @@
                     },total_amount_calculate:function (param) {
                         this.total_amount += param.deal_price * param.increment_buy_quantity;
                     },addCart:function(){
-                        console.log('addCart');
-                        return false;
                         let _this = this;
                         let jump_url = $(this.$refs.addCart).parent().data('jump_url');
                         $.ajax({
@@ -267,6 +272,7 @@
                     //监听-产品选择器初始化-事件
                     bus.$on('product_select_init', function(param){
                         _this.total_amount_init(param);
+                        _this.editProductList(param);
                     });
                     //监听-产品改变-事件
                     bus.$on('buy_quantity_change', function(param){
