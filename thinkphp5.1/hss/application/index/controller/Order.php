@@ -208,7 +208,7 @@ class Order extends \common\controller\UserBase
         $condition = [
             'where' => [
                 ['user_id','=',$this->user['id']],
-                ['sn','=',$postData['sn']],
+                ['sn','=',$orderInfo['sn']],
                 ['pay_status','=',1],
                 ['type','=',config('custom.pay_type')['orderPay']['code']]
             ], 'field'=>[
