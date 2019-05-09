@@ -1,6 +1,4 @@
 $(function(){
-
-    alert(3333);
     tab_down('.apply-data-nav .switch-item','.apply-module','click');
     var area_address,
         applicantData={};
