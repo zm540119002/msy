@@ -531,7 +531,8 @@ class Payment extends \common\controller\Base {
             //返回状态给微信服务器
             return $this->writeLog('充值订单支付更新失败',$info);
         }
-        $modelWalletDetail->commit();//提交事务
+        $modelWallet->commit();//提交事务
+        echo 12;
         echo 'SUCCESS';
     }
 
