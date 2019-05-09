@@ -360,7 +360,6 @@ class Payment extends \common\controller\Base {
             //$systemId = $attach['system_id'];
             $systemId = 3;
             $payInfo = $this->getPayInfo($systemId,$data['out_trade_no']);
-            print_r($payInfo);exit;
             if(empty($payInfo)){
                 return $this->writeLog("数据库没有此订单",$payInfo);
             }
@@ -372,6 +371,7 @@ class Payment extends \common\controller\Base {
             if($data['total_fee']/100!=$payInfo['actually_amount']){
                 return $this->writeLog("订单支付回调的金额和订单的金额不符",$payInfo);
             }
+            print_r(11);exit;
             $payModel = new \app\index\model\Pay();
             $payModel ->setConnection(config('custom.system_id')[$systemId]['db']);
             $data1 = [
