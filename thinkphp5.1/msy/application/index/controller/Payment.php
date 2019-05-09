@@ -353,7 +353,7 @@ class Payment extends \common\controller\Base {
             'attach'=>"{'system_id':3 }",
             'out_trade_no'=>"20190509134338359427051430427496",
             'total_fee'=>1,
-            'transaction_id'=>'10044007402014090300050927858',
+            'transaction_id'=>'5448756646446',
         ];
         if($data){
             //$attach = json_decode($data['attach'],true);
