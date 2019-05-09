@@ -7,7 +7,7 @@
             <table id=table18 class="add_new_merchandise" border=0 cellspacing=1 width="100%" height=57>
                 <tbody>
                 <tr>
-                    <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>项目名称：</td>
+                    <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>名称：</td>
                     <td class=dotted_bottom_gray width="89%" align=left>
                         <div class= width="89%" align=left>
                             <textarea class="project_description" name="name" >{$info.name}</textarea>
@@ -21,13 +21,13 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class=dotted_bottom_gray height=40 width="11%" align=right>标题：</td>
+                    <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>标题：</td>
                     <td class=dotted_bottom_gray width="89%" align=left>
                         <input style="width: 300px; " class="inputboxadmin" name="title" value="{$info.title}">
                     </td>
                 </tr>
                 <tr>
-                    <td class=dotted_bottom_gray height=40 width="11%" align=right>项目简介：</td>
+                    <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>介绍：</td>
                     <td class=dotted_bottom_gray width="89%" align=left>
                         <script id="intro" type="text/plain">
 
@@ -72,7 +72,7 @@
                         </td>
                     </tr>-->
                 <tr>
-                    <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>项目主图:</td>
+                    <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>主图:</td>
                     <td class=dotted_bottom_gray width="89%" align=left>
                         <!--<p> 加载编辑器的容器 </p>-->
                         <script id="main_img" type="text/plain">
@@ -82,7 +82,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>项目介绍:</td>
+                    <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>详情:</td>
                     <td class=dotted_bottom_gray width="89%" align=left>
                         <!-- 加载编辑器的容器 -->
                         <script id="detail_img" type="text/plain">
@@ -92,7 +92,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class=dotted_bottom_gray height=40 width="11%" align=right>项目操作视频：</td>
+                    <td class=dotted_bottom_gray height=40 width="11%" align=right>操作视频：</td>
                     <td class=dotted_bottom_gray width="89%" align=left>
                         <div class= width="89%" align=left>
                             <p class="f20 picture-tipc-box"><span class="c-red">*</span> 仅支持大小在10M内，mp4、rmvb、avi、ts格式的视频</p>
@@ -147,7 +147,7 @@
         autoFloatEnabled: true,
         initialFrameWidth: '100%'
     });
-    UE.getEditor('detail_img', {
+    var detail_img = UE.getEditor('detail_img', {
         toolbars: [
             ['imagenone', 'imageleft', 'imageright', 'imagecenter', 'simpleupload', 'insertimage']
         ],
@@ -201,6 +201,9 @@
         main_img.ready(function() {
             main_img.setContent($('#mainImg').val());
         });
+        detail_img.ready(function() {
+            detail_img.setContent($('#detailImg').val());
+        });
         // 简介
         intro.ready(function() {
             intro.setContent("{$info['intro']|raw}");
@@ -215,18 +218,27 @@
                 postData.main_img += $(this).attr('src') + ',';
 
             });
+            postData.detail_img = '';
+            $.each($('#detail_img').find('iframe').contents().find('.view img'),function(){
+                postData.detail_img += $(this).attr('src') + ',';
+
+            });
 
             postData.intro = intro.getContent();
 
             var content='';
             if(!postData.name){
-                content='项目名称不能为空';
+                content='名称不能为空';
+            }else if(!postData.title){
+                content='标题不能为空';
+            }else if(!postData.intro){
+                content='介绍不能为空';
             }else if(!postData.thumb_img){
                 content='缩略图不能为空';
             }else if(!postData.main_img){
-                content='项目主图不能为空';
-            } else if(!postData.detail_img){
-                content='项目介绍不能为空';
+                content='主图不能为空';
+            }else if(!postData.detail_img){
+                content='详情不能为空';
             }/*else if(!postData.video){
              content='项目视频不能为空';
              }*/

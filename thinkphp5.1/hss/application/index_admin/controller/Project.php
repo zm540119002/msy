@@ -44,8 +44,15 @@ class Project extends Base {
             if(  isset($_POST['main_img']) && $_POST['main_img'] ){
                 $_POST['main_img'] = moveImgFromTemp(config('upload_dir.project'),$_POST['main_img']);
             }
-            if(  isset($_POST['detail_img']) && $_POST['detail_img'] ){
-                $_POST['detail_img'] = moveImgFromTemp(config('upload_dir.project'),$_POST['detail_img']);
+            if( isset($_POST['detail_img']) && $_POST['detail_img'] ){
+                $detailArr = explode(',',input('post.detail_img','','string'));
+                $tempArr = array();
+                foreach ($detailArr as $item) {
+                    if($item){
+                        $tempArr[] = moveImgFromTemp(config('upload_dir.project'),$item);
+                    }
+                }
+                $_POST['detail_img'] = implode(',',$tempArr);
             }
 
             if( isset($_POST['video']) && $_POST['video'] ){
@@ -55,7 +62,8 @@ class Project extends Base {
             $data = $_POST;
             $data['update_time'] = time();
             $data['audit'] = 1; // 暂时没有审核，先固定
-
+            p($data);
+            exit;
             if(isset($_POST['id']) && $id=input('post.id/d')){//修改
                 // 编辑
                 $condition = ['where' => ['id' => $id,]];
