@@ -150,12 +150,12 @@
             <a href="javascript:void(0);" v-for="menu in menus" :data-jump_url="menu.action" :class="menu.class">
                 {{menu.name}}
                 <!-- 全选 -->
-                <div v-if="menu.class.indexOf('checked_all')!==-1" @click="addCart">
+                <div v-if="menu.class.indexOf('checked_all')!==-1">
                     <input type="checkbox" class="check-all">
                     <label for="" class="left">全选</label>
                 </div>
                 <!-- 总金额 -->
-                <div v-else-if="menu.class.indexOf('amount')!==-1">
+                <div v-else-if="menu.class.indexOf('amount')!==-1" @click="addCart">
                     <span class="total_amount">￥{{ parseFloat(total_amount).toFixed(2) }}</span>
                 </div>
                 <!-- 购物篮 -->
