@@ -347,18 +347,11 @@ class Payment extends \common\controller\Base {
      * wxPayNotifyCallBack
      * */
     public function wxPayNotifyCallBack(){
-//        $wxPay = new \common\component\payment\weixin\weixinpay;
-//        $data  = $wxPay->wxNotify();
-        $data = [
-            'attach'=>"{'system_id':3 }",
-            'out_trade_no'=>"20190509144120853424980986521178",
-            'total_fee'=>1,
-            'transaction_id'=>'5448756646446',
-        ];
+        $wxPay = new \common\component\payment\weixin\weixinpay;
+        $data  = $wxPay->wxNotify();
         if($data){
-            //$attach = json_decode($data['attach'],true);
-            //$systemId = $attach['system_id'];
-            $systemId = 3;
+            $attach = json_decode($data['attach'],true);
+            $systemId = $attach['system_id'];
             $payInfo = $this->getPayInfo($systemId,$data['out_trade_no']);
             if(empty($payInfo)){
                 return $this->writeLog("数据库没有此订单",$payInfo);
