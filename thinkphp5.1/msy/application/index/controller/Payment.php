@@ -371,7 +371,6 @@ class Payment extends \common\controller\Base {
             if($data['total_fee']/100!=$payInfo['actually_amount']){
                 return $this->writeLog("订单支付回调的金额和订单的金额不符",$payInfo);
             }
-            print_r(11);exit;
             $payModel = new \app\index\model\Pay();
             $payModel ->setConnection(config('custom.system_id')[$systemId]['db']);
             $data1 = [
@@ -388,6 +387,7 @@ class Payment extends \common\controller\Base {
             ];
             $payModel ->startTrans();
             $result = $payModel->isUpdate(true)->save($data1,$condition);
+            echo $payModel->getLastSql();exit;
             if($result === false){
                 $payModel ->rollback();
                 $payInfo['mysql_error'] = $payModel->getError();
