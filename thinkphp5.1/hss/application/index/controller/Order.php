@@ -232,7 +232,7 @@ class Order extends \common\controller\UserBase
 
         }else{
             //修改
-            return 123;
+
             $updateData = [
                 'actually_amount' =>$orderInfo['actually_amount'],
                 'pay_code' => $postData['pay_code'],
@@ -242,6 +242,7 @@ class Order extends \common\controller\UserBase
                 'user_id' => $this->user['id'],
             ];
             $result  = $modelPay->isUpdate(true)->save($updateData,$where);
+            return $modelPay->getLastSql();
             if($result === false){
                 $modelPay ->rollback();
                 return errorMsg('失败');
