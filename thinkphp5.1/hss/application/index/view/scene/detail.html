@@ -102,6 +102,9 @@
 		relation:'{$relation}'
 	};
 	$(function(){
+		//初始化场景商品页面
+		postData.id = '{$info.id}';
+		getJsonList(config,postData);
 		let param = {
 		};
 		new Vue({
@@ -114,9 +117,6 @@
 				}
 			}
 		});
-		//初始化场景商品页面
-		postData.id = '{$info.id}';
-		getJsonList(config,postData);
 	});
 	$(function(){
 		var id = '{$info.id}';
