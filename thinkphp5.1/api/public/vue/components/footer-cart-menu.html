@@ -203,7 +203,9 @@
             Vue.component('footer-cart-menu', {
                 template:'#footer-cart-menu_tpl',
                 props: {
-                    add_cart_call_back: {type: Function,default: function(param){
+                    async_verify_judge_call_back: {type: Function,default: function(param){
+                        console.log(param);
+                    }},add_cart_call_back: {type: Function,default: function(param){
                         console.log(param);
                     }}
                 },
