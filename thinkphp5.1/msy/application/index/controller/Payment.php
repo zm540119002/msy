@@ -392,6 +392,7 @@ class Payment extends \common\controller\Base {
                 $payInfo['mysql_error'] = $payModel->getError();
                 return $this->writeLog("支付订单更新失败",$payInfo);
             }
+            echo $result;
             //组装 回调的数据
             $info = [
                 'sn' => $data['out_trade_no'],
@@ -496,7 +497,6 @@ class Payment extends \common\controller\Base {
         if($walletDetailInfo['amount']!=$info['actually_amount']){
             return $this->writeLog("订单支付回调的金额和订单的金额不符",$info);
         }
-        $modelWalletDetail ->startTrans();
         $data = [
             'recharge_status'=>2,                           // 订单状态
             'payment_time'=>time(),
