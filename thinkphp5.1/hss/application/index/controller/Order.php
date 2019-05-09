@@ -203,13 +203,12 @@ class Order extends \common\controller\UserBase
             ]
         ];
         $orderInfo  = $modelOrder->getInfo($condition);
-        return $orderInfo;
         //先查找支付表是否有数据
         $modelPay = new \app\index\model\Pay();
         $condition = [
             'where' => [
                 ['user_id','=',$this->user['id']],
-                ['sn','=',$postData['sn']],
+                ['sn','=',$orderInfo['sn']],
                 ['pay_status','=',1],
                 ['type','=',config('custom.pay_type')['orderPay']['code']]
             ], 'field'=>[
@@ -230,18 +229,10 @@ class Order extends \common\controller\UserBase
             if(!$result){
                 return errorMsg('失败');
             }
-            // 各支付方式的处理方式 //做到这里
-            switch($data['pay_code']){
-                // 支付中心处理
-                case config('custom.pay_code.WeChatPay.code') :
-                case config('custom.pay_code.Alipay.code') :
-                case config('custom.pay_code.UnionPay.code') :
-                    $url = config('custom.pay_gateway').$orderInfo['sn'];
-                    break;
-            }
-            return successMsg( '成功',['url'=>$url]);
+
         }else{
             //修改
+
             $updateData = [
                 'actually_amount' =>$orderInfo['actually_amount'],
                 'pay_code' => $postData['pay_code'],
@@ -251,12 +242,22 @@ class Order extends \common\controller\UserBase
                 'user_id' => $this->user['id'],
             ];
             $result  = $modelPay->isUpdate(true)->save($updateData,$where);
+            return $modelPay->getLastSql();
             if($result === false){
                 $modelPay ->rollback();
                 return errorMsg('失败');
             }
         }
-
+        // 各支付方式的处理方式 //做到这里
+        switch($data['pay_code']){
+            // 支付中心处理
+            case config('custom.pay_code.WeChatPay.code') :
+            case config('custom.pay_code.Alipay.code') :
+            case config('custom.pay_code.UnionPay.code') :
+                $url = config('custom.pay_gateway').$orderInfo['sn'];
+                break;
+        }
+        return successMsg( '成功',['url'=>$url]);
 
     }
 
