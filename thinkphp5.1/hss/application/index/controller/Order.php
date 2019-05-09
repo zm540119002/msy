@@ -133,17 +133,6 @@ class Order extends \common\controller\UserBase
             }
 
             $modelOrder -> commit();
-//            $orderSn = input('post.order_sn','','string');
-//
-//            // 各支付方式的处理方式 //做到这里
-//            switch($data['pay_code']){
-//                // 支付中心处理
-//                case config('custom.pay_code.WeChatPay.code') :
-//                case config('custom.pay_code.Alipay.code') :
-//                case config('custom.pay_code.UnionPay.code') :
-//                    $url = config('custom.pay_gateway').$orderSn;
-//                    break;
-//            }
             return successMsg( '成功');
 
         }else{
