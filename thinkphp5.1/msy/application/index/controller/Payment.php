@@ -485,7 +485,6 @@ class Payment extends \common\controller\Base {
             ],
         ];
         $walletDetailInfo = $modelWalletDetail->getInfo($condition);
-        print_r($walletDetailInfo);exit;
         if(empty($walletDetailInfo)){
             return $this->writeLog("数据库没有此订单",$info);
         }
