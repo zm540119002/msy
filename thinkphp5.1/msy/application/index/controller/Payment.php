@@ -398,6 +398,7 @@ class Payment extends \common\controller\Base {
                 'user_id' => $payInfo['user_id'],
                 'pay_code' => $payInfo['pay_code'],
                 'pay_sn' => $data['transaction_id'],
+                'actually_amount' => $data['total_fee']/100,
             ];
             if($payInfo['type'] == 1){
                 $this->setOrderPayStatus($info,$systemId);
@@ -436,7 +437,7 @@ class Payment extends \common\controller\Base {
             echo 'SUCCESS';
             die;
         }
-        if($orderInfo['amount']!=$info['actually_amount']){
+        if($orderInfo['actually_amount']!=$info['actually_amount']){
             return $this->writeLog("订单支付回调的金额和订单的金额不符",$info);
         }
         $data = [
