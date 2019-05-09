@@ -196,13 +196,14 @@ class Order extends \common\controller\UserBase
         $condition = [
             'where' => [
                 ['user_id','=',$this->user['id']],
-                ['sn','=',$postData['sn']],
-                ['order_status','=',0],
+                ['sn','=',$postData['order_sn']],
+                ['order_status','<',2],
             ], 'field'=>[
                 'id','sn','actually_amount'
             ]
         ];
         $orderInfo  = $modelOrder->getInfo($condition);
+        return $orderInfo;
         //先查找支付表是否有数据
         $modelPay = new \app\index\model\Pay();
         $condition = [
