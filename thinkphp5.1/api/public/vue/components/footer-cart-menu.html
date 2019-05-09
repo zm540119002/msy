@@ -130,8 +130,7 @@
                         console.log(newVal);
                         console.log(oldVal);
                         this.subtotal_amount_calculate();
-                        if(oldVal !== 'undefined'){
-                            console.log(oldVal);
+                        if(typeof(oldVal) !== "undefined"){
                             let param = {
                                 product_id:this.product_id,
                                 buy_quantity:this.buy_quantity,
