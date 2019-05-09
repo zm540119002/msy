@@ -36,7 +36,7 @@
         </div>
         <div class="columns_flex l-r-sides">
             <div  v-if="display_pic" class="left">
-                <a class="p_img" href="/index/Goods/detail/id/{{product_id}}.html">
+                <a class="p_img" :href="product_id">
                     <img class="left" src="public_uploads/thumb_img" alt="">
                 </a>
             </div>
