@@ -174,7 +174,7 @@ class Order extends \common\controller\UserBase
 
     }
 
-    // 去支付
+    // 去结算
     public function toPay()
     {
         if (!request()->isPost()) {

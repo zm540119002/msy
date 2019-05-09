@@ -28,9 +28,9 @@ class Order extends \common\controller\Base
                     ['status', '=', 0],
                     ['order_status', '=', 2],
                     ['pay_sn', '<>', ''],
-                    ['payment_code', '=', 1],
+                    ['pay_code', '=', 1],
                 ],'field' => [
-                    'id', 'pay_sn','sn', 'amount','actually_amount','payment_code',
+                    'id', 'pay_sn','sn', 'amount','actually_amount','pay_code',
                     'user_id',
                 ],
             ];
@@ -40,9 +40,9 @@ class Order extends \common\controller\Base
                 'where' => [
                     ['status', '=', 0],
                     ['pay_sn', '<>', ''],
-                    ['payment_code', '=', 1],
+                    ['pay_code', '=', 1],
                 ],'field' => [
-                    'id', 'pay_sn','sn', 'amount','actually_amount','payment_code',
+                    'id', 'pay_sn','sn', 'amount','actually_amount','pay_code',
                     'user_id',
                 ],
             ];
@@ -53,7 +53,7 @@ class Order extends \common\controller\Base
 
         foreach($data as $k => $orderInfo){
             // 各方式退款
-            switch($orderInfo['payment_code']){
+            switch($orderInfo['pay_code']){
                 case 1 : // 微信支付
                     $wxPay = new \common\component\payment\weixin\weixinpay;
                     if(!$result = $wxPay->refundOrder($orderInfo)){
@@ -80,7 +80,7 @@ class Order extends \common\controller\Base
                 ['o.status', '=', 0],
                 ['o.sn', '=', $orderSn],
             ],'field' => [
-                'o.id', 'o.pay_sn','o.sn', 'o.amount','o.actually_amount','payment_code',
+                'o.id', 'o.pay_sn','o.sn', 'o.amount','o.actually_amount','pay_code',
                 'o.user_id',
             ],
         ];

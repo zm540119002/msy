@@ -45,8 +45,8 @@ class Franchise extends \think\Validate
         'area.max' => '提交地区数据不符！',
         'detail_address.require' => '详情地址必须！',
         'detail_address.max' => '详情地址过长！',
-        'payment_code.require' => '支付方式必须！',
-        'payment_code.max' => '提交支付方式不符！',
+        'pay_code.require' => '支付方式必须！',
+        'pay_code.max' => '提交支付方式不符！',
     ];
 
     //验证场景
@@ -59,7 +59,7 @@ class Franchise extends \think\Validate
             'city',
             'area',
             'detail_address',
-            'payment_code',
+            'pay_code',
         ],
     ];
 }
