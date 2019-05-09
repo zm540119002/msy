@@ -6333,3 +6333,19 @@ div.no_data{
     padding:0 0.25rem;
     margin-bottom:0;
 }
+.top_ul a{
+    position:relative;
+    color:#EC77A3;
+}
+.top_ul .current a::after{
+    border-bottom: 1px solid #EC77A3;
+    content: ' ';
+    display: block;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    -webkit-transform-origin: left bottom;
+    -webkit-transform: scaleY(0.5);
+    transform: scaleY(0.5)
+}
