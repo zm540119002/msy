@@ -6341,11 +6341,12 @@ div.no_data{
     border-bottom: 1px solid #EC77A3;
     content: ' ';
     display: block;
-    width: 40%;
+    width:50%;
+    margin:0 0 0 -25%;
     position: absolute;
-    left: 0;
-    bottom: 0;
+    left:50%;
+    bottom:-0.05rem;
     -webkit-transform-origin: left bottom;
-    -webkit-transform: scaleY(0.5);
-    transform: scaleY(0.5)
+    -webkit-transform: scaleY(0.8);
+    transform: scaleY(0.8)
 }
