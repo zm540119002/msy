@@ -5046,7 +5046,7 @@ ul.message_list{
 }
 .wy_list li .p_img{
     display:block;
-    width:45%;
+    width:auto;
 }
 .wy_list .list li img{
     width:100%;
