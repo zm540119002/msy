@@ -6350,3 +6350,6 @@ div.no_data{
     -webkit-transform: scaleY(0.8);
     transform: scaleY(0.8)
 }
+.maker_qualifications{
+    color:#0066cc;
+}
