@@ -89,6 +89,18 @@
 			}
 		});
 	}
+	// 获取该场景下的商品
+	var config = {
+		url:module+'Goods/getRelationGoods',
+		requestEnd:false,
+		loadTrigger:false,
+		currentPage:1,
+		callBack:getJsonCallBack
+	};
+	var postData = {
+		pageSize:10,
+		relation:'{$relation}'
+	};
 	$(function(){
 		let param = {
 		};
@@ -102,6 +114,11 @@
 				}
 			}
 		});
+		//初始化场景商品页面
+		postData.id = '{$info.id}';
+		getJsonList(config,postData);
+	});
+	$(function(){
 		var id = '{$info.id}';
 		var date=getWeek();
 		countDown(date,$('#countDownBox'));
@@ -118,23 +135,6 @@
 				clickable: true
 			}
 		});
-	});
-	// 获取该场景下的商品
-	var config = {
-		url:module+'Goods/getRelationGoods',
-		requestEnd:false,
-		loadTrigger:false,
-		currentPage:1,
-		callBack:getJsonCallBack
-	};
-	var postData = {
-		pageSize:10,
-		relation:'{$relation}'
-	};
-	$(function(){
-		//初始化场景商品页面
-		postData.id = '{$info.id}';
-		getJsonList(config,postData);
 	});
 </script>
 {/block}

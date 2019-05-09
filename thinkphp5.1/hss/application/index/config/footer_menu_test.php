@@ -23,7 +23,7 @@ return [
                 'amount',
             ],
         ],[//1
-            'name'   => '加入购物车',
+            'name'   => '加入购物车1',
             'class'=>[
                 'bottom_item',
                 'add_cart',
