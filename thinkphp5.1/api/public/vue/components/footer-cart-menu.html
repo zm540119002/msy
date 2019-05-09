@@ -127,15 +127,20 @@
             },watch: {
                 buy_quantity: {
                     handler(newVal, oldVal) {
+                        console.log(newVal);
+                        console.log(oldVal);
                         this.subtotal_amount_calculate();
-                        let param = {
-                            product_id:this.product_id,
-                            buy_quantity:this.buy_quantity,
-                            increment_buy_quantity:(parseInt(newVal) - parseInt(oldVal?oldVal:0)),
-                            deal_price:this.deal_price
-                        };
-                        //触发-产品改变-事件
-                        bus.$emit('buy_quantity_change',param);
+                        if(oldVal !== 'undefined'){
+                            console.log(oldVal);
+                            let param = {
+                                product_id:this.product_id,
+                                buy_quantity:this.buy_quantity,
+                                increment_buy_quantity:(parseInt(newVal) - parseInt(oldVal?oldVal:0)),
+                                deal_price:this.deal_price
+                            };
+                            //触发-产品改变-事件
+                            bus.$emit('buy_quantity_change',param);
+                        }
                     },
                     deep: false,
                     immediate: true
@@ -202,11 +207,8 @@
                     }
                 },methods: {
                     total_amount_init:function (param) {
-                        console.log(param);
-                        console.log(this.total_amount);
                         this.total_amount += param.deal_price * param.buy_quantity;
                     },total_amount_calculate:function (param) {
-                        console.log(123);
                         this.total_amount += param.deal_price * param.increment_buy_quantity;
                     },addCart:function(){
                         let _this = this;
