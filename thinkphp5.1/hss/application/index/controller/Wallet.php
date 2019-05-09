@@ -93,7 +93,7 @@ class Wallet extends Base {
             'actually_amount' =>$amount,
             'user_id' => $this->user['id'],
             'pay_code' => $payCode,
-            'type' => config('custom.pay_type')['orderPay']['code'],
+            'type' => config('custom.pay_type')['rechargePay']['code'],
         ];
         $result  = $modelPay->isUpdate(false)->save($data);
         if(!$result){
@@ -118,7 +118,6 @@ class Wallet extends Base {
                 break;
         }
     }
-
     /**
      * 充值记录页
      */
