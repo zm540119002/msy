@@ -176,7 +176,7 @@
                     <span class="cart_num"></span>
                 </div>
                 <!-- 加入购物车 -->
-                <div v-else-if="menu.class.indexOf('add_cart')!==-1" ref="addCart" @click="addCart">
+                <div v-else-if="menu.class.indexOf('add_cart')!==-1" ref="addCart" @click="async_verify">
                     <span class="s_i"></span>
                 </div>
                 <!-- 立即购买 -->
@@ -222,6 +222,32 @@
                         this.total_amount += param.subtotal_amount;
                     },total_amount_calculate:function (param) {
                         this.total_amount += param.deal_price * param.increment_buy_quantity;
+                    },async_verify:function(){
+                        let _this = this;
+                        let jump_url = $(this.$refs.addCart).parent().data('jump_url');
+                        $.ajax({
+                            url: jump_url,
+                            data: {},
+                            type: 'post',
+                            beforeSend: function(xhr){
+                                $('.loading').show();
+                            },
+                            error:function(xhr){
+                                $('.loading').hide();
+                                dialog.error('AJAX错误');
+                            },
+                            success: function(data){
+                                $('.loading').hide();
+                                //异步验证判断
+                                let param = {
+                                    'jump_url':jump_url,
+                                    'postData':_this.postData
+                                };
+                                if(async_verify_judge(data)){
+                                    _this.async_verify_call_back(param);
+                                }
+                            }
+                        });
                     },addCart:function(){
                         let _this = this;
                         let jump_url = $(this.$refs.addCart).parent().data('jump_url');
