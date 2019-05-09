@@ -194,7 +194,6 @@ class Payment extends \common\controller\Base {
             $this->assign('system_id',$systemId);
             $sn = input('sn','','string');
             $info = $this->getPayInfo($systemId,$sn);
-            print_r($info);exit;
             if(empty($info) OR !$info['actually_amount']){
                 $this->error('订单不存在或金额不能为0 !');
             }
