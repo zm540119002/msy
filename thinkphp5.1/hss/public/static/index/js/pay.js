@@ -14,7 +14,7 @@ $(function () {
 
     // 弹出支付方式
     $('body').on('click','.confirm_order',function(){
-        alert(33333);
+        alert(44444);
         var postData = {};
         postData = addAddress(postData);
         postData.order_id = $('.order_id').val();
