@@ -242,14 +242,13 @@ class Order extends \common\controller\UserBase
                 'user_id' => $this->user['id'],
             ];
             $result  = $modelPay->isUpdate(true)->save($updateData,$where);
-            return $modelPay->getLastSql();
             if($result === false){
                 $modelPay ->rollback();
                 return errorMsg('失败');
             }
         }
         // 各支付方式的处理方式 //做到这里
-        switch($data['pay_code']){
+        switch($postData['pay_code']){
             // 支付中心处理
             case config('custom.pay_code.WeChatPay.code') :
             case config('custom.pay_code.Alipay.code') :
