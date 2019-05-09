@@ -207,6 +207,7 @@
                     },addCart:function(){
                         let _this = this;
                         let jump_url = $(this.$refs.addCart).parent().data('jump_url');
+                        console.log(jump_url);
                         $.ajax({
                             url: jump_url,
                             data: {},
