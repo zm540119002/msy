@@ -503,14 +503,13 @@ class Payment extends \common\controller\Base {
             'recharge_status'=>2,                           // 订单状态
             'payment_time'=>time(),
             'pay_sn'=>$info['pay_sn'],                      // 支付单号 退款用
-            'pay_code'=>$info['pay_code'],                      // 支付单号 退款用
+            'pay_code'=>$info['pay_code'],                      // 支付方式
         ];
         $condition = [
             'where' => [
                 ['status', '=', 0],
                 ['sn', '=', $info['sn']],
-                ['recharge_status', '=', 0],
-                //['recharge_status', '=', 1],
+                ['recharge_status', '=', 1],
             ]
         ];
         $result = $modelWalletDetail -> allowField(true) -> save($data,$condition);
