@@ -1,4 +1,5 @@
 $(function () {
+    alert(111111);
     //购物车.加减
     $('body').on('click','.gplus,.greduce',function(){
         replaceOneGoodsToCart($(this).parents('.item'));
