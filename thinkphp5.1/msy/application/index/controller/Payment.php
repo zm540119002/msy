@@ -360,7 +360,6 @@ class Payment extends \common\controller\Base {
             //$systemId = $attach['system_id'];
             $systemId = 3;
             $payInfo = $this->getPayInfo($systemId,$data['out_trade_no']);
-            print_r($payInfo).PHP_EOL;
             if(empty($payInfo)){
                 return $this->writeLog("数据库没有此订单",$payInfo);
             }
@@ -404,7 +403,6 @@ class Payment extends \common\controller\Base {
             if($payInfo['type'] == 1){
                 $this->setOrderPayStatus($info,$systemId);
             }elseif($payInfo['type'] == 2){
-                echo 123;
                 $this->setRechargePayStatus($info,$systemId);
             }elseif($payInfo['type'] == 3){
                 $this->setFranchisePayStatus($payInfo,$systemId);
@@ -488,6 +486,7 @@ class Payment extends \common\controller\Base {
             ],
         ];
         $walletDetailInfo = $modelWalletDetail->getInfo($condition);
+        print_r($walletDetailInfo);
         if(empty($walletDetailInfo)){
             return $this->writeLog("数据库没有此订单",$info);
         }
