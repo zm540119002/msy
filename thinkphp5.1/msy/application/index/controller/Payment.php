@@ -512,7 +512,6 @@ class Payment extends \common\controller\Base {
             ]
         ];
         $result = $modelWalletDetail -> allowField(true) -> save($data,$condition);
-        echo $modelWalletDetail->getLastSql();
         if(!$result){
             $modelWalletDetail ->rollback();
             $info['mysql_error'] = $modelWalletDetail->getError();
@@ -524,7 +523,6 @@ class Payment extends \common\controller\Base {
             ['user_id', '=', $walletDetailInfo['user_id']],
         ];
         $res = $modelWallet->where($where)->setInc('amount', $walletDetailInfo['amount']);
-        echo $modelWallet->getLastSql();exit;
         if($res === false){
             $modelWallet->rollback();
             $info['mysql_error'] = $modelWallet->getError();
