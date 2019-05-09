@@ -426,7 +426,6 @@ class Payment extends \common\controller\Base {
             ],
         ];
         $orderInfo = $modelOrder->getInfo($condition);
-        p($orderInfo);exit;
         if(empty($orderInfo)){
             return $this->writeLog("数据库没有此订单",$info);
         }
@@ -453,6 +452,7 @@ class Payment extends \common\controller\Base {
             ],
         ];
         $result = $modelOrder -> allowField(true) -> save($data,$condition);
+        echo  $modelOrder->getLastSql();exit;
         if(!$result){
             $modelOrder->rollback();
             $info['mysql_error'] = $modelOrder->getError();
