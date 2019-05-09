@@ -86,7 +86,47 @@
 				return param;
 			},methods: {
 				add_cart_call_back:function (param) {
-					console.log(param);
+
+		/*			console.log(param);
+					console.log(param.postData.productList);
+					return false;
+					var url = module + 'Cart/addCart';
+					var _this=postData._this;
+					var lis=postData.lis;*/
+/*					console.log(param);
+					console.log(param.postData);
+					return false;*/
+					var postData = [];
+					postData.goodsList = param.postData.productList;
+
+					console.log(postData);
+					return false;
+					$.ajax({
+						url: param.jump_url,
+						data: postData,
+						type: 'post',
+						beforeSend: function(){
+							$('.loading').show();
+						},
+						error:function(){
+							$('.loading').hide();
+							dialog.error('AJAX错误');
+						},
+						success: function(data){
+							if(data.status==0){
+								dialog.error(data.info);
+							}
+							else if(data.code==1 && data.data=='no_login'){
+								loginDialog();
+								loginBackFunction = addCart;
+								loginBackFunctionParameter = postData;
+								return false;
+							}
+							else{
+								dialog.success(data.info);
+							}
+						}
+					});
 				}
 			}
 		});
