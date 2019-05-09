@@ -65,7 +65,6 @@ class Payment extends \common\controller\Base {
                 $this -> error($msg);
             }
         }else{
-
             $systemId = input('system_id',0,'int');
             $this->assign('system_id',$systemId);
             //$paymentType 1:订单支付 2：充值支付
@@ -317,30 +316,7 @@ class Payment extends \common\controller\Base {
     public function payFail(){
         return $this->fetch();
     }
-    // 微信支付回调处理
-    /*
-     * 回调处理，修改信息，通知，记录日志
-     * wxPayNotifyCallBack
-     * */
-//    public function wxPayNotifyCallBack(){
-//        $wxPay = new \common\component\payment\weixin\weixinpay;
-//        $data  = $wxPay->wxNotify();
-//        if($data){
-//            $attach = json_decode($data['attach'],true);
-//            $order['system_id'] = $attach['system_id'];
-//            $order['payment_type'] = $attach['payment_type'];
-//            $order['sn'] = $data['out_trade_no'];
-//            $order['actually_amount'] = $data['total_fee']/100;
-//            $order['pay_code'] = 0;
-//            $order['pay_sn'] = $data['transaction_id'];
-//
-//            if($attach['payment_type'] == 1){
-//                $this->setOrderPayStatus($order);
-//            }elseif($attach['payment_type'] == 2){
-//                $this->setRechargePayStatus($order);
-//            }
-//        }
-//    }
+   
     // 微信支付回调处理
     /*
      * 回调处理，修改信息，通知，记录日志
