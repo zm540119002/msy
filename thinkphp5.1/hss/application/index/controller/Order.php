@@ -232,6 +232,7 @@ class Order extends \common\controller\UserBase
 
         }else{
             //修改
+            return 123;
             $updateData = [
                 'actually_amount' =>$orderInfo['actually_amount'],
                 'pay_code' => $postData['pay_code'],
