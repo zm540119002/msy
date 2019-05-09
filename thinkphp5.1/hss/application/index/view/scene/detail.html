@@ -47,7 +47,7 @@
 						:key="parseInt(productInfo.id)"
 						:product_id="parseInt(productInfo.id)"
 						:deal_price="parseFloat(productInfo.bulk_price)"
-						:product_name="productInfo.specification"
+						:product_name="productInfo.headline"
 						:buy_named="buy_named"
 						:init_quantity="parseInt(init_quantity)"
 						:step_quantity="parseInt(step_quantity)"
@@ -72,11 +72,8 @@
 {/block}
 {block name="script"}
 <script type="text/javascript" src="api_common_js/swiper.min.js"></script>
-<script type="text/javascript" src="index_js/footerCart.js"></script>
 <script type="text/javascript">
 	function getJsonCallBack(data){
-		console.log(data);
-		console.log(data.data);
 		param = {
 			'buy_named':'采购数量',
 			'display_quota':true,
@@ -92,6 +89,18 @@
 			}
 		});
 	}
+	// 获取该场景下的商品
+	var config = {
+		url:module+'Goods/getRelationGoods',
+		requestEnd:false,
+		loadTrigger:false,
+		currentPage:1,
+		callBack:getJsonCallBack
+	};
+	var postData = {
+		pageSize:10,
+		relation:'{$relation}'
+	};
 	$(function(){
 		let param = {
 		};
@@ -105,6 +114,11 @@
 				}
 			}
 		});
+		//初始化场景商品页面
+		postData.id = '{$info.id}';
+		getJsonList(config,postData);
+	});
+	$(function(){
 		var id = '{$info.id}';
 		var date=getWeek();
 		countDown(date,$('#countDownBox'));
@@ -121,23 +135,6 @@
 				clickable: true
 			}
 		});
-	});
-	// 获取该场景下的商品
-	var config = {
-		url:module+'Goods/getRelationGoods',
-		requestEnd:false,
-		loadTrigger:false,
-		currentPage:1,
-		callBack:getJsonCallBack
-	};
-	var postData = {
-		pageSize:10,
-		relation:'{$relation}'
-	};
-	$(function(){
-		//初始化场景商品页面
-		postData.id = '{$info.id}';
-		getJsonList(config,postData);
 	});
 </script>
 {/block}
