@@ -54,7 +54,7 @@
             </div>
             <div  class="right">
                 <div  v-if="display_pic" class="product_name">
-                    <p class="text-intro">{{product_name}}</p>
+                    <p class="text-intro">{{product_name}}{{productInfo.product_name}}</p>
                 </div>
                 <div class="quantity_wrapper selected-number">
                     <a href="javascript:void(0);" class="reduce" @click="reduce">-</a>
@@ -84,6 +84,7 @@
                 init_quantity: {type: Number,default: 0},
                 step_quantity: {type: Number,default: 1},
                 display_quota: {type: Boolean,default: false},
+                productInfo: {type: Array,default: []},
                 display_pic: {type: Boolean,default: true}
             },
             data: function () {
