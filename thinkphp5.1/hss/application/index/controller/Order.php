@@ -118,7 +118,6 @@ class Order extends \common\controller\UserBase
 
             $data = input('post.');
             $data['order_status'] = 1;
-            $data['pay_code'] = $data['pay_code'];
             $modelOrder ->startTrans();
             $res = $modelOrder -> allowField(true) -> save($data,$condition['where']);
 
