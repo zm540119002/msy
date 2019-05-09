@@ -69,7 +69,7 @@ class Wallet extends Base {
             'amount'=>$amount,
             'actually_amount'=>$amount, // 还没有其它的业务 暂时先用$amount
             'create_time'=>time(),
-            'payment_code'=>$payCode,
+            'pay_code'=>$payCode,
         ];
 
         // 线下汇款凭证
@@ -155,7 +155,7 @@ class Wallet extends Base {
                 ['user_id','=',$this->user['id']],
             ],
             'field'=>[
-                'id','sn','type','recharge_status','amount','payment_code','create_time','payment_time',
+                'id','sn','type','recharge_status','amount','pay_code','create_time','payment_time',
             ],
             'order'=>[
                 'create_time'=>'desc'
@@ -228,7 +228,7 @@ class Wallet extends Base {
             }
             // 更新订单信息
             $data = input('post.');
-            $data['payment_code'] = $data['pay_code'];
+            $data['pay_code'] = $data['pay_code'];
             $data['pay_sn'] = $orderInfo['pay_sn'];
             $data['payment_time'] = time();
             $data['order_sn'] = $orderInfo['sn'];
