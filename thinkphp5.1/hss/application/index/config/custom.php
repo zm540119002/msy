@@ -106,15 +106,15 @@ return [
     'pay_type' => [
         'orderPay' => [
             'code' => 1,
-            'name' => '微信支付',
+            'name' => '订单支付',
         ],
         'rechargePay' => [
             'code' => 2,
-            'name' => '支付宝',
+            'name' => '充值支付',
         ],
         'franchisePay' => [
             'code' => 3,
-            'name' => '银联支付',
+            'name' => '加盟支付',
         ],
     ],
 
