@@ -84,7 +84,9 @@
                 init_quantity: {type: Number,default: 0},
                 step_quantity: {type: Number,default: 1},
                 display_quota: {type: Boolean,default: false},
-                productInfo: {type: Array,default: []},
+                productInfo: {type: Array,default: function(){
+                    return [];
+                }},
                 display_pic: {type: Boolean,default: true}
             },
             data: function () {
