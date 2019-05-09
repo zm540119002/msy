@@ -34,8 +34,6 @@ class Project extends \common\controller\Base{
         $this->assign('list',$list);
 
         return $this->fetch('list_tpl');
-
-
     }
 
     /**
