@@ -469,6 +469,7 @@ class Payment extends \common\controller\Base {
      * @param $info 回调信息
      */
     public function setRechargePayStatus($info,$systemId){
+        echo 123;
         $modelWalletDetail= new \app\index\model\WalletDetail();
         $modelWalletDetail ->setConnection(config('custom.system_id')[$systemId]['db']);
         $modelWallet = new \app\index\model\Wallet();
