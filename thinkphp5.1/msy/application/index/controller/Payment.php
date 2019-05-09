@@ -349,15 +349,16 @@ class Payment extends \common\controller\Base {
     public function wxPayNotifyCallBack(){
         $wxPay = new \common\component\payment\weixin\weixinpay;
         $data  = $wxPay->wxNotify();
-//        $data = [
-//            'attach'=>"{'system_id':3 }",
-//            'out_trade_no'=>"20190508133552360792209865014610",
-//            'total_fee'=>1,
-//            'transaction_id'=>'1004400740201409030005092168',
-//        ];
+        $data = [
+            'attach'=>"{'system_id':3 }",
+            'out_trade_no'=>"20190509114513729739306544173310",
+            'total_fee'=>1,
+            'transaction_id'=>'1004400740201409030005092168',
+        ];
         if($data){
             $attach = json_decode($data['attach'],true);
             $systemId = $attach['system_id'];
+            $systemId = 3;
             $payInfo = $this->getPayInfo($systemId,$data['out_trade_no']);
             if(empty($payInfo)){
                 return $this->writeLog("数据库没有此订单",$payInfo);
@@ -388,13 +389,20 @@ class Payment extends \common\controller\Base {
             $result = $payModel->isUpdate(true)->save($data1,$condition);
             if($result === false){
                 $payModel ->rollback();
-                $info['mysql_error'] = $payModel->getError();
-                return $this->writeLog("支付订单更新失败",$info);
+                $payInfo['mysql_error'] = $payModel->getError();
+                return $this->writeLog("支付订单更新失败",$payInfo);
             }
+            //组装 回调的数据
+            $info = [
+                'sn' => $data['out_trade_no'],
+                'user_id' => $payInfo['user_id'],
+                'pay_code' => $payInfo['pay_code'],
+                'pay_sn' => $data['transaction_id'],
+            ];
             if($payInfo['type'] == 1){
-                $this->setOrderPayStatus($payInfo,$systemId);
+                $this->setOrderPayStatus($info,$systemId);
             }elseif($payInfo['type'] == 2){
-                $this->setRechargePayStatus($payInfo,$systemId);
+                $this->setRechargePayStatus($info,$systemId);
             }elseif($payInfo['type'] == 3){
                 $this->setFranchisePayStatus($payInfo,$systemId);
             }
@@ -424,6 +432,7 @@ class Payment extends \common\controller\Base {
 
         //此订单回调已处理过
         if($orderInfo['order_status']>=2){
+            $modelOrder->commit();
             echo 'SUCCESS';
             die;
         }
@@ -448,6 +457,7 @@ class Payment extends \common\controller\Base {
             $info['mysql_error'] = $modelOrder->getError();
             return $this->writeLog("订单支付更新失败",$info);
         }
+        $modelOrder->commit();
         echo 'SUCCESS';
     }
 
@@ -478,6 +488,7 @@ class Payment extends \common\controller\Base {
         }
         //此订单回调已处理过
         if($walletDetailInfo['recharge_status']>=2){
+            $modelWalletDetail->commit();
             echo 'SUCCESS';
             die;
         }
@@ -516,9 +527,7 @@ class Payment extends \common\controller\Base {
             return $this->writeLog('充值订单支付更新失败',$info);
         }
         $modelWalletDetail->commit();//提交事务
-
         echo 'SUCCESS';
-
     }
 
     /**
