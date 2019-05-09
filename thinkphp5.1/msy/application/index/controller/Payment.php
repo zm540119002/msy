@@ -512,19 +512,17 @@ class Payment extends \common\controller\Base {
             ]
         ];
         $result = $modelWalletDetail -> allowField(true) -> save($data,$condition);
-        echo $result.PHP_EOL;
-        if(!$result){
+        if($result === false){
             $modelWalletDetail ->rollback();
             $info['mysql_error'] = $modelWalletDetail->getError();
             return $this->writeLog('充值订单支付更新失败',$info);
         }
-
         //充值到钱包表
         $where = [
             ['user_id', '=', $walletDetailInfo['user_id']],
         ];
         $result = $modelWallet->where($where)->setInc('amount', $walletDetailInfo['amount']);
-        echo $result.PHP_EOL;
+
         if($result === false){
             $modelWallet->rollback();
             $info['mysql_error'] = $modelWallet->getError();
@@ -532,7 +530,6 @@ class Payment extends \common\controller\Base {
             return $this->writeLog('充值订单支付更新失败',$info);
         }
         $modelWallet->commit();//提交事务
-        echo 12;
         echo 'SUCCESS';
     }
 
