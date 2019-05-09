@@ -191,6 +191,7 @@ class Payment extends \common\controller\Base {
             }
         }else{
             $systemId = input('system_id',0,'int');
+            print_r($systemId);exit;
             $this->assign('system_id',$systemId);
             $sn = input('sn','','string');
             $info = $this->getPayInfo($systemId,$sn);
