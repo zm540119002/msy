@@ -202,10 +202,7 @@
                     }
                 },methods: {
                     total_amount_init:function (param) {
-                        console.log(param.deal_price);
-                        console.log(param.buy_quantity);
-                        console.log(this.total_amount);
-                        this.total_amount += param.subtotal_amount;
+                        this.total_amount += param.deal_price * param.buy_quantity;
                     },total_amount_calculate:function (param) {
                         this.total_amount += param.deal_price * param.increment_buy_quantity;
                     },addCart:function(){
