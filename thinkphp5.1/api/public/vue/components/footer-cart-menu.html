@@ -37,7 +37,7 @@
         <div class="columns_flex l-r-sides">
             <div  v-if="display_pic" class="left">
                 <a class="p_img" :href="'/index/Goods/detail/id/' + product_url">
-                    <img class="left" :src="thumb_img?'public_uploads/' + thumb_img:''" alt="">
+                    <img class="left" :src="thumb_img?('public_uploads/' + thumb_img):'('api_common_img/default/no_pic_100.jpg')' " alt="">
                 </a>
             </div>
             <div  v-else class="left">
