@@ -60,7 +60,7 @@ return [
     'pay_gateway' => 'https://msy.meishangyun.com/index/Payment/pay?system_id=3&sn=',
 //    'pay_gateway' => 'https://msy.meishangyun.com/index/Payment/toPay?system_id=3&payment_type=1&sn=',
    // 'pay_recharge'=> 'https://msy.meishangyun.com/index/Payment/toPay?system_id=3&payment_type=2&sn=',
-    'pay_recharge'=> 'https://msy.meishangyun.com/index/Payment/pay?systepm_id=3&sn=',
+    'pay_recharge'=> 'https://msy.meishangyun.com/index/Payment/pay?system_id=3&sn=',
     'pay_franchise'=>'https://msy.meishangyun.com/index/Payment/pay?system_id=3&sn=',
 
     // 支付方式 1 微信 2：支付宝 3：网银 4:钱包
