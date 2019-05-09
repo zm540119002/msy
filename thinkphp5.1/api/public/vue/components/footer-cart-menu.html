@@ -166,13 +166,6 @@
                 <div v-else-if="menu.class.indexOf('add_cart')!==-1" @click="addCart" ref="addCart">
                     <span class="s_i"></span>
                 </div>
-                <!-- 立即购买 -->
-                <div v-else-if="menu.class.indexOf('buy_now')!==-1"  @click="buyNow">
-                    <span class="s_i"></span>
-                </div><!-- 立即购买 -->
-                <div v-else-if="menu.class.indexOf('confirm_order')!==-1"  @click="confirmOrder">
-                    <span class="s_i"></span>
-                </div>
                 <!-- 默认 -->
                 <div v-else>
                     <span class="s_i"></span>
@@ -234,10 +227,6 @@
                                 }
                             }
                         });
-                    },buyNow:function(){
-                        console.log('buyNow');
-                    },confirmOrder:function(){
-                        console.log('confirmOrder');
                     },editProductList:function(param){
                         let productInfo = {
                             'product_id':param.product_id,
