@@ -46,7 +46,7 @@
             </div>
             <div class="middle">
                 <div></div>
-                <div class="red subtotal_amount">￥{{ subtotal_amount }}</div>
+                <div class="red subtotal_amount">￥{{ parseFloat(subtotal_amount).toFixed(2) }}</div>
             </div>
             <div  class="right">
                 <div  v-if="display_pic" class="product_name">
@@ -74,7 +74,7 @@
                 quota_named: {type: String,default: '样品购买限额'},
                 unit: {type: String,default: '盒'},
                 quota_quantity: {type: Number,default: 1},
-                deal_price: {type: Number,default: 0.01},
+                deal_price: {type: Number,required: true},
                 init_quantity: {type: Number,default: 0},
                 step_quantity: {type: Number,default: 1},
                 display_quota: {type: Boolean,default: false},
@@ -117,8 +117,6 @@
             },created: function(){
                 this.subtotal_amount_calculate();
                 let param = {
-                    product_id:this.product_id,
-                    buy_quantity:this.buy_quantity,
                     subtotal_amount:this.subtotal_amount
                 };
                 //触发-产品选择器初始化-事件
@@ -127,14 +125,16 @@
                 buy_quantity: {
                     handler(newVal, oldVal) {
                         this.subtotal_amount_calculate();
-                        let param = {
-                            product_id:this.product_id,
-                            buy_quantity:this.buy_quantity,
-                            increment_buy_quantity:(parseInt(newVal) - parseInt(oldVal?oldVal:0)),
-                            deal_price:this.deal_price
-                        };
-                        //触发-产品改变-事件
-                        bus.$emit('buy_quantity_change',param);
+                        if(typeof(oldVal) !== "undefined"){
+                            let param = {
+                                product_id:this.product_id,
+                                buy_quantity:this.buy_quantity,
+                                increment_buy_quantity:(parseInt(newVal) - parseInt(oldVal?oldVal:0)),
+                                deal_price:this.deal_price
+                            };
+                            //触发-产品改变-事件
+                            bus.$emit('buy_quantity_change',param);
+                        }
                     },
                     deep: false,
                     immediate: true
@@ -156,7 +156,7 @@
                 </div>
                 <!-- 总金额 -->
                 <div v-else-if="menu.class.indexOf('amount')!==-1">
-                    <span class="total_amount">￥{{ total_amount }}</span>
+                    <span class="total_amount">￥{{ parseFloat(total_amount).toFixed(2) }}</span>
                 </div>
                 <!-- 购物篮 -->
                 <div v-else-if="menu.class.indexOf('add_cart_icon')!==-1">
@@ -201,7 +201,6 @@
                     }
                 },methods: {
                     total_amount_init:function (param) {
-                        console.log(this.total_amount);
                         this.total_amount += param.subtotal_amount;
                     },total_amount_calculate:function (param) {
                         this.total_amount += param.deal_price * param.increment_buy_quantity;
