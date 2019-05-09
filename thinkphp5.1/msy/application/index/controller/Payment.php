@@ -454,6 +454,7 @@ class Payment extends \common\controller\Base {
             ],
         ];
         $result = $modelOrder -> allowField(true) -> save($data,$condition);
+        echo $modelOrder->getLastSql().PHP_EOL;
         if(!$result){
             $modelOrder->rollback();
             $info['mysql_error'] = $modelOrder->getError();
