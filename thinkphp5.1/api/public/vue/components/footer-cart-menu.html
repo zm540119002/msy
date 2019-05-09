@@ -36,7 +36,7 @@
         </div>
         <div class="columns_flex l-r-sides">
             <div  v-if="display_pic" class="left">
-                <a class="p_img" :href="product_id">
+                <a class="p_img" :href="product_url">
                     <img class="left" :src="thumb_img" alt="">
                 </a>
             </div>
@@ -78,6 +78,7 @@
                 quota_named: {type: String,default: '样品购买限额'},
                 unit: {type: String,default: '盒'},
                 thumb_img: {type: String,default: ''},
+                product_url: {type: String,default: ''},
                 quota_quantity: {type: Number,default: 1},
                 deal_price: {type: Number,required: true},
                 init_quantity: {type: Number,default: 0},
