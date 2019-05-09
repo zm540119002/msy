@@ -39,14 +39,17 @@ class Project extends Base {
         }else{
             // 基础处理
             if(  isset($_POST['thumb_img']) && $_POST['thumb_img'] ){
-                $_POST['thumb_img'] = moveImgFromTemp(config('upload_dir.scheme'),basename($_POST['thumb_img']));
+                $_POST['thumb_img'] = moveImgFromTemp(config('upload_dir.project'),$_POST['thumb_img']);
             }
             if(  isset($_POST['main_img']) && $_POST['main_img'] ){
-                $_POST['main_img'] = moveImgFromTemp(config('upload_dir.scheme'),basename($_POST['main_img']));
+                $_POST['main_img'] = moveImgFromTemp(config('upload_dir.project'),$_POST['main_img']);
+            }
+            if(  isset($_POST['detail_img']) && $_POST['detail_img'] ){
+                $_POST['detail_img'] = moveImgFromTemp(config('upload_dir.project'),$_POST['detail_img']);
             }
 
             if( isset($_POST['video']) && $_POST['video'] ){
-                $_POST['video'] = moveImgFromTemp(config('upload_dir.scheme'),basename($_POST['video']));
+                $_POST['video'] = moveImgFromTemp(config('upload_dir.scheme'),$_POST['video']);
             }
 
             $data = $_POST;
