@@ -197,7 +197,7 @@ class Order extends \common\controller\UserBase
             'where' => [
                 ['user_id','=',$this->user['id']],
                 ['sn','=',$postData['sn']],
-                ['order_status','=',0],
+                ['order_status','<',2],
             ], 'field'=>[
                 'id','sn','actually_amount'
             ]
