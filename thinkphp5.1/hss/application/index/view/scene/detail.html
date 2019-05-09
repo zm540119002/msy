@@ -46,7 +46,7 @@
 						v-for="productInfo in productList"
 						:key="parseInt(productInfo.id)"
 						:product_id="parseInt(productInfo.id)"
-						:deal_price="parseFloat(productInfo.bulk_price).fix(2)"
+						:deal_price="parseFloat(productInfo.bulk_price).toFixed(2)"
 						:product_name="productInfo.specification"
 						:buy_named="buy_named"
 						:init_quantity="parseInt(init_quantity)"
