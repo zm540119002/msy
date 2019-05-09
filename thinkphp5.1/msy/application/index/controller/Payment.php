@@ -347,8 +347,8 @@ class Payment extends \common\controller\Base {
      * wxPayNotifyCallBack
      * */
     public function wxPayNotifyCallBack(){
-        $wxPay = new \common\component\payment\weixin\weixinpay;
-        $data  = $wxPay->wxNotify();
+//        $wxPay = new \common\component\payment\weixin\weixinpay;
+//        $data  = $wxPay->wxNotify();
         $data = [
             'attach'=>"{'system_id':3 }",
             'out_trade_no'=>"20190509114513729739306544173310",
