@@ -8,7 +8,6 @@ class Payment extends \common\controller\Base {
      */
     public function toPay()
     {
-        echo 123;exit;
         if(request()->isPost()){
             $postData = input('post.');
             $systemId = $postData['system_id'];
