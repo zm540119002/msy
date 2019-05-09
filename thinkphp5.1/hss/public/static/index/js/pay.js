@@ -46,7 +46,7 @@ $(function () {
 
         }else{
             _this = $(this);
-            submitOrders(_this,postData);
+            toPay(_this,postData);
         }
     });
 
@@ -145,7 +145,7 @@ function submitOrders(_this,postData){
 }
 //
 function toPay(_this,postData){
-    var url = module + 'Order/confirmOrder';
+    var url = module + 'Order/toPay';
     _this.addClass("nodisabled");//防止重复提交
     $.ajax({
         url: url,
