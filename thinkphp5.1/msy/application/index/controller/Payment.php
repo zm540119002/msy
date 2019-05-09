@@ -485,7 +485,6 @@ class Payment extends \common\controller\Base {
             ],
         ];
         $walletDetailInfo = $modelWalletDetail->getInfo($condition);
-        print_r($walletDetailInfo);
         if(empty($walletDetailInfo)){
             return $this->writeLog("数据库没有此订单",$info);
         }
@@ -513,7 +512,7 @@ class Payment extends \common\controller\Base {
             ]
         ];
         $result = $modelWalletDetail -> allowField(true) -> save($data,$condition);
-        echo $modelWalletDetail->getLastSql().PHP_EOL;
+        echo $result.PHP_EOL;
         if(!$result){
             $modelWalletDetail ->rollback();
             $info['mysql_error'] = $modelWalletDetail->getError();
@@ -525,7 +524,7 @@ class Payment extends \common\controller\Base {
             ['user_id', '=', $walletDetailInfo['user_id']],
         ];
         $result = $modelWallet->where($where)->setInc('amount', $walletDetailInfo['amount']);
-        echo $modelWallet->getLastSql().PHP_EOL;
+        echo $result.PHP_EOL;
         if($result === false){
             $modelWallet->rollback();
             $info['mysql_error'] = $modelWallet->getError();
