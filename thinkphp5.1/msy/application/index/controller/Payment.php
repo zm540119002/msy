@@ -472,7 +472,7 @@ class Payment extends \common\controller\Base {
         $modelWalletDetail= new \app\index\model\WalletDetail();
         $modelWalletDetail ->setConnection(config('custom.system_id')[$systemId]['db']);
         $modelWallet = new \app\index\model\Wallet();
-        $modelWallet ->setConnection(config('custom.system_id')[$info['system_id']]['db']);
+        $modelWallet ->setConnection(config('custom.system_id')[$systemId]['db']);
         $condition = [
             'where' => [
                 ['status', '=', 0],
@@ -512,17 +512,20 @@ class Payment extends \common\controller\Base {
             ]
         ];
         $result = $modelWalletDetail -> allowField(true) -> save($data,$condition);
+        echo $result;
         if(!$result){
             $modelWalletDetail ->rollback();
             $info['mysql_error'] = $modelWalletDetail->getError();
             return $this->writeLog('充值订单支付更新失败',$info);
         }
+
         //充值到钱包表
         $where = [
             ['user_id', '=', $walletDetailInfo['user_id']],
         ];
-        $res = $modelWallet->where($where)->setInc('amount', $walletDetailInfo['amount']);
-        if($res === false){
+        $result = $modelWallet->where($where)->setInc('amount', $walletDetailInfo['amount']);
+        echo $result;
+        if($result === false){
             $modelWallet->rollback();
             $info['mysql_error'] = $modelWallet->getError();
             //返回状态给微信服务器
