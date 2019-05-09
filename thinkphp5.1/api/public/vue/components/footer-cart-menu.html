@@ -163,11 +163,7 @@
                     <span class="cart_num"></span>
                 </div>
                 <!-- 加入购物车 -->
-                <div v-else-if="menu.class.indexOf('add_cart')!==-1" @click="addCart">
-                    <span class="s_i"></span>
-                </div>
-                <!-- 立即购买 -->
-                <div v-else-if="menu.class.indexOf('buy_now')!==-1"  @click="buyNow">
+                <div v-else-if="menu.class.indexOf('add_cart')!==-1" @click="addCart" ref="addCart">
                     <span class="s_i"></span>
                 </div>
                 <!-- 默认 -->
@@ -205,6 +201,7 @@
                         this.total_amount += param.deal_price * param.increment_buy_quantity;
                     },addCart:function(){
                         console.log('addCart');
+                        return false;
                         let _this = this;
                         let jump_url = $(this.$refs.addCart).parent().data('jump_url');
                         $.ajax({
