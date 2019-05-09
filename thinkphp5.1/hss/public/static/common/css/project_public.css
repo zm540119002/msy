@@ -6321,3 +6321,8 @@ div.no_data{
 .top_cols a{
     color:#fff;
 }
+.top_ul{
+    width:95%;
+    padding:0.15rem 0.25rem;
+    margin:0 auto;
+}
