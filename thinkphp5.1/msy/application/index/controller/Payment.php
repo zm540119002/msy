@@ -387,7 +387,6 @@ class Payment extends \common\controller\Base {
             ];
             $payModel ->startTrans();
             $result = $payModel->isUpdate(true)->save($data1,$condition);
-            echo $payModel->getLastSql();exit;
             if($result === false){
                 $payModel ->rollback();
                 $payInfo['mysql_error'] = $payModel->getError();
@@ -427,6 +426,7 @@ class Payment extends \common\controller\Base {
             ],
         ];
         $orderInfo = $modelOrder->getInfo($condition);
+        p($orderInfo);exit;
         if(empty($orderInfo)){
             return $this->writeLog("数据库没有此订单",$info);
         }
