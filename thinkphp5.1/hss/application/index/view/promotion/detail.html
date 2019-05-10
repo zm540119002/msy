@@ -117,12 +117,12 @@
 						}
 					});
 				},buy_now_call_back:function(param){
-
+					
 					var postData = {};
 					postData.goodsList = param.postData.productList;
-					var url = module + 'Order/generate';
+
 					$.ajax({
-						url: url,
+						url: param.jump_url,
 						data: postData,
 						type: 'post',
 						beforeSend: function(){

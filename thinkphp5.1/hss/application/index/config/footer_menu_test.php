@@ -42,6 +42,7 @@ return [
                 'bottom_item',
                 'buy_now',
             ],
+            'action'=>url('Order/generate'),
         ],[//4
             'name'   => '提交订单',
             'class'=>[
