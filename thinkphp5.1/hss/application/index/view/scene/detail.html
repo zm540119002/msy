@@ -68,7 +68,7 @@
 {block name="footer"}
 <div id="foot_cart_menu">
 	<footer-cart-menu
-			:async_verify_call_back="async_verify_call_back"
+			:buy_now_call_back="buy_now_call_back"
 	></footer-cart-menu>
 </div>
 {/block}
@@ -113,6 +113,32 @@
 			el: '#foot_cart_menu',
 			data:function(){
 				return param;
+			},methods: {
+				buy_now_call_back:function(param){
+
+					var postData = {};
+					postData.goodsList = param.postData.productList;
+
+					$.ajax({
+						url: param.jump_url,
+						data: postData,
+						type: 'post',
+						beforeSend: function(){
+							$('.loading').show();
+						},
+						error:function(){
+							dialog.error('AJAX错误');
+						},
+						success: function(data){
+							if(data.status){
+								location.href = module + 'Order/confirmOrder/order_sn/' + data.order_sn;
+							}else{
+								dialog.error(data.info);
+							}
+
+						}
+					});
+				}
 			}
 		});
 	});
