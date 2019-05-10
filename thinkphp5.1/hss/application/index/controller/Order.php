@@ -8,12 +8,15 @@ class Order extends \common\controller\UserBase
         if (!request()->isPost()) {
             return errorMsg('请求方式错误');
         }
-        $modelOrder = new \app\index\model\Order();
-        $modelOrderDetail = new \app\index\model\OrderDetail();
+
         $goodsList = input('post.goodsList/a');
         if (empty($goodsList)) {
             return errorMsg('请求数据不能为空');
         }
+        return $goodsList;
+
+        $modelOrder = new \app\index\model\Order();
+        $modelOrderDetail = new \app\index\model\OrderDetail();
         $goodsIds = array_column($goodsList,'goods_id');
         $config = [
             'where' => [

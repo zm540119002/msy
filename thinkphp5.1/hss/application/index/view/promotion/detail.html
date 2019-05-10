@@ -92,7 +92,6 @@
 
 
 				},add_cart_call_back:function (param) {
-
 					var postData = {};
 					postData.goodsList = param.postData.productList;
 		/*			console.log(param.jump_url);
@@ -114,6 +113,32 @@
 							} else{
 								dialog.success(data.info);
 							}
+						}
+					});
+				},buy_now_call_back:function(param){
+
+					var postData = {};
+					postData.goodsList = param.postData.productList;
+					console.log(44444);
+					return false;
+					var url = module + 'Order/generate';
+					$.ajax({
+						url: url,
+						data: postData,
+						type: 'post',
+						beforeSend: function(){
+							$('.loading').show();
+						},
+						error:function(){
+							dialog.error('AJAX错误');
+						},
+						success: function(data){
+							if(data.status){
+								location.href = module + 'Order/confirmOrder/order_sn/' + data.order_sn;
+							}else{
+								dialog.error(data.info);
+							}
+
 						}
 					});
 				}
