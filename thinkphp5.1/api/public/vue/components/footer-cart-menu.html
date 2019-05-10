@@ -176,7 +176,7 @@
                     <span class="cart_num"></span>
                 </div>
                 <!-- 加入购物车 -->
-                <div v-else-if="menu.class.indexOf('add_cart')!==-1" ref="addCart" @click="async_verify">
+                <div v-else-if="menu.class.indexOf('add_cart')!==-1" ref="addCart" @click="addCart">
                     <span class="s_i"></span>
                 </div>
                 <!-- 立即购买 -->
@@ -269,6 +269,7 @@
                                     'jump_url':jump_url,
                                     'postData':_this.postData
                                 };
+
                                 _this.add_cart_call_back(param);
                             }
                         });
