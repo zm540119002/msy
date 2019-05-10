@@ -144,7 +144,6 @@ class Cart extends \common\controller\UserBase{
         $model->startTrans();
         if(!empty($goodsList)){
             $res =  $model->saveAll($goodsList);
-            echo $model->getLastSql();exit;
             if (!count($res)) {
                 $model->rollback();
                 return errorMsg('失败');
