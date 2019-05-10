@@ -49,6 +49,7 @@
 {/block}
 {block name="script"}
 <script type="text/javascript" src="api_common_js/swiper.min.js"></script>
+<script type="text/javascript" src="api_common_js/swiper.min.js"></script>
 <script type="text/javascript">
 	function getJsonListCallBack(data){
 		param = {
@@ -88,8 +89,33 @@
 			},methods: {
 				async_verify_call_back:function (param) {
 					console.log(param);
+
+
 				},add_cart_call_back:function (param) {
-					console.log(param);
+
+					var postData = {};
+					postData.goodsList = param.postData.productList;
+		/*			console.log(param.jump_url);
+					console.log(postData);
+					return false;*/
+					$.ajax({
+						url: param.jump_url,
+						data: postData,
+						type: 'post',
+						beforeSend: function(){
+
+						},
+						error:function(){
+							dialog.error('AJAX错误');
+						},
+						success: function(data){
+							if(data.status==0){
+								dialog.error(data.info);
+							} else{
+								dialog.success(data.info);
+							}
+						}
+					});
 				}
 			}
 		});
