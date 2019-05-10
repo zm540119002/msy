@@ -228,6 +228,14 @@
                     },async_verify:function(event){
                         let _this = this;
                         let jump_url = $(event.currentTarget).parent().data('jump_url');
+                        if(!jump_url){
+                            return false;
+                        }
+                        //异步验证判断
+                        let param = {
+                            'jump_url':jump_url,
+                            'postData':_this.postData
+                        };
                         $.ajax({
                             url: jump_url,
                             data: {},
@@ -241,11 +249,7 @@
                             },
                             success: function(data){
                                 $('.loading').hide();
-                                //异步验证判断
-                                let param = {
-                                    'jump_url':jump_url,
-                                    'postData':_this.postData
-                                };
+
                                 console.log(data);
                                 return;
                                 if(async_verify_judge(data)){
@@ -255,7 +259,7 @@
                         });
                     },addCart:function(){
                         let _this = this;
-                        let jump_url = $(this.$refs.addCart).parent().data('jump_url');
+                        let jump_url = $(event.currentTarget).parent().data('jump_url');
                         $.ajax({
                             url: jump_url,
                             data: {},
