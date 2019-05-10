@@ -255,6 +255,7 @@
                                 $('.loading').hide();
                                 //异步验证判断
                                 let res = async_verify_judge(data);
+                                console.log(res);
                                 return false;
                                 if(async_verify_judge(data)){
                                     param.data = data;
