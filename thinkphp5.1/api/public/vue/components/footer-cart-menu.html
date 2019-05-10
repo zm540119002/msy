@@ -172,11 +172,11 @@
                     <span class="total_amount">￥{{ parseFloat(total_amount).toFixed(2) }}</span>
                 </div>
                 <!-- 购物篮 -->
-                <div v-else-if="menu.class.indexOf('add_cart_icon')!==-1" ref="addCart" @click="jump_url">
+                <div v-else-if="menu.class.indexOf('add_cart_icon')!==-1" @click="jump_url">
                     <span class="cart_num"></span>
                 </div>
                 <!-- 加入购物车 -->
-                <div v-else-if="menu.class.indexOf('add_cart')!==-1" ref="addCart" @click="jump_url">
+                <div v-else-if="menu.class.indexOf('add_cart')!==-1" @click="async_verify">
                     <span class="s_i"></span>
                 </div>
                 <!-- 立即购买 -->
@@ -227,7 +227,7 @@
                         location.href = jump_url;
                     },async_verify:function(){
                         let _this = this;
-                        let jump_url = $(this.$refs.addCart).parent().data('jump_url');
+                        let jump_url = $(e.currentTarget).parent().data('jump_url');
                         $.ajax({
                             url: jump_url,
                             data: {},
