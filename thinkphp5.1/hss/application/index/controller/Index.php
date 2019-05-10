@@ -43,7 +43,7 @@ class Index extends \common\controller\Base{
 
         $condition = [
             'where' => [
-                ['id','>',5]
+                ['id','>',20]
             ],
             'limit' => 10,
         ];
