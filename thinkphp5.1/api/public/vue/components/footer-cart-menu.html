@@ -243,7 +243,7 @@
                         $.ajax({
                             url: param.jump_url,
                             data: param.postData,
-                            type: 'post',
+                            type: param.type?param.type:'post',
                             beforeSend: function(xhr){
                                 $('.loading').show();
                             },
