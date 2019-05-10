@@ -172,7 +172,7 @@
                     <span class="total_amount">￥{{ parseFloat(total_amount).toFixed(2) }}</span>
                 </div>
                 <!-- 购物篮 -->
-                <div v-else-if="menu.class.indexOf('add_cart_icon')!==-1">
+                <div v-else-if="menu.class.indexOf('add_cart_icon')!==-1" ref="jumpUrl" @click="jumpUrl">
                     <span class="cart_num"></span>
                 </div>
                 <!-- 加入购物车 -->
@@ -273,6 +273,12 @@
                                 _this.add_cart_call_back(param);
                             }
                         });
+                    },jumpUrl:function(){
+                        let jump_url = $(this.$refs).parent().data('jump_url');
+
+                        console.log(jump_url);
+                        return false;
+
                     },buyNow:function(){
                         console.log('buyNow');
                     },confirmOrder:function(){
