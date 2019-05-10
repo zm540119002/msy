@@ -183,6 +183,7 @@ class Scene extends \common\controller\Base{
             }
             // 场景信息
             $this->displayScene($id);
+            $this->assign('relation',config('custom.relation_type.project'));
 
             return $this->fetch();
         }
@@ -192,6 +193,9 @@ class Scene extends \common\controller\Base{
     private function displayScene($id){
         $model = new\app\index\model\Scene();
         $config =[
+            'field' => [
+                'id','name','thumb_img','main_img','intro','tag','tag_category','title'
+            ],
             'where' => [
                 ['status', '=', 0],
                 ['shelf_status', '=', 3],
@@ -207,7 +211,7 @@ class Scene extends \common\controller\Base{
         $scene['main_img'] = explode(',',(string)$scene['main_img']);
         $scene['intro'] = $scene['intro'] ? htmlspecialchars_decode($scene['intro']) : $scene['intro'] ;
 
-        $this->assign('scene',$scene);
+        $this->assign('info',$scene);
     }
 
 

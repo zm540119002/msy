@@ -1,22 +1,16 @@
 {notempty name="list"}
 {volist name="list" id="info"}
-    <li data-id="{$info.id}">
-        <a class="p_img" href="{:url('/detail',['id'=>$info.id])}">
-            <img class="left" src="{:show_img_handle($info.thumb_img)}" alt="">
-        </a>
-        <div class="list_r">
-            <p class="text-intro">{$info.headline}</p>
-            <div>
-                <span class="red">￥<price>{$info.bulk_price}</price></span>
+<li data-id="{$info.id}">
+    <a href="{:url('Project/detail',['id'=>$info.id])}" data-id="{$info.id}" class="" title="{$info.name}">
+        <div class="applay_p_item columns_flex l-r-sides">
+            <div class="group_btn50">
+                <img class="common_default_img" src="{:show_img_handle($info.thumb_img)}" alt="{$info.name}">
             </div>
-            <div class="quantity_wrapper selected-number">
-                <a href="javascript:void(0);" class="greduce">-</a>
-                <input type="text" value="0" class="f24 gshopping_count" >
-                <input type="hidden" class="minimum_order_quantity" value="{$info.minimum_order_quantity}">
-                <input type="hidden" class="increase_quantity" value="{$info.increase_quantity}">
-                <a href="javascript:void(0);" class="gplus">+</a>
+            <div>
+                <p>立即进入</p>
             </div>
         </div>
-    </li>
+    </a>
+</li>
 {/volist}
 {/notempty}

@@ -91,7 +91,7 @@ class Payment extends \common\controller\UserBase{
                 return errorMsg('失败');
             }
             $data = [
-                'payment_code'=>4,
+                'pay_code'=>4,
                 'pay_sn'=> $orderInfo['pay_sn'],
                 'payment_time'=> $orderInfo['payment_time'],
                 'order_sn'=> $orderInfo['sn'],

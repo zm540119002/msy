@@ -41,11 +41,25 @@ class Project extends Base {
             if(  isset($_POST['thumb_img']) && $_POST['thumb_img'] ){
                 $_POST['thumb_img'] = moveImgFromTemp(config('upload_dir.project'),$_POST['thumb_img']);
             }
-            if(  isset($_POST['main_img']) && $_POST['main_img'] ){
-                $_POST['main_img'] = moveImgFromTemp(config('upload_dir.project'),$_POST['main_img']);
+            if( isset($_POST['main_img']) && $_POST['main_img'] ){
+                $detailArr = explode(',',input('post.main_img','','string'));
+                $tempArr = array();
+                foreach ($detailArr as $item) {
+                    if($item){
+                        $tempArr[] = moveImgFromTemp(config('upload_dir.project'),$item);
+                    }
+                }
+                $_POST['main_img'] = implode(',',$tempArr);
             }
-            if(  isset($_POST['detail_img']) && $_POST['detail_img'] ){
-                $_POST['detail_img'] = moveImgFromTemp(config('upload_dir.project'),$_POST['detail_img']);
+            if( isset($_POST['detail_img']) && $_POST['detail_img'] ){
+                $detailArr = explode(',',input('post.detail_img','','string'));
+                $tempArr = array();
+                foreach ($detailArr as $item) {
+                    if($item){
+                        $tempArr[] = moveImgFromTemp(config('upload_dir.project'),$item);
+                    }
+                }
+                $_POST['detail_img'] = implode(',',$tempArr);
             }
 
             if( isset($_POST['video']) && $_POST['video'] ){
@@ -182,6 +196,124 @@ class Project extends Base {
 
         return $this->fetch();
     }
+
+
+    // 促销系列方法
+    /**
+     * 展示选中的促销方案
+     */
+    public function getProjectPromotion(){
+        // 查询
+        if(!$id = input('id/d')){
+            $this ->error('参数有误',url('manage'));
+        }
+        $modelProject = new \app\index_admin\model\Project();
+        $condition = [
+            'where'=>[
+                ['id','=',$id],
+            ],'field'=>[
+                'id','name'
+            ]
+        ];
+        $project = $modelProject->getInfo($condition);
+
+        $this->assign('info',$project);
+
+        $model = new \app\index_admin\model\ProjectPromotion();
+        $condition = [
+            'where'=>[
+                ['pp.status','=',0],
+                ['pp.project_id','=',$id],
+            ],'field' => [
+                'p.id promotion_id','p.name','p.thumb_img','p.sort','p.shelf_status','pp.id '
+            ],'join'  => [
+                ['promotion p','pp.promotion_id=p.id','left']
+            ],'order' => [
+                'sort'=> 'desc'
+            ]
+        ];
+        $list = $model->pageQuery($condition);
+        $this->assign('list',$list);
+
+        return $this->fetch();
+    }
+
+    /**
+     * 关联促销方案
+     */
+    public function editProjectPromotion(){
+
+        if(request()->isPost()){
+
+            $id = input('id/d');
+            $promotion_ids  = input('promotion_ids/a');
+
+            if (!$id){
+                $this ->error('参数有误',url('manage'));
+            }
+
+            if ($promotion_ids){
+                foreach($promotion_ids as $k => $v){
+                    if ((int)$v){
+                        $data = ['project_id'=>$id,'promotion_id'=>$v];
+
+                        // 先删后增 -保证唯一
+                        $model = new \app\index_admin\model\ProjectPromotion();
+                        $model -> where($data)->delete();
+                        $model -> allowField(true) -> save($data);
+                    }
+                }
+            }
+            return successMsg('成功');
+
+        }else{
+
+            // 后面的页面需要场景id
+            if(!$id = input('param.id/d')){
+                $this ->error('参数有误',url('manage'));
+            }
+
+            $this->assign('id',$id);
+            return $this->fetch();
+        }
+    }
+
+    /**
+     * 获取所有促销方案&&已选中的
+     * @return \think\response\View
+     */
+    public function _getPromotionList(){
+        $list = Promotion::getListData();
+
+        // 其它业务 -标记已选中的
+        if($id = input('param.id/d')){
+            $Model= new \app\index_admin\model\ProjectPromotion();
+            $condition = [
+                'where' => [
+                    ['project_id','=', $id],
+                ],'field'=> [
+                    'promotion_id'
+                ]
+            ];
+            $promotionList = $Model->getlist($condition);
+
+            if ($promotionList){
+                $promotionIds = array_column($promotionList,'promotion_id');
+                // 取出交差值的数组
+                foreach($list as $k => $v){
+                    if ( in_array($v['id'],$promotionIds) ){
+                        $list[$k]['exist'] = 1;
+                    }
+                }
+            }
+        }
+
+        $this->assign('list',$list);
+
+        return view('/promotion/list_promotion_tpl');
+
+    }
+    // 促销系列方法END
 
     /**
      * 设置精选

@@ -1,20 +1,8 @@
 
 $(function () {
-    // // 弹出支付方式
-    //     // $('body').on('click','.confirm_order',function(){
-    //     //     var settlementMethod=$('.settlementMethod').html();
-    //     //     layer.open({
-    //     //         type: 1
-    //     //         ,anim: 'up'
-    //     //         ,style: 'position:fixed; bottom:0; left:0; width: 100%; height: 50%; padding:10px 0; border:none;',
-    //     //         className:'settlementMethod bankTransferLayer',
-    //     //         content: settlementMethod
-    //     //     });
-    //     // });
-
     // 弹出支付方式
     $('body').on('click','.confirm_order',function(){
-        alert(33333);
+        var _this = $(this);
         var postData = {};
         postData = addAddress(postData);
         postData.order_id = $('.order_id').val();
@@ -31,11 +19,10 @@ $(function () {
     });
 
 
-    // 提交订单带地址
+    // 提交订单带地址 立即结算
     $('body').on('click','.settlement_btn',function () {
 
         var postData = {};
-        postData = addAddress(postData);
         postData.order_id = $('.order_id').val();
         postData.order_sn = $('.order_sn').val();
         postData.pay_code = $('.pay_code').val();
@@ -47,7 +34,7 @@ $(function () {
 
         }else{
             _this = $(this);
-            submitOrders(_this,postData);
+            toPay(_this,postData);
         }
     });
 
@@ -137,6 +124,33 @@ function submitOrders(_this,postData){
                     content: settlementMethod
                 });
 
+            }else{
+                dialog.success(data.info);
+                //dialog.error('结算提交失败!');
+            }
+        }
+    });
+}
+// 去结算
+function toPay(_this,postData){
+    var url = module + 'Order/toPay';
+    _this.addClass("nodisabled");//防止重复提交
+    $.ajax({
+        url: url,
+        data: postData,
+        type: 'post',
+        beforeSend: function(){
+            $('.loading').show();
+        },
+        error:function(){
+            $('.loading').hide();
+            dialog.error('AJAX错误');
+        },
+        success: function(data){
+            _this.removeClass("nodisabled");//删除防止重复提交
+            $('.loading').hide();
+            if(data.status){
+                location.href = data.url;
             }else{
                 dialog.success(data.info);
                 //dialog.error('结算提交失败!');

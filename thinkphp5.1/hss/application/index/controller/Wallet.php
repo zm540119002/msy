@@ -69,7 +69,7 @@ class Wallet extends Base {
             'amount'=>$amount,
             'actually_amount'=>$amount, // 还没有其它的业务 暂时先用$amount
             'create_time'=>time(),
-            'payment_code'=>$payCode,
+            'pay_code'=>$payCode,
         ];
 
         // 线下汇款凭证
@@ -78,11 +78,29 @@ class Wallet extends Base {
         }
 
         $model= new \app\index\model\WalletDetail();
+        $model -> startTrans();
         $res  = $model->isUpdate(false)->save($data);
         if(!$res){
+            $model->rollback();
             return errorMsg('充值失败');
 
         }
+        //生成支付表的数据
+        $modelPay = new \app\index\model\Pay();
+        //增加
+        $data = [
+            'sn' => $walletDetailSn,
+            'actually_amount' =>$amount,
+            'user_id' => $this->user['id'],
+            'pay_code' => $payCode,
+            'type' => config('custom.pay_type')['rechargePay']['code'],
+        ];
+        $result  = $modelPay->isUpdate(false)->save($data);
+        if(!$result){
+            $model->rollback();
+            return errorMsg('失败');
+        }
+        $model->commit();
 
         // 各充值方式的处理
         switch($payCode){
@@ -100,7 +118,6 @@ class Wallet extends Base {
                 break;
         }
     }
-
     /**
      * 充值记录页
      */
@@ -138,7 +155,7 @@ class Wallet extends Base {
                 ['user_id','=',$this->user['id']],
             ],
             'field'=>[
-                'id','sn','type','recharge_status','amount','payment_code','create_time','payment_time',
+                'id','sn','type','recharge_status','amount','pay_code','create_time','payment_time',
             ],
             'order'=>[
                 'create_time'=>'desc'
@@ -211,7 +228,7 @@ class Wallet extends Base {
             }
             // 更新订单信息
             $data = input('post.');
-            $data['payment_code'] = $data['pay_code'];
+            $data['pay_code'] = $data['pay_code'];
             $data['pay_sn'] = $orderInfo['pay_sn'];
             $data['payment_time'] = time();
             $data['order_sn'] = $orderInfo['sn'];
