@@ -290,14 +290,14 @@
                         console.log('confirmOrder');
                     },editProductList:function(param){
                         let productInfo = {
-                            'foreign_id':param.product_id,
+                            'goods_id':param.product_id,
                             'num':param.buy_quantity
                         };
                         //产品是否存在产品列表，默认不存在
                         let existSign = false;
                         for(var i = 0,len = this.postData.productList.length; i < len; i++){
                             //产品已存在产品列表，则修改或删除
-                            if(this.postData.productList[i]['foreign_id'] == param.product_id){
+                            if(this.postData.productList[i]['goods_id'] == param.product_id){
                                 if(param.buy_quantity<=0){
                                     Vue.delete(this.postData.productList,i);
                                 }else{
