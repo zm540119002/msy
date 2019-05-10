@@ -110,7 +110,9 @@ class Order extends \common\controller\UserBase
                     ['user_id','=',$this->user['id']],
                     ['id','=',$fatherOrderId],
                     ['order_status','<',2],
-                ]
+                ],'field' => [
+                    'o.id', 'o.sn', 'o.amount', 'o.user_id', 'order_status'
+                 ],
             ];
 
             $orderInfo  = $modelOrder->getInfo($condition);
