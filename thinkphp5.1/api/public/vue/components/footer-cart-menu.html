@@ -227,24 +227,19 @@
                         }
                     },addCart:function(event){
                         let _this = this;
-                        console.log(event);
-                        console.log(event.currentTarget);
-                        console.log($(event.currentTarget));
-                        return false;
                         let jump_url = $(event.currentTarget).parent().data('jump_url');
+                        console.log(jump_url);
                         if(!jump_url){
                             return false;
                         }
+                        return false;
                         //异步验证
-                        let param = {
-                            'jump_url':jump_url,
-                            'postData':{
-                                'goodsList':_this.postData.productList
-                            }
+                        let postData = {
+                            'goodsList':_this.postData.productList
                         };
                         $.ajax({
-                            url: param.jump_url,
-                            data: param.postData,
+                            url: jump_url,
+                            data: postData,
                             type: param.type?param.type:'post',
                             beforeSend: function(xhr){
                                 $('.loading').show();
@@ -266,41 +261,6 @@
                             }
                         });
                     },buyNow:function(event){
-                        let _this = this;
-                        let jump_url = $(event.currentTarget).parent().data('jump_url');
-                        if(!jump_url){
-                            return false;
-                        }
-                        //异步验证
-                        let param = {
-                            'jump_url':jump_url,
-                            'postData':{
-                                'goodsList':_this.postData.productList
-                            }
-                        };
-                        $.ajax({
-                            url: param.jump_url,
-                            data: param.postData,
-                            type: param.type?param.type:'post',
-                            beforeSend: function(xhr){
-                                $('.loading').show();
-                            },
-                            error:function(xhr){
-                                $('.loading').hide();
-                                dialog.error('AJAX错误');
-                            },
-                            success: function(data){
-                                $('.loading').hide();
-                                //异步验证判断
-                                let param = {
-                                    data:data,
-                                    func:_this.buyNow
-                                };
-                                if(async_verify_judge(param)===true){
-                                    dialog.success('加入购物车成功');
-                                }
-                            }
-                        });
                     },confirmOrder:function(){
                         console.log('confirmOrder');
                     },editProductList:function(param){
