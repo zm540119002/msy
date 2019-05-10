@@ -229,6 +229,7 @@
                         let _this = this;
                         console.log(event);
                         console.log(event.currentTarget);
+                        console.log($(event.currentTarget));
                         return false;
                         let jump_url = $(event.currentTarget).parent().data('jump_url');
                         if(!jump_url){
