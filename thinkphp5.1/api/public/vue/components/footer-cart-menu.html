@@ -222,12 +222,12 @@
                         this.total_amount += param.subtotal_amount;
                     },total_amount_calculate:function (param) {
                         this.total_amount += param.deal_price * param.increment_buy_quantity;
-                    },jump_url:function (e) {
-                        let jump_url = $(e.currentTarget).parent().data('jump_url');
+                    },jump_url:function (event) {
+                        let jump_url = $(event.currentTarget).parent().data('jump_url');
                         location.href = jump_url;
-                    },async_verify:function(){
+                    },async_verify:function(event){
                         let _this = this;
-                        let jump_url = $(e.currentTarget).parent().data('jump_url');
+                        let jump_url = $(event.currentTarget).parent().data('jump_url');
                         $.ajax({
                             url: jump_url,
                             data: {},
