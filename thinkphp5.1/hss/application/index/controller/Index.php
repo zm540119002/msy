@@ -45,7 +45,7 @@ class Index extends \common\controller\Base{
             'where' => [
                 ['id','>',20]
             ],
-            'limit' => 10,
+            'limit' => 5,
         ];
 
         $list = $modelUser->getList($condition);
