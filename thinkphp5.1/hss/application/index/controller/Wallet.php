@@ -11,7 +11,6 @@ class Wallet extends Base {
             if(empty($this->wallet['password'])){
                 // 开通钱包
                 $this->assign('user',$this->user);
-                echo 123;exit;
                 echo $this->fetch('wallet_opening');
                 exit;
             }
@@ -41,7 +40,6 @@ class Wallet extends Base {
 
             $wallet= $model->getInfo($condition);
             $this->assign('wallet',$wallet);
-            $this->success();
             return $this->fetch('recharge');
         }
     }
