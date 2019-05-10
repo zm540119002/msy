@@ -238,7 +238,7 @@
                         };
                         $.ajax({
                             url: jump_url,
-                            data: {},
+                            data: param.postData,
                             type: 'post',
                             beforeSend: function(xhr){
                                 $('.loading').show();
