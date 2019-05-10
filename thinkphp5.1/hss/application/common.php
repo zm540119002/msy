@@ -191,3 +191,15 @@ function show_img_handle($img_url,$show_default=true){
         return '';
     }
 }
+
+// scene系列
+/**
+ * 处理场景信息
+ * @param $info array 场景信息
+ */
+function scene_handle(&$info){
+    $info['tag']      = $info['tag']      ? explode('|',(string)$info['tag']) : '';
+    $info['main_img'] = $info['main_img'] ? explode('|',(string)$info['main_img']) : '';
+    $info['intro']    = $info['intro']    ? htmlspecialchars_decode($info['intro']) : '';
+};
+
