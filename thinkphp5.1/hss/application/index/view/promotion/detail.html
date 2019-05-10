@@ -43,13 +43,14 @@
 <div id="foot_cart_menu">
 	<footer-cart-menu
 			:add_cart_call_back="add_cart_call_back"
+			:async_verify_call_back="async_verify_call_back"
 	></footer-cart-menu>
 </div>
 {/block}
 {block name="script"}
 <script type="text/javascript" src="api_common_js/swiper.min.js"></script>
 <script type="text/javascript">
-	function getJsonCallBack(data){
+	function getJsonListCallBack(data){
 		param = {
 			'buy_named':'采购数量',
 			'display_quota':true,
@@ -71,7 +72,7 @@
 		requestEnd:false,
 		loadTrigger:false,
 		currentPage:1,
-		callBack:getJsonCallBack
+		callBack:getJsonListCallBack
 	};
 	var postData = {
 		pageSize:10,
@@ -85,7 +86,9 @@
 			data:function(){
 				return param;
 			},methods: {
-				add_cart_call_back:function (param) {
+				async_verify_call_back:function (param) {
+					console.log(param);
+				},add_cart_call_back:function (param) {
 					console.log(param);
 				}
 			}

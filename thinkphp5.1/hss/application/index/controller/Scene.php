@@ -68,7 +68,7 @@ class Scene extends \common\controller\Base{
 
             $id = intval(input('id'));
             if(!$id) $this->error('此项目已下架');
-            // 场景信息
+            // 场景信息 主要是获取同组的场景信息
             $model = new\app\index\model\Scene();
             $condition =[
                 'field' => [
@@ -84,7 +84,7 @@ class Scene extends \common\controller\Base{
             ];
 
             $sceneList = $model->getList($condition);
-
+            $this->assign('sceneList',$sceneList);
             if(empty($sceneList)){
                 $this->error('此场景已下架');
             }
@@ -96,15 +96,15 @@ class Scene extends \common\controller\Base{
                     break;
                 }
             }
+
+
+            scene_handle($scene);
+/*
             $scene['tag'] = explode('|',(string)$scene['tag']);
             $scene['main_img'] = explode(',',(string)$scene['main_img']);
-            $scene['intro'] = $scene['intro'] ? htmlspecialchars_decode($scene['intro']) : $scene['intro'] ;
-
+            $scene['intro'] = $scene['intro'] ? htmlspecialchars_decode($scene['intro']) : $scene['intro'] ;*/
 
             $this->assign('info',$scene);
-
-            $this->assign('sceneList',$sceneList);
-
 
             // 获取场景下的促销方案
             $modelSceneScheme = new \app\index\model\ScenePromotion();
@@ -121,10 +121,10 @@ class Scene extends \common\controller\Base{
             ];
             $promotionList= $modelSceneScheme->getList($config);
 
+            $modelPromotionGoods = new \app\index\model\PromotionGoods();
+
             // 套餐下的商品总价 单个
-            foreach($promotionList as $k => $v){
-                $promotionList[$k]['amount'] = 9000;
-            }
+            $promotionList = $modelPromotionGoods->getListGoodsPrice($promotionList);
 
             $this->assign('promotionList',$promotionList);
 
@@ -207,9 +207,10 @@ class Scene extends \common\controller\Base{
             $this->error('此项目已下架');
         }
 
-        $scene['tag'] = explode('|',(string)$scene['tag']);
+        scene_handle($scene);
+/*        $scene['tag'] = explode('|',(string)$scene['tag']);
         $scene['main_img'] = explode(',',(string)$scene['main_img']);
-        $scene['intro'] = $scene['intro'] ? htmlspecialchars_decode($scene['intro']) : $scene['intro'] ;
+        $scene['intro'] = $scene['intro'] ? htmlspecialchars_decode($scene['intro']) : $scene['intro'] ;*/
 
         $this->assign('info',$scene);
     }

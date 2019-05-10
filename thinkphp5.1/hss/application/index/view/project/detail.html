@@ -1,166 +1,173 @@
 {extend name="template/base.html" /}
-{block name="content"}
-<section class="project_detail_preview" style="display:none">
-	<div class="project_detail_list">
-		{empty name="info.detail_img"}
-				<p>
-					<img src="public_img/default/no_pic_1000.jpg" alt="">
-				</p>
-			{else /}
-			{volist name="info.detail_img" id="detail_img"}
-				<p>
-					<img src="public_uploads/{$detail_img}" alt="" class="">
-				</p>
-			{/volist}
-		{/empty}
-	</div>
-</section>
-<article class="f24">
-	<section class="slider_banner">
-		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
-			<div class="swiper-wrapper">
-				<div class="swiper-slide swiper-slide-active">
-					{empty name="info.main_img"}
-					<img src="public_img/default/no_pic_100.jpg" class="left">
-					{else /}
-					<img src="public_uploads/{$info.main_img}" class="left">
-					{/empty}
-				</div>
 
-			</div>
-			<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
-				<span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span>
-				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 2"></span>
-				<span class="swiper-pagination-bul let " tabindex="0" role="button" aria-label="Go to slide 3"></span>
-				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 4"></span>
-			</div>
-		</div>
+{block name="title"}
+项目详情
+{/block}
+
+{block name="content"}
+<article class="f24">
+	<!-- 项目信息 -->
+	<div id="menu">
+		<ul class="columns_flex detail-nav">
+			<li data-item="item1"><a href="javascript:;" class="">项目产品</a></li>
+			<li data-item="item2"><a href="javascript:;" class="">项目详情</a></li>
+			<li data-item="item3"><a href="javascript:;" class="">项目操作</a></li>
+		</ul>
+	</div>
+
+	<!-- 项目产品 -->
+	<section class="content-padding content_main project_item">
+
+		{include file="template/scene_detail.html" /}
+
+		<!-- 内容 -->
+		<section class="content-padding content_main wy_list">
+			<!--采购方案列表-->
+			{notempty name="promotionList"}
+			{volist name="promotionList" id="vo"}
+			<a href="{:url('Promotion/detail',['id'=>$vo.id])}" data-id="{$vo.id}" class="">
+				<div class="applay_p_item columns_flex l-r-sides">
+					<div>
+						<div>¥<price>{$vo.price}</price></div>
+						<p>{$vo.title}</p>
+						<p>立即进入</p>
+					</div>
+					<div class="group_btn50">
+						<img class="common_default_img" src="{:show_img_handle($vo.thumb_img)}" alt="{$vo.name}">
+					</div>
+				</div>
+			</a>
+			{/volist}
+			{/notempty}
+			<!--产品列表-->
+			<ul class="goods_list list" id="list">
+				<div id="product-select">
+					<product-select
+							v-for="productInfo in productList"
+							:key="productInfo.id"
+							:product_id="productInfo.id"
+							:deal_price="parseFloat(productInfo.bulk_price)"
+							:product_name="productInfo.headline"
+							:product_src="productInfo.thumb_img"
+							:product_url="String(productInfo.id)"
+							:buy_named="buy_named"
+							:init_quantity="parseInt(init_quantity)"
+							:step_quantity="parseInt(step_quantity)"
+							:display_pic="display_pic"
+					></product-select>
+				</div>
+			</ul>
+		</section>
 	</section>
-	<section class="module-navigation ">
-		<div >
-			<ul>
-				<li>
-					<div class="top_radius f20 top_module">
-						<p class="product_intro">{$info.intro}</p>
-						<div class="tags_item columns_flex l-r-sides">
-							<div>
-								{volist name="$info.tag" id="tag"}
-								<span>{$tag}</span>
-								{/volist}
-							</div>
-							<div class="tags_item_r">
-								<a class="share" href="javascript:;"><span class="icon"></span>分享</a>
-							</div>
-						</div>
-					</div>
-				</li>
-				<li>
-					<div class="content-padding">
-						<p class="top_b_text wk_notice separation">[品牌定制须知] 品牌定制利润为王！维雅生物药妆精选优质项目产品任你选，帮助用户开启自主品牌可持续发展经营！用户在线选购产品并支付品牌定制单，其他全部交给维雅品牌定制服务团队。</p>
-						<div class="">
-							<a href="javascript:;" class="project_details right-arrow">点击了解更多项目详情</a>
-						</div>
-						<div class="columns_flex l-r-sides separation">
-							<div class="mid_module_left">
-								<img src="public_img/wy_dz.png" alt="">
-								<div>
-									<span class="left count-down-icons"></span>
-									<div class="d-r">
-										<p class="friday_end">品牌定制<span>.</span>周五截止</p>
-										<div id="countDownBox" class="count_down_box">
-											<span class="day"></span>天
-											<span class="hour"></span>小时
-											<span class="minute"></span>分
-											<span class="second"></span>秒
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="mid_module_right">
-								<span><span class="item end_time"></span>周五结单</span>
-								<span><span class="item factory"></span>品质工厂</span>
-							</div>
-						</div>
-					</div>
-				</li>
+	<!-- 项目详情 -->
+	<section class="project_item hide">
+		<p>
+			<img src="{:show_img_handle($project.main_img)}" alt="">
+		</p>
+	</section>
+	<!-- 项目操作 -->
+	<section class="project_item hide">
+
+		{notempty name="$project.video"}
+		<div class="content-padding">
+			<video width="" height="" controls src="{:show_img_handle($project.video)}">
+			</video>
+			<p>{$project.name}项目培训</p>
+			<p>{$project.update_time}</p>
+		</div>
+		{/notempty}
+		<div>
+			<h3>相关视频</h3>
+			<ul class="p_video_item" id="videos">
+
 			</ul>
 		</div>
 	</section>
-	<section class="content-padding content_main wy_list">
-		<ul class="goods_list list">
-			{notempty name="goodsList"}
-			{volist name="goodsList" id="info"}
-			<li data-id="{$info.id}" data-buy_type="1" id="li-id-{$key}">
-				<a class="p_img" href="{:url('Goods/detail',['id'=>$info.id])}">
-					{empty name="info.thumb_img"}
-					<img class="left goods_img" src="public_img/default/no_pic_100.jpg" alt="">
-					{else /}
-					<img class="left goods_img" src="public_uploads/{$info.thumb_img}" alt="">
-					{/empty}
-				</a>
-				<div class="list_r">
-					<p class="goods_title">{$info.headline}</p>
-					<div class="project_p_item">
-						<span class="red">￥<price>{$info.bulk_price}</price></span>
-					</div>
-					<div class="columns_flex l-r-sides project_p_item">
-						<div>起订数量：<span>{$info.minimum_order_quantity}{$info.purchase_unit|getUnit}</span>
-						</div>
-					</div>
-					<div class="columns_flex l-r-sides separation_item">
-
-						<a href="javascript:;" class="set_brand right-arrow">设定我的品牌：<span class="brand_name" data-id=""></span></a>
-					</div>
-					<div class="quantity_wrapper selected-number">
-						<a href="javascript:void(0);" class="greduce" >-</a>
-						<input type="text" value="0" class="f24 gshopping_count" >
-						<input type="hidden" class="minimum_order_quantity" value="{$info.minimum_order_quantity}">
-						<input type="hidden" class="increase_quantity" value="{$info.increase_quantity}">
-						<a href="javascript:void(0);" class="gplus">+</a>
-					</div>
-				</div>
-			</li>
-			{/volist}
-			{/notempty}
-		</ul>
-	</section>
 </article>
-<div id="areaMask2" class="mask QR_codes_mask"></div>
-<div class="mcover">
-	<img src="public_img/weixin_share.png" alt="">
-	<a href="javascript:void(0);" class="weixinShare_btn">X</a>
-</div>
 {/block}
 {block name="common"}
-    {include file="brand/set_brand" /}
-	{include file="public/sample_layer" /}
+	{include file="../../api/public/vue/components/footer-cart-menu.html" /}
 {/block}
 {block name="footer"}
-	{include file="template/footer_menu.html" /}
+<div id="foot_cart_menu">
+	<footer-cart-menu
+			:add_cart_call_back="add_cart_call_back"
+	></footer-cart-menu>
+</div>
 {/block}
 {block name="script"}
 <script type="text/javascript" src="api_common_js/swiper.min.js"></script>
-<script type="text/javascript" src="index_js/footerCart.js"></script>
 <script type="text/javascript">
+	function getJsonCallBack(data){
+		console.log(data);
+		param = {
+			'buy_named':'采购数量',
+			'display_quota':true,
+			'display_pic':true,
+			'init_quantity':2,
+			'step_quantity':10,
+			'productList':data.data
+		};
+		new Vue({
+			el: '#product-select',
+			data:function(){
+				return param;
+			}
+		});
+	}
+	// 获取该场景下的商品
+	var config = {
+		url:module+'Goods/getRelationGoods',
+		requestEnd:false,
+		loadTrigger:false,
+		currentPage:1,
+		callBack:getJsonCallBack
+	};
+	var postData = {
+		pageSize:10,
+		relation:'{$relation}'
+	};
 	$(function(){
+		//初始化场景商品页面
+		postData.id = '{$info.id}';
+		getJsonList(config,postData);
+		let param = {
+		};
+		new Vue({
+			el: '#foot_cart_menu',
+			data:function(){
+				return param;
+			},methods: {
+				add_cart_call_back:function (param) {
+					let goodsList = {};
+					console.log(param);
+				}
+			}
+		});
+	});
+	$(function(){
+		var id = '{$info.id}';
 		var date=getWeek();
 		countDown(date,$('#countDownBox'));
-		//预览项目详情
-		$('body').on('click','.project_details',function(){
-			var project_detail=$('.project_detail_preview').html();
-			layer.open({
-				title:['项目详情图','border-bottom:1px solid #d9d9d9;'],
-				className:'projectDetailLayer',
-				type:1,
-				anim:'up',
-				content:project_detail,
-				btn:['返回'],
-				success:function(){
-					var winH=$(window).height();
-					$('.project_detail_list').css('height',winH+'px');
-				}
-			})
+		// 后加载简介
+		$('document').ready(function(){
+			$('.intro').html("{$info.intro|raw}");
 		});
+		//轮播
+		var swiper = new Swiper('.swiper-container', {
+			spaceBetween: 30,
+			autoplay:true,
+			pagination: {
+				el: '.swiper-pagination',
+				clickable: true
+			}
+		});
+
+		// 项目信息切换
+		$('.detail-nav li').on('click',function(){
+			$(this).addClass('current').siblings().removeClass('current');
+			$('.project_item').hide().eq($(this).index()).show();
+		})
 	});
 </script>
 {/block}
