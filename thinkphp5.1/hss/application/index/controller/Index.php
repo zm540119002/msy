@@ -42,6 +42,9 @@ class Index extends \common\controller\Base{
         $modelUser = new \app\index\model\UserTest();
 
         $condition = [
+            'where' => [
+                ['id','>',5]
+            ],
             'limit' => 10,
         ];
 
