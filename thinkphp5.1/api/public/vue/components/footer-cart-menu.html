@@ -251,11 +251,8 @@
                             },
                             success: function(data){
                                 $('.loading').hide();
-
-                                console.log(data);
-                                return;
                                 if(async_verify_judge(data)){
-                                    _this.async_verify_call_back(param);
+//                                    _this.async_verify_call_back(param);
                                 }
                             }
                         });
