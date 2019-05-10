@@ -256,10 +256,10 @@
                                 //异步验证判断
                                 let param = {
                                     data:data,
-                                    obj:_this
+                                    func:_this.async_verify
                                 };
                                 if(async_verify_judge(param)){
-                                    dialog.success('成功');
+                                    dialog.success('加入购物车成功');
                                 }
                             }
                         });
