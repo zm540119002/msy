@@ -172,11 +172,11 @@
                     <span class="total_amount">￥{{ parseFloat(total_amount).toFixed(2) }}</span>
                 </div>
                 <!-- 购物篮 -->
-                <div v-else-if="menu.class.indexOf('add_cart_icon')!==-1" ref="jumpUrl" @click="jumpUrl">
+                <div v-else-if="menu.class.indexOf('add_cart_icon')!==-1" @click="jump_url">
                     <span class="cart_num"></span>
                 </div>
                 <!-- 加入购物车 -->
-                <div v-else-if="menu.class.indexOf('add_cart')!==-1" ref="addCart" @click="addCart">
+                <div v-else-if="menu.class.indexOf('add_cart')!==-1" @click="async_verify">
                     <span class="s_i"></span>
                 </div>
                 <!-- 立即购买 -->
@@ -222,9 +222,12 @@
                         this.total_amount += param.subtotal_amount;
                     },total_amount_calculate:function (param) {
                         this.total_amount += param.deal_price * param.increment_buy_quantity;
-                    },async_verify:function(){
+                    },jump_url:function (event) {
+                        let jump_url = $(event.currentTarget).parent().data('jump_url');
+                        location.href = jump_url;
+                    },async_verify:function(event){
                         let _this = this;
-                        let jump_url = $(this.$refs.addCart).parent().data('jump_url');
+                        let jump_url = $(event.currentTarget).parent().data('jump_url');
                         $.ajax({
                             url: jump_url,
                             data: {},
@@ -273,12 +276,6 @@
                                 _this.add_cart_call_back(param);
                             }
                         });
-                    },jumpUrl:function(){
-                        let jump_url = $(this.$refs).parent().data('jump_url');
-
-                        console.log(jump_url);
-                        return false;
-
                     },buyNow:function(){
                         console.log('buyNow');
                     },confirmOrder:function(){
