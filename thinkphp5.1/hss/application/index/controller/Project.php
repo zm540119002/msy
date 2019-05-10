@@ -108,7 +108,8 @@ class Project extends \common\controller\Base{
         }
     }
 
-    /**详情页
+    /**
+     * 详情页
      */
     public function detail(){
         if(request()->isAjax()){
@@ -127,28 +128,41 @@ class Project extends \common\controller\Base{
             ];
             $info = $model->getInfo($config);
             if(empty($info)){
-                $this->error('此商品已下架');
+                $this->error('此项目已下架');
             }
-            $info['detail_img'] = explode(',',(string)$info['detail_img']);
-            $info['tag'] = explode(',',(string)$info['tag']);
+     /*       $info['detail_img'] = explode(',',(string)$info['detail_img']);
+            $info['tag'] = explode(',',(string)$info['tag']);*/
+            project_handle($info);
+            /*
+                        $scene['tag'] = explode('|',(string)$scene['tag']);
+                        $scene['main_img'] = explode(',',(string)$scene['main_img']);
+                        $scene['intro'] = $scene['intro'] ? htmlspecialchars_decode($scene['intro']) : $scene['intro'] ;*/
+
             $this->assign('info',$info);
-            //获取相关的商品
-            $modelProjectGoods = new \app\index\model\ProjectGoods();
-            $config =[
+
+            // 获取场景下的促销方案
+            $modelProjectPromotion = new \app\index\model\ProjectPromotion();
+            $config = [
                 'where' => [
-                    ['pg.status', '=', 0],
-                    ['pg.project_id', '=', $id],
+                    ['pp.project_id', '=', $id],
+                    ['p.shelf_status', '=', 3],
                 ],'field'=>[
-                    'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity',
-                    'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
+                    'p.id','p.name','p.thumb_img'
                 ],'join'=>[
-                    ['goods g','g.id = pg.goods_id','left']
+                    ['promotion p','p.id = pp.promotion_id','left']
                 ]
             ];
-            $goodsList= $modelProjectGoods->getList($config);
-            $this->assign('goodsList',$goodsList);
-            $unlockingFooterCart = unlockingFooterCartConfig([0,2,1]);
-            $this->assign('unlockingFooterCart', $unlockingFooterCart);
+            $promotionList= $modelProjectPromotion->getList($config);
+
+            $modelPromotionGoods = new \app\index\model\PromotionGoods();
+
+            // 套餐列表下的各套餐的商品总价
+            $promotionList = $modelPromotionGoods->getListGoodsPrice($promotionList);
+
+            $this->assign('promotionList',$promotionList);
+
+            $this->assign('relation',config('custom.relation_type.project'));
+
             return $this->fetch();
         }
     }

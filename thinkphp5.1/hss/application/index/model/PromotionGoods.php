@@ -16,7 +16,7 @@ class PromotionGoods extends \common\model\Base {
 	protected $alias = 'pg';
 
     /**
-     * 获取各套餐列表商品总价
+     * 获取套餐列表下的各套餐的商品总价
      * @param $list array 方案列表
      * @return array
      */
