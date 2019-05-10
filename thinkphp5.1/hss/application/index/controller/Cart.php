@@ -39,6 +39,7 @@ class Cart extends \common\controller\UserBase{
             return errorMsg('请求方式错误');
         }
         $goodsList = input('post.goodsList/a');
+        //return $goodsList;
         if(empty($goodsList)){
             return errorMsg('没有数据');
         }
