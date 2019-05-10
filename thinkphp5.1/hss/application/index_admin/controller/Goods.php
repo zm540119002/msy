@@ -257,6 +257,8 @@ class Goods extends Base {
         return successMsg('成功');
     }
 
+
+
     /**
      * 增加各关联表下的商品 -通用方法
      */

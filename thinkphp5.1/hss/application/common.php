@@ -83,7 +83,7 @@ function unlockingFooterCartConfigTest($arr){
  * @return string`'支付方式：0：保留 1 微信 2：支付宝 3：网银 4:钱包',
  */
 function getPaymentCode($num){
-    return $num?config('custom.payment_code')[$num]:'';
+    return $num?config('custom.pay_code')[$num]:'';
 }
 /**获取品牌分类
  * @param $num
@@ -191,3 +191,27 @@ function show_img_handle($img_url,$show_default=true){
         return '';
     }
 }
+
+// scene系列
+/**
+ * 处理场景信息
+ * @param $info array 场景信息
+ */
+function scene_handle(&$info){
+    $info['tag']      = $info['tag']      ? explode('|',(string)$info['tag']) : '';
+    $info['main_img'] = $info['main_img'] ? explode(',',(string)$info['main_img']) : '';
+    $info['intro']    = $info['intro']    ? htmlspecialchars_decode($info['intro']) : '';
+};
+
+
+// project系列
+/**
+ * 处理项目信息
+ * @param $info array 场景信息
+ */
+function project_handle(&$info){
+    $info['tag']      = $info['tag']      ? explode('|',(string)$info['tag']) : '';
+    $info['main_img'] = $info['main_img'] ? explode(',',(string)$info['main_img']) : '';
+    $info['intro']    = $info['intro']    ? htmlspecialchars_decode($info['intro']) : '';
+};
+
