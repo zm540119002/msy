@@ -227,6 +227,8 @@
                         }
                     },addCart:function(event){
                         let _this = this;
+                        console.log(event);
+                        return false;
                         let jump_url = $(event.currentTarget).parent().data('jump_url');
                         //异步验证
                         let postData = {
