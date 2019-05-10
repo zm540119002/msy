@@ -47,8 +47,9 @@ class Cart extends \common\controller\UserBase{
         $model = new \app\index\model\Cart();
         $config = [
             'where' => [
-              ['user_id','=',$userId]
-            ]
+              ['user_id','=',$userId],
+              ['status','=',0],
+            ],
         ];
         $cartList = $model->getList($config);
 
@@ -109,7 +110,6 @@ class Cart extends \common\controller\UserBase{
             return errorMsg('请求方式错误');
         }
         $goodsList = input('post.goodsList/a');
-        //return $goodsList;
         if(empty($goodsList)){
             return errorMsg('没有数据');
         }
@@ -119,12 +119,12 @@ class Cart extends \common\controller\UserBase{
             'field' => [
                 'id','goods_id','num'
             ], 'where' => [
-                ['user_id','=',$userId]
+                ['user_id','=',$userId],
+                ['status','=',0],
             ]
         ];
         $cartList = $model->getList($config);
         $cartList =array_column($cartList,null,'goods_id');
-
         foreach ($goodsList as $k => &$goods){
 
             $goods['user_id']    = $this->user['id'];
