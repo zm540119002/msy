@@ -116,8 +116,10 @@
 			data:function(){
 				return param;
 			},methods: {
-				async_verify_call_back:function (param) {
-					console.log(param);
+				async_verify_call_back:function (param){
+					if(param.data.status==0){
+
+					}
 				},add_cart_call_back:function (param) {
 					console.log(param);
 				}

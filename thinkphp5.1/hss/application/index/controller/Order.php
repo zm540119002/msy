@@ -109,13 +109,17 @@ class Order extends \common\controller\UserBase
                 'where' => [
                     ['user_id','=',$this->user['id']],
                     ['id','=',$fatherOrderId],
-                    ['order_status','<',2],
-                ]
+                ],'field' => [
+                    'o.id', 'o.sn', 'o.amount', 'o.user_id', 'order_status'
+                 ],
             ];
 
             $orderInfo  = $modelOrder->getInfo($condition);
 
             if(!$orderInfo){
+                return errorMsg('没有此订单',['code'=>1]);
+            }
+            if($orderInfo['order_status']>1){
                 return errorMsg('订单已支付',['code'=>1]);
             }
 
@@ -232,6 +236,7 @@ class Order extends \common\controller\UserBase
             $where = [
                 'sn' => $orderInfo['sn'],
                 'user_id' => $this->user['id'],
+                'status' => 0,
             ];
             $result  = $modelPay->isUpdate(true)->save($updateData,$where);
             if($result === false){
