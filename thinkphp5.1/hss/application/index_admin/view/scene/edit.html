@@ -45,7 +45,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class=dotted_bottom_gray height=40 width="11%" align=right>标题：</td>
+                    <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>标题：</td>
                     <td class=dotted_bottom_gray width="89%" align=left>
                         <input style="width: 300px; " class="inputboxadmin" name="title" value="{$info.title}">
                     </td>
@@ -201,7 +201,7 @@
 
             postData.intro = intro.getContent();
 
-            var content='';
+/*            var content='';
             if(!postData.name){
                 content='场景名称不能为空';
             }else if(!postData.title){
@@ -216,7 +216,7 @@
             if(content){
                 dialog.error(content);
                 return false;
-            }
+            }*/
 
             var url = module +'Scene/edit';
             $.post(url,postData,function(msg){
