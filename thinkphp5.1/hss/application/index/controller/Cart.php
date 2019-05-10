@@ -34,7 +34,7 @@ class Cart extends \common\controller\UserBase{
      * @throws \Exception
      *
      */
-    public function addCart(){
+    public function addCart1(){
         if(!request()->isPost()){
             return errorMsg('请求方式错误');
         }
@@ -46,11 +46,14 @@ class Cart extends \common\controller\UserBase{
         $userId = $this->user['id'];
         $model = new \app\index\model\Cart();
         $config = [
-          'where' => [
+            'field' => [
+                'foreign_id'
+            ], 'where' => [
               ['user_id','=',$userId]
-          ]
+            ]
         ];
         $cartList = $model->getList($config);
+
         $addData = [];
         $updateData =[];
         foreach ($goodsList as $goods){
@@ -63,10 +66,10 @@ class Cart extends \common\controller\UserBase{
                         'user_id' => $this->user['id'],
                         'id' => $cart['id'],
                         'foreign_id' => $cart['foreign_id'],
-                        'buy_type' => $cart['buy_type'],
+                        'buy_type' => $cart['buy_type'] ? $cart['buy_type'] : 1,
                         'num' => $goods['num'] + $cart['num'],
-                        'brand_name' => $cart['brand_name'],
-                        'brand_id' => $cart['brand_id'],
+                        'brand_name' => $cart['brand_name'] ? $cart['brand_name'] : '',
+                        'brand_id' => $cart['brand_id'] ? $cart['brand_id'] : 0,
                     ];
                     $updateData[] = $data;
                 }
@@ -75,10 +78,10 @@ class Cart extends \common\controller\UserBase{
                 $data = [
                     'user_id' => $this->user['id'],
                     'foreign_id' => $goods['foreign_id'],
-                    'buy_type' =>$goods['buy_type'],
                     'num' =>$goods['num'],
-                    'brand_name' => $goods['brand_name'],
-                    'brand_id' => $goods['brand_id'],
+                    'buy_type' => $goods['buy_type'] ? $goods['buy_type'] : 1,
+                    'brand_name' => $goods['brand_name'] ? $goods['brand_name'] : '',
+                    'brand_id' => $goods['brand_id'] ? $goods['brand_id'] : 0,
                     'create_time'=>time(),
                 ];
                 $addData[] = $data;
@@ -94,6 +97,93 @@ class Cart extends \common\controller\UserBase{
         }
         if(!empty($updateData)){
             $res =  $model->saveAll($updateData);
+            if (!count($res)) {
+                $model->rollback();
+                return errorMsg('失败');
+            }
+        }
+        $model -> commit();
+        return successMsg('成功');
+    }
+
+    public function addCart(){
+        if(!request()->isPost()){
+            return errorMsg('请求方式错误');
+        }
+        $goodsList = input('post.goodsList/a');
+        //return $goodsList;
+        if(empty($goodsList)){
+            return errorMsg('没有数据');
+        }
+        $userId = $this->user['id'];
+        $model = new \app\index\model\Cart();
+        $config = [
+            'field' => [
+                'id','foreign_id','num'
+            ], 'where' => [
+                ['user_id','=',$userId]
+            ]
+        ];
+        $cartList = $model->getList($config);
+        $cartList =array_column($cartList,null,'foreign_id');
+        p($goodsList);
+        exit;
+        $addData = [];
+        foreach ($goodsList as $goods){
+
+            $data = [
+                'user_id' => $this->user['id'],
+                'foreign_id' => $goods['foreign_id'],
+                'num' =>$goods['num'],
+                'buy_type' => $goods['buy_type'] ? $goods['buy_type'] : 1,
+                'brand_name' => $goods['brand_name'] ? $goods['brand_name'] : '',
+                'brand_id' => $goods['brand_id'] ? $goods['brand_id'] : 0,
+                'create_time'=>time(),
+            ];
+
+            $carInfo = $cartList[$goods['foreign_id']];
+
+            if($carInfo != null){
+                $data['num']= $goods['num']+$carInfo['num'];
+                $data['id'] = $carInfo['id'];
+            }
+
+            $addData[] = $data;
+
+            //假定没找到
+        /*    $find = false;
+            foreach ($cartList as $cart){
+                if($goods['foreign_id'] == $cart['foreign_id'] && $goods['buy_type'] == $cart['buy_type'] && $goods['brand_name'] == $cart['brand_name'] ){//找到了，则更新记录
+                    $find = true;
+                    $data = [
+                        'user_id' => $this->user['id'],
+                        'id' => $cart['id'],
+                        'foreign_id' => $cart['foreign_id'],
+                        'buy_type' => $cart['buy_type'] ? $cart['buy_type'] : 1,
+                        'num' => $goods['num'] + $cart['num'],
+                        'brand_name' => $cart['brand_name'] ? $cart['brand_name'] : '',
+                        'brand_id' => $cart['brand_id'] ? $cart['brand_id'] : 0,
+                    ];
+                    $updateData[] = $data;
+                }
+            }
+            if(!$find){//如果没找到，则新增
+                $data = [
+                    'user_id' => $this->user['id'],
+                    'foreign_id' => $goods['foreign_id'],
+                    'num' =>$goods['num'],
+                    'buy_type' => $goods['buy_type'] ? $goods['buy_type'] : 1,
+                    'brand_name' => $goods['brand_name'] ? $goods['brand_name'] : '',
+                    'brand_id' => $goods['brand_id'] ? $goods['brand_id'] : 0,
+                    'create_time'=>time(),
+                ];
+                $addData[] = $data;
+            }*/
+        }
+
+        $model->startTrans();
+        if(!empty($addData)){
+            $res =  $model->saveAll($addData);
             if (!count($res)) {
                 $model->rollback();
                 return errorMsg('失败');
