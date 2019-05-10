@@ -207,6 +207,8 @@
                         console.log(param);
                     }},add_cart_call_back: {type: Function,default: function(param){
                         console.log(param);
+                    }},buy_now_call_back: {type: Function,default: function(param){
+                        console.log(param);
                     }}
                 },
                 data: function () {
@@ -239,7 +241,7 @@
                             }
                         };
                         $.ajax({
-                            url: jump_url,
+                            url: param.jump_url,
                             data: param.postData,
                             type: 'post',
                             beforeSend: function(xhr){
@@ -282,7 +284,31 @@
                             }
                         });
                     },buyNow:function(){
-                        console.log('buyNow');
+                        let _this = this;
+                        let jump_url = $(event.currentTarget).parent().data('jump_url');
+                        $.ajax({
+                            url: jump_url,
+                            data: {},
+                            type: 'post',
+                            beforeSend: function(xhr){
+                                $('.loading').show();
+                            },
+                            error:function(xhr){
+                                $('.loading').hide();
+                                dialog.error('AJAX错误');
+                            },
+                            success: function(data){
+                                $('.loading').hide();
+                                //提交
+                                let param = {
+                                    'jump_url':jump_url,
+                                    'postData':_this.postData
+                                };
+
+                                _this.buy_now_call_back(param);
+                            }
+                        });
+
                     },confirmOrder:function(){
                         console.log('confirmOrder');
                     },editProductList:function(param){
