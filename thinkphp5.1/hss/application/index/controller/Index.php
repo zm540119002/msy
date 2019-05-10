@@ -37,7 +37,20 @@ class Index extends \common\controller\Base{
         ];
         $sceneList  = $modelScene->getList($condition);
         $this ->assign('sceneList',$sceneList);
-        
+
+        // 众创空间用户
+        $modelUser = new \app\index\model\UserTest();
+
+        $condition = [
+            'where' => [
+                ['id','>',20]
+            ],
+            'limit' => 5,
+        ];
+
+        $list = $modelUser->getList($condition);
+        $this->assign('spaceList',$list);
+
         // 底部菜单，见配置文件custom.footer_menu
         $this->assign('currentPage',request()->controller().'/'.request()->action());
 
