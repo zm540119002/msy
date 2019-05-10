@@ -13,7 +13,6 @@ class Order extends \common\controller\UserBase
         if (empty($goodsList)) {
             return errorMsg('请求数据不能为空');
         }
-        return $goodsList;
 
         $modelOrder = new \app\index\model\Order();
         $modelOrderDetail = new \app\index\model\OrderDetail();
@@ -40,13 +39,12 @@ class Order extends \common\controller\UserBase
                     $goodsList[$k1]['purchase_unit'] = $goodsInfoNew['purchase_unit'];
                     $goodsList[$k1]['store_id'] = $goodsInfoNew['store_id'];
                     switch ($goodsInfo['buy_type']){
-                        case 1:
-                            $goodsList[$k1]['price'] = $goodsInfoNew['bulk_price'];
-                            break;
                         case 2:
                             $goodsList[$k1]['price'] = $goodsInfoNew['sample_price'];
                              break;
                         default:
+                            $goodsList[$k1]['price'] = $goodsInfoNew['bulk_price'];
+                            break;
                     }
                     $totalPrices = $goodsInfo['num'] * $goodsList[$k1]['price'];
                     $amount += number_format($totalPrices, 2, '.', '');
@@ -73,6 +71,7 @@ class Order extends \common\controller\UserBase
             return errorMsg('失败');
         }
         $orderId = $modelOrder ->getAttr('id');
+
         //组装订单明细
         $dataDetail = [];
         foreach ($goodsList as $item=>&$goodsInfo) {
@@ -82,10 +81,11 @@ class Order extends \common\controller\UserBase
             $dataDetail[$item]['goods_id'] = $goodsInfo['goods_id'];
             $dataDetail[$item]['user_id'] = $this->user['id'];
             $dataDetail[$item]['store_id'] = $goodsInfo['store_id'];
-            $dataDetail[$item]['buy_type'] = $goodsInfo['buy_type'];
-            $dataDetail[$item]['brand_name'] = $goodsInfo['brand_name'];
-            $dataDetail[$item]['brand_id'] = $goodsInfo['brand_id'];
+            $dataDetail[$item]['buy_type'] = $goodsInfo['buy_type'] ? $goodsInfo['buy_type'] : 1;
+            $dataDetail[$item]['brand_name'] = $goodsInfo['brand_name'] ? $goodsInfo['brand_name'] : '';
+            $dataDetail[$item]['brand_id'] = $goodsInfo['brand_id'] ? $goodsInfo['brand_id'] : 0;
         }
+
         //生成订单明细
         $res = $modelOrderDetail->allowField(true)->saveAll($dataDetail)->toArray();
         if (!count($res)) {

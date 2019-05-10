@@ -120,11 +120,9 @@
 
 					var postData = {};
 					postData.goodsList = param.postData.productList;
-					console.log(44444);
-					return false;
-					var url = module + 'Order/generate';
+
 					$.ajax({
-						url: url,
+						url: param.jump_url,
 						data: postData,
 						type: 'post',
 						beforeSend: function(){
