@@ -236,6 +236,7 @@ class Order extends \common\controller\UserBase
             $where = [
                 'sn' => $orderInfo['sn'],
                 'user_id' => $this->user['id'],
+                'status' => 0,
             ];
             $result  = $modelPay->isUpdate(true)->save($updateData,$where);
             if($result === false){
