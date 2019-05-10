@@ -32,7 +32,7 @@ class Cart extends \common\model\Base {
         foreach ($orderDetailList as &$orderDetailInfo){
             $condition = [
                 ['user_id','=',$user_id],
-                ['foreign_id','=',$orderDetailInfo['goods_id']],
+                ['goods_id','=',$orderDetailInfo['goods_id']],
                 ['buy_type','in',$orderDetailInfo['buy_type']],
             ];
             $result = $this -> del($condition,false);
