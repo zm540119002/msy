@@ -234,7 +234,9 @@
                         //异步验证判断
                         let param = {
                             'jump_url':jump_url,
-                            'postData':_this.postData
+                            'postData':{
+                                'goodsList':_this.postData.productList
+                            }
                         };
                         $.ajax({
                             url: jump_url,
