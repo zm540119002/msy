@@ -77,14 +77,14 @@
 <script type="text/javascript" src="api_common_js/swiper.min.js"></script>
 <script type="text/javascript">
 	function getJsonListCallBack(data){
-		console.log(data);
+		console.log(data.data.data);
 		param = {
 			'buy_named':'采购数量',
 			'display_quota':true,
 			'display_pic':true,
 			'init_quantity':2,
 			'step_quantity':10,
-			'productList':data.data
+			'productList':data.data.data
 		};
 		new Vue({
 			el: '#product-select',
