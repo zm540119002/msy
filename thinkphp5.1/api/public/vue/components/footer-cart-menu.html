@@ -259,7 +259,7 @@
                                 }
                             }
                         });
-                    },buyNow:function(){
+                    },buyNow:function(event){
                         let _this = this;
                         let jump_url = $(event.currentTarget).parent().data('jump_url');
                         if(!jump_url){
@@ -290,7 +290,7 @@
                                     data:data,
                                     func:_this.buyNow
                                 };
-                                if(async_verify_judge(param)){
+                                if(async_verify_judge(param)===true){
                                     dialog.success('加入购物车成功');
                                 }
                             }
