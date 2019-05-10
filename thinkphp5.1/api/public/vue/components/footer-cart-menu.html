@@ -254,13 +254,12 @@
                             success: function(data){
                                 $('.loading').hide();
                                 //异步验证判断
-                                let res = async_verify_judge(data);
-                                console.log(res);
-                                return false;
-                                if(async_verify_judge(data)){
-                                    param.data = data;
-                                    param.func = _this;
-                                    _this.async_verify_call_back(param);
+                                let param = {
+                                    data:data,
+                                    obj:_this
+                                };
+                                if(async_verify_judge(param)){
+                                    dialog.success('成功');
                                 }
                             }
                         });
