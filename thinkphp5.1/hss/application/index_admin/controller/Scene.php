@@ -75,6 +75,7 @@ class Scene extends Base {
             $data['intro'] = htmlspecialchars(addslashes(input('intro/s')));
             $data['update_time'] = time();
             $data['audit'] = 1; // 暂时没有审核，先固定
+            $data['shelf_status'] = 1; // 暂时没有审核，先固定
 
             if(isset($_POST['id']) && $id=input('post.id/d')){ //修改
 
