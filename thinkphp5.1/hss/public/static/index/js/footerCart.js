@@ -526,7 +526,7 @@ function assemblyData(lis) {
         //alert(goodsId);
         if(parseInt(num) && goodsId){
             var tmp = {};
-            tmp.foreign_id = goodsId;
+            tmp.goods_id = goodsId;
             tmp.num = num;
             tmp.buy_type=buy_type;
             tmp.brand_id=brand_id;

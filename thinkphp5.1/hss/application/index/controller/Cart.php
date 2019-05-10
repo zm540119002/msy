@@ -46,9 +46,7 @@ class Cart extends \common\controller\UserBase{
         $userId = $this->user['id'];
         $model = new \app\index\model\Cart();
         $config = [
-            'field' => [
-                'foreign_id'
-            ], 'where' => [
+            'where' => [
               ['user_id','=',$userId]
             ]
         ];
@@ -60,12 +58,12 @@ class Cart extends \common\controller\UserBase{
             //假定没找到
             $find = false;
             foreach ($cartList as $cart){
-                if($goods['foreign_id'] == $cart['foreign_id'] && $goods['buy_type'] == $cart['buy_type'] && $goods['brand_name'] == $cart['brand_name'] ){//找到了，则更新记录
+                if($goods['goods_id'] == $cart['goods_id'] && $goods['buy_type'] == $cart['buy_type'] && $goods['brand_name'] == $cart['brand_name'] ){//找到了，则更新记录
                     $find = true;
                     $data = [
                         'user_id' => $this->user['id'],
                         'id' => $cart['id'],
-                        'foreign_id' => $cart['foreign_id'],
+                        'goods_id' => $cart['goods_id'],
                         'buy_type' => $cart['buy_type'] ? $cart['buy_type'] : 1,
                         'num' => $goods['num'] + $cart['num'],
                         'brand_name' => $cart['brand_name'] ? $cart['brand_name'] : '',
@@ -77,7 +75,7 @@ class Cart extends \common\controller\UserBase{
             if(!$find){//如果没找到，则新增
                 $data = [
                     'user_id' => $this->user['id'],
-                    'foreign_id' => $goods['foreign_id'],
+                    'goods_id' => $goods['goods_id'],
                     'num' =>$goods['num'],
                     'buy_type' => $goods['buy_type'] ? $goods['buy_type'] : 1,
                     'brand_name' => $goods['brand_name'] ? $goods['brand_name'] : '',
@@ -119,13 +117,13 @@ class Cart extends \common\controller\UserBase{
         $model = new \app\index\model\Cart();
         $config = [
             'field' => [
-                'id','foreign_id','num'
+                'id','goods_id','num'
             ], 'where' => [
                 ['user_id','=',$userId]
             ]
         ];
         $cartList = $model->getList($config);
-        $cartList =array_column($cartList,null,'foreign_id');
+        $cartList =array_column($cartList,null,'goods_id');
 
         foreach ($goodsList as $k => &$goods){
 
@@ -135,7 +133,7 @@ class Cart extends \common\controller\UserBase{
             $goods['brand_id']   = $goods['brand_id'] ? $goods['brand_id'] : 0;
             $goods['create_time']= time();
 
-            $carInfo = $cartList[$goods['foreign_id']];
+            $carInfo = $cartList[$goods['goods_id']];
 
             if($carInfo != null){
                 $goods['num']= $goods['num']+$carInfo['num'];
@@ -170,9 +168,9 @@ class Cart extends \common\controller\UserBase{
 //                 ['c.create_time','>',time()-7*24*60*60],//只展示7天的数据
                  ['c.status','=',0],
              ],'join' => [
-                 ['goods g','g.id = c.foreign_id','left']
+                 ['goods g','g.id = c.goods_id','left']
              ],'field'=>[
-                 'c.id as cart_id','c.foreign_id','c.num','c.goods_type','c.buy_type','c.create_time','c.brand_id','c.brand_name',
+                 'c.id as cart_id','c.goods_id','c.num','c.goods_type','c.buy_type','c.create_time','c.brand_id','c.brand_name',
                  'g.id','g.headline','g.name','g.thumb_img','g.bulk_price','g.sample_price','g.specification','g.minimum_order_quantity',
                  'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
              ],'order'=>[

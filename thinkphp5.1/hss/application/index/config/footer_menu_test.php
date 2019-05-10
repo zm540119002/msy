@@ -35,7 +35,7 @@ return [
                 'bottom_item',
                 'add_cart_icon',
             ],
-            'action'=>url('Cart/addCart2'),
+            'action'=>url('Cart/manage'),
         ],[//3
             'name'   => '立即购买',
             'class'=>[
