@@ -222,9 +222,14 @@
                         this.total_amount += param.deal_price * param.increment_buy_quantity;
                     },jump_url:function (event) {
                         let jump_url = $(event.currentTarget).parent().data('jump_url');
-                        location.href = jump_url;
+                        if(jump_url){
+                            location.href = jump_url;
+                        }
                     },addCart:function(event){
                         let _this = this;
+                        console.log(event);
+                        console.log(event.currentTarget);
+                        return false;
                         let jump_url = $(event.currentTarget).parent().data('jump_url');
                         if(!jump_url){
                             return false;
