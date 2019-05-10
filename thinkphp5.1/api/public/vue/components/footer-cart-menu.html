@@ -228,6 +228,7 @@
                     },addCart:function(event){
                         let _this = this;
                         let jump_url = $(event.currentTarget).parent().data('jump_url');
+                        console.log(jump_url);
                         //异步验证
                         let postData = {
                             'goodsList':_this.postData.productList
