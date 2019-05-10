@@ -160,7 +160,7 @@
 <template id="footer-cart-menu_tpl">
     <footer class="f24 ">
         <div class="group_cart_nav">
-            <a href="javascript:void(0);" v-for="menu in menus" :jump_url="menu.action" :class="menu.class">
+            <a href="javascript:void(0);" v-for="menu in menus" :data-jump_url="menu.action" :class="menu.class">
                 {{menu.name}}
                 <!-- 全选 -->
                 <div v-if="menu.class.indexOf('checked_all')!==-1">
@@ -172,11 +172,11 @@
                     <span class="total_amount">￥{{ parseFloat(total_amount).toFixed(2) }}</span>
                 </div>
                 <!-- 购物篮 -->
-                <div v-else-if="menu.class.indexOf('add_cart_icon')!==-1" @click="jump_url">
+                <div v-else-if="menu.class.indexOf('add_cart_icon')!==-1" ref="jump_url" @click="jump_url">
                     <span class="cart_num"></span>
                 </div>
                 <!-- 加入购物车 -->
-                <div v-else-if="menu.class.indexOf('add_cart')!==-1" @click="addCart">
+                <div v-else-if="menu.class.indexOf('add_cart')!==-1" ref="addCart" @click="addCart">
                     <span class="s_i"></span>
                 </div>
                 <!-- 立即购买 -->
@@ -220,15 +220,14 @@
                         this.total_amount += param.subtotal_amount;
                     },total_amount_calculate:function (param) {
                         this.total_amount += param.deal_price * param.increment_buy_quantity;
-                    },jump_url:function (event) {
-                        let jump_url = $(event.currentTarget).parent().data('jump_url');
+                    },jump_url:function () {
+                        let jump_url = $(this.$refs.jump_url).parent().data('jump_url');
                         if(jump_url){
                             location.href = jump_url;
                         }
-                    },addCart:function(event){
+                    },addCart:function(){
                         let _this = this;
-                        let jump_url = $(event.currentTarget).parent().data('jump_url');
-                        console.log(jump_url);
+                        let jump_url = $(this.$refs.addCart).parent().data('jump_url');
                         //异步验证
                         let postData = {
                             'goodsList':_this.postData.productList
@@ -260,7 +259,7 @@
                         }else{
                             dialog.error('请选择商品！');
                         }
-                    },buyNow:function(event){
+                    },buyNow:function(){
                     },confirmOrder:function(){
                         console.log('confirmOrder');
                     },editProductList:function(param){
