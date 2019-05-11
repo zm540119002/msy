@@ -30,7 +30,7 @@ return [
         ],
         'Franchise/index' => [
             'name' => '加盟店家',
-            'a'    => 'href='.url('Franchise/index'),
+            'a'    => 'href='.url('Index/FranchiseIndex'),
 //            'a'    => "href=javascript:void(0) class='async_login' data-jump_url=".url('Franchise/index'),
             'icon' => 'practitioners',
         ],

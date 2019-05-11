@@ -1,8 +1,7 @@
 <?php
 namespace app\index\controller;
 
-class Franchise extends \common\controller\Base {
-    protected $user = null;
+class Franchise extends \common\controller\UserBase {
     /**首页
      */
     public function index(){
