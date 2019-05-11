@@ -173,7 +173,7 @@
                 </div>
                 <!-- 购物篮 -->
                 <div v-else-if="menu.class.indexOf('add_cart_icon')!==-1" @click="jump_url">
-                    <span class="cart_num"></span>
+                    <span class="cart_num">{{num}}</span>
                 </div>
                 <!-- 加入购物车 -->
                 <div v-else-if="menu.class.indexOf('add_cart')!==-1" @click="addCart">
@@ -203,6 +203,7 @@
             Vue.component('footer-cart-menu', {
                 template:'#footer-cart-menu_tpl',
                 props: {
+                    num: {type: Number,default: 0},
                     buy_now_call_back: {type: Function,default: function(param){
                         console.log(param);
                     }}
@@ -255,7 +256,7 @@
                                         }
                                     };
                                     if(async_verify_judge(param)===true){
-                                        dialog.success('成功！');
+                                        dialog.success('加入购物车成功！');
                                     }
                                 }
                             });

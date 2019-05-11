@@ -69,6 +69,7 @@
 <div id="foot_cart_menu">
 	<footer-cart-menu
 			:buy_now_call_back="buy_now_call_back"
+			:num="num"
 	></footer-cart-menu>
 </div>
 {/block}
@@ -108,6 +109,7 @@
 		postData.id = '{$info.id}';
 		getJsonList(config,postData);
 		let param = {
+			'num':10
 		};
 		new Vue({
 			el: '#foot_cart_menu',
