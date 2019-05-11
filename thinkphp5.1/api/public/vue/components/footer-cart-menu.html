@@ -172,11 +172,11 @@
                     <span class="total_amount">￥{{ parseFloat(total_amount).toFixed(2) }}</span>
                 </div>
                 <!-- 购物篮 -->
-                <div v-else-if="menu.class.indexOf('add_cart_icon')!==-1" @click="jump_url">
+                <div v-else-if="menu.class.indexOf('add_cart_icon')!==-1" ref="jump_url" @click="jump_url">
                     <span class="cart_num"></span>
                 </div>
                 <!-- 加入购物车 -->
-                <div v-else-if="menu.class.indexOf('add_cart')!==-1" @click="async_verify">
+                <div v-else-if="menu.class.indexOf('add_cart')!==-1" ref="addCart" @click="addCart">
                     <span class="s_i"></span>
                 </div>
                 <!-- 立即购买 -->
@@ -203,11 +203,7 @@
             Vue.component('footer-cart-menu', {
                 template:'#footer-cart-menu_tpl',
                 props: {
-                    async_verify_call_back: {type: Function,default: function(param){
-                        console.log(param);
-                    }},add_cart_call_back: {type: Function,default: function(param){
-                        console.log(param);
-                    }},buy_now_call_back: {type: Function,default: function(param){
+                    buy_now_call_back: {type: Function,default: function(param){
                         console.log(param);
                     }}
                 },
@@ -224,96 +220,46 @@
                         this.total_amount += param.subtotal_amount;
                     },total_amount_calculate:function (param) {
                         this.total_amount += param.deal_price * param.increment_buy_quantity;
-                    },jump_url:function (event) {
-                        let jump_url = $(event.currentTarget).parent().data('jump_url');
-                        location.href = jump_url;
-                    },async_verify:function(event){
-                        let _this = this;
-                        let jump_url = $(event.currentTarget).parent().data('jump_url');
-                        if(!jump_url){
-                            return false;
+                    },jump_url:function () {
+                        let jump_url = $(this.$refs.jump_url).parent().data('jump_url');
+                        if(jump_url){
+                            location.href = jump_url;
                         }
+                    },addCart:function(event){
+                        let _this = this;
+                        let jump_url = $(event.currentTarget).parent().data('jump_url');
                         //异步验证
-                        let param = {
-                            'jump_url':jump_url,
-                            'postData':{
-                                'goodsList':_this.postData.productList
-                            }
+                        let postData = {
+                            'goodsList':_this.postData.productList
                         };
-                        $.ajax({
-                            url: param.jump_url,
-                            data: param.postData,
-                            type: param.type?param.type:'post',
-                            beforeSend: function(xhr){
-                                $('.loading').show();
-                            },
-                            error:function(xhr){
-                                $('.loading').hide();
-                                dialog.error('AJAX错误');
-                            },
-                            success: function(data){
-                                $('.loading').hide();
-                                //异步验证判断
-                                let param = {
-                                    data:data,
-                                    func:_this.async_verify
-                                };
-                                if(async_verify_judge(param)){
-                                    dialog.success('加入购物车成功');
+                        if(jump_url && postData.goodsList.length){
+                            $.ajax({
+                                url: jump_url,
+                                data: postData,
+                                type: param.type?param.type:'post',
+                                beforeSend: function(xhr){
+                                    $('.loading').show();
+                                },
+                                error:function(xhr){
+                                    $('.loading').hide();
+                                    dialog.error('AJAX错误');
+                                },
+                                success: function(data){
+                                    $('.loading').hide();
+                                    //异步验证判断
+                                    let param = {
+                                        data:data,
+                                        func:_this.addCart
+                                    };
+                                    if(async_verify_judge(param)===true){
+                                        dialog.success('加入购物车成功！');
+                                    }
                                 }
-                            }
-                        });
-                    },addCart:function(){
-                        let _this = this;
-                        let jump_url = $(event.currentTarget).parent().data('jump_url');
-                        $.ajax({
-                            url: jump_url,
-                            data: {},
-                            type: 'post',
-                            beforeSend: function(xhr){
-                                $('.loading').show();
-                            },
-                            error:function(xhr){
-                                $('.loading').hide();
-                                dialog.error('AJAX错误');
-                            },
-                            success: function(data){
-                                $('.loading').hide();
-                                //提交
-                                let param = {
-                                    'jump_url':jump_url,
-                                    'postData':_this.postData
-                                };
-
-                                _this.add_cart_call_back(param);
-                            }
-                        });
+                            });
+                        }else{
+                            dialog.error('请选择商品！');
+                        }
                     },buyNow:function(){
-                        let _this = this;
-                        let jump_url = $(event.currentTarget).parent().data('jump_url');
-                        $.ajax({
-                            url: jump_url,
-                            data: {},
-                            type: 'post',
-                            beforeSend: function(xhr){
-                                $('.loading').show();
-                            },
-                            error:function(xhr){
-                                $('.loading').hide();
-                                dialog.error('AJAX错误');
-                            },
-                            success: function(data){
-                                $('.loading').hide();
-                                //提交
-                                let param = {
-                                    'jump_url':jump_url,
-                                    'postData':_this.postData
-                                };
-
-                                _this.buy_now_call_back(param);
-                            }
-                        });
-
                     },confirmOrder:function(){
                         console.log('confirmOrder');
                     },editProductList:function(param){
