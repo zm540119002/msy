@@ -228,6 +228,7 @@
                     },addCart:function(event){
                         let _this = this;
                         let _event = event;
+                        console.log(event);
                         let jump_url = $(event.currentTarget).parent().data('jump_url');
                         //异步验证
                         let postData = {
@@ -247,13 +248,13 @@
                                 },
                                 success: function(data){
                                     $('.loading').hide();
-                                    let aa = function(_event){
-                                        $(_event.currentTarget).click();
-                                    };
+                                    console.log(_event);
                                     //异步验证判断
                                     let param = {
                                         data:data,
-                                        func:aa
+                                        func:function(_event){
+                                            $(_event.currentTarget).click();
+                                        }
                                     };
                                     if(async_verify_judge(param)===true){
                                         dialog.success('加入购物车成功！');
