@@ -140,34 +140,14 @@ class Scene extends \common\controller\Base{
      * 没有图片 暂时隐藏 后期待确定后再删除 code=1， sort.html 文件 sql 三处
      */
     public function sort(){
-        if(request()->isAjax()){
-        }else{
-            $id = intval(input('id'));
-            if(!$id){
-                $this->error('此项目已下架');
-            }
-            // 场景信息
-            $this->displayScene($id);
-
-            // 场景下的商品分类
-            $modelSceneGoodsCategory = new \app\index\model\SceneGoodsCategory();
-            $config = [
-                'where'  => [
-                    ['gc.status', '=', 0],
-                    ['sgc.scene_id', '=', $id],
-                ],'field'=> [
-                    'gc.id ','gc.name','gc.img',
-                ],'join' => [
-                    ['goods_category gc','gc.id = sgc.goods_category_id','left']
-                ],'order'=> [
-                    'gc.sort'=>'desc'
-                ]
-            ];
-            $categoryList = $modelSceneGoodsCategory->getList($config);
-            $this->assign('categoryList',$categoryList);
-
-            return $this->fetch('sort_img');
+        $id = intval(input('id'));
+        if(!$id){
+            $this->error('此项目已下架');
         }
+        // 场景信息
+        $this->displayScene($id);
+
+        return $this->fetch();
     }
 
     /**
@@ -183,7 +163,6 @@ class Scene extends \common\controller\Base{
             }
             // 场景信息
             $this->displayScene($id);
-            $this->assign('relation',config('custom.relation_type.project'));
 
             return $this->fetch();
         }
