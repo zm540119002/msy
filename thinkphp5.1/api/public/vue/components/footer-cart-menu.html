@@ -221,23 +221,23 @@
                     },total_amount_calculate:function (param) {
                         this.total_amount += param.deal_price * param.increment_buy_quantity;
                     },jump_url:function (event) {
-                        let jump_url = $(event.currentTarget).parent().data('jump_url');
+                        let obj = $(event.currentTarget);
+                        let jump_url = obj.parent().data('jump_url');
                         if(jump_url){
                             location.href = jump_url;
                         }
                     },addCart:function(event){
-                        let _this = this;
                         let obj = $(event.currentTarget);
                         let jump_url = obj.parent().data('jump_url');
                         //异步验证
                         let postData = {
-                            'goodsList':_this.postData.productList
+                            'goodsList':this.postData.productList
                         };
                         if(jump_url && postData.goodsList.length){
                             $.ajax({
                                 url: jump_url,
                                 data: postData,
-                                type: param.type?param.type:'post',
+                                type: 'post',
                                 beforeSend: function(xhr){
                                     $('.loading').show();
                                 },
@@ -251,9 +251,7 @@
                                     let param = {
                                         data:data,
                                         func:function(){
-                                            console.log(1);
                                             obj.click();
-                                            console.log(2);
                                         }
                                     };
                                     if(async_verify_judge(param)===true){
