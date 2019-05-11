@@ -97,36 +97,11 @@ class Scene extends \common\controller\Base{
                 }
             }
 
-
             scene_handle($scene);
-/*
-            $scene['tag'] = explode('|',(string)$scene['tag']);
-            $scene['main_img'] = explode(',',(string)$scene['main_img']);
-            $scene['intro'] = $scene['intro'] ? htmlspecialchars_decode($scene['intro']) : $scene['intro'] ;*/
 
             $this->assign('info',$scene);
 
-            // 获取场景下的促销方案
-            $modelSceneScheme = new \app\index\model\ScenePromotion();
-            $config = [
-                'where' => [
-                    ['sp.status', '=', 0],
-                    ['sp.scene_id', '=', $id],
-                    ['p.shelf_status', '=', 3],
-                ],'field'=>[
-                    'p.id','p.name','p.thumb_img'
-                ],'join'=>[
-                    ['promotion p','p.id = sp.promotion_id','left']
-                ]
-            ];
-            $promotionList= $modelSceneScheme->getList($config);
-
-            $modelPromotionGoods = new \app\index\model\PromotionGoods();
-
-            // 套餐下的商品总价 单个
-            $promotionList = $modelPromotionGoods->getListGoodsPrice($promotionList);
-
-            $this->assign('promotionList',$promotionList);
+            Promotion::displayPromotionList($id);
 
             $this->assign('relation',config('custom.relation_type.scene'));
 
@@ -144,7 +119,7 @@ class Scene extends \common\controller\Base{
         if(!$id){
             $this->error('此项目已下架');
         }
-        // 场景信息
+
         $this->displayScene($id);
 
         return $this->fetch();
@@ -161,7 +136,7 @@ class Scene extends \common\controller\Base{
             if(!$id){
                 $this->error('此项目已下架');
             }
-            // 场景信息
+
             $this->displayScene($id);
 
             return $this->fetch();
