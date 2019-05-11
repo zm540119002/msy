@@ -227,8 +227,8 @@
                         }
                     },addCart:function(event){
                         let _this = this;
-                        let _event = event;
-                        let jump_url = $(event.currentTarget).parent().data('jump_url');
+                        let obj = $(event.currentTarget);
+                        let jump_url = obj.parent().data('jump_url');
                         //异步验证
                         let postData = {
                             'goodsList':_this.postData.productList
@@ -253,7 +253,7 @@
                                         data:data,
                                         func:function(){
                                             console.log(1);
-                                            $(_event.currentTarget).click();
+                                            obj.click();
                                             console.log(2);
                                         }
                                     };
