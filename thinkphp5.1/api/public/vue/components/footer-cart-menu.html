@@ -229,7 +229,6 @@
                         let _this = this;
                         let _event = event;
                         console.log(event);
-                        return ;
                         let jump_url = $(event.currentTarget).parent().data('jump_url');
                         //异步验证
                         let postData = {
@@ -253,8 +252,8 @@
                                     //异步验证判断
                                     let param = {
                                         data:data,
-                                        func:function(_event){
-                                            $(_event.currentTarget).click();
+                                        func:function(){
+                                            console.log(123);
                                         }
                                     };
                                     if(async_verify_judge(param)===true){
