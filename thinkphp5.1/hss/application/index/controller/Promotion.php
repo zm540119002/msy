@@ -39,9 +39,8 @@ class Promotion extends \common\controller\Base{
 
 
             // 购物车商品总数量
-            $cartSum = 100;
+            $cartSum = 0;
             if( $user = session('user') ){
-
                 $modelCart = new \app\index\model\Cart();
                 $cartSum  = $modelCart->where([['user_id','=',$user['id']],['status','=',0]])->sum('num');
             }
