@@ -2,6 +2,7 @@
 namespace app\index\controller;
 
 class Franchise extends \common\controller\UserBase {
+    protected $user = null;
     /**首页
      */
     public function index(){
