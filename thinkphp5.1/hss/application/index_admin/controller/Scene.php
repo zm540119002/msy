@@ -34,7 +34,7 @@ class Scene extends Base {
             if($id = input('param.id/d')){
                 $condition = [
                     'field' => [
-                        'id','name','shelf_status','sort','thumb_img','main_img','intro','tag','display_type','type','tag_category','title','background_img'
+                        'id','name','shelf_status','sort','thumb_img','main_img','intro','tag','display_type','tag_category','title','background_img'
                     ], 'where' => [
                         ['id','=',$id]
                     ],
@@ -150,7 +150,7 @@ class Scene extends Base {
 
         $where[] = ['status','=',0];
         // 条件
-        if(isset($_GET['type'])&&$type=input('get.type/d'))  $where[] = ['type','=',$type];
+        if(isset($_GET['type'])&&$type=input('get.type/s'))  $where[] = ['display_type','=',$type];
 
         if(isset($_GET['shelf_status'])&&$shelf_status=input('get.shelf_status/d'))  $where[] = ['shelf_status','=',$shelf_status];
 
@@ -159,7 +159,7 @@ class Scene extends Base {
 
         $condition = [
             'where'=>$where,
-            'field'=>['id','name','thumb_img','main_img','intro','shelf_status','sort','create_time','type','display_type'],
+            'field'=>['id','name','thumb_img','main_img','intro','shelf_status','sort','create_time','display_type'],
             'order'=>['id'=>'asc',],
         ];
 
