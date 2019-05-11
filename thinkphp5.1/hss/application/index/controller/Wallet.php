@@ -40,7 +40,6 @@ class Wallet extends Base {
 
             $wallet= $model->getInfo($condition);
             $this->assign('wallet',$wallet);
-
             return $this->fetch('recharge');
         }
     }

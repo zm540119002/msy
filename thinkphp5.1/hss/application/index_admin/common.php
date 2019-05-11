@@ -26,7 +26,7 @@ function goodsMergeById($old,$new){
         return $old;
     foreach ($old as &$value){
         foreach ($new as $val){
-            if($value['foreign_id'] == $val['foreign_id']){
+            if($value['goods_id'] == $val['goods_id']){
                 $value['num'] += $val['num'];
             }
         }
@@ -34,7 +34,7 @@ function goodsMergeById($old,$new){
     foreach ($new as $item){
         $find = false;
         foreach ($old as $val){
-            if($item['foreign_id'] == $val['foreign_id']){
+            if($item['goods_id'] == $val['goods_id']){
                 $find = true;
                 break;
             }
@@ -53,7 +53,7 @@ function goodsMergeById($old,$new){
 function GoodsNumMergeById($old,$new){
     foreach ($new as &$value){
         foreach ($old as $val){
-            if($value['id'] == $val['foreign_id']){
+            if($value['id'] == $val['goods_id']){
                 $value['num'] = $val['num'];
                 break;
             }

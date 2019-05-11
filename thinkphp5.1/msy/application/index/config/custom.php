@@ -24,7 +24,7 @@ return [
             'db'=>'db_config_weiya',
             'jump_url'=>[
                 1 => 'https://www.worldview.com.cn/index/Order/manage/order_status/2',
-                2 => 'https://www.worldview.com.cn/index/Order/manage/order_status/2',
+                2 => 'https://mcs.meishangyun.com/index/Wallet/index',
             ],
         ],
         '2'=>[

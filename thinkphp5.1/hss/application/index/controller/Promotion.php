@@ -33,11 +33,19 @@ class Promotion extends \common\controller\Base{
                 $this->error('此套餐已下架');
             }
 
-            $info['tag'] = explode('|',(string)$info['tag']);
-            $info['main_img'] = explode(',',(string)$info['main_img']);
-            $info['intro'] = $info['intro'] ? htmlspecialchars_decode($info['intro']) : $info['intro'] ;
-
+            promotion_handle($info);
             $this->assign('info',$info);
+
+
+
+            // 购物车商品总数量
+            $cartSum = 0;
+            if( $user = session('user') ){
+                $modelCart = new \app\index\model\Cart();
+                $cartSum  = $modelCart->where([['user_id','=',$user['id']],['status','=',0]])->sum('num');
+            }
+
+            $this->assign('cartSum',$cartSum);
 
             $unlockingFooterCart = unlockingFooterCartConfigTest([0,2,1,3]);
             array_push($unlockingFooterCart['menu'][0]['class'],'group_btn30');

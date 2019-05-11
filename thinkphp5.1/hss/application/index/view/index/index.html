@@ -46,23 +46,23 @@
 					<div class="swiper-wrapper">
 						<div class="swiper-slide">
 							<a href="#">
-								<img src="{:show_img_handle($vo.thumb_img)}" alt="{$vo.name}" class="common_default_img">
+								<img src="public_img/banner.jpg" alt="{$vo.name}" class="common_default_img">
 							</a>
 						</div>
 					</div>
 				</div>
 			</section>
-			<!-- 招商 --->
+			<!-- 招商 -->
 			<div class="scene_wrapper">
 				<div class="columns_flex l-r-sides" >
 					<a href="" class="graphic_item">
-						<img src="{:show_img_handle($vo.thumb_img)}" alt="">
+						<img src="public_img/scene2.jpg" alt="">
 					</a>
 					<a href="" class="graphic_item">
-						<img src="{:show_img_handle($vo.thumb_img)}" alt="">
+						<img src="public_img/scene3.jpg" alt="">
 					</a>
 					<a href="" class="graphic_item">
-						<img src="{:show_img_handle($vo.thumb_img)}" alt="">
+						<img src="public_img/scene1.jpg" alt="">
 					</a>
 				</div>
 			</div>
@@ -91,19 +91,20 @@
 					<a class="news_more" href="javascript:void(0)">众创空间</a>
 				</div>
 				<div class="customer_list">
-
+					{volist name="spaceList" id="vo"}
 					<div class="columns_flex l-r-sides">
-						<span>[客户昵称]</span>
-						<span>[手机号码]</span>
-						<span>[日期]</span>
-						<span>[咨询合作联盟]</span>
+						<span>{$vo.name}</span>
+						<span>{$vo.mobile_phone}</span>
+						<span>{$vo.create_time|date='Y-m-d'}</span>
+						<span>
+						{if $vo.sex==1}
+							咨询合作联盟
+						{else /}
+							咨询城市合伙人
+						{/if}
+						</span>
 					</div>
-					<div class="columns_flex l-r-sides">
-						<span>[客户昵称]</span>
-						<span>[手机号码]</span>
-						<span>[日期]</span>
-						<span>[咨询城市合伙人]</span>
-					</div>
+					{/volist}
 				</div>
 			</div>
 			<div class="scene_wrapper">
