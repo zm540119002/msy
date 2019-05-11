@@ -226,10 +226,11 @@
                             location.href = jump_url;
                         }
                     },addCart:function(event){
+                        let i = 0;
+                        console.log(++i);
+                        $(event.currentTarget).click();
                         let _this = this;
                         let _event = event;
-                        console.log(event);
-                        $(event.currentTarget).click();
                         let jump_url = $(event.currentTarget).parent().data('jump_url');
                         //异步验证
                         let postData = {
