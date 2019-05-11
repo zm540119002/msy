@@ -123,8 +123,9 @@ class Cart extends \common\controller\UserBase{
                 ['status','=',0],
             ]
         ];
+
         $cartList = $model->getList($config);
-        $cartList =array_column($cartList,null,'goods_id');
+        $cartList = array_column($cartList,null,'goods_id');
         foreach ($goodsList as $k => &$goods){
 
             $goods['user_id']    = $this->user['id'];
