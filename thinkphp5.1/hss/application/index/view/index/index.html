@@ -265,6 +265,24 @@
 		$('body').on('click','.news_more',function () {
 			location.href = module + 'Information/index';
 		});
+		//新闻滚动
+		var len=$('.news_list li').length;
+		var timer=setInterval(function(){
+			var i=0;
+			i++;
+			move(i);
+		},2200);
+		function move(i){
+			var h=$('.news_item').height();
+			var offsetY=h*i;
+			$('.news_list').get(0).style.transform="translate3d(0,-"+offsetY+"px,0)";
+			$('.news_list').get(0).style.transition="transform 500ms ease-in-out 0s";
+			setTimeout(function(){
+				$('.news_list').get(0).style.transform="translate3d(0,0,0)";
+				$('.news_list').get(0).style.transition="none 0s ease 0s";
+				$('.news_list li').eq(len-1).after($('.news_list li').eq(0));
+			},500);
+		}
 	});
 </script>
 {/block}
