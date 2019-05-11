@@ -173,7 +173,7 @@
                 </div>
                 <!-- 购物篮 -->
                 <div v-else-if="menu.class.indexOf('add_cart_icon')!==-1" ref="jump_url" @click="jump_url">
-                    <span class="cart_num"></span>
+                    <span class="cart_num"><i class="num"></i></span>
                 </div>
                 <!-- 加入购物车 -->
                 <div v-else-if="menu.class.indexOf('add_cart')!==-1" ref="addCart" @click="addCart">
