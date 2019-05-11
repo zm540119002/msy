@@ -4423,6 +4423,14 @@ select[name="nodeIds"]{
     padding:0 0 0 0.10rem;
     border-left:1px solid #d9d9d9;
 }
+.customer_list_wrapper{
+    height:1rem;
+    overflow:hidden;
+}
+.customer_list .customer_item{
+    height:;
+    line-height:;
+}
 .new_share_wrap{
     background:#C9A063;
 }
