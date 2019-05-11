@@ -60,13 +60,13 @@ class Index extends \common\controller\Base{
     /**
      * 加盟店的首页
      */
-    public function FranchiseIndex()
+    public function franchiseIndex()
     {
         if(request()->isAjax()){
         }else{
             // 底部菜单，见配置文件custom.footer_menu
             $this->assign('currentPage',request()->controller().'/'.request()->action());
-            return $this->fetch();
+            return $this->fetch('franchise/index');
         }
 
     }
