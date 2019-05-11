@@ -205,7 +205,7 @@
             Vue.component('footer-cart-menu', {
                 template:'#footer-cart-menu_tpl',
                 props: {
-                    cart_num: {type: Number,default: 0},
+                    cart_init_num: {type: Number,default: 0},
                     buy_now_call_back: {type: Function,default: function(param){
                         console.log(param);
                     }}
@@ -213,6 +213,7 @@
                 data: function () {
                     return {
                         total_amount:0,
+                        cart_num:this.cart_init_num,
                         menus: unlockingFooterCart.menu,
                         postData:{
                             productList:[]

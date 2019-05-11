@@ -19,10 +19,12 @@
 			<div id="product-select">
 				<product-select
 						v-for="productInfo in productList"
-						:key="parseInt(productInfo.id)"
-						:product_id="parseInt(productInfo.id)"
+						:key="productInfo.id"
+						:product_id="productInfo.id"
 						:deal_price="parseFloat(productInfo.bulk_price)"
 						:product_name="productInfo.headline"
+						:product_src="productInfo.thumb_img"
+						:product_url="String(productInfo.id)"
 						:buy_named="buy_named"
 						:init_quantity="parseInt(init_quantity)"
 						:step_quantity="parseInt(step_quantity)"
@@ -43,7 +45,7 @@
 <div id="foot_cart_menu">
 	<footer-cart-menu
 			:buy_now_call_back="buy_now_call_back"
-			:cart_num="cart_num"
+			:cart_init_num="cart_init_num"
 	></footer-cart-menu>
 </div>
 {/block}
@@ -52,7 +54,7 @@
 <script type="text/javascript" src="api_common_js/swiper.min.js"></script>
 <script type="text/javascript">
 	function getJsonListCallBack(data){
-
+		console.log(data);
 		param = {
 			'buy_named':'采购数量',
 			'display_quota':true,
@@ -83,7 +85,7 @@
 
 	$(function(){
 		let param = {
-			cart_num:parseInt("{$cartSum|default=0}")
+			cart_init_num:parseInt("{$cartSum|default=0}")
 		};
 		new Vue({
 			el: '#foot_cart_menu',
