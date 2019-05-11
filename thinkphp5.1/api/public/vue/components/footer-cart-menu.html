@@ -173,7 +173,9 @@
                 </div>
                 <!-- 购物篮 -->
                 <div v-else-if="menu.class.indexOf('add_cart_icon')!==-1" @click="jump_url">
-                    <span class="cart_num" v-if="cart_num">{{cart_num}}</span>
+                    <span class="cart_num" v-if="cart_num > 99">99+</span>
+                    <span class="cart_num" v-else-if="cart_num > 1">{{cart_num}}</span>
+                    <span class="cart_num" v-else></span>
                 </div>
                 <!-- 加入购物车 -->
                 <div v-else-if="menu.class.indexOf('add_cart')!==-1" @click="addCart">
