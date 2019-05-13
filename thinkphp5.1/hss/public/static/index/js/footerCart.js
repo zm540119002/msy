@@ -157,13 +157,14 @@ $(function () {
         lis = $('ul.goods_list').find('li[data-buy_type="1"]');
         var postData = assemblyData(lis);
         var goodsList = postData.goodsList;
-
-        console.log(JSON.stringify(postData));
+        var cartList = JSON.stringify(postData);
+        console.log(cartList);return false
         if(!postData){
             return false;
         }
         postData._this = _this;
         postData.lis = lis;
+
         addCart(postData);
     });
     //样品弹窗加入购物车
