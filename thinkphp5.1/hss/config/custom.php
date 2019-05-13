@@ -99,11 +99,11 @@ return [
         5 => '新零售商品分类',
     ],
     /**
-     * 标记 -关联表类型 goods
+     * 标记 -关联表类型 goods,promotion
      */
     'relation_type' => [
         'scene'    => 1,
-        'project'  => 2,
-        'promotion'=> 3,
+        'sort'     => 2,
+        'project'  => 3,
     ],
 ];
