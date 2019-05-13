@@ -171,7 +171,7 @@ class Project extends Base {
 
         try {
             $result= $model->del($condition);
-            $model = new \app\index_admin\model\SceneProject();
+            $model = new \app\index_admin\model\ProjectPromotion();
             $model->del($where,false);
 
             $model->commit();

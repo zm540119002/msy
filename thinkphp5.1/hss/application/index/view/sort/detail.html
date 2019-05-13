@@ -1,0 +1,151 @@
+{extend name="template/base.html" /}
+
+{block name="title"}
+品类详情
+{/block}
+
+{block name="content"}
+<article class="f24">
+	<!-- 项目信息 -->
+	<div id="menu">
+		<ul class="columns_flex detail-nav">
+			<li data-item="item1"><a href="javascript:;" class="">品类商品</a></li>
+			<li data-item="item2"><a href="javascript:;" class="">品类介绍</a></li>
+			<li data-item="item3"><a href="javascript:;" class="">相关培训</a></li>
+		</ul>
+	</div>
+
+	<!-- 品类商品 -->
+	<section class="content-padding content_main project_item">
+
+		{include file="template/scene_detail.html" /}
+
+		<!-- 内容 -->
+		<section class="content-padding content_main wy_list">
+			<!--采购方案列表-->
+			{notempty name="promotionList"}
+			{volist name="promotionList" id="vo"}
+			<a href="{:url('Promotion/detail',['id'=>$vo.id])}" data-id="{$vo.id}" class="">
+				<div class="applay_p_item columns_flex l-r-sides">
+					<div>
+						<div>¥<price>{$vo.price}</price></div>
+						<p>{$vo.name}</p>
+						<p>立即进入</p>
+					</div>
+					<div class="group_btn50">
+						<img class="common_default_img" src="{:show_img_handle($vo.thumb_img)}" alt="{$vo.name}">
+					</div>
+				</div>
+			</a>
+			{/volist}
+			{/notempty}
+			<!--产品列表-->
+			<ul class="goods_list list" id="list">
+				<div id="product-select">
+					<product-select
+							v-for="productInfo in productList"
+							:key="productInfo.id"
+							:product_id="productInfo.id"
+							:deal_price="parseFloat(productInfo.bulk_price)"
+							:product_name="productInfo.headline"
+							:product_src="productInfo.thumb_img"
+							:product_url="String(productInfo.id)"
+							:buy_named="buy_named"
+							:init_quantity="parseInt(init_quantity)"
+							:step_quantity="parseInt(step_quantity)"
+							:display_pic="display_pic"
+					></product-select>
+				</div>
+			</ul>
+		</section>
+	</section>
+	<!-- 品类介绍 -->
+	<section class="project_item hide">
+		<p>
+			{volist name="$info.detail_img" id="vo"}
+			<img src="{:show_img_handle($vo)}" alt="" class="common_default_img">
+			{/volist}
+		</p>
+	</section>
+	<!-- 相关培训 -->
+	<section class="project_item hide">
+		<p>
+			{volist name="$info.process_img" id="vo"}
+			<img src="{:show_img_handle($vo)}" alt="" class="common_default_img">
+			{/volist}
+		</p>
+	</section>
+</article>
+{/block}
+{block name="common"}
+	{include file="../../api/public/vue/components/footer-cart-menu.html" /}
+{/block}
+{block name="footer"}
+<div id="foot_cart_menu">
+	<footer-cart-menu
+			:add_cart_call_back="add_cart_call_back"
+	></footer-cart-menu>
+</div>
+{/block}
+{block name="script"}
+<script type="text/javascript" src="api_common_js/swiper.min.js"></script>
+<script type="text/javascript">
+	function getJsonListCallBack(data){
+		param = {
+			'buy_named':'采购数量',
+			'display_quota':true,
+			'display_pic':true,
+			'init_quantity':0,
+			'step_quantity':1,
+			'productList':data.data.data
+		};
+		new Vue({
+			el: '#product-select',
+			data:function(){
+				return param;
+			}
+		});
+	}
+	// 获取该场景下的商品
+	var config = {
+		url:module+'Goods/getRelationGoods',
+		requestEnd:false,
+		loadTrigger:false,
+		currentPage:1,
+		callBack:getJsonListCallBack
+	};
+	var postData = {
+		pageSize:10,
+		relation:'{$relation}'
+	};
+	$(function(){
+		//初始化场景商品页面
+		postData.id = '{$info.id}';
+		getJsonList(config,postData);
+	});
+	$(function(){
+		var id = '{$info.id}';
+		var date=getWeek();
+		countDown(date,$('#countDownBox'));
+		// 后加载简介
+		$('document').ready(function(){
+			$('.intro').html("{$info.intro|raw}");
+		});
+		//轮播
+		var swiper = new Swiper('.swiper-container', {
+			spaceBetween: 30,
+			autoplay:true,
+			pagination: {
+				el: '.swiper-pagination',
+				clickable: true
+			}
+		});
+
+		// 项目信息切换
+		$('.detail-nav li').on('click',function(){
+			$(this).addClass('current').siblings().removeClass('current');
+			$('.project_item').hide().eq($(this).index()).show();
+		})
+	});
+</script>
+{/block}

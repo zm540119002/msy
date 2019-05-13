@@ -245,8 +245,8 @@ class Promotion extends Base {
             case config('custom.relation_type.project'):
                 $model = new \app\index_admin\model\ProjectPromotion();
                 break;
-            case config('custom.relation_type.promotion'):
-                //$model = new \app\index_admin\model\PromotionPromotion();
+            case config('custom.relation_type.sort'):
+                $model = new \app\index_admin\model\SortPromotion();
                 break;
             default:
                 return errorMsg('参数有误');
