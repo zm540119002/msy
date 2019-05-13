@@ -120,11 +120,11 @@ cart = {
         $.each(goodsList,function(j,oldgoods){
             if(goods.goods_id == oldgoods.goods_id){
                 //找到修改数量
-                find = true;
                 goodsList[j].num = parseInt(goods.num);
                 return;
             }
         });
+        console.log(goodsList)
         var a = {
             goodsList:goodsList
         };
@@ -136,8 +136,6 @@ cart = {
 };
 
 $(function () {
-    var user_id = '{$user.id}';
-    console.log(user_id);
     //计算商品列表总价
     //calculateTotalPrice();
     //加
@@ -191,9 +189,11 @@ $(function () {
         var _this = $(this);
         var postData = {};
         var id = _this.parents('li').data('cart_id');
+        var goods_id = _this.parents('li').data('id');
         var num = _this.siblings('.cart_gshopping_count').val();
         postData.id = id;
         postData.num = num;
+        postData.goods_id = goods_id;
         if(1){
             cart.editCartNum(postData,_this);
         }else{
@@ -214,9 +214,11 @@ $(function () {
         var _this = $(this);
         var postData = {};
         var id = _this.parents('li').data('cart_id');
+        var goods_id = _this.parents('li').data('id');
         var num = _this.siblings('.cart_gshopping_count').val();
         postData.id = id;
         postData.num = num;
+        postData.goods_id = goods_id;
         if(1){
             cart.editCartNum(postData,_this);
         }else{
