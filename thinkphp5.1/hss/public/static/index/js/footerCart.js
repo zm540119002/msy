@@ -283,34 +283,7 @@ $(function () {
     });
     //购物车列表页
     $('body').on('click','.add_cart_icon',function(){
-        var url = module + 'Cart/index';
-        var postData = {};
-        $.ajax({
-            url: url,
-            data: postData,
-            type: 'post',
-            beforeSend: function(xhr){
-                $('.loading').show();
-            },
-            error:function(xhr){
-                $('.loading').hide();
-                dialog.error('AJAX错误');
-            },
-            success: function(data){
-                $('.loading').hide();
-                if(data.status==0){
-                    dialog.error(data.info);
-                }else if(data.code==1){
-                    if(data.data == 'no_login'){
-                        loginDialog();
-                    }
-                }else if(data.status==1){
-
-                }else{
-                    location.href = url;
-                }
-            }
-        });
+        location.href = module + 'Index/cartIndex';
     });
     //去结算 生成订单
     $('body').on('click','.settlement',function(){
@@ -326,8 +299,6 @@ $(function () {
                 goodsList.push({
                     goods_id:goods_id,
                     buy_type:buy_type,
-                    brand_id:brand_id,
-                    brand_name:brand_name,
                     num:num
                 });
             }
