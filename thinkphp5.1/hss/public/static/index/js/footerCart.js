@@ -58,12 +58,44 @@ function addCart(postData) {
  * 没有登录加入购物车
  * @param postData
  */
-function noLoginAddCart(goodsList){
-    var cartList = JSON.stringify(goodsList);
-    localStorage.removeItem("cartList");//删除变量名为key的存储变量
-    localStorage.setItem("cartList",cartList);
-    console.log(cartList);return false
-}
+cart = {
+    //向购物车中添加商品
+    addCart: function (addGoodsList) {
+        var cartListOld = localStorage.cartList;//获取存储购物车商品信息
+        if (cartListOld == null || cartListOld == "") {
+            //第一次加入商品
+            var goodsList = JSON.stringify(postData);
+            localStorage.setItem('cartList',goodsList);
+        }else {
+            var jsonstr = JSON.parse(cartListOld.substr(1, cartListOld.length));
+            var goodsList = jsonstr.goodsList;
+            var addGoodsList = postData.goodsList;
+            //查找购物车中是否有该商品
+            $.each(addGoodsList,function(i,addGoods){
+                var find = false;
+                $.each(goodsList,function(j,goods){
+                    if(addGoods.goods_id == goods.goods_id && addGoods.buy_type == goods.buy_type){
+                        //找到修改数量
+                        find = true;
+                        cartListOld[j].num = parseInt(cartListOld[j].num) + parseInt(goods.num);
+                    }
+                    if(!find){
+                        //没有该商品就直接加进去
+                        goodsList.push({
+                            "goods_id": addGoods.goods_id,
+                            "buy_type": addGoods.buy_type,
+                            "num": addGoods.num
+                        });
+                    }
+                });
+            });
+            //保存购物车
+            localStorage.setItem('cartList',goodsList);
+        }
+        return false;
+    }
+};
+
 $(function () {
     //计算商品列表总价
     //calculateTotalPrice();
@@ -177,7 +209,7 @@ $(function () {
         postData.lis = lis;
         if(1){
             var goodsList = postData.goodsList;
-            noLoginAddCart(goodsList);
+            cart.addCart(goodsList);
         }else{
             addCart(postData);
         }
