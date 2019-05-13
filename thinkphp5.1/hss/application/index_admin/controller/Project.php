@@ -52,7 +52,7 @@ class Project extends Base {
 
             $data['update_time'] = time();
             $data['audit'] = 1; // 暂时没有审核，先固定
-
+    
             if(isset($data['id']) && $id=input('post.id/d')){//修改
                 // 编辑
                 $condition = ['where' => ['id' => $id,]];
