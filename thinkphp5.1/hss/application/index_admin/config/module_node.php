@@ -25,7 +25,7 @@ return [
         'scheme'=>[
             'id'=>400,'name'=>'分类','type'=>2,
             'sub_menu' => [
-                ['id'=>401,'name'=>'分类管理','display'=>1,'controller'=>'Project_Category','action'=>'manage',],
+                ['id'=>401,'name'=>'分类管理','display'=>1,'controller'=>'Sort','action'=>'manage',],
             ],
         ],'promotion'=>[
             'id'=>500,'name'=>'促销','type'=>2,

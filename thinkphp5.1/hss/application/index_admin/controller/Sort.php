@@ -1,7 +1,12 @@
 <?php
 namespace app\index_admin\controller;
 
-class ProjectCategory extends Base
+/**
+ * 项目品类控制器
+ * Class Category
+ * @package app\index_admin\controller
+ */
+class Sort extends Base
 {
     protected $obj;
 
@@ -10,7 +15,7 @@ class ProjectCategory extends Base
     ];
 
     protected  function currentModelClass(){
-        $this->obj = new \app\index_admin\model\ProjectCategory();
+        $this->obj = new \app\index_admin\model\Sort();
     }
 
     public function manage(){
@@ -30,8 +35,6 @@ class ProjectCategory extends Base
                 $condition = ['where' => [['id','=',$id]]];
                 $info = $model->getInfo($condition);
                 $info['intro'] = htmlspecialchars_decode($info['intro']);
-                $info['remarks'] = htmlspecialchars_decode($info['remarks']);
-                $info['description'] = htmlspecialchars_decode($info['description']);
 
                 $this->assign('info',$info);
             }
@@ -43,10 +46,11 @@ class ProjectCategory extends Base
             unset($data['editorValue']);
 
             replace_splitter($data,['tag']);
-            process_upload_files($data,['thumb_img','video'],false);
+            process_upload_files($data,['thumb_img'],false);
             process_upload_files($data,['main_img','process_img','detail_img']);
-            htmlspecialchars_addslashes($data,['intro','remarks','description']);
+            htmlspecialchars_addslashes($data,['intro']);
 
+            $data['title'] = $data['name'];
             $data['update_time'] = time();
             $data['audit'] = 1; // 暂时没有审核，先固定
 
@@ -61,9 +65,6 @@ class ProjectCategory extends Base
                 //删除旧文件
                 if($info['thumb_img']){
                     delImgFromPaths($info['thumb_img'],$data['thumb_img']);
-                }
-                if($info['video']){
-                    delImgFromPaths($info['video'],$data['video']);
                 }
                 if($info['main_img']){
                     $oldImgArr = explode(',',$info['main_img']);
@@ -130,7 +131,7 @@ class ProjectCategory extends Base
 
         $condition = [
             'where'=>$where,
-            'field'=>['id','name','thumb_img','main_img','intro','shelf_status','sort','create_time','is_selection','video'],
+            'field'=>['id','name','thumb_img','main_img','intro','shelf_status','sort','create_time','is_selection'],
             'order'=>['id'=>'desc', 'sort'=>'desc',],
         ];
         $list = $this->obj->pageQuery($condition);
@@ -153,21 +154,20 @@ class ProjectCategory extends Base
         $where     = array();
         if($id = input('post.id/d')){
             $condition = [['id','=',$id]];
-            $where = [['project_id','=',$id]];
+            $where = [['sort_id','=',$id]];
         }
         if($ids = input('post.ids/a')){
             $condition = [['id','in',$ids]];
-            $where = [['project_id','in',$ids]];
+            $where = [['sort_id','in',$ids]];
         }
-
-        $model = new \app\index_admin\model\Project();
+        $model = new \app\index_admin\model\Sort();
 
         // 事务
         $model->startTrans();
 
         try {
             $result= $model->del($condition);
-            $model = new \app\index_admin\model\SceneProject();
+            $model = new \app\index_admin\model\SortPromotion();
             $model->del($where,false);
 
             $model->commit();
@@ -194,12 +194,12 @@ class ProjectCategory extends Base
     /**
      * 展示选中的促销方案
      */
-    public function getProjectPromotion(){
+    public function getSortPromotion(){
         // 查询
         if(!$id = input('id/d')){
             $this ->error('参数有误',url('manage'));
         }
-        $modelProject = new \app\index_admin\model\Project();
+        $modelProject = new \app\index_admin\model\Sort();
         $condition = [
             'where'=>[
                 ['id','=',$id],
@@ -211,22 +211,25 @@ class ProjectCategory extends Base
 
         $this->assign('info',$project);
 
-        $model = new \app\index_admin\model\ProjectPromotion();
+        $model = new \app\index_admin\model\SortPromotion();
         $condition = [
             'where'=>[
-                ['pp.status','=',0],
-                ['pp.project_id','=',$id],
+                ['sp.status','=',0],
+                ['sp.sort_id','=',$id],
             ],'field' => [
-                'p.id promotion_id','p.name','p.thumb_img','p.sort','p.shelf_status','pp.id '
+                'p.id promotion_id','p.name','p.thumb_img','p.sort','p.shelf_status','sp.id '
             ],'join'  => [
-                ['promotion p','pp.promotion_id=p.id','left']
+                ['promotion p','sp.promotion_id=p.id','left']
             ],'order' => [
                 'sort'=> 'desc'
             ]
         ];
+
         $list = $model->pageQuery($condition);
+/*        p($model->getLastSql());
+        exit;*/
         $this->assign('list',$list);
-        $this->assign('relation',config('custom.relation_type.project'));
+        $this->assign('relation',config('custom.relation_type.sort'));
 
         return $this->fetch();
     }
@@ -234,7 +237,7 @@ class ProjectCategory extends Base
     /**
      * 关联促销方案
      */
-    public function editProjectPromotion(){
+    public function editSortPromotion(){
 
         if(request()->isPost()){
 
@@ -248,10 +251,10 @@ class ProjectCategory extends Base
             if ($promotion_ids){
                 foreach($promotion_ids as $k => $v){
                     if ((int)$v){
-                        $data = ['project_id'=>$id,'promotion_id'=>$v];
+                        $data = ['sort_id'=>$id,'promotion_id'=>$v];
 
                         // 先删后增 -保证唯一
-                        $model = new \app\index_admin\model\ProjectPromotion();
+                        $model = new \app\index_admin\model\SortPromotion();
                         $model -> where($data)->delete();
                         $model -> allowField(true) -> save($data);
                     }
@@ -280,10 +283,10 @@ class ProjectCategory extends Base
 
         // 其它业务 -标记已选中的
         if($id = input('param.id/d')){
-            $Model= new \app\index_admin\model\ProjectPromotion();
+            $Model= new \app\index_admin\model\SortPromotion();
             $condition = [
                 'where' => [
-                    ['project_id','=', $id],
+                    ['sort_id','=', $id],
                 ],'field'=> [
                     'promotion_id'
                 ]
