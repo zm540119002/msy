@@ -77,7 +77,7 @@ class Index extends \common\controller\Base{
         }else{
             $unlockingFooterCart = unlockingFooterCartConfig([10,0,9]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
-            return $this->fetch();
+            return $this->fetch('cart/index');
         }
     }
 }
