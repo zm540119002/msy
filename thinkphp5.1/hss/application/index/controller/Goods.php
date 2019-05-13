@@ -137,7 +137,6 @@ class Goods extends \common\controller\Base{
         $list = $model -> pageQuery($config)->toArray();
 
         $showGoodsList =  $list['data'];
-        return $showGoodsList;
         foreach ($showGoodsList as $i =>&$showGoods){
             foreach($goodsList as $j=>&$goods){
                 if($showGoods['id'] == $goods['goods_id'] ){
