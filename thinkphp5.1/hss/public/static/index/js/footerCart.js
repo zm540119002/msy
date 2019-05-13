@@ -88,11 +88,9 @@ cart = {
         var goodsList = jsonstr.goodsList;
         console.log(goodsList);
         $.each(goods.goods_ids,function(i,goods_id){
-
             $.each(goodsList,function(j,oldgoods){
-                console.log(j);
                 if(goods_id == oldgoods.goods_id){
-                    console.log(111);
+                    console.log(j);
                     goodsList.push({
                         "goods_id": addGoods.goods_id,
                         "num": addGoods.num,
