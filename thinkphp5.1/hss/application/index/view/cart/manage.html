@@ -53,19 +53,6 @@
 		pageSize:20,
 		pageType:'index'
 	};
-	$(function(){
-		// 初始化购物车商品
-		getPagingList(config,postData);
-		//下拉加载
-		$(window).on('scroll',function(){
-			if(config.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
-				config.loadTrigger = false;
-				getPagingList(config,postData);
-			}
-		});
-		$('.group_cart_nav').addClass('cart_bottom_column');
-	});
-
 
 	// 新零售商品获取配置
 	var config_1 = {
@@ -81,6 +68,17 @@
 		is_selection:1
 	};
 	$(function(){
+		// 初始化购物车商品
+		getPagingList(config,postData);
+		//下拉加载
+		$(window).on('scroll',function(){
+			if(config.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
+				config.loadTrigger = false;
+				getPagingList(config,postData);
+			}
+		});
+		$('.group_cart_nav').addClass('cart_bottom_column');
+
 		//初始化分类商品页面
 		getPagingList(config_1,postData_1);
 		//下拉加载
@@ -91,6 +89,8 @@
 			}
 		});
 	});
+
+
 
 </script>
 {/block}
