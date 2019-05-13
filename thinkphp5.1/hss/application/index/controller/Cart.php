@@ -71,7 +71,7 @@ class Cart extends \common\controller\UserBase{
                         'brand_id' => $cart['brand_id'] ? $cart['brand_id'] : 0,
                     ];
                     $updateData[] = $data;
-                    break;
+                  
                 }
 
             }
