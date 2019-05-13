@@ -71,7 +71,9 @@ class Cart extends \common\controller\UserBase{
                         'brand_id' => $cart['brand_id'] ? $cart['brand_id'] : 0,
                     ];
                     $updateData[] = $data;
+                    break;
                 }
+
             }
             if(!$find){//如果没找到，则新增
                 $data = [
