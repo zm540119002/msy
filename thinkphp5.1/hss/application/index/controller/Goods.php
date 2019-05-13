@@ -125,7 +125,6 @@ class Goods extends \common\controller\Base{
                 'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
             ],
         ];
-
 //        $list = $model -> pageQuery($config)->each(function ($item, $key){
 //            foreach($goodsList as $k=>&$v){
 //                if($v['goods_id'] == $item['id'] ){
