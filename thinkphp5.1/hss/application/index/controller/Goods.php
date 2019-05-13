@@ -145,8 +145,10 @@ class Goods extends \common\controller\Base{
                 }
             }
         }
-        $list['data'] = $showGoodsList ;
-        $this->assign('list',$list);
+        $list = $showGoodsList ;
+        $currentPage = input('get.page/d');
+        $this->assign('currentPage',$currentPage);
+        $this->assign('list',$showGoodsList);
         if(isset($_GET['pageType'])){
             if($_GET['pageType'] == 'index' ){
                 return $this->fetch('cart/list_tpl');
