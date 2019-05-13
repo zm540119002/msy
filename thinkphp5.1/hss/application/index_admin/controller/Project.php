@@ -37,6 +37,7 @@ class Project extends Base {
             return $this->fetch();
 
         }else{
+            // 做到这里
             // 基础处理
             if(  isset($_POST['thumb_img']) && $_POST['thumb_img'] ){
                 $_POST['thumb_img'] = moveImgFromTemp(config('upload_dir.project'),$_POST['thumb_img']);
@@ -50,6 +51,16 @@ class Project extends Base {
                     }
                 }
                 $_POST['main_img'] = implode(',',$tempArr);
+            }
+            if( isset($_POST['process_img']) && $_POST['process_img'] ){
+                $detailArr = explode(',',input('post.process_img','','string'));
+                $tempArr = array();
+                foreach ($detailArr as $item) {
+                    if($item){
+                        $tempArr[] = moveImgFromTemp(config('upload_dir.project'),$item);
+                    }
+                }
+                $_POST['process_img'] = implode(',',$tempArr);
             }
             if( isset($_POST['detail_img']) && $_POST['detail_img'] ){
                 $detailArr = explode(',',input('post.detail_img','','string'));
@@ -66,9 +77,11 @@ class Project extends Base {
                 $_POST['video'] = moveImgFromTemp(config('upload_dir.scheme'),$_POST['video']);
             }
 
+
             $data = $_POST;
             $data['update_time'] = time();
             $data['audit'] = 1; // 暂时没有审核，先固定
+            return $data;
 
             if(isset($_POST['id']) && $id=input('post.id/d')){//修改
                 // 编辑
