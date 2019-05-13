@@ -79,6 +79,9 @@ cart = {
     },
     //删除商品
     delCart:function (goods) {
+
+        // localStorage.removeItem("cartList");
+        // return false//删除变量名为key的存储变量
         var cartListOld = localStorage.cartList;//获取存储购物车商品信息
         var jsonstr = JSON.parse(cartListOld);
         var goodsList = jsonstr.goodsList;
@@ -88,7 +91,7 @@ cart = {
                 if(good == oldgoods.goods_id){
                     console.log(111)
                     //找到删除
-                    delete goodsList[j];
+                     goodsList.splice(j,1);
                     return;
                 }
             });
@@ -240,9 +243,10 @@ $(function () {
             return false;
         }
         if (1){
-            postData._this = _this;
-            postData.lis = lis;
-            addCart(postData);
+            cart.addCart(postData);
+            // postData._this = _this;
+            // postData.lis = lis;
+            // addCart(postData);
         } else{
             cart.addCart(postData);
         }
