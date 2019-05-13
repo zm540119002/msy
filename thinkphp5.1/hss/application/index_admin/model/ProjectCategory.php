@@ -10,26 +10,5 @@ class ProjectCategory extends\common\model\Base {
 	protected $connection = 'db_config_1';
 	// 别名
 	protected $alias = 'pc';
-
-	//编辑
-	public function edit(){
-		$postData = input('post.');
-		$validate = new \common\validate\ProjectCategory();
-		if(!$validate->scene('edit')->check($postData)){
-			return errorMsg($validate->getError());
-		}
-		if($postData['id'] && intval($postData['id'])){
-			$postData['update_time'] = time();
-			$this->isUpdate(true)->save($postData);
-		}else{
-			unset($postData['id']);
-			$postData['create_time'] = time();
-			$this->save($postData);
-		}
-		if(!$this->getAttr('id')){
-			return errorMsg('失败',$this->getError());
-		}
-		return successMsg('成功！',array('id'=>$this->getAttr('id')));
-	}
 	
 }

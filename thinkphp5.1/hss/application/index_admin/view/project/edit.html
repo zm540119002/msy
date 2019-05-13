@@ -20,12 +20,12 @@
                         <input style="width: 100px; " class="inputboxadmin" name="sort" value="{$info.sort|default=0}">
                     </td>
                 </tr>
-                <tr>
+<!--                <tr>
                     <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>标题：</td>
                     <td class=dotted_bottom_gray width="89%" align=left>
                         <input style="width: 300px; " class="inputboxadmin" name="title" value="{$info.title}">
                     </td>
-                </tr>
+                </tr>-->
                 <tr>
                     <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>简介：</td>
                     <td class=dotted_bottom_gray width="89%" align=left>
@@ -270,9 +270,7 @@
             var content='';
             if(!postData.name){
                 content='名称不能为空';
-            }else if(!postData.title){
-                content='标题不能为空';
-            }else if(!postData.intro){
+            }/*else if(!postData.intro){
                 content='简介不能为空';
             }else if(!postData.description){
                 content='操作描述不能为空';
@@ -286,7 +284,7 @@
                 content='项目流程为空';
             }else if(!postData.video){
              content='项目视频不能为空';
-             }
+            }*/
             if(content){
                 dialog.error(content);
                 return false;

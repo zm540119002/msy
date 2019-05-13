@@ -50,6 +50,7 @@ class Project extends Base {
             process_upload_files($data,['main_img','process_img','detail_img']);
             htmlspecialchars_addslashes($data,['intro','remarks','description']);
 
+            $data['title'] = $data['name'];
             $data['update_time'] = time();
             $data['audit'] = 1; // 暂时没有审核，先固定
 
