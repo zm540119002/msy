@@ -81,7 +81,6 @@ cart = {
                         console.log(goodsList);
                     }
                     if(!find){
-                        console.log(222);
                         //没有该商品就直接加进去
                         goodsList.push({
                             "goods_id": addGoods.goods_id,
@@ -94,10 +93,10 @@ cart = {
             var a = {
                 goodsList:goodsList
             };
-            console.log(goodsList)
             //保存购物车
             localStorage.removeItem("cartList");//删除变量名为key的存储变量
             localStorage.setItem('cartList',JSON.stringify(a));
+            location.reload();
         }
 
         return false;
