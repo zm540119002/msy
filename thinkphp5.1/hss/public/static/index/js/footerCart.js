@@ -471,11 +471,11 @@ $(function () {
     //
     //     });
     // });
-    // //去支付
-    // $('body').on('click','.pay',function () {
-    //     var orderSn =  $('#order_sn').val();
-    //     location.href = module + 'Order/toPay/order_sn/' + orderSn;
-    // });
+    //去支付
+    $('body').on('click','.pay',function () {
+        var orderSn =  $('#order_sn').val();
+        location.href = module + 'Order/toPay/order_sn/' + orderSn;
+    });
 
     // 选择支付方式
     $('body').on('click','.settlementmethod .pay_nav li',function(){
