@@ -6266,6 +6266,11 @@ div.no_data{
 .customer_list span{
     color:#C7AA53;
 }
+.once-enter{
+    width:1.2rem;
+    background: #3FA9F5;
+    color:#fff;
+}
 /*加盟店家*/
 .franchise_ul li{
     margin:0 0 0.15rem 0;
