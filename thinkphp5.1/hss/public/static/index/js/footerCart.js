@@ -92,6 +92,7 @@ cart = {
                     }
                 });
             });
+            console.log(goodsList)
         }
         //保存购物车
         //localStorage.setItem('cartList',JSON.stringify(addGoodsList));
