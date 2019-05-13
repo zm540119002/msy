@@ -290,6 +290,7 @@ class Scene extends Base {
         ];
         $list = $model->pageQuery($condition);
         $this->assign('list',$list);
+        $this->assign('relation',config('custom.relation_type.scene'));
 
         return $this->fetch();
     }

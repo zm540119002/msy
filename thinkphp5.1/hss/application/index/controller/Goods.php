@@ -1,6 +1,8 @@
 <?php
 namespace app\index\controller;
 
+use function Sodium\crypto_box_publickey_from_secretkey;
+
 class Goods extends \common\controller\Base{
     /**首页
      */
@@ -102,6 +104,54 @@ class Goods extends \common\controller\Base{
         }
     }
 
+    /**
+     * 未登录状态  查出相关购物车产品信息 分页查询
+     */
+    public function getCartGoodsList(){
+        if(!request()->isGet()){
+            return errorMsg('请求方式错误');
+        }
+        return input('get.');
+        $model = new \app\index\model\Goods();
+        $config=[
+            'where'=>[
+                ['g.status', '=', 0],
+                ['g.shelf_status', '=', 3],
+            ],
+            'field'=>[
+                'g.id ','g.headline','g.thumb_img','g.bulk_price','g.sample_price','g.specification','g.minimum_order_quantity',
+                'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
+            ],
+            'order'=>[
+
+            ],
+        ];
+        if(input('?get.category_id') && input('get.category_id/d')){
+            $config['where'][] = ['g.category_id_1', '=', input('get.category_id/d')];
+        }
+        if(input('get.belong_to/d')){
+            $config['where'][] = ['g.belong_to', '=', input('get.belong_to/d')];
+        }
+        if(input('get.is_selection/d')){
+            $config['where'][] = ['g.is_selection', '=', input('get.is_selection/d')];
+        }
+        $keyword = input('get.keyword','');
+        if($keyword) {
+            $config['where'][] = ['name', 'like', '%' . trim($keyword) . '%'];
+        }
+
+        $list = $model -> pageQuery($config);
+        $this->assign('list',$list);
+
+        if(isset($_GET['pageType'])){
+
+            // 排列的数量不同
+            switch($_GET['pageType']){
+                case 'index': return $this->fetch('list_goods_two_column_tpl'); break;  // 一行两个
+                case 'sort' : return $this->fetch('list_goods_one_column_tpl'); break;   // 一行一个
+            }
+        }
+    }
     /***
      * 获取各关联表下的商品 -通用方法
      * @return array|\think\response\View
