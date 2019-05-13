@@ -79,6 +79,9 @@ cart = {
     },
     //删除商品
     delCart:function (goods) {
+
+        localStorage.removeItem("carlist");
+        return false//删除变量名为key的存储变量
         var cartListOld = localStorage.cartList;//获取存储购物车商品信息
         var jsonstr = JSON.parse(cartListOld);
         var goodsList = jsonstr.goodsList;
