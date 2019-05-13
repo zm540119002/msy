@@ -88,10 +88,6 @@ class Scene extends \common\controller\Base{
             if(empty($sceneList)){
                 $this->error('此场景已下架');
             }
-            p($model->getLastSql());
-            p($sceneList);
-            p($id);
-            exit;
 
             // 当前的场景
             $scene = [];
