@@ -84,14 +84,13 @@
 		$('body').on('click','.del',function(){
 			var _this     = $(this);
 			var postData  = {};
-			postData.type = 'scene';
-			postData.title= '促销';
+			postData.relation = "{$relation}";
 			var _thisTr   = _this.parents('tr');
 			postData.id   = _thisTr.data('id');
 			$(this).addClass('nodisabled');
 			layer.open({
 				btn: ['确定','取消'],//按钮
-				content:'取消关联选中的'+postData.title+' 编号'+postData.id+'？',
+				content:'取消关联选中的促销'+' 编号'+postData.id+'？',
 				yes:function (index) {
 					$.ajax({
 						url:module+'Promotion/delRelationPromotion',
