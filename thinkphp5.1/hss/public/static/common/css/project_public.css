@@ -3259,7 +3259,7 @@ input[type=text]::-webkit-focus-inner {
 	to {top:-40px;}
 }
 .friday_end{
-    font-size:0.28rem;
+    font-size:0.20rem;
 }
 .friday_end span{
     height:14px;
@@ -4710,6 +4710,9 @@ ul.message_list{
 }
 .mid_module_right span.factory{
     background-position:0 -0.85rem;
+}
+.mid_module_right .d-r{
+    width:2.85rem;
 }
 .wk_notice{
     color:#1CAD99;
