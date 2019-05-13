@@ -144,7 +144,7 @@ class Goods extends \common\controller\Base{
                 }
             }
         }
-
+        return $list;
         $this->assign('list',$list);
         if(isset($_GET['pageType'])){
             if($_GET['pageType'] == 'index' ){
