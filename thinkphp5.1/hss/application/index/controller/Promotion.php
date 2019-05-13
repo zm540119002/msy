@@ -60,5 +60,45 @@ class Promotion extends \common\controller\Base{
         return $this->fetch();
     }
 
+    /**
+     * 输出套餐列表信息
+     */
+    public function displayPromotionList($id,$type='scene'){
+
+        if(!$id){
+            return false;
+        }
+
+        $config = [
+            'where' => [
+                ['p.status','=', 0], ['p.shelf_status','=', 3],
+            ],'field'=>[
+                'p.id','p.name','p.thumb_img'
+            ],'join'=>[
+                ['promotion p','p.id = sp.promotion_id','left']
+            ]
+        ];
+
+        switch($type){
+            case 'sort' :
+                $model = new \app\index\model\ProjectPromotion();
+                $condition['where'][] = ['sp.scene_id','=',$id];
+                break;
+            case 'project' :
+                $model = new \app\index\model\ProjectPromotion();
+                $condition['where'][] = ['pp.project_id','=',$id];
+                break;
+            default;
+                $model = new \app\index\model\ScenePromotion();
+                $condition['where'][] = ['sp.scene_id','=',$id];
+        }
+        $promotionList= $model->getList($config);
+
+        $modelPromotionGoods = new \app\index\model\PromotionGoods();
+
+        $promotionList = $modelPromotionGoods->getListGoodsPrice($promotionList);
+
+        $this->assign('promotionList',$promotionList);
+    }
 
 }

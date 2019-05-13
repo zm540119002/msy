@@ -103,7 +103,8 @@ return [
      */
     'relation_type' => [
         'scene'    => 1,
-        'project'  => 2,
-        'promotion'=> 3,
+        'sort'     => 2,
+        'project'  => 3,
+        'promotion'=> 4,
     ],
 ];

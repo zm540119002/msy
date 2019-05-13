@@ -2,13 +2,8 @@
 {volist name="list" id="info"}
 <li data-id="{$info.id}">
     <a href="{:url('Project/detail',['id'=>$info.id])}" data-id="{$info.id}" class="" title="{$info.name}">
-        <div class="applay_p_item columns_flex l-r-sides">
-            <div class="group_btn50">
-                <img class="common_default_img" src="{:show_img_handle($info.thumb_img)}" alt="{$info.name}">
-            </div>
-            <div>
-                <p>立即进入</p>
-            </div>
+        <div class="group_btn">
+            <img class="common_default_img" src="{:show_img_handle($info.thumb_img)}" alt="{$info.name}">
         </div>
     </a>
 </li>

@@ -34,7 +34,7 @@ class Scene extends Base {
             if($id = input('param.id/d')){
                 $condition = [
                     'field' => [
-                        'id','name','shelf_status','sort','thumb_img','main_img','intro','tag','display_type','type','tag_category','title','background_img'
+                        'id','name','shelf_status','sort','thumb_img','main_img','intro','tag','display_type','tag_category','title','background_img'
                     ], 'where' => [
                         ['id','=',$id]
                     ],
@@ -53,13 +53,21 @@ class Scene extends Base {
             // 基础处理
             if(!input('param.name/s')) return errorMsg('失败');
 
-            if( isset($_POST['thumb_img']) && $_POST['thumb_img'] ){
+            $data = input('post.');
+            unset($data['editorValue']);
+
+            replace_splitter($data,['tag']);
+            process_upload_files($data,['thumb_img'],false);
+            process_upload_files($data,['main_img']);
+            htmlspecialchars_addslashes($data,['intro']);
+
+/*            if( isset($_POST['thumb_img']) && $_POST['thumb_img'] ){
                 $_POST['thumb_img'] = moveImgFromTemp(config('upload_dir.scheme'),$_POST['thumb_img']);
-            }
+            }*/
 /*            if( isset($_POST['background_img']) && $_POST['background_img'] ){
                 $_POST['background_img'] = moveImgFromTemp(config('upload_dir.scheme'),$_POST['background_img']);
             }*/
-            if( isset($_POST['main_img']) && $_POST['main_img'] ){
+/*            if( isset($_POST['main_img']) && $_POST['main_img'] ){
                 $detailArr = explode(',',input('post.main_img','','string'));
                 $tempArr = array();
                 foreach ($detailArr as $item) {
@@ -69,10 +77,8 @@ class Scene extends Base {
                 }
                 $_POST['main_img'] = implode(',',$tempArr);
 
-            }
+            }*/
 
-            $data = $_POST;
-            $data['intro'] = htmlspecialchars(addslashes(input('intro/s')));
             $data['update_time'] = time();
             $data['audit'] = 1; // 暂时没有审核，先固定
             $data['shelf_status'] = 1; // 暂时没有审核，先固定
@@ -101,7 +107,6 @@ class Scene extends Base {
                     delImgFromPaths($info['background_img'],$_POST['background_img']);
                 }
                 if($info['main_img']){
-                    //删除商品详情图
                     $oldImgArr = explode(',',$info['main_img']);
                     $newImgArr = explode(',',$_POST['main_img']);
                     delImgFromPaths($oldImgArr,$newImgArr);
@@ -150,7 +155,7 @@ class Scene extends Base {
 
         $where[] = ['status','=',0];
         // 条件
-        if(isset($_GET['type'])&&$type=input('get.type/d'))  $where[] = ['type','=',$type];
+        if(isset($_GET['type'])&&$type=input('get.type/s'))  $where[] = ['display_type','=',$type];
 
         if(isset($_GET['shelf_status'])&&$shelf_status=input('get.shelf_status/d'))  $where[] = ['shelf_status','=',$shelf_status];
 
@@ -159,7 +164,7 @@ class Scene extends Base {
 
         $condition = [
             'where'=>$where,
-            'field'=>['id','name','thumb_img','main_img','intro','shelf_status','sort','create_time','type','display_type'],
+            'field'=>['id','name','thumb_img','main_img','intro','shelf_status','sort','create_time','display_type'],
             'order'=>['id'=>'asc',],
         ];
 

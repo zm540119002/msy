@@ -10,7 +10,7 @@
                     <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>促销名称：</td>
                     <td class=dotted_bottom_gray width="89%" align=left>
                         <div class= width="89%" align=left>
-                            <textarea class="project_description" name="title" >{$info.title}</textarea>
+                            <textarea class="project_description" name="name" >{$info.name}</textarea>
                         </div>
                     </td>
                 </tr>
@@ -26,7 +26,7 @@
                     <td class=dotted_bottom_gray height=40 width="11%" align=right>标签：</td>
                     <td class=dotted_bottom_gray width="89%" align=left>
                         <input style="width: 200px; " class="inputboxadmin" name="tag" value="{$info.tag}">
-                        多个标签请用 | 分隔，例如：正品保障,纳晶水光
+                        多个标签请用 , 分隔，例如：正品保障,纳晶水光
                     </td>
                 </tr>
                 <tr>
@@ -172,8 +172,8 @@
             postData.intro = intro.getContent();
 
             var content='';
-            if(!postData.title){
-                content='促销标题不能为空';
+            if(!postData.name){
+                content='促销名称不能为空';
             }else if(!postData.thumb_img){
                 content='缩略图不能为空';
             }else if(!postData.main_img){

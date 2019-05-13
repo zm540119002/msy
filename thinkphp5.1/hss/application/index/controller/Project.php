@@ -37,40 +37,6 @@ class Project extends \common\controller\Base{
     }
 
     /**
-     * 场景项目列表
-     */
-    public function getSceneProjectList(){
-        if(!request()->isGet()){
-            return errorMsg('参数有误');
-        }
-        $scene_id = input('scene_id/d');
-        if(!$scene_id){
-            return errorMsg('参数有误');
-        }
-
-        $model = new \app\index\model\Project();
-        $condition = [
-            'field' => [
-                'p.id','p.name','p.thumb_img'
-            ],
-            'where' => [
-                ['p.status','=',0],
-                ['p.shelf_status','=',3],
-                ['sp.scene_id','=',$scene_id],
-            ],'join' => [
-                ['scene_project sp','p.id = sp.project_id','left'],
-            ],'order' => ['p.sort desc']
-        ];
-
-        $list = $model -> pageQuery($condition);
-        $this->assign('list',$list);
-
-        return $this->fetch('list_tpl');
-
-
-    }
-
-    /**
      * 查询项目下的相关视频 分页查询 暂时先随机
      */
     public function getVideoList(){
@@ -130,36 +96,12 @@ class Project extends \common\controller\Base{
             if(empty($info)){
                 $this->error('此项目已下架');
             }
-     /*       $info['detail_img'] = explode(',',(string)$info['detail_img']);
-            $info['tag'] = explode(',',(string)$info['tag']);*/
+
             project_handle($info);
-            /*
-                        $scene['tag'] = explode('|',(string)$scene['tag']);
-                        $scene['main_img'] = explode(',',(string)$scene['main_img']);
-                        $scene['intro'] = $scene['intro'] ? htmlspecialchars_decode($scene['intro']) : $scene['intro'] ;*/
 
             $this->assign('info',$info);
 
-            // 获取场景下的促销方案
-            $modelProjectPromotion = new \app\index\model\ProjectPromotion();
-            $config = [
-                'where' => [
-                    ['pp.project_id', '=', $id],
-                    ['p.shelf_status', '=', 3],
-                ],'field'=>[
-                    'p.id','p.name','p.thumb_img'
-                ],'join'=>[
-                    ['promotion p','p.id = pp.promotion_id','left']
-                ]
-            ];
-            $promotionList= $modelProjectPromotion->getList($config);
-
-            $modelPromotionGoods = new \app\index\model\PromotionGoods();
-
-            // 套餐列表下的各套餐的商品总价
-            $promotionList = $modelPromotionGoods->getListGoodsPrice($promotionList);
-
-            $this->assign('promotionList',$promotionList);
+            Promotion::displayPromotionList($id,'project');
 
             $this->assign('relation',config('custom.relation_type.project'));
 

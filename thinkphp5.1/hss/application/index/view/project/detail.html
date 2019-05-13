@@ -124,15 +124,14 @@
 {block name="script"}
 <script type="text/javascript" src="api_common_js/swiper.min.js"></script>
 <script type="text/javascript">
-	function getJsonCallBack(data){
-		console.log(data);
+	function getJsonListCallBack(data){
 		param = {
 			'buy_named':'采购数量',
 			'display_quota':true,
 			'display_pic':true,
-			'init_quantity':2,
-			'step_quantity':10,
-			'productList':data.data
+			'init_quantity':0,
+			'step_quantity':1,
+			'productList':data.data.data
 		};
 		new Vue({
 			el: '#product-select',
@@ -147,7 +146,7 @@
 		requestEnd:false,
 		loadTrigger:false,
 		currentPage:1,
-		callBack:getJsonCallBack
+		callBack:getJsonListCallBack
 	};
 	var postData = {
 		pageSize:10,
@@ -157,19 +156,6 @@
 		//初始化场景商品页面
 		postData.id = '{$info.id}';
 		getJsonList(config,postData);
-		let param = {
-		};
-		new Vue({
-			el: '#foot_cart_menu',
-			data:function(){
-				return param;
-			},methods: {
-				add_cart_call_back:function (param) {
-					let goodsList = {};
-					console.log(param);
-				}
-			}
-		});
 	});
 	$(function(){
 		var id = '{$info.id}';

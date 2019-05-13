@@ -32,7 +32,7 @@ class Promotion extends Base {
             if($id = input('param.id/d')){
                 $condition = [
                     'field' => [
-                        'id','title','shelf_status','sort','thumb_img','main_img','intro','tag','title','background_img'
+                        'id','name','shelf_status','sort','thumb_img','main_img','intro','tag','title','background_img'
                     ], 'where' => [
                         ['id','=',$id]
                     ],
@@ -49,28 +49,18 @@ class Promotion extends Base {
         else{
 
             // 基础处理
-            if(!input('param.title/s')) return errorMsg('失败');
+            if(!input('param.name/s')) return errorMsg('失败');
 
-            if( isset($_POST['thumb_img']) && $_POST['thumb_img'] ){
-                $_POST['thumb_img'] = moveImgFromTemp(config('upload_dir.scheme'),$_POST['thumb_img']);
-            }
-            /*            if( isset($_POST['background_img']) && $_POST['background_img'] ){
-                            $_POST['background_img'] = moveImgFromTemp(config('upload_dir.scheme'),$_POST['background_img']);
-                        }*/
-            if( isset($_POST['main_img']) && $_POST['main_img'] ){
-                $detailArr = explode(',',input('post.main_img','','string'));
-                $tempArr = array();
-                foreach ($detailArr as $item) {
-                    if($item){
-                        $tempArr[] = moveImgFromTemp(config('upload_dir.scheme'),$item);
-                    }
-                }
-                $_POST['main_img'] = implode(',',$tempArr);
+            $data = input('post.');
+            unset($data['editorValue']);
 
-            }
+            replace_splitter($data,['tag']);
+            process_upload_files($data,['thumb_img'],false);
+            process_upload_files($data,['main_img']);
+            htmlspecialchars_addslashes($data,['intro']);
 
-            $data = $_POST;
-            $data['intro'] = htmlspecialchars(addslashes(input('intro/s')));
+
+            $data['title'] = $data['name'];
             $data['update_time'] = time();
             $data['audit'] = 1; // 暂时没有审核，先固定
 

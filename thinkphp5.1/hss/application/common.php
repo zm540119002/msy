@@ -144,23 +144,6 @@ function saveImageFromHttp($url,$savePath) {
     }
 }
 
-function get_menu_tree($items, $id = 'id', $pid = 'parent_id_1', $son = 'children') {
-    $tree = array();
-    $tmpMap = array();
-
-    foreach ($items as $item) {
-        $tmpMap[$item[$id]] = $item;
-    }
-
-    foreach ($items as $item) {
-        if (isset($tmpMap[$item[$pid]])) {
-            $tmpMap[$item[$pid]][$son][] = &$tmpMap[$item[$id]];
-        } else {
-            $tree[] = &$tmpMap[$item[$id]];
-        }
-    }
-    return $tree;
-}
 
 /**
  * 图片展示处理 现暂时没有其它的默认图片，到时按目录区分默认图片
@@ -192,37 +175,4 @@ function show_img_handle($img_url,$show_default=true){
     }
 }
 
-// scene系列
-/**
- * 处理场景信息
- * @param $info array 场景信息
- */
-function scene_handle(&$info){
-    $info['tag']      = $info['tag']      ? explode('|',(string)$info['tag']) : '';
-    $info['main_img'] = $info['main_img'] ? explode(',',(string)$info['main_img']) : '';
-    $info['intro']    = $info['intro']    ? htmlspecialchars_decode($info['intro']) : '';
-};
-
-
-// project系列
-/**
- * 处理项目信息
- * @param $info array 场景信息
- */
-function project_handle(&$info){
-    $info['tag']      = $info['tag']      ? explode('|',(string)$info['tag']) : '';
-    $info['main_img'] = $info['main_img'] ? explode(',',(string)$info['main_img']) : '';
-    $info['intro']    = $info['intro']    ? htmlspecialchars_decode($info['intro']) : '';
-};
-
-// promotion系列
-/**
- * 处理项目信息
- * @param $info array 场景信息
- */
-function promotion_handle(&$info){
-    $info['tag']      = $info['tag']      ? explode('|',(string)$info['tag']) : '';
-    $info['main_img'] = $info['main_img'] ? explode(',',(string)$info['main_img']) : '';
-    $info['intro']    = $info['intro']    ? htmlspecialchars_decode($info['intro']) : '';
-};
 
