@@ -1,3 +1,4 @@
+var user_id = '{$user.id}';
 /**
  * 登录加入购物车
  * @param postData
@@ -223,7 +224,7 @@ $(function () {
         if(!postData){
             return false;
         }
-        if (isLogin()){
+        if (user_id){
             postData._this = _this;
             postData.lis = lis;
             addCart(postData);
