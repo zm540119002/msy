@@ -220,8 +220,6 @@ $(function () {
             postData.cart_ids = cart_ids;
             editCartNum(postData,_this);
         }
-
-        delCart(postData,type,$(this));
     });
     //购物车全选总价
     $('body').on('click','footer .checkall,.cpy_checkitem,.sign_checkitem',function(){
