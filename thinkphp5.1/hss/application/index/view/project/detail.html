@@ -29,7 +29,7 @@
 				<div class="applay_p_item columns_flex l-r-sides">
 					<div>
 						<div>¥<price>{$vo.price}</price></div>
-						<p>{$vo.title}</p>
+						<p>{$vo.name}</p>
 						<p>立即进入</p>
 					</div>
 					<div class="group_btn50">
@@ -62,22 +62,22 @@
 	<!-- 项目详情 -->
 	<section class="project_item hide">
 		<p>
-			<img src="{:show_img_handle($project.main_img)}" alt="">
+			{volist name="$info.main_img" id="vo"}
+			<img src="{:show_img_handle($vo)}" alt="" class="common_default_img">
+			{/volist}
 		</p>
 	</section>
 	<!-- 项目操作 -->
 	<section class="project_item hide">
 
-		{notempty name="$project.video"}
+		{notempty name="$info.video"}
 		<div class="content-padding">
-			<video width="" height="" controls src="{:show_img_handle($project.video)}">
+			<video width="" height="" controls src="{:show_img_handle($info.video)}">
 			</video>
-			<p>{$project.name}项目培训</p>
-			<p>{$project.update_time}</p>
 		</div>
 		{/notempty}
-		<div class="content-padding">
-			项目名称
+		<div class="content-padding description">
+
 		</div>
 		<div class="content-padding">
 			<p class="content-label">项目流程</p>
@@ -85,7 +85,7 @@
 				<div class="swiper-container swiper-container-horizontal swiper-container-ios">
 					<div class="swiper-wrapper">
 						<div class="swiper-slide swiper-slide-active">
-							{volist name="$info.main_img" id="vo"}
+							{volist name="$info.process_img" id="vo"}
 							<img src="{:show_img_handle($vo)}" alt="" class="common_default_img">
 							{/volist}
 						</div>
@@ -107,6 +107,7 @@
 		</div>
 		<div class="content-padding">
 			<p class="content-label">注意事项</p>
+			<p class="remarks"></p>
 		</div>
 	</section>
 </article>
@@ -164,6 +165,8 @@
 		// 后加载简介
 		$('document').ready(function(){
 			$('.intro').html("{$info.intro|raw}");
+			$('.remarks').html("{$info.remarks|raw}");
+			$('.description').html("{$info.description|raw}");
 		});
 		//轮播
 		var swiper = new Swiper('.swiper-container', {

@@ -80,12 +80,16 @@ class Project extends \common\controller\Base{
     public function detail(){
         if(request()->isAjax()){
         }else{
-            $id = intval(input('id'));
+
+            $id = input('id/d');
             if(!$id){
                 $this->error('此项目已下架');
             }
             $model = new \app\index\model\Project();
             $config =[
+                'field' => [
+                    'id','name','main_img','intro','tag','detail_img','video','title','process_img','description','remarks'
+                ],
                 'where' => [
                     ['p.status', '=', 0],
                     ['p.shelf_status', '=', 3],
@@ -109,7 +113,7 @@ class Project extends \common\controller\Base{
         }
     }
 
-    /**详情页
+    /**详情页 old
      */
     public function detailImg(){
         if(request()->isAjax()){
