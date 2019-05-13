@@ -61,8 +61,6 @@ function addCart(postData) {
 cart = {
     //向购物车中添加商品
     addCart: function (addGoodsList) {
-        // localStorage.removeItem("cartList");
-        // return false;
         var cartListOld = localStorage.cartList;//获取存储购物车商品信息
         if (cartListOld == null || cartListOld == "") {
             //第一次加入商品
@@ -77,7 +75,6 @@ cart = {
                 var find = false;
                 $.each(goodsList,function(j,goods){
                     if(addGoods.goods_id == goods.goods_id && addGoods.buy_type == goods.buy_type){
-
                         //找到修改数量
                         find = true;
                         goodsList[j].num = parseInt(addGoods.num) + parseInt(goods.num);
