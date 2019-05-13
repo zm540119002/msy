@@ -1,7 +1,7 @@
 <?php
 namespace app\index\controller;
 
-class Cart extends \common\controller\Base {
+class Cart extends \common\controller\UserBase {
     /**首页
      */
 
@@ -108,6 +108,7 @@ class Cart extends \common\controller\Base {
     }
 
     public function addCart(){
+
         if(!request()->isPost()){
             return errorMsg('请求方式错误');
         }

@@ -121,11 +121,10 @@ class Goods extends \common\controller\Base{
                 ['g.id', 'in', $goodsIds],
             ],
             'field'=>[
-                'g.id ','g.headline','g.thumb_img','g.bulk_price','g.sample_price','g.specification','g.minimum_order_quantity',
+                'g.id','g.headline','g.name','g.thumb_img','g.bulk_price','g.sample_price','g.specification','g.minimum_order_quantity',
                 'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
             ],
         ];
-
 //        $list = $model -> pageQuery($config)->each(function ($item, $key){
 //            foreach($goodsList as $k=>&$v){
 //                if($v['goods_id'] == $item['id'] ){
@@ -135,26 +134,23 @@ class Goods extends \common\controller\Base{
 //            return $item;
 //        });
         $list = $model -> pageQuery($config)->toArray();
-
         $showGoodsList =  $list['data'];
         foreach ($showGoodsList as $i =>&$showGoods){
             foreach($goodsList as $j=>&$goods){
                 if($showGoods['id'] == $goods['goods_id'] ){
-                    echo $goods['num'];
                     $showGoodsList[$i]['num'] = $goods['num'];
+                    $showGoodsList[$i]['buy_type'] = $goods['buy_type'];
+                    $showGoodsList[$i]['cart_id'] = $i+1;
                 }
             }
         }
-        $list['data'] = $showGoodsList;
-        return $list;
-        $this->assign('list',$list);
-
+        $list = $showGoodsList ;
+        $currentPage = input('get.page/d');
+        $this->assign('currentPage',$currentPage);
+        $this->assign('list',$showGoodsList);
         if(isset($_GET['pageType'])){
-
-            // 排列的数量不同
-            switch($_GET['pageType']){
-                case 'index': return $this->fetch('list_goods_two_column_tpl'); break;  // 一行两个
-                case 'sort' : return $this->fetch('list_goods_one_column_tpl'); break;   // 一行一个
+            if($_GET['pageType'] == 'index' ){
+                return $this->fetch('cart/list_tpl');
             }
         }
     }
