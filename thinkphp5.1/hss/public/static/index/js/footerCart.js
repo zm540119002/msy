@@ -62,7 +62,6 @@ cart = {
     //向购物车中添加商品
     addCart: function (addGoodsList) {
         var cartListOld = localStorage.cartList;//获取存储购物车商品信息
-        console.log(cartListOld);
         if (cartListOld == null || cartListOld == "") {
             //第一次加入商品
             var goodsList = JSON.stringify(addGoodsList);
@@ -76,13 +75,14 @@ cart = {
                 var find = false;
                 $.each(goodsList,function(j,goods){
                     if(addGoods.goods_id == goods.goods_id && addGoods.buy_type == goods.buy_type){
-                        console.log(12);
+
                         //找到修改数量
                         find = true;
                         goodsList[j].num = parseInt(addGoods.num) + parseInt(goods.num);
                         console.log(goodsList);
                     }
                     if(!find){
+                        console.log(222);
                         //没有该商品就直接加进去
                         goodsList.push({
                             "goods_id": addGoods.goods_id,
