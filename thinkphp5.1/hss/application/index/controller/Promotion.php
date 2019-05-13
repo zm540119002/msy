@@ -69,7 +69,7 @@ class Promotion extends \common\controller\Base{
             return false;
         }
 
-        $config = [
+        $condition = [
             'where' => [
                 ['p.status','=', 0], ['p.shelf_status','=', 3],
             ],'field'=>[
@@ -92,7 +92,7 @@ class Promotion extends \common\controller\Base{
                 $model = new \app\index\model\ScenePromotion();
                 $condition['where'][] = ['sp.scene_id','=',$id];
         }
-        $promotionList= $model->getList($config);
+        $promotionList= $model->getList($condition);
 
         $modelPromotionGoods = new \app\index\model\PromotionGoods();
 
