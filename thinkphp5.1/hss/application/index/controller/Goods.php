@@ -112,8 +112,9 @@ class Goods extends \common\controller\Base{
             return errorMsg('请求方式错误');
         }
         $cartList = input('get.cartList');
-        $cartList =  json_decode($cartList,true)['goodsList'];
-        return $cartList;
+        $goodsList =  json_decode($cartList,true)['goodsList'];
+        $goodsIds = array_column($goodsList,'goods_id');
+        return $goodsIds;
         $model = new \app\index\model\Goods();
         $config=[
             'where'=>[
