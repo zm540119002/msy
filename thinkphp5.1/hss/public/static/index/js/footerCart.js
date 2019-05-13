@@ -170,7 +170,7 @@ $(function () {
         var num = _this.siblings('.cart_gshopping_count').val();
         postData.id = id;
         postData.num = num;
-        if()
+       
         _this.addClass("nodisabled");//防止重复提交
         editCartNum(postData,_this);
 
@@ -223,23 +223,14 @@ $(function () {
         if(!postData){
             return false;
         }
-        var user_id = '{$user_id}';
+        var user_id = '{$user_id}';//判断是否登录
         if (user_id){
             postData._this = _this;
             postData.lis = lis;
             addCart(postData);
-
         } else{
             cart.addCart(postData);
         }
-        // if(1){
-        //     cart.addCart(postData);
-        // }else{
-        //     postData._this = _this;
-        //     postData.lis = lis;
-        //     addCart(postData);
-        // }
-
     });
     //样品弹窗加入购物车
     $('body').on('click','.goodsInfoLayer .add_cart_layer',function(){
