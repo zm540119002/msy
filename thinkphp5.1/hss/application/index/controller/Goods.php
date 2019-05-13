@@ -113,7 +113,7 @@ class Goods extends \common\controller\Base{
         }
         $cartList = input('get.cartList');
         $cartList =  json_decode($cartList,true);
-        return $cartList['goodsList'];
+        return $cartList['goodsList'][0]['goods_id'];
         $model = new \app\index\model\Goods();
         $config=[
             'where'=>[
