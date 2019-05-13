@@ -124,7 +124,6 @@ cart = {
                 return;
             }
         });
-        console.log(goodsList)
         var a = {
             goodsList:goodsList
         };
@@ -174,8 +173,6 @@ $(function () {
         }
         //计算商品列表总价
         calculateTotalPrice($(this));
-      
-        
     });
     //购物车加
     $('body').on('click','.cart_gplus',function(){
@@ -240,6 +237,16 @@ $(function () {
         //计算购物车商品列表总价
         calculateCartTotalPrice($(this));
     });
+    //购物车删除
+    $('body').on('click','.detele_cart',function(){
+        var _li = $(this).parents('li');
+        var postData = {};
+        var cart_ids=[];
+        cart_ids.push(_li.data('cart_id'));
+        postData.cart_ids = cart_ids;
+        var type = 'single';
+        delCart(postData,type,$(this));
+    });
     //购物车全选总价
     $('body').on('click','footer .checkall,.cpy_checkitem,.sign_checkitem',function(){
         //计算购物车商品列表总价
@@ -255,8 +262,7 @@ $(function () {
         if(!postData){
             return false;
         }
-        console.log(user_id);
-        if (user_id){
+        if (1){
             postData._this = _this;
             postData.lis = lis;
             addCart(postData);
