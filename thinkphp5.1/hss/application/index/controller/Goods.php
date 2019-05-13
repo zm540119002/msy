@@ -145,7 +145,7 @@ class Goods extends \common\controller\Base{
                 }
             }
         }
-
+        return $showGoodsList;
         $list['data'] = $showGoodsList;
         return $list;
         $this->assign('list',$list);
