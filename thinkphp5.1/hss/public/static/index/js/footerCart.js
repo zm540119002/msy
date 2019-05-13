@@ -1,9 +1,25 @@
-
+//加入购物车
 function addCart(postData) {
-
     var url = module + 'Cart/addCart';
-     var _this=postData._this;
-     var lis=postData.lis;
+    var _this=postData._this;
+    var lis=postData.lis;
+    if(1){
+        dialog.success(data.info);
+        var num = 0;
+
+        $.each(lis,function(index,val){
+            var buyType=$(this).data('buy_type');
+            if(buyType==1){
+                num += parseInt($(this).find('.gshopping_count').val());
+            }
+        });
+        $('footer').find('.cart_num').addClass('cur');
+        $('footer').find('.add_num').text('+'+num).addClass('current');
+        setTimeout(function(){
+            $('.add_num').removeClass('current');
+        },2000)
+        return false;
+    }
     _this.addClass("nodisabled");//防止重复提交
     delete postData._this;
     delete postData.lis;
