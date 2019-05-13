@@ -84,12 +84,13 @@ cart = {
                         console.log(1);
                         goodsList[j].num = parseInt(addGoods.num) + parseInt(goods.num);
                         console.log(goodsList);
+                        return;
                     }
                 });
                 if(!find){
                     console.log(2);
                     //没有该商品就直接加进去
-                    newGodsList.push({
+                    goodsList.push({
                         "goods_id": addGoods.goods_id,
                         "num": addGoods.num,
                         "buy_type": addGoods.buy_type
@@ -97,7 +98,7 @@ cart = {
                 }
             });
             console.log(newGodsList);
-            
+
             var a = {
                 goodsList:goodsList
             };
