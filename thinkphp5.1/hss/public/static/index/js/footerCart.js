@@ -85,8 +85,9 @@ cart = {
         var cartListOld = localStorage.cartList;//获取存储购物车商品信息
         var jsonstr = JSON.parse(cartListOld);
         var goodsList = jsonstr.goodsList;
-        console.log(goods)
+        console.log(goods.goods_ids)
         $.each(goods.goods_ids,function(i,good){
+            console.log(5)
             $.each(goodsList,function(j,oldgoods){
                 if(good == oldgoods.goods_id){
                     console.log(111)
