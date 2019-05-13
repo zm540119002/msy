@@ -26,16 +26,16 @@
 		{notempty name="promotionList"}
 			{volist name="promotionList" id="vo"}
 			<a href="{:url('Promotion/detail',['id'=>$vo.id])}" data-id="{$vo.id}" class="">
-				<!--<div class="applay_p_item columns_flex l-r-sides">
+				<div class="applay_p_item columns_flex l-r-sides">
 					<div>
 						<div>¥<price>{$vo.price}</price></div>
 						<p>{$vo.name}</p>
 						<p>立即进入</p>
 					</div>
 					<div class="group_btn50">
+						<img class="common_default_img" src="{:show_img_handle($vo.thumb_img)}" alt="{$vo.name}">
 					</div>
-				</div>-->
-				<img class="common_default_img" src="{:show_img_handle($vo.thumb_img)}" alt="{$vo.name}">
+				</div>
 			</a>
 			{/volist}
 		{/notempty}
