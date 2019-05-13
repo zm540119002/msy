@@ -120,11 +120,11 @@ cart = {
         $.each(goodsList,function(j,oldgoods){
             if(goods.goods_id == oldgoods.goods_id){
                 //找到修改数量
-                find = true;
                 goodsList[j].num = parseInt(goods.num);
                 return;
             }
         });
+        console.log(goodsList)
         var a = {
             goodsList:goodsList
         };
