@@ -557,8 +557,6 @@ function assemblyData(lis) {
         var _this = $(this);
         var num = _this.find('.gshopping_count').val();
         var buy_type=_this.data('buy_type');
-        var brand_id=_this.find('.brand_name').data('id');
-        var brand_name=_this.find('.brand_name').text();
         //alert(num);
         if(!isPosIntNumberOrZero(num)){
             isInt = false;
@@ -571,8 +569,6 @@ function assemblyData(lis) {
             tmp.goods_id = goodsId;
             tmp.num = num;
             tmp.buy_type=buy_type;
-            tmp.brand_id=brand_id;
-            tmp.brand_name=brand_name;
             postData.goodsList.push(tmp);
         }
     });
