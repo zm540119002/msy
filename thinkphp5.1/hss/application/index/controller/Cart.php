@@ -1,7 +1,7 @@
 <?php
 namespace app\index\controller;
 
-class Cart extends \common\controller\UserBase{
+class Cart extends \common\controller\Base {
     /**首页
      */
 
@@ -71,7 +71,7 @@ class Cart extends \common\controller\UserBase{
                         'brand_id' => $cart['brand_id'] ? $cart['brand_id'] : 0,
                     ];
                     $updateData[] = $data;
-                  
+
                 }
 
             }

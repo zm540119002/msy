@@ -1,6 +1,8 @@
 <?php
 namespace app\index\controller;
 
+use function Sodium\crypto_box_publickey_from_secretkey;
+
 class Goods extends \common\controller\Base{
     /**首页
      */
@@ -102,6 +104,60 @@ class Goods extends \common\controller\Base{
         }
     }
 
+    /**
+     * 未登录状态  查出相关购物车产品信息 分页查询
+     */
+    public function getCartGoodsList(){
+        if(!request()->isGet()){
+            return errorMsg('请求方式错误');
+        }
+        $cartList = input('get.cartList');
+        $goodsList =  json_decode($cartList,true)['goodsList'];
+        $goodsIds = array_column($goodsList,'goods_id');
+        $model = new \app\index\model\Goods();
+        $config=[
+            'where'=>[
+                ['g.status', '=', 0],
+                ['g.id', 'in', $goodsIds],
+            ],
+            'field'=>[
+                'g.id ','g.headline','g.thumb_img','g.bulk_price','g.sample_price','g.specification','g.minimum_order_quantity',
+                'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
+            ],
+        ];
+
+//        $list = $model -> pageQuery($config)->each(function ($item, $key){
+//            foreach($goodsList as $k=>&$v){
+//                if($v['goods_id'] == $item['id'] ){
+//                    $item['num'] = 6;
+//                }
+//            }
+//            return $item;
+//        });
+        $list = $model -> pageQuery($config)->toArray();
+
+        $showGoodsList =  $list['data'];
+        foreach ($showGoodsList as $i =>&$showGoods){
+            foreach($goodsList as $j=>&$goods){
+                if($showGoods['id'] == $goods['goods_id'] ){
+                    echo $goods['num'];
+                    $showGoodsList[$i]['num'] = $goods['num'];
+                }
+            }
+        }
+        $list['data'] = $showGoodsList;
+        return $list;
+        $this->assign('list',$list);
+
+        if(isset($_GET['pageType'])){
+
+            // 排列的数量不同
+            switch($_GET['pageType']){
+                case 'index': return $this->fetch('list_goods_two_column_tpl'); break;  // 一行两个
+                case 'sort' : return $this->fetch('list_goods_one_column_tpl'); break;   // 一行一个
+            }
+        }
+    }
     /***
      * 获取各关联表下的商品 -通用方法
      * @return array|\think\response\View
