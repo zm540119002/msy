@@ -4712,7 +4712,7 @@ ul.message_list{
     background-position:0 -0.85rem;
 }
 .mid_module_right .d-r{
-    width:2.85rem;
+    
 }
 .wk_notice{
     color:#1CAD99;
@@ -6024,6 +6024,7 @@ ul.info_list li{
     display:-webkit-flex;
 }
 .count_down_box{
+    width:2.85rem;
     padding:0.05rem 0.18rem 0.05rem 0.12rem;
     background: #000;
     color:#fff;
