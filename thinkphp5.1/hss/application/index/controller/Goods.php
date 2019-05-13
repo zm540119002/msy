@@ -134,9 +134,9 @@ class Goods extends \common\controller\Base{
 //            }
 //            return $item;
 //        });
-        $list = $model -> pageQuery($config);
+        $list = $model -> pageQuery($config)->toArray();
 
-        $showGoodsList =  $list->data;
+        $showGoodsList =  $list['data'];
         return $showGoodsList;
         foreach ($showGoodsList as $i =>&$showGoods){
             foreach($goodsList as $j=>&$goods){
