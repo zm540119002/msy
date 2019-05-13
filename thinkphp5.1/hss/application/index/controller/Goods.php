@@ -175,10 +175,10 @@ class Goods extends \common\controller\Base{
                 $field_id = 'pg.project_id';
                 $goods_id = 'pg.goods_id';
                 break;
-            case config('custom.relation_type.promotion'):
-                $model = new \app\index\model\PromotionGoods();
-                $field_id = 'pg.promotion_id';
-                $goods_id = 'pg.goods_id';
+            case config('custom.relation_type.sort'):
+                $model = new \app\index\model\SortGoods();
+                $field_id = 'sg.sort_id';
+                $goods_id = 'sg.goods_id';
                 break;
             default:
                 return errorMsg('参数有误');
