@@ -170,7 +170,7 @@ $(function () {
         var num = _this.siblings('.cart_gshopping_count').val();
         postData.id = id;
         postData.num = num;
-       
+
         _this.addClass("nodisabled");//防止重复提交
         editCartNum(postData,_this);
 
@@ -224,6 +224,7 @@ $(function () {
             return false;
         }
         var user_id = '{$user_id}';//判断是否登录
+        console.log(user_id);
         if (user_id){
             postData._this = _this;
             postData.lis = lis;
