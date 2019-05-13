@@ -6,7 +6,7 @@
  * @param $info array 场景信息
  */
 function scene_handle(&$info){
-    $info['tag']      = $info['tag']      ? explode('|',(string)$info['tag']) : '';
+    $info['tag']      = $info['tag']      ? explode(',',(string)$info['tag']) : '';
     $info['main_img'] = $info['main_img'] ? explode(',',(string)$info['main_img']) : '';
     $info['intro']    = $info['intro']    ? htmlspecialchars_decode($info['intro']) : '';
 };
@@ -18,7 +18,7 @@ function scene_handle(&$info){
  * @param $info array 场景信息
  */
 function project_handle(&$info){
-    $info['tag']      = $info['tag']      ? explode('|',(string)$info['tag']) : '';
+    $info['tag']      = $info['tag']      ? explode(',',(string)$info['tag']) : '';
     $info['main_img'] = $info['main_img'] ? explode(',',(string)$info['main_img']) : '';
     $info['intro']    = $info['intro']    ? htmlspecialchars_decode($info['intro']) : '';
 };
@@ -29,7 +29,7 @@ function project_handle(&$info){
  * @param $info array 场景信息
  */
 function promotion_handle(&$info){
-    $info['tag']      = $info['tag']      ? explode('|',(string)$info['tag']) : '';
+    $info['tag']      = $info['tag']      ? explode(',',(string)$info['tag']) : '';
     $info['main_img'] = $info['main_img'] ? explode(',',(string)$info['main_img']) : '';
     $info['intro']    = $info['intro']    ? htmlspecialchars_decode($info['intro']) : '';
 };
