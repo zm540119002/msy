@@ -100,7 +100,8 @@ class Scene extends \common\controller\Base{
             scene_handle($scene);
 
             $this->assign('info',$scene);
-
+            p($scene);
+            exit;
             Promotion::displayPromotionList($id);
 
             $this->assign('relation',config('custom.relation_type.scene'));

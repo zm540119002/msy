@@ -1,8 +1,6 @@
 <?php
 namespace app\index\controller;
 
-use function Sodium\crypto_box_publickey_from_secretkey;
-
 class Goods extends \common\controller\Base{
     /**首页
      */
