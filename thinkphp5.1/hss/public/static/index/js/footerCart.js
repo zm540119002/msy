@@ -225,6 +225,7 @@ $(function () {
         }
         var user_id = '{$user_id}';//判断是否登录
         console.log(user_id);
+        return  false
         if (user_id){
             postData._this = _this;
             postData.lis = lis;
