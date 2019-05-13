@@ -53,13 +53,21 @@ class Scene extends Base {
             // 基础处理
             if(!input('param.name/s')) return errorMsg('失败');
 
-            if( isset($_POST['thumb_img']) && $_POST['thumb_img'] ){
+            $data = input('post.');
+            unset($data['editorValue']);
+
+            replace_splitter($data,['tag']);
+            process_upload_files($data,['thumb_img'],false);
+            process_upload_files($data,['main_img']);
+            htmlspecialchars_addslashes($data,['intro']);
+
+/*            if( isset($_POST['thumb_img']) && $_POST['thumb_img'] ){
                 $_POST['thumb_img'] = moveImgFromTemp(config('upload_dir.scheme'),$_POST['thumb_img']);
-            }
+            }*/
 /*            if( isset($_POST['background_img']) && $_POST['background_img'] ){
                 $_POST['background_img'] = moveImgFromTemp(config('upload_dir.scheme'),$_POST['background_img']);
             }*/
-            if( isset($_POST['main_img']) && $_POST['main_img'] ){
+/*            if( isset($_POST['main_img']) && $_POST['main_img'] ){
                 $detailArr = explode(',',input('post.main_img','','string'));
                 $tempArr = array();
                 foreach ($detailArr as $item) {
@@ -69,10 +77,8 @@ class Scene extends Base {
                 }
                 $_POST['main_img'] = implode(',',$tempArr);
 
-            }
+            }*/
 
-            $data = $_POST;
-            $data['intro'] = htmlspecialchars(addslashes(input('intro/s')));
             $data['update_time'] = time();
             $data['audit'] = 1; // 暂时没有审核，先固定
             $data['shelf_status'] = 1; // 暂时没有审核，先固定
@@ -101,7 +107,6 @@ class Scene extends Base {
                     delImgFromPaths($info['background_img'],$_POST['background_img']);
                 }
                 if($info['main_img']){
-                    //删除商品详情图
                     $oldImgArr = explode(',',$info['main_img']);
                     $newImgArr = explode(',',$_POST['main_img']);
                     delImgFromPaths($oldImgArr,$newImgArr);

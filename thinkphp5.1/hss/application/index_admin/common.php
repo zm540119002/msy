@@ -87,13 +87,67 @@ function getShelStatus($num){
 function getAuthStatus($num){
     return $num?config('custom.auth_status')[$num]:'';
 }
-/*开启底部购物车配置项
+
+// 上传用
+/**
+ * 1、文件重命名
+ * @param $data array
+ * @param $arr array 要处理的字段
+ * @param bool $multiple
  */
-//function unlockingFooterCartConfig($arr){
-//    $footerCartConfig = C('FOOTER_CART_MENU');
-//    $tempArr = array();
-//    foreach ($arr as $val) {
-//        $tempArr[] = $footerCartConfig[$val];
-//    }
-//    return $tempArr;
-//}
+
+function process_upload_files(&$data,$arr,$multiple=true){
+
+    foreach($arr as $k => $v){
+
+        $file = $data[$v];
+
+        if($multiple){
+            if($file!=null){
+                $detailArr = explode(',',$file);
+                $tempArr = array();
+                foreach ($detailArr as $item) {
+                    if($item){
+                        $tempArr[] = moveImgFromTemp(config('upload_dir.project'),$item);
+                    }
+                }
+                $data[$v] = implode(',',$tempArr);
+            }
+
+        }else{
+            $data[$v] = moveImgFromTemp(config('upload_dir.project'),$file);
+        }
+
+    }
+}
+
+/**
+ * @param $data array
+ * @param $arr array 要处理的字段
+ */
+function htmlspecialchars_addslashes(&$data,$arr){
+    foreach($arr as $k => $v){
+
+        $str = $data[$v];
+
+        if($str!=null){
+            $data[$v] = htmlspecialchars(addslashes($str));
+        }
+    }
+}
+
+/**
+ * 替换分割符
+ */
+function replace_splitter(&$data,$arr){
+    foreach($arr as $k => $v){
+
+        $str = $data[$v];
+        if($str!=null){
+            $data[$v] = str_replace('，',',',$str);
+        }
+    }
+
+
+}
+

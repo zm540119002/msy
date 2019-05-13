@@ -38,7 +38,7 @@
                     <td class=dotted_bottom_gray height=40 width="11%" align=right>标签：</td>
                     <td class=dotted_bottom_gray width="89%" align=left>
                         <input style="width: 200px; " class="inputboxadmin" name="tag" value="{$info.tag}">
-                        多个标签请用 | 分隔，例如：正品保障|纳晶水光
+                        多个标签请用 , 分隔，例如：正品保障,纳晶水光
                     </td>
                 </tr>
                 <tr>
@@ -82,7 +82,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>详情:</td>
+                    <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>介绍:</td>
                     <td class=dotted_bottom_gray width="89%" align=left>
                         <!-- 加载编辑器的容器 -->
                         <script id="detail_img" type="text/plain">
@@ -129,7 +129,7 @@
                         <script id="process_img" type="text/plain">
 
                         </script>
-                        <input id="processImg" type="hidden" value="{$info.main_img|formatImg}">
+                        <input id="processImg" type="hidden" value="{$info.process_img|formatImg}">
                     </td>
                 </tr>
                 <tr>
@@ -229,12 +229,21 @@
         main_img.ready(function() {
             main_img.setContent($('#mainImg').val());
         });
+        process_img.ready(function() {
+            process_img.setContent($('#processImg').val());
+        });
         detail_img.ready(function() {
             detail_img.setContent($('#detailImg').val());
         });
         // 简介
         intro.ready(function() {
             intro.setContent("{$info['intro']|raw}");
+        });
+        remarks.ready(function() {
+            remarks.setContent("{$info['remarks']|raw}");
+        });
+        description.ready(function() {
+            description.setContent("{$info['description']|raw}");
         });
 
         // 表单认证
@@ -272,7 +281,7 @@
             }else if(!postData.main_img){
                 content='主图不能为空';
             }else if(!postData.detail_img){
-                content='详情不能为空';
+                content='介绍不能为空';
             }else if(!postData.process_img){
                 content='项目流程为空';
             }/*else if(!postData.video){

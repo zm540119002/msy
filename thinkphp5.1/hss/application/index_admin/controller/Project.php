@@ -32,58 +32,28 @@ class Project extends Base {
             if($id = input('param.id/d')){
                 $condition = ['where' => [['id','=',$id]]];
                 $info = $model->getInfo($condition);
+                $info['intro'] = htmlspecialchars_decode($info['intro']);
+                $info['remarks'] = htmlspecialchars_decode($info['remarks']);
+                $info['description'] = htmlspecialchars_decode($info['description']);
+
                 $this->assign('info',$info);
             }
             return $this->fetch();
 
         }else{
-            // 做到这里
             // 基础处理
-            if(  isset($_POST['thumb_img']) && $_POST['thumb_img'] ){
-                $_POST['thumb_img'] = moveImgFromTemp(config('upload_dir.project'),$_POST['thumb_img']);
-            }
-            if( isset($_POST['main_img']) && $_POST['main_img'] ){
-                $detailArr = explode(',',input('post.main_img','','string'));
-                $tempArr = array();
-                foreach ($detailArr as $item) {
-                    if($item){
-                        $tempArr[] = moveImgFromTemp(config('upload_dir.project'),$item);
-                    }
-                }
-                $_POST['main_img'] = implode(',',$tempArr);
-            }
-            if( isset($_POST['process_img']) && $_POST['process_img'] ){
-                $detailArr = explode(',',input('post.process_img','','string'));
-                $tempArr = array();
-                foreach ($detailArr as $item) {
-                    if($item){
-                        $tempArr[] = moveImgFromTemp(config('upload_dir.project'),$item);
-                    }
-                }
-                $_POST['process_img'] = implode(',',$tempArr);
-            }
-            if( isset($_POST['detail_img']) && $_POST['detail_img'] ){
-                $detailArr = explode(',',input('post.detail_img','','string'));
-                $tempArr = array();
-                foreach ($detailArr as $item) {
-                    if($item){
-                        $tempArr[] = moveImgFromTemp(config('upload_dir.project'),$item);
-                    }
-                }
-                $_POST['detail_img'] = implode(',',$tempArr);
-            }
+            $data = input('post.');
+            unset($data['editorValue']);
 
-            if( isset($_POST['video']) && $_POST['video'] ){
-                $_POST['video'] = moveImgFromTemp(config('upload_dir.scheme'),$_POST['video']);
-            }
+            replace_splitter($data,['tag']);
+            process_upload_files($data,['thumb_img','video'],false);
+            process_upload_files($data,['main_img','process_img','detail_img']);
+            htmlspecialchars_addslashes($data,['intro','remarks','description']);
 
-
-            $data = $_POST;
             $data['update_time'] = time();
             $data['audit'] = 1; // 暂时没有审核，先固定
-            return $data;
 
-            if(isset($_POST['id']) && $id=input('post.id/d')){//修改
+            if(isset($data['id']) && $id=input('post.id/d')){//修改
                 // 编辑
                 $condition = ['where' => ['id' => $id,]];
 
@@ -93,14 +63,28 @@ class Project extends Base {
 
                 //删除旧文件
                 if($info['thumb_img']){
-                    delImgFromPaths($info['thumb_img'],$_POST['thumb_img']);
-                }
-                if($info['main_img']){
-                    delImgFromPaths($info['main_img'],$_POST['main_img']);
+                    delImgFromPaths($info['thumb_img'],$data['thumb_img']);
                 }
                 if($info['video']){
-                    delImgFromPaths($info['video'],$_POST['video']);
+                    delImgFromPaths($info['video'],$data['video']);
                 }
+                if($info['main_img']){
+                    $oldImgArr = explode(',',$info['main_img']);
+                    $newImgArr = explode(',',$data['main_img']);
+                    delImgFromPaths($oldImgArr,$newImgArr);
+                }
+                if($info['process_img']){
+                    $oldImgArr = explode(',',$info['process_img']);
+                    $newImgArr = explode(',',$data['process_img']);
+                    delImgFromPaths($oldImgArr,$newImgArr);
+                }
+                if($info['detail_img']){
+                    $oldImgArr = explode(',',$info['process_img']);
+                    $newImgArr = explode(',',$data['process_img']);
+                    delImgFromPaths($oldImgArr,$newImgArr);
+                }
+
+
 
             } else{
                 //新增
