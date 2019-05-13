@@ -64,6 +64,7 @@ cart = {
         // localStorage.removeItem("cartList");//删除变量名为key的存储变量
         // return false;
         var cartListOld = localStorage.cartList;//获取存储购物车商品信息
+        console.log(cartListOld);
         if (cartListOld == null || cartListOld == "") {
             //第一次加入商品
             var goodsList = JSON.stringify(addGoodsList);
