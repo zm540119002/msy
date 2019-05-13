@@ -61,6 +61,7 @@ function addCart(postData) {
 cart = {
     //向购物车中添加商品
     addCart: function (addGoodsList) {
+        localStorage.removeItem("cartList");
         var cartListOld = localStorage.cartList;//获取存储购物车商品信息
         console.log(cartListOld);
         if (cartListOld == null || cartListOld == "") {
@@ -212,12 +213,11 @@ $(function () {
         if(!postData){
             return false;
         }
-        postData._this = _this;
-        postData.lis = lis;
         if(1){
-            var goodsList = postData.goodsList;
-            cart.addCart(goodsList);
+            cart.addCart(postData);
         }else{
+            postData._this = _this;
+            postData.lis = lis;
             addCart(postData);
         }
 
@@ -312,8 +312,6 @@ $(function () {
             if(signcheck.prop('checked')){
                 var goods_id=$(this).data('id');
                 var buy_type=$(this).data('buy_type');
-                var brand_id=$(this).data('brand_id');
-                var brand_name=$(this).data('brand_name');
                 var num=$(this).find('.cart_gshopping_count').val();
                 goodsList.push({
                     goods_id:goods_id,
