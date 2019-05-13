@@ -68,14 +68,8 @@ cart = {
             var goodsList = JSON.stringify(addGoodsList);
             localStorage.setItem('cartList',goodsList);
         }else {
-            console.log(123);
-
             var jsonstr = JSON.parse(cartListOld);
-            console.log(jsonstr);
             var goodsList = jsonstr.goodsList;
-            console.log(goodsList);
-
-            return false;
             var addGoodsList = postData.goodsList;
             //查找购物车中是否有该商品
             $.each(addGoodsList,function(i,addGoods){
