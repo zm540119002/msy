@@ -68,10 +68,11 @@ cart = {
             var goodsList = JSON.stringify(postData);
             localStorage.setItem('cartList',goodsList);
         }else {
+            console.log(123);
             var jsonstr = JSON.parse(cartListOld.substr(1, cartListOld.length));
             var goodsList = jsonstr.goodsList;
             console.log(goodsList);
-            console.log(123);
+
             return false;
             var addGoodsList = postData.goodsList;
             //查找购物车中是否有该商品
