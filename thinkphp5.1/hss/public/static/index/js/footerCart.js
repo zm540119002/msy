@@ -86,8 +86,8 @@ cart = {
                         //没有该商品就直接加进去
                         goodsList.push({
                             "goods_id": addGoods.goods_id,
-                            "buy_type": addGoods.buy_type,
-                            "num": addGoods.num
+                            "num": addGoods.num,
+                            "buy_type": addGoods.buy_type
                         });
                     }
                 });
