@@ -76,9 +76,11 @@ cart = {
                 var find = false;
                 $.each(goodsList,function(j,goods){
                     if(addGoods.goods_id == goods.goods_id && addGoods.buy_type == goods.buy_type){
+                        console.log(12);
                         //找到修改数量
                         find = true;
-                        cartListOld[j].num = parseInt(cartListOld[j].num) + parseInt(goods.num);
+                        goodsList[j].num = parseInt(addGoods.num) + parseInt(goods.num);
+                        console.log(goodsList);
                     }
                     if(!find){
                         //没有该商品就直接加进去
@@ -90,9 +92,9 @@ cart = {
                     }
                 });
             });
-            //保存购物车
-            localStorage.setItem('cartList',goodsList);
         }
+        //保存购物车
+        //localStorage.setItem('cartList',JSON.stringify(addGoodsList));
         return false;
     }
 };
