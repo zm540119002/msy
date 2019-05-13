@@ -157,7 +157,7 @@ $(function () {
         lis = $('ul.goods_list').find('li[data-buy_type="1"]');
         var postData = assemblyData(lis);
         var goodsList = postData.goodsList;
-        console.log(goodsList);
+        console.log(postData);
         if(!postData){
             return false;
         }
