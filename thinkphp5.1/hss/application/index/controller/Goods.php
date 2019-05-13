@@ -111,7 +111,8 @@ class Goods extends \common\controller\Base{
         if(!request()->isGet()){
             return errorMsg('请求方式错误');
         }
-        return input('get.');
+        $cartList = input('get.cartList');
+        return json_decode($cartList,true);
         $model = new \app\index\model\Goods();
         $config=[
             'where'=>[
@@ -123,7 +124,9 @@ class Goods extends \common\controller\Base{
                 'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
             ],
             'order'=>[
-
+                'is_selection'=>'desc',
+                'sort'=>'desc',
+                'id'=>'desc'
             ],
         ];
         if(input('?get.category_id') && input('get.category_id/d')){
