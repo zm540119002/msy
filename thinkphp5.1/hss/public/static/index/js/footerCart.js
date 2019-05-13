@@ -79,7 +79,7 @@ cart = {
                         console.log(12);
                         //找到修改数量
                         find = true;
-                        goodsList[j].num = parseInt(addGoods[j].num) + parseInt(goods.num);
+                        goodsList[j].num = parseInt(addGoods.num) + parseInt(goods.num);
                         console.log(goodsList);
                     }
                     if(!find){
