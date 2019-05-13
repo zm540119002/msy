@@ -4388,7 +4388,7 @@ select[name="nodeIds"]{
     width:1.68rem;
     height:.6rem;
     position:absolute;
-    top:.17rem;
+    top:.15rem;
     left:.10rem;
     display:block;
 }
@@ -4422,6 +4422,14 @@ select[name="nodeIds"]{
     display:block;
     padding:0 0 0 0.10rem;
     border-left:1px solid #d9d9d9;
+}
+.customer_list_wrapper{
+    height:1.2rem;
+    overflow:hidden;
+}
+.customer_list .customer_item{
+    height:;
+    line-height:;
 }
 .new_share_wrap{
     background:#C9A063;
