@@ -30,7 +30,7 @@ cart = {
                 });
                 if(!find){
                     //没有该商品就直接加进去
-                    goodsList.push({
+                    goodsList.unshift({
                         "goods_id": addGoods.goods_id,
                         "num": addGoods.num,
                         "buy_type": addGoods.buy_type
@@ -86,10 +86,15 @@ cart = {
         var jsonstr = JSON.parse(cartListOld);
         var goodsList = jsonstr.goodsList;
         $.each(goods.goods_ids,function(i,goods_id){
-            console.log(5)
+            console.log(5);
             $.each(goodsList,function(j,oldgoods){
                 if(goods_id == oldgoods.goods_id){
-                    console.log(111)
+                    console.log(111);
+                    goodsList.push({
+                        "goods_id": addGoods.goods_id,
+                        "num": addGoods.num,
+                        "buy_type": addGoods.buy_type
+                    });
                     //找到删除
                     //  goodsList.splice(j,1);
                     return;
