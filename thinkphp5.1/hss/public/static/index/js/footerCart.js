@@ -158,6 +158,7 @@ $(function () {
         var postData = assemblyData(lis);
         var goodsList = postData.goodsList;
         var cartList = JSON.stringify(postData);
+        localStorage.setItem("cartList",cartList);
         console.log(cartList);return false
         if(!postData){
             return false;
