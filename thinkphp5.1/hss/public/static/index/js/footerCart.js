@@ -88,7 +88,7 @@ cart = {
                 if(good == oldgoods.goods_id){
                     console.log(111)
                     //找到删除
-                    delete goodsList[j];
+                     goodsList.splice(j,1);
                     return;
                 }
             });
