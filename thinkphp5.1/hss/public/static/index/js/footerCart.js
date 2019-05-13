@@ -61,8 +61,8 @@ function addCart(postData) {
 cart = {
     //向购物车中添加商品
     addCart: function (addGoodsList) {
-        // localStorage.removeItem("cartList");//删除变量名为key的存储变量
-        // return false;
+        localStorage.removeItem("cartList");//删除变量名为key的存储变量
+        return false;
         var cartListOld = localStorage.cartList;//获取存储购物车商品信息
         console.log(cartListOld);
         if (cartListOld == null || cartListOld == "") {
