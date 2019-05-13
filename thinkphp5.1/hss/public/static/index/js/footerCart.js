@@ -99,7 +99,7 @@ cart = {
             localStorage.setItem('cartList',JSON.stringify(a));
             //计算总数
             var total_num = 0;
-            $.each(goodsList,function(i,goods){
+            $.each(addGoodsList,function(i,goods){
                 total_num += goods['num'];
             });
             dialog.success('成功');
