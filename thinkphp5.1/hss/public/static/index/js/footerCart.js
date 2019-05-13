@@ -85,16 +85,15 @@ cart = {
         var cartListOld = localStorage.cartList;//获取存储购物车商品信息
         var jsonstr = JSON.parse(cartListOld);
         var goodsList = jsonstr.goodsList;
-        console.log(goods.goods_ids)
         $.each(goods.goods_ids,function(i,goods_id){
             console.log(5)
             $.each(goodsList,function(j,oldgoods){
-                // if(goods_id == oldgoods.goods_id){
-                //     console.log(111)
-                //     //找到删除
-                //      goodsList.splice(j,1);
-                //     return;
-                // }
+                if(goods_id == oldgoods.goods_id){
+                    console.log(111)
+                    //找到删除
+                    //  goodsList.splice(j,1);
+                    return;
+                }
             });
 
         });
