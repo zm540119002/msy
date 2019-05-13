@@ -91,11 +91,6 @@ cart = {
             $.each(goodsList,function(j,oldgoods){
                 if(goods_id == oldgoods.goods_id){
                     console.log(j);
-                    goodsList.push({
-                        "goods_id": addGoods.goods_id,
-                        "num": addGoods.num,
-                        "buy_type": addGoods.buy_type
-                    });
                     //找到删除
                     //  goodsList.splice(j,1);
                     return;
