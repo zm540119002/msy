@@ -84,7 +84,7 @@ class Project extends Base {
                     delImgFromPaths($oldImgArr,$newImgArr);
                 }
 
-                
+
             } else{
                 //新增
                 $data['create_time'] = time();
@@ -192,7 +192,6 @@ class Project extends Base {
 
         return $this->fetch();
     }
-
 
     // 促销系列方法
     /**
