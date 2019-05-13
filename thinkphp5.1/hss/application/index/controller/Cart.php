@@ -108,6 +108,7 @@ class Cart extends \common\controller\Base {
     }
 
     public function addCart(){
+
         if(!request()->isPost()){
             return errorMsg('请求方式错误');
         }

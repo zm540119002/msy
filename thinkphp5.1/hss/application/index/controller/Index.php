@@ -70,4 +70,14 @@ class Index extends \common\controller\Base{
         }
 
     }
+
+    // 有结算页面
+    public function cartIndex(){
+        if(request()->isAjax()){
+        }else{
+            $unlockingFooterCart = unlockingFooterCartConfig([10,0,9]);
+            $this->assign('unlockingFooterCart', $unlockingFooterCart);
+            return $this->fetch();
+        }
+    }
 }
