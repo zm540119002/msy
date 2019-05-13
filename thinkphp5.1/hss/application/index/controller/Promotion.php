@@ -69,29 +69,37 @@ class Promotion extends \common\controller\Base{
             return false;
         }
 
-        $condition = [
-            'where' => [
-                ['p.status','=', 0], ['p.shelf_status','=', 3],
-            ],'field'=>[
-                'p.id','p.name','p.thumb_img'
-            ],'join'=>[
-                ['promotion p','p.id = sp.promotion_id','left']
-            ]
-        ];
-
         switch($type){
             case 'sort' :
                 $model = new \app\index\model\ProjectPromotion();
-                $condition['where'][] = ['sp.scene_id','=',$id];
+                //$condition['where'][] = ['sp.scene_id','=',$id];
+                $field_id = 'cp.project_id';
+                $join_id  = 'cp.promotion_id';
                 break;
             case 'project' :
                 $model = new \app\index\model\ProjectPromotion();
-                $condition['where'][] = ['pp.project_id','=',$id];
+                //$condition['where'][] = ['pp.project_id','=',$id];
+                $field_id = 'pp.project_id';
+                $join_id  = 'pp.promotion_id';
                 break;
             default;
                 $model = new \app\index\model\ScenePromotion();
-                $condition['where'][] = ['sp.scene_id','=',$id];
+                //$condition['where'][] = ['sp.scene_id','=',$id];
+                $field_id = 'sp.scene_id';
+                $join_id  = 'sp.promotion_id';
         }
+
+        $condition = [
+            'where' => [
+                ['p.status','=', 0], ['p.shelf_status','=', 3],
+                [$field_id,'=',$id]
+            ],'field'=>[
+                'p.id','p.name','p.thumb_img'
+            ],'join'=>[
+                ['promotion p','p.id = '.$join_id,'left']
+            ]
+        ];
+
         $promotionList= $model->getList($condition);
 
         $modelPromotionGoods = new \app\index\model\PromotionGoods();

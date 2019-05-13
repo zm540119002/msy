@@ -84,7 +84,7 @@
 		$('body').on('click','.del',function(){
 			var _this     = $(this);
 			var postData  = {};
-			postData.relation = 3;
+			postData.relation = "{$relation}";
 			var _thisTr   = _this.parents('tr');
 			postData.id   = _thisTr.data('id');
 			$(this).addClass('nodisabled');

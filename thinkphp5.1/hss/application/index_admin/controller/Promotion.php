@@ -235,17 +235,18 @@ class Promotion extends Base {
             return errorMsg('失败');
         }
 
-        $relation = input('get.relation/d');
+        $relation = input('post.relation/d');
+
         // custom.php relation_type
         switch($relation){
             case config('custom.relation_type.scene'):
-                $model = new \app\index_admin\model\SceneGoods();
+                $model = new \app\index_admin\model\ScenePromotion();
                 break;
             case config('custom.relation_type.project'):
-                $model = new \app\index_admin\model\ProjectGoods();
+                $model = new \app\index_admin\model\ProjectPromotion();
                 break;
             case config('custom.relation_type.promotion'):
-                $model = new \app\index_admin\model\PromotionGoods();
+                //$model = new \app\index_admin\model\PromotionPromotion();
                 break;
             default:
                 return errorMsg('参数有误');
