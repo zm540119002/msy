@@ -101,7 +101,7 @@ cart = {
             localStorage.setItem('cartList',JSON.stringify(a));
 
             dialog.success('成功');
-            var num = 0;
+            var num = 1;
 
             // $.each(lis,function(index,val){
             //     var buyType=$(this).data('buy_type');
