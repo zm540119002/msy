@@ -121,7 +121,7 @@ class Goods extends \common\controller\Base{
                 ['g.id', 'in', $goodsIds],
             ],
             'field'=>[
-                'g.id as goods_id','g.headline','g.name','g.thumb_img','g.bulk_price','g.sample_price','g.specification','g.minimum_order_quantity',
+                'g.id','g.headline','g.name','g.thumb_img','g.bulk_price','g.sample_price','g.specification','g.minimum_order_quantity',
                 'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
             ],
         ];
@@ -138,10 +138,10 @@ class Goods extends \common\controller\Base{
         $showGoodsList =  $list['data'];
         foreach ($showGoodsList as $i =>&$showGoods){
             foreach($goodsList as $j=>&$goods){
-                if($showGoods['goods_id'] == $goods['goods_id'] ){
+                if($showGoods['id'] == $goods['goods_id'] ){
                     $showGoodsList[$i]['num'] = $goods['num'];
                     $showGoodsList[$i]['buy_type'] = $goods['buy_type'];
-                    $showGoodsList[$i]['id'] = $i+1;
+                    $showGoodsList[$i]['cart_id'] = $i+1;
                 }
             }
         }
