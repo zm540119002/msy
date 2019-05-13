@@ -1,25 +1,12 @@
-//加入购物车
+/**
+ * 登录加入购物车
+ * @param postData
+ */
 function addCart(postData) {
-    var url = module + 'Cart/addCart';
-    var _this=postData._this;
-    var lis=postData.lis;
-    if(1){
-        dialog.success(data.info);
-        var num = 0;
 
-        $.each(lis,function(index,val){
-            var buyType=$(this).data('buy_type');
-            if(buyType==1){
-                num += parseInt($(this).find('.gshopping_count').val());
-            }
-        });
-        $('footer').find('.cart_num').addClass('cur');
-        $('footer').find('.add_num').text('+'+num).addClass('current');
-        setTimeout(function(){
-            $('.add_num').removeClass('current');
-        },2000)
-        return false;
-    }
+    var url = module + 'Cart/addCart';
+     var _this=postData._this;
+     var lis=postData.lis;
     _this.addClass("nodisabled");//防止重复提交
     delete postData._this;
     delete postData.lis;
@@ -65,6 +52,17 @@ function addCart(postData) {
             }
         }
     });
+}
+
+/**
+ * 没有登录加入购物车
+ * @param postData
+ */
+function noLoginAddCart(goodsList){
+    var cartList = JSON.stringify(goodsList);
+    localStorage.removeItem("cartList");//删除变量名为key的存储变量
+    localStorage.setItem("cartList",cartList);
+    console.log(cartList);return false
 }
 $(function () {
     //计算商品列表总价
@@ -172,17 +170,18 @@ $(function () {
         var lis = null;
         lis = $('ul.goods_list').find('li[data-buy_type="1"]');
         var postData = assemblyData(lis);
-        var goodsList = postData.goodsList;
-        var cartList = JSON.stringify(postData);
-        localStorage.setItem("cartList",cartList);
-        console.log(cartList);return false
         if(!postData){
             return false;
         }
         postData._this = _this;
         postData.lis = lis;
+        if(1){
+            var goodsList = postData.goodsList;
+            noLoginAddCart(goodsList);
+        }else{
+            addCart(postData);
+        }
 
-        addCart(postData);
     });
     //样品弹窗加入购物车
     $('body').on('click','.goodsInfoLayer .add_cart_layer',function(){
