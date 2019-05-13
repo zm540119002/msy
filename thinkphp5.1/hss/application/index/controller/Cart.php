@@ -1,7 +1,7 @@
 <?php
 namespace app\index\controller;
 
-class Cart extends \common\controller\Base {
+class Cart extends \common\controller\UserBase {
     /**首页
      */
 
