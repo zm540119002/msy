@@ -99,6 +99,21 @@ cart = {
             //保存购物车
             //localStorage.removeItem("cartList");//删除变量名为key的存储变量
             localStorage.setItem('cartList',JSON.stringify(a));
+
+            dialog.success(data.info);
+            var num = 0;
+
+            // $.each(lis,function(index,val){
+            //     var buyType=$(this).data('buy_type');
+            //     if(buyType==1){
+            //         num += parseInt($(this).find('.gshopping_count').val());
+            //     }
+            // });
+            $('footer').find('.cart_num').addClass('cur');
+            $('footer').find('.add_num').text('+'+num).addClass('current');
+            setTimeout(function(){
+                $('.add_num').removeClass('current');
+            },2000)
         }
 
         return false;
