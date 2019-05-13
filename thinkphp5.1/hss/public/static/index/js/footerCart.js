@@ -243,9 +243,10 @@ $(function () {
             return false;
         }
         if (1){
-            postData._this = _this;
-            postData.lis = lis;
-            addCart(postData);
+            cart.addCart(postData);
+            // postData._this = _this;
+            // postData.lis = lis;
+            // addCart(postData);
         } else{
             cart.addCart(postData);
         }
