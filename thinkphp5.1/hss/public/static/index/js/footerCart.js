@@ -299,8 +299,6 @@ $(function () {
                 goodsList.push({
                     goods_id:goods_id,
                     buy_type:buy_type,
-                    brand_id:brand_id,
-                    brand_name:brand_name,
                     num:num
                 });
             }
