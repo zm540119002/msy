@@ -79,7 +79,8 @@ cart = {
                         console.log(12);
                         //找到修改数量
                         find = true;
-                        cartListOld[j].num = parseInt(cartListOld[j].num) + parseInt(goods.num);
+                        goodsList[j].num = parseInt(cartListOld[j].num) + parseInt(goods.num);
+                        console.log(goodsList);
                     }
                     if(!find){
                         //没有该商品就直接加进去
