@@ -61,6 +61,7 @@ function addCart(postData) {
 cart = {
     //向购物车中添加商品
     addCart: function (addGoodsList) {
+        localStorage.removeItem("cartList");
         var cartListOld = localStorage.cartList;//获取存储购物车商品信息
         console.log(cartListOld);
         if (cartListOld == null || cartListOld == "") {
@@ -94,7 +95,7 @@ cart = {
             });
         }
         //保存购物车
-        localStorage.setItem('cartList',JSON.stringify(addGoodsList));
+        //localStorage.setItem('cartList',JSON.stringify(addGoodsList));
         return false;
     }
 };
