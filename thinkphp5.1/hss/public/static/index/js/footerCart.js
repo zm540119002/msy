@@ -1,4 +1,4 @@
-var user_id = '{$user.id}';
+
 /**
  * 登录加入购物车
  * @param postData
@@ -115,6 +115,8 @@ cart = {
 };
 
 $(function () {
+    var user_id = '{$user.id}';
+    console.log(user_id);
     //计算商品列表总价
     //calculateTotalPrice();
     //加
