@@ -1,0 +1,105 @@
+{extend name="template/base.html" /}
+
+{block name="title"}
+{$Think.config.custom.tag_category[$info.tag_category]}
+{/block}
+
+{block name="content"}
+<article class="f24">
+	<!-- 标题导航 -->
+	<section class="slider_banner">
+		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide swiper-slide-active">
+					{volist name="$info.main_img" id="vo"}
+					<img src="{:show_img_handle($vo)}" alt="" class="common_default_img">
+					{/volist}
+				</div>
+			</div>
+			<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
+				<span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span>
+				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 2"></span>
+				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 3"></span>
+				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 4"></span>
+			</div>
+		</div>
+	</section>
+	<section class="module-navigation ">
+		<div >
+			<ul>
+				<li>
+					<div class="top_radius f20 top_module">
+						<div>
+							<div class="title">
+								{$info.title}
+							</div>
+							<div class="intro"></div>
+						</div>
+						<div class="tags_item columns_flex l-r-sides">
+							<div>
+								{volist name="$info.tag" id="tag"}
+								<span>{$tag}</span>
+								{/volist}
+							</div>
+							<div class="tags_item_r">
+								<a class="collection" href="javascript:;"><span class="icon"></span><span class="text">收藏</span></a>
+								<a class="share" href="javascript:;"><span class="icon"></span>分享</a>
+							</div>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</section>
+
+	<!-- 内容 -->
+	<section class="content-padding content_main wy_list">
+		<!--产品列表-->
+		<ul class="goods_list list" id="list">
+
+		</ul>
+	</section>
+</article>
+{/block}
+{block name="common"}
+
+{/block}
+{block name="footer"}
+
+{/block}
+{block name="script"}
+
+<script type="text/javascript">
+	// 获取项目列表
+	var config = {
+		url:module+'Sort/getList',
+		requestEnd:false,
+		loadTrigger:false,
+		currentPage:1
+	};
+	var postData = {
+		pageSize:10
+	};
+
+	$(function(){
+		//初始化项目列表
+
+		getPagingList(config,postData);
+	});
+	$(function(){
+		// 后加载简介
+		$('document').ready(function(){
+			$('.intro').html("{$info.intro|raw}");
+		});
+		//轮播
+		var swiper = new Swiper('.swiper-container', {
+			spaceBetween: 30,
+			autoplay:true,
+			pagination: {
+				el: '.swiper-pagination',
+				clickable: true
+			}
+		});
+	});
+</script>
+{/block}

@@ -81,7 +81,6 @@ class Scene extends Base {
 
             $data['update_time'] = time();
             $data['audit'] = 1; // 暂时没有审核，先固定
-            $data['shelf_status'] = 1; // 暂时没有审核，先固定
 
             if(isset($_POST['id']) && $id=input('post.id/d')){ //修改
 
@@ -98,22 +97,23 @@ class Scene extends Base {
 
                 //删除旧文件
                 if($info['thumb_img']){
-                    delImgFromPaths($info['thumb_img'],$_POST['thumb_img']);
+                    delImgFromPaths($info['thumb_img'],$data['thumb_img']);
                 }
                 if($info['logo_img']){
-                    delImgFromPaths($info['logo_img'],$_POST['logo_img']);
+                    delImgFromPaths($info['logo_img'],$data['logo_img']);
                 }
                 if($info['background_img']){
-                    delImgFromPaths($info['background_img'],$_POST['background_img']);
+                    delImgFromPaths($info['background_img'],$data['background_img']);
                 }
                 if($info['main_img']){
                     $oldImgArr = explode(',',$info['main_img']);
-                    $newImgArr = explode(',',$_POST['main_img']);
+                    $newImgArr = explode(',',$data['main_img']);
                     delImgFromPaths($oldImgArr,$newImgArr);
                 }
 
             }
             else{//新增
+                $data['shelf_status'] = 1; // 暂时没有审核，先固定
                 $data['create_time'] = time();
                 $result = $model->edit($data);
                 if(!$result['status']) return $result;
