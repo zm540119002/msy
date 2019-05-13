@@ -139,7 +139,6 @@ class Goods extends \common\controller\Base{
         foreach ($showGoodsList as $i =>&$showGoods){
             foreach($goodsList as $j=>&$goods){
                 if($showGoods['goods_id'] == $goods['goods_id'] ){
-                    echo $goods['num'];
                     $showGoodsList[$i]['num'] = $goods['num'];
                     $showGoodsList[$i]['buy_type'] = $goods['buy_type'];
                 }
