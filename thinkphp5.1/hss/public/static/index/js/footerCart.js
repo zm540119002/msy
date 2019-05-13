@@ -70,6 +70,7 @@ cart = {
         }else {
             console.log(123);
             var jsonstr = JSON.parse(cartListOld.substr(1, cartListOld.length));
+            console.log(jsonstr);
             var goodsList = jsonstr.goodsList;
             console.log(goodsList);
 
