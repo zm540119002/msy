@@ -61,7 +61,10 @@ function addCart(postData) {
 cart = {
     //向购物车中添加商品
     addCart: function (addGoodsList) {
+        // localStorage.removeItem("cartList");//删除变量名为key的存储变量
+        // return false;
         var cartListOld = localStorage.cartList;//获取存储购物车商品信息
+        console.log(cartListOld);
         if (cartListOld == null || cartListOld == "") {
             //第一次加入商品
             var goodsList = JSON.stringify(addGoodsList);
@@ -71,33 +74,37 @@ cart = {
             var goodsList = jsonstr.goodsList;
             var addGoodsList = addGoodsList.goodsList;
             //查找购物车中是否有该商品
+            var newGodsList= [];
             $.each(addGoodsList,function(i,addGoods){
                 var find = false;
                 $.each(goodsList,function(j,goods){
                     if(addGoods.goods_id == goods.goods_id && addGoods.buy_type == goods.buy_type){
                         //找到修改数量
                         find = true;
+                        console.log(1);
                         goodsList[j].num = parseInt(addGoods.num) + parseInt(goods.num);
                         console.log(goodsList);
                     }
-                    if(!find){
-                        console.log(222);
-                        //没有该商品就直接加进去
-                        goodsList.push({
-                            "goods_id": addGoods.goods_id,
-                            "num": addGoods.num,
-                            "buy_type": addGoods.buy_type
-                        });
-                    }
                 });
+                if(!find){
+                    console.log(2);
+                    //没有该商品就直接加进去
+                    newGodsList.push({
+                        "goods_id": addGoods.goods_id,
+                        "num": addGoods.num,
+                        "buy_type": addGoods.buy_type
+                    });
+                }
             });
+            console.log(newGodsList);
+            
             var a = {
                 goodsList:goodsList
             };
-            console.log(goodsList)
             //保存购物车
             localStorage.removeItem("cartList");//删除变量名为key的存储变量
             localStorage.setItem('cartList',JSON.stringify(a));
+            location.reload();
         }
 
         return false;
