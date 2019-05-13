@@ -126,14 +126,25 @@ class Goods extends \common\controller\Base{
             ],
         ];
 
-        $list = $model -> pageQuery($config)->each(function ($item, $key){
-            foreach($goodsList as $k=>&$v){
-                if($v['goods_id'] == $item['id'] ){
-                    $item['num'] = 6;
+//        $list = $model -> pageQuery($config)->each(function ($item, $key){
+//            foreach($goodsList as $k=>&$v){
+//                if($v['goods_id'] == $item['id'] ){
+//                    $item['num'] = 6;
+//                }
+//            }
+//            return $item;
+//        });
+        $list = $model -> pageQuery($config);
+
+        $showGoodsList =  $list['data'];
+        foreach ($showGoodsList as $i =>&$showGoods){
+            foreach($goodsList as $j=>&$goods){
+                if($showGoods['id'] == $goods['goods_id'] ){
+                    $showGoodsList[$i] = $goods['num'];
                 }
             }
-            return $item;
-        });
+        }
+        $list['data'] = $showGoodsList;
         return $list;
         $this->assign('list',$list);
 
