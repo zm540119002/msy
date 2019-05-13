@@ -223,7 +223,7 @@ $(function () {
         if(!postData){
             return false;
         }
-        var user_id = '{$user_id}';//判断是否登录
+        var user_id = '{$user.id}';//判断是否登录
         console.log(user_id);
         return  false
         if (user_id){
