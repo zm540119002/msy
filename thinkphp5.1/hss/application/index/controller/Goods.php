@@ -127,8 +127,11 @@ class Goods extends \common\controller\Base{
         ];
 
         $list = $model -> pageQuery($config)->each(function ($item, $key){
-            $item['num'] = 5;
-
+            foreach($goodsList as $k=>&$v){
+                if($v['goods_id'] == $item['id'] ){
+                    $item['num'] = 6;
+                }
+            }
             return $item;
         });
         return $list;
