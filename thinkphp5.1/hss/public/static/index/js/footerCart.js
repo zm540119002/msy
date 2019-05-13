@@ -100,7 +100,7 @@ cart = {
             //localStorage.removeItem("cartList");//删除变量名为key的存储变量
             localStorage.setItem('cartList',JSON.stringify(a));
 
-            dialog.success(data.info);
+            dialog.success('成功');
             var num = 0;
 
             // $.each(lis,function(index,val){
