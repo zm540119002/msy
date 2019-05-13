@@ -74,6 +74,7 @@ cart = {
             var goodsList = jsonstr.goodsList;
             var addGoodsList = addGoodsList.goodsList;
             //查找购物车中是否有该商品
+            var newGodsList= [];
             $.each(addGoodsList,function(i,addGoods){
                 var find = false;
                 $.each(goodsList,function(j,goods){
@@ -84,17 +85,19 @@ cart = {
                         goodsList[j].num = parseInt(addGoods.num) + parseInt(goods.num);
                         console.log(goodsList);
                     }
-                    if(!find){
-                        console.log(2);
-                        //没有该商品就直接加进去
-                        goodsList.push({
-                            "goods_id": addGoods.goods_id,
-                            "num": addGoods.num,
-                            "buy_type": addGoods.buy_type
-                        });
-                    }
                 });
+                if(!find){
+                    console.log(2);
+                    //没有该商品就直接加进去
+                    newGodsList.push({
+                        "goods_id": addGoods.goods_id,
+                        "num": addGoods.num,
+                        "buy_type": addGoods.buy_type
+                    });
+                }
             });
+            console.log(newGodsList);
+            
             var a = {
                 goodsList:goodsList
             };
