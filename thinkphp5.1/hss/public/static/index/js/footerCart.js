@@ -136,8 +136,6 @@ cart = {
 };
 
 $(function () {
-    var user_id = '{$user.id}';
-    console.log(user_id);
     //计算商品列表总价
     //calculateTotalPrice();
     //加
