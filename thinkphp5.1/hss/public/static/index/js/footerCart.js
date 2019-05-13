@@ -92,7 +92,7 @@ cart = {
                 if(goods_id == oldgoods.goods_id){
                     console.log(j);
                     //找到删除
-                    goodsList.splice(j,1);
+                    //goodsList.splice(j,1);
                     return;
                 }
             });
@@ -244,13 +244,15 @@ $(function () {
         if(!postData){
             return false;
         }
-        if (1){
+        if (1){ //没有登录
             cart.addCart(postData);
             // postData._this = _this;
             // postData.lis = lis;
             // addCart(postData);
-        } else{
-            cart.addCart(postData);
+        } else{//登录
+            postData._this = _this;
+            postData.lis = lis;
+            addCart(postData);
         }
     });
     //购物车列表页
