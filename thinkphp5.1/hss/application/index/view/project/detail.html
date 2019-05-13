@@ -76,11 +76,37 @@
 			<p>{$project.update_time}</p>
 		</div>
 		{/notempty}
+		<div class="content-padding">
+			项目名称
+		</div>
 		<div>
-			<h3>相关视频</h3>
-			<ul class="p_video_item" id="videos">
-
+			<p class="content-label">项目流程</p>
+			<section class="slider_banner">
+				<div class="swiper-container swiper-container-horizontal swiper-container-ios">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide swiper-slide-active">
+							{volist name="$info.main_img" id="vo"}
+							<img src="{:show_img_handle($vo)}" alt="" class="common_default_img">
+							{/volist}
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+		<div class="content-padding">
+			<p class="content-label">推荐搭配居家产品</p>
+			<ul class="list">
+				<li>
+					<a>
+						<img src="" alt="">
+					</a>
+					<p>1111111</p>
+					<p>规格</p>
+				</li>
 			</ul>
+		</div>
+		<div class="content-padding">
+			<p class="content-label">注意事项</p>
 		</div>
 	</section>
 </article>
