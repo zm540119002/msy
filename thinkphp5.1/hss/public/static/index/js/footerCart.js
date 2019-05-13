@@ -63,6 +63,7 @@ cart = {
         var cartListOld = localStorage.cartList;//获取存储购物车商品信息
         var jsonstr = JSON.parse(cartListOld);
         var goodsList = jsonstr.goodsList;
+        console.log(goodsList);return
         $.each(goodsList,function(j,oldgoods){
             if(goods.goods_id == oldgoods.goods_id){
                 //找到修改数量
