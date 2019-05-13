@@ -97,7 +97,7 @@ cart = {
                 goodsList:goodsList
             };
             //保存购物车
-            localStorage.removeItem("cartList");//删除变量名为key的存储变量
+            //localStorage.removeItem("cartList");//删除变量名为key的存储变量
             localStorage.setItem('cartList',JSON.stringify(a));
         }
 
