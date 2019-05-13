@@ -140,11 +140,12 @@ class Goods extends \common\controller\Base{
         foreach ($showGoodsList as $i =>&$showGoods){
             foreach($goodsList as $j=>&$goods){
                 if($showGoods['id'] == $goods['goods_id'] ){
+                    echo $goods['num'];
                     $showGoodsList[$i]['num'] = $goods['num'];
                 }
             }
         }
-      
+
         $list['data'] = $showGoodsList;
         return $list;
         $this->assign('list',$list);
