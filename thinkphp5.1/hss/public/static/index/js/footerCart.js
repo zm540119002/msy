@@ -92,7 +92,7 @@ cart = {
                 if(goods_id == oldgoods.goods_id){
                     console.log(j);
                     //找到删除
-                    //  goodsList.splice(j,1);
+                    goodsList.splice(j,1);
                     return;
                 }
             });
