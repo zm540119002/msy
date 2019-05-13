@@ -65,7 +65,7 @@ cart = {
         console.log(cartListOld);
         if (cartListOld == null || cartListOld == "") {
             //第一次加入商品
-            var goodsList = JSON.stringify(postData);
+            var goodsList = JSON.stringify(addGoodsList);
             localStorage.setItem('cartList',goodsList);
         }else {
             console.log(123);
