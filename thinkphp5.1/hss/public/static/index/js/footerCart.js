@@ -98,6 +98,7 @@ cart = {
             });
 
         });
+        return false;
         console.log(goodsList)
         var a = {
             goodsList:goodsList
