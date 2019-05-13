@@ -114,38 +114,20 @@ class Goods extends \common\controller\Base{
         $cartList = input('get.cartList');
         $goodsList =  json_decode($cartList,true)['goodsList'];
         $goodsIds = array_column($goodsList,'goods_id');
-        return $goodsIds;
         $model = new \app\index\model\Goods();
         $config=[
             'where'=>[
                 ['g.status', '=', 0],
-                ['g.shelf_status', '=', 3],
+                ['g.id', 'in', $goodsIds],
             ],
             'field'=>[
                 'g.id ','g.headline','g.thumb_img','g.bulk_price','g.sample_price','g.specification','g.minimum_order_quantity',
                 'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
             ],
-            'order'=>[
-                'is_selection'=>'desc',
-                'sort'=>'desc',
-                'id'=>'desc'
-            ],
         ];
-        if(input('?get.category_id') && input('get.category_id/d')){
-            $config['where'][] = ['g.category_id_1', '=', input('get.category_id/d')];
-        }
-        if(input('get.belong_to/d')){
-            $config['where'][] = ['g.belong_to', '=', input('get.belong_to/d')];
-        }
-        if(input('get.is_selection/d')){
-            $config['where'][] = ['g.is_selection', '=', input('get.is_selection/d')];
-        }
-        $keyword = input('get.keyword','');
-        if($keyword) {
-            $config['where'][] = ['name', 'like', '%' . trim($keyword) . '%'];
-        }
 
         $list = $model -> pageQuery($config);
+        return $list;
         $this->assign('list',$list);
 
         if(isset($_GET['pageType'])){
