@@ -70,7 +70,7 @@ cart = {
         }else {
             var jsonstr = JSON.parse(cartListOld);
             var goodsList = jsonstr.goodsList;
-            var addGoodsList = postData.goodsList;
+            var addGoodsList = addGoodsList.goodsList;
             //查找购物车中是否有该商品
             $.each(addGoodsList,function(i,addGoods){
                 var find = false;
