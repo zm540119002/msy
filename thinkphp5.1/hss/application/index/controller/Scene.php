@@ -66,7 +66,7 @@ class Scene extends \common\controller\Base{
             array_push($unlockingFooterCart['menu'][3]['class'],'group_btn30');
             $this->assign('unlockingFooterCart',json_encode($unlockingFooterCart));*/
 
-            $id = intval(input('id'));
+            $id = input('id/d');
             if(!$id) $this->error('此项目已下架');
             // 场景信息 主要是获取同组的场景信息
             $model = new\app\index\model\Scene();
