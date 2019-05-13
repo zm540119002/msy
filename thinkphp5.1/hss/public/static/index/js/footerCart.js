@@ -157,20 +157,12 @@ $(function () {
         lis = $('ul.goods_list').find('li[data-buy_type="1"]');
         var postData = assemblyData(lis);
         var goodsList = postData.goodsList;
-        // console.log(postData)
-        // for(var i=0;i<goodsList.length;i++){
-        //     if(goodsList[i].buy_type == 1 && !goodsList[i].brand_name){
-        //         dialog.error('请设置品牌');
-        //         return false;
-        //     }
-        // }
-
+        console.log(goodsList);
         if(!postData){
             return false;
         }
         postData._this = _this;
         postData.lis = lis;
-
         addCart(postData);
     });
     //样品弹窗加入购物车

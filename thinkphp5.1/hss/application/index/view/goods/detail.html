@@ -211,6 +211,8 @@
 <script type="text/javascript" src="index_js/footerCart.js"></script>
 <script type="text/javascript">
 	$(function(){
+		var user_id = '{$user.id}';
+
 		var id = '{$info.id}';
 		var price=$('.goods_list').find('price').text();
 		$('.amount').find('price').text(price);
@@ -351,6 +353,11 @@
 		$('.five_star').setStar(parseFloat(averageScore));
 		//收藏
 		$('body').on('click','.collection',function(){
+			if(user_id){
+
+			}else{
+
+			}
 			var _this = $(this);
 			if(_this.find('span.icon').hasClass('selected')){
 				var postData = {};
