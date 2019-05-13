@@ -71,10 +71,9 @@ class Promotion extends \common\controller\Base{
 
         switch($type){
             case 'sort' :
-                $model = new \app\index\model\ProjectPromotion();
-                //$condition['where'][] = ['sp.scene_id','=',$id];
-                $field_id = 'cp.project_id';
-                $join_id  = 'cp.promotion_id';
+                $model = new \app\index\model\SortPromotion();
+                $field_id = 'sp.sort_id';
+                $join_id  = 'sp.promotion_id';
                 break;
             case 'project' :
                 $model = new \app\index\model\ProjectPromotion();
