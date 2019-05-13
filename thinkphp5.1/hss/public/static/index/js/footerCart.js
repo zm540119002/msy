@@ -89,12 +89,12 @@ cart = {
         $.each(goods.goods_ids,function(i,goods_id){
             console.log(5)
             $.each(goodsList,function(j,oldgoods){
-                if(goods_id == oldgoods.goods_id){
-                    console.log(111)
-                    //找到删除
-                     goodsList.splice(j,1);
-                    return;
-                }
+                // if(goods_id == oldgoods.goods_id){
+                //     console.log(111)
+                //     //找到删除
+                //      goodsList.splice(j,1);
+                //     return;
+                // }
             });
 
         });
