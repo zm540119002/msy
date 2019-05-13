@@ -141,6 +141,7 @@ class Goods extends \common\controller\Base{
                 if($showGoods['goods_id'] == $goods['goods_id'] ){
                     $showGoodsList[$i]['num'] = $goods['num'];
                     $showGoodsList[$i]['buy_type'] = $goods['buy_type'];
+                    $showGoodsList[$i]['id'] = $i+1;
                 }
             }
         }
