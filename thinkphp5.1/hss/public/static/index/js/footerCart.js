@@ -214,9 +214,11 @@ $(function () {
         var _this = $(this);
         var postData = {};
         var id = _this.parents('li').data('cart_id');
+        var goods_id = _this.parents('li').data('id');
         var num = _this.siblings('.cart_gshopping_count').val();
         postData.id = id;
         postData.num = num;
+        postData.goods_id = goods_id;
         if(1){
             cart.editCartNum(postData,_this);
         }else{
