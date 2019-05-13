@@ -97,21 +97,17 @@ cart = {
             //保存购物车
             //localStorage.removeItem("cartList");//删除变量名为key的存储变量
             localStorage.setItem('cartList',JSON.stringify(a));
-
+            //计算总数
+            var total_num = 0;
+            $.each(goodsList,function(i,goods){
+                total_num += goods['num'];
+            });
             dialog.success('成功');
-            var num = 1;
-
-            // $.each(lis,function(index,val){
-            //     var buyType=$(this).data('buy_type');
-            //     if(buyType==1){
-            //         num += parseInt($(this).find('.gshopping_count').val());
-            //     }
-            // });
             $('footer').find('.cart_num').addClass('cur');
-            $('footer').find('.add_num').text('+'+num).addClass('current');
-            setTimeout(function(){
-                $('.add_num').removeClass('current');
-            },2000)
+            $('footer').find('.add_num').text(total_num).addClass('current');
+            // setTimeout(function(){
+            //     $('.add_num').removeClass('current');
+            // },2000)
         }
 
         return false;

@@ -111,44 +111,46 @@ class Goods extends \common\controller\Base{
         if(!request()->isGet()){
             return errorMsg('请求方式错误');
         }
-        return input('get.');
+        $cartList = input('get.cartList');
+        $goodsList =  json_decode($cartList,true)['goodsList'];
+        $goodsIds = array_column($goodsList,'goods_id');
         $model = new \app\index\model\Goods();
         $config=[
             'where'=>[
                 ['g.status', '=', 0],
-                ['g.shelf_status', '=', 3],
+                ['g.id', 'in', $goodsIds],
             ],
             'field'=>[
-                'g.id ','g.headline','g.thumb_img','g.bulk_price','g.sample_price','g.specification','g.minimum_order_quantity',
+                'g.id','g.headline','g.name','g.thumb_img','g.bulk_price','g.sample_price','g.specification','g.minimum_order_quantity',
                 'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
             ],
-            'order'=>[
-
-            ],
         ];
-        if(input('?get.category_id') && input('get.category_id/d')){
-            $config['where'][] = ['g.category_id_1', '=', input('get.category_id/d')];
+//        $list = $model -> pageQuery($config)->each(function ($item, $key){
+//            foreach($goodsList as $k=>&$v){
+//                if($v['goods_id'] == $item['id'] ){
+//                    $item['num'] = 6;
+//                }
+//            }
+//            return $item;
+//        });
+        $list = $model -> pageQuery($config)->toArray();
+        $showGoodsList =  $list['data'];
+        foreach ($showGoodsList as $i =>&$showGoods){
+            foreach($goodsList as $j=>&$goods){
+                if($showGoods['id'] == $goods['goods_id'] ){
+                    $showGoodsList[$i]['num'] = $goods['num'];
+                    $showGoodsList[$i]['buy_type'] = $goods['buy_type'];
+                    $showGoodsList[$i]['cart_id'] = $i+1;
+                }
+            }
         }
-        if(input('get.belong_to/d')){
-            $config['where'][] = ['g.belong_to', '=', input('get.belong_to/d')];
-        }
-        if(input('get.is_selection/d')){
-            $config['where'][] = ['g.is_selection', '=', input('get.is_selection/d')];
-        }
-        $keyword = input('get.keyword','');
-        if($keyword) {
-            $config['where'][] = ['name', 'like', '%' . trim($keyword) . '%'];
-        }
-
-        $list = $model -> pageQuery($config);
-        $this->assign('list',$list);
-
+        $list = $showGoodsList ;
+        $currentPage = input('get.page/d');
+        $this->assign('currentPage',$currentPage);
+        $this->assign('list',$showGoodsList);
         if(isset($_GET['pageType'])){
-
-            // 排列的数量不同
-            switch($_GET['pageType']){
-                case 'index': return $this->fetch('list_goods_two_column_tpl'); break;  // 一行两个
-                case 'sort' : return $this->fetch('list_goods_one_column_tpl'); break;   // 一行一个
+            if($_GET['pageType'] == 'index' ){
+                return $this->fetch('cart/list_tpl');
             }
         }
     }
