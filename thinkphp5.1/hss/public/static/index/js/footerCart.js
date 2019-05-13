@@ -62,7 +62,6 @@ cart = {
     //向购物车中添加商品
     addCart: function (addGoodsList) {
         var cartListOld = localStorage.cartList;//获取存储购物车商品信息
-        console.log(cartListOld)
         if (cartListOld == null || cartListOld == "") {
             //第一次加入商品
             var goodsList = JSON.stringify(addGoodsList);
@@ -72,7 +71,6 @@ cart = {
             var goodsList = jsonstr.goodsList;
             var addGoodsList = addGoodsList.goodsList;
             //查找购物车中是否有该商品
-            var newGodsList= [];
             $.each(addGoodsList,function(i,addGoods){
                 var find = false;
                 $.each(goodsList,function(j,goods){

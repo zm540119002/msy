@@ -37,11 +37,18 @@
 	};
 	$(function(){
 		var user_id = '{$user.id}';
-		console.log(111);
 		console.log(user_id);
 		// 初始化购物车商品
-		getPagingList(config,postData);
-		getPagingList(config,postData);
+		if(user_id){
+			getPagingList(config,postData);
+		}else {
+			config.url = module+'Goods/getCartGoodsList';
+			var cartList = localStorage.cartList;//获取存储购物车商品信息
+			postData.cartList = cartList;
+			getPagingList(config,postData);
+		}
+
+
 		//下拉加载
 		$(window).on('scroll',function(){
 			if(config.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
