@@ -45,7 +45,7 @@
 	></footer-cart-menu>
 </div>
 {/block}
-<template id="main">
+<template id="app">
 	<div class="main">
 		<div @click="openMask">打开弹窗</div>
 		<dialog v-model="sendVal" type="danger" title="我是标题" content="我是内容"
@@ -127,7 +127,7 @@
 		let param = {
 		};
 		new Vue({
-			el: '#main',
+			el: '#app',
 			data:function(){
 				return {
 					sendVal: false
