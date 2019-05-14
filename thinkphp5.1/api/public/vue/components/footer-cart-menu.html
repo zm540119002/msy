@@ -220,13 +220,14 @@
                         total_amount:0,
                         cart_num:this.cart_init_num,
                         menus: unlockingFooterCart.menu,
+                        menu:this.footerCartMenu,
                         postData:{
                             productList:[]
                         }
                     }
                 },methods: {
                     total_amount_init:function (param) {
-                        console.log(this.footerCartMenu);
+                        console.log(this.menu);
                         this.total_amount += param.subtotal_amount;
                     },total_amount_calculate:function (param) {
                         this.total_amount += param.deal_price * param.increment_buy_quantity;
