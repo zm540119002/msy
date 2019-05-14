@@ -21,7 +21,7 @@
 						v-for="productInfo in productList"
 						:key="productInfo.id"
 						:product_id="productInfo.id"
-						:deal_price="parseFloat(productInfo.bulk_price)"
+						:deal_price="Number(productInfo.bulk_price)"
 						:product_name="productInfo.headline"
 						:product_src="productInfo.thumb_img"
 						:product_url="String(productInfo.id)"
@@ -60,7 +60,6 @@
 		}
 		param = {
 			'buy_named':'采购数量',
-			'display_quota':true,
 			'display_pic':true,
 			'init_quantity':1,
 			'step_quantity':1,
