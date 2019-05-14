@@ -69,12 +69,12 @@ cart = {
                 return;
             }
         });
-        var a = {
+        var cartList = {
             goodsList:goodsList
         };
         //保存购物车
         //localStorage.removeItem("cartList");//删除变量名为key的存储变量
-        localStorage.setItem('cartList',JSON.stringify(a));
+        localStorage.setItem('cartList',JSON.stringify(cartList));
     },
     //删除商品
     delCart:function (goods) {
@@ -106,6 +106,18 @@ cart = {
                 }
             });
         });
+    },
+    //统计购物车的数量
+    getGoodsTotal:function () {
+        var cartListOld = localStorage.cartList;//获取存储购物车商品信息
+        var jsonstr = JSON.parse(cartListOld);
+        var goodsList = jsonstr.goodsList;
+        //计算总数
+        var total_num = 0;
+        $.each(goodsList,function(i,goods){
+            total_num += goods['num'];
+        });
+        return total_num;
     }
     
 };
@@ -221,7 +233,7 @@ $(function () {
         goods_ids.push(_li.data('id'));
         if(user_id){
             postData.cart_ids = cart_ids;
-            editCartNum(postData,_this);
+            editCartNum(postData, $(this));
         }else{
             postData.goods_ids = goods_ids;
             cart.delCart(postData);
