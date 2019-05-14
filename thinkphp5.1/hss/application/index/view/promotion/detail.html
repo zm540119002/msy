@@ -77,7 +77,6 @@
 		pageSize:10,
 		id:"{$info.id}"
 	};
-
 	$(function(){
 		let param = {
 			cart_init_num:parseInt("{$cartSum|default=0}")
@@ -88,10 +87,8 @@
 				return param;
 			},methods: {
 				buy_now_call_back:function(param){
-
 					var postData = {};
 					postData.goodsList = param.postData.productList;
-
 					$.ajax({
 						url: param.jump_url,
 						data: postData,
@@ -108,7 +105,6 @@
 							}else{
 								dialog.error(data.info);
 							}
-
 						}
 					});
 				}
