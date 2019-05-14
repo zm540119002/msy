@@ -35,20 +35,21 @@
 {/block}
 {block name="login_dialog"}
 	{include file="../../api/public/vue/components/login.html" /}
-<!--<div id="loginDialog">-->
-	<!--<login-->
-	<!--&gt;</login>-->
-<!--</div>-->
-<!--<script type="text/javascript">-->
-	<!--$(function(){-->
-		<!--new Vue({-->
-			<!--el: '#loginDialog',-->
-			<!--data:function(){-->
-				<!--return {};-->
-			<!--}-->
-		<!--});-->
-	<!--});-->
-<!--</script>-->
+	<div id="loginDialogRoot">
+		<login
+		></login>
+	</div>
+	<script type="text/javascript">
+		$(function(){
+			new Vue({
+				el: '#loginDialogRoot',
+				data:function(){
+					return {};
+				},methods: {
+				}
+			});
+		});
+	</script>
 {/block}
 {block name="footer"}
 <div id="foot_cart_menu">
