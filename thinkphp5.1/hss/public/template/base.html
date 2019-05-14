@@ -39,21 +39,21 @@
     }
     //登录-弹窗触发
     function loginDialogTrigger(){
-        var content = $('.userInfoWrapper').html();
-        layer.open({
-            className:'loginLayer',
-            type:1,
-            shadeClose:false,
-            content:content,
-            btn:[''],
-            success:function(index){
-                console.log(index);
-            },
-            yes:function(index){
-                layer.close(index);
-            }
-        });
-        return false;
+//        var content = $('.userInfoWrapper').html();
+//        layer.open({
+//            className:'loginLayer',
+//            type:1,
+//            shadeClose:false,
+//            content:content,
+//            btn:[''],
+//            success:function(index){
+//                console.log(index);
+//            },
+//            yes:function(index){
+//                layer.close(index);
+//            }
+//        });
+//        return false;
         var content = $('.userInfoWrapper').html();
         console.log(content);
         window.open (content,"newwindow", "height=100, width=400, toolbar =no, menubar=no, scrollbars=no, resizable=no, location=no, status=no");
