@@ -39,24 +39,24 @@
     }
     //登录-弹窗触发
     function loginDialogTrigger(){
-        var content = $('.userInfoWrapper').html();
-        var content2 = $('#loginAndRegister').html();
-        layer.open({
-            className:'loginLayer',
-            type:1,
-            shadeClose:false,
-            content:content2,
-            btn:[''],
-            success:function(index){
-            },
-            yes:function(index){
-                layer.close(index);
-            }
-        });
-        return false;
+//        var content = $('.userInfoWrapper').html();
+//        var content2 = $('#loginAndRegister').html();
+//        layer.open({
+//            className:'loginLayer',
+//            type:1,
+//            shadeClose:false,
+//            content:content2,
+//            btn:[''],
+//            success:function(index){
+//            },
+//            yes:function(index){
+//                layer.close(index);
+//            }
+//        });
+//        return false;
         var content = document.getElementById('loginAndRegister');
         console.log(content);
-        window.open (content,"newwindow", "height=100, width=400, toolbar =no, menubar=no, scrollbars=no, resizable=no, location=no, status=no");
+        document.open (content,"newwindow", "height=100, width=400, toolbar =no, menubar=no, scrollbars=no, resizable=no, location=no, status=no");
     }
 </script>
 {/block}
