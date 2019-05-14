@@ -206,6 +206,11 @@
                 template:'#footer-cart-menu_tpl',
                 props: {
                     cart_init_num: {type: Number,default: 0},
+                    footerCartMenu: {type: Array,default:function(){
+                        let arr = [];
+                        arr['eg'] = '默认值示范';
+                        return arr;
+                    }},
                     buy_now_call_back: {type: Function,default: function(param){
                         console.log(param);
                     }}
@@ -221,6 +226,7 @@
                     }
                 },methods: {
                     total_amount_init:function (param) {
+                        console.log(this.footerCartMenu);
                         this.total_amount += param.subtotal_amount;
                     },total_amount_calculate:function (param) {
                         this.total_amount += param.deal_price * param.increment_buy_quantity;
