@@ -107,4 +107,9 @@ return [
         'project'  => 3,
         'promotion'  => 4,
     ],
+    // 广告位置
+    'ad_key' => [
+        'index_header' => '首页头部',
+        'index_nav'    => '首页导航',
+    ],
 ];

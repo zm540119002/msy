@@ -2,6 +2,12 @@
 {block name="css-customize"}
 <link rel="stylesheet" href="public_css/project_public.css">
 {/block}
+{block name="header"}
+<section class="header_title separation-line">
+    <a href="javascript:void(0);" class="back_prev_page async_login" data-jump_url="{:url('Mine/index')}"></a>
+    <h2 class="f24">{$Think.config.custom.title}</h2>
+</section>
+{/block}
 <!-- 公共模块-->
 {block name="common"}{/block}
 {block name="pre-script"}
