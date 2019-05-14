@@ -40,11 +40,12 @@
     //登录-弹窗触发
     function loginDialogTrigger(){
         var content = $('.userInfoWrapper').html();
+        var content2 = $('#loginAndRegister').html();
         layer.open({
             className:'loginLayer',
             type:1,
             shadeClose:false,
-            content:content,
+            content:content2,
             btn:[''],
             success:function(index){
             },
