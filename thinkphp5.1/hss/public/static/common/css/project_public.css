@@ -4425,7 +4425,7 @@ select[name="nodeIds"]{
     border-left:1px solid #d9d9d9;
 }
 .customer_list_wrapper{
-    height:1.2rem;
+    height:1rem;
     overflow:hidden;
 }
 .customer_list .customer_item{
