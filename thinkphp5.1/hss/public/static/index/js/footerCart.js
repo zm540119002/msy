@@ -223,6 +223,7 @@ $(function () {
         var goods_ids=[];
         cart_ids.push(_li.data('cart_id'));
         goods_ids.push(_li.data('id'));
+        console.log(user_id);
         if(1){
             postData.goods_ids = goods_ids;
             cart.delCart(postData);
@@ -246,7 +247,9 @@ $(function () {
         if(!postData){
             return false;
         }
+
         if (1){ //没有登录
+
             cart.addCart(postData);
             // postData._this = _this;
             // postData.lis = lis;
