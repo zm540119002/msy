@@ -1,10 +1,6 @@
 {extend name="template/base.html" /}
 {block name="content"}
 <article class="f24">
-	<section class="header_title separation-line">
-		<a href="javascript:void(0);" class="back_prev_page async_login" data-jump_url="{:url('Mine/index')}"></a>
-		<h2 class="f24">详情页</h2>
-	</section>
 	<section class="slider_banner">
 		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
 			<div class="swiper-wrapper">
@@ -72,10 +68,12 @@
 						<div class="columns_flex l-r-sides separation">
 							<div class="mid_module_left">
 								<img src="public_img/wy_dz.png" alt="">
+							</div>
+							<div class="mid_module_right">
 								<div>
 									<span class="left count-down-icons"></span>
 									<div class="d-r">
-										<p class="friday_end">每周采购<span>.</span>周五截止</p>
+										<p class="friday_end">每天<span>.</span>联合采购</p>
 										<div id="countDownBox" class="count_down_box">
 											<span class="day"></span>天
 											<span class="hour"></span>小时
@@ -84,10 +82,6 @@
 										</div>
 									</div>
 								</div>
-							</div>
-							<div class="mid_module_right">
-								<span><span class="item end_time"></span>周五结单</span>
-								<span><span class="item factory"></span>品质工厂</span>
 							</div>
 						</div>
 						<!--<div class="separation_item">
