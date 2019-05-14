@@ -178,11 +178,11 @@
                     <span class="cart_num" v-else></span>
                 </div>
                 <!-- 加入购物车 -->
-                <div v-else-if="menu.class.indexOf('add_cart')!==-1" @click="addCart">
+                <div v-else-if="menu.class.indexOf('add_cart')!==-1" @click="asyncVerify">
                     <span class="s_i"></span>
                 </div>
                 <!-- 立即购买 -->
-                <div v-else-if="menu.class.indexOf('buy_now')!==-1" @click="buyNow">
+                <div v-else-if="menu.class.indexOf('buy_now')!==-1" @click="asyncVerify">
                     <span class="s_i"></span>
                 </div>
                 <!-- 提交订单 -->
@@ -230,7 +230,7 @@
                         if(jump_url){
                             location.href = jump_url;
                         }
-                    },addCart:function(event){
+                    },asyncVerify:function(event){
                         let obj = $(event.currentTarget);
                         let jump_url = obj.parent().data('jump_url');
                         //异步验证
