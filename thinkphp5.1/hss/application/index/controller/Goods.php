@@ -123,14 +123,6 @@ class Goods extends \common\controller\Base{
                 'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
             ],
         ];
-//        $list = $model -> pageQuery($config)->each(function ($item, $key){
-//            foreach($goodsList as $k=>&$v){
-//                if($v['goods_id'] == $item['id'] ){
-//                    $item['num'] = 6;
-//                }
-//            }
-//            return $item;
-//        });
         $list = $model -> pageQuery($config)->toArray();
         $showGoodsList =  $list['data'];
         foreach ($showGoodsList as $i =>&$showGoods){
@@ -142,7 +134,6 @@ class Goods extends \common\controller\Base{
                 }
             }
         }
-        $list = $showGoodsList ;
         $currentPage = input('get.page/d');
         $this->assign('currentPage',$currentPage);
         $this->assign('list',$showGoodsList);

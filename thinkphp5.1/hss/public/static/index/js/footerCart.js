@@ -30,7 +30,7 @@ cart = {
                 });
                 if(!find){
                     //没有该商品就直接加进去
-                    goodsList.push({
+                    goodsList.unshift({
                         "goods_id": addGoods.goods_id,
                         "num": addGoods.num,
                         "buy_type": addGoods.buy_type
@@ -63,6 +63,7 @@ cart = {
         var cartListOld = localStorage.cartList;//获取存储购物车商品信息
         var jsonstr = JSON.parse(cartListOld);
         var goodsList = jsonstr.goodsList;
+
         $.each(goodsList,function(j,oldgoods){
             if(goods.goods_id == oldgoods.goods_id){
                 //找到修改数量
@@ -85,19 +86,19 @@ cart = {
         var cartListOld = localStorage.cartList;//获取存储购物车商品信息
         var jsonstr = JSON.parse(cartListOld);
         var goodsList = jsonstr.goodsList;
-        console.log(goods)
-        $.each(goods.goods_ids,function(i,good){
+        console.log(goodsList);
+        $.each(goods.goods_ids,function(i,goods_id){
             $.each(goodsList,function(j,oldgoods){
-                if(good == oldgoods.goods_id){
-                    console.log(111)
-                    //找到删除
-                     goodsList.splice(j,1);
-                    return;
+                if(goods_id == oldgoods.goods_id){
+                    console.log(j);
+                    goodsList = goodsList.filter(function (element, index, self) {
+                        return index<j||index>j
+                    });
                 }
             });
 
         });
-        console.log(goodsList)
+        console.log(goodsList);
         var a = {
             goodsList:goodsList
         };
@@ -242,13 +243,15 @@ $(function () {
         if(!postData){
             return false;
         }
-        if (1){
+        if (1){ //没有登录
             cart.addCart(postData);
             // postData._this = _this;
             // postData.lis = lis;
             // addCart(postData);
-        } else{
-            cart.addCart(postData);
+        } else{//登录
+            postData._this = _this;
+            postData.lis = lis;
+            addCart(postData);
         }
     });
     //购物车列表页
