@@ -4432,6 +4432,9 @@ select[name="nodeIds"]{
     height:;
     line-height:;
 }
+.customer_item span{
+    font-size:0.20rem;
+}
 .new_share_wrap{
     background:#C9A063;
 }
