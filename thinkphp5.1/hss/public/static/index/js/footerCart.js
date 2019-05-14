@@ -248,7 +248,6 @@ $(function () {
         if(!postData){
             return false;
         }
-        console.log(user_id);
         if (user_id){ //登录
             postData._this = _this;
             postData.lis = lis;
