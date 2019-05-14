@@ -80,10 +80,10 @@
 	};
 	$(function(){
 		let footerCartMenu = JSON.parse('{$unlockingFooterCart|raw}');
-		console.log(footerCartMenu);
+		console.log(footerCartMenu.menu);
 		let param = {
 			cart_init_num:parseInt("{$cartSum|default=0}"),
-			footerCartMenu:footerCartMenu?footerCartMenu:[]
+			footerCartMenu:footerCartMenu?footerCartMenu.menu:[]
 		};
 		new Vue({
 			el: '#foot_cart_menu',
