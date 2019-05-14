@@ -49,11 +49,9 @@ class Promotion extends \common\controller\Base{
      * 输出套餐列表信息
      */
     public function displayPromotionList($id,$type='scene'){
-
         if(!$id){
             return false;
         }
-
         switch($type){
             case 'sort' :
                 $model = new \app\index\model\SortPromotion();
