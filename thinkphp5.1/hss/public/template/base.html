@@ -2,9 +2,13 @@
 {block name="css-customize"}
 <link rel="stylesheet" href="public_css/project_public.css">
 {/block}
-
 <!-- 公共模块-->
-{block name="common"}{/block}
+{block name="common"}
+<div id="loginDialog">
+    <login
+    ></login>
+</div>
+{/block}
 {block name="pre-script"}
 <script type="text/javascript">
     //用于后面判断是否登录
