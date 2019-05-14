@@ -206,9 +206,6 @@
                 template:'#footer-cart-menu_tpl',
                 props: {
                     cart_init_num: {type: Number,default: 0},
-                    footerCartMenu: {type: Object,default:function(){
-                        return {'eg':'默认值示范'};
-                    }},
                     buy_now_call_back: {type: Function,default: function(param){
                         console.log(param);
                     }}
@@ -218,15 +215,12 @@
                         total_amount:0,
                         cart_num:this.cart_init_num,
                         menus: unlockingFooterCart.menu,
-                        menu:this.footerCartMenu,
                         postData:{
                             productList:[]
                         }
                     }
                 },methods: {
                     total_amount_init:function (param) {
-                        console.log(this.cart_init_num);
-                        console.log(this.footerCartMenu);
                         this.total_amount += param.subtotal_amount;
                     },total_amount_calculate:function (param) {
                         this.total_amount += param.deal_price * param.increment_buy_quantity;
