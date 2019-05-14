@@ -80,7 +80,7 @@
 	};
 	$(function(){
 		let footerCartMenu = JSON.parse('{$unlockingFooterCart|raw}');
-		console.log(footerCartMenu.menu);
+		console.log(typeof footerCartMenu.menu);
 		let param = {
 			cart_init_num:parseInt("{$cartSum|default=0}"),
 			footerCartMenu:footerCartMenu?footerCartMenu.menu:[]
