@@ -78,8 +78,11 @@
 		id:"{$info.id}"
 	};
 	$(function(){
+		let footerCartMenu = JSON.parse('{$unlockingFooterCart|raw}');
+		console.log(footerCartMenu);
 		let param = {
-			cart_init_num:parseInt("{$cartSum|default=0}")
+			cart_init_num:parseInt("{$cartSum|default=0}"),
+			footerCartMenu:footerCartMenu
 		};
 		new Vue({
 			el: '#foot_cart_menu',
