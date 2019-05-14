@@ -45,10 +45,11 @@
 	></footer-cart-menu>
 </div>
 {/block}
-<template>
+<template id="main">
 	<div class="main">
 		<div @click="openMask">打开弹窗</div>
-		<dialog-bar v-model="sendVal" type="danger" title="我是标题" content="我是内容" v-on:cancel="clickCancel()" @danger="clickDanger()" @confirm="clickConfirm()" dangerText="Delete"></dialog-bar>
+		<dialog v-model="sendVal" type="danger" title="我是标题" content="我是内容"
+				v-on:cancel="clickCancel()" @danger="clickDanger()" @confirm="clickConfirm()" dangerText="Delete"></dialog>
 	</div>
 </template>
 {block name="script"}
@@ -126,10 +127,7 @@
 		let param = {
 		};
 		new Vue({
-			el: '#loginDialog',
-			components:{
-				'dialog-bar': dialog
-			},
+			el: '#main',
 			data:function(){
 				return {
 					sendVal: false
