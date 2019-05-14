@@ -105,5 +105,6 @@ return [
         'scene'    => 1,
         'sort'     => 2,
         'project'  => 3,
+        'promotion'  => 4,
     ],
 ];
