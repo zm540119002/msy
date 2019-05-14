@@ -33,6 +33,23 @@
 {block name="common"}
 {include file="../../api/public/vue/components/footer-cart-menu.html" /}
 {include file="../../api/public/vue/components/login.html" /}
+<div id="loginDialog">
+	<login
+	></login>
+</div>
+<script type="text/javascript">
+	$(function(){
+		new Vue({
+			el: '#loginDialog',
+			data:function(){
+				return {};
+			}
+		});
+		$('body').on('click','ul.loginNav li',function(){
+			console.log($(this).attr('class'));
+		});
+	});
+</script>
 {/block}
 {block name="footer"}
 <div id="foot_cart_menu">

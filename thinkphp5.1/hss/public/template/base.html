@@ -2,9 +2,8 @@
 {block name="css-customize"}
 <link rel="stylesheet" href="public_css/project_public.css">
 {/block}
-
-<!-- 公共模块-->
-{block name="common"}{/block}
+<!-- 项目公共模块-->
+{block name="common-base"}{/block}
 {block name="pre-script"}
 <script type="text/javascript">
     //用于后面判断是否登录
@@ -40,23 +39,21 @@
     }
     //登录-弹窗触发
     function loginDialogTrigger(){
-        var content=$('.userInfoWrapper').html();
+        var content = $('.userInfoWrapper').html();
         layer.open({
             className:'loginLayer',
             type:1,
             shadeClose:false,
             content:content,
             btn:[''],
-            success:function(index,o){
-                console.log(index);
-                console.log(o);
+            success:function(index){
             },
             yes:function(index){
                 layer.close(index);
             }
         });
         return false;
-        var content = $('.userInfoWrapper').html();
+        var content = document.getElementById('loginAndRegister');
         console.log(content);
         window.open (content,"newwindow", "height=100, width=400, toolbar =no, menubar=no, scrollbars=no, resizable=no, location=no, status=no");
     }

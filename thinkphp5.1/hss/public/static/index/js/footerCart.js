@@ -173,6 +173,7 @@ $(function () {
         postData.id = id;
         postData.num = num;
         postData.goods_id = goods_id;
+
         if(user_id){
             editCartNum(postData,_this);
         }else{
@@ -247,17 +248,13 @@ $(function () {
         if(!postData){
             return false;
         }
-
-        if (1){ //没有登录
-
-            cart.addCart(postData);
-            // postData._this = _this;
-            // postData.lis = lis;
-            // addCart(postData);
-        } else{//登录
+        if (user_id){ //登录
             postData._this = _this;
             postData.lis = lis;
             addCart(postData);
+        } else{//没有登录
+            cart.addCart(postData);
+
         }
     });
     //购物车列表页
