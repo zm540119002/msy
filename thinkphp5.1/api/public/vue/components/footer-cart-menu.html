@@ -206,7 +206,9 @@
                 template:'#footer-cart-menu_tpl',
                 props: {
                     cart_init_num: {type: Number,default: 0},
-                    footerCartMenu: {type: Array},
+                    footerCartMenu: {type: Object,default:function(){
+                        return {'eg':'默认值示范'};
+                    }},
                     buy_now_call_back: {type: Function,default: function(param){
                         console.log(param);
                     }}
