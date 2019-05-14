@@ -24,7 +24,6 @@ cart = {
                         //找到修改数量
                         find = true;
                         goodsList[j].num = parseInt(addGoods.num) + parseInt(goods.num);
-                        console.log(goodsList);
                         return;
                     }
                 });
@@ -483,7 +482,6 @@ function calculateTotalPrice(obj){
         $.each(_thisLis,function(index,val){
             var _thisLi = $(this);
             var num = _thisLi.find('.gshopping_count').val();
-            //console.log(111);
             if(!isPosIntNumberOrZero(num)){
                 isInt = false;
                 return false;
