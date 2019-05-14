@@ -1,4 +1,11 @@
 {extend name="template/base.html" /}
+{block name="css-customize"}
+<style>
+.group_cart_nav{
+	bottom:0.88rem;
+}
+</style>
+{/block}
 {block name="content"}
 <section class="no_cart_data" style="display:none;">
 	<li class="no_data">
@@ -6,9 +13,9 @@
 	</li>
 </section>
 <article class="f24">
-	<section class="shopping_header_title header_title separation-line">
-		<h2>购物车</h2>
-	</section>
+	<!--<section class="shopping_header_title header_title separation-line">-->
+		<!--<h2>购物车</h2>-->
+	<!--</section>-->
 	<ul class="cart_goods_list" id="list">
 	</ul>
 <!--	<section id="no_data">
