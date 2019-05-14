@@ -91,15 +91,14 @@ cart = {
             $.each(goodsList,function(j,oldgoods){
                 if(goods_id == oldgoods.goods_id){
                     console.log(j);
-                    //找到删除
-                    //goodsList.splice(j,1);
-                    return;
+                    goodsList = goodsList.filter(function (element, index, self) {
+                        return index<j||index>j
+                    });
                 }
             });
 
         });
-        return false;
-        console.log(goodsList)
+        console.log(goodsList);
         var a = {
             goodsList:goodsList
         };
