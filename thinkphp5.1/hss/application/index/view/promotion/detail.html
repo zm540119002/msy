@@ -5,9 +5,7 @@
 {block name="header"}
 <div id="app">
 	<div @click="openMask">打开弹窗</div>
-	<dialog :type="danger" :title="我是标题" :content="我是内容"
-			@cancel="clickCancel" @danger="clickDanger" @confirm="clickConfirm" dangerText="Delete">
-
+	<dialog @cancel="clickCancel" @danger="clickDanger" @confirm="clickConfirm" dangerText="Delete">
 	</dialog>
 </div>
 <script type="application/javascript">
