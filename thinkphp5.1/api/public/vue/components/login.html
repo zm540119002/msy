@@ -83,6 +83,7 @@
             },
             methods: {
                 switchCurrent:function(event){
+                    console.log(1111);
                     let _thisLi = $(event.currentTarget);
                     _thisLi.length && _thisLi.addClass("current").siblings().removeClass("current");
                     let _thisIndex = _thisLi.index();
@@ -92,7 +93,6 @@
                         }
                     });
                 },login:function(){
-                    console.log(1111);
                     let content='';
                     if(!register.phoneCheck(this.postData.mobile_phone)){
                         content='请输入正确手机号码';
