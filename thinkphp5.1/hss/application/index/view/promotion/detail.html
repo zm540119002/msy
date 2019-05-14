@@ -40,6 +40,7 @@
 	<footer-cart-menu
 			:buy_now_call_back="buy_now_call_back"
 			:cart_init_num="cart_init_num"
+			:footerCartMenu="footerCartMenu"
 	></footer-cart-menu>
 </div>
 {/block}
@@ -78,8 +79,11 @@
 		id:"{$info.id}"
 	};
 	$(function(){
+		let footerCartMenu = JSON.parse('{$unlockingFooterCart|raw}');
+		console.log(footerCartMenu.menu);
 		let param = {
-			cart_init_num:parseInt("{$cartSum|default=0}")
+			cart_init_num:parseInt("{$cartSum|default=0}"),
+			footerCartMenu:footerCartMenu?footerCartMenu.menu:[]
 		};
 		new Vue({
 			el: '#foot_cart_menu',
