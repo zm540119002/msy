@@ -3,22 +3,7 @@
 <link rel="stylesheet" href="public_css/project_public.css">
 {/block}
 <!-- 项目公共模块-->
-{block name="common-base"}
-<div id="loginDialog">
-    <login
-    ></login>
-</div>
-<script type="text/javascript">
-    $(function(){
-        new Vue({
-            el: '#loginDialog',
-            data:function(){
-                return {};
-            }
-        });
-    });
-</script>
-{/block}
+{block name="common-base"}{/block}
 {block name="pre-script"}
 <script type="text/javascript">
     //用于后面判断是否登录
