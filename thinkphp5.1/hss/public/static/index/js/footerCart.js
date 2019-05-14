@@ -41,21 +41,19 @@ cart = {
                 goodsList:goodsList
             };
             //保存购物车
-            //localStorage.removeItem("cartList");//删除变量名为key的存储变量
             localStorage.setItem('cartList',JSON.stringify(cartList));
-            //计算总数
-            var total_num = 0;
-            $.each(goodsList,function(i,goods){
-                total_num += goods['num'];
-            });
-            dialog.success('成功');
-            $('footer').find('.cart_num').addClass('cur');
-            $('footer').find('.add_num').text(total_num).addClass('current');
-            // setTimeout(function(){
-            //     $('.add_num').removeClass('current');
-            // },2000)
         }
-
+        //计算总数
+        var total_num = 0;
+        $.each(goodsList,function(i,goods){
+            total_num += goods['num'];
+        });
+        dialog.success('成功');
+        $('footer').find('.cart_num').addClass('cur');
+        $('footer').find('.add_num').text(total_num).addClass('current');
+        // setTimeout(function(){
+        //     $('.add_num').removeClass('current');
+        // },2000)
         return false;
     },
     //修改商品数量
