@@ -3260,6 +3260,7 @@ input[type=text]::-webkit-focus-inner {
 }
 .friday_end{
     font-size:0.28rem;
+    text-align: center;
 }
 .friday_end span{
     height:14px;
@@ -4711,6 +4712,9 @@ ul.message_list{
 .mid_module_right span.factory{
     background-position:0 -0.85rem;
 }
+.mid_module_right .d-r{
+    margin:0 0 0 0.8rem;
+}
 .wk_notice{
     color:#1CAD99;
 }
@@ -6021,6 +6025,7 @@ ul.info_list li{
     display:-webkit-flex;
 }
 .count_down_box{
+    width:2.05rem;
     padding:0.05rem 0.18rem 0.05rem 0.12rem;
     background: #000;
     color:#fff;
@@ -6265,6 +6270,11 @@ div.no_data{
 }
 .customer_list span{
     color:#C7AA53;
+}
+.once-enter{
+    width:1.2rem;
+    background: #3FA9F5;
+    color:#fff;
 }
 /*加盟店家*/
 .franchise_ul li{

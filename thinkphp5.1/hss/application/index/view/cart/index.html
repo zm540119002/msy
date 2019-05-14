@@ -35,16 +35,59 @@
 		pageSize:20,
 		pageType:'index'
 	};
+
+	// 新零售商品获取配置
+	var config_1 = {
+		url:module+'Goods/getList',
+		requestEnd:false,
+		loadTrigger:false,
+		currentPage:1,
+		container:$("#goodsList")
+	};
+	var postData_1 = {
+		pageSize:10,
+		pageType:'index',
+		is_selection:1
+	};
+
 	$(function(){
+		var user_id = '{$user.id}';
 		// 初始化购物车商品
-		getPagingList(config,postData);
+		if(user_id){
+			getPagingList(config,postData);
+		}else {
+			config.url = module+'Goods/getCartGoodsList';
+			var cartList = localStorage.cartList;//获取存储购物车商品信息
+			postData.cartList = cartList;
+			getPagingList(config,postData);
+		}
+
 		//下拉加载
 		$(window).on('scroll',function(){
 			if(config.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
 				config.loadTrigger = false;
-				getPagingList(config,postData);
+				if(user_id){
+					getPagingList(config,postData);
+				}else {
+					config.url = module+'Goods/getCartGoodsList';
+					var cartList = localStorage.cartList;//获取存储购物车商品信息
+					postData.cartList = cartList;
+					getPagingList(config,postData);
+				}
+			}
+		});
+
+		//初始化零售商品
+		getPagingList(config_1,postData_1);
+		//下拉加载
+		$(window).on('scroll',function(){
+			if(config_1.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
+				config_1.loadTrigger = false;
+				getPagingList(config_1,postData_1);
 			}
 		});
 	});
+
+
 </script>
 {/block}

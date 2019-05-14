@@ -16,12 +16,11 @@ class PromotionGoods extends \common\model\Base {
 	protected $alias = 'pg';
 
     /**
-     * 获取套餐列表下的各套餐的商品总价
+     * 获取套餐总价
      * @param $list array 方案列表
      * @return array
      */
     public function getListGoodsPrice($list){
-        // 套餐下的商品总价 单个
         foreach($list as $k => $v){
 
             if( $v['id']>0 ){

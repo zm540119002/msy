@@ -60,5 +60,52 @@ class Promotion extends \common\controller\Base{
         return $this->fetch();
     }
 
+    /**
+     * 输出套餐列表信息
+     */
+    public function displayPromotionList($id,$type='scene'){
+
+        if(!$id){
+            return false;
+        }
+
+        switch($type){
+            case 'sort' :
+                $model = new \app\index\model\SortPromotion();
+                $field_id = 'sp.sort_id';
+                $join_id  = 'sp.promotion_id';
+                break;
+            case 'project' :
+                $model = new \app\index\model\ProjectPromotion();
+                //$condition['where'][] = ['pp.project_id','=',$id];
+                $field_id = 'pp.project_id';
+                $join_id  = 'pp.promotion_id';
+                break;
+            default;
+                $model = new \app\index\model\ScenePromotion();
+                //$condition['where'][] = ['sp.scene_id','=',$id];
+                $field_id = 'sp.scene_id';
+                $join_id  = 'sp.promotion_id';
+        }
+
+        $condition = [
+            'where' => [
+                ['p.status','=', 0], ['p.shelf_status','=', 3],
+                [$field_id,'=',$id]
+            ],'field'=>[
+                'p.id','p.name','p.thumb_img'
+            ],'join'=>[
+                ['promotion p','p.id = '.$join_id,'left']
+            ]
+        ];
+
+        $promotionList= $model->getList($condition);
+
+        $modelPromotionGoods = new \app\index\model\PromotionGoods();
+
+        $promotionList = $modelPromotionGoods->getListGoodsPrice($promotionList);
+
+        $this->assign('promotionList',$promotionList);
+    }
 
 }

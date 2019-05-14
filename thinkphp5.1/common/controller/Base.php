@@ -25,7 +25,12 @@ class Base extends \think\Controller{
 //            }
 //            $this->assign('weiXinUserInfo',$weiXinUserInfo);
 //        }
+
+        $user = checkLogin();
+        $this->assign('user',$user);
     }
+
+
     public function uploadFileToTemp(){
         $postData = $_POST;
         $savePath = isset($_POST['uploadpath']) ? $_POST['uploadpath'] : config('upload_dir.temp_path');

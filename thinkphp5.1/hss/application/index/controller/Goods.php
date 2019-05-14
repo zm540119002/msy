@@ -102,6 +102,47 @@ class Goods extends \common\controller\Base{
         }
     }
 
+    /**
+     * 未登录状态  查出相关购物车产品信息 分页查询
+     */
+    public function getCartGoodsList(){
+        if(!request()->isGet()){
+            return errorMsg('请求方式错误');
+        }
+        $cartList = input('get.cartList');
+        $goodsList =  json_decode($cartList,true)['goodsList'];
+        $goodsIds = array_column($goodsList,'goods_id');
+        $model = new \app\index\model\Goods();
+        $config=[
+            'where'=>[
+                ['g.status', '=', 0],
+                ['g.id', 'in', $goodsIds],
+            ],
+            'field'=>[
+                'g.id','g.headline','g.name','g.thumb_img','g.bulk_price','g.sample_price','g.specification','g.minimum_order_quantity',
+                'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
+            ],
+        ];
+        $list = $model -> pageQuery($config)->toArray();
+        $showGoodsList =  $list['data'];
+        foreach ($showGoodsList as $i =>&$showGoods){
+            foreach($goodsList as $j=>&$goods){
+                if($showGoods['id'] == $goods['goods_id'] ){
+                    $showGoodsList[$i]['num'] = $goods['num'];
+                    $showGoodsList[$i]['buy_type'] = $goods['buy_type'];
+                    $showGoodsList[$i]['cart_id'] = $i+1;
+                }
+            }
+        }
+        $currentPage = input('get.page/d');
+        $this->assign('currentPage',$currentPage);
+        $this->assign('list',$showGoodsList);
+        if(isset($_GET['pageType'])){
+            if($_GET['pageType'] == 'index' ){
+                return $this->fetch('cart/list_tpl');
+            }
+        }
+    }
     /***
      * 获取各关联表下的商品 -通用方法
      * @return array|\think\response\View
@@ -125,10 +166,10 @@ class Goods extends \common\controller\Base{
                 $field_id = 'pg.project_id';
                 $goods_id = 'pg.goods_id';
                 break;
-            case config('custom.relation_type.promotion'):
-                $model = new \app\index\model\PromotionGoods();
-                $field_id = 'pg.promotion_id';
-                $goods_id = 'pg.goods_id';
+            case config('custom.relation_type.sort'):
+                $model = new \app\index\model\SortGoods();
+                $field_id = 'sg.sort_id';
+                $goods_id = 'sg.goods_id';
                 break;
             default:
                 return errorMsg('参数有误');

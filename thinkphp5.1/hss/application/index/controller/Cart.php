@@ -1,7 +1,7 @@
 <?php
 namespace app\index\controller;
 
-class Cart extends \common\controller\UserBase{
+class Cart extends \common\controller\UserBase {
     /**首页
      */
 
@@ -71,7 +71,9 @@ class Cart extends \common\controller\UserBase{
                         'brand_id' => $cart['brand_id'] ? $cart['brand_id'] : 0,
                     ];
                     $updateData[] = $data;
+
                 }
+
             }
             if(!$find){//如果没找到，则新增
                 $data = [
@@ -106,6 +108,7 @@ class Cart extends \common\controller\UserBase{
     }
 
     public function addCart(){
+
         if(!request()->isPost()){
             return errorMsg('请求方式错误');
         }

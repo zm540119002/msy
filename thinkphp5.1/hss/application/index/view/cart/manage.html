@@ -41,7 +41,7 @@
 {/block}
 {block name="script"}
 <script type="text/javascript" src="index_js/footerCart.js"></script>
-<script type="text/javascript" src="index_js/cart.js"></script>
+<!--<script type="text/javascript" src="index_js/cart.js"></script>-->
 <script type="text/javascript">
 	var config = {
 		url:module+'Cart/getList',
@@ -53,19 +53,6 @@
 		pageSize:20,
 		pageType:'index'
 	};
-	$(function(){
-		// 初始化购物车商品
-		getPagingList(config,postData);
-		//下拉加载
-		$(window).on('scroll',function(){
-			if(config.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
-				config.loadTrigger = false;
-				getPagingList(config,postData);
-			}
-		});
-		$('.group_cart_nav').addClass('cart_bottom_column');
-	});
-
 
 	// 新零售商品获取配置
 	var config_1 = {
@@ -80,8 +67,35 @@
 		pageType:'index',
 		is_selection:1
 	};
+
 	$(function(){
-		//初始化分类商品页面
+		var user_id = '{$user.id}';
+		// 初始化购物车商品
+		if(user_id){
+			getPagingList(config,postData);
+		}else {
+			config.url = module+'Goods/getCartGoodsList';
+			var cartList = localStorage.cartList;//获取存储购物车商品信息
+			postData.cartList = cartList;
+			getPagingList(config,postData);
+		}
+
+		//下拉加载
+		$(window).on('scroll',function(){
+			if(config.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
+				config.loadTrigger = false;
+				if(user_id){
+					getPagingList(config,postData);
+				}else {
+					config.url = module+'Goods/getCartGoodsList';
+					var cartList = localStorage.cartList;//获取存储购物车商品信息
+					postData.cartList = cartList;
+					getPagingList(config,postData);
+				}
+			}
+		});
+
+		//初始化零售商品
 		getPagingList(config_1,postData_1);
 		//下拉加载
 		$(window).on('scroll',function(){
@@ -91,6 +105,8 @@
 			}
 		});
 	});
+
+
 
 </script>
 {/block}

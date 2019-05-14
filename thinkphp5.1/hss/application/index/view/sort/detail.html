@@ -1,7 +1,7 @@
 {extend name="template/base.html" /}
 
 {block name="title"}
-项目详情
+品类详情
 {/block}
 
 {block name="content"}
@@ -9,13 +9,13 @@
 	<!-- 项目信息 -->
 	<div id="menu">
 		<ul class="columns_flex detail-nav">
-			<li data-item="item1"><a href="javascript:;" class="">项目产品</a></li>
-			<li data-item="item2"><a href="javascript:;" class="">项目详情</a></li>
-			<li data-item="item3"><a href="javascript:;" class="">项目操作</a></li>
+			<li data-item="item1"><a href="javascript:;" class="">品类商品</a></li>
+			<li data-item="item2"><a href="javascript:;" class="">品类介绍</a></li>
+			<li data-item="item3"><a href="javascript:;" class="">相关培训</a></li>
 		</ul>
 	</div>
 
-	<!-- 项目产品 -->
+	<!-- 品类商品 -->
 	<section class="content-padding content_main project_item">
 
 		{include file="template/scene_detail.html" /}
@@ -59,7 +59,7 @@
 			</ul>
 		</section>
 	</section>
-	<!-- 项目详情 -->
+	<!-- 品类介绍 -->
 	<section class="project_item hide">
 		<p>
 			{volist name="$info.detail_img" id="vo"}
@@ -67,56 +67,13 @@
 			{/volist}
 		</p>
 	</section>
-	<!-- 项目操作 -->
+	<!-- 相关培训 -->
 	<section class="project_item hide">
-
-		{notempty name="$info.video"}
-		<div class="content-padding">
-			<video width="" height="" controls src="{:show_img_handle($info.video)}">
-			</video>
-		</div>
-		{/notempty}
-		<div class="content-padding description">
-
-		</div>
-		<div class="content-padding">
-			<p class="content-label">项目流程</p>
-			<section class="slider_banner">
-				<div class="swiper-container swiper-container-horizontal swiper-container-ios">
-					<div class="swiper-wrapper">
-						{volist name="$info.process_img" id="vo"}
-						<div class="swiper-slide swiper-slide-active">
-							<img src="{:show_img_handle($vo)}" alt="" class="common_default_img">
-						</div>
-						{/volist}
-					</div>
-					<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
-						<span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span>
-						<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 2"></span>
-						<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 3"></span>
-						<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 4"></span>
-					</div>
-				</div>
-
-
-			</section>
-		</div>
-		<div class="content-padding">
-			<p class="content-label">推荐搭配居家产品</p>
-			<ul class="list">
-				<li>
-					<a>
-						<img src="" alt="">
-					</a>
-					<p>1111111</p>
-					<p>规格</p>
-				</li>
-			</ul>
-		</div>
-		<div class="content-padding">
-			<p class="content-label">注意事项</p>
-			<p class="remarks"></p>
-		</div>
+		<p>
+			{volist name="$info.process_img" id="vo"}
+			<img src="{:show_img_handle($vo)}" alt="" class="common_default_img">
+			{/volist}
+		</p>
 	</section>
 </article>
 {/block}
@@ -173,8 +130,6 @@
 		// 后加载简介
 		$('document').ready(function(){
 			$('.intro').html("{$info.intro|raw}");
-			$('.remarks').html("{$info.remarks|raw}");
-			$('.description').html("{$info.description|raw}");
 		});
 		//轮播
 		var swiper = new Swiper('.swiper-container', {

@@ -1,7 +1,13 @@
 <?php
 namespace app\index\controller;
 
-class Project extends \common\controller\Base{
+/**
+ * 品类控制器
+ * Class Sort
+ * @package app\index\controller
+ */
+
+class Sort extends \common\controller\Base{
     /**首页
      */
     public function index(){
@@ -12,67 +18,31 @@ class Project extends \common\controller\Base{
     }
 
     /**
-     * 项目列表
+     * 列表
      */
     public function getList(){
         if(!request()->isGet()){
             return errorMsg('参数有误');
         }
 
-        $model = new \app\index\model\Project();
+        $model = new \app\index\model\Sort();
         $condition = [
             'field' => [
-                'p.id','p.name','p.thumb_img','p.intro'
+                'id','name','thumb_img','intro'
             ],
             'where' => [
-                ['p.status','=',0],
-                ['p.shelf_status','=',3],
-            ],'order' => ['p.sort desc']
+                ['status','=',0],
+                ['shelf_status','=',3],
+            ],'order' => ['sort desc']
         ];
 
         $list = $model -> pageQuery($condition);
         $this->assign('list',$list);
 
+
         return $this->fetch('list_tpl');
     }
 
-    /**
-     * 查询项目下的相关视频 分页查询 暂时先随机
-     */
-    public function getVideoList(){
-        if(!request()->isGet()){
-            return errorMsg('请求方式错误');
-        }
-        $model = new \app\index\model\Project();
-        $config=[
-            'where'=>[
-                ['status','=',0],
-                ['shelf_status','=',1],
-                ['audit','=',1],
-            ],
-            'field'=>[
-               'id','name','update_time','video'
-            ],
-            'order'=>[
-                'sort'=>'desc',
-            ],
-        ];
-
-        if(input('?get.belong_to') && (int)input('?get.belong_to')){
-            $config['where'][] = ['belong_to', '=', input('get.belong_to')];
-        }
-
-
-        $list = $model -> pageQuery($config);
-
-        $this->assign('list',$list);
-        if(isset($_GET['pageType'])){
-            // 排列的数量不同
-            switch($_GET['pageType']){
-                case 'column_1' : return $this->fetch('list_video_tpl'); break;   // 一行一个
-            }
-        }
-    }
 
     /**
      * 详情页
@@ -85,15 +55,15 @@ class Project extends \common\controller\Base{
             if(!$id){
                 $this->error('此项目已下架');
             }
-            $model = new \app\index\model\Project();
+            $model = new \app\index\model\Sort();
             $config =[
                 'field' => [
-                    'id','name','main_img','intro','tag','detail_img','video','title','process_img','description','remarks'
+                    'id','name','main_img','intro','tag','detail_img','title','process_img'
                 ],
                 'where' => [
-                    ['p.status', '=', 0],
-                    ['p.shelf_status', '=', 3],
-                    ['p.id', '=', $id],
+                    ['status', '=', 0],
+                    ['shelf_status', '=', 3],
+                    ['id', '=', $id],
                 ],
             ];
             $info = $model->getInfo($config);
@@ -101,13 +71,13 @@ class Project extends \common\controller\Base{
                 $this->error('此项目已下架');
             }
 
-            project_handle($info);
+            sort_handle($info);
 
             $this->assign('info',$info);
 
-            Promotion::displayPromotionList($id,'project');
+            Promotion::displayPromotionList($id,'sort');
 
-            $this->assign('relation',config('custom.relation_type.project'));
+            $this->assign('relation',config('custom.relation_type.sort'));
 
             return $this->fetch();
         }
@@ -122,7 +92,7 @@ class Project extends \common\controller\Base{
             if(!$id){
                 $this->error('此项目已下架');
             }
-            $model = new \app\index\model\Project();
+            $model = new \app\index\model\Sort();
             $config =[
                 'where' => [
                     ['p.status', '=', 0],
@@ -139,11 +109,11 @@ class Project extends \common\controller\Base{
             $this->assign('info',$info);
 
             //获取相关的商品
-            $modelProjectGoods = new \app\index\model\ProjectGoods();
+            $modelSortGoods = new \app\index\model\SortGoods();
             $config =[
                 'where' => [
                     ['pg.status', '=', 0],
-                    ['pg.project_id', '=', $id],
+                    ['pg.sort_id', '=', $id],
                 ],'field'=>[
                     'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity',
                     'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
@@ -151,7 +121,7 @@ class Project extends \common\controller\Base{
                     ['goods g','g.id = pg.goods_id','left']
                 ]
             ];
-            $goodsList= $modelProjectGoods->getList($config);
+            $goodsList= $modelSortGoods->getList($config);
             $this->assign('goodsList',$goodsList);
             $unlockingFooterCart = unlockingFooterCartConfig([0,2,1]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);

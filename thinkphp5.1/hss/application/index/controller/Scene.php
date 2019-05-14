@@ -66,7 +66,7 @@ class Scene extends \common\controller\Base{
             array_push($unlockingFooterCart['menu'][3]['class'],'group_btn30');
             $this->assign('unlockingFooterCart',json_encode($unlockingFooterCart));*/
 
-            $id = intval(input('id'));
+            $id = input('id/d');
             if(!$id) $this->error('此项目已下架');
             // 场景信息 主要是获取同组的场景信息
             $model = new\app\index\model\Scene();
@@ -88,6 +88,7 @@ class Scene extends \common\controller\Base{
             if(empty($sceneList)){
                 $this->error('此场景已下架');
             }
+
             // 当前的场景
             $scene = [];
             foreach($sceneList as $v){
@@ -97,36 +98,11 @@ class Scene extends \common\controller\Base{
                 }
             }
 
-
             scene_handle($scene);
-/*
-            $scene['tag'] = explode('|',(string)$scene['tag']);
-            $scene['main_img'] = explode(',',(string)$scene['main_img']);
-            $scene['intro'] = $scene['intro'] ? htmlspecialchars_decode($scene['intro']) : $scene['intro'] ;*/
 
             $this->assign('info',$scene);
 
-            // 获取场景下的促销方案
-            $modelSceneScheme = new \app\index\model\ScenePromotion();
-            $config = [
-                'where' => [
-                    ['sp.status', '=', 0],
-                    ['sp.scene_id', '=', $id],
-                    ['p.shelf_status', '=', 3],
-                ],'field'=>[
-                    'p.id','p.name','p.thumb_img'
-                ],'join'=>[
-                    ['promotion p','p.id = sp.promotion_id','left']
-                ]
-            ];
-            $promotionList= $modelSceneScheme->getList($config);
-
-            $modelPromotionGoods = new \app\index\model\PromotionGoods();
-
-            // 套餐下的商品总价 单个
-            $promotionList = $modelPromotionGoods->getListGoodsPrice($promotionList);
-
-            $this->assign('promotionList',$promotionList);
+            Promotion::displayPromotionList($id);
 
             $this->assign('relation',config('custom.relation_type.scene'));
 
@@ -140,34 +116,14 @@ class Scene extends \common\controller\Base{
      * 没有图片 暂时隐藏 后期待确定后再删除 code=1， sort.html 文件 sql 三处
      */
     public function sort(){
-        if(request()->isAjax()){
-        }else{
-            $id = intval(input('id'));
-            if(!$id){
-                $this->error('此项目已下架');
-            }
-            // 场景信息
-            $this->displayScene($id);
-
-            // 场景下的商品分类
-            $modelSceneGoodsCategory = new \app\index\model\SceneGoodsCategory();
-            $config = [
-                'where'  => [
-                    ['gc.status', '=', 0],
-                    ['sgc.scene_id', '=', $id],
-                ],'field'=> [
-                    'gc.id ','gc.name','gc.img',
-                ],'join' => [
-                    ['goods_category gc','gc.id = sgc.goods_category_id','left']
-                ],'order'=> [
-                    'gc.sort'=>'desc'
-                ]
-            ];
-            $categoryList = $modelSceneGoodsCategory->getList($config);
-            $this->assign('categoryList',$categoryList);
-
-            return $this->fetch('sort_img');
+        $id = intval(input('id'));
+        if(!$id){
+            $this->error('此项目已下架');
         }
+
+        $this->displayScene($id);
+
+        return $this->fetch();
     }
 
     /**
@@ -181,9 +137,8 @@ class Scene extends \common\controller\Base{
             if(!$id){
                 $this->error('此项目已下架');
             }
-            // 场景信息
+
             $this->displayScene($id);
-            $this->assign('relation',config('custom.relation_type.project'));
 
             return $this->fetch();
         }

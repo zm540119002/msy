@@ -1,101 +1,104 @@
 {extend name="template/base.html" /}
-{block name="content"}
 
+{block name="title"}
+{$Think.config.custom.tag_category[$info.tag_category]}
+{/block}
+
+{block name="content"}
 <article class="f24">
+	<!-- 标题导航 -->
 	<section class="slider_banner">
 		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
 			<div class="swiper-wrapper">
 				<div class="swiper-slide swiper-slide-active">
-					{volist name="$scene.main_img" id="info"}
-					<img src="{:show_img_handle($info)}" alt="" class="common_default_img">
+					{volist name="$info.main_img" id="vo"}
+					<img src="{:show_img_handle($vo)}" alt="" class="common_default_img">
 					{/volist}
 				</div>
 			</div>
+			<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
+				<span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span>
+				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 2"></span>
+				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 3"></span>
+				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 4"></span>
+			</div>
 		</div>
 	</section>
-	<section class="content-padding content_main wy_list">
-
-		<!--分类列表-->
-		<div class="mod_selection">
-            <div class="nav">
-                <ul class="mod_selection_nav">
-					{volist name="$categoryList" id="info"}
-					<li data-category-id="{$info.id}" >
-						<a href="javascript:void(0);" class="category_nav">{$info.name}</a>
-					</li>
-					{/volist}
-                </ul>
-            </div>
-        </div>
-
-		<!--产品列表-->
-		<div id="scroller-wrapper" class="list_wrapper">
-			<ul class="goods_list list" id="list">
-
+	<section class="module-navigation ">
+		<div >
+			<ul>
+				<li>
+					<div class="top_radius f20 top_module">
+						<div>
+							<div class="title">
+								{$info.title}
+							</div>
+							<div class="intro"></div>
+						</div>
+						<div class="tags_item columns_flex l-r-sides">
+							<div>
+								{volist name="$info.tag" id="tag"}
+								<span>{$tag}</span>
+								{/volist}
+							</div>
+							<div class="tags_item_r">
+								<a class="collection" href="javascript:;"><span class="icon"></span><span class="text">收藏</span></a>
+								<a class="share" href="javascript:;"><span class="icon"></span>分享</a>
+							</div>
+						</div>
+					</div>
+				</li>
 			</ul>
 		</div>
 	</section>
-</article>
 
+	<!-- 内容 -->
+	<section class="content-padding content_main wy_list">
+		<!--产品列表-->
+		<ul class="goods_list list" id="list">
+
+		</ul>
+	</section>
+</article>
 {/block}
 {block name="common"}
-    {include file="brand/set_brand" /}
-	{include file="public/sample_layer" /}
+
 {/block}
 {block name="footer"}
-	{include file="template/footer_menu.html" /}
+
 {/block}
 {block name="script"}
 <script type="text/javascript" src="api_common_js/swiper.min.js"></script>
-<script type="text/javascript" src="index_js/footerCart.js"></script>
 <script type="text/javascript">
-	$(function(){
-		var id = '{$info.id}';
-		var date=getWeek();
-		countDown(date,$('#countDownBox'));
-		//查看文本
-		$('.wk_notice').moreText({
-			mainCell:".more-text",
-			openBtn:'展开'
-		});
-		$(".mod_selection_nav li").click(function(){
-			var moveX = $(this).offset().left+$(this).parent().scrollLeft();
-			var pageX = document.documentElement.clientWidth;//设备的宽度
-			var blockWidth = $(this).width();
-			var left = moveX-(pageX/2)+(blockWidth/2);
-			$(".mod_selection_nav").animate({scrollLeft:left},400);
-			$(this).addClass("active").siblings().removeClass("active");
-		});
-	});
-
-	// 获取该场景分类下的商品
+	// 获取项目列表
 	var config = {
-		url:module+'Goods/getList', // 一对一分类 没有关联表
+		url:module+'Sort/getList',
 		requestEnd:false,
 		loadTrigger:false,
 		currentPage:1
 	};
 	var postData = {
-		pageSize:10,
-		pageType:'sort'
+		pageSize:10
 	};
-	$(function(){
-		//初始化分类商品页面
-		$('.mod_selection_nav li:eq(0)').addClass('current');
-		postData.category_id = $('.mod_selection_nav li.current').data('category-id');
-		getPagingList(config,postData);
 
-		$('body').on('click','.mod_selection_nav li',function(){
-			var _this = $(this);
-			$(this).addClass('current').siblings().removeClass('current');
-			config = {
-				url:module+'Goods/getList',
-				requestEnd:false,
-				loadTrigger:false,
-				currentPage:1
-			};
-			postData.category_id = _this.data('category-id');
-			getPagingList(config,postData);
+	$(function(){
+		//初始化项目列表
+
+		getPagingList(config,postData);
+	});
+	$(function(){
+		// 后加载简介
+		$('document').ready(function(){
+			$('.intro').html("{$info.intro|raw}");
+		});
+		//轮播
+		var swiper = new Swiper('.swiper-container', {
+			spaceBetween: 30,
+			autoplay:true,
+			pagination: {
+				el: '.swiper-pagination',
+				clickable: true
+			}
 		});
 	});
 </script>
