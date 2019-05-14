@@ -182,7 +182,7 @@
                     <span class="s_i"></span>
                 </div>
                 <!-- 立即购买 -->
-                <div v-else-if="menu.class.indexOf('buy_now')!==-1" @click="asyncVerify">
+                <div v-else-if="menu.class.indexOf('buy_now')!==-1" @click="buyNow">
                     <span class="s_i"></span>
                 </div>
                 <!-- 提交订单 -->
@@ -267,6 +267,7 @@
                             dialog.error('请选择商品！');
                         }
                     },buyNow:function(){
+                        loginDialogTrigger();
                     },confirmOrder:function(){
                         console.log('confirmOrder');
                     },editProductList:function(param){
