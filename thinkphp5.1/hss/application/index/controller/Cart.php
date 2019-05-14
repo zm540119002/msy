@@ -255,9 +255,9 @@ class Cart extends \common\controller\UserBase {
         ];
         $result = $model -> del($condition,true);
         if($result['status']){
-            return successMsg('删除成功');
+            return successMsg('成功');
         }else{
-            return errorMsg('删除失败');
+            return errorMsg('失败');
         }
     }
 }
