@@ -4,7 +4,7 @@ namespace app\index\controller;
 /**
  * 城市合伙人控制器
  */
-class CityPartner extends \common\controller\UserBase {
+class CityPartner extends \common\controller\Base {
 
     /**
      * 首页

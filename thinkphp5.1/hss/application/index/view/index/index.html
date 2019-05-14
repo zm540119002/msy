@@ -5,29 +5,6 @@
 		<a href="">
 			<img src="public_img/banner/top-banner.jpg" alt="" class="common_default_img">
 		</a>
-		<!--<div class="swiper-container swiper-container-horizontal swiper-container-ios">
-			<div class="swiper-wrapper">
-				<div class="swiper-slide swiper-slide-active">
-					<img src="public_img/banner/mch_banner1.jpg" alt="" class="common_default_img">
-				</div>
-				<div class="swiper-slide ">
-					<img src="public_img/banner/mch_banner2.jpg" alt="" class="common_default_img">
-				</div>
-				<div class="swiper-slide ">
-					<img src="public_img/banner/mch_banner1.jpg" alt="" class="common_default_img">
-				</div>
-				<div class="swiper-slide ">
-					<img src="public_img/banner/mch_banner2.jpg" alt="" class="common_default_img">
-				</div>
-			</div>
-			<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
-				<span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button"
-					  aria-label="Go to slide 1"></span>
-				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 2"></span>
-				<span class="swiper-pagination-bul let " tabindex="0" role="button" aria-label="Go to slide 3"></span>
-				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 4"></span>
-			</div>
-		</div>-->
 	</section>
 
 	<!-- 暂时不需要
@@ -110,12 +87,12 @@
 						<div class="columns_flex l-r-sides customer_item">
 							{if $vo.sex==1}
 								<span>{$vo.name|mb_substr=0,1}先生</span>
-								<span>{$vo.mobile_phone|substr=0,7}****</span>
+								<span class="mobile">{$vo.mobile_phone}</span>
 								<span>{$vo.create_time|date='Y-m-d'}</span>
 								<span>咨询合作联盟</span>
 							{else /}
 								<span>{$vo.name|mb_substr=0,1}女士</span>
-								<span>{$vo.mobile_phone|substr=0,7}****</span>
+								<span class="mobile">{$vo.mobile_phone}</span>
 								<span>{$vo.create_time|date='Y-m-d'}</span>
 								<span>咨询城市合伙人</span>
 							{/if}
@@ -303,7 +280,9 @@
 				$('.customer_list').get(0).style.transition="none 0s ease 0s";
 				$('.customer_list .customer_item').eq(len-1).after($('.customer_list .customer_item').eq(0));
 			},500);
-		}
+		};
+		var mobile=$('.customer_item span.mobile').text();
+        $('.customer_item span.mobile').text(mobileNHide(mobile));
 	});
 </script>
 {/block}

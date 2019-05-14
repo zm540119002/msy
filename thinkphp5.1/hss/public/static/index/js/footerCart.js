@@ -1,7 +1,7 @@
 
 
 /**
- * 没有登录加入购物车
+ * 没有登录购物车 操作
  * @param postData
  */
 cart = {
@@ -24,7 +24,6 @@ cart = {
                         //找到修改数量
                         find = true;
                         goodsList[j].num = parseInt(addGoods.num) + parseInt(goods.num);
-                        console.log(goodsList);
                         return;
                     }
                 });
@@ -41,22 +40,16 @@ cart = {
                 goodsList:goodsList
             };
             //保存购物车
-            //localStorage.removeItem("cartList");//删除变量名为key的存储变量
             localStorage.setItem('cartList',JSON.stringify(cartList));
-            //计算总数
-            var total_num = 0;
-            $.each(goodsList,function(i,goods){
-                total_num += goods['num'];
-            });
-            dialog.success('成功');
-            $('footer').find('.cart_num').addClass('cur');
-            $('footer').find('.add_num').text(total_num).addClass('current');
-            // setTimeout(function(){
-            //     $('.add_num').removeClass('current');
-            // },2000)
         }
-
-        return false;
+        //计算总数
+        var total_num = 0;
+        $.each(goodsList,function(i,goods){
+            total_num += parseInt(goods['num']);
+        });
+        dialog.success('成功');
+        $('footer').find('.cart_num').addClass('cur');
+        $('footer').find('.add_num').text(total_num).addClass('current');
     },
     //修改商品数量
     editCartNum:function (goods) {
@@ -71,12 +64,12 @@ cart = {
                 return;
             }
         });
-        var a = {
+        var cartList = {
             goodsList:goodsList
         };
         //保存购物车
         //localStorage.removeItem("cartList");//删除变量名为key的存储变量
-        localStorage.setItem('cartList',JSON.stringify(a));
+        localStorage.setItem('cartList',JSON.stringify(cartList));
     },
     //删除商品
     delCart:function (goods) {
@@ -96,7 +89,6 @@ cart = {
             goodsList:goodsList
         };
         //保存购物车
-        //localStorage.removeItem("cartList");//删除变量名为key的存储变量
         localStorage.setItem('cartList',JSON.stringify(cartList));
         //删除对应的商品列
         dialog.success('成功');
@@ -108,6 +100,18 @@ cart = {
                 }
             });
         });
+    },
+    //统计购物车的数量
+    getGoodsTotal:function () {
+        var cartListOld = localStorage.cartList;//获取存储购物车商品信息
+        var jsonstr = JSON.parse(cartListOld);
+        var goodsList = jsonstr.goodsList;
+        //计算总数
+        var total_num = 0;
+        $.each(goodsList,function(i,goods){
+            total_num += parseInt(goods['num']);
+        });
+        return total_num;
     }
     
 };
@@ -169,13 +173,11 @@ $(function () {
         postData.id = id;
         postData.num = num;
         postData.goods_id = goods_id;
-        if(1){
-            cart.editCartNum(postData,_this);
-        }else{
+        if(user_id){
             editCartNum(postData,_this);
+        }else{
+            cart.editCartNum(postData,_this);
         }
-
-
     });
     //购物车减
     $('body').on('click','.cart_greduce',function(){
@@ -194,10 +196,10 @@ $(function () {
         postData.id = id;
         postData.num = num;
         postData.goods_id = goods_id;
-        if(1){
-            cart.editCartNum(postData,_this);
-        }else{
+        if(user_id){
             editCartNum(postData,_this);
+        }else{
+            cart.editCartNum(postData,_this);
         }
 
     });
@@ -205,7 +207,6 @@ $(function () {
     $('body').on('blur','.cart_gshopping_count',function(){
         var buyNum=parseInt($(this).val());
         if(buyNum<1){
-             //dialog.error('起订数量不能少于'+orderNum);
              $(this).val(1);
              return false;
         }
@@ -223,12 +224,12 @@ $(function () {
         var goods_ids=[];
         cart_ids.push(_li.data('cart_id'));
         goods_ids.push(_li.data('id'));
-        if(1){
+        if(user_id){
+            postData.cart_ids = cart_ids;
+            delCart(postData, 'single',$(this));
+        }else{
             postData.goods_ids = goods_ids;
             cart.delCart(postData);
-        }else{
-            postData.cart_ids = cart_ids;
-            editCartNum(postData,_this);
         }
     });
     //购物车全选总价
@@ -246,7 +247,9 @@ $(function () {
         if(!postData){
             return false;
         }
+
         if (1){ //没有登录
+
             cart.addCart(postData);
             // postData._this = _this;
             // postData.lis = lis;
@@ -415,7 +418,6 @@ function assemblyData(lis) {
     var postData = {};
     postData.goodsList = [];
     var isInt = true;
-    //console.log(lis);
     $.each(lis,function(){
         var _this = $(this);
         var num = _this.find('.gshopping_count').val();
@@ -473,7 +475,6 @@ function calculateTotalPrice(obj){
         $.each(_thisLis,function(index,val){
             var _thisLi = $(this);
             var num = _thisLi.find('.gshopping_count').val();
-            //console.log(111);
             if(!isPosIntNumberOrZero(num)){
                 isInt = false;
                 return false;
@@ -604,7 +605,7 @@ function editCartNum(postData,obj) {
 
 //选择或当个删除购物车
 function delCart(postData,type,obj) {
-    var url = controller + 'del';
+    var url = module + 'Cart/del';
     layer.open({
         content:'是否删除？',
         btn:['确定','取消'],

@@ -34,6 +34,8 @@
 {/block}
 {block name="common"}
 {include file="../../api/public/vue/components/footer-cart-menu.html" /}
+{include file="../../api/public/vue/components/login.html" /}
+{include file="../../api/public/vue/components/dialog.html" /}
 {/block}
 {block name="footer"}
 <div id="foot_cart_menu">
@@ -43,6 +45,12 @@
 	></footer-cart-menu>
 </div>
 {/block}
+<template>
+	<div class="main">
+		<div @click="openMask">打开弹窗</div>
+		<dialog-bar v-model="sendVal" type="danger" title="我是标题" content="我是内容" v-on:cancel="clickCancel()" @danger="clickDanger()" @confirm="clickConfirm()" dangerText="Delete"></dialog-bar>
+	</div>
+</template>
 {block name="script"}
 <script type="text/javascript" src="api_common_js/swiper.min.js"></script>
 <script type="text/javascript">
@@ -77,7 +85,6 @@
 		pageSize:10,
 		id:"{$info.id}"
 	};
-
 	$(function(){
 		let param = {
 			cart_init_num:parseInt("{$cartSum|default=0}")
@@ -88,10 +95,8 @@
 				return param;
 			},methods: {
 				buy_now_call_back:function(param){
-
 					var postData = {};
 					postData.goodsList = param.postData.productList;
-
 					$.ajax({
 						url: param.jump_url,
 						data: postData,
@@ -108,7 +113,6 @@
 							}else{
 								dialog.error(data.info);
 							}
-
 						}
 					});
 				}
@@ -119,6 +123,32 @@
 		getJsonList(config,postData);
 	});
 	$(function(){
+		let param = {
+		};
+		new Vue({
+			el: '#loginDialog',
+			components:{
+				'dialog-bar': dialog
+			},
+			data:function(){
+				return {
+					sendVal: false
+				}
+			},methods:{
+				openMask(index){
+					this.sendVal = true;
+				},
+				clickCancel(){
+					console.log('点击了取消');
+				},
+				clickDanger(){
+					console.log('这里是danger回调')
+				},
+				clickConfirm(){
+					console.log('点击了confirm');
+				}
+			}
+		});
 		var date=getWeek();
 		countDown(date,$('#countDownBox'));
 		// 后加载简介
