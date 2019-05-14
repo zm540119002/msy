@@ -3,12 +3,9 @@
 {block name="title"}
 采购套餐
 {/block}
-
 {block name="content"}
 <article class="f24">
-
 	{include file="template/scene_detail.html" /}
-
 	<section class="content-padding content_main wy_list">
 		<div class="">
 			<span>推荐套餐包含产品(产品数量可增加套餐价格将调整)</span>
@@ -21,7 +18,7 @@
 						v-for="productInfo in productList"
 						:key="productInfo.id"
 						:product_id="productInfo.id"
-						:deal_price="parseFloat(productInfo.bulk_price)"
+						:deal_price="Number(productInfo.bulk_price)"
 						:product_name="productInfo.headline"
 						:product_src="productInfo.thumb_img"
 						:product_url="String(productInfo.id)"
@@ -35,9 +32,7 @@
 
 	</section>
 </article>
-
 {/block}
-
 {block name="common"}
 {include file="../../api/public/vue/components/footer-cart-menu.html" /}
 {/block}
@@ -49,7 +44,7 @@
 	></footer-cart-menu>
 </div>
 {/block}
-{block name="script"}
+{block name="suffix-script"}
 <script type="text/javascript" src="api_common_js/swiper.min.js"></script>
 <script type="text/javascript" src="api_common_js/swiper.min.js"></script>
 <script type="text/javascript">
@@ -60,7 +55,6 @@
 		}
 		param = {
 			'buy_named':'采购数量',
-			'display_quota':true,
 			'display_pic':true,
 			'init_quantity':1,
 			'step_quantity':1,
