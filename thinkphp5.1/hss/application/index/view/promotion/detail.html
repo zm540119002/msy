@@ -6,7 +6,7 @@
 {block name="content"}
 <article class="f24">
 	{include file="template/scene_detail.html" /}
-	<section class="content-padding content_main wy_list">
+	<section class="content-padding content_dialog wy_list">
 		<div class="">
 			<span>推荐套餐包含产品(产品数量可增加套餐价格将调整)</span>
 		</div>
@@ -45,10 +45,11 @@
 	></footer-cart-menu>
 </div>
 {/block}
-<template>
-	<div class="main">
+<template id="app">
+	<div class="dialog">
 		<div @click="openMask">打开弹窗</div>
-		<dialog-bar v-model="sendVal" type="danger" title="我是标题" content="我是内容" v-on:cancel="clickCancel()" @danger="clickDanger()" @confirm="clickConfirm()" dangerText="Delete"></dialog-bar>
+		<dialog v-model="sendVal" type="danger" title="我是标题" content="我是内容"
+				v-on:cancel="clickCancel()" @danger="clickDanger()" @confirm="clickConfirm()" dangerText="Delete"></dialog>
 	</div>
 </template>
 {block name="script"}
@@ -126,10 +127,7 @@
 		let param = {
 		};
 		new Vue({
-			el: '#loginDialog',
-			components:{
-				'dialog-bar': dialog
-			},
+			el: '#app',
 			data:function(){
 				return {
 					sendVal: false
