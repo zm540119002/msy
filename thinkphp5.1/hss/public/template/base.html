@@ -46,16 +46,11 @@
             shadeClose:false,
             content:content,
             btn:[''],
-            success:function(indexs,i){
-                tab_down('.loginNav li','.loginTab','click');
-                $('.layui-m-layershade').on('touchmove',function(e){
-                    event.preventDefault();
-                });
-                fixedLayer();
+            success:function(index,i){
+                console.log(index);
+                console.log(i);
             },
             yes:function(index){
-                cancleFixedLayer();
-                $('.loginTab').eq(0).show();
                 layer.close(index);
             }
         });
