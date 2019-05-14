@@ -37,12 +37,12 @@ cart = {
                     });
                 }
             });
-            var a = {
+            var cartList = {
                 goodsList:goodsList
             };
             //保存购物车
             //localStorage.removeItem("cartList");//删除变量名为key的存储变量
-            localStorage.setItem('cartList',JSON.stringify(a));
+            localStorage.setItem('cartList',JSON.stringify(cartList));
             //计算总数
             var total_num = 0;
             $.each(goodsList,function(i,goods){
@@ -80,31 +80,33 @@ cart = {
     },
     //删除商品
     delCart:function (goods) {
-
-        // localStorage.removeItem("cartList");
-        // return false//删除变量名为key的存储变量
         var cartListOld = localStorage.cartList;//获取存储购物车商品信息
         var jsonstr = JSON.parse(cartListOld);
         var goodsList = jsonstr.goodsList;
-        console.log(goodsList);
         $.each(goods.goods_ids,function(i,goods_id){
             $.each(goodsList,function(j,oldgoods){
                 if(goods_id == oldgoods.goods_id){
-                    console.log(j);
                     goodsList = goodsList.filter(function (element, index, self) {
                         return index<j||index>j
                     });
                 }
             });
-
         });
-        console.log(goodsList);
-        var a = {
+        var cartList = {
             goodsList:goodsList
         };
         //保存购物车
         //localStorage.removeItem("cartList");//删除变量名为key的存储变量
-        localStorage.setItem('cartList',JSON.stringify(a));
+        localStorage.setItem('cartList',JSON.stringify(cartList));
+        //删除对应的商品列
+        $.each(goods.goods_ids,function(i,goods_id){
+            $.each($('.cart_goods_list li'),function(j,oldgoods){
+                var id = $(this).data('id');
+                if(goods_id == id){
+                    $(this).remove();
+                }
+            });
+        });
     }
     
 };
