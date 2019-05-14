@@ -45,6 +45,9 @@
 				return {};
 			}
 		});
+		$('body').on('click','ul.loginNav li',function(){
+			console.log($(this).attr('class'));
+		});
 	});
 </script>
 {/block}

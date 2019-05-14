@@ -39,27 +39,23 @@
     }
     //登录-弹窗触发
     function loginDialogTrigger(){
-//        var content = $('.userInfoWrapper').html();
-//        layer.open({
-//            className:'loginLayer',
-//            type:1,
-//            shadeClose:false,
-//            content:content,
-//            btn:[''],
-//            success:function(index){
-//                console.log(index);
-//            },
-//            yes:function(index){
-//                layer.close(index);
-//            }
-//        });
-//        return false;
-//        var content = $('.userInfoWrapper').html();
+        var content = $('.userInfoWrapper').html();
+        layer.open({
+            className:'loginLayer',
+            type:1,
+            shadeClose:false,
+            content:content,
+            btn:[''],
+            success:function(index){
+                console.log(index);
+            },
+            yes:function(index){
+                layer.close(index);
+            }
+        });
+        return false;
         var content = document.getElementById('loginAndRegister');
         console.log(content);
-        confirm({ title: '我是标题', content: '请打开麦克风', doneText: '确认按钮文字', cancalText: '取消按钮文字' })
-            .then(() => { console.log('已确认') })
-            .catch(() => { console.log('已取消') });
         window.open (content,"newwindow", "height=100, width=400, toolbar =no, menubar=no, scrollbars=no, resizable=no, location=no, status=no");
     }
 </script>
