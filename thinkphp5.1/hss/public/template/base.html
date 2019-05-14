@@ -57,7 +57,9 @@
 //        var content = $('.userInfoWrapper').html();
         var content = document.getElementById('loginAndRegister');
         console.log(content);
-        alert(content);
+        confirm({ title: '我是标题', content: '请打开麦克风', doneText: '确认按钮文字', cancalText: '取消按钮文字' })
+            .then(() => { console.log('已确认') })
+            .catch(() => { console.log('已取消') });
         window.open (content,"newwindow", "height=100, width=400, toolbar =no, menubar=no, scrollbars=no, resizable=no, location=no, status=no");
     }
 </script>
