@@ -82,7 +82,7 @@
 		let footerCartMenu = JSON.parse('{$unlockingFooterCart|raw}');
 		let param = {
 			cart_init_num:parseInt("{$cartSum|default=0}"),
-			footerCartMenu:footerCartMenu.menu
+			footerCartMenu:[1,3,8,7]
 		};
 		new Vue({
 			el: '#foot_cart_menu',
