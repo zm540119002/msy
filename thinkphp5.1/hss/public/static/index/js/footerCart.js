@@ -1,7 +1,7 @@
 
 
 /**
- * 没有登录加入购物车
+ * 没有登录购物车 操作
  * @param postData
  */
 cart = {
@@ -24,7 +24,6 @@ cart = {
                         //找到修改数量
                         find = true;
                         goodsList[j].num = parseInt(addGoods.num) + parseInt(goods.num);
-                        console.log(goodsList);
                         return;
                     }
                 });
@@ -51,10 +50,6 @@ cart = {
         dialog.success('成功');
         $('footer').find('.cart_num').addClass('cur');
         $('footer').find('.add_num').text(total_num).addClass('current');
-        // setTimeout(function(){
-        //     $('.add_num').removeClass('current');
-        // },2000)
-        return false;
     },
     //修改商品数量
     editCartNum:function (goods) {
@@ -94,7 +89,6 @@ cart = {
             goodsList:goodsList
         };
         //保存购物车
-        //localStorage.removeItem("cartList");//删除变量名为key的存储变量
         localStorage.setItem('cartList',JSON.stringify(cartList));
         //删除对应的商品列
         dialog.success('成功');
@@ -213,7 +207,6 @@ $(function () {
     $('body').on('blur','.cart_gshopping_count',function(){
         var buyNum=parseInt($(this).val());
         if(buyNum<1){
-             //dialog.error('起订数量不能少于'+orderNum);
              $(this).val(1);
              return false;
         }
@@ -425,7 +418,6 @@ function assemblyData(lis) {
     var postData = {};
     postData.goodsList = [];
     var isInt = true;
-    //console.log(lis);
     $.each(lis,function(){
         var _this = $(this);
         var num = _this.find('.gshopping_count').val();
@@ -483,7 +475,6 @@ function calculateTotalPrice(obj){
         $.each(_thisLis,function(index,val){
             var _thisLi = $(this);
             var num = _thisLi.find('.gshopping_count').val();
-            //console.log(111);
             if(!isPosIntNumberOrZero(num)){
                 isInt = false;
                 return false;
