@@ -34,13 +34,13 @@
 {/block}
 {block name="common"}
 {include file="../../api/public/vue/components/footer-cart-menu.html" /}
+{include file="../../api/public/vue/components/login.html" /}
 {/block}
 {block name="footer"}
 <div id="foot_cart_menu">
 	<footer-cart-menu
 			:buy_now_call_back="buy_now_call_back"
 			:cart_init_num="cart_init_num"
-			:footerCartMenu="footerCartMenu"
 	></footer-cart-menu>
 </div>
 {/block}
@@ -79,10 +79,8 @@
 		id:"{$info.id}"
 	};
 	$(function(){
-		let footerCartMenu = JSON.parse('{$unlockingFooterCart|raw}');
 		let param = {
-			cart_init_num:parseInt("{$cartSum|default=0}"),
-			footerCartMenu:{'aa':1,'bb':2}
+			cart_init_num:parseInt("{$cartSum|default=0}")
 		};
 		new Vue({
 			el: '#foot_cart_menu',
@@ -118,6 +116,17 @@
 		getJsonList(config,postData);
 	});
 	$(function(){
+		let param = {
+		};
+		new Vue({
+			el: '#loginDialog',
+			data:function(){
+				return param;
+			},methods: {
+				login_succeed_call_back:function(){
+				}
+			}
+		});
 		var date=getWeek();
 		countDown(date,$('#countDownBox'));
 		// 后加载简介
