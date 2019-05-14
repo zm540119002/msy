@@ -71,7 +71,7 @@ class Index extends \common\controller\Base{
 
     }
 
-    // 有结算页面
+    // 只有结算页面
     public function cartIndex(){
         if(request()->isAjax()){
         }else{
@@ -81,7 +81,7 @@ class Index extends \common\controller\Base{
         }
     }
 
-    // 导航页-没有结算
+    // 导航页-结算
     public function cartManage(){
         if(request()->isAjax()){
         }else{
