@@ -614,7 +614,7 @@ function editCartNum(postData,obj) {
 
 //选择或当个删除购物车
 function delCart(postData,type,obj) {
-    var url = controller + 'del';
+    var url = module + 'Cart/del';
     layer.open({
         content:'是否删除？',
         btn:['确定','取消'],
