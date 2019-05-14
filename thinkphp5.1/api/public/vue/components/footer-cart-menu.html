@@ -225,6 +225,8 @@
                     }
                 },methods: {
                     total_amount_init:function (param) {
+                        console.log(this.menus);
+                        console.log(this.menu);
                         this.total_amount += param.subtotal_amount;
                     },total_amount_calculate:function (param) {
                         this.total_amount += param.deal_price * param.increment_buy_quantity;
@@ -298,8 +300,6 @@
                         }
                     }
                 },created:function(){
-                    console.log(this.menus);
-                    console.log(this.menu);
                     let _this = this;
                     //监听-产品选择器初始化-事件
                     bus.$on('product_select_init', function(param){
