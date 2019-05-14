@@ -1,6 +1,10 @@
 {extend name="template/base.html" /}
 {block name="content"}
 <article class="f24">
+	<section class="header_title separation-line">
+		<a href="javascript:void(0);" class="back_prev_page async_login" data-jump_url="{:url('Mine/index')}"></a>
+		<h2 class="f24">详情页</h2>
+	</section>
 	<section class="slider_banner">
 		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
 			<div class="swiper-wrapper">
@@ -354,11 +358,7 @@
 		$('.five_star').setStar(parseFloat(averageScore));
 		//收藏
 		$('body').on('click','.collection',function(){
-			if(user_id){
 
-			}else{
-
-			}
 			var _this = $(this);
 			if(_this.find('span.icon').hasClass('selected')){
 				var postData = {};
