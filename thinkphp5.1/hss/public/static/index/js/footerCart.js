@@ -169,13 +169,11 @@ $(function () {
         postData.id = id;
         postData.num = num;
         postData.goods_id = goods_id;
-        if(1){
-            cart.editCartNum(postData,_this);
-        }else{
+        if(user_id){
             editCartNum(postData,_this);
+        }else{
+            cart.editCartNum(postData,_this);
         }
-
-
     });
     //购物车减
     $('body').on('click','.cart_greduce',function(){
@@ -194,10 +192,10 @@ $(function () {
         postData.id = id;
         postData.num = num;
         postData.goods_id = goods_id;
-        if(1){
-            cart.editCartNum(postData,_this);
-        }else{
+        if(user_id){
             editCartNum(postData,_this);
+        }else{
+            cart.editCartNum(postData,_this);
         }
 
     });
@@ -223,13 +221,12 @@ $(function () {
         var goods_ids=[];
         cart_ids.push(_li.data('cart_id'));
         goods_ids.push(_li.data('id'));
-        console.log(user_id);
-        if(1){
-            postData.goods_ids = goods_ids;
-            cart.delCart(postData);
-        }else{
+        if(user_id){
             postData.cart_ids = cart_ids;
             editCartNum(postData,_this);
+        }else{
+            postData.goods_ids = goods_ids;
+            cart.delCart(postData);
         }
     });
     //购物车全选总价
