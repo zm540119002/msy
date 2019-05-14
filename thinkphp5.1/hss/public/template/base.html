@@ -13,4 +13,52 @@
 {block name="suffix-script"}
 <script type="text/javascript" src="api_common_js/dialog.js"></script>
 <script type="text/javascript" src="api_common_js/paging.js"></script>
+<script type="text/javascript">
+    //异步验证判断
+    function async_verify_judge(param){
+        if(param.data.status==0){
+            if(param.data.data.code == '1001'){
+                loginBackFunction = param.func;
+                loginDialog();
+            }else if(param.data.data.code=='1002'){
+            }else if(param.data.data.code=='1003'){
+            }else{
+                dialog.error(param.data.info);
+            }
+        }else if(param.data.status==1){
+            if(param.data.data.code == '1001'){
+            }else if(param.data.data.code=='1002'){
+            }else if(param.data.data.code=='1003'){
+            }else{
+                return true;
+            }
+        }else{
+            return true;
+        }
+    }
+    //登录-弹窗触发
+    function loginDialogTrigger(){
+        var content=$('.userInfoWrapper').html();
+        window.scrollTo(0,0);
+        layer.open({
+            className:'loginLayer',
+            type:1,
+            shadeClose:false,
+            content:content,
+            btn:[''],
+            success:function(indexs,i){
+                tab_down('.loginNav li','.loginTab','click');
+                $('.layui-m-layershade').on('touchmove',function(e){
+                    event.preventDefault();
+                });
+                fixedLayer();
+            },
+            yes:function(index){
+                cancleFixedLayer();
+                $('.loginTab').eq(0).show();
+                layer.close(index);
+            }
+        });
+    }
+</script>
 {/block}
