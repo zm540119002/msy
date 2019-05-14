@@ -46,7 +46,7 @@ cart = {
         //计算总数
         var total_num = 0;
         $.each(goodsList,function(i,goods){
-            total_num += goods['num'];
+            total_num += parseInt(goods['num']);
         });
         dialog.success('成功');
         $('footer').find('.cart_num').addClass('cur');
@@ -115,7 +115,7 @@ cart = {
         //计算总数
         var total_num = 0;
         $.each(goodsList,function(i,goods){
-            total_num += goods['num'];
+            total_num += parseInt(goods['num']);
         });
         return total_num;
     }
