@@ -1,5 +1,11 @@
 {extend name="template/base.html" /}
 {block name="title"}采购套餐{/block}
+{block name="header"}
+<section class="header_title separation-line">
+	<a href=" " class="back_prev_page async_login" data-jump_url="{:url('Mine/index2')}"></a>
+	<h2 class="f24">收益账户详情</h2>
+</section>
+{/block}
 {block name="content"}
 <article class="f24">
 	{include file="template/scene_detail.html" /}
