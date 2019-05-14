@@ -206,8 +206,7 @@
                 template:'#footer-cart-menu_tpl',
                 props: {
                     cart_init_num: {type: Number,default: 0},
-                    footerCartMenu: {type: Object,default:function(param){
-                        console.log(param);
+                    footerCartMenu: {type: Object,default:function(){
                         return {'eg':'默认值示范'};
                     }},
                     buy_now_call_back: {type: Function,default: function(param){
@@ -226,6 +225,7 @@
                     }
                 },methods: {
                     total_amount_init:function (param) {
+                        console.log(this.cart_init_num);
                         console.log(this.footerCartMenu);
                         this.total_amount += param.subtotal_amount;
                     },total_amount_calculate:function (param) {
