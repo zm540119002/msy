@@ -34,17 +34,20 @@
 	</script>
 </head>
 <body>
-{block name="header"}{/block}
+{block name="header"}
+<section class="header_title separation-line">
+	<a href=" " class="back_prev_page async_login" data-jump_url="{:url('Mine/index')}"></a>
+	<h2 class="f24">收益账户详情</h2>
+</section>
+{/block}
 <!-- 内容模块 -->
 {block name="content"}{/block}
 <!-- 公共模块-->
 {block name="common"}{/block}
-<section id="loginDialog">
+<div id="login">
 	<login
 	></login>
-	<dialog
-	></dialog>
-</section>
+</div>
 <!-- 页脚模块-->
 {block name="footer"}
 <footer class="f24">

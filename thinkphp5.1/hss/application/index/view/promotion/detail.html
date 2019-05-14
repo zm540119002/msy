@@ -1,12 +1,10 @@
 {extend name="template/base.html" /}
-
-{block name="title"}
-采购套餐
-{/block}
+{block name="title"}采购套餐{/block}
+{block name="header"}{/block}
 {block name="content"}
 <article class="f24">
 	{include file="template/scene_detail.html" /}
-	<section class="content-padding content_dialog wy_list">
+	<section class="content-padding content_main wy_list">
 		<div class="">
 			<span>推荐套餐包含产品(产品数量可增加套餐价格将调整)</span>
 		</div>
@@ -35,7 +33,6 @@
 {block name="common"}
 {include file="../../api/public/vue/components/footer-cart-menu.html" /}
 {include file="../../api/public/vue/components/login.html" /}
-{include file="../../api/public/vue/components/dialog.html" /}
 {/block}
 {block name="footer"}
 <div id="foot_cart_menu">
@@ -45,13 +42,6 @@
 	></footer-cart-menu>
 </div>
 {/block}
-<template id="app">
-	<div class="dialog">
-		<div @click="openMask">打开弹窗</div>
-		<dialog v-model="sendVal" type="danger" title="我是标题" content="我是内容"
-				v-on:cancel="clickCancel()" @danger="clickDanger()" @confirm="clickConfirm()" dangerText="Delete"></dialog>
-	</div>
-</template>
 {block name="script"}
 <script type="text/javascript" src="api_common_js/swiper.min.js"></script>
 <script type="text/javascript">
@@ -124,29 +114,6 @@
 		getJsonList(config,postData);
 	});
 	$(function(){
-		let param = {
-		};
-		new Vue({
-			el: '#app',
-			data:function(){
-				return {
-					sendVal: false
-				}
-			},methods:{
-				openMask(index){
-					this.sendVal = true;
-				},
-				clickCancel(){
-					console.log('点击了取消');
-				},
-				clickDanger(){
-					console.log('这里是danger回调')
-				},
-				clickConfirm(){
-					console.log('点击了confirm');
-				}
-			}
-		});
 		var date=getWeek();
 		countDown(date,$('#countDownBox'));
 		// 后加载简介
