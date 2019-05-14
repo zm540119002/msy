@@ -2,7 +2,6 @@
 {block name="css-customize"}
 <link rel="stylesheet" href="public_css/project_public.css">
 {/block}
-
 <!-- 公共模块-->
 {block name="common"}{/block}
 {block name="pre-script"}
@@ -41,21 +40,7 @@
     //登录-弹窗触发
     function loginDialogTrigger(){
         var content=$('.userInfoWrapper').html();
-        window.scrollTo(0,0);
-        layer.open({
-            className:'loginLayer',
-            type:1,
-            shadeClose:false,
-            content:content,
-            btn:[''],
-            success:function(index,i){
-                console.log(index);
-                console.log(i);
-            },
-            yes:function(index){
-                layer.close(index);
-            }
-        });
+        window.open (content);
     }
 </script>
 {/block}
