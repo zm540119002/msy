@@ -233,7 +233,7 @@ $(function () {
         goods_ids.push(_li.data('id'));
         if(user_id){
             postData.cart_ids = cart_ids;
-            editCartNum(postData, $(this));
+            delCart(postData, 'single',$(this));
         }else{
             postData.goods_ids = goods_ids;
             cart.delCart(postData);
