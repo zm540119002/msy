@@ -173,6 +173,7 @@ $(function () {
         postData.id = id;
         postData.num = num;
         postData.goods_id = goods_id;
+        console.log(user_id);
         if(user_id){
             editCartNum(postData,_this);
         }else{
