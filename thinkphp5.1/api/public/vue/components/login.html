@@ -164,8 +164,8 @@
             },created:function(){
                 let _this = this;
                 //监听-切换当前-事件
-                bus.$on('switchCurrent', function(param){
-                    _this.switchCurrent(param);
+                bus.$on('switchCurrent', function(){
+                    _this.switchCurrent();
                 });
                 //监听-登录-事件
                 bus.$on('login', function(param){
