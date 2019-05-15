@@ -115,17 +115,16 @@ cart = {
     }
     
 };
-var total_num = 0;
-if(user_id){
-    total_num = "{$total_num}";
-}else{
-    total_num = cart.getGoodsTotal();
 
-}
+
 
 $(function () {
     //初始化购物车数量
+    if(user_id){
+    }else{
+        total_num = cart.getGoodsTotal();
 
+    }
     // $('footer').find('.cart_num').addClass('cur');
     $('footer').find('.add_num').text(total_num).addClass('current');
     //加
