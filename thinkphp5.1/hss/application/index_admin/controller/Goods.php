@@ -145,6 +145,8 @@ class Goods extends Base {
      *  分页查询
      */
     public function getList(){
+        return 3333;
+
         $model = new \app\index_admin\model\Goods();
 
         $where[] = ['g.status','=',0];

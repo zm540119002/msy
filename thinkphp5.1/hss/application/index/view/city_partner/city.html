@@ -1,0 +1,58 @@
+{extend name="template/base.html" /}
+{block name="content"}
+<div class="f24">
+    <section class="f20 header_title separation-line">
+        <h2 class="">黑森森城市合伙人</h2>
+    </section>
+	<section>
+		<div id="wizard" class="page-bd">
+			<nav class="apply-data-nav">
+				<ul id="status " class="status f24 weui-flex">
+					<li class="weui-flex-item switch-item"><span class="search_city"></span><em></em>城市查询</li>
+					<li class="weui-flex-item switch-item "><span class="base_info"></span><em></em>店家登记</li>
+					<li class="weui-flex-item switch-item "><span class="base_money"></span><em></em>资格款项</li>
+					<li class="weui-flex-item "><span class="opening"></span>加盟成功</li>
+				</ul>
+			</nav>
+		</div>
+		<div class="content-padding">
+			<p>申请成为黑森森城市合伙人，分享头部皮肤管理事业财富。</p>
+			<p>请先查询拟申请的城市是否有空缺，如有空缺可填写资料，在线支付城市合伙人订金￥5000.00，黑森森城市合伙人资格审核通过后再补交资格余款，如不通过订金将7天内无息退回；通过后资格款项将转存入用户充值账户，用于采购结算专用。</p>
+			<dl>
+				<dt>黑森森城市合伙人资格政策：</dt>
+				<dd>一类市场城市合伙人：按区域位于中国1线城市或2线城市的申请人，其黑森森城市合伙人资格款29.8万元；</dd>
+				<dd>二类市场城市合伙人：按区域位于中国3线城市或4线城市的申请人，其黑森森城市合伙人资格款19.8万元；</dd>
+				<dd>三类市场城市合伙人：按区域位于中国5线城市或5线以下城市的申请人，其黑森森城市合伙人资格款9.8万元。</dd>
+			</dl>
+		</div>
+	</section>
+</div>
+<!--选择地区弹层-->
+<section id="areaLayer" class="express-area-box" style="display:none;">
+	<header>
+		<h3>选择地区</h3>
+		<a id="backUp" class="back" href="javascript:void(0);" title="返回" style="display: none;"></a>
+		<a id="closeArea" class="close" href="javascript:void(0);" title="关闭"></a>
+	</header>
+	<article id="areaBox">
+		<ul id="areaList" class="area-list">
+			<!--<li onclick="selectP(0);">北京市</li><li onclick="selectP(1);">天津市</li><li onclick="selectP(2);">河北省</li><li onclick="selectP(3);">河南省</li><li onclick="selectP(4);">山西省</li><li onclick="selectP(5);">山东省</li><li onclick="selectP(6);">内蒙古自治区</li><li onclick="selectP(7);">辽宁省</li><li onclick="selectP(8);">吉林省</li><li onclick="selectP(9);">黑龙江省</li><li onclick="selectP(10);">上海市</li><li onclick="selectP(11);">江苏省</li><li onclick="selectP(12);">浙江省</li><li onclick="selectP(13);">福建省</li><li onclick="selectP(14);">江西省</li><li onclick="selectP(15);">安徽省</li><li onclick="selectP(16);">湖北省</li><li onclick="selectP(17);">湖南省</li><li onclick="selectP(18);">广东省</li><li onclick="selectP(19);">广西壮族自治区</li><li onclick="selectP(20);">海南省</li><li onclick="selectP(21);">重庆市</li><li onclick="selectP(22);">四川省</li><li onclick="selectP(23);">贵州省</li><li onclick="selectP(24);">云南省</li><li onclick="selectP(25);">西藏自治区</li><li onclick="selectP(26);">陕西省</li><li onclick="selectP(27);">甘肃省</li><li onclick="selectP(28);">青海省</li><li onclick="selectP(29);">宁夏回族自治区</li><li onclick="selectP(30);">新疆维吾尔自治区</li><li onclick="selectP(31);">台湾省</li><li onclick="selectP(32);">香港特别行政区</li><li onclick="selectP(33);">澳门特别行政区</li>-->
+		</ul>
+	</article>
+</section>
+<!--遮罩层-->
+<div id="areaMask" class="address_mask"></div>
+<footer class="f24 group_cart_nav">
+	<div class="group_btn100 bottom_item">
+		<a href="{:url('CityPartner/registered')}">立即申请</a>
+	</div>
+</footer>
+{/block}
+{block name="common"}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript" src="api_common_js/swipe.js"></script>
+<script type="text/javascript" src="public_js/jquery.area.js"></script>
+<script type="text/javascript" src="index_js/franchise.js"></script>
+{/block} 

@@ -44,6 +44,9 @@ body{
 .left{
     float:left;
 }
+.gr{
+    color:#009a3e;
+}
 .right{
     float:right;
 }
@@ -1889,6 +1892,14 @@ background-position: 0 -27px;
 }
 .weui-flex-item.current .base_info{
     background:#fff url(../../common/img/base_info.png) no-repeat center 0;
+    background-size:0.68rem auto;
+}
+.weui-flex-item .search_city{
+    background:#fff url(../../common/img/search_city.png) no-repeat center 0;
+    background-size:0.68rem auto;
+}
+.weui-flex-item.current .search_city{
+    background:#fff url(../../common/img/search_s_city.png) no-repeat center 0;
     background-size:0.68rem auto;
 }
 .weui-flex-item .base_address{background:#fff url(../../common/img/base_address.png) no-repeat center 0;background-size:40px auto;}

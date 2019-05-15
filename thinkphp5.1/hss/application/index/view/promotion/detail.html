@@ -31,25 +31,20 @@
 </article>
 {/block}
 {block name="common"}
-{include file="../../api/public/vue/components/footer-cart-menu.html" /}
-{include file="../../api/public/vue/components/login.html" /}
-<div id="loginDialog">
-	<login
-	></login>
-</div>
-<script type="text/javascript">
-	$(function(){
-		new Vue({
-			el: '#loginDialog',
-			data:function(){
-				return {};
-			}
-		});
-		$('body').on('click','ul.loginNav li',function(){
-			console.log($(this).attr('class'));
-		});
-	});
-</script>
+	{include file="../../api/public/vue/components/footer-cart-menu.html" /}
+{/block}
+{block name="login_dialog"}
+	{include file="../../api/public/vue/components/login.html" /}
+	<script type="text/javascript">
+		function login_success_callback(param){
+			console.log(param);
+			layer.close(param.index);
+		}
+		function register_success_callback(param){
+			console.log(param);
+			layer.close(param.index);
+		}
+	</script>
 {/block}
 {block name="footer"}
 <div id="foot_cart_menu">

@@ -5,13 +5,28 @@ $('body').on('click','.add',function(){
     var config  = {};
     config.title= '添加'+title;
     config.url  = controller + 'edit';
+
+    var pid = $(this).data('pid');
+
+    if( pid>0&&pid!='undefined' ){
+        config.url = config.url+'/pid/'+pid;
+    }
+
     edit(config);
 });
 $('body').on('click','.edit',function(){
+
     var _thisTr = $(this).parents('tr');
     var config  = {};
     config.title= title+'编辑';
     config.url  =  controller + 'edit/id/' + _thisTr.data('id');
+
+    var pid = $(".add").data('pid');
+
+    if( pid>0&&pid!='undefined' ){
+        config.url = config.url+'/pid/'+pid;
+    }
+
     edit(config);
 });
 function edit(config){

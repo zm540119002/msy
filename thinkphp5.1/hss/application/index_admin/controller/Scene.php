@@ -57,8 +57,8 @@ class Scene extends Base {
             unset($data['editorValue']);
 
             replace_splitter($data,['tag']);
-            process_upload_files($data,['thumb_img'],false);
-            process_upload_files($data,['main_img']);
+            process_upload_files($data,['thumb_img'],'scene',false);
+            process_upload_files($data,['main_img'],'scene');
             htmlspecialchars_addslashes($data,['intro']);
 
 /*            if( isset($_POST['thumb_img']) && $_POST['thumb_img'] ){

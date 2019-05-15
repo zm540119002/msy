@@ -46,8 +46,8 @@ class Sort extends Base
             unset($data['editorValue']);
 
             replace_splitter($data,['tag']);
-            process_upload_files($data,['thumb_img'],false);
-            process_upload_files($data,['main_img','process_img','detail_img']);
+            process_upload_files($data,['thumb_img'],'sort',false);
+            process_upload_files($data,['main_img','process_img','detail_img'],'sort');
             htmlspecialchars_addslashes($data,['intro']);
 
             $data['title'] = $data['name'];
