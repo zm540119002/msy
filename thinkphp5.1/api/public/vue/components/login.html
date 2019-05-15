@@ -13,8 +13,8 @@
         </div>
         <div class="f24 bomb_box">
             <ul class="loginNav">
-                <li @click="switchCurrent" :class="{current:true}">登录</li>
-                <li @click="switchCurrent" :class="{current:false}">注册/重置密码</li>
+                <li :class="{current:true}">登录</li>
+                <li :class="{current:false}">注册/重置密码</li>
             </ul>
             <form class="loginTab" :class="{show:true}">
                 <div class="login_item">
@@ -163,6 +163,10 @@
                 }
             },created:function(){
                 let _this = this;
+                //监听-切换当前-事件
+                bus.$on('switchCurrent', function(){
+                    _this.switchCurrent();
+                });
                 //监听-登录-事件
                 bus.$on('login', function(param){
                     _this.login(param);
