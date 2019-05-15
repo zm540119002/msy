@@ -116,13 +116,13 @@ cart = {
     
 };
 
+
+
 $(function () {
     //初始化购物车数量
-    var total_num = 0;
     if(user_id){
-         total_num = 2;
     }else{
-         total_num = cart.getGoodsTotal();
+        total_num = cart.getGoodsTotal();
 
     }
     // $('footer').find('.cart_num').addClass('cur');
