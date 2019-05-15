@@ -51,6 +51,13 @@ class Index extends \common\controller\Base{
         $list = $modelUser->getList($condition);
         $this->assign('spaceList',$list);
 
+        // 广告
+        $ads = [];
+        $modelAdPositions = new \app\index\model\AdPositions();
+        $ads['top'] = reset($modelAdPositions->getAds('index_top'));
+        $ads['carousel'] = $modelAdPositions->getAds('index_carousel');
+        $this->assign('ads',$ads);
+
         // 底部菜单，见配置文件custom.footer_menu
         $this->assign('currentPage',request()->controller().'/'.request()->action());
 
@@ -91,5 +98,15 @@ class Index extends \common\controller\Base{
             $this->assign('currentPage',request()->controller().'/'.request()->action());
             return $this->fetch('cart/manage');
         }
+    }
+
+    // 项目优势页
+    public function superiority(){
+        return $this->fetch();
+    }
+
+    // 开放日活动
+    public function activity(){
+        return $this->fetch();
     }
 }

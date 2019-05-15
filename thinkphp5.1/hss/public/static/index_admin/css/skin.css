@@ -1441,6 +1441,9 @@ filter:alpha(opacity:0);
     background: #e5e5e5;
     overflow: hidden;
 }
+.upload-picture-module .picture-module img{
+	width:100%;
+}
 .upload-company-map .picture-module{
     position:relative;
     height:4rem;

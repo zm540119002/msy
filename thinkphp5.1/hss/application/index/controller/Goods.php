@@ -246,7 +246,7 @@ class Goods extends \common\controller\Base{
                     $this->assign('collected', 1);
                 }
             }
-
+            Cart::getCartTotalNum();
             $unlockingFooterCart = unlockingFooterCartConfig([0,2,1]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
             return $this->fetch();

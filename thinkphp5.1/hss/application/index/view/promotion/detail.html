@@ -35,42 +35,14 @@
 {/block}
 {block name="login_dialog"}
 	{include file="../../api/public/vue/components/login.html" /}
-	<div id="loginDialogTpl">
-		<div id="loginDialogRoot">
-			<login
-			></login>
-		</div>
-	</div>
 	<script type="text/javascript">
-		$(function(){
-			new Vue({
-				el: '#loginDialogRoot',
-				data:function(){
-					return {};
-				},methods: {
-				}
-			});
-		});
-		//登录-弹窗触发
-		function loginDialogTrigger(){
-			var content = $('.userInfoWrapper').html();
-			var content3 = $('#loginDialogTpl').html();
-			layer.open({
-				className:'loginLayer',
-				type:1,
-				shadeClose:false,
-				content:content3,
-				btn:[''],
-				success:function(index){
-				},
-				yes:function(index){
-					layer.close(index);
-				}
-			});
-			return false;
-			var content = document.getElementById('loginAndRegister');
-			console.log(content);
-			window.open (content,"newwindow", "height=100, width=400, toolbar =no, menubar=no, scrollbars=no, resizable=no, location=no, status=no");
+		function login_success_callback(param){
+			console.log(param);
+			layer.close(param.index);
+		}
+		function register_success_callback(param){
+			console.log(param);
+			layer.close(param.index);
 		}
 	</script>
 {/block}
@@ -90,7 +62,7 @@
 			dialog.error(data.info);
 			return false;
 		}
-		param = {
+		let param = {
 			'buy_named':'采购数量',
 			'display_pic':true,
 			'init_quantity':1,
@@ -117,6 +89,10 @@
 		id:"{$info.id}"
 	};
 	$(function(){
+		//初始化场景商品页面
+		postData.id = '{$info.id}';
+		getJsonList(config,postData);
+
 		let param = {
 			cart_init_num:parseInt("{$cartSum|default=0}")
 		};
@@ -149,10 +125,9 @@
 				}
 			}
 		});
-		//初始化场景商品页面
-		postData.id = '{$info.id}';
-		getJsonList(config,postData);
 	});
+</script>
+<script type="text/javascript">
 	$(function(){
 		var date=getWeek();
 		countDown(date,$('#countDownBox'));

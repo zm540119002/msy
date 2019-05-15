@@ -96,7 +96,7 @@ function getAuthStatus($num){
  * @param bool $multiple
  */
 
-function process_upload_files(&$data,$arr,$multiple=true){
+function process_upload_files(&$data,$arr,$directory,$multiple=true){
 
     foreach($arr as $k => $v){
 
@@ -108,14 +108,14 @@ function process_upload_files(&$data,$arr,$multiple=true){
                 $tempArr = array();
                 foreach ($detailArr as $item) {
                     if($item){
-                        $tempArr[] = moveImgFromTemp(config('upload_dir.project'),$item);
+                        $tempArr[] = moveImgFromTemp(config('upload_dir.'.$directory),$item);
                     }
                 }
                 $data[$v] = implode(',',$tempArr);
             }
 
         }else{
-            $data[$v] = moveImgFromTemp(config('upload_dir.project'),$file);
+            $data[$v] = moveImgFromTemp(config('upload_dir.'.$directory),$file);
         }
 
     }

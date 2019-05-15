@@ -18,7 +18,13 @@ class CityPartner extends \common\controller\Base {
             return $this->fetch();
         }
     }
+    /**
+     * 城市合伙人申请条件
+     */
+    public function city(){
 
+        return $this->fetch();
+    }
     /**
      * 合伙人申请
      */

@@ -8,6 +8,7 @@
 <script type="text/javascript">
     //用于后面判断是否登录
     var user_id = "{$user.id}";
+    var total_num = "{$total_num}";
 </script>
 {/block}
 <!-- 自定义js -->
@@ -18,18 +19,17 @@
     //异步验证判断
     function async_verify_judge(param){
         if(param.data.status==0){
+            //未登录
             if(param.data.data.code == '1001'){
-                loginBackFunction = param.func;
-                loginDialog();
+                loginDialogTrigger();
             }else if(param.data.data.code=='1002'){
-            }else if(param.data.data.code=='1003'){
             }else{
-                dialog.error(param.data.info);
+                return true;
             }
         }else if(param.data.status==1){
+            //已登录
             if(param.data.data.code == '1001'){
             }else if(param.data.data.code=='1002'){
-            }else if(param.data.data.code=='1003'){
             }else{
                 return true;
             }

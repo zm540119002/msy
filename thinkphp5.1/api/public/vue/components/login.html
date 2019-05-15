@@ -13,8 +13,8 @@
         </div>
         <div class="f24 bomb_box">
             <ul class="loginNav">
-                <li @click="switchCurrent" :class="{current:true}">登录</li>
-                <li @click="switchCurrent" :class="{current:false}">注册/重置密码</li>
+                <li class="switch_current" :class="{current:true}">登录</li>
+                <li class="switch_current" class="switch_current" :class="{current:false}">注册/重置密码</li>
             </ul>
             <form class="loginTab" :class="{show:true}">
                 <div class="login_item">
@@ -28,7 +28,7 @@
                         <input class="input-filed password" type="password" placeholder="密码" v-model="postData.password">
                     </div>
                 </div>
-                <a href="javascript:void(0);" class="entry-button" @click="login">登录</a>
+                <a href="javascript:void(0);" class="entry-button btn_login">登录</a>
             </form>
             <form class="loginTab" :class="{show:false}">
                 <div class="error_tipc" ></div>
@@ -51,15 +51,16 @@
                         <input class="input-filed password" autocomplete="new-password" type="password" placeholder="设置密码" v-model="postData.password">
                     </div>
                 </div>
-                <a href="javascript:void(0);" class="entry-button" @click="register">确定</a>
+                <a href="javascript:void(0);" class="entry-button btn_register">确定</a>
             </form>
         </div>
     </section>
 </template>
 <script type="text/javascript">
+    var component_login = null;
     $(function(){
         //表单切换
-        Vue.component('login', {
+        component_login = Vue.component('login', {
             template:'#login_tpl',
             props: {
                 login_succeed_call_back: {type: Function,default: function(param){
@@ -82,9 +83,8 @@
                 };
             },
             methods: {
-                switchCurrent:function(event){
-                    console.log(1111);
-                    let _thisLi = $(event.currentTarget);
+                switchCurrent:function(param){
+                    let _thisLi = param.obj;
                     _thisLi.length && _thisLi.addClass("current").siblings().removeClass("current");
                     let _thisIndex = _thisLi.index();
                     $.each(_thisLi.parents('.userInfoWrapper').find('form'),function(index){
@@ -92,7 +92,7 @@
                             $(this).addClass("show").siblings().removeClass("show");
                         }
                     });
-                },login:function(){
+                },login:function(param){
                     let content='';
                     if(!register.phoneCheck(this.postData.mobile_phone)){
                         content='请输入正确手机号码';
@@ -121,11 +121,16 @@
                             if(data.status==0){
                                 _this.login_failed_call_back(data);
                             }else if(data.status==1){
-                                _this.login_succeed_call_back(data);
+                                $.extend(param.login_success_callback_param,data);
+                                if(param.login_success_callback && $.isFunction(param.login_success_callback)){
+                                    param.login_success_callback(param.login_success_callback_param);
+                                }else{
+                                    _this.login_succeed_call_back(param.login_success_callback_param);
+                                }
                             }
                         }
                     });
-                },register:function(){
+                },register:function(param){
                     let content='';
                     if(!register.phoneCheck(this.postData.mobile_phone)){
                         content='请输入正确手机号码';
@@ -156,12 +161,90 @@
                             if(data.status==0){
                                 _this.register_failed_call_back(data);
                             }else if(data.status==1){
-                                _this.register_succeed_call_back(data);
+                                $.extend(param.login_success_callback_param,data);
+                                if(param.register_success_callback && $.isFunction(param.register_success_callback)){
+                                    param.register_success_callback(param.register_success_callback_param);
+                                }else{
+                                    _this.register_succeed_call_back(param.register_success_callback_param);
+                                }
                             }
                         }
                     });
                 }
             },created:function(){
+                let _this = this;
+                //监听-切换当前-事件
+                bus.$on('switchCurrent', function(param){
+                    _this.switchCurrent(param);
+                });
+                //监听-登录-事件
+                bus.$on('login', function(param){
+                    _this.login(param);
+                });
+                //监听-注册-事件
+                bus.$on('register', function(param){
+                    _this.register(param);
+                });
+            }
+        });
+    });
+</script>
+<div id="loginDialogTpl" style="display: none">
+    <div id="loginDialogRoot">
+        <login></login>
+    </div>
+</div>
+<script type="text/javascript">
+    //登录-弹窗触发
+    var loginDialogTriggerLayerIndex = 0;
+    function loginDialogTrigger(){
+        var content = $('#loginDialogTpl').html();
+        loginDialogTriggerLayerIndex = layer.open({
+            className:'loginLayer',
+            type:1,
+            shadeClose:false,
+            content:content,
+            btn:[''],
+            success:function(index){
+            },yes:function(index){
+                layer.close(index);
+            }
+        });
+    }
+    $(function(){
+        $('body').on('click','.loginLayer .switch_current',function(){
+            //触发-切换当前-事件
+            let param = {
+                obj:$(this)
+            };
+            bus.$emit('switchCurrent',param);
+        });
+        $('body').on('click','.loginLayer .btn_login',function(){
+            //触发-登录-事件
+            let login_success_callback_param = {
+                index:loginDialogTriggerLayerIndex
+            };
+            let param = {
+                login_success_callback_param:login_success_callback_param,
+                login_success_callback:login_success_callback
+            };
+            bus.$emit('login',param);
+        });
+        $('body').on('click','.loginLayer .btn_register',function(){
+            //触发-注册-事件
+            let register_success_callback_param = {
+                index:loginDialogTriggerLayerIndex
+            };
+            let param = {
+                register_success_callback_param:register_success_callback_param,
+                register_success_callback:register_success_callback
+            };
+            bus.$emit('register',param);
+        });
+        new Vue({
+            el:'#loginDialogRoot',
+            data:function(){
+                return {};
             }
         });
     });

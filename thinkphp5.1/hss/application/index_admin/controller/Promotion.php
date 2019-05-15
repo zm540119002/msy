@@ -55,8 +55,8 @@ class Promotion extends Base {
             unset($data['editorValue']);
 
             replace_splitter($data,['tag']);
-            process_upload_files($data,['thumb_img'],false);
-            process_upload_files($data,['main_img']);
+            process_upload_files($data,['thumb_img'],'promotion',false);
+            process_upload_files($data,['main_img'],'promotion');
             htmlspecialchars_addslashes($data,['intro']);
 
 

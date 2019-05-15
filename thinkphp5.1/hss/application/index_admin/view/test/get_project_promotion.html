@@ -1,0 +1,118 @@
+﻿{extend name="template/admin_pc/base.html" /}
+{block name="content"}
+<nav class="breadcrumb">
+	<i class="Hui-iconfont">&#xe67f;</i>项目管理 <span class="c-gray en">&gt;</span>{$info.name} <span class="c-gray en">&gt;</span>已增加的促销列表
+	<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a>
+</nav>
+<div class="page-container">
+	<div class="cl pd-5 bg-1 bk-gray">
+			<span class="l">
+				<a class="btn btn-primary radius" id="edit-promotion" data-id="{$info.id}" href="javascript:;">
+					<i class="Hui-iconfont"></i> 增加促销
+				</a>
+				<span class="friend-tipc">*注意</span>：已上架的促销才会显示在前台
+			</span>
+		<!-- 先不要 -->
+		<!--        <span class="r">共有数据：<strong id="count">{:count($list)}</strong> 条</span>-->
+	</div>
+	<div class="content" id="list">
+		<table class="table tb-type2">
+			<thead>
+			<tr class="thead">
+				<!--<th></th>-->
+				<th>编号</th>
+				<th>排序</th>
+				<th>促销名称</th>
+				<th>缩略图</th>
+				<th>发布状态</th>
+				<th>操作</th>
+			</tr>
+			</thead>
+			<tbody>
+			{volist name="list" id="vo"}
+			<tr class="hover" data-id="{$vo.id}">
+				<!--<td class="w48"><input type="checkbox" class="checkitem" name="checkbox">-->
+				<td class="w48"><span title="" class="editable">{$vo.promotion_id}</span></td>
+				<td class="w48 sort"><span title="" class="editable ">{$vo.sort}</span></td>
+				<td class="w50pre name"><span title="" class="editable ">{$vo.name}</span></td>
+				<td class="w96">
+					{if $vo.thumb_img}
+					<a href="javascript:void(0);">
+						<img width="100" class="product-thumb" src="public_uploads/{$vo.thumb_img}" alt='loading'>
+					</a>
+					{/if}
+				</td>
+				<td class="w96 shelf-status">
+					{if $vo.shelf_status == 1}
+					<span>已下架</span>
+					{else /}
+					<span>已发布</span>
+					{/if}
+				</td>
+				<td class="w96">
+					<a href="javascript:void(0);" class="del"  style="text-decoration:none" title="删除"><i class="Hui-iconfont"></i></a>
+				</td>
+			</tr>
+			{/volist}
+			</tbody>
+			<tfoot>
+			</tfoot>
+		</table>
+	</div>
+</div>
+
+
+{/block}
+{block name="script"}
+<script type="text/javascript" src="index_admin_js/sceneAssociation.js"></script>
+<script type="text/javascript">
+	$(function () {
+		// 展示修改促销方案
+		$("#edit-promotion").click(function () {
+			var id  = $(this).data('id');
+			var url = controller+'editProjectPromotion/'+'id/'+id;
+			var index = layer.open({
+				type: 2,
+				title: '关联促销方案',
+				content: url,
+				id: 1
+			});
+			layer.full(index);
+		});
+
+		// 取消关联
+		$('body').on('click','.del',function(){
+			var _this     = $(this);
+			var postData  = {};
+			postData.relation = "{$relation}";
+			var _thisTr   = _this.parents('tr');
+			postData.id   = _thisTr.data('id');
+			$(this).addClass('nodisabled');
+			layer.open({
+				btn: ['确定','取消'],//按钮
+				content:'取消关联选中的促销 编号'+postData.id+'？',
+				yes:function (index) {
+					$.ajax({
+						url:module+'Promotion/delRelationPromotion',
+						data:postData,
+						method:'post',
+						beforeSend:function(){
+
+						},
+						success:function(msg){
+							dialog.msg(msg,'',function(){
+								_thisTr.remove();
+							});
+							layer.close(index);
+						},
+
+					})
+				},
+				end:function(){
+					_this.removeClass('nodisabled');
+				}
+			});
+		});
+	});
+</script>
+{/block}
