@@ -122,7 +122,7 @@ $(function () {
     if(user_id){
         var total_num = cart.getGoodsTotal();
     }else{
-        var total_num = cart.getGoodsTotal();
+        var total_num = 0;
     }
     $('footer').find('.cart_num').addClass('cur');
     $('footer').find('.add_num').text(total_num).addClass('current');
