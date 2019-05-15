@@ -117,7 +117,6 @@ cart = {
 };
 
 $(function () {
-    var user_id = "{$user.id}";
     //初始化购物车数量
     console.log(user_id);
     if(user_id){
