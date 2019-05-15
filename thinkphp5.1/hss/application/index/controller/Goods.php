@@ -248,14 +248,12 @@ class Goods extends \common\controller\Base{
             }
 
             //统计购物车商品数量
-            $modelCart = new \app\index\model\Cart();
             $user = checkLogin();
             if($user){
+                $modelCart = new \app\index\model\Cart();
                 $totalNum = $modelCart->where(['status'=>0,'user_id'=>$user['id']])->sum('num');
                 $this -> assign('total_num',$totalNum);
             }
-
-
             $unlockingFooterCart = unlockingFooterCartConfig([0,2,1]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
             return $this->fetch();
