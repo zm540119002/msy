@@ -110,11 +110,11 @@ class Cart extends \common\controller\UserBase {
     public function addCart(){
 
         if(!request()->isPost()){
-            return errorMsg('请求方式错误');
+            $this->errorMsg('请求方式错误',config('code.error.default'));
         }
         $goodsList = input('post.goodsList/a');
         if(empty($goodsList)){
-            $this->errorMsg('没有数据');
+            $this->errorMsg('没有数据',config('code.error.default'));
         }
         $userId = $this->user['id'];
         $model = new \app\index\model\Cart();
@@ -150,11 +150,11 @@ class Cart extends \common\controller\UserBase {
             $res =  $model->saveAll($goodsList);
             if (!count($res)) {
                 $model->rollback();
-                $this->errorMsg('失败');
+                $this->errorMsg(config('code.error.default.msg'),config('code.error.default'));
             }
         }
         $model -> commit();
-        $this->successMsg('成功');
+        $this->successMsg(config('code.success.default.msg'),config('code.success.default'));
     }
 
     /**
