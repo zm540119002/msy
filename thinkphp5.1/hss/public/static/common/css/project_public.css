@@ -1894,6 +1894,14 @@ background-position: 0 -27px;
     background:#fff url(../../common/img/base_info.png) no-repeat center 0;
     background-size:0.68rem auto;
 }
+.weui-flex-item .search_city{
+    background:#fff url(../../common/img/search_city.png) no-repeat center 0;
+    background-size:0.68rem auto;
+}
+.weui-flex-item.current .search_city{
+    background:#fff url(../../common/img/search_city.png) no-repeat center 0;
+    background-size:0.68rem auto;
+}
 .weui-flex-item .base_address{background:#fff url(../../common/img/base_address.png) no-repeat center 0;background-size:40px auto;}
 .weui-flex-item .base_s_address{background:#fff url(../../common/img/base_s_address.png) no-repeat center 0;background-size:40px auto;}
 .weui-flex-item .opening{background:#fff url(../../common/img/base_s_finish.png) no-repeat center 0;background-size:40px auto;}
