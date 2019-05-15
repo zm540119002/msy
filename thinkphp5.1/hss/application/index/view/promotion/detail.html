@@ -54,12 +54,8 @@
 				success:function(index){
 					let vm = new Vue({
 						el: '#loginDialogRoot',
-						componets: {
-							component_login:component_login
-						},
-						render:function(func){
-							console.log(func);
-							console.log(component_login);
+						render:function(h){
+							return h('div',component_login);
 						},
 						data:function(){
 							return {};
