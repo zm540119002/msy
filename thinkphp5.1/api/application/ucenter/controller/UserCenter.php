@@ -8,7 +8,6 @@ class UserCenter extends \think\Controller{
             $modelUser = new \common\model\UserCenter();
             $postData = input('post.');
             $modelUser->login($postData);
-            return config('code.success.login');
             $this->successMsg(config('code.success.login.msg'),config('code.success.login')) ;
             return $modelUser->login($postData);
         }
