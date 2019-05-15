@@ -37,6 +37,7 @@
 	{include file="../../api/public/vue/components/login.html" /}
 	<div id="loginDialogTpl" style="display: none">
 		<div id="loginDialogRoot">
+			<component :is="view" ></component>
 		</div>
 	</div>
 	<script type="text/javascript">
@@ -54,15 +55,10 @@
 				success:function(index){
 					let vm = new Vue({
 						el: '#loginDialogRoot',
-						componets: {
-							component_login:component_login
-						},
-						render:function(func){
-							console.log(func);
-							console.log(component_login);
-						},
 						data:function(){
-							return {};
+							return {
+								view:component_login
+							};
 						},methods: {
 						}
 					});
