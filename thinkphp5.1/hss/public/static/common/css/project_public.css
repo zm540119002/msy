@@ -472,4 +472,6 @@
 nav .back_prev_page{
     background-image:none;
     color:#fff;
+    top:0.1rem;
+    font-size:0.35rem;
 }
