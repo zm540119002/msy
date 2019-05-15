@@ -84,11 +84,12 @@
             },
             methods: {
                 switchCurrent:function(_thisLi){
-                    console.log(_thisLi.length);
                     _thisLi.length && _thisLi.addClass("current").siblings().removeClass("current");
                     let _thisIndex = _thisLi.index();
                     console.log(_thisIndex);
                     $.each(_thisLi.parents('.userInfoWrapper').find('form'),function(index){
+                        console.log(index);
+                        console.log(_thisIndex);
                         if(index==_thisIndex){
                             $(this).addClass("show").siblings().removeClass("show");
                         }
