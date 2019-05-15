@@ -37,8 +37,6 @@
 	{include file="../../api/public/vue/components/login.html" /}
 	<script type="text/javascript">
 		var login_success_callback = function (param){
-			console.log(123);
-			console.log(param);
 			//异步验证判断
 			let param2 = {
 				data:param,
@@ -46,6 +44,7 @@
 					$('a.add_cart').click();
 				}
 			};
+			console.log(param2);
 			if(async_verify_judge(param2)===true){
 				dialog.success(param.info);
 			}
