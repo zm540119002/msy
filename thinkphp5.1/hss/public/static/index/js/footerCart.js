@@ -117,8 +117,14 @@ cart = {
 };
 
 $(function () {
-    //计算商品列表总价
-    //calculateTotalPrice();
+    //初始化购物车数量
+    if(user_id){
+        var total_num = cart.getGoodsTotal();
+    }else{
+        var total_num = cart.getGoodsTotal();
+    }
+    $('footer').find('.cart_num').addClass('cur');
+    $('footer').find('.add_num').text(total_num).addClass('current');
     //加
     $('body').on('click','.gplus',function(){
         var incrementObj={};
