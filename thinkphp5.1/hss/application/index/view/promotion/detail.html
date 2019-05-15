@@ -62,7 +62,7 @@
 			dialog.error(data.info);
 			return false;
 		}
-		param = {
+		let param = {
 			'buy_named':'采购数量',
 			'display_pic':true,
 			'init_quantity':1,
@@ -89,6 +89,10 @@
 		id:"{$info.id}"
 	};
 	$(function(){
+		//初始化场景商品页面
+		postData.id = '{$info.id}';
+		getJsonList(config,postData);
+
 		let param = {
 			cart_init_num:parseInt("{$cartSum|default=0}")
 		};
@@ -121,10 +125,9 @@
 				}
 			}
 		});
-		//初始化场景商品页面
-		postData.id = '{$info.id}';
-		getJsonList(config,postData);
 	});
+</script>
+<script type="text/javascript">
 	$(function(){
 		var date=getWeek();
 		countDown(date,$('#countDownBox'));

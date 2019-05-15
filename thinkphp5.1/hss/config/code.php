@@ -15,7 +15,10 @@
 
 return [
     'error' => [
-        'login' => [
+        'default' => [
+            'code' => '1000',
+            'msg' => '失败！',
+        ],'login' => [
             'code' => '1001',
             'msg' => '您还未登录平台，请先登录！',
         ],'empower' => [
@@ -23,9 +26,12 @@ return [
             'msg' => '未授权！',
         ],
     ],'success' => [
-        'login' => [
+        'default' => [
+            'code' => '1000',
+            'msg' => '成功！',
+        ],'login' => [
             'code' => '1001',
-            'msg' => '登录成功！',
+            'msg' => '已登录！',
         ],'empower' => [
             'code' => '1002',
             'msg' => '已授权！',

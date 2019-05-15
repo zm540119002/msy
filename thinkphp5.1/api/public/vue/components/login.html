@@ -161,12 +161,11 @@
                             if(data.status==0){
                                 _this.register_failed_call_back(data);
                             }else if(data.status==1){
-                                _this.register_succeed_call_back(data);
                                 $.extend(param.login_success_callback_param,data);
                                 if(param.register_success_callback && $.isFunction(param.register_success_callback)){
                                     param.register_success_callback(param.register_success_callback_param);
                                 }else{
-                                    _this.login_succeed_call_back(param.register_success_callback_param);
+                                    _this.register_succeed_call_back(param.register_success_callback_param);
                                 }
                             }
                         }
@@ -192,61 +191,60 @@
 </script>
 <div id="loginDialogTpl" style="display: none">
     <div id="loginDialogRoot">
-        <login
-        ></login>
+        <login></login>
     </div>
 </div>
 <script type="text/javascript">
     //登录-弹窗触发
+    var loginDialogTriggerLayerIndex = 0;
     function loginDialogTrigger(){
         var content = $('#loginDialogTpl').html();
-        let loginDialogTriggerLayerIndex = layer.open({
+        loginDialogTriggerLayerIndex = layer.open({
             className:'loginLayer',
             type:1,
             shadeClose:false,
             content:content,
             btn:[''],
             success:function(index){
-                $('body').on('click','.loginLayer .switch_current',function(){
-                    //触发-切换当前-事件
-                    let param = {
-                        obj:$(this)
-                    };
-                    bus.$emit('switchCurrent',param);
-                });
-                $('body').on('click','.loginLayer .btn_login',function(){
-                    //触发-登录-事件
-                    let login_success_callback_param = {
-                        index:loginDialogTriggerLayerIndex
-                    };
-                    let param = {
-                        login_success_callback_param:login_success_callback_param,
-                        login_success_callback:login_success_callback
-                    };
-                    bus.$emit('login',param);
-                });
-                $('body').on('click','.loginLayer .btn_register',function(){
-                    //触发-注册-事件
-                    let register_success_callback_param = {
-                        index:loginDialogTriggerLayerIndex
-                    };
-                    let param = {
-                        register_success_callback_param:register_success_callback_param,
-                        register_success_callback:register_success_callback
-                    };
-                    bus.$emit('register',param);
-                });
             },yes:function(index){
                 layer.close(index);
             }
         });
     }
     $(function(){
+        $('body').on('click','.loginLayer .switch_current',function(){
+            //触发-切换当前-事件
+            let param = {
+                obj:$(this)
+            };
+            bus.$emit('switchCurrent',param);
+        });
+        $('body').on('click','.loginLayer .btn_login',function(){
+            //触发-登录-事件
+            let login_success_callback_param = {
+                index:loginDialogTriggerLayerIndex
+            };
+            let param = {
+                login_success_callback_param:login_success_callback_param,
+                login_success_callback:login_success_callback
+            };
+            bus.$emit('login',param);
+        });
+        $('body').on('click','.loginLayer .btn_register',function(){
+            //触发-注册-事件
+            let register_success_callback_param = {
+                index:loginDialogTriggerLayerIndex
+            };
+            let param = {
+                register_success_callback_param:register_success_callback_param,
+                register_success_callback:register_success_callback
+            };
+            bus.$emit('register',param);
+        });
         new Vue({
             el:'#loginDialogRoot',
             data:function(){
                 return {};
-            },methods: {
             }
         });
     });

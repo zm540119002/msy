@@ -18,19 +18,24 @@
 <script type="text/javascript">
     //异步验证判断
     function async_verify_judge(param){
+        console.log(param);
         if(param.data.status==0){
-            if(param.data.data.code == '1001'){
-                loginBackFunction = param.func;
-                loginDialog();
+            //未登录
+            if(param.data.data.code == '1000'){
+                return true;
+            }else if(param.data.data.code == '1001'){
+                loginDialogTrigger();
             }else if(param.data.data.code=='1002'){
-            }else if(param.data.data.code=='1003'){
             }else{
-                dialog.error(param.data.info);
+                return true;
             }
         }else if(param.data.status==1){
-            if(param.data.data.code == '1001'){
+            //已登录
+            if(param.data.data.code == '1000'){
+                param.func();
+            }else if(param.data.data.code == '1001'){
+                param.func();
             }else if(param.data.data.code=='1002'){
-            }else if(param.data.data.code=='1003'){
             }else{
                 return true;
             }
