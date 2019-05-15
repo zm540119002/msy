@@ -126,7 +126,7 @@ $(function () {
 
     }
     // $('footer').find('.cart_num').addClass('cur');
-    $('footer').find('.add_num').text(total_num);
+    $('footer').find('.add_num').text(total_num).addClass('current');
     //加
     $('body').on('click','.gplus',function(){
         var incrementObj={};
