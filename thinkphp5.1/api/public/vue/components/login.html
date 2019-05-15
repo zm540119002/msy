@@ -93,8 +93,6 @@
                         }
                     });
                 },login:function(param){
-                    console.log(param);
-                    return false;
                     let content='';
                     if(!register.phoneCheck(this.postData.mobile_phone)){
                         content='请输入正确手机号码';
@@ -123,8 +121,12 @@
                             if(data.status==0){
                                 _this.login_failed_call_back(data);
                             }else if(data.status==1){
-                                _this.login_succeed_call_back(data);
-//                                param.login_success_callback(param.login_success_callback_param);
+                                $.extend(param.login_success_callback_param,data);
+                                if(param.login_success_callback && $.isFunction(param.login_success_callback)){
+                                    param.login_success_callback(param.login_success_callback_param);
+                                }else{
+                                    _this.login_succeed_call_back(param.login_success_callback_param);
+                                }
                             }
                         }
                     });
@@ -160,6 +162,12 @@
                                 _this.register_failed_call_back(data);
                             }else if(data.status==1){
                                 _this.register_succeed_call_back(data);
+                                $.extend(param.login_success_callback_param,data);
+                                if(param.register_success_callback && $.isFunction(param.register_success_callback)){
+                                    param.register_success_callback(param.register_success_callback_param);
+                                }else{
+                                    _this.login_succeed_call_back(param.register_success_callback_param);
+                                }
                             }
                         }
                     });

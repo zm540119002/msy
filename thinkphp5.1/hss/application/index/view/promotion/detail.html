@@ -52,21 +52,22 @@
 			});
 		});
 		function login_success_callback(param){
+			console.log(param);
 			layer.close(param.index);
 		}function register_success_callback(param){
+			console.log(param);
 			layer.close(param.index);
 		}
 		//登录-弹窗触发
 		function loginDialogTrigger(){
 			var content = $('#loginDialogTpl').html();
-			loginDialogTriggerLayer = layer.open({
+			let loginDialogTriggerLayerIndex = layer.open({
 				className:'loginLayer',
 				type:1,
 				shadeClose:false,
 				content:content,
 				btn:[''],
 				success:function(index){
-					let _index = index;
 					$('body').on('click','.loginLayer .switch_current',function(){
 						//触发-切换当前-事件
 						let param = {
@@ -77,7 +78,7 @@
 					$('body').on('click','.loginLayer .btn_login',function(){
 						//触发-登录-事件
 						let login_success_callback_param = {
-							index:_index
+							index:loginDialogTriggerLayerIndex
 						};
 						let param = {
 							login_success_callback_param:login_success_callback_param,
@@ -88,7 +89,7 @@
 					$('body').on('click','.loginLayer .btn_register',function(){
 						//触发-注册-事件
 						let register_success_callback_param = {
-							index:_index
+							index:loginDialogTriggerLayerIndex
 						};
 						let param = {
 							register_success_callback_param:register_success_callback_param,
