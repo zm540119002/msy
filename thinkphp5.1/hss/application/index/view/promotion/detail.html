@@ -126,16 +126,6 @@
 		getJsonList(config,postData);
 	});
 	$(function(){
-		new Vue({
-			el:'#loginDialogRoot',
-			data:function(){
-				return {};
-			},methods: {
-				login_success_callback:function(param){
-					console.log(123);
-				}
-			}
-		});
 		var date=getWeek();
 		countDown(date,$('#countDownBox'));
 		// 后加载简介

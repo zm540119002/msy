@@ -191,9 +191,7 @@
 </script>
 <div id="loginDialogTpl" style="display: none">
     <div id="loginDialogRoot">
-        <login
-                :login_success_callback="login_success_callback"
-        ></login>
+        <login></login>
     </div>
 </div>
 <script type="text/javascript">
@@ -220,7 +218,8 @@
                         index:loginDialogTriggerLayerIndex
                     };
                     let param = {
-                        login_success_callback_param:login_success_callback_param
+                        login_success_callback_param:login_success_callback_param,
+                        login_success_callback:login_success_callback
                     };
                     bus.$emit('login',param);
                 });
@@ -241,5 +240,11 @@
         });
     }
     $(function(){
+        new Vue({
+            el:'#loginDialogRoot',
+            data:function(){
+                return {};
+            }
+        });
     });
 </script>
