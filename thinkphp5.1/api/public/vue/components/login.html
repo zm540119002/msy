@@ -57,9 +57,10 @@
     </section>
 </template>
 <script type="text/javascript">
+    var vm_login = null;
     $(function(){
         //表单切换
-        var vm_login = Vue.component('login', {
+        vm_login = Vue.component('login', {
             template:'#login_tpl',
             props: {
                 login_succeed_call_back: {type: Function,default: function(param){
