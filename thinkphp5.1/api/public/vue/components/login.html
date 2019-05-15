@@ -105,6 +105,8 @@
                     }
                     let url = domain + 'ucenter/UserCenter/login';
                     let _this = this;
+                    console.log(this.postData);
+                    return false;
                     $.ajax({
                         url: url,
                         data: this.postData,
@@ -168,12 +170,12 @@
                     _this.switchCurrent(obj);
                 });
                 //监听-登录-事件
-                bus.$on('login', function(param){
-                    _this.login(param);
+                bus.$on('login', function(){
+                    _this.login();
                 });
                 //监听-注册-事件
-                bus.$on('register', function(param){
-                    _this.register(param);
+                bus.$on('register', function(){
+                    _this.register();
                 });
             }
         });

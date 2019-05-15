@@ -61,12 +61,17 @@
 				content:content,
 				btn:[''],
 				success:function(index){
-					//注册layer切换当前事件
 					$('body').on('click','.loginLayer .switch_current',function(){
-						console.log($(this));
-						console.log($(this).text());
 						//触发-切换当前-事件
 						bus.$emit('switchCurrent',$(this));
+					});
+					$('body').on('click','.loginLayer .btn_login',function(){
+						//触发-登录-事件
+						bus.$emit('login');
+					});
+					$('body').on('click','.loginLayer .btn_register',function(){
+						//触发-注册-事件
+						bus.$emit('register');
 					});
 				},yes:function(index){
 					layer.close(index);
