@@ -37,7 +37,7 @@
 	{include file="../../api/public/vue/components/login.html" /}
 	<script type="text/javascript">
 		var login_success_callback = function (param){
-			async_verify_judge(param);
+			console.log(param);
 			layer.close(param.index);
 		};
 		var register_success_callback = function (param){
