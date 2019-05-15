@@ -18,6 +18,7 @@
 <script type="text/javascript">
     //异步验证判断
     function async_verify_judge(param){
+        console.log(param);
         if(param.data.status==0){
             //未登录
             if(param.data.data.code == '1001'){
