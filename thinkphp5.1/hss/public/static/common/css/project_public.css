@@ -469,3 +469,9 @@
     margin:0 0 0.15rem 0;
     color:#0066cc;
 }
+nav .back_prev_page{
+    background-image:none;
+    color:#fff;
+    top:0.1rem;
+    font-size:0.35rem;
+}
