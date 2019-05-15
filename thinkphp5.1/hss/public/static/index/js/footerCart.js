@@ -695,7 +695,7 @@ function addCart(postData) {
                         num += parseInt($(this).find('.gshopping_count').val());
                     }
                 });
-                total_num = total_num + num;
+                total_num = parseInt(total_num) + parseInt(num);
                 // $('footer').find('.cart_num').addClass('cur');
                 $('footer').find('.add_num').text(total_num).addClass('current');
                 // setTimeout(function(){
