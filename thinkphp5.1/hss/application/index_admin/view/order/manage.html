@@ -40,9 +40,9 @@
 					</select>
 				</div>
 				<div class="text-c"> 日期范围：
-					<input type="text" onfocus="WdatePicker({ })" id="logmin" class="input-text Wdate" style="width:120px;">
+					<input type="text" onfocus="WdatePicker({ maxDate:'#F{$dp.$D(\'logmax\')||\'%y-%M-%d\'}' })" id="logmin" class="input-text Wdate" style="width:120px;">
 					-
-					<input type="text" onfocus="WdatePicker({})" id="logmax" class="input-text Wdate" style="width:120px;">
+					<input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'logmin\')}',maxDate:'%y-%M-%d' })" id="logmax" class="input-text Wdate" style="width:120px;">
 				</div>
 
 				<div class="form-group">
@@ -61,6 +61,7 @@
 {/block}
 {block name="script"}
 <script type="text/javascript" src="index_admin_js/commonCrud.js"></script>
+<script type="text/javascript" src="http://demo.h-ui.net/H-ui.admin/3.1/lib/My97DatePicker/4.8/WdatePicker.js"></script>
 <script type="text/javascript">
 	$(function () {
 		//加载第一页 这个需要配置公用???
