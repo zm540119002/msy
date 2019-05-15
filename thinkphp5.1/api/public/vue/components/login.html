@@ -13,8 +13,8 @@
         </div>
         <div class="f24 bomb_box">
             <ul class="loginNav">
-                <li :class="{current:true}">登录</li>
-                <li :class="{current:false}">注册/重置密码</li>
+                <li :class="{current:true}" class="switch_login">登录</li>
+                <li :class="{current:false}" class="switch_register">注册/重置密码</li>
             </ul>
             <form class="loginTab" :class="{show:true}">
                 <div class="login_item">
@@ -28,7 +28,7 @@
                         <input class="input-filed password" type="password" placeholder="密码" v-model="postData.password">
                     </div>
                 </div>
-                <a href="javascript:void(0);" class="entry-button">登录</a>
+                <a href="javascript:void(0);" class="entry-button btn_login">登录</a>
             </form>
             <form class="loginTab" :class="{show:false}">
                 <div class="error_tipc" ></div>
@@ -51,7 +51,7 @@
                         <input class="input-filed password" autocomplete="new-password" type="password" placeholder="设置密码" v-model="postData.password">
                     </div>
                 </div>
-                <a href="javascript:void(0);" class="entry-button">确定</a>
+                <a href="javascript:void(0);" class="entry-button btn_register">确定</a>
             </form>
         </div>
     </section>

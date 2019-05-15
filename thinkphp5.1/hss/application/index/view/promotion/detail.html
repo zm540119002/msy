@@ -61,7 +61,12 @@
 				content:content,
 				btn:[''],
 				success:function(index){
-					console.log(index);
+					$('.loginLayer').find('li.switch_login');
+					//注册layer切换当前事件
+					$('body').on('click',$('.loginLayer').find('li.switch_login'),function(){
+						//触发-切换当前-事件
+						bus.$emit('switchCurrent');
+					});
 				},yes:function(index){
 					layer.close(index);
 				}
