@@ -54,14 +54,12 @@
 				success:function(index){
 					let vm = new Vue({
 						el: '#loginDialogRoot',
-						render (h) {
-							console.log(h);
-						},
-						renderError (h, err) {
-							return h('pre', { style: { color: 'red' }}, err.stack)
-						},
 						componets: {
-							component_login
+							component_login:component_login
+						},
+						render:function(func){
+							console.log(func);
+							console.log(component_login);
 						},
 						data:function(){
 							return {};
