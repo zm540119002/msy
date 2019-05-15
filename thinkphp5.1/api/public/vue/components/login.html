@@ -161,12 +161,11 @@
                             if(data.status==0){
                                 _this.register_failed_call_back(data);
                             }else if(data.status==1){
-                                _this.register_succeed_call_back(data);
                                 $.extend(param.login_success_callback_param,data);
                                 if(param.register_success_callback && $.isFunction(param.register_success_callback)){
                                     param.register_success_callback(param.register_success_callback_param);
                                 }else{
-                                    _this.login_succeed_call_back(param.register_success_callback_param);
+                                    _this.register_succeed_call_back(param.register_success_callback_param);
                                 }
                             }
                         }
@@ -193,6 +192,7 @@
 <div id="loginDialogTpl" style="display: none">
     <div id="loginDialogRoot">
         <login
+                :login_success_callback="login_success_callback"
         ></login>
     </div>
 </div>
@@ -220,8 +220,7 @@
                         index:loginDialogTriggerLayerIndex
                     };
                     let param = {
-                        login_success_callback_param:login_success_callback_param,
-                        login_success_callback:login_success_callback
+                        login_success_callback_param:login_success_callback_param
                     };
                     bus.$emit('login',param);
                 });
@@ -242,12 +241,5 @@
         });
     }
     $(function(){
-        new Vue({
-            el:'#loginDialogRoot',
-            data:function(){
-                return {};
-            },methods: {
-            }
-        });
     });
 </script>
