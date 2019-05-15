@@ -36,14 +36,13 @@
 {block name="login_dialog"}
 	{include file="../../api/public/vue/components/login.html" /}
 	<div id="loginDialogTpl">
-	</div>
-	<div id="loginDialogRoot">
-		<component :is="view" ></component>
+		<div id="loginDialogRoot">
+			<component :is="view" ></component>
+		</div>
 	</div>
 	<script type="text/javascript">
 		$(function(){
-			let vm = new Vue({
-				el: '#loginDialogRoot',
+			var vm_login = new Vue({
 				data:function(){
 					return {
 						view:component_login
@@ -62,6 +61,7 @@
 				content:content,
 				btn:[''],
 				success:function(index){
+					vm_login.$mount('#loginDialogRoot');
 				},
 				yes:function(index){
 					layer.close(index);
