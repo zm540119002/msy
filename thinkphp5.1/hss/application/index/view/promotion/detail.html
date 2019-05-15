@@ -63,6 +63,8 @@
 				success:function(index){
 					//注册layer切换当前事件
 					$('body').on('click',$('.loginLayer').find('li'),function(){
+						console.log($(this));
+						console.log($(this).text());
 						//触发-切换当前-事件
 						bus.$emit('switchCurrent',$(this));
 					});
