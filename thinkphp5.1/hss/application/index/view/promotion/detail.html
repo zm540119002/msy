@@ -37,8 +37,6 @@
 	{include file="../../api/public/vue/components/login.html" /}
 	<div id="loginDialogTpl">
 		<div id="loginDialogRoot">
-			<login
-			></login>
 		</div>
 	</div>
 	<script type="text/javascript">
@@ -54,7 +52,7 @@
 				content:content,
 				btn:[''],
 				success:function(index){
-					new Vue({
+					let vm = new Vue({
 						el: '#loginDialogRoot',
 						data:function(){
 							return {};
