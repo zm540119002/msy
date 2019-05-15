@@ -35,72 +35,14 @@
 {/block}
 {block name="login_dialog"}
 	{include file="../../api/public/vue/components/login.html" /}
-	<div id="loginDialogTpl" style="display: none">
-		<div id="loginDialogRoot">
-			<login
-			></login>
-		</div>
-	</div>
 	<script type="text/javascript">
-		$(function(){
-			new Vue({
-				el:'#loginDialogRoot',
-				data:function(){
-					return {};
-				},methods: {
-				}
-			});
-		});
 		function login_success_callback(param){
 			console.log(param);
 			layer.close(param.index);
-		}function register_success_callback(param){
+		}
+		function register_success_callback(param){
 			console.log(param);
 			layer.close(param.index);
-		}
-		//登录-弹窗触发
-		function loginDialogTrigger(){
-			var content = $('#loginDialogTpl').html();
-			let loginDialogTriggerLayerIndex = layer.open({
-				className:'loginLayer',
-				type:1,
-				shadeClose:false,
-				content:content,
-				btn:[''],
-				success:function(index){
-					$('body').on('click','.loginLayer .switch_current',function(){
-						//触发-切换当前-事件
-						let param = {
-							obj:$(this)
-						};
-						bus.$emit('switchCurrent',param);
-					});
-					$('body').on('click','.loginLayer .btn_login',function(){
-						//触发-登录-事件
-						let login_success_callback_param = {
-							index:loginDialogTriggerLayerIndex
-						};
-						let param = {
-							login_success_callback_param:login_success_callback_param,
-							login_success_callback:login_success_callback
-						};
-						bus.$emit('login',param);
-					});
-					$('body').on('click','.loginLayer .btn_register',function(){
-						//触发-注册-事件
-						let register_success_callback_param = {
-							index:loginDialogTriggerLayerIndex
-						};
-						let param = {
-							register_success_callback_param:register_success_callback_param,
-							register_success_callback:register_success_callback
-						};
-						bus.$emit('register',param);
-					});
-				},yes:function(index){
-					layer.close(index);
-				}
-			});
 		}
 	</script>
 {/block}
