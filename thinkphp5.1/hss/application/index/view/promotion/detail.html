@@ -36,22 +36,7 @@
 {block name="login_dialog"}
 	{include file="../../api/public/vue/components/login.html" /}
 	<script type="text/javascript">
-		var login_success_callback = function(){};
-//		var login_success_callback = function (param){
-//			//异步验证判断
-//			let param2 = {
-//				data:param,
-//				func:function(){
-//					console.log($('a.add_cart'));
-//					$('a.add_cart').click();
-//				}
-//			};
-//			console.log(param2);
-//			if(async_verify_judge(param2)===true){
-//				dialog.success(param.info);
-//			}
-//			layer.close(param.index);
-//		};
+		var login_success_callback_private = function(){};
 		var register_success_callback = function (param){
 			console.log(param);
 			layer.close(param.index);

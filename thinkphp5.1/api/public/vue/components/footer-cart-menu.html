@@ -232,7 +232,7 @@
                         }
                     },asyncVerify:function(event){
                         let _this = $(event.currentTarget);
-                        login_success_callback = function(){
+                        login_success_callback_private = function(){
                             _this.click();
                         };
                         let jump_url = _this.parent().data('jump_url');
@@ -254,7 +254,6 @@
                                 },
                                 success: function(data){
                                     $('.loading').hide();
-                                    console.log(data);
                                     //异步验证判断
                                     let param = {
                                         data:data,
