@@ -114,7 +114,7 @@ class Cart extends \common\controller\UserBase {
         }
         $goodsList = input('post.goodsList/a');
         if(empty($goodsList)){
-            return errorMsg('没有数据');
+            $this->errorMsg('没有数据');
         }
         $userId = $this->user['id'];
         $model = new \app\index\model\Cart();
@@ -150,11 +150,11 @@ class Cart extends \common\controller\UserBase {
             $res =  $model->saveAll($goodsList);
             if (!count($res)) {
                 $model->rollback();
-                return errorMsg('失败');
+                $this->errorMsg('失败');
             }
         }
         $model -> commit();
-        return successMsg('成功');
+        $this->successMsg('成功');
     }
 
     /**
