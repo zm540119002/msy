@@ -122,7 +122,8 @@
                             if(data.status==0){
                                 _this.login_failed_call_back(data);
                             }else if(data.status==1){
-                                param.login_success_callback(param.login_success_callback_param);
+                                _this.login_succeed_call_back(data);
+//                                param.login_success_callback(param.login_success_callback_param);
                             }
                         }
                     });
