@@ -20,6 +20,28 @@
 						{notempty name="factoryInfo"}
 						<input type="hidden" name="store_id" class="store_id" value="{$factoryInfo.id|default=''}">
 						{/notempty}
+						<div class="express-area ">
+							<a id="expressArea" href="javascript:void(0)" class="f24 form-group box-flex">
+								<label class="form-label">选择地区：</label>
+								{empty name="address"}
+									<div class="area_address">省 &gt; 市 &gt; 区/县</div>
+									{else /}
+									<div class="area_address"></div>
+								{/empty}
+								<input type="hidden"  data-key="" value="" class="area-address-name" >
+							</a>
+						</div>
+						<div class="apply-items">
+							<input type="text" class="" name="detail_address" value="" placeholder="详细地址">
+						</div>
+						<a href="javascript:void(0);" class="one-step step">查询</a>
+					</form>
+				</div>
+				<div class="apply-module hide">
+					<form class="applicant_form">
+						{notempty name="factoryInfo"}
+						<input type="hidden" name="store_id" class="store_id" value="{$factoryInfo.id|default=''}">
+						{/notempty}
                         <div class="apply-items">
 							<input type="text" class="name " name="name" value="{$factoryInfo.name|default=''}" placeholder="店家名称">
 						</div>
