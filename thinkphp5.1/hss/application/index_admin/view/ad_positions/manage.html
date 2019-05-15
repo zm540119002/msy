@@ -1,0 +1,75 @@
+{extend name="template/admin_pc/base.html" /}
+{block name="content"}
+    <nav class="breadcrumb">
+        <i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 广告位置管理
+        <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a>
+    </nav>
+    <div class="page-container">
+        <div class="main-content mt-20" id="mainContent">
+            <div class="navbar-default mb-20">
+                <form id="form1" >
+                    <div class="form-group">
+                        <label class="control-label">关键词</label>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" name="keyword" value="" placeholder="搜索词"  class="form-control input-order-id">
+                        </div>
+                    </div>
+                    <!--排序规则-->
+                    <input type="button" id="search" class="btn btn-primary" value="搜索"><i class="fa fa-search"></i>
+                </form>
+            </div>
+            <div class="content" id="list"></div>
+        </div>
+
+    </div>
+    <!-- 隐藏区 -->
+    <div style="display:none">
+        <div id="loading">
+            <div class='loading'><img src='index_admin_img/default/loading.gif' alt='loading'></div>
+        </div>
+    </div>
+{/block}
+{block name="script"}
+    <script type="text/javascript" src="index_admin_js/commonCrud.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            //加载第一页
+            var config = {
+                url:controller+'getList'
+            };
+            var getData = $('#form1').serializeObject();
+            getPagingList(config,getData);
+
+            //翻页
+            $('body').on('click','.pager2',function(){
+                var curIndex= $(this).parents('ul.pagination').find('li.active span').text();
+                var selectedPage=$(this).data('page');
+                if(selectedPage=='»'){
+                    curIndex++;
+                    selectedPage=curIndex;
+                }
+                if(selectedPage=='«'){
+                    curIndex--;
+                    selectedPage=curIndex;
+                }
+                config.currentPage = selectedPage;
+                getPagingList(config,getData);
+            });
+            //搜索
+            $('#search').click(function(){
+                config.currentPage = 0;
+                var getData = $('#form1').serializeObject();
+                getPagingList(config,getData);
+            });
+
+            // 管理广告页
+            $('body').on('click','.adManage',function(){
+                var _thisTr = $(this).parents('tr');
+                var url =  module + 'Shortcut/manage/id/' + _thisTr.data('id');
+                location.href = url;
+            });
+        });
+    </script>
+{/block}
