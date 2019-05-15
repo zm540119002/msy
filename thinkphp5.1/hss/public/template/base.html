@@ -32,7 +32,7 @@
         }else if(param.data.status==1){
             //已登录
             if(param.data.data.code == '1000'){
-                param.func();
+                return true;
             }else if(param.data.data.code == '1001'){
                 param.func();
             }else if(param.data.data.code=='1002'){
