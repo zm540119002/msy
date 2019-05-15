@@ -54,12 +54,7 @@
 				success:function(index){
 					let vm = new Vue({
 						el: '#loginDialogRoot',
-						render (h) {
-							console.log(h);
-						},
-						renderError (h, err) {
-							return h('pre', { style: { color: 'red' }}, err.stack)
-						},
+								render:h=>h(123),
 						data:function(){
 							return {};
 						},methods: {
