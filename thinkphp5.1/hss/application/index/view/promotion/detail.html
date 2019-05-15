@@ -36,33 +36,31 @@
 {block name="login_dialog"}
 	{include file="../../api/public/vue/components/login.html" /}
 	<div id="loginDialogTpl">
-
+		<div id="loginDialogRoot">
+			<login
+			></login>
+		</div>
 	</div>
-<div id="loginDialogRoot">
-	<login
-	></login>
-</div>
 	<script type="text/javascript">
 		$(function(){
-			new Vue({
-				el: '#loginDialogRoot',
-				data:function(){
-					return {};
-				},methods: {
-				}
-			});
 		});
 		//登录-弹窗触发
 		function loginDialogTrigger(){
-			var content = $('.userInfoWrapper').html();
-			var content3 = $('#loginDialogTpl').html();
+			var content = $('#loginDialogTpl').html();
 			layer.open({
 				className:'loginLayer',
 				type:1,
 				shadeClose:false,
-				content:content3,
+				content:content,
 				btn:[''],
 				success:function(index){
+					new Vue({
+						el: '#loginDialogRoot',
+						data:function(){
+							return {};
+						},methods: {
+						}
+					});
 				},
 				yes:function(index){
 					layer.close(index);
