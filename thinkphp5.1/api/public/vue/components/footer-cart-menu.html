@@ -1,4 +1,4 @@
-<style>
+<style lang="less" scoped>
     .product-select{
         border-bottom:none;
         padding:0.12rem;
@@ -178,7 +178,7 @@
                     <span class="cart_num" v-else></span>
                 </div>
                 <!-- 加入购物车 -->
-                <div v-else-if="menu.class.indexOf('add_cart')!==-1" @click="addCart">
+                <div v-else-if="menu.class.indexOf('add_cart')!==-1" @click="asyncVerify">
                     <span class="s_i"></span>
                 </div>
                 <!-- 立即购买 -->
@@ -230,9 +230,9 @@
                         if(jump_url){
                             location.href = jump_url;
                         }
-                    },addCart:function(event){
-                        let obj = $(event.currentTarget);
-                        let jump_url = obj.parent().data('jump_url');
+                    },asyncVerify:function(event){
+                        let _this = $(event.currentTarget);
+                        let jump_url = _this.parent().data('jump_url');
                         //异步验证
                         let postData = {
                             'goodsList':this.postData.productList
@@ -255,11 +255,11 @@
                                     let param = {
                                         data:data,
                                         func:function(){
-                                            obj.click();
+                                            _this.click();
                                         }
                                     };
                                     if(async_verify_judge(param)===true){
-                                        dialog.success('加入购物车成功！');
+                                        dialog.success(data.info);
                                     }
                                 }
                             });
@@ -267,6 +267,7 @@
                             dialog.error('请选择商品！');
                         }
                     },buyNow:function(){
+                        loginDialogTrigger();
                     },confirmOrder:function(){
                         console.log('confirmOrder');
                     },editProductList:function(param){

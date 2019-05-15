@@ -28,9 +28,9 @@ return [
             'a'    => 'href='.url('Index/index'),
             'icon' => 'store',
         ],
-        'Franchise/index' => [
+        'Index/franchiseIndex' => [
             'name' => '加盟店家',
-            'a'    => 'href='.url('Index/FranchiseIndex'),
+            'a'    => 'href='.url('Index/franchiseIndex'),
 //            'a'    => "href=javascript:void(0) class='async_login' data-jump_url=".url('Franchise/index'),
             'icon' => 'practitioners',
         ],
@@ -40,9 +40,9 @@ return [
             'a'    => "href=javascript:void(0) class='async_login' data-jump_url=".url('CityPartner/index'),
             'icon' => 'business',
         ],
-        'Cart/manage' => [
+        'Index/cartManage' => [
             'name' => '采购车',
-            'a'    => 'href='.url('Index/cartIndex'),
+            'a'    => 'href='.url('Index/cartManage'),
 //            'a'    => "href=javascript:void(0) class='my_bottom_cart async_login' data-jump_url=".url('Cart/manage'),
             'icon' => 'cart',
         ],

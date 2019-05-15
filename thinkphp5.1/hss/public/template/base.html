@@ -2,5 +2,40 @@
 {block name="css-customize"}
 <link rel="stylesheet" href="public_css/project_public.css">
 {/block}
-<!-- 公共模块-->
-{block name="common"}{/block}
+<!-- 项目公共模块-->
+{block name="common-base"}{/block}
+{block name="pre-script"}
+<script type="text/javascript">
+    //用于后面判断是否登录
+    var user_id = "{$user.id}";
+</script>
+{/block}
+<!-- 自定义js -->
+{block name="suffix-script"}
+<script type="text/javascript" src="api_common_js/dialog.js"></script>
+<script type="text/javascript" src="api_common_js/paging.js"></script>
+<script type="text/javascript">
+    //异步验证判断
+    function async_verify_judge(param){
+        if(param.data.status==0){
+            if(param.data.data.code == '1001'){
+                loginBackFunction = param.func;
+                loginDialog();
+            }else if(param.data.data.code=='1002'){
+            }else if(param.data.data.code=='1003'){
+            }else{
+                dialog.error(param.data.info);
+            }
+        }else if(param.data.status==1){
+            if(param.data.data.code == '1001'){
+            }else if(param.data.data.code=='1002'){
+            }else if(param.data.data.code=='1003'){
+            }else{
+                return true;
+            }
+        }else{
+            return true;
+        }
+    }
+</script>
+{/block}

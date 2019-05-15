@@ -1,4 +1,12 @@
 {extend name="template/base.html" /}
+{block name="css-customize"}
+<link rel="stylesheet" href="public_css/project_public.css">
+<style>
+.group_cart_nav{
+	bottom:0.88rem;
+}
+</style>
+{/block}
 {block name="content"}
 <section class="no_cart_data" style="display:none;">
 	<li class="no_data">
@@ -6,9 +14,6 @@
 	</li>
 </section>
 <article class="f24">
-	<section class="shopping_header_title header_title separation-line">
-		<h2>购物车</h2>
-	</section>
 	<ul class="cart_goods_list" id="list">
 	</ul>
 <!--	<section id="no_data">
@@ -16,7 +21,7 @@
 			<p>注：采购车里超过7天未结算的商品会被系统自动清理</p>
 		</div>
 	</section>-->
-	<div class="project_wrapper">
+	<div class="project_wrapper content_main content-padding">
 		<div class="mod-part-title">
 			<div class="mod-part-title-wrap">
 				<span class="icon-title left"></span>
@@ -69,7 +74,6 @@
 	};
 
 	$(function(){
-		var user_id = '{$user.id}';
 		// 初始化购物车商品
 		if(user_id){
 			getPagingList(config,postData);
@@ -105,8 +109,5 @@
 			}
 		});
 	});
-
-
-
 </script>
 {/block}

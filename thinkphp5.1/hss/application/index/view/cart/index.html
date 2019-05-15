@@ -6,8 +6,9 @@
 	</li>
 </section>
 <article class="f24">
-	<section class="shopping_header_title header_title separation-line">
-		<h2>购物车</h2>
+	<section class="header_title separation-line">
+		<a href="javascript:void(0);" class="back_prev_page" data-jump_url="{:url('Mine/index')}"></a>
+		<h2 class="f24">购物车</h2>
 	</section>
 <!--	<section id="no_data">
 		<div class="cart_data_empty">
@@ -36,19 +37,7 @@
 		pageType:'index'
 	};
 
-	// 新零售商品获取配置
-	var config_1 = {
-		url:module+'Goods/getList',
-		requestEnd:false,
-		loadTrigger:false,
-		currentPage:1,
-		container:$("#goodsList")
-	};
-	var postData_1 = {
-		pageSize:10,
-		pageType:'index',
-		is_selection:1
-	};
+
 
 	$(function(){
 		var user_id = '{$user.id}';
@@ -77,15 +66,7 @@
 			}
 		});
 
-		//初始化零售商品
-		getPagingList(config_1,postData_1);
-		//下拉加载
-		$(window).on('scroll',function(){
-			if(config_1.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
-				config_1.loadTrigger = false;
-				getPagingList(config_1,postData_1);
-			}
-		});
+
 	});
 
 

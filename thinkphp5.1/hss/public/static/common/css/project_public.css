@@ -4399,7 +4399,7 @@ select[name="nodeIds"]{
 .news_list_wrapper{
     height:.6rem;
     overflow:hidden;
-    padding:0 .55rem 0 1.8rem;
+    padding:0 .55rem 0 1.4rem;
 }
 .scroll_news .news_item{
     height:.5rem;
@@ -4425,12 +4425,15 @@ select[name="nodeIds"]{
     border-left:1px solid #d9d9d9;
 }
 .customer_list_wrapper{
-    height:1.2rem;
+    height:1rem;
     overflow:hidden;
 }
 .customer_list .customer_item{
     height:;
     line-height:;
+}
+.customer_item span{
+    font-size:0.20rem;
 }
 .new_share_wrap{
     background:#C9A063;

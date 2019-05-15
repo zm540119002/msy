@@ -71,12 +71,24 @@ class Index extends \common\controller\Base{
 
     }
 
-    // 有结算页面
+    // 只有结算页面
     public function cartIndex(){
         if(request()->isAjax()){
         }else{
             $unlockingFooterCart = unlockingFooterCartConfig([10,0,9]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
+            return $this->fetch('cart/index');
+        }
+    }
+
+    // 导航页-结算
+    public function cartManage(){
+        if(request()->isAjax()){
+        }else{
+            $unlockingFooterCart = unlockingFooterCartConfig([10,0,9]);
+            $this->assign('unlockingFooterCart', $unlockingFooterCart);
+            // 底部菜单，见配置文件custom.footer_menu
+            $this->assign('currentPage',request()->controller().'/'.request()->action());
             return $this->fetch('cart/manage');
         }
     }
