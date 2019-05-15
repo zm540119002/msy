@@ -62,10 +62,6 @@
 				btn:[''],
 				success:function(index){
 					console.log(index);
-					//触发-切换当前-事件
-					bus.$emit('switchCurrent',param);
-					//触发-登录-事件
-					bus.$emit('login',param);
 				},
 				yes:function(index){
 					layer.close(index);
