@@ -48,20 +48,6 @@
 						<div class="apply-items">
 							<input type="tel" class="mobile " name="mobile" value="{$factoryInfo.mobile|default=''}" placeholder="手机号码">
 						</div>
-						<div class="express-area ">
-							<a id="expressArea" href="javascript:void(0)" class="f24 form-group box-flex">
-								<label class="form-label">选择地区：</label>
-								{empty name="address"}
-									<div class="area_address">省 &gt; 市 &gt; 区/县</div>
-									{else /}
-									<div class="area_address"></div>
-								{/empty}
-								<input type="hidden"  data-key="" value="" class="area-address-name" >
-							</a>
-						</div>
-						<div class="apply-items">
-							<input type="text" class="" name="detail_address" value="" placeholder="详细地址">
-						</div>
 						<a href="javascript:void(0);" class="one-step step">下一步</a>
 					</form>
 				</div>
