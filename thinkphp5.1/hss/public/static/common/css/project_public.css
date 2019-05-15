@@ -1894,6 +1894,10 @@ background-position: 0 -27px;
     background:#fff url(../../common/img/base_info.png) no-repeat center 0;
     background-size:0.68rem auto;
 }
+.weui-flex-item .search_city{
+    background:#fff url(../../common/img/search_city.png) no-repeat center 0;
+    background-size:0.68rem auto;
+}
 .weui-flex-item.current .search_city{
     background:#fff url(../../common/img/search_city.png) no-repeat center 0;
     background-size:0.68rem auto;
