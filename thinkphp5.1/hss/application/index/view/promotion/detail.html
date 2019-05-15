@@ -36,7 +36,6 @@
 {block name="login_dialog"}
 	{include file="../../api/public/vue/components/login.html" /}
 	<div id="loginDialogTpl">
-
 	</div>
 	<div id="tmp" style="display: none">
 		<div id="loginDialogRoot">
@@ -65,7 +64,8 @@
 				content:content,
 				btn:[''],
 				success:function(index){
-					document.getElementById('loginDialogTpl').appendChild(vm_login.$el)
+					$('.loginLayer').find('.layui-m-layercont').append($('#tmp').html());
+//					document.getElementById('loginDialogTpl').appendChild(vm_login.$el)
 				},
 				yes:function(index){
 					layer.close(index);
