@@ -260,4 +260,14 @@ class Cart extends \common\controller\UserBase {
             return errorMsg('失败');
         }
     }
+
+    public function getCartTotalNum(){
+        //统计购物车商品数量
+        $user = checkLogin();
+        if($user){
+            $modelCart = new \app\index\model\Cart();
+            $totalNum = $modelCart->where(['status'=>0,'user_id'=>$user['id']])->sum('num');
+            $this -> assign('total_num',$totalNum);
+        }
+    }
 }
