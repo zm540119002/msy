@@ -35,21 +35,18 @@
 {/block}
 {block name="login_dialog"}
 	{include file="../../api/public/vue/components/login.html" /}
-	<div id="loginDialogTpl">
-	</div>
-	<div id="tmp" style="display: none">
+	<div id="loginDialogTpl" style="display: none">
 		<div id="loginDialogRoot">
-			<component :is="view" ></component>
+			<login
+			></login>
 		</div>
 	</div>
 	<script type="text/javascript">
 		$(function(){
-			var vm_login = new Vue({
+			new Vue({
 				el:'#loginDialogRoot',
 				data:function(){
-					return {
-						view:component_login
-					};
+					return {};
 				},methods: {
 				}
 			});
@@ -64,8 +61,7 @@
 				content:content,
 				btn:[''],
 				success:function(index){
-					$('.loginLayer').find('.layui-m-layercont').append($('#tmp').html());
-//					document.getElementById('loginDialogTpl').appendChild(vm_login.$el)
+					console.log(index);
 				},
 				yes:function(index){
 					layer.close(index);
