@@ -2,21 +2,29 @@
 namespace app\index_admin\controller;
 
 /**
- * 项目控制器基类
+ * 广告控制器基类
+ * ad,advertising,advert 单词 广告插件会拦截
  */
-class Project extends Base {
+class Shortcut extends Base {
 
     protected $obj;
 
     protected $beforeActionList = [
-        'currentModelClass'  =>  ['only'=>'edit,setInfo,getList'],
+        'currentModelClass'  =>  ['only'=>'edit,setInfo,getList,del'],
     ];
 
     protected  function currentModelClass(){
-        $this->obj = new \app\index_admin\model\Project();
+        $this->obj = new \app\index_admin\model\Shortcut();
     }
 
     public function manage(){
+        $id = input('id/d');
+
+        if(!$id){
+            $this->errorMsg('参数错误');
+        }
+
+        $this->assign('pid',$id);
         return $this->fetch('manage');
     }
 
@@ -26,33 +34,34 @@ class Project extends Base {
      */
     public function edit(){
         $model = $this->obj;
+        $pid = input('param.pid/d');
+        $this->assign('pid',$pid);
+
+        if(!$pid){
+            $this->errorMsg('参数错误');
+        }
 
         if(!request()->isPost()){
             //要修改的方案
             if($id = input('param.id/d')){
+
                 $condition = ['where' => [['id','=',$id]]];
                 $info = $model->getInfo($condition);
-                $info['intro'] = htmlspecialchars_decode($info['intro']);
-                $info['remarks'] = htmlspecialchars_decode($info['remarks']);
-                $info['description'] = htmlspecialchars_decode($info['description']);
 
                 $this->assign('info',$info);
+
             }
             return $this->fetch();
 
         }else{
             // 基础处理
             $data = input('post.');
-            unset($data['editorValue']);
+            process_upload_files($data,['thumb_img'],'shortcut',false);
+            htmlspecialchars_addslashes($data,['ad_link']);
 
-            replace_splitter($data,['tag']);
-            process_upload_files($data,['thumb_img','video'],'project',false);
-            process_upload_files($data,['main_img','process_img','detail_img'],'project');
-            htmlspecialchars_addslashes($data,['intro','remarks','description']);
-
-            $data['title'] = $data['name'];
             $data['update_time'] = time();
-            $data['audit'] = 1; // 暂时没有审核，先固定
+            $data['ad_position_id'] = input('pid/d');
+            $data['sort'] = input('sort/d');
 
             if(isset($data['id']) && $id=input('post.id/d')){//修改
                 // 编辑
@@ -66,25 +75,6 @@ class Project extends Base {
                 if($info['thumb_img']){
                     delImgFromPaths($info['thumb_img'],$data['thumb_img']);
                 }
-                if($info['video']){
-                    delImgFromPaths($info['video'],$data['video']);
-                }
-                if($info['main_img']){
-                    $oldImgArr = explode(',',$info['main_img']);
-                    $newImgArr = explode(',',$data['main_img']);
-                    delImgFromPaths($oldImgArr,$newImgArr);
-                }
-                if($info['process_img']){
-                    $oldImgArr = explode(',',$info['process_img']);
-                    $newImgArr = explode(',',$data['process_img']);
-                    delImgFromPaths($oldImgArr,$newImgArr);
-                }
-                if($info['detail_img']){
-                    $oldImgArr = explode(',',$info['process_img']);
-                    $newImgArr = explode(',',$data['process_img']);
-                    delImgFromPaths($oldImgArr,$newImgArr);
-                }
-
 
             } else{
                 //新增
@@ -127,16 +117,23 @@ class Project extends Base {
      */
     public function getList(){
 
-        $where[] = ['status','=',0];
-        // 条件
-        $keyword = input('get.keyword/s');
-        if($keyword) $where[] = ['name','like', '%' . trim($keyword) . '%'];
+        $pid = input('id/d');
+
+        if(!$pid){
+            $this->errorMsg('参数错误');
+        }
 
         $condition = [
-            'where'=>$where,
-            'field'=>['id','name','thumb_img','main_img','intro','shelf_status','sort','create_time','is_selection','video'],
-            'order'=>['id'=>'desc', 'sort'=>'desc',],
+            'field' => ['id','name','sort','shelf_status'],
+            'where' => [
+                ['ad_position_id','=',$pid],
+                ['status','=',0],
+            ],
         ];
+
+        $keyword = input('get.keyword/s');
+        if($keyword) $condition['where'] = ['name','like', '%' . trim($keyword) . '%'];
+
         $list = $this->obj->pageQuery($condition);
         $this->assign('list',$list);
 
@@ -154,33 +151,15 @@ class Project extends Base {
         if(!input('?post.id')&&!input('?post.ids'))  return errorMsg('失败');
 
         $condition = array();
-        $where     = array();
+
         if($id = input('post.id/d')){
             $condition = [['id','=',$id]];
-            $where = [['project_id','=',$id]];
         }
         if($ids = input('post.ids/a')){
             $condition = [['id','in',$ids]];
-            $where = [['project_id','in',$ids]];
         }
 
-        $model = new \app\index_admin\model\Project();
-
-        // 事务
-        $model->startTrans();
-
-        try {
-            $result= $model->del($condition);
-            $model = new \app\index_admin\model\ProjectPromotion();
-            $model->del($where,false);
-
-            $model->commit();
-
-        } catch (\Exception $e) {
-            // 回滚事务
-            $model->rollback();
-            return errorMsg('失败');
-        }
+        $result= $this->obj->del($condition);
 
         return $result;
     }

@@ -1,0 +1,97 @@
+{extend name="template/admin_pc/base.html" /}
+{block name="content"}
+<div class="page-container">
+    <form class="form form-horizontal" id="form1">
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>广告名称：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$info.name}" placeholder="" name="name">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>广告链接：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$info.ad_link|default='#'}" placeholder="没有填 #" name="ad_link">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2">排序：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$info.sort|default=0}" placeholder="" name="sort">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>广告图：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <p class="f20 picture-tipc-box"><span class="friend-tipc">*注意</span>：必须上传图片(格式为jpg、jpeg、png、gif)</p>
+                <div class="upload-picture-module f24">
+                    <div>
+                        <div class="picture-module">
+                            <input type="file" class="uploadImg uploadSingleImg" name="">
+                            <img class="upload_img " src="{:show_img_handle($info.thumb_img,false)}" />
+                            <input type="hidden" class="layer-thumbnail-picture img"  value="{$info.thumb_img}" name="thumb_img"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row cl">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+                <input type="hidden" name="id" value="{$info.id}">
+                <input type="hidden" name="pid" value="{$pid}">
+                <button class="btn btn-primary radius button_save_black_4" type="button"><i class="Hui-iconfont"></i> 提交</button>
+                <button onclick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+            </div>
+        </div>
+    </form>
+</div>
+{/block}
+
+
+{block name="script"}
+<!-- 配置文件 -->
+<script type="text/javascript" src="hui_lib/Ueditor/ueditor.config.js"></script>
+<!-- 编辑器源码文件 -->
+<script type="text/javascript" src="hui_lib/Ueditor/ueditor.all.js"></script>
+<script type="text/javascript" charset="utf-8" src="hui_lib/Ueditor/lang/zh-cn/zh-cn.js"></script>
+<script src="https://cdn.bootcss.com/html5media/1.1.8/html5media.min.js"></script>
+<script type="text/javascript" src="api_common_js/admin/uploadSingleImg.js"></script>
+<!-- 实例化编辑器 -->
+<script type="text/javascript">
+    $(function(){
+        // 表单认证
+        $('.button_save_black_4').on('click',function(){
+            var postData = $('#form1').serializeObject();
+            var content='';
+            if(!postData.name){
+                content='名称不能为空';
+            }else if(!postData.thumb_img){
+                content='图片不能为空';
+            }else if(!postData.ad_link){
+                content='链接不能为空';
+            }
+            if(content){
+                dialog.error(content);
+                return false;
+            }
+
+            var url = controller +'edit';
+            $.post(url,postData,function(msg){
+                dialog.msg(msg,'',function () {
+                    if(msg.status){
+                        // 提交后关闭，然后刷新父窗口
+                        var index = parent.layer.getFrameIndex(window.name);   //先得到当前iframe层的索引
+                        parent.layer.close(index);
+                        //window.parent.location.reload();
+                    }
+                });
+            });
+
+        });
+        //返回
+        $('.button_save_black').click(function(){
+            location.href = controller + '/manage';
+        });
+    });
+</script>
+{/block}
