@@ -39,13 +39,13 @@
 		var login_success_callback = function (param){
 			console.log(param);
 			//异步验证判断
-			let param = {
+			let param2 = {
 				data:param,
 				func:function(){
 					$('a.add_cart').click();
 				}
 			};
-			if(async_verify_judge(param)===true){
+			if(async_verify_judge(param2)===true){
 				dialog.success(param.info);
 			}
 			layer.close(param.index);
