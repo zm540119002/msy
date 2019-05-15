@@ -83,8 +83,8 @@
                 };
             },
             methods: {
-                switchCurrent:function(obj){
-                    let _thisLi = obj;
+                switchCurrent:function(_thisLi){
+                    console.log(_thisLi);
                     _thisLi.length && _thisLi.addClass("current").siblings().removeClass("current");
                     let _thisIndex = _thisLi.index();
                     $.each(_thisLi.parents('.userInfoWrapper').find('form'),function(index){
