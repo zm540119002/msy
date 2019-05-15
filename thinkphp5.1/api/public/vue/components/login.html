@@ -83,7 +83,6 @@
             },
             methods: {
                 switchCurrent:function(event){
-                    console.log(1111);
                     let _thisLi = $(event.currentTarget);
                     _thisLi.length && _thisLi.addClass("current").siblings().removeClass("current");
                     let _thisIndex = _thisLi.index();
