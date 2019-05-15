@@ -51,27 +51,50 @@
 				}
 			});
 		});
+		function login_success_callback(param){
+			layer.close(param.index);
+		}function register_success_callback(param){
+			layer.close(param.index);
+		}
 		//登录-弹窗触发
 		function loginDialogTrigger(){
 			var content = $('#loginDialogTpl').html();
-			layer.open({
+			loginDialogTriggerLayer = layer.open({
 				className:'loginLayer',
 				type:1,
 				shadeClose:false,
 				content:content,
 				btn:[''],
 				success:function(index){
+					let _index = index;
 					$('body').on('click','.loginLayer .switch_current',function(){
 						//触发-切换当前-事件
-						bus.$emit('switchCurrent',$(this));
+						let param = {
+							obj:$(this)
+						};
+						bus.$emit('switchCurrent',param);
 					});
 					$('body').on('click','.loginLayer .btn_login',function(){
 						//触发-登录-事件
-						bus.$emit('login');
+						let login_success_callback_param = {
+							index:_index
+						};
+						let param = {
+							login_success_callback_param:login_success_callback_param,
+							login_success_callback:login_success_callback
+						};
+						bus.$emit('login',param);
 					});
 					$('body').on('click','.loginLayer .btn_register',function(){
 						//触发-注册-事件
-						bus.$emit('register');
+						let register_success_callback_param = {
+							index:_index
+						};
+						let param = {
+							register_success_callback_param:register_success_callback_param,
+							register_success_callback:register_success_callback
+						};
+						bus.$emit('register',param);
 					});
 				},yes:function(index){
 					layer.close(index);

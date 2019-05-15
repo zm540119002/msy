@@ -64,7 +64,6 @@
             template:'#login_tpl',
             props: {
                 login_succeed_call_back: {type: Function,default: function(param){
-                    console.log('成功');
                     dialog.success('成功');
                 }},login_failed_call_back: {type: Function,default: function(param){
                     dialog.error(param.info);
@@ -84,7 +83,8 @@
                 };
             },
             methods: {
-                switchCurrent:function(_thisLi){
+                switchCurrent:function(param){
+                    let _thisLi = param.obj;
                     _thisLi.length && _thisLi.addClass("current").siblings().removeClass("current");
                     let _thisIndex = _thisLi.index();
                     console.log(_thisIndex);
@@ -93,7 +93,7 @@
                             $(this).addClass("show").siblings().removeClass("show");
                         }
                     });
-                },login:function(){
+                },login:function(param){
                     let content='';
                     if(!register.phoneCheck(this.postData.mobile_phone)){
                         content='请输入正确手机号码';
@@ -122,11 +122,11 @@
                             if(data.status==0){
                                 _this.login_failed_call_back(data);
                             }else if(data.status==1){
-                                _this.login_succeed_call_back(data);
+                                param.login_success_callback(param.login_success_callback_param);
                             }
                         }
                     });
-                },register:function(){
+                },register:function(param){
                     let content='';
                     if(!register.phoneCheck(this.postData.mobile_phone)){
                         content='请输入正确手机号码';
@@ -165,16 +165,16 @@
             },created:function(){
                 let _this = this;
                 //监听-切换当前-事件
-                bus.$on('switchCurrent', function(obj){
-                    _this.switchCurrent(obj);
+                bus.$on('switchCurrent', function(param){
+                    _this.switchCurrent(param);
                 });
                 //监听-登录-事件
-                bus.$on('login', function(){
-                    _this.login();
+                bus.$on('login', function(param){
+                    _this.login(param);
                 });
                 //监听-注册-事件
-                bus.$on('register', function(){
-                    _this.register();
+                bus.$on('register', function(param){
+                    _this.register(param);
                 });
             }
         });
