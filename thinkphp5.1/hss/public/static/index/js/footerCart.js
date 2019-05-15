@@ -120,12 +120,12 @@ $(function () {
     //初始化购物车数量
     var total_num = 0;
     if(user_id){
-         total_num = "{$total_num}";
+         total_num = 0;
     }else{
          total_num = cart.getGoodsTotal();
 
     }
-    $('footer').find('.cart_num').addClass('cur');
+    // $('footer').find('.cart_num').addClass('cur');
     $('footer').find('.add_num').text(total_num).addClass('current');
     //加
     $('body').on('click','.gplus',function(){
