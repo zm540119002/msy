@@ -118,13 +118,14 @@ cart = {
 
 $(function () {
     //初始化购物车数量
-    console.log(user_id);
+    var total_num = 0;
     if(user_id){
-        var total_num = cart.getGoodsTotal();
+         total_num = 2;
     }else{
-        var total_num = 0;
+         total_num = cart.getGoodsTotal();
+
     }
-    $('footer').find('.cart_num').addClass('cur');
+    // $('footer').find('.cart_num').addClass('cur');
     $('footer').find('.add_num').text(total_num).addClass('current');
     //加
     $('body').on('click','.gplus',function(){
@@ -659,7 +660,7 @@ function delCart(postData,type,obj) {
 }
 
 /**
- * 登录加入购物车
+ * 登录状态加入购物车
  * @param postData
  */
 function addCart(postData) {
