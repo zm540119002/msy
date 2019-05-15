@@ -53,8 +53,19 @@
 				btn:[''],
 				success:function(index){
 					let vm = new Vue({
-								render:h=>h(vm_login)
-					}).$mount("#loginDialogRoot");
+						el: '#loginDialogRoot',
+						componets: {
+							component_login:component_login
+						},
+						render:function(func){
+							console.log(func);
+							console.log(component_login);
+						},
+						data:function(){
+							return {};
+						},methods: {
+						}
+					});
 				},
 				yes:function(index){
 					layer.close(index);
