@@ -116,9 +116,17 @@ cart = {
     
 };
 
+
+
 $(function () {
-    //计算商品列表总价
-    //calculateTotalPrice();
+    //初始化购物车数量
+    if(user_id){
+    }else{
+        total_num = cart.getGoodsTotal();
+
+    }
+    // $('footer').find('.cart_num').addClass('cur');
+    $('footer').find('.add_num').text(total_num).addClass('current');
     //加
     $('body').on('click','.gplus',function(){
         var incrementObj={};
@@ -259,7 +267,7 @@ $(function () {
     });
     //购物车列表页
     $('body').on('click','.add_cart_icon',function(){
-        location.href = module + 'Index/cartIndex';
+        location.href = module + 'Index/cartManage';
     });
     //去结算 生成订单
     $('body').on('click','.settlement',function(){
@@ -652,7 +660,7 @@ function delCart(postData,type,obj) {
 }
 
 /**
- * 登录加入购物车
+ * 登录状态加入购物车
  * @param postData
  */
 function addCart(postData) {
@@ -678,29 +686,17 @@ function addCart(postData) {
             _this.removeClass("nodisabled");//防止重复提交
             if(data.status==0){
                 dialog.error(data.info);
-            }
-            else if(data.code==1 && data.data=='no_login'){
-                loginDialog();
-                loginBackFunction = addCart;
-                loginBackFunctionParameter = postData;
-                return false;
-            }
-            else{
+            } else{
                 dialog.success(data.info);
                 var num = 0;
-
                 $.each(lis,function(index,val){
                     var buyType=$(this).data('buy_type');
                     if(buyType==1){
                         num += parseInt($(this).find('.gshopping_count').val());
                     }
                 });
-                $('footer').find('.cart_num').addClass('cur');
-                $('footer').find('.add_num').text('+'+num).addClass('current');
-                setTimeout(function(){
-                    $('.add_num').removeClass('current');
-                },2000)
-
+                total_num = parseInt(total_num) + parseInt(num);
+                $('footer').find('.add_num').text(total_num).addClass('current');
             }
         }
     });

@@ -25,7 +25,7 @@ return [
     ],'success' => [
         'login' => [
             'code' => '1001',
-            'msg' => '登录成功！',
+            'msg' => '已登录！',
         ],'empower' => [
             'code' => '1002',
             'msg' => '已授权！',
