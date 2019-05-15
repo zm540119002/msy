@@ -11,7 +11,7 @@
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>广告链接：</label>
             <div class="formControls col-xs-8 col-sm-9">
-                <input type="text" class="input-text" value="{$info.ad_link}" placeholder="" name="ad_link">
+                <input type="text" class="input-text" value="{$info.ad_link|default='#'}" placeholder="没有填 #" name="ad_link">
             </div>
         </div>
         <div class="row cl">

@@ -124,7 +124,7 @@ class Shortcut extends Base {
         }
 
         $condition = [
-            'field' => ['id','name','shelf_status'],
+            'field' => ['id','name','sort','shelf_status'],
             'where' => [
                 ['ad_position_id','=',$pid],
                 ['status','=',0],
