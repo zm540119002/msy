@@ -1,6 +1,6 @@
 {extend name="template/base.html" /}
 {block name="content"}
-<article class="f24 content_main">
+<div class="f24">
 	<section class="slider_banner">
 		<div class="swiper-container-horizontal swiper-container-ios">
 			<div class="swiper-wrapper">
@@ -10,29 +10,41 @@
 			</div>
 		</div>
 	</section>
-	<section class="module-navigation separation-line ">
-		<div class="columns_flex f20 channel_nav store_organize_nav">
-			<a href="{:url('registered')}" class="deployed-deployment current"><span class="union_purchase"></span>资格审核</a>
-			<a href="{:url('store/Manager/index')}" class="store_run"><span class="exclusive"></span>门店管理</a>
-			<a href="{:url('store/Operation/index')}" class="order-management"><span class="classify"></span>创客管理</a>
-			<a href="{:url('store/Order/index')}" class="order-management-change"><span class="purchasers"></span>推文管理</a>
-			<a href="javascript:void(0);" class="my-store"><span class="recharge"></span>C端商城</a>
-		</div>
-	</section>
 	<section class="content-padding">
-		<div>
-			<p>提示：您还不是黑森森城市合伙人，欢迎加入我们！</p>
+		<div class="columns_flex l-r-sides">
+			<div>
+                <span></span>
+                非黑森森加盟店
+            </div>
+            <div>
+                <a href="javascript:void(0)" class="async_login"  data-jump_url="{:url('Franchise/applyFranchise')}">
+                    加盟店资格申请
+                </a>
+                <!--<a href="{:url('Franchise/applyFranchise')}">加盟店资格申请 ></a>-->
+            </div>
 		</div>
-		<div>
-			<img src="public_img/default/no_pic_1000.jpg" alt="" class="common_default_img">
-			<a>进入申请 ></a>
-		</div>
-		<dl>
-			<dt>成为黑森森城市合伙人的好处</dt>
-			<dd>是非成败转头空，青山依旧在，惯看秋月春风。一壶浊酒喜相逢，古今多少事，滚滚长江东逝水，浪花淘尽英雄。 几度夕阳红。白发渔樵</dd>
-		</dl>
+        <ul class="franchise_ul">
+            <li>
+                <a href="" class="right-arrow">
+                    <span class="zh"></span>
+                    免费入驻部署美尚云智慧门店
+                </a>
+            </li>
+            <li>
+                <a href="{:url('Franchise/makersManage')}" class="right-arrow">
+                    <span class="ck"></span>
+                    黑森森加盟店新零售创客管理
+                </a>
+            </li>
+            <li>
+                <a href="" class="right-arrow">
+                    <span class="zc"></span>
+                    黑森森加盟门店众创空间管理
+                </a>
+            </li>
+        </ul>
 	</section>
-</article>
+</div>
 {/block}
 {block name="footer"}
 {include file="template/footer_project.html" /}
