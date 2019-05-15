@@ -35,12 +35,25 @@
 {/block}
 {block name="login_dialog"}
 	{include file="../../api/public/vue/components/login.html" /}
-	<div id="loginDialogTpl" style="display: none">
+	<div id="loginDialogTpl">
+
+	</div>
+	<div id="tmp" style="display: none">
 		<div id="loginDialogRoot">
+			<component :is="view" ></component>
 		</div>
 	</div>
 	<script type="text/javascript">
 		$(function(){
+			var vm_login = new Vue({
+				el:'#loginDialogRoot',
+				data:function(){
+					return {
+						view:component_login
+					};
+				},methods: {
+				}
+			});
 		});
 		//登录-弹窗触发
 		function loginDialogTrigger(){
@@ -52,23 +65,12 @@
 				content:content,
 				btn:[''],
 				success:function(index){
-					let vm = new Vue({
-						el: '#loginDialogRoot',
-								render:h=>h(123),
-						data:function(){
-							return {};
-						},methods: {
-						}
-					});
+					document.getElementById('loginDialogTpl').appendChild(vm_login.$el)
 				},
 				yes:function(index){
 					layer.close(index);
 				}
 			});
-			return false;
-			var content = document.getElementById('loginAndRegister');
-			console.log(content);
-			window.open (content,"newwindow", "height=100, width=400, toolbar =no, menubar=no, scrollbars=no, resizable=no, location=no, status=no");
 		}
 	</script>
 {/block}
