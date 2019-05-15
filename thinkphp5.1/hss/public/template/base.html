@@ -2,9 +2,8 @@
 {block name="css-customize"}
 <link rel="stylesheet" href="public_css/project_public.css">
 {/block}
-
-<!-- 公共模块-->
-{block name="common"}{/block}
+<!-- 项目公共模块-->
+{block name="common-base"}{/block}
 {block name="pre-script"}
 <script type="text/javascript">
     //用于后面判断是否登录
@@ -37,12 +36,6 @@
         }else{
             return true;
         }
-    }
-    //登录-弹窗触发
-    function loginDialogTrigger(){
-        var content = document.getElementById('loginDialog');
-        console.log(content);
-        window.open (content,"newwindow", "height=100, width=400, toolbar =no, menubar=no, scrollbars=no, resizable=no, location=no, status=no");
     }
 </script>
 {/block}

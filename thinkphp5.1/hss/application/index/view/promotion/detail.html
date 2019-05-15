@@ -31,8 +31,46 @@
 </article>
 {/block}
 {block name="common"}
-{include file="../../api/public/vue/components/footer-cart-menu.html" /}
-{include file="../../api/public/vue/components/login.html" /}
+	{include file="../../api/public/vue/components/footer-cart-menu.html" /}
+{/block}
+{block name="login_dialog"}
+	{include file="../../api/public/vue/components/login.html" /}
+	<div id="loginDialogTpl" style="display: none">
+		<div id="loginDialogRoot">
+		</div>
+	</div>
+	<script type="text/javascript">
+		$(function(){
+		});
+		//登录-弹窗触发
+		function loginDialogTrigger(){
+			var content = $('#loginDialogTpl').html();
+			layer.open({
+				className:'loginLayer',
+				type:1,
+				shadeClose:false,
+				content:content,
+				btn:[''],
+				success:function(index){
+					let vm = new Vue({
+						el: '#loginDialogRoot',
+								render:h=>h(123),
+						data:function(){
+							return {};
+						},methods: {
+						}
+					});
+				},
+				yes:function(index){
+					layer.close(index);
+				}
+			});
+			return false;
+			var content = document.getElementById('loginAndRegister');
+			console.log(content);
+			window.open (content,"newwindow", "height=100, width=400, toolbar =no, menubar=no, scrollbars=no, resizable=no, location=no, status=no");
+		}
+	</script>
 {/block}
 {block name="footer"}
 <div id="foot_cart_menu">
