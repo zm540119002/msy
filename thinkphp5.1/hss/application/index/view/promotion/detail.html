@@ -42,6 +42,15 @@
 	</div>
 	<script type="text/javascript">
 		$(function(){
+			let vm = new Vue({
+				el: '#loginDialogRoot',
+				data:function(){
+					return {
+						view:component_login
+					};
+				},methods: {
+				}
+			});
 		});
 		//登录-弹窗触发
 		function loginDialogTrigger(){
@@ -53,24 +62,11 @@
 				content:content,
 				btn:[''],
 				success:function(index){
-					let vm = new Vue({
-						el: '#loginDialogRoot',
-						data:function(){
-							return {
-								view:component_login
-							};
-						},methods: {
-						}
-					});
 				},
 				yes:function(index){
 					layer.close(index);
 				}
 			});
-			return false;
-			var content = document.getElementById('loginAndRegister');
-			console.log(content);
-			window.open (content,"newwindow", "height=100, width=400, toolbar =no, menubar=no, scrollbars=no, resizable=no, location=no, status=no");
 		}
 	</script>
 {/block}
