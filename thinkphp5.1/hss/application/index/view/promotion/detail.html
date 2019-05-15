@@ -52,10 +52,9 @@
 				content:content,
 				btn:[''],
 				success:function(index){
-					let aa = 132;
 					let vm = new Vue({
-								render:h=>h(aa)
-					});
+								render:h=>h(vm_login)
+					}).$mount("#loginDialogRoot");
 				},
 				yes:function(index){
 					layer.close(index);
