@@ -267,7 +267,7 @@ $(function () {
     });
     //购物车列表页
     $('body').on('click','.add_cart_icon',function(){
-        location.href = module + 'Index/cartIndex';
+        location.href = module + 'Index/cartMange';
     });
     //去结算 生成订单
     $('body').on('click','.settlement',function(){
