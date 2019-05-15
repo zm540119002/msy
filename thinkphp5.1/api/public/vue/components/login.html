@@ -93,8 +93,6 @@
                         }
                     });
                 },login:function(param){
-                    console.log(param);
-                    return false;
                     let content='';
                     if(!register.phoneCheck(this.postData.mobile_phone)){
                         content='请输入正确手机号码';
@@ -123,8 +121,8 @@
                             if(data.status==0){
                                 _this.login_failed_call_back(data);
                             }else if(data.status==1){
-                                _this.login_succeed_call_back(data);
-//                                param.login_success_callback(param.login_success_callback_param);
+//                                _this.login_succeed_call_back(data);
+                                param.login_success_callback(param.login_success_callback_param);
                             }
                         }
                     });
