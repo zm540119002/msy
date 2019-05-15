@@ -121,8 +121,14 @@
                             if(data.status==0){
                                 _this.login_failed_call_back(data);
                             }else if(data.status==1){
-//                                _this.login_succeed_call_back(data);
-                                param.login_success_callback(param.login_success_callback_param);
+                                $.extend(param.login_success_callback_param,data);
+                                console.log(param.login_success_callback_param);
+                                return false;
+                                if(param.login_success_callback && $.isFunction(param.login_success_callback)){
+                                    param.login_success_callback(param.login_success_callback_param);
+                                }else{
+                                    _this.login_succeed_call_back(param.login_success_callback_param);
+                                }
                             }
                         }
                     });
