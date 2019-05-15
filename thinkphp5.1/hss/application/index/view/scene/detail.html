@@ -7,14 +7,16 @@
 {block name="content"}
 <article class="f24">
 	<!-- 标题导航 -->
-	<ul class="nav_menu">
-		{volist name="sceneList" id="vo"}
-			<li data-scene-id="{$vo.id}" class="{if $vo.id==$info.id}current{/if}">
-				<a href="{:url(request()->controller().'/'.$vo.display_type,['id'=>$vo.id])}" class="category_nav">{$vo.name}</a>
-			</li>
-		{/volist}
-	</ul>
-
+	<nav style="position:relative;">
+		<a href="javascript:void(0);" class="back_prev_page" data-jump_url=""></a>
+		<ul class="nav_menu">
+			{volist name="sceneList" id="vo"}
+				<li data-scene-id="{$vo.id}" class="{if $vo.id==$info.id}current{/if}">
+					<a href="{:url(request()->controller().'/'.$vo.display_type,['id'=>$vo.id])}" class="category_nav">{$vo.name}</a>
+				</li>
+			{/volist}
+		</ul>
+	</nav>
 	{include file="template/scene_detail.html" /}
 
 	<!-- 内容 -->
