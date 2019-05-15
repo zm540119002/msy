@@ -64,6 +64,7 @@
             template:'#login_tpl',
             props: {
                 login_succeed_call_back: {type: Function,default: function(param){
+                    console.log('成功');
                     dialog.success('成功');
                 }},login_failed_call_back: {type: Function,default: function(param){
                     dialog.error(param.info);
