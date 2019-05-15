@@ -36,6 +36,9 @@
 {block name="login_dialog"}
 	{include file="../../api/public/vue/components/login.html" /}
 	<div id="loginDialogTpl">
+
+	</div>
+	<div id="tmp" style="display: none">
 		<div id="loginDialogRoot">
 			<component :is="view" ></component>
 		</div>
@@ -43,6 +46,7 @@
 	<script type="text/javascript">
 		$(function(){
 			var vm_login = new Vue({
+				el:'#loginDialogRoot',
 				data:function(){
 					return {
 						view:component_login
@@ -61,7 +65,7 @@
 				content:content,
 				btn:[''],
 				success:function(index){
-					vm_login.$mount('#loginDialogRoot');
+					document.getElementById('loginDialogTpl').appendChild(vm_login.$el)
 				},
 				yes:function(index){
 					layer.close(index);
