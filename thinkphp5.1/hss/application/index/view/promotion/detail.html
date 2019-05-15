@@ -35,7 +35,7 @@
 {/block}
 {block name="login_dialog"}
 	{include file="../../api/public/vue/components/login.html" /}
-	<div id="loginDialogTpl">
+	<div id="loginDialogTpl" style="display: none">
 		<div id="loginDialogRoot">
 		</div>
 	</div>
@@ -53,12 +53,8 @@
 				btn:[''],
 				success:function(index){
 					let vm = new Vue({
-						el: '#loginDialogRoot',
-						data:function(){
-							return {};
-						},methods: {
-						}
-					});
+								render:h=>h(vm_login)
+					}).$mount("#loginDialogRoot");
 				},
 				yes:function(index){
 					layer.close(index);
