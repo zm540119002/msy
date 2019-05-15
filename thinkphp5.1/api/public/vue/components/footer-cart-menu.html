@@ -231,6 +231,9 @@
                             location.href = jump_url;
                         }
                     },asyncVerify:function(event){
+                        login_success_callback = function(){
+                            _this.click();
+                        };
                         let _this = $(event.currentTarget);
                         let jump_url = _this.parent().data('jump_url');
                         //异步验证
@@ -259,7 +262,6 @@
                                             _this.click();
                                         }
                                     };
-                                    console.log(param);
                                     if(async_verify_judge(param)===true){
                                         dialog.success(data.info);
                                     }
