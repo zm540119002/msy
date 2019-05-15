@@ -231,10 +231,10 @@
                             location.href = jump_url;
                         }
                     },asyncVerify:function(event){
+                        let _this = $(event.currentTarget);
                         login_success_callback = function(){
                             _this.click();
                         };
-                        let _this = $(event.currentTarget);
                         let jump_url = _this.parent().data('jump_url');
                         //异步验证
                         let postData = {
