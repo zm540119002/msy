@@ -118,11 +118,10 @@ cart = {
 
 $(function () {
     //初始化购物车数量
-    console.log(user_id);
     if(user_id){
         var total_num = cart.getGoodsTotal();
     }else{
-        var total_num = 0;
+        var total_num = '{$total_num}';
     }
     $('footer').find('.cart_num').addClass('cur');
     $('footer').find('.add_num').text(total_num).addClass('current');
@@ -659,7 +658,7 @@ function delCart(postData,type,obj) {
 }
 
 /**
- * 登录加入购物车
+ * 登录状态加入购物车
  * @param postData
  */
 function addCart(postData) {
