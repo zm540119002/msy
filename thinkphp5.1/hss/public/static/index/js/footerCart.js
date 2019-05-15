@@ -120,7 +120,7 @@ $(function () {
     //初始化购物车数量
     var total_num = 0;
     if(user_id){
-         total_num = '{$total_num}';
+         total_num = "{$total_num}";
     }else{
          total_num = cart.getGoodsTotal();
 
