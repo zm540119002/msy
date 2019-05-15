@@ -91,59 +91,11 @@
     text-align: center;
 }
 
-
-.print{
-    background:#ff7aab;
-    color:white;
-    width:30%;
-    margin:.15rem auto 0;
-    text-align: center;
-	padding:3px;
-    font-weight: bold;
-    border-radius:5px;
-}
-
- body.modal-open {
-    position: fixed;
-    width: 100%;
-}
-
-.entry_msy{
-    position:absolute;
-    width: 100%;
-    bottom:0.82rem;
-    left: 0;
-}
-
 .recharge_form input[type="submit"],
 .recharge_form .pay_btn{
     height:100%;
     background: #FF7BAC;
     color:#fff;
-}
-
-.pay_nav li{
-    height:0.68rem;
-    line-height:0.68rem;
-    background: #fff;
-    padding:0 0 0 0.25rem;
-    margin:0 0 0.25rem 0;
-    border-radius:4px;
-    cursor: pointer;
-}
-
-.pay_nav li.current .selected{
-     background-position:0 -0.46rem;
-}
-
-.search_module_bar .search_text {
-    font-size: 12px;
-    width: 85%;
-    /*height: 100%;*/
-    /* line-height: 14px; */
-    box-sizing: border-box;
-    -webkit-box-flex: 1;
-    padding:.15rem 0;
 }
 
 .content_main .list img{
@@ -152,6 +104,7 @@
     /*height: 1.5rem;*/
     /*margin:0 0 0 0.14rem;*/
 }
+
 .list .p_img{
     display:block;
     width:45%;
@@ -161,31 +114,11 @@
     padding-bottom:0;
 }
 
-.goodsInfoLayer .layui-m-layercont{
-    padding:0.35rem 0 0 0;
-    /*padding:10px 0 0 10px;
-
-    position: fixed;
-    width: 100%;
-    background: #fff;
-    left: 0;
-    bottom:0;
-    height: 100%;
-    right: 0;*/
-}
-
 .scroll_news .news_tit{
-    width:1.68rem;
-    height:.6rem;
-    position:absolute;
     top:.15rem;
-    left:.10rem;
-    display:block;
 }
 
 .news_list_wrapper{
-    height:.6rem;
-    overflow:hidden;
     padding:0 .55rem 0 1.4rem;
 }
 
@@ -200,13 +133,9 @@
 
 .mod-part-title .mod-part-title-wrap .icon-title.left {
     background: url(../../common/img/icons/icon_left.png) 0 0 no-repeat;
-    background-size:0.5rem auto;
-    background-position:center;
 }
 .mod-part-title .mod-part-title-wrap .icon-title.right {
     background: url(../../common/img/icons/icon_right.png) 0 0 no-repeat;
-    background-size:0.5rem auto;
-    background-position:center;
 }
 
 .mod_selection .nav {
@@ -219,12 +148,7 @@
 }
 
 .mod_selection_nav li{
-    display:inline-block;
     width:1.5rem;
-    height:.8rem;
-    line-height:.8rem;
-    text-align:center;
-    background-size:100% 100%;
 }
 
 .mid_module_left img{
@@ -236,17 +160,8 @@
 }
 
 .flex_item a span{
-    position:relative;
-    /*width: 30px; */
-    width: 0.48rem;
-    /* height: 25px; */
-    height: 0.56rem;
-    margin: 0 auto;
     background-image: url(../../common/img/icons/my_center_icons.png);
-    background-repeat: no-repeat;
-    /* background-size: 30px 345px; */
     background-size: 0.58rem 9.9rem;
-    display: block;
 }
 
 .flex_item a span.notice{
@@ -273,24 +188,12 @@
 }
 
 .nav_menu li.current a:before {
-    position: absolute;
-    z-index: 1;
-    left: 50%;
-    bottom: -20px;
-    display: inline-block;
-    height: 30px;
     width:16px;
-    background-color: #fff;
-    content: "";
-    transform: scale3d(1, 0.05, 1);
-    transform-origin: center;
-    transition: all 0.5s;
     margin-left: -8px;
 }
 
 .scene_wrapper{
     margin:0.12rem 0 0;
-    overflow:hidden;
 }
 
 .graphic_item_65{
@@ -299,13 +202,9 @@
 }
 
 .list_r .goods_title{
-    overflow:hidden;
-    text-overflow:ellipsis;
-    display:-webkit-box;
-    -webkit-box-orient:vertical;
     -webkit-line-clamp:4;
-    margin:0 0 0.20rem 0;
 }
+
 .img0,.img1,.img2{
     width:33.33333%;
 }
@@ -318,43 +217,34 @@
     width:100%;
     height:100%;
 }
+
 .apply_item .content-label{
     color:#AA0005;
 }
-.wy_list .list li{
-    padding:0.12rem;
-    border:none;
-}
+
 .wy_list li .p_img{
     display:block;
     width:auto;
 }
+
 .wy_list .list li img{
     width:100%;
-}
-
-.sales_comment_wrapper li:last-child{
-     padding:0.12rem;
-    border-bottom:none;
 }
 
 .addressLayer .layui-m-layercont,
 .setBrandLayer .layui-m-layercont{
     height:600px;
-    overflow-x:hidden;
-    overflow-y:auto;
 }
 
 .pay_wrapper{
-    background: #f2f2f2;
     padding:0 0 1rem 0;
 }
 
 .recharge_wallet_item{
     padding:0.12rem 0.12rem 0.15rem 0.20rem;
     background: #fff;
-
 }
+
 .recharge_amount_item{
     background: #fff;
 }
@@ -438,33 +328,11 @@
 }
 
 .bank_transfer_item{
-    padding:0.15rem;
-    background: #fff;
     border:1px solid #d9d9d9;
-}
-
-.chat_item .me .content{
-    margin:0 0.20rem 0 0;
-    background:#22AC38;
-}
-
-@-webkit-keyframes twinkling{    /*透明度由0到1*/
-    0%{
-        opacity:0; /*透明度为0*/
-        }
-    100%{
-        opacity:1; /*透明度为1*/
-
-    }
 }
 
 .count_down_box{
     width:2.05rem;
-    padding:0.05rem 0.18rem 0.05rem 0.12rem;
-    background: #000;
-    color:#fff;
-    border-radius:0.5rem;
-    font-size:0.20rem;
 }
 
 .swiper-list-wrapper a img{width:100%;}
@@ -481,72 +349,14 @@
 .app_wrapper{
     padding:0 0 0.8rem 0;
 }
-.mod_selection{
-    position:relative;
-}
-.mod_selection .nav {
-    /*position: absolute;
-    top: -56px;*/
-    height: .8rem;
-    overflow: hidden;
-    box-sizing: border-box;
-    border-bottom: 1px solid #c1c1c1;
-}
-.chat_selection .nav{
-    top:0;
-}
-.mod_selection_nav{
-    position: relative;
-    width:6.4rem;
-    white-space: nowrap;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    background-color: #fff;
-    box-sizing: border-box;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: .4rem;
-    padding-right: 1rem;
-    left:0;
-}
+
 .mod_selection_nav li{
-    display:inline-block;
     width:1.5rem;
-    height:.8rem;
-    line-height:.8rem;
-    text-align:center;
-    background-size:100% 100%;
 }
 .mod_selection_nav li.active{
     color:#ff0000;
 }
-.mod_selection_more{
-    position: absolute;
-    width: 1rem;
-    height:.8rem;
-    line-height:.8rem;
-    text-align: center;
-    background: #fff;
-    border-left: 1px solid #c1c1c1;
-    z-index: 10;
-    right: 0;
-    top: 0;
-    font-size: .26667rem;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    justify-content: center;
-}
-.mod-selection-more .tab-arrow {
-    width: .4rem;
-    height: .21333rem;
-    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAARBAMAAABOcrPPAAAAGFBMV…7gqJ1ggZCAHSQvmCFEECII+YEkQBIgCZAESAIkAZIAw7/CBxB2EIrc6F0aAAAAAElFTkSuQmCC) no-repeat;
-    background-size: contain;
-}
+
 .project_item.hide{
     display: none;
 }
@@ -554,22 +364,11 @@
     padding:0.15rem;
     border-bottom:1px solid #d9d9d9;
 }
+
 .project_item video,.project_item p img{
     width:100%;
 }
-.money-box{
-    margin:0.15rem 0 0;
-    padding:0.15rem;
-    background: #fff;
-}
-.msy-logo img{
-    display:block;
-    width:50%;
-    margin:0 auto;
-}
-.msy-logo p{
-    text-align: center;
-}
+
 .hot_news_wrapper{
     padding:0.15rem;
     background: #fff;
