@@ -108,7 +108,6 @@ class Cart extends \common\controller\UserBase {
     }
 
     public function addCart(){
-
         if(!request()->isPost()){
             $this->errorMsg('请求方式错误',config('code.error.default'));
         }
@@ -154,7 +153,7 @@ class Cart extends \common\controller\UserBase {
             }
         }
         $model -> commit();
-        $this->successMsg(config('code.success.default.msg'),config('code.success.default'));
+        $this->successMsg('加入购物车成功！',config('code.success.default'));
     }
 
     /**
