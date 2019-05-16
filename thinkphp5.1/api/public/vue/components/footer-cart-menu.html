@@ -257,7 +257,7 @@
                                     //异步验证判断
                                     let param = {
                                         data:data,
-                                        jump_url:data.url?data.url:jump_url,
+                                        jump_url:data.data.url?data.data.url:jump_url,
                                         func:function(){
                                             _this.click();
                                         }

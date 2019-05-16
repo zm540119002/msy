@@ -35,7 +35,8 @@
             }else if(param.data.data.code=='1002'){
                 return false;
             }else if(param.data.data.code=='1003'){
-                dialog.success(param.data.info,param.jump_url);
+                //dialog.success(param.data.info,param.jump_url);
+                location.href=param.jump_url;
                 return false;
             }
             dialog.success(param.data.info);

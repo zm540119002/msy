@@ -94,8 +94,14 @@ class Order extends \common\controller\UserBase
         }
         $modelOrder->commit();
 
-        return $this->successMsg('生成订单成功',config('code.success.default'));
-        //return successMsg('生成订单成功', array('order_sn' => $orderSN));
+        $data = [
+            'code'=> config('code.success.jump.code'),
+            'url' => url('Order/confirmOrder',['order_sn'=>$orderSN]),
+        ];
+/*        p($data);
+        exit;*/
+        return $this->successMsg('生成订单成功',$data);
+        return successMsg('生成订单成功', array('order_sn' => $orderSN));
     }
 
     // 订单确认页
@@ -145,8 +151,14 @@ class Order extends \common\controller\UserBase
             return successMsg( '成功');
 
         }else{
-            $modelOrder = new \app\index\model\Order();
+
+
             $orderSn = input('order_sn/s');
+
+            if(empty($orderSn)){
+                $this->error('没有找到该订单');
+            }
+
             $config = [
                 'where' => [
                     ['o.status', '=', 0],
@@ -161,6 +173,8 @@ class Order extends \common\controller\UserBase
                     'g.headline','g.thumb_img','g.specification', 'g.purchase_unit'
                 ],
             ];
+
+            $modelOrder = new \app\index\model\Order();
             $orderGoodsList = $modelOrder->getList($config);
             if(empty($orderGoodsList)){
                 $this->error('没有找到该订单');
