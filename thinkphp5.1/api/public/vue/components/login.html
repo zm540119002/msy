@@ -64,9 +64,6 @@
         component_login = Vue.component('login', {
             template:'#login_tpl',
             props: {
-                value:{
-                    type:Number
-                },
                 login_succeed_call_back: {type: Function,default: function(param){
                     dialog.success('成功');
                 }},login_failed_call_back: {type: Function,default: function(param){
