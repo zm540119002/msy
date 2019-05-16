@@ -93,7 +93,9 @@ class Order extends \common\controller\UserBase
             return errorMsg('失败');
         }
         $modelOrder->commit();
-        return successMsg('生成订单成功', array('order_sn' => $orderSN));
+
+        return $this->successMsg('生成订单成功',config('code.success.default'));
+        //return successMsg('生成订单成功', array('order_sn' => $orderSN));
     }
 
     // 订单确认页
