@@ -36,11 +36,8 @@
 {block name="login_dialog"}
 	{include file="../../api/public/vue/components/login.html" /}
 	<script type="text/javascript">
-		function login_success_callback(param){
-			console.log(param);
-			layer.close(param.index);
-		}
-		function register_success_callback(param){
+		var login_success_callback_private = function(){};
+		var register_success_callback = function (param){
 			console.log(param);
 			layer.close(param.index);
 		}
@@ -123,6 +120,7 @@
 						}
 					});
 				}
+			},created:function(){
 			}
 		});
 	});

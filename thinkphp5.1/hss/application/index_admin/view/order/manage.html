@@ -1,0 +1,100 @@
+﻿{extend name="template/admin_pc/base.html" /}
+{block name="content"}
+
+<nav class="breadcrumb">
+	<i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 订单管理
+    <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a>
+</nav>
+<div class="page-container">
+    <div class="cl pd-5 bg-1 bk-gray">
+        <!-- 先不要 -->
+      <!--  <span class="r">共有数据：<strong id="count">4</strong> 条</span>-->
+    </div>
+	<div class="main-content mt-20" id="mainContent">
+		<div class="navbar-default mb-20">
+			<form id="form1" >
+				<div class="form-group">
+					<select name="order_status" class="form-control">
+						<option value="" selected="selected">订单状态</option>
+						<option value="1">待付款</option>
+						<option value="2">待收货</option>
+						<option value="3">待评价</option>
+						<option value="4">已完成</option>
+						<option value="5">已取消</option>
+						<option value="6">售后申请</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<select name="type" class="form-control">
+						<option value="">付款方式</option>
+						{foreach $Think.config.custom.pay_code as $k => $vo}
+						<option value="{$k}">{$vo}</option>
+						{/foreach}
+					</select>
+				</div>
+				<div class="form-group">
+					<select name="after_sale_status" class="form-control">
+						<option value="" selected="selected">售后服务</option>
+						<option value="1">待处理</option>
+						<option value="2">已完成</option>
+					</select>
+				</div>
+				<div class="text-c"> 日期范围：
+					<input type="text" onfocus="WdatePicker({ maxDate:'#F{$dp.$D(\'logmax\')||\'%y-%M-%d\'}' })" id="logmin" class="input-text Wdate" style="width:120px;">
+					-
+					<input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'logmin\')}',maxDate:'%y-%M-%d' })" id="logmax" class="input-text Wdate" style="width:120px;">
+				</div>
+
+				<div class="form-group">
+					<div class="input-group">
+						<input type="text" name="keyword" value="" placeholder="订单号"  class="form-control input-order-id">
+					</div>
+				</div>
+				<!--排序规则-->
+				<input type="button" id="search" class="btn btn-primary" value="搜索"><i class="fa fa-search"></i>
+			</form>
+		</div>
+		<div class="content" id="list"></div>
+	</div>
+</div>
+
+{/block}
+{block name="script"}
+<script type="text/javascript" src="index_admin_js/commonCrud.js"></script>
+<script type="text/javascript" src="http://demo.h-ui.net/H-ui.admin/3.1/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript">
+	$(function () {
+		//加载第一页 这个需要配置公用???
+		var config = {
+			url:controller+'getList'
+		};
+		var getData = $('#form1').serializeObject();
+		//getPagingList(config,getData);
+
+		//翻页
+		$('body').on('click','.pager2',function(){
+			var curIndex= $(this).parents('ul.pagination').find('li.active span').text();
+			var selectedPage=$(this).data('page');
+			if(selectedPage=='»'){
+				curIndex++;
+				selectedPage=curIndex;
+			}
+			if(selectedPage=='«'){
+				curIndex--;
+				selectedPage=curIndex;
+			}
+			config.currentPage = selectedPage;
+
+			var getData = $('#form1').serializeObject();
+			getPagingList(config,getData);
+		});
+		//搜索
+		$('#search').click(function(){
+			//config.currentPage = 0;
+			var getData = $('#form1').serializeObject();
+			getPagingList(config,getData);
+		});
+	});
+
+</script>
+{/block}
