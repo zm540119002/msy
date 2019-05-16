@@ -20,7 +20,7 @@
                 <div class="login_item">
                     <div class="columns_flex">
                         <span>中国(+86)</span>
-                        <input class="username user_phone input-filed" type="tel" placeholder="请输入手机号码" v-model.trim="loginPostData.mobile_phone">
+                        <input class="username user_phone input-filed" type="tel" :value="currentValue" @input="handleInput" placeholder="请输入手机号码" >
                     </div>
                 </div>
                 <div class="login_item">
@@ -64,6 +64,9 @@
         component_login = Vue.component('login', {
             template:'#login_tpl',
             props: {
+                value:{
+                    type:Number
+                },
                 login_succeed_call_back: {type: Function,default: function(param){
                     dialog.success('成功');
                 }},login_failed_call_back: {type: Function,default: function(param){
@@ -87,7 +90,16 @@
                     }
                 };
             },
+            computed:{
+                currentValue:function () {
+                    return this.value
+                }
+            },
             methods: {
+                handleInput(event){
+                    let value=event.target.value;
+                    this.$emit('input',value);
+                },
                 switchCurrent:function(param){
                     let _thisLi = param.obj;
                     _thisLi.length && _thisLi.addClass("current").siblings().removeClass("current");
