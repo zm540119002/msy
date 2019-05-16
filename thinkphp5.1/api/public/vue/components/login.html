@@ -94,6 +94,7 @@
                         }
                     });
                 },login:function(param){
+                    console.log(this.postData);
                     let content='';
                     if(!register.phoneCheck(this.postData.mobile_phone)){
                         content='请输入正确手机号码';
@@ -134,6 +135,7 @@
                         }
                     });
                 },register:function(param){
+                    console.log(this.postData);
                     let content='';
                     if(!register.phoneCheck(this.postData.mobile_phone)){
                         content='请输入正确手机号码';
