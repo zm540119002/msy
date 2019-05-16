@@ -28,7 +28,7 @@
                         <input class="input-filed password" type="password" placeholder="密码" v-model.trim="loginPostData.password">
                     </div>
                 </div>
-                <a href="javascript:void(0);" class="entry-button btn_login">登录</a>
+                <a href="javascript:void(0);" class="entry-button btn_login"  @click.native.prevent="login">登录</a>
             </form>
             <form class="loginTab" :class="{show:false}">
                 <div class="error_tipc" ></div>
@@ -190,9 +190,9 @@
                     _this.switchCurrent(param);
                 });
                 //监听-登录-事件
-                bus.$on('login', function(param){
-                    _this.login(param);
-                });
+                // bus.$on('login', function(param){
+                //     _this.login(param);
+                // });
                 //监听-注册-事件
                 bus.$on('register', function(param){
                     _this.register(param);
@@ -237,18 +237,18 @@
             };
             bus.$emit('switchCurrent',param);
         });
-        $('body').on('click','.loginLayer .btn_login',function(){
-            //触发-登录-事件
-            let login_success_callback_param = {
-                index:loginDialogTriggerLayerIndex
-            };
-            let param = {
-                login_success_callback_param:login_success_callback_param,
-                login_success_callback_private:login_success_callback_private,
-                login_success_callback_common:login_success_callback_common
-            };
-            bus.$emit('login',param);
-        });
+        // $('body').on('click','.loginLayer .btn_login',function(){
+        //     //触发-登录-事件
+        //     let login_success_callback_param = {
+        //         index:loginDialogTriggerLayerIndex
+        //     };
+        //     let param = {
+        //         login_success_callback_param:login_success_callback_param,
+        //         login_success_callback_private:login_success_callback_private,
+        //         login_success_callback_common:login_success_callback_common
+        //     };
+        //     bus.$emit('login',param);
+        // });
         $('body').on('click','.loginLayer .btn_register',function(){
             //触发-注册-事件
             let register_success_callback_param = {
