@@ -20,7 +20,7 @@
                 <div class="login_item">
                     <div class="columns_flex">
                         <span>中国(+86)</span>
-                        <input class="username user_phone input-filed" type="tel" placeholder="请输入手机号码" v-model.trim="loginPostData.mobile_phone">
+                        <input class="username user_phone input-filed" id="abc" type="tel" placeholder="请输入手机号码" v-model.trim="loginPostData.mobile_phone">
                     </div>
                 </div>
                 <div class="login_item">
@@ -218,7 +218,7 @@
             content:content,
             btn:[''],
             success:function(index){
-                var input = document.querySelectorAll("input");
+                var input = document.getElementById("abc");
                 input.focus();
             },yes:function(index){
                 layer.close(index);
