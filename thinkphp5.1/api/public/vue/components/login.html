@@ -61,18 +61,6 @@
     var component_login = null;
     $(function(){
         //表单切换
-        
-    });
-</script>
-<div id="loginDialogTpl" style="display: none">
-    <div id="loginDialogRoot">
-        <login></login>
-    </div>
-</div>
-<script type="text/javascript">
-    //登录-弹窗触发
-    var loginDialogTriggerLayerIndex = 0;
-    function loginDialogTrigger(){
         component_login = Vue.component('login', {
             template:'#login_tpl',
             props: {
@@ -217,6 +205,17 @@
                 return {};
             }
         });
+    });
+</script>
+<div id="loginDialogTpl" style="display: none">
+    <div id="loginDialogRoot">
+        <login></login>
+    </div>
+</div>
+<script type="text/javascript">
+    //登录-弹窗触发
+    var loginDialogTriggerLayerIndex = 0;
+    function loginDialogTrigger(){
         var content = $('#loginDialogTpl').html();
         loginDialogTriggerLayerIndex = layer.open({
             className:'loginLayer',
@@ -225,7 +224,12 @@
             content:content,
             btn:[''],
             success:function(index){
-                
+                new Vue({
+            el:'#loginDialogRoot',
+            data:function(){
+                return {};
+            }
+        });
             },yes:function(index){
                 layer.close(index);
             }
