@@ -122,8 +122,10 @@
                                 _this.login_failed_call_back(data);
                             }else if(data.status==1){
                                 $.extend(param.login_success_callback_param,data);
-                                if(param.login_success_callback && $.isFunction(param.login_success_callback)){
-                                    param.login_success_callback(param.login_success_callback_param);
+                                if( (param.login_success_callback_private && $.isFunction(param.login_success_callback_private))
+                                    || (param.login_success_callback_common && $.isFunction(param.login_success_callback_common)) ){
+                                    param.login_success_callback_private && param.login_success_callback_private(param.login_success_callback_param);
+                                    param.login_success_callback_common && param.login_success_callback_common(param.login_success_callback_param);
                                 }else{
                                     _this.login_succeed_call_back(param.login_success_callback_param);
                                 }
@@ -211,6 +213,9 @@
             }
         });
     }
+    var login_success_callback_common = function(param){
+        layer.close(param.index);
+    };
     $(function(){
         $('body').on('click','.loginLayer .switch_current',function(){
             //触发-切换当前-事件
@@ -226,7 +231,8 @@
             };
             let param = {
                 login_success_callback_param:login_success_callback_param,
-                login_success_callback:login_success_callback
+                login_success_callback_private:login_success_callback_private,
+                login_success_callback_common:login_success_callback_common
             };
             bus.$emit('login',param);
         });

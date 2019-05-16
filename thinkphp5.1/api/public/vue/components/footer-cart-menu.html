@@ -182,11 +182,11 @@
                     <span class="s_i"></span>
                 </div>
                 <!-- 立即购买 -->
-                <div v-else-if="menu.class.indexOf('buy_now')!==-1" @click="buyNow">
+                <div v-else-if="menu.class.indexOf('buy_now')!==-1" @click="asyncVerify">
                     <span class="s_i"></span>
                 </div>
                 <!-- 提交订单 -->
-                <div v-else-if="menu.class.indexOf('confirm_order')!==-1" @click="confirmOrder">
+                <div v-else-if="menu.class.indexOf('confirm_order')!==-1" @click="asyncVerify">
                     <span class="s_i"></span>
                 </div>
                 <!-- 默认 -->
@@ -232,6 +232,9 @@
                         }
                     },asyncVerify:function(event){
                         let _this = $(event.currentTarget);
+                        login_success_callback_private = function(){
+                            _this.click();
+                        };
                         let jump_url = _this.parent().data('jump_url');
                         //异步验证
                         let postData = {
@@ -251,7 +254,6 @@
                                 },
                                 success: function(data){
                                     $('.loading').hide();
-                                    console.log(data);
                                     //异步验证判断
                                     let param = {
                                         data:data,
@@ -259,9 +261,7 @@
                                             _this.click();
                                         }
                                     };
-                                    if(async_verify_judge(param)===true){
-                                        dialog.success(data.info);
-                                    }
+                                    async_verify_judge(param);
                                 }
                             });
                         }else{
@@ -270,7 +270,6 @@
                     },buyNow:function(){
                         loginDialogTrigger();
                     },confirmOrder:function(){
-                        console.log('confirmOrder');
                     },editProductList:function(param){
                         let productInfo = {
                             'goods_id':param.product_id,
