@@ -21,6 +21,7 @@
                     <div class="columns_flex">
                         <span>中国(+86)</span>
                         <input class="username user_phone input-filed" type="tel" placeholder="请输入手机号码" :value="loginPostData.mobile_phone" @input="loginPostData.mobile_phone = $event.target.value">
+                        <div>{{loginPostData.mobile_phone}}</div>
                     </div>
                 </div>
                 <div class="login_item">
