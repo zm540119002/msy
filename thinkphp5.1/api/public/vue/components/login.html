@@ -74,19 +74,7 @@
                     dialog.error(param.info);
                 }}
             },
-            data: function () {
-                return {
-                    loginPostData:{
-                        mobile_phone:'13679898380',
-                        password:'',
-                        captcha:''
-                    },registerPostData:{
-                        mobile_phone:'',
-                        password:'',
-                        captcha:''
-                    }
-                };
-            },
+           
             methods: {
                 switchCurrent:function(param){
                     let _thisLi = param.obj;
@@ -218,6 +206,22 @@
             content:content,
             btn:[''],
             success:function(index){
+                let User_03=Vue.extend({
+                    data: function () {
+                        return {
+                            loginPostData:{
+                                mobile_phone:'13679898380',
+                                password:'',
+                                captcha:''
+                            },registerPostData:{
+                                mobile_phone:'',
+                                password:'',
+                                captcha:''
+                            }
+                        }
+                    }
+                })
+                var user_03 = new User_03();// 实例化
             },yes:function(index){
                 layer.close(index);
             }
