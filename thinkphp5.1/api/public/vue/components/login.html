@@ -20,8 +20,7 @@
                 <div class="login_item">
                     <div class="columns_flex">
                         <span>中国(+86)</span>
-                        <input class="username user_phone input-filed" :value="something" @input="something = $event.target.value">
-                        <div>{{something}}</div>
+                        <input class="username user_phone input-filed" type="tel" placeholder="请输入手机号码" v-model.trim="loginPostData.mobile_phone">
                     </div>
                 </div>
                 <div class="login_item">
@@ -77,9 +76,8 @@
             },
             data: function () {
                 return {
-                    something:'hello',
                     loginPostData:{
-                        mobile_phone:'11111111111',
+                        mobile_phone:'13679898380',
                         password:'',
                         captcha:''
                     },registerPostData:{
