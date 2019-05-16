@@ -99,7 +99,7 @@
                     });
                 },login:function(param){
                     console.log(param);
-                    console.log(this.loginPostData.mobile_phone);
+                    // console.log(this.loginPostData.mobile_phone);
                     //this.loginPostData.mobile_phone
                     let content='';
                     if(!register.phoneCheck(this.loginPostData.mobile_phone)){
@@ -244,7 +244,7 @@
                 login_success_callback_private:login_success_callback_private,
                 login_success_callback_common:login_success_callback_common
             };
-            bus.$emit('login');
+            bus.$emit('login',param);
         });
         $('body').on('click','.loginLayer .btn_register',function(){
             //触发-注册-事件
