@@ -216,7 +216,7 @@
                         cart_num:this.cart_init_num,
                         menus: unlockingFooterCart.menu,
                         postData:{
-                            productList:[]
+                            goodsList:[]
                         }
                     }
                 },methods: {
@@ -236,14 +236,14 @@
                             _this.click();
                         };
                         let jump_url = _this.parent().data('jump_url');
+                        if(!this.postData.goodsList.length){
+                            dialog.error('请选择商品！');
+                        }
                         //异步验证
-                        let postData = {
-                            'goodsList':this.postData.productList
-                        };
-                        if(jump_url && postData.goodsList.length){
+                        if(jump_url){
                             $.ajax({
                                 url: jump_url,
-                                data: postData,
+                                data: this.postData,
                                 type: 'post',
                                 beforeSend: function(xhr){
                                     $('.loading').show();
@@ -257,6 +257,7 @@
                                     //异步验证判断
                                     let param = {
                                         data:data,
+                                        jump_url:data.url?data.url:jump_url,
                                         func:function(){
                                             _this.click();
                                         }
@@ -264,8 +265,6 @@
                                     async_verify_judge(param);
                                 }
                             });
-                        }else{
-                            dialog.error('请选择商品！');
                         }
                     },buyNow:function(){
                         loginDialogTrigger();
@@ -277,13 +276,13 @@
                         };
                         //产品是否存在产品列表，默认不存在
                         let existSign = false;
-                        for(var i = 0,len = this.postData.productList.length; i < len; i++){
+                        for(var i = 0,len = this.postData.goodsList.length; i < len; i++){
                             //产品已存在产品列表，则修改或删除
-                            if(this.postData.productList[i]['goods_id'] == param.product_id){
+                            if(this.postData.goodsList[i]['goods_id'] == param.product_id){
                                 if(param.buy_quantity<=0){
-                                    Vue.delete(this.postData.productList,i);
+                                    Vue.delete(this.postData.goodsList,i);
                                 }else{
-                                    this.postData.productList[i]['num'] = param.buy_quantity;
+                                    this.postData.goodsList[i]['num'] = param.buy_quantity;
                                 }
                                 existSign = true;
                                 break;
@@ -291,7 +290,7 @@
                         }
                         //产品不存在产品列表，则添加
                         if(!existSign && param.buy_quantity>0){
-                            this.postData.productList.push(productInfo);
+                            this.postData.goodsList.push(productInfo);
                         }
                     }
                 },created:function(){

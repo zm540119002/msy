@@ -20,12 +20,12 @@
                 <div class="login_item">
                     <div class="columns_flex">
                         <span>中国(+86)</span>
-                        <input class="username user_phone input-filed" type="tel" placeholder="请输入手机号码" v-model="postData.mobile_phone">
+                        <input class="username user_phone input-filed" type="tel" placeholder="请输入手机号码" v-model.trim="loginPostData.mobile_phone">
                     </div>
                 </div>
                 <div class="login_item">
                     <div class="columns_flex">
-                        <input class="input-filed password" type="password" placeholder="密码" v-model="postData.password">
+                        <input class="input-filed password" type="password" placeholder="密码" v-model.trim="loginPostData.password">
                     </div>
                 </div>
                 <a href="javascript:void(0);" class="entry-button btn_login">登录</a>
@@ -35,20 +35,21 @@
                 <div class="login_item">
                     <div class="columns_flex">
                         <span>中国(+86)</span>
-                        <input class="username user_phone input-filed" type="tel" placeholder="请输入手机号码" v-model="postData.mobile_phone">
+                        <input class="username user_phone input-filed" type="tel" placeholder="请输入手机号码" v-model.trim="registerPostData.mobile_phone">
                     </div>
                 </div>
                 <div class="smsLogin login_wrap">
                     <div class="login_item">
                         <div class="columns_flex l-r-sides">
-                            <input type="text" class="tel_code input-filed" placeholder="请输入收到的验证码" v-model="postData.captcha">
+                            <input type="text" class="tel_code input-filed" placeholder="请输入收到的验证码" v-model.trim="registerPostData.captcha">
                             <a href="javascript:void(0);" class="send_sms">获取验证码</a>
                         </div>
                     </div>
                 </div>
                 <div class="login_item">
                     <div class="columns_flex">
-                        <input class="input-filed password" autocomplete="new-password" type="password" placeholder="设置密码" v-model="postData.password">
+                        <input class="input-filed password" autocomplete="new-password" type="password" placeholder="设置密码"
+                               v-model.trim="registerPostData.password">
                     </div>
                 </div>
                 <a href="javascript:void(0);" class="entry-button btn_register">确定</a>
@@ -63,6 +64,9 @@
         component_login = Vue.component('login', {
             template:'#login_tpl',
             props: {
+                value:{
+                    type:Number
+                },
                 login_succeed_call_back: {type: Function,default: function(param){
                     dialog.success('成功');
                 }},login_failed_call_back: {type: Function,default: function(param){
@@ -75,7 +79,11 @@
             },
             data: function () {
                 return {
-                    postData:{
+                    loginPostData:{
+                        mobile_phone:'13679898380',
+                        password:'',
+                        captcha:''
+                    },registerPostData:{
                         mobile_phone:'',
                         password:'',
                         captcha:''
@@ -93,10 +101,12 @@
                         }
                     });
                 },login:function(param){
+                    console.log(param);
+                    console.log(this.loginPostData.mobile_phone);
                     let content='';
-                    if(!register.phoneCheck(this.postData.mobile_phone)){
+                    if(!register.phoneCheck(this.loginPostData.mobile_phone)){
                         content='请输入正确手机号码';
-                    }else if(!register.pswCheck(this.postData.password)){
+                    }else if(!register.pswCheck(this.loginPostData.password)){
                         content = "请输入6-16数字或字母的密码";
                     }
                     if(content){
@@ -107,7 +117,7 @@
                     let _this = this;
                     $.ajax({
                         url: url,
-                        data: this.postData,
+                        data: this.loginPostData,
                         type: 'post',
                         beforeSend: function(xhr){
                             $('.loading').show();
@@ -133,12 +143,13 @@
                         }
                     });
                 },register:function(param){
+                    console.log(this.registerPostData);
                     let content='';
-                    if(!register.phoneCheck(this.postData.mobile_phone)){
+                    if(!register.phoneCheck(this.registerPostData.mobile_phone)){
                         content='请输入正确手机号码';
-                    }else if(!register.vfyCheck(this.postData.captcha)){
+                    }else if(!register.vfyCheck(this.registerPostData.captcha)){
                         content = "请输入正确的验证码";
-                    }else if(!register.pswCheck(this.postData.password)){
+                    }else if(!register.pswCheck(this.registerPostData.password)){
                         content = "请输入6-16数字或字母的密码";
                     }
                     if(content){
@@ -149,7 +160,7 @@
                     let _this = this;
                     $.ajax({
                         url: url,
-                        data: this.postData,
+                        data: this.registerPostData,
                         type: 'post',
                         beforeSend: function(xhr){
                             $('.loading').show();
@@ -164,8 +175,10 @@
                                 _this.register_failed_call_back(data);
                             }else if(data.status==1){
                                 $.extend(param.login_success_callback_param,data);
-                                if(param.register_success_callback && $.isFunction(param.register_success_callback)){
-                                    param.register_success_callback(param.register_success_callback_param);
+                                if( (param.register_success_callback_private && $.isFunction(param.register_success_callback_private))
+                                        || (param.register_success_callback_common && $.isFunction(param.register_success_callback_common)) ){
+                                    param.register_success_callback_private && param.register_success_callback_private(param.login_success_callback_param);
+                                    param.register_success_callback_common && param.register_success_callback_common(param.login_success_callback_param);
                                 }else{
                                     _this.register_succeed_call_back(param.register_success_callback_param);
                                 }
@@ -174,6 +187,7 @@
                     });
                 }
             },created:function(){
+                console.log(this.loginPostData.mobile_phone);
                 let _this = this;
                 //监听-切换当前-事件
                 bus.$on('switchCurrent', function(param){
@@ -214,6 +228,9 @@
         });
     }
     var login_success_callback_common = function(param){
+        layer.close(param.index);
+    };
+    var register_success_callback_common = function(){
         layer.close(param.index);
     };
     $(function(){
