@@ -61,7 +61,27 @@
     var component_login = null;
     $(function(){
         //表单切换
-        component_login = Vue.component('login', {
+        
+    });
+</script>
+<div id="loginDialogTpl" style="display: none">
+    <div id="loginDialogRoot">
+        <login></login>
+    </div>
+</div>
+<script type="text/javascript">
+    //登录-弹窗触发
+    var loginDialogTriggerLayerIndex = 0;
+    function loginDialogTrigger(){
+        var content = $('#loginDialogTpl').html();
+        loginDialogTriggerLayerIndex = layer.open({
+            className:'loginLayer',
+            type:1,
+            shadeClose:false,
+            content:content,
+            btn:[''],
+            success:function(index){
+                component_login = Vue.component('login', {
             template:'#login_tpl',
             props: {
                 login_succeed_call_back: {type: Function,default: function(param){
@@ -199,31 +219,12 @@
                 });
             }
         });
-         new Vue({
+        new Vue({
             el:'#loginDialogRoot',
             data:function(){
                 return {};
             }
         });
-    });
-</script>
-<div id="loginDialogTpl" style="display: none">
-    <div id="loginDialogRoot">
-        <login></login>
-    </div>
-</div>
-<script type="text/javascript">
-    //登录-弹窗触发
-    var loginDialogTriggerLayerIndex = 0;
-    function loginDialogTrigger(){
-        var content = $('#loginDialogTpl').html();
-        loginDialogTriggerLayerIndex = layer.open({
-            className:'loginLayer',
-            type:1,
-            shadeClose:false,
-            content:content,
-            btn:[''],
-            success:function(index){
             },yes:function(index){
                 layer.close(index);
             }
