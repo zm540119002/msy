@@ -20,7 +20,7 @@
                 <div class="login_item">
                     <div class="columns_flex">
                         <span>中国(+86)</span>
-                        <input class="username user_phone input-filed" type="tel" placeholder="请输入手机号码" v-model.trim="loginPostData.mobile_phone">
+                        <input class="username user_phone input-filed" type="tel" placeholder="请输入手机号码" :value="loginPostData.mobile_phone" @input="loginPostData.mobile_phone = $event.target.value">
                     </div>
                 </div>
                 <div class="login_item">
@@ -88,6 +88,9 @@
                 };
             },
             methods: {
+                input:function(){
+                    this.$emit('input', value);
+                },
                 switchCurrent:function(param){
                     let _thisLi = param.obj;
                     _thisLi.length && _thisLi.addClass("current").siblings().removeClass("current");
