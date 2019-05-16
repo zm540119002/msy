@@ -20,7 +20,7 @@
                 <div class="login_item">
                     <div class="columns_flex">
                         <span>中国(+86)</span>
-                        <input class="username user_phone input-filed" :value="loginPostData.mobile_phone" @input="loginPostData.mobile_phone = $event.target.value">
+                        <input class="username user_phone input-filed" :value="something" @input="something = $event.target.value">
                         <div>{{loginPostData.mobile_phone}}</div>
                     </div>
                 </div>
@@ -77,6 +77,7 @@
             },
             data: function () {
                 return {
+                    something:'hello',
                     loginPostData:{
                         mobile_phone:'11111111111',
                         password:'',
