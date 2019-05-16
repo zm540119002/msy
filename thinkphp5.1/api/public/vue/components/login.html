@@ -73,15 +73,7 @@
     //登录-弹窗触发
     var loginDialogTriggerLayerIndex = 0;
     function loginDialogTrigger(){
-        var content = $('#loginDialogTpl').html();
-        loginDialogTriggerLayerIndex = layer.open({
-            className:'loginLayer',
-            type:1,
-            shadeClose:false,
-            content:content,
-            btn:[''],
-            success:function(index){
-                component_login = Vue.component('login', {
+        component_login = Vue.component('login', {
             template:'#login_tpl',
             props: {
                 login_succeed_call_back: {type: Function,default: function(param){
@@ -225,6 +217,15 @@
                 return {};
             }
         });
+        var content = $('#loginDialogTpl').html();
+        loginDialogTriggerLayerIndex = layer.open({
+            className:'loginLayer',
+            type:1,
+            shadeClose:false,
+            content:content,
+            btn:[''],
+            success:function(index){
+                
             },yes:function(index){
                 layer.close(index);
             }
