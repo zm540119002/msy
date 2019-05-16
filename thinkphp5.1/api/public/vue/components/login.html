@@ -238,16 +238,16 @@
             bus.$emit('switchCurrent',param);
         });
         // $('body').on('click','.loginLayer .btn_login',function(){
-        //     //触发-登录-事件
-        //     let login_success_callback_param = {
-        //         index:loginDialogTriggerLayerIndex
-        //     };
-        //     let param = {
-        //         login_success_callback_param:login_success_callback_param,
-        //         login_success_callback_private:login_success_callback_private,
-        //         login_success_callback_common:login_success_callback_common
-        //     };
-        //     bus.$emit('login',param);
+            //触发-登录-事件
+            let login_success_callback_param = {
+                index:loginDialogTriggerLayerIndex
+            };
+            let param = {
+                login_success_callback_param:login_success_callback_param,
+                login_success_callback_private:login_success_callback_private,
+                login_success_callback_common:login_success_callback_common
+            };
+            bus.$emit('login',param);
         // });
         $('body').on('click','.loginLayer .btn_register',function(){
             //触发-注册-事件
