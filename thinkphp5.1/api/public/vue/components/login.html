@@ -194,9 +194,9 @@
                     _this.switchCurrent(param);
                 });
                 //监听-登录-事件
-                // bus.$on('login', function(param){
-                //     _this.login(param);
-                // });
+                bus.$on('login', function(param){
+                    _this.login(param);
+                });
                 //监听-注册-事件
                 bus.$on('register', function(param){
                     _this.register(param);
