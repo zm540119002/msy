@@ -201,6 +201,9 @@
                 bus.$on('register', function(param){
                     _this.register(param);
                 });
+                bus.$on('input', function(){
+                    _this.input();
+                });
             }
         });
     });
