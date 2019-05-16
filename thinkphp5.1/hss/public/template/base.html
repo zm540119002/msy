@@ -26,7 +26,7 @@
             }else if(param.data.data.code=='1002'){
                 return false;
             }
-            dialog.error(data.info);
+            dialog.error(param.data.info);
         }else if(param.data.status==1){
             if(param.data.data.code == '1001'){
                 //已登录
@@ -35,7 +35,7 @@
             }else if(param.data.data.code=='1002'){
                 return false;
             }
-            dialog.success(data.info);
+            dialog.success(param.data.info);
         }
     }
 </script>
