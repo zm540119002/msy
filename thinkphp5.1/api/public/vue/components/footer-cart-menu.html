@@ -182,11 +182,11 @@
                     <span class="s_i"></span>
                 </div>
                 <!-- 立即购买 -->
-                <div v-else-if="menu.class.indexOf('buy_now')!==-1" @click="buyNow">
+                <div v-else-if="menu.class.indexOf('buy_now')!==-1" @click="asyncVerify">
                     <span class="s_i"></span>
                 </div>
                 <!-- 提交订单 -->
-                <div v-else-if="menu.class.indexOf('confirm_order')!==-1" @click="confirmOrder">
+                <div v-else-if="menu.class.indexOf('confirm_order')!==-1" @click="asyncVerify">
                     <span class="s_i"></span>
                 </div>
                 <!-- 默认 -->
@@ -261,9 +261,7 @@
                                             _this.click();
                                         }
                                     };
-                                    if(async_verify_judge(param)===true){
-                                        dialog.success(data.info);
-                                    }
+                                    async_verify_judge(param);
                                 }
                             });
                         }else{
@@ -272,7 +270,6 @@
                     },buyNow:function(){
                         loginDialogTrigger();
                     },confirmOrder:function(){
-                        console.log('confirmOrder');
                     },editProductList:function(param){
                         let productInfo = {
                             'goods_id':param.product_id,
