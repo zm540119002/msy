@@ -199,6 +199,12 @@
                 });
             }
         });
+         new Vue({
+            el:'#loginDialogRoot',
+            data:function(){
+                return {};
+            }
+        });
     });
 </script>
 <div id="loginDialogTpl" style="display: none">
@@ -218,12 +224,6 @@
             content:content,
             btn:[''],
             success:function(index){
-                 new Vue({
-            el:'#loginDialogRoot',
-            data:function(){
-                return {};
-            }
-        });
             },yes:function(index){
                 layer.close(index);
             }
