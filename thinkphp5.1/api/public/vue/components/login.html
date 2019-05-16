@@ -226,6 +226,9 @@
             content:content,
             btn:[''],
             success:function(index){
+                bus.$on('input', function(){
+                    _this.input();
+                });
             },yes:function(index){
                 layer.close(index);
             }
