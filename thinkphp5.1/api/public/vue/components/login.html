@@ -112,7 +112,6 @@
                 },login:function(param){
                     console.log(param);
                     console.log(this.loginPostData.mobile_phone);
-                    //this.loginPostData.mobile_phone
                     let content='';
                     if(!register.phoneCheck(this.loginPostData.mobile_phone)){
                         content='请输入正确手机号码';
@@ -185,8 +184,10 @@
                                 _this.register_failed_call_back(data);
                             }else if(data.status==1){
                                 $.extend(param.login_success_callback_param,data);
-                                if(param.register_success_callback && $.isFunction(param.register_success_callback)){
-                                    param.register_success_callback(param.register_success_callback_param);
+                                if( (param.register_success_callback_private && $.isFunction(param.register_success_callback_private))
+                                        || (param.register_success_callback_common && $.isFunction(param.register_success_callback_common)) ){
+                                    param.register_success_callback_private && param.register_success_callback_private(param.login_success_callback_param);
+                                    param.register_success_callback_common && param.register_success_callback_common(param.login_success_callback_param);
                                 }else{
                                     _this.register_succeed_call_back(param.register_success_callback_param);
                                 }
@@ -236,6 +237,9 @@
         });
     }
     var login_success_callback_common = function(param){
+        layer.close(param.index);
+    };
+    var register_success_callback_common = function(){
         layer.close(param.index);
     };
     $(function(){
