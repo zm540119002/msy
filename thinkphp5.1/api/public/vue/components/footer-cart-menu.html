@@ -272,7 +272,6 @@
                     },addCart:function(){
                         let _This = this;
                         let _this = $(event.currentTarget);
-
                         login_success_callback_private = function(){
                             _this.click();
                         };
@@ -353,7 +352,9 @@
                                         $.each(goodsList,function(i,goods){
                                             total_num += parseInt(goods['num']);
                                         });
-
+                                        $('footer').find('.cart_num').text(total_num).addClass('current');
+                                        return this.cart_init_num = 232;
+                                        dialog.success('成功');
                                         _This.cart_num = total_num;
                                         dialog.success('成功');
                                     }
