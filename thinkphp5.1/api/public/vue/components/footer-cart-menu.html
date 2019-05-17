@@ -282,11 +282,11 @@
                         }
                         let postData = this.postData;
 
-                        //异步验证
+                        // 异步验证
                         if(jump_url){
                             $.ajax({
                                 url: jump_url,
-                                data: this.postData,
+                                data: postData,
                                 type: 'post',
                                 beforeSend: function(xhr){
                                     $('.loading').show();
@@ -358,9 +358,17 @@
                                         dialog.success('加入购物车成功');
 
                                     }else{
+                                        var total_num = 0;
+                                        $.each(postData.goodsList,function(i,goods){
+                                            total_num += parseInt(goods['num']);
+                                        });
+                                        //$('footer').find('.cart_num').text(total_num).addClass('current');
+
+                                        _This.cart_num = _This.cart_num+total_num;
+                                        dialog.success('加入购物车成功');
+
                                         async_verify_judge(param);
                                     }
-                                    //async_verify_judge(param);
                                 }
                             });
                         }
