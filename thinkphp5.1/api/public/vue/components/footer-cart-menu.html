@@ -306,10 +306,8 @@
                                             _this.click();
                                         }
                                     };
-
                                     // 没登陆的回调
-                                    loginDialogTrigger = function(){
-
+                                    if(param.data.status==0){
                                         var cartListOld = localStorage.cartList;//获取存储购物车商品信息
                                         if (cartListOld == null || cartListOld == "") {
 
@@ -358,9 +356,8 @@
 
                                         _This.cart_num = total_num;
                                         dialog.success('成功');
-
-                                    };
-                                    async_verify_judge(param);
+                                    }
+                                    //async_verify_judge(param);
                                 }
                             });
                         }
