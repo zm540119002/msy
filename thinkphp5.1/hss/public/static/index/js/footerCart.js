@@ -405,8 +405,10 @@ function generateOrder(postData,obj) {
         success: function(data){
             obj.removeClass("nodisabled");//防止重复提交
             $('.loading').hide();
+
             if(data.status){
-                location.href = module + 'Order/confirmOrder/order_sn/' + data.order_sn;
+
+                location.href = data.data.url;
             }else{
                 dialog.error(data.info);
             }
