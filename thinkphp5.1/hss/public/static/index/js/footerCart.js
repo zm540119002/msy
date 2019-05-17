@@ -10,9 +10,9 @@ cart = {
         var cartListOld = localStorage.cartList;//获取存储购物车商品信息
         if (cartListOld == null || cartListOld == "") {
             //第一次加入商品
-            var goodsList = JSON.stringify(addGoodsList);
-            localStorage.setItem('cartList',goodsList);
-            var goodsList = postData.goodsList;
+            var cartList = JSON.stringify(addGoodsList);
+            localStorage.setItem('cartList',cartList);
+            var goodsList = addGoodsList.goodsList;
         }else {
             var jsonstr = JSON.parse(cartListOld);
             var goodsList = jsonstr.goodsList;
