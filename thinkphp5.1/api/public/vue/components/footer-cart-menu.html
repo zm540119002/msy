@@ -270,7 +270,7 @@
                             });
                         }
                     },addCart:function(){
-                        let kkk=this;
+
                         let _this = $(event.currentTarget);
                         login_success_callback_private = function(){
                             _this.click();
@@ -353,11 +353,8 @@
                                         $.each(goodsList,function(i,goods){
                                             total_num += parseInt(goods['num']);
                                         });
-                                        kkk.cart_num = 2;
-                                        //$('footer').find('.cart_num').text(total_num).addClass('current');
-                                        console.log(_this)
-                                        // _this.cart_num = 20000000;
-                                        // console.log(_this.cart_num)
+                                        $('footer').find('.cart_num').text(total_num).addClass('current');
+                                        return this.cart_init_num = 232;
                                         dialog.success('成功');
 
                                         //unlockingFooterCart.cart_num = 44;
