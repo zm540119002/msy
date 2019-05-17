@@ -64,9 +64,6 @@
         component_login = Vue.component('login', {
             template:'#login_tpl',
             props: {
-                value:{
-                    type:Number
-                },
                 login_succeed_call_back: {type: Function,default: function(param){
                     dialog.success('成功');
                 }},login_failed_call_back: {type: Function,default: function(param){
@@ -80,7 +77,7 @@
             data: function () {
                 return {
                     loginPostData:{
-                        mobile_phone:'13679898380',
+                        mobile_phone:'',
                         password:'',
                         captcha:''
                     },registerPostData:{
@@ -101,7 +98,6 @@
                         }
                     });
                 },login:function(param){
-                    console.log(param);
                     console.log(this.loginPostData.mobile_phone);
                     let content='';
                     if(!register.phoneCheck(this.loginPostData.mobile_phone)){
@@ -187,7 +183,6 @@
                     });
                 }
             },created:function(){
-                console.log(this.loginPostData.mobile_phone);
                 let _this = this;
                 //监听-切换当前-事件
                 bus.$on('switchCurrent', function(param){
