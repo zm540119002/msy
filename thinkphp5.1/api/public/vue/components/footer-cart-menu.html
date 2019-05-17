@@ -270,7 +270,7 @@
                             });
                         }
                     },addCart:function(){
-this.cart_num = 2;
+
                         let _this = $(event.currentTarget);
                         login_success_callback_private = function(){
                             _this.click();
@@ -353,6 +353,7 @@ this.cart_num = 2;
                                         $.each(goodsList,function(i,goods){
                                             total_num += parseInt(goods['num']);
                                         });
+                                        this.cart_num = 2;
                                         //$('footer').find('.cart_num').text(total_num).addClass('current');
                                         console.log(_this)
                                         // _this.cart_num = 20000000;
