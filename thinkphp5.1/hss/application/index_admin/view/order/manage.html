@@ -39,7 +39,7 @@
 						<option value="2">已完成</option>
 					</select>
 				</div>
-				<div class="text-c">日期范围：
+				<div class="form-group">日期范围：
 					<input type="text" name="start_time" id="countTimestart" onfocus="selecttime(1)" value="" size="17" class="date" readonly>
 					-
 					<input type="text" name="end_time" id="countTimeend" onfocus="selecttime(2)" value="" size="17"  class="date" readonly>
@@ -86,6 +86,7 @@
 			config.currentPage = selectedPage;
 
 			var getData = $('#form1').serializeObject();
+
 			getPagingList(config,getData);
 		});
 		//搜索
