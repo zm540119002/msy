@@ -173,9 +173,9 @@
                 </div>
                 <!-- 购物篮 -->
                 <div v-else-if="menu.class.indexOf('add_cart_icon')!==-1" @click="jump_url">
-                    <span class="cart_num" v-if="cart_num > 99">99+</span>
-                    <span class="cart_num" v-else-if="cart_num > 1">{{ cart_num }}</span>
-                    <span class="cart_num" v-else></span>
+                    <span class="add_num current" v-if="cart_num > 99">99+</span>
+                    <span class="add_num current" v-else-if="cart_num > 1">{{ cart_num }}</span>
+                    <span class="add_num current" v-else></span>
                 </div>
                 <!-- 加入购物车 -->
                 <div v-else-if="menu.class.indexOf('add_cart')!==-1" @click="addCart">
@@ -270,8 +270,9 @@
                             });
                         }
                     },addCart:function(){
-
+                        let _This = this;
                         let _this = $(event.currentTarget);
+
                         login_success_callback_private = function(){
                             _this.click();
                         };
@@ -305,6 +306,7 @@
                                             _this.click();
                                         }
                                     };
+
                                     // 没登陆的回调
                                     loginDialogTrigger = function(){
 
@@ -353,17 +355,18 @@
                                         $.each(goodsList,function(i,goods){
                                             total_num += parseInt(goods['num']);
                                         });
-                                        $('footer').find('.cart_num').text(total_num).addClass('current');
-                                        return this.cart_init_num = 232;
+
+                                        _This.cart_num = total_num;
                                         dialog.success('成功');
 
-                                        //unlockingFooterCart.cart_num = 44;
                                     };
                                     async_verify_judge(param);
                                 }
                             });
                         }
                     },confirmOrder:function(){
+
+                        return 222;
                     },editProductList:function(param){
                         let productInfo = {
                             'goods_id':param.product_id,
