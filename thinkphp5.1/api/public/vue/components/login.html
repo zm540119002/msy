@@ -96,6 +96,7 @@
                  handleInput(event) {
         var value = event.target.value;
         this.currentValue = value;
+        this.loginPostData.mobile_phone=this.currentValue;
         this.$emit('input', value); //触发 input 事件，并传入新值
     },
                 switchCurrent:function(param){
@@ -108,7 +109,7 @@
                         }
                     });
                 },login:function(param){
-                    console.log(currentValue);
+                    console.log(this.loginPostData.mobile_phone);
                     let content='';
                     if(!register.phoneCheck(this.loginPostData.mobile_phone)){
                         content='请输入正确手机号码';
