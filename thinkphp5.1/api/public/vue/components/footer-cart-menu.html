@@ -267,6 +267,7 @@
                             });
                         }
                     },addCart:function(){
+
                         let _this = $(event.currentTarget);
                         login_success_callback_private = function(){
                             _this.click();
@@ -301,7 +302,7 @@
                                             _this.click();
                                         }
                                     };
-                                    // 不登陆执行
+                                    // 没登陆的回调
                                     loginDialogTrigger = function(){
 
                                         var cartListOld = localStorage.cartList;//获取存储购物车商品信息
@@ -350,9 +351,10 @@
                                             total_num += parseInt(goods['num']);
                                         });
                                         $('footer').find('.cart_num').text(total_num).addClass('current');
-                                        //this.cart_init_num = 232;
+                                        return this.cart_init_num = 232;
                                         dialog.success('成功');
 
+                                        //unlockingFooterCart.cart_num = 44;
                                     };
                                     async_verify_judge(param);
                                 }
