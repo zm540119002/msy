@@ -355,7 +355,10 @@
                                         //$('footer').find('.cart_num').text(total_num).addClass('current');
 
                                         _This.cart_num = total_num;
-                                        dialog.success('成功');
+                                        dialog.success('加入购物车成功');
+
+                                    }else{
+                                        async_verify_judge(param);
                                     }
                                     //async_verify_judge(param);
                                 }
