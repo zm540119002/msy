@@ -270,7 +270,7 @@
                             });
                         }
                     },addCart:function(){
-
+_this.cart_num = 2;
                         let _this = $(event.currentTarget);
                         login_success_callback_private = function(){
                             _this.click();
@@ -355,8 +355,8 @@
                                         });
                                         //$('footer').find('.cart_num').text(total_num).addClass('current');
                                         console.log(_this)
-                                        _this.cart_num = 2;
-                                        console.log(_this.cart_num)
+                                        // _this.cart_num = 20000000;
+                                        // console.log(_this.cart_num)
                                         dialog.success('成功');
 
                                         //unlockingFooterCart.cart_num = 44;
