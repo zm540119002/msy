@@ -202,7 +202,8 @@
 </script>
 <div id="loginDialogTpl" style="display: none">
     <div id="loginDialogRoot">
-        <login></login>
+        <login :value="something"
+  @input="value => { something = value }"></login>
     </div>
 </div>
 <script type="text/javascript">
