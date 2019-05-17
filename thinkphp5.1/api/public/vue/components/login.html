@@ -20,7 +20,7 @@
                 <div class="login_item">
                     <div class="columns_flex">
                         <span>中国(+86)</span>
-                        <input class="username user_phone input-filed" type="tel" placeholder="请输入手机号码" v-model.trim="loginPostData.mobile_phone">
+                        <input class="username user_phone input-filed" type="tel" placeholder="请输入手机号码" :value="currentValue" @input="handleInput">
                     </div>
                 </div>
                 <div class="login_item">
@@ -87,7 +87,17 @@
                     }
                 };
             },
+             computed:{
+    currentValue:function () {
+      return this.value
+    }
+  },
             methods: {
+                 handleInput(event) {
+        var value = event.target.value;
+        this.currentValue = value;
+        this.$emit('input', value); //触发 input 事件，并传入新值
+    },
                 switchCurrent:function(param){
                     let _thisLi = param.obj;
                     _thisLi.length && _thisLi.addClass("current").siblings().removeClass("current");
