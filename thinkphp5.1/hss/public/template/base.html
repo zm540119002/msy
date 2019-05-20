@@ -47,8 +47,20 @@
             localStorage.cartList = JSON.stringify({'goodsList':goodsList});
         }else{
             let cartListOld = JSON.parse(localStorage.cartList);
-            let cartList = {};
-            console.log(cartListOld);
+            let localStorageGoodsList = cartListOld.goodsList;
+            $.each(localStorageGoodsList,function(i,o){
+                $.each(goodsList,function(ii,oo){
+                    if(o.goods_id == oo.goods_id){
+                        if(operator){
+                            o.num -= oo.num;
+                        }else{
+                            o.num += oo.num;
+                        }
+                    }else{
+                        localStorageGoodsList.unshift(oo);
+                    }
+                });
+            });
         }
         console.log(localStorage.cartList);
     }
