@@ -42,9 +42,10 @@
         }
     }
     //编辑cookie里的购物车商品列表
-    function editLocalStorageCartList(){
+    function editLocalStorageCartList(goodsList){
         var cartListOld = JSON.stringify(localStorage.cartList);
         console.log(cartListOld);
+        console.log(goodsList);
     }
     /**没有登录购物车 操作
      * @param postData
