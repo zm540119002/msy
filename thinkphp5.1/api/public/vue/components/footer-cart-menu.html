@@ -263,6 +263,7 @@
                                     $('.loading').hide();
                                     //加入购物车
                                     if(_this.attr('class')=='add_cart'){
+                                        editLocalStorageCartList(this.postData.goodsList);
                                     }else{
                                         //异步验证判断
                                         let param = {
