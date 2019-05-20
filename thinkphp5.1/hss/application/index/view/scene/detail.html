@@ -56,6 +56,7 @@
 						:init_quantity="parseInt(init_quantity)"
 						:step_quantity="parseInt(step_quantity)"
 						:display_pic="display_pic"
+						:add_cart_type="parseInt(add_cart_type)"
 				></product-select>
 			</div>
 		</ul>
@@ -82,7 +83,8 @@
 			'display_pic':true,
 			'init_quantity':0,
 			'step_quantity':1,
-			'productList':data.data.data
+			'productList':data.data.data,
+			'add_cart_type':2
 		};
 		new Vue({
 			el: '#product-select',

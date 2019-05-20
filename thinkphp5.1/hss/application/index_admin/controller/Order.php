@@ -24,7 +24,10 @@ class Order extends Base{
         p($table);
         exit;*/
 
-        $where[] = ['o.status','=',0];
+        $where = [
+            ['o.status','=',0],
+            ['o.order_status','<>',0],
+        ];
 
         if($pay_code = input('pay_code/d')){
             $where[] = ['o.pay_code','=',$pay_code];
@@ -43,8 +46,7 @@ class Order extends Base{
         $config = [
             'field'=>[
                 'u.mobile_phone',
-                'o.id','o.sn','o.pay_sn','o.order_status','o.after_sale_status','o.pay_code','o.amount','o.coupons_pay','o.actually_amount','o.remark','o.user_id',
-                'o.create_time','o.payment_time','o.finished_time','o.consignee','o.mobile','o.province','o.city','o.area','o.detail_address',
+                'o.id','o.sn','o.order_status','o.after_sale_status','o.pay_code','o.user_id', 'o.create_time',
             ],'where'=>$where,
             'join' => [
                 ['common.user u','o.user_id = u.id'],
@@ -56,14 +58,8 @@ class Order extends Base{
 
         $model = new \app\index_admin\model\Order();
         $list = $model ->pageQuery($config);
-        p($model->getLastSql());
-        exit;
+
         $this->assign('list',$list);
-        if($_GET['pageType'] == 'layer'){
-            return view('goods/list_layer_tpl');
-        }
-        if($_GET['pageType'] == 'manage'){
-            return view('goods/list_tpl');
-        }
+        return view('list_tpl');
     }
 }
