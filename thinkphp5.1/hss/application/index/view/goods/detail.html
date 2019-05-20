@@ -25,7 +25,7 @@
 			</div>
 		</div>
 	</section>
-	<section class="module-navigation top_detail_module" id="app">
+	<section class="module-navigation top_detail_module">
 		<div >
 			<ul class="goods_list list">
 				<li data-id='{$info.id}' data-buy_type="1" id="li-id-{$info.id}">
@@ -207,22 +207,6 @@
 {block name="script"}
 <script type="text/javascript" src="api_common_js/swiper.min.js"></script>
 <script type="text/javascript" src="index_js/footerCart.js"></script>
-<script>
-	var vm = new Vue({
-		el: '#app',
-		data: {
-			message: 'Runoob!'
-		},
-		computed: {
-			// 计算属性的 getter
-			reversedMessage: function () {
-				// `this` 指向 vm 实例
-				return this.message.split('').reverse().join('')
-			}
-		}
-	})
-</script>
-
 
 <script type="text/javascript">
 	$(function(){
