@@ -132,6 +132,10 @@
 			var getData = $('#form1').serializeObject();
 			getPagingList(config,getData);
 		});
+		$(".ship").on('click',function(){
+			expressDeliveryHtml();
+		});
+
 	});
 
 	// 日期
@@ -154,7 +158,8 @@
 
 	// 发货
 	function expressDeliveryHtml(info){
-
+		alert(33333);
+		return false;
 		var content = $('#expressDeliveryHtml').html();
 		layer.open({
 			title:['请输入发货快递信息','border-bottom:1px solid #d9d9d9;'],
