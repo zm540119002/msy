@@ -1,5 +1,3 @@
-
-
 /**
  * 没有登录购物车 操作
  * @param postData
@@ -21,7 +19,7 @@ cart = {
             $.each(addGoodsList,function(i,addGoods){
                 var find = false;
                 $.each(goodsList,function(j,goods){
-                    if(addGoods.goods_id == goods.goods_id && addGoods.buy_type == goods.buy_type){
+                    if(addGoods.goods_id == goods.goods_id){
                         //找到修改数量
                         find = true;
                         goodsList[j].num = parseInt(addGoods.num) + parseInt(goods.num);
