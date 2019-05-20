@@ -49,9 +49,9 @@
             let cartListOld = JSON.parse(localStorage.cartList);
             let localStorageGoodsList = cartListOld.goodsList;
             $.each(localStorageGoodsList,function(i,o){
-                console.log(o);
                 $.each(goodsList,function(ii,oo){
-                    console.log(oo);
+                    console.log(o.goods_id);
+                    console.log(oo.goods_id);
                 });
             });
             //保存购物车
