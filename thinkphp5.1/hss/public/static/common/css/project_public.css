@@ -423,10 +423,12 @@
     background-position:0 -1.6rem;
 }
 .applay_p_item{
+    height:118px;
     padding:0.15rem;
     background: #fff;
     border-radius:4px;
     color:#000;
+    background-size:100% auto;
 }
 .top_cols{
     padding:0.15rem 0.15rem 0.55rem 0.15rem;
