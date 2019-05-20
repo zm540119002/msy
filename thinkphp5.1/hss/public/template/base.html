@@ -43,11 +43,24 @@
     }
     //编辑cookie里的购物车商品列表
     function editLocalStorageCartList(goodsList){
-        var cartList = localStorage.cartList?JSON.stringify(localStorage.cartList):{};
-        $.each(goodsList,function(i,o){
-            console.log(i);
-            console.log(o);
+        console.log(localStorage);
+
+    }
+    //删除cookie里的购物车商品列表
+    function delLocalStorageCartList(goodsList){
+        let cartList = localStorage.cartList?JSON.stringify(localStorage.cartList):{};
+        if($.isEmptyObject(cartList)){
+            return false;
+        }
+        $.each(cartList,function(i,o){
+            $.each(goodsList,function(ii,oo){
+                if(o.goods_id == oo.goods_id){
+                    //删除购物车
+                    localStorage.removeItem(o);
+                }
+            });
         });
+        console.log(localStorage);
     }
     /**没有登录购物车 操作
      * @param postData
