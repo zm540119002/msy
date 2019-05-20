@@ -246,6 +246,7 @@
                             dialog.error('请选择商品！');
                             return false;
                         }
+                        let _thisVue = this;
                         //异步验证
                         if(jump_url){
                             $.ajax({
@@ -261,16 +262,21 @@
                                 },
                                 success: function(data){
                                     $('.loading').hide();
-                                    //异步验证判断
-                                    let param = {
-                                        data:data,
-                                        class:_this.attr('class'),
-                                        jump_url:data.data.url?data.data.url:jump_url,
-                                        func:function(){
-                                            _this.click();
-                                        }
-                                    };
-                                    async_verify_judge(param);
+                                    //加入购物车
+                                    if(_this.attr('class')=='add_cart'){
+                                        editLocalStorageCartList(_thisVue.postData.goodsList);
+                                    }else{
+                                        //异步验证判断
+                                        let param = {
+                                            data:data,
+                                            class:_this.attr('class'),
+                                            jump_url:data.data.url?data.data.url:jump_url,
+                                            func:function(){
+                                                _this.click();
+                                            }
+                                        };
+                                        async_verify_judge(param);
+                                    }
                                 }
                             });
                         }
