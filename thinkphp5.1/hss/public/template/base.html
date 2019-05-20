@@ -18,7 +18,6 @@
 <script type="text/javascript">
     //异步验证判断
     function async_verify_judge(param){
-        console.log(JSON.stringify(localStorage));
         if(param.data.status==0){
             if(param.data.data.code == '1001'){
                 //未登录
@@ -41,6 +40,14 @@
             }
             dialog.success(param.data.info);
         }
+    }
+    //编辑cookie里的购物车商品列表
+    function editLocalStorageCartList(goodsList){
+        var cartList = localStorage.cartList?JSON.stringify(localStorage.cartList):{};
+        $.each(goodsList,function(i,o){
+            console.log(i);
+            console.log(o);
+        });
     }
     /**没有登录购物车 操作
      * @param postData
