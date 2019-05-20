@@ -129,6 +129,8 @@
                     });
                 },register:function(param){
                     let postData = $('#formLogin').serializeObject();
+                    console.log(postData);
+                    return false;
                     let content='';
                     if(!register.phoneCheck(postData.mobile_phone)){
                         content='请输入正确手机号码';
