@@ -108,7 +108,7 @@ cart = {
         //获取存储购物车商品信息
         var cartListOld = localStorage.cartList;
 
-        var total_num = '';
+        var total_num = 0;
         if(cartListOld){
             var jsonstr = JSON.parse(cartListOld);
             var goodsList = jsonstr.goodsList;
