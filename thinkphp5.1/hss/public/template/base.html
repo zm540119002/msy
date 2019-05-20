@@ -61,6 +61,8 @@
                     }
                 });
             });
+            //保存购物车
+            localStorage.cartList = JSON.stringify({'goodsList':localStorageGoodsList});
         }
         console.log(localStorage.cartList);
     }
