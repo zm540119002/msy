@@ -22,7 +22,7 @@
             if(param.data.data.code == '1001'){
                 //加入购物车
                 if(param.class=='add_cart'){
-                    editLocalStorageCartList(goodsList);
+                    editLocalStorageCartList(param.goodsList);
                     return false;
                 }else{
                     //未登录
