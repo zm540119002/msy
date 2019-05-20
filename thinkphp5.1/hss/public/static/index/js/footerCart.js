@@ -4,18 +4,18 @@
  */
 cart = {
     //向购物车中添加商品
-    addCart: function (addGoodsList) {
+    addCart: function (postData) {
         //获取存储购物车商品信息
         var cartListOld = localStorage.cartList;
         if (cartListOld == null || cartListOld == "") {
             //第一次加入商品
-            var cartList = JSON.stringify(addGoodsList);
+            var cartList = JSON.stringify(postData);
             localStorage.setItem('cartList',cartList);
-            var goodsList = addGoodsList.goodsList;
+            var goodsList = postData.goodsList;
         }else {
             var jsonstr = JSON.parse(cartListOld);
             var goodsList = jsonstr.goodsList;
-            var addGoodsList = addGoodsList.goodsList;
+            var addGoodsList = postData.goodsList;
             //查找购物车中是否有该商品
             $.each(addGoodsList,function(i,addGoods){
                 var find = false;
