@@ -279,14 +279,11 @@
                             _this.click();
                         };
                         let jump_url = _this.parent().data('jump_url');
-
                         let postData = this.postData;
-
                         if(!postData.goodsList.length){
                             dialog.error('请选择商品！');
                             return false;
                         }
-
                         // 异步验证
                         if(jump_url){
                             $.ajax({
