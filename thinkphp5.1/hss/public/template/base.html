@@ -46,7 +46,8 @@
         console.log(localStorage.cartList);
         if(!localStorage.cartList){
             localStorage.cartList = JSON.stringify(goodsList);
-            return false;
+        }else{
+            let cartList = JSON.parse(localStorage.cartList);
         }
     }
     //删除cookie里的购物车商品列表
