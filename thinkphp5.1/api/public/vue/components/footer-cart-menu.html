@@ -166,34 +166,34 @@
             <a href="javascript:void(0);" v-for="menu in menus" :data-jump_url="menu.action" :class="menu.class">
                 {{menu.name}}
                 <!-- 全选 -->
-                <div v-if="menu.class.indexOf('checked_all')!==-1">
+                <div v-if="menu.class.indexOf('checked_all')!==-1" class="checked_all">
                     <input type="checkbox" class="check-all">
                     <label for="" class="left">全选</label>
                 </div>
                 <!-- 总金额 -->
-                <div v-else-if="menu.class.indexOf('amount')!==-1">
+                <div v-else-if="menu.class.indexOf('amount')!==-1" class="amount">
                     <span class="total_amount">￥{{ parseFloat(total_amount).toFixed(2) }}</span>
                 </div>
                 <!-- 购物篮 -->
-                <div v-else-if="menu.class.indexOf('add_cart_icon')!==-1" @click="jump_url">
+                <div v-else-if="menu.class.indexOf('add_cart_icon')!==-1" class="add_cart_icon" @click="jump_url">
                     <span class="add_num current" v-if="cart_num > 99">99+</span>
                     <span class="add_num current" v-else-if="cart_num > 1">{{ cart_num }}</span>
                     <span class="add_num current" v-else></span>
                 </div>
                 <!-- 加入购物车 -->
-                <div v-else-if="menu.class.indexOf('add_cart')!==-1" @click="addCart">
+                <div v-else-if="menu.class.indexOf('add_cart')!==-1" class="add_cart" @click="asyncVerify">
                     <span class="s_i"></span>
                 </div>
                 <!-- 立即购买 -->
-                <div v-else-if="menu.class.indexOf('buy_now')!==-1" @click="asyncVerify">
+                <div v-else-if="menu.class.indexOf('buy_now')!==-1" class="buy_now" @click="asyncVerify">
                     <span class="s_i"></span>
                 </div>
                 <!-- 提交订单 -->
-                <div v-else-if="menu.class.indexOf('confirm_order')!==-1" @click="asyncVerify">
+                <div v-else-if="menu.class.indexOf('confirm_order')!==-1" class="confirm_order" @click="asyncVerify">
                     <span class="s_i"></span>
                 </div>
                 <!-- 默认 -->
-                <div v-else>
+                <div v-else class="default">
                     <span class="s_i"></span>
                 </div>
             </a>
@@ -264,6 +264,7 @@
                                     //异步验证判断
                                     let param = {
                                         data:data,
+                                        class:_this.attr('class'),
                                         jump_url:data.data.url?data.data.url:jump_url,
                                         func:function(){
                                             _this.click();

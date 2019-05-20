@@ -21,9 +21,13 @@
         console.log(JSON.stringify(localStorage));
         if(param.data.status==0){
             if(param.data.data.code == '1001'){
-                //未登录
-                loginDialogTrigger();
-                return false;
+                if(param.class='add_cart'){
+                    console.log(add_cart);
+                }else{
+                    //未登录
+                    loginDialogTrigger();
+                    return false;
+                }
             }else if(param.data.data.code=='1002'){
                 return false;
             }
