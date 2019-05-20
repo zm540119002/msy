@@ -3,6 +3,8 @@
 $('body').on('click','.set_wallet',function () {
     var data = {jump_url:$(this).data('jump_url')};
     loginBackFunction = forgetWalletPasswordDialog(data);
+
+    loginDialog = '加入';
     async_verify(data);
 });
 

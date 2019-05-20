@@ -39,10 +39,10 @@
 						<option value="2">已完成</option>
 					</select>
 				</div>
-				<div class="text-c"> 日期范围：
-					<input type="text" onfocus="WdatePicker({ maxDate:'#F{$dp.$D(\'logmax\')||\'%y-%M-%d\'}' })" id="logmin" class="input-text Wdate" style="width:120px;">
+				<div class="form-group">日期范围：
+					<input type="text" name="start_time" id="countTimestart" onfocus="selecttime(1)" value="" size="17" class="date" readonly>
 					-
-					<input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'logmin\')}',maxDate:'%y-%M-%d' })" id="logmax" class="input-text Wdate" style="width:120px;">
+					<input type="text" name="end_time" id="countTimeend" onfocus="selecttime(2)" value="" size="17"  class="date" readonly>
 				</div>
 
 				<div class="form-group">
@@ -61,7 +61,7 @@
 {/block}
 {block name="script"}
 <script type="text/javascript" src="index_admin_js/commonCrud.js"></script>
-<script type="text/javascript" src="http://demo.h-ui.net/H-ui.admin/3.1/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="hui_lib/My97DatePicker/4.8/WdatePicker.js"></script>
 <script type="text/javascript">
 	$(function () {
 		//加载第一页 这个需要配置公用???
@@ -86,6 +86,7 @@
 			config.currentPage = selectedPage;
 
 			var getData = $('#form1').serializeObject();
+
 			getPagingList(config,getData);
 		});
 		//搜索
@@ -95,6 +96,24 @@
 			getPagingList(config,getData);
 		});
 	});
+
+	// 日期
+	function selecttime(flag){
+		if(flag==1){
+			var endTime = $("#countTimeend").val();
+			if(endTime != ""){
+				WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:endTime})
+			}else{
+				WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'%y-%M-%d'})
+			}
+		}else{
+			var startTime = $("#countTimestart").val();
+			if(startTime != ""){
+				WdatePicker({dateFmt:'yyyy-MM-dd',minDate:startTime,maxDate:'%y-%M-%d'})
+			}else{
+				WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'%y-%M-%d'})}
+		}
+	}
 
 </script>
 {/block}

@@ -28,7 +28,7 @@
                         <input class="input-filed password" type="password" placeholder="密码" v-model.trim="loginPostData.password">
                     </div>
                 </div>
-                <a href="javascript:void(0);" class="entry-button btn_login" @click="abc">登录</a>
+                <a href="javascript:void(0);" class="entry-button btn_login">登录</a>
             </form>
             <form class="loginTab" :class="{show:false}">
                 <div class="error_tipc" ></div>
@@ -64,9 +64,6 @@
         component_login = Vue.component('login', {
             template:'#login_tpl',
             props: {
-                value:{
-                    type:Number
-                },
                 login_succeed_call_back: {type: Function,default: function(param){
                     dialog.success('成功');
                 }},login_failed_call_back: {type: Function,default: function(param){
@@ -80,8 +77,8 @@
             data: function () {
                 return {
                     loginPostData:{
-                        mobile_phone:'13679898380',
-                        password:'',
+                        mobile_phone:'18819362618',
+                        password:'123456',
                         captcha:''
                     },registerPostData:{
                         mobile_phone:'',
@@ -100,12 +97,8 @@
                             $(this).addClass("show").siblings().removeClass("show");
                         }
                     });
-                },abc:function(){
+                },login:function(param){
                     console.log(this.loginPostData.mobile_phone);
-                },
-                login:function(param){
-                    //console.log(param);
-                    
                     let content='';
                     if(!register.phoneCheck(this.loginPostData.mobile_phone)){
                         content='请输入正确手机号码';
@@ -190,16 +183,15 @@
                     });
                 }
             },created:function(){
-                console.log(this.loginPostData.mobile_phone);
                 let _this = this;
                 //监听-切换当前-事件
                 bus.$on('switchCurrent', function(param){
                     _this.switchCurrent(param);
                 });
                 //监听-登录-事件
-                // bus.$on('login', function(param){
-                //     _this.login(param);
-                // });
+                bus.$on('login', function(param){
+                    _this.login(param);
+                });
                 //监听-注册-事件
                 bus.$on('register', function(param){
                     _this.register(param);
@@ -231,11 +223,38 @@
         });
     }
     var login_success_callback_common = function(param){
+        add_cart_callback_common();
+
+
         layer.close(param.index);
     };
     var register_success_callback_common = function(){
         layer.close(param.index);
     };
+    var add_cart_callback_common = function(param) {
+
+        var cartListOld = localStorage.cartList;//获取存储购物车商品信息
+        if (cartListOld) {
+            var postData = JSON.parse(cartListOld);
+
+            $.ajax({
+                url: module + 'Cart/addCart',
+                data: postData,
+                type: 'post',
+                beforeSend: function (xhr) {
+
+                },
+                error: function (xhr) {
+                    $('.loading').hide();
+                    dialog.error('AJAX错误');
+                },
+                success: function (data) {
+                    localStorage.removeItem("cartList")
+                }
+            });
+        }
+    };
+
     $(function(){
         $('body').on('click','.loginLayer .switch_current',function(){
             //触发-切换当前-事件
@@ -244,18 +263,18 @@
             };
             bus.$emit('switchCurrent',param);
         });
-        // $('body').on('click','.loginLayer .btn_login',function(){
-        //     //触发-登录-事件
-        //     let login_success_callback_param = {
-        //         index:loginDialogTriggerLayerIndex
-        //     };
-        //     let param = {
-        //         login_success_callback_param:login_success_callback_param,
-        //         login_success_callback_private:login_success_callback_private,
-        //         login_success_callback_common:login_success_callback_common
-        //     };
-        //     bus.$emit('login',param);
-        // });
+        $('body').on('click','.loginLayer .btn_login',function(){
+            //触发-登录-事件
+            let login_success_callback_param = {
+                index:loginDialogTriggerLayerIndex
+            };
+            let param = {
+                login_success_callback_param:login_success_callback_param,
+                login_success_callback_private:login_success_callback_private,
+                login_success_callback_common:login_success_callback_common
+            };
+            bus.$emit('login',param);
+        });
         $('body').on('click','.loginLayer .btn_register',function(){
             //触发-注册-事件
             let register_success_callback_param = {

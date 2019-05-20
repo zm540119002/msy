@@ -20,6 +20,7 @@
     function async_verify_judge(param){
         if(param.data.status==0){
             if(param.data.data.code == '1001'){
+
                 //未登录
                 loginDialogTrigger();
                 return false;
@@ -28,6 +29,7 @@
             }
             dialog.error(param.data.info);
         }else if(param.data.status==1){
+
             if(param.data.data.code == '1001'){
                 //已登录
                 param.func();
@@ -35,7 +37,8 @@
             }else if(param.data.data.code=='1002'){
                 return false;
             }else if(param.data.data.code=='1003'){
-                dialog.success(param.data.info,param.jump_url);
+                //dialog.success(param.data.info,param.jump_url);
+                location.href=param.jump_url;
                 return false;
             }
             dialog.success(param.data.info);
