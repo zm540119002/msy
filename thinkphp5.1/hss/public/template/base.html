@@ -44,7 +44,7 @@
     //编辑cookie里的购物车商品列表
     function editLocalStorageCartList(goodsList,operator){
         if(!localStorage.cartList){
-            localStorage.cartList = JSON.stringify(goodsList);
+            localStorage.cartList = JSON.stringify({'goodsList':goodsList});
         }else{
             let cartList = {};
             cartList = JSON.parse(localStorage.cartList);
