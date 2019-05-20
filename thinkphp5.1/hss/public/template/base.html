@@ -48,21 +48,6 @@
             localStorage.cartList = JSON.stringify(goodsList);
             return false;
         }
-        $.each(cartList,function(i,o){
-            $.each(goodsList,function(ii,oo){
-                if(o.goods_id == oo.goods_id){
-                    if(operator){
-                        o.num -= oo.num;
-                    }else{
-                        o.num += oo.num;
-                    }
-                }else{
-                    cartList.unshift(oo);
-                }
-            });
-        });
-        //保存购物车
-        localStorage.setItem('cartList',cartList);
         console.log(localStorage);
     }
     //删除cookie里的购物车商品列表
