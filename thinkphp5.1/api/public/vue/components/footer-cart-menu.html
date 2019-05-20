@@ -181,7 +181,7 @@
                     <span class="add_num current" v-else></span>
                 </div>
                 <!-- 加入购物车 -->
-                <div v-else-if="menu.class.indexOf('add_cart')!==-1" class="add_cart" @click="asyncVerify">
+                <div v-else-if="menu.class.indexOf('add_cart')!==-1" class="add_cart" @click="addCart">
                     <span class="s_i"></span>
                 </div>
                 <!-- 立即购买 -->
@@ -203,6 +203,7 @@
 <script type="text/javascript">
     $(function(){
         var unlockingFooterCart = '{$unlockingFooterCart|raw}';
+        console.log(unlockingFooterCart);
         if(unlockingFooterCart){
             unlockingFooterCart = JSON.parse(unlockingFooterCart);
             Vue.component('footer-cart-menu', {
@@ -265,7 +266,7 @@
                                     //加入购物车
                                     if(_thisJquery.attr('class')=='add_cart'){
 //                                        editLocalStorageCartList(_thisVue.postData.goodsList,true);
-                                        return false;
+//                                        return false;
                                     }
                                     //异步验证判断
                                     let param = {
