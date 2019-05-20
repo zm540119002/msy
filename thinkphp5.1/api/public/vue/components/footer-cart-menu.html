@@ -265,17 +265,17 @@
                                     //加入购物车
                                     if(_thisJquery.attr('class')=='add_cart'){
                                         editLocalStorageCartList(_thisVue.postData.goodsList);
-                                    }else{
-                                        //异步验证判断
-                                        let param = {
-                                            data:data,
-                                            jump_url:data.data.url?data.data.url:jump_url,
-                                            func:function(){
-                                                _thisJquery.click();
-                                            }
-                                        };
-                                        async_verify_judge(param);
+                                        return false;
                                     }
+                                    //异步验证判断
+                                    let param = {
+                                        data:data,
+                                        jump_url:data.data.url?data.data.url:jump_url,
+                                        func:function(){
+                                            _thisJquery.click();
+                                        }
+                                    };
+                                    async_verify_judge(param);
                                 }
                             });
                         }
