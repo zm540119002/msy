@@ -20,9 +20,17 @@
     function async_verify_judge(param){
         if(param.data.status==0){
             if(param.data.data.code == '1001'){
-                //未登录
-                loginDialogTrigger();
-                return false;
+                //加入购物车
+                if(param.class=='add_cart'){
+                    if(editLocalStorageCartList(goodsList)===true){
+                        dialog.success('加入购物车成功！');
+                    }
+                    return false;
+                }else{
+                    //未登录
+                    loginDialogTrigger();
+                    return false;
+                }
             }else if(param.data.data.code=='1002'){
                 return false;
             }
@@ -72,6 +80,7 @@
             //保存购物车
             localStorage.cartList = JSON.stringify({'goodsList':goodsListNew});
         }
+        return true;
     }
     //删除cookie里的购物车商品列表
     function delLocalStorageCartList(goodsList){
