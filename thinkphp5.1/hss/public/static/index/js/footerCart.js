@@ -10,8 +10,9 @@ cart = {
         var cartListOld = localStorage.cartList;//获取存储购物车商品信息
         if (cartListOld == null || cartListOld == "") {
             //第一次加入商品
-            var goodsList = JSON.stringify(addGoodsList);
-            localStorage.setItem('cartList',goodsList);
+            var cartList = JSON.stringify(addGoodsList);
+            localStorage.setItem('cartList',cartList);
+            var goodsList = addGoodsList.goodsList;
         }else {
             var jsonstr = JSON.parse(cartListOld);
             var goodsList = jsonstr.goodsList;
@@ -104,13 +105,17 @@ cart = {
     //统计购物车的数量
     getGoodsTotal:function () {
         var cartListOld = localStorage.cartList;//获取存储购物车商品信息
-        var jsonstr = JSON.parse(cartListOld);
-        var goodsList = jsonstr.goodsList;
-        //计算总数
-        var total_num = 0;
-        $.each(goodsList,function(i,goods){
-            total_num += parseInt(goods['num']);
-        });
+
+        var total_num = '';
+        if(cartListOld){
+            var jsonstr = JSON.parse(cartListOld);
+            var goodsList = jsonstr.goodsList;
+            //计算总数
+            $.each(goodsList,function(i,goods){
+                total_num += parseInt(goods['num']);
+            });
+        }
+
         return total_num;
     }
     
@@ -405,8 +410,10 @@ function generateOrder(postData,obj) {
         success: function(data){
             obj.removeClass("nodisabled");//防止重复提交
             $('.loading').hide();
+
             if(data.status){
-                location.href = module + 'Order/confirmOrder/order_sn/' + data.order_sn;
+
+                location.href = data.data.url;
             }else{
                 dialog.error(data.info);
             }

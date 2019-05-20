@@ -20,22 +20,25 @@
     function async_verify_judge(param){
         if(param.data.status==0){
             if(param.data.data.code == '1001'){
-                loginBackFunction = param.func;
-                loginDialog();
+                //未登录
+                loginDialogTrigger();
+                return false;
             }else if(param.data.data.code=='1002'){
-            }else if(param.data.data.code=='1003'){
-            }else{
-                dialog.error(param.data.info);
+                return false;
             }
+            dialog.error(param.data.info);
         }else if(param.data.status==1){
             if(param.data.data.code == '1001'){
+                //已登录
+                param.func();
+                return false;
             }else if(param.data.data.code=='1002'){
+                return false;
             }else if(param.data.data.code=='1003'){
-            }else{
-                return true;
+                location.href=param.jump_url;
+                return false;
             }
-        }else{
-            return true;
+            dialog.success(param.data.info);
         }
     }
 </script>

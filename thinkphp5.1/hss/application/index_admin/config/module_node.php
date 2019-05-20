@@ -38,9 +38,9 @@ return [
                 ['id'=>601,'name'=>'广告管理','display'=>1,'controller'=>'AdPositions','action'=>'manage',],
             ],
         ],'information'=>[
-            'id'=>700,'name'=>'资讯','type'=>2,
+            'id'=>700,'name'=>'订单','type'=>2,
             'sub_menu' => [
-                ['id'=>701,'name'=>'资讯管理','display'=>1,'controller'=>'Information','action'=>'manage',],
+                ['id'=>701,'name'=>'订单管理','display'=>1,'controller'=>'Order','action'=>'manage',],
             ],
         ],'customer'=>[
             'id'=>800,'name'=>'客服','type'=>2,
