@@ -5,9 +5,6 @@
 cart = {
     //向购物车中添加商品
     addCart: function (addGoodsList) {
-        if(!addGoodsList){
-            dialog.error('没有数据');
-        }
         //获取存储购物车商品信息
         var cartListOld = localStorage.cartList;
         if (cartListOld == null || cartListOld == "") {
