@@ -48,6 +48,8 @@
         }else{
             let cartList = {};
             cartList = JSON.parse(localStorage.cartList);
+            console.log(cartList);
+            cartList = cartList['goodsList'];
             $.each(cartList,function(i,o){
                 $.each(goodsList,function(ii,oo){
                     if(o.goods_id == oo.goods_id){
