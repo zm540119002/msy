@@ -42,7 +42,7 @@
         }
     }
     //编辑cookie里的购物车商品列表
-    function editLocalStorageCartList(goodsList){
+    function editLocalStorageCartList(goodsList,operator){
         let cartList = localStorage.cartList?JSON.stringify(localStorage.cartList):{};
         if($.isEmptyObject(cartList)){
             localStorage.cartList = goodsList;
