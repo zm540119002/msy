@@ -49,6 +49,7 @@
             let cartListOld = JSON.parse(localStorage.cartList);
             let localStorageGoodsList = cartListOld.goodsList;
             let goodsListNew = [];
+            let find = false;
             $.each(localStorageGoodsList,function(i,o){
                 $.each(goodsList,function(ii,oo){
                     if(o.goods_id == oo.goods_id){
@@ -57,11 +58,14 @@
                         }else{
                             o.num += oo.num;
                         }
-                        goodsListNew.unshift(o);
+                        find = true;
                     }else{
                         goodsListNew.unshift(oo);
                     }
                 });
+                if(find){
+                    goodsListNew.unshift(o);
+                }
             });
             //保存购物车
             localStorage.cartList = JSON.stringify({'goodsList':goodsListNew});
