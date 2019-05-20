@@ -86,7 +86,6 @@
 		//初始化场景商品页面
 		postData.id = '{$info.id}';
 		getJsonList(config,postData);
-
 		// 购物车里商品数量
 		var total_num = "{$total_num}";
 
@@ -94,7 +93,6 @@
 
 			var cartListOld = localStorage.cartList;//获取存储购物车商品信息
 			if(cartListOld){
-
 				total_num = 0;
 				var jsonstr = JSON.parse(cartListOld);
 				var goodsList = jsonstr.goodsList;
@@ -104,7 +102,6 @@
 				});
 			}
 		}
-
 		let param = {
 			cart_init_num:parseInt(total_num)
 		};

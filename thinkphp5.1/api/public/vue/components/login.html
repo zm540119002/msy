@@ -77,8 +77,8 @@
             data: function () {
                 return {
                     loginPostData:{
-                        mobile_phone:'18819362618',
-                        password:'123456',
+                        mobile_phone:'',
+                        password:'',
                         captcha:''
                     },registerPostData:{
                         mobile_phone:'',
@@ -224,26 +224,20 @@
     }
     var login_success_callback_common = function(param){
         add_cart_callback_common();
-
-
         layer.close(param.index);
     };
     var register_success_callback_common = function(){
         layer.close(param.index);
     };
     var add_cart_callback_common = function(param) {
-
         var cartListOld = localStorage.cartList;//获取存储购物车商品信息
         if (cartListOld) {
             var postData = JSON.parse(cartListOld);
-
             $.ajax({
                 url: module + 'Cart/addCart',
                 data: postData,
                 type: 'post',
-                beforeSend: function (xhr) {
-
-                },
+                beforeSend: function (xhr) {},
                 error: function (xhr) {
                     $('.loading').hide();
                     dialog.error('AJAX错误');
@@ -254,7 +248,6 @@
             });
         }
     };
-
     $(function(){
         $('body').on('click','.loginLayer .switch_current',function(){
             //触发-切换当前-事件
