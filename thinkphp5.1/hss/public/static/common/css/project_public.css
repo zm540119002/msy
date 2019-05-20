@@ -377,9 +377,13 @@
     color:#C7AA53;
 }
 .once-enter{
-    width:1.2rem;
+    width: 1.4rem;
     background: #3FA9F5;
-    color:#fff;
+    color: #fff;
+    padding: 0.05rem 0.01rem;
+    border-radius: 6px;
+    text-align: center;
+    margin: 0.14rem 0 0;
 }
 /*加盟店家*/
 .franchise_ul li{
