@@ -161,7 +161,7 @@
                             if(data.status==0){
                                 _this.register_failed_call_back(data);
                             }else if(data.status==1){
-                                $.extend(param.login_success_callback_param,data);
+                                $.extend(param.register_success_callback_param,data);
                                 if( (param.register_success_callback_private && $.isFunction(param.register_success_callback_private))
                                         || (param.register_success_callback_common && $.isFunction(param.register_success_callback_common)) ){
                                     param.register_success_callback_private && param.register_success_callback_private(param.login_success_callback_param);
