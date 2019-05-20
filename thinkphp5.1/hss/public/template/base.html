@@ -75,17 +75,24 @@
     }
     //删除cookie里的购物车商品列表
     function delLocalStorageCartList(goodsList){
+        if(!localStorage.cartList){
+            return false;
+        }
         let goodsListOld = (JSON.parse(localStorage.cartList)).goodsList;
         let goodsListNew = [];
         $.each(goodsListOld,function(i,o){
+            let find = false;
             $.each(goodsList,function(ii,oo){
                 if(o.goods_id == oo.goods_id){
-                    //删除购物车
-                    localStorage.removeItem(o);
+                    find = true;
                 }
             });
+            if(find){
+                goodsListNew.push(o);
+            }
         });
-        console.log(localStorage);
+        //保存购物车
+        localStorage.cartList = JSON.stringify({'goodsList':goodsListNew});
     }
 </script>
 {/block}
