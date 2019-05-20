@@ -261,16 +261,20 @@
                                 },
                                 success: function(data){
                                     $('.loading').hide();
-                                    //异步验证判断
-                                    let param = {
-                                        data:data,
-                                        class:_this.attr('class'),
-                                        jump_url:data.data.url?data.data.url:jump_url,
-                                        func:function(){
-                                            _this.click();
-                                        }
-                                    };
-                                    async_verify_judge(param);
+                                    //加入购物车
+                                    if(_this.attr('class')=='add_cart'){
+                                    }else{
+                                        //异步验证判断
+                                        let param = {
+                                            data:data,
+                                            class:_this.attr('class'),
+                                            jump_url:data.data.url?data.data.url:jump_url,
+                                            func:function(){
+                                                _this.click();
+                                            }
+                                        };
+                                        async_verify_judge(param);
+                                    }
                                 }
                             });
                         }
