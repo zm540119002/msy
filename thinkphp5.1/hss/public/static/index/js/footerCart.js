@@ -5,7 +5,11 @@
 cart = {
     //向购物车中添加商品
     addCart: function (addGoodsList) {
-        var cartListOld = localStorage.cartList;//获取存储购物车商品信息
+        if(!addGoodsList){
+            dialog.error('没有数据');
+        }
+        //获取存储购物车商品信息
+        var cartListOld = localStorage.cartList;
         if (cartListOld == null || cartListOld == "") {
             //第一次加入商品
             var cartList = JSON.stringify(addGoodsList);
@@ -52,7 +56,8 @@ cart = {
     },
     //修改商品数量
     editCartNum:function (goods) {
-        var cartListOld = localStorage.cartList;//获取存储购物车商品信息
+        //获取存储购物车商品信息
+        var cartListOld = localStorage.cartList;
         var jsonstr = JSON.parse(cartListOld);
         var goodsList = jsonstr.goodsList;
 
@@ -72,7 +77,8 @@ cart = {
     },
     //删除商品
     delCart:function (goods) {
-        var cartListOld = localStorage.cartList;//获取存储购物车商品信息
+        //获取存储购物车商品信息
+        var cartListOld = localStorage.cartList;
         var jsonstr = JSON.parse(cartListOld);
         var goodsList = jsonstr.goodsList;
         $.each(goods.goods_ids,function(i,goods_id){
@@ -102,7 +108,8 @@ cart = {
     },
     //统计购物车的数量
     getGoodsTotal:function () {
-        var cartListOld = localStorage.cartList;//获取存储购物车商品信息
+        //获取存储购物车商品信息
+        var cartListOld = localStorage.cartList;
 
         var total_num = '';
         if(cartListOld){
