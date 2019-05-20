@@ -50,16 +50,19 @@
             let goodsListNew = [];
             let find = false;
             $.each(localStorageGoodsList,function(i,o){
+                let goodsNotFind = null;
                 $.each(goodsList,function(ii,oo){
                     if(o.goods_id == oo.goods_id){
                         o.num += oo.num;
                         find = true;
                     }else{
-                        goodsListNew.unshift(oo);
+                        goodsNotFind = oo;
                     }
                 });
                 if(find){
                     goodsListNew.unshift(o);
+                }else{
+                    goodsListNew.unshift(goodsNotFind);
                 }
             });
             //保存购物车
