@@ -64,14 +64,15 @@
                     }
                 });
                 if(find){
+                    console.log(o);
                     goodsListNew.unshift(o);
                 }
             });
             //保存购物车
             localStorage.cartList = JSON.stringify({'goodsList':goodsListNew});
         }
-        console.log(localStorage.cartList);
-        console.log(goodsList);
+//        console.log(localStorage.cartList);
+//        console.log(goodsList);
     }
     //删除cookie里的购物车商品列表
     function delLocalStorageCartList(goodsList){
