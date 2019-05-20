@@ -77,7 +77,8 @@ cart = {
     },
     //删除商品
     delCart:function (goods) {
-        var cartListOld = localStorage.cartList;//获取存储购物车商品信息
+        //获取存储购物车商品信息
+        var cartListOld = localStorage.cartList;
         var jsonstr = JSON.parse(cartListOld);
         var goodsList = jsonstr.goodsList;
         $.each(goods.goods_ids,function(i,goods_id){
@@ -107,7 +108,8 @@ cart = {
     },
     //统计购物车的数量
     getGoodsTotal:function () {
-        var cartListOld = localStorage.cartList;//获取存储购物车商品信息
+        //获取存储购物车商品信息
+        var cartListOld = localStorage.cartList;
 
         var total_num = '';
         if(cartListOld){
