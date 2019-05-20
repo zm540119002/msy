@@ -49,14 +49,14 @@
             let cartListOld = JSON.parse(localStorage.cartList);
             let localStorageGoodsList = cartListOld.goodsList;
             $.each(localStorageGoodsList,function(i,o){
+                console.log(o);
                 $.each(goodsList,function(ii,oo){
-                    
+                    console.log(oo);
                 });
             });
             //保存购物车
             localStorage.cartList = JSON.stringify({'goodsList':localStorageGoodsList});
         }
-        console.log(localStorage.cartList);
     }
     //删除cookie里的购物车商品列表
     function delLocalStorageCartList(goodsList){
