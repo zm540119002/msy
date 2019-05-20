@@ -51,6 +51,7 @@
         }
         console.log(cartList);
         let find = false;
+        let tmp = {};
         $.each(cartList,function(i,o){
             $.each(goodsList,function(ii,oo){
                 if(o.goods_id == oo.goods_id){
@@ -61,10 +62,13 @@
                     }
                     find = true;
                     console.log(oo);
+                }else{
+                    tmp = oo;
                 }
             });
         });
         if(!find){
+            cartList.unshift(tmp);
         }
         //保存购物车
 //        localStorage.setItem('cartList',JSON.stringify({'goodsList':cartList}));
