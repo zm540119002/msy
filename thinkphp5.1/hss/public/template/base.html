@@ -49,22 +49,6 @@
             let cartList = {};
             cartList = JSON.parse(localStorage.cartList);
             console.log(cartList);
-            cartList = cartList['goodsList'];
-            $.each(cartList,function(i,o){
-                $.each(goodsList,function(ii,oo){
-                    if(o.goods_id == oo.goods_id){
-                        if(operator){
-                            o.num -= oo.num;
-                        }else{
-                            o.num += oo.num;
-                        }
-                    }else{
-                        cartList.unshift(oo);
-                    }
-                });
-            });
-            //保存购物车
-            localStorage.cartList = JSON.stringify({'goodsList':cartList});
         }
         console.log(localStorage.cartList);
     }
