@@ -314,17 +314,14 @@
                                     if(param.data.status==0){
                                         var cartListOld = localStorage.cartList;//获取存储购物车商品信息
                                         if (cartListOld == null || cartListOld == "") {
-
                                             //第一次加入商品
                                             var cartList = JSON.stringify(postData);
                                             localStorage.setItem('cartList',cartList);
                                             var goodsList = postData.goodsList;
                                         }else {
-
                                             var jsonstr = JSON.parse(cartListOld);
                                             var goodsList = jsonstr.goodsList;
                                             var addGoodsList = postData.goodsList;
-
                                             //查找购物车中是否有该商品
                                             $.each(addGoodsList,function(i,addGoods){
                                                 var find = false;
@@ -351,35 +348,25 @@
                                             //保存购物车
                                             localStorage.setItem('cartList',JSON.stringify(cartList));
                                         }
-
                                         //计算总数
                                         var total_num = 0;
                                         $.each(goodsList,function(i,goods){
                                             total_num += parseInt(goods['num']);
                                         });
-                                        //$('footer').find('.cart_num').text(total_num).addClass('current');
-
                                         _This.cart_num = total_num;
                                         dialog.success('加入购物车成功');
-
                                     }else{
                                         var total_num = 0;
                                         $.each(postData.goodsList,function(i,goods){
                                             total_num += parseInt(goods['num']);
                                         });
-                                        //$('footer').find('.cart_num').text(total_num).addClass('current');
-
                                         _This.cart_num = _This.cart_num+total_num;
                                         dialog.success('加入购物车成功');
-
                                         async_verify_judge(param);
                                     }
                                 }
                             });
                         }
-                    },confirmOrder:function(){
-
-                        return 222;
                     },editProductList:function(param){
                         let productInfo = {
                             'goods_id':param.product_id,
