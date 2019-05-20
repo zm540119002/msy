@@ -64,12 +64,13 @@
 <script type="text/javascript" src="hui_lib/My97DatePicker/4.8/WdatePicker.js"></script>
 <script type="text/javascript">
 	$(function () {
+
 		//加载第一页 这个需要配置公用???
 		var config = {
 			url:controller+'getList'
 		};
 		var getData = $('#form1').serializeObject();
-		//getPagingList(config,getData);
+		getPagingList(config,getData);
 
 		//翻页
 		$('body').on('click','.pager2',function(){

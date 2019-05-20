@@ -241,6 +241,7 @@
                         let jump_url = _this.parent().data('jump_url');
                         if(!this.postData.goodsList.length){
                             dialog.error('请选择商品！');
+                            return false;
                         }
                         //异步验证
                         if(jump_url){
