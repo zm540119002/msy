@@ -48,24 +48,23 @@
             localStorage.cartList = JSON.stringify(goodsList);
         }else{
             cartList = JSON.parse(localStorage.cartList);
+            $.each(cartList,function(i,o){
+                $.each(goodsList,function(ii,oo){
+                    if(o.goods_id == oo.goods_id){
+                        if(operator){
+                            o.num -= oo.num;
+                        }else{
+                            o.num += oo.num;
+                        }
+                        console.log(oo);
+                    }else{
+                        cartList.unshift(oo);
+                        console.log(oo);
+                    }
+                });
+            });
         }
         console.log(cartList);
-        let find = false;
-        $.each(cartList,function(i,o){
-            $.each(goodsList,function(ii,oo){
-                if(o.goods_id == oo.goods_id){
-                    if(operator){
-                        o.num -= oo.num;
-                    }else{
-                        o.num += oo.num;
-                    }
-                    console.log(oo);
-                }else{
-                    cartList.unshift(oo);
-                    console.log(oo);
-                }
-            });
-        });
         //保存购物车
 //        localStorage.setItem('cartList',JSON.stringify({'goodsList':cartList}));
     }
