@@ -234,19 +234,19 @@
                             location.href = jump_url;
                         }
                     },asyncVerify:function(event){
-                        let _this = $(event.currentTarget);
+                        let _thisJquery = $(event.currentTarget);
+                        let _thisVue = this;
                         login_success_callback_private = function(){
-                            _this.click();
+                            _thisJquery.click();
                         };
                         register_success_callback_private = function(){
-                            _this.click();
+                            _thisJquery.click();
                         };
-                        let jump_url = _this.parent().data('jump_url');
+                        let jump_url = _thisJquery.parent().data('jump_url');
                         if(!this.postData.goodsList.length){
                             dialog.error('请选择商品！');
                             return false;
                         }
-                        let _thisVue = this;
                         //异步验证
                         if(jump_url){
                             $.ajax({
@@ -263,16 +263,15 @@
                                 success: function(data){
                                     $('.loading').hide();
                                     //加入购物车
-                                    if(_this.attr('class')=='add_cart'){
+                                    if(_thisJquery.attr('class')=='add_cart'){
                                         editLocalStorageCartList(_thisVue.postData.goodsList);
                                     }else{
                                         //异步验证判断
                                         let param = {
                                             data:data,
-                                            class:_this.attr('class'),
                                             jump_url:data.data.url?data.data.url:jump_url,
                                             func:function(){
-                                                _this.click();
+                                                _thisJquery.click();
                                             }
                                         };
                                         async_verify_judge(param);
