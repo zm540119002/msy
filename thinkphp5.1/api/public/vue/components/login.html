@@ -129,8 +129,6 @@
                     });
                 },register:function(param){
                     let postData = $('#formLogin').serializeObject();
-                    console.log(postData);
-                    return false;
                     let content='';
                     if(!register.phoneCheck(postData.mobile_phone)){
                         content='请输入正确手机号码';
@@ -164,8 +162,8 @@
                                 $.extend(param.register_success_callback_param,data);
                                 if( (param.register_success_callback_private && $.isFunction(param.register_success_callback_private))
                                         || (param.register_success_callback_common && $.isFunction(param.register_success_callback_common)) ){
-                                    param.register_success_callback_private && param.register_success_callback_private(param.login_success_callback_param);
-                                    param.register_success_callback_common && param.register_success_callback_common(param.login_success_callback_param);
+                                    param.register_success_callback_private && param.register_success_callback_private(param.register_success_callback_param);
+                                    param.register_success_callback_common && param.register_success_callback_common(param.register_success_callback_param);
                                 }else{
                                     _this.register_succeed_call_back(param.register_success_callback_param);
                                 }
@@ -267,7 +265,8 @@
             };
             let param = {
                 register_success_callback_param:register_success_callback_param,
-                register_success_callback:register_success_callback
+                register_success_callback_private:register_success_callback_private,
+                register_success_callback_common:register_success_callback_common
             };
             bus.$emit('register',param);
         });
