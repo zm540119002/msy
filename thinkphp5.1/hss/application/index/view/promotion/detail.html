@@ -86,9 +86,10 @@
 		postData.id = '{$info.id}';
 		getJsonList(config,postData);
 		// 购物车里商品数量
-		var total_num = parseInt("{$total_num|default=0}");
+		let total_num = parseInt("{$total_num|default=0}");
+		console.log(total_num);
 		//获取存储购物车商品信息
-		var goodsList = (JSON.parse(localStorage.cartList)).goodsList;
+		let goodsList = (JSON.parse(localStorage.cartList)).goodsList;
 		if(goodsList.length){
 			//计算总数
 			$.each(goodsList,function(i,goods){
