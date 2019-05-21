@@ -60,9 +60,9 @@
                 $.each(goodsListOld,function(ii,oo){
                     if(o.goods_id == oo.goods_id){
                         if(reduce && reduce==='true'){
-                            o.num -= oo.num;
+                            oo.num -= o.num;
                         }else{
-                            o.num += oo.num;
+                            oo.num += o.num;
                         }
                         find = true;
                     }else{
@@ -70,9 +70,9 @@
                     }
                 });
                 if(find){
-                    goodsListNew.push(o);
-                }else{
                     goodsListNew.push(goodsNotFind);
+                }else{
+                    goodsListNew.push(o);
                 }
             });
             //保存购物车
