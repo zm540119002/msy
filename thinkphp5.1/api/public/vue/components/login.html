@@ -87,7 +87,7 @@
                         }
                     });
                 },login:function(param){
-                    let postData = $('#formLogin').serializeObject();
+                    let postData = $('.loginLayer').find('#formLogin').serializeObject();
                     let content='';
                     if(!register.phoneCheck(postData.mobile_phone)){
                         content='请输入正确手机号码';
@@ -128,7 +128,7 @@
                         }
                     });
                 },register:function(param){
-                    let postData = $('#formLogin').serializeObject();
+                    let postData = $('.loginLayer').find('#formLogin').serializeObject();
                     let content='';
                     if(!register.phoneCheck(postData.mobile_phone)){
                         content='请输入正确手机号码';
