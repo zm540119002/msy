@@ -79,9 +79,11 @@
             //保存购物车
             localStorage.cartList = JSON.stringify({'goodsList':goodsListNew});
         }
-        $.each(param.goodsList,function(i,o){
-            param._thisVue.cart_num += o.num;
-        });
+        if(param._thisVue){
+            $.each(param.goodsList,function(i,o){
+                param._thisVue.cart_num += o.num;
+            });
+        }
         dialog.success('加入购物车成功！');
     }
     //删除cookie里的购物车商品列表
