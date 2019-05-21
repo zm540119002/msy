@@ -25,7 +25,6 @@
                 return false;
             }else if(param.data.data.code == '1001'){
                 //登录
-
                 if(param.class=='add_cart'){
                     //加入购物车
                     editLocalStorageCartList(param);
@@ -90,6 +89,8 @@
             //保存购物车
             localStorage.cartList = JSON.stringify({'goodsList':goodsListNew});
         }
+        console.log(param._thisVue.cart_num);
+        console.log(param.goodsList);
         $.each(param.goodsList,function(i,o){
             param._thisVue.cart_num += o.num;
         });
