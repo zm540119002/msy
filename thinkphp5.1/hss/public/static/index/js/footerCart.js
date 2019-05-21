@@ -346,6 +346,7 @@ $(function () {
     // 结算订单处理 增加支付方式
     $('body').on('click','.settlement_btn',function () {
         var pay_code = $('input[name=pay_code]').val();
+        console.log(pay_code);return;
         var sn = $('input[name=order_sn]').val();
         if(!pay_code){
             dialog.error('请选择支付方式');
@@ -680,7 +681,7 @@ function addCart(postData) {
                 var num = 0;
                 $.each(lis,function(index,val){
                     num += parseInt($(this).find('.gshopping_count').val());
-                   
+
                 });
                 total_num = parseInt(total_num) + parseInt(num);
                 $('footer').find('.add_num').text(total_num).addClass('current');
