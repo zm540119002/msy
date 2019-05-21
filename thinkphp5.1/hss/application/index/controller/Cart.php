@@ -260,6 +260,7 @@ class Cart extends \common\controller\UserBase {
         }
     }
 
+    //统计购物车商品数量
     public function getCartTotalNum(){
         //统计购物车商品数量
         $user = checkLogin();
