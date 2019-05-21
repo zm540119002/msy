@@ -47,7 +47,6 @@ cart = {
             total_num += parseInt(goods['num']);
         });
         dialog.success('成功');
-        $('footer').find('.cart_num').addClass('cur');
         $('footer').find('.add_num').text(total_num).addClass('current');
     },
     //修改商品数量
@@ -129,10 +128,11 @@ $(function () {
     if(user_id){
     }else{
         total_num = cart.getGoodsTotal();
-
     }
-    // $('footer').find('.cart_num').addClass('cur');
-    $('footer').find('.add_num').text(total_num).addClass('current');
+    if(total_num){
+        $('footer').find('.add_num').text(total_num).addClass('current');
+    }
+
     //加
     $('body').on('click','.gplus',function(){
         var incrementObj={};
