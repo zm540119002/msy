@@ -71,7 +71,7 @@
 					<tr>
 						<th width="100" class="text-r"><span class="c-red">*</span>快递公司：</th>
 						<td>
-							<select>
+							<select name="express_id">
 								<option value="">请选择</option>
 								{volist name="expressList" id="vo"}
 								<option value="{$vo.id}">{$vo.name}</option>
@@ -80,7 +80,7 @@
 						</td>
 					</tr>
 					<tr>
-						<th class="text-r"><span class="c-red">*</span>快递号：</th>
+						<th class="text-r"><span class="c-red">*</span>物流单号：</th>
 						<td><input type="text" style="width:300px" class="input-text" value="" placeholder="" name="express_sn"></td>
 					</tr>
 					<tr>
@@ -141,7 +141,8 @@
 
 /*			console.log(data);
 			return ;*/
-			$("#expressOrderSn").html();
+			$("#expressOrderSn").html(data.sn);
+			var id = data.id;
 			if(!$.isEmptyObject(data)){
 				var region = [];
 				region.push(data.province);
@@ -152,7 +153,59 @@
 				$("#express").append(data.detail_address);
 			}
 
-			expressDeliveryHtml();
+			var content = $('#expressDeliveryHtml');
+
+			layer.open({
+				title:['请输入发货快递信息','border-bottom:1px solid #d9d9d9;'],
+				className:'forgetWalletPasswordLayer',
+				content:content,
+				type:1,
+				area: ['800px', '310px'],
+				shadeClose:false,
+				btn:['确定发货','取消'],
+				success:function(){
+
+				},
+				yes:function(index){
+					var postForm = $('#fromExpress');
+					//var content='';
+					var data = postForm.serializeObject();
+					if(!data.express_id){
+						dialog.error('快递公司不能为空');
+						return false;
+					}
+					if(!data.express_sn){
+						dialog.error('物流单号不能为空');
+						return false;
+					}
+
+					postData = {
+						id:id,
+						express_id:data.express_id,
+						express_sn:data.express_sn
+					};
+
+					var url = module+'Order/addExpress';
+					$.post(url,postData,function (data) {
+						if(data.status){
+							location.reload();
+							dialog.success(data.info);
+							return false;
+						}
+						if(!data.status){
+							dialog.success(data.info);
+							return false;
+						}
+					},'JSON');
+				}
+			});
+
+
+
+
+
+
+			//expressDeliveryHtml();
 		});
 
 	});
@@ -178,16 +231,16 @@
 	// 发货
 	function expressDeliveryHtml(info){
 
-		var content = $('#expressDeliveryHtml').html();
+		var content = $('#expressDeliveryHtml');
 
-/*		console.log(content);
-		return false;*/
 		layer.open({
-			className:'loginLayer',
-			type:1,
-			shadeClose:false,
+			title:['请输入发货快递信息','border-bottom:1px solid #d9d9d9;'],
+			className:'forgetWalletPasswordLayer',
 			content:content,
-			btn:[''],
+			type:1,
+			area: ['800px', '310px'],
+			shadeClose:false,
+			btn:['确定发货','取消'],
 			success:function(){
 
 			},
