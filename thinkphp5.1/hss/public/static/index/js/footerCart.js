@@ -346,7 +346,6 @@ $(function () {
     // 结算订单处理 增加支付方式
     $('body').on('click','.settlement_btn',function () {
         var pay_code = $('input[name=pay_code]').val();
-        console.log(pay_code);return;
         var sn = $('input[name=order_sn]').val();
         if(!pay_code){
             dialog.error('请选择支付方式');
