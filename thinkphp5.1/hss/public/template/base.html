@@ -18,34 +18,43 @@
 <script type="text/javascript">
     //异步验证判断
     function async_verify_judge(param){
-        if(param.data.status==0){//失败回调
-            if(param.data.data.code == '1000'){//默认
+        //失败回调
+        if(param.data.status==0){
+            //默认
+            if(param.data.data.code == '1000'){
                 return false;
-            }else if(param.data.data.code == '1001'){//登录
-                //加入购物车
+            }else if(param.data.data.code == '1001'){
+                //登录
                 if(param.class=='add_cart'){
+                    //加入购物车
                     editLocalStorageCartList(param.goodsList);
                 }else{
                     loginDialogTrigger();
                 }
                 return false;
-            }else if(param.data.data.code=='1002'){//授权
+            }else if(param.data.data.code=='1002'){
+                //授权
                 return false;
             }
             dialog.error(param.data.info);
-        }else if(param.data.status==1){//成功回调
-            if(param.data.data.code == '1000'){//默认
+        }else if(param.data.status==1){
+            //成功回调
+            if(param.data.data.code == '1000'){
+                //默认
                 return false;
-            }else if(param.data.data.code == '1001'){//登录
-                //加入购物车
+            }else if(param.data.data.code == '1001'){
+                //登录
                 if(param.class=='add_cart'){
+                    //加入购物车
                 }else{
                     param.func();
                 }
                 return false;
-            }else if(param.data.data.code=='1002'){//授权
+            }else if(param.data.data.code=='1002'){
+                //授权
                 return false;
-            }else if(param.data.data.code=='1003'){//跳转
+            }else if(param.data.data.code=='1003'){
+                //跳转
                 location.href=param.jump_url;
                 return false;
             }
