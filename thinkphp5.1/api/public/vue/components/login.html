@@ -20,7 +20,7 @@
                 <div class="login_item">
                     <div class="columns_flex">
                         <span>中国(+86)</span>
-                        <input class="username user_phone input-filed" type="tel" placeholder="请输入手机号码" v-model="mobile_phone">
+                        <input class="username user_phone input-filed" type="tel" placeholder="请输入手机号码" name="mobile_phone">
                     </div>
                 </div>
                 <div class="login_item">
@@ -74,9 +74,7 @@
                 }}
             },
             data: function () {
-                return {
-                    mobile_phone:'1233'
-                };
+                return {};
             },
             methods: {
                 switchCurrent:function(param){
@@ -89,8 +87,6 @@
                         }
                     });
                 },login:function(param){
-                    console.log(this.mobile_phone);
-                    return false;
                     let postData = $('.loginLayer').find('#formLogin').serializeObject();
                     let content='';
                     if(!register.phoneCheck(postData.mobile_phone)){
