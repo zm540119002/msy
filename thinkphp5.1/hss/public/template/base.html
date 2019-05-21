@@ -35,13 +35,13 @@
             dialog.error(param.data.info);
         }else if(param.data.status==1){ //成功回调
             if(param.data.data.code == '1000'){ //默认
-                return false;
-            }else if(param.data.data.code == '1001'){ //登录
                 if(param.clickObj.attr('class')=='add_cart'){ //加入购物车
                     console.log(param._thisVue);
                 }else{
-                    param.func();
                 }
+                return false;
+            }else if(param.data.data.code == '1001'){ //登录
+                param.func();
                 return false;
             }else if(param.data.data.code=='1002'){ //授权
                 return false;
