@@ -32,7 +32,6 @@ cart = {
                     goodsList.unshift({
                         "goods_id": addGoods.goods_id,
                         "num": addGoods.num,
-                        "buy_type": addGoods.buy_type
                     });
                 }
             });
