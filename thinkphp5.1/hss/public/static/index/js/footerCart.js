@@ -47,7 +47,6 @@ cart = {
             total_num += parseInt(goods['num']);
         });
         dialog.success('成功');
-        $('footer').find('.cart_num').addClass('cur');
         $('footer').find('.add_num').text(total_num).addClass('current');
     },
     //修改商品数量
@@ -129,10 +128,11 @@ $(function () {
     if(user_id){
     }else{
         total_num = cart.getGoodsTotal();
-
     }
-    // $('footer').find('.cart_num').addClass('cur');
-    $('footer').find('.add_num').text(total_num).addClass('current');
+    if(total_num){
+        $('footer').find('.add_num').text(total_num).addClass('current');
+    }
+
     //加
     $('body').on('click','.gplus',function(){
         var incrementObj={};
@@ -284,11 +284,9 @@ $(function () {
             var signcheck=$(this).find('.sign_checkitem');
             if(signcheck.prop('checked')){
                 var goods_id=$(this).data('id');
-                var buy_type=$(this).data('buy_type');
                 var num=$(this).find('.cart_gshopping_count').val();
                 goodsList.push({
                     goods_id:goods_id,
-                    buy_type:buy_type,
                     num:num
                 });
             }
@@ -313,13 +311,11 @@ $(function () {
         $.each(oLis,function () {
             var _this=$(this);
             var goods_id=_this.data('id');
-            var buy_type=_this.data('buy_type');
             var brand_id=_this.data('brand_id');
             var brand_name=_this.data('brand_name');
             var num=_this.find('span.num').text();
             goodsList.push({
                 goods_id:goods_id,
-                buy_type:buy_type,
                 num:num,
                 brand_id:brand_id,
                 brand_name:brand_name,
@@ -434,7 +430,6 @@ function assemblyData(lis) {
     $.each(lis,function(){
         var _this = $(this);
         var num = _this.find('.gshopping_count').val();
-        var buy_type=_this.data('buy_type');
         //alert(num);
         if(!isPosIntNumberOrZero(num)){
             isInt = false;
@@ -446,7 +441,6 @@ function assemblyData(lis) {
             var tmp = {};
             tmp.goods_id = goodsId;
             tmp.num = num;
-            tmp.buy_type=buy_type;
             postData.goodsList.push(tmp);
         }
     });
@@ -544,29 +538,16 @@ function goodsNumReduce(obj,opt) {
 //单个商品数量自加
 function goodsNumPlus(obj,opt) {
     var _li = obj.parents('li');
-    var buy_type=_li.data('buy_type');
     var orderQuantity=parseInt(opt.order_quantity);
-    if(buy_type==1){
-        var num = _li.find('.gshopping_count').val();
-        num=parseInt(num);
-        if(num==0){
-            _li.find('.gshopping_count').val(opt.order_quantity);
-        }else{
-            num=num+parseInt(opt.increase_quantity);
-            _li.find('.gshopping_count').val(num);
-        }
+    var num = _li.find('.gshopping_count').val();
+    num=parseInt(num);
+    if(num==0){
+        _li.find('.gshopping_count').val(opt.order_quantity);
+    }else{
+        num=num+parseInt(opt.increase_quantity);
+        _li.find('.gshopping_count').val(num);
     }
-    
-    if(buy_type==2){
-        var num = $('.goodsInfoLayer').find('.gshopping_count').val();
-        num=parseInt(num);
-        if(num>=orderQuantity){
-            dialog.error('购买限额为'+num);
-            //return false;
-        }else{
-            $('.goodsInfoLayer').find('.gshopping_count').val(++num);
-        }
-    }
+
 }
 //购物车中单个商品数量自减
 function cartGoodsNumReduce(obj) {
@@ -698,10 +679,8 @@ function addCart(postData) {
                 dialog.success(data.info);
                 var num = 0;
                 $.each(lis,function(index,val){
-                    var buyType=$(this).data('buy_type');
-                    if(buyType==1){
-                        num += parseInt($(this).find('.gshopping_count').val());
-                    }
+                    num += parseInt($(this).find('.gshopping_count').val());
+
                 });
                 total_num = parseInt(total_num) + parseInt(num);
                 $('footer').find('.add_num').text(total_num).addClass('current');
