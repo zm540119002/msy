@@ -18,8 +18,8 @@
 <script type="text/javascript">
     //异步验证判断
     function async_verify_judge(param){
-        //失败回调
-        if(param.data.status==0){
+
+        if(param.data.status==0){//失败回调
             //默认
             if(param.data.data.code == '1000'){
                 return false;
@@ -37,8 +37,8 @@
                 return false;
             }
             dialog.error(param.data.info);
-        }else if(param.data.status==1){
-            //成功回调
+        }else if(param.data.status==1){//成功回调
+
             if(param.data.data.code == '1000'){
                 //默认
                 return false;
