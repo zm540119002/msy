@@ -83,11 +83,10 @@
             if(param.data.data.code == '1000'){ //默认
                 if(param.clickObj.attr('class')=='add_cart'){ //加入购物车
                     if(param.componentFooterCartMenu){
-                        $.each(param.componentFooterCartMenu.config.postData.goodsList,function(i,o){
+                        $.each(param.postData.goodsList,function(i,o){
                             param.componentFooterCartMenu.cart_num += o.num;
                         });
                     }
-                }else{
                 }
                 return false;
             }else if(param.data.data.code == '1001'){ //登录
@@ -96,7 +95,7 @@
             }else if(param.data.data.code=='1002'){ //授权
                 return false;
             }else if(param.data.data.code=='1003'){ //跳转
-                location.href=param.config.jump_url;
+                location.href = jump_url;
                 return false;
             }
             dialog.success(param.data.info);
@@ -105,11 +104,11 @@
     //编辑cookie里的购物车商品列表
     function editLocalStorageCartList(param,reduce){
         if(!localStorage.cartList){
-            localStorage.cartList = JSON.stringify({'goodsList':param.componentFooterCartMenu.config.postData.goodsList});
+            localStorage.cartList = JSON.stringify({'goodsList':param.componentFooterCartMenu.postData.goodsList});
         }else{
             let goodsListOld = (JSON.parse(localStorage.cartList)).goodsList;
             let goodsListNew = [];
-            $.each(param.componentFooterCartMenu.config.postData.goodsList,function(i,o){
+            $.each(param.componentFooterCartMenu.postData.goodsList,function(i,o){
                 let find = null;
                 $.each(goodsListOld,function(ii,oo){
                     if(o.goods_id == oo.goods_id){
@@ -131,7 +130,7 @@
             localStorage.cartList = JSON.stringify({'goodsList':goodsListNew});
         }
         if(param.componentFooterCartMenu){
-            $.each(param.componentFooterCartMenu.config.postData.goodsList,function(i,o){
+            $.each(param.componentFooterCartMenu.postData.goodsList,function(i,o){
                 param.componentFooterCartMenu.cart_num += o.num;
             });
         }
