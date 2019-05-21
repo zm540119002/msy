@@ -58,18 +58,62 @@
 	</div>
 </div>
 
+<section id="expressDeliveryHtml" style="display:none;">
+	<div class="f24 bomb_box">
+		<div id="deliverBox" style="" class="layui-layer-wrap">
+			<form id="deliverForm" autocomplete="off" class="nice-validator n-default" novalidate="novalidate">
+				<table class="wst-form wst-box-top">
+					<tbody>
+	<!--				<tr>
+						<th width="80">发货方式：</th>
+						<td>
+							<label>
+								<input type="radio" name="delivery_type" value="0">无需物流
+							</label>
+							<label>
+								<input type="radio" name="delivery_type" checked="" value="1">需要物流
+							</label>
+						</td>
+					</tr>-->
+					<tr class="deliver_express">
+						<th width="80">快递公司：</th>
+						<td>
+							<select id="expressId">
+								<option value="0">请选择</option>
+								{volist name="expressList" id="vo"}
+								<option value="{$vo.id}">{$vo.name}</option>
+								{/volist}
+							</select>
+						</td>
+					</tr>
+					<tr class="deliver_express">
+						<th>快递号：</th>
+						<td><input type="text" id="expressNo" maxlength="20" style="width:80%"></td>
+					</tr>
+					<tr>
+						<th>收货信息：</th>
+						<td class="user_address">北京市北京大兴区faffafaf</td>
+					</tr>
+					</tbody></table>
+			</form>
+		</div>
+	</div>
+
+</section>
+
 {/block}
 {block name="script"}
 <script type="text/javascript" src="index_admin_js/commonCrud.js"></script>
 <script type="text/javascript" src="hui_lib/My97DatePicker/4.8/WdatePicker.js"></script>
 <script type="text/javascript">
 	$(function () {
+
 		//加载第一页 这个需要配置公用???
 		var config = {
 			url:controller+'getList'
 		};
 		var getData = $('#form1').serializeObject();
-		//getPagingList(config,getData);
+		getPagingList(config,getData);
 
 		//翻页
 		$('body').on('click','.pager2',function(){
@@ -95,6 +139,10 @@
 			var getData = $('#form1').serializeObject();
 			getPagingList(config,getData);
 		});
+		$("body").on('click','.ship',function(){
+			expressDeliveryHtml();
+		});
+
 	});
 
 	// 日期
@@ -113,6 +161,67 @@
 			}else{
 				WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'%y-%M-%d'})}
 		}
+	}
+
+	// 发货
+	function expressDeliveryHtml(info){
+		var content = $('#expressDeliveryHtml').html();
+		layer.open({
+			title:['请输入发货快递信息','border-bottom:1px solid #d9d9d9;'],
+			className:'forgetWalletPasswordLayer',
+			content:content,
+			type:1,
+			shadeClose:false,
+			btn:['确定发货','取消'],
+			success:function(){
+
+			
+			},
+			yes:function(index){
+				var postForm = $('.forgetWalletPasswordLayer #ForgetWalletPassword');
+				var content='';
+				var postData = postForm.serializeObject();
+
+				var oLis=$('.forgetWalletPasswordLayer input.password_item');
+				var password='';
+				for(var i=0;i<oLis.length;i++){
+					password=password+$(oLis[i]).val();
+				}
+				postData.password = password;
+
+				if(!register.vfyCheck(postData.captcha)){
+					content = "请输入正确的验证码";
+				}else if(!postData.password&&postData.password.length<6){
+					content = "请输入6位数字的密码";
+				}
+				if(content){
+					dialog.error(content);
+					return false;
+				}
+
+				var url = module+'Wallet/forgetPassword';
+				$.post(url,postData,function (data) {
+					if(data.status){
+						layer.closeAll();
+						layer.open({
+							content : '设置成功',
+							time : 1,
+							skin: 'msg',
+							end : function(){
+								if(info.jump_url){
+									location.href=info.jump_url;
+								}
+							}
+						});
+						return true;
+					}
+					if(!data.status){
+						dialog.success(data.info);
+						return false;
+					}
+				},'JSON');
+			}
+		});
 	}
 
 </script>

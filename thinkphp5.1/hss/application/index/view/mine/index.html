@@ -60,9 +60,6 @@
                 <p class="user_mobile">{$user.mobile_phone}</p>
             </div>
         </div>
-        <!--<a href="javascript:void(0);" id="logout_dialog" class="sign_out">
-            退出>
-        </a>-->
         <a href="javascript:void(0);" class="customer_info">
             <img src="public_img/modify.png" alt="">
         </a>
@@ -94,27 +91,18 @@
                 <span class="brand"></span>
                 代金券
             </a>
-            <a href="{:url('Wallet/index')}" class="person-td">
-                <span class="charge"></span>
-                采购充值
-            </a>
-<!--            <a href="javascript:void(0)" class="person-td">
+            <a href="javascript:void(0)" class="person-td async_login" data-jump_url="{:url('Wallet/index')}">
                 <span class="pur_wallet"></span>
                 采购钱包
-            </a>-->
-            <a href="{:url('income/index')}" class="person-td recharge">
+            </a>
+            <a href="javascript:void(0)" class="person-td async_login" data-jump_url="{:url('income/index')}">
                 <span class="s_wallet"></span>
                 收益钱包
             </a>
-
         </div>
     </section>
     <section class="separation-line">
         <div class="flex_item">
-            <!--<a href="javascript:void(0)" class="person-td async_login my_cart"  data-jump_url="{:url('Cart/index')}">-->
-                <!--<span class="cart"></span>-->
-                <!--采购车-->
-            <!--</a>-->
             <a href="{:url('index/cartIndex')}" class="person-td my_cart" >
                 <span class="cart"></span>
                 采购车

@@ -9,7 +9,6 @@
 			<span>推荐套餐包含产品(产品数量可增加套餐价格将调整)</span>
 		</div>
 		<!--产品列表-->
-		<!--产品列表-->
 		<ul class="goods_list list" id="list">
 			<div id="product-select">
 				<product-select
@@ -87,23 +86,23 @@
 		postData.id = '{$info.id}';
 		getJsonList(config,postData);
 		// 购物车里商品数量
-		var total_num = "{$total_num}";
+//		var total_num = "{$total_num}";
+//		if(!total_num || total_num=='null'){
+//			//获取存储购物车商品信息
+//			var cartListOld = localStorage.cartList;
+//			if(cartListOld){
+//				total_num = 0;
+//				var jsonstr = JSON.parse(cartListOld);
+//				var goodsList = jsonstr.goodsList;
+//				//计算总数
+//				$.each(goodsList,function(i,goods){
+//					total_num += parseInt(goods['num']);
+//				});
+//			}
+//		}
 
-		if(!total_num || total_num=='null'){
-
-			var cartListOld = localStorage.cartList;//获取存储购物车商品信息
-			if(cartListOld){
-				total_num = 0;
-				var jsonstr = JSON.parse(cartListOld);
-				var goodsList = jsonstr.goodsList;
-				//计算总数
-				$.each(goodsList,function(i,goods){
-					total_num += parseInt(goods['num']);
-				});
-			}
-		}
 		let param = {
-			cart_init_num:parseInt(total_num)
+			cart_init_num:0
 		};
 		new Vue({
 			el: '#foot_cart_menu',

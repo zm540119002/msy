@@ -5,6 +5,20 @@ class Order extends Base{
     //首页
     public function manage(){
 
+        $modelExpress = new \app\index_admin\model\Express();
+        $condition = [
+            'field' => [
+                'id','name'
+            ], 'where' => [
+                ['status','=',1]
+            ],'order'  => [
+                'order' => 'desc',
+                'letter'=> 'asc'
+            ]
+        ];
+        $expressList = $modelExpress->getList($condition);
+        $this->assign('expressList',$expressList);
+
         return $this->fetch();
     }
 
@@ -13,55 +27,53 @@ class Order extends Base{
      */
     public function getList(){
 
-        $model = new \app\index_admin\model\Goods();
+// 获取表的所有字段
+/*        $model = new \app\index_admin\model\Order();
+        $table = $model->getTableFields();
+        foreach($table as $k => $v){
+            $table[$k] = "'".$v."'";
+        }
+        $table = implode(',',$table);
 
-        $where[] = ['g.status','=',0];
+        p($table);
+        exit;*/
 
-        if($category_id_1 = input('category_id_1/d')){
-            $where[] = ['g.category_id_1','=',$category_id_1];
+        $where = [
+            ['o.status','=',0],
+            ['o.order_status','<>',0],
+        ];
+
+        if($pay_code = input('pay_code/d')){
+            $where[] = ['o.pay_code','=',$pay_code];
         }
-        if($category_id_2 = input('category_id_2/d')){
-            $where[] = ['g.category_id_2','=',$category_id_2];
+        if($after_sale_status = input('after_sale_status/d')){
+            $where[] = ['o.after_sale_status','=',$after_sale_status];
         }
-        if($category_id_3 = input('category_id_3/d')){
-            $where[] = ['g.category_id_3','=',$category_id_3];
-        }
-        if($belong_to = input('belong_to/d')){ // 经过特别处理
-            $where[] = ['g.belong_to','=',$belong_to];
-        }
-        if($shelf_status = input('shelf_status/d')){
-            $where[] = ['g.shelf_status','=',$shelf_status];
+        if($order_status = input('order_status/d')){
+            $where[] = ['o.order_status','=',$order_status];
         }
 
         $keyword = input('get.keyword','','string');
         if($keyword){
-            $where[] = ['g.name','like', '%' . trim($keyword) . '%'];
+            $where[] = ['o.sn','like', '%' . trim($keyword) . '%'];
         }
         $config = [
-            'where'=>$where,
             'field'=>[
-                'g.id','g.name','g.bulk_price','g.sample_price','g.sort','g.is_selection',
-                'g.thumb_img','g.shelf_status','g.create_time','g.rq_code_url','g.belong_to'
-//                'g.category_id_1',
-//                'gc1.name as category_name_1'
+                'u.mobile_phone',
+                'o.id','o.sn','o.order_status','o.after_sale_status','o.pay_code','o.user_id', 'o.create_time',
+            ],'where'=>$where,
+            'join' => [
+                ['common.user u','o.user_id = u.id'],
             ],
-//            'join' => [
-//                ['goods_category gc1','gc1.id = g.category_id_1'],
-//            ],
             'order'=>[
-                'g.sort'=>'desc',
-                'g.id'=>'desc',
+                'o.id'=>'desc',
             ],
         ];
 
+        $model = new \app\index_admin\model\Order();
         $list = $model ->pageQuery($config);
 
         $this->assign('list',$list);
-        if($_GET['pageType'] == 'layer'){
-            return view('goods/list_layer_tpl');
-        }
-        if($_GET['pageType'] == 'manage'){
-            return view('goods/list_tpl');
-        }
+        return view('list_tpl');
     }
 }

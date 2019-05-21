@@ -56,10 +56,12 @@
                 <div  v-if="display_pic" class="product_name">
                     <p class="text-intro">{{product_name}}</p>
                 </div>
-                <div class="quantity_wrapper selected-number">
+                <div class="quantity_wrapper selected-number" v-if="add_cart_type==1">
                     <a href="javascript:void(0);" class="reduce" @click="reduce">-</a>
                     <input type="text" :value="buy_quantity" class="f24 product_count" readonly="readonly">
                     <a href="javascript:void(0);" class="plus" @click="plus">+</a>
+                </div><div class="quantity_wrapper selected-number" v-else-if="add_cart_type==2">
+                    <a href="javascript:void(0);" class="add-cart"></a>
                 </div>
             </div>
         </div>
@@ -80,6 +82,7 @@
                 product_src: {type: String,default: ''},
                 product_url: {type: String,default: ''},
                 quota_quantity: {type: Number,default: 1},
+                add_cart_type: {type: Number,default: 1},
                 deal_price: {type: Number,required: true},
                 init_quantity: {type: Number,default: 0},
                 step_quantity: {type: Number,default: 1},
@@ -163,34 +166,34 @@
             <a href="javascript:void(0);" v-for="menu in menus" :data-jump_url="menu.action" :class="menu.class">
                 {{menu.name}}
                 <!-- 全选 -->
-                <div v-if="menu.class.indexOf('checked_all')!==-1">
+                <div v-if="menu.class.indexOf('checked_all')!==-1" class="checked_all">
                     <input type="checkbox" class="check-all">
                     <label for="" class="left">全选</label>
                 </div>
                 <!-- 总金额 -->
-                <div v-else-if="menu.class.indexOf('amount')!==-1">
+                <div v-else-if="menu.class.indexOf('amount')!==-1" class="amount">
                     <span class="total_amount">￥{{ parseFloat(total_amount).toFixed(2) }}</span>
                 </div>
                 <!-- 购物篮 -->
-                <div v-else-if="menu.class.indexOf('add_cart_icon')!==-1" @click="jump_url">
+                <div v-else-if="menu.class.indexOf('add_cart_icon')!==-1" class="add_cart_icon" @click="jump_url">
                     <span class="add_num current" v-if="cart_num > 99">99+</span>
                     <span class="add_num current" v-else-if="cart_num > 1">{{ cart_num }}</span>
                     <span class="add_num current" v-else></span>
                 </div>
                 <!-- 加入购物车 -->
-                <div v-else-if="menu.class.indexOf('add_cart')!==-1" @click="addCart">
+                <div v-else-if="menu.class.indexOf('add_cart')!==-1" class="add_cart" @click="asyncVerify">
                     <span class="s_i"></span>
                 </div>
                 <!-- 立即购买 -->
-                <div v-else-if="menu.class.indexOf('buy_now')!==-1" @click="asyncVerify">
+                <div v-else-if="menu.class.indexOf('buy_now')!==-1" class="buy_now" @click="asyncVerify">
                     <span class="s_i"></span>
                 </div>
                 <!-- 提交订单 -->
-                <div v-else-if="menu.class.indexOf('confirm_order')!==-1" @click="asyncVerify">
+                <div v-else-if="menu.class.indexOf('confirm_order')!==-1" class="confirm_order" @click="asyncVerify">
                     <span class="s_i"></span>
                 </div>
                 <!-- 默认 -->
-                <div v-else>
+                <div v-else class="default">
                     <span class="s_i"></span>
                 </div>
             </a>
@@ -231,16 +234,18 @@
                             location.href = jump_url;
                         }
                     },asyncVerify:function(event){
-                        let _this = $(event.currentTarget);
+                        let _thisJquery = $(event.currentTarget);
+                        let _thisVue = this;
                         login_success_callback_private = function(){
-                            _this.click();
+                            _thisJquery.click();
                         };
                         register_success_callback_private = function(){
-                            _this.click();
+                            _thisJquery.click();
                         };
-                        let jump_url = _this.parent().data('jump_url');
+                        let jump_url = _thisJquery.parent().data('jump_url');
                         if(!this.postData.goodsList.length){
                             dialog.error('请选择商品！');
+                            return false;
                         }
                         //异步验证
                         if(jump_url){
@@ -260,105 +265,14 @@
                                     //异步验证判断
                                     let param = {
                                         data:data,
+                                        class:_thisJquery.attr('class'),
+                                        goodsList:_thisVue.postData.goodsList,
                                         jump_url:data.data.url?data.data.url:jump_url,
                                         func:function(){
-                                            _this.click();
+                                            _thisJquery.click();
                                         }
                                     };
                                     async_verify_judge(param);
-                                }
-                            });
-                        }
-                    },addCart:function(){
-                        let _This = this;
-                        let _this = $(event.currentTarget);
-                        login_success_callback_private = function(){
-                            _this.click();
-                        };
-                        let jump_url = _this.parent().data('jump_url');
-
-                        if(!this.postData.goodsList.length){
-                            dialog.error('请选择商品！');
-                        }
-                        let postData = this.postData;
-
-                        // 异步验证
-                        if(jump_url){
-                            $.ajax({
-                                url: jump_url,
-                                data: postData,
-                                type: 'post',
-                                beforeSend: function(xhr){
-                                    $('.loading').show();
-                                },
-                                error:function(xhr){
-                                    $('.loading').hide();
-                                    dialog.error('AJAX错误');
-                                },
-                                success: function(data){
-                                    $('.loading').hide();
-                                    //异步验证判断
-                                    let param = {
-                                        data:data,
-                                        jump_url:data.data.url?data.data.url:jump_url,
-                                        func:function(){
-                                            _this.click();
-                                        }
-                                    };
-                                    // 没登陆的回调
-                                    if(param.data.status==0){
-                                        var cartListOld = localStorage.cartList;//获取存储购物车商品信息
-                                        if (cartListOld == null || cartListOld == "") {
-                                            //第一次加入商品
-                                            var cartList = JSON.stringify(postData);
-                                            localStorage.setItem('cartList',cartList);
-                                            var goodsList = postData.goodsList;
-                                        }else {
-                                            var jsonstr = JSON.parse(cartListOld);
-                                            var goodsList = jsonstr.goodsList;
-                                            var addGoodsList = postData.goodsList;
-                                            //查找购物车中是否有该商品
-                                            $.each(addGoodsList,function(i,addGoods){
-                                                var find = false;
-                                                $.each(goodsList,function(j,goods){
-                                                    if(addGoods.goods_id == goods.goods_id && addGoods.buy_type == goods.buy_type){
-                                                        //找到修改数量
-                                                        find = true;
-                                                        goodsList[j].num = parseInt(addGoods.num) + parseInt(goods.num);
-                                                        return;
-                                                    }
-                                                });
-                                                if(!find){
-                                                    //没有该商品就直接加进去
-                                                    goodsList.unshift({
-                                                        "goods_id": addGoods.goods_id,
-                                                        "num": addGoods.num,
-                                                        "buy_type": addGoods.buy_type
-                                                    });
-                                                }
-                                            });
-                                            var cartList = {
-                                                goodsList:goodsList
-                                            };
-                                            //保存购物车
-                                            localStorage.setItem('cartList',JSON.stringify(cartList));
-                                        }
-                                        //计算总数
-                                        var total_num = 0;
-                                        $.each(goodsList,function(i,goods){
-                                            total_num += parseInt(goods['num']);
-                                        });
-                                        _This.cart_num = total_num;
-                                        dialog.success('加入购物车成功');
-                                    }else{
-                                        var total_num = 0;
-                                        $.each(postData.goodsList,function(i,goods){
-                                            total_num += parseInt(goods['num']);
-                                        });
-                                        _This.cart_num = _This.cart_num+total_num;
-                                        dialog.success('加入购物车成功');
-                                        async_verify_judge(param);
-                                    }
                                 }
                             });
                         }
