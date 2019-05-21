@@ -18,29 +18,34 @@
 <script type="text/javascript">
     //异步验证判断
     function async_verify_judge(param){
-        if(param.data.status==0){
-            if(param.data.data.code == '1001'){
+        if(param.data.status==0){//失败回调
+            if(param.data.data.code == '1000'){//默认
+                return false;
+            }else if(param.data.data.code == '1001'){//登录
                 //加入购物车
                 if(param.class=='add_cart'){
                     editLocalStorageCartList(param.goodsList);
-                    return false;
                 }else{
-                    //未登录
                     loginDialogTrigger();
-                    return false;
                 }
-            }else if(param.data.data.code=='1002'){
+                return false;
+            }else if(param.data.data.code=='1002'){//授权
                 return false;
             }
             dialog.error(param.data.info);
-        }else if(param.data.status==1){
-            if(param.data.data.code == '1001'){
-                //已登录
-                param.func();
+        }else if(param.data.status==1){//成功回调
+            if(param.data.data.code == '1000'){//默认
                 return false;
-            }else if(param.data.data.code=='1002'){
+            }else if(param.data.data.code == '1001'){//登录
+                //加入购物车
+                if(param.class=='add_cart'){
+                }else{
+                    param.func();
+                }
                 return false;
-            }else if(param.data.data.code=='1003'){
+            }else if(param.data.data.code=='1002'){//授权
+                return false;
+            }else if(param.data.data.code=='1003'){//跳转
                 location.href=param.jump_url;
                 return false;
             }
@@ -75,6 +80,7 @@
             //保存购物车
             localStorage.cartList = JSON.stringify({'goodsList':goodsListNew});
         }
+        _thisVue.cart_num += goodsList.length;
         dialog.success('加入购物车成功！');
     }
     //删除cookie里的购物车商品列表
