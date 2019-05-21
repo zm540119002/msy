@@ -680,7 +680,7 @@ function addCart(postData) {
                 var num = 0;
                 $.each(lis,function(index,val){
                     num += parseInt($(this).find('.gshopping_count').val());
-                   
+
                 });
                 total_num = parseInt(total_num) + parseInt(num);
                 $('footer').find('.add_num').text(total_num).addClass('current');
