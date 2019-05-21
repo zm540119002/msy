@@ -100,8 +100,13 @@
                 goodsListNew.push(o);
             }
         });
-        //保存购物车
-        localStorage.cartList = JSON.stringify({'goodsList':goodsListNew});
+        if(goodsListNew.length){
+            //保存购物车
+            localStorage.cartList = JSON.stringify({'goodsList':goodsListNew});
+        }else{
+            //保存购物车
+            localStorage.cartList = '';
+        }
     }
 </script>
 {/block}
