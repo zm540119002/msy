@@ -61,6 +61,7 @@ class Order extends Base{
             'field'=>[
                 'u.mobile_phone',
                 'o.id','o.sn','o.order_status','o.after_sale_status','o.pay_code','o.user_id', 'o.create_time',
+                'o.province','o.city','o.area'
             ],'where'=>$where,
             'join' => [
                 ['common.user u','o.user_id = u.id'],
