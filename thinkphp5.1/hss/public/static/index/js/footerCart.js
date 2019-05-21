@@ -124,15 +124,6 @@ cart = {
 
 
 $(function () {
-    //初始化购物车数量
-    if(user_id){
-    }else{
-        total_num = cart.getGoodsTotal();
-    }
-    if(total_num){
-        $('footer').find('.add_num').text(total_num).addClass('current');
-    }
-
     //加
     $('body').on('click','.gplus',function(){
         var incrementObj={};

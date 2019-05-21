@@ -138,6 +138,9 @@
                     }];
                     editLocalStorageCartList(goodsList,true);
                 },plusCart: function () {
+                    let param = {
+
+                    };
                     let goodsList = [{
                         goods_id:this.product_id,
                         num:this.step_quantity
@@ -252,47 +255,15 @@
                     },asyncVerify:function(event){
                         let _thisJquery = $(event.currentTarget);
                         let _thisVue = this;
-                        login_success_callback_private = function(){
-                            _thisJquery.click();
+                        let config = {
+                            obj:_thisJquery,
+                            postData:_thisVue.postData,
+                            componentFooterCartMenu:_thisVue,
+                            func:function(){
+                                _thisJquery.click();
+                            }
                         };
-                        register_success_callback_private = function(){
-                            _thisJquery.click();
-                        };
-                        let jump_url = _thisJquery.parent().data('jump_url');
-                        if(!this.postData.goodsList.length){
-                            dialog.error('请选择商品！');
-                            return false;
-                        }
-                        //异步验证
-                        if(jump_url){
-                            $.ajax({
-                                url: jump_url,
-                                data: this.postData,
-                                type: 'post',
-                                beforeSend: function(xhr){
-                                    $('.loading').show();
-                                },
-                                error:function(xhr){
-                                    $('.loading').hide();
-                                    dialog.error('AJAX错误');
-                                },
-                                success: function(data){
-                                    $('.loading').hide();
-                                    //异步验证判断
-                                    let param = {
-                                        data:data,
-                                        _thisVue:_thisVue,
-                                        class:_thisJquery.attr('class'),
-                                        goodsList:_thisVue.postData.goodsList,
-                                        jump_url:data.data.url?data.data.url:jump_url,
-                                        func:function(){
-                                            _thisJquery.click();
-                                        }
-                                    };
-                                    async_verify_judge(param);
-                                }
-                            });
-                        }
+                        asyncVerify(config);
                     },editProductList:function(param){
                         let productInfo = {
                             'goods_id':param.product_id,

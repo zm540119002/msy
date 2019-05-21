@@ -212,27 +212,30 @@
         });
     }
     var login_success_callback_common = function(param){
-        add_cart_callback_common();
+        //localStorage.cartList 入库
+        add_localStorage_cartList();
         layer.close(param.index);
     };
     var register_success_callback_common = function(){
         layer.close(param.index);
     };
-    var add_cart_callback_common = function(param) {
-        //获取存储购物车商品信息
-        var cartListOld = localStorage.cartList;
-        if (cartListOld) {
-            var postData = JSON.parse(cartListOld);
+    //localStorage.cartList 入库
+    var add_localStorage_cartList = function() {
+        if (localStorage.cartList) {
+            var postData = JSON.parse(localStorage.cartList);
             $.ajax({
                 url: module + 'Cart/addCart',
                 data: postData,
                 type: 'post',
-                beforeSend: function (xhr) {},
+                beforeSend: function (xhr) {
+                    $('.loading').show();
+                },
                 error: function (xhr) {
                     $('.loading').hide();
                     dialog.error('AJAX错误');
                 },
                 success: function (data) {
+                    $('.loading').hide();
                     localStorage.removeItem("cartList")
                 }
             });
