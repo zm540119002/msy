@@ -79,8 +79,6 @@
             //保存购物车
             localStorage.cartList = JSON.stringify({'goodsList':goodsListNew});
         }
-        console.log(param._thisVue.cart_num);
-        console.log(param.goodsList);
         $.each(param.goodsList,function(i,o){
             param._thisVue.cart_num += o.num;
         });
