@@ -27,7 +27,7 @@
                 //登录
                 if(param.class=='add_cart'){
                     //加入购物车
-                    editLocalStorageCartList(param.goodsList);
+                    editLocalStorageCartList(param);
                 }else{
                     loginDialogTrigger();
                 }
@@ -64,11 +64,11 @@
     //编辑cookie里的购物车商品列表
     function editLocalStorageCartList(goodsList,reduce){
         if(!localStorage.cartList){
-            localStorage.cartList = JSON.stringify({'goodsList':goodsList});
+            localStorage.cartList = JSON.stringify({'goodsList':param.goodsList});
         }else{
             let goodsListOld = (JSON.parse(localStorage.cartList)).goodsList;
             let goodsListNew = [];
-            $.each(goodsList,function(i,o){
+            $.each(param.goodsList,function(i,o){
                 let find = null;
                 $.each(goodsListOld,function(ii,oo){
                     if(o.goods_id == oo.goods_id){
@@ -89,7 +89,7 @@
             //保存购物车
             localStorage.cartList = JSON.stringify({'goodsList':goodsListNew});
         }
-        _thisVue.cart_num += goodsList.length;
+        param._thisVue.cart_num += param.goodsList.length;
         dialog.success('加入购物车成功！');
     }
     //删除cookie里的购物车商品列表
