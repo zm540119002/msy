@@ -88,8 +88,8 @@
 		// 购物车里商品数量
 		var total_num = "{$total_num}";
 		//获取存储购物车商品信息
-		var cartListOld = localStorage.cartList;
 		if(!total_num && total_num != 'null'){
+			var cartListOld = localStorage.cartList;
 			var jsonstr = JSON.parse(cartListOld);
 			var goodsList = jsonstr.goodsList;
 			//计算总数
