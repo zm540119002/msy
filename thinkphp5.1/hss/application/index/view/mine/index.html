@@ -144,6 +144,13 @@
 {block name="common"}
 {include file="template/wallet_pay_dialog.html" /}
 {/block}
+{block name="login_dialog"}
+{include file="../../api/public/vue/components/login.html" /}
+<script type="text/javascript">
+    var login_success_callback_private = function(){};
+    var register_success_callback_private = function(){};
+</script>
+{/block}
 {block name="footer"}
 {include file="template/footer_project.html" /}
 {/block}
