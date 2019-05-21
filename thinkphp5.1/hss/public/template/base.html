@@ -49,31 +49,27 @@
     }
     //编辑cookie里的购物车商品列表
     function editLocalStorageCartList(goodsList,reduce){
-        console.log(localStorage.cartList);
         if(!localStorage.cartList){
             localStorage.cartList = JSON.stringify({'goodsList':goodsList});
         }else{
             let goodsListOld = (JSON.parse(localStorage.cartList)).goodsList;
             let goodsListNew = [];
-            let find = false;
-            $.each(goodsListOld,function(i,o){
-                let goodsNotFind = null;
-                $.each(goodsList,function(ii,oo){
+            $.each(goodsList,function(i,o){
+                let find = null;
+                $.each(goodsListOld,function(ii,oo){
                     if(o.goods_id == oo.goods_id){
                         if(reduce && reduce==='true'){
-                            o.num -= oo.num;
+                            oo.num -= o.num;
                         }else{
-                            o.num += oo.num;
+                            oo.num += o.num;
                         }
-                        find = true;
-                    }else{
-                        goodsNotFind = oo;
+                        find = oo;
                     }
                 });
                 if(find){
-                    goodsListNew.push(o);
+                    goodsListNew.unshift(find);
                 }else{
-                    goodsListNew.push(goodsNotFind);
+                    goodsListNew.unshift(o);
                 }
             });
             //保存购物车
@@ -99,8 +95,13 @@
                 goodsListNew.push(o);
             }
         });
-        //保存购物车
-        localStorage.cartList = JSON.stringify({'goodsList':goodsListNew});
+        if(goodsListNew.length){
+            //保存购物车
+            localStorage.cartList = JSON.stringify({'goodsList':goodsListNew});
+        }else{
+            //保存购物车
+            localStorage.cartList = '';
+        }
     }
 </script>
 {/block}
