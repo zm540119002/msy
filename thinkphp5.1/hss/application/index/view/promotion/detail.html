@@ -92,9 +92,8 @@
 			let goodsList = (JSON.parse(localStorage.cartList)).goodsList;
 			//计算总数
 			$.each(goodsList,function(i,goods){
-				total_num += parseInt(goods['num']);
+				total_num += goods['num'];
 			});
-
 		}
 		let param = {
 			cart_init_num:total_num
