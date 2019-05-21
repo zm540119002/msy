@@ -134,13 +134,14 @@
 		});
 		$("body").on('click','.ship',function(){
 
-			expressDeliveryHtml();
+
 
 			// 省市id转换成字符地址
 			var data=$(this).parents('tr').find(".consigneeInfo").serializeObject();
 
 /*			console.log(data);
 			return ;*/
+			$("#expressOrderSn").html();
 			if(!$.isEmptyObject(data)){
 				var region = [];
 				region.push(data.province);
@@ -148,7 +149,10 @@
 				region.push(data.area);
 
 				$("#express").setArea(region);
+				$("#express").append(data.detail_address);
 			}
+
+			expressDeliveryHtml();
 		});
 
 	});
@@ -174,18 +178,16 @@
 	// 发货
 	function expressDeliveryHtml(info){
 
-
-
-
 		var content = $('#expressDeliveryHtml').html();
+
+/*		console.log(content);
+		return false;*/
 		layer.open({
-			title:['请输入发货快递信息','border-bottom:1px solid #d9d9d9;'],
-			className:'forgetWalletPasswordLayer',
-			content:content,
+			className:'loginLayer',
 			type:1,
-			area: ['800px', '310px'],
 			shadeClose:false,
-			btn:['确定发货','取消'],
+			content:content,
+			btn:[''],
 			success:function(){
 
 			},
