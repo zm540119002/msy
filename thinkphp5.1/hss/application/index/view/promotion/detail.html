@@ -87,17 +87,17 @@
 		getJsonList(config,postData);
 		// 购物车里商品数量
 		var total_num = "{$total_num}";
-		total_num = 1;
+		console.log(total_num);
 		//获取存储购物车商品信息
-//		if(!total_num || total_num != 'null'){
-//			var cartListOld = localStorage.cartList;
-//			var jsonstr = JSON.parse(cartListOld);
-//			var goodsList = jsonstr.goodsList;
-//			//计算总数
-//			$.each(goodsList,function(i,goods){
-//				total_num = parseInt(total_num) + parseInt(goods['num']);
-//			});
-//		}
+		if(!total_num || total_num != 'null'){
+			var cartListOld = localStorage.cartList;
+			var jsonstr = JSON.parse(cartListOld);
+			var goodsList = jsonstr.goodsList;
+			//计算总数
+			$.each(goodsList,function(i,goods){
+				total_num = parseInt(total_num) + parseInt(goods['num']);
+			});
+		}
 		let param = {
 			cart_init_num:parseInt(total_num)
 		};
