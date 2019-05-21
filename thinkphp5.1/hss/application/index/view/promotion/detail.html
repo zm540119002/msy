@@ -96,7 +96,7 @@
 			var goodsList = jsonstr.goodsList;
 			//计算总数
 			$.each(goodsList,function(i,goods){
-				total_num += parseInt(goods['num']);
+				total_num = parseInt(total_num) + parseInt(goods['num']);
 			});
 		}
 		console.log(parseInt(total_num));
