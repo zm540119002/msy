@@ -61,13 +61,13 @@
                 <tr>
                     <td class=dotted_bottom_gray height=40 width="11%" align=right>起订数量：</td>
                     <td class=dotted_bottom_gray width="89%" align=left>
-                        <input style="width: 200px;" class="inputboxadmin" name="minimum_order_quantity" value="{$info.minimum_order_quantity}">
+                        <input style="width: 200px;" class="inputboxadmin" name="minimum_order_quantity" value="{$info.minimum_order_quantity|default=1}">
                     </td>
                 </tr>
                 <tr>
                     <td class=dotted_bottom_gray height=40 width="11%" align=right>起订递增数量：</td>
                     <td class=dotted_bottom_gray width="89%" align=left>
-                        <input style="width: 200px;" class="inputboxadmin" name="increase_quantity" value="{$info.increase_quantity}">
+                        <input style="width: 200px;" class="inputboxadmin" name="increase_quantity" value="{$info.increase_quantity|default=1}">
                     </td>
                 </tr>
 
@@ -185,20 +185,19 @@
         autoHeightEnabled: true,
         autoFloatEnabled: true
     });
-    var ueDetail = UE.getEditor('detail_img', {
+
+    var config_img = {
         toolbars: [
             ['imagenone', 'imageleft', 'imageright', 'imagecenter', 'simpleupload', 'insertimage']
         ],
         autoHeightEnabled: true,
-        autoFloatEnabled: true
-    });
-    var ueNotices = UE.getEditor('main_img', {
-        toolbars: [
-            ['imagenone', 'imageleft', 'imageright', 'imagecenter', 'simpleupload', 'insertimage']
-        ],
-        autoHeightEnabled: true,
-        autoFloatEnabled: true
-    });
+        autoFloatEnabled: true,
+        initialFrameWidth: '100%'
+    };
+
+    var ueNotices   = UE.getEditor('main_img',config_img);
+    var ueDetail = UE.getEditor('detail_img',config_img);
+
 </script>
 <script type="text/javascript" src="api_common_js/admin/categoryLinkage.js"></script>
 <script type="text/javascript">
