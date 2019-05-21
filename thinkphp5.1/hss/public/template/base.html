@@ -95,7 +95,7 @@
             }else if(param.data.data.code=='1002'){ //授权
                 return false;
             }else if(param.data.data.code=='1003'){ //跳转
-                location.href = jump_url;
+                location.href = param.jump_url;
                 return false;
             }
             dialog.success(param.data.info);
