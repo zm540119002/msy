@@ -87,7 +87,6 @@
 		getJsonList(config,postData);
 		// 购物车里商品数量
 		var total_num = "{$total_num}";
-		total_num = 1;
 		if(!total_num || total_num=='null'){
 			//获取存储购物车商品信息
 			var cartListOld = localStorage.cartList;
@@ -139,6 +138,18 @@
 </script>
 <script type="text/javascript">
 	$(function(){
+		var add = function(x){
+			var sum = 0;
+			var tmp = function(x){
+				sum = sum + x;
+				return tmp;
+			};
+			tmp.toString = function(){
+				return sum;
+			};
+			return tmp;
+		};
+		console.log(add(100)(2)(3));
 		var date=getWeek();
 		countDown(date,$('#countDownBox'));
 		// 后加载简介
