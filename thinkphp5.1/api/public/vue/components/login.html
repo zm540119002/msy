@@ -20,7 +20,7 @@
                 <div class="login_item">
                     <div class="columns_flex">
                         <span>中国(+86)</span>
-                        <input class="username user_phone input-filed" type="tel" placeholder="请输入手机号码" :mobile_phone="loginData.mobile_phone">
+                        <input class="username user_phone input-filed" type="tel" placeholder="请输入手机号码" :loginData="mobile_phone">
                     </div>
                 </div>
                 <div class="login_item">
@@ -75,9 +75,7 @@
             },
             data: function () {
                 return {
-                    loginData:{
-                        mobile_phone:''
-                    }
+                    loginData:''
                 };
             },
             methods: {
