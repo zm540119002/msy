@@ -54,9 +54,8 @@
         }else{
             let goodsListOld = (JSON.parse(localStorage.cartList)).goodsList;
             let goodsListNew = [];
-            let find = false;
             $.each(goodsList,function(i,o){
-                let goodsNotFind = null;
+                let find = null;
                 $.each(goodsListOld,function(ii,oo){
                     if(o.goods_id == oo.goods_id){
                         if(reduce && reduce==='true'){
@@ -64,13 +63,11 @@
                         }else{
                             oo.num += o.num;
                         }
-                        find = true;
-                    }else{
-                        goodsNotFind = oo;
+                        find = oo;
                     }
                 });
                 if(find){
-                    goodsListNew.push(goodsNotFind);
+                    goodsListNew.push(find);
                 }else{
                     goodsListNew.push(o);
                 }
