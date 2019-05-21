@@ -17,20 +17,6 @@
                             {include file="goods_category/linkage_tpl" /}
                         </td>
                     </tr>
-<!--                    <tr>
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>商品归属：</td>
-                        <td class=dotted_bottom_gray width="89%" align=left>
-                            <div class="type_item">
-                                {volist name="$Think.config.custom.belong_to" id ='vo' key="k"}
-                                    {if ($info.belong_to[$k-1])}
-                                        <input type="checkbox" name="belong_to" value="" checked="checked">{$vo}
-                                    {else /}
-                                        <input type="checkbox" name="belong_to" value="">{$vo}
-                                    {/if}
-                                {/volist}
-                            </div>
-                        </td>
-                    </tr>-->
                     <tr>
                         <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>商品名称：</td>
                         <td class=dotted_bottom_gray width="40%" align=left>
@@ -169,6 +155,15 @@
     <script src="https://cdn.bootcss.com/html5media/1.1.8/html5media.min.js"></script>
     <!-- 实例化编辑器 -->
     <script type="text/javascript">
+        var config_img = {
+            toolbars: [
+                ['imagenone', 'imageleft', 'imageright', 'imagecenter', 'simpleupload', 'insertimage']
+            ],
+            autoHeightEnabled: true,
+            autoFloatEnabled: true,
+            initialFrameWidth: '100%'
+        };
+
         var ueParam = UE.getEditor('param', {
             toolbars: [
                 [  'fullscreen', 'source', '|', 'undo', 'redo', '|',
@@ -185,20 +180,10 @@
             autoHeightEnabled: true,
             autoFloatEnabled: true
         });
-        var ueDetail = UE.getEditor('detail_img', {
-            toolbars: [
-                ['imagenone', 'imageleft', 'imageright', 'imagecenter', 'simpleupload', 'insertimage']
-            ],
-            autoHeightEnabled: true,
-            autoFloatEnabled: true
-        });
-        var ueNotices = UE.getEditor('main_img', {
-            toolbars: [
-                ['imagenone', 'imageleft', 'imageright', 'imagecenter', 'simpleupload', 'insertimage']
-            ],
-            autoHeightEnabled: true,
-            autoFloatEnabled: true
-        });
+
+        var main_img   = UE.getEditor('main_img',config_img);
+        var detail_img = UE.getEditor('detail_img',config_img);
+        
     </script>
     <script type="text/javascript" src="api_common_js/admin/categoryLinkage.js"></script>
     <script type="text/javascript">
