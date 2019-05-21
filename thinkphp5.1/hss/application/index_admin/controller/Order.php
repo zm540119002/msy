@@ -5,8 +5,19 @@ class Order extends Base{
     //首页
     public function manage(){
 
-
-
+        $modelExpress = new \app\index_admin\model\Express();
+        $condition = [
+            'field' => [
+                'id','name'
+            ], 'where' => [
+                ['status','=',1]
+            ],'order'  => [
+                'order' => 'desc',
+                'letter'=> 'asc'
+            ]
+        ];
+        $expressList = $modelExpress->getList($condition);
+        $this->assign('expressList',$expressList);
 
         return $this->fetch();
     }
