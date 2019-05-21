@@ -135,6 +135,18 @@ class Goods extends Base {
                 $this->assign('info',$goodsInfo);
             }
 
+
+            $config = [
+                'field' => [
+                    'sort'
+                ], 'order'=>[
+                    'sort'=>'desc',
+                ],
+            ];
+            $info = $modelGoods->getInfo($config);
+            $sort_num = $info['sort']+1;
+            $this->assign('sort_num',$sort_num);
+
             //单位
             $this->assign('unitList',config('custom.unit'));
             return $this->fetch();
