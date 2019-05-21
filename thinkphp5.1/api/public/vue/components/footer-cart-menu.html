@@ -262,7 +262,7 @@
                             _thisJquery.click();
                         };
                         let jump_url = _thisJquery.parent().data('jump_url');
-                        if(!this.postData.goodsList.length){
+                        if(!_thisVue.postData.goodsList.length){
                             dialog.error('请选择商品！');
                             return false;
                         }
@@ -284,10 +284,8 @@
                                     //异步验证判断
                                     let param = {
                                         data:data,
-                                        _thisVue:_thisVue,
+                                        componentFooterCartMenu:_thisVue,
                                         clickObj:_thisJquery,
-                                        class:_thisJquery.attr('class'),
-                                        goodsList:_thisVue.postData.goodsList,
                                         jump_url:data.data.url?data.data.url:jump_url,
                                         func:function(){
                                             _thisJquery.click();

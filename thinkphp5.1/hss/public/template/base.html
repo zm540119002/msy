@@ -36,7 +36,11 @@
         }else if(param.data.status==1){ //成功回调
             if(param.data.data.code == '1000'){ //默认
                 if(param.clickObj.attr('class')=='add_cart'){ //加入购物车
-                    console.log(param._thisVue);
+                    if(param.componentFooterCartMenu){
+                        $.each(param.componentFooterCartMenu.postData.goodsList,function(i,o){
+                            param.componentFooterCartMenu.cart_num += o.num;
+                        });
+                    }
                 }else{
                 }
                 return false;
@@ -55,11 +59,11 @@
     //编辑cookie里的购物车商品列表
     function editLocalStorageCartList(param,reduce){
         if(!localStorage.cartList){
-            localStorage.cartList = JSON.stringify({'goodsList':param.goodsList});
+            localStorage.cartList = JSON.stringify({'goodsList':param.componentFooterCartMenu.postData.goodsList});
         }else{
             let goodsListOld = (JSON.parse(localStorage.cartList)).goodsList;
             let goodsListNew = [];
-            $.each(param.goodsList,function(i,o){
+            $.each(param.componentFooterCartMenu.postData.goodsList,function(i,o){
                 let find = null;
                 $.each(goodsListOld,function(ii,oo){
                     if(o.goods_id == oo.goods_id){
@@ -80,9 +84,9 @@
             //保存购物车
             localStorage.cartList = JSON.stringify({'goodsList':goodsListNew});
         }
-        if(param._thisVue){
-            $.each(param.goodsList,function(i,o){
-                param._thisVue.cart_num += o.num;
+        if(param.componentFooterCartMenu){
+            $.each(param.componentFooterCartMenu.postData.goodsList,function(i,o){
+                param.componentFooterCartMenu.cart_num += o.num;
             });
         }
         dialog.success('加入购物车成功！');
