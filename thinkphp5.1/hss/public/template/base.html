@@ -63,7 +63,6 @@
     }
     //编辑cookie里的购物车商品列表
     function editLocalStorageCartList(param,reduce){
-        console.log(param.goodsList);
         if(!localStorage.cartList){
             localStorage.cartList = JSON.stringify({'goodsList':param.goodsList});
         }else{
