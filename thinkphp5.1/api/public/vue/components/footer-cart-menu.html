@@ -193,7 +193,7 @@
                 <!-- 购物篮 -->
                 <div v-else-if="menu.class.indexOf('add_cart_icon')!==-1" class="add_cart_icon" @click="jump_url">
                     <span class="add_num current" v-if="cart_num > 99">99+</span>
-                    <span class="add_num current" v-else-if="cart_num > 1">{{ cart_num }}</span>
+                    <span class="add_num current" v-else-if="cart_num > 0">{{ cart_num }}</span>
                     <span class="add_num current" v-else></span>
                 </div>
                 <!-- 加入购物车 -->
@@ -281,6 +281,7 @@
                                     //异步验证判断
                                     let param = {
                                         data:data,
+                                        _thisVue:_thisVue,
                                         class:_thisJquery.attr('class'),
                                         goodsList:_thisVue.postData.goodsList,
                                         jump_url:data.data.url?data.data.url:jump_url,
@@ -315,6 +316,8 @@
                         if(!existSign && param.buy_quantity>0){
                             this.postData.goodsList.push(productInfo);
                         }
+                    },editCartNum:function(param){
+                        this.cart_num += param.increment_buy_quantity;
                     }
                 },created:function(){
                     let _this = this;
