@@ -94,7 +94,7 @@ class Order extends Base{
        $data = [
            'express_id'  => $express_id,
            'express_sn'  => $express_sn,
-           'order_status'=> 2,
+           'order_status'=> 3,
        ];
 
         $condition = [
