@@ -209,6 +209,16 @@
 <script type="text/javascript" src="index_js/footerCart.js"></script>
 <script type="text/javascript">
 	$(function(){
+		//初始化购物车数量
+		var total_num = "{$total_num}";
+		if(user_id){
+		}else{
+			total_num = cart.getGoodsTotal();
+		}
+		if(total_num){
+			$('footer').find('.add_num').text(total_num).addClass('current');
+		}
+
 		var id = '{$info.id}';
 		var price=$('.goods_list').find('price').text();
 		$('.amount').find('price').text(price);
