@@ -317,6 +317,7 @@
                         }
                     }
                 },editCartNum:function(param){
+                    console.log(param.increment_buy_quantity);
                     this.cart_num += param.increment_buy_quantity;
                 },created:function(){
                     let _this = this;
@@ -327,6 +328,7 @@
                     });
                     //监听-产品改变-事件
                     bus.$on('buy_quantity_change', function(param){
+                        console.log(param);
                         _this.total_amount_calculate(param);
                         _this.editProductList(param);
                         _this.editCartNum(param);
