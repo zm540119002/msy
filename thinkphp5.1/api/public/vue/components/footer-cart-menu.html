@@ -316,6 +316,8 @@
                             this.postData.goodsList.push(productInfo);
                         }
                     }
+                },editCartNum:function(param){
+                    this.cart_num += param.increment_buy_quantity;
                 },created:function(){
                     let _this = this;
                     //监听-产品选择器初始化-事件
@@ -327,6 +329,7 @@
                     bus.$on('buy_quantity_change', function(param){
                         _this.total_amount_calculate(param);
                         _this.editProductList(param);
+                        _this.editCartNum(param);
                     });
                 }
             });
