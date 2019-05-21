@@ -87,8 +87,10 @@
 		getJsonList(config,postData);
 		// 购物车里商品数量
 		var total_num = "{$total_num|default=0}";
+		console.log(total_num);
 		if(!total_num){
 			//获取存储购物车商品信息
+			console.log(localStorage.cartList);
 			var cartListOld = localStorage.cartList;
 			if(cartListOld){
 				total_num = 0;
