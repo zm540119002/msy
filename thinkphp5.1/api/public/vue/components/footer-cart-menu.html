@@ -315,10 +315,10 @@
                         if(!existSign && param.buy_quantity>0){
                             this.postData.goodsList.push(productInfo);
                         }
+                    },editCartNum:function(param){
+                        console.log(param.increment_buy_quantity);
+                        this.cart_num += param.increment_buy_quantity;
                     }
-                },editCartNum:function(param){
-                    console.log(param.increment_buy_quantity);
-                    this.cart_num += param.increment_buy_quantity;
                 },created:function(){
                     let _this = this;
                     //监听-产品选择器初始化-事件
