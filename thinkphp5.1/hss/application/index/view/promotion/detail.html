@@ -89,6 +89,14 @@
 		let total_num = "{$total_num|default=0}";
 		total_num = parseInt(total_num);
 		console.log(total_num);
+		//获取存储购物车商品信息
+		if(localStorage.cartList){
+			let goodsList = (JSON.parse(localStorage.cartList)).goodsList;//计算总数
+			$.each(goodsList,function(i,goods){
+				total_num += parseInt(goods['num']);
+			});
+
+		}
 		let param = {
 			cart_init_num:1
 		};
