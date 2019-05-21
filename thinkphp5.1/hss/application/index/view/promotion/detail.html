@@ -89,9 +89,7 @@
 		var total_num = "{$total_num|default=0}";
 		//获取存储购物车商品信息
 		if(localStorage.cartList.length){
-			var cartListOld = localStorage.cartList;
-			var jsonstr = JSON.parse(cartListOld);
-			var goodsList = jsonstr.goodsList;
+			var goodsList = (JSON.parse(localStorage.cartList)).goodsList;
 			//计算总数
 			$.each(goodsList,function(i,goods){
 				total_num = parseInt(total_num) + parseInt(goods['num']);
