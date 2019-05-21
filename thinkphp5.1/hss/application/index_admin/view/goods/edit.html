@@ -185,20 +185,19 @@
         autoHeightEnabled: true,
         autoFloatEnabled: true
     });
-    var ueDetail = UE.getEditor('detail_img', {
+
+    var config_img = {
         toolbars: [
             ['imagenone', 'imageleft', 'imageright', 'imagecenter', 'simpleupload', 'insertimage']
         ],
         autoHeightEnabled: true,
-        autoFloatEnabled: true
-    });
-    var ueNotices = UE.getEditor('main_img', {
-        toolbars: [
-            ['imagenone', 'imageleft', 'imageright', 'imagecenter', 'simpleupload', 'insertimage']
-        ],
-        autoHeightEnabled: true,
-        autoFloatEnabled: true
-    });
+        autoFloatEnabled: true,
+        initialFrameWidth: '100%'
+    };
+
+    var ueNotices   = UE.getEditor('main_img',config_img);
+    var ueDetail = UE.getEditor('detail_img',config_img);
+
 </script>
 <script type="text/javascript" src="api_common_js/admin/categoryLinkage.js"></script>
 <script type="text/javascript">
