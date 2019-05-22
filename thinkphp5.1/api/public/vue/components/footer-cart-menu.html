@@ -134,18 +134,13 @@
                     }
                 },reduceCart: function (event) {
                     let postData = {
-                        goodsList:[{
-                            'goods_id':this.product_id,
-                            'num':this.step_quantity
-                        }]
+                        goodsList:[]
                     };
-//                    let postData = {
-//                        goodsList:[]
-//                    };
-//                    let productInfo = {
-//                        'goods_id':this.product_id,
-//                        'num':this.step_quantity
-//                    };
+                    let productInfo = {
+                        'goods_id':this.product_id,
+                        'num':this.step_quantity
+                    };
+                    postData.push(productInfo);
                     let _thisJquery = $(event.currentTarget);
                     let config = {
                         clickObj:_thisJquery,
