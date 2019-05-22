@@ -115,7 +115,6 @@
 								></product-select>
 							</div>
 						</ul>
-	</section>
 					</div>
 				</li>
 			</ul>
@@ -236,6 +235,21 @@
 		};
 		new Vue({
 			el: '#foot_cart_menu',
+			data:function(){
+				return param;
+			}
+		});
+
+		let param = {
+			'buy_named':'采购数量',
+			'display_pic':true,
+			'init_quantity':0,
+			'step_quantity':1,
+			'add_cart_type':1,
+			'productList':data.data
+		};
+		new Vue({
+			el: '#product-select',
 			data:function(){
 				return param;
 			}
