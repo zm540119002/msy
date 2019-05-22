@@ -145,23 +145,26 @@
                     let config = {
                         clickObj:_thisJquery,
                         postData:postData,
+                        componentFooterCartMenu:component_footer_cart_menu,
                         reduce:true,
                         func:function(){
                             _thisJquery.click();
                         }
                     };
                     asyncVerify(config);
-                },plusCart: function () {
+                },plusCart: function (event) {
                     let postData = {
-                        goodsList:[{
-                            goods_id: this.product_id,
-                            num: this.step_quantity
-                        }]
+                        goodsList:[]
+                    };
+                    let productInfo = {
+                        'goods_id':this.product_id,
+                        'num':this.step_quantity
                     };
                     let _thisJquery = $(event.currentTarget);
                     let config = {
                         clickObj:_thisJquery,
                         postData:postData,
+                        componentFooterCartMenu:component_footer_cart_menu,
                         reduce:false,
                         func:function(){
                             _thisJquery.click();
@@ -244,9 +247,10 @@
 <script type="text/javascript">
     $(function(){
         var unlockingFooterCart = '{$unlockingFooterCart|raw}';
+        var component_footer_cart_menu = null;
         if(unlockingFooterCart){
             unlockingFooterCart = JSON.parse(unlockingFooterCart);
-            Vue.component('footer-cart-menu', {
+            component_footer_cart_menu = Vue.component('footer-cart-menu', {
                 template:'#footer-cart-menu_tpl',
                 props: {
                     cart_init_num: {type: Number,default: 0},
