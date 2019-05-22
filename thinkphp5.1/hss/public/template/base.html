@@ -22,12 +22,6 @@
             dialog.error('参数错误！');
             return false;
         }
-        login_success_callback_private = function(){
-            config.clickObj.click();
-        };
-        register_success_callback_private = function(){
-            config.clickObj.click();
-        };
         //异步验证
         $.ajax({
             url: jump_url,
@@ -42,7 +36,6 @@
             },
             success: function(data){
                 $('.loading').hide();
-                console.log(data);
                 //异步验证判断
                 let param = {
                     data:data,
