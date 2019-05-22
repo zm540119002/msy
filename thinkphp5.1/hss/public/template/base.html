@@ -18,12 +18,8 @@
 <script type="text/javascript">
     function asyncVerify(config){
         let jump_url = config.clickObj.data('jump_url');
-        if(!config.clickObj || !jump_url || !config.postData){
+        if(!config.clickObj || !jump_url){
             dialog.error('参数错误！');
-            return false;
-        }
-        if(!config.postData.goodsList.length){
-            dialog.error('请选择商品！');
             return false;
         }
         login_success_callback_private = function(){
@@ -103,6 +99,10 @@
     }
     //编辑cookie里的购物车商品列表
     function editLocalStorageCartList(param){
+        if(!param.postData.goodsList.length){
+            dialog.error('请选择商品！');
+            return false;
+        }
         if(!localStorage.cartList){
             localStorage.cartList = JSON.stringify({'goodsList':param.postData.goodsList});
         }else{
