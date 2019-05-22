@@ -148,7 +148,7 @@
 //                    };
                     let _thisJquery = $(event.currentTarget);
                     let config = {
-                        obj:_thisJquery,
+                        clickObj:_thisJquery,
                         postData:postData,
                         reduce:true,
                         func:function(){
@@ -165,7 +165,7 @@
                     };
                     let _thisJquery = $(event.currentTarget);
                     let config = {
-                        obj:_thisJquery,
+                        clickObj:_thisJquery,
                         postData:postData,
                         reduce:false,
                         func:function(){
@@ -283,7 +283,7 @@
                         let _thisJquery = $(event.currentTarget);
                         let _thisVue = this;
                         let config = {
-                            obj:_thisJquery,
+                            clickObj:_thisJquery,
                             postData:_thisVue.postData,
                             componentFooterCartMenu:_thisVue,
                             func:function(){
