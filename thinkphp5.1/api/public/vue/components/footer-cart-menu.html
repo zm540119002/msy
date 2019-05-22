@@ -61,7 +61,7 @@
                     <input type="text" :value="buy_quantity" class="f24 product_count" readonly="readonly">
                     <a href="javascript:void(0);" class="plus" @click="plus">+</a>
                 </div>
-                <div class="quantity_wrapper selected-number" v-else-if="add_cart_type==2" :data-jump_url="{:url('Cart/addCart')}">
+                <div class="quantity_wrapper selected-number" v-else-if="add_cart_type==2" :data-jump_url="module+'Cart/addCart'">
                     <a href="javascript:void(0);" class="add-cart" @click="plusCart"></a>
                 </div>
                 <div class="quantity_wrapper selected-number" v-else-if="add_cart_type==3">
