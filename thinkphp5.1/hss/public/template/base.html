@@ -67,7 +67,7 @@
             if(param.data.data.code == '1000'){ //默认
                 return false;
             }else if(param.data.data.code == '1001'){ //登录
-                if(param.clickObj.attr('class')=='add_cart'){ //加入购物车
+                if(param.clickObj.attr('class')=='add_cart' && param.postData){ //加入购物车
                     editLocalStorageCartList(param);
                 }else{
                     loginDialogTrigger();

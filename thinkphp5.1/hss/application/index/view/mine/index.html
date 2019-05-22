@@ -160,6 +160,16 @@
 <script type="text/javascript" src="{:request()->scheme()}://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
 <script type="text/javascript">
     $(function () {
+        $('body').on('click','.async_login',function(){
+            let _this = $(this);
+            let config = {
+                clickObj:_this,
+                func:function(){
+                    _this.click();
+                }
+            };
+            asyncVerify(config);
+        });
         var mobile=$('.user_mobile').text();
         $('.user_mobile').text(mobileNHide(mobile));
         //个人信息
