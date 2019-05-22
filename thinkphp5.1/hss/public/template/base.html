@@ -130,8 +130,8 @@
             //保存购物车
             localStorage.cartList = JSON.stringify({'goodsList':goodsListNew});
         }
-        if(param.componentFooterCartMenu){
-            $.each(param.componentFooterCartMenu.postData.goodsList,function(i,o){
+        if(param.clickObj.attr('class')=='add_cart' && param.componentFooterCartMenu){ //加入购物车
+            $.each(param.postData.goodsList,function(i,o){
                 param.componentFooterCartMenu.cart_num += o.num;
             });
         }
