@@ -253,6 +253,7 @@
 <script type="text/javascript">
     $(function(){
         var unlockingFooterCart = '{$unlockingFooterCart|raw}';
+        console.log(unlockingFooterCart);
         if(unlockingFooterCart){
             unlockingFooterCart = JSON.parse(unlockingFooterCart);
             Vue.component('footer-cart-menu', {
@@ -279,7 +280,7 @@
                         this.total_amount += param.deal_price * param.increment_buy_quantity;
                     },jump_url:function (event) {
                         let obj = $(event.currentTarget);
-                        let jump_url = obj.parent().data('jump_url');
+                        let jump_url = obj.data('jump_url');
                         if(jump_url){
                             location.href = jump_url;
                         }

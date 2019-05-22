@@ -43,7 +43,7 @@
     <section class="separation-line columns_flex l-r-sides flex_item">
         {empty name="user"}
         <div class="user_top">
-            <a href="javascript:void(0);" id="login_dialog" onclick="loginDialogTrigger()">
+            <a href="javascript:void(0);" id="login_dialog">
                <img src="public_img/default/head_50.png" alt="">
                注册登录
            </a>
@@ -145,10 +145,68 @@
 {include file="template/wallet_pay_dialog.html" /}
 {/block}
 {block name="login_dialog"}
+<script type="text/javascript">
+    var login_success_callback_private = function(){
+        location.reload();
+    };
+    var register_success_callback_private = function(){};
+</script>
 {include file="../../api/public/vue/components/login.html" /}
 <script type="text/javascript">
-    var login_success_callback_private = function(){};
-    var register_success_callback_private = function(){};
+    //退出-弹窗触发
+    function logoutDialogTrigger(){
+        var url = domain+'ucenter/UserCenter/logout';
+        layer.open({
+            content:'是否退出？',
+            btn:['确定','取消'],
+            yes:function(index){
+                $.ajax({
+                    url: url,
+                    data: {},
+                    type: 'post',
+                    beforeSend: function(){
+                        $('.loading').show();
+                    },
+                    error:function(){
+                        $('.loading').hide();
+                        dialog.error('AJAX错误');
+                    },
+                    success: function(data){
+                        $('.loading').hide();
+                        if(data.status){
+                            location.reload();
+                        }
+                    }
+                });
+                layer.close(index);
+            }
+        });
+    }
+    //异步验证
+    $('body').on('click','.async_login',function(){
+        let _this = $(this);
+        login_success_callback_private = function(){
+            location.href = _this.data('jump_url');
+        };
+        register_success_callback_private = function(){
+            location.href = _this.data('jump_url');
+        };
+        let config = {
+            clickObj:_this,
+            func:function(){
+                location.href = _this.data('jump_url');
+            }
+        };
+        asyncVerify(config);
+    });
+    //退出-弹窗事件
+    $('body').on('click','#logout_dialog',function(){
+        logoutDialogTrigger();
+    });
+    //登录-弹窗事件
+    $('body').on('click','#login_dialog',function(){
+        loginDialogTrigger();
+    });
 </script>
 {/block}
 {block name="footer"}
@@ -160,22 +218,6 @@
 <script type="text/javascript" src="{:request()->scheme()}://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
 <script type="text/javascript">
     $(function () {
-        $('body').on('click','.async_login',function(){
-            let _this = $(this);
-            login_success_callback_private = function(){
-                location.href = _this.data('jump_url');
-            };
-            register_success_callback_private = function(){
-                location.href = _this.data('jump_url');
-            };
-            let config = {
-                clickObj:_this,
-                func:function(){
-                    location.href = _this.data('jump_url');
-                }
-            };
-            asyncVerify(config);
-        });
         var mobile=$('.user_mobile').text();
         $('.user_mobile').text(mobileNHide(mobile));
         //个人信息
