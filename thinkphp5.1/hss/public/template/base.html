@@ -17,6 +17,8 @@
 <script type="text/javascript" src="api_common_js/paging.js"></script>
 <script type="text/javascript">
     function asyncVerify(config){
+        console.log(config);
+        return false;
         let jump_url = config.clickObj.data('jump_url');
         if(!config.clickObj || !jump_url){
             dialog.error('参数错误！');
