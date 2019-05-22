@@ -39,10 +39,10 @@
 							</div>
 						</div>
 						<div class="title_name goods_title  f28">
-							<!--<span class="hot">
-								<img src="public_img/hot.png" alt="">
-							</span>-->
-							<!--<p class="title_name goods_title  f28"></p>-->
+
+
+
+
 							{$info.headline}
 						</div>
 						<p class="specification_text">{$info.specification}</p>
@@ -109,6 +109,7 @@
 										:buy_named="buy_named"
 										:init_quantity="parseInt(init_quantity)"
 										:step_quantity="parseInt(step_quantity)"
+										:display_pic="display_pic"
 								></product-select>
 							</div>
 						</ul>
@@ -119,12 +120,12 @@
 	</section>
 	<div class="scrollwrapper">
 		<div id="menu">
-            <ul class="columns_flex detail-nav">
-                <li data-item="item1" ><a href="javascript:;" class="">商品参数</a></li>
-                <li data-item="item2" ><a href="javascript:;" class="">商品详情</a></li>
-                <li data-item="item3" ><a href="javascript:;" class="">评分评价</a></li>
-            </ul>
-        </div>
+			<ul class="columns_flex detail-nav">
+				<li data-item="item1" ><a href="javascript:;" class="">商品参数</a></li>
+				<li data-item="item2" ><a href="javascript:;" class="">商品详情</a></li>
+				<li data-item="item3" ><a href="javascript:;" class="">评分评价</a></li>
+			</ul>
+		</div>
 		<div id="content" class="floor-content">
 			<div id="item1" class="floor">
 				<div class="floor_item">
@@ -202,9 +203,9 @@
 </div>
 {/block}
 {block name="common"}
-	{include file="goods/sample_layer" /}
-	{include file="brand/set_brand" /}
-	{include file="../../api/public/vue/components/footer-cart-menu.html" /}
+{include file="goods/sample_layer" /}
+{include file="brand/set_brand" /}
+{include file="../../api/public/vue/components/footer-cart-menu.html" /}
 {/block}
 {block name="footer"}
 <div id="foot_cart_menu">
@@ -238,8 +239,8 @@
 		});
 		param = {
 			'buy_named':'采购数量',
-			'display_pic':true,
-			'init_quantity':0,
+			'display_pic':false,
+			'init_quantity':1,
 			'step_quantity':1,
 			'add_cart_type':1,
 			'productList':[
@@ -283,13 +284,13 @@
 			}
 		});
 		//楼层
-		var menu = $('#menu');						
-		var items = $('#content').find('.floor');	
+		var menu = $('#menu');
+		var items = $('#content').find('.floor');
 		var height=$('.detail-nav').height();
 		var offsetHeight=$('.detail-nav').offset().top;
 		$(window).scroll(function() {
 			//滚动
-			var top = $(document).scrollTop();			
+			var top = $(document).scrollTop();
 			var currentId = '';
 			if(top>offsetHeight){
 				$('.detail-nav').addClass('top-fixed');
@@ -298,7 +299,7 @@
 			}
 			items.each(function(){
 				var m = $(this);
-				var itemTop = m.offset().top;			
+				var itemTop = m.offset().top;
 				if(top + 43>= itemTop ){
 					//currentId = '#' + m.attr('id');
 					currentId = m.attr('id');
@@ -322,13 +323,13 @@
 				if(m.attr('id')==id){
 					var itemTop = m.offset().top;
 					_this.addClass('active').siblings().removeClass('active');
-				var scrollY=itemTop-40;	
+					var scrollY=itemTop-40;
 					$('html, body').animate({
 						scrollTop: scrollY
 					},500);
 				}else{
 					_this.removeClass('active');
-				} 
+				}
 			});
 		});
 
