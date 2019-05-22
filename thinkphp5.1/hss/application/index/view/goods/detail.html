@@ -216,7 +216,7 @@
 <script type="text/javascript">
 	$(function(){
 		//数据库里购物车里商品数量
-		let goodsInfo = JSON.parse('{$goodsInfo|raw}');
+		let goodsInfo = JSON.parse('{$info|raw}');
 		console.log(goodsInfo);
 		let total_num = parseInt("{$total_num|default=0}");
 		//localStorage里商品信息
@@ -243,8 +243,8 @@
 			'add_cart_type':1,
 			'productList':[
 				{
-					'id':goodsInfo.goods_id,
-					'deal_price':goodsInfo.deal_price
+					'id':goodsInfo.id,
+					'deal_price':goodsInfo.id
 				}
 			]
 		};
