@@ -8,8 +8,8 @@
                     <th>排序</th>
                     <th>商品名称</th>
                     <!--<th>所属分类</th>-->
-                    <th>批量价格</th>
-                    <th>归属</th>
+                    <th>价格</th>
+                  <!--  <th>归属</th>-->
            <!--         <th>样品价格</th>-->
                     <th>精选</th>
                     <th>上下架状态</th>
@@ -25,13 +25,6 @@
                         <td class="w50pre name"><span title="" class="editable ">{$info.name}</span></td>
                         <td class="w5">{$info.bulk_price}</td>
               <!--          <td class="w5">{$info.sample_price}</td>-->
-                        <td class="w5">
-                            {volist name="$Think.config.custom.belong_to" id ='vo' key="k"}
-                            {if (strrev(decbin($info.belong_to))[$k-1])}
-                            {$vo},
-                            {/if}
-                            {/volist}
-                        </td>
                         <td class="w96 is-selection">
                             {if $info.is_selection == 1}
                             <span>精选</span>
