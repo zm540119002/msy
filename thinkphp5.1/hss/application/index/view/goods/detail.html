@@ -102,7 +102,7 @@
 								<product-select
 										v-for="productInfo in productList"
 										:key="productInfo.id"
-										:product_id="productInfo.id"
+										:product_id="Number(productInfo.id)"
 										:deal_price="Number(productInfo.bulk_price)"
 										:buy_named="buy_named"
 										:init_quantity="parseInt(init_quantity)"
@@ -235,9 +235,6 @@
 				return param;
 			}
 		});
-		console.log(typeof goodsInfo);
-		console.log(goodsInfo);
-		console.log(goodsInfo.goods_id);
 		param = {
 			'buy_named':'采购数量',
 			'display_pic':true,
