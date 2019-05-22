@@ -79,6 +79,7 @@
                     $.each(param.postData.goodsList,function(i,o){
                         param.componentFooterCartMenu.cart_num += o.num;
                     });
+                    dialog.error(param.info);
                 }
                 return false;
             }else if(param.data.data.code == '1001'){ //登录
