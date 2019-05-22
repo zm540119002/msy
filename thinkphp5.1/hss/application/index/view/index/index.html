@@ -2,9 +2,9 @@
 {block name="content"}
 <article class="f24 content_main">
 	<section class="slider_banner">
-		<a href="{$ads.top.ad_link}">
+		<a href="">
 			<!--<img src="public_img/banner/top-banner.jpg" alt="{$ads.0.name}" class="common_default_img">-->
-			<img src="{:show_img_handle($ads.top.thumb_img)}" alt="{$ads.top.name}" class="common_default_img">
+			<img src="{:show_img_handle($ads.top.thumb_img)}" class="common_default_img">
 		</a>
 	</section>
 
@@ -54,11 +54,11 @@
 					</div>
 				</div>
 			</section>
-			<!-- 招商 -->
+			<!-- 入口 -->
 			<div class="scene_wrapper">
 				<div class="columns_flex l-r-sides" >
-					<a href="" class="graphic_item">
-						<img src="public_img/scene2.jpg" alt="">
+					<a href="{$ads.top.ad_link}" class="graphic_item">
+						<img src="public_img/scene2.jpg" alt="{$ads.top.name}">
 					</a>
 					<a href="" class="graphic_item">
 						<img src="public_img/scene3.jpg" alt="">
