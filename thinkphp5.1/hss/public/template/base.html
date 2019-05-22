@@ -17,7 +17,6 @@
 <script type="text/javascript" src="api_common_js/paging.js"></script>
 <script type="text/javascript">
     function asyncVerify(config){
-
         let jump_url = config.clickObj.data('jump_url');
         if(!config.clickObj || !jump_url){
             dialog.error('参数错误！');
@@ -29,7 +28,6 @@
         register_success_callback_private = function(){
             config.clickObj.click();
         };
-
         //异步验证
         $.ajax({
             url: jump_url,
@@ -44,6 +42,7 @@
             },
             success: function(data){
                 $('.loading').hide();
+                console.log(data);
                 //异步验证判断
                 let param = {
                     data:data,
@@ -60,8 +59,9 @@
     }
     //异步验证判断
     function async_verify_judge(param){
+
         param.func();
-        return  false;
+        return false;
         //失败回调
         if(param.data.status==0){
             if(param.data.data.code == '1000'){ //默认
@@ -78,21 +78,15 @@
             }
             dialog.error(param.data.info);
         }else if(param.data.status==1){ //成功回调
-
-
             if(param.data.data.code == '1000'){ //默认
                 if(param.clickObj.attr('class')=='add_cart' && param.componentFooterCartMenu){ //加入购物车
                     $.each(param.postData.goodsList,function(i,o){
                         param.componentFooterCartMenu.cart_num += o.num;
                     });
                 }
-
-
-                param.func();
                 return false;
             }else if(param.data.data.code == '1001'){ //登录
-
-                console.log(1111);
+                console.log(param);
                 return false;
                 param.func();
                 return false;
