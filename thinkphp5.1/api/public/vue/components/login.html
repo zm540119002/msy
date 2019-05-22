@@ -86,6 +86,7 @@
                         }
                     });
                 },login:function(param){
+                    console.log(param);
                     let postData = $('.loginLayer').find('#formLogin').serializeObject();
                     let content='';
                     if(!register.phoneCheck(postData.mobile_phone)){
