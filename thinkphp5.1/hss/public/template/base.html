@@ -87,6 +87,8 @@
                 return false;
             }
             dialog.success(param.data.info);
+        }else{
+            param.func();
         }
     }
     //编辑cookie里的购物车商品列表
