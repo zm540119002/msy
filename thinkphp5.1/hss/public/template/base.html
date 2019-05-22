@@ -76,7 +76,9 @@
                 }
                 return false;
             }else if(param.data.data.code == '1001'){ //登录
-                param.func();
+                if(param.func && $.isFunction(param.func)){
+                    param.func();
+                }
                 return false;
             }else if(param.data.data.code=='1002'){ //授权
                 return false;
