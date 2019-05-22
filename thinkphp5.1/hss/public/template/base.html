@@ -22,6 +22,11 @@
             dialog.error('参数错误！');
             return false;
         }
+        //前端验证
+        if((config.clickObj.attr('class')=='add_cart' || config.clickObj.attr('class')=='buy_now' )
+                && !config.postData.goodsList.length){ //加入购物车
+            dialog.error('请选择商品！');
+        }
         //异步验证
         $.ajax({
             url: jump_url,
@@ -55,7 +60,7 @@
         //失败回调
         if(param.data.status==0){
             if(param.data.data.code == '1000'){ //默认
-                console.log(param);
+                dialog.error(param.info);
                 return false;
             }else if(param.data.data.code == '1001'){ //登录
                 if(param.clickObj.attr('class')=='add_cart' && param.postData){ //加入购物车
