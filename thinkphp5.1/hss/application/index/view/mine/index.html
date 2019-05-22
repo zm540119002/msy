@@ -165,7 +165,7 @@
             let config = {
                 clickObj:_this,
                 func:function(){
-                    _this.click();
+                    location.href = _this.data('jump_url');
                 }
             };
             asyncVerify(config);
