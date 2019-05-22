@@ -237,7 +237,7 @@
 		});
 		console.log(typeof goodsInfo);
 		console.log(goodsInfo);
-		console.log(goodsInfo.id);
+		console.log(goodsInfo.goods_id);
 		param = {
 			'buy_named':'采购数量',
 			'display_pic':true,
@@ -246,7 +246,7 @@
 			'add_cart_type':1,
 			'productList':[
 				{
-					id:goodsInfo.id,
+					id:goodsInfo.goods_id,
 					deal_price:goodsInfo.bulk_price
 				}
 			]
