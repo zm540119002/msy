@@ -96,20 +96,22 @@
 						<div class="columns_flex l-r-sides separation_item">
 							<a href="javascript:;" class="set_brand right-arrow">设定我的品牌：<span class="brand_name" data-id=""></span></a>
 						</div>-->
-						<div class="columns_flex l-r-sides">
-							<div>
-								<p>采购数量(单位:{$info.purchase_unit|getUnit})</p>
-								<p>起订数量:<span class="order_quantity">{$info.minimum_order_quantity}{$info.purchase_unit|getUnit}</span>
-								</p>
+						<!--产品列表-->
+						<ul class="goods_list list" id="list">
+							<div id="product-select">
+								<product-select
+										v-for="productInfo in productList"
+										:key="productInfo.id"
+										:product_id="productInfo.id"
+										:deal_price="Number(productInfo.deal_price)"
+										:product_name="productInfo.headline"
+										:product_src="productInfo.thumb_img"
+										:buy_named="buy_named"
+										:init_quantity="parseInt(init_quantity)"
+										:step_quantity="parseInt(step_quantity)"
+								></product-select>
 							</div>
-							<div class="quantity_wrapper selected-number">
-								<a href="javascript:void(0);" class="greduce">-</a>
-								<input type="text" value="{$info.minimum_order_quantity}" class="f24 gshopping_count">
-								<input type="hidden" class="minimum_order_quantity" value="{$info.minimum_order_quantity}">
-								<input type="hidden" class="increase_quantity" value="{$info.increase_quantity}">
-								<a href="javascript:void(0);" class="gplus">+</a>
-							</div>
-						</div>
+						</ul>
 					</div>
 				</li>
 			</ul>
@@ -202,24 +204,59 @@
 {block name="common"}
 	{include file="goods/sample_layer" /}
 	{include file="brand/set_brand" /}
+	{include file="../../api/public/vue/components/footer-cart-menu.html" /}
 {/block}
 {block name="footer"}
-	{include file="template/footer_menu.html" /}
+<div id="foot_cart_menu">
+	<footer-cart-menu
+			:cart_init_num="cart_init_num"
+	></footer-cart-menu>
+</div>
 {/block}
 {block name="script"}
 <script type="text/javascript" src="api_common_js/swiper.min.js"></script>
-<script type="text/javascript" src="index_js/footerCart.js"></script>
 <script type="text/javascript">
 	$(function(){
-		//初始化购物车数量
-		var total_num = "{$total_num}";
-		if(user_id){
-		}else{
-			total_num = cart.getGoodsTotal();
+		//数据库里购物车里商品数量
+		let goodsInfo = JSON.parse('{$goodsInfo|raw}');
+		let total_num = parseInt("{$total_num|default=0}");
+		//localStorage里商品信息
+		if(localStorage.cartList){
+			let goodsList = (JSON.parse(localStorage.cartList)).goodsList;
+			$.each(goodsList,function(i,goods){
+				total_num += goods['num'];
+			});
 		}
-		if(total_num){
-			$('footer').find('.add_num').text(total_num).addClass('current');
-		}
+		let param = {
+			cart_init_num:total_num
+		};
+		new Vue({
+			el: '#foot_cart_menu',
+			data:function(){
+				return param;
+			}
+		});
+		param = {
+			'buy_named':'采购数量',
+			'display_pic':true,
+			'init_quantity':0,
+			'step_quantity':1,
+			'add_cart_type':1,
+			'productList':[
+				{
+					'id':goodsInfo.goods_id,
+					'deal_price':goodsInfo.deal_price,
+					'headline':goodsInfo.headline,
+					'thumb_img':goodsInfo.thumb_img
+				}
+			]
+		};
+		new Vue({
+			el: '#product-select',
+			data:function(){
+				return param;
+			}
+		});
 
 		var id = '{$info.id}';
 		var price=$('.goods_list').find('price').text();

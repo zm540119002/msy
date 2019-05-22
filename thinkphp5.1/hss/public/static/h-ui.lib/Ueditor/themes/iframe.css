@@ -1,1 +1,7 @@
 /*可以在这里添加你自己的css*/
+.view img {
+    width: 200px;
+}
+p {
+    display: inline;
+}

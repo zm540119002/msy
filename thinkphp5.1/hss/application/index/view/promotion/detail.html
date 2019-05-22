@@ -23,6 +23,7 @@
 						:init_quantity="parseInt(init_quantity)"
 						:step_quantity="parseInt(step_quantity)"
 						:display_pic="display_pic"
+						:add_cart_type="add_cart_type"
 				></product-select>
 			</div>
 		</ul>
@@ -57,8 +58,9 @@
 		let param = {
 			'buy_named':'采购数量',
 			'display_pic':true,
-			'init_quantity':1,
+			'init_quantity':0,
 			'step_quantity':1,
+			'add_cart_type':1,
 			'productList':data.data
 		};
 		new Vue({

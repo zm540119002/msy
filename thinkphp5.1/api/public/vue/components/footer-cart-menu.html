@@ -62,7 +62,7 @@
                     <a href="javascript:void(0);" class="plus" @click="plus">+</a>
                 </div>
                 <div class="quantity_wrapper selected-number" v-else-if="add_cart_type==2">
-                    <a href="javascript:void(0);" class="add-cart"></a>
+                    <a href="javascript:void(0);" class="add_cart" @click="plusCart" :data-jump_url="add_cart_url"><i></i></a>
                 </div>
                 <div class="quantity_wrapper selected-number" v-else-if="add_cart_type==3">
                     <a href="javascript:void(0);" class="reduce" @click="reduceCart">-</a>
@@ -103,7 +103,8 @@
             data: function () {
                 return {
                     'buy_quantity':this.init_quantity,
-                    'subtotal_amount':0
+                    'subtotal_amount':0,
+                    'add_cart_url':'{:url("Cart/addCart")}'
                 };
             },
             methods: {
@@ -131,21 +132,51 @@
                     }else{
                         this.buy_quantity += this.step_quantity;
                     }
-                },reduceCart: function () {
-                    let goodsList = [{
-                        goods_id:this.product_id,
-                        num:this.step_quantity
-                    }];
-                    editLocalStorageCartList(goodsList,true);
-                },plusCart: function () {
-                    let param = {
-
+                },reduceCart: function (event) {
+                    let postData = {
+                        goodsList:[{
+                            goods_id: this.product_id,
+                            num: this.step_quantity
+                        }]
                     };
-                    let goodsList = [{
-                        goods_id:this.product_id,
-                        num:this.step_quantity
-                    }];
-                    editLocalStorageCartList(goodsList);
+                    let _thisJquery = $(event.currentTarget);
+                    login_success_callback_private = function(){
+                        _thisJquery.click()
+                    };
+                    register_success_callback_private = function(){
+                        _thisJquery.click()
+                    };
+                    let config = {
+                        clickObj:_thisJquery,
+                        postData:postData,
+                        reduce:true,
+                        func:function(){
+                            _thisJquery.click();
+                        }
+                    };
+                    asyncVerify(config);
+                },plusCart: function (event) {
+                    let postData = {
+                        goodsList:[{
+                            goods_id: this.product_id,
+                            num: this.step_quantity
+                        }]
+                    };
+                    let _thisJquery = $(event.currentTarget);
+                    login_success_callback_private = function(){
+                        _thisJquery.click()
+                    };
+                    register_success_callback_private = function(){
+                        _thisJquery.click()
+                    };
+                    let config = {
+                        clickObj:_thisJquery,
+                        postData:postData,
+                        func:function(){
+                            _thisJquery.click();
+                        }
+                    };
+                    asyncVerify(config);
                 }
             },created: function(){
                 this.subtotal_amount_calculate();
@@ -182,7 +213,7 @@
 <template id="footer-cart-menu_tpl">
     <footer class="f24 ">
         <div class="group_cart_nav">
-            <a href="javascript:void(0);" v-for="menu in menus" :data-jump_url="menu.action" :class="menu.class">
+            <a href="javascript:void(0);" v-for="menu in menus" :class="menu.class">
                 {{menu.name}}
                 <!-- 全选 -->
                 <div v-if="menu.class.indexOf('checked_all')!==-1" class="checked_all">
@@ -194,21 +225,21 @@
                     <span class="total_amount">￥{{ parseFloat(total_amount).toFixed(2) }}</span>
                 </div>
                 <!-- 购物篮 -->
-                <div v-else-if="menu.class.indexOf('add_cart_icon')!==-1" class="add_cart_icon" @click="jump_url">
+                <div v-else-if="menu.class.indexOf('add_cart_icon')!==-1" class="add_cart_icon" @click="jump_url" :data-jump_url="menu.action">
                     <span class="add_num current" v-if="cart_num > 99">99+</span>
                     <span class="add_num current" v-else-if="cart_num > 0">{{ cart_num }}</span>
                     <span class="add_num current" v-else></span>
                 </div>
                 <!-- 加入购物车 -->
-                <div v-else-if="menu.class.indexOf('add_cart')!==-1" class="add_cart" @click="asyncVerify">
+                <div v-else-if="menu.class.indexOf('add_cart')!==-1" class="add_cart" @click="asyncVerify" :data-jump_url="menu.action">
                     <span class="s_i"></span>
                 </div>
                 <!-- 立即购买 -->
-                <div v-else-if="menu.class.indexOf('buy_now')!==-1" class="buy_now" @click="asyncVerify">
+                <div v-else-if="menu.class.indexOf('buy_now')!==-1" class="buy_now" @click="asyncVerify" :data-jump_url="menu.action">
                     <span class="s_i"></span>
                 </div>
                 <!-- 提交订单 -->
-                <div v-else-if="menu.class.indexOf('confirm_order')!==-1" class="confirm_order" @click="asyncVerify">
+                <div v-else-if="menu.class.indexOf('confirm_order')!==-1" class="confirm_order" @click="asyncVerify" :data-jump_url="menu.action">
                     <span class="s_i"></span>
                 </div>
                 <!-- 默认 -->
@@ -222,6 +253,7 @@
 <script type="text/javascript">
     $(function(){
         var unlockingFooterCart = '{$unlockingFooterCart|raw}';
+        console.log(unlockingFooterCart);
         if(unlockingFooterCart){
             unlockingFooterCart = JSON.parse(unlockingFooterCart);
             Vue.component('footer-cart-menu', {
@@ -248,15 +280,21 @@
                         this.total_amount += param.deal_price * param.increment_buy_quantity;
                     },jump_url:function (event) {
                         let obj = $(event.currentTarget);
-                        let jump_url = obj.parent().data('jump_url');
+                        let jump_url = obj.data('jump_url');
                         if(jump_url){
                             location.href = jump_url;
                         }
                     },asyncVerify:function(event){
                         let _thisJquery = $(event.currentTarget);
                         let _thisVue = this;
+                        login_success_callback_private = function(){
+                            _thisJquery.click()
+                        };
+                        register_success_callback_private = function(){
+                            _thisJquery.click()
+                        };
                         let config = {
-                            obj:_thisJquery,
+                            clickObj:_thisJquery,
                             postData:_thisVue.postData,
                             componentFooterCartMenu:_thisVue,
                             func:function(){
