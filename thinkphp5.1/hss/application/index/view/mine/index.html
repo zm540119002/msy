@@ -160,6 +160,7 @@
 <script type="text/javascript" src="{:request()->scheme()}://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
 <script type="text/javascript">
     $(function () {
+        //异步验证
         $('body').on('click','.async_login',function(){
             let _this = $(this);
             login_success_callback_private = function(){
