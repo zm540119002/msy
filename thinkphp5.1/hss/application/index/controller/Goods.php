@@ -214,6 +214,7 @@ class Goods extends \common\controller\Base{
             $info['detail_img'] = explode(',',(string)$info['detail_img']);
             $info['tag'] = explode(',',(string)$info['tag']);
             $this->assign('info',$info);
+            $this->assign('goodsInfo',json_encode(['goods_id'=>$info['id'],'deal_price'=>$info['bulk_price']]));
 
 
             $modelComment = new \app\index\model\Comment();
