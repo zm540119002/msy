@@ -93,7 +93,6 @@
     }
     //编辑cookie里的购物车商品列表
     function editLocalStorageCartList(param){
-        console.log(param);
         if(!param.postData.goodsList.length){
             dialog.error('请选择商品！');
             return false;
