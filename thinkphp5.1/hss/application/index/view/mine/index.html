@@ -43,7 +43,7 @@
     <section class="separation-line columns_flex l-r-sides flex_item">
         {empty name="user"}
         <div class="user_top">
-            <a href="javascript:void(0);" id="login_dialog" onclick="loginDialogTrigger()">
+            <a href="javascript:void(0);" id="login_dialog">
                <img src="public_img/default/head_50.png" alt="">
                注册登录
            </a>
@@ -60,7 +60,7 @@
                 <p class="user_mobile">{$user.mobile_phone}</p>
             </div>
         </div>
-        <a href="javascript:void(0);" class="customer_info" onclick="logoutDialog()">
+        <a href="javascript:void(0);" class="customer_info">
             <img src="public_img/modify.png" alt="">
         </a>
         {/empty}
@@ -194,6 +194,14 @@
             }
         };
         asyncVerify(config);
+    });
+    //退出-弹窗事件
+    $('body').on('click','#logout_dialog',function(){
+        logoutDialog();
+    });
+    //登录-弹窗事件
+    $('body').on('click','#login_dialog',function(){
+        loginDialogTrigger();
     });
 </script>
 {/block}
