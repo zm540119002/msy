@@ -206,6 +206,9 @@
 {/block}
 {block name="footer"}
 <div id="foot_cart_menu">
+	<footer-cart-menu
+			:cart_init_num="cart_init_num"
+	></footer-cart-menu>
 </div>
 {/block}
 {block name="script"}
@@ -225,6 +228,12 @@
 		let param = {
 			cart_init_num:total_num
 		};
+		new Vue({
+			el: '#foot_cart_menu',
+			data:function(){
+				return param;
+			}
+		});
 
 		var id = '{$info.id}';
 		var price=$('.goods_list').find('price').text();
