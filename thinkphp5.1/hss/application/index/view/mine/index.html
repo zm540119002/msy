@@ -162,10 +162,14 @@
     $(function () {
         $('body').on('click','.async_login',function(){
             let _this = $(this);
+
             let config = {
                 clickObj:_this,
                 func:function(){
                     location.href = _this.data('jump_url');
+
+                    console.log(_this.data('jump_url'));
+                    return false;
                 }
             };
             asyncVerify(config);
