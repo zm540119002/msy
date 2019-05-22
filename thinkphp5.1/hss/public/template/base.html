@@ -84,6 +84,7 @@
                 dialog.error(param.data.info);
                 return false;
             }else if(param.data.data.code == '2001'){ //登录
+                return;
                 if(param.func && $.isFunction(param.func)){
                     param.func();
                 }
