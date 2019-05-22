@@ -59,9 +59,6 @@
     }
     //异步验证判断
     function async_verify_judge(param){
-
-        param.func();
-        return false;
         //失败回调
         if(param.data.status==0){
             if(param.data.data.code == '1000'){ //默认
@@ -86,8 +83,6 @@
                 }
                 return false;
             }else if(param.data.data.code == '1001'){ //登录
-                console.log(param);
-                return false;
                 param.func();
                 return false;
             }else if(param.data.data.code=='1002'){ //授权
