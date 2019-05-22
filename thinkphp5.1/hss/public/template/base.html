@@ -52,6 +52,7 @@
                         data:data,
                         componentFooterCartMenu:config.componentFooterCartMenu,
                         clickObj:config.obj,
+                        reduce:config.reduce,
                         jump_url:data.data.url?data.data.url:jump_url,
                         func:function(){
                             config.obj.click();
@@ -102,7 +103,7 @@
         }
     }
     //编辑cookie里的购物车商品列表
-    function editLocalStorageCartList(param,reduce){
+    function editLocalStorageCartList(param){
         if(!localStorage.cartList){
             localStorage.cartList = JSON.stringify({'goodsList':param.componentFooterCartMenu.postData.goodsList});
         }else{
@@ -112,7 +113,7 @@
                 let find = null;
                 $.each(goodsListOld,function(ii,oo){
                     if(o.goods_id == oo.goods_id){
-                        if(reduce && reduce==='true'){
+                        if(param.reduce && param.reduce==='true'){
                             oo.num -= o.num;
                         }else{
                             oo.num += o.num;

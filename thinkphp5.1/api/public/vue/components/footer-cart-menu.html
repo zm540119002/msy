@@ -62,7 +62,7 @@
                     <a href="javascript:void(0);" class="plus" @click="plus">+</a>
                 </div>
                 <div class="quantity_wrapper selected-number" v-else-if="add_cart_type==2">
-                    <a href="javascript:void(0);" class="add-cart"></a>
+                    <a href="javascript:void(0);" class="add-cart" @click="plusCart"></a>
                 </div>
                 <div class="quantity_wrapper selected-number" v-else-if="add_cart_type==3">
                     <a href="javascript:void(0);" class="reduce" @click="reduceCart">-</a>
@@ -131,21 +131,40 @@
                     }else{
                         this.buy_quantity += this.step_quantity;
                     }
-                },reduceCart: function () {
-                    let goodsList = [{
-                        goods_id:this.product_id,
-                        num:this.step_quantity
-                    }];
-                    editLocalStorageCartList(goodsList,true);
-                },plusCart: function () {
-                    let param = {
-
+                },reduceCart: function (event) {
+                    let postData = {
+                        goodsList:[{
+                            goods_id: this.product_id,
+                            num: this.step_quantity
+                        }]
                     };
-                    let goodsList = [{
-                        goods_id:this.product_id,
-                        num:this.step_quantity
-                    }];
-                    editLocalStorageCartList(goodsList);
+                    let _thisJquery = $(event.currentTarget);
+                    let config = {
+                        obj:_thisJquery,
+                        postData:postData,
+                        reduce:true,
+                        func:function(){
+                            _thisJquery.click();
+                        }
+                    };
+                    asyncVerify(config);
+                },plusCart: function () {
+                    let postData = {
+                        goodsList:[{
+                            goods_id: this.product_id,
+                            num: this.step_quantity
+                        }]
+                    };
+                    let _thisJquery = $(event.currentTarget);
+                    let config = {
+                        obj:_thisJquery,
+                        postData:postData,
+                        reduce:false,
+                        func:function(){
+                            _thisJquery.click();
+                        }
+                    };
+                    asyncVerify(config);
                 }
             },created: function(){
                 this.subtotal_amount_calculate();
