@@ -109,6 +109,7 @@
             localStorage.cartList = JSON.stringify({'goodsList':param.postData.goodsList});
         }else{
             let goodsListOld = (JSON.parse(localStorage.cartList)).goodsList;
+            console.log(goodsListOld);
             let goodsListNew = [];
             $.each(param.postData.goodsList,function(i,o){
                 let find = null;
