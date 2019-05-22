@@ -41,6 +41,7 @@
                 dialog.error('AJAX错误');
             },
             success: function(data){
+                console.log(data);
                 $('.loading').hide();
                 //异步验证判断
                 let param = {
