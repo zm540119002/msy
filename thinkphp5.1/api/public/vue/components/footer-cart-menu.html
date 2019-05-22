@@ -153,14 +153,11 @@
                     asyncVerify(config);
                 },plusCart: function (event) {
                     let postData = {
-                        goodsList:[]
+                        goodsList:[{
+                            goods_id: this.product_id,
+                            num: this.step_quantity
+                        }]
                     };
-                    let productInfo = {
-                        'goods_id':this.product_id,
-                        'num':this.step_quantity
-                    };
-                    postData.push(productInfo);
-                    console.log(postData);return;
                     let _thisJquery = $(event.currentTarget);
                     let config = {
                         clickObj:_thisJquery,
