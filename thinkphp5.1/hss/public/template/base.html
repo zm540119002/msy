@@ -80,8 +80,8 @@
                     $.each(param.postData.goodsList,function(i,o){
                         param.componentFooterCartMenu.cart_num += o.num;
                     });
-                    dialog.error(param.data.info);
                 }
+                dialog.error(param.data.info);
                 return false;
             }else if(param.data.data.code == '2001'){ //登录
                 if(param.func && $.isFunction(param.func)){
