@@ -36,7 +36,9 @@
 {block name="login_dialog"}
 	{include file="../../api/public/vue/components/login.html" /}
 	<script type="text/javascript">
-		var login_success_callback_private = function(){};
+		var login_success_callback_private = function(){
+			location.reload();
+		};
 		var register_success_callback_private = function(){};
 	</script>
 {/block}
