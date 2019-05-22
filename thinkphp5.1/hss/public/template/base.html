@@ -18,9 +18,6 @@
 <script type="text/javascript">
     function asyncVerify(config){
         let jump_url = config.clickObj.data('jump_url');
-        console.log(config);
-        console.log(jump_url);
-        return false;
         if(!config.clickObj || !jump_url){
             dialog.error('参数错误！');
             return false;
@@ -32,34 +29,34 @@
             config.clickObj.click();
         };
         //异步验证
-        if(jump_url){
-            $.ajax({
-                url: jump_url,
-                data: config.postData,
-                type: 'post',
-                beforeSend: function(xhr){
-                    $('.loading').show();
-                },
-                error:function(xhr){
-                    $('.loading').hide();
-                    dialog.error('AJAX错误');
-                },
-                success: function(data){
-                    $('.loading').hide();
-                    //异步验证判断
-                    let param = {
-                        data:data,
-                        postData:config.postData,
-                        componentFooterCartMenu:config.componentFooterCartMenu,
-                        clickObj:config.clickObj,
-                        reduce:config.reduce,
-                        jump_url:data.data.url?data.data.url:jump_url,
-                        func:config.func
-                    };
-                    async_verify_judge(param);
-                }
-            });
-        }
+        $.ajax({
+            url: jump_url,
+            data: config.postData,
+            type: 'post',
+            beforeSend: function(xhr){
+                $('.loading').show();
+            },
+            error:function(xhr){
+                $('.loading').hide();
+                dialog.error('AJAX错误');
+            },
+            success: function(data){
+                $('.loading').hide();
+                //异步验证判断
+                let param = {
+                    data:data,
+                    postData:config.postData,
+                    componentFooterCartMenu:config.componentFooterCartMenu,
+                    clickObj:config.clickObj,
+                    reduce:config.reduce,
+                    jump_url:data.data.url?data.data.url:jump_url,
+                    func:config.func
+                };
+                console.log(param);
+                return false;
+                async_verify_judge(param);
+            }
+        });
     }
     //异步验证判断
     function async_verify_judge(param){
