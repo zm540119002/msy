@@ -217,7 +217,7 @@
 <script type="text/javascript">
 	$(function(){
 		//数据库里购物车里商品数量
-		let goodsInfo = JSON.parse('{:json_encode($info)}');
+		let goodsInfo = JSON.parse('{:json_encode($goodsInfo)}');
 		let total_num = parseInt("{$total_num|default=0}");
 		//localStorage里商品信息
 		if(localStorage.cartList){
