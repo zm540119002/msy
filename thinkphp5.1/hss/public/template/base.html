@@ -105,7 +105,7 @@
     function editLocalStorageCartList(param){
         console.log(param);return;
         if(!localStorage.cartList){
-            localStorage.cartList = JSON.stringify({'goodsList':param.componentFooterCartMenu.postData.goodsList});
+            localStorage.cartList = JSON.stringify({'goodsList':param.postData.goodsList});
         }else{
             let goodsListOld = (JSON.parse(localStorage.cartList)).goodsList;
             let goodsListNew = [];
