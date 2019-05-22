@@ -103,7 +103,7 @@
 										v-for="productInfo in productList"
 										:key="productInfo.id"
 										:product_id="productInfo.id"
-										:deal_price="Number(productInfo.id)"
+										:deal_price="Number(productInfo.deal_price)"
 										:buy_named="buy_named"
 										:init_quantity="parseInt(init_quantity)"
 										:step_quantity="parseInt(step_quantity)"
@@ -218,6 +218,7 @@
 	$(function(){
 		//数据库里购物车里商品数量
 		let goodsInfo = JSON.parse('{$goodsInfo|raw}');
+		console.log(goodsInfo);
 		let total_num = parseInt("{$total_num|default=0}");
 		//localStorage里商品信息
 		if(localStorage.cartList){
