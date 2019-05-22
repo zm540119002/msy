@@ -247,10 +247,9 @@
 <script type="text/javascript">
     $(function(){
         var unlockingFooterCart = '{$unlockingFooterCart|raw}';
-        var component_footer_cart_menu = null;
         if(unlockingFooterCart){
             unlockingFooterCart = JSON.parse(unlockingFooterCart);
-            component_footer_cart_menu = Vue.component('footer-cart-menu', {
+            Vue.component('footer-cart-menu', {
                 template:'#footer-cart-menu_tpl',
                 props: {
                     cart_init_num: {type: Number,default: 0},
