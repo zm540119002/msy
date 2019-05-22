@@ -104,7 +104,6 @@
 										:key="productInfo.id"
 										:product_id="productInfo.id"
 										:deal_price="Number(productInfo.bulk_price)"
-										:product_name="productInfo.headline"
 										:buy_named="buy_named"
 										:init_quantity="parseInt(init_quantity)"
 										:step_quantity="parseInt(step_quantity)"
@@ -219,7 +218,6 @@
 	$(function(){
 		//数据库里购物车里商品数量
 		let goodsInfo = '{:json_encode($info)}';
-		console.log(goodsInfo);
 		let total_num = parseInt("{$total_num|default=0}");
 		//localStorage里商品信息
 		if(localStorage.cartList){
@@ -237,7 +235,6 @@
 				return param;
 			}
 		});
-
 		param = {
 			'buy_named':'采购数量',
 			'display_pic':true,
@@ -246,8 +243,8 @@
 			'add_cart_type':1,
 			'productList':[
 				{
-					id:1,
-					deal_price:1
+					id:goodsInfo.id,
+					deal_price:goodsInfo.bulk_price
 				}
 			]
 		};
