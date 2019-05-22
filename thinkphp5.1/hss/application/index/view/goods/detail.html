@@ -102,7 +102,7 @@
 								<product-select
 										v-for="productInfo in productList"
 										:key="productInfo.id"
-										:product_id="Number(productInfo.id)"
+										:product_id="productInfo.id"
 										:deal_price="Number(productInfo.bulk_price)"
 										:buy_named="buy_named"
 										:init_quantity="parseInt(init_quantity)"
@@ -243,8 +243,8 @@
 			'add_cart_type':1,
 			'productList':[
 				{
-					id:goodsInfo.goods_id,
-					deal_price:goodsInfo.bulk_price
+					'id':goodsInfo.goods_id,
+					'deal_price':goodsInfo.bulk_price
 				}
 			]
 		};
