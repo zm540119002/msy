@@ -253,6 +253,8 @@
 <script type="text/javascript">
     $(function(){
         var unlockingFooterCart = '{$unlockingFooterCart|raw}';
+        console.log(unlockingFooterCart);
+        return false;
         if(unlockingFooterCart){
             unlockingFooterCart = JSON.parse(unlockingFooterCart);
             Vue.component('footer-cart-menu', {
