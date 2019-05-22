@@ -18,8 +18,8 @@
 <script type="text/javascript">
     function asyncVerify(config){
         console.log(config);
-        let jump_url = config.obj.parent().data('jump_url');
-        if(!config.obj || !jump_url || !config.postData){
+        let jump_url = config.clickObj.parent().data('jump_url');
+        if(!config.clickObj || !jump_url || !config.postData){
             dialog.error('参数错误！');
             return false;
         }
@@ -28,10 +28,10 @@
             return false;
         }
         login_success_callback_private = function(){
-            config.obj.click();
+            config.clickObj.click();
         };
         register_success_callback_private = function(){
-            config.obj.click();
+            config.clickObj.click();
         };
         //异步验证
         if(jump_url){
@@ -52,11 +52,11 @@
                     let param = {
                         data:data,
                         componentFooterCartMenu:config.componentFooterCartMenu,
-                        clickObj:config.obj,
+                        clickObj:config.clickObj,
                         reduce:config.reduce,
                         jump_url:data.data.url?data.data.url:jump_url,
                         func:function(){
-                            config.obj.click();
+                            config.clickObj.click();
                         }
                     };
                     async_verify_judge(param);
@@ -103,7 +103,7 @@
     }
     //编辑cookie里的购物车商品列表
     function editLocalStorageCartList(param){
-        console.log(param);return;
+        console.log(param);
         if(!localStorage.cartList){
             localStorage.cartList = JSON.stringify({'goodsList':param.postData.goodsList});
         }else{
