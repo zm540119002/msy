@@ -3,13 +3,6 @@
 {block name="css-customize"}
 <link type="text/css" rel="stylesheet" href="index_admin_css/fenlei.css" />
 <link type="text/css" rel="stylesheet" href="index_admin_css/skin.css" />
-<style>
-    .view img{
-        width:200px;
-        height:200px;
-    }
-</style>
-
 {/block}
 
 {block name="content"}
@@ -100,7 +93,7 @@
             <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>商品主图：</label>
             <div class="formControls col-xs-8 col-sm-9">
                 <script id="main_img" type="text/plain"></script>
-                <input id="mainImg" type="hidden" value="{$info.main_img|formatImg}">
+                <input id="mainImg" type="hidden"  value="{$info.main_img|formatImg}">
             </div>
         </div>
         <div class="row cl">
@@ -110,33 +103,11 @@
                 <input id="detailImg" type="hidden" value="{$info.detail_img|formatImg}">
             </div>
         </div>
-
-        <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-2">图片上传：</label>
-            <div class="formControls col-xs-8 col-sm-9">
-                <div class="uploader-list-container">
-                    <div class="queueList">
-                        <div id="dndArea" class="placeholder">
-                            <div id="filePicker-2"></div>
-                            <p>或将照片拖到这里，单次最多可选300张</p>
-                        </div>
-                    </div>
-                    <div class="statusBar" style="display:none;">
-                        <div class="progress"> <span class="text">0%</span> <span class="percentage"></span> </div>
-                        <div class="info"></div>
-                        <div class="btns">
-                            <div id="filePicker2"></div>
-                            <div class="uploadBtn">开始上传</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <div class="row cl">
             <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
                 <button class="btn btn-primary radius button_save_black_4" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
                 <button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+                <span class="c-red">*</span>(图片只显示缩略图，不影响原效果)
             </div>
         </div>
     </form>
@@ -309,8 +280,7 @@
                 dialog.error(content);
                 return false;
             }
-/*            console.log(postData);
-            return false;*/
+
             var _this = $(this);
             _this.addClass("nodisabled");//防止重复提交
             $.post(action,postData,function(data){
