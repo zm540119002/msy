@@ -41,7 +41,6 @@
                 dialog.error('AJAX错误');
             },
             success: function(data){
-                console.log(data);
                 $('.loading').hide();
                 //异步验证判断
                 let param = {
@@ -53,8 +52,6 @@
                     jump_url:data.data.url?data.data.url:jump_url,
                     func:config.func
                 };
-                console.log(param);
-                return false;
                 async_verify_judge(param);
             }
         });
