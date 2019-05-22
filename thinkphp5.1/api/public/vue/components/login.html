@@ -212,14 +212,15 @@
         });
     }
     var login_success_callback_common = function(param){
+        //localStorage.cartList 入库
         add_localStorage_cartList();
         layer.close(param.index);
     };
     var register_success_callback_common = function(){
         layer.close(param.index);
     };
+    //localStorage.cartList 入库
     var add_localStorage_cartList = function() {
-        //获取存储购物车商品信息
         if (localStorage.cartList) {
             var postData = JSON.parse(localStorage.cartList);
             $.ajax({

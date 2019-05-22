@@ -43,7 +43,7 @@
     <section class="separation-line columns_flex l-r-sides flex_item">
         {empty name="user"}
         <div class="user_top">
-            <a href="javascript:void(0);" id="login_dialog">
+            <a href="javascript:void(0);" id="login_dialog" onclick="loginDialogTrigger()">
                <img src="public_img/default/head_50.png" alt="">
                注册登录
            </a>
@@ -144,6 +144,13 @@
 {block name="common"}
 {include file="template/wallet_pay_dialog.html" /}
 {/block}
+{block name="login_dialog"}
+{include file="../../api/public/vue/components/login.html" /}
+<script type="text/javascript">
+    var login_success_callback_private = function(){};
+    var register_success_callback_private = function(){};
+</script>
+{/block}
 {block name="footer"}
 {include file="template/footer_project.html" /}
 {/block}
@@ -153,6 +160,16 @@
 <script type="text/javascript" src="{:request()->scheme()}://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
 <script type="text/javascript">
     $(function () {
+        $('body').on('click','.async_login',function(){
+            let _this = $(this);
+            let config = {
+                clickObj:_this,
+                func:function(){
+                    _this.click();
+                }
+            };
+            asyncVerify(config);
+        });
         var mobile=$('.user_mobile').text();
         $('.user_mobile').text(mobileNHide(mobile));
         //个人信息

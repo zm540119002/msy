@@ -16,6 +16,50 @@
 <script type="text/javascript" src="api_common_js/dialog.js"></script>
 <script type="text/javascript" src="api_common_js/paging.js"></script>
 <script type="text/javascript">
+    function asyncVerify(config){
+        let jump_url = config.clickObj.data('jump_url');
+        if(!config.clickObj || !jump_url){
+            dialog.error('参数错误！');
+            return false;
+        }
+        login_success_callback_private = function(){
+            config.clickObj.click();
+        };
+        register_success_callback_private = function(){
+            config.clickObj.click();
+        };
+        //异步验证
+        if(jump_url){
+            $.ajax({
+                url: jump_url,
+                data: config.postData,
+                type: 'post',
+                beforeSend: function(xhr){
+                    $('.loading').show();
+                },
+                error:function(xhr){
+                    $('.loading').hide();
+                    dialog.error('AJAX错误');
+                },
+                success: function(data){
+                    $('.loading').hide();
+                    //异步验证判断
+                    let param = {
+                        data:data,
+                        postData:config.postData,
+                        componentFooterCartMenu:config.componentFooterCartMenu,
+                        clickObj:config.clickObj,
+                        reduce:config.reduce,
+                        jump_url:data.data.url?data.data.url:jump_url,
+                        func:function(){
+                            config.clickObj.click();
+                        }
+                    };
+                    async_verify_judge(param);
+                }
+            });
+        }
+    }
     //异步验证判断
     function async_verify_judge(param){
         //失败回调
@@ -23,7 +67,7 @@
             if(param.data.data.code == '1000'){ //默认
                 return false;
             }else if(param.data.data.code == '1001'){ //登录
-                if(param.clickObj.attr('class')=='add_cart'){ //加入购物车
+                if(param.clickObj.attr('class')=='add_cart' && param.postData){ //加入购物车
                     editLocalStorageCartList(param);
                 }else{
                     loginDialogTrigger();
@@ -35,13 +79,10 @@
             dialog.error(param.data.info);
         }else if(param.data.status==1){ //成功回调
             if(param.data.data.code == '1000'){ //默认
-                if(param.clickObj.attr('class')=='add_cart'){ //加入购物车
-                    if(param.componentFooterCartMenu){
-                        $.each(param.componentFooterCartMenu.postData.goodsList,function(i,o){
-                            param.componentFooterCartMenu.cart_num += o.num;
-                        });
-                    }
-                }else{
+                if(param.clickObj.attr('class')=='add_cart' && param.componentFooterCartMenu){ //加入购物车
+                    $.each(param.postData.goodsList,function(i,o){
+                        param.componentFooterCartMenu.cart_num += o.num;
+                    });
                 }
                 return false;
             }else if(param.data.data.code == '1001'){ //登录
@@ -50,42 +91,43 @@
             }else if(param.data.data.code=='1002'){ //授权
                 return false;
             }else if(param.data.data.code=='1003'){ //跳转
-                location.href=param.jump_url;
+                location.href = param.jump_url;
                 return false;
             }
             dialog.success(param.data.info);
         }
     }
     //编辑cookie里的购物车商品列表
-    function editLocalStorageCartList(param,reduce){
+    function editLocalStorageCartList(param){
+        if(!param.postData.goodsList.length){
+            dialog.error('请选择商品！');
+            return false;
+        }
         if(!localStorage.cartList){
-            localStorage.cartList = JSON.stringify({'goodsList':param.componentFooterCartMenu.postData.goodsList});
+            localStorage.cartList = JSON.stringify({'goodsList':param.postData.goodsList});
         }else{
             let goodsListOld = (JSON.parse(localStorage.cartList)).goodsList;
-            let goodsListNew = [];
-            $.each(param.componentFooterCartMenu.postData.goodsList,function(i,o){
-                let find = null;
+            $.each(param.postData.goodsList,function(i,o){
+                let find = false;
                 $.each(goodsListOld,function(ii,oo){
                     if(o.goods_id == oo.goods_id){
-                        if(reduce && reduce==='true'){
+                        if(param.reduce && param.reduce==='true'){
                             oo.num -= o.num;
                         }else{
                             oo.num += o.num;
                         }
-                        find = oo;
+                        find = true;
                     }
                 });
-                if(find){
-                    goodsListNew.unshift(find);
-                }else{
-                    goodsListNew.unshift(o);
+                if(!find){
+                    goodsListOld.unshift(o);
                 }
             });
             //保存购物车
-            localStorage.cartList = JSON.stringify({'goodsList':goodsListNew});
+            localStorage.cartList = JSON.stringify({'goodsList':goodsListOld});
         }
-        if(param.componentFooterCartMenu){
-            $.each(param.componentFooterCartMenu.postData.goodsList,function(i,o){
+        if(param.clickObj.attr('class')=='add_cart' && param.componentFooterCartMenu){ //加入购物车
+            $.each(param.postData.goodsList,function(i,o){
                 param.componentFooterCartMenu.cart_num += o.num;
             });
         }
