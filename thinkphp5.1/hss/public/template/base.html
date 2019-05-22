@@ -109,8 +109,6 @@
             localStorage.cartList = JSON.stringify({'goodsList':param.postData.goodsList});
         }else{
             let goodsListOld = (JSON.parse(localStorage.cartList)).goodsList;
-            console.log(goodsListOld);
-            let goodsListNew = [];
             $.each(param.postData.goodsList,function(i,o){
                 let find = null;
                 $.each(goodsListOld,function(ii,oo){
@@ -124,13 +122,13 @@
                     }
                 });
                 if(find){
-                    goodsListNew.unshift(find);
+                    goodsListOld.unshift(find);
                 }else{
-                    goodsListNew.unshift(o);
+                    goodsListOld.unshift(o);
                 }
             });
             //保存购物车
-            localStorage.cartList = JSON.stringify({'goodsList':goodsListNew});
+            localStorage.cartList = JSON.stringify({'goodsList':goodsListOld});
         }
         if(param.clickObj.attr('class')=='add_cart' && param.componentFooterCartMenu){ //加入购物车
             $.each(param.postData.goodsList,function(i,o){
