@@ -220,8 +220,11 @@ class Goods extends \common\controller\Base{
                 'thumb_img'=>$info['thumb_img'],
                 'headline'=>$info['headline'],
 //                'specification'=>'(头部调理油10ml+头发养护油10ml)x20瓶',
-                'specification'=>htmlspecialchars($info['specification']),
+                'specification'=>$info['specification'],
             ]));
+//            $this->assign('specification',$info['specification']);
+
+
             $modelComment = new \app\index\model\Comment();
             $where = [
                 ['status','=',0],
