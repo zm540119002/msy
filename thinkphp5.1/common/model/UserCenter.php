@@ -81,6 +81,7 @@ class UserCenter extends Base {
 			if(!$validateUser->scene('resetPassword')->check($data)){
 				return errorMsg($validateUser->getError());
 			}
+			print_r($saveData);exit;
 			if(!$this->_resetPassword($saveData['mobile_phone'],$saveData['password'])){
 				return errorMsg('重置密码失败');
 			}
@@ -123,7 +124,6 @@ class UserCenter extends Base {
 		);
 		$saveData['update_time'] = time();
 		$res = $this->isUpdate(true)->where($where)->save($saveData);
-		print_r($this->getLastSql());exit;
 		if(false === $res){
 			return false;
 		}
