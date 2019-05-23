@@ -78,7 +78,7 @@ class UserCenter extends Base {
 		}elseif ($user['status'] ==2){
 			return errorMsg('账号已删除');
 		}else{//已注册，正常，则修改密码
-			return errorMsg('重置密码失败');
+			return errorMsg($saveData['password']);
 			if(!$validateUser->scene('resetPassword')->check($saveData)){
 				return errorMsg($validateUser->getError());
 			}
