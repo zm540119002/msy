@@ -218,8 +218,6 @@
 	$(function(){
 		//数据库里购物车里商品数量
 		let goodsInfo = JSON.parse('{$goodsInfo|raw}');
-		console.log('{$specification|raw}');
-		console.log(typeof '{$specification|raw}');
 		console.log(goodsInfo);
 		let total_num = parseInt("{$total_num|default=0}");
 		//localStorage里商品信息
@@ -248,7 +246,6 @@
 					'deal_price':goodsInfo.deal_price,
 					'headline':goodsInfo.headline,
 					'specification':goodsInfo.specification,
-//					'specification':'{$specification|raw}',
 					'thumb_img':goodsInfo.thumb_img
 				}
 			]

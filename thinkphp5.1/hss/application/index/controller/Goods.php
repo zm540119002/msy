@@ -213,20 +213,16 @@ class Goods extends \common\controller\Base{
             $info['main_img'] = explode(',',(string)$info['main_img']);
             $info['detail_img'] = explode(',',(string)$info['detail_img']);
             $info['tag'] = explode(',',(string)$info['tag']);
-            $info['specification']    = $info['specification']    ? htmlspecialchars_decode($info['specification']) : '';
             $this->assign('info',$info);
             $this->assign('goodsInfo',json_encode([
                 'goods_id'=>$info['id'],
                 'deal_price'=>$info['bulk_price'],
                 'thumb_img'=>$info['thumb_img'],
                 'headline'=>$info['headline'],
-                'specification'=>'(头部调理油10ml+头发养护油10ml)x20瓶',
-//                'specification'=>(string)$info['specification'],
-            ]));
-            $this->assign('specification',json_encode([
+//                'specification'=>'(头部调理油10ml+头发养护油10ml)x20瓶',
+//                'specification'=>'(肩颈赋活油10ml+肩颈舒缓油10ml)x20瓶',
                 'specification'=>$info['specification'],
             ]));
-
 
             $modelComment = new \app\index\model\Comment();
             $where = [
