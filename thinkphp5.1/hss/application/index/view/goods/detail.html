@@ -106,6 +106,8 @@
 										:deal_price="Number(productInfo.deal_price)"
 										:product_name="productInfo.headline"
 										:product_src="productInfo.thumb_img"
+										:specification="productInfo.specification"
+										:specification_unit="productInfo.specification_unit"
 										:init_quantity="parseInt(init_quantity)"
 										:step_quantity="parseInt(step_quantity)"
 										:type="type"
@@ -234,14 +236,16 @@
 			}
 		});
 		param = {
+			'type':3,
 			'init_quantity':1,
 			'step_quantity':1,
-			'type':3,
 			'productList':[
 				{
 					'id':goodsInfo.goods_id,
 					'deal_price':goodsInfo.deal_price,
 					'headline':goodsInfo.headline,
+					'specification':goodsInfo.specification,
+					'specification_unit':goodsInfo.specification_unit,
 					'thumb_img':goodsInfo.thumb_img
 				}
 			]

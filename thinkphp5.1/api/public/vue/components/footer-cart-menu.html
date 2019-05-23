@@ -73,11 +73,11 @@
             </div>
             <div class="columns_flex l-r-sides">
                 <div class="left">
-                    <p>采购数量：(单位:{{unit}})</p>
+                    <p>采购数量：(单位:{{specification_unit}})</p>
                     <p>
                         <span class="step-named">起订数量：</span>
                         <span class="step-quantity">{{init_quantity}}</span>
-                        <span class="unit">{{unit}}</span>
+                        <span class="specification_unit">{{specification_unit}}</span>
                     </p>
                 </div>
                 <div class="middle">
@@ -110,11 +110,11 @@
                 <div class="left">
                     <div></div>
                     <div class="red subtotal_amount">￥{{ parseFloat(subtotal_amount).toFixed(2) }}</div>
+                    <div class="product_name"><p class="text-intro">{{product_name}}</p></div>
+                    <div class="specification">{{specification}}/{{specification_unit}}</div>
+                    <div class="deal_price"><p><span class="red deal_price">￥{{deal_price}}</span></p></div>
                 </div>
                 <div  class="right">
-                    <div class="product_name">
-                        <p class="text-intro">{{product_name}}</p>
-                    </div>
                     <div class="quantity_wrapper selected-number" v-if="add_cart_type==1">
                         <a href="javascript:void(0);" class="reduce" @click="reduce">-</a>
                         <input type="text" :value="buy_quantity" class="f24 product_count" readonly="readonly">
@@ -140,7 +140,8 @@
             props: {
                 product_id: {type: [String, Number],default:0,required: true},
                 product_name: {type: String,default: ''},
-                unit: {type: String,default: '盒'},
+                specification: {type: String,default: ''},
+                specification_unit: {type: String,default: '盒'},
                 product_src: {type: String,default: ''},
                 quota_quantity: {type: Number,default: 1},
                 type: {type: Number,default: 1},
