@@ -236,6 +236,7 @@
 				return param;
 			}
 		});
+		let specification = '{$specification}'
 		param = {
 			'type':3,
 			'init_quantity':1,
@@ -246,7 +247,7 @@
 					'deal_price':goodsInfo.deal_price,
 					'headline':goodsInfo.headline,
 //					'specification':goodsInfo.specification,
-					'specification':'{$specification|raw}',
+					'specification':specification,
 					'thumb_img':goodsInfo.thumb_img
 				}
 			]
