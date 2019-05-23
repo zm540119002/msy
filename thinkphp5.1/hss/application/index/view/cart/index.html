@@ -1,55 +1,104 @@
 {extend name="template/base.html" /}
+{block name="title"}购物车{/block}
 {block name="content"}
 <section class="no_cart_data" style="display:none;">
-	<li class="no_data">
-		<img src="https://www.worldview.com.cn/static/common/img/no-cart.png" alt="">
-	</li>
+	<li class="no_data"><img src="https://www.worldview.com.cn/static/common/img/no-cart.png" alt=""></li>
 </section>
 <article class="f24">
 	<section class="header_title separation-line">
 		<a href="javascript:void(0);" class="back_prev_page"></a>
 		<h2 class="f24">购物车</h2>
 	</section>
-<!--	<section id="no_data">
-		<div class="cart_data_empty">
-			<p>注：采购车里超过7天未结算的商品会被系统自动清理</p>
+	<!--产品列表-->
+	<ul class="cart_goods_list list" id="list">
+		<div id="product-select">
+			<product-select
+					v-for="productInfo in productList"
+					:key="productInfo.id"
+					:product_id="productInfo.id"
+					:deal_price="Number(productInfo.bulk_price)"
+					:product_name="productInfo.headline"
+					:product_src="productInfo.thumb_img"
+					:init_quantity="parseInt(productInfo.num)"
+					:step_quantity="parseInt(step_quantity)"
+					:type="type"
+			></product-select>
 		</div>
-	</section>-->
-	<ul class="cart_goods_list" id="list">
 	</ul>
 </article>
 {/block}
 {block name="footer"}
-{include file="template/footer_menu.html" /}
+{include file="../../api/public/vue/components/footer-cart-menu.html" /}
+<div id="foot_cart_menu">
+	<footer-cart-menu
+			:cart_init_num="cart_init_num"
+	></footer-cart-menu>
+</div>
+<script type="text/javascript">
+	function getJsonListCallBack(data){
+		console.log(data);
+		if(data.status==0){
+			dialog.error(data.info);
+			return false;
+		}
+		let param = {
+			'type':4,
+			'step_quantity':1,
+			'productList':data.data.data
+		};
+		new Vue({
+			el: '#product-select',
+			data:function(){
+				return param;
+			}
+		});
+	}
+	$(function(){
+		//数据库里购物车里商品数量
+		let total_num = parseInt("{$total_num|default=0}");
+		//localStorage里商品信息
+		if(localStorage.cartList){
+			let goodsList = (JSON.parse(localStorage.cartList)).goodsList;
+			$.each(goodsList,function(i,goods){
+				total_num += goods['num'];
+			});
+		}
+		let param = {
+			cart_init_num:total_num
+		};
+		new Vue({
+			el: '#foot_cart_menu',
+			data:function(){
+				return param;
+			}
+		});
+	});
+</script>
 {/block}
 {block name="script"}
-<script type="text/javascript" src="index_js/footerCart.js"></script>
 <script type="text/javascript">
 	var config = {
 		url:module+'Cart/getList',
 		requestEnd:false,
 		loadTrigger:false,
-		currentPage:1
+		currentPage:1,
+		callBack:getJsonListCallBack
 	};
 	var postData = {
 		pageSize:20,
 		pageType:'index'
 	};
-
-
-
 	$(function(){
 		var user_id = '{$user.id}';
 		// 初始化购物车商品
 		if(user_id){
-			getPagingList(config,postData);
+			getJsonList(config,postData);
 		}else {
 			config.url = module+'Goods/getCartGoodsList';
-			var cartList = localStorage.cartList;//获取存储购物车商品信息
+			var cartList = localStorage.cartList; //获取存储购物车商品信息
 			postData.cartList = cartList;
 			getPagingList(config,postData);
 		}
-
 		//下拉加载
 		$(window).on('scroll',function(){
 			if(config.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
@@ -58,16 +107,12 @@
 					getPagingList(config,postData);
 				}else {
 					config.url = module+'Goods/getCartGoodsList';
-					var cartList = localStorage.cartList;//获取存储购物车商品信息
+					var cartList = localStorage.cartList; //获取存储购物车商品信息
 					postData.cartList = cartList;
 					getPagingList(config,postData);
 				}
 			}
 		});
-
-
 	});
-
-
 </script>
 {/block}

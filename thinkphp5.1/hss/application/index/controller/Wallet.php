@@ -176,6 +176,7 @@ class Wallet extends Base {
      * ajax
      */
     public function checkWallet(){
+
         if (request()->isAjax()) {
             $password = input('password/s');
             $user_id  = $this->user['id'];
@@ -227,7 +228,7 @@ class Wallet extends Base {
             }
             // 更新订单信息
             $data = input('post.');
-            $data['pay_code'] = $data['pay_code'];
+            //$data['pay_code'] = $data['pay_code'];
             $data['pay_sn'] = $orderInfo['pay_sn'];
             $data['payment_time'] = time();
             $data['order_sn'] = $orderInfo['sn'];

@@ -1,9 +1,5 @@
 {extend name="template/base.html" /}
-
-{block name="title"}
-品类详情
-{/block}
-
+{block name="title"}品类详情{/block}
 {block name="content"}
 <article class="f24">
 	<!-- 项目信息 -->
@@ -14,12 +10,9 @@
 			<li data-item="item3"><a href="javascript:;" class="">相关培训</a></li>
 		</ul>
 	</div>
-
 	<!-- 品类商品 -->
 	<section class="content-padding content_main project_item">
-
 		{include file="template/scene_detail.html" /}
-
 		<!-- 内容 -->
 		<section class="content-padding content_main wy_list">
 			<!--采购方案列表-->
@@ -86,7 +79,6 @@
 <script type="text/javascript">
 	function getJsonListCallBack(data){
 		param = {
-			'display_quota':true,
 			'init_quantity':1,
 			'step_quantity':1,
 			'productList':data.data.data

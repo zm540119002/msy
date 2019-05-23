@@ -1,4 +1,5 @@
 {extend name="template/base.html" /}
+{block name="title"}商品详情{/block}
 {block name="content"}
 <article class="f24">
 	<section class="slider_banner">
@@ -39,10 +40,6 @@
 							</div>
 						</div>
 						<div class="title_name goods_title  f28">
-
-
-
-
 							{$info.headline}
 						</div>
 						<p class="specification_text">{$info.specification}</p>
@@ -87,15 +84,6 @@
 								</div>
 							</div>
 						</div>
-						<!--<div class="separation_item">
-							<a href="javascript:void(0);" class="sample_purchase right-arrow" >样品购买
-								<input type="hidden" class="minimum_sample_quantity" value="{$info.minimum_sample_quantity}">
-								<input type="hidden" class="sample_price" value="{$info.sample_price}">
-							</a>
-						</div>
-						<div class="columns_flex l-r-sides separation_item">
-							<a href="javascript:;" class="set_brand right-arrow">设定我的品牌：<span class="brand_name" data-id=""></span></a>
-						</div>-->
 						<!--产品列表-->
 						<ul class="goods_list list" id="list">
 							<div id="product-select">
@@ -104,10 +92,13 @@
 										:key="productInfo.id"
 										:product_id="productInfo.id"
 										:deal_price="Number(productInfo.deal_price)"
-										:product_name="productInfo.headline"
+										:product_name="productInfo.name"
 										:product_src="productInfo.thumb_img"
+										:specification="productInfo.specification"
+										:specification_unit="productInfo.specification_unit"
 										:init_quantity="parseInt(init_quantity)"
 										:step_quantity="parseInt(step_quantity)"
+										:type="type"
 								></product-select>
 							</div>
 						</ul>
@@ -233,14 +224,16 @@
 			}
 		});
 		param = {
+			'type':3,
 			'init_quantity':1,
 			'step_quantity':1,
-			'add_cart_type':1,
 			'productList':[
 				{
 					'id':goodsInfo.goods_id,
 					'deal_price':goodsInfo.deal_price,
-					'headline':goodsInfo.headline,
+					'headline':goodsInfo.name,
+					'specification':goodsInfo.specification,
+					'specification_unit':goodsInfo.specification_unit,
 					'thumb_img':goodsInfo.thumb_img
 				}
 			]
@@ -373,6 +366,7 @@
 
 		//打开二维码
 		$('body').on('click','.qrcode_share',function (){
+			alert(1)
 			var rq_code_url = "{$info.rq_code_url}";
 			if(rq_code_url){
 				var imgSrc=uploads+rq_code_url;

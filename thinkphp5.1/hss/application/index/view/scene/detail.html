@@ -1,9 +1,5 @@
 {extend name="template/base.html" /}
-
-{block name="title"}
-{$Think.config.custom.tag_category[$info.tag_category]}
-{/block}
-
+{block name="title"}{$Think.config.custom.tag_category[$info.tag_category]}{/block}
 {block name="content"}
 <article class="f24">
 	<!-- 标题导航 -->
@@ -18,7 +14,6 @@
 		</ul>
 	</nav>
 	{include file="template/scene_detail.html" /}
-
 	<!-- 内容 -->
 	<section class="content-padding content_main wy_list">
 		<div class="">
@@ -71,7 +66,7 @@
 			return false;
 		}
 		param = {
-			'init_quantity':0,
+			'init_quantity':1,
 			'step_quantity':1,
 			'productList':data.data.data,
 			'add_cart_type':2

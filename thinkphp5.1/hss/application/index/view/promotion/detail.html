@@ -1,5 +1,5 @@
 {extend name="template/base.html" /}
-{block name="title"}采购套餐{/block}
+{block name="title"}套餐详情{/block}
 {block name="header"}{/block}
 {block name="content"}
 <article class="f24">
@@ -20,7 +20,6 @@
 						:product_src="productInfo.thumb_img"
 						:init_quantity="parseInt(init_quantity)"
 						:step_quantity="parseInt(step_quantity)"
-						:add_cart_type="add_cart_type"
 				></product-select>
 			</div>
 		</ul>
@@ -34,7 +33,9 @@
 		var login_success_callback_private = function(){
 			location.reload();
 		};
-		var register_success_callback_private = function(){};
+		var register_success_callback_private = function(){
+			location.reload();
+		};
 	</script>
 	{include file="../../api/public/vue/components/login.html" /}
 {/block}
@@ -52,10 +53,8 @@
 			return false;
 		}
 		let param = {
-			'type':1,
-			'init_quantity':0,
+			'init_quantity':1,
 			'step_quantity':1,
-			'add_cart_type':1,
 			'productList':data.data
 		};
 		new Vue({

@@ -79,8 +79,9 @@ return [
                 'bottom_item',
                 'settlement',
             ],
+            'action'=>url('Order/generate'),
         ],[//10
-            'name'   => '全选',
+            'name'   => '',
             'class'=>[
                 'bottom_item',
                 'checked_all',
