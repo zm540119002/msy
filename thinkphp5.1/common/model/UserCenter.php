@@ -80,12 +80,11 @@ class UserCenter extends Base {
 			if(!$validateUser->scene('resetPassword')->check($data)){
 				return errorMsg($validateUser->getError());
 			}
-			return errorMsg('重置密码失败');
 			if(!$this->_resetPassword($saveData['mobile_phone'],$saveData)){
 				return errorMsg('重置密码失败');
 			}
 		}
-		return $this->_login($saveData['mobile_phone'],$saveData['password']);
+		return $this->_login($saveData['mobile_phone'],$data['password']);
 	}
 
 	/**注册
