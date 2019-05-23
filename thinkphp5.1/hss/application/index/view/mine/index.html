@@ -145,12 +145,16 @@
 {include file="template/wallet_pay_dialog.html" /}
 {/block}
 {block name="login_dialog"}
+<script type="text/javascript">
+    var login_success_callback_private = function(){
+        location.reload();
+    };
+    var register_success_callback_private = function(){};
+</script>
 {include file="../../api/public/vue/components/login.html" /}
 <script type="text/javascript">
-    var login_success_callback_private = function(){};
-    var register_success_callback_private = function(){};
     //退出-弹窗触发
-    function logoutDialog(){
+    function logoutDialogTrigger(){
         var url = domain+'ucenter/UserCenter/logout';
         layer.open({
             content:'是否退出？',
@@ -197,7 +201,7 @@
     });
     //退出-弹窗事件
     $('body').on('click','#logout_dialog',function(){
-        logoutDialog();
+        logoutDialogTrigger();
     });
     //登录-弹窗事件
     $('body').on('click','#login_dialog',function(){

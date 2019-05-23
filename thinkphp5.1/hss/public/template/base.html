@@ -22,12 +22,6 @@
             dialog.error('参数错误！');
             return false;
         }
-        //前端验证
-        if((config.clickObj.attr('class')=='add_cart' || config.clickObj.attr('class')=='buy_now' )
-                && !config.postData.goodsList.length){ //加入购物车
-            dialog.error('请选择商品！');
-            return false;
-        }
         //异步验证
         $.ajax({
             url: jump_url,
@@ -75,22 +69,22 @@
             }
             dialog.error(param.data.info);
         }else if(param.data.status==1){ //成功回调
-            if(param.data.data.code == '1000'){ //默认
+            if(param.data.data.code == '2000'){ //默认
                 if(param.clickObj.attr('class')=='add_cart' && param.componentFooterCartMenu){ //加入购物车
                     $.each(param.postData.goodsList,function(i,o){
                         param.componentFooterCartMenu.cart_num += o.num;
                     });
-                    dialog.error(param.info);
                 }
+                dialog.error(param.data.info);
                 return false;
-            }else if(param.data.data.code == '1001'){ //登录
+            }else if(param.data.data.code == '2001'){ //登录
                 if(param.func && $.isFunction(param.func)){
                     param.func();
                 }
                 return false;
-            }else if(param.data.data.code=='1002'){ //授权
+            }else if(param.data.data.code=='2002'){ //授权
                 return false;
-            }else if(param.data.data.code=='1003'){ //跳转
+            }else if(param.data.data.code=='2003'){ //跳转
                 location.href = param.jump_url;
                 return false;
             }

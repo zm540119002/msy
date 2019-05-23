@@ -26,9 +26,16 @@ class Order extends \common\controller\UserBase
                 'g.purchase_unit','g.store_id'
             ]
         ];
+
+
         //计算订单总价
         $modeGoods = new \app\index\model\Goods();
         $goodsListNew = $modeGoods->getList($config);
+
+        if(empty($goodsListNew)){
+            return $this->errorMsg('商品已失效');
+        }
+
         $amount = 0;
         foreach ($goodsList as $k1 => &$goodsInfo) {
             foreach ($goodsListNew as $k2 => &$goodsInfoNew) {

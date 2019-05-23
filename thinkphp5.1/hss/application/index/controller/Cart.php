@@ -170,6 +170,7 @@ class Cart extends \common\controller\UserBase {
                  ['c.user_id','=',$userId],
 //                 ['c.create_time','>',time()-7*24*60*60],//只展示7天的数据
                  ['c.status','=',0],
+                 //['g.status','=',0],
              ],'join' => [
                  ['goods g','g.id = c.goods_id','left']
              ],'field'=>[
