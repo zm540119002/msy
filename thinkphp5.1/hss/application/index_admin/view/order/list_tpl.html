@@ -21,7 +21,7 @@
         <td class="w48 sort">{$vo.create_time|date='Y-m-d H:i'}</td>
         <td class="w48 sort">{$vo.sn}</td>
         <td class="w48 sort">{$vo.mobile_phone}</td>
-        <td class="w48 sort">{$Think.config.custom.pay_code[$vo.order_status]}</td>
+        <td class="w48 sort">{$Think.config.custom.pay_code[$vo.pay_code]}</td>
         <td class="w48 ">
             {$Think.config.custom.order_status[$vo.order_status]}
         </td>
@@ -31,13 +31,14 @@
         <td class="w96">
             <a href="javascript:void(0);" class="info" style="text-decoration:none" title="详情">订单详情</a>
             | <a href="javascript:void(0);" class="edit" style="text-decoration:none" title="打印订单">打印订单</a>
-            {if $vo.order_status == 2}
-            <!--2:待收货-->
+            {if $vo.order_status==2}
+            <!--2:待发货-->
             | <a href="javascript:void(0);" class="ship" style="text-decoration:none" title="发货">发货</a>
-
             {elseif $vo.order_status == 3 }
+            <!--3:待收货-->
+            {elseif $vo.order_status == 4 }
             <!--3:待评价-->
-            <a href="javascript:void(0);" class="to_evaluate">待收货</a>
+            <a href="javascript:void(0);" class="to_evaluate">待评价</a>
 
             {else /}
 

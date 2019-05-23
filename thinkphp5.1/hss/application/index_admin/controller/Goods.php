@@ -57,6 +57,7 @@ class Goods extends Base {
 
             // 选中的店铺类型 十进制
             $_POST['belong_to'] = bindec(strrev(implode(input('post.belong_to/a'))));
+            $_POST['specification'] = trim(input('post.specification/s'));
 
             if(isset($_POST['id']) && intval($_POST['id'])){//修改
                 $config = [
@@ -298,6 +299,10 @@ class Goods extends Base {
                 $model = new \app\index_admin\model\PromotionGoods();
                 $condition = [['promotion_id','=',$data[0]['promotion_id']]];
                 break;
+            case config('custom.relation_type.sort'):
+                $model = new \app\index_admin\model\SortGoods();
+                $condition = [['sort_id','=',$data[0]['sort_id']]];
+                break;
             default:
                 return errorMsg('参数有误');
         }
@@ -346,6 +351,11 @@ class Goods extends Base {
                 $model = new \app\index_admin\model\PromotionGoods();
                 $field_id = 'pg.promotion_id';
                 $goods_id = 'pg.goods_id';
+                break;
+            case config('custom.relation_type.sort'):
+                $model = new \app\index_admin\model\SortGoods();
+                $field_id = 'sg.sort_id';
+                $goods_id = 'sg.goods_id';
                 break;
             default:
                 return errorMsg('参数有误');

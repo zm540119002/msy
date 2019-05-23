@@ -292,7 +292,6 @@ class Order extends \common\controller\UserBase
     //订单-详情页
     public function detail()
     {
-        $model = new \app\index\model\Order();
         $orderSn = input('order_sn/s');
         $config=[
             'where'=>[
@@ -312,6 +311,7 @@ class Order extends \common\controller\UserBase
                 'o.id'=>'desc'
             ]
         ];
+        $model= new \app\index\model\Order();
         $info = $model->getInfo($config);
 
         if(empty($info)){
@@ -339,15 +339,6 @@ class Order extends \common\controller\UserBase
         $info['goods_list']= $goodsList;
         $info['goods_num'] = array_sum(array_column($goodsList,'num'));
 
-
-/*        $goodsNum = 0;
-        foreach ($goodsList as &$goods){
-            $goodsNum+=$goods['num'];
-        }
-        $info['goods_list'] = $goodsList;
-        $info['goods_num'] = $goodsNum;*/
-/*        p($info);
-        exit;*/
         $this->assign('orderInfo',$info);
 
         // 显示的地址信息
@@ -357,21 +348,18 @@ class Order extends \common\controller\UserBase
         $this->assignWalletInfo();
 
         // 底部按钮
-        // 0：临时 1:待付款 2:待收货 3:待评价 4:已完成 5:已取消 6:售后',
+        // 0：临时 1:待付款 2:待收货 3:待收货 4:待评价 5:已完成 6:已取消',
         switch ($info['order_status'])
         {
             case "1":
-                //$configFooter = [5];
                 $configFooter = [0,111,11];
                 break;
             case "2":
+            case "3":
                 $configFooter = [12];
                 break;
-            case "3":
-                $configFooter = [13];
-                break;
             case "4":
-                $configFooter = [14];
+                $configFooter = [13];
                 break;
             case "5":
                 $configFooter = [14];
@@ -412,13 +400,15 @@ class Order extends \common\controller\UserBase
                 ['user_id','=',$this->user['id']],
             ]
         ];
+        return $where;
         $model = new \app\index\model\Order();
         $orderInfo = $model->getInfo($where);
         //$orderInfo['sn'] = '20190412170757362998811738229639';
         $type = true;
         switch($orderStatus){
+            case 2 :
             case 3 : // 确定收货
-                $where['order_status'] = 2;
+                $where[] = ['order_status','in','2,3'];
                 break;
             case 5 : // 取消订单
                 $where['order_status'] = 1;
@@ -469,13 +459,18 @@ class Order extends \common\controller\UserBase
                 'o.id','o.pay_sn','o.sn','o.order_status','o.pay_code','o.amount','o.actually_amount','o.remark',
                 'o.consignee','o.mobile','o.province','o.city','o.area','o.detail_address','o.create_time','o.payment_time',
                 'o.finished_time',
-            ],'order'=>[
-            'o.id'=>'desc'
-        ]
-
+            ],'order' => [
+                'o.create_time'=>'desc',
+            ],
         ];
         if(input('?get.order_status') && input('get.order_status/d')){
-            $config['where'][] = ['o.order_status', '=', input('get.order_status/d')];
+            $order_status = input('get.order_status/d');
+            if($order_status==2){
+                $config['where'][] = ['o.order_status', 'in', '2,3'];
+            }else{
+                $config['where'][] = ['o.order_status', '=', $order_status];
+            }
+
         }else{
             $config['where'][] = ['o.order_status', '>', 0];
         }
@@ -490,18 +485,15 @@ class Order extends \common\controller\UserBase
         $list = $model -> pageQuery($config)->each(function($item, $key){
             $modelOrderDetail = new \app\index\model\OrderDetail();
             $config=[
-                'where'=>[
-                    ['od.status', '=', 0],
-                    ['od.father_order_id','=',$item['id']]
-                ],
-                'field'=>[
+                'field' => [
                     'od.goods_id','od.price', 'od.num', 'od.buy_type','od.brand_id','od.brand_name',
                     'g.name','g.thumb_img',
-                ],
-                'join'=>[
+                ], 'where' => [
+                    ['od.status', '=', 0],
+                    ['od.father_order_id','=',$item['id']]
+                ], 'join'  => [
                     ['goods g','g.id = od.goods_id','left'],
-                ],
-
+                ]
             ];
             $goodsList = $modelOrderDetail -> getList($config);
             $goodsNum = 0;

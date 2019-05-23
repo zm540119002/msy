@@ -74,6 +74,47 @@ $(function () {
         forgetWalletPasswordDialog()
     });
 
+    // 确认收货
+    $('body').on('click','.confirm_receive',function () {
+
+        var id = $(".order_id").val();
+
+        var param = {
+            content : '确认收货 !'
+        };
+        param.postData = {
+            id : id,
+            order_status : 4
+        };
+
+        setOrderStatus(param);
+    });
+
+    // 申请退款
+    $('body').on('click','.refund_application',function () {
+        var _this = $(this);
+        setOrderStatus(_this,7);
+    });
+
+    // 取消订单
+    $('body').on('click','.cancel_order',function () {
+        var _this = $(this);
+        setOrderStatus(_this,5);
+    });
+
+    //去评价
+    $('body').on('click','.to_evaluate',function () {
+        location.href =module +'Comment/index';
+    });
+    //查看评论
+    $('body').on('click','.see_evaluation',function () {
+
+    });
+    //申请售后
+    $('body').on('click','.apply_after_sales',function () {
+        location.href =module +'AfterSale/index';
+    });
+
 });
 
 // 增加订单收货地址信息
@@ -158,5 +199,61 @@ function toPay(_this,postData){
             }
         }
     });
+}
+
+
+function setOrderStatus(param) {
+    param.url = module+'Order/setOrderStatus';
+    //param.postData.order_status = order_status;
+
+    function setOrderStatusCallback(){
+        location.href =module +'Order/manage/order_status/'+ param.postData.order_status;
+    }
+/*    console.log(param);
+    return false;*/
+    openLayer(param)
+}
+
+function openLayer(param){
+    layer.open({
+        content:param.content,
+        btn:['确定','取消'],
+        yes:function(index){
+            $.ajax({
+                url: param.url,
+                data: param.postData,
+                type: 'post',
+                beforeSend: function(){
+                    $('.loading').show();
+                },
+                error:function(){
+                    $('.loading').hide();
+                    dialog.error('AJAX错误');
+                },
+                success: function(data){
+                    $('.loading').hide();
+                    if(!data.status){
+                        dialog.error(data.info);
+                        return false;
+                    }
+                    if(data.status){
+
+                        setOrderStatusCallback();
+
+       /*                 switch(order_status){
+                            case 3 : // 确认收货
+                            case 7 : // 申请退款
+                                location.href =module +'Order/manage/order_status/'+ order_status;
+                                break;
+                            case 5 : // 取消订单
+                                _thisTr.remove();
+                                break;
+                        }*/
+                    }
+                }
+            });
+            layer.close(index);
+        }
+    })
 }
 
