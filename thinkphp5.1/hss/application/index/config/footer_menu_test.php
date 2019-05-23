@@ -80,7 +80,7 @@ return [
                 'settlement',
             ],
         ],[//10
-            'name'   => '全选',
+            'name'   => '',
             'class'=>[
                 'bottom_item',
                 'checked_all',
