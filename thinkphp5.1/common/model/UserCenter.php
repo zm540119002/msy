@@ -122,7 +122,6 @@ class UserCenter extends Base {
 			'mobile_phone' => $mobilePhone,
 		);
 		$saveData['update_time'] = time();
-		print_r($this);exit;
 		$res = $this->isUpdate(true)->where($where)->save($saveData);
 		print_r($this->getLastSql());exit;
 		if(false === $res){
