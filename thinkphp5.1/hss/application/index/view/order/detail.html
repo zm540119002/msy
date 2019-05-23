@@ -31,28 +31,7 @@
             </div>
             <div>
                 <span>状态：</span>
-                {if $orderInfo.order_status == 1}
-                <!--1:待付款-->
-                <span>待付款</span>
-                {elseif $orderInfo.order_status == 2 }
-                <!--2:待收货-->
-                <span>待收货</span>
-                {elseif $orderInfo.order_status == 3 }
-                <!--3:待评价-->
-                <span>待评价</span>
-                {elseif $orderInfo.order_status == 4 }
-                <!--4:已完成-->
-                <span>已完成</span>
-                {elseif $orderInfo.order_status == 5 }
-                <!--5:已取消-->
-                <span>已取消</span>
-                {elseif $orderInfo.order_status == 6}
-                <!--6:售后-->
-                <span>售后</span>
-                {else /}
-
-                {/if}
-
+                <span>{$Think.config.custom.order_status[$orderInfo.order_status]['name']}</span>
             </div>
         </div>
 
@@ -120,7 +99,7 @@
 {block name="script"}
 
 <script type="text/javascript" src="index_js/pay.js"></script>
-<script type="text/javascript" src="api_common_js/wallet.js"></script>
+<script type="text/javascript" src="index_js/wallet.js"></script>
 <script src="api_common_js/jquery.area.js"></script>
 <script type="text/javascript" src="index_js/address.js"></script>
 <script type="text/javascript">

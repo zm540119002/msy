@@ -98,6 +98,7 @@ function addAddress(postData) {
 
 // 其它支付方式提交订单
 function submitOrders(_this,postData){
+
     var url = module + 'Order/confirmOrder';
     _this.addClass("nodisabled");//防止重复提交
     var settlementMethod=$('.settlementMethod').html();
