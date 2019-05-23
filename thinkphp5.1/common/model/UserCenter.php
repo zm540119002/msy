@@ -125,8 +125,11 @@ class UserCenter extends Base {
 			'password' => $data['password'],
 			'update_time' => time(),
 		];
-		$res = $this->isUpdate(true)->where($where)->save($saveData);
-		print_r($this->getError());exit;
+		try {
+			$res = $this->isUpdate(true)->where($where)->save($saveData);
+		} catch (\Exception $e) {
+			print_r($e);exit;
+		}
 		if(false === $res){
 			return false;
 		}
