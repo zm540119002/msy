@@ -88,7 +88,7 @@ class Project extends \common\controller\Base{
             $model = new \app\index\model\Project();
             $config =[
                 'field' => [
-                    'id','name','main_img','intro','tag','detail_img','video','title','process_img','description','remarks'
+                    'id','name','thumb_img','main_img','intro','tag','detail_img','video','title','process_img','description','remarks','specification','buy_type'
                 ],
                 'where' => [
                     ['p.status', '=', 0],
