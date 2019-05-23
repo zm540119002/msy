@@ -186,6 +186,7 @@ class Cart extends \common\controller\UserBase {
              $config['where'][] = ['g.name', 'like', '%' . trim($keyword) . '%'];
          }
          $list = $model -> pageQuery($config);
+        print_r(123);exit;
         $this->successMsg('成功',$model->getLastSql());
         $this->successMsg('成功',$list);
         $currentPage = input('get.page/d');
