@@ -218,7 +218,7 @@ class Goods extends \common\controller\Base{
                 'goods_id'=>$info['id'],
                 'deal_price'=>$info['bulk_price'],
                 'thumb_img'=>$info['thumb_img'],
-                'headline'=>$info['headline'],
+                'name'=>$info['name'],
                 'specification'=>$info['specification'],
             ]));
 
