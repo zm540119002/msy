@@ -347,6 +347,14 @@
                         register_success_callback_private = function(){
                             _thisJquery.click()
                         };
+                        //前端验证
+                        if((_thisJquery.attr('class')=='add_cart'
+                                || _thisJquery.attr('class')=='buy_now')
+                                && !_thisVue.postData.goodsList.length
+                        ){ //加入购物车
+                            dialog.error('请选择商品！');
+                            return false;
+                        }
                         let config = {
                             clickObj:_thisJquery,
                             postData:_thisVue.postData,

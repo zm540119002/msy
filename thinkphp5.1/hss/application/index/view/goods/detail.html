@@ -203,17 +203,14 @@
 {block name="common"}
 {include file="goods/sample_layer" /}
 {include file="brand/set_brand" /}
-{include file="../../api/public/vue/components/footer-cart-menu.html" /}
 {/block}
 {block name="footer"}
+{include file="../../api/public/vue/components/footer-cart-menu.html" /}
 <div id="foot_cart_menu">
 	<footer-cart-menu
 			:cart_init_num="cart_init_num"
 	></footer-cart-menu>
 </div>
-{/block}
-{block name="script"}
-<script type="text/javascript" src="api_common_js/swiper.min.js"></script>
 <script type="text/javascript">
 	$(function(){
 		//数据库里购物车里商品数量
@@ -236,8 +233,6 @@
 			}
 		});
 		param = {
-			'buy_named':'采购数量',
-			'display_pic':false,
 			'init_quantity':1,
 			'step_quantity':1,
 			'add_cart_type':1,
@@ -256,7 +251,13 @@
 				return param;
 			}
 		});
-
+	});
+</script>
+{/block}
+{block name="script"}
+<script type="text/javascript" src="api_common_js/swiper.min.js"></script>
+<script type="text/javascript">
+	$(function(){
 		var id = '{$info.id}';
 		var price=$('.goods_list').find('price').text();
 		$('.amount').find('price').text(price);
