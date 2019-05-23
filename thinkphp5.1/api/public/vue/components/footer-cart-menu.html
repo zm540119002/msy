@@ -141,13 +141,12 @@
             <img class="left common_default_img" :src="product_src?('public_uploads/' + product_src):('api_common_img/default/no_pic_100.jpg') " alt="">
         </a>
         <div class="cart_list_r">
-            <p>商品商品商品商品商品商品商品商品商品商品商品</p>
-            <div>商品规格：<span>10ml</span></div>
+            <p>{{product_name}}</p>
+            <div>商品规格：<span>{{specification}}</span></div>
             <div class="commodity_purchaser f24">
                 <span class="pink">￥{{deal_price}}</span>
             </div>
             <div class="purchase_goods_num cart_goods_operate">
-                <!--<span>购买数量(5)</span>-->
                 <div class="quantity_wrapper selected-number">
                     <a href="javascript:void(0);" class="reduce" @click="reduce">-</a>
                     <input type="text" :value="buy_quantity" class="f24 product_count" readonly="readonly">
@@ -317,6 +316,10 @@
                 </div>
                 <!-- 立即购买 -->
                 <div v-else-if="menu.class.indexOf('buy_now')!==-1" class="buy_now" @click="asyncVerify" :data-jump_url="menu.action">
+                    <span class="s_i"></span>
+                </div>
+                <!-- 去结算 -->
+                <div v-else-if="menu.class.indexOf('settlement')!==-1" class="buy_now" @click="asyncVerify" :data-jump_url="menu.action">
                     <span class="s_i"></span>
                 </div>
                 <!-- 提交订单 -->
