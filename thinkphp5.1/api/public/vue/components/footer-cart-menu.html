@@ -105,14 +105,15 @@
             </div>
         </div>
     </li><li v-else-if="type==3">
-        <a href="">
-            <img src="" alt="">
-        </a>
-        <div class="product-select">
+        <div class="left">
+            <a class="p_img" :href="'/index/Goods/detail/id/' + product_id">
+                <img class="left" :src="product_src?('public_uploads/' + product_src):('api_common_img/default/no_pic_100.jpg') " alt="">
+            </a>
+        </div>
+        <div class="product-select right">
             <div class="">
                 <div class="product_name"><p class="text-intro">{{product_name}}</p></div>
                 <div class="specification">{{specification}}/{{specification_unit}}<span class="red deal_price">￥{{deal_price}}</span></div>
-                <!--<div class="deal_price"><p></p></div>-->
             </div>
             <div class="columns_flex l-r-sides">
                 <div class="red subtotal_amount">￥{{ parseFloat(subtotal_amount).toFixed(2) }}</div>
