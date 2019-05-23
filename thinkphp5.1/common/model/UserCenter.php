@@ -126,6 +126,7 @@ class UserCenter extends Base {
 			'update_time' => time(),
 		];
 		$res = $this->isUpdate(true)->where($where)->save($saveData);
+		print_r($this->getError());exit;
 		if(false === $res){
 			return false;
 		}
