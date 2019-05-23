@@ -218,12 +218,9 @@ class Goods extends \common\controller\Base{
                 'goods_id'=>$info['id'],
                 'deal_price'=>$info['bulk_price'],
                 'thumb_img'=>$info['thumb_img'],
-                'headline'=>$info['headline'],
-//                'specification'=>'(头部调理油10ml+头发养护油10ml)x20瓶',
-//                'specification'=>'(肩颈赋活油10ml+肩颈舒缓油10ml)x20瓶',
-                'specification'=>$info['specification'],
+                'name'=>$info['name'],
+                'specification'=>preg_replace('//s*/', '', $info['specification']),
             ]));
-
             $modelComment = new \app\index\model\Comment();
             $where = [
                 ['status','=',0],
@@ -234,7 +231,6 @@ class Goods extends \common\controller\Base{
             $this ->assign('averageScore',$averageScore);
             $total = $modelComment -> where($where)->count('user_id');
             $this ->assign('total',$total);
-
 
             //登录判断是否已收藏
             $user = session('user');

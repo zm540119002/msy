@@ -56,7 +56,6 @@ class UserCenter extends Base {
 	 */
 	public function register($data){
 		$data['password'] = trim($data['password']);
-
 		$saveData['name'] = trim($data['name']);
 		$saveData['salt'] = create_random_str(10,0);//盐值;
 		$saveData['mobile_phone'] = trim($data['mobile_phone']);
@@ -79,7 +78,7 @@ class UserCenter extends Base {
 		}elseif ($user['status'] ==2){
 			return errorMsg('账号已删除');
 		}else{//已注册，正常，则修改密码
-			if(!$validateUser->scene('resetPassword')->check($saveData)){
+			if(!$validateUser->scene('resetPassword')->check($data)){
 				return errorMsg($validateUser->getError());
 			}
 			if(!$this->_resetPassword($saveData['mobile_phone'],$saveData['password'])){
@@ -123,6 +122,7 @@ class UserCenter extends Base {
 			'mobile_phone' => $mobilePhone,
 		);
 		$saveData['update_time'] = time();
+		return errorMsg('重置密码失败');
 		$res = $this->isUpdate(true)->where($where)->save($saveData);
 		if(false === $res){
 			return false;
