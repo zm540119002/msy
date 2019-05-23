@@ -30,7 +30,9 @@
         -webkit-line-clamp: 4;
         -webkit-box-orient: vertical;
         word-break: break-all;
-    }
+    }.check_all {
+         -webkit-appearance: checkbox;
+     }
 </style>
 <!-- 产品选择器 -->
 <template id="product_select_tpl">
@@ -296,7 +298,7 @@
                 {{menu.name}}
                 <!-- 全选 -->
                 <div v-if="menu.class.indexOf('checked_all')!==-1" class="checked_all">
-                    <input type="checkbox" class="check-all">
+                    <input type="checkbox" class="check_all">
                     <label for="" class="">全选</label>
                 </div>
                 <!-- 总金额 -->
