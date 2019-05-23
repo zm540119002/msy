@@ -56,7 +56,6 @@ class UserCenter extends Base {
 	 */
 	public function register($data){
 		$data['password'] = trim($data['password']);
-		$saveData['name'] = trim($data['name']);
 		$saveData['salt'] = create_random_str(10,0);//盐值;
 		$saveData['mobile_phone'] = trim($data['mobile_phone']);
 		$saveData['password'] = md5($saveData['salt'] . $data['password']);
@@ -81,7 +80,7 @@ class UserCenter extends Base {
 			if(!$validateUser->scene('resetPassword')->check($data)){
 				return errorMsg($validateUser->getError());
 			}
-			if(!$this->_resetPassword($saveData['mobile_phone'],$saveData['password'])){
+			if(!$this->_resetPassword($saveData['mobile_phone'],$saveData)){
 				return errorMsg('重置密码失败');
 			}
 		}
@@ -117,13 +116,16 @@ class UserCenter extends Base {
 
 	/**重置密码
 	 */
-	private function _resetPassword($mobilePhone,$saveData){
+	private function _resetPassword($mobilePhone,$data){
 		$where = array(
 			'mobile_phone' => $mobilePhone,
 		);
-		$saveData['update_time'] = time();
+		$saveData = [
+			'salt' => $data['salt'],
+			'password' => $data['password'],
+			'update_time' => time(),
+		];
 		$res = $this->isUpdate(true)->where($where)->save($saveData);
-		print_r($this->getLastSql());exit;
 		if(false === $res){
 			return false;
 		}
