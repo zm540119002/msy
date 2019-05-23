@@ -1,9 +1,5 @@
 {extend name="template/base.html" /}
-
-{block name="title"}
-项目详情
-{/block}
-
+{block name="title"}项目详情{/block}
 {block name="content"}
 <article class="f24">
 	<!-- 项目信息 -->
@@ -14,12 +10,9 @@
 			<li data-item="item3"><a href="javascript:;" class="">项目操作</a></li>
 		</ul>
 	</div>
-
 	<!-- 项目产品 -->
 	<section class="content-padding content_main project_item">
-
 		{include file="template/scene_detail.html" /}
-
 		<!-- 内容 -->
 		<section class="content-padding content_main wy_list">
 			<!--采购方案列表-->
