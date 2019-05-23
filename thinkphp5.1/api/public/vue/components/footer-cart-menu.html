@@ -104,6 +104,33 @@
                 </div>
             </div>
         </div>
+    </li><li v-else-if="type==3">
+        <div class="product-select">
+            <div class="columns_flex l-r-sides">
+                <div class="left">
+                    <div></div>
+                    <div class="red subtotal_amount">￥{{ parseFloat(subtotal_amount).toFixed(2) }}</div>
+                </div>
+                <div  class="right">
+                    <div class="product_name">
+                        <p class="text-intro">{{product_name}}</p>
+                    </div>
+                    <div class="quantity_wrapper selected-number" v-if="add_cart_type==1">
+                        <a href="javascript:void(0);" class="reduce" @click="reduce">-</a>
+                        <input type="text" :value="buy_quantity" class="f24 product_count" readonly="readonly">
+                        <a href="javascript:void(0);" class="plus" @click="plus">+</a>
+                    </div>
+                    <div class="quantity_wrapper selected-number" v-else-if="add_cart_type==2">
+                        <a href="javascript:void(0);" class="add_cart" @click="plusCart" :data-jump_url="add_cart_url"><i></i></a>
+                    </div>
+                    <div class="quantity_wrapper selected-number" v-else-if="add_cart_type==3">
+                        <a href="javascript:void(0);" class="reduce" @click="reduceCart">-</a>
+                        <input type="text" :value="buy_quantity" class="f24 product_count" readonly="readonly">
+                        <a href="javascript:void(0);" class="plus" @click="plusCart">+</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </li>
 </template>
 <script type="text/javascript">
