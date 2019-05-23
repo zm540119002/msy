@@ -213,7 +213,6 @@ class Goods extends \common\controller\Base{
             $info['main_img'] = explode(',',(string)$info['main_img']);
             $info['detail_img'] = explode(',',(string)$info['detail_img']);
             $info['tag'] = explode(',',(string)$info['tag']);
-            $info['specification']    = $info['specification']    ? ($info['specification']) : '';
             $this->assign('info',$info);
             $specification = (string)$info['specification'];
             $this->assign('goodsInfo',json_encode([
