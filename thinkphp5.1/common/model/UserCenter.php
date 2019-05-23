@@ -85,6 +85,7 @@ class UserCenter extends Base {
 				return errorMsg('重置密码失败');
 			}
 		}
+		return errorMsg('重置密码失败');
 		return $this->_login($saveData['mobile_phone'],$saveData['password']);
 	}
 
