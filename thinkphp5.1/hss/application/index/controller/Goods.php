@@ -213,7 +213,7 @@ class Goods extends \common\controller\Base{
             $info['main_img'] = explode(',',(string)$info['main_img']);
             $info['detail_img'] = explode(',',(string)$info['detail_img']);
             $info['tag'] = explode(',',(string)$info['tag']);
-            $info['specification']    = $info['specification']    ? htmlspecialchars_decode($info['specification']) : '';
+            $info['specification']    = $info['specification']    ? ($info['specification']) : '';
             $this->assign('info',$info);
             $specification = (string)$info['specification'];
             $this->assign('goodsInfo',json_encode([
@@ -222,8 +222,7 @@ class Goods extends \common\controller\Base{
                 'thumb_img'=>$info['thumb_img'],
                 'headline'=>$info['headline'],
 //                'specification'=>'(头部调理油10ml+头发养护油10ml)x20瓶',
-//                'specification'=>(string)$info['specification'],
-                'specification'=>$specification,
+                'specification'=>$info['specification'],
             ]));
             $this->assign('specification',json_encode([
                 'specification'=>$info['specification'],
