@@ -141,7 +141,7 @@
     </li><li v-else-if="type==4">
         <input type="checkbox" class="item_checkbox checkitem sign_checkitem" >
         <a  href="" class="cart_goods_img">
-            <img src="" alt="" class="c_img">
+            <img class="left" :src="product_src?('public_uploads/' + product_src):('api_common_img/default/no_pic_100.jpg') " alt="">
         </a>
         <div class="cart_list_r">
             <p>商品商品商品商品商品商品商品商品商品商品商品</p>
