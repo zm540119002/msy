@@ -216,7 +216,7 @@
 </div>
 <script type="text/javascript">
 	$(function(){
-		let str = "{$goodsInfo['specification']|raw}";
+		let str = "{$specification|raw}";
 		//数据库里购物车里商品数量
 		let goodsInfo = JSON.parse('{$goodsInfo|raw}');
 		goodsInfo.specification = str;
