@@ -92,6 +92,7 @@ class UserCenter extends Base {
 	private function _register($saveData){
 		$saveData['create_time'] = time();
 		$res = $this->isUpdate(false)->save($saveData);
+		print_r($this->getLastSql());exit;
 		if(false === $res){
 			return false;
 		}
@@ -128,7 +129,7 @@ class UserCenter extends Base {
 		try {
 			$res = $this->isUpdate(true)->where($where)->save($saveData);
 		} catch (\Exception $e) {
-			print_r($e);exit;
+			echo $e->getMessage();
 		}
 		if(false === $res){
 			return false;
