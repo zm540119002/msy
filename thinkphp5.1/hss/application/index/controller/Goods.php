@@ -220,6 +220,8 @@ class Goods extends \common\controller\Base{
                 'deal_price'=>$info['bulk_price'],
                 'thumb_img'=>$info['thumb_img'],
                 'headline'=>$info['headline'],
+//                'specification'=>'(头部调理油10ml+头发养护油10ml)x20瓶',
+                'specification'=>$info['specification'],
             ]));
 
 

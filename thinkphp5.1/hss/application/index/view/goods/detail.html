@@ -106,8 +106,11 @@
 										:deal_price="Number(productInfo.deal_price)"
 										:product_name="productInfo.headline"
 										:product_src="productInfo.thumb_img"
+										:specification="productInfo.specification"
+										:specification_unit="productInfo.specification_unit"
 										:init_quantity="parseInt(init_quantity)"
 										:step_quantity="parseInt(step_quantity)"
+										:type="type"
 								></product-select>
 							</div>
 						</ul>
@@ -214,7 +217,7 @@
 <script type="text/javascript">
 	$(function(){
 		//数据库里购物车里商品数量
-		let goodsInfo = JSON.parse('{$goodsInfo|raw}');
+		let goodsInfo = JSON.parse("{$goodsInfo|raw}");
 		let total_num = parseInt("{$total_num|default=0}");
 		//localStorage里商品信息
 		if(localStorage.cartList){
@@ -233,14 +236,15 @@
 			}
 		});
 		param = {
+			'type':3,
 			'init_quantity':1,
 			'step_quantity':1,
-			'add_cart_type':1,
 			'productList':[
 				{
 					'id':goodsInfo.goods_id,
 					'deal_price':goodsInfo.deal_price,
 					'headline':goodsInfo.headline,
+					'specification':goodsInfo.specification,
 					'thumb_img':goodsInfo.thumb_img
 				}
 			]

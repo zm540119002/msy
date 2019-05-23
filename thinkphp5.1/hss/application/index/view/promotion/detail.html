@@ -20,7 +20,6 @@
 						:product_src="productInfo.thumb_img"
 						:init_quantity="parseInt(init_quantity)"
 						:step_quantity="parseInt(step_quantity)"
-						:add_cart_type="add_cart_type"
 				></product-select>
 			</div>
 		</ul>
@@ -30,11 +29,13 @@
 {block name="common"}
 {/block}
 {block name="login_dialog"}
-	{include file="../../api/public/vue/components/login.html" /}
 	<script type="text/javascript">
-		var login_success_callback_private = function(){};
+		var login_success_callback_private = function(){
+			location.reload();
+		};
 		var register_success_callback_private = function(){};
 	</script>
+	{include file="../../api/public/vue/components/login.html" /}
 {/block}
 {block name="footer"}
 {include file="../../api/public/vue/components/footer-cart-menu.html" /}
@@ -50,10 +51,8 @@
 			return false;
 		}
 		let param = {
-			'type':1,
-			'init_quantity':0,
+			'init_quantity':1,
 			'step_quantity':1,
-			'add_cart_type':1,
 			'productList':data.data
 		};
 		new Vue({

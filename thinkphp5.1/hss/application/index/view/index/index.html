@@ -7,18 +7,6 @@
 			<img src="{:show_img_handle($ads.top.thumb_img)}" class="common_default_img">
 		</a>
 	</section>
-
-	<!-- 暂时不需要
-		<section class="module-navigation separation-line ">
-		<div class="columns_flex f20 channel_nav store_organize_nav">
-			<a href="javascript:void(0);" class="deployed-deployment current"><span class="union_purchase"></span>采购商城</a>
-			<a href="javascript:void(0);" class="store_run"><span class="exclusive"></span>众创空间</a>
-			<a href="{:url('store/Operation/index')}" class="order-management"><span class="classify"></span>加盟店家</a>
-			<a href="{:url('store/Order/index')}" class="order-management-change"><span class="purchasers"></span>城市合伙人</a>
-			<a href="javascript:void(0);" class="my-store"><span class="recharge"></span>平台推客</a>
-		</div>
-	</section>
-	-->
 	<section class="">
 		<div class="content-padding">
 			<!-- 开放日 -->
@@ -32,25 +20,6 @@
 							</a>
 						</div>
 						{/volist}
-
-						<!--
-												<div class="swiper-slide">
-							<a href="#">
-								<img src="public_img/banner/banner.jpg" alt="{$vo.name}" class="common_default_img">
-							</a>
-						</div>
-						<div class="swiper-slide">
-							<a href="#">
-								<img src="public_img/banner/banner1.jpg" alt="{$vo.name}" class="common_default_img">
-							</a>
-						</div>
-						<div class="swiper-slide">
-							<a href="#">
-								<img src="public_img/banner/banner2.jpg" alt="{$vo.name}" class="common_default_img">
-							</a>
-						</div>
-						-->
-
 					</div>
 				</div>
 			</section>
@@ -72,7 +41,6 @@
 			<div class="hot_news_wrapper">
 				<div class="scroll_news">
 					<a class="news_tit">
-						<!--<img src="public_img/wy_logo.png" alt="">-->
 						<span>黑森森快报</span>
 					</a>
 					<div class="news_list_wrapper">
@@ -208,20 +176,12 @@
 		});
 
 		//下拉加载
-		//var offsetHeight=$('.nav_menu').offset().top;
 		$(window).on('scroll',function(){
 			if(config.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
 				config.loadTrigger = false;
 				postData.category_id = $('.nav_menu li.current').data('category-id');
 				getPagingList(config,postData);
 			}
-			//滚动
-			// var top=$(document).scrollTop();
-			// if(top>offsetHeight){
-			// 	$('.nav_menu').addClass('top-fixed');
-			// }else {
-			// 	$('.nav_menu').removeClass('top-fixed');
-			// }
 		});
 
 		$('body').on('click','.my_cart',function () {
