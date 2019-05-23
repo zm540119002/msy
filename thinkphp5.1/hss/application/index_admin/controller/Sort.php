@@ -185,7 +185,7 @@ class Sort extends Base
     public function manageRelationGoods(){
         // 暂时先全部写在商品分类里
         GoodsCategory::getGoodsCategory();
-        $this->assign('relation',config('custom.relation_type.project'));
+        $this->assign('relation',config('custom.relation_type.sort'));
 
         return $this->fetch();
     }
