@@ -23,6 +23,12 @@
     .product-select	img.left{
         width:100%;
     }
+    .left_img{
+        width:40%;
+    }
+    .left_img img{
+        width:100%;
+    }
 </style>
 <!-- 产品选择器 -->
 <template id="product_select_tpl">
@@ -105,7 +111,7 @@
             </div>
         </div>
     </li><li v-else-if="type==3">
-        <div class="left list_left_img">
+        <div class="left left_img">
             <a class="p_img" :href="'/index/Goods/detail/id/' + product_id">
                 <img class="left" :src="product_src?('public_uploads/' + product_src):('api_common_img/default/no_pic_100.jpg') " alt="">
             </a>
