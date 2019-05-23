@@ -85,7 +85,6 @@ class UserCenter extends Base {
 				return errorMsg('重置密码失败');
 			}
 		}
-		return errorMsg('重置密码失败');
 		return $this->_login($saveData['mobile_phone'],$saveData['password']);
 	}
 
@@ -123,6 +122,7 @@ class UserCenter extends Base {
 			'mobile_phone' => $mobilePhone,
 		);
 		$saveData['update_time'] = time();
+		return errorMsg('重置密码失败');
 		$res = $this->isUpdate(true)->where($where)->save($saveData);
 		if(false === $res){
 			return false;
