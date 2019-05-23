@@ -56,7 +56,6 @@ class UserCenter extends Base {
 	 */
 	public function register($data){
 		$data['password'] = trim($data['password']);
-		$saveData['name'] = trim($data['name']);
 		$saveData['salt'] = create_random_str(10,0);//盐值;
 		$saveData['mobile_phone'] = trim($data['mobile_phone']);
 		$saveData['password'] = md5($saveData['salt'] . $data['password']);
@@ -81,8 +80,7 @@ class UserCenter extends Base {
 			if(!$validateUser->scene('resetPassword')->check($data)){
 				return errorMsg($validateUser->getError());
 			}
-			print_r($saveData);exit;
-			if(!$this->_resetPassword($saveData['mobile_phone'],$saveData['password'])){
+			if(!$this->_resetPassword($saveData['mobile_phone'],$saveData)){
 				return errorMsg('重置密码失败');
 			}
 		}
