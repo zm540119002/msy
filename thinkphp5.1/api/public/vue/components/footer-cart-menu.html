@@ -140,18 +140,18 @@
     </li>
     <li v-else-if="type==4">
         <input type="checkbox" class="item_checkbox checkitem sign_checkitem" >
-        <a  href="{:url('Goods/detail',['id'=>$info.id])}" class="cart_goods_img">
-            <img src="{:show_img_handle($info.thumb_img)}" alt="" class="c_img">
+        <a  href="" class="cart_goods_img">
+            <img src="" alt="" class="c_img">
         </a>
         <div class="cart_list_r">
-            <p>{$info.name}</p>
-            <div>商品规格：<span>{$info.specification}</span></div>
+            <p>商品商品商品商品商品商品商品商品商品商品商品</p>
+            <div>商品规格：<span>10ml</span></div>
             <div class="commodity_purchaser f24">
                 {if $info.buy_type == 1}
-                <span class="pink">￥<price>{$info.bulk_price}</price></span>
+                <span class="pink">￥<price>50.00</price></span>
                 <!--<div>购买类型：<span>批量</span></div>-->
                 {elseif $info.buy_type == 2}
-                <span class="pink">￥<price>{$info.sample_price}</price></span>
+                <span class="pink">￥<price>45.00</price></span>
                 <div>购买类型：<span>样品</span></div>
                 {else /}
                 {/if}
