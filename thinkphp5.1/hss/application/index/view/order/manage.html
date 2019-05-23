@@ -65,13 +65,12 @@
 
 {block name="script"}
     <script type="text/javascript" src="index_js/pay.js"></script>
-    <script type="text/javascript" src="index_js/order.js"></script>
     <script type="text/javascript">
         var config = {
             url:module+'Order/getList',
             requestEnd:false,
             loadTrigger:false,
-            currentPage:1
+            currentPage:1,
 
         };
         var postData = {
@@ -103,6 +102,86 @@
                     config.loadTrigger = false;
                     getPagingList(config,postData);
                 }
+            });
+
+            // 确认收货
+            $('body').on('click','.confirm_receive',function () {
+                var _this = $(this);
+                setOrderStatus(_this,3);
+            });
+
+            // 申请退款
+            $('body').on('click','.refund_application',function () {
+                var _this = $(this);
+                setOrderStatus(_this,7);
+            });
+
+            // 取消订单
+            $('body').on('click','.cancel_order',function () {
+                var _this = $(this);
+                setOrderStatus(_this,5);
+            });
+
+            function setOrderStatus(_this,order_status) {
+                var _thisTr = _this.parents('li');
+                var id      = _thisTr.data('id');
+                var title   = _this.attr('title');
+                var postData={
+                    id:id,
+                    order_status:order_status
+                };
+
+                var url = module+'Order/setOrderStatus';
+                layer.open({
+                    content:'确定'+title+'？',
+                    btn:['确定','取消'],
+                    yes:function(index){
+                        $.ajax({
+                            url: url,
+                            data: postData,
+                            type: 'post',
+                            beforeSend: function(){
+                                $('.loading').show();
+                            },
+                            error:function(){
+                                $('.loading').hide();
+                                dialog.error('AJAX错误');
+                            },
+                            success: function(data){
+                                $('.loading').hide();
+                                if(!data.status){
+                                    dialog.error(data.info);
+                                    return false;
+                                }
+                                if(data.status){
+                                    switch(order_status){
+                                        case 3 : // 确认收货
+                                        case 7 : // 申请退款
+                                            location.href =module +'Order/manage/order_status/'+ order_status;
+                                            break;
+                                        case 5 : // 取消订单
+                                            _thisTr.remove();
+                                            break;
+                                    }
+                                }
+                            }
+                        });
+                        layer.close(index);
+                    }
+                })
+            }
+
+            //去评价
+            $('body').on('click','.to_evaluate',function () {
+                location.href =module +'Comment/index';
+            });
+            //查看评论
+            $('body').on('click','.see_evaluation',function () {
+
+            });
+            //申请售后
+            $('body').on('click','.apply_after_sales',function () {
+                location.href =module +'AfterSale/index';
             });
         });
     </script>

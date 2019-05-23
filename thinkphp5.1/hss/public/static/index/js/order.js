@@ -87,7 +87,9 @@ $(function () {
             order_status : 4
         };
 
-        setOrderStatus(param);
+        param.url = module+'Order/setOrderStatus';
+        openLayer(param);
+
     });
 
     // 申请退款
@@ -202,18 +204,6 @@ function toPay(_this,postData){
 }
 
 
-function setOrderStatus(param) {
-    param.url = module+'Order/setOrderStatus';
-    //param.postData.order_status = order_status;
-
-    function setOrderStatusCallback(){
-        location.href =module +'Order/manage/order_status/'+ param.postData.order_status;
-    }
-/*    console.log(param);
-    return false;*/
-    openLayer(param)
-}
-
 function openLayer(param){
     layer.open({
         content:param.content,
@@ -235,20 +225,8 @@ function openLayer(param){
                     if(!data.status){
                         dialog.error(data.info);
                         return false;
-                    }
-                    if(data.status){
-
-                        setOrderStatusCallback();
-
-       /*                 switch(order_status){
-                            case 3 : // 确认收货
-                            case 7 : // 申请退款
-                                location.href =module +'Order/manage/order_status/'+ order_status;
-                                break;
-                            case 5 : // 取消订单
-                                _thisTr.remove();
-                                break;
-                        }*/
+                    }else{
+                        location.href =module +'Order/manage/order_status/'+ param.postData.order_status;
                     }
                 }
             });

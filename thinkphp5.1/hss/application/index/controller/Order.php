@@ -400,10 +400,10 @@ class Order extends \common\controller\UserBase
                 ['user_id','=',$this->user['id']],
             ]
         ];
-        return $where;
+
         $model = new \app\index\model\Order();
         $orderInfo = $model->getInfo($where);
-        //$orderInfo['sn'] = '20190412170757362998811738229639';
+
         $type = true;
         switch($orderStatus){
             case 2 :
