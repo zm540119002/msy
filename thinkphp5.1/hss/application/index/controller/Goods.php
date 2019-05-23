@@ -219,7 +219,6 @@ class Goods extends \common\controller\Base{
                 'deal_price'=>$info['bulk_price'],
                 'thumb_img'=>$info['thumb_img'],
                 'headline'=>$info['headline'],
-                'specification'=>$info['specification'],
                 'specification_unit'=>$info['specification_unit'],
             ]));
 
