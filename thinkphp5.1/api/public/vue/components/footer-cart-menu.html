@@ -112,8 +112,7 @@
                 </div>
             </div>
         </div>
-    </li>
-    <li v-else-if="type==3">
+    </li><li v-else-if="type==3">
         <div class="product-select">
             <div class="columns_flex l-r-sides">
                 <div class="left">
@@ -135,8 +134,8 @@
                 <div><span class="">10盒/箱 按整箱采购</span></div>
             </div>
         </div>
-    </li><li v-else-if="type==4">
-        <input type="checkbox" class="item_checkbox checkitem sign_checkitem" >
+    </li><li v-else-if="type==4"><!--用于购物车-->
+        <input type="checkbox" class="item_checkbox check_item sign_check_item" >
         <a href="" class="cart_goods_img" :href="'/index/Goods/detail/id/' + product_id">
             <img class="left common_default_img" :src="product_src?('public_uploads/' + product_src):('api_common_img/default/no_pic_100.jpg') " alt="">
         </a>
