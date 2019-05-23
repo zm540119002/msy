@@ -219,7 +219,7 @@ class Goods extends \common\controller\Base{
                 'deal_price'=>$info['bulk_price'],
                 'thumb_img'=>$info['thumb_img'],
                 'name'=>$info['name'],
-                'specification'=>str_replace(array("/r/n", "/r", "/n"), '', $info['specification']),
+                'specification'=>preg_replace('//s*/', '', $info['specification']),
             ]));
 
             $modelComment = new \app\index\model\Comment();
