@@ -57,6 +57,7 @@ class Goods extends Base {
 
             // 选中的店铺类型 十进制
             $_POST['belong_to'] = bindec(strrev(implode(input('post.belong_to/a'))));
+            $_POST['specification'] = trim(input('post.specification/s'));
 
             if(isset($_POST['id']) && intval($_POST['id'])){//修改
                 $config = [
