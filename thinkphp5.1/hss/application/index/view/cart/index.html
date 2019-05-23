@@ -44,7 +44,7 @@
 			'type':4,
 			'init_quantity':1,
 			'step_quantity':1,
-			'productList':data.data.data
+			'productList':data.data
 		};
 		new Vue({
 			el: '#product-select',
@@ -92,7 +92,7 @@
 		var user_id = '{$user.id}';
 		// 初始化购物车商品
 		if(user_id){
-			getPagingList(config,postData);
+			getJsonList(config,postData);
 		}else {
 			config.url = module+'Goods/getCartGoodsList';
 			var cartList = localStorage.cartList; //获取存储购物车商品信息
