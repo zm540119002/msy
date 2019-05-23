@@ -215,13 +215,15 @@ class Goods extends \common\controller\Base{
             $info['tag'] = explode(',',(string)$info['tag']);
             $info['specification']    = $info['specification']    ? htmlspecialchars_decode($info['specification']) : '';
             $this->assign('info',$info);
+            $specification = (string)$info['specification'];
             $this->assign('goodsInfo',json_encode([
                 'goods_id'=>$info['id'],
                 'deal_price'=>$info['bulk_price'],
                 'thumb_img'=>$info['thumb_img'],
                 'headline'=>$info['headline'],
-                'specification'=>'(头部调理油10ml+头发养护油10ml)x20瓶',
+//                'specification'=>'(头部调理油10ml+头发养护油10ml)x20瓶',
 //                'specification'=>(string)$info['specification'],
+                'specification'=>$specification,
             ]));
             $this->assign('specification',json_encode([
                 'specification'=>$info['specification'],
