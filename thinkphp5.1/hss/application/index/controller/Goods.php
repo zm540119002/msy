@@ -220,7 +220,6 @@ class Goods extends \common\controller\Base{
                 'thumb_img'=>$info['thumb_img'],
                 'name'=>$info['name'],
                 'specification'=>preg_replace('//s*/', '', $info['specification']),
-//                'specification'=>str_replace(array("/r/n", "/r", "/n"), '', $info['specification']),
             ]));
 
             $modelComment = new \app\index\model\Comment();
