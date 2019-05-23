@@ -51,11 +51,8 @@
 						:deal_price="parseFloat(productInfo.bulk_price)"
 						:product_name="productInfo.headline"
 						:product_src="productInfo.thumb_img"
-						:product_url="String(productInfo.id)"
-						:buy_named="buy_named"
 						:init_quantity="parseInt(init_quantity)"
 						:step_quantity="parseInt(step_quantity)"
-						:display_pic="display_pic"
 						:add_cart_type="parseInt(add_cart_type)"
 				></product-select>
 			</div>
@@ -64,13 +61,9 @@
 </article>
 {/block}
 {block name="common"}
-	{include file="../../api/public/vue/components/footer-cart-menu.html" /}
 {/block}
 {block name="footer"}
-
-{/block}
-{block name="script"}
-<script type="text/javascript" src="api_common_js/swiper.min.js"></script>
+{include file="../../api/public/vue/components/footer-cart-menu.html" /}
 <script type="text/javascript">
 	function getJsonListCallBack(data){
 		if(data.status==0){
@@ -78,9 +71,6 @@
 			return false;
 		}
 		param = {
-			'buy_named':'采购数量',
-			'display_quota':true,
-			'display_pic':true,
 			'init_quantity':0,
 			'step_quantity':1,
 			'productList':data.data.data,
@@ -93,6 +83,11 @@
 			}
 		});
 	}
+</script>
+{/block}
+{block name="script"}
+<script type="text/javascript" src="api_common_js/swiper.min.js"></script>
+<script type="text/javascript">
 	// 获取该场景下的商品
 	var config = {
 		url:module+'Goods/getRelationGoods',
