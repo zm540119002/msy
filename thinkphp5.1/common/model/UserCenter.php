@@ -92,7 +92,6 @@ class UserCenter extends Base {
 	private function _register($saveData){
 		$saveData['create_time'] = time();
 		$res = $this->isUpdate(false)->save($saveData);
-		print_r($this->getLastSql());exit;
 		if(false === $res){
 			return false;
 		}
