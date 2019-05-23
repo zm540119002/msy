@@ -118,12 +118,13 @@ class UserCenter extends Base {
 	/**重置密码
 	 */
 	private function _resetPassword($mobilePhone,$saveData){
-		return false;
 		$where = array(
 			'mobile_phone' => $mobilePhone,
 		);
 		$saveData['update_time'] = time();
+		print_r($this);exit;
 		$res = $this->isUpdate(true)->where($where)->save($saveData);
+		print_r($this->getLastSql());exit;
 		if(false === $res){
 			return false;
 		}
