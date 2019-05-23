@@ -84,6 +84,11 @@ class Index extends \common\controller\Base{
         }else{
             $unlockingFooterCart = unlockingFooterCartConfig([10,0,9]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
+            $unlockingFooterCart = unlockingFooterCartConfigTest([10,0,9]);
+            array_push($unlockingFooterCart['menu'][0]['class'],'group_btn20');
+            array_push($unlockingFooterCart['menu'][1]['class'],'group_btn50');
+            array_push($unlockingFooterCart['menu'][2]['class'],'group_btn30');
+            $this->assign('unlockingFooterCart',json_encode($unlockingFooterCart));
             return $this->fetch('cart/index');
         }
     }

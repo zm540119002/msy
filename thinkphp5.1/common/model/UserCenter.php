@@ -55,9 +55,10 @@ class UserCenter extends Base {
 	/**注册
 	 */
 	public function register($data){
+		$data['mobile_phone'] = trim($data['mobile_phone']);
 		$data['password'] = trim($data['password']);
 		$saveData['salt'] = create_random_str(10,0);//盐值;
-		$saveData['mobile_phone'] = trim($data['mobile_phone']);
+		$saveData['mobile_phone'] = $data['mobile_phone'];
 		$saveData['password'] = md5($saveData['salt'] . $data['password']);
 		$saveData['captcha'] = trim($data['captcha']);
 		if(!$this->_checkCaptcha($saveData['mobile_phone'],$saveData['captcha'])){
@@ -84,7 +85,7 @@ class UserCenter extends Base {
 				return errorMsg('重置密码失败');
 			}
 		}
-		return $this->_login($saveData['mobile_phone'],$saveData['password']);
+		return $this->_login($saveData['mobile_phone'],$data['password']);
 	}
 
 	/**注册
@@ -125,7 +126,7 @@ class UserCenter extends Base {
 			'password' => $data['password'],
 			'update_time' => time(),
 		];
-		$res = $this->isUpdate(true)->where($where)->save($saveData);
+		$res = $this->isUpdate(true)->save($saveData,$where);
 		if(false === $res){
 			return false;
 		}
