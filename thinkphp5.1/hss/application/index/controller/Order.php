@@ -400,13 +400,15 @@ class Order extends \common\controller\UserBase
                 ['user_id','=',$this->user['id']],
             ]
         ];
+        return $where;
         $model = new \app\index\model\Order();
         $orderInfo = $model->getInfo($where);
         //$orderInfo['sn'] = '20190412170757362998811738229639';
         $type = true;
         switch($orderStatus){
+            case 2 :
             case 3 : // 确定收货
-                $where['order_status'] = 2;
+                $where[] = ['order_status','in','2,3'];
                 break;
             case 5 : // 取消订单
                 $where['order_status'] = 1;
