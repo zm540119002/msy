@@ -8,6 +8,8 @@
 <script type="text/javascript">
     //用于后面判断是否登录
     var user_id = "{$user.id}";
+    /**获取json格式列表数据
+     */
     function getJsonListDefaultCallBack(data){
         return data.data.data;
     }
@@ -45,7 +47,7 @@
             }
         });
     }
-    /**获取json格式列表数据
+    /**vue版获取json格式列表数据
      */
     function vueVersionGetJsonListDefaultCallBack(data){
         console.log(data);
