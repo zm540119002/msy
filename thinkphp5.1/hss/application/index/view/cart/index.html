@@ -36,24 +36,23 @@
 	></footer-cart-menu>
 </div>
 <script type="text/javascript">
-	var product_select_param = {
-		'type':4,
-		'step_quantity':1,
-		'productList':null
-	};
-	new Vue({
-		el: '#product-select',
-		data:function(){
-			return product_select_param;
-		}
-	});
 	function getJsonListCallBack(data){
 		console.log(data);
 		if(data.status==0){
 			dialog.error(data.info);
 			return false;
 		}
-		product_select_param.productList = data.data.data;
+		let param = {
+			'type':4,
+			'step_quantity':1,
+			'productList':data.data.data
+		};
+		new Vue({
+			el: '#product-select',
+			data:function(){
+				return param;
+			}
+		});
 	}
 	$(function(){
 		//数据库里购物车里商品数量
