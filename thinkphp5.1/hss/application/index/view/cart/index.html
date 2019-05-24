@@ -29,6 +29,7 @@
 				:specification="productInfo.specification"
 				:type="type"
 		></product-select>
+		<a href="javascript:void(0);" @click="test">测试</a>
 	</ul>
 	{if $type}
 	<div class="project_wrapper content_main content-padding">
@@ -98,7 +99,11 @@
 			data:function(){
 				return param;
 			},methods:{
-				getJsonListCallBack:function(data){
+				test:function(){
+					let _thisVue = this;
+					console.log(_thisVue.getJsonListParam.loadTrigger);
+					vueVersionGetJsonList(_thisVue);
+				},getJsonListCallBack:function(data){
 					if(data.status==0){
 						dialog.error(data.info);
 						return false;
