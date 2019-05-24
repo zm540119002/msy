@@ -1,6 +1,7 @@
 <?php
 namespace app\index\controller;
 
+
 class Project extends \common\controller\Base{
     /**首页
      */
@@ -37,44 +38,6 @@ class Project extends \common\controller\Base{
     }
 
     /**
-     * 查询项目下的相关视频 分页查询 暂时先随机
-     */
-    public function getVideoList(){
-        if(!request()->isGet()){
-            return errorMsg('请求方式错误');
-        }
-        $model = new \app\index\model\Project();
-        $config=[
-            'where'=>[
-                ['status','=',0],
-                ['shelf_status','=',1],
-                ['audit','=',1],
-            ],
-            'field'=>[
-               'id','name','update_time','video'
-            ],
-            'order'=>[
-                'sort'=>'desc',
-            ],
-        ];
-
-        if(input('?get.belong_to') && (int)input('?get.belong_to')){
-            $config['where'][] = ['belong_to', '=', input('get.belong_to')];
-        }
-
-
-        $list = $model -> pageQuery($config);
-
-        $this->assign('list',$list);
-        if(isset($_GET['pageType'])){
-            // 排列的数量不同
-            switch($_GET['pageType']){
-                case 'column_1' : return $this->fetch('list_video_tpl'); break;   // 一行一个
-            }
-        }
-    }
-
-    /**
      * 详情页
      */
     public function detail(){
@@ -100,6 +63,33 @@ class Project extends \common\controller\Base{
             if(empty($info)){
                 $this->error('此项目已下架');
             }
+
+            // 项目流程 json
+            $arr = [
+                'img' => '/hss_project/1557805583740576.jpg',
+                'desc'=> '01、检测头皮状况',
+            ];
+            $array = [];
+            for($i=0;$i<10;$i++){
+                $array[] = $arr;
+            }
+
+            $array =  json_encode($array);
+
+            $info['process'] = json_decode($array,true);
+
+            // 项目推荐商品
+            $modelGoods = new \app\index\model\Goods();
+            $condition = [
+                'field' => [
+                    'id','headline','specification','thumb_img'
+                ],'where' => [
+                    ['status','=',0],
+                    ['shelf_status','=',3],
+                    ['id','in','172,173,174,175,2,3,6'],
+                ],'limit' => 4
+            ];
+            $info['recommend_goods'] = $modelGoods->getList($condition);
 
             project_handle($info);
 
