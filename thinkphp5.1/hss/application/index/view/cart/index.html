@@ -90,17 +90,13 @@
 				return param;
 			},methods:{
 				getJsonListCallBack:function(data){
-					console.log(data.data.data);
 					if(data.status==0){
 						dialog.error(data.info);
 						return false;
 					}
-					for (var i=0,len=cars.length; i<len; i++){
-						this.productList.push(data.data.data);
-					}
-					this.productList = data.data.data;
-					console.log(this.productList);
-//					this.productList.push(data.data.data);
+					$.each(data.data.data,function(i,o){
+						this.productList.push(o);
+					});
 				}
 			},created:function(){
 				var getJsonListParam = {

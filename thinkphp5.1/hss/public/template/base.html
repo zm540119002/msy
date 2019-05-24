@@ -40,10 +40,11 @@
                 $('.loading').hide();
                 if(data.data.length && (data.data.data.length<config.postData.pageSize)){
                     config.requestEnd = true;
+                    return false;
                 }
                 config.postData.page ++;
                 config.loadTrigger = true;
-                config.callBack?config.callBack(data.data.data):getJsonListDefaultCallBack(data.data.data);
+                config.callBack?config.callBack(data):getJsonListDefaultCallBack(data);
             }
         });
     }
