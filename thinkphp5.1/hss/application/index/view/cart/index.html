@@ -78,7 +78,7 @@
 		return data.data.data;
 	}
 	var getJsonListParam = {
-		url:module+'Cart/getList',
+		url:module+'Goods/getCartGoodsList',
 		requestEnd:false,
 		loadTrigger:false,
 		postData:{
@@ -92,28 +92,32 @@
 {block name="script"}
 <script type="text/javascript">
 	$(function(){
-		var user_id = '{$user.id}';
+		// var user_id = '{$user.id}';
 		// 初始化购物车商品
-		if(user_id){
-			getJsonList(getJsonListParam);
-		}else {
-			getJsonListParam.url = module+'Goods/getCartGoodsList';
-			var cartList = localStorage.cartList; //获取存储购物车商品信息
-			postData.cartList = cartList;
-			getPagingList(getJsonListParam,postData);
-		}
+		var cartList = localStorage.cartList; //获取存储购物车商品信息
+		postData.cartList = cartList;
+		getJsonList(getJsonListParam);
+		// if(user_id){
+		//
+		// }else {
+		// 	getJsonListParam.url = module+'Goods/getCartGoodsList';
+		// 	var cartList = localStorage.cartList; //获取存储购物车商品信息
+		// 	postData.cartList = cartList;
+		// 	getPagingList(getJsonListParam,postData);
+		// }
 		//下拉加载
 		$(window).on('scroll',function(){
 			if(getJsonListParam.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
 				getJsonListParam.loadTrigger = false;
-				if(user_id){
-					getJsonList(getJsonListParam);
-				}else {
-					getJsonListParam.url = module+'Goods/getCartGoodsList';
-					var cartList = localStorage.cartList; //获取存储购物车商品信息
-					postData.cartList = cartList;
-					getPagingList(getJsonListParam,postData);
-				}
+				getJsonList(getJsonListParam);
+				// if(user_id){
+				// 	getJsonList(getJsonListParam);
+				// }else {
+				// 	getJsonListParam.url = module+'Goods/getCartGoodsList';
+				// 	var cartList = localStorage.cartList; //获取存储购物车商品信息
+				// 	postData.cartList = cartList;
+				// 	getPagingList(getJsonListParam,postData);
+				// }
 			}
 		});
 	});
