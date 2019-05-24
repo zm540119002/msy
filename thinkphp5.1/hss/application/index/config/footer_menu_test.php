@@ -79,6 +79,7 @@ return [
                 'bottom_item',
                 'settlement',
             ],
+            'action'=>url('Order/generate'),
         ],[//10
             'name'   => '',
             'class'=>[
