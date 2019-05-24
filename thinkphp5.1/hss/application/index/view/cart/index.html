@@ -78,7 +78,7 @@
 {/block}
 {block name="script"}
 <script type="text/javascript">
-	var config = {
+	var getJsonListParam = {
 		url:module+'Cart/getList',
 		requestEnd:false,
 		loadTrigger:false,
@@ -92,24 +92,24 @@
 		var user_id = '{$user.id}';
 		// 初始化购物车商品
 		if(user_id){
-			getJsonList(config,postData);
+			getJsonList(getJsonListParam);
 		}else {
-			config.url = module+'Goods/getCartGoodsList';
+			getJsonListParam.url = module+'Goods/getCartGoodsList';
 			var cartList = localStorage.cartList; //获取存储购物车商品信息
 			postData.cartList = cartList;
-			getPagingList(config,postData);
+			getPagingList(getJsonListParam,postData);
 		}
 		//下拉加载
 		$(window).on('scroll',function(){
-			if(config.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
-				config.loadTrigger = false;
+			if(getJsonListParam.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
+				getJsonListParam.loadTrigger = false;
 				if(user_id){
-					getJsonList(config,postData);
+					getJsonList(getJsonListParam);
 				}else {
-					config.url = module+'Goods/getCartGoodsList';
+					getJsonListParam.url = module+'Goods/getCartGoodsList';
 					var cartList = localStorage.cartList; //获取存储购物车商品信息
 					postData.cartList = cartList;
-					getPagingList(config,postData);
+					getPagingList(getJsonListParam,postData);
 				}
 			}
 		});
