@@ -201,6 +201,7 @@
                         this.buy_quantity += this.step_quantity;
                     }
                 },reduceCart: function (event) {
+                    this.buy_quantity -= this.step_quantity;
                     let postData = {
                         goodsList:[{
                             goods_id: this.product_id,
