@@ -37,17 +37,6 @@
 </div>
 <script type="text/javascript">
 	$(function(){
-		var product_select_param = {
-			'type':4,
-			'step_quantity':1
-//			'productList':data.data.data
-		};
-		var vm_product_select = new Vue({
-			el: '#product-select',
-			data:function(){
-				return product_select_param;
-			}
-		});
 		//数据库里购物车里商品数量
 		let total_num = parseInt("{$total_num|default=0}");
 		//localStorage里商品信息
@@ -67,10 +56,19 @@
 			}
 		});
 	});
-</script>
-{/block}
-{block name="script"}
-<script type="text/javascript">
+</script><script type="text/javascript">
+	$(function(){
+		let param = {
+			'type':4,
+			'step_quantity':1
+		};
+		new Vue({
+			el: '#product-select',
+			data:function(){
+				return param;
+			}
+		});
+	});
 	function getJsonListCallBack(data){
 		console.log(data.data.data);
 		if(data.status==0){
@@ -89,6 +87,10 @@
 		},
 		callBack:getJsonListCallBack
 	};
+</script>
+{/block}
+{block name="script"}
+<script type="text/javascript">
 	$(function(){
 		var user_id = '{$user.id}';
 		// 初始化购物车商品
