@@ -92,7 +92,6 @@ class Index extends \common\controller\Base{
             array_push($unlockingFooterCart['menu'][2]['class'],'group_btn30');
             $this->assign('unlockingFooterCart',json_encode($unlockingFooterCart));
             $type = input('type');
-            echo $type;
             $this->assign('type',$type);
             if($type){
                 // 底部菜单，见配置文件custom.footer_menu
