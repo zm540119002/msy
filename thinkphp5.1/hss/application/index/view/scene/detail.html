@@ -78,28 +78,27 @@
 			}
 		});
 	}
+	$(function(){
+		// 初始化场景商品页面
+		var config = {
+			url:module+'Goods/getRelationGoods',
+			requestEnd:false,
+			loadTrigger:false,
+			postData:{
+				id:'{$info.id}',
+				relation:'{$relation}',
+				pageSize:10,
+				page:1
+			},
+			callBack:getJsonListCallBack
+		};
+		getJsonList(config);
+	});
 </script>
 {/block}
 {block name="script"}
 <script type="text/javascript" src="api_common_js/swiper.min.js"></script>
 <script type="text/javascript">
-	// 获取该场景下的商品
-	var config = {
-		url:module+'Goods/getRelationGoods',
-		requestEnd:false,
-		loadTrigger:false,
-		postData:{
-			id:'{$info.id}',
-			relation:'{$relation}',
-			pageSize:10,
-			page:1
-		},
-		callBack:getJsonListCallBack
-	};
-	$(function(){
-		//初始化场景商品页面
-		getJsonList(config);
-	});
 	$(function(){
 		var id = '{$info.id}';
 		var date=getWeek();
