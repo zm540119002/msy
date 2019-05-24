@@ -325,8 +325,7 @@
         $("body").on('click','.recommend',function(){
 
             var id = "{$info['id']}";
-            var url =  controller + 'manageRelationGoods/id/' + id;
-            //location.href = url;
+            var url =  controller + 'RecommendGoods/id/' + id;
 
             layer.open({
                 type: 2,
@@ -336,8 +335,7 @@
                 area: ['80%', '80%'],
                 content: url //iframe的url
             });
-
-            //expressDeliveryHtml();
+            
         });
 
     });

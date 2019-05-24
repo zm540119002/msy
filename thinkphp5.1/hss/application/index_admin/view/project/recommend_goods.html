@@ -54,7 +54,6 @@
     <script type="text/javascript">
         $(function () {
             var id = {$id};
-            var relation = 2;
             //加载第一页
             var config = {
                 url:module+'goods/getList'
@@ -81,8 +80,8 @@
             // 显示已关联的商品
             if(id){
                 $.ajax({
-                    url: module+'Goods/getRelationGoods',
-                    data: {id:id,relation:relation},
+                    url: controller+'getRecommendGoods',
+                    data: {id:id},
                     type: 'get',
                     beforeSend: function(){
                     },

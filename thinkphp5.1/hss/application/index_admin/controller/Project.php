@@ -334,7 +334,6 @@ class Project extends Base {
 
     // 关联推荐商品
     public function recommendGoods(){
-        // 暂时先全部写在商品分类里
         if($id = input('id/d')){
             $this->assign('id',$id);
         }
@@ -350,6 +349,40 @@ class Project extends Base {
         $this->assign('allCategoryList',$allCategoryList);
 
         return $this->fetch();
+    }
+
+    public function getRecommendGoods(){
+        $id = input('id/d');
+        if($id){
+
+            $model = new \app\index\model\Project();
+            $condition = [
+                'field' => [
+                    'recommend_goods'
+                ],'where' => [
+                    ['id','=',$id]
+                ],
+            ];
+            $info  = $model->getInfo($condition);
+
+            //相关推荐商品
+            $modelGoods = new \app\index\model\Goods();
+            $config =[
+                'where' => [
+                    ['g.status', '=', 0],
+                    ['g.id', 'in', $info['recommend_goods']],
+                ],'field'=>[
+                    'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity',
+                    'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit','g.name'
+                ]
+            ];
+            $list= $modelGoods->getList($config);
+
+            $this->assign('list',$list);
+            return view('goods/selected_list');
+        }
+
+
     }
 
 
