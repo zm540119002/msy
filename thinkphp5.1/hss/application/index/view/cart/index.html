@@ -99,11 +99,9 @@
 						dialog.error(data.info);
 						return false;
 					}
-					this.productList.push({message:"动态新增"});
-					console.log({message:"动态新增"});
-					console.log(typeof {message:"动态新增"});
+					let _this = this;
 					$.each(data.data.data,function(i,o){
-						this.productList.push({message:"动态新增"});
+						_this.productList.push(o);
 					});
 				}
 			},created:function(){
