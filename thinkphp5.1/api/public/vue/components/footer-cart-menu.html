@@ -45,10 +45,6 @@
                         <img class="left" :src="product_src?('public_uploads/' + product_src):('api_common_img/default/no_pic_100.jpg') " alt="">
                     </a>
                 </div>
-                <div class="middle">
-                    <div></div>
-                    <div class="red subtotal_amount">￥{{ parseFloat(subtotal_amount).toFixed(2) }}</div>
-                </div>
                 <div  class="right">
                     <div class="product_name">
                         <p class="text-intro">{{product_name}}</p>
@@ -205,10 +201,11 @@
                         this.buy_quantity += this.step_quantity;
                     }
                 },reduceCart: function (event) {
+                    this.buy_quantity -= this.step_quantity;
                     let postData = {
                         goodsList:[{
                             goods_id: this.product_id,
-                            num: this.step_quantity
+                            num: -this.step_quantity
                         }]
                     };
                     let _thisJquery = $(event.currentTarget);
@@ -228,6 +225,7 @@
                     };
                     asyncVerify(config);
                 },plusCart: function (event) {
+                    this.buy_quantity += this.step_quantity;
                     let postData = {
                         goodsList:[{
                             goods_id: this.product_id,
