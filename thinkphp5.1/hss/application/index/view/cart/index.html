@@ -112,13 +112,14 @@
 				this.getJsonListParam.callBack = this.getJsonListCallBack;
 				getJsonList(this.getJsonListParam);
 				//下拉加载
+				let _this = this;
 				$(window).on('scroll',function(){
-					if(this.getJsonListParam.loadTrigger
+					if(_this.getJsonListParam.loadTrigger
 							&& $(document).scrollTop()+$(window).height()+200>$(document).height()){
-						this.getJsonListParam.loadTrigger = false;
-						console.log(this.getJsonListParam);
+						_this.getJsonListParam.loadTrigger = false;
+						console.log(_this.getJsonListParam);
 						return false;
-						getJsonList(this.getJsonListParam);
+						getJsonList(_this.getJsonListParam);
 					}
 				});
 			}
