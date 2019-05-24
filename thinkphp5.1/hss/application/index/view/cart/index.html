@@ -36,25 +36,18 @@
 	></footer-cart-menu>
 </div>
 <script type="text/javascript">
-	function getJsonListCallBack(data){
-		console.log(data);
-		if(data.status==0){
-			dialog.error(data.info);
-			return false;
-		}
-		let param = {
+	$(function(){
+		var product_select_param = {
 			'type':4,
-			'step_quantity':1,
-			'productList':data.data.data
+			'step_quantity':1
+//			'productList':data.data.data
 		};
-		new Vue({
+		var vm_product_select = new Vue({
 			el: '#product-select',
 			data:function(){
-				return param;
+				return product_select_param;
 			}
 		});
-	}
-	$(function(){
 		//数据库里购物车里商品数量
 		let total_num = parseInt("{$total_num|default=0}");
 		//localStorage里商品信息
@@ -78,39 +71,46 @@
 {/block}
 {block name="script"}
 <script type="text/javascript">
-	var config = {
+	function getJsonListCallBack(data){
+		console.log(data.data.data);
+		if(data.status==0){
+			dialog.error(data.info);
+			return false;
+		}
+		return data.data.data;
+	}
+	var getJsonListParam = {
 		url:module+'Cart/getList',
 		requestEnd:false,
 		loadTrigger:false,
-		currentPage:1,
+		postData:{
+			pageSize:4,
+			page:1
+		},
 		callBack:getJsonListCallBack
-	};
-	var postData = {
-		pageSize:20,
-		pageType:'index'
 	};
 	$(function(){
 		var user_id = '{$user.id}';
 		// 初始化购物车商品
 		if(user_id){
-			getJsonList(config,postData);
+			getJsonList(getJsonListParam);
 		}else {
-			config.url = module+'Goods/getCartGoodsList';
+			getJsonListParam.url = module+'Goods/getCartGoodsList';
 			var cartList = localStorage.cartList; //获取存储购物车商品信息
 			postData.cartList = cartList;
-			getPagingList(config,postData);
+			getPagingList(getJsonListParam,postData);
 		}
 		//下拉加载
 		$(window).on('scroll',function(){
-			if(config.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
-				config.loadTrigger = false;
+			if(getJsonListParam.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
+				getJsonListParam.loadTrigger = false;
 				if(user_id){
-					getPagingList(config,postData);
+					getJsonList(getJsonListParam);
 				}else {
-					config.url = module+'Goods/getCartGoodsList';
+					getJsonListParam.url = module+'Goods/getCartGoodsList';
 					var cartList = localStorage.cartList; //获取存储购物车商品信息
 					postData.cartList = cartList;
-					getPagingList(config,postData);
+					getPagingList(getJsonListParam,postData);
 				}
 			}
 		});
