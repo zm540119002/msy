@@ -33,19 +33,17 @@
 			{/volist}
 			{/notempty}
 			<!--产品列表-->
-			<ul class="goods_list list" id="list">
-				<div id="product-select">
-					<product-select
-							v-for="productInfo in productList"
-							:key="productInfo.id"
-							:product_id="productInfo.id"
-							:deal_price="parseFloat(productInfo.bulk_price)"
-							:product_name="productInfo.headline"
-							:product_src="productInfo.thumb_img"
-							:init_quantity="parseInt(init_quantity)"
-							:step_quantity="parseInt(step_quantity)"
-					></product-select>
-				</div>
+			<ul class="goods_list list" id="product-select">
+				<product-select
+						v-for="productInfo in productList"
+						:key="productInfo.id"
+						:product_id="productInfo.id"
+						:deal_price="parseFloat(productInfo.bulk_price)"
+						:product_name="productInfo.headline"
+						:product_src="productInfo.thumb_img"
+						:init_quantity="parseInt(init_quantity)"
+						:step_quantity="parseInt(step_quantity)"
+				></product-select>
 			</ul>
 		</section>
 	</section>
