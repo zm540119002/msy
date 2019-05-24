@@ -10,21 +10,20 @@
 		<h2 class="f24">购物车</h2>
 	</section>
 	<!--产品列表-->
-	<ul class="cart_goods_list list" id="list">
-		<div id="product-select">
-			<product-select
-					v-for="productInfo in productList"
-					:key="productInfo.id"
-					:product_id="productInfo.id"
-					:deal_price="Number(productInfo.bulk_price)"
-					:init_quantity="parseInt(productInfo.num)"
-					:step_quantity="parseInt(step_quantity)"
-					:product_name="productInfo.name"
-					:product_src="productInfo.thumb_img"
-					:specification="productInfo.specification"
-					:type="type"
-			></product-select>
-		</div>
+	<ul class="cart_goods_list list" id="product-select">
+		<product-select
+				v-for="productInfo in productList"
+				:key="productInfo.id"
+				:product_id="productInfo.id"
+				:deal_price="Number(productInfo.bulk_price)"
+				:init_quantity="parseInt(productInfo.num)"
+				:step_quantity="parseInt(step_quantity)"
+				:product_name="productInfo.name"
+				:product_src="productInfo.thumb_img"
+				:specification="productInfo.specification"
+				:type="type"
+		></product-select>
+		<button class="btn" @click="btn1Click()">点我试试</button><br/>
 	</ul>
 </article>
 {/block}
@@ -71,6 +70,10 @@
 			el: '#product-select',
 			data:function(){
 				return param;
+			},methods:{
+				btn1Click:function(){
+					this.productList.push({message:"动态新增"});
+				}
 			}
 		});
 		var getJsonListParam = {
