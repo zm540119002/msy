@@ -31,7 +31,7 @@
 				:type="type"
 		></product-select>
 	</ul>
-
+	{if $type}
 	<div class="project_wrapper content_main content-padding">
 		<div class="mod-part-title">
 			<div class="mod-part-title-wrap">
@@ -46,6 +46,7 @@
 			</ul>
 		</div>
 	</div>
+	{/if}
 </article>
 {/block}
 {block name="footer"}
