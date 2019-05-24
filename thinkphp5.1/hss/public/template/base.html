@@ -8,7 +8,49 @@
 <script type="text/javascript">
     //用于后面判断是否登录
     var user_id = "{$user.id}";
-
+    /**获取json格式列表数据
+     */
+    function getJsonListDefaultCallBack(data){
+        console.log(11);
+        console.log(data.data.data);
+        return data.data.data;
+    }
+    function getJsonList(config){
+        //提交路径
+        config.url = config.url?config.url:action;
+        //要提交的数据
+        config.postData = config.postData?config.postData:{};
+        config.postData.page = config.postData.currentPage ? config.postData.currentPage : 1;
+        config.postData.pageSize = config.postData.pageSize ? config.postData.pageSize:4;
+        //请求结束标志
+        if(config.requestEnd){
+            config.loadTrigger = true;
+            return false;
+        }
+        $.ajax({
+            url: config.url,
+            data: config.postData,
+            type: 'get',
+            beforeSend: function(){
+                $('.loading').show();
+            },
+            error:function (xhr) {
+                $('.loading').hide();
+                dialog.error('AJAX错误');
+            },
+            success: function(data){
+                $('.loading').hide();
+                console.log(123);
+                console.log(data);
+                if(data.data.data.length<config.postData.pageSize){
+                    config.requestEnd = true;
+                }
+                config.postData.currentPage ++;
+                config.loadTrigger = true;
+                config.callBack?config.callBack(data):getJsonListDefaultCallBack(data);
+            }
+        });
+    }
 </script>
 {/block}
 <!-- 自定义js -->
@@ -25,7 +67,7 @@
         //异步验证
         $.ajax({
             url: jump_url,
-            data: config.postData,
+            data: config.config.postData,
             type: 'post',
             beforeSend: function(xhr){
                 $('.loading').show();
@@ -39,7 +81,7 @@
                 //异步验证判断
                 let param = {
                     data:data,
-                    postData:config.postData,
+                    config.postData:config.config.postData,
                     componentFooterCartMenu:config.componentFooterCartMenu,
                     clickObj:config.clickObj,
                     reduce:config.reduce,
@@ -58,7 +100,7 @@
                 dialog.error(param.data.info);
                 return false;
             }else if(param.data.data.code == '1001'){ //登录
-                if(param.clickObj.attr('class').indexOf('add_cart')!==-1 && param.postData){ //加入购物车
+                if(param.clickObj.attr('class').indexOf('add_cart')!==-1 && param.config.postData){ //加入购物车
                     editLocalStorageCartList(param);
                 }else{
                     loginDialogTrigger();
@@ -71,7 +113,7 @@
         }else if(param.data.status==1){ //成功回调
             if(param.data.data.code == '2000'){ //默认
                 if(param.clickObj.attr('class').indexOf('add_cart')!==-1 && param.componentFooterCartMenu){ //加入购物车
-                    $.each(param.postData.goodsList,function(i,o){
+                    $.each(param.config.postData.goodsList,function(i,o){
                         param.componentFooterCartMenu.cart_num += o.num;
                     });
                 }
@@ -95,15 +137,15 @@
     }
     //编辑cookie里的购物车商品列表
     function editLocalStorageCartList(param){
-        if(!param.postData.goodsList.length){
+        if(!param.config.postData.goodsList.length){
             dialog.error('请选择商品！');
             return false;
         }
         if(!localStorage.cartList){
-            localStorage.cartList = JSON.stringify({'goodsList':param.postData.goodsList});
+            localStorage.cartList = JSON.stringify({'goodsList':param.config.postData.goodsList});
         }else{
             let goodsListOld = (JSON.parse(localStorage.cartList)).goodsList;
-            $.each(param.postData.goodsList,function(i,o){
+            $.each(param.config.postData.goodsList,function(i,o){
                 let find = false;
                 $.each(goodsListOld,function(ii,oo){
                     if(o.goods_id == oo.goods_id){
@@ -123,7 +165,7 @@
             localStorage.cartList = JSON.stringify({'goodsList':goodsListOld});
         }
         if(param.clickObj.attr('class')=='add_cart' && param.componentFooterCartMenu){ //加入购物车
-            $.each(param.postData.goodsList,function(i,o){
+            $.each(param.config.postData.goodsList,function(i,o){
                 param.componentFooterCartMenu.cart_num += o.num;
             });
             dialog.success('加入购物车成功！');
