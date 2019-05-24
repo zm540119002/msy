@@ -95,7 +95,7 @@
 		{notempty name="$info.recommend_goods"}
 		<div class="content-padding">
 			<p class="content-label">推荐搭配居家产品</p>
-			<ul class="list">
+			<ul class="columns_flex flex-both-side goods-content-list">
 				{volist name="$info.recommend_goods" id="vo"}
 				<li>
 					<a href="{:url('Index/Goods/detail',['id'=>$vo.id])}">
