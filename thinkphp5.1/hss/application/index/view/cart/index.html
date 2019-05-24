@@ -76,8 +76,7 @@
 						dialog.error(data.info);
 						return false;
 					}
-					return data.data.data;
-//					this.productList.push({message:"动态新增"});
+					this.productList.push(data.data.data);
 				}
 			},created:function(){
 				var getJsonListParam = {
