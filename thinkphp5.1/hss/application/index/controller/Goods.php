@@ -216,7 +216,7 @@ class Goods extends \common\controller\Base{
             $info['main_img'] = explode(',',(string)$info['main_img']);
             $info['detail_img'] = explode(',',(string)$info['detail_img']);
             $info['tag'] = explode(',',(string)$info['tag']);
-            $info['purchase_specification_description'] = '10盒/箱 按箱采购'; // 假数据
+            //$info['purchase_specification_description'] = '10盒/箱 按箱采购'; // 假数据
             
             $this->assign('info',$info);
             $this->assign('goodsInfo',json_encode([
