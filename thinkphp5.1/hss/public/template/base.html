@@ -152,6 +152,11 @@
                         param.vueObj.buy_quantity += o.num;
                     });
                 }
+                if(param.clickObj.attr('class').indexOf('add_cart')!==-1){ //
+                    $.each(param.postData.goodsList,function(i,o){
+                        param.vueObj.buy_quantity += o.num;
+                    });
+                }
                 dialog.error(param.data.info);
                 return false;
             }else if(param.data.data.code == '2001'){ //登录
