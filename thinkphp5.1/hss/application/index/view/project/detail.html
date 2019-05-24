@@ -100,9 +100,9 @@
 				{volist name="$info.recommend_goods" id="vo"}
 				<li>
 					<a href="{:url('Index/Goods/detail',['id'=>$vo.id])}">
-						<img src="{:show_img_handle($vo.thumb_img)}" alt="{$vo.headline}">
+						<img src="{:show_img_handle($vo.thumb_img)}" alt="{$vo.name}">
 					</a>
-					<p>{$vo.headline}</p>
+					<p>{$vo.name}</p>
 					<p>规格：{$vo.specification}</p>
 				</li>
 				{/volist}
