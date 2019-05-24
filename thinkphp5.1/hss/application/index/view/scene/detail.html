@@ -89,6 +89,7 @@
 		requestEnd:false,
 		loadTrigger:false,
 		postData:{
+			id:'{$info.id}',
 			relation:'{$relation}',
 			pageSize:10,
 			page:1
@@ -97,7 +98,6 @@
 	};
 	$(function(){
 		//初始化场景商品页面
-		postData.id = '{$info.id}';
 		getJsonList(config);
 	});
 	$(function(){
