@@ -36,25 +36,18 @@
 	></footer-cart-menu>
 </div>
 <script type="text/javascript">
-	function getJsonListCallBack(data){
-		console.log(data.data.data);
-		if(data.status==0){
-			dialog.error(data.info);
-			return false;
-		}
-		let param = {
+	$(function(){
+		var product_select_param = {
 			'type':4,
 			'step_quantity':1,
 			'productList':data.data.data
 		};
-		new Vue({
+		var vm_product_select = new Vue({
 			el: '#product-select',
 			data:function(){
 				return param;
 			}
 		});
-	}
-	$(function(){
 		//数据库里购物车里商品数量
 		let total_num = parseInt("{$total_num|default=0}");
 		//localStorage里商品信息
@@ -78,6 +71,14 @@
 {/block}
 {block name="script"}
 <script type="text/javascript">
+	function getJsonListCallBack(data){
+		console.log(data.data.data);
+		console.log(vm_product_select);
+		if(data.status==0){
+			dialog.error(data.info);
+			return false;
+		}
+	}
 	var getJsonListParam = {
 		url:module+'Cart/getList',
 		requestEnd:false,
