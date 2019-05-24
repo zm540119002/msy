@@ -27,10 +27,6 @@
 </article>
 {/block}
 {block name="footer"}
-
-{include file="template/footer_project.html" /}
-
-
 {include file="../../api/public/vue/components/footer-cart-menu.html" /}
 <div id="foot_cart_menu">
 	<footer-cart-menu
@@ -113,6 +109,8 @@
 		return data.data.data;
 	}
 </script>
+
+{include file="template/footer_project.html" /}
 {/block}
 {block name="script"}
 <script type="text/javascript">
