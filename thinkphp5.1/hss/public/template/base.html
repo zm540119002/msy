@@ -53,13 +53,9 @@
         console.log(data);
     }
     function vueVersionGetJsonList(vueObj){
-        console.log(vueObj.getJsonListParam.loadTrigger);
-        vueObj.getJsonListParam.loadTrigger = false;
-        return false;
         //提交路径
         vueObj.getJsonListParam.url = vueObj.getJsonListParam.url?vueObj.getJsonListParam.url:action;
         //要提交的数据
-        vueObj.getJsonListParam.postData = vueObj.getJsonListParam.postData?vueObj.getJsonListParam.postData:{};
         vueObj.getJsonListParam.postData.page = vueObj.getJsonListParam.postData.page ? vueObj.getJsonListParam.postData.page : 1;
         vueObj.getJsonListParam.postData.pageSize = vueObj.getJsonListParam.postData.pageSize ? vueObj.getJsonListParam.postData.pageSize:4;
         //请求结束标志
