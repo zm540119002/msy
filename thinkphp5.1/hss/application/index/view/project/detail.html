@@ -4,7 +4,7 @@
 <article class="f24">
 	<!-- 项目信息 -->
 	<div id="menu">
-		<a href="javascript:void(0);" class="back_prev_page" data-jump_url=""><</a>
+		<a href="javascript:void(0);" class="back_prev_page" data-jump_url=""></a>
 		<ul class="columns_flex detail-nav">
 			<li data-item="item1"><a href="javascript:;" class="">项目产品</a></li>
 			<li data-item="item2"><a href="javascript:;" class="">项目详情</a></li>
@@ -20,15 +20,15 @@
 			{notempty name="promotionList"}
 			{volist name="promotionList" id="vo"}
 			<a href="{:url('Promotion/detail',['id'=>$vo.id])}" data-id="{$vo.id}" class="">
-				<div class="applay_p_item columns_flex l-r-sides">
+				<div class="applay_p_item columns_flex l-r-sides" style="background-image:url({:show_img_handle($vo.thumb_img)})">
 					<div>
-						<div>¥<price>{$vo.price}</price></div>
+						<div class="red">¥<price>{$vo.price}</price></div>
 						<p>{$vo.name}</p>
-						<p>立即进入</p>
+						<p class="once-enter">立即进入></p>
 					</div>
-					<div class="group_btn50">
-						<img class="common_default_img" src="{:show_img_handle($vo.thumb_img)}" alt="{$vo.name}">
-					</div>
+					<!--<div class="group_btn50">
+						<img class="common_default_img" src="" alt="{$vo.name}">
+					</div>-->
 				</div>
 			</a>
 			{/volist}

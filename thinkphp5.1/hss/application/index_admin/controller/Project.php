@@ -35,6 +35,7 @@ class Project extends Base {
                 $info['intro'] = htmlspecialchars_decode($info['intro']);
                 $info['remarks'] = htmlspecialchars_decode($info['remarks']);
                 $info['description'] = htmlspecialchars_decode($info['description']);
+                $info['recommend_goods_num'] = array_sum(explode(',',$info['recommend_goods']));
 
                 $this->assign('info',$info);
             }
@@ -329,6 +330,59 @@ class Project extends Base {
             return errorMsg('失败');
         }
         return successMsg('成功');
+    }
+
+    // 关联推荐商品
+    public function recommendGoods(){
+        if($id = input('id/d')){
+            $this->assign('id',$id);
+        }
+
+        $model = new \app\index_admin\model\GoodsCategory();
+        $config = [
+            'where'=>[
+                'status'=>0
+            ]
+        ];
+
+        $allCategoryList = $model->getList($config);
+        $this->assign('allCategoryList',$allCategoryList);
+
+        return $this->fetch();
+    }
+
+    public function getRecommendGoods(){
+        $id = input('id/d');
+        if($id){
+
+            $model = new \app\index\model\Project();
+            $condition = [
+                'field' => [
+                    'recommend_goods'
+                ],'where' => [
+                    ['id','=',$id]
+                ],
+            ];
+            $info  = $model->getInfo($condition);
+
+            //相关推荐商品
+            $modelGoods = new \app\index\model\Goods();
+            $config =[
+                'where' => [
+                    ['g.status', '=', 0],
+                    ['g.id', 'in', $info['recommend_goods']],
+                ],'field'=>[
+                    'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity',
+                    'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit','g.name'
+                ]
+            ];
+            $list= $modelGoods->getList($config);
+
+            $this->assign('list',$list);
+            return view('goods/selected_list');
+        }
+
+
     }
 
 

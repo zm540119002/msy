@@ -102,6 +102,14 @@
             </div>
         </div>
         <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2">推荐商品：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <button type="button" class="btn btn-primary radius recommend"><i class="Hui-iconfont"></i> 添加商品</button>
+                已添加 <span class="c-red">{$info.recommend_goods_num|default=0}</span> 种商品
+            </div>
+        </div>
+
+        <div class="row cl">
             <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
                 <input type="hidden" name='id' value="{$info.id}">
                 <button class="btn btn-primary radius button_save_black_4" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
@@ -312,6 +320,22 @@
         //返回
         $('.button_save_black').click(function(){
             location.href = controller + '/manage';
+        });
+
+        $("body").on('click','.recommend',function(){
+
+            var id = "{$info['id']}";
+            var url =  controller + 'RecommendGoods/id/' + id;
+
+            layer.open({
+                type: 2,
+                title:'添加推荐商品',
+                shadeClose: true,
+                shade: 0.8,
+                area: ['80%', '80%'],
+                content: url //iframe的url
+            });
+            
         });
 
     });
