@@ -2,18 +2,20 @@
 {block name="css-customize"}
 <link rel="stylesheet" href="public_css/project_public.css">
 {/block}
-{if $type!=1}
 {block name="title"}购物车{/block}
-{/if}
 {block name="content"}
 <section class="no_cart_data" style="display:none;">
 	<li class="no_data"><img src="https://www.worldview.com.cn/static/common/img/no-cart.png" alt=""></li>
 </section>
 <article class="f24">
-	<section class="header_title separation-line">
-		<a href="javascript:void(0);" class="back_prev_page"></a>
-		<h2 class="f24">购物车</h2>
-	</section>
+    {if $type}
+       {else /}
+			<section class="header_title separation-line">
+				<a href="javascript:void(0);" class="back_prev_page"></a>
+				<h2 class="f24">购物车</h2>
+			</section>
+	{/if}
+
 	<!--产品列表-->
 	<ul class="cart_goods_list list" id="product-select">
 		<product-select
