@@ -48,6 +48,7 @@
 						:product_src="productInfo.thumb_img"
 						:init_quantity="parseInt(init_quantity)"
 						:step_quantity="parseInt(step_quantity)"
+						:type="type"
 				></product-select>
 			</div>
 		</ul>
@@ -65,7 +66,7 @@
 			return false;
 		}
 		param = {
-			'type':5,
+			'type':0,
 			'init_quantity':1,
 			'step_quantity':1,
 			'productList':data.data.data
