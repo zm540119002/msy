@@ -15,20 +15,10 @@ class Cart extends \common\controller\UserBase {
         }
     }
 
-    // 导航页-没有结算
-    public function manage(){
-        if(request()->isAjax()){
-        }else{
-            $unlockingFooterCart = unlockingFooterCartConfig([10,0,9]);
-            $this->assign('unlockingFooterCart', $unlockingFooterCart);
-
-            // 底部菜单，见配置文件custom.footer_menu
-            $this->assign('currentPage',request()->controller().'/'.request()->action());
-
-            return $this->fetch();
-        }
-    }
-
+    /**
+     * 加入购物车
+     * @throws \think\exception\PDOException
+     */
     public function addCart(){
         if(!request()->isPost()){
             $this->errorMsg('请求方式错误',config('code.error.default'));
