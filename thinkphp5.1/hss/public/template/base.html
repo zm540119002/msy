@@ -171,10 +171,7 @@
                 location.href = param.jump_url;
                 return false;
             }
-            if((param.clickObj.attr('class').indexOf('plus')!==-1 || param.clickObj.attr('class').indexOf('reduce')!==-1)){ //
-            }else{
-                dialog.success(param.data.info);
-            }
+            dialog.success(param.data.info);
         }else{ //返回页面
             param.func();
         }
