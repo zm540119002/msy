@@ -105,6 +105,7 @@
 					$.each(data.data.data,function(i,o){
 						console.log(o);
 						console.log(typeof o);
+						this.productList.push(o);
 					});
 				}
 			},created:function(){
