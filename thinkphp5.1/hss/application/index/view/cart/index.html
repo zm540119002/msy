@@ -85,7 +85,7 @@
 			getJsonListParam:{
 				url:module+'Goods/getCartGoodsList',
 				requestEnd:false,
-				loadTrigger:false,
+				loadTrigger:true,
 				postData:{
 					cartList:localStorage.cartList,
 					pageSize:4,
@@ -109,17 +109,14 @@
 					});
 				}
 			},created:function(){
-				this.getJsonListParam.callBack = this.getJsonListCallBack;
-				getJsonList(this.getJsonListParam);
+				let _thisVue = this;
+				_thisVue.getJsonListParam.callBack = _thisVue.getJsonListCallBack;
+				vueVersionJsonList(_thisVue);
 				//下拉加载
-				let _this = this;
 				$(window).on('scroll',function(){
-					if(_this.getJsonListParam.loadTrigger
+					if(_thisVue.getJsonListParam.loadTrigger
 							&& $(document).scrollTop()+$(window).height()+200>$(document).height()){
-						_this.getJsonListParam.loadTrigger = false;
-						console.log(_this.getJsonListParam);
-						return false;
-						getJsonList(_this.getJsonListParam);
+						vueVersionJsonList(_thisVue);
 					}
 				});
 			}
