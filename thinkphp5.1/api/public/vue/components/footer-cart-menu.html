@@ -201,10 +201,11 @@
                         this.buy_quantity += this.step_quantity;
                     }
                 },reduceCart: function (event) {
+                    this.buy_quantity -= this.step_quantity;
                     let postData = {
                         goodsList:[{
                             goods_id: this.product_id,
-                            num: this.step_quantity
+                            num: -this.step_quantity
                         }]
                     };
                     let _thisJquery = $(event.currentTarget);
@@ -224,6 +225,7 @@
                     };
                     asyncVerify(config);
                 },plusCart: function (event) {
+                    this.buy_quantity += this.step_quantity;
                     let postData = {
                         goodsList:[{
                             goods_id: this.product_id,
