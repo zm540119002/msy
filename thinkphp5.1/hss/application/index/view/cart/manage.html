@@ -49,7 +49,7 @@
 <!--<script type="text/javascript" src="index_js/cart.js"></script>-->
 <script type="text/javascript">
 	var config = {
-		url:module+'Cart/getList',
+		url:module+'Cart/getCartGoodsList',
 		requestEnd:false,
 		loadTrigger:false,
 		currentPage:1
@@ -76,13 +76,17 @@
 	$(function(){
 		// 初始化购物车商品
 		if(user_id){
-			getPagingList(config,postData);
+			getJsonList(config,postData);
 		}else {
 			config.url = module+'Goods/getCartGoodsList';
 			var cartList = localStorage.cartList;//获取存储购物车商品信息
 			postData.cartList = cartList;
 			getPagingList(config,postData);
 		}
+
+		// var cartList = localStorage.cartList;//获取存储购物车商品信息
+		// postData.cartList = cartList;
+		// getJsonList(config,postData);
 
 		//下拉加载
 		$(window).on('scroll',function(){

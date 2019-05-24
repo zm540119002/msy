@@ -109,31 +109,34 @@ class Goods extends \common\controller\Base{
         if(!request()->isGet()){
             return errorMsg('请求方式错误');
         }
-        $cartList = input('get.cartList');
-        $goodsList =  json_decode($cartList,true)['goodsList'];
-        $goodsIds = array_column($goodsList,'goods_id');
-        $model = new \app\index\model\Goods();
-        $config=[
-            'where'=>[
-                ['g.status', '=', 0],
-                ['g.id', 'in', $goodsIds],
-            ],
-            'field'=>[
-                'g.id','g.headline','g.name','g.thumb_img','g.bulk_price','g.sample_price','g.specification','g.minimum_order_quantity',
-                'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
-            ],
-        ];
-        $list = $model -> pageQuery($config)->toArray();
-        $showGoodsList =  $list['data'];
-        foreach ($showGoodsList as $i =>&$showGoods){
-            foreach($goodsList as $j=>&$goods){
-                if($showGoods['id'] == $goods['goods_id'] ){
-                    $showGoodsList[$i]['num'] = $goods['num'];
-                    $showGoodsList[$i]['buy_type'] = $goods['buy_type'];
-                    $showGoodsList[$i]['cart_id'] = $i+1;
+        $user = checkLogin();
+        if(!$user){
+            $cartList = input('get.cartList');
+            $goodsList =  json_decode($cartList,true)['goodsList'];
+            $goodsIds = array_column($goodsList,'goods_id');
+            $model = new \app\index\model\Goods();
+            $config=[
+                'where'=>[
+                    ['g.status', '=', 0],
+                    ['g.id', 'in', $goodsIds],
+                ],
+                'field'=>[
+                    'g.id','g.headline','g.name','g.thumb_img','g.bulk_price','g.sample_price','g.specification','g.minimum_order_quantity',
+                    'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
+                ],
+            ];
+            $list = $model -> pageQuery($config)->toArray();
+            $showGoodsList =  $list['data'];
+            foreach ($showGoodsList as $i =>&$showGoods){
+                foreach($goodsList as $j=>&$goods){
+                    if($showGoods['id'] == $goods['goods_id'] ){
+                        $showGoodsList[$i]['num'] = $goods['num'];
+                        $showGoodsList[$i]['cart_id'] = $i+1;
+                    }
                 }
             }
         }
+        $list['data']=$showGoodsList;
         $currentPage = input('get.page/d');
         $this->assign('currentPage',$currentPage);
         $this->assign('list',$showGoodsList);
@@ -213,6 +216,8 @@ class Goods extends \common\controller\Base{
             $info['main_img'] = explode(',',(string)$info['main_img']);
             $info['detail_img'] = explode(',',(string)$info['detail_img']);
             $info['tag'] = explode(',',(string)$info['tag']);
+            $info['purchase_specification_description'] = '10盒/箱 按箱采购'; // 假数据
+            
             $this->assign('info',$info);
             $this->assign('goodsInfo',json_encode([
                 'goods_id'=>$info['id'],
