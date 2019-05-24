@@ -70,7 +70,7 @@
 			data:function(){
 				return param;
 			},methods:{
-				getJsonListCallBack:function(){
+				getJsonListCallBack:function(data){
 					console.log(data.data.data);
 					if(data.status==0){
 						dialog.error(data.info);
