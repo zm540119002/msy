@@ -39,7 +39,7 @@
             success: function(data){
                 $('.loading').hide();
                 console.log(data);
-                if(data.data && (data.data.data.length<config.postData.pageSize)){
+                if(data && data.data && (data.data.data.length<config.postData.pageSize)){
                     config.requestEnd = true;
                 }
                 config.postData.page ++;
