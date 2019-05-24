@@ -97,7 +97,7 @@
 					console.log(this.productList);
 					console.log(typeof this.productList);
 					$.each(data.data.data,function(i,o){
-						Vue.set(this.productList,i,o);
+						Vue.set(this.productList,'aa',o);
 					});
 				}
 			},created:function(){
