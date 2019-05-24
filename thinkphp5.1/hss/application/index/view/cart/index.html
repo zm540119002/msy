@@ -116,6 +116,8 @@
 					if(this.getJsonListParam.loadTrigger
 							&& $(document).scrollTop()+$(window).height()+200>$(document).height()){
 						this.getJsonListParam.loadTrigger = false;
+						console.log(this.getJsonListParam);
+						return false;
 						getJsonList(this.getJsonListParam);
 					}
 				});
