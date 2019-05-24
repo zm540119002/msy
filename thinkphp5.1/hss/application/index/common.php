@@ -25,6 +25,7 @@ function project_handle(&$info){
     $info['intro']      = $info['intro']    ? htmlspecialchars_decode($info['intro']) : '';
     $info['description']= $info['description']    ? htmlspecialchars_decode($info['description']) : '';
     $info['remarks']    = $info['remarks']    ? htmlspecialchars_decode($info['remarks']) : '';
+    $info['process']    = $info['process']    ? json_decode($info['process'],true) : [];
 };
 
 // sort系列
