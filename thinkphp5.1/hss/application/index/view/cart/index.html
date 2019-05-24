@@ -94,6 +94,9 @@
 						dialog.error(data.info);
 						return false;
 					}
+					for (var i=0,len=cars.length; i<len; i++){
+						this.productList.push(data.data.data);
+					}
 					this.productList = data.data.data;
 					console.log(this.productList);
 //					this.productList.push(data.data.data);

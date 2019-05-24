@@ -11,7 +11,7 @@
     /**获取json格式列表数据
      */
     function getJsonListDefaultCallBack(data){
-        return data.data.data;
+        console.log(data);
     }
     function getJsonList(config){
         //提交路径
@@ -43,7 +43,7 @@
                 }
                 config.postData.page ++;
                 config.loadTrigger = true;
-                config.callBack?config.callBack(data):getJsonListDefaultCallBack(data);
+                config.callBack?config.callBack(data.data.data):getJsonListDefaultCallBack(data.data.data);
             }
         });
     }
