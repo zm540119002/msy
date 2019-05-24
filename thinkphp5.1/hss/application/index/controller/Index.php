@@ -90,6 +90,7 @@ class Index extends \common\controller\Base{
             array_push($unlockingFooterCart['menu'][2]['class'],'group_btn30');
             $this->assign('unlockingFooterCart',json_encode($unlockingFooterCart));
             $type = $_GET['type'];
+            echo $type;
             $this->assign('type',$type);
             return $this->fetch('cart/index');
         }
