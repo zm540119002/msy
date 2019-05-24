@@ -1,9 +1,10 @@
 {extend name="template/base.html" /}
 {block name="css-customize"}
 <link rel="stylesheet" href="public_css/project_public.css">
-
 {/block}
+{if $type}
 {block name="title"}购物车{/block}
+{/if}
 {block name="content"}
 <section class="no_cart_data" style="display:none;">
 	<li class="no_data"><img src="https://www.worldview.com.cn/static/common/img/no-cart.png" alt=""></li>
