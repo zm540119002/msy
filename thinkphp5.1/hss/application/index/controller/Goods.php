@@ -137,7 +137,6 @@ class Goods extends \common\controller\Base{
             }
         }
         $list['data']=$showGoodsList;
-        $this->successMsg('成功',$list);
         $currentPage = input('get.page/d');
         $this->assign('currentPage',$currentPage);
         $this->assign('list',$showGoodsList);
