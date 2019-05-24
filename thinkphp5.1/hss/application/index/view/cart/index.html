@@ -105,12 +105,12 @@
 			if(config.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
 				config.loadTrigger = false;
 				if(user_id){
-					getPagingList(config,postData);
+					getJsonList(config,postData);
 				}else {
 					config.url = module+'Goods/getCartGoodsList';
 					var cartList = localStorage.cartList; //获取存储购物车商品信息
 					postData.cartList = cartList;
-					getJsonList(config,postData);
+					getPagingList(config,postData);
 				}
 			}
 		});
