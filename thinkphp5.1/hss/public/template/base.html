@@ -38,8 +38,6 @@
             },
             success: function(data){
                 $('.loading').hide();
-                console.log(data);
-                console.log(data.data);
                 if(data.data.length && (data.data.data.length<config.postData.pageSize)){
                     config.requestEnd = true;
                 }
