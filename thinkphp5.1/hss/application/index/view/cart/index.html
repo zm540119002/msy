@@ -82,12 +82,11 @@
 		url:module+'Cart/getList',
 		requestEnd:false,
 		loadTrigger:false,
-		currentPage:1,
 		callBack:getJsonListCallBack
 	};
 	var postData = {
 		pageSize:20,
-		pageType:'index'
+		currentPage:1
 	};
 	$(function(){
 		var user_id = '{$user.id}';
