@@ -51,7 +51,7 @@ class Project extends \common\controller\Base{
             $model = new \app\index\model\Project();
             $config =[
                 'field' => [
-                    'id','name','main_img','intro','tag','detail_img','video','title','process_img','description','remarks'
+                    'id','name','main_img','intro','tag','detail_img','video','title','process_img','description','remarks','process','recommend_goods'
                 ],
                 'where' => [
                     ['p.status', '=', 0],
@@ -65,7 +65,7 @@ class Project extends \common\controller\Base{
             }
 
             // 项目流程 json
-            $arr = [
+/*            $arr = [
                 'img' => '/hss_project/1557805583740576.jpg',
                 'desc'=> '01、检测头皮状况',
             ];
@@ -75,8 +75,9 @@ class Project extends \common\controller\Base{
             }
 
             $array =  json_encode($array);
-
-            $info['process'] = json_decode($array,true);
+            echo $array;
+            exit;
+            $info['process'] = json_decode($array,true);*/
 
             // 项目推荐商品
             $modelGoods = new \app\index\model\Goods();
@@ -86,7 +87,7 @@ class Project extends \common\controller\Base{
                 ],'where' => [
                     ['status','=',0],
                     ['shelf_status','=',3],
-                    ['id','in','172,173,174,175,2,3,6'],
+                    ['id','in',$info['recommend_goods']],
                 ],'limit' => 4
             ];
             $info['recommend_goods'] = $modelGoods->getList($condition);

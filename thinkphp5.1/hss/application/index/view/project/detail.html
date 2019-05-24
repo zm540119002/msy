@@ -67,6 +67,8 @@
 		<div class="content-padding description">
 
 		</div>
+
+		{notempty name="$info.process"}
 		<div class="content-padding">
 			<p class="content-label">项目流程</p>
 			<section class="slider_banner">
@@ -86,17 +88,18 @@
 						<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 4"></span>
 					</div>
 				</div>
-
-
 			</section>
 		</div>
+		{/notempty}
+
+		{notempty name="$info.recommend_goods"}
 		<div class="content-padding">
 			<p class="content-label">推荐搭配居家产品</p>
 			<ul class="list">
 				{volist name="$info.recommend_goods" id="vo"}
 				<li>
-					<a>
-						<img src="{:show_img_handle($vo.thumb_img)}" alt="">
+					<a href="{:url('Index/Goods/detail',['id'=>$vo.id])}">
+						<img src="{:show_img_handle($vo.thumb_img)}" alt="{$vo.headline}">
 					</a>
 					<p>{$vo.headline}</p>
 					<p>规格：{$vo.specification}</p>
@@ -104,6 +107,7 @@
 				{/volist}
 			</ul>
 		</div>
+		{/notempty}
 		<div class="content-padding">
 			<p class="remarks"></p>
 		</div>
