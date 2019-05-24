@@ -38,7 +38,8 @@
             },
             success: function(data){
                 $('.loading').hide();
-                if(data.data && data.data.data.length<config.postData.pageSize){
+                console.log(data);
+                if(data.data && (data.data.data.length<config.postData.pageSize)){
                     config.requestEnd = true;
                 }
                 config.postData.page ++;
