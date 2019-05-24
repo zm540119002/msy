@@ -94,7 +94,11 @@
 		url:module+'Goods/getPromotionGoods',
 		requestEnd:false,
 		loadTrigger:false,
-		currentPage:1,
+		postData:{
+			id:'{$info.id}',
+			pageSize:10,
+			page:1
+		},
 		callBack:getJsonListCallBack
 	};
 	var postData = {
@@ -103,8 +107,7 @@
 	};
 	$(function(){
 		//初始化场景商品页面
-		postData.id = '{$info.id}';
-		getJsonList(config,postData);
+		getJsonList(config);
 	});
 </script>
 <script type="text/javascript">
