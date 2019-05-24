@@ -31,6 +31,21 @@
 				:type="type"
 		></product-select>
 	</ul>
+
+	<div class="project_wrapper content_main content-padding">
+		<div class="mod-part-title">
+			<div class="mod-part-title-wrap">
+				<span class="icon-title left"></span>
+				<span class="title">新零售精选</span>
+				<span class="icon-title right"></span>
+			</div>
+		</div>
+		<div id="scroller-wrapper" class="list_wrapper">
+			<ul class="columns_flex flex-both-side goods-content-list" id="goodsList">
+
+			</ul>
+		</div>
+	</div>
 </article>
 {/block}
 {block name="footer"}
@@ -127,9 +142,32 @@
 {/block}
 {block name="script"}
 <script type="text/javascript">
+	// 新零售商品获取配置
+	var config_1 = {
+		url:module+'Goods/getList',
+		requestEnd:false,
+		loadTrigger:false,
+		currentPage:1,
+		container:$("#goodsList")
+	};
+	var postData_1 = {
+		pageSize:10,
+		pageType:'index',
+		is_selection:1
+	};
 	$(function(){
 		var type = '{$type}';
-		console.log(type)
+		if(type){
+			//初始化零售商品
+			getPagingList(config_1,postData_1);
+			//下拉加载
+			$(window).on('scroll',function(){
+				if(config_1.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
+					config_1.loadTrigger = false;
+					getPagingList(config_1,postData_1);
+				}
+			});
+		}
 	});
 </script>
 {/block}
