@@ -79,6 +79,8 @@
                     console.log(data.data.length);
                     vueObj.getJsonListParam.requestEnd = true;
                 }
+                console.log(data.data.length);
+                console.log(vueObj.getJsonListParam.requestEnd);
                 vueObj.getJsonListParam.postData.page ++;
                 vueObj.getJsonListParam.callBack?vueObj.getJsonListParam.callBack(data):vueVersionGetJsonListDefaultCallBack(data);
             }
