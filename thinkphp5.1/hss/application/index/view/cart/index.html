@@ -76,7 +76,7 @@
 						dialog.error(data.info);
 						return false;
 					}
-					$.extend(this.productList,data.data.data);
+					this.productList += data.data.data;
 //					this.productList.push(data.data.data);
 				}
 			},created:function(){
