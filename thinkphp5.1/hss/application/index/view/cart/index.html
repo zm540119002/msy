@@ -91,8 +91,6 @@
 		var user_id = '{$user.id}';
 		// 初始化购物车商品
 		if(user_id){
-			console.log(123);
-			return false;
 			getJsonList(getJsonListParam);
 		}else {
 			getJsonListParam.url = module+'Goods/getCartGoodsList';
