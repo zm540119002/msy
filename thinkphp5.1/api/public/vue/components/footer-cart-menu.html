@@ -160,9 +160,9 @@
             </div>
             <div class="purchase_goods_num cart_goods_operate">
                 <div class="quantity_wrapper selected-number">
-                    <a href="javascript:void(0);" class="reduce" @click="reduceCart" :data-jump_url="add_cart_url">-</a>
+                    <a href="javascript:void(0);" class="add_cart" @click="reduceCart" :data-jump_url="add_cart_url">-</a>
                     <input type="text" :value="buy_quantity" class="f24 product_count" readonly="readonly">
-                    <a href="javascript:void(0);" class="plus" @click="plusCart" :data-jump_url="add_cart_url">+</a>
+                    <a href="javascript:void(0);" class="add_cart" @click="plusCart" :data-jump_url="add_cart_url">+</a>
                 </div>
                 <a href="javascript:void(0);" class="delete_order goodsDel delete_cart">删除</a>
             </div>
