@@ -116,6 +116,7 @@
 				$(window).on('scroll',function(){
 					if(_thisVue.getJsonListParam.loadTrigger
 							&& $(document).scrollTop()+$(window).height()+200>$(document).height()){
+						console.log(_thisVue.getJsonListParam.loadTrigger);
 						vueVersionGetJsonList(_thisVue);
 					}
 				});

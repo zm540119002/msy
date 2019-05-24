@@ -14,7 +14,9 @@
         console.log(data);
     }
     function vueVersionGetJsonList(vueObj){
-        console.log(vueObj.getJsonListParam);
+        console.log(vueObj.getJsonListParam.loadTrigger);
+        vueObj.getJsonListParam.loadTrigger = false;
+        return false;
         //提交路径
         vueObj.getJsonListParam.url = vueObj.getJsonListParam.url?vueObj.getJsonListParam.url:action;
         //要提交的数据
