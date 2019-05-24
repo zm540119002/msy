@@ -19,7 +19,7 @@
         config.url = config.url?config.url:action;
         //要提交的数据
         config.postData = config.postData?config.postData:{};
-        config.postData.page = config.postData.currentPage ? config.postData.currentPage : 1;
+        config.postData.page = config.postData.page ? config.postData.page : 1;
         config.postData.pageSize = config.postData.pageSize ? config.postData.pageSize:4;
         //请求结束标志
         if(config.requestEnd){
@@ -43,7 +43,7 @@
                 if(data.data.data.length<config.postData.pageSize){
                     config.requestEnd = true;
                 }
-                config.postData.currentPage ++;
+                config.postData.page ++;
                 config.loadTrigger = true;
                 config.callBack?config.callBack(data):getJsonListDefaultCallBack(data);
             }
