@@ -111,7 +111,7 @@
 					});
 				}
 			},created:function(){
-				this.getJsonListParam.callBack = this.getJsonListCallBack
+				this.getJsonListParam.callBack = this.getJsonListCallBack;
 				getJsonList(this.getJsonListParam);
 				//下拉加载
 				$(window).on('scroll',function(){
