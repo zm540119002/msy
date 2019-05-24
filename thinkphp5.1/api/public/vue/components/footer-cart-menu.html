@@ -201,7 +201,6 @@
                         this.buy_quantity += this.step_quantity;
                     }
                 },reduceCart: function (event) {
-                    this.buy_quantity -= this.step_quantity;
                     let postData = {
                         goodsList:[{
                             goods_id: this.product_id,
@@ -209,6 +208,7 @@
                         }]
                     };
                     let _thisJquery = $(event.currentTarget);
+                    let _thisVue = this;
                     login_success_callback_private = function(){
                         _thisJquery.click()
                     };
@@ -217,6 +217,7 @@
                     };
                     let config = {
                         clickObj:_thisJquery,
+                        vueObj:_thisVue,
                         postData:postData,
                         reduce:true,
                         func:function(){
@@ -225,7 +226,6 @@
                     };
                     asyncVerify(config);
                 },plusCart: function (event) {
-                    this.buy_quantity += this.step_quantity;
                     let postData = {
                         goodsList:[{
                             goods_id: this.product_id,
@@ -233,6 +233,7 @@
                         }]
                     };
                     let _thisJquery = $(event.currentTarget);
+                    let _thisVue = this;
                     login_success_callback_private = function(){
                         _thisJquery.click()
                     };
@@ -241,6 +242,7 @@
                     };
                     let config = {
                         clickObj:_thisJquery,
+                        vueObj:_thisVue,
                         postData:postData,
                         func:function(){
                             _thisJquery.click();

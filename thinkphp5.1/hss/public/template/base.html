@@ -149,6 +149,7 @@
                 if(param.clickObj.attr('class').indexOf('add_cart')!==-1 && param.componentFooterCartMenu){ //加入购物车
                     $.each(param.postData.goodsList,function(i,o){
                         param.componentFooterCartMenu.cart_num += o.num;
+                        param.vueObj.buy_quantity += o.num;
                     });
                 }
                 dialog.error(param.data.info);
