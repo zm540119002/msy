@@ -95,6 +95,7 @@
 				return param;
 			},methods:{
 				getJsonListCallBack:function(data){
+					console.log(data);
 					if(data.status==0){
 						dialog.error(data.info);
 						return false;
