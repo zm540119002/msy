@@ -97,7 +97,7 @@
 					console.log(this.productList);
 					$.each(data.data.data,function(i,o){
 						console.log(o);
-						this.productList.push(o);
+						this.productList.unshift(o);
 					});
 				}
 			},created:function(){
