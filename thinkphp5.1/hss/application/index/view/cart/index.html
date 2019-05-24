@@ -1,5 +1,10 @@
 {extend name="template/base.html" /}
+{block name="css-customize"}
+<link rel="stylesheet" href="public_css/project_public.css">
+{/block}
+{if $type!=1}
 {block name="title"}购物车{/block}
+{/if}
 {block name="content"}
 <section class="no_cart_data" style="display:none;">
 	<li class="no_data"><img src="https://www.worldview.com.cn/static/common/img/no-cart.png" alt=""></li>
@@ -109,8 +114,15 @@
 		return data.data.data;
 	}
 </script>
-
+{if $type}
+<style>
+	.group_cart_nav{
+		bottom:0.88rem;
+	}
+</style>
 {include file="template/footer_project.html" /}
+{/if}
+
 {/block}
 {block name="script"}
 <script type="text/javascript">

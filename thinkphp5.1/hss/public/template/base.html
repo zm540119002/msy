@@ -38,7 +38,7 @@
             },
             success: function(data){
                 $('.loading').hide();
-                if(data.data.data.length<config.postData.pageSize){
+                if(data.data.length && (data.data.data.length<config.postData.pageSize)){
                     config.requestEnd = true;
                 }
                 config.postData.page ++;
