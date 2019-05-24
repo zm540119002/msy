@@ -76,7 +76,8 @@
 						dialog.error(data.info);
 						return false;
 					}
-					this.productList.push(data.data.data);
+					$.extend(this.productList,data.data.data);
+//					this.productList.push(data.data.data);
 				}
 			},created:function(){
 				var getJsonListParam = {
