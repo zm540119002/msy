@@ -100,9 +100,11 @@
 						return false;
 					}
 					this.productList.push({message:"动态新增"});
-					console.log(this.productList);
+					console.log({message:"动态新增"});
+					console.log(typeof {message:"动态新增"});
 					$.each(data.data.data,function(i,o){
 						console.log(o);
+						console.log(typeof o);
 					});
 				}
 			},created:function(){
