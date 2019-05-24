@@ -95,9 +95,11 @@
 						return false;
 					}
 					console.log(this.productList);
+					console.log(typeof this.productList);
 					$.each(data.data.data,function(i,o){
 						console.log(o);
-//						this.productList.push(o);
+						console.log(typeof o);
+						this.productList.unshift(o);
 					});
 				}
 			},created:function(){
