@@ -32,17 +32,24 @@
 				<li data-id='{$info.id}' data-buy_type="1" id="li-id-{$info.id}">
 					<div class="top_radius f20 top_module">
 						<div class="columns_flex l-r-sides">
-							<div>
-								<span class="red">￥<price class="sale_price">{$info.bulk_price}</price></span>
+							<div class="left">
+								<div>
+									<span class="red">￥<span class="sale_price">{$info.bulk_price}</span></span>
+								</div>
 							</div>
-							<div>
-								<a class="qrcode_share"  href="javascript:void(0);"></a>
+							<div  class="right">
+								<div class="quantity_wrapper selected-number">
+									<a href="javascript:void(0);" class="reduce" @click="reduce">-</a>
+									<input type="text" class="f24 product_count" value="0">
+									<a href="javascript:void(0);" class="plus" >+</a>
+								</div>
 							</div>
+
 						</div>
-						<div class="title_name goods_title  f28">
+						<div class="title_name goods_title f28">
 							{$info.headline}
 						</div>
-						<p class="specification_text">{$info.specification}</p>
+						<p class="specification_text">{$info.specification}<span style="display: inline-block;float: right;">{$info.purchase_specification_description}</span></p>
 						<p class="product_intro">{$info.intro|raw}</p>
 						<div class="tags_item columns_flex l-r-sides">
 							<div>
@@ -224,7 +231,7 @@
 			}
 		});
 		param = {
-			'type':3,
+			'type':5,
 			'init_quantity':1,
 			'step_quantity':1,
 			'productList':[
