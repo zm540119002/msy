@@ -11,8 +11,7 @@
     /**获取json格式列表数据
      */
     function getJsonListDefaultCallBack(data){
-        console.log(11);
-        console.log(data.data.data);
+        console.log(data);
         return data.data.data;
     }
     function getJsonList(config){
@@ -40,7 +39,6 @@
             },
             success: function(data){
                 $('.loading').hide();
-                console.log(123);
                 console.log(data);
                 if(data.data.data.length<config.postData.pageSize){
                     config.requestEnd = true;
