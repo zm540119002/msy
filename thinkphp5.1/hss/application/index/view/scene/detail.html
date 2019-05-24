@@ -48,7 +48,6 @@
 						:product_src="productInfo.thumb_img"
 						:init_quantity="parseInt(init_quantity)"
 						:step_quantity="parseInt(step_quantity)"
-						:add_cart_type="parseInt(add_cart_type)"
 				></product-select>
 			</div>
 		</ul>
@@ -66,10 +65,10 @@
 			return false;
 		}
 		param = {
+			'type':0,
 			'init_quantity':1,
 			'step_quantity':1,
-			'productList':data.data.data,
-			'add_cart_type':2
+			'productList':data.data.data
 		};
 		new Vue({
 			el: '#product-select',
