@@ -83,7 +83,7 @@ class Project extends \common\controller\Base{
             $modelGoods = new \app\index\model\Goods();
             $condition = [
                 'field' => [
-                    'id','headline','specification','thumb_img'
+                    'id','name','specification','thumb_img'
                 ],'where' => [
                     ['status','=',0],
                     ['shelf_status','=',3],
