@@ -89,6 +89,12 @@ class Index extends \common\controller\Base{
             array_push($unlockingFooterCart['menu'][1]['class'],'group_btn50');
             array_push($unlockingFooterCart['menu'][2]['class'],'group_btn30');
             $this->assign('unlockingFooterCart',json_encode($unlockingFooterCart));
+            $type = input('type');
+            $this->assign('type',$type);
+            if($type){
+                // 底部菜单，见配置文件custom.footer_menu
+                $this->assign('currentPage',request()->controller().'/'.request()->action());
+            }
             return $this->fetch('cart/index');
         }
     }

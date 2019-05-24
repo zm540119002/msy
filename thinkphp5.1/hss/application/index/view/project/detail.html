@@ -33,18 +33,16 @@
 			{/volist}
 			{/notempty}
 			<!--产品列表-->
-			<ul class="goods_list list" id="list">
-				<div id="product-select">
-					<product-select
-							v-for="productInfo in productList"
-							:key="productInfo.id"
-							:product_id="productInfo.id"
-							:deal_price="parseFloat(productInfo.bulk_price)"
-							:product_name="productInfo.headline"
-							:init_quantity="parseInt(init_quantity)"
-							:step_quantity="parseInt(step_quantity)"
-					></product-select>
-				</div>
+			<ul class="goods_list list" id="product-select">
+				<product-select
+						v-for="productInfo in productList"
+						:key="productInfo.id"
+						:product_id="productInfo.id"
+						:deal_price="parseFloat(productInfo.bulk_price)"
+						:product_name="productInfo.headline"
+						:init_quantity="parseInt(init_quantity)"
+						:step_quantity="parseInt(step_quantity)"
+				></product-select>
 			</ul>
 		</section>
 	</section>
@@ -93,9 +91,9 @@
 		{/notempty}
 
 		{notempty name="$info.recommend_goods"}
-		<div class="content-padding">
+		<div class="content-padding content_main ">
 			<p class="content-label">推荐搭配居家产品</p>
-			<ul class="list">
+			<ul class="columns_flex flex-both-side goods-content-list">
 				{volist name="$info.recommend_goods" id="vo"}
 				<li>
 					<a href="{:url('Index/Goods/detail',['id'=>$vo.id])}">
