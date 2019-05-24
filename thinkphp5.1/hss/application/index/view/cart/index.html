@@ -15,9 +15,8 @@
 				<h2 class="f24">购物车</h2>
 			</section>
 	{/if}
-
 	<!--产品列表-->
-	<ul class="cart_goods_list list" id="product-select">
+	<ul class="cart_goods_list list" id="product-list">
 		<product-select
 				v-for="productInfo in productList"
 				:key="productInfo.id"
@@ -95,7 +94,7 @@
 			}
 		};
 		new Vue({
-			el: '#product-select',
+			el: '#product-list',
 			data:function(){
 				return param;
 			},methods:{
