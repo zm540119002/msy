@@ -80,9 +80,14 @@
 </script><script type="text/javascript">
 	$(function(){
 		let param = {
-			'type':4,
-			'step_quantity':1,
-			'productList':[]
+			type:4,
+			step_quantity:1,
+			productList:[],
+			items:[
+				{message:"Test one",id:"1"},
+				{message:"Test two",id:"2"},
+				{message:"Test three",id:"3"}
+			]
 		};
 		new Vue({
 			el: '#product-select',
@@ -94,11 +99,10 @@
 						dialog.error(data.info);
 						return false;
 					}
-					console.log(this.productList);
-					console.log(typeof this.productList);
-					$.each(data.data.data,function(i,o){
-						Vue.set(this.productList,'aa',o);
-					});
+					this.items.push({message:"动态新增"});
+//					$.each(data.data.data,function(i,o){
+//						Vue.set(this.productList,'aa',o);
+//					});
 				}
 			},created:function(){
 				var getJsonListParam = {
