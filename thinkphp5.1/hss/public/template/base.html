@@ -171,7 +171,9 @@
                 location.href = param.jump_url;
                 return false;
             }
-            dialog.success(param.data.info);
+            if(!param.clickObj.attr('class').indexOf('add_cart')!==-1){ //
+                dialog.success(param.data.info);
+            }
         }else{ //返回页面
             param.func();
         }
