@@ -23,7 +23,6 @@
 				:specification="productInfo.specification"
 				:type="type"
 		></product-select>
-		<button class="btn" @click="btn1Click()">点我试试</button><br/>
 	</ul>
 </article>
 {/block}
@@ -71,29 +70,36 @@
 			data:function(){
 				return param;
 			},methods:{
-				btn1Click:function(){
-					this.productList.push({message:"动态新增"});
+				getJsonListCallBack:function(){
+					console.log(data.data.data);
+					if(data.status==0){
+						dialog.error(data.info);
+						return false;
+					}
+					return data.data.data;
+//					this.productList.push({message:"动态新增"});
 				}
-			}
-		});
-		var getJsonListParam = {
-			url:module+'Goods/getCartGoodsList',
-			requestEnd:false,
-			loadTrigger:false,
-			postData:{
-				cartList:localStorage.cartList,
-				pageSize:4,
-				page:1
-			},
-			callBack:getJsonListCallBack
-		};
-		getJsonList(getJsonListParam);
-		//下拉加载
-		$(window).on('scroll',function(){
-			if(getJsonListParam.loadTrigger
-					&& $(document).scrollTop()+$(window).height()+200>$(document).height()){
-				getJsonListParam.loadTrigger = false;
+			},created:function(){
+				var getJsonListParam = {
+					url:module+'Goods/getCartGoodsList',
+					requestEnd:false,
+					loadTrigger:false,
+					postData:{
+						cartList:localStorage.cartList,
+						pageSize:4,
+						page:1
+					},
+					callBack:this.getJsonListCallBack
+				};
 				getJsonList(getJsonListParam);
+				//下拉加载
+				$(window).on('scroll',function(){
+					if(getJsonListParam.loadTrigger
+							&& $(document).scrollTop()+$(window).height()+200>$(document).height()){
+						getJsonListParam.loadTrigger = false;
+						getJsonList(getJsonListParam);
+					}
+				});
 			}
 		});
 	});
