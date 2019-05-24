@@ -135,16 +135,41 @@ class Goods extends \common\controller\Base{
                     }
                 }
             }
-        }
-        $list['data']=$showGoodsList;
-        $currentPage = input('get.page/d');
-        $this->assign('currentPage',$currentPage);
-        $this->assign('list',$showGoodsList);
-        if(isset($_GET['pageType'])){
-            if($_GET['pageType'] == 'index' ){
-                return $this->fetch('cart/list_tpl');
+            $list['data']=$showGoodsList;
+        }else{
+            $userId = $user['id'];
+            $model = new \app\index\model\Cart();
+            $config=[
+                'where'=>[
+                    ['c.user_id','=',$userId],
+//                 ['c.create_time','>',time()-7*24*60*60],//只展示7天的数据
+                    ['c.status','=',0],
+                    //['g.status','=',0],
+                ],'join' => [
+                    ['goods g','g.id = c.goods_id','left']
+                ],'field'=>[
+                    'c.id as cart_id','c.goods_id','c.num','c.create_time',
+                    'g.id','g.headline','g.name','g.thumb_img','g.bulk_price','g.sample_price','g.specification','g.minimum_order_quantity',
+                    'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
+                ],'order'=>[
+                    'c.id'=>'desc'
+                ],
+            ];
+            $keyword = input('get.keyword','');
+            if($keyword) {
+                $config['where'][] = ['g.name', 'like', '%' . trim($keyword) . '%'];
             }
+            $list = $model -> pageQuery($config);
         }
+        $this->successMsg('成功',$list);
+//        $currentPage = input('get.page/d');
+//        $this->assign('currentPage',$currentPage);
+//        $this->assign('list',$showGoodsList);
+//        if(isset($_GET['pageType'])){
+//            if($_GET['pageType'] == 'index' ){
+//                return $this->fetch('cart/list_tpl');
+//            }
+//        }
     }
     /***
      * 获取各关联表下的商品 -通用方法
