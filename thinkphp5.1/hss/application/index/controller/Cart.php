@@ -29,84 +29,6 @@ class Cart extends \common\controller\UserBase {
         }
     }
 
-    /**
-     * @return array
-     * @throws \Exception
-     *
-     */
-    public function addCart1(){
-        if(!request()->isPost()){
-            return errorMsg('请求方式错误');
-        }
-        $goodsList = input('post.goodsList/a');
-        //return $goodsList;
-        if(empty($goodsList)){
-            return errorMsg('没有数据');
-        }
-        $userId = $this->user['id'];
-        $model = new \app\index\model\Cart();
-        $config = [
-            'where' => [
-              ['user_id','=',$userId],
-              ['status','=',0],
-            ],
-        ];
-        $cartList = $model->getList($config);
-
-        $addData = [];
-        $updateData =[];
-        foreach ($goodsList as $goods){
-            //假定没找到
-            $find = false;
-            foreach ($cartList as $cart){
-                if($goods['goods_id'] == $cart['goods_id'] && $goods['buy_type'] == $cart['buy_type'] && $goods['brand_name'] == $cart['brand_name'] ){//找到了，则更新记录
-                    $find = true;
-                    $data = [
-                        'user_id' => $this->user['id'],
-                        'id' => $cart['id'],
-                        'goods_id' => $cart['goods_id'],
-                        'buy_type' => $cart['buy_type'] ? $cart['buy_type'] : 1,
-                        'num' => $goods['num'] + $cart['num'],
-                        'brand_name' => $cart['brand_name'] ? $cart['brand_name'] : '',
-                        'brand_id' => $cart['brand_id'] ? $cart['brand_id'] : 0,
-                    ];
-                    $updateData[] = $data;
-
-                }
-
-            }
-            if(!$find){//如果没找到，则新增
-                $data = [
-                    'user_id' => $this->user['id'],
-                    'goods_id' => $goods['goods_id'],
-                    'num' =>$goods['num'],
-                    'buy_type' => $goods['buy_type'] ? $goods['buy_type'] : 1,
-                    'brand_name' => $goods['brand_name'] ? $goods['brand_name'] : '',
-                    'brand_id' => $goods['brand_id'] ? $goods['brand_id'] : 0,
-                    'create_time'=>time(),
-                ];
-                $addData[] = $data;
-            }
-        }
-        $model->startTrans();
-        if(!empty($addData)){
-            $res =  $model->saveAll($addData);
-            if (!count($res)) {
-                $model->rollback();
-                return errorMsg('失败');
-            }
-        }
-        if(!empty($updateData)){
-            $res =  $model->saveAll($updateData);
-            if (!count($res)) {
-                $model->rollback();
-                return errorMsg('失败');
-            }
-        }
-        $model -> commit();
-        return successMsg('成功');
-    }
-
     public function addCart(){
         if(!request()->isPost()){
             $this->errorMsg('请求方式错误',config('code.error.default'));
@@ -154,47 +76,6 @@ class Cart extends \common\controller\UserBase {
         }
         $model -> commit();
         $this->successMsg('加入购物车成功！',config('code.success.default'));
-    }
-
-    /**
-     * 分页查询
-     */
-    public function getList(){
-        if(!request()->isGet()){
-            return errorMsg('请求方式错误');
-        }
-        $userId = $this->user['id'];
-        $model = new \app\index\model\Cart();
-         $config=[
-             'where'=>[
-                 ['c.user_id','=',$userId],
-//                 ['c.create_time','>',time()-7*24*60*60],//只展示7天的数据
-                 ['c.status','=',0],
-                 //['g.status','=',0],
-             ],'join' => [
-                 ['goods g','g.id = c.goods_id','left']
-             ],'field'=>[
-                 'c.id as cart_id','c.goods_id','c.num','c.goods_type','c.buy_type','c.create_time','c.brand_id','c.brand_name',
-                 'g.id','g.headline','g.name','g.thumb_img','g.bulk_price','g.sample_price','g.specification','g.minimum_order_quantity',
-                 'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
-             ],'order'=>[
-                 'c.id'=>'desc'
-             ],
-         ];
-         $keyword = input('get.keyword','');
-         if($keyword) {
-             $config['where'][] = ['g.name', 'like', '%' . trim($keyword) . '%'];
-         }
-         $list = $model -> pageQuery($config);
-        $this->successMsg('成功',$list);
-        $currentPage = input('get.page/d');
-        $this->assign('currentPage',$currentPage);
-         $this->assign('list',$list);
-         if(isset($_GET['pageType'])){
-             if($_GET['pageType'] == 'index' ){
-                 return $this->fetch('list_tpl');
-             }
-         }
     }
 
     /**详情页
