@@ -1,0 +1,357 @@
+{extend name="template/admin_pc/base.html" /}
+{block name="content"}
+<div class="page">
+    <div style="margin-top:15px;">
+        <form id="form1">
+            <input type="hidden" name="id" value="{$info.id}">
+            <table id=table18 class="add_new_merchandise" border=0 cellspacing=1 width="100%" height=57>
+                <tbody>
+                <tr>
+                    <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>名称：</td>
+                    <td class=dotted_bottom_gray width="89%" align=left>
+                        <div class= width="89%" align=left>
+                            <textarea class="project_description" name="name" >{$info.name}</textarea>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class=dotted_bottom_gray height=40 width="11%" align=right>排序：</td>
+                    <td class=dotted_bottom_gray width="89%" align=left>
+                        <input style="width: 100px; " class="inputboxadmin" name="sort" value="{$info.sort|default=0}">
+                    </td>
+                </tr>
+<!--                <tr>
+                    <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>标题：</td>
+                    <td class=dotted_bottom_gray width="89%" align=left>
+                        <input style="width: 300px; " class="inputboxadmin" name="title" value="{$info.title}">
+                    </td>
+                </tr>-->
+                <tr>
+                    <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>介绍：</td>
+                    <td class=dotted_bottom_gray width="89%" align=left>
+                        <script id="intro" type="text/plain">
+
+                        </script>
+                    </td>
+                </tr>
+                <tr>
+                    <td class=dotted_bottom_gray height=40 width="11%" align=right>标签：</td>
+                    <td class=dotted_bottom_gray width="89%" align=left>
+                        <input style="width: 200px; " class="inputboxadmin" name="tag" value="{$info.tag}">
+                        多个标签请用 , 分隔，例如：正品保障,纳晶水光
+                    </td>
+                </tr>
+                <!--    <tr>
+                        <td class=dotted_bottom_gray height=40 width="11%" align=right>背景颜色：</td>
+                        <td class=dotted_bottom_gray width="89%" align=left>
+                            <p class="f20 picture-tipc-box"><span class="friend-tipc">*注意</span>：必须上传图片(格式为jpg、jpeg、png、gif)</p>
+                            <div class="upload-picture-module f24">
+                                <div>
+                                    <div class="picture-module" style="background:url({:show_img_handle($info.background_img,false)});">
+                                        <input type="file" class="uploadImg uploadSingleImg" name="">
+                                        <img class="upload_img " src="{:show_img_handle($info.background_img,false)}" />
+                                        <input type="hidden" class="layer-thumbnail-picture img"  value="{$info.background_img}" name="background_img"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>-->
+                <tr>
+                    <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>主图:</td>
+                    <td class=dotted_bottom_gray width="89%" align=left>
+                        <!--<p> 加载编辑器的容器 </p>-->
+                        <script id="main_img" type="text/plain">
+
+                        </script>
+                        <input id="mainImg" type="hidden" value="{$info.main_img|formatImg}">
+                    </td>
+                </tr>
+                <tr>
+                    <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>介绍:</td>
+                    <td class=dotted_bottom_gray width="89%" align=left>
+                        <!-- 加载编辑器的容器 -->
+                        <script id="detail_img" type="text/plain">
+
+                        </script>
+                        <input id="detailImg" type="hidden" value="{$info.detail_img|formatImg}">
+                    </td>
+                </tr>
+                <tr>
+                    <td class=dotted_bottom_gray height=40 width="11%" align=right>操作视频：</td>
+                    <td class=dotted_bottom_gray width="89%" align=left>
+                        <div class= width="89%" align=left>
+                            <p class="f20 picture-tipc-box"><span class="c-red">*</span> 仅支持大小在10M内，mp4、rmvb、avi、ts格式的视频</p>
+                            <form>
+                                <div class="upload-picture-module f24">
+                                    <div>
+                                        <div class="picture-module">
+                                            <input type="file" class="uploadImg uploadSingleVideo" name="">
+                                            {empty name="$info.video"}
+                                            <video class="upload_img upload-video" src="" autoplay="autoplay"></video>
+                                            {else /}
+                                            <video class="upload_img upload-video" src="public_uploads/{$info.video}" autoplay="autoplay"></video>
+                                            {/empty}
+                                            <input type="hidden" class="layer-thumbnail-picture img"  value="{$info.video}" name="video"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>项目操作描述：</td>
+                    <td class=dotted_bottom_gray width="89%" align=left>
+                        <script id="description" type="text/plain">
+
+                        </script>
+                    </td>
+                </tr>
+                <tr>
+                    <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>项目流程：</td>
+                    <td class=dotted_bottom_gray width="89%" align=left>
+                        <p class="f20 picture-tipc-box"><span class="friend-tipc">*注意</span>：必须上传图片(格式为jpg、jpeg、png、gif)</p>
+                        <div class="upload-picture-module f24">
+                            <div>
+                                <div class="picture-module">
+                                    <input type="file" class="uploadImg uploadSingleImg" name="">
+                                    <img class="upload_img " src="{:show_img_handle($info.thumb_img,false)}" />
+                                    <input type="hidden" class="layer-thumbnail-picture img"  value="{$info.thumb_img}" name="thumb_img"/>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>简介：</td>
+                    <td class=dotted_bottom_gray width="89%" align=left>
+                        <script id="process_text" type="text/plain">
+
+                        </script>
+                    </td>
+                </tr>
+                <tr>
+                    <td class=dotted_bottom_gray height=40 width="11%" align=right>项目注意事项：</td>
+                    <td class=dotted_bottom_gray width="89%" align=left>
+                        <script id="remarks" type="text/plain">
+
+                        </script>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="11%"></td>
+                    <td height=60 width="50%" align=center>
+                        <a href='javascript:void(0);'><input class="button_save_black_4" value="确定" type="button"></a>
+                        &nbsp;&nbsp;
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>
+{/block}
+
+
+{block name="script"}
+<!-- 配置文件 -->
+<script type="text/javascript" src="hui_lib/Ueditor/ueditor.config.js"></script>
+<!-- 编辑器源码文件 -->
+<script type="text/javascript" src="hui_lib/Ueditor/ueditor.all.js"></script>
+<script type="text/javascript" charset="utf-8" src="hui_lib/Ueditor/lang/zh-cn/zh-cn.js"></script>
+<script src="https://cdn.bootcss.com/html5media/1.1.8/html5media.min.js"></script>
+<script type="text/javascript" src="api_common_js/admin/uploadSingleImg.js"></script>
+<!-- 实例化编辑器 -->
+<script type="text/javascript">
+    var config_img = {
+        toolbars: [
+            ['imagenone', 'imageleft', 'imageright', 'imagecenter', 'simpleupload', 'insertimage']
+        ],
+        autoHeightEnabled: true,
+        autoFloatEnabled: true,
+        initialFrameWidth: '100%'
+    };
+
+    var config_text = {
+        toolbars: [
+            [
+                'undo', //撤销
+                'bold', //加粗
+                'indent', //首行缩进
+                'italic', //斜体
+                'underline', //下划线
+                'strikethrough', //删除线
+                'subscript', //下标
+                'fontborder', //字符边框
+                'superscript', //上标
+                'formatmatch', //格式刷
+                'source', //源代码
+                'horizontal', //分隔线
+                'removeformat', //清除格式
+                'fontfamily', //字体
+                'fontsize', //字号
+                'paragraph', //段落格式
+                'spechars', //特殊字符
+                'justifyleft', //居左对齐
+                'justifyright', //居右对齐
+                'justifycenter', //居中对齐
+                'justifyjustify', //两端对齐
+                'forecolor', //字体颜色
+                'backcolor', //背景色
+                'imagecenter', //居中
+                'lineheight', //行间距
+                'customstyle', //自定义标题
+                'autotypeset', //自动排版
+                'touppercase', //字母大写
+                'tolowercase', //字母小写
+                'background', //背景
+                'simpleupload',
+            ]
+        ],
+        autoHeightEnabled: true,
+        autoFloatEnabled: true,
+        initialFrameWidth: '70%'
+    };
+
+    var main_img   = UE.getEditor('main_img',config_img);
+    var process_img= UE.getEditor('process_img',config_img);
+    var detail_img = UE.getEditor('detail_img',config_img);
+
+    var intro      = UE.getEditor('intro',config_text);
+    var remarks    = UE.getEditor('remarks',config_text);
+    var description= UE.getEditor('description',config_text);
+
+</script>
+<script type="text/javascript">
+    $(function(){
+        //项目主图
+        main_img.ready(function() {
+            main_img.setContent($('#mainImg').val());
+        });
+        process_img.ready(function() {
+            process_img.setContent($('#processImg').val());
+        });
+        detail_img.ready(function() {
+            detail_img.setContent($('#detailImg').val());
+        });
+        // 简介
+        intro.ready(function() {
+            intro.setContent("{$info['intro']|raw}");
+        });
+        remarks.ready(function() {
+            remarks.setContent("{$info['remarks']|raw}");
+        });
+        description.ready(function() {
+            description.setContent("{$info['description']|raw}");
+        });
+
+        // 表单认证
+        $('.button_save_black_4').on('click',function(){
+            var postData = $('#form1').serializeObject();
+            // 多图片
+            postData.main_img = '';
+            $.each($('#main_img').find('iframe').contents().find('.view img'),function(){
+                postData.main_img += $(this).attr('src') + ',';
+            });
+            postData.detail_img = '';
+            $.each($('#detail_img').find('iframe').contents().find('.view img'),function(){
+                postData.detail_img += $(this).attr('src') + ',';
+            });
+            postData.process_img = '';
+            $.each($('#process_img').find('iframe').contents().find('.view img'),function(){
+                postData.process_img += $(this).attr('src') + ',';
+            });
+
+            postData.intro = intro.getContent();
+            postData.remarks = remarks.getContent();
+            postData.description = description.getContent();
+
+            var content='';
+            if(!postData.name){
+                content='名称不能为空';
+            }/*else if(!postData.intro){
+                content='简介不能为空';
+            }else if(!postData.description){
+                content='操作描述不能为空';
+            }else if(!postData.thumb_img){
+                content='缩略图不能为空';
+            }else if(!postData.main_img){
+                content='主图不能为空';
+            }else if(!postData.detail_img){
+                content='介绍不能为空';
+            }else if(!postData.process_img){
+                content='项目流程为空';
+            }else if(!postData.video){
+             content='项目视频不能为空';
+            }*/
+            if(content){
+                dialog.error(content);
+                return false;
+            }
+
+            var url = module +'Project/edit';
+            $.post(url,postData,function(msg){
+                dialog.msg(msg,'',function () {
+                    if(msg.status){
+                        // 提交后关闭，然后刷新父窗口
+                        var index = parent.layer.getFrameIndex(window.name);   //先得到当前iframe层的索引
+                        parent.layer.close(index);
+                        //window.parent.location.reload();
+                    }
+                });
+            });
+
+        });
+        // 选择单视频
+        $('body').on('change','.uploadSingleVideo',function () {
+            _this = $(this);
+            uploadsSingleVideoFlag = false;
+            var video = event.target.files[0];
+            var obj=$(this).parent();
+            // 判断是否视频
+            if(!video){
+                return false;
+            }
+
+            // 判断视频格式
+            var imgRegExp=/\.(?:mp4|rmvb|avi|ts)$/;
+            if(!(video.type.indexOf('video')==0 && video.type && imgRegExp.test(video.name)) ){
+                dialog.error('只支持：mp4、rmvb、avi、ts格式的视频');
+                return false;
+            }
+            if( (video.size/1024/1024)>30){
+                dialog.error('视频大小不能超过10M !');
+                return false;
+            }
+
+            var reader = new FileReader();
+            reader.readAsDataURL(video);
+            reader.onload = function(e){
+                var postData = {fileBase64: e.target.result};
+                var videoUrl=e.target.result;
+                $(obj).find('video').attr('src',videoUrl);
+                //提交
+                var type = _this.data('type');
+                if(type == 'notupload'){
+                    $(obj).find('.img').val(videoUrl);
+                    return false;
+                }
+                $.post(controller+"uploadFileToTemp",postData,function(msg){
+
+                    if(msg.status == 1){
+                        uploadsSingleVideoFlag = true;
+                        $(obj).find('.img').val(msg.info);
+                    }else{
+                        dialog.error(msg.info)
+                    }
+                })
+
+            }
+        });
+
+        //返回
+        $('.button_save_black').click(function(){
+            location.href = controller + '/manage';
+        });
+
+    });
+</script>
+{/block}
