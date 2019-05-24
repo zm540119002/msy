@@ -8,12 +8,12 @@
 	<li class="no_data"><img src="https://www.worldview.com.cn/static/common/img/no-cart.png" alt=""></li>
 </section>
 <article class="f24">
-    {if $type}
-       {else /}
-			<section class="header_title separation-line">
-				<a href="javascript:void(0);" class="back_prev_page"></a>
-				<h2 class="f24">购物车</h2>
-			</section>
+	{if $type}
+	{else /}
+		<section class="header_title separation-line">
+			<a href="javascript:void(0);" class="back_prev_page"></a>
+			<h2 class="f24">购物车</h2>
+		</section>
 	{/if}
 	<!--产品列表-->
 	<ul class="cart_goods_list list" id="product-list">
@@ -29,7 +29,6 @@
 				:specification="productInfo.specification"
 				:type="type"
 		></product-select>
-		<a href="javascript:void(0);" @click="test">测试</a>
 	</ul>
 	{if $type}
 	<div class="project_wrapper content_main content-padding">
