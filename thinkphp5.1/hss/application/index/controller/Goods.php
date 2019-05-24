@@ -122,7 +122,7 @@ class Goods extends \common\controller\Base{
                 ],
                 'field'=>[
                     'g.id','g.headline','g.name','g.thumb_img','g.bulk_price','g.sample_price','g.specification','g.minimum_order_quantity',
-                    'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
+                    'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit', 'g.shelf_status',
                 ],
             ];
             $list = $model -> pageQuery($config)->toArray();
@@ -144,13 +144,13 @@ class Goods extends \common\controller\Base{
                     ['c.user_id','=',$userId],
 //                 ['c.create_time','>',time()-7*24*60*60],//只展示7天的数据
                     ['c.status','=',0],
-                    //['g.status','=',0],
+                    ['g.status','=',0],
                 ],'join' => [
                     ['goods g','g.id = c.goods_id','left']
                 ],'field'=>[
                     'c.id as cart_id','c.goods_id','c.num','c.create_time',
                     'g.id','g.headline','g.name','g.thumb_img','g.bulk_price','g.sample_price','g.specification','g.minimum_order_quantity',
-                    'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
+                    'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit','g.shelf_status',
                 ],'order'=>[
                     'c.id'=>'desc'
                 ],

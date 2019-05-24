@@ -15,9 +15,8 @@
 				<h2 class="f24">购物车</h2>
 			</section>
 	{/if}
-
 	<!--产品列表-->
-	<ul class="cart_goods_list list" id="product-select">
+	<ul class="cart_goods_list list" id="product-list">
 		<product-select
 				v-for="productInfo in productList"
 				:key="productInfo.id"
@@ -30,6 +29,7 @@
 				:specification="productInfo.specification"
 				:type="type"
 		></product-select>
+		<a href="javascript:void(0);" @click="test">测试</a>
 	</ul>
 	{if $type}
 	<div class="project_wrapper content_main content-padding">
@@ -80,58 +80,55 @@
 </script><script type="text/javascript">
 	$(function(){
 		let param = {
-			'type':4,
-			'step_quantity':1,
-			'productList':[]
+			type:4,
+			step_quantity:1,
+			productList:[],
+			getJsonListParam:{
+				url:module+'Goods/getCartGoodsList',
+				requestEnd:false,
+				loadTrigger:true,
+				postData:{
+					cartList:localStorage.cartList,
+					pageSize:4,
+					page:1
+				}
+			}
 		};
 		new Vue({
-			el: '#product-select',
+			el: '#product-list',
 			data:function(){
 				return param;
 			},methods:{
-				getJsonListCallBack:function(data){
+				test:function(){
+					let _thisVue = this;
+					console.log(_thisVue.getJsonListParam.loadTrigger);
+					vueVersionGetJsonList(_thisVue);
+				},getJsonListCallBack:function(data){
+					console.log(data);
 					if(data.status==0){
 						dialog.error(data.info);
 						return false;
 					}
-					console.log(this.productList);
+					let _this = this;
 					$.each(data.data.data,function(i,o){
-						console.log(o);
-						this.productList.push(o);
+						_this.productList.push(o);
 					});
 				}
 			},created:function(){
-				var getJsonListParam = {
-					url:module+'Goods/getCartGoodsList',
-					requestEnd:false,
-					loadTrigger:false,
-					postData:{
-						cartList:localStorage.cartList,
-						pageSize:4,
-						page:1
-					},
-					callBack:this.getJsonListCallBack
-				};
-				getJsonList(getJsonListParam);
+				let _thisVue = this;
+				_thisVue.getJsonListParam.callBack = _thisVue.getJsonListCallBack;
+				vueVersionGetJsonList(_thisVue);
 				//下拉加载
 				$(window).on('scroll',function(){
-					if(getJsonListParam.loadTrigger
+					if(_thisVue.getJsonListParam.loadTrigger
 							&& $(document).scrollTop()+$(window).height()+200>$(document).height()){
-						getJsonListParam.loadTrigger = false;
-						getJsonList(getJsonListParam);
+						console.log(_thisVue.getJsonListParam.loadTrigger);
+						vueVersionGetJsonList(_thisVue);
 					}
 				});
 			}
 		});
 	});
-	function getJsonListCallBack(data){
-		console.log(data.data.data);
-		if(data.status==0){
-			dialog.error(data.info);
-			return false;
-		}
-		return data.data.data;
-	}
 </script>
 {if $type}
 <style>
@@ -159,6 +156,7 @@
 		is_selection:1
 	};
 	$(function(){
+		//购物车页面的类型
 		var type = '{$type}';
 		if(type){
 			//初始化零售商品
