@@ -2,6 +2,8 @@
 namespace app\index\controller;
 
 // 前台首页
+use think\Console;
+
 class Index extends \common\controller\Base{
     /**
      * 促销列表，场景列表，商品列表 -ajax
@@ -90,6 +92,7 @@ class Index extends \common\controller\Base{
             array_push($unlockingFooterCart['menu'][2]['class'],'group_btn30');
             $this->assign('unlockingFooterCart',json_encode($unlockingFooterCart));
             $type = input('type');
+            echo $type;
             $this->assign('type',$type);
             if($type){
                 // 底部菜单，见配置文件custom.footer_menu
