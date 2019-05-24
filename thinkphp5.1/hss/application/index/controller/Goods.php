@@ -109,39 +109,67 @@ class Goods extends \common\controller\Base{
         if(!request()->isGet()){
             return errorMsg('请求方式错误');
         }
-        $cartList = input('get.cartList');
-        $goodsList =  json_decode($cartList,true)['goodsList'];
-        $goodsIds = array_column($goodsList,'goods_id');
-        $model = new \app\index\model\Goods();
-        $config=[
-            'where'=>[
-                ['g.status', '=', 0],
-                ['g.id', 'in', $goodsIds],
-            ],
-            'field'=>[
-                'g.id','g.headline','g.name','g.thumb_img','g.bulk_price','g.sample_price','g.specification','g.minimum_order_quantity',
-                'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
-            ],
-        ];
-        $list = $model -> pageQuery($config)->toArray();
-        $showGoodsList =  $list['data'];
-        foreach ($showGoodsList as $i =>&$showGoods){
-            foreach($goodsList as $j=>&$goods){
-                if($showGoods['id'] == $goods['goods_id'] ){
-                    $showGoodsList[$i]['num'] = $goods['num'];
-                    $showGoodsList[$i]['buy_type'] = $goods['buy_type'];
-                    $showGoodsList[$i]['cart_id'] = $i+1;
+        $user = checkLogin();
+        if(!$user){
+            $cartList = input('get.cartList');
+            $goodsList =  json_decode($cartList,true)['goodsList'];
+            $goodsIds = array_column($goodsList,'goods_id');
+            $model = new \app\index\model\Goods();
+            $config=[
+                'where'=>[
+                    ['g.status', '=', 0],
+                    ['g.id', 'in', $goodsIds],
+                ],
+                'field'=>[
+                    'g.id','g.headline','g.name','g.thumb_img','g.bulk_price','g.sample_price','g.specification','g.minimum_order_quantity',
+                    'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
+                ],
+            ];
+            $list = $model -> pageQuery($config)->toArray();
+            $showGoodsList =  $list['data'];
+            foreach ($showGoodsList as $i =>&$showGoods){
+                foreach($goodsList as $j=>&$goods){
+                    if($showGoods['id'] == $goods['goods_id'] ){
+                        $showGoodsList[$i]['num'] = $goods['num'];
+                        $showGoodsList[$i]['cart_id'] = $i+1;
+                    }
                 }
             }
-        }
-        $currentPage = input('get.page/d');
-        $this->assign('currentPage',$currentPage);
-        $this->assign('list',$showGoodsList);
-        if(isset($_GET['pageType'])){
-            if($_GET['pageType'] == 'index' ){
-                return $this->fetch('cart/list_tpl');
+            $list['data']=$showGoodsList;
+        }else{
+            $userId = $user['id'];
+            $model = new \app\index\model\Cart();
+            $config=[
+                'where'=>[
+                    ['c.user_id','=',$userId],
+//                 ['c.create_time','>',time()-7*24*60*60],//只展示7天的数据
+                    ['c.status','=',0],
+                    //['g.status','=',0],
+                ],'join' => [
+                    ['goods g','g.id = c.goods_id','left']
+                ],'field'=>[
+                    'c.id as cart_id','c.goods_id','c.num','c.create_time',
+                    'g.id','g.headline','g.name','g.thumb_img','g.bulk_price','g.sample_price','g.specification','g.minimum_order_quantity',
+                    'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
+                ],'order'=>[
+                    'c.id'=>'desc'
+                ],
+            ];
+            $keyword = input('get.keyword','');
+            if($keyword) {
+                $config['where'][] = ['g.name', 'like', '%' . trim($keyword) . '%'];
             }
+            $list = $model -> pageQuery($config);
         }
+        $this->successMsg('成功',$list);
+//        $currentPage = input('get.page/d');
+//        $this->assign('currentPage',$currentPage);
+//        $this->assign('list',$showGoodsList);
+//        if(isset($_GET['pageType'])){
+//            if($_GET['pageType'] == 'index' ){
+//                return $this->fetch('cart/list_tpl');
+//            }
+//        }
     }
     /***
      * 获取各关联表下的商品 -通用方法
@@ -213,6 +241,8 @@ class Goods extends \common\controller\Base{
             $info['main_img'] = explode(',',(string)$info['main_img']);
             $info['detail_img'] = explode(',',(string)$info['detail_img']);
             $info['tag'] = explode(',',(string)$info['tag']);
+            //$info['purchase_specification_description'] = '10盒/箱 按箱采购'; // 假数据
+            
             $this->assign('info',$info);
             $this->assign('goodsInfo',json_encode([
                 'goods_id'=>$info['id'],
@@ -251,10 +281,11 @@ class Goods extends \common\controller\Base{
                 }
             }
             Cart::getCartTotalNum();
-            $unlockingFooterCart = unlockingFooterCartConfigTest([0,2,1]);
+            $unlockingFooterCart = unlockingFooterCartConfigTest([0,2,1,3]);
             array_push($unlockingFooterCart['menu'][0]['class'],'group_btn30');
             array_push($unlockingFooterCart['menu'][1]['class'],'group_btn30');
             array_push($unlockingFooterCart['menu'][2]['class'],'group_btn30');
+            array_push($unlockingFooterCart['menu'][3]['class'],'group_btn30');
             $this->assign('unlockingFooterCart',json_encode($unlockingFooterCart));
             return $this->fetch();
         }
