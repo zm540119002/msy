@@ -36,7 +36,7 @@
 </style>
 <!-- 产品选择器 -->
 <template id="product_select_tpl">
-    <li v-if="type==0">
+    <li v-if="type==5">
         <div class="product-select">
             <div class="columns_flex l-r-sides">
                 <p>
@@ -181,7 +181,6 @@
                 product_src: {type: String,default: ''},
                 quota_quantity: {type: Number,default: 1},
                 type: {type: Number,default: 1},
-                add_cart_type: {type: Number,default: 1},
                 deal_price: {type: Number,required: true},
                 init_quantity: {type: Number,default: 0},
                 step_quantity: {type: Number,default: 1},
