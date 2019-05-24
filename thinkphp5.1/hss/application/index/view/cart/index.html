@@ -89,6 +89,17 @@
 				{message:"Test three",id:"3"}
 			]
 		};
+		var getJsonListParam = {
+			url:module+'Goods/getCartGoodsList',
+			requestEnd:false,
+			loadTrigger:false,
+			postData:{
+				cartList:localStorage.cartList,
+				pageSize:4,
+				page:1
+			},
+			callBack:this.getJsonListCallBack
+		};
 		new Vue({
 			el: '#product-select',
 			data:function(){
@@ -106,26 +117,15 @@
 					});
 				}
 			},created:function(){
-				var getJsonListParam = {
-					url:module+'Goods/getCartGoodsList',
-					requestEnd:false,
-					loadTrigger:false,
-					postData:{
-						cartList:localStorage.cartList,
-						pageSize:4,
-						page:1
-					},
-					callBack:this.getJsonListCallBack
-				};
 				getJsonList(getJsonListParam);
-				//下拉加载
-				$(window).on('scroll',function(){
-					if(getJsonListParam.loadTrigger
-							&& $(document).scrollTop()+$(window).height()+200>$(document).height()){
-						getJsonListParam.loadTrigger = false;
-						getJsonList(getJsonListParam);
-					}
-				});
+			}
+		});
+		//下拉加载
+		$(window).on('scroll',function(){
+			if(getJsonListParam.loadTrigger
+					&& $(document).scrollTop()+$(window).height()+200>$(document).height()){
+				getJsonListParam.loadTrigger = false;
+				getJsonList(getJsonListParam);
 			}
 		});
 	});
