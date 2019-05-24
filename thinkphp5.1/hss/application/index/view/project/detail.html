@@ -67,14 +67,17 @@
 		<div class="content-padding description">
 
 		</div>
+
+		{notempty name="$info.process"}
 		<div class="content-padding">
 			<p class="content-label">项目流程</p>
 			<section class="slider_banner">
 				<div class="swiper-container swiper-container-horizontal swiper-container-ios">
 					<div class="swiper-wrapper">
-						{volist name="$info.process_img" id="vo"}
-						<div class="swiper-slide swiper-slide-active">
-							<img src="{:show_img_handle($vo)}" alt="" class="common_default_img">
+						{volist name="$info.process" id="vo"}
+						<div class="swiper-slide swiper-slide-active" style="text-align: left;margin-right: 10px;">
+							<img src="{:show_img_handle($vo.img)}" alt="" class="common_default_img">
+							{$vo.desc}
 						</div>
 						{/volist}
 					</div>
@@ -85,25 +88,30 @@
 						<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 4"></span>
 					</div>
 				</div>
-
-
 			</section>
 		</div>
+		{/notempty}
+
+		{notempty name="$info.recommend_goods"}
 		<div class="content-padding">
 			<p class="content-label">推荐搭配居家产品</p>
 			<ul class="list columns_flex flex-both-side goods-content-list">
+				{volist name="$info.recommend_goods" id="vo"}
 				<li>
-					<a>
-						<img src="" alt="">
+					<a href="{:url('Index/Goods/detail',['id'=>$vo.id])}">
+						<img src="{:show_img_handle($vo.thumb_img)}" alt="{$vo.headline}">
 					</a>
-					<p>1111111</p>
-					<p>规格</p>
+					<p>{$vo.headline}</p>
+					<p>规格：{$vo.specification}</p>
 				</li>
+				{/volist}
 			</ul>
 		</div>
+		{/notempty}
 		<div class="content-padding">
 			<p class="remarks"></p>
 		</div>
+
 	</section>
 </article>
 {/block}
@@ -148,9 +156,10 @@
 		relation:'{$relation}'
 	};
 	$(function(){
+
 		//初始化场景商品页面
 		postData.id = '{$info.id}';
-		getJsonList(config,postData);
+		//getJsonList(config,postData);
 	});
 	$(function(){
 		var id = '{$info.id}';
@@ -175,7 +184,8 @@
 		$('.detail-nav li').on('click',function(){
 			$(this).addClass('current').siblings().removeClass('current');
 			$('.project_item').hide().eq($(this).index()).show();
-		})
+		});
+
 	});
 </script>
 {/block}

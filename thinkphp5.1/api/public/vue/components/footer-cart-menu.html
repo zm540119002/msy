@@ -38,11 +38,7 @@
 <template id="product_select_tpl">
     <li v-if="type==0">
         <div class="product-select">
-            <div class="columns_flex l-r-sides">
-                <p>
-                    <span class="red deal_price">￥{{deal_price}}</span>
-                </p>
-            </div>
+            <div class="columns_flex l-r-sides"><p><span class="red deal_price">￥{{deal_price}}</span></p></div>
             <div class="columns_flex l-r-sides">
                 <div class="left">
                     <a class="p_img" :href="'/index/Goods/detail/id/' + product_id">
@@ -65,11 +61,7 @@
         </div>
     </li><li v-else-if="type==1">
         <div class="product-select">
-            <div class="columns_flex l-r-sides">
-                <p>
-                    <span class="red deal_price">￥{{deal_price}}</span>
-                </p>
-            </div>
+            <div class="columns_flex l-r-sides"><p><span class="red deal_price">￥{{deal_price}}</span></p></div>
             <div class="columns_flex l-r-sides">
                 <div class="left">
                     <a class="p_img" :href="'/index/Goods/detail/id/' + product_id">
@@ -95,9 +87,7 @@
     </li><li v-else-if="type==2">
         <div class="product-select">
             <div class="columns_flex l-r-sides">
-                <p>
-                    <span class="red deal_price">￥{{deal_price}}</span>
-                </p>
+                <p><span class="red deal_price">￥{{deal_price}}</span></p>
                 <p v-if="display_quota">样品购买限额：<span class="quota">{{quota_quantity}}</span></p>
             </div>
             <div class="columns_flex l-r-sides">
@@ -140,9 +130,7 @@
                     </div>
                 </div>
             </div>
-            <div class="product_name">
-                <p class="two-line-apostrophe">{{product_name}}</p>
-            </div>
+            <div class="product_name"><p class="two-line-apostrophe">{{product_name}}</p></div>
         </div>
     </li><li v-else-if="type==4"><!--用于购物车-->
         <input type="checkbox" class="item_checkbox check_item" >
@@ -152,9 +140,7 @@
         <div class="cart_list_r">
             <p>{{product_name}}</p>
             <div>商品规格：<span>{{specification}}</span></div>
-            <div class="commodity_purchaser f24">
-                <span class="pink">￥{{deal_price}}</span>
-            </div>
+            <div class="commodity_purchaser f24"><span class="pink">￥{{deal_price}}</span></div>
             <div class="purchase_goods_num cart_goods_operate">
                 <div class="quantity_wrapper selected-number">
                     <a href="javascript:void(0);" class="add_cart reduce" @click="reduceCart" :data-jump_url="add_cart_url">-</a>
@@ -250,8 +236,6 @@
                             num: this.step_quantity
                         }]
                     };
-                    console.log(postData);
-                    return;
                     let _thisJquery = $(event.currentTarget);
                     login_success_callback_private = function(){
                         _thisJquery.click()

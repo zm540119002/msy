@@ -88,17 +88,17 @@
 		url:module+'Goods/getRelationGoods',
 		requestEnd:false,
 		loadTrigger:false,
-		currentPage:1,
+		postData:{
+			id:'{$info.id}',
+			relation:'{$relation}',
+			pageSize:10,
+			page:1
+		},
 		callBack:getJsonListCallBack
-	};
-	var postData = {
-		pageSize:10,
-		relation:'{$relation}'
 	};
 	$(function(){
 		//初始化场景商品页面
-		postData.id = '{$info.id}';
-		getJsonList(config,postData);
+		getJsonList(config);
 	});
 	$(function(){
 		var id = '{$info.id}';
