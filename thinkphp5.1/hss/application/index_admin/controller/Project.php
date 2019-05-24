@@ -35,6 +35,7 @@ class Project extends Base {
                 $info['intro'] = htmlspecialchars_decode($info['intro']);
                 $info['remarks'] = htmlspecialchars_decode($info['remarks']);
                 $info['description'] = htmlspecialchars_decode($info['description']);
+                $info['recommend_goods_num'] = array_sum(explode(',',$info['recommend_goods']));
 
                 $this->assign('info',$info);
             }
@@ -329,6 +330,26 @@ class Project extends Base {
             return errorMsg('失败');
         }
         return successMsg('成功');
+    }
+
+    // 关联推荐商品
+    public function recommendGoods(){
+        // 暂时先全部写在商品分类里
+        if($id = input('id/d')){
+            $this->assign('id',$id);
+        }
+
+        $model = new \app\index_admin\model\GoodsCategory();
+        $config = [
+            'where'=>[
+                'status'=>0
+            ]
+        ];
+
+        $allCategoryList = $model->getList($config);
+        $this->assign('allCategoryList',$allCategoryList);
+
+        return $this->fetch();
     }
 
 
