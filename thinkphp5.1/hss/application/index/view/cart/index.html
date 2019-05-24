@@ -45,7 +45,7 @@
 		var vm_product_select = new Vue({
 			el: '#product-select',
 			data:function(){
-				return param;
+				return product_select_param;
 			}
 		});
 		//数据库里购物车里商品数量
@@ -73,11 +73,11 @@
 <script type="text/javascript">
 	function getJsonListCallBack(data){
 		console.log(data.data.data);
-		console.log(vm_product_select);
 		if(data.status==0){
 			dialog.error(data.info);
 			return false;
 		}
+		return data.data.data;
 	}
 	var getJsonListParam = {
 		url:module+'Cart/getList',
