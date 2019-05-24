@@ -120,8 +120,9 @@
 				vueVersionGetJsonList(_thisVue);
 				//下拉加载
 				$(window).on('scroll',function(){
-					if(!_thisVue.getJsonListParam.requestEnd
+					if(_thisVue.getJsonListParam.loadTrigger
 							&& $(document).scrollTop()+$(window).height()+200>$(document).height()){
+						_thisVue.getJsonListParam.loadTrigger = false;
 						vueVersionGetJsonList(_thisVue);
 					}
 				});

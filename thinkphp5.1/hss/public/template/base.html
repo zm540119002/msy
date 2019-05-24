@@ -60,6 +60,7 @@
         }
         //请求结束标志
         if(vueObj.getJsonListParam.requestEnd){
+            vueObj.getJsonListParam.loadTrigger = false;
             return false;
         }
         $.ajax({
@@ -75,12 +76,10 @@
             },
             success: function(data){
                 $('.loading').hide();
+                vueObj.getJsonListParam.loadTrigger = true;
                 if(data.data && (data.data.data.length<vueObj.getJsonListParam.postData.pageSize)){
-                    console.log(data.data.length);
                     vueObj.getJsonListParam.requestEnd = true;
                 }
-                console.log(data.data.length);
-                console.log(vueObj.getJsonListParam.requestEnd);
                 vueObj.getJsonListParam.postData.page ++;
                 vueObj.getJsonListParam.callBack?vueObj.getJsonListParam.callBack(data):vueVersionGetJsonListDefaultCallBack(data);
             }
