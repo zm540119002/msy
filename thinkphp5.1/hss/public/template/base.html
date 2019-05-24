@@ -54,13 +54,12 @@
     }
     function vueVersionGetJsonList(vueObj){
         //提交路径
-        vueObj.getJsonListParam.url = vueObj.getJsonListParam.url?vueObj.getJsonListParam.url:action;
-        //要提交的数据
-        vueObj.getJsonListParam.postData.page = vueObj.getJsonListParam.postData.page ? vueObj.getJsonListParam.postData.page : 1;
-        vueObj.getJsonListParam.postData.pageSize = vueObj.getJsonListParam.postData.pageSize ? vueObj.getJsonListParam.postData.pageSize:4;
+        if(!vueObj.getJsonListParam.url){
+            dialog.error('缺少url！');
+            return false;
+        }
         //请求结束标志
         if(vueObj.getJsonListParam.requestEnd){
-            vueObj.getJsonListParam.loadTrigger = true;
             return false;
         }
         $.ajax({
@@ -80,7 +79,6 @@
                     vueObj.getJsonListParam.requestEnd = true;
                 }
                 vueObj.getJsonListParam.postData.page ++;
-                vueObj.getJsonListParam.loadTrigger = true;
                 vueObj.getJsonListParam.callBack?vueObj.getJsonListParam.callBack(data):vueVersionGetJsonListDefaultCallBack(data);
             }
         });
