@@ -91,6 +91,10 @@ class Index extends \common\controller\Base{
             $this->assign('unlockingFooterCart',json_encode($unlockingFooterCart));
             $type = input('type');
             $this->assign('type',$type);
+            if($type){
+                // 底部菜单，见配置文件custom.footer_menu
+                $this->assign('currentPage',request()->controller().'/'.request()->action());
+            }
             return $this->fetch('cart/index');
         }
     }
