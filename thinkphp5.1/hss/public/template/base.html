@@ -126,8 +126,9 @@
             $.each(param.postData.goodsList,function(i,o){
                 param.componentFooterCartMenu.cart_num += o.num;
             });
+            dialog.success('加入购物车成功！');
+            return false;
         }
-        dialog.success('加入购物车成功！');
     }
     //删除cookie里的购物车商品列表
     function delLocalStorageCartList(goodsList){
