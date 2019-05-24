@@ -10,10 +10,11 @@
     var user_id = "{$user.id}";
     /**获取json格式列表数据
      */
-    function getJsonListDefaultCallBack(data){
+    function vueVersionGetJsonListDefaultCallBack(data){
         console.log(data);
     }
-    function vueVersionJsonList(vueObj){
+    function vueVersionGetJsonList(vueObj){
+        console.log(vueObj.getJsonListParam);
         //提交路径
         vueObj.getJsonListParam.url = vueObj.getJsonListParam.url?vueObj.getJsonListParam.url:action;
         //要提交的数据
@@ -43,7 +44,7 @@
                 }
                 vueObj.getJsonListParam.postData.page ++;
                 vueObj.getJsonListParam.loadTrigger = true;
-                vueObj.getJsonListParam.callBack?vueObj.getJsonListParam.callBack(data):getJsonListDefaultCallBack(data);
+                vueObj.getJsonListParam.callBack?vueObj.getJsonListParam.callBack(data):vueVersionGetJsonListDefaultCallBack(data);
             }
         });
     }

@@ -111,12 +111,12 @@
 			},created:function(){
 				let _thisVue = this;
 				_thisVue.getJsonListParam.callBack = _thisVue.getJsonListCallBack;
-				vueVersionJsonList(_thisVue);
+				vueVersionGetJsonList(_thisVue);
 				//下拉加载
 				$(window).on('scroll',function(){
 					if(_thisVue.getJsonListParam.loadTrigger
 							&& $(document).scrollTop()+$(window).height()+200>$(document).height()){
-						vueVersionJsonList(_thisVue);
+						vueVersionGetJsonList(_thisVue);
 					}
 				});
 			}
