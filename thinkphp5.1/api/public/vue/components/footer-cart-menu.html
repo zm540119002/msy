@@ -129,7 +129,7 @@
             <div class="product_name"><p class="two-line-apostrophe">{{product_name}}</p></div>
         </div>
     </li><li v-else-if="type==4"><!--用于购物车-->
-        <input type="checkbox" class="item_checkbox check_item" v-model='checked' :click='checkItem' />
+        <input type="checkbox" class="item_checkbox check_item" v-model='checked' @click='checkItem' />
         <a href="" class="cart_goods_img" :href="'/index/Goods/detail/id/' + product_id">
             <img class="left common_default_img" :src="product_src?('public_uploads/' + product_src):('api_common_img/default/no_pic_100.jpg') " alt="">
         </a>
@@ -314,8 +314,7 @@
                 {{menu.name}}
                 <!-- 全选 -->
                 <div v-if="menu.class.indexOf('checked_all')!==-1" class="checked_all">
-                    <input type="checkbox" class="check_all" v-model='checked' :click='checkAll' />
-                    <input type="checkbox" class="check_all" />
+                    <input type="checkbox" class="check_all" v-model='checked' @click='checkAll' />
                     <label for="" class="">全选</label>
                 </div>
                 <!-- 总金额 -->
@@ -378,7 +377,7 @@
                     total_amount_init:function (param) {
                         this.total_amount += param.subtotal_amount;
                     },checkAll:function(){
-                        this.checked = !this.checked;
+//                        this.checked = !this.checked;
                     },total_amount_calculate:function (param) {
                         this.total_amount += param.deal_price * param.increment_buy_quantity;
                     },jump_url:function (event) {
