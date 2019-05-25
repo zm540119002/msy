@@ -135,7 +135,7 @@
             }else if(param.data.data.code == '1001'){ //登录
                 if(param.clickObj.attr('class').indexOf('add_cart')!==-1 && param.postData){ //加入购物车
                     editLocalStorageCartList(param);
-                }else if(param.clickObj.attr('class').indexOf('add_cart')!==-1 && param.postData){
+                }else if(param.clickObj.attr('class').indexOf('delete_cart')!==-1 && param.postData){
                     console.log(125);
                     return false;
                     editLocalStorageCartList(param);
