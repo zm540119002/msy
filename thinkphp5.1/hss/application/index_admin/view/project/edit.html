@@ -412,12 +412,17 @@
 
         });
         //上传单图片和描述
-    $('body').on('change','.uploadImgDescribe',function () {
-        var file = $(this);
-        fileList = $(this).get(0).files;
-        num=file.data('num');//限制个数
-        uploadPicDescribe(fileList[0],0,fileList.length);
-    });
+        $('body').on('change','.uploadImgDescribe',function () {
+            var file = $(this);
+            fileList = $(this).get(0).files;
+            num=file.data('num');//限制个数
+            uploadPicDescribe(fileList[0],0,fileList.length);
+        });
+        //删除
+        $('body').on('click','.delete-picture',function(){
+            $(this).parents('li').remove();
+            //$('.company-video').data('src','');
+        });
 });
 //上传图片描述
 function uploadPicDescribe(fil,i,len){
