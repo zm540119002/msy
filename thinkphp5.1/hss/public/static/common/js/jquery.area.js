@@ -583,6 +583,7 @@ var areaObject={
 		//expressArea += district[p][c][d];
 		if(pType==1){
 			expressArea += district[p][c];
+			console.log(expressArea);
 		}else{
 			expressArea += district[p][c][d];
 		}
