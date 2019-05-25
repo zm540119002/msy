@@ -244,6 +244,8 @@
         $.each(goodsListOld,function(i,o){
             let find = false;
             $.each(param.postData.goodsList,function(ii,oo){
+                console.log(123);
+                return false;
                 if(o.goods_id == oo.goods_id){
                     find = true;
                 }
