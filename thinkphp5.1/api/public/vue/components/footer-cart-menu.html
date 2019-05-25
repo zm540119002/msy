@@ -129,7 +129,7 @@
             <div class="product_name"><p class="two-line-apostrophe">{{product_name}}</p></div>
         </div>
     </li><li v-else-if="type==4"><!--用于购物车-->
-        <input type="checkbox" class="item_checkbox check_item" v-model='checked' :click='checkItem' />
+        <input type="checkbox" class="item_checkbox check_item" v-model='checked' />
         <a href="" class="cart_goods_img" :href="'/index/Goods/detail/id/' + product_id">
             <img class="left common_default_img" :src="product_src?('public_uploads/' + product_src):('api_common_img/default/no_pic_100.jpg') " alt="">
         </a>
@@ -146,6 +146,10 @@
                 <a href="javascript:void(0);" class="delete_order goodsDel delete_cart" @click="delCart" :data-jump_url="del_cart_url">删除</a>
             </div>
         </div>
+    </li>
+    <li v-else-if="type==5" class="no_data">
+        {{num}}
+        <img src="https://hss.meishangyun.com/static/common/img/no-news.png" alt="">
     </li>
 </template>
 <script type="text/javascript">
@@ -164,7 +168,7 @@
                 init_quantity: {type: Number,default: 1},
                 step_quantity: {type: Number,default: 1},
                 display_quota: {type: Boolean,default: false},
-                checked: {type: Boolean,default: true},
+                item_checked: {type: Boolean,default: false},
                 productInfo: {type: Array,default:function(){
                     let arr = [];
                     arr['eg'] = '默认值示范';
@@ -175,6 +179,7 @@
                     buy_quantity:this.init_quantity,
                     buy_quantity_reduce_judge:true,
                     subtotal_amount:0,
+                    checked:this.item_checked,
                     add_cart_url:'{:url("Cart/addCart")}',
                     del_cart_url:'{:url("Cart/del")}'
                 };
@@ -299,6 +304,13 @@
                     },
                     deep: false,
                     immediate: true
+                },checked: {
+                    handler(newVal, oldVal) {
+                        console.log(newVal);
+                        console.log(oldVal);
+                    },
+                    deep: false,
+                    immediate: true
                 }
             }
         });
@@ -312,7 +324,7 @@
                 {{menu.name}}
                 <!-- 全选 -->
                 <div v-if="menu.class.indexOf('checked_all')!==-1" class="checked_all">
-                    <input type="checkbox" class="check_all">
+                    <input type="checkbox" class="check_all" v-model='checked' />
                     <label for="" class="">全选</label>
                 </div>
                 <!-- 总金额 -->
@@ -358,6 +370,7 @@
                 template:'#footer-cart-menu_tpl',
                 props: {
                     cart_init_num: {type: Number,default: 0},
+                    all_checked: {type: Boolean,default: true},
                     buy_now_call_back: {type: Function,default: function(param){
                         console.log(param);
                     }}
@@ -365,6 +378,7 @@
                     return {
                         total_amount:0,
                         cart_num:this.cart_init_num,
+                        checked:this.all_checked,
                         menus: unlockingFooterCart.menu,
                         postData:{
                             goodsList:[]

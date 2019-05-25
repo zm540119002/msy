@@ -55,7 +55,6 @@ class Goods extends \common\controller\Base{
      * 查出产商相关产品 分页查询
      */
     public function getList(){
-
         if(!request()->isGet()){
             return errorMsg('请求方式错误');
         }
@@ -93,7 +92,6 @@ class Goods extends \common\controller\Base{
         $this->assign('list',$list);
 
         if(isset($_GET['pageType'])){
-
             // 排列的数量不同
             switch($_GET['pageType']){
                 case 'index': return $this->fetch('list_goods_two_column_tpl'); break;  // 一行两个
