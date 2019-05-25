@@ -582,8 +582,7 @@ var areaObject={
 		clockArea();
 		//expressArea += district[p][c][d];
 		if(pType==1){
-			expressArea += district[p][c];
-			console.log(expressArea);
+			expressArea=expressArea;
 		}else{
 			expressArea += district[p][c][d];
 		}
