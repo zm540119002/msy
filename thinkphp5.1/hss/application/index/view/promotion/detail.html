@@ -9,7 +9,7 @@
 			<span>推荐套餐包含产品(产品数量可增加套餐价格将调整)</span>
 		</div>
 		<!--产品列表-->
-		<ul class="goods_list list" id="product-select">
+		<ul class="goods_list list" id="product-list">
 			<product-select
 					v-for="productInfo in productList"
 					:key="productInfo.id"
@@ -45,23 +45,6 @@
 	></footer-cart-menu>
 </div>
 <script type="text/javascript">
-	function getJsonListCallBack(data){
-		if(data.status==0){
-			dialog.error(data.info);
-			return false;
-		}
-		let param = {
-			'init_quantity':1,
-			'step_quantity':1,
-			'productList':data.data
-		};
-		new Vue({
-			el: '#product-select',
-			data:function(){
-				return param;
-			}
-		});
-	}
 	$(function(){
 		//数据库里购物车里商品数量
 		let total_num = parseInt("{$total_num|default=0}");
@@ -82,45 +65,62 @@
 			}
 		});
 	});
+</script><script type="text/javascript">
+	$(function(){
+		let param = {
+			init_quantity:1,
+			step_quantity:1,
+			productList:[],
+			getJsonListParam:{
+				url:module+'Goods/getPromotionGoods',
+				requestEnd:false,
+				loadTrigger:true,
+				postData:{
+					id:'{$info.id}',
+					pageSize:4,
+					page:1
+				}
+			}
+		};
+		new Vue({
+			el: '#product-list',
+			data:function(){
+				return param;
+			},methods:{
+				test:function(){
+					let _thisVue = this;
+					vueVersionGetJsonList(_thisVue);
+				},getJsonListCallBack:function(data){
+					console.log(data);
+					if(data.status==0){
+						dialog.error(data.info);
+						return false;
+					}
+					let _this = this;
+					$.each(data.data.data,function(i,o){
+						_this.productList.push(o);
+					});
+				}
+			},created:function(){
+				let _thisVue = this;
+				_thisVue.getJsonListParam.callBack = _thisVue.getJsonListCallBack;
+				vueVersionGetJsonList(_thisVue);
+				//下拉加载
+				$(window).on('scroll',function(){
+					if(_thisVue.getJsonListParam.loadTrigger
+							&& $(document).scrollTop()+$(window).height()+200>$(document).height()){
+						//第一次触发后，先停止触发，去其他地方重新放开
+						_thisVue.getJsonListParam.loadTrigger = false;
+						vueVersionGetJsonList(_thisVue);
+					}
+				});
+			}
+		});
+	});
 </script>
 {/block}
 {block name="script"}
 <script type="text/javascript" src="api_common_js/swiper.min.js"></script>
-<script type="text/javascript">
-	function getJsonListCallBack(data){
-		if(data.status==0){
-			dialog.error(data.info);
-			return false;
-		}
-		param = {
-			'type':0,
-			'init_quantity':1,
-			'step_quantity':1,
-			'productList':data.data.data
-		};
-		new Vue({
-			el: '#product-select',
-			data:function(){
-				return param;
-			}
-		});
-	}
-	$(function(){
-		// 初始化场景商品页面
-		var config = {
-			url:module+'Goods/getPromotionGoods',
-			requestEnd:false,
-			loadTrigger:false,
-			postData:{
-				id:'{$info.id}',
-				pageSize:10,
-				page:1
-			},
-			callBack:getJsonListCallBack
-		};
-		getJsonList(config);
-	});
-</script>
 <script type="text/javascript">
 	$(function(){
 		var date=getWeek();
