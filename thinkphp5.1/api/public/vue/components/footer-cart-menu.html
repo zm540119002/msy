@@ -202,12 +202,13 @@
                         this.buy_quantity += this.step_quantity;
                     }
                 },reduceCart: function (event) {
+                    console.log(this.buy_quantity);
+                    console.log(this.step_quantity);
                     if(this.buy_quantity_reduce_judge && this.buy_quantity>1){
                         this.buy_quantity_reduce_judge = false;
                         this.buy_quantity -= this.step_quantity;
                     }else{
-                        console.log(this.buy_quantity);
-                        console.log(this.step_quantity);
+                        console.log(123);
                         return false;
                     }
                     let postData = {
