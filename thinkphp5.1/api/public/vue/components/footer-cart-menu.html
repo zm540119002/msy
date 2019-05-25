@@ -178,6 +178,7 @@
                     buy_quantity:this.init_quantity,
                     buy_quantity_reduce_judge:true,
                     subtotal_amount:0,
+                    checked:this.item_checked,
                     add_cart_url:'{:url("Cart/addCart")}',
                     del_cart_url:'{:url("Cart/del")}'
                 };
@@ -302,7 +303,7 @@
                     },
                     deep: false,
                     immediate: true
-                },item_checked: {
+                },checked: {
                     handler(newVal, oldVal) {
                         console.log(newVal);
                         console.log(oldVal);
