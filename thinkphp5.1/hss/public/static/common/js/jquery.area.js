@@ -555,6 +555,7 @@ var areaObject={
 		areaCont = "";
 		var lists=$('#areaList');
 		if(lists.hasClass('provinces')){
+			alert(1);
 			for (var k=0; k<district[p][c].length; k++) {
 				areaCont += '<li onClick="">' + district[p][c][k] + '</li>';
 			}
