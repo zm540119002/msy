@@ -81,18 +81,30 @@
         </div>
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-2">项目流程：</label>
-            <div class="formControls col-xs-8 col-sm-9">
+            <div class="formControls col-xs-8 col-sm-9 process" style="display: -webkit-flex;flex-wrap: wrap;">
                 <div class="upload-picture-module f24">
-                    <div>
-                        <div class="picture-module">
-                            <input type="file" class="uploadImg uploadSingleImg" name="">
-                            <img class="upload_img " src="{:show_img_handle($info.thumb_img,false)}" />
-                            <input type="hidden" class="layer-thumbnail-picture img"  value="{$info.thumb_img}" name="thumb_img"/>
-                        </div>
+                    <div class="picture-module">
+                        <input type="file" class="uploadImg uploadSingleImg" name="">
+                        <img class="upload_img " src="{:show_img_handle($info.process,false)}" />
+                        <input type="hidden" class="layer-thumbnail-picture img"  value="{$info.thumb_img}" name="process_img"/>
+                    </div>
+                    <div style="width: 200px;">
+                        <textarea name="process_text" cols="" rows="" class="textarea" style="height: 100%;" placeholder="说点什么..." datatype="*10-100" dragonfly="true" nullmsg="备注不能为空！"></textarea>
+                    </div>
+                </div>
+                <div class="upload-picture-module f24">
+                    <div class="picture-module">
+                        <input type="file" class="uploadImg uploadSingleImg" name="">
+                        <img class="upload_img " src="{:show_img_handle($info.thumb_img,false)}" />
+                        <input type="hidden" class="layer-thumbnail-picture img"  value="{$info.thumb_img}" name="process_img"/>
+                    </div>
+                    <div style="width: 200px;">
+                        <textarea name="process_text" cols="" rows="" class="textarea" style="height: 100%;" placeholder="说点什么..." datatype="*10-100" dragonfly="true" nullmsg="备注不能为空！"></textarea>
                     </div>
                 </div>
             </div>
         </div>
+
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-2">项目注意事项：</label>
             <div class="formControls col-xs-8 col-sm-9">
@@ -129,7 +141,6 @@
 <script type="text/javascript" src="hui_lib/Ueditor/ueditor.all.js"></script>
 <script type="text/javascript" charset="utf-8" src="hui_lib/Ueditor/lang/zh-cn/zh-cn.js"></script>
 <script src="https://cdn.bootcss.com/html5media/1.1.8/html5media.min.js"></script>
-<script type="text/javascript" src="api_common_js/admin/uploadSingleImg.js"></script>
 <!-- 实例化编辑器 -->
 <script type="text/javascript">
     var config_img = {
@@ -318,6 +329,56 @@
                     }
                 })
 
+            }
+        });
+
+        // 选择上传的单图片
+        $('body').on('change','.uploadSingleImg',function () {
+            var _this=$(this);
+            uploadsSingleImgFlag = false;
+            var img = event.target.files[0];
+            var uploadfileSize=img.size/1024/1024;
+            var obj=$(this).parent();
+            // 判断是否图片
+            if(!img){
+                return false;
+            }
+
+            // 判断图片格式
+            var imgRegExp=/\.(?:jpg|jpeg|png|gif)$/;
+            if(!(img.type.indexOf('image')==0 && img.type && imgRegExp.test(img.name)) ){
+                dialog.error('请上传：jpg、jpeg、png、gif格式图片');
+                return false;
+            }
+            if(uploadfileSize>1){
+                dialog.error('图片大小不能超过1M');
+                return false;
+            }
+            var reader = new FileReader();
+            reader.readAsDataURL(img);
+            reader.onload = function(e){
+                var imgUrl=e.target.result;
+                $(obj).addClass('active');
+                var postData = {fileBase64: e.target.result};
+                // postData.imgWidth = 145;
+                // postData.imgHeight = 100;
+                $(obj).find('img').attr('src',imgUrl);
+                var type = _this.data('type');
+                if(type == 'notupload'){
+                    $(obj).find('.img').val(imgUrl);
+                    console.log(1);
+                    return false;
+                }
+                //提交
+                $.post(controller+"uploadFileToTemp",postData,function(msg){
+                    if(msg.status == 1){
+                        uploadsSingleImgFlag = true;
+                        $(obj).find('.img').val(msg.info);
+
+                    }else{
+                        dialog.error(msg.info)
+                    }
+                })
             }
         });
 
