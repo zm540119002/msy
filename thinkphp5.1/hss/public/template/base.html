@@ -155,7 +155,8 @@
                         param.vueObj.buy_quantity += o.num;
                     });
                 }
-                if(param.clickObj.attr('class').indexOf('add_cart')!==-1){ //加入购物车提示
+                if(param.clickObj.attr('class').indexOf('add_cart')!==-1
+                        && (param.clickObj.attr('class').indexOf('plus')===-1 || param.clickObj.attr('class').indexOf('reduce')===-1)){ //加入购物车提示
                     dialog.success(param.data.info);
                 }
             }else if(param.data.data.code == '2001'){ //登录
