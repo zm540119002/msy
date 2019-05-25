@@ -554,6 +554,9 @@ var areaObject={
 	/*选择城市*/
 	selectC:function(p,c) {
 		areaCont = "";
+		if(pType==1){
+			clockArea();
+		}
 		for (var k=0; k<district[p][c].length; k++) {
 			areaCont += '<li onClick="areaObject.selectD(' + p + ',' + c + ',' + k + ');">' + district[p][c][k] + '</li>';
 		}
