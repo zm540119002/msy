@@ -1497,6 +1497,11 @@ filter:alpha(opacity:0);
 .edit-describe{
 	display:block;
 }
+.delete-picture{
+	position:absolute;
+	right:0;
+	top:0;
+}
 /*订单客服售前*/
 .layui-m-layerchild.chatLayer{
     background:#f2f2f2;
