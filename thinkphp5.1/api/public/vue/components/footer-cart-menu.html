@@ -180,6 +180,12 @@
                 subtotal_amount_calculate:function(){
                     this.subtotal_amount = this.deal_price * this.buy_quantity;
                 },delCart:function(event){
+                    let postData = {
+                        goodsList:[{
+                            goods_id: this.product_id,
+                        }]
+                    };
+                    console.log(postData);
                 },reduce: function () {
                     //如果开启了样品购买限额
                     if(this.display_quota){
