@@ -123,6 +123,8 @@
                 }
                 if(param.clickObj.attr('class').indexOf('delete_cart')!==-1 && param.postData){ //删除
                     param.clickObj.parents('li').remove();
+                    param.vueObj.productList = [0];
+                    param.vueObj.type = 5;
                 }
                 if(param.clickObj.attr('class').indexOf('add_cart')!==-1
                         && !(param.clickObj.attr('class').indexOf('plus')!==-1 || param.clickObj.attr('class').indexOf('reduce')!==-1)
