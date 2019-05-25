@@ -554,18 +554,9 @@ var areaObject={
 	/*选择城市*/
 	selectC:function(p,c) {
 		areaCont = "";
-		
-		if(pType==1){
-			alert(1);
-			for (var k=0; k<district[p][c].length; k++) {
-				areaCont += '<li onClick="">' + district[p][c][k] + '</li>';
-			}
-		}else{
-			for (var k=0; k<district[p][c].length; k++) {
-				areaCont += '<li onClick="areaObject.selectD(' + p + ',' + c + ',' + k + ');">' + district[p][c][k] + '</li>';
-			}
+		for (var k=0; k<district[p][c].length; k++) {
+			areaCont += '<li onClick="areaObject.selectD(' + p + ',' + c + ',' + k + ');">' + district[p][c][k] + '</li>';
 		}
-	
 		areaList.html(areaCont);
 		$("#areaBox").scrollTop(0);
 		var sCity = city[p][c];
@@ -589,7 +580,12 @@ var areaObject={
 	selectD:function(p,c,d) {
 		var areaKey=$('.area-address-name').data('key');
 		clockArea();
-		expressArea += district[p][c][d];
+		//expressArea += district[p][c][d];
+		if(pType==1){
+			expressArea += district[p][c];
+		}else{
+			expressArea += district[p][c][d];
+		}
 		$(".express-area .area_address").html(expressArea);
 		if(!areaObject.provinceCityD.length){
 			
