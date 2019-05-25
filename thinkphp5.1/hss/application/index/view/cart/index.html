@@ -27,6 +27,7 @@
 				:product_name="productInfo.name"
 				:product_src="productInfo.thumb_img"
 				:specification="productInfo.specification"
+				:item_checked="item_checked"
 				:type="type"
 		></product-select>
 	</ul>
@@ -81,6 +82,7 @@
 		let param = {
 			type:4,
 			step_quantity:1,
+			item_checked:true,
 			productList:[],
 			getJsonListParam:{
 				url:module+'Goods/getCartGoodsList',
