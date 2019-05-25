@@ -219,6 +219,8 @@
         }else{
             //清空本地购物车
             localStorage.removeItem("cartList");
+            param.vueObj.productList = [0];
+            param.vueObj.type = 5;
         }
         param.clickObj.parents('li').remove();
     }
