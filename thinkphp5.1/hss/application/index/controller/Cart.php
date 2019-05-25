@@ -119,7 +119,7 @@ class Cart extends \common\controller\UserBase {
         ];
         $result = $model -> del($condition,true);
         if($result['status']){
-            $this->successMsg('加入购物车成功！',config('code.success.default'));
+            $this->successMsg('删除成功！',config('code.success.default'));
         }else{
             $this->errorMsg('删除失败！',config('code..default'));
         }
