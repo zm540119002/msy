@@ -116,7 +116,7 @@ class Cart extends \common\controller\UserBase {
 
     //删除地址
     public function del(){
-        return 123;
+        return input('post.');
         if(!request()->isAjax()){
             return errorMsg(config('custom.not_ajax'));
         }
