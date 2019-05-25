@@ -171,9 +171,10 @@
                 }}
             },data: function () {
                 return {
-                    'buy_quantity':this.init_quantity,
-                    'subtotal_amount':0,
-                    'add_cart_url':'{:url("Cart/addCart")}'
+                    buy_quantity:this.init_quantity,
+                    buy_quantity_reduce_judge:true,
+                    subtotal_amount:0,
+                    add_cart_url:'{:url("Cart/addCart")}'
                 };
             },methods: {
                 subtotal_amount_calculate:function(){
@@ -201,7 +202,8 @@
                         this.buy_quantity += this.step_quantity;
                     }
                 },reduceCart: function (event) {
-                    if(this.buy_quantity>1){
+                    if(this.buy_quantity_reduce_judge && this.buy_quantity>1){
+                        this.buy_quantity_reduce_judge = false;
                         this.buy_quantity -= this.step_quantity;
                     }else{
                         console.log(this.buy_quantity);
