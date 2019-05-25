@@ -145,19 +145,23 @@
             }
         }else if(param.data.status==1){ //成功回调
             if(param.data.data.code == '2000'){ //默认
-                if(param.clickObj.attr('class').indexOf('add_cart')!==-1 && param.componentFooterCartMenu){
+                if(param.clickObj.attr('class').indexOf('add_cart')!==-1 && param.componentFooterCartMenu){ //底部购物车菜单数量统计
                     $.each(param.postData.goodsList,function(i,o){
                         param.componentFooterCartMenu.cart_num += o.num;
                     });
                 }
-                if(param.clickObj.attr('class').indexOf('plus')!==-1){
+                if(param.clickObj.attr('class').indexOf('add_cart')!==-1 && param.clickObj.attr('class').indexOf('plus')!==-1){ //加
                     $.each(param.postData.goodsList,function(i,o){
+                        console.log(param.vueObj.buy_quantity);
+                        console.log(o.num);
                         param.vueObj.buy_quantity += o.num;
                         param.vueObj.buy_quantity_reduce_judge = true;
                     });
                 }
-                if(param.clickObj.attr('class').indexOf('reduce')!==-1){
+                if(param.clickObj.attr('class').indexOf('add_cart')!==-1 && param.clickObj.attr('class').indexOf('reduce')!==-1){ //减
                     $.each(param.postData.goodsList,function(i,o){
+                        console.log(param.vueObj.buy_quantity);
+                        console.log(o.num);
                         param.vueObj.buy_quantity -= o.num;
                         param.vueObj.buy_quantity_reduce_judge = true;
                     });
