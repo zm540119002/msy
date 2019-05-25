@@ -116,11 +116,11 @@ class Cart extends \common\controller\UserBase {
 
     //删除地址
     public function del(){
-        return input('post.');
         if(!request()->isAjax()){
             return errorMsg(config('custom.not_ajax'));
         }
-        $ids = input('post.cart_ids/a');
+        $ids = input('post.goodsList/a');
+        return $ids;
         $model = new \app\index\model\Cart();
         $condition = [
             ['user_id','=',$this->user['id']],
