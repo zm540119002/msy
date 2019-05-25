@@ -101,9 +101,8 @@ function process_upload_files(&$data,$arr,$directory,$multiple=true){
     foreach($arr as $k => $v){
 
         $file = $data[$v];
-
-        if($multiple){
-            if($file!=null){
+        if($file!=null){
+            if($multiple){
                 $detailArr = explode(',',$file);
                 $tempArr = array();
                 foreach ($detailArr as $item) {
@@ -112,12 +111,11 @@ function process_upload_files(&$data,$arr,$directory,$multiple=true){
                     }
                 }
                 $data[$v] = implode(',',$tempArr);
+            }else{
+                $data[$v] = moveImgFromTemp(config('upload_dir.'.$directory),$file);
             }
 
-        }else{
-            $data[$v] = moveImgFromTemp(config('upload_dir.'.$directory),$file);
         }
-
     }
 }
 
