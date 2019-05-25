@@ -156,7 +156,7 @@
                     });
                 }
                 if(param.clickObj.attr('class').indexOf('add_cart')!==-1
-                        && (param.clickObj.attr('class').indexOf('plus')===-1 || param.clickObj.attr('class').indexOf('reduce')===-1)
+                        && !(param.clickObj.attr('class').indexOf('plus')!==-1 || param.clickObj.attr('class').indexOf('reduce')!==-1)
                 ){ //包含add_cart，但是不能包含plus 或者 reduce才提示
                     dialog.success(param.data.info);
                 }
