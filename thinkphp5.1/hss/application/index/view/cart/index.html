@@ -106,8 +106,8 @@
 					let _this = this;
 					console.log(data.data.current_page);
 					if(data.data.current_page==1){
-						
-						this.type=5;
+						console.log(123);
+						_this.type=5;
 					}
 					$.each(data.data.data,function(i,o){
 						_this.productList.push(o);
