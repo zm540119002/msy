@@ -519,7 +519,8 @@ var district = 	[
 						["路氹城"]
 					]
 				];
-var expressArea, areaCont, areaList = $("#areaList")
+var expressArea, areaCont, areaList = $("#areaList");
+var pType=$('#areaList').data('type');
 	// , areaTop = areaList.offset().top;
 
 /*初始化省份*/
@@ -553,8 +554,8 @@ var areaObject={
 	/*选择城市*/
 	selectC:function(p,c) {
 		areaCont = "";
-		var lists=$('#areaList');
-		if(lists.hasClass('provinces')){
+		
+		if(pType==1){
 			alert(1);
 			for (var k=0; k<district[p][c].length; k++) {
 				areaCont += '<li onClick="">' + district[p][c][k] + '</li>';
