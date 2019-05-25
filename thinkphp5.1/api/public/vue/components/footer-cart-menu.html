@@ -204,6 +204,7 @@
                     if(this.buy_quantity>1){
                         this.buy_quantity -= this.step_quantity;
                     }else{
+                        console.log(this.buy_quantity);
                         return false;
                     }
                     let postData = {
