@@ -12,8 +12,7 @@
     <section class="recommendGoods_content">
         <!--推荐产品容器-->
         <div id="recommendGoods">
-            <span class="content-label">已添加产品</span>
-            <a href="javascript:void(0);" class="confirm_add">确定添加</a>
+            <span class="content-label">已添加的商品</span>
             <ul class="selected_goods_list" id="selected_list">
 
             </ul>
@@ -151,7 +150,6 @@
                     return false;
                 }
                 postData.selectedIds = selectedIds;
-                postData.relation    = relation;
                 var url = module+'Goods/addRelationGoods';
 
                 _this.addClass("nodisabled");//防止重复提交
@@ -173,7 +171,7 @@
                 });
 
             })
-            
+
         });
     </script>
 {/block}

@@ -143,7 +143,7 @@
                     <input type="text" :value="buy_quantity" class="f24 product_count" readonly="readonly">
                     <a href="javascript:void(0);" class="add_cart plus" @click="plusCart" :data-jump_url="add_cart_url">+</a>
                 </div>
-                <a href="javascript:void(0);" class="delete_order goodsDel delete_cart" @click="delCart">删除</a>
+                <a href="javascript:void(0);" class="delete_order goodsDel delete_cart" @click="delCart" :data-jump_url="del_cart_url">删除</a>
             </div>
         </div>
     </li>
@@ -174,18 +174,27 @@
                     buy_quantity:this.init_quantity,
                     buy_quantity_reduce_judge:true,
                     subtotal_amount:0,
-                    add_cart_url:'{:url("Cart/addCart")}'
+                    add_cart_url:'{:url("Cart/addCart")}',
+                    del_cart_url:'{:url("Cart/del")}'
                 };
             },methods: {
                 subtotal_amount_calculate:function(){
                     this.subtotal_amount = this.deal_price * this.buy_quantity;
                 },delCart:function(event){
+                    let _thisJquery = $(event.currentTarget);
+                    let _thisVue = this;
                     let postData = {
                         goodsList:[{
-                            goods_id: this.product_id,
+                            goods_id: this.product_id
                         }]
                     };
-                    console.log(postData);
+                    let config = {
+                        clickObj:_thisJquery,
+                        vueObj:_thisVue,
+                        postData:postData,
+                        reduce:true
+                    };
+                    asyncVerify(config);
                 },reduce: function () {
                     //如果开启了样品购买限额
                     if(this.display_quota){

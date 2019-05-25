@@ -105,7 +105,7 @@
             <label class="form-label col-xs-4 col-sm-2">推荐商品：</label>
             <div class="formControls col-xs-8 col-sm-9">
                 <button type="button" class="btn btn-primary radius recommend"><i class="Hui-iconfont"></i> 添加商品</button>
-                已添加 <span class="c-red">{$info.recommend_goods_num|default=0}</span> 种商品
+                已选择 <span class="c-red">{$info.recommend_goods_num|default=0}</span> 种商品    <span class="c-red">*</span>只展示前4款商品
             </div>
         </div>
 
@@ -252,9 +252,13 @@
              }else if(!postData.video){
              content='项目视频不能为空';
              }*/
-            if(content){
+/*            if(content){
                 dialog.error(content);
                 return false;
+            }*/
+
+            if(recommendIds){
+                postData.recommendIds = recommendIds;
             }
 
             var url = module +'Project/edit';
@@ -322,6 +326,8 @@
             location.href = controller + '/manage';
         });
 
+        // 默认值 如果选择就覆盖
+        var recommendIds="{$info['recommend_goods']}";
         $("body").on('click','.recommend',function(){
 
             var id = "{$info['id']}";
@@ -333,11 +339,26 @@
                 shadeClose: true,
                 shade: 0.8,
                 area: ['80%', '80%'],
-                content: url //iframe的url
+                content: url, //iframe的url
+                btn: ['确定添加', '关闭'],
+                yes: function(index, layero){
+
+                    var body = layer.getChildFrame('body', index);
+                    recommendIds = [];
+                    body.find('.selected_goods_list li').each(function () {
+                        var goodsSelectedId=$(this).data('goods-id');
+                        recommendIds.push(goodsSelectedId);
+                    });
+                    $(".recommend").next().html(recommendIds.length);
+
+                    layer.close(index);
+                },
+                no: function(){
+                    layer.close(index);
+                }
             });
 
         });
-
     });
 </script>
 {/block}

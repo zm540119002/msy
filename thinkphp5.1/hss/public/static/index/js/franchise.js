@@ -5,18 +5,21 @@ $(function(){
     //填写基本资料
     $('body').on('click','.one-step',function(){
         area_address =$('.area-address-name').getArea();
-        applicantData=$('.applicant_form').serializeObject();
-        var content='';
-        if(!applicantData.name){
-            content='请填写店家名称';
-        }else if(!applicantData.applicant){
-            content='请填写申请人姓名';
-        }else if(!register.phoneCheck(applicantData.mobile)){
-            content='请填写手机号码';
-        }else if(!area_address){
+        // applicantData=$('.applicant_form').serializeObject();
+        // var content='';
+        // if(!applicantData.name){
+        //     content='请填写店家名称';
+        // }else if(!applicantData.applicant){
+        //     content='请填写申请人姓名';
+        // }else if(!register.phoneCheck(applicantData.mobile)){
+        //     content='请填写手机号码';
+        // }else if(!area_address){
+        //     content='请选择地区';
+        // }else if(!applicantData.detail_address){
+        //     content='请填写详细地址';
+        // }
+        if(!area_address){
             content='请选择地区';
-        }else if(!applicantData.detail_address){
-            content='请填写详细地址';
         }
         if(content){
             dialog.error(content);

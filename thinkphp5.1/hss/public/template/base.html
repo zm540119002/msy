@@ -135,7 +135,10 @@
             }else if(param.data.data.code == '1001'){ //登录
                 if(param.clickObj.attr('class').indexOf('add_cart')!==-1 && param.postData){ //加入购物车
                     editLocalStorageCartList(param);
-                }else{
+                }else if(param.clickObj.attr('class').indexOf('delete_cart')!==-1 && param.postData){
+                    delLocalStorageCartList(param);
+                }
+                else{
                     loginDialogTrigger();
                 }
             }else if(param.data.data.code=='1002'){ //授权
@@ -232,7 +235,7 @@
         }
     }
     //删除cookie里的购物车商品列表
-    function delLocalStorageCartList(goodsList){
+    function delLocalStorageCartList(param){
         if(!localStorage.cartList){
             return false;
         }
@@ -240,8 +243,8 @@
         let goodsListNew = [];
         $.each(goodsListOld,function(i,o){
             let find = false;
-            $.each(goodsList,function(ii,oo){
-                if(o.goods_id == oo.goods_id){
+            $.each(param.postData.goodsList,function(ii,oo){
+                if(o.goods_id !== oo.goods_id){
                     find = true;
                 }
             });
@@ -254,7 +257,8 @@
             localStorage.cartList = JSON.stringify({'goodsList':goodsListNew});
         }else{
             //保存购物车
-            localStorage.cartList = '';
+            localStorage.removeItem("cartList");
+            //localStorage.cartList = '';
         }
     }
 </script>
