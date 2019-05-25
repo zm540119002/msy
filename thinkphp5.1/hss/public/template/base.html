@@ -145,14 +145,20 @@
             }
         }else if(param.data.status==1){ //成功回调
             if(param.data.data.code == '2000'){ //默认
-                if(param.clickObj.attr('class').indexOf('add_cart')!==-1 && param.componentFooterCartMenu){ //购物总数量统计
+                if(param.clickObj.attr('class').indexOf('add_cart')!==-1 && param.componentFooterCartMenu){
                     $.each(param.postData.goodsList,function(i,o){
                         param.componentFooterCartMenu.cart_num += o.num;
                     });
                 }
-                if(param.clickObj.attr('class').indexOf('plus')!==-1 || param.clickObj.attr('class').indexOf('reduce')!==-1){ //购物单数量统计
+                if(param.clickObj.attr('class').indexOf('plus')!==-1){
                     $.each(param.postData.goodsList,function(i,o){
                         param.vueObj.buy_quantity += o.num;
+                        param.vueObj.buy_quantity_reduce_judge = true;
+                    });
+                }
+                if(param.clickObj.attr('class').indexOf('reduce')!==-1){
+                    $.each(param.postData.goodsList,function(i,o){
+                        param.vueObj.buy_quantity -= o.num;
                         param.vueObj.buy_quantity_reduce_judge = true;
                     });
                 }
