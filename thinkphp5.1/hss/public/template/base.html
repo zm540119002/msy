@@ -235,7 +235,7 @@
         }
     }
     //删除cookie里的购物车商品列表
-    function delLocalStorageCartList(goodsList){
+    function delLocalStorageCartList(param){
         if(!localStorage.cartList){
             return false;
         }
@@ -243,7 +243,7 @@
         let goodsListNew = [];
         $.each(goodsListOld,function(i,o){
             let find = false;
-            $.each(goodsList,function(ii,oo){
+            $.each(param.goodsList,function(ii,oo){
                 if(o.goods_id == oo.goods_id){
                     find = true;
                 }
