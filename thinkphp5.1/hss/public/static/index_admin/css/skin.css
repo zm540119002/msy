@@ -1494,6 +1494,9 @@ filter:alpha(opacity:0);
     height: 2px;
     top:38%;
 }
+.edit-describe{
+	display:block;
+}
 /*订单客服售前*/
 .layui-m-layerchild.chatLayer{
     background:#f2f2f2;
