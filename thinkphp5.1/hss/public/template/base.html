@@ -245,7 +245,7 @@
         $.each(goodsListOld,function(i,o){
             let find = false;
             $.each(param.postData.goodsList,function(ii,oo){
-                if(o.goods_id == oo.goods_id){
+                if(o.goods_id !== oo.goods_id){
                     find = true;
                 }
             });
