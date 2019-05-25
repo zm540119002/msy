@@ -45,7 +45,6 @@ class Project extends Base {
             // 基础处理
             $data = input('post.');
             unset($data['editorValue']);
-            p($data);
             // 多图上传带描述
             replace_splitter($data,['tag']);
             process_upload_files($data,['thumb_img','video'],'project',false);
