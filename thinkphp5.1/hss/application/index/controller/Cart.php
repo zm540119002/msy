@@ -99,37 +99,29 @@ class Cart extends \common\controller\UserBase {
         }
     }
 
-    //修改购物车数量
-    public function editCartNum(){
-        if(!request()->isPost()){
-            return errorMsg('请求方式错误');
-        }
-        $data = input('post.');
-        $data['user_id'] = $this -> user['id'];
-        $model = new \app\index\model\Cart();
-        $res = $model ->isUpdate(true)-> save($data);
-        if(false === $res){
-            return errorMsg('失败');
-        }
-        return successMsg('成功');
-    }
-
     //删除地址
     public function del(){
         if(!request()->isAjax()){
             return errorMsg(config('custom.not_ajax'));
         }
-        $ids = input('post.cart_ids/a');
+        $goodsList = input('post.goodsList/a');
+        if(empty($goodsList)){
+            $this->errorMsg('没有数据！',config('code.error.default'));
+        }
+        $goodsIds = [];
+        foreach ($goodsList as $item=>$value){
+            $goodsIds[] = $value['goods_id'];
+        }
         $model = new \app\index\model\Cart();
         $condition = [
             ['user_id','=',$this->user['id']],
-            ['id','in',$ids],
+            ['goods_id','in',$goodsIds],
         ];
         $result = $model -> del($condition,true);
         if($result['status']){
-            return successMsg('成功');
+            $this->successMsg('删除成功！',config('code.success.default'));
         }else{
-            return errorMsg('失败');
+            $this->errorMsg('删除失败！',config('code..default'));
         }
     }
 
