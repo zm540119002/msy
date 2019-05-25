@@ -1498,9 +1498,14 @@ filter:alpha(opacity:0);
 	display:block;
 }
 .delete-picture{
+	width:20px;
+	height:20px;
+	line-height: 20px;
+	text-align:center;
 	position:absolute;
 	right:0;
 	top:0;
+	z-index:100;
 }
 /*订单客服售前*/
 .layui-m-layerchild.chatLayer{
