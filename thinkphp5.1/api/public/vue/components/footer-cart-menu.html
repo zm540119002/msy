@@ -129,7 +129,7 @@
             <div class="product_name"><p class="two-line-apostrophe">{{product_name}}</p></div>
         </div>
     </li><li v-else-if="type==4"><!--用于购物车-->
-        <input type="checkbox" class="item_checkbox check_item" v-model='item_checked' />
+        <input type="checkbox" class="item_checkbox check_item" v-model='checked' />
         <a href="" class="cart_goods_img" :href="'/index/Goods/detail/id/' + product_id">
             <img class="left common_default_img" :src="product_src?('public_uploads/' + product_src):('api_common_img/default/no_pic_100.jpg') " alt="">
         </a>
@@ -323,7 +323,7 @@
                 {{menu.name}}
                 <!-- 全选 -->
                 <div v-if="menu.class.indexOf('checked_all')!==-1" class="checked_all">
-                    <input type="checkbox" class="check_all" v-model='all_checked' />
+                    <input type="checkbox" class="check_all" v-model='checked' />
                     <label for="" class="">全选</label>
                 </div>
                 <!-- 总金额 -->
@@ -377,6 +377,7 @@
                     return {
                         total_amount:0,
                         cart_num:this.cart_init_num,
+                        checked:this.all_checked,
                         menus: unlockingFooterCart.menu,
                         postData:{
                             goodsList:[]
