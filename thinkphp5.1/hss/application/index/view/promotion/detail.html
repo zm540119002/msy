@@ -106,8 +106,7 @@
 				$(window).on('scroll',function(){
 					if(_thisVue.getJsonListParam.loadTrigger
 							&& $(document).scrollTop()+$(window).height()+200>$(document).height()){
-						//第一次触发后，先停止触发，去其他地方重新放开
-						_thisVue.getJsonListParam.loadTrigger = false;
+						//停止触发，去其他地方重新放开
 						vueVersionGetJsonList(_thisVue);
 					}
 				});
