@@ -107,6 +107,7 @@
 					if(_thisVue.getJsonListParam.loadTrigger
 							&& $(document).scrollTop()+$(window).height()+200>$(document).height()){
 						//停止触发，去其他地方重新放开
+						_thisVue.getJsonListParam.loadTrigger = false;
 						vueVersionGetJsonList(_thisVue);
 					}
 				});
