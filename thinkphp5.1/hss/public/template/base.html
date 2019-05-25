@@ -152,8 +152,6 @@
                 }
                 if(param.clickObj.attr('class').indexOf('add_cart')!==-1 && param.clickObj.attr('class').indexOf('plus')!==-1){ //加
                     $.each(param.postData.goodsList,function(i,o){
-                        console.log(param.vueObj.buy_quantity);
-                        console.log(o.num);
                         param.vueObj.buy_quantity += o.num;
                         param.vueObj.buy_quantity_reduce_judge = true;
                     });
