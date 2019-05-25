@@ -108,17 +108,16 @@ class Cart extends \common\controller\UserBase {
         if(empty($goodsList)){
             $this->errorMsg('没有数据！',config('code.error.default'));
         }
-        $ids = [];
+        $goodsIds = [];
         foreach ($goodsList as $item=>$value){
-            $ids[] = $value['goods_id'];
+            $goodsIds[] = $value['goods_id'];
         }
         $model = new \app\index\model\Cart();
         $condition = [
             ['user_id','=',$this->user['id']],
-            ['id','in',$ids],
+            ['goods_id','in',$goodsIds],
         ];
         $result = $model -> del($condition,true);
-        return $model->getLastSql();
         if($result['status']){
             $this->successMsg('删除成功！',config('code.success.default'));
         }else{
