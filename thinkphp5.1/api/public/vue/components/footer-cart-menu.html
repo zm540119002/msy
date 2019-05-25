@@ -314,7 +314,7 @@
                 {{menu.name}}
                 <!-- 全选 -->
                 <div v-if="menu.class.indexOf('checked_all')!==-1" class="checked_all">
-                    <input type="checkbox" class="check_all">
+                    <input type="checkbox" class="check_all" v-model='checked' :click='checkAll' />
                     <label for="" class="">全选</label>
                 </div>
                 <!-- 总金额 -->
@@ -360,6 +360,7 @@
                 template:'#footer-cart-menu_tpl',
                 props: {
                     cart_init_num: {type: Number,default: 0},
+                    checked: {type: Boolean,default: true},
                     buy_now_call_back: {type: Function,default: function(param){
                         console.log(param);
                     }}
@@ -375,6 +376,8 @@
                 },methods: {
                     total_amount_init:function (param) {
                         this.total_amount += param.subtotal_amount;
+                    },checkAll:function(){
+                        this.checked = !this.checked;
                     },total_amount_calculate:function (param) {
                         this.total_amount += param.deal_price * param.increment_buy_quantity;
                     },jump_url:function (event) {
