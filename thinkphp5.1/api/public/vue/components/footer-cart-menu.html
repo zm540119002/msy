@@ -129,7 +129,7 @@
             <div class="product_name"><p class="two-line-apostrophe">{{product_name}}</p></div>
         </div>
     </li><li v-else-if="type==4"><!--用于购物车-->
-        <input type="checkbox" class="item_checkbox check_item" v-model='checked' :value='checked' />
+        <input type="checkbox" class="item_checkbox check_item" v-model='item_checked' :value='item_checked' />
         <a href="" class="cart_goods_img" :href="'/index/Goods/detail/id/' + product_id">
             <img class="left common_default_img" :src="product_src?('public_uploads/' + product_src):('api_common_img/default/no_pic_100.jpg') " alt="">
         </a>
@@ -167,7 +167,7 @@
                 init_quantity: {type: Number,default: 1},
                 step_quantity: {type: Number,default: 1},
                 display_quota: {type: Boolean,default: false},
-                checked: {type: Boolean,default: true},
+                item_checked: {type: Boolean,default: true},
                 productInfo: {type: Array,default:function(){
                     let arr = [];
                     arr['eg'] = '默认值示范';
@@ -302,7 +302,7 @@
                     },
                     deep: false,
                     immediate: true
-                },checked: {
+                },item_checked: {
                     handler(newVal, oldVal) {
                         console.log(newVal);
                         console.log(oldVal);
@@ -322,7 +322,7 @@
                 {{menu.name}}
                 <!-- 全选 -->
                 <div v-if="menu.class.indexOf('checked_all')!==-1" class="checked_all">
-                    <input type="checkbox" class="check_all" v-model='checked' :value='checked' />
+                    <input type="checkbox" class="check_all" v-model='all_checked' :value='all_checked' />
                     <label for="" class="">全选</label>
                 </div>
                 <!-- 总金额 -->
@@ -368,7 +368,7 @@
                 template:'#footer-cart-menu_tpl',
                 props: {
                     cart_init_num: {type: Number,default: 0},
-                    checked: {type: Boolean,default: true},
+                    all_checked: {type: Boolean,default: true},
                     buy_now_call_back: {type: Function,default: function(param){
                         console.log(param);
                     }}
