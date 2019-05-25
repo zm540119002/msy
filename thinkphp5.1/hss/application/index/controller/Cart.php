@@ -119,7 +119,11 @@ class Cart extends \common\controller\UserBase {
         if(!request()->isAjax()){
             return errorMsg(config('custom.not_ajax'));
         }
-        $ids = input('post.goodsList/a');
+        $goodsList = input('post.goodsList/a');
+        $ids = [];
+        foreach ($goodsList as $item=>$value){
+            $ids[] = $value;
+        }
         return $ids;
         $model = new \app\index\model\Cart();
         $condition = [
