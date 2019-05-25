@@ -82,24 +82,15 @@
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-2">项目流程：</label>
             <div class="formControls col-xs-8 col-sm-9 process" style="display: -webkit-flex;flex-wrap: wrap;">
-                <div class="upload-picture-module f24">
-                    <div class="picture-module">
-                        <input type="file" class="uploadImg uploadSingleImg" name="">
-                        <img class="upload_img " src="{:show_img_handle($info.process,false)}" />
-                        <input type="hidden" class="layer-thumbnail-picture img"  value="{$info.thumb_img}" name="process_img"/>
-                    </div>
-                    <div style="width: 200px;">
-                        <textarea name="process_text" cols="" rows="" class="textarea" style="height: 100%;" placeholder="说点什么..." datatype="*10-100" dragonfly="true" nullmsg="备注不能为空！"></textarea>
-                    </div>
-                </div>
-                <div class="upload-picture-module f24">
-                    <div class="picture-module">
-                        <input type="file" class="uploadImg uploadSingleImg" name="">
-                        <img class="upload_img " src="{:show_img_handle($info.thumb_img,false)}" />
-                        <input type="hidden" class="layer-thumbnail-picture img"  value="{$info.thumb_img}" name="process_img"/>
-                    </div>
-                    <div style="width: 200px;">
-                        <textarea name="process_text" cols="" rows="" class="textarea" style="height: 100%;" placeholder="说点什么..." datatype="*10-100" dragonfly="true" nullmsg="备注不能为空！"></textarea>
+                <form class="">
+                    <ul class="upload-picture-module multi-picture-moduleDes f24"></ul>
+                </form>
+                <div class="error_tipc"></div>
+                <div class="upload-picture-module margin-left f24">
+                    <div>
+                        <div class="picture-module">
+                            <input type="file" class="uploadImg uploadImgDescribe " name="" accept="image/*" multiple>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -420,6 +411,44 @@
             });
 
         });
+        //上传单图片和描述
+    $('body').on('change','.uploadImgDescribe',function () {
+        var file = $(this);
+        fileList = $(this).get(0).files;
+        num=file.data('num');//限制个数
+        uploadPicDescribe(fileList[0],0,fileList.length);
     });
+});
+//上传图片描述
+function uploadPicDescribe(fil,i,len){
+    
+    var img = fil;
+    var obj=$(this).parent();
+    var fileSize=fil.size/1024/1024;
+    // 判断是否图片
+    if(!img){
+        return false;
+    }
+    // 判断图片格式
+    var imgRegExp=/\.(?:jpg|jpeg|png|gif)$/;
+    if(!(img.type.indexOf('image')==0 && img.type && imgRegExp.test(img.name)) ){
+        errorTipc('请上传：jpg、jpeg、png、gif格式图片');
+    }
+    var reader = new FileReader();
+    reader.readAsDataURL(img);
+    reader.onload = function(e){
+        var imgUrl=e.target.result;
+        var img=  $('<img src="" class="upload_img">');
+        img.attr("src", imgUrl);
+        var imgAdd = $('<li><a href="javascript:void(0);" class="edit-describe">编辑照片描述</a><textarea name="" id='+i+' cols="30" rows="5" placeholder="请填写描述" class="edit-text"></textarea><div class="picture-module active"><input type="file" class="uploadImg uploadSingleEditImg" name=""><a class="delete-picture">X</a></div></li>');
+        imgAdd.find('.picture-module').append(img);
+        $('.multi-picture-moduleDes').append(imgAdd);
+        if(i<len-1){
+            if(fileList[i+1]){
+                uploadPicDescribe(fileList[i+1],i+1,len);
+            }
+        }
+    }
+}
 </script>
 {/block}
