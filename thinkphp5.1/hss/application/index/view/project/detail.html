@@ -31,7 +31,7 @@
 			{/volist}
 			{/notempty}
 			<!--产品列表-->
-			<ul class="goods_list list" id="product-select">
+			<ul class="goods_list list" id="product-list">
 				<product-select
 						v-for="productInfo in productList"
 						:key="productInfo.id"
@@ -117,51 +117,60 @@
 {/block}
 {block name="footer"}
 {include file="../../api/public/vue/components/footer-cart-menu.html" /}
-<div id="foot_cart_menu">
-	<footer-cart-menu
-			:add_cart_call_back="add_cart_call_back"
-	></footer-cart-menu>
-</div>
 {/block}
 {block name="script"}
 <script type="text/javascript" src="api_common_js/swiper.min.js"></script>
 <script type="text/javascript">
-	function getJsonListCallBack(data){
-		if(data.status==0){
-			dialog.error(data.info);
-			return false;
-		}
-		param = {
-			'type':0,
-			'init_quantity':1,
-			'step_quantity':1,
-			'productList':data.data.data
+	$(function(){
+		let param = {
+			init_quantity:1,
+			step_quantity:1,
+			productList:[],
+			getJsonListParam:{
+				url:module+'Goods/getPromotionGoods',
+				requestEnd:false,
+				loadTrigger:false,
+				postData:{
+					id:'{$info.id}',
+					relation:'{$relation}',
+					pageSize:10,
+					page:1
+				}
+			}
 		};
 		new Vue({
-			el: '#product-select',
+			el: '#product-list',
 			data:function(){
 				return param;
+			},methods:{
+				getJsonListCallBack:function(data){
+					console.log(data);
+					if(data.status==0){
+						dialog.error(data.info);
+						return false;
+					}
+					let _this = this;
+					$.each(data.data.data,function(i,o){
+						_this.productList.push(o);
+					});
+				}
+			},created:function(){
+				let _thisVue = this;
+				_thisVue.getJsonListParam.callBack = _thisVue.getJsonListCallBack;
+				vueVersionGetJsonList(_thisVue);
+				//下拉加载
+				$(window).on('scroll',function(){
+					if(_thisVue.getJsonListParam.loadTrigger
+							&& $(document).scrollTop()+$(window).height()+200>$(document).height()){
+						//停止触发，去其他地方重新放开
+						_thisVue.getJsonListParam.loadTrigger = false;
+						vueVersionGetJsonList(_thisVue);
+					}
+				});
 			}
 		});
-	}
-	$(function(){
-		// 初始化场景商品页面
-		var config = {
-			url:module+'Goods/getRelationGoods',
-			requestEnd:false,
-			loadTrigger:false,
-			postData:{
-				id:'{$info.id}',
-				relation:'{$relation}',
-				pageSize:10,
-				page:1
-			},
-			callBack:getJsonListCallBack
-		};
-		getJsonList(config);
 	});
 </script>
-
 <script type="text/javascript">
 	$(function(){
 		var id = '{$info.id}';
