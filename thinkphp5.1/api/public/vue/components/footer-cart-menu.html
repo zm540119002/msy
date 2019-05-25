@@ -181,6 +181,8 @@
             },methods: {
                 subtotal_amount_calculate:function(){
                     this.subtotal_amount = this.deal_price * this.buy_quantity;
+                },checkItem:function(){
+                    this.checked = !this.checked;
                 },delCart:function(event){
                     let _thisJquery = $(event.currentTarget);
                     let _thisVue = this;
