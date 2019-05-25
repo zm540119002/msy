@@ -104,6 +104,9 @@
 						return false;
 					}
 					let _this = this;
+					if(data.data.current_page==1&&!data.data.data){
+						this.type=5;
+					}
 					$.each(data.data.data,function(i,o){
 						_this.productList.push(o);
 					});
