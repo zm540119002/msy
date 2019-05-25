@@ -1427,6 +1427,9 @@ filter:alpha(opacity:0);
     -webkit-flex: 1 1 auto;
     flex: 1 1 auto;
 }
+.hss-picture-moduleDes li{
+	margin:0;
+}
 .brand-store-module li{
     width:50%;
     margin:0.15rem 0;
