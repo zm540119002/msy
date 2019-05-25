@@ -18,7 +18,7 @@
 	<!--产品列表-->
 	<ul class="cart_goods_list list" id="product-list">
 		<product-select
-				v-for="productInfo in productList"
+				v-for="(productInfo,index) in productList"
 				:key="productInfo.id"
 				:product_id="productInfo.id"
 				:deal_price="Number(productInfo.bulk_price)"
