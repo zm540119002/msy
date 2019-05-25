@@ -118,6 +118,7 @@ class Cart extends \common\controller\UserBase {
             ['id','in',$ids],
         ];
         $result = $model -> del($condition,true);
+        return $model->getLastSql();
         if($result['status']){
             $this->successMsg('删除成功！',config('code.success.default'));
         }else{
