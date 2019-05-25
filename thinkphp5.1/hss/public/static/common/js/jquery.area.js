@@ -573,6 +573,24 @@ var areaObject={
 			}
 		}
 		$("#backUp").attr("onClick", "areaObject.selectP(" + p + ");");
+		if(pType==1){
+			clockArea();
+			$(".express-area .area_address").html(expressArea);
+			if(!areaObject.provinceCityD.length){
+				
+				for(var i=0;i<arguments.length;i++){
+						areaObject.provinceCityD+=arguments[i]+',';
+					}
+					$('.area-address-name').val(expressArea).data('key',areaObject.provinceCityD);
+					// return false;
+				}
+			areaObject.provinceCityD=[];
+			for(var i=0;i<arguments.length;i++){
+				areaObject.provinceCityD+=arguments[i]+',';
+			}
+			$('.area-address-name').val(expressArea).data('key',areaObject.provinceCityD);
+			return expressArea;
+			}
 		return sCity;
 	},
 
@@ -582,7 +600,7 @@ var areaObject={
 		clockArea();
 		//expressArea += district[p][c][d];
 		if(pType==1){
-			expressArea += district[p][c];
+			expressArea=expressArea;
 		}else{
 			expressArea += district[p][c][d];
 		}
