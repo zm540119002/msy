@@ -106,7 +106,9 @@
 						return false;
 					}
 					let _this = this;
+					console.log(_this.productList);
 					if(data.data.current_page==1&&$.isEmptyArray(data.data.data)){
+						//_this.productList =
 						_this.type=5;
 					}
 					$.each(data.data.data,function(i,o){
