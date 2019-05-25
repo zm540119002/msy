@@ -153,7 +153,7 @@
                 if(param.clickObj.attr('class').indexOf('plus')!==-1 || param.clickObj.attr('class').indexOf('reduce')!==-1){ //购物单数量统计
                     $.each(param.postData.goodsList,function(i,o){
                         param.vueObj.buy_quantity += o.num;
-                        this.buy_quantity_reduce_judge = true;
+                        param.vueObj.buy_quantity_reduce_judge = true;
                     });
                 }
                 if(param.clickObj.attr('class').indexOf('add_cart')!==-1
