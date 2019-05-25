@@ -161,7 +161,7 @@
                 quota_quantity: {type: Number,default: 1},
                 type: {type: Number,default: 1},
                 deal_price: {type: Number,required: true},
-                init_quantity: {type: Number,default: 0},
+                init_quantity: {type: Number,default: 1},
                 step_quantity: {type: Number,default: 1},
                 display_quota: {type: Boolean,default: false},
                 productInfo: {type: Array,default:function(){
@@ -204,6 +204,8 @@
                     if(this.buy_quantity>this.init_quantity){
                         this.buy_quantity -= this.step_quantity;
                     }else{
+                        console.log(this.buy_quantity);
+                        console.log(this.init_quantity);
                         return false;
                     }
                     let postData = {
