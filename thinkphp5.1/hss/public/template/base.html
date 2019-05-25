@@ -216,11 +216,11 @@
         if(goodsListNew.length){
             //删除后保存本地购物车
             localStorage.cartList = JSON.stringify({'goodsList':goodsListNew});
-            param.clickObj.parents('li').remove();
         }else{
             //清空本地购物车
             localStorage.removeItem("cartList");
         }
+        param.clickObj.parents('li').remove();
     }
 </script>
 {/block}
