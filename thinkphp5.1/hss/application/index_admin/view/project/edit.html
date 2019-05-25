@@ -5,6 +5,9 @@
     .upload-picture-module,.upload-picture-module li {
         margin: 0;
     }
+    .upload-picture-module .picture-module {
+        width: 200px;
+    }
 </style>
 <div class="page-container">
     <form class="form form-horizontal" id="form1">
@@ -87,10 +90,20 @@
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-2">项目流程：</label>
             <div class="formControls col-xs-8 col-sm-9 process">
-                <ul class="upload-picture-module multi-picture-moduleDes hss-picture-moduleDes f24"></ul>
+                <ul class="upload-picture-module multi-picture-moduleDes hss-picture-moduleDes f24">
+                    <li>
+                        <div class="picture-module active">
+                            <input class="uploadImg uploadSingleEditImg" name="process_img">
+                            <img src="" class="upload_img">
+                        </div>
+                        <div style="width: 200px;">
+                            <textarea style="height: 60px;" name="process_text" cols="30" rows="5" placeholder="请填写描述" class="edit-text"></textarea>
+                        </div>
+                    </li>
+                </ul>
                 <div class="error_tipc"></div>
-                <div class="upload-picture-module margin-left f24" style="justify-content: flex-end;">
-                    <div class="picture-module">
+                <div class="upload-picture-module margin-left f24">
+                    <div class="picture-module" style="width: 50px; height: 50px;">
                         <input type="file" class="uploadImg uploadImgDescribe " name="" accept="image/*" multiple>
                     </div>
                 </div>
@@ -226,10 +239,17 @@
             $.each($('#detail_img').find('iframe').contents().find('.view img'),function(){
                 postData.detail_img += $(this).attr('src') + ',';
             });
-/*            postData.process_img = '';
-            $.each($('#process_img').find('iframe').contents().find('.view img'),function(){
+            //postData.process_img = '';
+/*            $.each($('#process_img').find('iframe').contents().find('.view img'),function(){
                 postData.process_img += $(this).attr('src') + ',';
             });*/
+            //var sss = $("input[name='process_img']").val();
+            var arr =[];
+            $("input[name='process_img']").each(function(){
+                arr.push($(this).val());
+            });
+            console.log(arr);
+            return false;
 
             postData.intro = intro.getContent();
             postData.remarks = remarks.getContent();
@@ -322,56 +342,6 @@
             }
         });
 
-        // 选择上传的单图片
-        $('body').on('change','.uploadSingleImg',function () {
-            var _this=$(this);
-            uploadsSingleImgFlag = false;
-            var img = event.target.files[0];
-            var uploadfileSize=img.size/1024/1024;
-            var obj=$(this).parent();
-            // 判断是否图片
-            if(!img){
-                return false;
-            }
-
-            // 判断图片格式
-            var imgRegExp=/\.(?:jpg|jpeg|png|gif)$/;
-            if(!(img.type.indexOf('image')==0 && img.type && imgRegExp.test(img.name)) ){
-                dialog.error('请上传：jpg、jpeg、png、gif格式图片');
-                return false;
-            }
-            if(uploadfileSize>1){
-                dialog.error('图片大小不能超过1M');
-                return false;
-            }
-            var reader = new FileReader();
-            reader.readAsDataURL(img);
-            reader.onload = function(e){
-                var imgUrl=e.target.result;
-                $(obj).addClass('active');
-                var postData = {fileBase64: e.target.result};
-                // postData.imgWidth = 145;
-                // postData.imgHeight = 100;
-                $(obj).find('img').attr('src',imgUrl);
-                var type = _this.data('type');
-                if(type == 'notupload'){
-                    $(obj).find('.img').val(imgUrl);
-                    console.log(1);
-                    return false;
-                }
-                //提交
-                $.post(controller+"uploadFileToTemp",postData,function(msg){
-                    if(msg.status == 1){
-                        uploadsSingleImgFlag = true;
-                        $(obj).find('.img').val(msg.info);
-
-                    }else{
-                        dialog.error(msg.info)
-                    }
-                })
-            }
-        });
-
         //返回
         $('.button_save_black').click(function(){
             location.href = controller + '/manage';
@@ -410,19 +380,22 @@
             });
 
         });
-        //上传单图片和描述
+
+        // 上传图片和描述
         $('body').on('change','.uploadImgDescribe',function () {
             var file = $(this);
             fileList = $(this).get(0).files;
             num=file.data('num');//限制个数
+
             uploadPicDescribe(fileList[0],0,fileList.length);
         });
         //删除
-        $('body').on('click','.delete-picture',function(){
+        $('body').on('click','.uploadSingleEditImg',function(){
             $(this).parents('li').remove();
             //$('.company-video').data('src','');
         });
-});
+    });
+
     //上传图片描述
     function uploadPicDescribe(fil,i,len){
         var img = fil;
@@ -443,7 +416,9 @@
             var imgUrl=e.target.result;
             var img=  $('<img src="" class="upload_img">');
             img.attr("src", imgUrl);
-            var imgAdd = $('<li><a href="javascript:void(0);" class="edit-describe"></a><div class="picture-module active"><input type="file" class="uploadImg uploadSingleEditImg" name=""><a class="delete-picture">X</a></div><div style="width: 200px;"><textarea name="" id='+i+' cols="30" rows="5" placeholder="请填写描述" class="edit-text"></textarea></div></li>');
+            var imgAdd = $('<li>' +
+                    '<div class="picture-module active"><input class="uploadImg uploadSingleEditImg" name="process_img">' +
+                    '</div><div style="width: 200px;"><textarea style="height: 60px;" name="process_text" id='+i+' cols="30" rows="5" placeholder="请填写描述" class="edit-text"></textarea></div></li>');
             imgAdd.find('.picture-module').append(img);
             $('.multi-picture-moduleDes').append(imgAdd);
             if(i<len-1){
