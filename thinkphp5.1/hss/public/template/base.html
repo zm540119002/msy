@@ -222,7 +222,7 @@
                 param.vueObj.buy_quantity += o.num;
             });
         }
-        if(param.clickObj.attr('class').indexOf('add_cart')!==-1 && param.clickObj.attr('class')+.indexOf('reduce')!==-1){ //减
+        if(param.clickObj.attr('class').indexOf('add_cart')!==-1 && param.clickObj.attr('class').indexOf('reduce')!==-1){ //减
             $.each(param.postData.goodsList,function(i,o){
                 param.vueObj.buy_quantity += o.num;
                 param.vueObj.buy_quantity_reduce_judge = true;
