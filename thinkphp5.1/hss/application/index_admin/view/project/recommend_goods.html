@@ -133,45 +133,6 @@
                 })
                 _this.parent().remove();
             });
-            // 提交添加
-            $('body').on('click','.confirm_add',function(){
-                var selectedIds=[];
-                var postData ={};
-                var _this=$(this);
-                $('.selected_goods_list li').each(function () {
-                    var selectedGoods={};
-                    var goodsSelectedId=$(this).data('goods-id');
-                    selectedGoods.project_id=id;
-                    selectedGoods.goods_id=goodsSelectedId;
-                    selectedIds.push(selectedGoods);
-                });
-                if($.isEmptyArray(selectedIds)){
-                    dialog.error('未选择商品');
-                    return false;
-                }
-                postData.selectedIds = selectedIds;
-                var url = module+'Goods/addRelationGoods';
-
-                _this.addClass("nodisabled");//防止重复提交
-                $.ajax({
-                    url: url,
-                    data: postData,
-                    type: 'post',
-                    beforeSend: function(){
-                    },
-                    error:function (xhr) {
-                        dialog.error('AJAX错误');
-                    },
-                    success: function(data){
-                        _this.removeClass("nodisabled");
-                        dialog.msg(data,'',function () {
-                            history.go(-1);
-                        })
-                    }
-                });
-
-            })
-
         });
     </script>
 {/block}

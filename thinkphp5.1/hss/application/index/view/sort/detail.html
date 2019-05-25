@@ -20,14 +20,11 @@
 			{notempty name="promotionList"}
 			{volist name="promotionList" id="vo"}
 			<a href="{:url('Promotion/detail',['id'=>$vo.id])}" data-id="{$vo.id}" class="">
-				<div class="applay_p_item columns_flex l-r-sides">
+				<div class="applay_p_item columns_flex l-r-sides" style="background-image:url({:show_img_handle($vo.thumb_img)})">
 					<div>
-						<div>¥<price>{$vo.price}</price></div>
+						<div class="red">¥<price>{$vo.price}</price></div>
 						<p>{$vo.name}</p>
-						<p>立即进入</p>
-					</div>
-					<div class="group_btn50">
-						<img class="common_default_img" src="{:show_img_handle($vo.thumb_img)}" alt="{$vo.name}">
+						<p class="once-enter">立即进入></p>
 					</div>
 				</div>
 			</a>
@@ -56,6 +53,22 @@
 			<img src="{:show_img_handle($vo)}" alt="" class="common_default_img">
 			{/volist}
 		</p>
+		{notempty name="$info.recommend_goods"}
+		<div class="content-padding content_main ">
+			<p class="content-label">推荐搭配产品</p>
+			<ul class="columns_flex flex-both-side goods-content-list">
+				{volist name="$info.recommend_goods" id="vo"}
+				<li>
+					<a href="{:url('Index/Goods/detail',['id'=>$vo.id])}">
+						<img src="{:show_img_handle($vo.thumb_img)}" alt="{$vo.name}">
+					</a>
+					<p>{$vo.name}</p>
+					<p>规格：{$vo.specification}</p>
+				</li>
+				{/volist}
+			</ul>
+		</div>
+		{/notempty}
 	</section>
 	<!-- 相关培训 -->
 	<section class="project_item hide">
