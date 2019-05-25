@@ -26,9 +26,6 @@
 						<p>{$vo.name}</p>
 						<p class="once-enter">立即进入></p>
 					</div>
-					<!--<div class="group_btn50">
-						<img class="common_default_img" src="" alt="{$vo.name}">
-					</div>-->
 				</div>
 			</a>
 			{/volist}
@@ -138,7 +135,7 @@
 			'type':0,
 			'init_quantity':1,
 			'step_quantity':1,
-			'productList':data
+			'productList':data.data.data
 		};
 		new Vue({
 			el: '#product-select',
