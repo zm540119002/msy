@@ -145,16 +145,18 @@
             }
         }else if(param.data.status==1){ //成功回调
             if(param.data.data.code == '2000'){ //默认
-                if(param.clickObj.attr('class').indexOf('add_cart')!==-1 && param.componentFooterCartMenu){ //加入购物车
+                if(param.clickObj.attr('class').indexOf('add_cart')!==-1 && param.componentFooterCartMenu){ //加入购物车购物数量统计
                     $.each(param.postData.goodsList,function(i,o){
                         param.componentFooterCartMenu.cart_num += o.num;
                     });
-                    dialog.success(param.data.info);
                 }
-                if(param.clickObj.attr('class').indexOf('plus')!==-1 || param.clickObj.attr('class').indexOf('reduce')!==-1){ //
+                if(param.clickObj.attr('class').indexOf('plus')!==-1 || param.clickObj.attr('class').indexOf('reduce')!==-1){ //购物车里的加入购物车
                     $.each(param.postData.goodsList,function(i,o){
                         param.vueObj.buy_quantity += o.num;
                     });
+                }
+                if(param.clickObj.attr('class').indexOf('add_cart')!==-1){ //加入购物车提示
+                    dialog.success(param.data.info);
                 }
             }else if(param.data.data.code == '2001'){ //登录
                 if(param.func && $.isFunction(param.func)){
