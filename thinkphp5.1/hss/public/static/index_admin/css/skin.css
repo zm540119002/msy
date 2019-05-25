@@ -1427,6 +1427,9 @@ filter:alpha(opacity:0);
     -webkit-flex: 1 1 auto;
     flex: 1 1 auto;
 }
+.hss-picture-moduleDes li{
+	margin:0;
+}
 .brand-store-module li{
     width:50%;
     margin:0.15rem 0;
@@ -1506,6 +1509,10 @@ filter:alpha(opacity:0);
 	right:0;
 	top:0;
 	z-index:100;
+}
+.edit-text{
+	width:270px;
+	height:80px;
 }
 /*订单客服售前*/
 .layui-m-layerchild.chatLayer{
