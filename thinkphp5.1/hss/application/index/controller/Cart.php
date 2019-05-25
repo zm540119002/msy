@@ -120,7 +120,7 @@ class Cart extends \common\controller\UserBase {
             return errorMsg(config('custom.not_ajax'));
         }
         $goodsList = input('post.goodsList/a');
-        print_r($goodsList);exit;
+        print_r($goodsList);
         $ids = [];
         foreach ($goodsList as $item=>$value){
             $ids[] = $value;
