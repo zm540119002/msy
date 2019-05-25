@@ -143,7 +143,7 @@
                     <input type="text" :value="buy_quantity" class="f24 product_count" readonly="readonly">
                     <a href="javascript:void(0);" class="add_cart plus" @click="plusCart" :data-jump_url="add_cart_url">+</a>
                 </div>
-                <a href="javascript:void(0);" class="delete_order goodsDel delete_cart">删除</a>
+                <a href="javascript:void(0);" class="delete_order goodsDel delete_cart" @click="delCart">删除</a>
             </div>
         </div>
     </li>
@@ -179,6 +179,7 @@
             },methods: {
                 subtotal_amount_calculate:function(){
                     this.subtotal_amount = this.deal_price * this.buy_quantity;
+                },delCart:function(event){
                 },reduce: function () {
                     //如果开启了样品购买限额
                     if(this.display_quota){
