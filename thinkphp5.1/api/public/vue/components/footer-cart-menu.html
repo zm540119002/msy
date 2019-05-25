@@ -201,11 +201,9 @@
                         this.buy_quantity += this.step_quantity;
                     }
                 },reduceCart: function (event) {
-                    if(this.buy_quantity>this.init_quantity){
+                    if(this.buy_quantity>1){
                         this.buy_quantity -= this.step_quantity;
                     }else{
-                        console.log(this.buy_quantity);
-                        console.log(this.init_quantity);
                         return false;
                     }
                     let postData = {
