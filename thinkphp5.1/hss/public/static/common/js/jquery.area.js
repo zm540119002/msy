@@ -553,9 +553,17 @@ var areaObject={
 	/*选择城市*/
 	selectC:function(p,c) {
 		areaCont = "";
-		for (var k=0; k<district[p][c].length; k++) {
-			areaCont += '<li onClick="areaObject.selectD(' + p + ',' + c + ',' + k + ');">' + district[p][c][k] + '</li>';
+		var lists=$('#areaList');
+		if(lists.hasClass('provinces')){
+			for (var k=0; k<district[p][c].length; k++) {
+				areaCont += '<li onClick="">' + district[p][c][k] + '</li>';
+			}
+		}else{
+			for (var k=0; k<district[p][c].length; k++) {
+				areaCont += '<li onClick="areaObject.selectD(' + p + ',' + c + ',' + k + ');">' + district[p][c][k] + '</li>';
+			}
 		}
+	
 		areaList.html(areaCont);
 		$("#areaBox").scrollTop(0);
 		var sCity = city[p][c];
