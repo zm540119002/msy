@@ -85,7 +85,6 @@ class Promotion extends \common\controller\Base{
         ];
 
         $promotionList= $model->getList($condition);
-
         $modelPromotionGoods = new \app\index\model\PromotionGoods();
 
         $promotionList = $modelPromotionGoods->getListGoodsPrice($promotionList);
