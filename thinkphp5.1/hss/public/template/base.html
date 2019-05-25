@@ -135,7 +135,12 @@
             }else if(param.data.data.code == '1001'){ //登录
                 if(param.clickObj.attr('class').indexOf('add_cart')!==-1 && param.postData){ //加入购物车
                     editLocalStorageCartList(param);
-                }else{
+                }else if(param.clickObj.attr('class').indexOf('add_cart')!==-1 && param.postData){
+                    console.log(125);
+                    return false;
+                    editLocalStorageCartList(param);
+                }
+                else{
                     loginDialogTrigger();
                 }
             }else if(param.data.data.code=='1002'){ //授权
