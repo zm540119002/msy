@@ -44,6 +44,7 @@
 						:product_src="productInfo.thumb_img"
 						:init_quantity="parseInt(init_quantity)"
 						:step_quantity="parseInt(step_quantity)"
+						:type="type"
 				></product-select>
 			</ul>
 		</section>
@@ -75,9 +76,17 @@
 			:add_cart_call_back="add_cart_call_back"
 	></footer-cart-menu>
 </div>
+{/block}
+{block name="script"}
+<script type="text/javascript" src="api_common_js/swiper.min.js"></script>
 <script type="text/javascript">
 	function getJsonListCallBack(data){
+		if(data.status==0){
+			dialog.error(data.info);
+			return false;
+		}
 		param = {
+			'type':0,
 			'init_quantity':1,
 			'step_quantity':1,
 			'productList':data.data.data
@@ -89,30 +98,25 @@
 			}
 		});
 	}
-</script>
-{/block}
-{block name="script"}
-<script type="text/javascript" src="api_common_js/swiper.min.js"></script>
-<script type="text/javascript">
-
-	// 获取该场景下的商品
-	var config = {
-		url:module+'Goods/getRelationGoods',
-		requestEnd:false,
-		loadTrigger:false,
-		currentPage:1,
-		postData:{
-			id:'{$info.id}',
-			relation:'{$relation}',
-			pageSize:10,
-			page:1
-		},
-		callBack:getJsonListCallBack
-	};
 	$(function(){
-		//初始化场景商品页面
+		// 初始化场景商品页面
+		var config = {
+			url:module+'Goods/getRelationGoods',
+			requestEnd:false,
+			loadTrigger:false,
+			postData:{
+				id:'{$info.id}',
+				relation:'{$relation}',
+				pageSize:10,
+				page:1
+			},
+			callBack:getJsonListCallBack
+		};
 		getJsonList(config);
 	});
+</script>
+
+<script type="text/javascript">
 	$(function(){
 		var id = '{$info.id}';
 		var date=getWeek();
