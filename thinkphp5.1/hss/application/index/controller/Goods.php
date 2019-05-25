@@ -338,7 +338,9 @@ class Goods extends \common\controller\Base{
             ],
         ];
 
-        return $model -> pageQuery($condition);
+        $list = $model -> pageQuery($condition);
+        $this->successMsg('成功',$list);
+        //return $model -> pageQuery($condition);
         return $model->getLastSql();
     }
 }
