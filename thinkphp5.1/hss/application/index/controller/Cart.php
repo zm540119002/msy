@@ -123,7 +123,7 @@ class Cart extends \common\controller\UserBase {
         print_r($goodsList);
         $ids = [];
         foreach ($goodsList as $item=>$value){
-            $ids[] = $value;
+            $ids[] = $value['goods_id'];
         }
         return $ids;
         $model = new \app\index\model\Cart();
