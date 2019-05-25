@@ -96,8 +96,7 @@
                     editLocalStorageCartList(param);
                 }else if(param.clickObj.attr('class').indexOf('delete_cart')!==-1 && param.postData){
                     delLocalStorageCartList(param);
-                }
-                else{
+                }else{
                     loginDialogTrigger();
                 }
             }else if(param.data.data.code=='1002'){ //授权
@@ -121,6 +120,9 @@
                         param.vueObj.buy_quantity += o.num;
                         param.vueObj.buy_quantity_reduce_judge = true;
                     });
+                }
+                if(param.clickObj.attr('class').indexOf('delete_cart')!==-1 && param.postData){ //删除
+                    param.clickObj.parents('li').remove();
                 }
                 if(param.clickObj.attr('class').indexOf('add_cart')!==-1
                         && !(param.clickObj.attr('class').indexOf('plus')!==-1 || param.clickObj.attr('class').indexOf('reduce')!==-1)
@@ -212,13 +214,13 @@
             }
         });
         if(goodsListNew.length){
-            //保存购物车
+            //删除后保存本地购物车
             localStorage.cartList = JSON.stringify({'goodsList':goodsListNew});
         }else{
-            //保存购物车
+            //清空本地购物车
             localStorage.removeItem("cartList");
-            //localStorage.cartList = '';
         }
+        param.clickObj.parents('li').remove();
     }
 </script>
 {/block}
