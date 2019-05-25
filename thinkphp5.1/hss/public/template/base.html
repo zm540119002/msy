@@ -96,8 +96,7 @@
                     editLocalStorageCartList(param);
                 }else if(param.clickObj.attr('class').indexOf('delete_cart')!==-1 && param.postData){
                     delLocalStorageCartList(param);
-                }
-                else{
+                }else{
                     loginDialogTrigger();
                 }
             }else if(param.data.data.code=='1002'){ //授权
@@ -217,7 +216,6 @@
         }else{
             //保存购物车
             localStorage.removeItem("cartList");
-            //localStorage.cartList = '';
         }
     }
 </script>
