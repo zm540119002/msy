@@ -121,6 +121,9 @@
                         param.vueObj.buy_quantity_reduce_judge = true;
                     });
                 }
+                if(param.clickObj.attr('class').indexOf('delete_cart')!==-1 && param.postData){ //删除
+                    param.clickObj.parents('li').remove();
+                }
                 if(param.clickObj.attr('class').indexOf('add_cart')!==-1
                         && !(param.clickObj.attr('class').indexOf('plus')!==-1 || param.clickObj.attr('class').indexOf('reduce')!==-1)
                 ){ //包含add_cart，但是不能包含plus 或者 reduce才提示
@@ -211,10 +214,11 @@
             }
         });
         if(goodsListNew.length){
-            //保存购物车
+            //删除后保存本地购物车
             localStorage.cartList = JSON.stringify({'goodsList':goodsListNew});
+            param.clickObj.parents('li').remove();
         }else{
-            //保存购物车
+            //清空本地购物车
             localStorage.removeItem("cartList");
         }
     }
