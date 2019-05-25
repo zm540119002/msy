@@ -554,9 +554,6 @@ var areaObject={
 	/*选择城市*/
 	selectC:function(p,c) {
 		areaCont = "";
-		if(pType==1){
-			clockArea();
-		}
 		for (var k=0; k<district[p][c].length; k++) {
 			areaCont += '<li onClick="areaObject.selectD(' + p + ',' + c + ',' + k + ');">' + district[p][c][k] + '</li>';
 		}
@@ -576,6 +573,24 @@ var areaObject={
 			}
 		}
 		$("#backUp").attr("onClick", "areaObject.selectP(" + p + ");");
+		if(pType==1){
+			clockArea();
+			$(".express-area .area_address").html(expressArea);
+			if(!areaObject.provinceCityD.length){
+				
+				for(var i=0;i<arguments.length;i++){
+						areaObject.provinceCityD+=arguments[i]+',';
+					}
+					$('.area-address-name').val(expressArea).data('key',areaObject.provinceCityD);
+					// return false;
+				}
+			areaObject.provinceCityD=[];
+			for(var i=0;i<arguments.length;i++){
+				areaObject.provinceCityD+=arguments[i]+',';
+			}
+			$('.area-address-name').val(expressArea).data('key',areaObject.provinceCityD);
+			return expressArea;
+			}
 		return sCity;
 	},
 
