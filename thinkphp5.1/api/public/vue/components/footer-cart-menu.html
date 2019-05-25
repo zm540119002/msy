@@ -136,7 +136,7 @@
         <div class="cart_list_r">
             <p>{{product_name}}</p>
             <div>商品规格：<span>{{specification}}</span></div>
-            <div class="commodity_purchaser f24"><span class="pink">￥{{deal_price}}</span></div>
+            <div class="commodity_purchaser f24"><span class="pink">￥{{deal_price}}{{index}}</span></div>
             <div class="purchase_goods_num cart_goods_operate">
                 <div class="quantity_wrapper selected-number">
                     <a href="javascript:void(0);" class="add_cart reduce" @click="reduceCart" :data-jump_url="add_cart_url">-</a>
