@@ -106,7 +106,7 @@
 						return false;
 					}
 					let _this = this;
-					if(data.data.current_page==1){
+					if(data.data.current_page==1&&$.isEmptyArray(data.data.data)){
 						_this.type=5;
 					}
 					$.each(data.data.data,function(i,o){
