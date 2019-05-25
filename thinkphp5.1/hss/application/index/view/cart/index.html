@@ -107,7 +107,12 @@
 					}
 					let _this = this;
 					if(data.data.current_page==1&&$.isEmptyArray(data.data.data)){
-						_this.productList = [0];
+						_this.productList = [
+							{
+								deal_price:0,
+								num:1,
+							}
+						];
 						_this.type=5;
 					}
 					$.each(data.data.data,function(i,o){
