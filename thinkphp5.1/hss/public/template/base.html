@@ -10,20 +10,20 @@
     var user_id = "{$user.id}";
     /**获取json格式列表数据
      */
-    function getJsonListDefaultCallBack(data){
-        return data.data.data;
+    function getJsonListDefaultCallBack(data){
+        return data.data.data;
     }
-    function getJsonList(config){
+    function getJsonList(config){
         //提交路径
-        config.url = config.url?config.url:action;
+        config.url = config.url?config.url:action;
         //要提交的数据
-        config.postData = config.postData?config.postData:{};
-        config.postData.page = config.postData.page ? config.postData.page : 1;
-        config.postData.pageSize = config.postData.pageSize ? config.postData.pageSize:4;
+        config.postData = config.postData?config.postData:{};
+        config.postData.page = config.postData.page ? config.postData.page : 1;
+        config.postData.pageSize = config.postData.pageSize ? config.postData.pageSize:4;
         //请求结束标志
         if(config.requestEnd){
-            config.loadTrigger = true;
-            return false;
+            config.loadTrigger = true;
+            return false;
         }
         $.ajax({
             url: config.url,
@@ -41,9 +41,47 @@
                 if(data.data.data.length<config.postData.pageSize){
                     config.requestEnd = true;
                 }
-                config.postData.page ++;
+                config.postData.page ++;
                 config.loadTrigger = true;
                 config.callBack?config.callBack(data):getJsonListDefaultCallBack(data);
+            }
+        });
+    }
+    /**vue版获取json格式列表数据
+     */
+    function vueVersionGetJsonListDefaultCallBack(data){
+        console.log(data);
+    }
+    function vueVersionGetJsonList(vueObj){
+        //提交路径
+        if(!vueObj.getJsonListParam.url){
+            dialog.error('缺少url！');
+            return false;
+        }
+        //请求结束标志
+        if(vueObj.getJsonListParam.requestEnd){
+            vueObj.getJsonListParam.loadTrigger = false;
+            return false;
+        }
+        $.ajax({
+            url: vueObj.getJsonListParam.url,
+            data: vueObj.getJsonListParam.postData,
+            type: 'get',
+            beforeSend: function(){
+                $('.loading').show();
+            },
+            error:function (xhr) {
+                $('.loading').hide();
+                dialog.error('AJAX错误');
+            },
+            success: function(data){
+                $('.loading').hide();
+                vueObj.getJsonListParam.loadTrigger = true;
+                if(data.data && (data.data.data.length<vueObj.getJsonListParam.postData.pageSize)){
+                    vueObj.getJsonListParam.requestEnd = true;
+                }
+                vueObj.getJsonListParam.postData.page ++;
+                vueObj.getJsonListParam.callBack?vueObj.getJsonListParam.callBack(data):vueVersionGetJsonListDefaultCallBack(data);
             }
         });
     }
@@ -80,6 +118,7 @@
                     postData:config.postData,
                     componentFooterCartMenu:config.componentFooterCartMenu,
                     clickObj:config.clickObj,
+                    vueObj:config.vueObj,
                     reduce:config.reduce,
                     jump_url:data.data && data.data.url?data.data.url:jump_url,
                     func:config.func
@@ -111,6 +150,12 @@
                 if(param.clickObj.attr('class').indexOf('add_cart')!==-1 && param.componentFooterCartMenu){ //加入购物车
                     $.each(param.postData.goodsList,function(i,o){
                         param.componentFooterCartMenu.cart_num += o.num;
+                        param.vueObj.buy_quantity += o.num;
+                    });
+                }
+                if(param.clickObj.attr('class').indexOf('add_cart')!==-1){ //
+                    $.each(param.postData.goodsList,function(i,o){
+                        param.vueObj.buy_quantity += o.num;
                     });
                 }
                 dialog.error(param.data.info);

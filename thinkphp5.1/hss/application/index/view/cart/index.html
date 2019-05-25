@@ -1,31 +1,51 @@
 {extend name="template/base.html" /}
+{block name="css-customize"}
+<link rel="stylesheet" href="public_css/project_public.css">
+{/block}
 {block name="title"}购物车{/block}
 {block name="content"}
 <section class="no_cart_data" style="display:none;">
 	<li class="no_data"><img src="https://www.worldview.com.cn/static/common/img/no-cart.png" alt=""></li>
 </section>
 <article class="f24">
-	<section class="header_title separation-line">
-		<a href="javascript:void(0);" class="back_prev_page"></a>
-		<h2 class="f24">购物车</h2>
-	</section>
+	{if $type}
+	{else /}
+		<section class="header_title separation-line">
+			<a href="javascript:void(0);" class="back_prev_page"></a>
+			<h2 class="f24">购物车</h2>
+		</section>
+	{/if}
 	<!--产品列表-->
-	<ul class="cart_goods_list list" id="list">
-		<div id="product-select">
-			<product-select
-					v-for="productInfo in productList"
-					:key="productInfo.id"
-					:product_id="productInfo.id"
-					:deal_price="Number(productInfo.bulk_price)"
-					:init_quantity="parseInt(productInfo.num)"
-					:step_quantity="parseInt(step_quantity)"
-					:product_name="productInfo.name"
-					:product_src="productInfo.thumb_img"
-					:specification="productInfo.specification"
-					:type="type"
-			></product-select>
-		</div>
+	<ul class="cart_goods_list list" id="product-list">
+		<product-select
+				v-for="productInfo in productList"
+				:key="productInfo.id"
+				:product_id="productInfo.id"
+				:deal_price="Number(productInfo.bulk_price)"
+				:init_quantity="parseInt(productInfo.num)"
+				:step_quantity="parseInt(step_quantity)"
+				:product_name="productInfo.name"
+				:product_src="productInfo.thumb_img"
+				:specification="productInfo.specification"
+				:type="type"
+		></product-select>
 	</ul>
+	{if $type}
+	<div class="project_wrapper content_main content-padding">
+		<div class="mod-part-title">
+			<div class="mod-part-title-wrap">
+				<span class="icon-title left"></span>
+				<span class="title">新零售精选</span>
+				<span class="icon-title right"></span>
+			</div>
+		</div>
+		<div id="scroller-wrapper" class="list_wrapper">
+			<ul class="columns_flex flex-both-side goods-content-list" id="goodsList">
+
+			</ul>
+		</div>
+	</div>
+	{/if}
 </article>
 {/block}
 {block name="footer"}
@@ -59,68 +79,95 @@
 </script><script type="text/javascript">
 	$(function(){
 		let param = {
-			'type':4,
-			'step_quantity':1,
-			'productList':[]
+			type:4,
+			step_quantity:1,
+			productList:[],
+			getJsonListParam:{
+				url:module+'Goods/getCartGoodsList',
+				requestEnd:false,
+				loadTrigger:true,
+				postData:{
+					cartList:localStorage.cartList,
+					pageSize:4,
+					page:1
+				}
+			}
 		};
 		new Vue({
-			el: '#product-select',
+			el: '#product-list',
 			data:function(){
 				return param;
+			},methods:{
+				test:function(){
+					let _thisVue = this;
+					vueVersionGetJsonList(_thisVue);
+				},getJsonListCallBack:function(data){
+					console.log(data);
+					if(data.status==0){
+						dialog.error(data.info);
+						return false;
+					}
+					let _this = this;
+					$.each(data.data.data,function(i,o){
+						_this.productList.push(o);
+					});
+				}
+			},created:function(){
+				let _thisVue = this;
+				_thisVue.getJsonListParam.callBack = _thisVue.getJsonListCallBack;
+				vueVersionGetJsonList(_thisVue);
+				//下拉加载
+				$(window).on('scroll',function(){
+					if(_thisVue.getJsonListParam.loadTrigger
+							&& $(document).scrollTop()+$(window).height()+200>$(document).height()){
+						//第一次触发后，先停止触发，去其他地方重新放开
+						_thisVue.getJsonListParam.loadTrigger = false;
+						vueVersionGetJsonList(_thisVue);
+					}
+				});
 			}
 		});
 	});
-	function getJsonListCallBack(data){
-		console.log(data.data.data);
-		if(data.status==0){
-			dialog.error(data.info);
-			return false;
-		}
-		return data.data.data;
-	}
-	var getJsonListParam = {
-		url:module+'Goods/getCartGoodsList',
-		requestEnd:false,
-		loadTrigger:false,
-		postData:{
-			pageSize:4,
-			page:1
-		},
-		callBack:getJsonListCallBack
-	};
 </script>
+{if $type}
+<style>
+	.group_cart_nav{
+		bottom:0.88rem;
+	}
+</style>
+{include file="template/footer_project.html" /}
+{/if}
+
 {/block}
 {block name="script"}
 <script type="text/javascript">
+	// 新零售商品获取配置
+	var config_1 = {
+		url:module+'Goods/getList',
+		requestEnd:false,
+		loadTrigger:false,
+		currentPage:1,
+		container:$("#goodsList")
+	};
+	var postData_1 = {
+		pageSize:10,
+		pageType:'index',
+		is_selection:1
+	};
 	$(function(){
-		// var user_id = '{$user.id}';
-		// 初始化购物车商品
-		var cartList = localStorage.cartList; //获取存储购物车商品信息
-		postData.cartList = cartList;
-		getJsonList(getJsonListParam);
-		// if(user_id){
-		//
-		// }else {
-		// 	getJsonListParam.url = module+'Goods/getCartGoodsList';
-		// 	var cartList = localStorage.cartList; //获取存储购物车商品信息
-		// 	postData.cartList = cartList;
-		// 	getPagingList(getJsonListParam,postData);
-		// }
-		//下拉加载
-		$(window).on('scroll',function(){
-			if(getJsonListParam.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
-				getJsonListParam.loadTrigger = false;
-				getJsonList(getJsonListParam);
-				// if(user_id){
-				// 	getJsonList(getJsonListParam);
-				// }else {
-				// 	getJsonListParam.url = module+'Goods/getCartGoodsList';
-				// 	var cartList = localStorage.cartList; //获取存储购物车商品信息
-				// 	postData.cartList = cartList;
-				// 	getPagingList(getJsonListParam,postData);
-				// }
-			}
-		});
+		//购物车页面的类型
+		var type = '{$type}';
+		if(type){
+			//初始化零售商品
+			getPagingList(config_1,postData_1);
+			//下拉加载
+			$(window).on('scroll',function(){
+				if(config_1.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
+					config_1.loadTrigger = false;
+					getPagingList(config_1,postData_1);
+				}
+			});
+		}
 	});
 </script>
 {/block}

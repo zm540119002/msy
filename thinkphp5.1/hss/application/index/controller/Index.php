@@ -2,6 +2,8 @@
 namespace app\index\controller;
 
 // 前台首页
+use think\Console;
+
 class Index extends \common\controller\Base{
     /**
      * 促销列表，场景列表，商品列表 -ajax
@@ -78,7 +80,7 @@ class Index extends \common\controller\Base{
 
     }
 
-    // 只有结算页面
+    // 购物车管理页面
     public function cartIndex(){
         if(request()->isAjax()){
         }else{
@@ -89,19 +91,13 @@ class Index extends \common\controller\Base{
             array_push($unlockingFooterCart['menu'][1]['class'],'group_btn50');
             array_push($unlockingFooterCart['menu'][2]['class'],'group_btn30');
             $this->assign('unlockingFooterCart',json_encode($unlockingFooterCart));
+            $type = input('type');
+            $this->assign('type',$type);
+            if($type){
+                // 底部菜单，见配置文件custom.footer_menu
+                $this->assign('currentPage',request()->controller().'/'.request()->action());
+            }
             return $this->fetch('cart/index');
-        }
-    }
-
-    // 导航页-结算
-    public function cartManage(){
-        if(request()->isAjax()){
-        }else{
-            $unlockingFooterCart = unlockingFooterCartConfig([10,0,9]);
-            $this->assign('unlockingFooterCart', $unlockingFooterCart);
-            // 底部菜单，见配置文件custom.footer_menu
-            $this->assign('currentPage',request()->controller().'/'.request()->action());
-            return $this->fetch('cart/manage');
         }
     }
 

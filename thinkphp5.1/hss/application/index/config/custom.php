@@ -40,9 +40,9 @@ return [
             'a'    => "href=javascript:void(0) class='async_login' data-jump_url=".url('CityPartner/index'),
             'icon' => 'business',
         ],
-        'Index/cartManage' => [
+        'Index/cartIndex' => [
             'name' => '采购车',
-            'a'    => 'href='.url('Index/cartManage'),
+            'a'    => 'href='.url('Index/cartIndex',['type'=>1]),
 //            'a'    => "href=javascript:void(0) class='my_bottom_cart async_login' data-jump_url=".url('Cart/manage'),
             'icon' => 'cart',
         ],

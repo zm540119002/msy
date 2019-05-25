@@ -45,10 +45,6 @@
                         <img class="left" :src="product_src?('public_uploads/' + product_src):('api_common_img/default/no_pic_100.jpg') " alt="">
                     </a>
                 </div>
-                <div class="middle">
-                    <div></div>
-                    <div class="red subtotal_amount">￥{{ parseFloat(subtotal_amount).toFixed(2) }}</div>
-                </div>
                 <div  class="right">
                     <div class="product_name">
                         <p class="text-intro">{{product_name}}</p>
@@ -173,15 +169,13 @@
                     arr['eg'] = '默认值示范';
                     return arr;
                 }}
-            },
-            data: function () {
+            },data: function () {
                 return {
                     'buy_quantity':this.init_quantity,
                     'subtotal_amount':0,
                     'add_cart_url':'{:url("Cart/addCart")}'
                 };
-            },
-            methods: {
+            },methods: {
                 subtotal_amount_calculate:function(){
                     this.subtotal_amount = this.deal_price * this.buy_quantity;
                 },reduce: function () {
@@ -210,10 +204,11 @@
                     let postData = {
                         goodsList:[{
                             goods_id: this.product_id,
-                            num: this.step_quantity
+                            num: -this.step_quantity
                         }]
                     };
                     let _thisJquery = $(event.currentTarget);
+                    let _thisVue = this;
                     login_success_callback_private = function(){
                         _thisJquery.click()
                     };
@@ -222,6 +217,7 @@
                     };
                     let config = {
                         clickObj:_thisJquery,
+                        vueObj:_thisVue,
                         postData:postData,
                         reduce:true,
                         func:function(){
@@ -237,6 +233,7 @@
                         }]
                     };
                     let _thisJquery = $(event.currentTarget);
+                    let _thisVue = this;
                     login_success_callback_private = function(){
                         _thisJquery.click()
                     };
@@ -245,6 +242,7 @@
                     };
                     let config = {
                         clickObj:_thisJquery,
+                        vueObj:_thisVue,
                         postData:postData,
                         func:function(){
                             _thisJquery.click();
@@ -340,8 +338,7 @@
                     buy_now_call_back: {type: Function,default: function(param){
                         console.log(param);
                     }}
-                },
-                data: function () {
+                },data: function () {
                     return {
                         total_amount:0,
                         cart_num:this.cart_init_num,

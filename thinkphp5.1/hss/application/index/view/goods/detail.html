@@ -32,22 +32,20 @@
 				<li data-id='{$info.id}' data-buy_type="1" id="li-id-{$info.id}">
 					<div class="top_radius f20 top_module">
 						<!--产品列表-->
-						<ul class="goods_list list" id="list">
-							<div id="product-select">
-								<product-select
-										v-for="productInfo in productList"
-										:key="productInfo.id"
-										:product_id="productInfo.id"
-										:deal_price="Number(productInfo.deal_price)"
-										:product_name="productInfo.name"
-										:product_src="productInfo.thumb_img"
-										:specification="productInfo.specification"
-										:specification_unit="productInfo.specification_unit"
-										:init_quantity="parseInt(init_quantity)"
-										:step_quantity="parseInt(step_quantity)"
-										:type="type"
-								></product-select>
-							</div>
+						<ul class="goods_list list" id="product-select">
+							<product-select
+									v-for="productInfo in productList"
+									:key="productInfo.id"
+									:product_id="productInfo.id"
+									:deal_price="Number(productInfo.deal_price)"
+									:product_name="productInfo.name"
+									:product_src="productInfo.thumb_img"
+									:specification="productInfo.specification"
+									:specification_unit="productInfo.specification_unit"
+									:init_quantity="parseInt(init_quantity)"
+									:step_quantity="parseInt(step_quantity)"
+									:type="type"
+							></product-select>
 						</ul>
 						<div class="title_name goods_title f28">
 							{$info.headline}
