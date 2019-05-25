@@ -240,6 +240,7 @@
             return false;
         }
         let goodsListOld = (JSON.parse(localStorage.cartList)).goodsList;
+        console.log(goodsListOld);
         let goodsListNew = [];
         $.each(goodsListOld,function(i,o){
             let find = false;
