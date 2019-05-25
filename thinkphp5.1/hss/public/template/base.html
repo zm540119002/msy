@@ -240,7 +240,6 @@
             return false;
         }
         let goodsListOld = (JSON.parse(localStorage.cartList)).goodsList;
-        console.log(goodsListOld);
         let goodsListNew = [];
         $.each(goodsListOld,function(i,o){
             let find = false;
@@ -253,14 +252,13 @@
                 goodsListNew.push(o);
             }
         });
-        console.log(goodsListNew);
-        return false;
         if(goodsListNew.length){
             //保存购物车
             localStorage.cartList = JSON.stringify({'goodsList':goodsListNew});
         }else{
             //保存购物车
-            localStorage.cartList = '';
+            localStorage.removeItem("cartList");
+            //localStorage.cartList = '';
         }
     }
 </script>
