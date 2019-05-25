@@ -201,6 +201,11 @@
                         this.buy_quantity += this.step_quantity;
                     }
                 },reduceCart: function (event) {
+                    if(this.buy_quantity>this.init_quantity){
+                        this.buy_quantity -= this.step_quantity;
+                    }else{
+                        return false;
+                    }
                     let postData = {
                         goodsList:[{
                             goods_id: this.product_id,
