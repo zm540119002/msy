@@ -123,16 +123,18 @@
 					console.log(param);
 					return false;
 					let _this = this;
-					let find = -1;
+					let findIndex = -1;
 					$.each(this.productList,function(i,o){
-						$.each(param.goodsList,function(ii,oo){
+						$.each(param.postData.goodsList,function(ii,oo){
 							if(o.id == oo.goods_id){
-								find = i;
+								findIndex = i;
+								param.vueObj.buy_quantity -= oo.num;
 							}
 						});
 					});
-					if(find !== -1){
-						Vue.delete(_this.productList,find);
+					if(findIndex !== -1){
+						Vue.delete(_this.productList,findIndex);
+
 					}
 				}
 			},computed: {
