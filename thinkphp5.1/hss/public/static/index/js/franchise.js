@@ -3,7 +3,7 @@ $(function(){
     var area_address,
         applicantData={};
     //填写基本资料
-    $('body').on('click','.one-step',function(){
+    $('body').on('click','.search-city',function(){
         var area_address =$('.area-address-name').getArea();
         // applicantData=$('.applicant_form').serializeObject();
         // var content='';
