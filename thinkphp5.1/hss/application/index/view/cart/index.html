@@ -120,16 +120,15 @@
 						_this.productList.push(o);
 					});
 				},delCart:function(param){
-					console.log(this.productList);
 					$.each(this.productList,function(i,o){
 						$.each(param,function(ii,oo){
+							console.log(o);
+							console.log(oo);
 							if(o.id == oo.goods_id){
 								Vue.delete(this.productList,i);
 							}
 						});
 					});
-					console.log(this.productList);
-					console.log(param);
 				}
 			},computed: {
 				editProductList:function(param){
