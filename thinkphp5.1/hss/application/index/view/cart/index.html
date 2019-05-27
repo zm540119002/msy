@@ -122,13 +122,13 @@
 				},delCart:function(param){
 					let _this = this;
 					let findIndex = -1;
-					let findNum = 0;
 					$.each(this.productList,function(i,o){
 						$.each(param.postData.goodsList,function(ii,oo){
 							if(o.id == oo.goods_id){
 								findIndex = i;
-								findNum = oo.num;
-								console.log(findNum);
+								if(findIndex !== -1){
+									Vue.delete(_this.productList,i);
+								}
 								console.log(param.vueObj.buy_quantity);
 								param.vueObj.buy_quantity -= oo.num;
 								console.log(param.vueObj.buy_quantity);
