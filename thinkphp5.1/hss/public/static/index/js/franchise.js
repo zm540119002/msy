@@ -8,10 +8,6 @@ $(function(){
         var arr=[[18,0],[18,1],[8,0],[7,1]];
         var cityData=[];
         cityData.push(parseInt(area_address[0]),parseInt(area_address[1]));
-       
-        //postData.area = area_address[2];
-        console.log(cityData);
-        console.log(arrayHasElement(arr,cityData));
         var provinces=arrayHasElement(arr,cityData);
         if(!provinces){
             layer.open({
@@ -63,7 +59,6 @@ $(function(){
     // 弹出支付方式
     $('body').on('click','.recharge_money',function(){
         var settlementMethod=$('.settlementMethod').html();
-        console.log(applicantData);
         layer.open({
             type: 1
             ,anim: 'up'
