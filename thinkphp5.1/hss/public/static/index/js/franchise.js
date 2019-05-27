@@ -64,7 +64,7 @@ $(function(){
         if(content){
             dialog.error(content);
         }else{
-            $('.weui-flex-item:eq(0)').removeClass('current');
+            $('.weui-flex-item:eq(0),.weui-flex-item:eq(1)').removeClass('current');
             $('.weui-flex-item:eq(2)').addClass('current');
             $('.apply-module:eq(1)').hide();
             $('.apply-module:eq(2)').show();
