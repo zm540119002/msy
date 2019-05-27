@@ -127,7 +127,7 @@
 							if(o.id == oo.goods_id){
 								findIndex = i;
 								if(findIndex !== -1){
-									Vue.delete(_this.productList,i);
+									Vue.delete(_this.productList,findIndex);
 								}
 								console.log(param.vueObj.buy_quantity);
 								param.vueObj.buy_quantity -= oo.num;
