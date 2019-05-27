@@ -123,12 +123,14 @@
 					let _this = this;
 					let findIndex = -1;
 					$.each(this.productList,function(i,o){
+						let findNum = 0;
 						$.each(param.postData.goodsList,function(ii,oo){
 							if(o.id == oo.goods_id){
 								findIndex = i;
-								param.vueObj.buy_quantity -= oo.num;
+								findNum = oo.num;
 							}
 						});
+						param.vueObj.buy_quantity -= findNum;
 					});
 					if(findIndex !== -1){
 						Vue.delete(_this.productList,findIndex);
