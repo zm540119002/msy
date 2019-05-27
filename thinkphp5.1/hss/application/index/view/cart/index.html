@@ -121,8 +121,8 @@
 					});
 				},delCart:function(param){
 					let _this = this;
+					let findIndex = -1;
 					$.each(this.productList,function(i,o){
-						let findIndex = -1;
 						$.each(param.postData.goodsList,function(ii,oo){
 							if(o.id == oo.goods_id){
 								findIndex = i;
@@ -131,11 +131,6 @@
 								console.log(param.vueObj.buy_quantity);
 							}
 						});
-						if(findIndex !== -1){
-							console.log(findIndex);
-							console.log(i);
-//							Vue.delete(_this.productList,findIndex);
-						}
 					});
 					if(findIndex !== -1){
 						Vue.delete(_this.productList,findIndex);
