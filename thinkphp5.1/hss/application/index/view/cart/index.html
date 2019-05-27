@@ -153,15 +153,6 @@
 				bus.$on('delete_cart', function(param){
 					_thisVue.delCart(param);
 				});
-			},watch: {
-				productList: {
-					handler(newVal, oldVal) {
-						console.log(newVal);
-//						console.log(oldVal);
-					},
-					deep: false,
-					immediate: true
-				}
 			}
 		});
 	});
