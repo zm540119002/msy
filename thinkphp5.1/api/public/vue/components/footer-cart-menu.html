@@ -177,7 +177,7 @@
             },data: function () {
                 return {
                     buy_quantity:this.init_quantity,
-                    buy_quantity_reduce_judge:true,
+                    buy_quantity_reduce_trigger:true,
                     subtotal_amount:0,
                     checked:this.init_checked,
                     add_cart_url:'{:url("Cart/addCart")}',
@@ -187,13 +187,24 @@
                 subtotal_amount_calculate:function(){
                     this.subtotal_amount = this.deal_price * this.buy_quantity;
                 },delCart:function(event){
-                    let _thisJquery = $(event.currentTarget);
-                    let _thisVue = this;
+                    if(this.buy_quantity_reduce_trigger){
+                        this.buy_quantity_reduce_trigger = false;
+                    }else{
+                        return false;
+                    }
                     let postData = {
                         goodsList:[{
                             goods_id: this.product_id,
                             num: -this.buy_quantity
                         }]
+                    };
+                    let _thisJquery = $(event.currentTarget);
+                    let _thisVue = this;
+                    login_success_callback_private = function(){
+                        _thisJquery.click()
+                    };
+                    register_success_callback_private = function(){
+                        _thisJquery.click()
                     };
                     let config = {
                         clickObj:_thisJquery,
@@ -228,8 +239,8 @@
                         this.buy_quantity += this.step_quantity;
                     }
                 },reduceCart: function (event) {
-                    if(this.buy_quantity_reduce_judge && this.buy_quantity>1){
-                        this.buy_quantity_reduce_judge = false;
+                    if(this.buy_quantity_reduce_trigger && this.buy_quantity>1){
+                        this.buy_quantity_reduce_trigger = false;
                     }else{
                         return false;
                     }

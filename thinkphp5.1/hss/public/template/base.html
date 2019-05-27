@@ -118,7 +118,7 @@
                 if(param.clickObj.attr('class').indexOf('add_cart')!==-1 && param.clickObj.attr('class').indexOf('reduce')!==-1){ //减
                     $.each(param.postData.goodsList,function(i,o){
                         param.vueObj.buy_quantity += o.num;
-                        param.vueObj.buy_quantity_reduce_judge = true;
+                        param.vueObj.buy_quantity_reduce_trigger = true;
                     });
                 }
                 if(param.clickObj.attr('class').indexOf('delete_cart')!==-1 && param.postData){ //删除
@@ -187,7 +187,7 @@
         if(param.clickObj.attr('class').indexOf('add_cart')!==-1 && param.clickObj.attr('class').indexOf('reduce')!==-1){ //减
             $.each(param.postData.goodsList,function(i,o){
                 param.vueObj.buy_quantity += o.num;
-                param.vueObj.buy_quantity_reduce_judge = true;
+                param.vueObj.buy_quantity_reduce_trigger = true;
             });
         }
         if(param.clickObj.attr('class').indexOf('add_cart')!==-1
