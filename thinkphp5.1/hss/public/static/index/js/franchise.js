@@ -28,19 +28,26 @@ $(function(){
         var provinces=arrayHasElement(arr,postData);
         if(!provinces){
             layer.open({
-                content:'所查询的城市暂时没有空缺<br/>备注：城市合伙人可能已被签约，或者正处于保留状态，建议过段时间再查询。',
+                content:'所查询的城市可以申请城市合伙人<br/>声明：同一城市可能存在多位申请人,同等条件下按先申请先审核签约原则。',
                 btn:['确定'],
                 yes:function(index){
                    
                     layer.close(index);
                 }
             });
-        }
-       else{
-            $('.weui-flex-item:eq(0)').removeClass('current');
-            $('.weui-flex-item:eq(1)').addClass('current');
-            $('.apply-module:eq(0)').hide();
-            $('.apply-module:eq(1)').show();
+        }else{
+            layer.open({
+                content:'所查询的城市暂时没有空缺<br/>备注：城市合伙人可能已被签约，或者正处于保留状态，建议过段时间再查询。',
+                btn:['确定'],
+                yes:function(index){
+                    $('.weui-flex-item:eq(0)').removeClass('current');
+                    $('.weui-flex-item:eq(1)').addClass('current');
+                    $('.apply-module:eq(0)').hide();
+                    $('.apply-module:eq(1)').show();
+                    layer.close(index);
+                }
+            });
+           
         }
     });
     
