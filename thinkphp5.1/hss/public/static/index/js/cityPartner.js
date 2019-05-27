@@ -38,7 +38,7 @@ $(function(){
         applicantData=$('.applicant_form').serializeObject();
         var content=''; 
         if(!applicantData.company_name){
-            content='请填写店家名称';
+            content='请填写企业名称';
         }else if(!applicantData.applicant){
             content='请填写申请人姓名';
         }else if(!register.phoneCheck(applicantData.mobile)){

@@ -18,10 +18,13 @@ class Franchise extends \common\controller\UserBase {
         }
     }
 
-
-        public function franchiseSettlement()
+    /**
+     * 申请提交
+     * @return array
+     * @throws \think\exception\PDOException
+     */
+    public function franchiseSettlement()
     {
-
         if(!request()->isAjax()){
             return errorMsg('请求方式错误');
         }
