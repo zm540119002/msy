@@ -384,7 +384,7 @@
             uploadPicDescribe(fileList[0],0,fileList.length);
         });
         //删除
-        $('body').on('click','.multi-picture-moduleDes .picture-module',function(){
+        $('body').on('click','.delete-picture',function(){
             $(this).parents('li').remove();
 
         });
@@ -406,6 +406,7 @@
         var imgAdd = $('<li>' +
                 '<div class="picture-module active"><input class="uploadImg uploadSingleEditImg" name="process_img" value="11">' +
                 '<img src="/uploads/'+Obj.img+'" class="upload_img">'+
+                '<a class="delete-picture">X</a>'+
                 '</div><div><textarea style="height: 60px;width: 200px;" name="process_text"'+
                 ' cols="30" rows="5" placeholder="请填写描述" class="edit-text">'+Obj.desc+'</textarea></div></li>');
         $('.multi-picture-moduleDes').append(imgAdd);
