@@ -3,7 +3,7 @@ $(function(){
     var area_address,
         applicantData={};
     //填写基本资料
-    $('body').on('click','.one-step',function(){
+    $('body').on('click','.search-city',function(){
         var area_address =$('.area-address-name').getArea();
         // applicantData=$('.applicant_form').serializeObject();
         // var content='';
@@ -19,19 +19,22 @@ $(function(){
         //     content='请填写详细地址';
         // }
         var arr=[[18,0],[18,1],[8,0],[7,1]];
-        var postData=[];
-        postData.push(parseInt(area_address[0]),parseInt(area_address[1]));
+        var cityData=[];
+        cityData.push(parseInt(area_address[0]),parseInt(area_address[1]));
        
         //postData.area = area_address[2];
-        console.log(postData);
-        console.log(arrayHasElement(arr,postData));
-        var provinces=arrayHasElement(arr,postData);
+        console.log(cityData);
+        console.log(arrayHasElement(arr,cityData));
+        var provinces=arrayHasElement(arr,cityData);
         if(!provinces){
             layer.open({
                 content:'所查询的城市可以申请城市合伙人<br/>声明：同一城市可能存在多位申请人,同等条件下按先申请先审核签约原则。',
                 btn:['确定'],
                 yes:function(index){
-                   
+                    $('.weui-flex-item:eq(0)').removeClass('current');
+                    $('.weui-flex-item:eq(1)').addClass('current');
+                    $('.apply-module:eq(0)').hide();
+                    $('.apply-module:eq(1)').show();
                     layer.close(index);
                 }
             });
@@ -40,10 +43,7 @@ $(function(){
                 content:'所查询的城市暂时没有空缺<br/>备注：城市合伙人可能已被签约，或者正处于保留状态，建议过段时间再查询。',
                 btn:['确定'],
                 yes:function(index){
-                    $('.weui-flex-item:eq(0)').removeClass('current');
-                    $('.weui-flex-item:eq(1)').addClass('current');
-                    $('.apply-module:eq(0)').hide();
-                    $('.apply-module:eq(1)').show();
+                    
                     layer.close(index);
                 }
             });
