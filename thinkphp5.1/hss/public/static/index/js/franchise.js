@@ -39,7 +39,7 @@ $(function(){
     });
      //填写基本资料
     $('body').on('click','.one-step',function(){
-        var applicantData=$('.applicant_form').serializeObject();
+        applicantData=$('.applicant_form').serializeObject();
         var content=''; 
         if(!applicantData.name){
             content='请填写店家名称';
@@ -63,6 +63,7 @@ $(function(){
     // 弹出支付方式
     $('body').on('click','.recharge_money',function(){
         var settlementMethod=$('.settlementMethod').html();
+        console.log(applicantData);
         layer.open({
             type: 1
             ,anim: 'up'
@@ -83,7 +84,6 @@ $(function(){
     $('body').on('click','.settlement_btn',function () {
         applicantData.province = area_address[0];
         applicantData.city = area_address[1];
-        applicantData.area = area_address[2];
         applicantData.pay_code = $('.pay_code').val();
         _this = $(this);
         if(!applicantData.pay_code){
