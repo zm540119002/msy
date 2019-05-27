@@ -76,12 +76,19 @@
                 getPagingList(config,getData);
             });
 
+            var ids  = $(window.parent.document).contents().find('input[name="ids"]').val();
+
             // 显示已关联的商品
-            if(id){
+            if(id || ids){
+                var data = {id:id};
+                if(ids){
+                    data.ids = ids;
+                }
+
                 $.ajax({
                     url: controller+'getRecommendGoods',
-                    data: {id:id},
-                    type: 'get',
+                    data: data,
+                    type: 'post',
                     beforeSend: function(){
                     },
                     error:function (xhr) {
