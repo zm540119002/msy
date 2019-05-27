@@ -55,13 +55,35 @@ return [
     'recharge_amount'=>[0.01,10000,20000,30000,50000,80000],
     //加盟费用
     'franchise_fee'=>0.01,
+    //城市合伙人加盟费用
+    'cityPartner_fee'=>[
+        //一类城市
+        1=>[
+            'earnest'=>0.01,
+            'amount'=>1,
+        ],
+        //二类城市
+        2=>[
+            'earnest'=>0.01,
+            'amount'=>1,
+        ],
+        //三类城市
+        3=>[
+            'earnest'=>0.01,
+            'amount'=>1,
+        ],
+        //四类城市
+        4=>[
+            'earnest'=>0.01,
+            'amount'=>1,
+        ],
+
+    ],
 
     // 支付链接 充值链接
     'pay_gateway' => 'https://msy.meishangyun.com/index/Payment/pay?system_id=3&sn=',
-//    'pay_gateway' => 'https://msy.meishangyun.com/index/Payment/toPay?system_id=3&payment_type=1&sn=',
-   // 'pay_recharge'=> 'https://msy.meishangyun.com/index/Payment/toPay?system_id=3&payment_type=2&sn=',
-    'pay_recharge'=> 'https://msy.meishangyun.com/index/Payment/pay?system_id=3&sn=',
-    'pay_franchise'=>'https://msy.meishangyun.com/index/Payment/pay?system_id=3&sn=',
+//    'pay_recharge'=> 'https://msy.meishangyun.com/index/Payment/pay?system_id=3&sn=',
+//    'pay_franchise'=>'https://msy.meishangyun.com/index/Payment/pay?system_id=3&sn=',
 
     // 支付方式 1 微信 2：支付宝 3：网银 4:钱包
     'pay_code' => [
@@ -116,6 +138,14 @@ return [
         'franchisePay' => [
             'code' => 3,
             'name' => '加盟支付',
+        ],
+        'cityPartnerSeatPay' => [
+            'code' => 4,
+            'name' => '城市合伙人席位订金',
+        ],
+        'cityPartnerBalancePay' => [
+            'code' => 5,
+            'name' => '城市合伙人资格尾款支付',
         ],
     ],
 

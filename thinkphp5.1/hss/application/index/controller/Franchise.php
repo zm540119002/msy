@@ -62,7 +62,7 @@ class Franchise extends \common\controller\UserBase {
             return errorMsg('失败');
         }
         $modelFranchise -> commit();
-        return successMsg('成功',['url'=>config('custom.pay_franchise').$sn]);
+        return successMsg('成功',['url'=>config('custom.pay_gateway').$sn]);
     }
 
     /**
