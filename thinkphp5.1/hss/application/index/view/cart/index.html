@@ -67,6 +67,10 @@
 				total_num += goods['num'];
 			});
 		}
+		if(!total_num){
+ 			var html = $('.no_cart_data').html();
+			$('#product-list').append(html);
+		}
 		let param = {
 			cart_init_num:total_num
 		};
@@ -76,8 +80,10 @@
 				return param;
 			}
 		});
+
 	});
-</script><script type="text/javascript">
+</script>
+<script type="text/javascript">
 	$(function(){
 		let param = {
 			type:4,
@@ -106,10 +112,10 @@
 						return false;
 					}
 					let _this = this;
-					if(data.data.current_page==1&&$.isEmptyArray(data.data.data)){
-						_this.productList = [0];
-						_this.type=5;
-					}
+					// if(data.data.current_page==1&&$.isEmptyArray(data.data.data)){
+					// 	_this.productList = [0];
+					// 	_this.type=5;
+					// }
 					$.each(data.data.data,function(i,o){
 						_this.productList.push(o);
 					});
