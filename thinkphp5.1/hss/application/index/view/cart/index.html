@@ -122,6 +122,8 @@
 				},delCart:function(param){
 					$.each(this.productList,function(i,o){
 						$.each(param,function(ii,oo){
+							console.log(o.id);
+							console.log(oo.goods_id);
 							if(o.id == oo.goods_id){
 								console.log(o);
 								console.log(oo);
