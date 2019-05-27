@@ -2,7 +2,7 @@
 {block name="content"}
 <div class="f24">
     <section class="f20 header_title separation-line">
-        <h2 class="">黑森森城市合伙人</h2>
+        <h2 class="">城市合伙人</h2>
     </section>
 	<section>
 		<div id="wizard" class="page-bd">
@@ -17,9 +17,6 @@
 			<div class="apply-data-content">
 				<div class="apply-module ">
 					<form class="applicant_form">
-						{notempty name="factoryInfo"}
-						<input type="hidden" name="store_id" class="store_id" value="{$factoryInfo.id|default=''}">
-						{/notempty}
 						<div class="express-area ">
 							<a id="expressArea" href="javascript:void(0)" class="f24 form-group box-flex">
 								<label class="form-label">选择地区：</label>
@@ -36,17 +33,14 @@
 				</div>
 				<div class="apply-module hide">
 					<form class="applicant_form">
-						{notempty name="factoryInfo"}
-						<input type="hidden" name="store_id" class="store_id" value="{$factoryInfo.id|default=''}">
-						{/notempty}
                         <div class="apply-items">
-							<input type="text" class="name " name="name" value="{$factoryInfo.name|default=''}" placeholder="店家名称">
+							<input type="text" class="name" name="company_name" value="" placeholder="企业名称">
 						</div>
 						<div class="apply-items">
-							<input type="text" class="applicant " name="applicant" value="{$factoryInfo.name|default=''}" placeholder="姓名">
+							<input type="text" class="applicant " name="applicant" value="" placeholder="姓名">
 						</div>
 						<div class="apply-items">
-							<input type="tel" class="mobile " name="mobile" value="{$factoryInfo.mobile|default=''}" placeholder="手机号码">
+							<input type="tel" class="mobile " name="mobile" value="" placeholder="手机号码">
 						</div>
 						<a href="javascript:void(0);" class="one-step step">下一步</a>
 					</form>
@@ -96,7 +90,6 @@
 	</header>
 	<article id="areaBox">
 		<ul id="areaList" class="area-list" data-type="1">
-			<!--<li onclick="selectP(0);">北京市</li><li onclick="selectP(1);">天津市</li><li onclick="selectP(2);">河北省</li><li onclick="selectP(3);">河南省</li><li onclick="selectP(4);">山西省</li><li onclick="selectP(5);">山东省</li><li onclick="selectP(6);">内蒙古自治区</li><li onclick="selectP(7);">辽宁省</li><li onclick="selectP(8);">吉林省</li><li onclick="selectP(9);">黑龙江省</li><li onclick="selectP(10);">上海市</li><li onclick="selectP(11);">江苏省</li><li onclick="selectP(12);">浙江省</li><li onclick="selectP(13);">福建省</li><li onclick="selectP(14);">江西省</li><li onclick="selectP(15);">安徽省</li><li onclick="selectP(16);">湖北省</li><li onclick="selectP(17);">湖南省</li><li onclick="selectP(18);">广东省</li><li onclick="selectP(19);">广西壮族自治区</li><li onclick="selectP(20);">海南省</li><li onclick="selectP(21);">重庆市</li><li onclick="selectP(22);">四川省</li><li onclick="selectP(23);">贵州省</li><li onclick="selectP(24);">云南省</li><li onclick="selectP(25);">西藏自治区</li><li onclick="selectP(26);">陕西省</li><li onclick="selectP(27);">甘肃省</li><li onclick="selectP(28);">青海省</li><li onclick="selectP(29);">宁夏回族自治区</li><li onclick="selectP(30);">新疆维吾尔自治区</li><li onclick="selectP(31);">台湾省</li><li onclick="selectP(32);">香港特别行政区</li><li onclick="selectP(33);">澳门特别行政区</li>-->
 		</ul>
 	</article>
 </section>
@@ -110,5 +103,5 @@
 {block name="script"}
 <script type="text/javascript" src="api_common_js/swipe.js"></script>
 <script type="text/javascript" src="public_js/jquery.area.js"></script>
-<script type="text/javascript" src="index_js/franchise.js"></script>
+<script type="text/javascript" src="index_js/cityPartner.js"></script>
 {/block} 
