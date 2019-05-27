@@ -382,18 +382,16 @@
                         }
                         this.total_amount += param.subtotal_amount;
                     },total_amount_calculate:function (param) {
-                        console.log(param.total_amount);
-                        console.log(param.subtotal_amount);
-                        if(this.type==4){
-                            if(param.checked){
-                                this.total_amount += param.subtotal_amount;
-                            }else{
-                                this.total_amount -= param.subtotal_amount;
-                            }
-                        }else{
-                            this.total_amount += param.deal_price * param.increment_buy_quantity;
+                        if(this.type==4 && !param.checked){
+                            return false;
                         }
-
+                        this.total_amount += param.deal_price * param.increment_buy_quantity;
+                    },total_amount_calculate_with_checked:function (param) {
+                        if(param.checked){
+                            this.total_amount += param.subtotal_amount;
+                        }else{
+                            this.total_amount -= param.subtotal_amount;
+                        }
                     },jump_url:function (event) {
                         let obj = $(event.currentTarget);
                         let jump_url = obj.data('jump_url');
@@ -431,44 +429,49 @@
                         };
                         asyncVerify(config);
                     },editProductList:function(param){
+                        if(this.type==4 && !param.checked){
+                            return false;
+                        }
                         let productInfo = {
                             'goods_id':param.product_id,
                             'num':param.buy_quantity
                         };
-                        if(this.type==4){
-                            let existSign = false;
-                            for(let i = 0,len = this.postData.goodsList.length; i < len; i++){
-                                if(this.postData.goodsList[i]['goods_id'] == param.product_id){
-                                    if(!param.checked){
-                                        Vue.delete(this.postData.goodsList,i);
-                                    }
-                                    existSign = true;
-                                    break;
+                        //产品是否存在产品列表，默认不存在
+                        let existSign = false;
+                        for(let i = 0,len = this.postData.goodsList.length; i < len; i++){
+                            //产品已存在产品列表，则修改或删除
+                            if(this.postData.goodsList[i]['goods_id'] == param.product_id){
+                                if(param.buy_quantity<=0){
+                                    Vue.delete(this.postData.goodsList,i);
+                                }else{
+                                    this.postData.goodsList[i]['num'] = param.buy_quantity;
                                 }
+                                existSign = true;
+                                break;
                             }
-                            //产品不存在产品列表，则添加
-                            if(!existSign && param.checked && param.buy_quantity>0){
-                                this.postData.goodsList.push(productInfo);
-                            }
-                        }else{
-                            //产品是否存在产品列表，默认不存在
-                            let existSign = false;
-                            for(let i = 0,len = this.postData.goodsList.length; i < len; i++){
-                                //产品已存在产品列表，则修改或删除
-                                if(this.postData.goodsList[i]['goods_id'] == param.product_id){
-                                    if(param.buy_quantity<=0){
-                                        Vue.delete(this.postData.goodsList,i);
-                                    }else{
-                                        this.postData.goodsList[i]['num'] = param.buy_quantity;
-                                    }
-                                    existSign = true;
-                                    break;
+                        }
+                        //产品不存在产品列表，则添加
+                        if(!existSign && param.buy_quantity>0){
+                            this.postData.goodsList.push(productInfo);
+                        }
+                    },editProductListWithChecked:function(param){
+                        let productInfo = {
+                            'goods_id':param.product_id,
+                            'num':param.buy_quantity
+                        };
+                        let existSign = false;
+                        for(let i = 0,len = this.postData.goodsList.length; i < len; i++){
+                            if(this.postData.goodsList[i]['goods_id'] == param.product_id){
+                                if(!param.checked){
+                                    Vue.delete(this.postData.goodsList,i);
                                 }
+                                existSign = true;
+                                break;
                             }
-                            //产品不存在产品列表，则添加
-                            if(!existSign && param.buy_quantity>0){
-                                this.postData.goodsList.push(productInfo);
-                            }
+                        }
+                        //产品不存在产品列表，则添加
+                        if(!existSign && param.checked && param.buy_quantity>0){
+                            this.postData.goodsList.push(productInfo);
                         }
                     }
                 },created:function(){
@@ -485,8 +488,8 @@
                     });
                     //底部购物菜单-监听-复选框改变-事件
                     bus.$on('footer_cart_item_checkbox_change', function(param){
-                        _this.total_amount_calculate(param);
-                        _this.editProductList(param);
+                        _this.total_amount_calculate_with_checked(param);
+                        _this.editProductListWithChecked(param);
                     });
                 }
             });
