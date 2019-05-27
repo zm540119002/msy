@@ -373,8 +373,14 @@
                     }
                 },methods: {
                     total_amount_init:function (param) {
+                        if(this.type==4 && !param.checked){
+                            return false;
+                        }
                         this.total_amount += param.subtotal_amount;
                     },total_amount_calculate:function (param) {
+                        if(this.type==4 && !param.checked){
+                            return false;
+                        }
                         this.total_amount += param.deal_price * param.increment_buy_quantity;
                     },jump_url:function (event) {
                         let obj = $(event.currentTarget);
@@ -411,9 +417,9 @@
                         };
                         asyncVerify(config);
                     },editProductList:function(param){
-//                        if(this.type==4){
-//                        }else{
-//                        }
+                        if(this.type==4 && !param.checked){
+                            return false;
+                        }
                         let productInfo = {
                             'goods_id':param.product_id,
                             'num':param.buy_quantity
