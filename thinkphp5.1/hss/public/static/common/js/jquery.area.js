@@ -519,7 +519,8 @@ var district = 	[
 						["路氹城"]
 					]
 				];
-var expressArea, areaCont, areaList = $("#areaList")
+var expressArea, areaCont, areaList = $("#areaList");
+var pType=$('#areaList').data('type');
 	// , areaTop = areaList.offset().top;
 
 /*初始化省份*/
@@ -572,6 +573,24 @@ var areaObject={
 			}
 		}
 		$("#backUp").attr("onClick", "areaObject.selectP(" + p + ");");
+		if(pType==1){
+			clockArea();
+			$(".express-area .area_address").html(expressArea);
+			if(!areaObject.provinceCityD.length){
+				
+				for(var i=0;i<arguments.length;i++){
+						areaObject.provinceCityD+=arguments[i]+',';
+					}
+					$('.area-address-name').val(expressArea).data('key',areaObject.provinceCityD);
+					// return false;
+				}
+			areaObject.provinceCityD=[];
+			for(var i=0;i<arguments.length;i++){
+				areaObject.provinceCityD+=arguments[i]+',';
+			}
+			$('.area-address-name').val(expressArea).data('key',areaObject.provinceCityD);
+			return expressArea;
+			}
 		return sCity;
 	},
 
@@ -579,7 +598,12 @@ var areaObject={
 	selectD:function(p,c,d) {
 		var areaKey=$('.area-address-name').data('key');
 		clockArea();
-		expressArea += district[p][c][d];
+		//expressArea += district[p][c][d];
+		if(pType==1){
+			expressArea=expressArea;
+		}else{
+			expressArea += district[p][c][d];
+		}
 		$(".express-area .area_address").html(expressArea);
 		if(!areaObject.provinceCityD.length){
 			

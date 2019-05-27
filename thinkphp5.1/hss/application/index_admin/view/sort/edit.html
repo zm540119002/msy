@@ -1,118 +1,85 @@
 {extend name="template/admin_pc/base.html" /}
 {block name="content"}
-<div class="page">
-    <div style="margin-top:15px;">
-        <form id="form1">
-            <input type="hidden" name="id" value="{$info.id}">
-            <table id=table18 class="add_new_merchandise" border=0 cellspacing=1 width="100%" height=57>
-                <tbody>
-                <tr>
-                    <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>名称：</td>
-                    <td class=dotted_bottom_gray width="89%" align=left>
-                        <div class= width="89%" align=left>
-                            <textarea class="project_description" name="name" >{$info.name}</textarea>
-                        </div>
-                    </td>
-                </tr>
-<!--                <tr>
-                    <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>标题：</td>
-                    <td class=dotted_bottom_gray width="89%" align=left>
-                        <input style="width: 300px; " class="inputboxadmin" name="title" value="{$info.title}">
-                    </td>
-                </tr>-->
-                <tr>
-                    <td class=dotted_bottom_gray height=40 width="11%" align=right>排序：</td>
-                    <td class=dotted_bottom_gray width="89%" align=left>
-                        <input style="width: 100px; " class="inputboxadmin" name="sort" value="{$info.sort|default=0}">
-                    </td>
-                </tr>
-                <tr>
-                    <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>简介：</td>
-                    <td class=dotted_bottom_gray width="89%" align=left>
-                        <script id="intro" type="text/plain">
+<div class="page-container">
+    <form class="form form-horizontal" id="form1">
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>文案标题：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" placeholder="" name="name" value="{$info.name}">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2">排序：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" placeholder="" name="sort" value="{$info.sort|default=0}">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2">标签：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" placeholder="多个标签请用逗号分隔，例如：正品保障,纳晶水光" name="tag" value="{$info.tag}">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>缩略图：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <div class="upload-picture-module f24">
+                    <div class="picture-module">
+                        <input type="file" class="uploadImg uploadSingleImg" name="">
+                        <img class="upload_img " src="{:show_img_handle($info.thumb_img,false)}" />
+                        <input type="hidden" class="layer-thumbnail-picture img"  value="{$info.thumb_img}" name="thumb_img"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2">推荐商品：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <button type="button" class="btn btn-primary radius recommend"><i class="Hui-iconfont"></i> 添加商品</button>
+                已选择 <span class="c-red">{$info.recommend_goods_num|default=0}</span> 种商品    <span class="c-red">*</span>只展示前4款商品
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>简介：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <script id="intro" type="text/plain">
 
-                        </script>
-                    </td>
-                </tr>
-                <tr>
-                    <td class=dotted_bottom_gray height=40 width="11%" align=right>标签：</td>
-                    <td class=dotted_bottom_gray width="89%" align=left>
-                        <input style="width: 200px; " class="inputboxadmin" name="tag" value="{$info.tag}">
-                        多个标签请用 , 分隔，例如：正品保障,纳晶水光
-                    </td>
-                </tr>
-                <tr>
-                    <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>缩略图：</td>
-                    <td class=dotted_bottom_gray width="89%" align=left>
-                        <p class="f20 picture-tipc-box"><span class="friend-tipc">*注意</span>：必须上传图片(格式为jpg、jpeg、png、gif)</p>
-                        <div class="upload-picture-module f24">
-                            <div>
-                                <div class="picture-module">
-                                    <input type="file" class="uploadImg uploadSingleImg" name="">
-                                    <img class="upload_img " src="{:show_img_handle($info.thumb_img,false)}" />
-                                    <input type="hidden" class="layer-thumbnail-picture img"  value="{$info.thumb_img}" name="thumb_img"/>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <!--    <tr>
-                        <td class=dotted_bottom_gray height=40 width="11%" align=right>背景颜色：</td>
-                        <td class=dotted_bottom_gray width="89%" align=left>
-                            <p class="f20 picture-tipc-box"><span class="friend-tipc">*注意</span>：必须上传图片(格式为jpg、jpeg、png、gif)</p>
-                            <div class="upload-picture-module f24">
-                                <div>
-                                    <div class="picture-module" style="background:url({:show_img_handle($info.background_img,false)});">
-                                        <input type="file" class="uploadImg uploadSingleImg" name="">
-                                        <img class="upload_img " src="{:show_img_handle($info.background_img,false)}" />
-                                        <input type="hidden" class="layer-thumbnail-picture img"  value="{$info.background_img}" name="background_img"/>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>-->
-                <tr>
-                    <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>主图:</td>
-                    <td class=dotted_bottom_gray width="89%" align=left>
-                        <!--<p> 加载编辑器的容器 </p>-->
-                        <script id="main_img" type="text/plain">
+                </script>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>主图：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <script id="main_img" type="text/plain"></script>
+                <input id="mainImg" type="hidden" value="{$info.main_img|formatImg}">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>介绍详情图：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <script id="detail_img" type="text/plain"></script>
+                <input id="detailImg" type="hidden" value="{$info.detail_img|formatImg}">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>相关培训：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <!--<p> 加载编辑器的容器 </p>-->
+                <script id="process_img" type="text/plain">
 
-                        </script>
-                        <input id="mainImg" type="hidden" value="{$info.main_img|formatImg}">
-                    </td>
-                </tr>
-                <tr>
-                    <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>介绍:</td>
-                    <td class=dotted_bottom_gray width="89%" align=left>
-                        <!-- 加载编辑器的容器 -->
-                        <script id="detail_img" type="text/plain">
-
-                        </script>
-                        <input id="detailImg" type="hidden" value="{$info.detail_img|formatImg}">
-                    </td>
-                </tr>
-                <tr>
-                    <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>项目流程:</td>
-                    <td class=dotted_bottom_gray width="89%" align=left>
-                        <!--<p> 加载编辑器的容器 </p>-->
-                        <script id="process_img" type="text/plain">
-
-                        </script>
-                        <input id="processImg" type="hidden" value="{$info.process_img|formatImg}">
-                    </td>
-                </tr>
-
-                <tr>
-                    <td width="11%"></td>
-                    <td height=60 width="50%" align=center>
-                        <a href='javascript:void(0);'><input class="button_save_black_4" value="确定" type="button"></a>
-                        &nbsp;&nbsp;
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </form>
-    </div>
+                </script>
+                <input id="processImg" type="hidden" value="{$info.process_img|formatImg}">
+            </div>
+        </div>
+        <div class="row cl">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+                <input type="hidden" name='id' value="{$info.id}">
+                <button class="btn btn-primary radius button_save_black_4" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
+                <button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+                <span class="c-red">*</span>(图片只显示缩略图，不影响原效果)
+            </div>
+        </div>
+    </form>
 </div>
 {/block}
 
@@ -237,6 +204,9 @@
                 dialog.error(content);
                 return false;
             }
+            if(recommendIds){
+                postData.recommendIds = recommendIds;
+            }
 
             var url = module +'Sort/edit';
             $.post(url,postData,function(msg){
@@ -248,6 +218,40 @@
                         //window.parent.location.reload();
                     }
                 });
+            });
+
+        });
+
+        // 默认值 如果选择就覆盖
+        var recommendIds="{$info['recommend_goods']}";
+        $("body").on('click','.recommend',function(){
+
+            var id = "{$info['id']}";
+            var url =  controller + 'RecommendGoods/id/' + id;
+
+            layer.open({
+                type: 2,
+                title:'添加推荐商品',
+                shadeClose: true,
+                shade: 0.8,
+                area: ['80%', '80%'],
+                content: url, //iframe的url
+                btn: ['确定添加', '关闭'],
+                yes: function(index, layero){
+
+                    var body = layer.getChildFrame('body', index);
+                    recommendIds = [];
+                    body.find('.selected_goods_list li').each(function () {
+                        var goodsSelectedId=$(this).data('goods-id');
+                        recommendIds.push(goodsSelectedId);
+                    });
+                    $(".recommend").next().html(recommendIds.length);
+
+                    layer.close(index);
+                },
+                no: function(){
+                    layer.close(index);
+                }
             });
 
         });

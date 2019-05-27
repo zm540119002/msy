@@ -18,7 +18,7 @@
 	<!--产品列表-->
 	<ul class="cart_goods_list list" id="product-list">
 		<product-select
-				v-for="productInfo in productList"
+				v-for="(productInfo,index) in productList"
 				:key="productInfo.id"
 				:product_id="productInfo.id"
 				:deal_price="Number(productInfo.bulk_price)"
@@ -27,6 +27,7 @@
 				:product_name="productInfo.name"
 				:product_src="productInfo.thumb_img"
 				:specification="productInfo.specification"
+				:item_checked="item_checked"
 				:type="type"
 		></product-select>
 	</ul>
@@ -81,14 +82,15 @@
 		let param = {
 			type:4,
 			step_quantity:1,
+			item_checked:true,
 			productList:[],
 			getJsonListParam:{
 				url:module+'Goods/getCartGoodsList',
 				requestEnd:false,
-				loadTrigger:true,
+				loadTrigger:false,
 				postData:{
 					cartList:localStorage.cartList,
-					pageSize:4,
+					pageSize:40,
 					page:1
 				}
 			}
@@ -98,16 +100,16 @@
 			data:function(){
 				return param;
 			},methods:{
-				test:function(){
-					let _thisVue = this;
-					vueVersionGetJsonList(_thisVue);
-				},getJsonListCallBack:function(data){
-					console.log(data);
+				getJsonListCallBack:function(data){
 					if(data.status==0){
 						dialog.error(data.info);
 						return false;
 					}
 					let _this = this;
+					if(data.data.current_page==1&&$.isEmptyArray(data.data.data)){
+						_this.productList = [0];
+						_this.type=5;
+					}
 					$.each(data.data.data,function(i,o){
 						_this.productList.push(o);
 					});
@@ -120,7 +122,7 @@
 				$(window).on('scroll',function(){
 					if(_thisVue.getJsonListParam.loadTrigger
 							&& $(document).scrollTop()+$(window).height()+200>$(document).height()){
-						//第一次触发后，先停止触发，去其他地方重新放开
+						//停止触发，去其他地方重新放开
 						_thisVue.getJsonListParam.loadTrigger = false;
 						vueVersionGetJsonList(_thisVue);
 					}

@@ -35,7 +35,7 @@ class Project extends Base {
                 $info['intro'] = htmlspecialchars_decode($info['intro']);
                 $info['remarks'] = htmlspecialchars_decode($info['remarks']);
                 $info['description'] = htmlspecialchars_decode($info['description']);
-                $info['recommend_goods_num'] = array_sum(explode(',',$info['recommend_goods']));
+                $info['recommend_goods_num'] = $info['recommend_goods'] ? count(explode(',',$info['recommend_goods'])) : 0;
 
                 $this->assign('info',$info);
             }
@@ -50,6 +50,14 @@ class Project extends Base {
             process_upload_files($data,['thumb_img','video'],'project',false);
             process_upload_files($data,['main_img','process_img','detail_img'],'project');
             htmlspecialchars_addslashes($data,['intro','remarks','description']);
+
+            $recommendIds = input('recommendIds/a');
+            if(!empty($recommendIds)){
+                $data['recommend_goods'] = implode(',',$recommendIds);
+
+            }else{
+                $data['recommend_goods'] = '';
+            }
 
             $data['title'] = $data['name'];
             $data['update_time'] = time();

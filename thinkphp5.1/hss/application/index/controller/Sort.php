@@ -58,7 +58,7 @@ class Sort extends \common\controller\Base{
             $model = new \app\index\model\Sort();
             $config =[
                 'field' => [
-                    'id','name','main_img','intro','tag','detail_img','title','process_img'
+                    'id','name','main_img','intro','tag','detail_img','title','process_img','recommend_goods'
                 ],
                 'where' => [
                     ['status', '=', 0],
@@ -70,6 +70,19 @@ class Sort extends \common\controller\Base{
             if(empty($info)){
                 $this->error('此项目已下架');
             }
+
+            // 品类推荐商品
+            $modelGoods = new \app\index\model\Goods();
+            $condition = [
+                'field' => [
+                    'id','name','specification','thumb_img'
+                ],'where' => [
+                    ['status','=',0],
+                    ['shelf_status','=',3],
+                    ['id','in',$info['recommend_goods']],
+                ],'limit' => 4
+            ];
+            $info['recommend_goods'] = $modelGoods->getList($condition);
 
             sort_handle($info);
 

@@ -45,8 +45,10 @@
 }
 
 .module-navigation {
-    width:96%;
-    margin:-.5rem auto 0;
+/*    width:96%;
+    margin:-.5rem auto 0;*/
+    width:100%;
+    margin: auto 0;
 }
 
 .module-navigation .channel_nav,

@@ -6,47 +6,6 @@
 {block name="common-base"}{/block}
 {block name="pre-script"}
 <script type="text/javascript">
-    //用于后面判断是否登录
-    var user_id = "{$user.id}";
-    /**获取json格式列表数据
-     */
-    function getJsonListDefaultCallBack(data){
-        return data.data.data;
-    }
-    function getJsonList(config){
-        //提交路径
-        config.url = config.url?config.url:action;
-        //要提交的数据
-        config.postData = config.postData?config.postData:{};
-        config.postData.page = config.postData.page ? config.postData.page : 1;
-        config.postData.pageSize = config.postData.pageSize ? config.postData.pageSize:4;
-        //请求结束标志
-        if(config.requestEnd){
-            config.loadTrigger = true;
-            return false;
-        }
-        $.ajax({
-            url: config.url,
-            data: config.postData,
-            type: 'get',
-            beforeSend: function(){
-                $('.loading').show();
-            },
-            error:function (xhr) {
-                $('.loading').hide();
-                dialog.error('AJAX错误');
-            },
-            success: function(data){
-                $('.loading').hide();
-                if(data.data.data.length<config.postData.pageSize){
-                    config.requestEnd = true;
-                }
-                config.postData.page ++;
-                config.loadTrigger = true;
-                config.callBack?config.callBack(data):getJsonListDefaultCallBack(data);
-            }
-        });
-    }
     /**vue版获取json格式列表数据
      */
     function vueVersionGetJsonListDefaultCallBack(data){
@@ -129,49 +88,57 @@
     }
     //异步验证判断
     function async_verify_judge(param){
-        //失败回调
-        if(param.data.status==0){
+        if(param.data.status==0){ //失败回调
             if(param.data.data.code == '1000'){ //默认
                 dialog.error(param.data.info);
-                return false;
             }else if(param.data.data.code == '1001'){ //登录
                 if(param.clickObj.attr('class').indexOf('add_cart')!==-1 && param.postData){ //加入购物车
                     editLocalStorageCartList(param);
+                }else if(param.clickObj.attr('class').indexOf('delete_cart')!==-1 && param.postData){
+                    delLocalStorageCartList(param);
                 }else{
                     loginDialogTrigger();
                 }
-                return false;
             }else if(param.data.data.code=='1002'){ //授权
-                return false;
+            }else{
+                dialog.error(param.data.info);
             }
-            dialog.error(param.data.info);
         }else if(param.data.status==1){ //成功回调
             if(param.data.data.code == '2000'){ //默认
-                if(param.clickObj.attr('class').indexOf('add_cart')!==-1 && param.componentFooterCartMenu){ //加入购物车
+                if(param.clickObj.attr('class').indexOf('add_cart')!==-1 && param.componentFooterCartMenu){ //底部购物车菜单数量统计
                     $.each(param.postData.goodsList,function(i,o){
                         param.componentFooterCartMenu.cart_num += o.num;
-                        param.vueObj.buy_quantity += o.num;
                     });
                 }
-                if(param.clickObj.attr('class').indexOf('add_cart')!==-1){ //
+                if(param.clickObj.attr('class').indexOf('add_cart')!==-1 && param.clickObj.attr('class').indexOf('plus')!==-1){ //加
                     $.each(param.postData.goodsList,function(i,o){
                         param.vueObj.buy_quantity += o.num;
                     });
                 }
-                dialog.error(param.data.info);
-                return false;
+                if(param.clickObj.attr('class').indexOf('add_cart')!==-1 && param.clickObj.attr('class').indexOf('reduce')!==-1){ //减
+                    $.each(param.postData.goodsList,function(i,o){
+                        param.vueObj.buy_quantity += o.num;
+                        param.vueObj.buy_quantity_reduce_judge = true;
+                    });
+                }
+                if(param.clickObj.attr('class').indexOf('delete_cart')!==-1 && param.postData){ //删除
+                    param.clickObj.parents('li').remove();
+                }
+                if(param.clickObj.attr('class').indexOf('add_cart')!==-1
+                        && !(param.clickObj.attr('class').indexOf('plus')!==-1 || param.clickObj.attr('class').indexOf('reduce')!==-1)
+                ){ //包含add_cart，但是不能包含plus 或者 reduce才提示
+                    dialog.success(param.data.info);
+                }
             }else if(param.data.data.code == '2001'){ //登录
                 if(param.func && $.isFunction(param.func)){
                     param.func();
                 }
-                return false;
             }else if(param.data.data.code=='2002'){ //授权
-                return false;
             }else if(param.data.data.code=='2003'){ //跳转
                 location.href = param.jump_url;
-                return false;
+            }else{
+                dialog.success(param.data.info);
             }
-            dialog.success(param.data.info);
         }else{ //返回页面
             param.func();
         }
@@ -205,16 +172,31 @@
             //保存购物车
             localStorage.cartList = JSON.stringify({'goodsList':goodsListOld});
         }
-        if(param.clickObj.attr('class')=='add_cart' && param.componentFooterCartMenu){ //加入购物车
+        if(param.clickObj.attr('class').indexOf('add_cart')!==-1 && param.componentFooterCartMenu){ //底部购物车菜单数量统计
             $.each(param.postData.goodsList,function(i,o){
                 param.componentFooterCartMenu.cart_num += o.num;
             });
             dialog.success('加入购物车成功！');
-            return false;
+        }
+        if(param.clickObj.attr('class').indexOf('add_cart')!==-1 && param.clickObj.attr('class').indexOf('plus')!==-1){ //加
+            $.each(param.postData.goodsList,function(i,o){
+                param.vueObj.buy_quantity += o.num;
+            });
+        }
+        if(param.clickObj.attr('class').indexOf('add_cart')!==-1 && param.clickObj.attr('class').indexOf('reduce')!==-1){ //减
+            $.each(param.postData.goodsList,function(i,o){
+                param.vueObj.buy_quantity += o.num;
+                param.vueObj.buy_quantity_reduce_judge = true;
+            });
+        }
+        if(param.clickObj.attr('class').indexOf('add_cart')!==-1
+                && !(param.clickObj.attr('class').indexOf('plus')!==-1 || param.clickObj.attr('class').indexOf('reduce')!==-1)
+        ){ //包含add_cart，但是不能包含plus 或者 reduce才提示
+            dialog.success('加入购物车成功！');
         }
     }
     //删除cookie里的购物车商品列表
-    function delLocalStorageCartList(goodsList){
+    function delLocalStorageCartList(param){
         if(!localStorage.cartList){
             return false;
         }
@@ -222,8 +204,8 @@
         let goodsListNew = [];
         $.each(goodsListOld,function(i,o){
             let find = false;
-            $.each(goodsList,function(ii,oo){
-                if(o.goods_id == oo.goods_id){
+            $.each(param.postData.goodsList,function(ii,oo){
+                if(o.goods_id !== oo.goods_id){
                     find = true;
                 }
             });
@@ -232,12 +214,13 @@
             }
         });
         if(goodsListNew.length){
-            //保存购物车
+            //删除后保存本地购物车
             localStorage.cartList = JSON.stringify({'goodsList':goodsListNew});
         }else{
-            //保存购物车
-            localStorage.cartList = '';
+            //清空本地购物车
+            localStorage.removeItem("cartList");
         }
+        param.clickObj.parents('li').remove();
     }
 </script>
 {/block}
