@@ -440,7 +440,7 @@
                         }else{
                             //产品是否存在产品列表，默认不存在
                             let existSign = false;
-                            for(var i = 0,len = this.postData.goodsList.length; i < len; i++){
+                            for(let i = 0,len = this.postData.goodsList.length; i < len; i++){
                                 //产品已存在产品列表，则修改或删除
                                 if(this.postData.goodsList[i]['goods_id'] == param.product_id){
                                     if(param.buy_quantity<=0){
