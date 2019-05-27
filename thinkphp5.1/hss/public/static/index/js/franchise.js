@@ -79,7 +79,7 @@ $(function(){
 
 var arrayHasElement = function(array, element) {  // 判断二维数组array中是否存在一维数组element
     
-  for (var el of array) {
+//   for (var el of array) {
       console.log(el.length);
     if (el.length ) {
       for (var index in el) {
@@ -91,7 +91,7 @@ var arrayHasElement = function(array, element) {  // 判断二维数组array中�
         }
       }
     }
-  }
+//   }
   return false;
 }
 // 提交申请
