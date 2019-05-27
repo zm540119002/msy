@@ -5,26 +5,9 @@ $(function(){
     //填写基本资料
     $('body').on('click','.search-city',function(){
         var area_address =$('.area-address-name').getArea();
-        // applicantData=$('.applicant_form').serializeObject();
-        // var content='';
-        // if(!applicantData.name){
-        //     content='请填写店家名称';
-        // }else if(!applicantData.applicant){
-        //     content='请填写申请人姓名';
-        // }else if(!register.phoneCheck(applicantData.mobile)){
-        //     content='请填写手机号码';
-        // }else if(!area_address){
-        //     content='请选择地区';
-        // }else if(!applicantData.detail_address){
-        //     content='请填写详细地址';
-        // }
         var arr=[[18,0],[18,1],[8,0],[7,1]];
         var cityData=[];
         cityData.push(parseInt(area_address[0]),parseInt(area_address[1]));
-       
-        //postData.area = area_address[2];
-        console.log(cityData);
-        console.log(arrayHasElement(arr,cityData));
         var provinces=arrayHasElement(arr,cityData);
         if(!provinces){
             layer.open({
@@ -52,8 +35,8 @@ $(function(){
     });
      //填写基本资料
     $('body').on('click','.one-step',function(){
-        var applicantData=$('.applicant_form').serializeObject();
-        var content='';
+        applicantData=$('.applicant_form').serializeObject();
+        var content=''; 
         if(!applicantData.name){
             content='请填写店家名称';
         }else if(!applicantData.applicant){
@@ -62,7 +45,7 @@ $(function(){
             content='请填写手机号码';
         }
         if(content){
-            dialog.error(content);
+            dialog.error(content); 
         }else{
             $('.weui-flex-item:eq(0),.weui-flex-item:eq(1)').removeClass('current');
             $('.weui-flex-item:eq(2)').addClass('current');
@@ -96,7 +79,6 @@ $(function(){
     $('body').on('click','.settlement_btn',function () {
         applicantData.province = area_address[0];
         applicantData.city = area_address[1];
-        applicantData.area = area_address[2];
         applicantData.pay_code = $('.pay_code').val();
         _this = $(this);
         if(!applicantData.pay_code){
