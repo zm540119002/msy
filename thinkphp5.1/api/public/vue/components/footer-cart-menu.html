@@ -144,7 +144,7 @@
                     <input type="text" :value="buy_quantity" class="f24 product_count" readonly="readonly">
                     <a href="javascript:void(0);" class="add_cart plus" @click="plusCart" :data-jump_url="add_cart_url">+</a>
                 </div>
-                <a href="javascript:void(0);" class="delete_order goodsDel delete_cart" :data-jump_url="del_cart_url">删除</a>
+                <a href="javascript:void(0);" class="delete_order goodsDel delete_cart" @click="delete_cart" :data-jump_url="del_cart_url">删除</a>
             </div>
         </div>
     </li>
@@ -200,6 +200,9 @@
                         postData:postData,
                         reduce:true
                     };
+                    //触发-删除购物车-事件
+                    bus.$emit('delete_cart',param);
+                    return false;
                     asyncVerify(config);
                 },reduce: function () {
                     //如果开启了样品购买限额
@@ -388,6 +391,8 @@
                         if(jump_url){
                             location.href = jump_url;
                         }
+                    },delCart:function (param) {
+                        console.log(param);
                     },asyncVerify:function(event){
                         let _thisJquery = $(event.currentTarget);
                         let _thisVue = this;
@@ -451,6 +456,10 @@
                     bus.$on('buy_quantity_change', function(param){
                         _this.total_amount_calculate(param);
                         _this.editProductList(param);
+                    });
+                    //监听-删除购物车-事件
+                    bus.$on('delete_cart', function(param){
+                        _this.delCart(param);
                     });
                 }
             });
