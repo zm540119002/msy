@@ -116,13 +116,12 @@
 					// 	_this.productList = [0];
 					// 	_this.type=5;
 					// }
-					console.log(data.data.data);
 					$.each(data.data.data,function(i,o){
-						console.log(o);
 						_this.productList.push(o);
 					});
 				}
 			},created:function(){
+				console.log(this.productList);
 				let _thisVue = this;
 				_thisVue.getJsonListParam.callBack = _thisVue.getJsonListCallBack;
 				vueVersionGetJsonList(_thisVue);
