@@ -382,18 +382,13 @@
                         }
                         this.total_amount += param.subtotal_amount;
                     },total_amount_calculate:function (param) {
-                        console.log(param.total_amount);
-                        console.log(param.subtotal_amount);
-                        if(this.type==4){
-                            if(param.checked){
-                                this.total_amount += param.subtotal_amount;
-                            }else{
-                                this.total_amount -= param.subtotal_amount;
-                            }
+                        this.total_amount += param.deal_price * param.increment_buy_quantity;
+                    },total_amount_calculate_with_checked:function (param) {
+                        if(param.checked){
+                            this.total_amount += param.subtotal_amount;
                         }else{
-                            this.total_amount += param.deal_price * param.increment_buy_quantity;
+                            this.total_amount -= param.subtotal_amount;
                         }
-
                     },jump_url:function (event) {
                         let obj = $(event.currentTarget);
                         let jump_url = obj.data('jump_url');
@@ -485,7 +480,7 @@
                     });
                     //底部购物菜单-监听-复选框改变-事件
                     bus.$on('footer_cart_item_checkbox_change', function(param){
-                        _this.total_amount_calculate(param);
+                        _this.total_amount_calculate_with_checked(param);
                         _this.editProductList(param);
                     });
                 }
