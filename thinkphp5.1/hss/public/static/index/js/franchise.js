@@ -4,7 +4,7 @@ $(function(){
         applicantData={};
     //填写基本资料
     $('body').on('click','.one-step',function(){
-        area_address =$('.area-address-name').getArea();
+        var area_address =$('.area-address-name').getArea();
         // applicantData=$('.applicant_form').serializeObject();
         // var content='';
         // if(!applicantData.name){
@@ -18,6 +18,12 @@ $(function(){
         // }else if(!applicantData.detail_address){
         //     content='请填写详细地址';
         // }
+        var postData={};
+        postData.province = area_address[0];
+        postData.city = area_address[1];
+        //postData.area = area_address[2];
+        console.log(postData);
+        return false;
         if(!area_address){
             content='请选择地区';
         }
