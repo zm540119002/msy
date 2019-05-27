@@ -119,6 +119,8 @@
 					$.each(data.data.data,function(i,o){
 						_this.productList.push(o);
 					});
+				},delCart:function (param) {
+					console.log(param);
 				}
 			},computed: {
 				getProductList:function(){
@@ -137,6 +139,10 @@
 						_thisVue.getJsonListParam.loadTrigger = false;
 						vueVersionGetJsonList(_thisVue);
 					}
+				});
+				//监听-删除购物车-事件
+				bus.$on('delete_cart', function(param){
+					_this.delCart(param);
 				});
 			},watch: {
 				productList: {

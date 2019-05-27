@@ -389,8 +389,6 @@
                         if(jump_url){
                             location.href = jump_url;
                         }
-                    },delCart:function (param) {
-                        console.log(param);
                     },asyncVerify:function(event){
                         let _thisJquery = $(event.currentTarget);
                         let _thisVue = this;
@@ -454,10 +452,6 @@
                     bus.$on('buy_quantity_change', function(param){
                         _this.total_amount_calculate(param);
                         _this.editProductList(param);
-                    });
-                    //监听-删除购物车-事件
-                    bus.$on('delete_cart', function(param){
-                        _this.delCart(param);
                     });
                 }
             });
