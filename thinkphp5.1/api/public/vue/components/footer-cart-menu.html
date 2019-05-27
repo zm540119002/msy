@@ -283,28 +283,16 @@
                 }
             },created: function(){
                 this.subtotal_amount_calculate();
-                let param = {
-                    product_id:this.product_id,
-                    buy_quantity:this.buy_quantity,
-                    subtotal_amount:this.subtotal_amount,
-                    vueProductSelect:this
-                };
                 //底部购物菜单-触发-产品选择器初始化-事件
-                bus.$emit('footer_cart_product_select_init',param);
+                bus.$emit('footer_cart_product_select_init',this);
             },watch: {
                 buy_quantity: {
                     handler(newVal, oldVal) {
                         this.subtotal_amount_calculate();
                         if(typeof(oldVal) !== "undefined"){
-                            let param = {
-                                product_id:this.product_id,
-                                buy_quantity:this.buy_quantity,
-                                increment_buy_quantity:(parseInt(newVal) - parseInt(oldVal?oldVal:0)),
-                                deal_price:this.deal_price,
-                                vueProductSelect:this
-                            };
+                            this.increment_buy_quantity = parseInt(newVal) - parseInt(oldVal?oldVal:0);
                             //底部购物菜单-触发-产品改变-事件
-                            bus.$emit('footer_cart_buy_quantity_change',param);
+                            bus.$emit('footer_cart_buy_quantity_change',this);
                         }
                     },
                     deep: false,
@@ -426,7 +414,6 @@
 //                        if(this.type==4){
 //                        }else{
 //                        }
-                        console.log(param.vueProductSelect.checked);
                         let productInfo = {
                             'goods_id':param.product_id,
                             'num':param.buy_quantity
