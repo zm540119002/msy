@@ -122,7 +122,7 @@
                     });
                 }
                 if(param.clickObj.attr('class').indexOf('delete_cart')!==-1 && param.postData){ //删除
-                    param.clickObj.parents('li').remove();
+//                    param.clickObj.parents('li').remove();
                 }
                 if(param.clickObj.attr('class').indexOf('add_cart')!==-1
                         && !(param.clickObj.attr('class').indexOf('plus')!==-1 || param.clickObj.attr('class').indexOf('reduce')!==-1)
@@ -222,7 +222,7 @@
 //            $('#product-list').append(html);
             localStorage.removeItem("cartList");
         }
-        param.clickObj.parents('li').remove();
+//        param.clickObj.parents('li').remove();
     }
 </script>
 {/block}
