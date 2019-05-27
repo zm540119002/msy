@@ -419,6 +419,7 @@
                         };
                         asyncVerify(config);
                     },editProductList:function(param){
+                        console.log(param);
                         let productInfo = {
                             'goods_id':param.product_id,
                             'num':param.buy_quantity
@@ -453,7 +454,6 @@
                     bus.$on('footer_cart_buy_quantity_change', function(param){
                         _this.total_amount_calculate(param);
                         _this.editProductList(param);
-                        console.log(param);
                     });
                 }
             });
