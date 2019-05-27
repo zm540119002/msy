@@ -130,7 +130,7 @@
             <div class="product_name"><p class="two-line-apostrophe">{{product_name}}</p></div>
         </div>
     </li><li v-else-if="type==4"><!--用于购物车-->
-        <input type="checkbox" class="item_checkbox check_item" v-model='checked' />
+        <input type="checkbox" class="item_checkbox check_item" v-model='checked' @click="checkItem"/>
         <a href="" class="cart_goods_img" :href="'/index/Goods/detail/id/' + product_id">
             <img class="left common_default_img" :src="product_src?('public_uploads/' + product_src):('api_common_img/default/no_pic_100.jpg') " alt="">
         </a>
@@ -183,6 +183,10 @@
             },methods: {
                 subtotal_amount_calculate:function(){
                     this.subtotal_amount = this.deal_price * this.buy_quantity;
+                },checkItem:function(){
+                    this.checked = !this.checked;
+                    //底部购物菜单-触发-复选框改变-事件
+                    bus.$emit('footer_cart_item_checkbox_change',this);
                 },delCart:function(event){
                     if(this.buy_quantity_reduce_trigger){
                         this.buy_quantity_reduce_trigger = false;
@@ -283,26 +287,16 @@
                 }
             },created: function(){
                 this.subtotal_amount_calculate();
-                let param = {
-                    product_id:this.product_id,
-                    buy_quantity:this.buy_quantity,
-                    subtotal_amount:this.subtotal_amount
-                };
                 //底部购物菜单-触发-产品选择器初始化-事件
-                bus.$emit('footer_cart_product_select_init',param);
+                bus.$emit('footer_cart_product_select_init',this);
             },watch: {
                 buy_quantity: {
                     handler(newVal, oldVal) {
                         this.subtotal_amount_calculate();
                         if(typeof(oldVal) !== "undefined"){
-                            let param = {
-                                product_id:this.product_id,
-                                buy_quantity:this.buy_quantity,
-                                increment_buy_quantity:(parseInt(newVal) - parseInt(oldVal?oldVal:0)),
-                                deal_price:this.deal_price
-                            };
+                            this.increment_buy_quantity = parseInt(newVal) - parseInt(oldVal?oldVal:0);
                             //底部购物菜单-触发-产品改变-事件
-                            bus.$emit('footer_cart_buy_quantity_change',param);
+                            bus.$emit('footer_cart_buy_quantity_change',this);
                         }
                     },
                     deep: false,
@@ -383,8 +377,14 @@
                     }
                 },methods: {
                     total_amount_init:function (param) {
+                        if(this.type==4 && !param.checked){
+                            return false;
+                        }
                         this.total_amount += param.subtotal_amount;
                     },total_amount_calculate:function (param) {
+                        if(this.type==4 && !param.checked){
+                            return false;
+                        }
                         this.total_amount += param.deal_price * param.increment_buy_quantity;
                     },jump_url:function (event) {
                         let obj = $(event.currentTarget);
@@ -401,11 +401,15 @@
                         register_success_callback_private = function(){
                             _thisJquery.click()
                         };
+                        console.log(_thisVue.postData.goodsList);
+                        return false;
                         //前端验证
-                        if((_thisJquery.attr('class')=='add_cart'
-                                || _thisJquery.attr('class')=='buy_now')
-                                && !_thisVue.postData.goodsList.length
-                        ){ //加入购物车
+                        if((
+                                (_thisJquery.attr('class')=='add_cart' //加入购物车
+                                || _thisJquery.attr('class')=='buy_now' //立即购买
+                                || _thisJquery.attr('class')=='settlement' //去结算
+                                ) && !_thisVue.postData.goodsList.length)
+                        ){ //提交商品为空验证
                             dialog.error('请选择商品！');
                             return false;
                         }
@@ -419,6 +423,9 @@
                         };
                         asyncVerify(config);
                     },editProductList:function(param){
+                        if(this.type==4 && !param.checked){
+                            return false;
+                        }
                         let productInfo = {
                             'goods_id':param.product_id,
                             'num':param.buy_quantity
@@ -451,6 +458,11 @@
                     });
                     //底部购物菜单-监听-产品改变-事件
                     bus.$on('footer_cart_buy_quantity_change', function(param){
+                        _this.total_amount_calculate(param);
+                        _this.editProductList(param);
+                    });
+                    //底部购物菜单-监听-复选框改变-事件
+                    bus.$on('footer_cart_item_checkbox_change', function(param){
                         _this.total_amount_calculate(param);
                         _this.editProductList(param);
                     });

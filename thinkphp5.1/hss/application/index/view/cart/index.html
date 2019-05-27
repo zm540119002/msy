@@ -40,9 +40,7 @@
 			</div>
 		</div>
 		<div id="scroller-wrapper" class="list_wrapper">
-			<ul class="columns_flex flex-both-side goods-content-list" id="goodsList">
-
-			</ul>
+			<ul class="columns_flex flex-both-side goods-content-list" id="goodsList"></ul>
 		</div>
 	</div>
 	{/if}
@@ -52,6 +50,7 @@
 {include file="../../api/public/vue/components/footer-cart-menu.html" /}
 <div id="foot_cart_menu">
 	<footer-cart-menu
+			:type="type"
 			:cart_init_num="cart_init_num"
 	></footer-cart-menu>
 </div>
