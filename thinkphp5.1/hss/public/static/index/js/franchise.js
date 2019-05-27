@@ -51,9 +51,8 @@ $(function(){
         }
     });
      //填写基本资料
-    $('body').on('click','.search-city',function(){
-        var area_address =$('.area-address-name').getArea();
-        applicantData=$('.applicant_form').serializeObject();
+    $('body').on('click','.one-step',function(){
+        var applicantData=$('.applicant_form').serializeObject();
         var content='';
         if(!applicantData.name){
             content='请填写店家名称';
