@@ -77,22 +77,23 @@ $(function(){
     });
 });
 
-var arrayHasElement = function(array, element) {  // 判断二维数组array中是否存在一维数组element
-    
-  for (var el of array) {
-      console.log(el.length);
-    if (el.length === element.length) {
-      for (var index in el) {
-        if (el[index] !== element[index]) {
-          break;
+var arrayHasElement = function(array, element) {  
+    // 判断二维数组array中是否存在一维数组element
+    for (var el of array) {
+        console.log(el.length);
+        if (el.length === element.length) {
+        for (var index in el) {
+            if (el[index] !== element[index]) {
+            break;
         }
-        if (index == (el.length - 1)) {    // 到最后一个元素都没有出现不相等，就说明这两个数组相等。
-          return true;
+        // 判断二维数组array中是否存在一维数组element
+            if (index == (el.length - 1)) {   
+                return true;
+            }
         }
-      }
+        }
     }
-  }
-  return false;
+    return false;
 }
 // 提交申请
 function submitApplicant(_this,postData){
