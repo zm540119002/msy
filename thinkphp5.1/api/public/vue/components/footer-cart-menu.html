@@ -448,12 +448,12 @@
                     bus.$on('footer_cart_product_select_init', function(param){
                         _this.total_amount_init(param);
                         _this.editProductList(param);
-                        console.log(param);
                     });
                     //底部购物菜单-监听-产品改变-事件
                     bus.$on('footer_cart_buy_quantity_change', function(param){
                         _this.total_amount_calculate(param);
                         _this.editProductList(param);
+                        console.log(param);
                     });
                 }
             });
