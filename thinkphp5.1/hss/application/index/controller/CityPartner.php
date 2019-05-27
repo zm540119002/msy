@@ -40,7 +40,7 @@ class CityPartner extends \common\controller\UserBase {
         if(!$validate->scene('add')->check($postData)) {
             return errorMsg($validate->getError());
         }
-        $modelFranchise = new \app\index\model\Franchise();
+        $modelFranchise = new \app\index\model\CityPartner();
         $modelFranchise -> startTrans();
         $sn = generateSN(); //内部支付编号
         $postData['sn'] = $sn;
