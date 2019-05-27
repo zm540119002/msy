@@ -199,7 +199,7 @@
                         reduce:true
                     };
                     //触发-删除购物车-事件
-                    bus.$emit('delete_cart',param);
+                    bus.$emit('delete_cart',postData);
                     return false;
                     asyncVerify(config);
                 },reduce: function () {
