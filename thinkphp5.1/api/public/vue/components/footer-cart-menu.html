@@ -200,20 +200,11 @@
                     };
                     let _thisJquery = $(event.currentTarget);
                     let _thisVue = this;
-                    login_success_callback_private = function(){
-                        _thisJquery.click()
-                    };
-                    register_success_callback_private = function(){
-                        _thisJquery.click()
-                    };
                     let config = {
                         clickObj:_thisJquery,
                         vueObj:_thisVue,
                         postData:postData,
-                        reduce:true,
-                        func:function(){
-                            _thisJquery.click();
-                        }
+                        reduce:true
                     };
                     asyncVerify(config);
                 },reduce: function () {
