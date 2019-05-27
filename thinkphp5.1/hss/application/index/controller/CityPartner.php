@@ -30,12 +30,13 @@ class CityPartner extends \common\controller\UserBase {
      * @return array
      * @throws \think\exception\PDOException
      */
-    public function franchiseSettlement()
+    public function submitApplicant()
     {
         if(!request()->isAjax()){
             return errorMsg('请求方式错误');
         }
         $postData = input('post.');
+        return $postData;
         $validate = new \app\index\validate\Franchise();
         if(!$validate->scene('add')->check($postData)) {
             return errorMsg($validate->getError());
