@@ -106,7 +106,6 @@
 			data:function(){
 				return param;
 			},methods:{
-			},computed: {
 				getJsonListCallBack:function(data){
 					if(data.status==0){
 						dialog.error(data.info);
@@ -121,8 +120,12 @@
 						_this.productList.push(o);
 					});
 				}
-			},
-			created:function(){
+			},computed: {
+				getProductList:function(){
+					console.log(this.productList);
+					return this.productList;
+				}
+			},created:function(){
 				let _thisVue = this;
 				_thisVue.getJsonListParam.callBack = _thisVue.getJsonListCallBack;
 				vueVersionGetJsonList(_thisVue);
@@ -138,7 +141,7 @@
 			},watch: {
 				productList: {
 					handler(newVal, oldVal) {
-						console.log(newVal);
+//						console.log(newVal);
 //						console.log(oldVal);
 					},
 					deep: false,
