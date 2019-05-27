@@ -199,7 +199,10 @@
                         clickObj:_thisJquery,
                         vueObj:_thisVue,
                         postData:postData,
-                        reduce:true
+                        reduce:true,
+                        func:function(){
+                            _thisJquery.click();
+                        }
                     };
                     asyncVerify(config);
                 },reduce: function () {
