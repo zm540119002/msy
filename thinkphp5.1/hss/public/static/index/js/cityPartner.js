@@ -4,7 +4,7 @@ $(function(){
         applicantData={};
     //填写基本资料
     $('body').on('click','.search-city',function(){
-        var area_address =$('.area-address-name').getArea();
+        area_address =$('.area-address-name').getArea();
         var arr=[[18,0],[18,1],[8,0],[7,1]];
         var cityData=[];
         cityData.push(parseInt(area_address[0]),parseInt(area_address[1]));
