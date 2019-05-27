@@ -80,7 +80,7 @@ $(function(){
 var arrayHasElement = function(array, element) {  // 判断二维数组array中是否存在一维数组element
     
   for (var el of array) {
-      console.log(el);
+      console.log(element.length);
     if (el.length === element.length) {
       for (var index in el) {
         if (el[index] !== element[index]) {
