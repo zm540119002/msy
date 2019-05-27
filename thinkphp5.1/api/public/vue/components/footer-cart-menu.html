@@ -439,7 +439,7 @@
                                 }
                             }
                             //产品不存在产品列表，则添加
-                            if(!existSign && param.buy_quantity>0){
+                            if(!existSign && param.checked && param.buy_quantity>0){
                                 this.postData.goodsList.push(productInfo);
                             }
                         }else{
