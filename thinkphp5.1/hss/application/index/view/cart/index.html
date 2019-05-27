@@ -120,6 +120,7 @@
 						_this.productList.push(o);
 					});
 				},delCart:function(param){
+					console.log(param);
 					$.each(this.productList,function(i,o){
 						$.each(param,function(ii,oo){
 							console.log(o.id);
