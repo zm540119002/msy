@@ -191,16 +191,16 @@
                     let _thisVue = this;
                     let postData = {
                         goodsList:[{
-                            goods_id: this.product_id
+                            goods_id: this.product_id,
+                            num: this.buy_quantity
                         }]
                     };
-                    let param = {
+                    let config = {
+                        clickObj:_thisJquery,
+                        vueObj:_thisVue,
                         postData:postData,
                         reduce:true
                     };
-                    //触发-删除购物车-事件
-                    bus.$emit('delete_cart',postData);
-                    return false;
                     asyncVerify(config);
                 },reduce: function () {
                     //如果开启了样品购买限额
