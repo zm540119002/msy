@@ -25,13 +25,18 @@ $(function(){
         //postData.area = area_address[2];
         console.log(postData);
         console.log(arrayHasElement(arr,postData));
-        return false;
-        if(!area_address){
-            content='请选择地区';
+        var provinces=arrayHasElement(arr,postData);
+        if(!provinces){
+            layer.open({
+                content:'所查询的城市暂时没有空缺<br/>备注：城市合伙人可能已被签约，或者正处于保留状态，建议过段时间再查询。',
+                btn:['确定'],
+                yes:function(index){
+                   
+                    layer.close(index);
+                }
+            });
         }
-        if(content){
-            dialog.error(content);
-        }else{
+       else{
             $('.weui-flex-item:eq(0)').removeClass('current');
             $('.weui-flex-item:eq(1)').addClass('current');
             $('.apply-module:eq(0)').hide();
