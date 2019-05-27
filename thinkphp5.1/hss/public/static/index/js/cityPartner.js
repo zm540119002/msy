@@ -3,34 +3,56 @@ $(function(){
     var area_address,
         applicantData={};
     //填写基本资料
+    $('body').on('click','.search-city',function(){
+        var area_address =$('.area-address-name').getArea();
+        var arr=[[18,0],[18,1],[8,0],[7,1]];
+        var cityData=[];
+        cityData.push(parseInt(area_address[0]),parseInt(area_address[1]));
+        var provinces=arrayHasElement(arr,cityData);
+        if(!provinces){
+            layer.open({
+                content:'所查询的城市可以申请城市合伙人<br/>声明：同一城市可能存在多位申请人,同等条件下按先申请先审核签约原则。',
+                btn:['确定'],
+                yes:function(index){
+                    $('.weui-flex-item:eq(0)').removeClass('current');
+                    $('.weui-flex-item:eq(1)').addClass('current');
+                    $('.apply-module:eq(0)').hide();
+                    $('.apply-module:eq(1)').show();
+                    layer.close(index);
+                }
+            });
+        }else{
+            layer.open({
+                content:'所查询的城市暂时没有空缺<br/>备注：城市合伙人可能已被签约，或者正处于保留状态，建议过段时间再查询。',
+                btn:['确定'],
+                yes:function(index){
+                    
+                    layer.close(index);
+                }
+            });
+           
+        }
+    });
+     //填写基本资料
     $('body').on('click','.one-step',function(){
-        area_address =$('.area-address-name').getArea();
         applicantData=$('.applicant_form').serializeObject();
-        var content='';
+        var content=''; 
         if(!applicantData.name){
             content='请填写店家名称';
         }else if(!applicantData.applicant){
             content='请填写申请人姓名';
         }else if(!register.phoneCheck(applicantData.mobile)){
             content='请填写手机号码';
-        }else if(!area_address){
-            content='请选择地区';
-        }else if(!applicantData.detail_address){
-            content='请填写详细地址';
-        }
-        if(!area_address){
-            content='请选择地区';
         }
         if(content){
-            dialog.error(content);
+            dialog.error(content); 
         }else{
-            $('.weui-flex-item:eq(0)').removeClass('current');
-            $('.weui-flex-item:eq(1)').addClass('current');
-            $('.apply-module:eq(0)').hide();
-            $('.apply-module:eq(1)').show();
+            $('.weui-flex-item:eq(0),.weui-flex-item:eq(1)').removeClass('current');
+            $('.weui-flex-item:eq(2)').addClass('current');
+            $('.apply-module:eq(1)').hide();
+            $('.apply-module:eq(2)').show();
         }
     });
-    
     //确定通过入驻
     $('body').on('click','.three-step',function(){
     });
@@ -57,7 +79,6 @@ $(function(){
     $('body').on('click','.settlement_btn',function () {
         applicantData.province = area_address[0];
         applicantData.city = area_address[1];
-        applicantData.area = area_address[2];
         applicantData.pay_code = $('.pay_code').val();
         _this = $(this);
         if(!applicantData.pay_code){
@@ -68,6 +89,25 @@ $(function(){
         
     });
 });
+
+var arrayHasElement = function(array, element) {  
+    // 判断二维数组array中是否存在一维数组element
+    for (var el of array) {
+        console.log(el.length);
+        if (el.length === element.length) {
+        for (var index in el) {
+            if (el[index] !== element[index]) {
+            break;
+        }
+        // 判断二维数组array中是否存在一维数组element
+            if (index == (el.length - 1)) {   
+                return true;
+            }
+        }
+        }
+    }
+    return false;
+}
 // 提交申请
 function submitApplicant(_this,postData){
     var url = module + 'Franchise/franchiseSettlement';
