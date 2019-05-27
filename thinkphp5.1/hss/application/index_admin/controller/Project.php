@@ -48,11 +48,24 @@ class Project extends Base {
             // 基础处理
             $data = input('post.');
             unset($data['editorValue']);
+            unset($data['process_desc']);
             // 多图上传带描述
             replace_splitter($data,['tag']);
             process_upload_files($data,['thumb_img','video'],'project',false);
             process_upload_files($data,['main_img','process_img','detail_img'],'project');
             htmlspecialchars_addslashes($data,['intro','remarks','description']);
+
+            if($data['process_img']){
+                $process = explode(',',$data['process_img']);
+                foreach($process as $k => $v){
+                    unset($process[$k]);
+                    $process[$k]['img'] = $v;
+                    $process[$k]['desc']= $data['process_text'][$k];
+                }
+                //p($process);
+                //exit;
+                $data['process'] = json_encode($process);
+            }
 
             $recommendIds = input('recommendIds/a');
             if(!empty($recommendIds)){
@@ -66,6 +79,8 @@ class Project extends Base {
             $data['update_time'] = time();
             $data['audit'] = 1; // 暂时没有审核，先固定
 
+          /*  p($data);
+            exit;*/
             if(isset($data['id']) && $id=input('post.id/d')){//修改
                 // 编辑
                 $condition = ['where' => ['id' => $id,]];
