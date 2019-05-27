@@ -119,9 +119,11 @@
 					$.each(data.data.data,function(i,o){
 						_this.productList.push(o);
 					});
+				},delCart:function(param){
+					console.log(param);
 				}
 			},computed: {
-				delCart:function(param){
+				editProductList:function(param){
 					console.log(param);
 				}
 			},created:function(){
