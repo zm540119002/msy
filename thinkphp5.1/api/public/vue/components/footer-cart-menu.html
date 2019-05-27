@@ -184,6 +184,7 @@
                 subtotal_amount_calculate:function(){
                     this.subtotal_amount = this.deal_price * this.buy_quantity;
                 },checkItem:function(){
+                    this.checked = !this.checked;
                     //底部购物菜单-触发-复选框改变-事件
                     bus.$emit('footer_cart_item_checkbox_change',this);
                 },delCart:function(event){
