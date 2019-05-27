@@ -429,6 +429,7 @@
                         };
                         if(this.type==4){
                             for(let i = 0,len = this.postData.goodsList.length; i < len; i++){
+                                console.log(param.checked);
                                 if(this.postData.goodsList[i]['goods_id'] == param.product_id){
                                     if(!param.checked){
                                         Vue.delete(this.postData.goodsList,i);
