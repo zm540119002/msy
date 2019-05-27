@@ -21,6 +21,10 @@ class Mine extends \common\controller\Base{
         }
         $this->assign('wallet',$wallet);
 
+        $modelOrder = new \app\index\model\Order();
+        $data = $modelOrder->statusSum($user['id']);
+        $this->assign('orderStatusSum',$data);
+
         // 底部菜单，见配置文件custom.footer_menu
         $this->assign('currentPage',request()->controller().'/'.request()->action());
 

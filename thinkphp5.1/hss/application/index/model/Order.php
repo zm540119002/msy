@@ -53,5 +53,38 @@ class Order extends \common\model\Base {
 		//返回状态给微信服务器
 		return successMsg('成功');
 	}
+
+	/**
+     * 获取各类的订单总数量
+     */
+    public function statusSum($user_id){
+        if(!$user_id){
+            return [];
+
+        }else{
+            $condition = [
+                'field' => [
+                    'order_status','count(*) sum'
+                ],'where' => [
+                    ['order_status','<>',0],
+                    ['status','=',0],
+                    ['user_id','=',$user_id],
+                ],'group' => 'order_status'
+            ];
+            $data = $this->getList($condition);
+            $list = [];
+            foreach($data as $k => $v){
+                if($v['sum']){
+                    $list[$v['order_status']] = $v['sum'];
+                }
+            }
+            if($list[2]+$list[3]){
+                $list[2] = $list[2]+$list[3];
+            }
+            unset($list[3]);
+
+            return $list;
+        }
+    }
 	
 }
