@@ -24,7 +24,7 @@ $(function(){
        
         //postData.area = area_address[2];
         console.log(postData);
-        arrayHasElement(arr,postData);
+        console.log(arrayHasElement(arr,postData));
         return false;
         if(!area_address){
             content='请选择地区';
