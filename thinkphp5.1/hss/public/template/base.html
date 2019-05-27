@@ -127,6 +127,9 @@
                         param.vueObj.buy_quantity_reduce_trigger = true;
                         param.clickObj.parents('li').remove();
                     });
+                    if(!$('#product-list').find('li').length){
+                        $('#product-list').append($('.no_cart_data').html());
+                    }
                     //触发-删除购物车-事件
                     bus.$emit('delete_cart',param);
                 }
@@ -225,7 +228,7 @@
         }else{
             //清空本地购物车
             var html = $('.no_cart_data').html();
-//            $('#product-list').append(html);
+            $('#product-list').append(html);
             localStorage.removeItem("cartList");
         }
         param.clickObj.parents('li').remove();
