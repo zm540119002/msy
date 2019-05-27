@@ -4,7 +4,7 @@ $(function(){
         applicantData={};
     //填写基本资料
     $('body').on('click','.search-city',function(){
-        var area_address =$('.area-address-name').getArea();
+        area_address =$('.area-address-name').getArea();
         var arr=[[18,0],[18,1],[8,0],[7,1]];
         var cityData=[];
         cityData.push(parseInt(area_address[0]),parseInt(area_address[1]));
@@ -37,7 +37,7 @@ $(function(){
     $('body').on('click','.one-step',function(){
         applicantData=$('.applicant_form').serializeObject();
         var content=''; 
-        if(!applicantData.name){
+        if(!applicantData.company_name){
             content='请填写店家名称';
         }else if(!applicantData.applicant){
             content='请填写申请人姓名';
