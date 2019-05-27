@@ -148,9 +148,6 @@
             </div>
         </div>
     </li>
-    <li v-else-if="type==5" class="no_data">
-        <img src="https://hss.meishangyun.com/static/common/img/no-news.png" alt="">
-    </li>
 </template>
 <script type="text/javascript">
     $(function(){
@@ -368,6 +365,7 @@
             Vue.component('footer-cart-menu', {
                 template:'#footer-cart-menu_tpl',
                 props: {
+                    type: {type: Number,default: 1},
                     cart_init_num: {type: Number,default: 0},
                     init_checked: {type: Boolean,default: false},
                     buy_now_call_back: {type: Function,default: function(param){
@@ -421,27 +419,30 @@
                         };
                         asyncVerify(config);
                     },editProductList:function(param){
-                        let productInfo = {
-                            'goods_id':param.product_id,
-                            'num':param.buy_quantity
-                        };
-                        //产品是否存在产品列表，默认不存在
-                        let existSign = false;
-                        for(var i = 0,len = this.postData.goodsList.length; i < len; i++){
-                            //产品已存在产品列表，则修改或删除
-                            if(this.postData.goodsList[i]['goods_id'] == param.product_id){
-                                if(param.buy_quantity<=0){
-                                    Vue.delete(this.postData.goodsList,i);
-                                }else{
-                                    this.postData.goodsList[i]['num'] = param.buy_quantity;
+                        if(this.type==4){
+                        }else{
+                            let productInfo = {
+                                'goods_id':param.product_id,
+                                'num':param.buy_quantity
+                            };
+                            //产品是否存在产品列表，默认不存在
+                            let existSign = false;
+                            for(var i = 0,len = this.postData.goodsList.length; i < len; i++){
+                                //产品已存在产品列表，则修改或删除
+                                if(this.postData.goodsList[i]['goods_id'] == param.product_id){
+                                    if(param.buy_quantity<=0){
+                                        Vue.delete(this.postData.goodsList,i);
+                                    }else{
+                                        this.postData.goodsList[i]['num'] = param.buy_quantity;
+                                    }
+                                    existSign = true;
+                                    break;
                                 }
-                                existSign = true;
-                                break;
                             }
-                        }
-                        //产品不存在产品列表，则添加
-                        if(!existSign && param.buy_quantity>0){
-                            this.postData.goodsList.push(productInfo);
+                            //产品不存在产品列表，则添加
+                            if(!existSign && param.buy_quantity>0){
+                                this.postData.goodsList.push(productInfo);
+                            }
                         }
                     },editCartNum:function(param){
                         this.cart_num += param.increment_buy_quantity;
