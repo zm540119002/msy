@@ -126,6 +126,7 @@
                         param.vueObj.buy_quantity += o.num;
                         param.vueObj.buy_quantity_reduce_trigger = true;
                         param.clickObj.parents('li').remove();
+                        console.log(o.num);
                     });
                     if(!$('#product-list').find('li').length){
                         $('#product-list').append($('.no_cart_data').html());
