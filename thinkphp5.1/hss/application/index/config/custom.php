@@ -34,10 +34,10 @@ return [
 //            'a'    => "href=javascript:void(0) class='async_login' data-jump_url=".url('Franchise/index'),
             'icon' => 'practitioners',
         ],
-        'CityPartner/index' => [
+        'index/cityPartnerIndex' => [
             'name' => '城市合伙人',
             //'a'    => 'href='.url('Business/index'),
-            'a'    => "href=javascript:void(0) class='async_login' data-jump_url=".url('CityPartner/index'),
+            'a'    => "href=javascript:void(0) class='async_login' data-jump_url=".url('index/cityPartnerIndex'),
             'icon' => 'business',
         ],
         'Index/cartIndex' => [
