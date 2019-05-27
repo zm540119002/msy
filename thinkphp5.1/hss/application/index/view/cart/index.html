@@ -108,7 +108,7 @@
 					let _this = this;
 					if(data.data.current_page==1&&$.isEmptyArray(data.data.data)){
 						_this.productList = [0];
-						_this.subtotal_amount = 0;
+						_this.total_amount = 0;
 						_this.type=5;
 					}
 					$.each(data.data.data,function(i,o){
