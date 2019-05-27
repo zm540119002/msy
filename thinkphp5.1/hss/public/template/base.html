@@ -127,7 +127,7 @@
                         param.vueObj.buy_quantity_reduce_trigger = true;
                         param.clickObj.parents('li').remove();
                     });
-                    if($('#product-list').find('li').length){
+                    if(!$('#product-list').find('li').length){
                         $('#product-list').append($('.no_cart_data').html());
                     }
                     //触发-删除购物车-事件
