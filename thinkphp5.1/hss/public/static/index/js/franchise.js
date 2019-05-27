@@ -78,6 +78,7 @@ $(function(){
 });
 
 var arrayHasElement = function(array, element) {  // 判断二维数组array中是否存在一维数组element
+    console.log(el);
   for (var el of array) {
     if (el.length === element.length) {
       for (var index in el) {
