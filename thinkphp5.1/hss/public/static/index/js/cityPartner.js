@@ -80,7 +80,6 @@ $(function(){
         applicantData.province = area_address[0];
         applicantData.city = area_address[1];
         applicantData.pay_code = $('.pay_code').val();
-        console.log(applicantData);return false;
         _this = $(this);
         if(!applicantData.pay_code){
             dialog.error('请选择结算方式');
@@ -94,7 +93,6 @@ $(function(){
 var arrayHasElement = function(array, element) {  
     // 判断二维数组array中是否存在一维数组element
     for (var el of array) {
-        console.log(el.length);
         if (el.length === element.length) {
         for (var index in el) {
             if (el[index] !== element[index]) {
@@ -111,7 +109,7 @@ var arrayHasElement = function(array, element) {
 }
 // 提交申请
 function submitApplicant(_this,postData){
-    var url = module + 'Franchise/franchiseSettlement';
+    var url = module + 'CityPartner/submitApplicant';
     _this.addClass("nodisabled");//防止重复提交
     $.ajax({
         url: url,
