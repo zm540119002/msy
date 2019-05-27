@@ -20,7 +20,7 @@ $(function(){
         // }
         var arr=[[18,0],[18,1],[8,0],[7,1]];
         var postData=[];
-        postData.push([parseInt(area_address[0]),parseInt(area_address[1])]);
+        postData.push(parseInt(area_address[0]),parseInt(area_address[1]));
        
         //postData.area = area_address[2];
         console.log(postData);
@@ -79,9 +79,9 @@ $(function(){
 
 var arrayHasElement = function(array, element) {  // 判断二维数组array中是否存在一维数组element
     
-//   for (var el of array) {
+  for (var el of array) {
       console.log(el.length);
-    if (el.length ) {
+    if (el.length === element.length) {
       for (var index in el) {
         if (el[index] !== element[index]) {
           break;
@@ -91,7 +91,7 @@ var arrayHasElement = function(array, element) {  // 判断二维数组array中�
         }
       }
     }
-//   }
+  }
   return false;
 }
 // 提交申请
