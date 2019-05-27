@@ -382,10 +382,13 @@
                         }
                         this.total_amount += param.subtotal_amount;
                     },total_amount_calculate:function (param) {
-                        if(this.type==4 && !param.checked){
-                            return false;
-                        }
                         this.total_amount += param.deal_price * param.increment_buy_quantity;
+                    },total_amount_calculate_with_checked:function (param) {
+                        if(param.checked){
+                            this.total_amount += param.subtotal_amount;
+                        }else{
+                            this.total_amount -= param.subtotal_amount;
+                        }
                     },jump_url:function (event) {
                         let obj = $(event.currentTarget);
                         let jump_url = obj.data('jump_url');
@@ -428,14 +431,19 @@
                             'num':param.buy_quantity
                         };
                         if(this.type==4){
+                            let existSign = false;
                             for(let i = 0,len = this.postData.goodsList.length; i < len; i++){
                                 if(this.postData.goodsList[i]['goods_id'] == param.product_id){
                                     if(!param.checked){
                                         Vue.delete(this.postData.goodsList,i);
-                                    }else{
-                                        this.postData.goodsList.push(productInfo);
                                     }
+                                    existSign = true;
+                                    break;
                                 }
+                            }
+                            //产品不存在产品列表，则添加
+                            if(!existSign && param.checked && param.buy_quantity>0){
+                                this.postData.goodsList.push(productInfo);
                             }
                         }else{
                             //产品是否存在产品列表，默认不存在
@@ -472,7 +480,7 @@
                     });
                     //底部购物菜单-监听-复选框改变-事件
                     bus.$on('footer_cart_item_checkbox_change', function(param){
-                        _this.total_amount_calculate(param);
+                        _this.total_amount_calculate_with_checked(param);
                         _this.editProductList(param);
                     });
                 }
