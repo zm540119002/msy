@@ -126,13 +126,10 @@
 						$.each(param.goodsList,function(ii,oo){
 							if(o.id == oo.goods_id){
 								find = i;
-								console.log(i);
-//								_this.$delete(_this.productList,i);
 							}
 						});
 					});
 					if(find !== -1){
-						console.log(find);
 						Vue.delete(_this.productList,find);
 					}
 				}
