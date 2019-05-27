@@ -142,7 +142,7 @@
 				});
 				//监听-删除购物车-事件
 				bus.$on('delete_cart', function(param){
-					_this.delCart(param);
+					_thisVue.delCart(param);
 				});
 			},watch: {
 				productList: {
