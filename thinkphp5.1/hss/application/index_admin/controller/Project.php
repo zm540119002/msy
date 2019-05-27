@@ -37,6 +37,9 @@ class Project extends Base {
                 $info['description'] = htmlspecialchars_decode($info['description']);
                 $info['recommend_goods_num'] = $info['recommend_goods'] ? count(explode(',',$info['recommend_goods'])) : 0;
 
+                $info['process'] = $info['process'] ? addslashes($info['process']) : 0;
+             /*   p($info);
+                exit;*/
                 $this->assign('info',$info);
             }
             return $this->fetch();
