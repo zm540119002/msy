@@ -421,6 +421,8 @@
                         asyncVerify(config);
                     },editProductList:function(param){
                         console.log(this.postData.goodsList);
+                        console.log(param.checked);
+                        console.log(this.type);
                         if(this.type==4 && !param.checked){
                             return false;
                         }
