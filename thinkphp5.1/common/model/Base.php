@@ -101,8 +101,14 @@ class Base extends \think\Model {
 		return successMsg('成功');
 	}
 
-	/**验证字段唯一性
-	 */
+    /**验证字段唯一性
+     * @param $fieldName
+     * @param $config
+     * @return array|\PDOStatement|string|\think\Model|null
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
 	public function checkUnique($fieldName,$config){
 		$_config = [
 			'field' => [
@@ -120,8 +126,10 @@ class Base extends \think\Model {
 		return $info;
 	}
 
-	/**根据手机号码检查正常账号
-	 */
+    /**根据手机号码检查正常账号
+     * @param $mobilePhone
+     * @return array|mixed
+     */
 	protected function checkUserExistByMobilePhone($mobilePhone){
 		if(!isMobile($mobilePhone)){
 			return errorMsg('请输入正确的手机号码');
@@ -142,7 +150,12 @@ class Base extends \think\Model {
 	}
 
 	// 设置数据库配置
-	public function setConnection($config){
+
+    /**
+     * @param \think\db\Connection $config
+     * @return \think\Model|void
+     */
+    public function setConnection($config){
 	    $this->connection = $config;
     }
 }
