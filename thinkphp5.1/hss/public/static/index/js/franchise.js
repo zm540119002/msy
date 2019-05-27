@@ -81,7 +81,7 @@ var arrayHasElement = function(array, element) {  // 判断二维数组array中�
     
   for (var el of array) {
       console.log(el.length);
-    if (el.length === element.length) {
+    if (el.length ) {
       for (var index in el) {
         if (el[index] !== element[index]) {
           break;
