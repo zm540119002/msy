@@ -27,7 +27,7 @@
 				:product_name="productInfo.name"
 				:product_src="productInfo.thumb_img"
 				:specification="productInfo.specification"
-				:item_checked="item_checked"
+				:init_checked="init_checked"
 				:type="type"
 		></product-select>
 	</ul>
@@ -67,6 +67,10 @@
 				total_num += goods['num'];
 			});
 		}
+		if(!total_num){
+ 			var html = $('.no_cart_data').html();
+			$('#product-list').append(html);
+		}
 		let param = {
 			cart_init_num:total_num
 		};
@@ -76,13 +80,15 @@
 				return param;
 			}
 		});
+
 	});
-</script><script type="text/javascript">
+</script>
+<script type="text/javascript">
 	$(function(){
 		let param = {
 			type:4,
 			step_quantity:1,
-			item_checked:true,
+			init_checked:true,
 			productList:[],
 			getJsonListParam:{
 				url:module+'Goods/getCartGoodsList',
@@ -106,13 +112,20 @@
 						return false;
 					}
 					let _this = this;
-					if(data.data.current_page==1&&$.isEmptyArray(data.data.data)){
-						_this.productList = [0];
-						_this.type=5;
-					}
+					// if(data.data.current_page==1&&$.isEmptyArray(data.data.data)){
+					// 	_this.productList = [0];
+					// 	_this.type=5;
+					// }
 					$.each(data.data.data,function(i,o){
 						_this.productList.push(o);
 					});
+				},delCart:function (param) {
+					console.log(param);
+				}
+			},computed: {
+				getProductList:function(){
+//					console.log(this.productList);
+//					return this.productList;
 				}
 			},created:function(){
 				let _thisVue = this;
@@ -127,6 +140,19 @@
 						vueVersionGetJsonList(_thisVue);
 					}
 				});
+				//监听-删除购物车-事件
+				bus.$on('delete_cart', function(param){
+					_thisVue.delCart(param);
+				});
+			},watch: {
+				productList: {
+					handler(newVal, oldVal) {
+//						console.log(newVal);
+//						console.log(oldVal);
+					},
+					deep: false,
+					immediate: true
+				}
 			}
 		});
 	});

@@ -38,7 +38,7 @@
 <template id="product_select_tpl">
     <li v-if="type==0">
         <div class="product-select">
-            <div class="columns_flex l-r-sides"><p><span class="red deal_price">￥{{deal_price}}</span></p></div>
+            <div class=""><p></p></div>
             <div class="columns_flex l-r-sides">
                 <div class="left">
                     <a class="p_img" :href="'/index/Goods/detail/id/' + product_id">
@@ -49,8 +49,9 @@
                     <div class="product_name">
                         <p class="text-intro">{{product_name}}</p>
                     </div>
-                    <div class="quantity_wrapper selected-number">
-                        <a href="javascript:void(0);" class="add_cart add_cart_i" @click="plusCart" :data-jump_url="add_cart_url"><i></i></a>
+                    <div class="quantity_wrapper selected-number columns_flex l-r-sides">
+                        <div><span class="red deal_price">￥{{deal_price}}</span></div>
+                        <div><a href="javascript:void(0);" class="add_cart add_cart_i" @click="plusCart" :data-jump_url="add_cart_url"><i></i></a></div>
                     </div>
                 </div>
             </div>
@@ -167,7 +168,7 @@
                 init_quantity: {type: Number,default: 1},
                 step_quantity: {type: Number,default: 1},
                 display_quota: {type: Boolean,default: false},
-                item_checked: {type: Boolean,default: false},
+                init_checked: {type: Boolean,default: false},
                 productInfo: {type: Array,default:function(){
                     let arr = [];
                     arr['eg'] = '默认值示范';
@@ -178,7 +179,7 @@
                     buy_quantity:this.init_quantity,
                     buy_quantity_reduce_judge:true,
                     subtotal_amount:0,
-                    checked:this.item_checked,
+                    checked:this.init_checked,
                     add_cart_url:'{:url("Cart/addCart")}',
                     del_cart_url:'{:url("Cart/del")}'
                 };
@@ -193,12 +194,13 @@
                             goods_id: this.product_id
                         }]
                     };
-                    let config = {
-                        clickObj:_thisJquery,
-                        vueObj:_thisVue,
+                    let param = {
                         postData:postData,
                         reduce:true
                     };
+                    //触发-删除购物车-事件
+                    bus.$emit('delete_cart',postData);
+                    return false;
                     asyncVerify(config);
                 },reduce: function () {
                     //如果开启了样品购买限额
@@ -303,13 +305,6 @@
                     },
                     deep: false,
                     immediate: true
-                },checked: {
-                    handler(newVal, oldVal) {
-                        console.log(newVal);
-                        console.log(oldVal);
-                    },
-                    deep: false,
-                    immediate: true
                 }
             }
         });
@@ -369,7 +364,7 @@
                 template:'#footer-cart-menu_tpl',
                 props: {
                     cart_init_num: {type: Number,default: 0},
-                    all_checked: {type: Boolean,default: true},
+                    init_checked: {type: Boolean,default: false},
                     buy_now_call_back: {type: Function,default: function(param){
                         console.log(param);
                     }}
@@ -377,7 +372,7 @@
                     return {
                         total_amount:0,
                         cart_num:this.cart_init_num,
-                        checked:this.all_checked,
+                        checked:this.init_checked,
                         menus: unlockingFooterCart.menu,
                         postData:{
                             goodsList:[]
