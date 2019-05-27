@@ -401,6 +401,8 @@
                         register_success_callback_private = function(){
                             _thisJquery.click()
                         };
+                        console.log(_thisVue.postData.goodsList);
+                        return false;
                         //前端验证
                         if((
                                 (_thisJquery.attr('class')=='add_cart' //加入购物车
@@ -421,9 +423,6 @@
                         };
                         asyncVerify(config);
                     },editProductList:function(param){
-                        console.log(this.postData.goodsList);
-                        console.log(param.checked);
-                        console.log(this.type);
                         if(this.type==4 && !param.checked){
                             return false;
                         }
