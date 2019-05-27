@@ -80,6 +80,7 @@ $(function(){
         applicantData.province = area_address[0];
         applicantData.city = area_address[1];
         applicantData.pay_code = $('.pay_code').val();
+        console.log(applicantData);return false;
         _this = $(this);
         if(!applicantData.pay_code){
             dialog.error('请选择结算方式');
