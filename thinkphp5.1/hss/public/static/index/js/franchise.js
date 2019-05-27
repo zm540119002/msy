@@ -18,8 +18,9 @@ $(function(){
         // }else if(!applicantData.detail_address){
         //     content='请填写详细地址';
         // }
+        var arr=[["18",0]]
         var postData=[];
-        postData.push([area_address[0],area_address[1]]);
+        postData.push([parseInt(area_address[0]),parseInt(area_address[1])]);
        
         //postData.area = area_address[2];
         console.log(postData);
