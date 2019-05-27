@@ -121,18 +121,20 @@
 					});
 				},delCart:function(param){
 					let _this = this;
+					let find = -1;
 					$.each(this.productList,function(i,o){
 						$.each(param.goodsList,function(ii,oo){
 							if(o.id == oo.goods_id){
-								console.log(o.id);
-								console.log(oo.goods_id);
+								find = i;
 								console.log(i);
-								console.log(ii);
 //								_this.$delete(_this.productList,i);
 							}
 						});
 					});
-//					Vue.delete(_this.productList,1);
+					if(find !== -1){
+						console.log(find);
+						Vue.delete(_this.productList,find);
+					}
 				}
 			},computed: {
 				editProductList:function(param){
