@@ -383,8 +383,8 @@
             uploadPicDescribe(fileList[0],0,fileList.length);
         });
         //删除
-        $('body').on('click','.multi-picture-moduleDes li',function(){
-            $(this).remove();
+        $('body').on('click','.multi-picture-moduleDes .picture-module',function(){
+            $(this).parents('li').remove();
 
         });
     });
