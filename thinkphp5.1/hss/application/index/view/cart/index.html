@@ -119,13 +119,10 @@
 					$.each(data.data.data,function(i,o){
 						_this.productList.push(o);
 					});
-				},delCart:function (param) {
-					console.log(param);
 				}
 			},computed: {
-				getProductList:function(){
-//					console.log(this.productList);
-//					return this.productList;
+				delCart:function(param){
+					console.log(param);
 				}
 			},created:function(){
 				let _thisVue = this;
