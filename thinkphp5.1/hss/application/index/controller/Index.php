@@ -97,6 +97,7 @@ class Index extends \common\controller\Base{
                 // 底部菜单，见配置文件custom.footer_menu
                 $this->assign('currentPage',request()->controller().'/'.request()->action());
             }
+            Cart::getCartTotalNum();
             return $this->fetch('cart/index');
         }
     }
