@@ -194,12 +194,13 @@
                             goods_id: this.product_id
                         }]
                     };
-                    let config = {
-                        clickObj:_thisJquery,
-                        vueObj:_thisVue,
+                    let param = {
                         postData:postData,
                         reduce:true
                     };
+                    //触发-删除购物车-事件
+                    bus.$emit('delete_cart',postData);
+                    return false;
                     asyncVerify(config);
                 },reduce: function () {
                     //如果开启了样品购买限额
