@@ -455,6 +455,11 @@
                         _this.total_amount_calculate(param);
                         _this.editProductList(param);
                     });
+                    //底部购物菜单-监听-复选框改变-事件
+                    bus.$on('footer_cart_item_checkbox_change', function(param){
+                        _this.total_amount_calculate(param);
+                        _this.editProductList(param);
+                    });
                 }
             });
         }
