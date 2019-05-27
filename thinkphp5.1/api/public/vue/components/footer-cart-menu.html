@@ -186,7 +186,7 @@
                 },checkItem:function(){
                     this.checked = !this.checked;
                     //底部购物菜单-触发-复选框改变-事件
-                    bus.$emit('footer_cart_item_checkbox_change',this);
+                    bus.$emit('footer_cart_checkbox_item_change',this);
                 },delCart:function(event){
                     if(this.buy_quantity_reduce_trigger){
                         this.buy_quantity_reduce_trigger = false;
@@ -407,8 +407,8 @@
                         register_success_callback_private = function(){
                             _thisJquery.click()
                         };
-                        console.log(_thisVue.postData.goodsList);
-                        return false;
+//                        console.log(_thisVue.postData.goodsList);
+//                        return false;
                         //前端验证
                         if((
                                 (_thisJquery.attr('class')=='add_cart' //加入购物车
@@ -487,7 +487,7 @@
                         _this.editProductList(param);
                     });
                     //底部购物菜单-监听-复选框改变-事件
-                    bus.$on('footer_cart_item_checkbox_change', function(param){
+                    bus.$on('footer_cart_checkbox_item_change', function(param){
                         _this.total_amount_calculate_with_checked(param);
                         _this.editProductListWithChecked(param);
                     });
