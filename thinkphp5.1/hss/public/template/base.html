@@ -122,6 +122,7 @@
                     });
                 }
                 if(param.clickObj.attr('class').indexOf('delete_cart')!==-1 && param.postData){ //删除
+                    console.log(param);
                     param.clickObj.parents('li').remove();
                 }
                 if(param.clickObj.attr('class').indexOf('add_cart')!==-1
@@ -218,6 +219,8 @@
             localStorage.cartList = JSON.stringify({'goodsList':goodsListNew});
         }else{
             //清空本地购物车
+            var html = $('.no_cart_data').html();
+            $('#product-list').append(html);
             localStorage.removeItem("cartList");
         }
         param.clickObj.parents('li').remove();
