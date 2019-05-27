@@ -286,7 +286,8 @@
                 let param = {
                     product_id:this.product_id,
                     buy_quantity:this.buy_quantity,
-                    subtotal_amount:this.subtotal_amount
+                    subtotal_amount:this.subtotal_amount,
+                    vueProductSelect:this
                 };
                 //底部购物菜单-触发-产品选择器初始化-事件
                 bus.$emit('footer_cart_product_select_init',param);
@@ -299,7 +300,8 @@
                                 product_id:this.product_id,
                                 buy_quantity:this.buy_quantity,
                                 increment_buy_quantity:(parseInt(newVal) - parseInt(oldVal?oldVal:0)),
-                                deal_price:this.deal_price
+                                deal_price:this.deal_price,
+                                vueProductSelect:this
                             };
                             //底部购物菜单-触发-产品改变-事件
                             bus.$emit('footer_cart_buy_quantity_change',param);
@@ -424,6 +426,7 @@
 //                        if(this.type==4){
 //                        }else{
 //                        }
+                        console.log(param.vueProductSelect.checked);
                         let productInfo = {
                             'goods_id':param.product_id,
                             'num':param.buy_quantity
@@ -448,7 +451,6 @@
                         }
                     }
                 },created:function(){
-                    console.log(this.type);
                     let _this = this;
                     //底部购物菜单-监听-产品选择器初始化-事件
                     bus.$on('footer_cart_product_select_init', function(param){
