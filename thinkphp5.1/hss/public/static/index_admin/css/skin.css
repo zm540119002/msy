@@ -1500,7 +1500,7 @@ filter:alpha(opacity:0);
 .edit-describe{
 	display:block;
 }
-.delete-picture{
+.active a.delete-picture{
 	width:20px;
 	height:20px;
 	line-height: 20px;
