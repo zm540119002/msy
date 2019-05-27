@@ -373,7 +373,7 @@ class Sort extends Base
             $recommend_goods = $ids;
 
         }else{
-            $model = new \app\index\model\Project();
+            $model = new \app\index\model\Sort();
             $condition = [
                 'field' => [
                     'recommend_goods'
