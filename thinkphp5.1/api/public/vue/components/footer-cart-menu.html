@@ -427,7 +427,7 @@
                             'goods_id':param.product_id,
                             'num':param.buy_quantity
                         };
-                        if(this.type==4 && !param.checked){
+                        if(this.type==4){
                             for(let i = 0,len = this.postData.goodsList.length; i < len; i++){
                                 if(this.postData.goodsList[i]['goods_id'] == param.product_id){
                                     if(!param.checked){
