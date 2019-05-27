@@ -18,9 +18,6 @@ $(function(){
         }else if(!applicantData.detail_address){
             content='请填写详细地址';
         }
-        if(!area_address){
-            content='请选择地区';
-        }
         if(content){
             dialog.error(content);
         }else{
