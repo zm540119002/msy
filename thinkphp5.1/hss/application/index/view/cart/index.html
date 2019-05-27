@@ -119,11 +119,26 @@
 					$.each(data.data.data,function(i,o){
 						_this.productList.push(o);
 					});
+				},delCart:function(param){
+					let _this = this;
+					let findIndex = -1;
+					$.each(this.productList,function(i,o){
+						let findNum = 0;
+						$.each(param.postData.goodsList,function(ii,oo){
+							if(o.id == oo.goods_id){
+								findIndex = i;
+								findNum = oo.num;
+							}
+						});
+						param.vueObj.buy_quantity -= findNum;
+					});
+					if(findIndex !== -1){
+						Vue.delete(_this.productList,findIndex);
+					}
 				}
 			},computed: {
-				getProductList:function(){
-//					console.log(this.productList);
-//					return this.productList;
+				editProductList:function(param){
+					console.log(param);
 				}
 			},created:function(){
 				let _thisVue = this;
@@ -137,6 +152,10 @@
 						_thisVue.getJsonListParam.loadTrigger = false;
 						vueVersionGetJsonList(_thisVue);
 					}
+				});
+				//监听-删除购物车-事件
+				bus.$on('delete_cart', function(param){
+					_thisVue.delCart(param);
 				});
 			},watch: {
 				productList: {
