@@ -419,7 +419,6 @@
                         };
                         asyncVerify(config);
                     },editProductList:function(param){
-                        console.log(this.postData);
                         let productInfo = {
                             'goods_id':param.product_id,
                             'num':param.buy_quantity
@@ -449,6 +448,7 @@
                     bus.$on('footer_cart_product_select_init', function(param){
                         _this.total_amount_init(param);
                         _this.editProductList(param);
+                        console.log(param);
                     });
                     //底部购物菜单-监听-产品改变-事件
                     bus.$on('footer_cart_buy_quantity_change', function(param){
