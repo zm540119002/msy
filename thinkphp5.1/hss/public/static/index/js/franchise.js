@@ -50,7 +50,27 @@ $(function(){
            
         }
     });
-    
+     //填写基本资料
+    $('body').on('click','.search-city',function(){
+        var area_address =$('.area-address-name').getArea();
+        applicantData=$('.applicant_form').serializeObject();
+        var content='';
+        if(!applicantData.name){
+            content='请填写店家名称';
+        }else if(!applicantData.applicant){
+            content='请填写申请人姓名';
+        }else if(!register.phoneCheck(applicantData.mobile)){
+            content='请填写手机号码';
+        }
+        if(content){
+            dialog.error(content);
+        }else{
+            $('.weui-flex-item:eq(0)').removeClass('current');
+            $('.weui-flex-item:eq(2)').addClass('current');
+            $('.apply-module:eq(1)').hide();
+            $('.apply-module:eq(2)').show();
+        }
+    });
     //确定通过入驻
     $('body').on('click','.three-step',function(){
     });
