@@ -382,6 +382,8 @@
                         }
                         this.total_amount += param.subtotal_amount;
                     },total_amount_calculate:function (param) {
+                        console.log(param.deal_price);
+                        console.log(param.increment_buy_quantity);
                         if(this.type==4){
                             if(param.checked){
                                 this.total_amount += param.deal_price * param.increment_buy_quantity;
