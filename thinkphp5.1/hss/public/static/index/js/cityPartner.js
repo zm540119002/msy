@@ -37,7 +37,7 @@ $(function(){
     $('body').on('click','.one-step',function(){
         applicantData=$('.applicant_form').serializeObject();
         var content=''; 
-        if(!applicantData.name){
+        if(!applicantData.company_name){
             content='请填写店家名称';
         }else if(!applicantData.applicant){
             content='请填写申请人姓名';
