@@ -120,8 +120,6 @@
 						_this.productList.push(o);
 					});
 				},delCart:function(param){
-					console.log(param);
-					return false;
 					let _this = this;
 					let findIndex = -1;
 					$.each(this.productList,function(i,o){
@@ -134,7 +132,6 @@
 					});
 					if(findIndex !== -1){
 						Vue.delete(_this.productList,findIndex);
-
 					}
 				}
 			},computed: {
