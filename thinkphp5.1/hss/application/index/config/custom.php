@@ -34,10 +34,9 @@ return [
 //            'a'    => "href=javascript:void(0) class='async_login' data-jump_url=".url('Franchise/index'),
             'icon' => 'practitioners',
         ],
-        'index/cityPartnerIndex' => [
+        'Index/cityPartnerIndex' => [
             'name' => '城市合伙人',
-            //'a'    => 'href='.url('Business/index'),
-            'a'    => "href=javascript:void(0) class='async_login' data-jump_url=".url('index/cityPartnerIndex'),
+            'a'    => "href=javascript:void(0) class='async_login' data-jump_url=".url('Index/cityPartnerIndex'),
             'icon' => 'business',
         ],
         'Index/cartIndex' => [
