@@ -18,9 +18,9 @@ $(function(){
         // }else if(!applicantData.detail_address){
         //     content='请填写详细地址';
         // }
-        var postData={};
-        postData.province = area_address[0];
-        postData.city = area_address[1];
+        var postData=[];
+        postData.push([area_address[0],area_address[1]]);
+       
         //postData.area = area_address[2];
         console.log(postData);
         return false;
