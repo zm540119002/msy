@@ -334,19 +334,19 @@
                     <span class="add_num current" v-else></span>
                 </div>
                 <!-- 加入购物车 -->
-                <div v-else-if="menu.class.indexOf('add_cart')!==-1" class="add_cart" @click="asyncVerify" :data-jump_url="menu.action">
+                <div v-else-if="menu.class.indexOf('add_cart')!==-1" class="add_cart" @click="addCart" :data-jump_url="menu.action">
                     <span class="s_i"></span>
                 </div>
                 <!-- 立即购买 -->
-                <div v-else-if="menu.class.indexOf('buy_now')!==-1" class="buy_now" @click="asyncVerify" :data-jump_url="menu.action">
+                <div v-else-if="menu.class.indexOf('buy_now')!==-1" class="buy_now" @click="addCart" :data-jump_url="menu.action">
                     <span class="s_i"></span>
                 </div>
                 <!-- 去结算 -->
-                <div v-else-if="menu.class.indexOf('settlement')!==-1" class="buy_now" @click="asyncVerify" :data-jump_url="menu.action">
+                <div v-else-if="menu.class.indexOf('settlement')!==-1" class="buy_now" @click="addCart" :data-jump_url="menu.action">
                     <span class="s_i"></span>
                 </div>
                 <!-- 提交订单 -->
-                <div v-else-if="menu.class.indexOf('confirm_order')!==-1" class="confirm_order" @click="asyncVerify" :data-jump_url="menu.action">
+                <div v-else-if="menu.class.indexOf('confirm_order')!==-1" class="confirm_order" @click="addCart" :data-jump_url="menu.action">
                     <span class="s_i"></span>
                 </div>
                 <!-- 默认 -->
@@ -392,7 +392,7 @@
                         if(jump_url){
                             location.href = jump_url;
                         }
-                    },asyncVerify:function(event){
+                    },addCart:function(event){
                         let _thisJquery = $(event.currentTarget);
                         let _thisVue = this;
                         login_success_callback_private = function(){
@@ -419,33 +419,28 @@
                         };
                         asyncVerify(config);
                     },editProductList:function(param){
-                        if(this.type==4){
-                        }else{
-                            let productInfo = {
-                                'goods_id':param.product_id,
-                                'num':param.buy_quantity
-                            };
-                            //产品是否存在产品列表，默认不存在
-                            let existSign = false;
-                            for(var i = 0,len = this.postData.goodsList.length; i < len; i++){
-                                //产品已存在产品列表，则修改或删除
-                                if(this.postData.goodsList[i]['goods_id'] == param.product_id){
-                                    if(param.buy_quantity<=0){
-                                        Vue.delete(this.postData.goodsList,i);
-                                    }else{
-                                        this.postData.goodsList[i]['num'] = param.buy_quantity;
-                                    }
-                                    existSign = true;
-                                    break;
+                        let productInfo = {
+                            'goods_id':param.product_id,
+                            'num':param.buy_quantity
+                        };
+                        //产品是否存在产品列表，默认不存在
+                        let existSign = false;
+                        for(var i = 0,len = this.postData.goodsList.length; i < len; i++){
+                            //产品已存在产品列表，则修改或删除
+                            if(this.postData.goodsList[i]['goods_id'] == param.product_id){
+                                if(param.buy_quantity<=0){
+                                    Vue.delete(this.postData.goodsList,i);
+                                }else{
+                                    this.postData.goodsList[i]['num'] = param.buy_quantity;
                                 }
-                            }
-                            //产品不存在产品列表，则添加
-                            if(!existSign && param.buy_quantity>0){
-                                this.postData.goodsList.push(productInfo);
+                                existSign = true;
+                                break;
                             }
                         }
-                    },editCartNum:function(param){
-                        this.cart_num += param.increment_buy_quantity;
+                        //产品不存在产品列表，则添加
+                        if(!existSign && param.buy_quantity>0){
+                            this.postData.goodsList.push(productInfo);
+                        }
                     }
                 },created:function(){
                     let _this = this;
