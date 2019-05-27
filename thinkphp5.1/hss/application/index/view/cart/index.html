@@ -126,18 +126,18 @@
 						$.each(param.postData.goodsList,function(ii,oo){
 							if(o.id == oo.goods_id){
 								findIndex = i;
-								if(findIndex !== -1){
-									Vue.delete(_this.productList,findIndex);
-								}
 								console.log(param.vueObj.buy_quantity);
 								param.vueObj.buy_quantity -= oo.num;
 								console.log(param.vueObj.buy_quantity);
 							}
 						});
+						if(findIndex !== -1){
+							Vue.delete(_this.productList,findIndex);
+						}
 					});
-					if(findIndex !== -1){
-						Vue.delete(_this.productList,findIndex);
-					}
+//					if(findIndex !== -1){
+//						Vue.delete(_this.productList,findIndex);
+//					}
 				}
 			},created:function(){
 				let _thisVue = this;
