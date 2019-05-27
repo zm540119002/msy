@@ -130,7 +130,7 @@
             <div class="product_name"><p class="two-line-apostrophe">{{product_name}}</p></div>
         </div>
     </li><li v-else-if="type==4"><!--用于购物车-->
-        <input type="checkbox" class="item_checkbox check_item" v-model='checked' />
+        <input type="checkbox" class="item_checkbox check_item" v-model='checked' @click="checkItem"/>
         <a href="" class="cart_goods_img" :href="'/index/Goods/detail/id/' + product_id">
             <img class="left common_default_img" :src="product_src?('public_uploads/' + product_src):('api_common_img/default/no_pic_100.jpg') " alt="">
         </a>
@@ -183,6 +183,10 @@
             },methods: {
                 subtotal_amount_calculate:function(){
                     this.subtotal_amount = this.deal_price * this.buy_quantity;
+                },checkItem:function(){
+                    this.checked = !this.checked;
+                    //底部购物菜单-触发-复选框改变-事件
+                    bus.$emit('footer_cart_item_checkbox_change',this);
                 },delCart:function(event){
                     if(this.buy_quantity_reduce_trigger){
                         this.buy_quantity_reduce_trigger = false;
@@ -417,6 +421,9 @@
                         };
                         asyncVerify(config);
                     },editProductList:function(param){
+                        console.log(this.postData.goodsList);
+                        console.log(param.checked);
+                        console.log(this.type);
                         if(this.type==4 && !param.checked){
                             return false;
                         }
@@ -452,6 +459,11 @@
                     });
                     //底部购物菜单-监听-产品改变-事件
                     bus.$on('footer_cart_buy_quantity_change', function(param){
+                        _this.total_amount_calculate(param);
+                        _this.editProductList(param);
+                    });
+                    //底部购物菜单-监听-复选框改变-事件
+                    bus.$on('footer_cart_item_checkbox_change', function(param){
                         _this.total_amount_calculate(param);
                         _this.editProductList(param);
                     });
