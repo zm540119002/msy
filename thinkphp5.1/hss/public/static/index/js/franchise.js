@@ -4,8 +4,8 @@ $(function(){
         applicantData={};
     //填写基本资料
     $('body').on('click','.one-step',function(){
-        area_address =$('.area-address-name').getArea();
         applicantData=$('.applicant_form').serializeObject();
+        area_address =$('.area-address-name').getArea();
         var content='';
         if(!applicantData.name){
             content='请填写店家名称';
