@@ -360,9 +360,20 @@ class Sort extends Base
 
     public function getRecommendGoods(){
         $id = input('id/d');
-        if($id){
+        $ids= input('ids/s');
 
-            $model = new \app\index\model\Sort();
+        if(strpos($ids,',')){
+            $ids = explode(',',$ids);
+        }
+
+        if( !$id && !$ids ){
+            return errorMsg('参数错误 !');
+        }
+        if($ids){
+            $recommend_goods = $ids;
+
+        }else{
+            $model = new \app\index\model\Project();
             $condition = [
                 'field' => [
                     'recommend_goods'
@@ -371,24 +382,23 @@ class Sort extends Base
                 ],
             ];
             $info  = $model->getInfo($condition);
-
-            //相关推荐商品
-            $modelGoods = new \app\index\model\Goods();
-            $config =[
-                'where' => [
-                    ['g.status', '=', 0],
-                    ['g.id', 'in', $info['recommend_goods']],
-                ],'field'=>[
-                    'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity',
-                    'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit','g.name'
-                ]
-            ];
-            $list= $modelGoods->getList($config);
-
-            $this->assign('list',$list);
-            return view('goods/selected_list');
+            $recommend_goods = $info['recommend_goods'];
         }
 
+        //相关推荐商品
+        $modelGoods = new \app\index\model\Goods();
+        $config =[
+            'where' => [
+                ['g.status', '=', 0],
+                ['g.id', 'in', $recommend_goods],
+            ],'field'=>[
+                'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity',
+                'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit','g.name'
+            ]
+        ];
+        $list= $modelGoods->getList($config);
 
+        $this->assign('list',$list);
+        return view('goods/selected_list');
     }
 }
