@@ -363,7 +363,7 @@
                         recommendIds.push(goodsSelectedId);
                     });
                     $(".recommend").next().html(recommendIds.length);
-                    $("#ids").val(recommendIds);
+                    $('input[name="ids"]').val(recommendIds);
                     layer.close(index);
                 },
                 no: function(){
