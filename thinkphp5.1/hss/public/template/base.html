@@ -231,7 +231,11 @@
             $('#product-list').append(html);
             localStorage.removeItem("cartList");
         }
-        param.clickObj.parents('li').remove();
+        $.each(param.postData.goodsList,function(i,o){
+            param.vueObj.buy_quantity += o.num;
+            param.vueObj.buy_quantity_reduce_trigger = true;
+            param.clickObj.parents('li').remove();
+        });
     }
 </script>
 {/block}
