@@ -382,13 +382,13 @@
                         }
                         this.total_amount += param.subtotal_amount;
                     },total_amount_calculate:function (param) {
-                        console.log(param.deal_price);
-                        console.log(param.increment_buy_quantity);
+                        console.log(param.total_amount);
+                        console.log(param.subtotal_amount);
                         if(this.type==4){
                             if(param.checked){
-                                this.total_amount += param.deal_price * param.increment_buy_quantity;
+                                this.total_amount += param.subtotal_amount;
                             }else{
-                                this.total_amount -= param.deal_price * param.increment_buy_quantity;
+                                this.total_amount -= param.subtotal_amount;
                             }
                         }else{
                             this.total_amount += param.deal_price * param.increment_buy_quantity;
