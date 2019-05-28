@@ -480,7 +480,8 @@
                             checked:param.checked
                         };
                         this.checkItemList.push(tmp);
-                    },editCheckAll:function(param){
+                        this.editCheckAll();
+                    },editCheckAll:function(){
                         //一票否决
                         let sign = true;
                         for(let i = 0,len = this.checkItemList.length; i < len; i++){
