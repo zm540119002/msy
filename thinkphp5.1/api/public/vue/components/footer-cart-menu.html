@@ -183,9 +183,6 @@
             },methods: {
                 subtotal_amount_calculate:function(){
                     this.subtotal_amount = this.deal_price * this.buy_quantity;
-                },checkItem:function(){
-                    //触发-产品选择器复选框改变-事件
-                    bus.$emit('product_select_check_item_change',this);
                 },delCart:function(event){
                     if(this.buy_quantity_reduce_trigger){
                         this.buy_quantity_reduce_trigger = false;
@@ -283,6 +280,14 @@
                         }
                     };
                     asyncVerify(config);
+                },checkItem:function(){
+                    console.log(this.checked);
+                    //触发-产品选择器复选框改变-事件
+                    bus.$emit('product_select_check_item_change',this);
+                },checkItemChange:function(){
+                    console.log(this.checked);
+                    //触发-产品选择器复选框改变-事件
+                    bus.$emit('product_select_check_item_change',this);
                 }
             },created: function(){
                 this.subtotal_amount_calculate();
@@ -292,8 +297,7 @@
                 //监听-底部购物车全选改变-事件
                 bus.$on('footer_cart_check_all_change', function(param){
                     _this.checked = param;
-//                    _this.checkItem();
-                    console.log(param);
+                    _this.checkItemChange();
                 });
             },watch: {
                 buy_quantity: {
