@@ -505,25 +505,25 @@
                         if(!find){
                             this.checkItemList.push(tmp);
                         }
-                        this.editCheckAll();
-                    },editCheckAll:function(){
-                        //一票否决
-                        let sign = true;
-                        for(let i = 0,len = this.checkItemList.length; i < len; i++){
-                            if(!this.checkItemList[i].checked){
-                                sign = false;
-                                break;
-                            }
-                        }
-                        this.checked = sign;
-                        this.checked?this.checked_name='全不选':this.checked_name='全选';
-                    },checkAll:function(){
+                        this.editCheckAll(param);
+                    },editCheckAll:function(param){
                         if(param.checked_operation_type=='edit'){ //删除选择状态列表
+                            //一票否决
+                            let sign = true;
                             for(let i = 0,len = this.checkItemList.length; i < len; i++){
-                                this.checkItemList[i].checked = this.checked;
+                                if(!this.checkItemList[i].checked){
+                                    sign = false;
+                                    break;
+                                }
                             }
+                            this.checked = sign;
                             this.checked?this.checked_name='全不选':this.checked_name='全选';
                         }
+                    },checkAll:function(){
+                        for(let i = 0,len = this.checkItemList.length; i < len; i++){
+                            this.checkItemList[i].checked = this.checked;
+                        }
+                        this.checked?this.checked_name='全不选':this.checked_name='全选';
                         //触发-底部购物车全选改变-事件
                         bus.$emit('footer_cart_check_all_change',!this.checked);
                     }
