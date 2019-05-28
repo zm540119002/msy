@@ -481,7 +481,7 @@
                         let find = false;
                         for(let i = 0,len = this.checkItemList.length; i < len; i++){
                             if(this.checkItemList[i].product_id == param.product_id){
-                                this.checkItemList[i].checked = param.checked;
+                                this.checkItemList[i].checked = !param.checked;
                                 find = true;
                                 break;
                             }
