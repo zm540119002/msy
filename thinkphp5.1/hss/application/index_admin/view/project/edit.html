@@ -380,7 +380,7 @@
             var file = $(this);
             fileList = $(this).get(0).files;
             num=file.data('num');//限制个数
-            console.log(fileList);
+            //console.log(fileList);
             //return false;
             uploadPicDescribe(fileList[0],0,fileList.length);
         });
@@ -445,17 +445,19 @@
                     msg.img = msg.info;
                     msg.desc = '';
                     addImg(msg);
+
+                    if(i<len-1){
+                        i++;
+                        if(fileList[i]){
+                            uploadPicDescribe(fileList[i],i,len);
+                        }
+                    }
+                    
                 }else{
                     dialog.error(msg.info)
                 }
             });
 
-            if(i<len-1){
-                i++;
-                if(fileList[i]){
-                    uploadPicDescribe(fileList[i],i,len);
-                }
-            }
         }
     }
 </script>

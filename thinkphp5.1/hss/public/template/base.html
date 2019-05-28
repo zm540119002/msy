@@ -127,6 +127,9 @@
                         param.vueObj.buy_quantity_reduce_trigger = true;
                         param.clickObj.parents('li').remove();
                     });
+                    if(param.vueObj.checked){
+                        param.vueObj.checked = false;
+                    }
                     if(!$('#product-list').find('li').length){
                         $('#product-list').append($('.no_cart_data').html());
                     }
@@ -236,6 +239,9 @@
             param.vueObj.buy_quantity_reduce_trigger = true;
             param.clickObj.parents('li').remove();
         });
+        if(param.vueObj.checked){
+            param.vueObj.checked = false;
+        }
     }
 </script>
 {/block}
