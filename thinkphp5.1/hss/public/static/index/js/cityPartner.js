@@ -9,9 +9,10 @@ $(function(){
             dialog.error('请选择城市');
             return false;
         }
-        var arr=[[18,0],[18,1],[8,0],[7,1]];
         var cityData=[];
-        cityData.push(parseInt(area_address[0]),parseInt(area_address[1]));
+		for (var key=0;key<cityList.length;key++) {
+			cityData.push([parseInt(cityList[key].province),parseInt(cityList[key].city)]);
+		}
         var provinces=(arr,cityData);
         if(!provinces){
             layer.open({
