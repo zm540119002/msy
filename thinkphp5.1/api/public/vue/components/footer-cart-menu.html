@@ -479,6 +479,7 @@
                         console.log(param.product_id);
                     }
                 },created:function(){
+                    console.log(this.index);
                     let _this = this;
                     //监听-产品选择器初始化-事件
                     bus.$on('product_select_init', function(param){
