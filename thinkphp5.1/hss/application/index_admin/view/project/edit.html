@@ -380,7 +380,8 @@
             var file = $(this);
             fileList = $(this).get(0).files;
             num=file.data('num');//限制个数
-
+            console.log(fileList);
+            //return false;
             uploadPicDescribe(fileList[0],0,fileList.length);
         });
         //删除
@@ -450,8 +451,9 @@
             });
 
             if(i<len-1){
-                if(fileList[i+1]){
-                    uploadPicDescribe(fileList[i+1],i+1,len);
+                i++;
+                if(fileList[i]){
+                    uploadPicDescribe(fileList[i],i,len);
                 }
             }
         }
