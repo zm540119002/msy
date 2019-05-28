@@ -177,6 +177,7 @@
                     buy_quantity_reduce_trigger:true,
                     subtotal_amount:0,
                     checked:this.init_checked,
+                    checked_operation_type:'edit',
                     add_cart_url:'{:url("Cart/addCart")}',
                     del_cart_url:'{:url("Cart/del")}'
                 };
@@ -491,9 +492,13 @@
                         let find = false;
                         for(let i = 0,len = this.checkItemList.length; i < len; i++){
                             if(this.checkItemList[i].product_id == param.product_id){
-                                this.checkItemList[i].checked = param.checked;
-                                find = true;
-                                break;
+                                if(param.checked_operation_type=='delete'){ //删除选择状态列表
+                                    Vue.delete(this.checkItemList,i);
+                                }else{ //修改选择状态列表
+                                    this.checkItemList[i].checked = param.checked;
+                                    find = true;
+                                    break;
+                                }
                             }
                         }
                         if(!find){
@@ -512,10 +517,12 @@
                         this.checked = sign;
                         this.checked?this.checked_name='全不选':this.checked_name='全选';
                     },checkAll:function(){
-                        for(let i = 0,len = this.checkItemList.length; i < len; i++){
-                            this.checkItemList[i].checked = this.checked;
+                        if(param.checked_operation_type=='edit'){ //删除选择状态列表
+                            for(let i = 0,len = this.checkItemList.length; i < len; i++){
+                                this.checkItemList[i].checked = this.checked;
+                            }
+                            this.checked?this.checked_name='全不选':this.checked_name='全选';
                         }
-                        this.checked?this.checked_name='全不选':this.checked_name='全选';
                         //触发-底部购物车全选改变-事件
                         bus.$emit('footer_cart_check_all_change',!this.checked);
                     }
