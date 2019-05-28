@@ -30,7 +30,6 @@ $(function(){
                 content:'所查询的城市暂时没有空缺<br/>备注：城市合伙人可能已被签约，或者正处于保留状态，建议过段时间再查询。',
                 btn:['确定'],
                 yes:function(index){
-                    
                     layer.close(index);
                 }
             });
