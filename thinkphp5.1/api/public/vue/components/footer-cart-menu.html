@@ -399,6 +399,7 @@
                         }
                         this.total_amount += param.deal_price * param.increment_buy_quantity;
                     },total_amount_calculate_with_checked:function (param) {
+                        console.log(param.checked);
                         if(param.checkItemOrAll=='item'){
                             if(!param.checked){
                                 this.total_amount += param.subtotal_amount;
@@ -427,8 +428,6 @@
                         register_success_callback_private = function(){
                             _thisJquery.click()
                         };
-//                        console.log(_thisVue.postData.goodsList);
-//                        return false;
                         //前端验证
                         if((
                                 (_thisJquery.attr('class')=='add_cart' //加入购物车
