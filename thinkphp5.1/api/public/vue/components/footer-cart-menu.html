@@ -291,7 +291,7 @@
                 bus.$emit('product_select_init',_this);
                 //监听-底部购物车全选改变-事件
                 bus.$on('footer_cart_check_all_change', function(param){
-                    _this.editCheckItem(param);
+                    _this.editCheckItem(!param);
                 });
             },watch: {
                 buy_quantity: {
