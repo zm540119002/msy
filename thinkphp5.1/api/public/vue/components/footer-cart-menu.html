@@ -479,7 +479,14 @@
                             product_id:param.product_id,
                             checked:param.checked
                         };
-                        this.checkItemList.push(tmp);
+                        for(let i = 0,len = this.checkItemList.length; i < len; i++){
+                            if(this.checkItemList[i].product_id == param.product_id){
+                                this.checkItemList[i].checked = param.checked;
+                                break;
+                            }else{
+                                this.checkItemList.push(tmp);
+                            }
+                        }
                         this.editCheckAll();
                     },editCheckAll:function(){
                         //一票否决
