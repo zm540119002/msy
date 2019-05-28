@@ -88,7 +88,7 @@ class Project extends \common\controller\Base{
                     ['status','=',0],
                     ['shelf_status','=',3],
                     ['id','in',$info['recommend_goods']],
-                ],'limit' => 4
+                ]
             ];
             $info['recommend_goods'] = $modelGoods->getList($condition);
 
