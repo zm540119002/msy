@@ -390,6 +390,7 @@ class Payment extends \common\controller\Base {
                 'sn' => $data['out_trade_no'],
                 'user_id' => $payInfo['user_id'],
                 'pay_code' => $payInfo['pay_code'],
+                'type' => $payInfo['type'],
                 'pay_sn' => $data['transaction_id'],
                 'actually_amount' => $data['total_fee']/100,
             ];
@@ -398,6 +399,8 @@ class Payment extends \common\controller\Base {
             }elseif($payInfo['type'] == 2){
                 $this->setRechargePayStatus($info,$systemId);
             }elseif($payInfo['type'] == 3){
+                $this->setFranchisePayStatus($info,$systemId);
+            }elseif($payInfo['type'] == 4){
                 $this->setFranchisePayStatus($info,$systemId);
             }
         }
@@ -525,6 +528,7 @@ class Payment extends \common\controller\Base {
     }
 
     /**
+     * hss加盟店申请回调处理
      * @param $info 回调信息
      * @param $systemId 平台id
      */
@@ -550,6 +554,45 @@ class Payment extends \common\controller\Base {
             $modelFranchise ->rollback();
             $info['mysql_error'] = $modelFranchise->getError();
             return $this->writeLog("订单支付更新失败",$info);
+        }
+        $modelFranchise ->commit();
+        echo 'SUCCESS';
+    }
+    /**
+     * hss城市人申请回调处理
+     * @param $info 回调信息
+     * @param $systemId 平台id
+     */
+    public function setCityPartnerPayStatus($info,$systemId){
+        $modelFranchise = new \app\index\model\CityPartner();
+        $modelFranchise ->setConnection(config('custom.system_id')[$systemId]['db']);
+
+        $data = [
+            'apply_status'=>2,                              // 状态
+            'payment_time'=>time(),
+            'pay_sn'=>$info['pay_sn'],                      // 支付单号 退款用
+            'pay_code'=>$info['pay_code'],                      // 支付方式
+        ];
+        if($info['type'] == 4){
+            //席位支付
+            $data['apply_status']=2;
+        }elseif($info['type'] == 5){
+            //尾款支付
+            $data['apply_status']=4;
+        }
+        $condition = [
+            'where' => [
+                ['status', '=', 0],
+                ['sn', '=', $info['sn']],
+                ['user_id', '=', $info['user_id']],
+                ['apply_status', '=', 1],
+            ],
+        ];
+        $result = $modelFranchise -> allowField(true) -> save($data,$condition);
+        if($result === false){
+            $modelFranchise ->rollback();
+            $info['mysql_error'] = $modelFranchise->getError();
+            return $this->writeLog("城市人申请席位定金支付更新失败",$info);
         }
         $modelFranchise ->commit();
         echo 'SUCCESS';

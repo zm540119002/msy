@@ -33,8 +33,8 @@
 			<!--产品列表-->
 			<ul class="goods_list list" id="product-list">
 				<product-select
-						v-for="productInfo in productList"
-						:key="productInfo.id"
+						v-for="(productInfo,index) in productList"
+						:key="index"
 						:product_id="productInfo.id"
 						:deal_price="parseFloat(productInfo.bulk_price)"
 						:product_name="productInfo.headline"
