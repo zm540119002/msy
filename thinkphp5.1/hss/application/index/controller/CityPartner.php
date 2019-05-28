@@ -28,12 +28,11 @@ class CityPartner extends \common\controller\UserBase {
                 ],
             ];
             $cityList = $modelCityPartner -> getList($config);
-            print_r($cityList);
+//            print_r($cityList);
             $unlockingFooterCart = unlockingFooterCartConfig([10, 0, 9]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
             return $this->fetch();
         }
-//        return $this->fetch();
     }
 
     /**
