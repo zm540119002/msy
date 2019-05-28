@@ -70,15 +70,13 @@
             $('.swiper-slide ').css('height',$(window).height()+'px');
             $('body').css({height:100+'%',position:'relative'});
         })
-        window.onload=function(){
-            var swiper = new Swiper('.swiper-container', {
-                direction: 'vertical',
-                pagination: {
-                    el: '.swiper-pagination',
-                    clickable: true,
-                },
-            });
-        }
+        var swiper = new Swiper('.swiper-container', {
+        direction: 'vertical',
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        });
 
 </script>
 {/block}
