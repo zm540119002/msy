@@ -184,7 +184,6 @@
                 subtotal_amount_calculate:function(){
                     this.subtotal_amount = this.deal_price * this.buy_quantity;
                 },checkItem:function(){
-                    this.checked = !this.checked;
                     //触发-产品选择器复选框改变-事件
                     bus.$emit('product_select_check_item_change',this);
                 },delCart:function(event){
@@ -314,7 +313,7 @@
                 {{menu.name}}
                 <!-- 全选 -->
                 <div v-if="menu.class.indexOf('checked_all')!==-1" class="checked_all">
-                    <input type="checkbox" class="check_all" v-model='checked' />
+                    <input type="checkbox" class="check_all" v-model='checked' @click="checkAll" />
                     <label for="" class="">全选</label>
                 </div>
                 <!-- 总金额 -->
@@ -388,7 +387,7 @@
                         }
                         this.total_amount += param.deal_price * param.increment_buy_quantity;
                     },total_amount_calculate_with_checked:function (param) {
-                        if(param.checked){
+                        if(!param.checked){
                             this.total_amount += param.subtotal_amount;
                         }else{
                             this.total_amount -= param.subtotal_amount;
@@ -490,8 +489,6 @@
                         if(!find){
                             this.checkItemList.push(tmp);
                         }
-                        console.log(tmp);
-                        console.log(this.checkItemList);
                         this.editCheckAll();
                     },editCheckAll:function(){
                         //一票否决
@@ -503,6 +500,9 @@
                             }
                         }
                         this.checked = sign;
+                    },checkAll:function(){
+//                        this.checked = !this.checked;
+                        console.log(this.checked);
                     }
                 },created:function(){
                     let _this = this;
