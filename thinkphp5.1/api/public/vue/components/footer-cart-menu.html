@@ -327,8 +327,8 @@
                 {{menu.name}}
                 <!-- 全选 -->
                 <div v-if="menu.class.indexOf('checked_all')!==-1" class="checked_all">
-                    <input type="checkbox" class="check_all" v-model='checked' @click="checkAll" />
-                    <label for="" class="">全选</label>
+                    <input type="checkbox" class="check_all" v-model='checked' @click="checkAll" id="check_all"/>
+                    <label for="check_all">全选</label>
                 </div>
                 <!-- 总金额 -->
                 <div v-else-if="menu.class.indexOf('amount')!==-1" class="amount">
@@ -519,11 +519,13 @@
                             this.checked = sign;
                         }
                     },checkAll:function(){
+                        this.checked = !this.checked;
+                        console.log(this.checked);
                         for(let i = 0,len = this.checkItemList.length; i < len; i++){
                             this.checkItemList[i].checked = this.checked;
                         }
                         //触发-底部购物车全选改变-事件
-                        bus.$emit('footer_cart_check_all_change',!this.checked);
+                        bus.$emit('footer_cart_check_all_change',this.checked);
                     }
                 },created:function(){
                     let _this = this;
