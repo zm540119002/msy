@@ -107,10 +107,9 @@
 <script type="text/javascript" >
 	var cityList = JSON.parse('{$cityList|raw}');
 	console.log(cityList);
-	var arr=[];
+	var cityArr=[];
 		for (var key=0;key<cityList.length;key++) {
-			arr.push([parseInt(cityList[key].province),parseInt(cityList[key].city)]);
+			cityArr.push([parseInt(cityList[key].province),parseInt(cityList[key].city)]);
 		}
-	console.log(arr);
 </script>
 {/block} 
