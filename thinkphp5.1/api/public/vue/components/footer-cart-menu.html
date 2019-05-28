@@ -312,11 +312,6 @@
                     handler(newVal, oldVal) {
                         //触发-产品选择器复选框改变-事件
                         bus.$emit('product_select_check_item_change',this);
-                        if(typeof(oldVal) !== "undefined"){
-//                            this.increment_buy_quantity = parseInt(newVal) - parseInt(oldVal?oldVal:0);
-//                            //触发--产品选择器购买数量改变-事件
-//                            bus.$emit('product_select_buy_quantity_change',this);
-                        }
                     },
                     deep: false,
                     immediate: true
@@ -389,7 +384,7 @@
                         total_amount:0,
                         cart_num:this.cart_init_num,
                         checked:this.init_checked,
-                        checked_name:this.init_checked?'全选':'全不选',
+                        checked_name:'',
                         checkItemList:[],
                         menus: unlockingFooterCart.menu,
                         postData:{
@@ -519,6 +514,7 @@
                             }
                         }
                         this.checked = sign;
+                        this.checked?this.checked_name='全选':this.checked_name='全不选';
                     },checkAll:function(){
                         for(let i = 0,len = this.checkItemList.length; i < len; i++){
                             this.checkItemList[i].checked = this.checked;
