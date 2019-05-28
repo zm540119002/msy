@@ -60,22 +60,25 @@
 {block name="script"}
 <script type="text/javascript" src="api_common_js/swiper.min.js"></script>
 <script>
-        (function($){
-    var deviceWidth=document.documentElement.clientWidth;
-    var html =document.getElementsByTagName('html')[0];
-    html.style.fontSize='';
-    })(jQuery);
+    //     (function($){
+    // var deviceWidth=document.documentElement.clientWidth;
+   
+    // })(jQuery);
         $(function(){
+            var html =document.getElementsByTagName('html')[0];
+            html.style.fontSize='';
             $('.swiper-slide ').css('height',$(window).height()+'px');
             $('body').css({height:100+'%',position:'relative'});
         })
-        var swiper = new Swiper('.swiper-container', {
-        direction: 'vertical',
-        pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-        },
-        });
+        window.onload=function(){
+            var swiper = new Swiper('.swiper-container', {
+                direction: 'vertical',
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+            });
+        }
 
 </script>
 {/block}
