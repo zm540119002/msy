@@ -27,17 +27,6 @@ class Order extends Base{
      */
     public function getList(){
 
-// 获取表的所有字段
-/*        $model = new \app\index_admin\model\Order();
-        $table = $model->getTableFields();
-        foreach($table as $k => $v){
-            $table[$k] = "'".$v."'";
-        }
-        $table = implode(',',$table);
-
-        p($table);
-        exit;*/
-
         $where = [
             ['o.status','=',0],
             ['o.order_status','<>',0],
@@ -78,6 +67,37 @@ class Order extends Base{
         return view('list_tpl');
     }
 
+    /**
+     * 订单信息
+     */
+    public function getInfo(){
+
+        // 获取表的所有字段
+        $model = new \app\index\model\Order();
+        $table = $model->getTableFields();
+        foreach($table as $k => $v){
+            $table[$k] = "'".$v."'";
+        }
+        $table = implode(',',$table);
+
+        p($table);
+        exit;
+
+        $id = input('id/d');
+
+        if(!$id){
+            $this->error('没有该订单');
+        }
+        $model = new \app\index\model\Order();
+        $condition = [
+            'field' => [
+                'sn','pay_sn','order_status','pay_code','amount','coupons_pay','order_pay','actually_amount','remark','user_id','coupons_id','create_time','payment_time','finished_time','consignee','mobile','province','city','area','detail_address','brand_name','express_sn','exp_id'
+            ],
+        ];
+
+
+
+    }
 
     /**
      * 增加快递信息
