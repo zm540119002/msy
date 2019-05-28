@@ -108,12 +108,8 @@
 	var cityList = JSON.parse('{$cityList|raw}');
 	console.log(cityList);
 	var arr=[];
-	
 		for (var key in cityList) {
-			//console.log(key);     //获取key值
-			//console.log(json[key]); //获取对应的value值
 			arr.push([parseInt(cityList[key].province),parseInt(cityList[key].city)]);
-			break;
 		}
 	console.log(arr);
 </script>
