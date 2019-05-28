@@ -401,11 +401,18 @@
                         }
                         this.total_amount += param.deal_price * param.increment_buy_quantity;
                     },total_amount_calculate_with_checked:function (param) {
-                        console.log(param.checkItemOrAll);
-                        if(!param.checked){
-                            this.total_amount += param.subtotal_amount;
-                        }else{
-                            this.total_amount -= param.subtotal_amount;
+                        if(param.checkItemOrAll=='item'){
+                            if(!param.checked){
+                                this.total_amount += param.subtotal_amount;
+                            }else{
+                                this.total_amount -= param.subtotal_amount;
+                            }
+                        }else if(param.checkItemOrAll=='all'){
+                            if(param.checked){
+                                this.total_amount += param.subtotal_amount;
+                            }else{
+                                this.total_amount -= param.subtotal_amount;
+                            }
                         }
                     },jump_url:function (event) {
                         let obj = $(event.currentTarget);
