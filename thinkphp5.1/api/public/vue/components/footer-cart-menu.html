@@ -321,7 +321,7 @@
                 <!-- 全选 -->
                 <div v-if="menu.class.indexOf('checked_all')!==-1" class="checked_all">
                     <input type="checkbox" class="check_all" v-model='checked' @click="checkAll" />
-                    <label for="" class="">全选</label>
+                    <label for="" class="">{{checked_name}}</label>
                 </div>
                 <!-- 总金额 -->
                 <div v-else-if="menu.class.indexOf('amount')!==-1" class="amount">
@@ -376,6 +376,7 @@
                         total_amount:0,
                         cart_num:this.cart_init_num,
                         checked:this.init_checked,
+                        checked_name:this.init_checked?'全选':'全不选',
                         checkItemList:[],
                         menus: unlockingFooterCart.menu,
                         postData:{
@@ -511,6 +512,7 @@
                         for(let i = 0,len = this.checkItemList.length; i < len; i++){
                             this.checkItemList[i].checked = !this.checked;
                         }
+                        this.checked?this.checked_name='全选':this.checked_name='全不选';
                         //触发-底部购物车全选改变-事件
                         bus.$emit('footer_cart_check_all_change',!this.checked);
                     }
