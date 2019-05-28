@@ -398,6 +398,7 @@
                         if(this.type==4 && !param.checked){
                             return false;
                         }
+                        console.log(param.increment_buy_quantity);
                         this.total_amount += param.deal_price * param.increment_buy_quantity;
                     },total_amount_calculate_with_checked:function (param) {
                         if(param.checked){
