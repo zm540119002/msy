@@ -130,7 +130,7 @@
             <div class="product_name"><p class="two-line-apostrophe">{{product_name}}</p></div>
         </div>
     </li><li v-else-if="type==4"><!--用于购物车-->
-        <input type="checkbox" class="item_checkbox check_item" v-model='checked' @click="checkItem"/>
+        <input type="checkbox" class="item_checkbox check_item" v-model='checked' />
         <a href="" class="cart_goods_img" :href="'/index/Goods/detail/id/' + product_id">
             <img class="left common_default_img" :src="product_src?('public_uploads/' + product_src):('api_common_img/default/no_pic_100.jpg') " alt="">
         </a>
@@ -280,11 +280,10 @@
                         }
                     };
                     asyncVerify(config);
-                },checkItem:function(){
+                },editCheckItem:function(){
 //                    this.checked = !this.checked;
                     //触发-产品选择器复选框改变-事件
 //                    bus.$emit('product_select_check_item_change',this);
-                },checkAll:function(){
                 }
             },created: function(){
                 this.subtotal_amount_calculate();
@@ -514,14 +513,14 @@
                             }
                         }
                         this.checked = sign;
-                        this.checked?this.checked_name='全选':this.checked_name='全不选';
+                        this.checked?this.checked_name='全不选':this.checked_name='全选';
                     },checkAll:function(){
                         for(let i = 0,len = this.checkItemList.length; i < len; i++){
                             this.checkItemList[i].checked = this.checked;
                         }
-                        this.checked?this.checked_name='全选':this.checked_name='全不选';
+                        this.checked?this.checked_name='全不选':this.checked_name='全选';
                         //触发-底部购物车全选改变-事件
-                        bus.$emit('footer_cart_check_all_change',this.checked);
+//                        bus.$emit('footer_cart_check_all_change',this.checked);
                     }
                 },created:function(){
                     let _this = this;
