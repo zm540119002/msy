@@ -6,6 +6,9 @@ $(function(){
     $('body').on('click','.search-city',function(){
         area_address =$('.area-address-name').getArea();
         console.log(area_address);
+        if($.empty(area_address)){
+            console.log(222)
+        }
         return false;
         var arr=[[18,0],[18,1],[8,0],[7,1]];
         var cityData=[];
