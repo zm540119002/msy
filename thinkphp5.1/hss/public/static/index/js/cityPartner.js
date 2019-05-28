@@ -9,10 +9,13 @@ $(function(){
             dialog.error('请选择城市');
             return false;
         }
-        var arr=[[18,0],[18,1],[8,0],[7,1]];
+        var cityArr=[];
+		for (var key=0;key<cityList.length;key++) {
+			cityArr.push([parseInt(cityList[key].province),parseInt(cityList[key].city)]);
+		}
         var cityData=[];
         cityData.push(parseInt(area_address[0]),parseInt(area_address[1]));
-        var provinces=(arr,cityData);
+        var provinces=arrayHasElement(cityArr,cityData);
         if(!provinces){
             layer.open({
                 content:'所查询的城市可以申请城市合伙人<br/>声明：同一城市可能存在多位申请人,同等条件下按先申请先审核签约原则。',

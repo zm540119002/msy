@@ -105,18 +105,6 @@
 <script type="text/javascript" src="public_js/jquery.area.js"></script>
 <script type="text/javascript" src="index_js/cityPartner.js"></script>
 <script type="text/javascript" >
-	var cityList = JSON.parse('{$cityList|raw}');
-	console.log(cityList);
-	var arr=[];
-	for(var i=0;i<cityList.length;i++){
-		for (var key in cityList[i]) {
-			//console.log(key);     //获取key值
-			//console.log(json[key]); //获取对应的value值
-			console.log(cityList[i]);
-			arr.push([cityList[i][key],cityList[i][key]]);
-			break;
-		}
-	}
-	console.log(arr);
+	var cityList = JSON.parse('{$cityList|raw}');	
 </script>
 {/block} 
