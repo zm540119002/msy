@@ -12,7 +12,7 @@ $(function(){
         var arr=[[18,0],[18,1],[8,0],[7,1]];
         var cityData=[];
         cityData.push(parseInt(area_address[0]),parseInt(area_address[1]));
-        var provinces=arrayHasElement(arr,cityData);
+        var provinces=(arr,cityData);
         if(!provinces){
             layer.open({
                 content:'所查询的城市可以申请城市合伙人<br/>声明：同一城市可能存在多位申请人,同等条件下按先申请先审核签约原则。',
