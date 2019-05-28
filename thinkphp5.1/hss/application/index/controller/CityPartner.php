@@ -21,7 +21,7 @@ class CityPartner extends \common\controller\UserBase {
             $config=[
                 'where'=>[
                     ['status', '=', 0],
-                    ['apply_status','=',$info['id']]
+                    ['apply_status','=',3]
                 ],
                 'field'=>[
                     'province','city',
