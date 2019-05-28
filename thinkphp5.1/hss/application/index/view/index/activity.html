@@ -1,6 +1,17 @@
 {extend name="template/base.html" /}
+{block name="css-customize"}
+<style>
+ .swiper-container-vertical>.swiper-wrapper {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+</style>
+{/block}
 {block name="content"}
-    
+   
      <div class="swiper-container swiper-container-initialized swiper-container-vertical swiper-container-ios">
         <div class="swiper-wrapper">
              <div class="swiper-slide swiper-slide-active">
