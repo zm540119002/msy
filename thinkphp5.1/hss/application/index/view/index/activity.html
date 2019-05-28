@@ -1,13 +1,42 @@
 {extend name="template/base.html" /}
 {block name="css-customize"}
 <style>
-.swiper-container-vertical>.swiper-wrapper {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-}
+html, body {
+      position: relative;
+      height: 100%;
+    }
+    body {
+      background: #eee;
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      color:#000;
+      margin: 0;
+      padding: 0;
+    }
+    .swiper-container {
+      width: 100%;
+      height: 100%;
+    }
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: #fff;
+
+      /* Center slide text vertically */
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+    }
+  </style>
 </style>
 {/block}
 {block name="content"}
@@ -68,7 +97,7 @@
             var html =document.getElementsByTagName('html')[0];
             html.style.fontSize='';
             $('.swiper-slide ').css('height',$(window).height()+'px');
-            $('body').css({height:100+'%',position:'relative'});
+            //$('body').css({height:100+'%',position:'relative'});
         })
         var swiper = new Swiper('.swiper-container', {
         direction: 'vertical',
