@@ -502,7 +502,7 @@
                         this.checked = sign;
                     },checkAll:function(param){
                         for(let i = 0,len = this.checkItemList.length; i < len; i++){
-                            this.checkItemList[i].checked = !this.checked;
+                            this.checkItemList[i].checked = this.checked;
                         }
                         console.log(this.checked);
                         console.log(this.checkItemList);
