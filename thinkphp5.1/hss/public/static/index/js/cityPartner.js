@@ -5,11 +5,10 @@ $(function(){
     //填写基本资料
     $('body').on('click','.search-city',function(){
         area_address =$('.area-address-name').getArea();
-        console.log(area_address);
         if(!area_address){
-            console.log(222)
+            dialog.error('请选择城市');
+            return false;
         }
-        return false;
         var arr=[[18,0],[18,1],[8,0],[7,1]];
         var cityData=[];
         cityData.push(parseInt(area_address[0]),parseInt(area_address[1]));
