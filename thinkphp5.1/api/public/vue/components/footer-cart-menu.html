@@ -289,16 +289,13 @@
                 this.subtotal_amount_calculate();
                 //触发-产品选择器初始化-事件
                 bus.$emit('product_select_init',this);
-                //监听-底部购物菜单-复选框改变-事件
-                bus.$on('footer_cart_check_all_change', function(param){
-                });
             },watch: {
                 buy_quantity: {
                     handler(newVal, oldVal) {
                         this.subtotal_amount_calculate();
                         if(typeof(oldVal) !== "undefined"){
                             this.increment_buy_quantity = parseInt(newVal) - parseInt(oldVal?oldVal:0);
-                            //触发--产品选择器产品改变-事件
+                            //触发--产品选择器购买数量改变-事件
                             bus.$emit('product_select_buy_quantity_change',this);
                         }
                     },
@@ -373,6 +370,7 @@
                         total_amount:0,
                         cart_num:this.cart_init_num,
                         checked:this.init_checked,
+                        checkItemList:[],
                         menus: unlockingFooterCart.menu,
                         postData:{
                             goodsList:[]
@@ -476,6 +474,8 @@
                         if(!existSign && param.checked && param.buy_quantity>0){
                             this.postData.goodsList.push(productInfo);
                         }
+                    },editCheckItemList:function(param){
+                        console.log(param.index);
                     }
                 },created:function(){
                     let _this = this;
@@ -483,16 +483,17 @@
                     bus.$on('product_select_init', function(param){
                         _this.total_amount_init(param);
                         _this.editProductList(param);
-                    });
-                    //监听-产品选择器产品改变-事件
-                    bus.$on('product_select_buy_quantity_change', function(param){
-                        _this.total_amount_calculate(param);
-                        _this.editProductList(param);
+                        _this.editCheckItemList(param);
                     });
                     //监听-产品选择器复选框改变-事件
                     bus.$on('product_select_check_item_change', function(param){
                         _this.total_amount_calculate_with_checked(param);
                         _this.editProductListWithChecked(param);
+                    });
+                    //监听-产品选择器购买数量改变-事件
+                    bus.$on('product_select_buy_quantity_change', function(param){
+                        _this.total_amount_calculate(param);
+                        _this.editProductList(param);
                     });
                 }
             });
