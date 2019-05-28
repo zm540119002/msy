@@ -112,17 +112,17 @@
                 收货地址
             </a>
             <a href="javascript:void(0)" class="person-td async_login order_manage"  data-jump_url="{:url('Order/manage',['order_status'=>1])}">
-                <span class="wait_pay"></span>
+                <span class="wait_pay"><i class="num">{$orderStatusSum['1']}</i></span>
                 待付款
             </a>
             <a href="javascript:void(0)" class="person-td async_login order_manage"  data-jump_url="{:url('Order/manage',['order_status'=>2])}">
-                <span class="wait_recevie"></span>
+                <span class="wait_recevie"><i class="num">{$orderStatusSum['2']}</i></span>
                 待收货
             </a>
         </div>
         <div class="flex_item">
             <a href="javascript:void(0)" class="person-td async_login order_manage" data-jump_url="{:url('Order/manage',['order_status'=>3])}">
-                <span class="commit"></span>
+                <span class="commit"><i class="num">{$orderStatusSum['4']}</i></span>
                 待评价
             </a>
             <a href="javascript:void(0)" class="person-td async_login order_manage"  data-jump_url="{:url('Order/manage',['order_status'=>6])}">

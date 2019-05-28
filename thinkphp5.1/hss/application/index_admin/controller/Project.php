@@ -37,6 +37,9 @@ class Project extends Base {
                 $info['description'] = htmlspecialchars_decode($info['description']);
                 $info['recommend_goods_num'] = $info['recommend_goods'] ? count(explode(',',$info['recommend_goods'])) : 0;
 
+                $info['process'] = $info['process'] ? addslashes($info['process']) : 0;
+             /*   p($info);
+                exit;*/
                 $this->assign('info',$info);
             }
             return $this->fetch();
@@ -45,11 +48,24 @@ class Project extends Base {
             // 基础处理
             $data = input('post.');
             unset($data['editorValue']);
+            unset($data['process_desc']);
             // 多图上传带描述
             replace_splitter($data,['tag']);
             process_upload_files($data,['thumb_img','video'],'project',false);
             process_upload_files($data,['main_img','process_img','detail_img'],'project');
             htmlspecialchars_addslashes($data,['intro','remarks','description']);
+
+            if($data['process_img']){
+                $process = explode(',',$data['process_img']);
+                foreach($process as $k => $v){
+                    unset($process[$k]);
+                    $process[$k]['img'] = $v;
+                    $process[$k]['desc']= $data['process_text'][$k];
+                }
+                //p($process);
+                //exit;
+                $data['process'] = json_encode($process);
+            }
 
             $recommendIds = input('recommendIds/a');
             if(!empty($recommendIds)){
@@ -63,6 +79,8 @@ class Project extends Base {
             $data['update_time'] = time();
             $data['audit'] = 1; // 暂时没有审核，先固定
 
+          /*  p($data);
+            exit;*/
             if(isset($data['id']) && $id=input('post.id/d')){//修改
                 // 编辑
                 $condition = ['where' => ['id' => $id,]];
@@ -361,8 +379,19 @@ class Project extends Base {
 
     public function getRecommendGoods(){
         $id = input('id/d');
-        if($id){
+        $ids= input('ids/s');
 
+        if(strpos($ids,',')){
+            $ids = explode(',',$ids);
+        }
+
+        if( !$id && !$ids ){
+            return errorMsg('参数错误 !');
+        }
+        if($ids){
+            $recommend_goods = $ids;
+
+        }else{
             $model = new \app\index\model\Project();
             $condition = [
                 'field' => [
@@ -372,26 +401,26 @@ class Project extends Base {
                 ],
             ];
             $info  = $model->getInfo($condition);
-
-            //相关推荐商品
-            $modelGoods = new \app\index\model\Goods();
-            $config =[
-                'where' => [
-                    ['g.status', '=', 0],
-                    ['g.id', 'in', $info['recommend_goods']],
-                ],'field'=>[
-                    'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity',
-                    'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit','g.name'
-                ]
-            ];
-            $list= $modelGoods->getList($config);
-
-            $this->assign('list',$list);
-            return view('goods/selected_list');
+            $recommend_goods = $info['recommend_goods'];
         }
 
+        //相关推荐商品
+        $modelGoods = new \app\index\model\Goods();
+        $config =[
+            'where' => [
+                ['g.status', '=', 0],
+                ['g.id', 'in', $recommend_goods],
+            ],'field'=>[
+                'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity',
+                'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit','g.name'
+            ]
+        ];
+        $list= $modelGoods->getList($config);
 
+        $this->assign('list',$list);
+        return view('goods/selected_list');
     }
+
 
 
 }

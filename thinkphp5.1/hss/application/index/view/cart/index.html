@@ -27,7 +27,6 @@
 				:product_name="productInfo.name"
 				:product_src="productInfo.thumb_img"
 				:specification="productInfo.specification"
-				:item_checked="item_checked"
 				:type="type"
 		></product-select>
 	</ul>
@@ -41,9 +40,7 @@
 			</div>
 		</div>
 		<div id="scroller-wrapper" class="list_wrapper">
-			<ul class="columns_flex flex-both-side goods-content-list" id="goodsList">
-
-			</ul>
+			<ul class="columns_flex flex-both-side goods-content-list" id="goodsList"></ul>
 		</div>
 	</div>
 	{/if}
@@ -53,6 +50,7 @@
 {include file="../../api/public/vue/components/footer-cart-menu.html" /}
 <div id="foot_cart_menu">
 	<footer-cart-menu
+			:type="type"
 			:cart_init_num="cart_init_num"
 	></footer-cart-menu>
 </div>
@@ -67,7 +65,12 @@
 				total_num += goods['num'];
 			});
 		}
+		if(!total_num){
+ 			var html = $('.no_cart_data').html();
+			$('#product-list').append(html);
+		}
 		let param = {
+			type:4,
 			cart_init_num:total_num
 		};
 		new Vue({
@@ -76,13 +79,14 @@
 				return param;
 			}
 		});
+
 	});
-</script><script type="text/javascript">
+</script>
+<script type="text/javascript">
 	$(function(){
 		let param = {
 			type:4,
 			step_quantity:1,
-			item_checked:true,
 			productList:[],
 			getJsonListParam:{
 				url:module+'Goods/getCartGoodsList',
@@ -106,13 +110,23 @@
 						return false;
 					}
 					let _this = this;
-					if(data.data.current_page==1&&$.isEmptyArray(data.data.data)){
-						_this.productList = [0];
-						_this.type=5;
-					}
 					$.each(data.data.data,function(i,o){
 						_this.productList.push(o);
 					});
+				},delCart:function(param){
+					return false;
+					let _this = this;
+					let findIndex = -1;
+					$.each(this.productList,function(i,o){
+						$.each(param.postData.goodsList,function(ii,oo){
+							if(o.id == oo.goods_id){
+								findIndex = i;
+							}
+						});
+					});
+					if(findIndex !== -1){
+						Vue.delete(_this.productList,findIndex);
+					}
 				}
 			},created:function(){
 				let _thisVue = this;
@@ -126,6 +140,10 @@
 						_thisVue.getJsonListParam.loadTrigger = false;
 						vueVersionGetJsonList(_thisVue);
 					}
+				});
+				//监听-产品列表-删除购物车-事件
+				bus.$on('product_list_delete_cart', function(param){
+					_thisVue.delCart(param);
 				});
 			}
 		});

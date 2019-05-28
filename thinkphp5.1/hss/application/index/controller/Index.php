@@ -80,6 +80,18 @@ class Index extends \common\controller\Base{
 
     }
 
+    /**
+     * 首页
+     */
+    public function cityPartnerIndex(){
+        if(request()->isAjax()){
+        }else{
+            // 底部菜单，见配置文件custom.footer_menu
+            $this->assign('currentPage',request()->controller().'/'.request()->action());
+            return $this->fetch('city_partner/index');
+        }
+    }
+
     // 购物车管理页面
     public function cartIndex(){
         if(request()->isAjax()){
@@ -97,6 +109,7 @@ class Index extends \common\controller\Base{
                 // 底部菜单，见配置文件custom.footer_menu
                 $this->assign('currentPage',request()->controller().'/'.request()->action());
             }
+            Cart::getCartTotalNum();
             return $this->fetch('cart/index');
         }
     }
@@ -110,4 +123,5 @@ class Index extends \common\controller\Base{
     public function activity(){
         return $this->fetch();
     }
+
 }

@@ -286,6 +286,10 @@ class Order extends \common\controller\UserBase
             $orderStatus = input('order_status');
             $this ->assign('order_status',$orderStatus);
         }
+        $modelOrder = new \app\index\model\Order();
+        $data = $modelOrder->statusSum($this->user['id']);
+        $this->assign('orderStatusSum',$data);
+
        return $this->fetch();
     }
 
