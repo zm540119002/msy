@@ -16,6 +16,9 @@
 return [
     'title' => '美尚云',
 
+    //支付完成后，跳转页面
+    'return_url' => 'https://msy.meishangyun.com/index/Payment/payComplete/',
+
     /***
      * 根据系统号连接不同数据库
      */
@@ -39,6 +42,8 @@ return [
             'jump_url'=>[
                 1 => 'https://hss.meishangyun.com/index/Order/manage/order_status/2',
                 2 => 'https://hss.meishangyun.com/index/Wallet/index',
+                3 => 'https://hss.meishangyun.com/index/Order/manage/order_status/2',
+                4 => 'https://hss.meishangyun.com/index/Order/manage/order_status/2',
             ],
         ],
     ],

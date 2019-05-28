@@ -157,7 +157,7 @@ class Payment extends \common\controller\Base {
             ];
             $attach = json_encode($attach);
             $jump_url =config('custom.system_id')[$systemId]['jump_url'][$info['type']];
-            $return_url = config('wx_config.return_url');
+            $return_url = config('custom.return_url');
             $payInfo = [
                 'sn'=>$info['sn'],
                 'product'=>$info['id'],
