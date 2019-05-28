@@ -1,4 +1,4 @@
-{extend name="template/base.html" /}
+<!--{extend name="template/base.html" /}-->
 {block name="css-customize"}
 <style>
 .swiper-container-vertical>.swiper-wrapper {
@@ -61,7 +61,7 @@
 <script type="text/javascript" src="api_common_js/swiper.min.js"></script>
 <script>
         $(function(){
-            $('body').css('height',100+'%','position','relative');
+            $('body').css({height:100+'%',position:'relative'});
         })
         var swiper = new Swiper('.swiper-container', {
         direction: 'vertical',

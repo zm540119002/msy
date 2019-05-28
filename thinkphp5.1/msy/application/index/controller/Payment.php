@@ -400,8 +400,8 @@ class Payment extends \common\controller\Base {
                 $this->setRechargePayStatus($info,$systemId);
             }elseif($payInfo['type'] == 3){
                 $this->setFranchisePayStatus($info,$systemId);
-            }elseif($payInfo['type'] == 4){
-                $this->setFranchisePayStatus($info,$systemId);
+            }elseif($payInfo['type'] == 4|| $payInfo['type'] == 5){
+                $this->setCityPartnerPayStatus($info,$systemId);
             }
         }
     }
@@ -564,8 +564,8 @@ class Payment extends \common\controller\Base {
      * @param $systemId 平台id
      */
     public function setCityPartnerPayStatus($info,$systemId){
-        $modelFranchise = new \app\index\model\CityPartner();
-        $modelFranchise ->setConnection(config('custom.system_id')[$systemId]['db']);
+        $modelCityPartner = new \app\index\model\CityPartner();
+        $modelCityPartner ->setConnection(config('custom.system_id')[$systemId]['db']);
 
         $data = [
             'apply_status'=>2,                              // 状态
@@ -588,13 +588,13 @@ class Payment extends \common\controller\Base {
                 ['apply_status', '=', 1],
             ],
         ];
-        $result = $modelFranchise -> allowField(true) -> save($data,$condition);
+        $result = $modelCityPartner -> allowField(true) -> save($data,$condition);
         if($result === false){
-            $modelFranchise ->rollback();
-            $info['mysql_error'] = $modelFranchise->getError();
+            $modelCityPartner ->rollback();
+            $info['mysql_error'] = $modelCityPartner->getError();
             return $this->writeLog("城市人申请席位定金支付更新失败",$info);
         }
-        $modelFranchise ->commit();
+        $modelCityPartner ->commit();
         echo 'SUCCESS';
     }
     /**
