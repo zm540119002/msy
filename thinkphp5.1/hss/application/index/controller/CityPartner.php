@@ -28,7 +28,9 @@ class CityPartner extends \common\controller\UserBase {
                 ],
             ];
             $cityList = $modelCityPartner -> getList($config);
-            $this->assign('cityList',json_encode($cityList->toArray()));
+            print_r(json_encode($cityList));
+            $this->assign('cityList',json_encode($cityList));
+
             $unlockingFooterCart = unlockingFooterCartConfig([10, 0, 9]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
             return $this->fetch();
