@@ -111,6 +111,11 @@ class Project extends Base {
                     $newImgArr = explode(',',$data['process_img']);
                     delImgFromPaths($oldImgArr,$newImgArr);
                 }
+                if($info['process']){
+                    $oldImgArr = explode(',',array_column(json_decode($info['process'],true),'img'));
+                    $newImgArr = explode(',',array_column($process,'img'));
+                    delImgFromPaths($oldImgArr,$newImgArr);
+                }
 
 
             } else{
