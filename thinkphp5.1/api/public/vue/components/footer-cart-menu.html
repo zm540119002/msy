@@ -184,7 +184,6 @@
                 subtotal_amount_calculate:function(){
                     this.subtotal_amount = this.deal_price * this.buy_quantity;
                 },checkItem:function(){
-//                    this.checked = !this.checked;
                     //触发-产品选择器复选框改变-事件
                     bus.$emit('product_select_check_item_change',this);
                 },delCart:function(event){
@@ -388,7 +387,7 @@
                         }
                         this.total_amount += param.deal_price * param.increment_buy_quantity;
                     },total_amount_calculate_with_checked:function (param) {
-                        if(param.checked){
+                        if(!param.checked){
                             this.total_amount += param.subtotal_amount;
                         }else{
                             this.total_amount -= param.subtotal_amount;
