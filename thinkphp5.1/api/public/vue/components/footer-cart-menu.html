@@ -501,7 +501,6 @@
                         }
                         this.checked = sign;
                     },checkAll:function(param){
-                        console.log(param.checked);
                         console.log(this.checked);
                     }
                 },created:function(){
@@ -517,7 +516,6 @@
                         _this.total_amount_calculate_with_checked(param);
                         _this.editProductListWithChecked(param);
                         _this.editCheckItemList(param);
-                        _this.checkAll(param);
                     });
                     //监听-产品选择器购买数量改变-事件
                     bus.$on('product_select_buy_quantity_change', function(param){
