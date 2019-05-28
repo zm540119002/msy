@@ -98,40 +98,11 @@
 {block name="script"}
 <script type="text/javascript" src="http://www.hss.cc/static/common/js/jquery.area.js"></script>
 <script type="text/javascript" src="hui_lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="index_admin_js/common.js"></script>
 <script type="text/javascript">
 	$(function () {
+		getList();
 
-		//加载第一页 这个需要配置公用???
-		var config = {
-			url:controller+'getList'
-		};
-		var getData = $('#form1').serializeObject();
-		getPagingList(config,getData);
-
-		//翻页
-		$('body').on('click','.pager2',function(){
-			var curIndex= $(this).parents('ul.pagination').find('li.active span').text();
-			var selectedPage=$(this).data('page');
-			if(selectedPage=='»'){
-				curIndex++;
-				selectedPage=curIndex;
-			}
-			if(selectedPage=='«'){
-				curIndex--;
-				selectedPage=curIndex;
-			}
-			config.currentPage = selectedPage;
-
-			var getData = $('#form1').serializeObject();
-
-			getPagingList(config,getData);
-		});
-		//搜索
-		$('#search').click(function(){
-			//config.currentPage = 0;
-			var getData = $('#form1').serializeObject();
-			getPagingList(config,getData);
-		});
 		// 发货
 		$("body").on('click','.ship',function(){
 
@@ -208,17 +179,11 @@
 
 		// 订单信息
 		$('body').on('click','.info',function(){
-
-			var _thisTr = $(this).parents('tr');
-			var config  = {
-				title : '订单详情',
-				url   : controller + 'getInfo/type/1/id' + _thisTr.data('id')
-			};
-
-			getInfo(config);
+			var url = controller + 'getInfo/type/info/id/' + $(this).parents('tr').data('id');
+			layer_show('订单详情',url);
 		});
 
-		// 订单信息 做到这里
+		// 打印订单
 		$('body').on('click','.print',function(){
 
 			var _thisTr = $(this).parents('tr');
@@ -236,15 +201,6 @@
 		});
 
 	});
-
-	function getInfo(config){
-		var index = layer.open({
-			type: 2,
-			title: config.title,
-			content: config.url
-		});
-		layer.full(index);
-	}
 
 	// 日期
 	function selecttime(flag){
