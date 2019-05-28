@@ -91,7 +91,9 @@ class Order extends Base{
         $model = new \app\index\model\Order();
         $condition = [
             'field' => [
-                'sn','pay_sn','order_status','pay_code','amount','coupons_pay','order_pay','actually_amount','remark','user_id','coupons_id','create_time','payment_time','finished_time','consignee','mobile','province','city','area','detail_address','brand_name','express_sn','exp_id'
+                'sn','pay_sn','order_status','after_sale_status','pay_code','amount','coupons_amount','actually_amount','remark','create_time','payment_time','receive_time','consignee','mobile','province','city','area','detail_address','express_sn','exp_id'
+            ],'where' => [
+              ''
             ],
         ];
 
