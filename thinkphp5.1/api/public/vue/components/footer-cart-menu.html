@@ -165,7 +165,7 @@
                 init_quantity: {type: Number,default: 1},
                 step_quantity: {type: Number,default: 1},
                 display_quota: {type: Boolean,default: false},
-                init_checked: {type: Boolean,default: false},
+                init_checked: {type: Boolean,default: true},
                 productInfo: {type: Array,default:function(){
                     let arr = [];
                     arr['eg'] = '默认值示范';
@@ -185,8 +185,8 @@
                     this.subtotal_amount = this.deal_price * this.buy_quantity;
                 },checkItem:function(){
                     this.checked = !this.checked;
-                    //底部购物菜单-触发-复选框改变-事件
-                    bus.$emit('footer_cart_checkbox_item_change',this);
+                    //触发-产品选择器复选框改变-事件
+                    bus.$emit('product_select_check_item_change',this);
                 },delCart:function(event){
                     if(this.buy_quantity_reduce_trigger){
                         this.buy_quantity_reduce_trigger = false;
@@ -287,16 +287,19 @@
                 }
             },created: function(){
                 this.subtotal_amount_calculate();
-                //底部购物菜单-触发-产品选择器初始化-事件
-                bus.$emit('footer_cart_product_select_init',this);
+                //触发-产品选择器初始化-事件
+                bus.$emit('product_select_init',this);
+                //监听-底部购物菜单-复选框改变-事件
+                bus.$on('footer_cart_check_all_change', function(param){
+                });
             },watch: {
                 buy_quantity: {
                     handler(newVal, oldVal) {
                         this.subtotal_amount_calculate();
                         if(typeof(oldVal) !== "undefined"){
                             this.increment_buy_quantity = parseInt(newVal) - parseInt(oldVal?oldVal:0);
-                            //底部购物菜单-触发-产品改变-事件
-                            bus.$emit('footer_cart_buy_quantity_change',this);
+                            //触发--产品选择器产品改变-事件
+                            bus.$emit('product_select_buy_quantity_change',this);
                         }
                     },
                     deep: false,
@@ -314,7 +317,7 @@
                 {{menu.name}}
                 <!-- 全选 -->
                 <div v-if="menu.class.indexOf('checked_all')!==-1" class="checked_all">
-                    <input type="checkbox" class="check_all" v-model='checked' />
+                    <input type="checkbox" class="check_all" v-model='checked' disabled="disabled"/>
                     <label for="" class="">全选</label>
                 </div>
                 <!-- 总金额 -->
@@ -476,18 +479,18 @@
                     }
                 },created:function(){
                     let _this = this;
-                    //底部购物菜单-监听-产品选择器初始化-事件
-                    bus.$on('footer_cart_product_select_init', function(param){
+                    //监听-产品选择器初始化-事件
+                    bus.$on('product_select_init', function(param){
                         _this.total_amount_init(param);
                         _this.editProductList(param);
                     });
-                    //底部购物菜单-监听-产品改变-事件
-                    bus.$on('footer_cart_buy_quantity_change', function(param){
+                    //监听-产品选择器产品改变-事件
+                    bus.$on('product_select_buy_quantity_change', function(param){
                         _this.total_amount_calculate(param);
                         _this.editProductList(param);
                     });
-                    //底部购物菜单-监听-复选框改变-事件
-                    bus.$on('footer_cart_checkbox_item_change', function(param){
+                    //监听-产品选择器复选框改变-事件
+                    bus.$on('product_select_check_item_change', function(param){
                         _this.total_amount_calculate_with_checked(param);
                         _this.editProductListWithChecked(param);
                     });
