@@ -1,48 +1,113 @@
 {extend name="template/base.html" /}
+{block name="css-customize"}
+<style>
+body {
+      position: relative;
+      height: 100%;
+    }
+    .swiper-container {
+      width: 100%;
+      height: 100%;
+    }
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: #fff;
+
+      /* Center slide text vertically */
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+    }
+    .swiper-container-vertical>.swiper-wrapper {
+    /*-webkit-box-orient: vertical;
+    -webkit-box-direction: normal;*/
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+    .common_default_img{
+        height:100%;
+    }
+  </style>
+</style>
+{/block}
 {block name="content"}
-     <section>
-         <section class="header_title separation-line">
+    <!--<section class="header_title separation-line">
             <a href="javascript:void(0);" class="back_prev_page" data-jump_url=""></a>
             <h2 class="f24">开放日</h2>
-        </section>
-         <div>
-             <img src="public_img/cpy_01.jpg" alt="" class="common_default_img">
-         </div>
-         <div>
-             <img src="public_img/cpy_02.jpg" alt="" class="common_default_img">
-         </div>
-         <div>
-             <img src="public_img/cpy_03.jpg" alt="" class="common_default_img">
-         </div>
-         <div>
-             <img src="public_img/cpy_04.jpg" alt="" class="common_default_img">
-         </div>
-         <div>
-             <img src="public_img/develp_01.jpg" alt="" class="common_default_img">
-         </div>
-         <div>
-             <img src="public_img/develp_02.jpg" alt="" class="common_default_img">
-         </div>
-         <div>
-             <img src="public_img/develp_03.jpg" alt="" class="common_default_img">
-         </div>
-         <div>
-             <img src="public_img/develp_04.jpg" alt="" class="common_default_img">
-         </div>
-         <div>
-             <img src="public_img/develp_05.jpg" alt="" class="common_default_img">
-         </div>
-         <div>
-             <img src="public_img/develp_06.jpg" alt="" class="common_default_img">
-         </div>
-         <div>
-             <img src="public_img/develp_07.jpg" alt="" class="common_default_img">
-         </div>
-     </section>
+    </section>-->
+     <div class="swiper-container swiper-container-initialized swiper-container-vertical swiper-container-ios">
+        <div class="swiper-wrapper">
+             <div class="swiper-slide ">
+                  <img src="public_img/cpy_01.jpg" alt="" class="common_default_img">
+             </div>
+             <div class="swiper-slide">
+                  <img src="public_img/cpy_02.jpg" alt="" class="common_default_img">
+             </div>
+             <div class="swiper-slide ">
+                  <img src="public_img/cpy_03.jpg" alt="" class="common_default_img">
+             </div>
+             <div class="swiper-slide ">
+                  <img src="public_img/cpy_04.jpg" alt="" class="common_default_img">
+             </div>
+              <div class="swiper-slide ">
+                  <img src="public_img/develp_01.jpg" alt="" class="common_default_img">
+             </div>
+              <div class="swiper-slide ">
+                  <img src="public_img/develp_02.jpg" alt="" class="common_default_img">
+             </div>
+              <div class="swiper-slide ">
+                  <img src="public_img/develp_03.jpg" alt="" class="common_default_img">
+             </div>
+              <div class="swiper-slide ">
+                  <img src="public_img/develp_04.jpg" alt="" class="common_default_img">
+             </div>
+              <div class="swiper-slide ">
+                  <img src="public_img/develp_05.jpg" alt="" class="common_default_img">
+             </div>
+              <div class="swiper-slide ">
+                  <img src="public_img/develp_06.jpg" alt="" class="common_default_img">
+             </div>
+              <div class="swiper-slide ">
+                  <img src="public_img/develp_07.jpg" alt="" class="common_default_img">
+             </div>
+        </div>
+        <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"><span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 2"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 3"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 4"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 5"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 6"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 7"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 8"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 9"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 10"></span></div>
+     </div>
 {/block}
 {block name="footer"}
 
 {/block}
 {block name="script"}
+<script type="text/javascript" src="api_common_js/swiper.min.js"></script>
+<script>
+    //     (function($){
+    // var deviceWidth=document.documentElement.clientWidth;
+   
+    // })(jQuery);
+        $(function(){
+            var html =document.getElementsByTagName('html')[0];
+            html.style.fontSize='';
+            $('.swiper-slide ').css('height',$(window).height()+'px');
+            //$('body').css({height:100+'%',position:'relative'});
+        })
+        var swiper = new Swiper('.swiper-container', {
+        direction: 'vertical',
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        });
 
+</script>
 {/block}

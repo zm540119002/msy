@@ -106,6 +106,17 @@
                 });
             });
 
+            $('body').on('click','.preview',function(){
+                var _thisTr = $(this).parents('tr');
+                var url =  '/index/Project/detail/id/' + _thisTr.data('id');
+                var index = layer.open({
+                    type: 2,
+                    title: '项目预览',
+                    content: url
+                });
+                layer.full(index);
+            });
+
             // 去设置场景下的促销方案
             $('body').on('click','.relationPromotion',function(){
                 var _thisTr = $(this).parents('tr');

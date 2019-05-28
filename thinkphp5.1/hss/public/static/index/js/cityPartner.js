@@ -5,10 +5,17 @@ $(function(){
     //填写基本资料
     $('body').on('click','.search-city',function(){
         area_address =$('.area-address-name').getArea();
-        var arr=[[18,0],[18,1],[8,0],[7,1]];
+        if(!area_address){
+            dialog.error('请选择城市');
+            return false;
+        }
+        var cityArr=[];
+		for (var key=0;key<cityList.length;key++) {
+			cityArr.push([parseInt(cityList[key].province),parseInt(cityList[key].city)]);
+		}
         var cityData=[];
         cityData.push(parseInt(area_address[0]),parseInt(area_address[1]));
-        var provinces=arrayHasElement(arr,cityData);
+        var provinces=arrayHasElement(cityArr,cityData);
         if(!provinces){
             layer.open({
                 content:'所查询的城市可以申请城市合伙人<br/>声明：同一城市可能存在多位申请人,同等条件下按先申请先审核签约原则。',
@@ -26,7 +33,6 @@ $(function(){
                 content:'所查询的城市暂时没有空缺<br/>备注：城市合伙人可能已被签约，或者正处于保留状态，建议过段时间再查询。',
                 btn:['确定'],
                 yes:function(index){
-                    
                     layer.close(index);
                 }
             });

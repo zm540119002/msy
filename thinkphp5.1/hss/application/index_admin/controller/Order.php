@@ -27,17 +27,6 @@ class Order extends Base{
      */
     public function getList(){
 
-// 获取表的所有字段
-/*        $model = new \app\index_admin\model\Order();
-        $table = $model->getTableFields();
-        foreach($table as $k => $v){
-            $table[$k] = "'".$v."'";
-        }
-        $table = implode(',',$table);
-
-        p($table);
-        exit;*/
-
         $where = [
             ['o.status','=',0],
             ['o.order_status','<>',0],
@@ -78,6 +67,41 @@ class Order extends Base{
         return view('list_tpl');
     }
 
+    /**
+     * 订单信息
+     */
+    public function getInfo(){
+        $id = input('id/d');
+
+        if(!$id){
+            $this->error('没有该订单');
+        }
+        $model = new \app\index\model\Order();
+        $condition = [
+            'field' => [
+                'o.sn','o.pay_sn','o.order_status','o.pay_code','o.remark','o.payment_time',
+                'o.after_sale_status', 'o.amount','o.coupons_amount','o.actually_amount','o.create_time','o.receive_time',
+                'o.consignee','o.mobile','o.province','o.city','o.area','o.detail_address','o.express_sn','o.exp_id',
+                'od.goods_name','od.'
+            ],'where' => [
+              ['o.status','=',0],
+              ['o.order_status','<>',0],
+            ],'join' => [
+                ['order_detail od','o.id=od.father_order_id','left']
+            ]
+        ];
+        $data = $model->getList($condition);
+
+        if(empty($data)){
+            $this->error('没有找到该订单');
+        }
+
+        foreach($data as $k => $v){
+
+        }
+
+
+    }
 
     /**
      * 增加快递信息

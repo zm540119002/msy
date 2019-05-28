@@ -9,7 +9,6 @@ class CityPartner extends \common\controller\UserBase {
      * 城市合伙人申请条件
      */
     public function city(){
-
         return $this->fetch();
     }
     /**
@@ -18,11 +17,22 @@ class CityPartner extends \common\controller\UserBase {
     public function registered(){
         if (request()->isAjax()) {
         } else {
+            $modelCityPartner = new \app\index\model\CityPartner();
+            $config=[
+                'where'=>[
+                    ['status', '=', 0],
+                    ['apply_status','=',3]
+                ],
+                'field'=>[
+                    'province','city',
+                ],
+            ];
+            $cityList = $modelCityPartner -> getList($config);
+            $this->assign('cityList',json_encode($cityList));
             $unlockingFooterCart = unlockingFooterCartConfig([10, 0, 9]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
             return $this->fetch();
         }
-//        return $this->fetch();
     }
 
     /**
@@ -40,17 +50,17 @@ class CityPartner extends \common\controller\UserBase {
         if(!$validate->scene('add')->check($postData)) {
             return errorMsg($validate->getError());
         }
-        $modelFranchise = new \app\index\model\CityPartner();
-        $modelFranchise -> startTrans();
+        $modelCityPartner = new \app\index\model\CityPartner();
+        $modelCityPartner -> startTrans();
         $sn = generateSN(); //内部支付编号
         $postData['sn'] = $sn;
         $postData['user_id'] = $this->user['id'];
         $postData['earnest'] = config('custom.cityPartner_fee')[1]['earnest'];
         $postData['amount'] = config('custom.cityPartner_fee')[1]['amount'];
         $postData['create_time'] = time();
-        $result  = $modelFranchise->isUpdate(false)->save($postData);
+        $result  = $modelCityPartner->isUpdate(false)->save($postData);
         if(!$result){
-            $modelFranchise ->rollback();
+            $modelCityPartner ->rollback();
             return errorMsg('失败');
         }
 
@@ -69,7 +79,7 @@ class CityPartner extends \common\controller\UserBase {
             $modelPay ->rollback();
             return errorMsg('失败');
         }
-        $modelFranchise -> commit();
+        $modelCityPartner -> commit();
         return successMsg('成功',['url'=>config('custom.pay_gateway').$sn]);
     }
 

@@ -122,11 +122,16 @@
                     });
                 }
                 if(param.clickObj.attr('class').indexOf('delete_cart')!==-1 && param.postData){ //删除
+
                     $.each(param.postData.goodsList,function(i,o){
                         param.vueObj.buy_quantity += o.num;
                         param.vueObj.buy_quantity_reduce_trigger = true;
                         param.clickObj.parents('li').remove();
                     });
+                    //删除已选择产品
+                    if(param.vueObj.checked){
+                        param.vueObj.checked_operation_type = 'delete';
+                    }
                     if(!$('#product-list').find('li').length){
                         $('#product-list').append($('.no_cart_data').html());
                     }
@@ -236,6 +241,10 @@
             param.vueObj.buy_quantity_reduce_trigger = true;
             param.clickObj.parents('li').remove();
         });
+        //删除已选择产品
+        if(param.vueObj.checked){
+            param.vueObj.checked_operation_type = 'delete';
+        }
     }
 </script>
 {/block}
