@@ -31,9 +31,9 @@
 	<!-- 用于vue组件通信 -->
 	<script type="text/javascript">
 		var bus = new Vue();
-		$(function() {
+		window.addEventListener('load', function () {
 			FastClick.attach(document.body);
-		});
+		}, false);
 	</script>
 </head>
 <body>
