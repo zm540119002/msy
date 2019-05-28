@@ -445,18 +445,19 @@
                     msg.img = msg.info;
                     msg.desc = '';
                     addImg(msg);
-                    console.log(msg);
+
+                    if(i<len-1){
+                        i++;
+                        if(fileList[i]){
+                            uploadPicDescribe(fileList[i],i,len);
+                        }
+                    }
+
                 }else{
                     dialog.error(msg.info)
                 }
             });
 
-            if(i<len-1){
-                i++;
-                if(fileList[i]){
-                    uploadPicDescribe(fileList[i],i,len);
-                }
-            }
         }
     }
 </script>

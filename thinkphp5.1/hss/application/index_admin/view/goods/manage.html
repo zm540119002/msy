@@ -103,7 +103,13 @@
             $('body').on('click','.preview',function(){
                 var _thisTr = $(this).parents('tr');
                 var url =  controller + 'preview/id/' + _thisTr.data('id');
-                location.href = url;
+                //location.href = url;
+                var index = layer.open({
+                    type: 2,
+                    title: '预览',
+                    content: url
+                });
+                layer.full(index);
             });
 
             ////设置为精选
