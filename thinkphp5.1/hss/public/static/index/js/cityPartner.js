@@ -10,6 +10,8 @@ $(function(){
             return false;
         }
         var arr=[[18,0],[18,1],[8,0],[7,1]];
+        var cityList = '{$cityList}';
+        console.log(cityList);
         var cityData=[];
         cityData.push(parseInt(area_address[0]),parseInt(area_address[1]));
         var provinces=arrayHasElement(arr,cityData);
