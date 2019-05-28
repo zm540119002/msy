@@ -6,7 +6,7 @@ $(function(){
     $('body').on('click','.search-city',function(){
         area_address =$('.area-address-name').getArea();
         console.log(area_address);
-        if($.empty(area_address)){
+        if(area_address==''||area_address=null){
             console.log(222)
         }
         return false;
