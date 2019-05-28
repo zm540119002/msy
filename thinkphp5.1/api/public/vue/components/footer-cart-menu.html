@@ -307,6 +307,8 @@
                     immediate: true
                 },checked: {
                     handler(newVal, oldVal) {
+                        console.log(oldVal);
+                        console.log(newVal);
                         //触发-产品选择器复选框改变-事件
                         bus.$emit('product_select_check_item_change',this);
                     },
@@ -400,7 +402,6 @@
                         }
                         this.total_amount += param.deal_price * param.increment_buy_quantity;
                     },total_amount_calculate_with_checked:function (param) {
-                        console.log(param);
                         if(param.checked){
                             this.total_amount += param.subtotal_amount;
                         }else{
