@@ -15,8 +15,6 @@ $(function(){
 		}
         var cityData=[];
         cityData.push(parseInt(area_address[0]),parseInt(area_address[1]));
-        console.log(cityData);
-        console.log(cityArr);
         var provinces=arrayHasElement(cityArr,cityData);
         if(!provinces){
             layer.open({
