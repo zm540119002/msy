@@ -408,8 +408,6 @@
                         }
                         this.total_amount += param.deal_price * param.increment_buy_quantity;
                     },total_amount_calculate_with_checked:function (param) {
-                        console.log(param.checked);
-                        console.log(param.subtotal_amount);
                         if(param.checked){
                             this.total_amount += param.subtotal_amount;
                         }else{
@@ -502,7 +500,7 @@
                         let find = false;
                         for(let i = 0,len = this.checkItemList.length; i < len; i++){
                             if(this.checkItemList[i].product_id == param.product_id){
-                                this.checkItemList[i].checked = !param.checked;
+                                this.checkItemList[i].checked = param.checked;
                                 find = true;
                                 break;
                             }
@@ -535,13 +533,13 @@
                     bus.$on('product_select_init', function(param){
                         _this.total_amount_init(param);
                         _this.editProductList(param);
-//                        _this.editCheckItemList(param);
+                        _this.editCheckItemList(param);
                     });
                     //监听-产品选择器复选框改变-事件
                     bus.$on('product_select_check_item_change', function(param){
                         _this.total_amount_calculate_with_checked(param);
-//                        _this.editProductListWithChecked(param);
-//                        _this.editCheckItemList(param);
+                        _this.editProductListWithChecked(param);
+                        _this.editCheckItemList(param);
                     });
                     //监听-产品选择器购买数量改变-事件
                     bus.$on('product_select_buy_quantity_change', function(param){
