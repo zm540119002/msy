@@ -103,8 +103,9 @@
 {block name="script"}
 <script type="text/javascript" src="api_common_js/swipe.js"></script>
 <script type="text/javascript" src="public_js/jquery.area.js"></script>
-<script type="text/javascript" src="index_js/cityPartner.js">
-	var cityList = JSON.parse('$cityList');
-	console(cityList);return false;
+<script type="text/javascript" src="index_js/cityPartner.js"></script>
+<script type="text/javascript" >
+	var cityList = '{$cityList}';
+	console.log(cityList);
 </script>
 {/block} 
