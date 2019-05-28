@@ -108,8 +108,8 @@
 	var cityList = JSON.parse('{$cityList|raw}');
 	console.log(cityList);
 	var arr=[];
-		for (var key in cityList) {
-			arr.push([parseInt(cityList[key].province),parseInt(cityList[key].city)]);
+		for (var key=0;i<cityList.length;key++) {
+			arr.push([parseInt(cityList[i].province),parseInt(cityList[i].city)]);
 		}
 	console.log(arr);
 </script>
