@@ -32,6 +32,23 @@
 	<script type="text/javascript">
 		var bus = new Vue();
 		$(function() {
+			FastClick.prototype.onClick = function(event) {
+				'use strict';
+				var permitted;
+				if (this.trackingClick) {
+					this.targetElement = null;
+					this.trackingClick = false;
+					return true;
+				}
+				if (event.target.type === 'submit' && event.detail === 0) {
+					return true;
+				}
+				permitted = this.onMouse(event);
+				if (!permitted) {
+					this.targetElement = null;
+				}
+				return permitted;
+			};
 			FastClick.attach(document.body);
 		});
 	</script>
