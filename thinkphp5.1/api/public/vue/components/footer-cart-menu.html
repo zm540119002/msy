@@ -281,15 +281,14 @@
                     };
                     asyncVerify(config);
                 },checkItem:function(){
-                    this.checkItemOrAll = 'item';
-                    console.log(this.checked);
-                    this.checked = !this.checked;
+//                    this.checkItemOrAll = 'item';
+//                    this.checked = !this.checked;
                     //触发-产品选择器复选框改变-事件
-                    bus.$emit('product_select_check_item_change',this);
+//                    bus.$emit('product_select_check_item_change',this);
                 },checkAll:function(){
                     this.checkItemOrAll = 'all';
                     //触发-产品选择器复选框改变-事件
-                    bus.$emit('product_select_check_item_change',this);
+//                    bus.$emit('product_select_check_item_change',this);
                 }
             },created: function(){
                 this.subtotal_amount_calculate();
@@ -309,6 +308,18 @@
                             this.increment_buy_quantity = parseInt(newVal) - parseInt(oldVal?oldVal:0);
                             //触发--产品选择器购买数量改变-事件
                             bus.$emit('product_select_buy_quantity_change',this);
+                        }
+                    },
+                    deep: false,
+                    immediate: true
+                },checked: {
+                    handler(newVal, oldVal) {
+                        console.log(newVal);
+                        console.log(oldVal);
+                        if(typeof(oldVal) !== "undefined"){
+//                            this.increment_buy_quantity = parseInt(newVal) - parseInt(oldVal?oldVal:0);
+//                            //触发--产品选择器购买数量改变-事件
+//                            bus.$emit('product_select_buy_quantity_change',this);
                         }
                     },
                     deep: false,
@@ -402,19 +413,19 @@
                         this.total_amount += param.deal_price * param.increment_buy_quantity;
                     },total_amount_calculate_with_checked:function (param) {
                         console.log(param.checked);
-                        if(param.checkItemOrAll=='item'){
-                            if(!param.checked){
-                                this.total_amount += param.subtotal_amount;
-                            }else{
-                                this.total_amount -= param.subtotal_amount;
-                            }
-                        }else if(param.checkItemOrAll=='all'){
-                            if(param.checked){
-                                this.total_amount += param.subtotal_amount;
-                            }else{
-                                this.total_amount -= param.subtotal_amount;
-                            }
-                        }
+//                        if(param.checkItemOrAll=='item'){
+//                            if(!param.checked){
+//                                this.total_amount += param.subtotal_amount;
+//                            }else{
+//                                this.total_amount -= param.subtotal_amount;
+//                            }
+//                        }else if(param.checkItemOrAll=='all'){
+//                            if(param.checked){
+//                                this.total_amount += param.subtotal_amount;
+//                            }else{
+//                                this.total_amount -= param.subtotal_amount;
+//                            }
+//                        }
                     },jump_url:function (event) {
                         let obj = $(event.currentTarget);
                         let jump_url = obj.data('jump_url');
