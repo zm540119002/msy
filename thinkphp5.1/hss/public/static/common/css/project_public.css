@@ -494,8 +494,8 @@ nav .back_prev_page{
     margin:0;
 }
 .project_item .goods-content-list {
-    padding: 0;
+    padding-bottom: 0;
 }
 .project_item .content_main {
-    padding: 0;
+    padding-bottom: 0;
 }
