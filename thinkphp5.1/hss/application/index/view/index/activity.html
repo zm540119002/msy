@@ -1,4 +1,4 @@
-<!--{extend name="template/base.html" /}-->
+{extend name="template/base.html" /}
 {block name="css-customize"}
 <style>
 .swiper-container-vertical>.swiper-wrapper {
@@ -60,6 +60,11 @@
 {block name="script"}
 <script type="text/javascript" src="api_common_js/swiper.min.js"></script>
 <script>
+        (function($){
+    var deviceWidth=document.documentElement.clientWidth;
+    var html =document.getElementsByTagName('html')[0];
+    html.style.fontSize=100+'px';
+    })(jQuery);
         $(function(){
             $('body').css({height:100+'%',position:'relative'});
         })
