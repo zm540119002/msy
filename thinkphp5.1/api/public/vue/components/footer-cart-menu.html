@@ -479,13 +479,16 @@
                             product_id:param.product_id,
                             checked:param.checked
                         };
+                        let find = false;
                         for(let i = 0,len = this.checkItemList.length; i < len; i++){
                             if(this.checkItemList[i].product_id == param.product_id){
                                 this.checkItemList[i].checked = param.checked;
+                                find = true;
                                 break;
-                            }else{
-                                this.checkItemList.push(tmp);
                             }
+                        }
+                        if(!find){
+                            this.checkItemList.push(tmp);
                         }
                         console.log(tmp);
                         console.log(this.checkItemList);
