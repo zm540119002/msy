@@ -287,8 +287,6 @@
 //                    bus.$emit('product_select_check_item_change',this);
                 },checkAll:function(){
                     this.checkItemOrAll = 'all';
-                    //触发-产品选择器复选框改变-事件
-//                    bus.$emit('product_select_check_item_change',this);
                 }
             },created: function(){
                 this.subtotal_amount_calculate();
@@ -316,6 +314,9 @@
                     handler(newVal, oldVal) {
                         console.log(oldVal);
                         console.log(newVal);
+                        console.log(this.checked);
+                        //触发-产品选择器复选框改变-事件
+                        bus.$emit('product_select_check_item_change',this);
                         if(typeof(oldVal) !== "undefined"){
 //                            this.increment_buy_quantity = parseInt(newVal) - parseInt(oldVal?oldVal:0);
 //                            //触发--产品选择器购买数量改变-事件
