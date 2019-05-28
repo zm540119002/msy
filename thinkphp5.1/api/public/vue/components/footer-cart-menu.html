@@ -500,12 +500,12 @@
                             }
                         }
                         this.checked = sign;
-                    },checkAll:function(param){
+                        console.log(this.checked);
+                        console.log(sign);
+                    },checkAll:function(){
                         for(let i = 0,len = this.checkItemList.length; i < len; i++){
                             this.checkItemList[i].checked = !this.checked;
                         }
-                        console.log(this.checked);
-                        console.log(this.checkItemList);
                     }
                 },created:function(){
                     let _this = this;
