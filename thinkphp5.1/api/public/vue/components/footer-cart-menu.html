@@ -314,7 +314,7 @@
                 {{menu.name}}
                 <!-- 全选 -->
                 <div v-if="menu.class.indexOf('checked_all')!==-1" class="checked_all">
-                    <input type="checkbox" class="check_all" v-model='checked' @click="checkAllOrNot" />
+                    <input type="checkbox" class="check_all" v-model='checked' @click="checkAll" />
                     <label for="" class="">全选</label>
                 </div>
                 <!-- 总金额 -->
@@ -501,6 +501,9 @@
                             }
                         }
                         this.checked = sign;
+                    },checkAll:function(){
+//                        this.checked = !this.checked;
+                        console.log(this.checked);
                     }
                 },created:function(){
                     let _this = this;
