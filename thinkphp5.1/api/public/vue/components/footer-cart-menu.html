@@ -314,7 +314,7 @@
                 {{menu.name}}
                 <!-- 全选 -->
                 <div v-if="menu.class.indexOf('checked_all')!==-1" class="checked_all">
-                    <input type="checkbox" class="check_all" v-model='checked' />
+                    <input type="checkbox" class="check_all" v-model='checked' @click="checkAllOrNot" />
                     <label for="" class="">全选</label>
                 </div>
                 <!-- 总金额 -->
@@ -490,8 +490,6 @@
                         if(!find){
                             this.checkItemList.push(tmp);
                         }
-                        console.log(tmp);
-                        console.log(this.checkItemList);
                         this.editCheckAll();
                     },editCheckAll:function(){
                         //一票否决
