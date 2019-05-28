@@ -130,7 +130,6 @@
                     });
                     //删除已选择产品
                     if(param.vueObj.checked){
-                        param.vueObj.checked = false;
                         param.vueObj.checked_operation_type = 'delete';
                     }
                     if(!$('#product-list').find('li').length){
@@ -244,7 +243,6 @@
         });
         //删除已选择产品
         if(param.vueObj.checked){
-            param.vueObj.checked = false;
             param.vueObj.checked_operation_type = 'delete';
         }
     }
