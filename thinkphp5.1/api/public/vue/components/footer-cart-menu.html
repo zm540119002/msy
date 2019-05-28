@@ -494,9 +494,9 @@
                         let find = false;
                         for(let i = 0,len = this.checkItemList.length; i < len; i++){
                             if(this.checkItemList[i].product_id == param.product_id){
-                                if(param.checked_operation_type=='delete'){ //删除选择状态列表
+                                if(param.checked_operation_type=='delete'){ //删除
                                     Vue.delete(this.checkItemList,i);
-                                }else if(param.checked_operation_type=='edit'){ //修改选择状态列表
+                                }else if(param.checked_operation_type=='edit'){ //修改
                                     this.checkItemList[i].checked = param.checked;
                                     find = true;
                                     break;
@@ -508,7 +508,7 @@
                         }
                         this.editCheckAll(param);
                     },editCheckAll:function(param){
-                        if(param.checked_operation_type=='edit'){ //删除选择状态列表
+                        if(param.checked_operation_type=='edit'){ //修改
                             //一票否决
                             let sign = true;
                             for(let i = 0,len = this.checkItemList.length; i < len; i++){
