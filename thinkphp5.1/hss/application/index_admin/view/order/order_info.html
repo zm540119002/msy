@@ -1,0 +1,105 @@
+{extend name="template/admin_pc/base.html" /}
+
+{block name="content"}
+
+<div class="page-container">
+    <div class="form-horizontal" id="form1">
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>文案标题：</label>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>简介：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <script id="intro" type="text/plain">
+
+                </script>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2">标签：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" placeholder="多个标签请用逗号分隔，例如：正品保障,纳晶水光" name="tag" value="">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2">排序：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" placeholder="" name="sort" value="">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>项目主图：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <script id="main_img" type="text/plain"></script>
+                <input id="mainImg" type="hidden" value="">
+            </div>
+        </div>
+
+        <div class="row cl"></div>
+        <hr/>
+        <div class="row cl"></div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>项目介绍：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <script id="detail_img" type="text/plain"></script>
+                <input id="detailImg" type="hidden" value="">
+            </div>
+        </div>
+
+        <div class="row cl"></div>
+        <hr/>
+        <div class="row cl"></div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2">操作描述：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <script id="description" type="text/plain">
+
+                </script>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2">项目流程：</label>
+            <div class="formControls col-xs-8 col-sm-9 process">
+                <ul class="upload-picture-module multi-picture-moduleDes hss-picture-moduleDes f24">
+
+                </ul>
+                <div class="error_tipc"></div>
+                <div class="upload-picture-module margin-left f24">
+                    <div class="picture-module" style="width: 50px; height: 50px;">
+                        <input type="file" class="uploadImg uploadImgDescribe " name="" accept="image/*" multiple>
+                    </div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="c-red">*</span>支持选择多张图片
+                </div>
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2">项目注意事项：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <script id="remarks" type="text/plain">
+
+                </script>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2">推荐商品：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <button type="button" class="btn btn-primary radius recommend"><i class="Hui-iconfont"></i> 添加商品</button>
+                已选择 <span class="c-red"></span> 种商品    <span class="c-red">*</span>只展示前4款商品
+            </div>
+        </div>
+        <div class="row cl">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+                <input type="hidden" name='id' value="{$info.id}">
+                <input type="hidden" name='ids' value="">
+                <button class="btn btn-primary radius button_save_black_4" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
+                <button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+                <span class="c-red">*</span>(图片只显示缩略图，不影响原效果)
+            </div>
+        </div>
+    </div>
+</div>
+{/block}

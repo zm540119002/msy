@@ -79,13 +79,14 @@ class Order extends Base{
         $model = new \app\index\model\Order();
         $condition = [
             'field' => [
-                'o.sn','o.pay_sn','o.order_status','o.pay_code','o.remark','o.payment_time',
+                'o.id','o.sn','o.pay_sn','o.order_status','o.pay_code','o.remark','o.payment_time',
                 'o.after_sale_status', 'o.amount','o.coupons_amount','o.actually_amount','o.create_time','o.receive_time',
                 'o.consignee','o.mobile','o.province','o.city','o.area','o.detail_address','o.express_sn','o.exp_id',
-                'od.goods_name','od.'
+                'od.goods_name','od.goods_img','od.price','od.num'
             ],'where' => [
               ['o.status','=',0],
               ['o.order_status','<>',0],
+              ['o.id','=',$id],
             ],'join' => [
                 ['order_detail od','o.id=od.father_order_id','left']
             ]
@@ -95,11 +96,20 @@ class Order extends Base{
         if(empty($data)){
             $this->error('没有找到该订单');
         }
-
+        $orderInfo = reset($data);
         foreach($data as $k => $v){
-
+            $goods = [
+                'goods_name' => $v['goods_name'],
+                'goods_img'  => $v['goods_img'],
+                'price'      => $v['price'],
+                'num'        => $v['num'],
+            ];
+            $orderInfo['goods_info'][] = $goods;
         }
-
+        $type = input('type/d');
+        if($type=='info'){
+            return $this->fetch('order_info');
+        }
 
     }
 
