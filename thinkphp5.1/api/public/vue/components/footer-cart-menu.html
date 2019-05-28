@@ -480,6 +480,16 @@
                             checked:param.checked
                         };
                         this.checkItemList.push(tmp);
+                    },editCheckAll:function(param){
+                        //一票否决
+                        let sign = true;
+                        for(let i = 0,len = this.checkItemList.length; i < len; i++){
+                            if(!this.checkItemList[i].checked){
+                                sign = false;
+                                break;
+                            }
+                        }
+                        this.checked = sign;
                     }
                 },created:function(){
                     let _this = this;
