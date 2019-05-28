@@ -291,8 +291,8 @@
                 let _this = this;
                 //监听-底部购物车全选改变-事件
                 bus.$on('footer_cart_check_all_change', function(param){
-//                    _this.checkItem(param);
                     this.checked = param;
+                    _this.checkItem();
                     console.log(param);
                 });
             },watch: {
