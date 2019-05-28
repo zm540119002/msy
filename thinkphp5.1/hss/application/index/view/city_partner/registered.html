@@ -106,6 +106,7 @@
 <script type="text/javascript" src="index_js/cityPartner.js"></script>
 <script type="text/javascript" >
 	var cityList = '{$cityList}';
+	var cityList = JSON.parse('{$cityList|raw}');
 	console.log(cityList);
 </script>
 {/block} 
