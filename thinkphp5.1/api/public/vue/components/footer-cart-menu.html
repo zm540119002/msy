@@ -288,6 +288,13 @@
                 this.subtotal_amount_calculate();
                 //触发-产品选择器初始化-事件
                 bus.$emit('product_select_init',this);
+                let _this = this;
+                //监听-底部购物车全选改变-事件
+                bus.$on('footer_cart_check_all_change', function(param){
+                    _this.checked = param;
+//                    _this.checkItem();
+                    console.log(param);
+                });
             },watch: {
                 buy_quantity: {
                     handler(newVal, oldVal) {
@@ -504,7 +511,8 @@
                         for(let i = 0,len = this.checkItemList.length; i < len; i++){
                             this.checkItemList[i].checked = !this.checked;
                         }
-                        console.log(this.checkItemList);
+                        //触发-底部购物车全选改变-事件
+                        bus.$emit('footer_cart_check_all_change',!this.checked);
                     }
                 },created:function(){
                     let _this = this;

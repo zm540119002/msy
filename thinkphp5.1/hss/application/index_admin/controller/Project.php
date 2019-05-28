@@ -59,8 +59,8 @@ class Project extends Base {
                 $process = explode(',',$data['process_img']);
                 foreach($process as $k => $v){
                     unset($process[$k]);
-                    $process[$k]['img'] = $v;
-                    $process[$k]['desc']= $data['process_text'][$k];
+                    $process[$k]['img'] = trim($v);
+                    $process[$k]['desc']= trim($data['process_text'][$k]);
                 }
                 //p($process);
                 //exit;
