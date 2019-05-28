@@ -122,6 +122,8 @@
                     });
                 }
                 if(param.clickObj.attr('class').indexOf('delete_cart')!==-1 && param.postData){ //删除
+                    console.log(param);
+                    return;
                     $.each(param.postData.goodsList,function(i,o){
                         param.vueObj.buy_quantity += o.num;
                         param.vueObj.buy_quantity_reduce_trigger = true;
