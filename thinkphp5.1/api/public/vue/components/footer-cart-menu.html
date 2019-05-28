@@ -409,6 +409,7 @@
                         this.total_amount += param.deal_price * param.increment_buy_quantity;
                     },total_amount_calculate_with_checked:function (param) {
                         console.log(param.checked);
+                        console.log(param.subtotal_amount);
                         if(param.checked){
                             this.total_amount += param.subtotal_amount;
                         }else{
