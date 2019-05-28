@@ -136,12 +136,9 @@
 		$("body").on('click','.ship',function(){
 
 
-
 			// 省市id转换成字符地址
 			var data=$(this).parents('tr').find(".consigneeInfo").serializeObject();
 
-/*			console.log(data);
-			return ;*/
 			$("#expressOrderSn").html(data.sn);
 			var id = data.id;
 			if(!$.isEmptyObject(data)){
@@ -209,7 +206,45 @@
 			//expressDeliveryHtml();
 		});
 
+		// 订单信息
+		$('body').on('click','.info',function(){
+
+			var _thisTr = $(this).parents('tr');
+			var config  = {
+				title : '订单详情',
+				url   : controller + 'getInfo/type/1/id' + _thisTr.data('id')
+			};
+
+			getInfo(config);
+		});
+
+		// 订单信息 做到这里
+		$('body').on('click','.print',function(){
+
+			var _thisTr = $(this).parents('tr');
+			var config  = {};
+			config.title= '打印订单';
+			config.url  =  controller + 'Order/getInfo/' + _thisTr.data('id');
+
+			var pid = $(".add").data('pid');
+
+			if( pid>0&&pid!='undefined' ){
+				config.url = config.url+'/pid/'+pid;
+			}
+
+			edit(config);
+		});
+
 	});
+
+	function getInfo(config){
+		var index = layer.open({
+			type: 2,
+			title: config.title,
+			content: config.url
+		});
+		layer.full(index);
+	}
 
 	// 日期
 	function selecttime(flag){
