@@ -53,9 +53,9 @@ $(function(){
                     $('.weui-flex-item:eq(1)').addClass('current');
                     $('.apply-module:eq(0)').hide();
                     $('.apply-module:eq(1)').show();
-                    layer.close(index);
                     _this = $(".aa span[type='1']");
                     submitApplicant(_this,applicantData);
+                    layer.close(index);
                 }
             });
         }else{
