@@ -91,6 +91,7 @@ $(function(){
         applicantData.applicant=data.applicant;
         applicantData.mobile=data.mobile;
         applicantData.step = 2;
+        console.log(applicantData);
         var content=''; 
         if(!applicantData.company_name){
             content='请填写企业名称';
