@@ -19,7 +19,9 @@ $(function(){
         $('.applicant').val(apply[0].applicant);
         $('.mobile').val(apply[0].mobile);
         console.log($('nav.apply-data-nav li:eq(1)'));
-        $('.search-city').trigger('click');
+        $('nav.apply-data-nav li:eq(0)').click(function(){
+            alert(13);
+        });
     }
     return false;
     $('body').on('click','.apply-data-nav .switch-item',function(){
