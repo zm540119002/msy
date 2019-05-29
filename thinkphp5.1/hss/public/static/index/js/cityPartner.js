@@ -6,8 +6,8 @@ $(function(){
         $(this).addClass('current').siblings().removeClass('current');
         $('.apply-module').hide().eq($(this).index()).show();
     })
-     $('nav.apply-data-nav li:eq(1)').click(function(){
-             $(this).addClass('current').siblings().removeClass('current');
+     $('nav.apply-data-nav li:eq(apply[0].apply_status)').click(function(){
+        $(this).addClass('current').siblings().removeClass('current');
     });
      if(!$.isEmptyArray(apply)){
         // console.log(apply[0].id);
@@ -28,7 +28,7 @@ $(function(){
         $('.applicant').val(apply[0].applicant);
         $('.mobile').val(apply[0].mobile);
         console.log($('nav.apply-data-nav li:eq(1)'));
-        $('nav.apply-data-nav li:eq(1)').click();
+        $('nav.apply-data-nav li:eq(apply[0].apply_status)').click();
     }
     var area_address,
         applicantData={};
