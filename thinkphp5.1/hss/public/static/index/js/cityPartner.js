@@ -23,7 +23,7 @@ $(function(){
     }
     if(apply[0].apply_status-1==0){
         alert(1);
-        $('.apply-data-nav .switch-item').eq(apply[0].apply_status-1).click();
+        $('.apply-data-nav .switch-item:eq(0)').click();
     }
     return false;
     $('body').on('click','.apply-data-nav .switch-item',function(){
