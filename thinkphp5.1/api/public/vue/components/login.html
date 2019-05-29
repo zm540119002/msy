@@ -203,6 +203,35 @@
     </div>
 </div>
 <script type="text/javascript">
+    //退出-弹窗触发
+    function logoutDialogTrigger(){
+        var url = domain+'ucenter/UserCenter/logout';
+        layer.open({
+            content:'是否退出？',
+            btn:['确定','取消'],
+            yes:function(index){
+                $.ajax({
+                    url: url,
+                    data: {},
+                    type: 'post',
+                    beforeSend: function(){
+                        $('.loading').show();
+                    },
+                    error:function(){
+                        $('.loading').hide();
+                        dialog.error('AJAX错误');
+                    },
+                    success: function(data){
+                        $('.loading').hide();
+                        if(data.status){
+                            location.reload();
+                        }
+                    }
+                });
+                layer.close(index);
+            }
+        });
+    }
     //登录-弹窗触发
     var loginDialogTriggerLayerIndex = 0;
     function loginDialogTrigger(){
