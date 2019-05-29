@@ -134,8 +134,6 @@ $(function(){
 
     // 结算
     $('body').on('click','.settlement_btn',function () {
-        applicantData.province = area_address[0];
-        applicantData.city = area_address[1];
         applicantData.pay_code = $('.pay_code').val();
         _this = $(this);
         if(!applicantData.pay_code){
