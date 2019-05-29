@@ -90,7 +90,7 @@ class CityPartner extends \common\controller\UserBase {
             $postData['earnest'] = config('custom.cityPartner_fee')[1]['earnest'];
             $postData['amount'] = config('custom.cityPartner_fee')[1]['amount'];
             $postData['create_time'] = time();
-            $result  = $modelCityPartner->isUpdate(false)->save($postData);
+            $result  = $modelCityPartner->save($postData);
             if(!$result){
                 $modelCityPartner ->rollback();
                 return errorMsg('失败');
