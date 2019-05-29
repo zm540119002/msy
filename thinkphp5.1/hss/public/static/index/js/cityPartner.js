@@ -11,14 +11,15 @@ $(function(){
      //初始化 未完成的申请
     if(!$.isEmptyArray(apply)){
         console.log(apply[0].id);
-        applicantData={
-            id:apply[0].id,
-            province:apply[0].province,
-            city:apply[0].city,
-            applicant:apply[0].applicant,
-            mobile:apply[0].mobile,
-            company_name:apply[0].company_name,
-        };
+        applicantData.id= apply[0].id;
+        // applicantData={
+        //     id:apply[0].id,
+        //     province:apply[0].province,
+        //     city:apply[0].city,
+        //     applicant:apply[0].applicant,
+        //     mobile:apply[0].mobile,
+        //     company_name:apply[0].company_name,
+        // };
         //省市区初始化
         var province = apply[0].province;
         var city = apply[0].city;
