@@ -144,46 +144,14 @@
 {block name="common"}
 {include file="template/wallet_pay_dialog.html" /}
 {/block}
-{block name="login_dialog"}
+{block name="footer"}
+{include file="template/footer_project.html" /}
+{/block}
+{block name="script"}
+<script type="text/javascript" src="api_common_js/wallet.js"></script>
+<script type="text/javascript" src="{:request()->scheme()}://api.map.baidu.com/api?v=2.0&ak=Fimtwu6FDRrHWvg3oq44YCw0c0YonNpv"></script>
+<script type="text/javascript" src="{:request()->scheme()}://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
 <script type="text/javascript">
-    var login_success_callback_private = function(){
-        location.reload();
-    };
-    var register_success_callback_private = function(){
-        location.reload();
-    };
-</script>
-{include file="../../api/public/vue/components/login.html" /}
-<script type="text/javascript">
-    //退出-弹窗触发
-    function logoutDialogTrigger(){
-        var url = domain+'ucenter/UserCenter/logout';
-        layer.open({
-            content:'是否退出？',
-            btn:['确定','取消'],
-            yes:function(index){
-                $.ajax({
-                    url: url,
-                    data: {},
-                    type: 'post',
-                    beforeSend: function(){
-                        $('.loading').show();
-                    },
-                    error:function(){
-                        $('.loading').hide();
-                        dialog.error('AJAX错误');
-                    },
-                    success: function(data){
-                        $('.loading').hide();
-                        if(data.status){
-                            location.reload();
-                        }
-                    }
-                });
-                layer.close(index);
-            }
-        });
-    }
     //异步验证
     $('body').on('click','.async_login',function(){
         let _this = $(this);
@@ -210,14 +178,6 @@
         loginDialogTrigger();
     });
 </script>
-{/block}
-{block name="footer"}
-{include file="template/footer_project.html" /}
-{/block}
-{block name="script"}
-<script type="text/javascript" src="api_common_js/wallet.js"></script>
-<script type="text/javascript" src="{:request()->scheme()}://api.map.baidu.com/api?v=2.0&ak=Fimtwu6FDRrHWvg3oq44YCw0c0YonNpv"></script>
-<script type="text/javascript" src="{:request()->scheme()}://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
 <script type="text/javascript">
     $(function () {
         var mobile=$('.user_mobile').text();
@@ -314,7 +274,7 @@
                   $('.userInfoLayer').find('.user_name').text(user_name);
                    var  postData = {
                        name:user_name
-                   }
+                   };
                     var old_name =   $('.userInfoLayer ').find('.old_name').val();
                     if(old_name !== user_name){
                         //提交
@@ -328,7 +288,6 @@
                             }
                         })
                     }
-
                   layer.close(index);
                 }
             });
