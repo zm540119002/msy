@@ -18,7 +18,7 @@ $(function(){
         $('.company_name').val(apply[0].company_name);
         $('.applicant').val(apply[0].applicant);
         $('.mobile').val(apply[0].mobile);
-        console.log(apply[0].apply_status-1);
+        console.log($('ul li:eq(1)'));
         $('ul li:eq(1)').click();
     }
     return false;
