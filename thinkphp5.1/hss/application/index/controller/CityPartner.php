@@ -83,7 +83,6 @@ class CityPartner extends \common\controller\UserBase {
         switch ($postData['step']){
             case 1:
             case 2:
-            echo 333; exit ;
             $modelCityPartner = new \app\index\model\CityPartner();
             $modelCityPartner -> startTrans();
             $sn = generateSN(); //内部支付编号
@@ -93,7 +92,7 @@ class CityPartner extends \common\controller\UserBase {
             $postData['amount'] = config('custom.cityPartner_fee')[1]['amount'];
             $postData['create_time'] = time();
             $result  = $modelCityPartner->save($postData);
-            return  $modelCityPartner->getLastSql();
+            echo $modelCityPartner->getLastSql();exit;
             if(!$result){
                 $modelCityPartner ->rollback();
                 return errorMsg('失败');
