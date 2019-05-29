@@ -13,6 +13,6 @@ class CityPartner extends \common\model\Base {
 
 	public function submitApplicant($data){
 		$this->isUpdate(false)->save($data);
-		return $this->id;
+		return $this->getAttr('id');
 	}
 }
