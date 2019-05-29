@@ -1,15 +1,17 @@
 $(function(){
-    var area_address,
-        applicantData={};
-        id = 0;
+
     //nav切换
     $('body').on('click','.apply-data-nav .switch-item',function(){
         $(this).addClass('current').siblings().removeClass('current');
         $('.apply-module').hide().eq($(this).index()).show();
     });
+    var area_address,
+        applicantData={
+            id:0
+        };
      //初始化 未完成的申请
     if(!$.isEmptyArray(apply)){
-        id = apply[0].id;
+        applicantData.id = apply[0].id;
         //省市区初始化
         var province = apply[0].province;
         var city = apply[0].city;
@@ -45,7 +47,6 @@ $(function(){
         applicantData.province = area_address[0];
         applicantData.city = area_address[1];
         applicantData.step = 1;
-        applicantData.id = id;
         var provinces=arrayHasElement(cityArr,cityData);
         if(!provinces){
             layer.open({
@@ -75,7 +76,9 @@ $(function(){
     });
      //填写基本资料
     $('body').on('click','.one-step',function(){
+        var _this = $(this);
         applicantData=$('.applicant_form').serializeObject();
+        applicantData.step = 2;
         var content=''; 
         if(!applicantData.company_name){
             content='请填写企业名称';
@@ -85,13 +88,15 @@ $(function(){
             content='请填写手机号码';
         }
         if(content){
-            dialog.error(content); 
-        }else{
-            $('.weui-flex-item:eq(0),.weui-flex-item:eq(1)').removeClass('current');
-            $('.weui-flex-item:eq(2)').addClass('current');
-            $('.apply-module:eq(1)').hide();
-            $('.apply-module:eq(2)').show();
+            dialog.error(content);
+            return false;
         }
+
+        $('.weui-flex-item:eq(0),.weui-flex-item:eq(1)').removeClass('current');
+        $('.weui-flex-item:eq(2)').addClass('current');
+        $('.apply-module:eq(1)').hide();
+        $('.apply-module:eq(2)').show();
+        submitApplicant(_this,applicantData);
     });
     //确定通过入驻
     $('body').on('click','.three-step',function(){

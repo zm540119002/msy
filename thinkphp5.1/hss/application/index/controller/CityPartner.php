@@ -79,19 +79,21 @@ class CityPartner extends \common\controller\UserBase {
 //        if(!$validate->scene('add')->check($postData)) {
 //            return errorMsg($validate->getError());
 //        }
-
+        $modelCityPartner = new \app\index\model\CityPartner();
+        $postData['apply_status'] = $postData['step'];
         switch ($postData['step']){
             case 1:
+                $postData['user_id'] = $this->user['id'];
+                $postData['create_time'] = time();
             case 2:
-            $modelCityPartner = new \app\index\model\CityPartner();
+
             $modelCityPartner -> startTrans();
 //            $sn = generateSN(); //内部支付编号
 //            $postData['sn'] = $sn;
-            $postData['user_id'] = $this->user['id'];
-            $postData['apply_status'] = $postData['step'];
+
 //            $postData['earnest'] = config('custom.cityPartner_fee')[1]['earnest'];
 //            $postData['amount'] = config('custom.cityPartner_fee')[1]['amount'];
-            $postData['create_time'] = time();
+
             if($postData['id']){
                 $where = [
                     ['id','=',$postData['id']],
