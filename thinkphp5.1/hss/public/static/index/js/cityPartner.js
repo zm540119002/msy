@@ -18,6 +18,7 @@ $(function(){
         $('.company_name').val(apply[0].company_name);
         $('.applicant').val(apply[0].applicant);
         $('.mobile').val(apply[0].mobile);
+        console.log(typeof (apply[0].apply_status-1));
         $('.apply-data-nav .switch-item:eq(apply[0].apply_status-1)').click();
     }
     return false;
