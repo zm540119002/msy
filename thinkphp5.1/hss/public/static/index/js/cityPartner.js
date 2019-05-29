@@ -1,21 +1,13 @@
 $(function(){
-    //初始化 未完成的申请
+   
    
     $('body').on('click','.apply-data-nav .switch-item',function(){
         console.log($(this).index())
         $(this).addClass('current').siblings().removeClass('current');
         $('.apply-module').hide().eq($(this).index()).show();
     })
-    
-   
-     if(!$.isEmptyArray(apply)){
-        // console.log(apply[0].id);
-        // console.log(apply[0].province);
-        // console.log(apply[0].city);
-        // console.log(apply[0].company_name);
-        // console.log(apply[0].applicant);
-        // console.log(apply[0].mobile);
-        // console.log(apply[0].apply_status);
+     //初始化 未完成的申请
+    if(!$.isEmptyArray(apply)){
         //省市区初始化
         var province = apply[0].province;
         var city = apply[0].city;
