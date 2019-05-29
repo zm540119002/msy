@@ -21,7 +21,7 @@ $(function(){
         console.log($('ul li:eq(1)'));
         $('nav li:eq(1)').click();
     }
-    return false;
+    
     $('body').on('click','.apply-data-nav .switch-item',function(){
         console.log($(this).index())
         $(this).addClass('current').siblings().removeClass('current');
