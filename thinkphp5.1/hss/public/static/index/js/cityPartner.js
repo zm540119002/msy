@@ -21,7 +21,7 @@ $(function(){
         console.log($('nav.apply-data-nav li:eq(1)'));
         $('.search-city').click();
     }
-    return false;
+   
     $('body').on('click','.apply-data-nav .switch-item',function(){
         console.log($(this).index())
         $(this).addClass('current').siblings().removeClass('current');
