@@ -91,12 +91,27 @@ class CityPartner extends \common\controller\UserBase {
             $postData['earnest'] = config('custom.cityPartner_fee')[1]['earnest'];
             $postData['amount'] = config('custom.cityPartner_fee')[1]['amount'];
             $postData['create_time'] = time();
-            $result  = $modelCityPartner->save($postData);
-            echo $modelCityPartner->getLastSql();exit;
-            if(!$result){
-                $modelCityPartner ->rollback();
-                return errorMsg('失败');
+
+            if($postData['id']){
+                $where = [
+                    ['id','=',$postData['id']],
+                    ['status','=',0],
+                ];
+                $result  = $modelCityPartner->isUpdate(true)->save($postData,$where);
+                return $modelCityPartner->getLastSql();
+                if(false===$result){
+                    $modelCityPartner ->rollback();
+                    return errorMsg('失败');
+                }
+            }else{
+                $result  = $modelCityPartner->isUpdate(false)->save($postData);
+                if(!$result){
+                    $modelCityPartner ->rollback();
+                    return errorMsg('失败');
+                }
             }
+            echo $modelCityPartner->getLastSql();exit;
+
             break;
             case 3:
                 $modelCityPartner = new \app\index\model\CityPartner();
