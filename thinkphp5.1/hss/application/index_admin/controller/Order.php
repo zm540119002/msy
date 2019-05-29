@@ -50,7 +50,7 @@ class Order extends Base{
             'field'=>[
                 'u.mobile_phone',
                 'o.id','o.sn','o.order_status','o.after_sale_status','o.pay_code','o.user_id', 'o.create_time',
-                'o.province','o.city','o.area','o.detail_address','o.express_sn'
+                'o.complete_address','o.express_sn'
             ],'where'=>$where,
             'join' => [
                 ['common.user u','o.user_id = u.id'],
@@ -81,7 +81,7 @@ class Order extends Base{
             'field' => [
                 'o.id','o.sn','o.pay_sn','o.order_status','o.pay_code','o.remark','o.payment_time',
                 'o.after_sale_status', 'o.amount','o.coupons_amount','o.actually_amount','o.create_time','o.receive_time',
-                'o.consignee','o.mobile','o.province','o.city','o.area','o.detail_address','o.express_sn','o.exp_id',
+                'o.consignee','o.mobile','o.complete_address','o.express_sn','o.exp_id',
                 'od.goods_name','od.goods_img','od.price','od.num'
             ],'where' => [
               ['o.status','=',0],
@@ -109,7 +109,8 @@ class Order extends Base{
         $type = input('type/d');
 
         $this->assign('info',$orderInfo);
-
+  /*      p($orderInfo);
+        exit;*/
         if($type=='info'){
             return $this->fetch('order_info');
         }
