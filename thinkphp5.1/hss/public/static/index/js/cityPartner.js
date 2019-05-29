@@ -18,7 +18,7 @@ $(function(){
         $('.company_name').val(apply[0].company_name);
         $('.applicant').val(apply[0].applicant);
         $('.mobile').val(apply[0].mobile);
-        console.log($('ul li:eq(1)'));
+        console.log($('nav.apply-data-nav li:eq(1)'));
         $('nav.apply-data-nav li').click(function(){
             alert(1);
         });
