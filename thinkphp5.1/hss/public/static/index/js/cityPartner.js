@@ -7,6 +7,7 @@ $(function(){
     });
     var area_address,
         applicantData={
+            id:0
         };
      //初始化 未完成的申请
     if(!$.isEmptyArray(apply)){
