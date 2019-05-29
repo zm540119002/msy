@@ -97,7 +97,6 @@ class CityPartner extends \common\controller\UserBase {
                     ['status','=',0],
                 ];
                 $result  = $modelCityPartner->isUpdate(true)->save($postData,$where);
-                return $modelCityPartner->getLastSql();
                 if(false===$result){
                     $modelCityPartner ->rollback();
                     return errorMsg('失败');
@@ -109,8 +108,6 @@ class CityPartner extends \common\controller\UserBase {
                     return errorMsg('失败');
                 }
             }
-            echo $modelCityPartner->getLastSql();exit;
-
             break;
             case 3:
                 $modelCityPartner = new \app\index\model\CityPartner();
