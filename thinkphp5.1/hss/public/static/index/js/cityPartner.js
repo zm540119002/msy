@@ -20,8 +20,9 @@ $(function(){
         $('.mobile').val(apply[0].mobile);
         console.log($('ul li:eq(1)'));
         $('nav li').eq(1).click(function(){
-              $(this).addClass('current').siblings().removeClass('current');
-        $('.apply-module').hide().eq($(this).index()).show();
+            console.log(123);
+            //   $(this).addClass('current').siblings().removeClass('current');
+        //$('.apply-module').hide().eq($(this).index()).show();
         });
     }
     
