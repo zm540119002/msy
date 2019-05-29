@@ -9,19 +9,17 @@ $(function(){
         // console.log(apply[0].mobile);
         // console.log(apply[0].apply_status);
         //省市区初始化
-        var province = apply[0].province;
-        var city = apply[0].city;
-        var region = [];
-        region.push(province);
-        region.push(city);
-        $('.area_address').setArea(region);
-        $('.company_name').val(apply[0].company_name);
-        $('.applicant').val(apply[0].applicant);
-        $('.mobile').val(apply[0].mobile);
-        console.log($('nav.apply-data-nav li:eq(1)'));
-        $('nav.apply-data-nav li:eq(0)').click(function(){
-            alert(13);
-        });
+        // var province = apply[0].province;
+        // var city = apply[0].city;
+        // var region = [];
+        // region.push(province);
+        // region.push(city);
+        // $('.area_address').setArea(region);
+        // $('.company_name').val(apply[0].company_name);
+        // $('.applicant').val(apply[0].applicant);
+        // $('.mobile').val(apply[0].mobile);
+        // console.log($('nav.apply-data-nav li:eq(1)'));
+        $('.search-city').click();
     }
     return false;
     $('body').on('click','.apply-data-nav .switch-item',function(){
