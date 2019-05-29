@@ -12,6 +12,15 @@ $(function(){
      //初始化 未完成的申请
     if(!$.isEmptyArray(apply)){
         applicantData.id= apply[0].id;
+        applicantData = {
+            id:apply[0].id,
+            province:apply[0].province,
+            city:apply[0].city,
+            company_name:apply[0].company_name,
+            applicant:apply[0].applicant,
+            mobile:apply[0].mobile,
+        }
+
         //省市区初始化
         var province = apply[0].province;
         var city = apply[0].city;
@@ -125,9 +134,8 @@ $(function(){
 
     // 结算
     $('body').on('click','.settlement_btn',function () {
-        applicantData.province = area_address[0];
-        applicantData.city = area_address[1];
         applicantData.pay_code = $('.pay_code').val();
+        applicantData.step = 3;
         _this = $(this);
         if(!applicantData.pay_code){
             dialog.error('请选择结算方式');
