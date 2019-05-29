@@ -82,7 +82,7 @@ class CityPartner extends \common\controller\UserBase {
         $modelCityPartner = new \app\index\model\CityPartner();
         $result  = $modelCityPartner->isUpdate(false)->save($postData);
         $id = $modelCityPartner->getAttr('id');
-        return $id;
+        return $result;
         $modelCityPartner -> startTrans();
         $postData['apply_status'] = $postData['step'];
         switch ($postData['step']){
