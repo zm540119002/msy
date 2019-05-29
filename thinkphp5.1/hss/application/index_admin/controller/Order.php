@@ -107,6 +107,9 @@ class Order extends Base{
             $orderInfo['goods_info'][] = $goods;
         }
         $type = input('type/d');
+
+        $this->assign('info',$orderInfo);
+
         if($type=='info'){
             return $this->fetch('order_info');
         }
