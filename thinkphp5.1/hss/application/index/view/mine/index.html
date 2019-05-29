@@ -152,23 +152,6 @@
 <script type="text/javascript" src="{:request()->scheme()}://api.map.baidu.com/api?v=2.0&ak=Fimtwu6FDRrHWvg3oq44YCw0c0YonNpv"></script>
 <script type="text/javascript" src="{:request()->scheme()}://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
 <script type="text/javascript">
-    //异步验证
-    $('body').on('click','.async_login',function(){
-        let _this = $(this);
-        login_success_callback_private = function(){
-            location.href = _this.data('jump_url');
-        };
-        register_success_callback_private = function(){
-            location.href = _this.data('jump_url');
-        };
-        let config = {
-            clickObj:_this,
-            func:function(){
-                location.href = _this.data('jump_url');
-            }
-        };
-        asyncVerify(config);
-    });
     //退出-弹窗事件
     $('body').on('click','#logout_dialog',function(){
         logoutDialogTrigger();
