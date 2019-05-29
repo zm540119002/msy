@@ -85,17 +85,29 @@ class CityPartner extends \common\controller\UserBase {
             case 2:
             $modelCityPartner = new \app\index\model\CityPartner();
             $modelCityPartner -> startTrans();
-            $sn = generateSN(); //内部支付编号
-            $postData['sn'] = $sn;
+//            $sn = generateSN(); //内部支付编号
+//            $postData['sn'] = $sn;
             $postData['user_id'] = $this->user['id'];
-            $postData['earnest'] = config('custom.cityPartner_fee')[1]['earnest'];
-            $postData['amount'] = config('custom.cityPartner_fee')[1]['amount'];
+            $postData['apply_status'] = $postData['step'];
+//            $postData['earnest'] = config('custom.cityPartner_fee')[1]['earnest'];
+//            $postData['amount'] = config('custom.cityPartner_fee')[1]['amount'];
             $postData['create_time'] = time();
-            $result  = $modelCityPartner->save($postData);
-            echo $modelCityPartner->getLastSql();exit;
-            if(!$result){
-                $modelCityPartner ->rollback();
-                return errorMsg('失败');
+            if($postData['id']){
+                $where = [
+                    ['id','=',$postData['id']],
+                    ['status','=',0],
+                ];
+                $result  = $modelCityPartner->isUpdate(true)->save($postData,$where);
+                if(false===$result){
+                    $modelCityPartner ->rollback();
+                    return errorMsg('失败');
+                }
+            }else{
+                $result  = $modelCityPartner->isUpdate(false)->save($postData);
+                if(!$result){
+                    $modelCityPartner ->rollback();
+                    return errorMsg('失败');
+                }
             }
             break;
             case 3:

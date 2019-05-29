@@ -19,7 +19,7 @@
         </div>
         <div class="row cl">
             <div class="col-sm-12">收货人：{$info.consignee}</div>
-            <div class="col-sm-12">收货地址：{$info.detail_address}</div>
+            <div class="col-sm-12">收货地址：{$info.complete_address}</div>
             <div class="col-sm-12">联系方式：{$info.mobile}</div>
         </div>
         <div class="order-box">
@@ -33,7 +33,7 @@
             </div>
             <div class="goods-item">
                 <div class="goods-list">
-                    {volist name="$infoInfo.goods_info" id="vo"}
+                    {volist name="info['goods_info']" id="vo"}
                     <div class="item j-g4">
                         <div class="goods">
                             <div class="img">
