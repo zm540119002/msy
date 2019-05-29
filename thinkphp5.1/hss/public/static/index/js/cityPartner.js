@@ -19,9 +19,11 @@ $(function(){
         $('.applicant').val(apply[0].applicant);
         $('.mobile').val(apply[0].mobile);
         console.log($('ul li:eq(1)'));
-        $('nav li').click();
+        $('nav.apply-data-nav li').click(function(){
+            alert(1);
+        });
     }
-    
+    return false;
     $('body').on('click','.apply-data-nav .switch-item',function(){
         console.log($(this).index())
         $(this).addClass('current').siblings().removeClass('current');
