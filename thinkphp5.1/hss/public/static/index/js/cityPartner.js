@@ -135,6 +135,7 @@ $(function(){
     // 结算
     $('body').on('click','.settlement_btn',function () {
         applicantData.pay_code = $('.pay_code').val();
+        applicantData.step = 3;
         _this = $(this);
         if(!applicantData.pay_code){
             dialog.error('请选择结算方式');
