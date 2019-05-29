@@ -490,7 +490,7 @@ class Order extends \common\controller\UserBase
             $modelOrderDetail = new \app\index\model\OrderDetail();
             $config=[
                 'field' => [
-                    'od.goods_id','od.price', 'od.num','od.brand_id','od.brand_name',
+                    'od.goods_id','od.price', 'od.num',
                     'g.name','g.thumb_img',
                 ], 'where' => [
                     ['od.status', '=', 0],
