@@ -21,7 +21,9 @@ $(function(){
         $('.apply-module:eq(0)').hide();
         $('.apply-module:eq(apply[0].apply_status-1)').show();
     }
-
+    if(apply[0].apply_status-1==0){
+        $('.apply-data-nav .switch-item').eq(apply[0].apply_status-1).click();
+    }
 
     $('body').on('click','.apply-data-nav .switch-item',function(){
         $(this).addClass('current').siblings().removeClass('current');
