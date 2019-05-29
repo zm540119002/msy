@@ -27,7 +27,7 @@ $(function(){
         $(this).addClass('current').siblings().removeClass('current');
         $('.apply-module').hide().eq($(this).index()).show();
     })
-    $('.search-city').click();
+   
     var area_address,
         applicantData={};
     //填写基本资料
@@ -67,6 +67,7 @@ $(function(){
            
         }
     });
+     $('.search-city').click();
      //填写基本资料
     $('body').on('click','.one-step',function(){
         applicantData=$('.applicant_form').serializeObject();
