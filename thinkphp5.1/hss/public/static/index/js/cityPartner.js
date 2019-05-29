@@ -2,6 +2,9 @@ $(function(){
     //初始化 未完成的申请
     if(!$.isEmptyArray(apply)){
         console.log(apply[0].id)
+        $('.company_name').text(apply[0].company_name);
+        $('.applicant').text(apply[0].applicant);
+        $('.mobile').text(apply[0].mobile);
     }
 
 
