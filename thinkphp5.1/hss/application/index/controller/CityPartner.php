@@ -80,57 +80,61 @@ class CityPartner extends \common\controller\UserBase {
 //            return errorMsg($validate->getError());
 //        }
         $modelCityPartner = new \app\index\model\CityPartner();
+        $modelCityPartner -> startTrans();
         $postData['apply_status'] = $postData['step'];
         switch ($postData['step']){
             case 1:
+            case 2:
                 $postData['user_id'] = $this->user['id'];
                 $postData['create_time'] = time();
-            case 2:
-
-            $modelCityPartner -> startTrans();
-//            $sn = generateSN(); //内部支付编号
-//            $postData['sn'] = $sn;
-
-//            $postData['earnest'] = config('custom.cityPartner_fee')[1]['earnest'];
-//            $postData['amount'] = config('custom.cityPartner_fee')[1]['amount'];
-
-            if($postData['id']){
-                $where = [
-                    ['id','=',$postData['id']],
-                    ['status','=',0],
-                ];
-                $result  = $modelCityPartner->isUpdate(true)->save($postData,$where);
-                if(false===$result){
-                    $modelCityPartner ->rollback();
-                    return errorMsg('失败');
+                if($postData['id']){
+                    $where = [
+                        ['id','=',$postData['id']],
+                        ['user_id','=',$this->user['id']],
+                        ['status','=',0],
+                    ];
+                    $result  = $modelCityPartner->isUpdate(true)->save($postData,$where);
+                    if(false===$result){
+                        $modelCityPartner ->rollback();
+                        return errorMsg('失败');
+                    }
+                }else{
+                    $result  = $modelCityPartner->isUpdate(false)->save($postData);
+                    if(!$result){
+                        $modelCityPartner ->rollback();
+                        return errorMsg('失败');
+                    }
                 }
-            }else{
-                $result  = $modelCityPartner->isUpdate(false)->save($postData);
-                if(!$result){
-                    $modelCityPartner ->rollback();
-                    return errorMsg('失败');
-                }
-            }
-            break;
+                break;
             case 3:
-                $modelCityPartner = new \app\index\model\CityPartner();
-                $modelCityPartner -> startTrans();
-                $sn = generateSN(); //内部支付编号
-                $postData['sn'] = $sn;
-                $postData['user_id'] = $this->user['id'];
+                $earnestSn = generateSN(); //内部支付编号
+                $postData['earnest_sn'] = $earnestSn;
                 $postData['earnest'] = config('custom.cityPartner_fee')[1]['earnest'];
                 $postData['amount'] = config('custom.cityPartner_fee')[1]['amount'];
                 $postData['create_time'] = time();
-                $result  = $modelCityPartner->isUpdate(false)->save($postData);
-                if(!$result){
-                    $modelCityPartner ->rollback();
-                    return errorMsg('失败');
+                if($postData['id']){
+                    $where = [
+                        ['id','=',$postData['id']],
+                        ['user_id','=',$this->user['id']],
+                        ['status','=',0],
+                    ];
+                    $result  = $modelCityPartner->isUpdate(true)->save($postData,$where);
+                    if(false===$result){
+                        $modelCityPartner ->rollback();
+                        return errorMsg('失败');
+                    }
+                }else{
+                    $result  = $modelCityPartner->isUpdate(false)->save($postData);
+                    if(!$result){
+                        $modelCityPartner ->rollback();
+                        return errorMsg('失败');
+                    }
                 }
 
                 //生成支付表数据
                 $modelPay = new \app\index\model\Pay();
                 $data = [
-                    'sn' => $sn,
+                    'sn' => $earnestSn,
                     'actually_amount' =>config('custom.cityPartner_fee')[1]['earnest'],
                     'user_id' => $this->user['id'],
                     'pay_code' => $postData['pay_code'],
