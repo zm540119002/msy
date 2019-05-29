@@ -18,13 +18,8 @@ $(function(){
         $('.company_name').val(apply[0].company_name);
         $('.applicant').val(apply[0].applicant);
         $('.mobile').val(apply[0].mobile);
-        // $('.apply-module:eq(0)').hide();
-        // $('.apply-module:eq(apply[0].apply_status-1)').show();
-    }
-    if(apply[0].apply_status-1==0){
-        alert(1);
-        $('.apply-data-nav .switch-item:eq(0)').click();
-    }
+        $('.apply-data-nav .switch-item:eq(apply[0].apply_status-1)').click();
+   
     return false;
     $('body').on('click','.apply-data-nav .switch-item',function(){
         $(this).addClass('current').siblings().removeClass('current');
