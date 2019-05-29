@@ -330,7 +330,7 @@ class Order extends \common\controller\UserBase
                 ['od.father_order_id','=',$info['id']]
             ],
             'field'=>[
-                'od.goods_id', 'od.price', 'od.num',
+                'od.goods_id', 'od.price', 'od.num', 'od.buy_type','od.brand_id','od.brand_name',
                 'g.name','g.thumb_img','g.specification'
             ],
             'join'=>[
@@ -490,7 +490,7 @@ class Order extends \common\controller\UserBase
             $modelOrderDetail = new \app\index\model\OrderDetail();
             $config=[
                 'field' => [
-                    'od.goods_id','od.price', 'od.num',
+                    'od.goods_id','od.price', 'od.num', 'od.buy_type','od.brand_id','od.brand_name',
                     'g.name','g.thumb_img',
                 ], 'where' => [
                     ['od.status', '=', 0],

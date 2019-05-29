@@ -102,10 +102,9 @@
 <script type="text/javascript">
 	$(function () {
 		getList();
-
+		var region = [];
 		// 发货
 		$("body").on('click','.ship',function(){
-
 
 			// 省市id转换成字符地址
 			var data=$(this).parents('tr').find(".consigneeInfo").serializeObject();
@@ -113,7 +112,7 @@
 			$("#expressOrderSn").html(data.sn);
 			var id = data.id;
 			if(!$.isEmptyObject(data)){
-				var region = [];
+				//var region = [];
 				region.push(data.province);
 				region.push(data.city);
 				region.push(data.area);

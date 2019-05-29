@@ -19,7 +19,7 @@
         </div>
         <div class="row cl">
             <div class="col-sm-12">收货人：{$info.consignee}</div>
-            <div class="col-sm-12">收货地址：{$info.province}{$info.city}{$info.area}{$info.detail_address}</div>
+            <div class="col-sm-12">收货地址：<span id="express"></span></div>
             <div class="col-sm-12">联系方式：{$info.mobile}</div>
         </div>
         <div class="order-box">
@@ -63,4 +63,23 @@
         </div>
     </div>
 </div>
+{/block}
+
+{block name="script"}
+<script type="text/javascript" src="http://www.hss.cc/static/common/js/jquery.area.js"></script>
+<script type="text/javascript" src="index_admin_js/common.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $(document).ready(function(){
+            // 省市id转换成字符地址
+            var region = [];
+            region.push("{$info.province}");
+            region.push("{$info.city}");
+            region.push("{$info.area}");
+            $("#express").setArea(region);
+            $("#express").append("{$info.detail_address}");
+        });
+
+    });
+</script>
 {/block}
