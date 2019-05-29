@@ -22,6 +22,7 @@ $(function(){
         $('.apply-module:eq(apply[0].apply_status-1)').show();
     }
     if(apply[0].apply_status-1==0){
+        alert(1);
         $('.apply-data-nav .switch-item').eq(apply[0].apply_status-1).click();
     }
 
