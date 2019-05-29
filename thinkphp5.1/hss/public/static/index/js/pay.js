@@ -98,7 +98,7 @@ function addAddress(postData) {
     region.push(postData.city);
     region.push(postData.area);
     region = areaObject.setArea(region);
-    postData.detail_address = region;
+    postData.complete_address = region+postData.detail_address;
 
     return postData;
 }

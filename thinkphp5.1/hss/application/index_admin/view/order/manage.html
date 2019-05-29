@@ -102,7 +102,6 @@
 <script type="text/javascript">
 	$(function () {
 		getList();
-		var region = [];
 		// 发货
 		$("body").on('click','.ship',function(){
 
@@ -112,13 +111,7 @@
 			$("#expressOrderSn").html(data.sn);
 			var id = data.id;
 			if(!$.isEmptyObject(data)){
-				//var region = [];
-				region.push(data.province);
-				region.push(data.city);
-				region.push(data.area);
-
-				//$("#express").setArea(region);
-				$("#express").append(data.detail_address);
+				$("#express").append(data.complete_address);
 			}
 
 			var content = $('#expressDeliveryHtml');
