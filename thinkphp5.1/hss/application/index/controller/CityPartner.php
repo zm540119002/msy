@@ -101,7 +101,7 @@ class CityPartner extends \common\controller\UserBase {
                     }
                 }else{
                     $result  = $modelCityPartner->isUpdate(false)->save($postData);
-                    $id = $modelCityPartner->id;
+                    return $result;
                     if(!$result){
                         $modelCityPartner ->rollback();
                         return errorMsg('失败');
@@ -128,7 +128,6 @@ class CityPartner extends \common\controller\UserBase {
                     }
                 }else{
                     $result  = $modelCityPartner->isUpdate(false)->save($postData);
-                    echo $result;exit;
                     $id = $modelCityPartner->id;
                     if(!$result){
                         $modelCityPartner ->rollback();
