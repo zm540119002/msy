@@ -186,23 +186,11 @@
 		//轮播
 		var swiper = new Swiper('.swiper-container', {
 			spaceBetween: 30,
-			autoplay:true,
 			pagination: {
 				el: '.swiper-pagination',
 				clickable: true
 			}
 		});
-
-/*
-		var swiper = new Swiper('.swiper-container', {
-			direction: 'horizontal',
-			pagination: {
-				el: '.swiper-pagination',
-				clickable: true
-			},
-		});
-*/
-
 		// 项目信息切换
 		$('.detail-nav li').on('click',function(){
 			$(this).addClass('current').siblings().removeClass('current');
