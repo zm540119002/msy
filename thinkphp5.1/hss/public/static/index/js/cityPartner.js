@@ -1,7 +1,7 @@
 $(function(){
     //初始化 未完成的申请
     if(!$.isEmptyArray(apply)){
-        console.log(123)
+        console.log(apply[0].id)
     }
 
 
