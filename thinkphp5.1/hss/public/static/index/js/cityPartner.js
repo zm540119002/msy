@@ -19,7 +19,10 @@ $(function(){
         $('.applicant').val(apply[0].applicant);
         $('.mobile').val(apply[0].mobile);
         console.log($('ul li:eq(1)'));
-        $('nav li').eq(1).click();
+        $('nav li').eq(1).click(function(){
+              $(this).addClass('current').siblings().removeClass('current');
+        $('.apply-module').hide().eq($(this).index()).show();
+        });
     }
     
     $('body').on('click','.apply-data-nav .switch-item',function(){
@@ -27,6 +30,7 @@ $(function(){
         $(this).addClass('current').siblings().removeClass('current');
         $('.apply-module').hide().eq($(this).index()).show();
     })
+
     var area_address,
         applicantData={};
     //填写基本资料
