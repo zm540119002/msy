@@ -81,7 +81,7 @@ class CityPartner extends \common\controller\UserBase {
 //        }
         $modelCityPartner = new \app\index\model\CityPartner();
         $result  = $modelCityPartner->submitApplicant($postData);
-        return $modelCityPartner->id;
+        return $postData;
         $modelCityPartner -> startTrans();
         $postData['apply_status'] = $postData['step'];
         switch ($postData['step']){
