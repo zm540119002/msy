@@ -7,6 +7,14 @@ $(function(){
         console.log(apply[0].company_name);
         console.log(apply[0].applicant);
         console.log(apply[0].mobile);
+        //省市区初始化
+        var province = apply[0].province;
+        var city = apply[0].city;
+        var region = [];
+        region.push(province);
+        region.push(city);
+        $('.area_address').setArea(region);
+
         $('.company_name').val(apply[0].company_name);
         $('.applicant').val(apply[0].applicant);
         $('.mobile').val(apply[0].mobile);
