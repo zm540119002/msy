@@ -330,7 +330,7 @@ class Order extends \common\controller\UserBase
                 ['od.father_order_id','=',$info['id']]
             ],
             'field'=>[
-                'od.goods_id', 'od.price', 'od.num', 'od.buy_type','od.brand_id','od.brand_name',
+                'od.goods_id', 'od.price', 'od.num',
                 'g.name','g.thumb_img','g.specification'
             ],
             'join'=>[
