@@ -92,6 +92,14 @@ function addAddress(postData) {
     postData.detail_address = $('.consigneeInfo input[name="layer_detail_address"]').val();
     postData.address_id = addressId;
 
+    // 详细地址
+    var region = [];
+    region.push(postData.province);
+    region.push(postData.city);
+    region.push(postData.area);
+    region = areaObject.setArea(region);
+    postData.detail_address = region;
+
     return postData;
 }
 

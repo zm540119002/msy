@@ -508,18 +508,16 @@
                         this.editCheckAll(param);
                     },editCheckAll:function(param){
                         if(param.checked_operation_type=='edit'){ //修改选择状态
-                            //一票否决
-                            let sign = true;
+                            this.checked = true;
                             for(let i = 0,len = this.checkItemList.length; i < len; i++){
                                 if(!this.checkItemList[i].checked){
-                                    sign = false;
+                                    this.checked = false;
                                     break;
                                 }
                             }
-                            this.checked = sign;
                         }
                     },checkAll:function(){
-                        console.log(this.checked);
+                        this.checked = !this.checked;
                         for(let i = 0,len = this.checkItemList.length; i < len; i++){
                             this.checkItemList[i].checked = this.checked;
                         }
