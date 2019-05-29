@@ -18,10 +18,8 @@ $(function(){
         $('.company_name').val(apply[0].company_name);
         $('.applicant').val(apply[0].applicant);
         $('.mobile').val(apply[0].mobile);
-        if(apply[0].apply_status-1 == 0){
-            $('.weui-flex-item:eq(0)').addClass('current');
-            $('.apply-module:eq(0)').show();
-        }
+        $('.apply-module:eq(0)').hide();
+        $('.apply-module:eq(apply[0].apply_status-1)').show();
     }
 
 
