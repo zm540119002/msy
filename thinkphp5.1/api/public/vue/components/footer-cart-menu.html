@@ -498,13 +498,12 @@
                                 }else if(param.checked_operation_type=='edit'){ //修改选择状态
                                     this.checkItemList[i].checked = param.checked;
                                     find = true;
-                                    this.checkItemList.push(tmp);
                                     break;
                                 }
                             }
                         }
                         if(!find){
-//                            this.checkItemList.push(tmp);
+                            this.checkItemList.push(tmp);
                         }
                         this.editCheckAll(param);
                     },editCheckAll:function(param){
