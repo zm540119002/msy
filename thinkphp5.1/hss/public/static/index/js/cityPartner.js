@@ -12,7 +12,15 @@ $(function(){
      //初始化 未完成的申请
     if(!$.isEmptyArray(apply)){
         console.log(apply[0].id);
-        applicantData.id = apply[0].id;
+        applicantData.id= apply[0].id;
+        // applicantData={
+        //     id:apply[0].id,
+        //     province:apply[0].province,
+        //     city:apply[0].city,
+        //     applicant:apply[0].applicant,
+        //     mobile:apply[0].mobile,
+        //     company_name:apply[0].company_name,
+        // };
         //省市区初始化
         var province = apply[0].province;
         var city = apply[0].city;
@@ -80,7 +88,10 @@ $(function(){
      //填写基本资料
     $('body').on('click','.one-step',function(){
         var _this = $(this);
-        applicantData=$('.applicant_form').serializeObject();
+        var data=$('.applicant_form').serializeObject();
+        applicantData.company_name=data.company_name;
+        applicantData.applicant=data.applicant;
+        applicantData.mobile=data.mobile;
         applicantData.step = 2;
         console.log(applicantData);
         return false;
