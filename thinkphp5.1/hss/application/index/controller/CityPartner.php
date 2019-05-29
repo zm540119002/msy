@@ -79,6 +79,7 @@ class CityPartner extends \common\controller\UserBase {
 //        if(!$validate->scene('add')->check($postData)) {
 //            return errorMsg($validate->getError());
 //        }
+        echo $postData['step']; exit ;
         switch ($postData['step']){
             case 1:
             case 2:
