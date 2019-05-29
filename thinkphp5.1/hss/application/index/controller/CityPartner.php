@@ -103,6 +103,7 @@ class CityPartner extends \common\controller\UserBase {
                     unset($postData['id']);
                     $result  = $modelCityPartner->isUpdate(false)->save($postData);
                     $id = $result;
+                    return $id;
                     if(false===$result){
                         $modelCityPartner ->rollback();
                         return errorMsg('失败');
