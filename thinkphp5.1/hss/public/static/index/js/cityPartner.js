@@ -23,7 +23,10 @@ $(function(){
     }
 
 
-    tab_down('.apply-data-nav .switch-item','.apply-module','click');
+    $('body').on('click','.apply-data-nav .switch-item',function(){
+        $(this).addClass('current').siblings().removeClass('current');
+        $('.apply-module').hide().eq($(this).index()).show();
+    })
     var area_address,
         applicantData={};
     //填写基本资料
