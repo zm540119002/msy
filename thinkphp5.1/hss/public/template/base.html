@@ -4,6 +4,17 @@
 {/block}
 <!-- 项目公共模块-->
 {block name="common-base"}{/block}
+{block name="login_dialog"}
+<script type="text/javascript">
+    var login_success_callback_private = function(){
+        location.reload();
+    };
+    var register_success_callback_private = function(){
+        location.reload();
+    };
+</script>
+{include file="../../api/public/vue/components/login.html" /}
+{/block}
 {block name="pre-script"}
 <script type="text/javascript">
     /**vue版获取json格式列表数据
