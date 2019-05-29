@@ -105,8 +105,7 @@ class Order extends \common\controller\UserBase
             'code'=> config('code.success.jump.code'),
             'url' => url('Order/confirmOrder',['order_sn'=>$orderSN]),
         ];
-/*        p($data);
-        exit;*/
+
         return $this->successMsg('生成订单成功',$data);
         return successMsg('生成订单成功', array('order_sn' => $orderSN));
     }
@@ -141,6 +140,7 @@ class Order extends \common\controller\UserBase
             $data = input('post.');
             $data['order_status'] = 1;
             $modelOrder ->startTrans();
+
             $res = $modelOrder -> allowField(true) -> save($data,$condition['where']);
 
             //根据订单号查询关联的购物车的商品
@@ -186,7 +186,6 @@ class Order extends \common\controller\UserBase
             if(empty($orderGoodsList)){
                 $this->error('没有找到该订单');
             }
-
 
             $this ->assign('orderGoodsList',$orderGoodsList);
 
