@@ -1,3 +1,7 @@
+var area_address,
+    applicantData={
+        id:0
+    };
 $(function(){
 
     //nav切换
@@ -5,10 +9,7 @@ $(function(){
         $(this).addClass('current').siblings().removeClass('current');
         $('.apply-module').hide().eq($(this).index()).show();
     });
-    var area_address,
-        applicantData={
-            id:0
-        };
+
      //初始化 未完成的申请
     if(!$.isEmptyArray(apply)){
         applicantData.id= apply[0].id;

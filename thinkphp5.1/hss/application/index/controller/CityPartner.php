@@ -94,12 +94,14 @@ class CityPartner extends \common\controller\UserBase {
                         ['status','=',0],
                     ];
                     $result  = $modelCityPartner->isUpdate(true)->save($postData,$where);
+                    $id = $modelCityPartner->getAttr('id');
                     if(false===$result){
                         $modelCityPartner ->rollback();
                         return errorMsg('失败');
                     }
                 }else{
                     $result  = $modelCityPartner->isUpdate(false)->save($postData);
+                    $id = $result;
                     if(!$result){
                         $modelCityPartner ->rollback();
                         return errorMsg('失败');
