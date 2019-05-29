@@ -69,8 +69,7 @@
             <ul>
                 <li>
                     {volist name="orderInfo.goods_list" id="goods_info"}
-                            <div class="columns_flex order_item" data-id="{$goods_info.goods_id}" data-buy_type="{$goods_info.buy_type}"
-                                 data-brand_id="{$goods_info.brand_id}" data-brand_name="{$goods_info.brand_name}">
+                            <div class="columns_flex order_item" data-id="{$goods_info.goods_id}">
                                 <div class="list_left_img">
                                     <img src="{:show_img_handle($goods_info.thumb_img)}" class="left">
                                 </div>
