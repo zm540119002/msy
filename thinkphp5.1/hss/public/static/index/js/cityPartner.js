@@ -6,10 +6,8 @@ $(function(){
         $(this).addClass('current').siblings().removeClass('current');
         $('.apply-module').hide().eq($(this).index()).show();
     })
-    var index=apply[0].apply_status-1;
-     $('nav.apply-data-nav li:eq('+index+')').click(function(){
-        $(this).addClass('current').siblings().removeClass('current');
-    });
+    
+   
      if(!$.isEmptyArray(apply)){
         // console.log(apply[0].id);
         // console.log(apply[0].province);
@@ -28,7 +26,10 @@ $(function(){
         $('.company_name').val(apply[0].company_name);
         $('.applicant').val(apply[0].applicant);
         $('.mobile').val(apply[0].mobile);
-        console.log($('nav.apply-data-nav li:eq(1)'));
+        var index=apply[0].apply_status-1;
+        $('nav.apply-data-nav li:eq('+index+')').click(function(){
+            $(this).addClass('current').siblings().removeClass('current');
+        });
         $('nav.apply-data-nav li:eq('+index+')').click();
     }
     var area_address,
