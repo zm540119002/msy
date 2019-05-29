@@ -182,6 +182,7 @@ function submitApplicant(_this,postData){
             _this.removeClass("nodisabled");//删除防止重复提交
             $('.loading').hide();
             if(data.status){
+                applicantData.id = data.id;
                 if(postData.step==1){
                     $('.weui-flex-item:eq(0)').removeClass('current');
                     $('.weui-flex-item:eq(1)').addClass('current');
