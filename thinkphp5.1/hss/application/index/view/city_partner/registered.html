@@ -20,7 +20,7 @@
 						<div class="express-area ">
 							<a id="expressArea" href="javascript:void(0)" class="f24 form-group box-flex">
 								<label class="form-label">选择地区：</label>
-								{empty name="address"}
+								{empty name="apply.address"}
 									<div class="area_address">省 &gt; 市 &gt; 区/县</div>
 									{else /}
 									<div class="area_address"></div>
@@ -105,8 +105,10 @@
 <script type="text/javascript" src="public_js/jquery.area.js"></script>
 <script type="text/javascript" src="index_js/cityPartner.js"></script>
 <script type="text/javascript" >
-	var cityList = JSON.parse('{$cityList|raw}');	
+	var cityList = JSON.parse('{$cityList|raw}');
+	//申请中
 	var apply = JSON.parse('{$apply|raw}');
+	//已交定金或尾款
 	var applied = JSON.parse('{$applied|raw}');
 	console.log(apply);
 	console.log(applied);
