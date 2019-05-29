@@ -19,9 +19,9 @@ $(function(){
         $('.applicant').val(apply[0].applicant);
         $('.mobile').val(apply[0].mobile);
         console.log($('nav.apply-data-nav li:eq(1)'));
-        $('.search-city').click();
+        
     }
-   
+    $('.search-city').click();
     $('body').on('click','.apply-data-nav .switch-item',function(){
         console.log($(this).index())
         $(this).addClass('current').siblings().removeClass('current');
