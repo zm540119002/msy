@@ -17,6 +17,7 @@ class CityPartner extends \common\controller\UserBase {
     public function registered(){
         if (request()->isAjax()) {
         } else {
+            //平台已审核通过的申请
             $modelCityPartner = new \app\index\model\CityPartner();
             $config=[
                 'where'=>[
@@ -29,6 +30,33 @@ class CityPartner extends \common\controller\UserBase {
             ];
             $cityList = $modelCityPartner -> getList($config);
             $this->assign('cityList',json_encode($cityList));
+            //自己提交的申请
+            $modelCityPartner = new \app\index\model\CityPartner();
+            $config=[
+                'where'=>[
+                    ['status', '=', 0],
+                    ['user_id','=',$this->user['id']]
+                ],
+                'field'=>[
+                    'id','province','city','applicant','mobile','city_level','earnest','amount','apply_status'
+                ],
+            ];
+            $selfApplyList = $modelCityPartner -> getList($config);
+            //申请中
+            $apply = [];
+            //已交定金或尾款申请
+            $applied = [];
+            if($selfApplyList){
+                foreach ($selfApplyList as $selfapply){
+                    if ($selfapply['apply_status']<4){
+                        $apply[] = $selfapply;
+                    }else{
+                        $applied[] = $selfapply;
+                    }
+                }
+            }
+            $this->assign('apply',json_encode($apply));
+            $this->assign('applied',json_encode($applied));
             $unlockingFooterCart = unlockingFooterCartConfig([10, 0, 9]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
             return $this->fetch();
