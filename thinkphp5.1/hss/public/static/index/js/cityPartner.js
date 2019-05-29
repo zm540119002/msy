@@ -11,6 +11,7 @@ $(function(){
         };
      //初始化 未完成的申请
     if(!$.isEmptyArray(apply)){
+        console.log(apply[0].id);
         applicantData.id = apply[0].id;
         //省市区初始化
         var province = apply[0].province;
@@ -31,7 +32,7 @@ $(function(){
         $('nav.apply-data-nav li:eq('+index+')').click();
     }
 
-    //填写基本资料
+    //填写地址
     $('body').on('click','.search-city',function(){
         area_address =$('.area-address-name').getArea();
         if(!area_address){
@@ -47,6 +48,8 @@ $(function(){
         applicantData.province = area_address[0];
         applicantData.city = area_address[1];
         applicantData.step = 1;
+        console.log(applicantData);
+        return false;
         var provinces=arrayHasElement(cityArr,cityData);
         if(!provinces){
             layer.open({
@@ -79,6 +82,8 @@ $(function(){
         var _this = $(this);
         applicantData=$('.applicant_form').serializeObject();
         applicantData.step = 2;
+        console.log(applicantData);
+        return false;
         var content=''; 
         if(!applicantData.company_name){
             content='请填写企业名称';
