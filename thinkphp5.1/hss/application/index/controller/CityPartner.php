@@ -80,13 +80,6 @@ class CityPartner extends \common\controller\UserBase {
 //            return errorMsg($validate->getError());
 //        }
         $modelCityPartner = new \app\index\model\CityPartner();
-        $saveData = [
-            'city' => $postData['city'],
-            'province' => $postData['province'],
-            'step' => $postData['step'],
-        ];
-        $result  = $modelCityPartner->submitApplicant($saveData);
-        return $result;
         $modelCityPartner -> startTrans();
         $postData['apply_status'] = $postData['step'];
         switch ($postData['step']){
@@ -107,9 +100,9 @@ class CityPartner extends \common\controller\UserBase {
                         return errorMsg('失败');
                     }
                 }else{
+                    unset($postData['id']);
                     $result  = $modelCityPartner->isUpdate(false)->save($postData);
-                    $id = $modelCityPartner->getAttr('id');
-                    return $id;
+                    $id = $result;
                     if(false===$result){
                         $modelCityPartner ->rollback();
                         return errorMsg('失败');
@@ -135,8 +128,9 @@ class CityPartner extends \common\controller\UserBase {
                         return errorMsg('失败');
                     }
                 }else{
+                    unset($postData['id']);
                     $result  = $modelCityPartner->isUpdate(false)->save($postData);
-                    $id = $modelCityPartner->id;
+                    $id = $result;
                     if(!$result){
                         $modelCityPartner ->rollback();
                         return errorMsg('失败');
