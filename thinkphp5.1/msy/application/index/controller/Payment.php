@@ -499,11 +499,9 @@ class Payment extends \common\controller\Base {
             'pay_code'=>$info['pay_code'],                      // 支付方式
         ];
         $condition = [
-            'where' => [
-                ['status', '=', 0],
-                ['sn', '=', $info['sn']],
-                ['recharge_status', '=', 1],
-            ]
+            ['status', '=', 0],
+            ['sn', '=', $info['sn']],
+            ['recharge_status', '=', 1],
         ];
         $result = $modelWalletDetail -> allowField(true) -> save($data,$condition);
         if($result === false){
@@ -574,20 +572,18 @@ class Payment extends \common\controller\Base {
             'pay_code'=>$info['pay_code'],                      // 支付方式
         ];
         $condition = [
-            'where' => [
-                ['status', '=', 0],
-                ['user_id', '=', $info['user_id']],
-                ['apply_status', '=', 1],
-            ],
+            ['status', '=', 0],
+            ['user_id', '=', $info['user_id']],
+            ['apply_status', '=', 1],
         ];
 
         if($info['type'] == 4){
             //席位支付
-            $condition['where']['earnest_sn'] = $info['sn'];
+            $condition['earnest_sn'] = $info['sn'];
             $data['apply_status']=4;
         }elseif($info['type'] == 5){
             //尾款支付
-            $condition['where']['balance_sn'] = $info['sn'];
+            $condition['balance_sn'] = $info['sn'];
             $data['apply_status']=6;
         }
         $result = $modelCityPartner -> allowField(true) -> save($data,$condition);
