@@ -9,8 +9,8 @@
         </div>
         <div class="row cl">
             <div class="col-sm-12">订单编号：{$info.sn}</div>
-            <div class="col-sm-12">支付方式：{$info.pay_code}</div>
-            <div class="col-sm-12">支付时间：{$info.payment_time}</div>
+            <div class="col-sm-12">支付方式：{$Think.config.custom.pay_code[$info.pay_code]}</div>
+            <div class="col-sm-12">支付时间：{$info.payment_time|date='Y-m-d H:i:s'}</div>
             <div class="col-sm-12">交易流水：{$info.pay_sn}</div>
             <div class="col-sm-12">配送方式：{$info.express_sn}</div>
         </div>
