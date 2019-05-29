@@ -25,7 +25,7 @@ $(function(){
         alert(1);
         $('.apply-data-nav .switch-item').eq(apply[0].apply_status-1).click();
     }
-
+    return false;
     $('body').on('click','.apply-data-nav .switch-item',function(){
         $(this).addClass('current').siblings().removeClass('current');
         $('.apply-module').hide().eq($(this).index()).show();
