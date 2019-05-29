@@ -1,6 +1,12 @@
 $(function(){
     //初始化 未完成的申请
-    if(!$.isEmptyArray(apply)){
+   
+    $('body').on('click','.apply-data-nav .switch-item',function(){
+        console.log($(this).index())
+        $(this).addClass('current').siblings().removeClass('current');
+        $('.apply-module').hide().eq($(this).index()).show();
+    })
+     if(!$.isEmptyArray(apply)){
         // console.log(apply[0].id);
         // console.log(apply[0].province);
         // console.log(apply[0].city);
@@ -19,15 +25,10 @@ $(function(){
         $('.applicant').val(apply[0].applicant);
         $('.mobile').val(apply[0].mobile);
         console.log($('nav.apply-data-nav li:eq(1)'));
-        
+        $('nav.apply-data-nav li:eq(1)').click(function(){
+             $(this).addClass('current').siblings().removeClass('current');
+        });
     }
-   
-    $('body').on('click','.apply-data-nav .switch-item',function(){
-        console.log($(this).index())
-        $(this).addClass('current').siblings().removeClass('current');
-        $('.apply-module').hide().eq($(this).index()).show();
-    })
-   
     var area_address,
         applicantData={};
     //填写基本资料
@@ -67,7 +68,6 @@ $(function(){
            
         }
     });
-     $('.search-city').click();
      //填写基本资料
     $('body').on('click','.one-step',function(){
         applicantData=$('.applicant_form').serializeObject();
