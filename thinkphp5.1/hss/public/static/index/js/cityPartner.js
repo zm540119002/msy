@@ -23,6 +23,7 @@ $(function(){
     }
     return false;
     $('body').on('click','.apply-data-nav .switch-item',function(){
+        console.log($(this).index())
         $(this).addClass('current').siblings().removeClass('current');
         $('.apply-module').hide().eq($(this).index()).show();
     })
