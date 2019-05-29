@@ -91,6 +91,7 @@ class CityPartner extends \common\controller\UserBase {
             $postData['amount'] = config('custom.cityPartner_fee')[1]['amount'];
             $postData['create_time'] = time();
             $result  = $modelCityPartner->save($postData);
+            return  $modelCityPartner->getLastSql();
             if(!$result){
                 $modelCityPartner ->rollback();
                 return errorMsg('失败');
