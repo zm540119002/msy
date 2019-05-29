@@ -19,7 +19,7 @@ $(function(){
         $('.applicant').val(apply[0].applicant);
         $('.mobile').val(apply[0].mobile);
         console.log(apply[0].apply_status-1);
-        $('.apply-data-nav li:eq(apply[0].apply_status-1)').click();
+        $('.apply-data-nav li').eq(apply[0].apply_status-1).click();
     }
     return false;
     $('body').on('click','.apply-data-nav .switch-item',function(){
