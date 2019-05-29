@@ -568,26 +568,28 @@ class Payment extends \common\controller\Base {
         $modelCityPartner ->setConnection(config('custom.system_id')[$systemId]['db']);
 
         $data = [
-            'apply_status'=>2,                              // 状态
+            'apply_status'=>4,                              // 状态
             'payment_time'=>time(),
             'pay_sn'=>$info['pay_sn'],                      // 支付单号 退款用
             'pay_code'=>$info['pay_code'],                      // 支付方式
         ];
-        if($info['type'] == 4){
-            //席位支付
-            $data['apply_status']=2;
-        }elseif($info['type'] == 5){
-            //尾款支付
-            $data['apply_status']=4;
-        }
         $condition = [
             'where' => [
                 ['status', '=', 0],
-                ['sn', '=', $info['sn']],
                 ['user_id', '=', $info['user_id']],
                 ['apply_status', '=', 1],
             ],
         ];
+
+        if($info['type'] == 4){
+            //席位支付
+            $condition['where']['earnest_sn'] = $info['sn'];
+            $data['apply_status']=4;
+        }elseif($info['type'] == 5){
+            //尾款支付
+            $condition['where']['balance_sn'] = $info['sn'];
+            $data['apply_status']=6;
+        }
         $result = $modelCityPartner -> allowField(true) -> save($data,$condition);
         if($result === false){
             $modelCityPartner ->rollback();
