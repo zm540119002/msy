@@ -79,10 +79,11 @@ class CityPartner extends \common\controller\UserBase {
 //        if(!$validate->scene('add')->check($postData)) {
 //            return errorMsg($validate->getError());
 //        }
-        echo $postData['step']; exit ;
+
         switch ($postData['step']){
             case 1:
             case 2:
+            echo 333; exit ;
             $modelCityPartner = new \app\index\model\CityPartner();
             $modelCityPartner -> startTrans();
             $sn = generateSN(); //内部支付编号
