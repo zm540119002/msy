@@ -19,11 +19,7 @@ $(function(){
         $('.applicant').val(apply[0].applicant);
         $('.mobile').val(apply[0].mobile);
         console.log($('ul li:eq(1)'));
-        $('nav li').eq(1).click(function(){
-            console.log(123);
-            //   $(this).addClass('current').siblings().removeClass('current');
-        //$('.apply-module').hide().eq($(this).index()).show();
-        });
+        $('nav li').click();
     }
     
     $('body').on('click','.apply-data-nav .switch-item',function(){
