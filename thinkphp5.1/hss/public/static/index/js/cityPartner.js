@@ -1,11 +1,9 @@
 $(function(){
-   
-   
+    //nav切换
     $('body').on('click','.apply-data-nav .switch-item',function(){
-        console.log($(this).index())
         $(this).addClass('current').siblings().removeClass('current');
         $('.apply-module').hide().eq($(this).index()).show();
-    })
+    });
      //初始化 未完成的申请
     if(!$.isEmptyArray(apply)){
         //省市区初始化
@@ -15,9 +13,11 @@ $(function(){
         region.push(province);
         region.push(city);
         $('.area_address').setArea(region);
+        //资料初始化
         $('.company_name').val(apply[0].company_name);
         $('.applicant').val(apply[0].applicant);
         $('.mobile').val(apply[0].mobile);
+        //定位到已完成步骤
         var index=apply[0].apply_status-1;
         $('nav.apply-data-nav li:eq('+index+')').click(function(){
             $(this).addClass('current').siblings().removeClass('current');
@@ -39,17 +39,23 @@ $(function(){
 		}
         var cityData=[];
         cityData.push(parseInt(area_address[0]),parseInt(area_address[1]));
+        applicantData.province = area_address[0];
+        applicantData.city = area_address[1];
+        applicantData.step = 1;
         var provinces=arrayHasElement(cityArr,cityData);
         if(!provinces){
             layer.open({
                 content:'所查询的城市可以申请城市合伙人<br/>声明：同一城市可能存在多位申请人,同等条件下按先申请先审核签约原则。',
                 btn:['确定'],
+                className:aa,
                 yes:function(index){
                     $('.weui-flex-item:eq(0)').removeClass('current');
                     $('.weui-flex-item:eq(1)').addClass('current');
                     $('.apply-module:eq(0)').hide();
                     $('.apply-module:eq(1)').show();
                     layer.close(index);
+                    _this = $(".aa span[type='1']");
+                    submitApplicant(_this,applicantData);
                 }
             });
         }else{
@@ -155,13 +161,11 @@ function submitApplicant(_this,postData){
         success: function(data){
             _this.removeClass("nodisabled");//删除防止重复提交
             $('.loading').hide();
-            if(data.status){
-                location.href = data.url;
-
-            }else{
-                dialog.success(data.info);
-                //dialog.error('结算提交失败!');
-            }
+            // if(data.status){
+            //     location.href = data.url;
+            // }else{
+            //     dialog.success(data.info);
+            // }
         }
     });
 }

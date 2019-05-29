@@ -73,7 +73,9 @@ class CityPartner extends \common\controller\UserBase {
         if(!request()->isAjax()){
             return errorMsg('请求方式错误');
         }
+
         $postData = input('post.');
+        return $postData;
         $validate = new \app\index\validate\CityPartner();
         if(!$validate->scene('add')->check($postData)) {
             return errorMsg($validate->getError());
