@@ -85,7 +85,7 @@ class CityPartner extends \common\controller\UserBase {
             'province' => $postData['province'],
             'step' => $postData['step'],
         ];
-        $result  = $modelCityPartner->submitApplicant($postData);
+        $result  = $modelCityPartner->submitApplicant($saveData);
         return $result;
         $modelCityPartner -> startTrans();
         $postData['apply_status'] = $postData['step'];
