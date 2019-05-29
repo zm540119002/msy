@@ -86,7 +86,10 @@ $(function(){
      //填写基本资料
     $('body').on('click','.one-step',function(){
         var _this = $(this);
-        applicantData=$('.applicant_form').serializeObject();
+        var data=$('.applicant_form').serializeObject();
+        applicantData.company_name=data.company_name;
+        applicantData.applicant=data.applicant;
+        applicantData.mobile=data.mobile;
         applicantData.step = 2;
         console.log(applicantData);
         return false;
