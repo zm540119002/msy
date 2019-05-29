@@ -80,8 +80,7 @@ class CityPartner extends \common\controller\UserBase {
 //            return errorMsg($validate->getError());
 //        }
         $modelCityPartner = new \app\index\model\CityPartner();
-        $result  = $modelCityPartner->isUpdate(false)->save($postData);
-        $id = $modelCityPartner->getAttr('id');
+        $result  = $modelCityPartner->submitApplicant($postData);
         return $result;
         $modelCityPartner -> startTrans();
         $postData['apply_status'] = $postData['step'];
