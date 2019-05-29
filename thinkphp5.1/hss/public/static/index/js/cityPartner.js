@@ -5,9 +5,9 @@ $(function(){
         console.log(apply[0].company_name);
         console.log(apply[0].applicant);
         console.log(apply[0].mobile);
-        $('.company_name').text(apply[0].company_name);
-        $('.applicant').text(apply[0].applicant);
-        $('.mobile').text(apply[0].mobile);
+        $('.company_name').val(apply[0].company_name);
+        $('.applicant').val(apply[0].applicant);
+        $('.mobile').val(apply[0].mobile);
     }
 
 
