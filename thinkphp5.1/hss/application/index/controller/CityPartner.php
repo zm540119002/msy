@@ -38,7 +38,7 @@ class CityPartner extends \common\controller\UserBase {
                     ['user_id','=',$this->user['id']]
                 ],
                 'field'=>[
-                    'id','province','city','applicant','mobile','city_level','earnest','amount','apply_status'
+                    'id','province','city','company_name','applicant','mobile','city_level','earnest','amount','apply_status'
                 ],
             ];
             $selfApplyList = $modelCityPartner -> getList($config);
