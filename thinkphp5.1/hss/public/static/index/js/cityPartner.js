@@ -47,7 +47,7 @@ $(function(){
             layer.open({
                 content:'所查询的城市可以申请城市合伙人<br/>声明：同一城市可能存在多位申请人,同等条件下按先申请先审核签约原则。',
                 btn:['确定'],
-                className:aa,
+                className:'aa',
                 yes:function(index){
                     $('.weui-flex-item:eq(0)').removeClass('current');
                     $('.weui-flex-item:eq(1)').addClass('current');
