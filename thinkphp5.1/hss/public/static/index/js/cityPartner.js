@@ -1,13 +1,13 @@
 $(function(){
-    //初始化 未完成的申请
+   
+   
+    $('body').on('click','.apply-data-nav .switch-item',function(){
+        console.log($(this).index())
+        $(this).addClass('current').siblings().removeClass('current');
+        $('.apply-module').hide().eq($(this).index()).show();
+    })
+     //初始化 未完成的申请
     if(!$.isEmptyArray(apply)){
-        // console.log(apply[0].id);
-        // console.log(apply[0].province);
-        // console.log(apply[0].city);
-        // console.log(apply[0].company_name);
-        // console.log(apply[0].applicant);
-        // console.log(apply[0].mobile);
-        // console.log(apply[0].apply_status);
         //省市区初始化
         var province = apply[0].province;
         var city = apply[0].city;
@@ -18,16 +18,12 @@ $(function(){
         $('.company_name').val(apply[0].company_name);
         $('.applicant').val(apply[0].applicant);
         $('.mobile').val(apply[0].mobile);
-        console.log($('ul li:eq(1)'));
-        $('nav li').click();
+        var index=apply[0].apply_status-1;
+        $('nav.apply-data-nav li:eq('+index+')').click(function(){
+            $(this).addClass('current').siblings().removeClass('current');
+        });
+        $('nav.apply-data-nav li:eq('+index+')').click();
     }
-    
-    $('body').on('click','.apply-data-nav .switch-item',function(){
-        console.log($(this).index())
-        $(this).addClass('current').siblings().removeClass('current');
-        $('.apply-module').hide().eq($(this).index()).show();
-    })
-
     var area_address,
         applicantData={};
     //填写基本资料

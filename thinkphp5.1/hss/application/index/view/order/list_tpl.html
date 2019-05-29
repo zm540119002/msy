@@ -4,7 +4,8 @@
             <p>编号：{$info.sn}</p>
             <a href="{:url('order/detail',['order_sn'=>$info.sn])}">
                 {volist name="info.goods_list" id="goods_info"}
-                <div class="order_item" data-id="{$goods_info.goods_id}">
+                <div class="order_item" data-id="{$goods_info.goods_id}"
+                     data-brand_id="{$goods_info.brand_id}"  data-brand_name="{$goods_info.brand_name}"  >
                         <img src="{:show_img_handle($goods_info.thumb_img)}" class="left">
                     <div class="order_top_r">
                         <p>{$goods_info.name}</p>
