@@ -101,7 +101,7 @@ class CityPartner extends \common\controller\UserBase {
                     }
                 }else{
                     $result  = $modelCityPartner->isUpdate(false)->save($postData);
-                    $id = $result;
+                    $id = $modelCityPartner->getAttr('id');
                     if(!$result){
                         $modelCityPartner ->rollback();
                         return errorMsg('失败');
@@ -128,7 +128,7 @@ class CityPartner extends \common\controller\UserBase {
                     }
                 }else{
                     $result  = $modelCityPartner->isUpdate(false)->save($postData);
-                    $id = $result;
+                    $id = $modelCityPartner->getAttr('id');
                     if(!$result){
                         $modelCityPartner ->rollback();
                         return errorMsg('失败');
@@ -146,6 +146,7 @@ class CityPartner extends \common\controller\UserBase {
                     'create_time' => time(),
                 ];
                 $result  = $modelPay->isUpdate(false)->save($data);
+                $id = $modelCityPartner->getAttr('id');
                 if(!$result){
                     $modelPay ->rollback();
                     return errorMsg('失败');
