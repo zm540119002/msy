@@ -7,6 +7,7 @@ $(function(){
         console.log(apply[0].company_name);
         console.log(apply[0].applicant);
         console.log(apply[0].mobile);
+        console.log(apply[0].apply_status);
         //省市区初始化
         var province = apply[0].province;
         var city = apply[0].city;
