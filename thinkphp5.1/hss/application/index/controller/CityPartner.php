@@ -136,7 +136,6 @@ class CityPartner extends \common\controller\UserBase {
                         return errorMsg('失败');
                     }
                 }
-
                 //生成支付表数据
                 $modelPay = new \app\index\model\Pay();
                 $data = [
