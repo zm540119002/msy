@@ -497,17 +497,13 @@
                                     Vue.delete(this.checkItemList,i);
                                 }else if(param.checked_operation_type=='edit'){ //修改选择状态
                                     this.checkItemList[i].checked = param.checked;
-                                    this.checkItemList.push({
-                                        product_id:param.product_id,
-                                        checked:param.checked
-                                    });
                                     find = true;
                                     break;
                                 }
                             }
                         }
                         if(!find){
-//                            this.checkItemList.push(tmp);
+                            this.checkItemList.push(tmp);
                         }
                         this.editCheckAll(param);
                     },editCheckAll:function(param){
