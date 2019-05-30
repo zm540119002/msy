@@ -102,7 +102,7 @@ class Order extends \common\controller\UserBase
         $modelOrder->commit();
 
         $data = [
-            'code'=> config('code.success.jump.code'),
+            'code'=> config('code.success.default.code'),
             'url' => url('Order/confirmOrder',['order_sn'=>$orderSN]),
         ];
 
@@ -391,8 +391,6 @@ class Order extends \common\controller\UserBase
      * 设置状态
      */
     public function setOrderStatus(){
-        $this->successMsg('加入购物车成功！',config('code.success.default'));
-        return false;
 
         if(!request()->isPost()){
             return config('custom.not_post');
@@ -419,20 +417,23 @@ class Order extends \common\controller\UserBase
             case 2 :
             case 3 : // 确定收货
                 $where[] = ['order_status','in','2,3'];
+                $result = [
+                    'code'=> config('code.success.jump.code'),
+                    'url' => url('Order/confirmOrder',['order_sn'=>$orderInfo['sn']]),
+                ];
+                $msg = '收货成功';
                 break;
             case 5 : // 取消订单
-                $where['order_status'] = 1;
+                $where[] = ['order_status','=',1];
                 break;
             case 7 : // 申请退款
                 // system_id,order_sn
-                $curl = new \common\component\curl\Curl();
+/*                $curl = new \common\component\curl\Curl();
                 $res = $curl->get('https://msy.meishangyun.com/index/Order/refundOrder',array('system_id'=>3,'order_sn'=>$orderInfo['sn']));
-/*                p($res);
-                exit;*/
                 $res = json_decode($res,true);
                 if(!$res['status'] || $res==null){
                     $type = false;
-                }
+                }*/
 
                 break;
         }
@@ -447,8 +448,12 @@ class Order extends \common\controller\UserBase
         $rse = $model->where($where['where'])->setField($data);
         if(!$rse){
             return errorMsg('失败');
+
+        }else{
+            $this->successMsg($msg,$result);
         }
-        return successMsg('成功');
+
+        //$this->successMsg('收货成功 ！',config('code.success.default'));
     }
 
     /**
