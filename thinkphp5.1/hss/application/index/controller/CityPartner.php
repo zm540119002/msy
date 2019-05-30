@@ -85,6 +85,8 @@ class CityPartner extends \common\controller\UserBase {
         switch ($postData['step']){
             case 1:
             case 2:
+                print_r($postData['old_apply_status']);
+                print_r($postData['apply_status']);exit;
                 if($postData['old_apply_status']> $postData['apply_status']){
                     unset($postData['apply_status']);
                 }
