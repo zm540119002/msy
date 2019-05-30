@@ -109,7 +109,6 @@ class Goods extends \common\controller\Base{
         }
         $user = checkLogin();
         if(!$user){
-            print_r(input('get.'));exit;
             $cartList = input('get.data');
 
             $goodsList =  json_decode($cartList,true)['goodsList'];
