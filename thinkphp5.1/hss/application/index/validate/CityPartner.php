@@ -6,7 +6,7 @@ class CityPartner extends \think\Validate
     //验证规则
     protected $rule = [
         'province'  => [
-            'require', 'max' => 5,'number','mobile'
+            'require', 'max' => 5,'number'
         ],
         'city'  => [
             'require', 'max' => 5,'number'
@@ -28,7 +28,6 @@ class CityPartner extends \think\Validate
     //验证消息
     protected $message  =   [
         'province.require' => '省份必须！',
-        'province.mobile' => '111！',
         'province.max' => '提交省份数据不符！',
         'city.require' => '城市必须！',
         'city.max' => '提交城市数据不符！',
