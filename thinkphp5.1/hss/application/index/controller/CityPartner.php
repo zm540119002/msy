@@ -154,6 +154,7 @@ class CityPartner extends \common\controller\UserBase {
                     $modelPay ->rollback();
                     $this->errorMsg('失败');
                 }
+                break;
         }
         $modelCityPartner -> commit();
         $this->successMsg('成功',['url'=>config('custom.pay_gateway').$earnestSn,'id'=>$id]);
