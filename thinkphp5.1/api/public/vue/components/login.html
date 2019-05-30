@@ -203,6 +203,35 @@
     </div>
 </div>
 <script type="text/javascript">
+    //退出-弹窗触发
+    function logoutDialogTrigger(){
+        var url = domain+'ucenter/UserCenter/logout';
+        layer.open({
+            content:'是否退出？',
+            btn:['确定','取消'],
+            yes:function(index){
+                $.ajax({
+                    url: url,
+                    data: {},
+                    type: 'post',
+                    beforeSend: function(){
+                        $('.loading').show();
+                    },
+                    error:function(){
+                        $('.loading').hide();
+                        dialog.error('AJAX错误');
+                    },
+                    success: function(data){
+                        $('.loading').hide();
+                        if(data.status){
+                            location.reload();
+                        }
+                    }
+                });
+                layer.close(index);
+            }
+        });
+    }
     //登录-弹窗触发
     var loginDialogTriggerLayerIndex = 0;
     function loginDialogTrigger(){
@@ -255,6 +284,23 @@
             data:function(){
                 return {};
             }
+        });
+        //异步验证
+        $('body').on('click','.async_login',function(){
+            let _this = $(this);
+            login_success_callback_private = function(){
+                location.href = _this.data('jump_url');
+            };
+            register_success_callback_private = function(){
+                location.href = _this.data('jump_url');
+            };
+            let config = {
+                clickObj:_this,
+                func:function(){
+                    location.href = _this.data('jump_url');
+                }
+            };
+            asyncVerify(config);
         });
         $('body').on('click','.loginLayer .switch_current',function(){
             //触发-切换当前-事件

@@ -10,5 +10,4 @@ class CityPartner extends \common\model\Base {
     protected $connection = 'db_config_1';
 	//表的别名
 	protected $alias = 'cp';
-	
 }
