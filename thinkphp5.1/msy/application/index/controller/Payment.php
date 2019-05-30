@@ -281,11 +281,6 @@ class Payment extends \common\controller\Base {
             'pay_sn'=>$info['pay_sn'],                      // 支付单号 退款用
             'pay_code'=>$info['pay_code'],                      // 支付单号 退款用
         ];
-//        $condition = [
-//            ['status', '=', 0],
-//            ['sn', '=', $info['sn']],
-//            ['order_status', '=', 1],
-//        ];
         $result = $modelOrder -> allowField(true) -> save($data,$condition['where']);
         if(!$result){
             $modelOrder->rollback();
