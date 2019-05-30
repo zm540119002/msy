@@ -8,16 +8,15 @@ class Base extends \think\Model {
 		unset($data['id']);
 		if(count($where)){//修改
 			$res = $this->allowField(true)->isUpdate(true)->save($data,$where);
+			$id = $where['id'];
 		}else{//新增
 			$res = $this->allowField(true)->isUpdate(false)->save($data);
+			$id = $this->getAttr('id');
 		}
-		print_r($this->id);
-		exit;
-		print_r($this->getAttr('id'));
 		if($res === false){
 			return false;
 		}
-		return $this->getAttr('id');
+		return $id;
 	}
 
 	/**编辑多条记录
