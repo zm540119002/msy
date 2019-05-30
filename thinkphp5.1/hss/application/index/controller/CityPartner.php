@@ -100,7 +100,6 @@ class CityPartner extends \common\controller\UserBase {
                         ['status','=',0],
                     ];
                     $id  = $modelCityPartner->edit($postData,$where);
-                    return $id;
                     if(false===$id){
                         $modelCityPartner ->rollback();
                         $this->errorMsg('失败');
