@@ -11,7 +11,6 @@ class Base extends \think\Model {
 		}else{//新增
 			$res = $this->allowField(true)->isUpdate(false)->save($data);
 		}
-		print_r($this->getLastSql());
 		if($res === false){
 			return false;
 		}
