@@ -78,15 +78,13 @@ class CityPartner extends \common\controller\UserBase {
         $validate = new \app\index\validate\CityPartner();
         $modelCityPartner -> startTrans();
         $postData['apply_status'] = $postData['step'];
+        $validateName = 'step'.$postData['apply_status'];
+        if(!$validate->scene($validateName)->check($postData)) {
+            $this->errorMsg($validate->getError());
+        }
         switch ($postData['step']){
             case 1:
-                if(!$validate->scene('step1')->check($postData)) {
-                    $this->errorMsg($validate->getError());
-                }
             case 2:
-                if(!$validate->scene('step2')->check($postData)) {
-                    $this->errorMsg($validate->getError());
-                }
                 if($postData['old_apply_status']> $postData['apply_status']){
                     unset($postData['apply_status']);
                 }
@@ -98,23 +96,15 @@ class CityPartner extends \common\controller\UserBase {
                         ['user_id','=',$this->user['id']],
                         ['status','=',0],
                     ];
-                    $id  = $modelCityPartner->edit($postData,$where);
-                    if(false===$id){
-                        $modelCityPartner ->rollback();
-                        $this->errorMsg('失败');
-                    }
-                }else{
-                    $id  = $modelCityPartner->edit($postData);
-                    if(false===$id){
-                        $modelCityPartner ->rollback();
-                        $this->errorMsg('失败');
-                    }
+
+                }
+                $id  = $modelCityPartner->edit($postData,$where);
+                if(false===$id){
+                    $modelCityPartner ->rollback();
+                    $this->errorMsg('失败');
                 }
                 break;
             case 3:
-                if(!$validate->scene('step3')->check($postData)) {
-                    $this->errorMsg($validate->getError());
-                }
                 $earnestSn = generateSN(); //内部支付编号
                 $postData['earnest_sn'] = $earnestSn;
                 $postData['earnest'] = config('custom.cityPartner_fee')[1]['earnest'];
@@ -126,17 +116,11 @@ class CityPartner extends \common\controller\UserBase {
                         ['user_id','=',$this->user['id']],
                         ['status','=',0],
                     ];
-                    $id  = $modelCityPartner->edit($postData,$where);
-                    if(false===$id){
-                        $modelCityPartner ->rollback();
-                        $this->errorMsg('失败');
-                    }
-                }else{
-                    $id  = $modelCityPartner->edit($postData);
-                    if(false===$id){
-                        $modelCityPartner ->rollback();
-                        $this->errorMsg('失败');
-                    }
+                }
+                $id  = $modelCityPartner->edit($postData,$where);
+                if(false===$id){
+                    $modelCityPartner ->rollback();
+                    $this->errorMsg('失败');
                 }
                 //生成支付表数据
                 $modelPay = new \app\index\model\Pay();
