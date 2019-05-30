@@ -5,13 +5,13 @@ class Base extends \think\Model {
 	/**编辑单条记录
 	 */
 	public function edit($data,$where=[]){
-		print_r($where);
 		unset($data['id']);
 		if(count($where)){//修改
 			$res = $this->allowField(true)->isUpdate(true)->save($data,$where);
 		}else{//新增
 			$res = $this->allowField(true)->isUpdate(false)->save($data);
 		}
+		print_r($this->getLastSql());
 		if($res === false){
 			return false;
 		}

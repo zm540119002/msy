@@ -140,7 +140,7 @@ class Order extends Base{
             ['id','=',$id],
             ['status','=',0],
         ];
-
+        print_r($condition);
         $model = new \app\index_admin\model\Order();
         $res = $model->edit($data,$condition);
 
