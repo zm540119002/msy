@@ -5,12 +5,11 @@ class Base extends \think\Model {
 	/**编辑单条记录
 	 */
 	public function edit($data,$where=[]){
-	    return $data;
 		if(!intval($data['id'])){//修改
-			$res = $this->allowField(true)->isUpdate(true)->save($data);
+			$res = $this->allowField(true)->isUpdate(false)->save($data);
 		}else{//新增
 			unset($data['id']);
-			$res = $this->allowField(true)->isUpdate(false)->save($data,$where);
+			$res = $this->allowField(true)->isUpdate(true)->save($data,$where);
 		}
 		if($res === false){
 			return false;
