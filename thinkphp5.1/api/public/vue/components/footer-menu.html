@@ -415,9 +415,6 @@
                             location.href = jump_url;
                         }
                     },addCart:function(event){
-                        console.log(33333);
-                        return false;
-
                         let _thisJquery = $(event.currentTarget);
                         let _thisVue = this;
                         login_success_callback_private = function(){
@@ -529,7 +526,28 @@
                         //触发-底部购物车全选改变-事件
                         bus.$emit('footer_cart_check_all_change',this.checked);
                     },confirmReceive:function(event){
-                        console.log(2222);
+                        let _thisJquery = $(event.currentTarget);
+                        let _thisVue = this;
+
+                        console.log(_thisJquery);
+                        console.log(_thisVue);
+                        return false;
+
+                        login_success_callback_private = function(){
+                            _thisJquery.click()
+                        };
+                        register_success_callback_private = function(){
+                            _thisJquery.click()
+                        };
+                        let config = {
+                            clickObj:_thisJquery,
+                            postData:_thisVue.postData,
+                            componentFooterCartMenu:_thisVue,
+                            func:function(){
+                                _thisJquery.click();
+                            }
+                        };
+                        asyncVerify(config);
                         return false;
                     }
                 },created:function(){
