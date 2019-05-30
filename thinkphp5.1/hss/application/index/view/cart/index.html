@@ -124,7 +124,7 @@
 					let _this = this;
 					let findIndex = -1;
 					$.each(this.productList,function(i,o){
-						$.each(param.postData.goodsList,function(ii,oo){
+						$.each(param.postData.data,function(ii,oo){
 							if(o.id == oo.goods_id){
 								findIndex = i;
 							}
@@ -137,6 +137,7 @@
 			},created:function(){
 				let _thisVue = this;
 				_thisVue.getJsonListParam.callBack = _thisVue.getJsonListCallBack;
+				console.log(123);return;
 				vueVersionGetJsonList(_thisVue);
 				//下拉加载
 				$(window).on('scroll',function(){
