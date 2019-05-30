@@ -28,8 +28,8 @@ class CityPartner extends \think\Validate
 
     //验证消息
     protected $message  =   [
-        'name.require' => '加盟店名称必须！',
-        'name.max' => '加盟店名称过长！',
+        'company_name.require' => '加盟店名称必须！',
+        'company_name.max' => '加盟店名称过长！',
         'mobile.mobile' => '请填写正确的手机号码！',
         'province.require' => '省份必须！',
         'province.max' => '提交省份数据不符！',
@@ -42,13 +42,21 @@ class CityPartner extends \think\Validate
     //验证场景
     protected $scene = [
         //申请
-        'add'  =>  [
-            'name',
+        'step1'  =>  [
+            'province',
+            'city',
+        ],
+        'step2'  =>  [
+            'company_name',
             'mobile',
             'province',
             'city',
-            'area',
-            'detail_address',
+        ],
+        'step3'  =>  [
+            'company_name',
+            'mobile',
+            'province',
+            'city',
             'pay_code',
         ],
     ];

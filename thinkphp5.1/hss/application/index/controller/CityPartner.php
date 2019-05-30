@@ -78,14 +78,17 @@ class CityPartner extends \common\controller\UserBase {
 
         $postData = input('post.');
         $validate = new \app\index\validate\CityPartner();
-//        if(!$validate->scene('add')->check($postData)) {
-//            $this->errorMsg($validate->getError());
-//        }
         $modelCityPartner -> startTrans();
         $postData['apply_status'] = $postData['step'];
         switch ($postData['step']){
             case 1:
+                if(!$validate->scene('add')->check($postData)) {
+                    $this->errorMsg($validate->getError());
+                }
             case 2:
+                if(!$validate->scene('add')->check($postData)) {
+                    $this->errorMsg($validate->getError());
+                }
                 if($postData['old_apply_status']> $postData['apply_status']){
                     unset($postData['apply_status']);
                 }
@@ -111,6 +114,9 @@ class CityPartner extends \common\controller\UserBase {
                 }
                 break;
             case 3:
+                if(!$validate->scene('add')->check($postData)) {
+                    $this->errorMsg($validate->getError());
+                }
                 $earnestSn = generateSN(); //内部支付编号
                 $postData['earnest_sn'] = $earnestSn;
                 $postData['earnest'] = config('custom.cityPartner_fee')[1]['earnest'];
