@@ -96,14 +96,14 @@ class CityPartner extends \common\controller\UserBase {
                         ['user_id','=',$this->user['id']],
                         ['status','=',0],
                     ];
-                    $id  = $modelCityPartner->editSingle($postData,$where);
+                    $id  = $modelCityPartner->edit($postData,$where);
                     if(false===$id){
                         $modelCityPartner ->rollback();
                         $this->errorMsg('失败');
                     }
                 }else{
                     unset($postData['id']);
-                    $id  = $modelCityPartner->editSingle($postData);
+                    $id  = $modelCityPartner->edit($postData);
                     if(false===$id){
                         $modelCityPartner ->rollback();
                         $this->errorMsg('失败');
@@ -122,13 +122,18 @@ class CityPartner extends \common\controller\UserBase {
                         ['user_id','=',$this->user['id']],
                         ['status','=',0],
                     ];
-                    $id  = $modelCityPartner->editSingle($postData,$where);
+                    $id  = $modelCityPartner->edit($postData,$where);
                     if(false===$id){
                         $modelCityPartner ->rollback();
                         $this->errorMsg('失败');
                     }
                 }else{
+<<<<<<< HEAD
                     $id  = $modelCityPartner->editSingle($postData);
+=======
+                    unset($postData['id']);
+                    $id  = $modelCityPartner->edit($postData);
+>>>>>>> 54b34d2458d27027e611bb5469367182c2bb8be0
                     if(false===$id){
                         $modelCityPartner ->rollback();
                         $this->errorMsg('失败');
