@@ -75,7 +75,8 @@ class CityPartner extends \common\controller\UserBase {
         }
         $modelCityPartner = new \app\index\model\CityPartner();
 
-        $postData = input('post.');
+        $postData = input('post./a');
+
         $validate = new \app\index\validate\CityPartner();
         $modelCityPartner -> startTrans();
         $postData['apply_status'] = $postData['step'];
