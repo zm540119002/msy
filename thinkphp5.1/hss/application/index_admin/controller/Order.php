@@ -55,6 +55,7 @@ class Order extends Base{
                 ['common.user u','o.user_id = u.id'],
             ],
             'order'=>[
+                'o.payment_time'=>'desc',
                 'o.id'=>'desc',
             ],
         ];
@@ -139,6 +140,7 @@ class Order extends Base{
             ['id','=',$id],
             ['status','=',0],
         ];
+
         $model = new \app\index_admin\model\Order();
         $res = $model->edit($data,$condition);
 
