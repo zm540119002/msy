@@ -71,13 +71,13 @@ class CityPartner extends \common\controller\UserBase {
     public function submitApplicant()
     {
         if(!request()->isAjax()){
-            return errorMsg('请求方式错误');
+            $this->errorMsg('请求方式错误');
         }
 
         $postData = input('post.');
         $validate = new \app\index\validate\CityPartner();
 //        if(!$validate->scene('add')->check($postData)) {
-//            return errorMsg($validate->getError());
+//            $this->errorMsg($validate->getError());
 //        }
         $modelCityPartner = new \app\index\model\CityPartner();
         $modelCityPartner -> startTrans();
@@ -93,19 +93,17 @@ class CityPartner extends \common\controller\UserBase {
                         ['user_id','=',$this->user['id']],
                         ['status','=',0],
                     ];
-                    $result  = $modelCityPartner->isUpdate(true)->save($postData,$where);
-                    $id = $modelCityPartner->getAttr('id');
-                    if(false===$result){
+                    $id  = $modelCityPartner->editSingle($postData,$where);
+                    if(false===$id){
                         $modelCityPartner ->rollback();
-                        return errorMsg('失败');
+                        $this->errorMsg('失败');
                     }
                 }else{
                     unset($postData['id']);
-                    $result  = $modelCityPartner->isUpdate(false)->save($postData);
-                    $id = $modelCityPartner->id;
-                    if(false===$result){
+                    $id  = $modelCityPartner->editSingle($postData);
+                    if(false===$id){
                         $modelCityPartner ->rollback();
-                        return errorMsg('失败');
+                        $this->errorMsg('失败');
                     }
                 }
                 break;
@@ -121,19 +119,17 @@ class CityPartner extends \common\controller\UserBase {
                         ['user_id','=',$this->user['id']],
                         ['status','=',0],
                     ];
-                    $result  = $modelCityPartner->isUpdate(true)->save($postData,$where);
-                    $id = $modelCityPartner->getAttr('id');
-                    if(false===$result){
+                    $id  = $modelCityPartner->editSingle($postData,$where);
+                    if(false===$id){
                         $modelCityPartner ->rollback();
-                        return errorMsg('失败');
+                        $this->errorMsg('失败');
                     }
                 }else{
                     unset($postData['id']);
-                    $result  = $modelCityPartner->isUpdate(false)->save($postData);
-                    $id = $modelCityPartner->id;
-                    if(!$result){
+                    $id  = $modelCityPartner->editSingle($postData);
+                    if(false===$id){
                         $modelCityPartner ->rollback();
-                        return errorMsg('失败');
+                        $this->errorMsg('失败');
                     }
                 }
                 //生成支付表数据
@@ -149,7 +145,7 @@ class CityPartner extends \common\controller\UserBase {
                 $result  = $modelPay->isUpdate(false)->save($data);
                 if(!$result){
                     $modelPay ->rollback();
-                    return errorMsg('失败');
+                    $this->errorMsg('失败');
                 }
         }
         $modelCityPartner -> commit();

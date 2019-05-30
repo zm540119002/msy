@@ -2,18 +2,21 @@
 namespace common\model;
 
 class Base extends \think\Model {
-	/**增加或修改
+	/**编辑单条记录
 	 */
-	public function edit($data,$condition=[]){
-		$res = $this->allowField(true)->save($data,$condition);
-		if($res === false){
-			return errorMsg('失败');
+	public function editSingle($data,$where=[]){
+		if(intval($data['id'])){//新增
+			$res = $this->allowField(true)->isUpdate(false)->save($data);
+			if($res === false){
+				return false;
+			}
+		}else{//修改
+			$res = $this->allowField(true)->isUpdate(true)->save($data,$where);
+			if($res === false){
+				return false;
+			}
 		}
-		$returnArray = [];
-		if(empty($condition)){
-			$returnArray['id'] = $this->getAttr('id');
-		}
-		return successMsg('成功',$returnArray);
+		return $this->getAttr('id');
 	}
 
 	/**查询多条数据
