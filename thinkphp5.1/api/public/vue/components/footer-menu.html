@@ -358,7 +358,7 @@
                 </div>
                 <!-- 确定收货-->
                 <div v-else-if="menu.class.indexOf('confirm_receive')!==-1" class="confirm_receive" @click="confirmReceive" :data-jump_url="menu.action">
-                    <span class="s_i">22222</span>
+                    <span class="s_i"></span>
                 </div>
                 <!-- 默认 -->
                 <div v-else class="default">
@@ -415,6 +415,9 @@
                             location.href = jump_url;
                         }
                     },addCart:function(event){
+                        console.log(33333);
+                        return false;
+
                         let _thisJquery = $(event.currentTarget);
                         let _thisVue = this;
                         login_success_callback_private = function(){
