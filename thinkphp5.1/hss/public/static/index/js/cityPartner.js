@@ -14,12 +14,12 @@ $(function(){
         applicantData.id= apply[0].id;
         applicantData = {
             id:apply[0].id,
-            // province:apply[0].province,
-            // city:apply[0].city,
-            // company_name:apply[0].company_name,
-            // applicant:apply[0].applicant,
-            // mobile:apply[0].mobile,
-            // old_apply_status:apply[0].apply_status
+            province:apply[0].province,
+            city:apply[0].city,
+            company_name:apply[0].company_name,
+            applicant:apply[0].applicant,
+            mobile:apply[0].mobile,
+            old_apply_status:apply[0].apply_status
         };
 
         //省市区初始化
