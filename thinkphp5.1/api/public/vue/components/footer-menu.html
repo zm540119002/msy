@@ -191,7 +191,7 @@
                         return false;
                     }
                     let postData = {
-                        goodsList:[{
+                        data:[{
                             goods_id: this.product_id,
                             num: -this.buy_quantity
                         }]
@@ -234,7 +234,7 @@
                         return false;
                     }
                     let postData = {
-                        goodsList:[{
+                        data:[{
                             goods_id: this.product_id,
                             num: -this.step_quantity
                         }]
@@ -259,7 +259,7 @@
                     asyncVerify(config);
                 },plusCart: function (event) {
                     let postData = {
-                        goodsList:[{
+                        data:[{
                             goods_id: this.product_id,
                             num: this.step_quantity
                         }]
@@ -386,7 +386,7 @@
                         checkItemList:[],
                         menus: unlockingFooterCart.menu,
                         postData:{
-                            goodsList:[]
+                            data:[]
                         }
                     }
                 },methods: {
@@ -424,7 +424,7 @@
                                 (   _thisJquery.attr('class')=='add_cart' //加入购物车
                                 ||  _thisJquery.attr('class')=='buy_now' //立即购买
                                 ||  _thisJquery.attr('class')=='settlement' //去结算
-                                ) && !_thisVue.postData.goodsList.length)
+                                ) && !_thisVue.postData.data.length)
                         ){ //提交商品为空验证
                             dialog.error('请选择商品！');
                             return false;
@@ -448,13 +448,13 @@
                         };
                         //产品是否存在产品列表，默认不存在
                         let existSign = false;
-                        for(let i = 0,len = this.postData.goodsList.length; i < len; i++){
+                        for(let i = 0,len = this.postData.data.length; i < len; i++){
                             //产品已存在产品列表，则修改或删除
-                            if(this.postData.goodsList[i]['goods_id'] == param.product_id){
+                            if(this.postData.data[i]['goods_id'] == param.product_id){
                                 if(param.buy_quantity<=0){
-                                    Vue.delete(this.postData.goodsList,i);
+                                    Vue.delete(this.postData.data,i);
                                 }else{
-                                    this.postData.goodsList[i]['num'] = param.buy_quantity;
+                                    this.postData.data[i]['num'] = param.buy_quantity;
                                 }
                                 existSign = true;
                                 break;
@@ -462,7 +462,7 @@
                         }
                         //产品不存在产品列表，则添加
                         if(!existSign && param.buy_quantity>0){
-                            this.postData.goodsList.push(productInfo);
+                            this.postData.data.push(productInfo);
                         }
                     },editProductListWithChecked:function(param){
                         let productInfo = {
@@ -470,10 +470,10 @@
                             'num':param.buy_quantity
                         };
                         let existSign = false;
-                        for(let i = 0,len = this.postData.goodsList.length; i < len; i++){
-                            if(this.postData.goodsList[i]['goods_id'] == param.product_id){
+                        for(let i = 0,len = this.postData.data.length; i < len; i++){
+                            if(this.postData.data[i]['goods_id'] == param.product_id){
                                 if(!param.checked){
-                                    Vue.delete(this.postData.goodsList,i);
+                                    Vue.delete(this.postData.data,i);
                                 }
                                 existSign = true;
                                 break;
@@ -481,7 +481,7 @@
                         }
                         //产品不存在产品列表，则添加
                         if(!existSign && param.checked && param.buy_quantity>0){
-                            this.postData.goodsList.push(productInfo);
+                            this.postData.data.push(productInfo);
                         }
                     },editCheckItemList:function(param){
                         let tmp = {
