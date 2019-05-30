@@ -153,13 +153,14 @@
                 ){ //包含add_cart，但是不能包含plus 或者 reduce才提示
                     dialog.success(param.data.info);
                 }
+                if(param.clickObj.attr('class').indexOf('buy_now')!==-1){ //立即购买
+                    location.href = param.jump_url;
+                }
             }else if(param.data.data.code == '2001'){ //登录
                 if(param.func && $.isFunction(param.func)){
                     param.func();
                 }
             }else if(param.data.data.code=='2002'){ //授权
-            }else if(param.data.data.code=='2003'){ //跳转
-                location.href = param.jump_url;
             }else{
                 dialog.success(param.data.info);
             }
