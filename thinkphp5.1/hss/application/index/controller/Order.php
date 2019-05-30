@@ -102,12 +102,10 @@ class Order extends \common\controller\UserBase
         $modelOrder->commit();
 
         $data = [
-            'code'=> config('code.success.jump.code'),
+            'code'=> config('code.success.default.code'),
             'url' => url('Order/confirmOrder',['order_sn'=>$orderSN]),
         ];
-
-        return $this->successMsg('生成订单成功',$data);
-        return successMsg('生成订单成功', array('order_sn' => $orderSN));
+        $this->successMsg('生成订单成功',$data);
     }
 
     // 订单确认页
