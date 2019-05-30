@@ -151,7 +151,7 @@ class CityPartner extends \common\controller\UserBase {
                 }
         }
         $modelCityPartner -> commit();
-        return successMsg('成功',['url'=>config('custom.pay_gateway').$earnestSn,'id'=>$id]);
+        $this->successMsg('成功',['url'=>config('custom.pay_gateway').$earnestSn,'id'=>$id]);
     }
 
 }
