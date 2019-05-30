@@ -70,16 +70,17 @@ class CityPartner extends \common\controller\UserBase {
      */
     public function submitApplicant()
     {
+
         if(!request()->isAjax()){
             $this->errorMsg('请求方式错误');
         }
         $modelCityPartner = new \app\index\model\CityPartner();
-
         $postData = input('post./a');
-
+        print_r($postData);exit;
         $validate = new \app\index\validate\CityPartner();
         $modelCityPartner -> startTrans();
         $postData['apply_status'] = $postData['step'];
+
         switch ($postData['step']){
             case 1:
                 if(!$validate->scene('step1')->check($postData)) {
