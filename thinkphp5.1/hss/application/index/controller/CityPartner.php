@@ -128,15 +128,9 @@ class CityPartner extends \common\controller\UserBase {
                         $this->errorMsg('失败');
                     }
                 }else{
-<<<<<<< HEAD
                     unset($postData['id']);
                     $id  = $modelCityPartner->editSingle($postData);
                     if(false===$id){
-=======
-                    $result  = $modelCityPartner->isUpdate(false)->save($postData);
-                    $id = $modelCityPartner->id;
-                    if(!$result){
->>>>>>> d4c6baf9009112c0cfb859bd603664ea6d421ec1
                         $modelCityPartner ->rollback();
                         $this->errorMsg('失败');
                     }
