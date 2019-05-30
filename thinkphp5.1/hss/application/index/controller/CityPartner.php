@@ -75,7 +75,7 @@ class CityPartner extends \common\controller\UserBase {
             $this->errorMsg('请求方式错误');
         }
         $modelCityPartner = new \app\index\model\CityPartner();
-        $postData = input('post./a');
+        $postData = input('post.');
         print_r($postData);exit;
         $validate = new \app\index\validate\CityPartner();
         $modelCityPartner -> startTrans();
