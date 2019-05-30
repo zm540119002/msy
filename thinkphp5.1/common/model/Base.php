@@ -6,7 +6,7 @@ class Base extends \think\Model {
 	 */
 	public function edit($data,$where=[]){
 		unset($data['id']);
-		if(count($where)){//修改
+		if(count($where) && intval($where['id'])){//修改
 			$res = $this->allowField(true)->isUpdate(true)->save($data,$where);
 			$id = $where['id'];
 		}else{//新增
