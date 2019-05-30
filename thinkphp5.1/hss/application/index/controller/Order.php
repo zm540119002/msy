@@ -359,7 +359,7 @@ class Order extends \common\controller\UserBase
                 break;
             case "2":
             case "3":
-                $configFooter = [12];
+                $configFooter = [12,18];
                 break;
             case "4":
                 $configFooter = [13];
@@ -374,12 +374,14 @@ class Order extends \common\controller\UserBase
                 $configFooter = [];
         }
 
-//        $unlockingFooterCart = unlockingFooterCartConfig($configFooter);
-//        $this->assign('unlockingFooterCart', $unlockingFooterCart);
+        $unlockingFooterCart = unlockingFooterCartConfigTest($configFooter);
 
-        $unlockingFooterCart = unlockingFooterCartConfigTest([18,19]);
-        array_push($unlockingFooterCart['menu'][0]['class'],'group_btn50');
-        array_push($unlockingFooterCart['menu'][1]['class'],'group_btn50');
+        $num = floor(100/count($configFooter));
+
+        foreach($configFooter as $k => $v){
+            array_push($unlockingFooterCart['menu'][$k]['class'],'group_btn'.$num);
+        }
+
         $this->assign('unlockingFooterCart',json_encode($unlockingFooterCart));
         return $this->fetch();
 
