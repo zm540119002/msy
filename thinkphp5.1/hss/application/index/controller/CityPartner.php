@@ -70,7 +70,6 @@ class CityPartner extends \common\controller\UserBase {
      */
     public function submitApplicant()
     {
-
         if(!request()->isAjax()){
             $this->errorMsg('请求方式错误');
         }
