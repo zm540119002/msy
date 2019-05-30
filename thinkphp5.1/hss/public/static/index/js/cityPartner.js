@@ -185,7 +185,7 @@ function submitApplicant(_this,postData){
             _this.removeClass("nodisabled");//删除防止重复提交
             $('.loading').hide();
             if(data.status){
-                applicantData.id = data.id;
+                applicantData.id = data.data.id;
                 if(postData.step==1){
                     $('.weui-flex-item:eq(0)').removeClass('current');
                     $('.weui-flex-item:eq(1)').addClass('current');
@@ -197,7 +197,7 @@ function submitApplicant(_this,postData){
                     $('.apply-module:eq(1)').hide();
                     $('.apply-module:eq(2)').show();
                 }else if(postData.step==3){
-                    location.href = data.url;
+                    location.href = data.data.url;
                 }
             }else{
                 dialog.success(data.info);
