@@ -70,22 +70,25 @@ class CityPartner extends \common\controller\UserBase {
      */
     public function submitApplicant()
     {
-
         if(!request()->isAjax()){
             $this->errorMsg('请求方式错误');
         }
         $modelCityPartner = new \app\index\model\CityPartner();
 
-        $postData = input('post.');
+        $postData = input('post./a');
+
         $validate = new \app\index\validate\CityPartner();
-//        if(!$validate->scene('add')->check($postData)) {
-//            $this->errorMsg($validate->getError());
-//        }
         $modelCityPartner -> startTrans();
         $postData['apply_status'] = $postData['step'];
         switch ($postData['step']){
             case 1:
+                if(!$validate->scene('step1')->check($postData)) {
+                    $this->errorMsg($validate->getError());
+                }
             case 2:
+                if(!$validate->scene('step2')->check($postData)) {
+                    $this->errorMsg($validate->getError());
+                }
                 if($postData['old_apply_status']> $postData['apply_status']){
                     unset($postData['apply_status']);
                 }
@@ -111,6 +114,9 @@ class CityPartner extends \common\controller\UserBase {
                 }
                 break;
             case 3:
+                if(!$validate->scene('step3')->check($postData)) {
+                    $this->errorMsg($validate->getError());
+                }
                 $earnestSn = generateSN(); //内部支付编号
                 $postData['earnest_sn'] = $earnestSn;
                 $postData['earnest'] = config('custom.cityPartner_fee')[1]['earnest'];
@@ -149,9 +155,9 @@ class CityPartner extends \common\controller\UserBase {
                     $modelPay ->rollback();
                     $this->errorMsg('失败');
                 }
+                break;
         }
         $modelCityPartner -> commit();
         $this->successMsg('成功',['url'=>config('custom.pay_gateway').$earnestSn,'id'=>$id]);
     }
-
 }
