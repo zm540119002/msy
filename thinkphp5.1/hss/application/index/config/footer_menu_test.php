@@ -98,6 +98,7 @@ return [
                 'bottom_item',
                 'confirm_receive',
             ],
+            'action'=>url('Order/setOrderStatus'),
         ], [//13
             'name'   => '去评价',
             'class'=>[

@@ -527,28 +527,40 @@
                         //触发-底部购物车全选改变-事件
                         bus.$emit('footer_cart_check_all_change',this.checked);
                     },confirmReceive:function(event){
+                        let _thisJquery = $(event.currentTarget);
                         let _thisVue = this;
+                        let order_id = _thisVue.order_id;
+                        if( !order_id ){ //提交商品为空验证
+                            dialog.error('请选择要收货的订单 ！');
+                            return false;
+                        }
 
+                        layer.open({
+                            content : '确实收到货了吗 ?',
+                            btn:['确定','取消'],
+                            end : function(){
+                                return false;
+                            },
+                            yes:function(index){
+                                let postData = {
+                                    order_id:order_id,
+                                    status:4
+                                };
 
+                                let config = {
+                                    clickObj:_thisJquery,
+                                    postData:postData,
+                                    func:function(){
+                                        _thisJquery.click();
+                                    }
+                                };
+                                asyncVerify(config);
 
-                        console.log(_thisVue.order_id);
-                        return false;
-
-                        login_success_callback_private = function(){
-                            _thisJquery.click()
-                        };
-                        register_success_callback_private = function(){
-                            _thisJquery.click()
-                        };
-                        let config = {
-                            clickObj:_thisJquery,
-                            postData:_thisVue.postData,
-                            componentFooterCartMenu:_thisVue,
-                            func:function(){
-                                _thisJquery.click();
+                                //console.log(333333);
+                                layer.close(index)
                             }
-                        };
-                        asyncVerify(config);
+                        });
+
                         return false;
                     }
                 },created:function(){

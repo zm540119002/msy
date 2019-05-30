@@ -391,6 +391,8 @@ class Order extends \common\controller\UserBase
      * 设置状态
      */
     public function setOrderStatus(){
+        $this->successMsg('加入购物车成功！',config('code.success.default'));
+        return false;
 
         if(!request()->isPost()){
             return config('custom.not_post');

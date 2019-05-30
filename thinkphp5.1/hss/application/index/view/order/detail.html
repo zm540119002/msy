@@ -102,8 +102,9 @@
 <script type="text/javascript">
     $(function(){
         let param = {
-            order_id:"{$orderInfo.id}",
+            order_id:parseInt("{$orderInfo.id|default=0}"),
         };
+
         new Vue({
             el: '#foot_cart_menu',
             data:function(){
