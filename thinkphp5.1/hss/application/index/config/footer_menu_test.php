@@ -132,7 +132,7 @@ return [
             'name'   => '查看物流',
             'class'=>[
                 'bottom_item',
-                'delete',
+                'confirm_receive',
             ],
         ],[//19
             'name'   => '查看物流2',

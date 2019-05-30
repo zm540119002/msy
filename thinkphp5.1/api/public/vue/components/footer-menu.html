@@ -356,6 +356,10 @@
                 <div v-else-if="menu.class.indexOf('confirm_order')!==-1" class="confirm_order" @click="addCart" :data-jump_url="menu.action">
                     <span class="s_i"></span>
                 </div>
+                <!-- 确定收货-->
+                <div v-else-if="menu.class.indexOf('confirm_receive')!==-1" class="confirm_receive" @click="confirmReceive" :data-jump_url="menu.action">
+                    <span class="s_i">22222</span>
+                </div>
                 <!-- 默认 -->
                 <div v-else class="default">
                     <span class="s_i"></span>
@@ -521,6 +525,9 @@
                         }
                         //触发-底部购物车全选改变-事件
                         bus.$emit('footer_cart_check_all_change',this.checked);
+                    },confirmReceive:function(event){
+                        console.log(2222);
+                        return false;
                     }
                 },created:function(){
                     let _this = this;
