@@ -20,7 +20,7 @@ $(function(){
             company_name:apply[0].company_name,
             applicant:apply[0].applicant,
             mobile:apply[0].mobile,
-            ord_apply_status:apply[0].apply_status
+            old_apply_status:apply[0].apply_status
         };
 
         //省市区初始化

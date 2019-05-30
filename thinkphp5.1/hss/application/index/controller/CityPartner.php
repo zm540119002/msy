@@ -77,8 +77,6 @@ class CityPartner extends \common\controller\UserBase {
         $modelCityPartner = new \app\index\model\CityPartner();
 
         $postData = input('post.');
-        print_r($postData);exit;
-
         $validate = new \app\index\validate\CityPartner();
 //        if(!$validate->scene('add')->check($postData)) {
 //            $this->errorMsg($validate->getError());
