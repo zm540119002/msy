@@ -165,8 +165,6 @@
 					},'JSON');
 				}
 			});
-
-			//expressDeliveryHtml();
 		});
 
 		// 订单信息
@@ -176,21 +174,11 @@
 		});
 
 		// 打印订单
-		$('body').on('click','.print',function(){
-
-			var _thisTr = $(this).parents('tr');
-			var config  = {};
-			config.title= '打印订单';
-			config.url  =  controller + 'Order/getInfo/' + _thisTr.data('id');
-
-			var pid = $(".add").data('pid');
-
-			if( pid>0&&pid!='undefined' ){
-				config.url = config.url+'/pid/'+pid;
-			}
-
-			edit(config);
-		});
+/*		$('body').on('click','.print',function(){
+			var url = controller + 'getInfo/type/print/id/' + $(this).parents('tr').data('id');
+			window.location.href = url;
+			//layer_show('打印订单',url);
+		});*/
 
 	});
 

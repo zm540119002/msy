@@ -4,7 +4,6 @@ namespace app\index_admin\controller;
 class Order extends Base{
     //首页
     public function manage(){
-
         $modelExpress = new \app\index_admin\model\Express();
         $condition = [
             'field' => [
@@ -82,7 +81,7 @@ class Order extends Base{
                 'o.id','o.sn','o.pay_sn','o.order_status','o.pay_code','o.remark','o.payment_time',
                 'o.after_sale_status', 'o.amount','o.coupons_amount','o.actually_amount','o.create_time','o.receive_time',
                 'o.consignee','o.mobile','o.complete_address','o.express_sn','o.exp_id',
-                'od.goods_name','od.goods_img','od.price','od.num'
+                'od.goods_name','od.goods_img','od.price','od.num','od.specification'
             ],'where' => [
               ['o.status','=',0],
               ['o.order_status','<>',0],
@@ -106,15 +105,16 @@ class Order extends Base{
             ];
             $orderInfo['goods_info'][] = $goods;
         }
-        $type = input('type/d');
+        $type = input('type/s');
 
         $this->assign('info',$orderInfo);
-  /*      p($orderInfo);
-        exit;*/
+
         if($type=='info'){
             return $this->fetch('order_info');
-        }
+        }else{
 
+            return $this->fetch('order_print');
+        }
     }
 
     /**

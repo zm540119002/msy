@@ -389,8 +389,6 @@ class Order extends \common\controller\UserBase
             return config('custom.not_post');
         }
 
-
-
         $id = input('post.id/d');
         $orderStatus = input('post.order_status/d');
         if(!input('?post.id') && !$id){

@@ -22,21 +22,17 @@ td,th{padding:2px;}
     <td width='250'>{$info.sn}</td>
   </tr>
   <tr>
-    <td width='100' align="right">配送方式：</td>
-    <td>{:WSTLangDeliverType($info.['deliverType'])}</td>
     <td width='100' align="right">快递单号：</td>
-    <td>{$info.['expressNo']}</td>
+    <td>{$info.express_sn}</td>
   </tr>
-  {if ($info.['orderType']==0)}
   <tr>
     <td width='100' align="right">收货地址：</td>
-    <td colspan="6">{$info.['userName']}&nbsp;|&nbsp;{$info.['userPhone']}&nbsp;|&nbsp;{$info.['userAddress']}</td>
+    <td colspan="6">{$info.complete_address}</td>
   </tr>
-  {/if}
-  {if $info.['orderRemarks']!=''}
+  {if $info.remark!=''}
   <tr>
     <td width='100' align="right">订单备注：</td>
-    <td colspan="6">{$info.['orderRemarks']}</td>
+    <td colspan="6">{$info.remark}</td>
   </tr>
   {/if}
 </table>
@@ -48,50 +44,34 @@ td,th{padding:2px;}
     <th align="left">商品数量</th>
     <th align="left">小计</th>
   </tr>
-  {volist name='$info.["goods"]' id='vo2'}
+  {volist name="info.goods_info" id="vo"}
   <tr>
-    <td>{$vo2["goodsName"]}</td>
-    <td>
-    {if $vo2['goodsType']==1 && $info.['orderStatus']==2}
-      <table width='100%'>
-      {volist name='$vo2["extraJson"]' id='vgcard'}
-         <tr>
-            <td>卡券号：{$vgcard['cardNo']}</td>
-            <td>卡券密码：{$vgcard['cardPwd']}</td>
-         </tr>
-      {/volist}
-      </table>
-    {else}
-    {:str_replace('@@_@@',';',$vo2["goodsSpecNames"])}&nbsp;
-    {/if}
-    </td>
-    <td>¥{$vo2['goodsPrice']}</td>
-    <td>{$vo2['goodsNum']}</td>
-    <td>¥{$vo2['goodsPrice']*$vo2['goodsNum']}</td>
+    <td>{$vo.goods_name}</td>
+    <td>{$vo.specification}</td>
+    <td>¥{$vo.price}</td>
+    <td>{$vo.num}</td>
+    <td>¥{$vo.price*$vo.num}</td>
   </tr>
   {/volist}
   </table>
   <table width='100%' border='0'>
   <tr>
-    <td colspan='6' align="right">商品总金额：¥{$info.['goodsMoney']}</td>
+    <td colspan='6' align="right">商品总金额：¥{$info.amount}</td>
   </tr>
   <tr>
-    <td colspan='6' align="right">运费：¥{$info.['deliverMoney']}</td>
+    <td colspan='6' align="right">应付金额：¥{$info.actually_amount}</td>
   </tr>
   <tr>
-    <td colspan='6' align="right">应付金额：¥{$info.['totalMoney']}</td>
+    <td colspan='6' align="right">优惠抵扣金额：¥-{$info.coupons_amount}</td>
   </tr>
   <tr>
-    <td colspan='6' align="right">积分抵扣金额：¥-{$info.['scoreMoney']}</td>
-  </tr>
-  <tr>
-    <td colspan='6' align="right">实付金额：¥{$info.['realTotalMoney']}</td>
+    <td colspan='6' align="right">实付金额：¥{$info.actually_amount}</td>
   </tr>
 </table>
 <br/>
 <table width='100%'>
    <tr>
-     <td>商家：{$info.['shopName']}&nbsp;&nbsp;&nbsp;电话：{$info.['shopTel']}</td>
+     <td>商家：黑森森&nbsp;&nbsp;&nbsp;电话：</td>
      <td align="right">打印时间：{:date('Y-m-d H:i:s')}</td>
    </tr>
 </table>
