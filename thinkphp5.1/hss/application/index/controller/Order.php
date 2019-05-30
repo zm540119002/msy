@@ -359,7 +359,7 @@ class Order extends \common\controller\UserBase
                 break;
             case "2":
             case "3":
-                $configFooter = [12,18];
+                $configFooter = [18,12];
                 break;
             case "4":
                 $configFooter = [13];
