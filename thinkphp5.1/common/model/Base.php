@@ -17,6 +17,20 @@ class Base extends \think\Model {
 		return $this->getAttr('id');
 	}
 
+	/**编辑单条记录
+	 */
+	public function editAll($data,$where=[]){
+		if(count($where)){//修改
+			$res = $this->allowField(true)->isUpdate(true)->save($data,$where);
+		}else{//新增
+			$res = $this->allowField(true)->saveAll($data,false);
+		}
+		if($res === false){
+			return false;
+		}
+		return $res;
+	}
+
 	/**查询多条数据
 	 */
 	public function getList($config=[]){
