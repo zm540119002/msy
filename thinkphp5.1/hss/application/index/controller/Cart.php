@@ -121,7 +121,7 @@ class Cart extends \common\controller\UserBase {
         if($result['status']){
             $this->successMsg('删除成功！',config('code.success.default'));
         }else{
-            $this->errorMsg('删除失败！',config('code..default'));
+            $this->errorMsg('删除失败！',config('code.default'));
         }
     }
 
