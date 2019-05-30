@@ -7,14 +7,11 @@ class Base extends \think\Model {
 	public function editSingle($data,$where=[]){
 		if(!intval($data['id'])){//修改
 			$res = $this->allowField(true)->isUpdate(true)->save($data);
-			if($res === false){
-				return false;
-			}
 		}else{//新增
 			$res = $this->allowField(true)->isUpdate(false)->save($data,$where);
-			if($res === false){
-				return false;
-			}
+		}
+		if($res === false){
+			return false;
 		}
 		return $this->getAttr('id');
 	}
