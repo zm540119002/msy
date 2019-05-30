@@ -4,7 +4,7 @@ namespace common\model;
 class Base extends \think\Model {
 	/**编辑单条记录
 	 */
-	public function editSingle($data,$where=[]){
+	public function edit($data,$where=[]){
 		if(!intval($data['id'])){//修改
 			$res = $this->allowField(true)->isUpdate(true)->save($data);
 		}else{//新增
