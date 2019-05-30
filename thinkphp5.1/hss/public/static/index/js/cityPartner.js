@@ -1,6 +1,5 @@
 var area_address,
     applicantData={
-
     };
 $(function(){
 
@@ -63,13 +62,9 @@ $(function(){
             layer.open({
                 content:'所查询的城市可以申请城市合伙人<br/>声明：同一城市可能存在多位申请人,同等条件下按先申请先审核签约原则。',
                 btn:['确定'],
-                className:'aa',
+                className:'confirm',
                 yes:function(index){
-                    // $('.weui-flex-item:eq(0)').removeClass('current');
-                    // $('.weui-flex-item:eq(1)').addClass('current');
-                    // $('.apply-module:eq(0)').hide();
-                    // $('.apply-module:eq(1)').show();
-                    _this = $(".aa span[type='1']");
+                    _this = $(".confirm span[type='1']");
                     submitApplicant(_this,applicantData);
                     layer.close(index);
                 }
@@ -106,11 +101,6 @@ $(function(){
             dialog.error(content);
             return false;
         }
-
-        // $('.weui-flex-item:eq(0),.weui-flex-item:eq(1)').removeClass('current');
-        // $('.weui-flex-item:eq(2)').addClass('current');
-        // $('.apply-module:eq(1)').hide();
-        // $('.apply-module:eq(2)').show();
         submitApplicant(_this,applicantData);
     });
     //确定通过入驻
