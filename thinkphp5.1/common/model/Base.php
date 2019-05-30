@@ -24,7 +24,7 @@ class Base extends \think\Model {
 	public function editAll($data,$where=[]){
 		if(count($where)){//修改
 			//暂没实现
-//			$res = $this->allowField(true)->isUpdate(true)->save($data,$where);
+			//$res = $this->allowField(true)->isUpdate(true)->save($data,$where);
 		}else{//新增
 			$res = $this->allowField(true)->saveAll($data,false);
 		}
