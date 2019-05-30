@@ -109,8 +109,9 @@ class Goods extends \common\controller\Base{
         }
         $user = checkLogin();
         if(!$user){
+            print_r(input('get.'));exit;
             $cartList = input('get.data');
-            print_r($cartList);exit;
+
             $goodsList =  json_decode($cartList,true)['goodsList'];
             $goodsIds = array_column($goodsList,'goods_id');
             $model = new \app\index\model\Goods();
