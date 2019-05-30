@@ -45,6 +45,7 @@
                 dialog.error('AJAX错误');
             },
             success: function(data){
+                console.log(data);return false;
                 $('.loading').hide();
                 vueObj.getJsonListParam.loadTrigger = true;
                 if(data.data && (data.data.data.length<vueObj.getJsonListParam.postData.pageSize)){
