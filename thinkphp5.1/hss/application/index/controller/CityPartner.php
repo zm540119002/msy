@@ -69,13 +69,14 @@ class CityPartner extends \common\controller\UserBase {
      * @throws \think\exception\PDOException
      */
     public function submitApplicant()
-    {  return $postData;
+    {
+
         if(!request()->isAjax()){
             $this->errorMsg('请求方式错误');
         }
         $modelCityPartner = new \app\index\model\CityPartner();
-
         $postData = input('post./a');
+        return $postData;
         $validate = new \app\index\validate\CityPartner();
         $modelCityPartner -> startTrans();
         $postData['apply_status'] = $postData['step'];
