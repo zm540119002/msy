@@ -19,7 +19,7 @@ class CityPartner extends \common\controller\UserBase {
         } else {
             //平台已审核通过的申请
             $modelCityPartner = new \app\index\model\CityPartner();
-            $config=[
+            $condition=[
                 'where'=>[
                     ['status', '=', 0],
                     ['apply_status','=',3]
@@ -28,11 +28,11 @@ class CityPartner extends \common\controller\UserBase {
                     'province','city',
                 ],
             ];
-            $cityList = $modelCityPartner -> getList($config);
+            $cityList = $modelCityPartner -> getList($condition);
             $this->assign('cityList',json_encode($cityList));
             //自己提交的申请
             $modelCityPartner = new \app\index\model\CityPartner();
-            $config=[
+            $condition=[
                 'where'=>[
                     ['status', '=', 0],
                     ['user_id','=',$this->user['id']]
@@ -41,7 +41,7 @@ class CityPartner extends \common\controller\UserBase {
                     'id','province','city','company_name','applicant','mobile','city_level','earnest','amount','apply_status'
                 ],
             ];
-            $selfApplyList = $modelCityPartner -> getList($config);
+            $selfApplyList = $modelCityPartner -> getList($condition);
             //申请中
             $apply = [];
             //已交定金或尾款申请
@@ -73,18 +73,21 @@ class CityPartner extends \common\controller\UserBase {
         if(!request()->isAjax()){
             $this->errorMsg('请求方式错误');
         }
+        $modelCityPartner = new \app\index\model\CityPartner();
 
         $postData = input('post.');
         $validate = new \app\index\validate\CityPartner();
 //        if(!$validate->scene('add')->check($postData)) {
 //            $this->errorMsg($validate->getError());
 //        }
-        $modelCityPartner = new \app\index\model\CityPartner();
         $modelCityPartner -> startTrans();
         $postData['apply_status'] = $postData['step'];
         switch ($postData['step']){
             case 1:
             case 2:
+                if($postData['old_apply_status']> $postData['apply_status']){
+                    unset($postData['apply_status']);
+                }
                 $postData['user_id'] = $this->user['id'];
                 $postData['create_time'] = time();
                 if($postData['id']){
@@ -125,9 +128,15 @@ class CityPartner extends \common\controller\UserBase {
                         $this->errorMsg('失败');
                     }
                 }else{
+<<<<<<< HEAD
                     unset($postData['id']);
                     $id  = $modelCityPartner->editSingle($postData);
                     if(false===$id){
+=======
+                    $result  = $modelCityPartner->isUpdate(false)->save($postData);
+                    $id = $modelCityPartner->id;
+                    if(!$result){
+>>>>>>> d4c6baf9009112c0cfb859bd603664ea6d421ec1
                         $modelCityPartner ->rollback();
                         $this->errorMsg('失败');
                     }
