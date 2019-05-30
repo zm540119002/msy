@@ -66,6 +66,7 @@
 		//localStorage里商品信息
 		if(localStorage.cartList){
 			let goodsList = (JSON.parse(localStorage.cartList)).data;
+			console.log(goodsList);
 			$.each(goodsList,function(i,goods){
 				total_num += goods['num'];
 			});
