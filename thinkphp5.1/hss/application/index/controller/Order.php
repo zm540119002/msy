@@ -9,7 +9,7 @@ class Order extends \common\controller\UserBase
             return errorMsg('请求方式错误');
         }
 
-        $goodsList = input('post.goodsList/a');
+        $goodsList = input('post.data/a');
         if (empty($goodsList)) {
             return errorMsg('请求数据不能为空');
         }
