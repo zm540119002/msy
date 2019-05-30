@@ -17,7 +17,7 @@ class Base extends \think\Model {
 		return $this->getAttr('id');
 	}
 
-	/**编辑单条记录
+	/**编辑多条记录
 	 */
 	public function editAll($data,$where=[]){
 		if(count($where)){//修改
