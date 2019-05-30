@@ -98,17 +98,12 @@ class CityPartner extends \common\controller\UserBase {
                         ['user_id','=',$this->user['id']],
                         ['status','=',0],
                     ];
-                    $id  = $modelCityPartner->edit($postData,$where);
-                    if(false===$id){
-                        $modelCityPartner ->rollback();
-                        $this->errorMsg('失败');
-                    }
-                }else{
-                    $id  = $modelCityPartner->edit($postData);
-                    if(false===$id){
-                        $modelCityPartner ->rollback();
-                        $this->errorMsg('失败');
-                    }
+
+                }
+                $id  = $modelCityPartner->edit($postData,$where);
+                if(false===$id){
+                    $modelCityPartner ->rollback();
+                    $this->errorMsg('失败');
                 }
                 break;
             case 3:
@@ -126,17 +121,11 @@ class CityPartner extends \common\controller\UserBase {
                         ['user_id','=',$this->user['id']],
                         ['status','=',0],
                     ];
-                    $id  = $modelCityPartner->edit($postData,$where);
-                    if(false===$id){
-                        $modelCityPartner ->rollback();
-                        $this->errorMsg('失败');
-                    }
-                }else{
-                    $id  = $modelCityPartner->edit($postData);
-                    if(false===$id){
-                        $modelCityPartner ->rollback();
-                        $this->errorMsg('失败');
-                    }
+                }
+                $id  = $modelCityPartner->edit($postData,$where);
+                if(false===$id){
+                    $modelCityPartner ->rollback();
+                    $this->errorMsg('失败');
                 }
                 //生成支付表数据
                 $modelPay = new \app\index\model\Pay();
