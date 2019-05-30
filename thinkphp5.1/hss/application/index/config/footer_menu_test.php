@@ -128,6 +128,18 @@ return [
                 'bottom_item',
                 'delete',
             ],
+        ],[//18
+            'name'   => '查看物流',
+            'class'=>[
+                'bottom_item',
+                'delete',
+            ],
+        ],[//19
+            'name'   => '查看物流2',
+            'class'=>[
+                'bottom_item',
+                'delete',
+            ],
         ]
     ],
 ];

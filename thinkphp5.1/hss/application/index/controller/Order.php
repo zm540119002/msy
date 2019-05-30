@@ -359,6 +359,7 @@ class Order extends \common\controller\UserBase
                 break;
             case "2":
             case "3":
+            $unlockingFooterCart = unlockingFooterCartConfigTest([18,19]);
                 $configFooter = [12];
                 break;
             case "4":
@@ -374,8 +375,13 @@ class Order extends \common\controller\UserBase
                 $configFooter = [];
         }
 
-        $unlockingFooterCart = unlockingFooterCartConfig($configFooter);
-        $this->assign('unlockingFooterCart', $unlockingFooterCart);
+//        $unlockingFooterCart = unlockingFooterCartConfig($configFooter);
+//        $this->assign('unlockingFooterCart', $unlockingFooterCart);
+
+
+        array_push($unlockingFooterCart['menu'][0]['class'],'group_btn50');
+        array_push($unlockingFooterCart['menu'][1]['class'],'group_btn50');
+        $this->assign('unlockingFooterCart',json_encode($unlockingFooterCart));
         return $this->fetch();
 
     }
