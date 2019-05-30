@@ -22,7 +22,7 @@ class CityPartner extends \common\controller\UserBase {
             $condition=[
                 'where'=>[
                     ['status', '=', 0],
-                    ['apply_status','=',3]
+                    ['apply_status','=',5]
                 ],
                 'field'=>[
                     'province','city',
