@@ -76,7 +76,6 @@ class CityPartner extends \common\controller\UserBase {
         $modelCityPartner = new \app\index\model\CityPartner();
 
         $postData = input('post./a');
-
         $validate = new \app\index\validate\CityPartner();
         $modelCityPartner -> startTrans();
         $postData['apply_status'] = $postData['step'];
@@ -101,6 +100,7 @@ class CityPartner extends \common\controller\UserBase {
                         ['status','=',0],
                     ];
                     $id  = $modelCityPartner->edit($postData,$where);
+                    return $id;
                     if(false===$id){
                         $modelCityPartner ->rollback();
                         $this->errorMsg('失败');
