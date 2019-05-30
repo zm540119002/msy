@@ -6,10 +6,10 @@ class Base extends \think\Model {
 	 */
 	public function edit($data,$where=[]){
 		if(intval($data['id'])){//修改
-			$res = $this->allowField(true)->isUpdate(true)->save($data);
+			$res = $this->allowField(true)->isUpdate(true)->save($data,$where);
 		}else{//新增
 			unset($data['id']);
-			$res = $this->allowField(true)->isUpdate(false)->save($data,$where);
+			$res = $this->allowField(true)->isUpdate(false)->save($data);
 		}
 		if($res === false){
 			return false;
