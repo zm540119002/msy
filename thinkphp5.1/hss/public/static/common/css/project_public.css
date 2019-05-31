@@ -500,6 +500,19 @@ nav .back_prev_page{
     padding-bottom: 0;
 }
 /*  */
+.product_name .four-line-omit{
+    font-size: 14px;
+    color: #333;
+}
+.product_specs{
+    color: #999;
+    font-size: 14px;
+    margin-top: 10px;
+}
+.product_procure{
+    color: #999;
+    font-size: 14px;
+}
 .product-select .right{
     position: relative;
 }
@@ -550,7 +563,6 @@ nav .back_prev_page{
 }
 .order_top_r p:nth-of-type(2) price{
    font-size: 16px;
-   /* color: #999; */
 }
 .order_top_r p:nth-of-type(3){
     text-align: right;
@@ -572,4 +584,7 @@ nav .back_prev_page{
 .order_bottom .red price{
     font-size: 18px;
     color: #333;
+}
+.product-select div.right{
+    width: 56% !important;
 }
