@@ -101,6 +101,17 @@
     ></footer-menu>
 </div>
 <script type="text/javascript">
+
+    $('body').on('click','.confirm_order',function(){
+
+        var _this = $(this);
+        var postData = {};
+        postData = addAddress(postData);
+        //postData.order_id = $('.order_id').val();
+        //postData.order_sn = $('.order_sn').val();
+        //submitOrders(_this,postData);
+    });
+    
     $(function(){
         let param = {
             order_id:parseInt("{$orderInfo.id|default=0}"),
@@ -119,8 +130,9 @@
 
 {block name="script"}
 
-<!--<script type="text/javascript" src="index_js/pay.js"></script>
-<script type="text/javascript" src="index_js/wallet.js"></script>-->
+<!--<script type="text/javascript" src="index_js/pay.js"></script>-->
+<!--<script type="text/javascript" src="index_js/pay1.js"></script>-->
+<script type="text/javascript" src="index_js/wallet.js"></script>
 <script src="api_common_js/jquery.area.js"></script>
 <script type="text/javascript" src="index_js/address.js"></script>
 <!--<script type="text/javascript" src="index_js/order.js"></script>-->
