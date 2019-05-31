@@ -8,8 +8,7 @@ class UserCenter extends \think\Controller{
             $modelUser = new \common\model\UserCenter();
             $postData = input('post.');
             $modelUser->login($postData);
-            $this->successMsg(config('code.success.login.msg'),config('code.success.login')) ;
-            return $modelUser->login($postData);
+            $this->successMsg('登录成功！',config('code.success.login'));
         }
     }
     /**后台登录
@@ -18,7 +17,8 @@ class UserCenter extends \think\Controller{
         if (request()->isAjax()) {
             $modelUser = new \common\model\UserCenter();
             $postData = input('post.');
-            return $modelUser->login($postData);
+            $modelUser->login($postData);
+            $this->successMsg('登录成功！',config('code.success.login'));
         }
     }
     /**注册
@@ -27,15 +27,15 @@ class UserCenter extends \think\Controller{
         if (request()->isAjax()) {
             $modelUser = new \common\model\UserCenter();
             $postData = input('post.');
-            return $modelUser->register($postData);
+            $modelUser->register($postData);
+            $this->successMsg('注册成功！',config('code.success.login'));
         }
     }
     //退出
     public function logout(){
         session(null);
         header('Content-type: text/html; charset=utf-8');
-        return successMsg('成功');
-        return redirect('login');
+        $this->successMsg('成功') ;
     }
     /*发送验证码
      */
@@ -56,10 +56,10 @@ class UserCenter extends \think\Controller{
             if('BUSINESS_LIMIT_CONTROL'===$response->Code){
                 return errorMsg('同一个手机号码发送短信验证码，支持1条/分钟，5条/小时 ，累计10条/天。');
             }
-            return errorMsg($response->Message);
+            $this->errorMsg($response->Message);
         }
         //设置session
         session('captcha_'.$mobilePhone,$captcha);
-        return successMsg($response->Message);
+        $this->successMsg($response->Message);
     }
 }

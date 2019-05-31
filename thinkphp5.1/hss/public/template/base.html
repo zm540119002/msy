@@ -91,7 +91,8 @@
                     vueObj:config.vueObj,
                     reduce:config.reduce,
                     jump_url:data.data && data.data.url?data.data.url:jump_url,
-                    func:config.func
+                    responsePageCallBack:config.responsePageCallBack,
+                    asyncVerifyCallBack:config.asyncVerifyCallBack
                 };
                 async_verify_judge(param);
             }
@@ -100,9 +101,7 @@
     //异步验证判断
     function async_verify_judge(param){
         if(param.data.status==0){ //失败回调
-            if(param.data.data.code == '1000'){ //默认
-                dialog.error(param.data.info);
-            }else if(param.data.data.code == '1001'){ //登录
+            if(param.data.data.code == '1001'){ //未登录
                 if(param.clickObj.attr('class').indexOf('add_cart')!==-1 && param.postData){ //加入购物车
                     editLocalStorageCartList(param);
                 }else if(param.clickObj.attr('class').indexOf('delete_cart')!==-1 && param.postData){
@@ -110,12 +109,14 @@
                 }else{
                     loginDialogTrigger();
                 }
-            }else if(param.data.data.code=='1002'){ //授权
             }else{
                 dialog.error(param.data.info);
             }
         }else if(param.data.status==1){ //成功回调
             if(param.data.data.code == '2000'){ //默认
+                if(param.asyncVerifyCallBack && $.isFunction(param.asyncVerifyCallBack)){
+                    param.asyncVerifyCallBack();
+                }
                 if(param.clickObj.attr('class').indexOf('add_cart')!==-1 && param.componentFooterCartMenu){ //底部购物车菜单数量统计
                     $.each(param.postData.data,function(i,o){
                         param.componentFooterCartMenu.cart_num += o.num;
@@ -145,8 +146,6 @@
                     if(!$('#product-list').find('li').length){
                         $('#product-list').append($('.no_cart_data').html());
                     }
-                    //触发-产品选择器-删除-事件
-                    bus.$emit('product_select_delete_cart',param);
                 }
                 if(param.clickObj.attr('class').indexOf('add_cart')!==-1
                         && !(param.clickObj.attr('class').indexOf('plus')!==-1 || param.clickObj.attr('class').indexOf('reduce')!==-1)
@@ -156,15 +155,33 @@
                 if(param.clickObj.attr('class').indexOf('buy_now')!==-1){ //立即购买
                     location.href = param.jump_url;
                 }
-            }else if(param.data.data.code == '2001'){ //登录
-                if(param.func && $.isFunction(param.func)){
-                    param.func();
+                if(param.clickObj.attr('class').indexOf('confirm_receive')!==-1){ // 提示后跳转
+                    layer.open({
+                        content : param.data.info?param.data.info:'成功',
+                        time : 1,
+                        skin: 'msg',
+                        end : function(){
+                            location.href=param.jump_url;
+                        }
+                    });
+                }
+                if(param.clickObj.attr('class').indexOf('confirm_order')!==-1){
+                    var settlementMethod=$('.settlementMethod').html();
+                    layer.open({
+                        type: 1
+                        ,anim: 'up'
+                        ,style: 'position:fixed; bottom:0; left:0; width: 100%; height: 50%; padding:10px 0; border:none;',
+                        className:'settlementMethod bankTransferLayer',
+                        content: settlementMethod
+                    });
                 }
             }else{
                 dialog.success(param.data.info);
             }
         }else{ //返回页面
-            param.func();
+            if(param.responsePageCallBack && $.isFunction(param.responsePageCallBack)){
+                param.responsePageCallBack();
+            }
         }
     }
     //编辑cookie里的购物车商品列表

@@ -55,7 +55,7 @@
 {/block}
 {block name="common"}{/block}
 {block name="footer"}
-{include file="../../api/public/vue/components/footer-menu.html" /}
+{include file="../../api/public/vue/components/product-select.html" /}
 <script type="text/javascript">
 	$(function(){
 		let param = {
@@ -81,7 +81,6 @@
 				return param;
 			},methods:{
 				getJsonListCallBack:function(data){
-					console.log(data);
 					if(data.status==0){
 						dialog.error(data.info);
 						return false;

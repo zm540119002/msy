@@ -1,15 +1,16 @@
 
 $(function () {
+/*    var address;
     // 弹出支付方式
     $('body').on('click','.confirm_order',function(){
 
         var _this = $(this);
         var postData = {};
-        postData = addAddress(postData);
-        postData.order_id = $('.order_id').val();
-        postData.order_sn = $('.order_sn').val();
-        submitOrders(_this,postData);
-    });
+        address = addAddress(postData);
+        //postData.order_id = $('.order_id').val();
+        //postData.order_sn = $('.order_sn').val();
+        //submitOrders(_this,postData);
+    });*/
 
     // 选择支付方式
     $('body').on('click','.settlementMethod .pay_nav li',function(){
@@ -78,8 +79,9 @@ $(function () {
 });
 
 // 增加订单收货地址信息
-function addAddress(postData) {
+function getAddress() {
     var addressId= $('.address_id').val();
+    var postData = {};
     if(!addressId){
         dialog.error('请选择收货地址');
         return false;

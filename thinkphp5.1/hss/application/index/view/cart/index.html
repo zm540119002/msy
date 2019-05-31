@@ -87,6 +87,7 @@
 
 	});
 </script>
+{include file="../../api/public/vue/components/product-select.html" /}
 <script type="text/javascript">
 	$(function(){
 		let param = {
@@ -108,31 +109,16 @@
 			el: '#product-list',
 			data:function(){
 				return param;
-			},methods:{
-				getJsonListCallBack:function(data){
-					if(data.status==0){
+			},methods: {
+				getJsonListCallBack: function (data) {
+					if (data.status == 0) {
 						dialog.error(data.info);
 						return false;
 					}
 					let _this = this;
-					$.each(data.data.data,function(i,o){
+					$.each(data.data.data, function (i, o) {
 						_this.productList.push(o);
 					});
-				},delCart:function(param){
-					console.log(param);
-					return false;
-					let _this = this;
-					let findIndex = -1;
-					$.each(this.productList,function(i,o){
-						$.each(param.postData.data,function(ii,oo){
-							if(o.id == oo.goods_id){
-								findIndex = i;
-							}
-						});
-					});
-					if(findIndex !== -1){
-						Vue.delete(_this.productList,findIndex);
-					}
 				}
 			},created:function(){
 				let _thisVue = this;
@@ -146,10 +132,6 @@
 						_thisVue.getJsonListParam.loadTrigger = false;
 						vueVersionGetJsonList(_thisVue);
 					}
-				});
-				//监听-产品选择器-删除-事件
-				bus.$on('product_select_delete_cart', function(param){
-					_thisVue.delCart(param);
 				});
 			}
 		});

@@ -126,7 +126,8 @@
                             }else if(data.status==1){
                                 $.extend(param.login_success_callback_param,data);
                                 if( (param.login_success_callback_private && $.isFunction(param.login_success_callback_private))
-                                    || (param.login_success_callback_common && $.isFunction(param.login_success_callback_common)) ){
+                                    || (param.login_success_callback_common && $.isFunction(param.login_success_callback_common))
+                                ){
                                     param.login_success_callback_private && param.login_success_callback_private(param.login_success_callback_param);
                                     param.login_success_callback_common && param.login_success_callback_common(param.login_success_callback_param);
                                 }else{
@@ -169,7 +170,8 @@
                             }else if(data.status==1){
                                 $.extend(param.register_success_callback_param,data);
                                 if( (param.register_success_callback_private && $.isFunction(param.register_success_callback_private))
-                                        || (param.register_success_callback_common && $.isFunction(param.register_success_callback_common)) ){
+                                    || (param.register_success_callback_common && $.isFunction(param.register_success_callback_common))
+                                ){
                                     param.register_success_callback_private && param.register_success_callback_private(param.register_success_callback_param);
                                     param.register_success_callback_common && param.register_success_callback_common(param.register_success_callback_param);
                                 }else{
@@ -296,7 +298,7 @@
             };
             let config = {
                 clickObj:_this,
-                func:function(){
+                responsePageCallBack:function(){
                     location.href = _this.data('jump_url');
                 }
             };
