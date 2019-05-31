@@ -12,12 +12,12 @@
         {include file="template/address_info.html" /}
 
         <section class="goods_order_form">
-            <input type="hidden" value="{$orderGoodsList[0]['id']}" class="order_id">
-            <input type="hidden" value="{$orderGoodsList[0]['sn']}" class="order_sn">
+            <input type="hidden" value="{$orderInfo.id}" class="order_id">
+            <input type="hidden" value="{$orderInfo.sn}" class="order_sn">
             <!--结算显示商品页面-->
-            {notempty name="orderGoodsList"}
+            {notempty name="orderInfo.goods_list"}
             <ul class="goods_order_item">
-                {volist name="orderGoodsList" id="info"}
+                {volist name="orderInfo.goods_list" id="info"}
                 <li id="li-id-{$key}" data-order_detail_id="{$info.order_detail_id}">
                     <a href="{:url('Goods/detail',['id'=>$info.goods_id])}">
                         <img data-img="" data-isloaded="" src="{:show_img_handle($info.thumb_img)}" alt="" class="c_img left" />
@@ -37,7 +37,7 @@
         </section>
         <div class="columns_flex l-r-sides content-padding">
             <span>商品金额</span>
-            <span class="red">￥<price>{$orderGoodsList[0]['amount']}</price></span>
+            <span class="red">￥<price>{$goods_info.price*$goods_info.num}</price></span>
         </div>
     </article>
 
