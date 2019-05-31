@@ -22,7 +22,7 @@ class Order extends \common\controller\UserBase
                 ['g.status', '=', 0],
                 ['g.id', 'in', $goodsIds],
             ], 'field' => [
-                'g.id as goods_id','g.headline','g.thumb_img','g.bulk_price','g.specification','g.sample_price',
+                'g.id as goods_id','g.name','g.headline','g.thumb_img','g.bulk_price','g.specification','g.sample_price',
                 'g.purchase_unit','g.store_id'
             ]
         ];
@@ -45,6 +45,7 @@ class Order extends \common\controller\UserBase
                     $goodsList[$k1]['specification'] = $goodsInfoNew['specification'];
                     $goodsList[$k1]['purchase_unit'] = $goodsInfoNew['purchase_unit'];
                     $goodsList[$k1]['store_id'] = $goodsInfoNew['store_id'];
+                    $goodsList[$k1]['name'] = $goodsInfoNew['name'];
                     switch ($goodsInfo['buy_type']){
                         case 2:
                             $goodsList[$k1]['price'] = $goodsInfoNew['sample_price'];
@@ -91,6 +92,9 @@ class Order extends \common\controller\UserBase
             $dataDetail[$item]['buy_type'] = $goodsInfo['buy_type'] ? $goodsInfo['buy_type'] : 1;
             $dataDetail[$item]['brand_name'] = $goodsInfo['brand_name'] ? $goodsInfo['brand_name'] : '';
             $dataDetail[$item]['brand_id'] = $goodsInfo['brand_id'] ? $goodsInfo['brand_id'] : 0;
+            $dataDetail[$item]['goods_img'] = $goodsInfo['thumb_img'];
+            $dataDetail[$item]['goods_name'] = $goodsInfo['name'];
+            $dataDetail[$item]['specification'] = $goodsInfo['specification'];
         }
 
         //生成订单明细
@@ -114,7 +118,7 @@ class Order extends \common\controller\UserBase
         if (request()->isPost()) {
             // 更新订单状态并清除订单里购物车里的商品
             $fatherOrderId = input('post.order_id',0,'int');
-            
+
             $modelOrder = new \app\index\model\Order();
             $condition = [
                 'where' => [
