@@ -533,6 +533,7 @@ nav .back_prev_page{
     font-size: 9px;
     right: -15px;
     top: -6px;
+    font-weight: normal;
 }
 .menu_nav{
     border-bottom: none;
