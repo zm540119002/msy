@@ -126,7 +126,7 @@ class Index extends \common\controller\Base{
 
     public function test()
     {
-        return json_encode([1,2],true);
+        return 222;
     }
 
 }
