@@ -124,4 +124,9 @@ class Index extends \common\controller\Base{
         return $this->fetch();
     }
 
+    public function test()
+    {
+        return json_encode([1,2],true);
+    }
+
 }
