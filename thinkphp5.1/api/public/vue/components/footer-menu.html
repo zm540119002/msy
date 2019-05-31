@@ -57,8 +57,6 @@
                 props: {
                     type: {type: Number,default: 1},
                     cart_init_num: {type: Number,default: 0},
-                    order_id: {type: Number,default: 0},
-                    address: {type: String,default: ''},
                     init_total_amount: {type: Number,default: 0},
                     init_checked: {type: Boolean,default: false},
                     buy_now_call_back: {type: Function,default: function(param){
@@ -118,7 +116,10 @@
                         let config = {
                             clickObj:_thisJquery,
                             postData:_thisVue.postData,
-                            componentFooterCartMenu:_thisVue
+                            componentFooterCartMenu:_thisVue,
+                            asyncVerifyCallBack:function(){
+                                console.log('asyncVerifyCallBack');
+                            }
                         };
                         asyncVerify(config);
                     },editProductList:function(param){

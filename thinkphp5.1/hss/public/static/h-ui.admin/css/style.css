@@ -1,3 +1,51 @@
 @charset "utf-8";
 /* 你自己的样式 */
+.order-box .goods-head{
+  display: flex;
+  background: #f8f8f8;
+  height: 40px;
+  line-height: 40px;
+  padding-left: 10px;
+  margin-top: 5px;
+  border-top: 2px solid #e2a390;
+}
+.goods-head .goods{
+  flex: 6
+}
+.goods-head .number{
+  flex: 3;
+}
+.goods-head .price{
+  flex: 2;
+}
+.goods-head .num{
+  flex: 2;
+}
+.goods-head .t-price{
+  flex: 2
+}
+.j-g4{
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+.j-g4 .goods{
+  flex: 6;
+}
 
+.j-g4 .spec{
+  flex: 3;
+}
+.j-g4 .price{
+  flex: 2;
+}
+.j-g4 .num{
+  flex: 2;
+}
+.j-g4 .t-price{
+  flex: 2;
+}
+.box-head{
+  margin: 15px 0;
+}
