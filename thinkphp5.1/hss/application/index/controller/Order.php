@@ -170,23 +170,6 @@ class Order extends \common\controller\UserBase
             $this->successMsg('成功',$data);
 
         }else{
-
-            $orderSn = input('order_sn/s');
-
-            if(!$orderSn){
-                $this->error('没有找到该订单');
-            }
-
-            $where = [
-                ['o.status', '=', 0],
-                ['o.sn', '=', $orderSn],
-                ['o.user_id', '=', $this->user['id']],
-            ];
-
-            $this->assignOrderInfo($where);
-
-/*
-
             $orderSn = input('order_sn/s');
 
             if(empty($orderSn)){
@@ -220,13 +203,10 @@ class Order extends \common\controller\UserBase
             // 显示地址
             $this->getOrderAddressInfo($orderInfo);
 
-            $unlockingFooterCart = unlockingFooterCartConfigTest([0,20]);
-            array_push($unlockingFooterCart['menu'][0]['class'],'group_btn70');
-            array_push($unlockingFooterCart['menu'][1]['class'],'group_btn30');
+            $unlockingFooterCart = unlockingFooterCartConfig([0,111,11]);
+            $this->assign('unlockingFooterCart', $unlockingFooterCart);
 
-            $this->assign('unlockingFooterCart',json_encode($unlockingFooterCart));
-
-            $this->assignWalletInfo();*/
+            $this->assignWalletInfo();
 
             return $this->fetch();
         }
