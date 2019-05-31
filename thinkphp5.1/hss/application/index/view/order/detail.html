@@ -104,7 +104,7 @@
     $(function(){
         let param = {
             order_id:parseInt("{$orderInfo.id|default=0}"),
-            init_total_amount:"{$orderInfo.actually_amount}"
+            init_total_amount:"{$orderInfo.actually_amount|default=0}"
         };
 
         new Vue({
