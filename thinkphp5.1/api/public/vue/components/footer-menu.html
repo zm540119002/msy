@@ -27,16 +27,16 @@
                 <div v-else-if="menu.class.indexOf('buy_now')!==-1" class="buy_now" @click="addCart" :data-jump_url="menu.action">
                     <span class="s_i"></span>
                 </div>
-                <!-- 去结算 -->
+                <!-- 结算 -->
                 <div v-else-if="menu.class.indexOf('settlement')!==-1" class="settlement" @click="addCart" :data-jump_url="menu.action">
                     <span class="s_i"></span>
                 </div>
-                <!-- 提交订单 -->
+                <!-- 提交订单/去结算 -->
                 <div v-else-if="menu.class.indexOf('confirm_order')!==-1" class="confirm_order" @click="confirm_order" :data-jump_url="menu.action">
                     <span class="s_i"></span>
                 </div>
                 <!-- 确定收货-->
-                <div v-else-if="menu.class.indexOf('confirm_receive')!==-1" class="confirm_receive" @click="confirmReceive" :data-jump_url="menu.action">
+                <div v-else-if="menu.class.indexOf('confirm_receive')!==-1" class="confirm_receive" @click="confirm_order" :data-jump_url="menu.action">
                     <span class="s_i"></span>
                 </div>
                 <!-- 默认 -->
@@ -58,6 +58,7 @@
                     type: {type: Number,default: 1},
                     cart_init_num: {type: Number,default: 0},
                     order_id: {type: Number,default: 0},
+                    address: {type: String,default: ''},
                     init_total_amount: {type: Number,default: 0},
                     init_checked: {type: Boolean,default: false},
                     buy_now_call_back: {type: Function,default: function(param){
@@ -96,7 +97,6 @@
                             location.href = jump_url;
                         }
                     },addCart:function(event){
-
                         let _thisJquery = $(event.currentTarget);
                         let _thisVue = this;
                         login_success_callback_private = function(){
@@ -118,11 +118,8 @@
                         let config = {
                             clickObj:_thisJquery,
                             postData:_thisVue.postData,
-                            componentFooterCartMenu:_thisVue,
-                            callBack:function(){
-                            }
+                            componentFooterCartMenu:_thisVue
                         };
-
                         asyncVerify(config);
                     },editProductList:function(param){
                         if(this.type==4 && !param.checked){
@@ -207,78 +204,27 @@
                         }
                         //触发-底部购物车全选改变-事件
                         bus.$emit('footer_cart_check_all_change',this.checked);
-                    },confirmReceive:function(event){
-                        let _thisJquery = $(event.currentTarget);
-                        let _thisVue = this;
-                        let order_id = _thisVue.order_id;
-                        if( !order_id ){ //提交商品为空验证
-                            dialog.error('请选择要收货的订单 ！');
-                            return false;
-                        }
-
-                        layer.open({
-                            content : '确实收到货了吗 ?',
-                            btn:['确定','取消'],
-                            end : function(){
-                                return false;
-                            },
-                            yes:function(index){
-                                let postData = {
-                                    id:order_id,
-                                    order_status:4
-                                };
-
-                                let config = {
-                                    clickObj:_thisJquery,
-                                    postData:postData,
-                                    func:function(){
-                                        _thisJquery.click();
-                                    }
-                                };
-                                asyncVerify(config);
-
-                                //console.log(333333);
-                                layer.close(index)
-                            }
-                        });
-
-                        return false;
                     },confirm_order:function(event){
                         let _thisJquery = $(event.currentTarget);
                         let _thisVue = this;
-                        let order_id = _thisVue.order_id;
-                        if( !order_id ){ //提交商品为空验证
+                        login_success_callback_private = function(){
+                            _thisJquery.click()
+                        };
+                        register_success_callback_private = function(){
+                            _thisJquery.click()
+                        };
+                        //前端验证
+                        if( !_thisVue.order_id ){ //提交商品为空验证
                             dialog.error('请选择要收货的订单 ！');
                             return false;
                         }
-
-                        layer.open({
-                            content : '确实收到货了吗 ?',
-                            btn:['确定','取消'],
-                            end : function(){
-                                return false;
-                            },
-                            yes:function(index){
-                                let postData = {
-                                    id:order_id,
-                                    order_status:4
-                                };
-
-                                let config = {
-                                    clickObj:_thisJquery,
-                                    postData:postData,
-                                    func:function(){
-                                        _thisJquery.click();
-                                    }
-                                };
-                                asyncVerify(config);
-
-                                //console.log(333333);
-                                layer.close(index)
-                            }
-                        });
-
-                        return false;
+                        _thisVue.postData.order_id = _thisVue.order_id;
+                        let config = {
+                            clickObj:_thisJquery,
+                            postData:_thisVue.postData,
+                            componentFooterCartMenu:_thisVue
+                        };
+                        asyncVerify(config);
                     }
                 },created:function(){
                     let _this = this;
