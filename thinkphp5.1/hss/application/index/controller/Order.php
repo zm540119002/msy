@@ -353,7 +353,7 @@ class Order extends \common\controller\UserBase
         switch ($info['order_status'])
         {
             case "1":
-                $configFooter = [0,111,11];
+                $configFooter = [0,11];
                 break;
             case "2":
             case "3":
