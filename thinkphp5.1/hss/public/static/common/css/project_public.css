@@ -520,7 +520,7 @@ nav .back_prev_page{
     position: absolute;
   bottom: 0;
   width: 100%;
-  display: flex;
+  display: block;
   justify-content: space-between;
 }
 .four-line-omit{
