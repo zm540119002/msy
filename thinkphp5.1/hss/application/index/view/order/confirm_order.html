@@ -46,7 +46,6 @@
 {include file="../../api/public/vue/components/footer-menu.html" /}
 <div id="foot_cart_menu">
     <footer-menu
-            :order_id="parseInt(order_id)"
             :init_total_amount="Number(init_total_amount)"
     ></footer-menu>
 </div>
@@ -54,7 +53,6 @@
 <script type="text/javascript">
     $(function(){
         let param = {
-            order_id:"{$orderInfo.id|default=0}",
             init_total_amount:"{$orderInfo.actually_amount|default=0}"
         };
 
