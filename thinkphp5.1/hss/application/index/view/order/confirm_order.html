@@ -44,20 +44,18 @@
 {/block}
 {block name="footer"}
 {include file="../../api/public/vue/components/footer-menu.html" /}
-<div id="foot_cart_menu">
+<div id="foot_menu">
     <footer-menu
             :init_total_amount="Number(init_total_amount)"
     ></footer-menu>
 </div>
-
 <script type="text/javascript">
     $(function(){
         let param = {
             init_total_amount:"{$orderInfo.actually_amount|default=0}"
         };
-
         new Vue({
-            el: '#foot_cart_menu',
+            el: '#foot_menu',
             data:function(){
                 return param;
             }
