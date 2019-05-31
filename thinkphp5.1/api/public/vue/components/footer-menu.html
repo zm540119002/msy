@@ -543,15 +543,15 @@
                             },
                             yes:function(index){
                                 let postData = {
-                                    order_id:order_id,
-                                    status:4
+                                    id:order_id,
+                                    order_status:4
                                 };
 
                                 let config = {
                                     clickObj:_thisJquery,
                                     postData:postData,
                                     func:function(){
-                                        console.log(123);
+                                        _thisJquery.click();
                                     }
                                 };
                                 asyncVerify(config);

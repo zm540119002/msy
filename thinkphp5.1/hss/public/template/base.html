@@ -93,6 +93,8 @@
                     jump_url:data.data && data.data.url?data.data.url:jump_url,
                     func:config.func
                 };
+        /*        console.log(param.data.info);
+                return false;*/
                 async_verify_judge(param);
             }
         });
@@ -157,7 +159,15 @@
                     location.href = param.jump_url;
                 }
                 if(param.clickObj.attr('class').indexOf('confirm_receive')!==-1){ // 提示后跳转
+                    layer.open({
+                        content : param.data.info?param.data.info:'成功',
+                        time : 1,
+                        skin: 'msg',
+                        end : function(){
+                            location.href=param.jump_url;
 
+                        }
+                    });
                 }
             }else if(param.data.data.code == '2001'){ //登录
                 if(param.func && $.isFunction(param.func)){

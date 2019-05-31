@@ -396,8 +396,9 @@ class Order extends \common\controller\UserBase
 
         $id = input('post.id/d');
         $orderStatus = input('post.order_status/d');
+
         if(!input('?post.id') && !$id){
-            return errorMsg('失败');
+            $this->errorMsg('失败');
         }
 
         $where = [
@@ -411,17 +412,20 @@ class Order extends \common\controller\UserBase
         $orderInfo = $model->getInfo($where);
 
         $type = true;
+        // 订单状态：1:待付款 2:待发货 3:待收货 4:待评价 5:已完成 6:已取消
         switch($orderStatus){
-            case 2 :
-            case 3 : // 确定收货
+            case 4 : // 去确定收货
                 $where[] = ['order_status','in','2,3'];
                 $result = [
-                    'code'=> config('code.success.jump.code'),
-                    'url' => url('Order/confirmOrder',['order_sn'=>$orderInfo['sn']]),
+                    'code'=> config('code.success.default.code'),
+                    'url' => url('order/detail',['order_sn'=>$orderInfo['sn']]),
                 ];
                 $msg = '收货成功';
                 break;
-            case 5 : // 取消订单
+            case 5 : // 去评价
+                $where[] = ['order_status','=',4];
+                break;
+            case 6 : // 取消订单
                 $where[] = ['order_status','=',1];
                 break;
             case 7 : // 申请退款
@@ -433,6 +437,9 @@ class Order extends \common\controller\UserBase
                     $type = false;
                 }*/
 
+                break;
+            default:
+                $type = false;
                 break;
         }
 
