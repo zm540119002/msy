@@ -1,0 +1,321 @@
+<style lang="less" scoped>
+    .product-select{
+        border-bottom:none;
+        padding:0.12rem;
+        margin:0.12rem;
+        background-color: #ffffff;
+    }.product-select div.left{
+        width:40%;
+    }.product-select div.middle{
+        width:20%;
+    }.product-select div.right{
+        width:40%;
+    }.product-select div.right div:last-child{
+        height:20%;
+    }.product-select div.middle div{
+        height:50%;
+    }.product-select img.left{
+        width:100%;
+    }.two-line-omit {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        word-break: break-all;
+    }.four-line-omit {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+        word-break: break-all;
+    }.check_all {
+         -webkit-appearance: checkbox;
+     }
+</style>
+<!-- 产品选择器 -->
+<template id="product_select_tpl">
+    <li v-if="type==0">
+        <div class="product-select">
+            <div class=""><p></p></div>
+            <div class="columns_flex l-r-sides">
+                <div class="left">
+                    <a class="p_img" :href="'/index/Goods/detail/id/' + product_id">
+                        <img class="left" :src="product_src?('public_uploads/' + product_src):('api_common_img/default/no_pic_100.jpg') " alt="">
+                    </a>
+                </div>
+                <div  class="right">
+                    <div class="product_name">
+                        <p class="four-line-omit">{{product_name}}</p>
+                    </div>
+                    <div class="quantity_wrapper selected-number columns_flex l-r-sides">
+                        <div><span class="red deal_price">￥{{deal_price}}</span></div>
+                        <div><a href="javascript:void(0);" class="add_cart add_cart_i" @click="plusCart" :data-jump_url="add_cart_url"><i></i></a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li><li v-else-if="type==1">
+        <div class="product-select">
+            <div class="columns_flex l-r-sides"><p><span class="red deal_price">￥{{deal_price}}</span></p></div>
+            <div class="columns_flex l-r-sides">
+                <div class="left">
+                    <a class="p_img" :href="'/index/Goods/detail/id/' + product_id">
+                        <img class="left" :src="product_src?('public_uploads/' + product_src):('api_common_img/default/no_pic_100.jpg') " alt="">
+                    </a>
+                </div>
+                <div class="middle">
+                    <div></div>
+                    <div class="red subtotal_amount">￥{{ parseFloat(subtotal_amount).toFixed(2) }}</div>
+                </div>
+                <div  class="right">
+                    <div class="product_name">
+                        <p class="two-line-omit">{{product_name}}</p>
+                    </div>
+                    <div class="quantity_wrapper selected-number">
+                        <a href="javascript:void(0);" class="reduce" @click="reduce">-</a>
+                        <input type="text" :value="buy_quantity" class="f24 product_count" readonly="readonly">
+                        <a href="javascript:void(0);" class="plus" @click="plus">+</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li><li v-else-if="type==2">
+        <div class="product-select">
+            <div class="columns_flex l-r-sides">
+                <p><span class="red deal_price">￥{{deal_price}}</span></p>
+                <p v-if="display_quota">样品购买限额：<span class="quota">{{quota_quantity}}</span></p>
+            </div>
+            <div class="columns_flex l-r-sides">
+                <div class="left">
+                    <p>采购数量：(单位:{{specification_unit}})</p>
+                    <p>
+                        <span class="step-named">起订数量：</span>
+                        <span class="step-quantity">{{init_quantity}}</span>
+                        <span class="specification_unit">{{specification_unit}}</span>
+                    </p>
+                </div>
+                <div class="middle">
+                    <div></div>
+                    <div class="red subtotal_amount">￥{{ parseFloat(subtotal_amount).toFixed(2) }}</div>
+                </div>
+                <div  class="right">
+                    <div class="product_name">
+                        <p class="two-line-omit">{{product_name}}</p>
+                    </div>
+                    <div class="quantity_wrapper selected-number">
+                        <a href="javascript:void(0);" class="reduce" @click="reduce">-</a>
+                        <input type="text" :value="buy_quantity" class="f24 product_count" readonly="readonly">
+                        <a href="javascript:void(0);" class="plus" @click="plus">+</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li><li v-else-if="type==3">
+        <div class="product-select">
+            <div class="columns_flex l-r-sides">
+                <div class="left">
+                    <div></div>
+                    <div class="red subtotal_amount">￥<span class="">{{ parseFloat(subtotal_amount).toFixed(2) }}</span></div>
+                </div>
+                <div class="right">
+                    <div class="quantity_wrapper selected-number">
+                        <a href="javascript:void(0);" class="reduce" @click="reduce">-</a>
+                        <input type="text" :value="buy_quantity" class="f24 product_count" readonly="readonly">
+                        <a href="javascript:void(0);" class="plus" @click="plus">+</a>
+                    </div>
+                </div>
+            </div>
+            <div class="product_name"><p class="two-line-omit">{{product_name}}</p></div>
+        </div>
+    </li><li v-else-if="type==4"><!--用于购物车-->
+        <input type="checkbox" class="item_checkbox check_item" v-model="checked" />
+        <a href="" class="cart_goods_img" :href="'/index/Goods/detail/id/' + product_id">
+            <img class="left common_default_img" :src="product_src?('public_uploads/' + product_src):('api_common_img/default/no_pic_100.jpg') " alt="">
+        </a>
+        <div class="cart_list_r">
+            <p>{{product_name}}</p>
+            <div>商品规格：<span>{{specification}}</span></div>
+            <div class="commodity_purchaser f24"><span class="pink">￥{{deal_price}}</span></div>
+            <div class="purchase_goods_num cart_goods_operate">
+                <div class="quantity_wrapper selected-number">
+                    <a href="javascript:void(0);" class="add_cart reduce" @click="reduceCart" :data-jump_url="add_cart_url">-</a>
+                    <input type="text" :value="buy_quantity" class="f24 product_count" readonly="readonly">
+                    <a href="javascript:void(0);" class="add_cart plus" @click="plusCart" :data-jump_url="add_cart_url">+</a>
+                </div>
+                <a href="javascript:void(0);" class="delete_order goodsDel delete_cart" @click="delCart" :data-jump_url="del_cart_url">删除</a>
+            </div>
+        </div>
+    </li>
+</template>
+<script type="text/javascript">
+    $(function(){
+        Vue.component('product-select', {
+            template:'#product_select_tpl',
+            props: {
+                product_id: {type: [String, Number],default:0,required: true},
+                product_name: {type: String,default: ''},
+                specification: {type: String,default: ''},
+                specification_unit: {type: String,default: '盒'},
+                product_src: {type: String,default: ''},
+                quota_quantity: {type: Number,default: 1},
+                type: {type: Number,default: 1},
+                deal_price: {type: Number,required: true},
+                init_quantity: {type: Number,default: 1},
+                step_quantity: {type: Number,default: 1},
+                display_quota: {type: Boolean,default: false},
+                init_checked: {type: Boolean,default: true},
+                productInfo: {type: Array,default:function(){
+                    let arr = [];
+                    arr['eg'] = '默认值示范';
+                    return arr;
+                }}
+            },data: function () {
+                return {
+                    buy_quantity:this.init_quantity,
+                    buy_quantity_reduce_trigger:true,
+                    subtotal_amount:0,
+                    checked:this.init_checked,
+                    checked_operation_type:'edit',
+                    add_cart_url:'{:url("Cart/addCart")}',
+                    del_cart_url:'{:url("Cart/del")}'
+                };
+            },methods: {
+                subtotal_amount_calculate:function(){
+                    this.subtotal_amount = this.deal_price * this.buy_quantity;
+                },delCart:function(event){
+                    if(this.buy_quantity_reduce_trigger){
+                        this.buy_quantity_reduce_trigger = false;
+                    }else{
+                        return false;
+                    }
+                    let postData = {
+                        data:[{
+                            goods_id: this.product_id,
+                            num: -this.buy_quantity
+                        }]
+                    };
+                    let _thisJquery = $(event.currentTarget);
+                    let _thisVue = this;
+                    let config = {
+                        clickObj:_thisJquery,
+                        vueObj:_thisVue,
+                        postData:postData,
+                        reduce:true
+                    };
+                    asyncVerify(config);
+                },reduce: function () {
+                    //如果开启了样品购买限额
+                    if(this.display_quota){
+                        if((this.buy_quantity-this.step_quantity)<this.init_quantity){
+                            this.buy_quantity = this.init_quantity;
+                        }else{
+                            this.buy_quantity -= this.step_quantity;
+                        }
+                    }else if(this.buy_quantity>this.init_quantity){
+                        this.buy_quantity -= this.step_quantity;
+                    }
+                },plus: function () {
+                    //如果开启了样品购买限额
+                    if(this.display_quota){
+                        if((this.buy_quantity+this.step_quantity)>this.quota_quantity){
+                            this.buy_quantity = this.quota_quantity;
+                        }else{
+                            this.buy_quantity += this.step_quantity;
+                        }
+                    }else{
+                        this.buy_quantity += this.step_quantity;
+                    }
+                },reduceCart: function (event) {
+                    if(this.buy_quantity_reduce_trigger && this.buy_quantity>1){
+                        this.buy_quantity_reduce_trigger = false;
+                    }else{
+                        return false;
+                    }
+                    let postData = {
+                        data:[{
+                            goods_id: this.product_id,
+                            num: -this.step_quantity
+                        }]
+                    };
+                    let _thisJquery = $(event.currentTarget);
+                    let _thisVue = this;
+                    login_success_callback_private = function(){
+                        _thisJquery.click()
+                    };
+                    register_success_callback_private = function(){
+                        _thisJquery.click()
+                    };
+                    let config = {
+                        clickObj:_thisJquery,
+                        vueObj:_thisVue,
+                        postData:postData,
+                        reduce:true,
+                        func:function(){
+                            _thisJquery.click();
+                        }
+                    };
+                    asyncVerify(config);
+                },plusCart: function (event) {
+                    let postData = {
+                        data:[{
+                            goods_id: this.product_id,
+                            num: this.step_quantity
+                        }]
+                    };
+                    let _thisJquery = $(event.currentTarget);
+                    let _thisVue = this;
+                    login_success_callback_private = function(){
+                        _thisJquery.click()
+                    };
+                    register_success_callback_private = function(){
+                        _thisJquery.click()
+                    };
+                    let config = {
+                        clickObj:_thisJquery,
+                        vueObj:_thisVue,
+                        postData:postData,
+                        func:function(){
+                            _thisJquery.click();
+                        }
+                    };
+                    asyncVerify(config);
+                },editCheckItem:function(param){
+                    this.checked = param;
+                }
+            },created: function(){
+                let _this = this;
+                _this.subtotal_amount_calculate();
+                //触发-产品选择器初始化-事件
+                bus.$emit('product_select_init',_this);
+                //监听-底部购物车全选改变-事件
+                bus.$on('footer_cart_check_all_change', function(param){
+                    _this.editCheckItem(param);
+                });
+            },watch: {
+                buy_quantity: {
+                    handler(newVal, oldVal) {
+                        this.subtotal_amount_calculate();
+                        if(typeof(oldVal) !== "undefined"){
+                            this.increment_buy_quantity = parseInt(newVal) - parseInt(oldVal?oldVal:0);
+                            //触发--产品选择器购买数量改变-事件
+                            bus.$emit('product_select_buy_quantity_change',this);
+                        }
+                    },
+                    deep: false,
+                    immediate: true
+                },checked: {
+                    handler(newVal, oldVal) {
+                        if(typeof(oldVal) !== "undefined"){
+                            //触发-产品选择器复选框改变-事件
+                            bus.$emit('product_select_check_item_change',this);
+                        }
+                    },
+                    deep: false,
+                    immediate: true
+                }
+            }
+        });
+    });
+</script>
