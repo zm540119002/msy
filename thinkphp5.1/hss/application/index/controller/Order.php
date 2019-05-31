@@ -22,7 +22,7 @@ class Order extends \common\controller\UserBase
                 ['g.status', '=', 0],
                 ['g.id', 'in', $goodsIds],
             ], 'field' => [
-                'g.id as goods_id','g.headline','g.thumb_img','g.bulk_price','g.specification','g.sample_price',
+                'g.id as goods_id','g.name','g.headline','g.thumb_img','g.bulk_price','g.specification','g.sample_price',
                 'g.purchase_unit','g.store_id'
             ]
         ];
@@ -45,6 +45,7 @@ class Order extends \common\controller\UserBase
                     $goodsList[$k1]['specification'] = $goodsInfoNew['specification'];
                     $goodsList[$k1]['purchase_unit'] = $goodsInfoNew['purchase_unit'];
                     $goodsList[$k1]['store_id'] = $goodsInfoNew['store_id'];
+                    $goodsList[$k1]['name'] = $goodsInfoNew['name'];
                     switch ($goodsInfo['buy_type']){
                         case 2:
                             $goodsList[$k1]['price'] = $goodsInfoNew['sample_price'];
@@ -91,6 +92,9 @@ class Order extends \common\controller\UserBase
             $dataDetail[$item]['buy_type'] = $goodsInfo['buy_type'] ? $goodsInfo['buy_type'] : 1;
             $dataDetail[$item]['brand_name'] = $goodsInfo['brand_name'] ? $goodsInfo['brand_name'] : '';
             $dataDetail[$item]['brand_id'] = $goodsInfo['brand_id'] ? $goodsInfo['brand_id'] : 0;
+            $dataDetail[$item]['goods_img'] = $goodsInfo['thumb_img'];
+            $dataDetail[$item]['goods_name'] = $goodsInfo['name'];
+            $dataDetail[$item]['specification'] = $goodsInfo['specification'];
         }
 
         //生成订单明细
@@ -114,7 +118,6 @@ class Order extends \common\controller\UserBase
         if (request()->isPost()) {
             // 更新订单状态并清除订单里购物车里的商品
             $fatherOrderId = input('post.order_id',0,'int');
-
 
             $modelOrder = new \app\index\model\Order();
             $condition = [
@@ -153,7 +156,12 @@ class Order extends \common\controller\UserBase
             }
 
             $modelOrder -> commit();
+            $data = [
+                'code'=> config('code.success.default.code'),
+                //'url' => url('Order/confirmOrder',['order_sn'=>$orderSN]),
+            ];
             return successMsg( '成功');
+            //$this->successMsg('成功',$data);
 
         }else{
 
@@ -353,7 +361,7 @@ class Order extends \common\controller\UserBase
         switch ($info['order_status'])
         {
             case "1":
-                $configFooter = [0,111,11];
+                $configFooter = [0,20];
                 break;
             case "2":
             case "3":
@@ -396,8 +404,9 @@ class Order extends \common\controller\UserBase
 
         $id = input('post.id/d');
         $orderStatus = input('post.order_status/d');
+
         if(!input('?post.id') && !$id){
-            return errorMsg('失败');
+            $this->errorMsg('失败');
         }
 
         $where = [
@@ -411,17 +420,20 @@ class Order extends \common\controller\UserBase
         $orderInfo = $model->getInfo($where);
 
         $type = true;
+        // 订单状态：1:待付款 2:待发货 3:待收货 4:待评价 5:已完成 6:已取消
         switch($orderStatus){
-            case 2 :
-            case 3 : // 确定收货
+            case 4 : // 去确定收货
                 $where[] = ['order_status','in','2,3'];
                 $result = [
-                    'code'=> config('code.success.jump.code'),
-                    'url' => url('Order/confirmOrder',['order_sn'=>$orderInfo['sn']]),
+                    'code'=> config('code.success.default.code'),
+                    'url' => url('order/detail',['order_sn'=>$orderInfo['sn']]),
                 ];
                 $msg = '收货成功';
                 break;
-            case 5 : // 取消订单
+            case 5 : // 去评价
+                $where[] = ['order_status','=',4];
+                break;
+            case 6 : // 取消订单
                 $where[] = ['order_status','=',1];
                 break;
             case 7 : // 申请退款
@@ -433,6 +445,9 @@ class Order extends \common\controller\UserBase
                     $type = false;
                 }*/
 
+                break;
+            default:
+                $type = false;
                 break;
         }
 

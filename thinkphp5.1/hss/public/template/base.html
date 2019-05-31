@@ -93,6 +93,8 @@
                     jump_url:data.data && data.data.url?data.data.url:jump_url,
                     func:config.func
                 };
+        /*        console.log(param.data.info);
+                return false;*/
                 async_verify_judge(param);
             }
         });
@@ -145,8 +147,6 @@
                     if(!$('#product-list').find('li').length){
                         $('#product-list').append($('.no_cart_data').html());
                     }
-                    //触发-产品选择器-删除-事件
-                    bus.$emit('product_select_delete_cart',param);
                 }
                 if(param.clickObj.attr('class').indexOf('add_cart')!==-1
                         && !(param.clickObj.attr('class').indexOf('plus')!==-1 || param.clickObj.attr('class').indexOf('reduce')!==-1)
@@ -157,17 +157,20 @@
                     location.href = param.jump_url;
                 }
                 if(param.clickObj.attr('class').indexOf('confirm_receive')!==-1){ // 提示后跳转
-
-                }
-            }else if(param.data.data.code == '2001'){ //登录
-                if(param.func && $.isFunction(param.func)){
-                    param.func();
+                    layer.open({
+                        content : param.data.info?param.data.info:'成功',
+                        time : 1,
+                        skin: 'msg',
+                        end : function(){
+                            location.href=param.jump_url;
+                        }
+                    });
                 }
             }else{
                 dialog.success(param.data.info);
             }
         }else{ //返回页面
-            param.func();
+            console.log('返回页面');
         }
     }
     //编辑cookie里的购物车商品列表

@@ -27,11 +27,11 @@
                 <div v-else-if="menu.class.indexOf('buy_now')!==-1" class="buy_now" @click="addCart" :data-jump_url="menu.action">
                     <span class="s_i"></span>
                 </div>
-                <!-- 去结算 -->
-                <div v-else-if="menu.class.indexOf('settlement')!==-1" class="buy_now" @click="addCart" :data-jump_url="menu.action">
+                <!-- 结算 -->
+                <div v-else-if="menu.class.indexOf('settlement')!==-1" class="settlement" @click="addCart" :data-jump_url="menu.action">
                     <span class="s_i"></span>
                 </div>
-                <!-- 提交订单 -->
+                <!-- 提交订单/去结算 -->
                 <div v-else-if="menu.class.indexOf('confirm_order')!==-1" class="confirm_order" @click="addCart" :data-jump_url="menu.action">
                     <span class="s_i"></span>
                 </div>
@@ -58,13 +58,14 @@
                     type: {type: Number,default: 1},
                     cart_init_num: {type: Number,default: 0},
                     order_id: {type: Number,default: 0},
+                    init_total_amount: {type: Number,default: 0},
                     init_checked: {type: Boolean,default: false},
                     buy_now_call_back: {type: Function,default: function(param){
                         console.log(param);
                     }}
                 },data: function () {
                     return {
-                        total_amount:0,
+                        total_amount:this.init_total_amount,
                         cart_num:this.cart_init_num,
                         checked:this.init_checked,
                         checkItemList:[],
@@ -97,6 +98,7 @@
                     },addCart:function(event){
                         let _thisJquery = $(event.currentTarget);
                         let _thisVue = this;
+                        console.log(_thisVue.postData);return ;
                         login_success_callback_private = function(){
                             _thisJquery.click()
                         };
@@ -117,8 +119,7 @@
                             clickObj:_thisJquery,
                             postData:_thisVue.postData,
                             componentFooterCartMenu:_thisVue,
-                            func:function(){
-                                _thisJquery.click();
+                            callBack:function(){
                             }
                         };
                         asyncVerify(config);
@@ -222,15 +223,51 @@
                             },
                             yes:function(index){
                                 let postData = {
-                                    order_id:order_id,
-                                    status:4
+                                    id:order_id,
+                                    order_status:4
                                 };
 
                                 let config = {
                                     clickObj:_thisJquery,
                                     postData:postData,
                                     func:function(){
-                                        console.log(123);
+                                        _thisJquery.click();
+                                    }
+                                };
+                                asyncVerify(config);
+
+                                //console.log(333333);
+                                layer.close(index)
+                            }
+                        });
+
+                        return false;
+                    },confirm_order:function(event){
+                        let _thisJquery = $(event.currentTarget);
+                        let _thisVue = this;
+                        let order_id = _thisVue.order_id;
+                        if( !order_id ){ //提交商品为空验证
+                            dialog.error('请选择要收货的订单 ！');
+                            return false;
+                        }
+
+                        layer.open({
+                            content : '确实收到货了吗 ?',
+                            btn:['确定','取消'],
+                            end : function(){
+                                return false;
+                            },
+                            yes:function(index){
+                                let postData = {
+                                    id:order_id,
+                                    order_status:4
+                                };
+
+                                let config = {
+                                    clickObj:_thisJquery,
+                                    postData:postData,
+                                    func:function(){
+                                        _thisJquery.click();
                                     }
                                 };
                                 asyncVerify(config);
