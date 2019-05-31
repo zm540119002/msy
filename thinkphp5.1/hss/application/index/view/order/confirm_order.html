@@ -39,25 +39,40 @@
             <span>商品金额</span>
             <span class="red">￥<price>{$orderGoodsList[0]['amount']}</price></span>
         </div>
-
     </article>
 
 {/block}
-{block name="common"}
-
-{/block}
 {block name="footer"}
-{include file="template/footer_menu.html" /}
+{include file="../../api/public/vue/components/footer-menu.html" /}
+<div id="foot_cart_menu">
+    <footer-menu
+            :order_id="parseInt(order_id)"
+            :init_total_amount="Number(init_total_amount)"
+    ></footer-menu>
+</div>
 
+<script type="text/javascript">
+    $(function(){
+        let param = {
+            order_id:"{$orderInfo.id|default=0}",
+            init_total_amount:"{$orderInfo.actually_amount|default=0}"
+        };
+
+        new Vue({
+            el: '#foot_cart_menu',
+            data:function(){
+                return param;
+            }
+        });
+    });
+</script>
 {/block}
+
 {block name="script"}
-    <script type="text/javascript" src="index_js/pay.js"></script>
-    <script type="text/javascript" src="index_js/wallet.js"></script>
-    <script src="api_common_js/jquery.area.js"></script>
-    <script type="text/javascript" src="api_common_js/address.js"></script>
-    <script type="text/javascript">
-        //初始化订单金额
-        amount = "{$orderGoodsList[0]['amount']}";
-        $('footer').find('.amount').text(amount);
-    </script>
+
+<!--<script type="text/javascript" src="index_js/pay.js"></script>-->
+<script type="text/javascript" src="index_js/pay1.js"></script>
+<script type="text/javascript" src="index_js/wallet.js"></script>
+<script src="api_common_js/jquery.area.js"></script>
+<script type="text/javascript" src="index_js/address.js"></script>
 {/block}
