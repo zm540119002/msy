@@ -6,12 +6,12 @@ class Order extends \common\controller\UserBase
     public function generate()
     {
         if (!request()->isPost()) {
-            return errorMsg('请求方式错误');
+            $this->errorMsg('请求方式错误');
         }
 
         $goodsList = input('post.data/a');
         if (empty($goodsList)) {
-            return errorMsg('请求数据不能为空');
+            $this->errorMsg('请求数据不能为空');
         }
 
         $modelOrder = new \app\index\model\Order();
@@ -33,7 +33,7 @@ class Order extends \common\controller\UserBase
         $goodsListNew = $modeGoods->getList($config);
 
         if(empty($goodsListNew)){
-            return $this->errorMsg('商品已失效');
+            $this->errorMsg('商品已失效');
         }
 
         $amount = 0;
@@ -75,7 +75,7 @@ class Order extends \common\controller\UserBase
         $res = $modelOrder->allowField(true)->save($data);
         if (!$res) {
             $modelOrder->rollback();
-            return errorMsg('失败');
+            $this->errorMsg('失败');
         }
         $orderId = $modelOrder ->getAttr('id');
 
@@ -97,7 +97,7 @@ class Order extends \common\controller\UserBase
         $res = $modelOrderDetail->allowField(true)->saveAll($dataDetail)->toArray();
         if (!count($res)) {
             $modelOrder->rollback();
-            return errorMsg('失败');
+            $this->errorMsg('失败');
         }
         $modelOrder->commit();
 

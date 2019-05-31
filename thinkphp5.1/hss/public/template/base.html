@@ -156,6 +156,9 @@
                 if(param.clickObj.attr('class').indexOf('buy_now')!==-1){ //立即购买
                     location.href = param.jump_url;
                 }
+                if(param.clickObj.attr('class').indexOf('confirm_receive')!==-1){ // 提示后跳转
+
+                }
             }else if(param.data.data.code == '2001'){ //登录
                 if(param.func && $.isFunction(param.func)){
                     param.func();
