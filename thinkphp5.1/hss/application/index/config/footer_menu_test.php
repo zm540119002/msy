@@ -98,6 +98,7 @@ return [
                 'bottom_item',
                 'confirm_receive',
             ],
+            'action'=>url('Order/setOrderStatus'),
         ], [//13
             'name'   => '去评价',
             'class'=>[
@@ -132,7 +133,7 @@ return [
             'name'   => '查看物流',
             'class'=>[
                 'bottom_item',
-                'delete',
+                'confirm_receive',
             ],
         ],[//19
             'name'   => '查看物流2',

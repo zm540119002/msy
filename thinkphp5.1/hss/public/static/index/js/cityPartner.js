@@ -2,7 +2,6 @@ var area_address,
     applicantData={
     };
 $(function(){
-
     //nav切换
     $('body').on('click','.apply-data-nav .switch-item',function(){
         $(this).addClass('current').siblings().removeClass('current');
@@ -88,8 +87,7 @@ $(function(){
         applicantData.applicant=data.applicant;
         applicantData.mobile=data.mobile;
         applicantData.step = 2;
-        console.log(applicantData);
-        var content=''; 
+        var content='';
         if(!applicantData.company_name){
             content='请填写企业名称';
         }else if(!applicantData.applicant){

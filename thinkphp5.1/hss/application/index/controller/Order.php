@@ -9,7 +9,7 @@ class Order extends \common\controller\UserBase
             return errorMsg('请求方式错误');
         }
 
-        $goodsList = input('post.goodsList/a');
+        $goodsList = input('post.data/a');
         if (empty($goodsList)) {
             return errorMsg('请求数据不能为空');
         }
@@ -102,12 +102,10 @@ class Order extends \common\controller\UserBase
         $modelOrder->commit();
 
         $data = [
-            'code'=> config('code.success.jump.code'),
+            'code'=> config('code.success.default.code'),
             'url' => url('Order/confirmOrder',['order_sn'=>$orderSN]),
         ];
-
-        return $this->successMsg('生成订单成功',$data);
-        return successMsg('生成订单成功', array('order_sn' => $orderSN));
+        $this->successMsg('生成订单成功',$data);
     }
 
     // 订单确认页
@@ -374,12 +372,14 @@ class Order extends \common\controller\UserBase
                 $configFooter = [];
         }
 
-//        $unlockingFooterCart = unlockingFooterCartConfig($configFooter);
-//        $this->assign('unlockingFooterCart', $unlockingFooterCart);
+        $unlockingFooterCart = unlockingFooterCartConfigTest($configFooter);
 
-        $unlockingFooterCart = unlockingFooterCartConfigTest([18,19]);
-        array_push($unlockingFooterCart['menu'][0]['class'],'group_btn50');
-        array_push($unlockingFooterCart['menu'][1]['class'],'group_btn50');
+        $num = floor(100/count($configFooter));
+
+        foreach($configFooter as $k => $v){
+            array_push($unlockingFooterCart['menu'][$k]['class'],'group_btn'.$num);
+        }
+
         $this->assign('unlockingFooterCart',json_encode($unlockingFooterCart));
         return $this->fetch();
 
@@ -415,20 +415,23 @@ class Order extends \common\controller\UserBase
             case 2 :
             case 3 : // 确定收货
                 $where[] = ['order_status','in','2,3'];
+                $result = [
+                    'code'=> config('code.success.jump.code'),
+                    'url' => url('Order/confirmOrder',['order_sn'=>$orderInfo['sn']]),
+                ];
+                $msg = '收货成功';
                 break;
             case 5 : // 取消订单
-                $where['order_status'] = 1;
+                $where[] = ['order_status','=',1];
                 break;
             case 7 : // 申请退款
                 // system_id,order_sn
-                $curl = new \common\component\curl\Curl();
+/*                $curl = new \common\component\curl\Curl();
                 $res = $curl->get('https://msy.meishangyun.com/index/Order/refundOrder',array('system_id'=>3,'order_sn'=>$orderInfo['sn']));
-/*                p($res);
-                exit;*/
                 $res = json_decode($res,true);
                 if(!$res['status'] || $res==null){
                     $type = false;
-                }
+                }*/
 
                 break;
         }
@@ -443,8 +446,12 @@ class Order extends \common\controller\UserBase
         $rse = $model->where($where['where'])->setField($data);
         if(!$rse){
             return errorMsg('失败');
+
+        }else{
+            $this->successMsg($msg,$result);
         }
-        return successMsg('成功');
+
+        //$this->successMsg('收货成功 ！',config('code.success.default'));
     }
 
     /**

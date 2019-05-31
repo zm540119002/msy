@@ -65,7 +65,7 @@
 		let total_num = parseInt("{$total_num|default=0}");
 		//localStorage里商品信息
 		if(localStorage.cartList){
-			let goodsList = (JSON.parse(localStorage.cartList)).goodsList;
+			let goodsList = (JSON.parse(localStorage.cartList)).data;
 			$.each(goodsList,function(i,goods){
 				total_num += goods['num'];
 			});
@@ -124,7 +124,7 @@
 					let _this = this;
 					let findIndex = -1;
 					$.each(this.productList,function(i,o){
-						$.each(param.postData.goodsList,function(ii,oo){
+						$.each(param.postData.data,function(ii,oo){
 							if(o.id == oo.goods_id){
 								findIndex = i;
 							}

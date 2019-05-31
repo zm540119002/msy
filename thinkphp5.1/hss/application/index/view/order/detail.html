@@ -95,11 +95,16 @@
 {block name="footer"}
 {include file="../../api/public/vue/components/footer-menu.html" /}
 <div id="foot_cart_menu">
-    <footer-menu></footer-menu>
+    <footer-menu
+            :order_id="order_id"
+    ></footer-menu>
 </div>
 <script type="text/javascript">
     $(function(){
-        let param = {};
+        let param = {
+            order_id:parseInt("{$orderInfo.id|default=0}"),
+        };
+
         new Vue({
             el: '#foot_cart_menu',
             data:function(){
