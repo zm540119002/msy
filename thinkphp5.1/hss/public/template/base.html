@@ -169,9 +169,9 @@
                 }
 
             }else if(param.data.data.code == '2001'){ //已登录
-//                if(param.func && $.isFunction(param.func)){
-//                    param.func();
-//                }
+                if(param.func && $.isFunction(param.func)){
+                    param.func();
+                }
             }else{
                 dialog.success(param.data.info);
             }
