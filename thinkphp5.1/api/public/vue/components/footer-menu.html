@@ -32,7 +32,7 @@
                     <span class="s_i"></span>
                 </div>
                 <!-- 提交订单 -->
-                <div v-else-if="menu.class.indexOf('confirm_order')!==-1" class="confirm_order" @click="addCart" :data-jump_url="menu.action">
+                <div v-else-if="menu.class.indexOf('confirm_order')!==-1" class="confirm_order" @click="confirm_order" :data-jump_url="menu.action">
                     <span class="s_i"></span>
                 </div>
                 <!-- 确定收货-->
@@ -96,6 +96,7 @@
                             location.href = jump_url;
                         }
                     },addCart:function(event){
+
                         let _thisJquery = $(event.currentTarget);
                         let _thisVue = this;
                         login_success_callback_private = function(){
@@ -122,6 +123,7 @@
                                 _thisJquery.click();
                             }
                         };
+
                         asyncVerify(config);
                     },editProductList:function(param){
                         if(this.type==4 && !param.checked){
