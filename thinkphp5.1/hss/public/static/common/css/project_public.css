@@ -530,11 +530,8 @@ nav .back_prev_page{
 .menu_nav li .num{
     width: 16px;
     height: 16px;
-    font-size: 10px;
-    background: #fff;
-    border: 1px solid red;
-    color: red;
-    right: -18px;
+    font-size: 9px;
+    right: -15px;
     top: -6px;
 }
 .menu_nav{
@@ -578,12 +575,9 @@ nav .back_prev_page{
     padding: 0;
     color: #666;
 }
-.order_bottom .red{
-    color: #333;
-}
 .order_bottom .red price{
     font-size: 18px;
-    color: #333;
+    color: red;
 }
 .product-select div.right{
     width: 56% !important;
