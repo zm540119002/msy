@@ -244,6 +244,42 @@
                         });
 
                         return false;
+                    },confirm_order:function(event){
+                        let _thisJquery = $(event.currentTarget);
+                        let _thisVue = this;
+                        let order_id = _thisVue.order_id;
+                        if( !order_id ){ //提交商品为空验证
+                            dialog.error('请选择要收货的订单 ！');
+                            return false;
+                        }
+
+                        layer.open({
+                            content : '确实收到货了吗 ?',
+                            btn:['确定','取消'],
+                            end : function(){
+                                return false;
+                            },
+                            yes:function(index){
+                                let postData = {
+                                    id:order_id,
+                                    order_status:4
+                                };
+
+                                let config = {
+                                    clickObj:_thisJquery,
+                                    postData:postData,
+                                    func:function(){
+                                        _thisJquery.click();
+                                    }
+                                };
+                                asyncVerify(config);
+
+                                //console.log(333333);
+                                layer.close(index)
+                            }
+                        });
+
+                        return false;
                     }
                 },created:function(){
                     let _this = this;

@@ -114,9 +114,7 @@ class Order extends \common\controller\UserBase
         if (request()->isPost()) {
             // 更新订单状态并清除订单里购物车里的商品
             $fatherOrderId = input('post.order_id',0,'int');
-
-            p($fatherOrderId);
-            exit;
+            
             $modelOrder = new \app\index\model\Order();
             $condition = [
                 'where' => [
@@ -158,8 +156,8 @@ class Order extends \common\controller\UserBase
                 'code'=> config('code.success.default.code'),
                 //'url' => url('Order/confirmOrder',['order_sn'=>$orderSN]),
             ];
-            //return successMsg( '成功');
-            $this->successMsg('成功',$data);
+            return successMsg( '成功');
+            //$this->successMsg('成功',$data);
 
         }else{
 
