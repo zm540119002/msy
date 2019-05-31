@@ -520,7 +520,7 @@ nav .back_prev_page{
     position: absolute;
   bottom: 0;
   width: 100%;
-  display: flex;
+  display: block;
   justify-content: space-between;
 }
 .four-line-omit{
@@ -530,12 +530,10 @@ nav .back_prev_page{
 .menu_nav li .num{
     width: 16px;
     height: 16px;
-    font-size: 10px;
-    background: #fff;
-    border: 1px solid red;
-    color: red;
-    right: -18px;
+    font-size: 9px;
+    right: -15px;
     top: -6px;
+    font-weight: normal;
 }
 .menu_nav{
     border-bottom: none;
@@ -578,12 +576,9 @@ nav .back_prev_page{
     padding: 0;
     color: #666;
 }
-.order_bottom .red{
-    color: #333;
-}
 .order_bottom .red price{
     font-size: 18px;
-    color: #333;
+    color: red;
 }
 .product-select div.right{
     width: 56% !important;
