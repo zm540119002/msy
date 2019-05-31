@@ -117,7 +117,10 @@
                         let config = {
                             clickObj:_thisJquery,
                             postData:_thisVue.postData,
-                            componentFooterCartMenu:_thisVue
+                            componentFooterCartMenu:_thisVue,
+                            func:function(){
+                                _thisJquery.click()
+                            }
                         };
                         asyncVerify(config);
                     },editProductList:function(param){
