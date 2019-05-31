@@ -149,6 +149,6 @@ return [
                 'confirm_order',
             ],
             'action'=>url('Order/confirmOrder'),
-        ],
+        ]
     ],
 ];

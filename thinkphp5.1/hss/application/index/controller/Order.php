@@ -143,6 +143,9 @@ class Order extends \common\controller\UserBase
             $data = input('post.');
             $data['order_status'] = 1;
             $modelOrder ->startTrans();
+            $address = json_decode($data['address'],true);
+            unset($data['address']);
+            $data = array_merge($data,$address);
 
             $res = $modelOrder -> allowField(true) -> save($data,$condition['where']);
 
@@ -359,12 +362,17 @@ class Order extends \common\controller\UserBase
         // 钱包余额
         $this->assignWalletInfo();
 
+        $unlockingFooterCart = false;
         // 底部按钮
         // 0：临时 1:待付款 2:待收货 3:待收货 4:待评价 5:已完成 6:已取消',
         switch ($info['order_status'])
         {
             case "1":
                 $configFooter = [0,20];
+                $unlockingFooterCart = unlockingFooterCartConfigTest($configFooter);
+                array_push($unlockingFooterCart['menu'][0]['class'],'group_btn70');
+                array_push($unlockingFooterCart['menu'][1]['class'],'group_btn30');
+
                 break;
             case "2":
             case "3":
@@ -383,13 +391,16 @@ class Order extends \common\controller\UserBase
                 $configFooter = [];
         }
 
-        $unlockingFooterCart = unlockingFooterCartConfigTest($configFooter);
+        if(!$unlockingFooterCart){
+            $unlockingFooterCart = unlockingFooterCartConfigTest($configFooter);
 
-        $num = floor(100/count($configFooter));
+            $num = floor(100/count($configFooter));
 
-        foreach($configFooter as $k => $v){
-            array_push($unlockingFooterCart['menu'][$k]['class'],'group_btn'.$num);
+            foreach($configFooter as $k => $v){
+                array_push($unlockingFooterCart['menu'][$k]['class'],'group_btn'.$num);
+            }
         }
+
 
         $this->assign('unlockingFooterCart',json_encode($unlockingFooterCart));
         return $this->fetch();
