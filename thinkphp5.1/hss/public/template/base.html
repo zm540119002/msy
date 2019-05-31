@@ -113,6 +113,9 @@
             }
         }else if(param.data.status==1){ //成功回调
             if(param.data.data.code == '2000'){ //默认
+                if(param.callBack && $.isFunction(param.callBack)){
+                    param.callBack();
+                }
                 if(param.clickObj.attr('class').indexOf('add_cart')!==-1 && param.componentFooterCartMenu){ //底部购物车菜单数量统计
                     $.each(param.postData.data,function(i,o){
                         param.componentFooterCartMenu.cart_num += o.num;
@@ -165,9 +168,7 @@
                 dialog.success(param.data.info);
             }
         }else{ //返回页面
-//            param.clickObj.click();
-            console.log(param);
-            console.log(param.func);
+            param.returnPageCallBack();
         }
     }
     //编辑cookie里的购物车商品列表
