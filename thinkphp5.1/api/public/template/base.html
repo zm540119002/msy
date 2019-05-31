@@ -5,8 +5,8 @@
 	<title>{block name="title"}{$Think.config.custom.title}{/block}</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 	<meta name="apple-mobile-web-app-capable" content="yes" />
-	<link rel="stylesheet" href="api_common_css/base.css?version=1.0">
-	<link rel="stylesheet" href="api_common_css/public.css?version=1.0">
+	<link rel="stylesheet" href="api_common_css/base.css">
+	<link rel="stylesheet" href="api_common_css/public.css">
 	{block name="css-customize"}{/block}
 	<script type="text/javascript">
 		var domain = window.location.protocol + '//' + document.domain + '/';
@@ -36,7 +36,7 @@
 {block name="header"}{/block}
 <!-- 登录模块 -->
 {block name="login_dialog"}
-	<script type="text/javascript" src="api_common_js/login.js?version=1.0"></script>
+	<script type="text/javascript" src="api_common_js/login.js"></script>
 	{include file="../../api/public/template/login_dialog.html" /}
 {/block}
 <!-- 内容模块 -->
@@ -55,8 +55,8 @@
 </footer>
 {/block}
 <!--js基本插件-->
-<script type="text/javascript" src="api_common_js/public.js?version=1.0"></script>
-<script type="text/javascript" src="api_common_js/common.js?version=1.0"></script>
+<script type="text/javascript" src="api_common_js/public.js"></script>
+<script type="text/javascript" src="api_common_js/common.js"></script>
 <script type="text/javascript" src="api_common_js/forbidscroll.js"></script>
 <script type="text/javascript" src="api_common_js/layer.mobile/layer.js"></script>
 <!-- 后置自定义js -->
