@@ -50,8 +50,6 @@
 <script type="text/javascript">
     $(function(){
         var unlockingFooterCart = '{$unlockingFooterCart|raw}';
-        console.log(unlockingFooterCart);
-        return;
         if(unlockingFooterCart){
             unlockingFooterCart = JSON.parse(unlockingFooterCart);
             Vue.component('footer-menu', {
@@ -216,7 +214,6 @@
                         register_success_callback_private = function(){
                             _thisJquery.click()
                         };
-
                         _thisVue.postData.order_id = "{$orderInfo.id|default=0}";
                         _thisVue.postData.order_sn = "{$orderInfo.sn|default=''}";
                         //前端验证
@@ -224,21 +221,18 @@
                             dialog.error('请选择要提交的订单 ！');
                             return false;
                         }
-
-                        address = getAddress();
+                        let address = getAddress();
                         _thisVue.postData.address = JSON.stringify(address);
 
                         if( !_thisVue.postData.address ){
                             dialog.error('请选择收货地址 ！');
                             return false;
                         }
-
                         let config = {
                             clickObj:_thisJquery,
                             postData:_thisVue.postData,
                             componentFooterCartMenu:_thisVue
                         };
-
                         asyncVerify(config);
                     }
                 },created:function(){
