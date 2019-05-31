@@ -91,7 +91,8 @@
                     vueObj:config.vueObj,
                     reduce:config.reduce,
                     jump_url:data.data && data.data.url?data.data.url:jump_url,
-                    func:config.func
+                    responsePageCallBack:config.responsePageCallBack,
+                    asyncVerifyCallBack:config.asyncVerifyCallBack
                 };
                 async_verify_judge(param);
             }
@@ -113,8 +114,8 @@
             }
         }else if(param.data.status==1){ //成功回调
             if(param.data.data.code == '2000'){ //默认
-                if(param.callBack && $.isFunction(param.callBack)){
-                    param.callBack();
+                if(param.asyncVerifyCallBack && $.isFunction(param.asyncVerifyCallBack)){
+                    param.asyncVerifyCallBack();
                 }
                 if(param.clickObj.attr('class').indexOf('add_cart')!==-1 && param.componentFooterCartMenu){ //底部购物车菜单数量统计
                     $.each(param.postData.data,function(i,o){
@@ -164,11 +165,23 @@
                         }
                     });
                 }
+                if(param.clickObj.attr('class').indexOf('confirm_order')!==-1){
+                    var settlementMethod=$('.settlementMethod').html();
+                    layer.open({
+                        type: 1
+                        ,anim: 'up'
+                        ,style: 'position:fixed; bottom:0; left:0; width: 100%; height: 50%; padding:10px 0; border:none;',
+                        className:'settlementMethod bankTransferLayer',
+                        content: settlementMethod
+                    });
+                }
             }else{
                 dialog.success(param.data.info);
             }
         }else{ //返回页面
-            param.responsePageCallBack();
+            if(param.responsePageCallBack && $.isFunction(param.responsePageCallBack)){
+                param.responsePageCallBack();
+            }
         }
     }
     //编辑cookie里的购物车商品列表
