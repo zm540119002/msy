@@ -575,9 +575,6 @@ nav .back_prev_page{
     padding: 0;
     color: #666;
 }
-.order_bottom .red{
-    /* color: #333; */
-}
 .order_bottom .red price{
     font-size: 18px;
     color: red;
