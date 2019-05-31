@@ -147,8 +147,6 @@
                     if(!$('#product-list').find('li').length){
                         $('#product-list').append($('.no_cart_data').html());
                     }
-                    //触发-产品选择器-删除-事件
-                    bus.$emit('product_select_delete_cart',param);
                 }
                 if(param.clickObj.attr('class').indexOf('add_cart')!==-1
                         && !(param.clickObj.attr('class').indexOf('plus')!==-1 || param.clickObj.attr('class').indexOf('reduce')!==-1)
@@ -165,7 +163,6 @@
                         skin: 'msg',
                         end : function(){
                             location.href=param.jump_url;
-
                         }
                     });
                 }
