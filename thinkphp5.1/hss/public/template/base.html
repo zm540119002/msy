@@ -93,7 +93,8 @@
                     jump_url:data.data && data.data.url?data.data.url:jump_url,
                     func:config.func
                 };
-
+        /*        console.log(param.data.info);
+                return false;*/
                 async_verify_judge(param);
             }
         });
@@ -164,19 +165,15 @@
                         skin: 'msg',
                         end : function(){
                             location.href=param.jump_url;
+
                         }
                     });
-                }
-
-            }else if(param.data.data.code == '2001'){ //已登录
-                if(param.func && $.isFunction(param.func)){
-                    param.func();
                 }
             }else{
                 dialog.success(param.data.info);
             }
         }else{ //返回页面
-            param.func();
+            console.log('返回页面');
         }
     }
     //编辑cookie里的购物车商品列表
