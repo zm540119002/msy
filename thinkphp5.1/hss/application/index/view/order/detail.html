@@ -102,19 +102,8 @@
 </div>
 <script type="text/javascript" src="index_js/pay1.js"></script>
 <script type="text/javascript">
-
     var address = '';
-    // 弹出支付方式
-    $('body').on('click','.confirm_order',function(){
-
-        var postData = {};
-        address = addAddress(postData);
-        address = JSON.stringify(address);
-    });
-
-
     $(function(){
-        console.log(address);
         let param = {
             order_id:"{$orderInfo.id|default=0}",
             address:address,
@@ -126,6 +115,13 @@
                 return param;
             }
         });
+    });
+    // 弹出支付方式
+    $('body').on('click','.confirm_order',function(){
+        var postData = {};
+        address = addAddress(postData);
+        address = JSON.stringify(address);
+        console.log(address);
     });
 </script>
 {/block}
