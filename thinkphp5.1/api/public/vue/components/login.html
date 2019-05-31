@@ -126,7 +126,8 @@
                             }else if(data.status==1){
                                 $.extend(param.login_success_callback_param,data);
                                 if( (param.login_success_callback_private && $.isFunction(param.login_success_callback_private))
-                                    || (param.login_success_callback_common && $.isFunction(param.login_success_callback_common)) ){
+                                    || (param.login_success_callback_common && $.isFunction(param.login_success_callback_common))
+                                ){
                                     param.login_success_callback_private && param.login_success_callback_private(param.login_success_callback_param);
                                     param.login_success_callback_common && param.login_success_callback_common(param.login_success_callback_param);
                                 }else{
@@ -169,7 +170,8 @@
                             }else if(data.status==1){
                                 $.extend(param.register_success_callback_param,data);
                                 if( (param.register_success_callback_private && $.isFunction(param.register_success_callback_private))
-                                        || (param.register_success_callback_common && $.isFunction(param.register_success_callback_common)) ){
+                                    || (param.register_success_callback_common && $.isFunction(param.register_success_callback_common))
+                                ){
                                     param.register_success_callback_private && param.register_success_callback_private(param.register_success_callback_param);
                                     param.register_success_callback_common && param.register_success_callback_common(param.register_success_callback_param);
                                 }else{
@@ -284,6 +286,23 @@
             data:function(){
                 return {};
             }
+        });
+        //异步验证
+        $('body').on('click','.async_login',function(){
+            let _this = $(this);
+            login_success_callback_private = function(){
+                location.href = _this.data('jump_url');
+            };
+            register_success_callback_private = function(){
+                location.href = _this.data('jump_url');
+            };
+            let config = {
+                clickObj:_this,
+                func:function(){
+                    location.href = _this.data('jump_url');
+                }
+            };
+            asyncVerify(config);
         });
         $('body').on('click','.loginLayer .switch_current',function(){
             //触发-切换当前-事件

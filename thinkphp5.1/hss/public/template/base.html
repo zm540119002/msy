@@ -100,9 +100,7 @@
     //异步验证判断
     function async_verify_judge(param){
         if(param.data.status==0){ //失败回调
-            if(param.data.data.code == '1000'){ //默认
-                dialog.error(param.data.info);
-            }else if(param.data.data.code == '1001'){ //登录
+            if(param.data.data.code == '1001'){ //未登录
                 if(param.clickObj.attr('class').indexOf('add_cart')!==-1 && param.postData){ //加入购物车
                     editLocalStorageCartList(param);
                 }else if(param.clickObj.attr('class').indexOf('delete_cart')!==-1 && param.postData){
@@ -110,30 +108,29 @@
                 }else{
                     loginDialogTrigger();
                 }
-            }else if(param.data.data.code=='1002'){ //授权
             }else{
                 dialog.error(param.data.info);
             }
         }else if(param.data.status==1){ //成功回调
             if(param.data.data.code == '2000'){ //默认
                 if(param.clickObj.attr('class').indexOf('add_cart')!==-1 && param.componentFooterCartMenu){ //底部购物车菜单数量统计
-                    $.each(param.postData.goodsList,function(i,o){
+                    $.each(param.postData.data,function(i,o){
                         param.componentFooterCartMenu.cart_num += o.num;
                     });
                 }
                 if(param.clickObj.attr('class').indexOf('add_cart')!==-1 && param.clickObj.attr('class').indexOf('plus')!==-1){ //加
-                    $.each(param.postData.goodsList,function(i,o){
+                    $.each(param.postData.data,function(i,o){
                         param.vueObj.buy_quantity += o.num;
                     });
                 }
                 if(param.clickObj.attr('class').indexOf('add_cart')!==-1 && param.clickObj.attr('class').indexOf('reduce')!==-1){ //减
-                    $.each(param.postData.goodsList,function(i,o){
+                    $.each(param.postData.data,function(i,o){
                         param.vueObj.buy_quantity += o.num;
                         param.vueObj.buy_quantity_reduce_trigger = true;
                     });
                 }
                 if(param.clickObj.attr('class').indexOf('delete_cart')!==-1 && param.postData){ //删除
-                    $.each(param.postData.goodsList,function(i,o){
+                    $.each(param.postData.data,function(i,o){
                         param.vueObj.buy_quantity += o.num;
                         param.vueObj.buy_quantity_reduce_trigger = true;
                         param.clickObj.parents('li').remove();
@@ -145,21 +142,25 @@
                     if(!$('#product-list').find('li').length){
                         $('#product-list').append($('.no_cart_data').html());
                     }
-                    //触发-产品选择器-删除-事件
-                    bus.$emit('product_select_delete_cart',param);
                 }
                 if(param.clickObj.attr('class').indexOf('add_cart')!==-1
                         && !(param.clickObj.attr('class').indexOf('plus')!==-1 || param.clickObj.attr('class').indexOf('reduce')!==-1)
                 ){ //包含add_cart，但是不能包含plus 或者 reduce才提示
                     dialog.success(param.data.info);
                 }
-            }else if(param.data.data.code == '2001'){ //登录
-                if(param.func && $.isFunction(param.func)){
-                    param.func();
+                if(param.clickObj.attr('class').indexOf('buy_now')!==-1){ //立即购买
+                    location.href = param.jump_url;
                 }
-            }else if(param.data.data.code=='2002'){ //授权
-            }else if(param.data.data.code=='2003'){ //跳转
-                location.href = param.jump_url;
+                if(param.clickObj.attr('class').indexOf('confirm_receive')!==-1){ // 提示后跳转
+                    layer.open({
+                        content : param.data.info?param.data.info:'成功',
+                        time : 1,
+                        skin: 'msg',
+                        end : function(){
+                            location.href=param.jump_url;
+                        }
+                    });
+                }
             }else{
                 dialog.success(param.data.info);
             }
@@ -169,17 +170,17 @@
     }
     //编辑cookie里的购物车商品列表
     function editLocalStorageCartList(param){
-        if(!param.postData.goodsList.length){
+        if(!param.postData.data.length){
             dialog.error('请选择商品！');
             return false;
         }
         if(!localStorage.cartList){
-            localStorage.cartList = JSON.stringify({'goodsList':param.postData.goodsList});
+            localStorage.cartList = JSON.stringify({'data':param.postData.data});
         }else{
-            let goodsListOld = (JSON.parse(localStorage.cartList)).goodsList;
-            $.each(param.postData.goodsList,function(i,o){
+            let dataOld = (JSON.parse(localStorage.cartList)).data;
+            $.each(param.postData.data,function(i,o){
                 let find = false;
-                $.each(goodsListOld,function(ii,oo){
+                $.each(dataOld,function(ii,oo){
                     if(o.goods_id == oo.goods_id){
                         if(param.reduce && param.reduce==='true'){
                             oo.num -= o.num;
@@ -190,25 +191,25 @@
                     }
                 });
                 if(!find){
-                    goodsListOld.unshift(o);
+                    dataOld.unshift(o);
                 }
             });
             //保存购物车
-            localStorage.cartList = JSON.stringify({'goodsList':goodsListOld});
+            localStorage.cartList = JSON.stringify({'data':dataOld});
         }
         if(param.clickObj.attr('class').indexOf('add_cart')!==-1 && param.componentFooterCartMenu){ //底部购物车菜单数量统计
-            $.each(param.postData.goodsList,function(i,o){
+            $.each(param.postData.data,function(i,o){
                 param.componentFooterCartMenu.cart_num += o.num;
             });
             dialog.success('加入购物车成功！');
         }
         if(param.clickObj.attr('class').indexOf('add_cart')!==-1 && param.clickObj.attr('class').indexOf('plus')!==-1){ //加
-            $.each(param.postData.goodsList,function(i,o){
+            $.each(param.postData.data,function(i,o){
                 param.vueObj.buy_quantity += o.num;
             });
         }
         if(param.clickObj.attr('class').indexOf('add_cart')!==-1 && param.clickObj.attr('class').indexOf('reduce')!==-1){ //减
-            $.each(param.postData.goodsList,function(i,o){
+            $.each(param.postData.data,function(i,o){
                 param.vueObj.buy_quantity += o.num;
                 param.vueObj.buy_quantity_reduce_trigger = true;
             });
@@ -224,29 +225,29 @@
         if(!localStorage.cartList){
             return false;
         }
-        let goodsListOld = (JSON.parse(localStorage.cartList)).goodsList;
-        let goodsListNew = [];
-        $.each(goodsListOld,function(i,o){
+        let dataOld = (JSON.parse(localStorage.cartList)).data;
+        let dataNew = [];
+        $.each(dataOld,function(i,o){
             let find = false;
-            $.each(param.postData.goodsList,function(ii,oo){
+            $.each(param.postData.data,function(ii,oo){
                 if(o.goods_id !== oo.goods_id){
                     find = true;
                 }
             });
             if(find){
-                goodsListNew.push(o);
+                dataNew.push(o);
             }
         });
-        if(goodsListNew.length){
+        if(dataNew.length){
             //删除后保存本地购物车
-            localStorage.cartList = JSON.stringify({'goodsList':goodsListNew});
+            localStorage.cartList = JSON.stringify({'data':dataNew});
         }else{
             //清空本地购物车
             var html = $('.no_cart_data').html();
             $('#product-list').append(html);
             localStorage.removeItem("cartList");
         }
-        $.each(param.postData.goodsList,function(i,o){
+        $.each(param.postData.data,function(i,o){
             param.vueObj.buy_quantity += o.num;
             param.vueObj.buy_quantity_reduce_trigger = true;
             param.clickObj.parents('li').remove();

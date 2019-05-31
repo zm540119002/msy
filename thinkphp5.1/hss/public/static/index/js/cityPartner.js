@@ -1,17 +1,26 @@
+var area_address,
+    applicantData={
+    };
 $(function(){
-
     //nav切换
     $('body').on('click','.apply-data-nav .switch-item',function(){
         $(this).addClass('current').siblings().removeClass('current');
         $('.apply-module').hide().eq($(this).index()).show();
     });
-    var area_address,
-        applicantData={
-            id:0
-        };
+
      //初始化 未完成的申请
     if(!$.isEmptyArray(apply)){
         applicantData.id= apply[0].id;
+        applicantData = {
+            id:apply[0].id,
+            province:apply[0].province,
+            city:apply[0].city,
+            company_name:apply[0].company_name,
+            applicant:apply[0].applicant,
+            mobile:apply[0].mobile,
+            old_apply_status:apply[0].apply_status
+        };
+
         //省市区初始化
         var province = apply[0].province;
         var city = apply[0].city;
@@ -52,13 +61,9 @@ $(function(){
             layer.open({
                 content:'所查询的城市可以申请城市合伙人<br/>声明：同一城市可能存在多位申请人,同等条件下按先申请先审核签约原则。',
                 btn:['确定'],
-                className:'aa',
+                className:'confirm',
                 yes:function(index){
-                    $('.weui-flex-item:eq(0)').removeClass('current');
-                    $('.weui-flex-item:eq(1)').addClass('current');
-                    $('.apply-module:eq(0)').hide();
-                    $('.apply-module:eq(1)').show();
-                    _this = $(".aa span[type='1']");
+                    _this = $(".confirm span[type='1']");
                     submitApplicant(_this,applicantData);
                     layer.close(index);
                 }
@@ -82,7 +87,7 @@ $(function(){
         applicantData.applicant=data.applicant;
         applicantData.mobile=data.mobile;
         applicantData.step = 2;
-        var content=''; 
+        var content='';
         if(!applicantData.company_name){
             content='请填写企业名称';
         }else if(!applicantData.applicant){
@@ -94,11 +99,6 @@ $(function(){
             dialog.error(content);
             return false;
         }
-
-        $('.weui-flex-item:eq(0),.weui-flex-item:eq(1)').removeClass('current');
-        $('.weui-flex-item:eq(2)').addClass('current');
-        $('.apply-module:eq(1)').hide();
-        $('.apply-module:eq(2)').show();
         submitApplicant(_this,applicantData);
     });
     //确定通过入驻
@@ -125,9 +125,8 @@ $(function(){
 
     // 结算
     $('body').on('click','.settlement_btn',function () {
-        applicantData.province = area_address[0];
-        applicantData.city = area_address[1];
         applicantData.pay_code = $('.pay_code').val();
+        applicantData.step = 3;
         _this = $(this);
         if(!applicantData.pay_code){
             dialog.error('请选择结算方式');
@@ -173,11 +172,24 @@ function submitApplicant(_this,postData){
         success: function(data){
             _this.removeClass("nodisabled");//删除防止重复提交
             $('.loading').hide();
-            // if(data.status){
-            //     location.href = data.url;
-            // }else{
-            //     dialog.success(data.info);
-            // }
+            if(data.status){
+                applicantData.id = data.data.id;
+                if(postData.step==1){
+                    $('.weui-flex-item:eq(0)').removeClass('current');
+                    $('.weui-flex-item:eq(1)').addClass('current');
+                    $('.apply-module:eq(0)').hide();
+                    $('.apply-module:eq(1)').show();
+                }else if(postData.step==2){
+                    $('.weui-flex-item:eq(0),.weui-flex-item:eq(1)').removeClass('current');
+                    $('.weui-flex-item:eq(2)').addClass('current');
+                    $('.apply-module:eq(1)').hide();
+                    $('.apply-module:eq(2)').show();
+                }else if(postData.step==3){
+                    location.href = data.data.url;
+                }
+            }else{
+                dialog.success(data.info);
+            }
         }
     });
 }

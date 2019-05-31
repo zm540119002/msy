@@ -110,7 +110,7 @@ class Goods extends \common\controller\Base{
         $user = checkLogin();
         if(!$user){
             $cartList = input('get.cartList');
-            $goodsList =  json_decode($cartList,true)['goodsList'];
+            $goodsList =  json_decode($cartList,true)['data'];
             $goodsIds = array_column($goodsList,'goods_id');
             $model = new \app\index\model\Goods();
             $config=[
@@ -140,7 +140,6 @@ class Goods extends \common\controller\Base{
             $config=[
                 'where'=>[
                     ['c.user_id','=',$userId],
-//                 ['c.create_time','>',time()-7*24*60*60],//只展示7天的数据
                     ['c.status','=',0],
                     ['g.status','=',0],
                 ],'join' => [
@@ -160,14 +159,6 @@ class Goods extends \common\controller\Base{
             $list = $model -> pageQuery($config);
         }
         $this->successMsg('成功',$list);
-//        $currentPage = input('get.page/d');
-//        $this->assign('currentPage',$currentPage);
-//        $this->assign('list',$showGoodsList);
-//        if(isset($_GET['pageType'])){
-//            if($_GET['pageType'] == 'index' ){
-//                return $this->fetch('cart/list_tpl');
-//            }
-//        }
     }
     /***
      * 获取各关联表下的商品 -通用方法
@@ -338,7 +329,5 @@ class Goods extends \common\controller\Base{
 
         $list = $model -> pageQuery($condition);
         $this->successMsg('成功',$list);
-        //return $model -> pageQuery($condition);
-        return $model->getLastSql();
     }
 }

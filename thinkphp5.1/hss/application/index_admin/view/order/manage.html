@@ -109,7 +109,7 @@
 			var data=$(this).parents('tr').find(".consigneeInfo").serializeObject();
 
 			$("#expressOrderSn").html(data.sn);
-			var id = data.id;
+			var id = $(this).parents('tr').data('id');
 			if(!$.isEmptyObject(data)){
 				$("#express").append(data.complete_address);
 			}
@@ -130,7 +130,7 @@
 				yes:function(index){
 					var postForm = $('#fromExpress');
 					//var content='';
-					var data = postForm.serializeObject();
+					data = postForm.serializeObject();
 					if(!data.express_id){
 						dialog.error('快递公司不能为空');
 						return false;
@@ -140,7 +140,7 @@
 						return false;
 					}
 
-					postData = {
+					var postData = {
 						id:id,
 						express_id:data.express_id,
 						express_sn:data.express_sn
@@ -165,31 +165,12 @@
 					},'JSON');
 				}
 			});
-
-			//expressDeliveryHtml();
 		});
 
 		// 订单信息
 		$('body').on('click','.info',function(){
 			var url = controller + 'getInfo/type/info/id/' + $(this).parents('tr').data('id');
 			layer_show('订单详情',url);
-		});
-
-		// 打印订单
-		$('body').on('click','.print',function(){
-
-			var _thisTr = $(this).parents('tr');
-			var config  = {};
-			config.title= '打印订单';
-			config.url  =  controller + 'Order/getInfo/' + _thisTr.data('id');
-
-			var pid = $(".add").data('pid');
-
-			if( pid>0&&pid!='undefined' ){
-				config.url = config.url+'/pid/'+pid;
-			}
-
-			edit(config);
 		});
 
 	});

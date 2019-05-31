@@ -19,20 +19,20 @@ class CityPartner extends \common\controller\UserBase {
         } else {
             //平台已审核通过的申请
             $modelCityPartner = new \app\index\model\CityPartner();
-            $config=[
+            $condition=[
                 'where'=>[
                     ['status', '=', 0],
-                    ['apply_status','=',3]
+                    ['apply_status','=',5]
                 ],
                 'field'=>[
                     'province','city',
                 ],
             ];
-            $cityList = $modelCityPartner -> getList($config);
+            $cityList = $modelCityPartner -> getList($condition);
             $this->assign('cityList',json_encode($cityList));
             //自己提交的申请
             $modelCityPartner = new \app\index\model\CityPartner();
-            $config=[
+            $condition=[
                 'where'=>[
                     ['status', '=', 0],
                     ['user_id','=',$this->user['id']]
@@ -41,7 +41,7 @@ class CityPartner extends \common\controller\UserBase {
                     'id','province','city','company_name','applicant','mobile','city_level','earnest','amount','apply_status'
                 ],
             ];
-            $selfApplyList = $modelCityPartner -> getList($config);
+            $selfApplyList = $modelCityPartner -> getList($condition);
             //申请中
             $apply = [];
             //已交定金或尾款申请
@@ -71,66 +71,61 @@ class CityPartner extends \common\controller\UserBase {
     public function submitApplicant()
     {
         if(!request()->isAjax()){
-            return errorMsg('请求方式错误');
+            $this->errorMsg('请求方式错误');
         }
-
+        $modelCityPartner = new \app\index\model\CityPartner();
         $postData = input('post.');
         $validate = new \app\index\validate\CityPartner();
-//        if(!$validate->scene('add')->check($postData)) {
-//            return errorMsg($validate->getError());
-//        }
-        $modelCityPartner = new \app\index\model\CityPartner();
+        $modelCityPartner -> startTrans();
         $postData['apply_status'] = $postData['step'];
+        $validateName = 'step'.$postData['apply_status'];
+        if(!$validate->scene($validateName)->check($postData)) {
+            $this->errorMsg($validate->getError());
+        }
         switch ($postData['step']){
             case 1:
+            case 2:
+                if($postData['old_apply_status']> $postData['apply_status']){
+                    unset($postData['apply_status']);
+                }
                 $postData['user_id'] = $this->user['id'];
                 $postData['create_time'] = time();
-            case 2:
+                if($postData['id']){
+                    $where = [
+                        ['id','=',$postData['id']],
+                        ['user_id','=',$this->user['id']],
+                        ['status','=',0],
+                    ];
 
-            $modelCityPartner -> startTrans();
-//            $sn = generateSN(); //内部支付编号
-//            $postData['sn'] = $sn;
-
-//            $postData['earnest'] = config('custom.cityPartner_fee')[1]['earnest'];
-//            $postData['amount'] = config('custom.cityPartner_fee')[1]['amount'];
-
-            if($postData['id']){
-                $where = [
-                    ['id','=',$postData['id']],
-                    ['status','=',0],
-                ];
-                $result  = $modelCityPartner->isUpdate(true)->save($postData,$where);
-                if(false===$result){
-                    $modelCityPartner ->rollback();
-                    return errorMsg('失败');
                 }
-            }else{
-                $result  = $modelCityPartner->isUpdate(false)->save($postData);
-                if(!$result){
+                $id  = $modelCityPartner->edit($postData,$where);
+                if(false===$id){
                     $modelCityPartner ->rollback();
-                    return errorMsg('失败');
+                    $this->errorMsg('失败');
                 }
-            }
-            break;
+                break;
             case 3:
-                $modelCityPartner = new \app\index\model\CityPartner();
-                $modelCityPartner -> startTrans();
-                $sn = generateSN(); //内部支付编号
-                $postData['sn'] = $sn;
-                $postData['user_id'] = $this->user['id'];
+                $earnestSn = generateSN(); //内部支付编号
+                $postData['earnest_sn'] = $earnestSn;
                 $postData['earnest'] = config('custom.cityPartner_fee')[1]['earnest'];
                 $postData['amount'] = config('custom.cityPartner_fee')[1]['amount'];
                 $postData['create_time'] = time();
-                $result  = $modelCityPartner->isUpdate(false)->save($postData);
-                if(!$result){
-                    $modelCityPartner ->rollback();
-                    return errorMsg('失败');
+                if($postData['id']){
+                    $where = [
+                        ['id','=',$postData['id']],
+                        ['user_id','=',$this->user['id']],
+                        ['status','=',0],
+                    ];
                 }
-
+                $id  = $modelCityPartner->edit($postData,$where);
+                if(false===$id){
+                    $modelCityPartner ->rollback();
+                    $this->errorMsg('失败');
+                }
                 //生成支付表数据
                 $modelPay = new \app\index\model\Pay();
                 $data = [
-                    'sn' => $sn,
+                    'sn' => $earnestSn,
                     'actually_amount' =>config('custom.cityPartner_fee')[1]['earnest'],
                     'user_id' => $this->user['id'],
                     'pay_code' => $postData['pay_code'],
@@ -140,37 +135,11 @@ class CityPartner extends \common\controller\UserBase {
                 $result  = $modelPay->isUpdate(false)->save($data);
                 if(!$result){
                     $modelPay ->rollback();
-                    return errorMsg('失败');
+                    $this->errorMsg('失败');
                 }
+                break;
         }
         $modelCityPartner -> commit();
-        return successMsg('成功',['url'=>config('custom.pay_gateway').$sn]);
-    }
-
-    public function getSigningInfo(){
-        $province_id = 1;
-        $city_id = 1;
-        if(!$province_id OR !$city_id){
-            return errorMsg('请求数据不能为空');
-
-        }else{
-            // 到时看下需不需要按补齐尾款的时间来判断
-            $model = new \app\index\model\CityPartner;
-
-            $condition = [
-                'where'=>[
-                    ['status',['=', 2], ['=', 3],'OR'],
-                ],
-                'field'=>['id'],
-            ];
-
-            $res = $model->getInfo($condition);
-
-            p($model->getLastSql());
-            exit;
-
-            return true;
-        }
-
+        $this->successMsg('成功',['url'=>config('custom.pay_gateway').$earnestSn,'id'=>$id]);
     }
 }
