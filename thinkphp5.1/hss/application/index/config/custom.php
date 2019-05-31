@@ -41,7 +41,7 @@ return [
         ],
         'Index/cartIndex' => [
             'name' => '采购车',
-            'a'    => 'href='.url('Index/cartIndex',['type'=>1]) . '?v=1.0',
+            'a'    => 'href='.url('Index/cartIndex',['type'=>1]) . '?v=' . rand ( 5 ,  15 ),
 //            'a'    => "href=javascript:void(0) class='my_bottom_cart async_login' data-jump_url=".url('Cart/manage'),
             'icon' => 'cart',
         ],
