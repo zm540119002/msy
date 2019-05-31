@@ -103,22 +103,22 @@
 <script type="text/javascript" src="index_js/pay1.js"></script>
 <script type="text/javascript">
 
-    var address = '';
+/*    var address = '';
     // 弹出支付方式
     $('body').on('click','.confirm_order',function(){
 
         var postData = {};
         address = addAddress(postData);
         address = JSON.stringify(address);
-    });
-
+    });*/
 
     $(function(){
         let param = {
             order_id:"{$orderInfo.id|default=0}",
-            address:address,
+            //address:address,
             init_total_amount:"{$orderInfo.actually_amount|default=0}"
         };
+
         new Vue({
             el: '#foot_cart_menu',
             data:function(){
