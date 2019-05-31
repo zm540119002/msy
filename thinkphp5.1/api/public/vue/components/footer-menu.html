@@ -57,7 +57,6 @@
                 props: {
                     type: {type: Number,default: 1},
                     cart_init_num: {type: Number,default: 0},
-                    order_id: {type: Number,default: 0},
                     init_total_amount: {type: Number,default: 0},
                     init_checked: {type: Boolean,default: false},
                     buy_now_call_back: {type: Function,default: function(param){
@@ -117,11 +116,9 @@
                         let config = {
                             clickObj:_thisJquery,
                             postData:_thisVue.postData,
-                            componentFooterCartMenu:_thisVue,
-                            func:function(){
-                                _thisJquery.click()
-                            }
+                            componentFooterCartMenu:_thisVue
                         };
+                        console.log(config);return;
                         asyncVerify(config);
                     },editProductList:function(param){
                         if(this.type==4 && !param.checked){
