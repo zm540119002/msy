@@ -97,14 +97,14 @@
 <div id="foot_cart_menu">
     <footer-menu
             :order_id="order_id"
-            :total_amount="total_amount"
+            :init_total_amount="init_total_amount"
     ></footer-menu>
 </div>
 <script type="text/javascript">
     $(function(){
         let param = {
             order_id:parseInt("{$orderInfo.id|default=0}"),
-            total_amount:"{$orderInfo.actually_amount}"
+            init_total_amount:"{$orderInfo.actually_amount}"
         };
 
         new Vue({
