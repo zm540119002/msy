@@ -213,30 +213,30 @@
                         register_success_callback_private = function(){
                             _thisJquery.click()
                         };
+
+                        _thisVue.postData.order_id = "{$orderInfo.id|default=0}";
+                        _thisVue.postData.order_sn = "{$orderInfo.sn|default=''}";
                         //前端验证
-                        if( !_thisVue.order_id ){
+                        if( !_thisVue.postData.order_id || !_thisVue.postData.order_sn ){
                             dialog.error('请选择要提交的订单 ！');
                             return false;
                         }
 
-                        var postData = {};
-                        address = addAddress(postData);
-                        address = JSON.stringify(address);
-                        console.log(address);
+                        address = getAddress();
+                        _thisVue.postData.address = JSON.stringify(address);
 
-
-   /*                     _thisVue.postData.order_id = _thisVue.order_id;
-                        if( !_thisVue.address ){
+                        if( !_thisVue.postData.address ){
                             dialog.error('请选择收货地址 ！');
                             return false;
                         }
-                        _thisVue.postData.address = _thisVue.address;
+
                         let config = {
                             clickObj:_thisJquery,
                             postData:_thisVue.postData,
                             componentFooterCartMenu:_thisVue
                         };
-                        asyncVerify(config);*/
+
+                        asyncVerify(config);
                     }
                 },created:function(){
                     let _this = this;

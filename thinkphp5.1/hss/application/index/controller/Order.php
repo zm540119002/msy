@@ -132,10 +132,12 @@ class Order extends \common\controller\UserBase
             $orderInfo  = $modelOrder->getInfo($condition);
 
             if(!$orderInfo){
-                return errorMsg('没有此订单',['code'=>1]);
+                //return errorMsg('没有此订单',['code'=>1]);
+                $this->errorMsg('没有此订单',['code'=>1]);
             }
             if($orderInfo['order_status']>1){
-                return errorMsg('订单已支付',['code'=>1]);
+                //return errorMsg('订单已支付',['code'=>1]);
+                $this->errorMsg('订单已支付',['code'=>1]);
             }
 
             $data = input('post.');
@@ -152,7 +154,8 @@ class Order extends \common\controller\UserBase
 
             if(false === $res){
                 $modelOrder ->rollback();
-                return errorMsg('失败');
+                ///return errorMsg('失败');
+                $this->errorMsg('失败');
             }
 
             $modelOrder -> commit();
@@ -160,8 +163,8 @@ class Order extends \common\controller\UserBase
                 'code'=> config('code.success.default.code'),
                 //'url' => url('Order/confirmOrder',['order_sn'=>$orderSN]),
             ];
-            return successMsg( '成功');
-            //$this->successMsg('成功',$data);
+            //return successMsg( '成功');
+            $this->successMsg('成功',$data);
 
         }else{
 
