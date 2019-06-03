@@ -152,7 +152,9 @@
                 ){ //包含add_cart，但是不能包含plus 或者 reduce才提示
                     dialog.success(param.data.info);
                 }
-                if(param.clickObj.attr('class').indexOf('buy_now')!==-1){ //立即购买
+                if(param.clickObj.attr('class').indexOf('buy_now')!==-1
+                        || param.clickObj.attr('class').indexOf('settlement')!==-1
+                ){ //立即购买 | 结算
                     location.href = param.jump_url;
                 }
                 if(param.clickObj.attr('class').indexOf('confirm_receive')!==-1){ // 提示后跳转
