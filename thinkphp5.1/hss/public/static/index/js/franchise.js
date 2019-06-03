@@ -2,6 +2,42 @@ $(function(){
     tab_down('.apply-data-nav .switch-item','.apply-module','click');
     var area_address,
         applicantData={};
+
+    //初始化 未完成的申请
+    if(!$.isEmptyArray(apply)){
+        applicantData.id= apply.id;
+        applicantData = {
+            id:apply.id,
+            name:apply.name,
+            applicant:apply.applicant,
+            mobile:apply.mobile,
+            province:apply.province,
+            city:apply.city,
+            area:apply.area,
+            detail_address:apply.detail_address,
+            old_apply_status:apply.apply_status
+        };
+
+        //省市区初始化
+        var province = apply.province;
+        var city = apply.city;
+        var area = apply.area;
+        var region = [];
+        region.push(province);
+        region.push(city);
+        region.push(area);
+        $('.area_address').setArea(region);
+        //资料初始化
+        $('.name').val(apply.name);
+        $('.applicant').val(apply.applicant);
+        $('.mobile').val(apply.mobile);
+        //定位到已完成步骤
+        var index=apply.apply_status-1;
+        $('nav.apply-data-nav li:eq('+index+')').click(function(){
+            $(this).addClass('current').siblings().removeClass('current');
+        });
+        $('nav.apply-data-nav li:eq('+index+')').click();
+    }
     //填写基本资料
     $('body').on('click','.one-step',function(){
         var _this = $(this);
