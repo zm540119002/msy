@@ -152,6 +152,7 @@
         </div>
     </li>
 </template>
+
 <script type="text/javascript">
     $(function(){
         Vue.component('product-select', {
@@ -285,6 +286,11 @@
                     };
                     asyncVerify(config);
                 },dialogCart: function (event) {
+                    // 弹出加入采购车
+                    console.log(1)
+                    $('.dialogCart').slideDown(500)
+                    $('.bg').toggle()
+                
                 },editCheckItem:function(param){
                     this.checked = param;
                 }
