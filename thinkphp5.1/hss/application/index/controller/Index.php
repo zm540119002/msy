@@ -119,7 +119,7 @@ class Index extends \common\controller\Base{
         $unlockingFooterCart = unlockingFooterCartConfigTest([21,22]);
         array_push($unlockingFooterCart['menu'][0]['class'],'group_btn50');
         array_push($unlockingFooterCart['menu'][1]['class'],'group_btn50');
- 
+
         $this->assign('unlockingFooterCart',json_encode($unlockingFooterCart));
 
         return $this->fetch();
