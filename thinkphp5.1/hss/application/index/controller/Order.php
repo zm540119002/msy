@@ -176,15 +176,15 @@ class Order extends \common\controller\UserBase
                 $this->error('没有找到该订单');
             }
 
-/*            $where = [
+            $where = [
                 ['o.status', '=', 0],
                 ['o.sn', '=', $orderSn],
                 ['o.user_id', '=', $this->user['id']],
             ];
 
-            $this->assignOrderInfo($where);*/
+            $this->assignOrderInfo($where);
 
-            $config = [
+/*            $config = [
                 'where' => [
                     ['o.status', '=', 0],
                     ['o.sn', '=', $orderSn],
@@ -214,7 +214,7 @@ class Order extends \common\controller\UserBase
             $unlockingFooterCart = unlockingFooterCartConfig([0,111,11]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
 
-            $this->assignWalletInfo();
+            $this->assignWalletInfo();*/
 
             return $this->fetch();
         }
