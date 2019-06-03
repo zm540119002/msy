@@ -56,10 +56,10 @@
 	<div class="dialogCart">
 		<div class="close" onclick="close">×</div>
 		{include file="../../api/public/vue/components/footer-menu.html" /}
-		<div id="dialogCart">
+		<div id="foot_cart_menu">
 			<footer-menu></footer-menu>
 		</div>
-		
+	</div>
 </article>
 
 {/block}
@@ -117,7 +117,7 @@
 			}
 		});
 		new Vue({
-            el:'#dialogCart',
+            el:'#foot_cart_menu',
             data:function(){
                 return {};
             }
