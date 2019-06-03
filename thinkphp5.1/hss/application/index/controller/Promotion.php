@@ -24,23 +24,15 @@ class Promotion extends \common\controller\Base{
             promotion_handle($info);
             $this->assign('info',$info);
 
-            // 购物车商品总数量
-/*            $cartSum = 0;
-            if( $user = session('user') ){
-                $modelCart = new \app\index\model\Cart();
-                $cartSum  = $modelCart->where([['user_id','=',$user['id']],['status','=',0]])->sum('num');
-            }
-            $this->assign('cartSum',$cartSum);*/
-
             Cart::getCartTotalNum();
-            $this->assignStandardBottomButton([0,3]);
+            //$this->assignStandardBottomButton([0,2,3]);
 
-/*            $unlockingFooterCart = unlockingFooterCartConfigTest([0,3]);
-            array_push($unlockingFooterCart['menu'][0]['class'],'group_btn50');
-            array_push($unlockingFooterCart['menu'][1]['class'],'group_btn50');
-            array_push($unlockingFooterCart['menu'][2]['class'],'group_btn30');
-            array_push($unlockingFooterCart['menu'][3]['class'],'group_btn30');
-            $this->assign('unlockingFooterCart',json_encode($unlockingFooterCart));*/
+            $unlockingFooterCart = unlockingFooterCartConfigTest([0,2,3]);
+            array_push($unlockingFooterCart['menu'][0]['class'],'group_btn25');
+            array_push($unlockingFooterCart['menu'][1]['class'],'group_btn25');
+            array_push($unlockingFooterCart['menu'][2]['class'],'group_btn70');
+
+            $this->assign('unlockingFooterCart',json_encode($unlockingFooterCart));
 
             $this->assign('relation',config('custom.relation_type.promotion'));
         }
