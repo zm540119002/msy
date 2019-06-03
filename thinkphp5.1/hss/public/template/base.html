@@ -62,13 +62,13 @@
 <script type="text/javascript" src="api_common_js/dialog.js"></script>
 <script type="text/javascript" src="api_common_js/paging.js"></script>
 <script type="text/javascript">
+    //异步验证
     function asyncVerify(config){
         let jump_url = config.clickObj.data('jump_url');
         if(!config.clickObj || !jump_url){
             dialog.error('参数错误！');
             return false;
         }
-        //异步验证
         $.ajax({
             url: jump_url,
             data: config.postData,
@@ -152,7 +152,9 @@
                 ){ //包含add_cart，但是不能包含plus 或者 reduce才提示
                     dialog.success(param.data.info);
                 }
-                if(param.clickObj.attr('class').indexOf('buy_now')!==-1){ //立即购买
+                if(param.clickObj.attr('class').indexOf('buy_now')!==-1
+                        || param.clickObj.attr('class').indexOf('settlement')!==-1
+                ){ //立即购买 | 结算
                     location.href = param.jump_url;
                 }
                 if(param.clickObj.attr('class').indexOf('confirm_receive')!==-1){ // 提示后跳转

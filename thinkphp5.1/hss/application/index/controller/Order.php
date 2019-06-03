@@ -170,8 +170,6 @@ class Order extends \common\controller\UserBase
             $this->successMsg('成功',$data);
 
         }else{
-
-
             $orderSn = input('order_sn/s');
 
             if(empty($orderSn)){
@@ -205,10 +203,9 @@ class Order extends \common\controller\UserBase
             // 显示地址
             $this->getOrderAddressInfo($orderInfo);
 
-            $unlockingFooterCart = unlockingFooterCartConfigTest([0,20]);
-            array_push($unlockingFooterCart['menu'][0]['class'],'group_btn70');
-            array_push($unlockingFooterCart['menu'][1]['class'],'group_btn30');
-            $this->assign('unlockingFooterCart',json_encode($unlockingFooterCart));
+            $unlockingFooterCart = unlockingFooterCartConfig([0,111,11]);
+            $this->assign('unlockingFooterCart', $unlockingFooterCart);
+
             $this->assignWalletInfo();
 
             return $this->fetch();
@@ -307,7 +304,27 @@ class Order extends \common\controller\UserBase
     //订单-详情页
     public function detail()
     {
+
+
         $orderSn = input('order_sn/s');
+
+        if(!$orderSn){
+            $this->error('没有找到该订单');
+        }
+
+        $where = [
+            ['o.status', '=', 0],
+            ['o.sn', '=', $orderSn],
+            ['o.user_id', '=', $this->user['id']],
+        ];
+
+        $this->assignOrderInfo($where);
+
+     /*   $orderSn = input('order_sn/s');
+
+        if(!$orderSn){
+            $this->error('没有找到该订单');
+        }
         $config=[
             'where'=>[
                 ['o.status', '=', 0],
@@ -372,7 +389,6 @@ class Order extends \common\controller\UserBase
                 $unlockingFooterCart = unlockingFooterCartConfigTest($configFooter);
                 array_push($unlockingFooterCart['menu'][0]['class'],'group_btn70');
                 array_push($unlockingFooterCart['menu'][1]['class'],'group_btn30');
-
                 break;
             case "2":
             case "3":
@@ -402,9 +418,8 @@ class Order extends \common\controller\UserBase
         }
 
 
-        $this->assign('unlockingFooterCart',json_encode($unlockingFooterCart));
+        $this->assign('unlockingFooterCart',json_encode($unlockingFooterCart));*/
         return $this->fetch();
-
     }
 
     /**
@@ -593,6 +608,108 @@ class Order extends \common\controller\UserBase
         $walletInfo = $modelWallet->getInfo($config);
 
         $this->assign('walletInfo', $walletInfo);
+    }
+
+    /**
+     * 详情
+     */
+    private function assignOrderInfo($where=[]){
+
+        $config=[
+            'where'=>[
+                ['o.status', '=', 0],
+                ['o.user_id', '=', $this->user['id']],
+            ],
+            'field'=>[
+                'o.id','o.pay_sn','o.sn','o.order_status','o.pay_code','o.amount','o.actually_amount','o.remark',
+                'o.consignee','o.mobile','o.province','o.city','o.area','o.detail_address','o.create_time','o.payment_time',
+                'o.finished_time',
+                'u.name','u.mobile_phone'
+            ],'join'=>[
+                ['common.user u','u.id = o.user_id','left'],
+            ],'order'=>[
+                'o.id'=>'desc'
+            ]
+        ];
+        if($where){
+            $config['where'] = $where;
+        }
+
+        $model= new \app\index\model\Order();
+        $info = $model->getInfo($config);
+
+        if(empty($info)){
+            $this->error('没有找到该订单');
+        }
+
+        $info =  $info!=0?$info->toArray():[];
+        $modelOrderDetail = new \app\index\model\OrderDetail();
+        $config=[
+            'where'=>[
+                ['od.status', '=', 0],
+                ['od.father_order_id','=',$info['id']]
+            ],
+            'field'=>[
+                'od.goods_id', 'od.price', 'od.num', 'od.buy_type','od.brand_id','od.brand_name',
+                'g.name','g.thumb_img','g.specification'
+            ],
+            'join'=>[
+                ['goods g','g.id = od.goods_id','left'],
+            ],
+
+        ];
+        $goodsList = $modelOrderDetail -> getList($config);
+
+        $info['goods_list']= $goodsList;
+        $info['goods_num'] = array_sum(array_column($goodsList,'num'));
+
+        $this->assign('orderInfo',$info);
+
+        // 显示的地址信息
+        $this->getOrderAddressInfo($info);
+
+        // 钱包余额
+        $this->assignWalletInfo();
+
+        $unlockingFooterCart = false;
+        // 底部按钮
+        // 0：临时 1:待付款 2:待收货 3:待收货 4:待评价 5:已完成 6:已取消',
+        switch ($info['order_status'])
+        {
+            case "1":
+                $configFooter = [0,20];
+                $unlockingFooterCart = unlockingFooterCartConfigTest($configFooter);
+                array_push($unlockingFooterCart['menu'][0]['class'],'group_btn70');
+                array_push($unlockingFooterCart['menu'][1]['class'],'group_btn30');
+                break;
+            case "2":
+            case "3":
+                $configFooter = [12];
+                break;
+            case "4":
+                $configFooter = [13];
+                break;
+            case "5":
+                $configFooter = [14];
+                break;
+            case "6":
+                $configFooter = [];
+                break;
+            default:
+                $configFooter = [];
+        }
+
+        if(!$unlockingFooterCart){
+            $unlockingFooterCart = unlockingFooterCartConfigTest($configFooter);
+
+            $num = floor(100/count($configFooter));
+
+            foreach($configFooter as $k => $v){
+                array_push($unlockingFooterCart['menu'][$k]['class'],'group_btn'.$num);
+            }
+        }
+
+        $this->assign('unlockingFooterCart',json_encode($unlockingFooterCart));
     }
 
 
