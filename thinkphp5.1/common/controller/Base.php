@@ -172,6 +172,23 @@ class Base extends \think\Controller{
         }
         return $tempRelativePath . $fileName;
     }
+
+    /**
+     * 输出标准底部框
+     */
+    public function assignStandardBottomButton($configFooter=[]){
+
+        if($configFooter){
+            $unlockingFooterCart = unlockingFooterCartConfigTest($configFooter);
+
+            $num = floor(100/count($configFooter));
+
+            foreach($configFooter as $k => $v){
+                array_push($unlockingFooterCart['menu'][$k]['class'],'group_btn'.$num);
+            }
+            $this->assign('unlockingFooterCart',json_encode($unlockingFooterCart));
+        }
+    }
   
 
 
