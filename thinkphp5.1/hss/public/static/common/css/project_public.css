@@ -524,9 +524,9 @@ nav .back_prev_page{
   display:flex;
   justify-content: space-between;
 }
-.selected-number{
+/*.selected-number{
     display:block;
-}
+}*/
 .four-line-omit{
     line-height:24px;
 }
