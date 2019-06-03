@@ -17,7 +17,7 @@ $(function(){
             detail_address:apply.detail_address,
             old_apply_status:apply.apply_status
         };
-
+        console.log(apply.detail_address)
         //省市区初始化
         var region = [];
         region.push(apply.province);
