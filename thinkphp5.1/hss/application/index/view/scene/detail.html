@@ -55,6 +55,7 @@
 	<div class="bg"></div>
 	<div class="dialogCart">
 		<div class="close" onclick="close">×</div>
+		{include file="../../api/public/vue/components/footer-menu.html" /}
 		<div id="dialogCart">
 			<footer-menu></footer-menu>
 		</div>
@@ -65,7 +66,7 @@
 {block name="common"}{/block}
 {block name="footer"}
 {include file="../../api/public/vue/components/product-select.html" /}
-{include file="../../api/public/vue/components/footer-menu.html" /}
+
 <script type="text/javascript">
 	$(function(){
 		let param = {
