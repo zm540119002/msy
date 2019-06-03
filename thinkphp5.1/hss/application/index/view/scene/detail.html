@@ -69,6 +69,16 @@
 	</div>
 <script type="text/javascript">
 	$(function(){
+		new Vue({
+            el:'#foot_cart_menu',
+            data:function(){
+                return {};
+            }
+        });
+	})
+</script>
+<script type="text/javascript">
+	$(function(){
 		let param = {
 			type:0,
 			init_quantity:1,
@@ -116,12 +126,6 @@
 				});
 			}
 		});
-		new Vue({
-            el:'#foot_cart_menu',
-            data:function(){
-                return {};
-            }
-        });
 	});
 </script>
 {/block}
