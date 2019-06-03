@@ -30,7 +30,7 @@
         </td>
         <td class="w96">
             <a href="javascript:void(0);" class="info" style="text-decoration:none" title="详情">订单详情</a>
-            | <a href="javascript:void(0);" class="print" style="text-decoration:none" title="打印订单">打印订单</a>
+            | <a href="{:url('getInfo',['type'=>'print','id'=>$vo.id])}" target="_blank" style="text-decoration:none" title="打印订单">打印订单</a>
             {if $vo.order_status==2}
             <!--2:待发货-->
             | <a href="javascript:void(0);" class="ship" style="text-decoration:none" title="发货">发货</a>
@@ -46,12 +46,8 @@
         </td>
         <td>
             <form style="display:none;" class="consigneeInfo">
-                <input type="hidden" class="" name="id" value="{$vo.id}" />
+                <input type="hidden" class="" name="complete_address" value="{$vo.complete_address}" />
                 <input type="hidden" class="" name="sn" value="{$vo.sn}" />
-                <input type="hidden" class="" name="province" value="{$vo.province}" />
-                <input type="hidden" class="" name="city" value="{$vo.city}" />
-                <input type="hidden" class="" name="area" value="{$vo.area}" />
-                <input type="hidden" class="" name="detail_address" value="{$vo.detail_address}" />
             </form>
         </td>
     </tr>

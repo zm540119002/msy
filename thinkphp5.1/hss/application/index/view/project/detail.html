@@ -79,12 +79,12 @@
 						</div>
 						{/volist}
 					</div>
-					<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
+<!--					<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
 						<span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span>
 						<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 2"></span>
 						<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 3"></span>
 						<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 4"></span>
-					</div>
+					</div>-->
 				</div>
 			</section>
 		</div>
@@ -116,10 +116,7 @@
 {block name="common"}
 {/block}
 {block name="footer"}
-{include file="../../api/public/vue/components/footer-cart-menu.html" /}
-{/block}
-{block name="script"}
-<script type="text/javascript" src="api_common_js/swiper.min.js"></script>
+{include file="../../api/public/vue/components/product-select.html" /}
 <script type="text/javascript">
 	$(function(){
 		let param = {
@@ -172,6 +169,9 @@
 		});
 	});
 </script>
+{/block}
+{block name="script"}
+<script type="text/javascript" src="api_common_js/swiper.min.js"></script>
 <script type="text/javascript">
 	$(function(){
 		var id = '{$info.id}';
@@ -186,7 +186,6 @@
 		//轮播
 		var swiper = new Swiper('.swiper-container', {
 			spaceBetween: 30,
-			autoplay:true,
 			pagination: {
 				el: '.swiper-pagination',
 				clickable: true

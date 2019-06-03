@@ -2,18 +2,42 @@
 namespace common\model;
 
 class Base extends \think\Model {
-	/**增加或修改
+	/**编辑单条记录
 	 */
-	public function edit($data,$condition=[]){
-		$res = $this->allowField(true)->save($data,$condition);
+	public function edit($data,$where=[]){
+		if($data['id'] || (count($where) && intval($where['id'])) ){//修改
+			if($data['id']){
+				$res = $this->allowField(true)->isUpdate(true)->save($data);
+				$id = $data['id'];
+			}elseif(count($where) && intval($where['id'])){
+				unset($data['id']);
+				$res = $this->allowField(true)->isUpdate(true)->save($data,$where);
+				$id = $where['id'];
+			}
+		}else{//新增
+			unset($data['id']);
+			$res = $this->allowField(true)->isUpdate(false)->save($data);
+			$id = $this->getAttr('id');
+		}
 		if($res === false){
-			return errorMsg('失败');
+			return false;
 		}
-		$returnArray = [];
-		if(empty($condition)){
-			$returnArray['id'] = $this->getAttr('id');
+		return $id;
+	}
+
+	/**编辑多条记录
+	 */
+	public function editAll($data,$where=[]){
+		if(count($where)){//修改
+			//暂没实现
+			//$res = $this->allowField(true)->isUpdate(true)->save($data,$where);
+		}else{//新增
+			$res = $this->allowField(true)->saveAll($data,false);
 		}
-		return successMsg('成功',$returnArray);
+		if($res === false){
+			return false;
+		}
+		return $res;
 	}
 
 	/**查询多条数据
@@ -24,7 +48,6 @@ class Base extends \think\Model {
 				'*',
 			],
 		];
-
 		$_config = array_merge($_config,$config);
 		$_model = $this->alias($this->alias);
 		foreach ($_config as $key=>$value){
@@ -71,7 +94,6 @@ class Base extends \think\Model {
 				$_model = $_model->$key($value);
 			}
 		}
-
 		$pageSize = (isset($_GET['pageSize']) && intval($_GET['pageSize'])) ?
 			input('get.pageSize',0,'int') : config('custom.default_page_size');
 
@@ -102,12 +124,6 @@ class Base extends \think\Model {
 	}
 
     /**验证字段唯一性
-     * @param $fieldName
-     * @param $config
-     * @return array|\PDOStatement|string|\think\Model|null
-     * @throws \think\db\exception\DataNotFoundException
-     * @throws \think\db\exception\ModelNotFoundException
-     * @throws \think\exception\DbException
      */
 	public function checkUnique($fieldName,$config){
 		$_config = [
@@ -127,8 +143,6 @@ class Base extends \think\Model {
 	}
 
     /**根据手机号码检查正常账号
-     * @param $mobilePhone
-     * @return array|mixed
      */
 	protected function checkUserExistByMobilePhone($mobilePhone){
 		if(!isMobile($mobilePhone)){
@@ -151,8 +165,7 @@ class Base extends \think\Model {
 
 	// 设置数据库配置
 
-    /**
-     * @param \think\db\Connection $config
+    /**@param \think\db\Connection $config
      * @return \think\Model|void
      */
     public function setConnection($config){

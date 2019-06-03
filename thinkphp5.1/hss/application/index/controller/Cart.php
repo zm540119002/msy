@@ -23,7 +23,7 @@ class Cart extends \common\controller\UserBase {
         if(!request()->isPost()){
             $this->errorMsg('请求方式错误',config('code.error.default'));
         }
-        $goodsList = input('post.goodsList/a');
+        $goodsList = input('post.data/a');
         if(empty($goodsList)){
             $this->errorMsg('没有数据',config('code.error.default'));
         }
@@ -104,7 +104,7 @@ class Cart extends \common\controller\UserBase {
         if(!request()->isAjax()){
             return errorMsg(config('custom.not_ajax'));
         }
-        $goodsList = input('post.goodsList/a');
+        $goodsList = input('post.data/a');
         if(empty($goodsList)){
             $this->errorMsg('没有数据！',config('code.error.default'));
         }
@@ -121,7 +121,7 @@ class Cart extends \common\controller\UserBase {
         if($result['status']){
             $this->successMsg('删除成功！',config('code.success.default'));
         }else{
-            $this->errorMsg('删除失败！',config('code..default'));
+            $this->errorMsg('删除失败！',config('code.default'));
         }
     }
 

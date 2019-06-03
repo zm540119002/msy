@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>订单打印</title>
+</head>
+<style>
+body{font-size:13px;}
+td,th{padding:2px;}
+</style>
+<body>
+<table width='100%' border='0'>
+  <tr>
+    <td colspan='8' style='text-align:center;font-weight:bold;font-size:26px'>订单信息</td>
+  </tr>
+  <tr>
+    <td width='100' align="right">下单时间：</td>
+    <td width='250'>{$info.createTime}</td>
+    <td width='100' align="right">支付方式：</td>
+    <td width='250'>{$info.pay_code}</td>
+    <td width='100' align="right">订单编号：</td>
+    <td width='250'>{$info.sn}</td>
+  </tr>
+  <tr>
+    <td width='100' align="right">快递单号：</td>
+    <td>{$info.express_sn}</td>
+  </tr>
+  <tr>
+    <td width='100' align="right">收货地址：</td>
+    <td colspan="6">{$info.complete_address}</td>
+  </tr>
+  {if $info.remark!=''}
+  <tr>
+    <td width='100' align="right">订单备注：</td>
+    <td colspan="6">{$info.remark}</td>
+  </tr>
+  {/if}
+</table>
+<table width='100%' border='1' style='border-collapse:collapse;border-color:#000;'>
+  <tr style='background:#cccccc;'>
+    <th align="left">商品名称</th>
+    <th align="left">商品规格</th>
+    <th align="left" align="left">商品价格</th>
+    <th align="left">商品数量</th>
+    <th align="left">小计</th>
+  </tr>
+  {volist name="info.goods_info" id="vo"}
+  <tr>
+    <td>{$vo.goods_name}</td>
+    <td>{$vo.specification}</td>
+    <td>¥{$vo.price}</td>
+    <td>{$vo.num}</td>
+    <td>¥{$vo.price*$vo.num}</td>
+  </tr>
+  {/volist}
+  </table>
+  <table width='100%' border='0'>
+  <tr>
+    <td colspan='6' align="right">商品总金额：¥{$info.amount}</td>
+  </tr>
+  <tr>
+    <td colspan='6' align="right">应付金额：¥{$info.actually_amount}</td>
+  </tr>
+  <tr>
+    <td colspan='6' align="right">优惠抵扣金额：¥-{$info.coupons_amount}</td>
+  </tr>
+  <tr>
+    <td colspan='6' align="right">实付金额：¥{$info.actually_amount}</td>
+  </tr>
+</table>
+<br/>
+<table width='100%'>
+   <tr>
+     <td>商家：黑森森&nbsp;&nbsp;&nbsp;电话：</td>
+     <td align="right">打印时间：{:date('Y-m-d H:i:s')}</td>
+   </tr>
+</table>
+</body>
+<script>
+window.print();
+</script>
+</html>

@@ -5,97 +5,62 @@
 <div class="page-container">
     <div class="form form-horizontal" id="form1">
         <div class="row cl">
-            <div class="col-xs-4 col-sm-2">订单信息：</div>
+            <div class="col-xs-4 col-sm-2"><strong>订单信息</strong></div>
         </div>
         <div class="row cl">
-            <div class="col-sm-12">订单信息：</div>
-            <div class="col-sm-12">订单信息：</div>
-            <div class="col-xs-4 col-sm-2">订单信息：</div>
-            <div class="col-xs-4 col-sm-2">订单信息：</div>
+            <div class="col-sm-12">订单编号：{$info.sn}</div>
+            <div class="col-sm-12">支付方式：{$Think.config.custom.pay_code[$info.pay_code]}</div>
+            <div class="col-sm-12">支付时间：{$info.payment_time|date='Y-m-d H:i:s'}</div>
+            <div class="col-sm-12">交易流水：{$info.pay_sn}</div>
+            <div class="col-sm-12">配送方式：{$info.express_sn}</div>
         </div>
         <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-2">标签：</label>
-            <div class="formControls col-xs-8 col-sm-9">
-                <input type="text" class="input-text" placeholder="多个标签请用逗号分隔，例如：正品保障,纳晶水光" name="tag" value="">
+            <div class="col-sm-12"><strong>收货人信息</strong></div>
+        </div>
+        <div class="row cl">
+            <div class="col-sm-12">收货人：{$info.consignee}</div>
+            <div class="col-sm-12">收货地址：{$info.complete_address}</div>
+            <div class="col-sm-12">联系方式：{$info.mobile}</div>
+        </div>
+        <div class="order-box">
+            <div class="box-head"><strong>商品清单</strong></div>
+            <div class="goods-head">
+                <div class="goods">商品</div>
+                <div class="number">商品编号</div>
+                <div class="price">单价</div>
+                <div class="num">数量</div>
+                <div class="t-price">总价</div>
             </div>
-        </div>
-        <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-2">排序：</label>
-            <div class="formControls col-xs-8 col-sm-9">
-                <input type="text" class="input-text" placeholder="" name="sort" value="">
-            </div>
-        </div>
-        <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>项目主图：</label>
-            <div class="formControls col-xs-8 col-sm-9">
-                <script id="main_img" type="text/plain"></script>
-                <input id="mainImg" type="hidden" value="">
-            </div>
-        </div>
-
-        <div class="row cl"></div>
-        <hr/>
-        <div class="row cl"></div>
-
-        <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>项目介绍：</label>
-            <div class="formControls col-xs-8 col-sm-9">
-                <script id="detail_img" type="text/plain"></script>
-                <input id="detailImg" type="hidden" value="">
-            </div>
-        </div>
-
-        <div class="row cl"></div>
-        <hr/>
-        <div class="row cl"></div>
-
-        <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-2">操作描述：</label>
-            <div class="formControls col-xs-8 col-sm-9">
-                <script id="description" type="text/plain">
-
-                </script>
-            </div>
-        </div>
-        <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-2">项目流程：</label>
-            <div class="formControls col-xs-8 col-sm-9 process">
-                <ul class="upload-picture-module multi-picture-moduleDes hss-picture-moduleDes f24">
-
-                </ul>
-                <div class="error_tipc"></div>
-                <div class="upload-picture-module margin-left f24">
-                    <div class="picture-module" style="width: 50px; height: 50px;">
-                        <input type="file" class="uploadImg uploadImgDescribe " name="" accept="image/*" multiple>
+            <div class="goods-item">
+                <div class="goods-list">
+                    {volist name="info['goods_info']" id="vo"}
+                    <div class="item j-g4">
+                        <div class="goods">
+                            <div class="img">
+                                <a href="{:url('Goods/detail',['id'=>$vo.id])}" target="_blank">
+                                    <img src="{:show_img_handle($vo.goods_img)}" width="80" height="80" title="{$vo.goods_name}">
+                                    商品名称
+                                </a>                              
+                            </div>   
+                            <div class="name">{$vo.goods_name}</div>                         
+                        </div>
+                        
+                        <div class="spec">商品编号</div>
+                        <div class="price">¥{$vo.price}</div>
+                        <div class="num">{$vo.num}</div>
+                        <div class="t-price">¥{$vo.price*$vo.num}</div>
+                        <div class="f-clear"></div>
                     </div>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <span class="c-red">*</span>支持选择多张图片
+                    {/volist}
                 </div>
             </div>
-        </div>
-
-        <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-2">项目注意事项：</label>
-            <div class="formControls col-xs-8 col-sm-9">
-                <script id="remarks" type="text/plain">
-
-                </script>
-            </div>
-        </div>
-        <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-2">推荐商品：</label>
-            <div class="formControls col-xs-8 col-sm-9">
-                <button type="button" class="btn btn-primary radius recommend"><i class="Hui-iconfont"></i> 添加商品</button>
-                已选择 <span class="c-red"></span> 种商品    <span class="c-red">*</span>只展示前4款商品
-            </div>
-        </div>
-        <div class="row cl">
-            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
-                <input type="hidden" name='id' value="{$info.id}">
-                <input type="hidden" name='ids' value="">
-                <button class="btn btn-primary radius button_save_black_4" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
-                <button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
-                <span class="c-red">*</span>(图片只显示缩略图，不影响原效果)
+            <div class="goods-footer">
+                <div class="goods-summary" style="text-align:right">
+                    <div class="summary">商品总金额：¥<span>{$info.amount}</span></div>
+                    <div class="summary line">应付总金额：¥<span>{$info.actually_amount}</span></div>
+                    <div class="summary">优惠抵扣金额：¥-<span>{$info.coupons_amount}</span></div>
+                    <div class="summary">实付总金额：¥<span>{$info.actually_amount}</span></div>
+                </div>
             </div>
         </div>
     </div>

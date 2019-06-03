@@ -2,6 +2,7 @@
 $(function () {
     // 弹出支付方式
     $('body').on('click','.confirm_order',function(){
+
         var _this = $(this);
         var postData = {};
         postData = addAddress(postData);
@@ -91,6 +92,14 @@ function addAddress(postData) {
     postData.area     = $('.consigneeInfo input[name="area"]').val();
     postData.detail_address = $('.consigneeInfo input[name="layer_detail_address"]').val();
     postData.address_id = addressId;
+
+    // 详细地址
+    var region = [];
+    region.push(postData.province);
+    region.push(postData.city);
+    region.push(postData.area);
+    region = areaObject.setArea(region);
+    postData.complete_address = region+postData.detail_address;
 
     return postData;
 }

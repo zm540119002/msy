@@ -7,7 +7,7 @@
 <section class="no_cart_data" style="display:none;">
 	<li class="no_data">
 		<img src="https://www.worldview.com.cn/static/common/img/no-cart.png" alt="">
-		<a  href="{:url('Index/index')}" >
+		<a  href="{:url('Index/index')}" class="go-stroll">
 			去逛逛!
 		</a>
 	</li>
@@ -51,25 +51,13 @@
 	{/if}
 </article>
 {/block}
-{block name="login_dialog"}
-<script type="text/javascript">
-	var login_success_callback_private = function(){
-		location.reload();
-	};
-	var register_success_callback_private = function(){
-		location.reload();
-	};
-</script>
-{include file="../../api/public/vue/components/login.html" /}
-{/block}
 {block name="footer"}
-{block name="footer"}
-{include file="../../api/public/vue/components/footer-cart-menu.html" /}
+{include file="../../api/public/vue/components/footer-menu.html" /}
 <div id="foot_cart_menu">
-	<footer-cart-menu
+	<footer-menu
 			:type="type"
 			:cart_init_num="cart_init_num"
-	></footer-cart-menu>
+	></footer-menu>
 </div>
 <script type="text/javascript">
 	$(function(){
@@ -77,7 +65,7 @@
 		let total_num = parseInt("{$total_num|default=0}");
 		//localStorage里商品信息
 		if(localStorage.cartList){
-			let goodsList = (JSON.parse(localStorage.cartList)).goodsList;
+			let goodsList = (JSON.parse(localStorage.cartList)).data;
 			$.each(goodsList,function(i,goods){
 				total_num += goods['num'];
 			});
@@ -99,6 +87,7 @@
 
 	});
 </script>
+{include file="../../api/public/vue/components/product-select.html" /}
 <script type="text/javascript">
 	$(function(){
 		let param = {
@@ -120,30 +109,16 @@
 			el: '#product-list',
 			data:function(){
 				return param;
-			},methods:{
-				getJsonListCallBack:function(data){
-					if(data.status==0){
+			},methods: {
+				getJsonListCallBack: function (data) {
+					if (data.status == 0) {
 						dialog.error(data.info);
 						return false;
 					}
 					let _this = this;
-					$.each(data.data.data,function(i,o){
+					$.each(data.data.data, function (i, o) {
 						_this.productList.push(o);
 					});
-				},delCart:function(param){
-					return false;
-					let _this = this;
-					let findIndex = -1;
-					$.each(this.productList,function(i,o){
-						$.each(param.postData.goodsList,function(ii,oo){
-							if(o.id == oo.goods_id){
-								findIndex = i;
-							}
-						});
-					});
-					if(findIndex !== -1){
-						Vue.delete(_this.productList,findIndex);
-					}
 				}
 			},created:function(){
 				let _thisVue = this;
@@ -157,10 +132,6 @@
 						_thisVue.getJsonListParam.loadTrigger = false;
 						vueVersionGetJsonList(_thisVue);
 					}
-				});
-				//监听-产品列表-删除购物车-事件
-				bus.$on('product_list_delete_cart', function(param){
-					_thisVue.delCart(param);
 				});
 			}
 		});

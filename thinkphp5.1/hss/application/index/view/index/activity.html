@@ -5,6 +5,23 @@ html,body {
     position: relative;
     height: 100%;
 }
+.back, .back_prev_page {
+    position: absolute;
+    left: 0;
+    top: 0.56rem;
+    width: 1rem;
+    height: 1rem;
+    display: block;
+    margin-left: 5px;
+    background: url(../../static/common/img/icons/back.png) no-repeat center;
+    background-size: 0.45rem auto;
+}
+.foot_nav_bar a span.f_icon{
+    width:1.8rem;
+    height:1.5rem;
+    background-size: 1.8rem 26rem;
+    background-image:url(../../static/common/img/icons/public_bottom_icons.png);
+}
 .swiper-container {
     width: 100%;
     height: 100%;
@@ -29,11 +46,11 @@ html,body {
     align-items: center;
 }
 .swiper-container-vertical>.swiper-wrapper {
--webkit-box-orient: vertical;
--webkit-box-direction: normal;
--webkit-flex-direction: column;
--ms-flex-direction: column;
-flex-direction: column;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
 }
 .header_title{
     position:relative;
@@ -42,87 +59,90 @@ flex-direction: column;
     width:100%;
     padding:0.5rem 0;
 }
-.back, .back_prev_page {
-    position: absolute;
-    left: 0;
-    top: 0.56rem;
-    width: 1rem;
-    height: 1rem;
-    display: block;
-    margin-left: 5px;
-    background: url(../../common/img/icons/back.png) no-repeat center;
-    background-size: 0.45rem auto;
+.foot_nav_bar{
+    padding: 0.3rem 0;
 }
-  </style>
+.foot_nav_bar a span.practitioners {
+    background-position: 0 -2rem;
+}
+.foot_nav_bar a span.business {
+    background-position: 0 -3.8rem;
+}
+.foot_nav_bar a span.cart {
+    background-position: -0.028rem -12rem;
+}
+.foot_nav_bar a span.my {
+    background-position: 0 -14.6rem;
+}
 </style>
 {/block}
 {block name="content"}
-    <section class="header_title separation-line">
-        <a href="javascript:void(0);" class="back_prev_page" data-jump_url=""></a>
-        <h2 class="f24">开放日</h2>
-    </section>
-     <div class="swiper-container swiper-container-initialized swiper-container-vertical swiper-container-ios">
-        <div class="swiper-wrapper">
-             <div class="swiper-slide ">
-                  <img src="public_img/cpy_01.jpg" alt="" class="common_default_img">
-             </div>
-             <div class="swiper-slide">
-                  <img src="public_img/cpy_02.jpg" alt="" class="common_default_img">
-             </div>
-             <div class="swiper-slide ">
-                  <img src="public_img/cpy_03.jpg" alt="" class="common_default_img">
-             </div>
-             <div class="swiper-slide ">
-                  <img src="public_img/cpy_04.jpg" alt="" class="common_default_img">
-             </div>
-              <div class="swiper-slide ">
-                  <img src="public_img/develp_01.jpg" alt="" class="common_default_img">
-             </div>
-              <div class="swiper-slide ">
-                  <img src="public_img/develp_02.jpg" alt="" class="common_default_img">
-             </div>
-              <div class="swiper-slide ">
-                  <img src="public_img/develp_03.jpg" alt="" class="common_default_img">
-             </div>
-              <div class="swiper-slide ">
-                  <img src="public_img/develp_04.jpg" alt="" class="common_default_img">
-             </div>
-              <div class="swiper-slide ">
-                  <img src="public_img/develp_05.jpg" alt="" class="common_default_img">
-             </div>
-              <div class="swiper-slide ">
-                  <img src="public_img/develp_06.jpg" alt="" class="common_default_img">
-             </div>
-              <div class="swiper-slide ">
-                  <img src="public_img/develp_07.jpg" alt="" class="common_default_img">
-             </div>
+<section class="header_title separation-line">
+    <a href="javascript:void(0);" class="back_prev_page" data-jump_url=""></a>
+    <h2 class="f24">开放日</h2>
+</section>
+<div class="swiper-container swiper-container-initialized swiper-container-vertical swiper-container-ios">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide ">
+            <img src="public_img/cpy_01.jpg" alt="" class="common_default_img">
         </div>
-        <!--<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"><span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 2"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 3"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 4"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 5"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 6"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 7"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 8"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 9"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 10"></span></div>-->
-     </div>
+        <div class="swiper-slide">
+            <img src="public_img/cpy_02.jpg" alt="" class="common_default_img">
+        </div>
+        <div class="swiper-slide ">
+            <img src="public_img/cpy_03.jpg" alt="" class="common_default_img">
+        </div>
+        <div class="swiper-slide ">
+            <img src="public_img/cpy_04.jpg" alt="" class="common_default_img">
+        </div>
+        <div class="swiper-slide ">
+            <img src="public_img/develp_01.jpg" alt="" class="common_default_img">
+        </div>
+        <div class="swiper-slide ">
+            <img src="public_img/develp_02.jpg" alt="" class="common_default_img">
+        </div>
+        <div class="swiper-slide ">
+            <img src="public_img/develp_03.jpg" alt="" class="common_default_img">
+        </div>
+        <div class="swiper-slide ">
+            <img src="public_img/develp_04.jpg" alt="" class="common_default_img">
+        </div>
+        <div class="swiper-slide ">
+            <img src="public_img/develp_05.jpg" alt="" class="common_default_img">
+        </div>
+        <div class="swiper-slide ">
+            <img src="public_img/develp_06.jpg" alt="" class="common_default_img">
+        </div>
+        <div class="swiper-slide ">
+            <img src="public_img/develp_07.jpg" alt="" class="common_default_img">
+        </div>
+    </div>
+    <!--<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"><span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 2"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 3"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 4"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 5"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 6"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 7"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 8"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 9"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 10"></span></div>-->
+</div>
 {/block}
 {block name="footer"}
-
+{include file="template/footer_project.html" /}
 {/block}
 {block name="script"}
 <script type="text/javascript" src="api_common_js/swiper.min.js"></script>
 <script>
     //     (function($){
     // var deviceWidth=document.documentElement.clientWidth;
-   
+
     // })(jQuery);
-        $(function(){
-            var html =document.getElementsByTagName('html')[0];
-            html.style.fontSize='';
-            $('.swiper-slide ').css('height',$(window).height()+'px');
-            //$('body').css({height:100+'%',position:'relative'});
-        })
-        var swiper = new Swiper('.swiper-container', {
+    $(function(){
+        var html =document.getElementsByTagName('html')[0];
+        html.style.fontSize='';
+        $('.swiper-slide ').css('height',$(window).height()+'px');
+        //$('body').css({height:100+'%',position:'relative'});
+    })
+    var swiper = new Swiper('.swiper-container', {
         direction: 'vertical',
         pagination: {
             el: '.swiper-pagination',
             clickable: true,
         },
-        });
+    });
 
 </script>
 {/block}

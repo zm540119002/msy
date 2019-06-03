@@ -4,7 +4,6 @@ namespace app\index_admin\controller;
 class Order extends Base{
     //首页
     public function manage(){
-
         $modelExpress = new \app\index_admin\model\Express();
         $condition = [
             'field' => [
@@ -50,12 +49,13 @@ class Order extends Base{
             'field'=>[
                 'u.mobile_phone',
                 'o.id','o.sn','o.order_status','o.after_sale_status','o.pay_code','o.user_id', 'o.create_time',
-                'o.province','o.city','o.area','o.detail_address','o.express_sn'
+                'o.complete_address','o.express_sn'
             ],'where'=>$where,
             'join' => [
                 ['common.user u','o.user_id = u.id'],
             ],
             'order'=>[
+                'o.payment_time'=>'desc',
                 'o.id'=>'desc',
             ],
         ];
@@ -81,8 +81,8 @@ class Order extends Base{
             'field' => [
                 'o.id','o.sn','o.pay_sn','o.order_status','o.pay_code','o.remark','o.payment_time',
                 'o.after_sale_status', 'o.amount','o.coupons_amount','o.actually_amount','o.create_time','o.receive_time',
-                'o.consignee','o.mobile','o.province','o.city','o.area','o.detail_address','o.express_sn','o.exp_id',
-                'od.goods_name','od.goods_img','od.price','od.num'
+                'o.consignee','o.mobile','o.complete_address','o.express_sn','o.exp_id',
+                'od.goods_name','od.goods_img','od.price','od.num','od.specification'
             ],'where' => [
               ['o.status','=',0],
               ['o.order_status','<>',0],
@@ -106,11 +106,16 @@ class Order extends Base{
             ];
             $orderInfo['goods_info'][] = $goods;
         }
-        $type = input('type/d');
+        $type = input('type/s');
+
+        $this->assign('info',$orderInfo);
+
         if($type=='info'){
             return $this->fetch('order_info');
-        }
+        }else{
 
+            return $this->fetch('order_print');
+        }
     }
 
     /**

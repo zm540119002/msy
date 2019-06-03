@@ -74,7 +74,7 @@ return [
                 'address_create',
             ],
         ],[//9
-            'name'   => '去结算',
+            'name'   => '结算',
             'class'=>[
                 'bottom_item',
                 'settlement',
@@ -92,12 +92,14 @@ return [
                 'bottom_item',
                 'confirm_order',
             ],
+            'action'=>url('Order/confirmOrder'),
         ],[//12
             'name'   => '确认收货',
             'class'=>[
                 'bottom_item',
                 'confirm_receive',
             ],
+            'action'=>url('Order/setOrderStatus'),
         ], [//13
             'name'   => '去评价',
             'class'=>[
@@ -128,6 +130,25 @@ return [
                 'bottom_item',
                 'delete',
             ],
+        ],[//18
+            'name'   => '查看物流',
+            'class'=>[
+                'bottom_item',
+                'confirm_receive',
+            ],
+        ],[//19
+            'name'   => '查看物流2',
+            'class'=>[
+                'bottom_item',
+                'delete',
+            ],
+        ],[// 20
+            'name'   => '去结算',
+            'class'=>[
+                'bottom_item',
+                'confirm_order',
+            ],
+            'action'=>url('Order/confirmOrder'),
         ]
     ],
 ];
