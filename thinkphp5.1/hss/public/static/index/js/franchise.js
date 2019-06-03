@@ -19,14 +19,12 @@ $(function(){
         };
 
         //省市区初始化
-        var province = apply.province;
-        var city = apply.city;
-        var area = apply.area;
         var region = [];
-        region.push(province);
-        region.push(city);
-        region.push(area);
+        region.push(apply.province);
+        region.push(apply.city);
+        region.push(apply.area);
         $('.area_address').setArea(region);
+        $('.detail_address').val(apply.detail_address);
         //资料初始化
         $('.name').val(apply.name);
         $('.applicant').val(apply.applicant);
