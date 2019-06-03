@@ -149,6 +149,20 @@ return [
                 'confirm_order',
             ],
             'action'=>url('Order/confirmOrder'),
+        ],[// 21
+            'name'   => '申请黑森森加盟店资格',
+            'class'=>[
+                'bottom_item',
+                'apply_franchisee_qualification',
+            ],
+            'action'=>url('/'),
+        ],[// 22
+            'name'   => '申请黑森森城市合伙人资格',
+            'class'=>[
+                'bottom_item',
+                'apply_city_partner_qualification',
+            ],
+            'action'=>url('/'),
         ]
     ],
 ];
