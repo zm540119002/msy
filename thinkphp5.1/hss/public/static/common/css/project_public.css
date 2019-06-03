@@ -22,7 +22,8 @@
 
 .group_cart_nav a{color:#fff;text-align: center;display: block;}
 
-.bottom_item:last-child{
+.bottom_item:last-child,
+.bottom_item.add_cart{
     background: #FF7BAC;
 }
 
@@ -520,9 +521,12 @@ nav .back_prev_page{
     position: absolute;
   bottom: 0;
   width: 100%;
-  display: block;
+  display:flex;
   justify-content: space-between;
 }
+/*.selected-number{
+    display:block;
+}*/
 .four-line-omit{
     line-height:24px;
 }
