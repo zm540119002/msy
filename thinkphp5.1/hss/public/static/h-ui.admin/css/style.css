@@ -49,3 +49,6 @@
 .box-head{
   margin: 15px 0;
 }
+.upload-picture-module {
+  margin: 0; !important;
+}
