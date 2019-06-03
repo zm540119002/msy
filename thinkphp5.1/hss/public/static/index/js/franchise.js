@@ -7,7 +7,9 @@ $(function(){
         var _this = $(this);
         applicantData=$('.applicant_form').serializeObject();
         area_address =$('.area-address-name').getArea();
-
+        applicantData.province = area_address[0];
+        applicantData.city = area_address[1];
+        applicantData.area = area_address[2];
         var content='';
         if(!applicantData.name){
             content='请填写店家名称';
