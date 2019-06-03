@@ -50,30 +50,30 @@ return [
         ],
     ],
     // 充值金额
-    'recharge_amount'=>[0.01,10000,20000,30000,50000,80000],
+    'recharge_amount'=>[1000,10000,20000,30000,50000,80000],
     //加盟费用
-    'franchise_fee'=>0.01,
+    'franchise_fee'=>9800,
     //城市合伙人加盟费用
     'cityPartner_fee'=>[
         //一类城市
         1=>[
-            'earnest'=>0.01,
-            'amount'=>1,
+            'earnest'=>5000,
+            'amount'=>19800,
         ],
         //二类城市
         2=>[
-            'earnest'=>0.01,
-            'amount'=>1,
+            'earnest'=>5000,
+            'amount'=>19800,
         ],
         //三类城市
         3=>[
-            'earnest'=>0.01,
-            'amount'=>1,
+            'earnest'=>5000,
+            'amount'=>19800,
         ],
         //四类城市
         4=>[
-            'earnest'=>0.01,
-            'amount'=>1,
+            'earnest'=>5000,
+            'amount'=>19800,
         ],
 
     ],

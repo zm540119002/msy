@@ -62,13 +62,13 @@
 <script type="text/javascript" src="api_common_js/dialog.js"></script>
 <script type="text/javascript" src="api_common_js/paging.js"></script>
 <script type="text/javascript">
+    //异步验证
     function asyncVerify(config){
         let jump_url = config.clickObj.data('jump_url');
         if(!config.clickObj || !jump_url){
             dialog.error('参数错误！');
             return false;
         }
-        //异步验证
         $.ajax({
             url: jump_url,
             data: config.postData,
