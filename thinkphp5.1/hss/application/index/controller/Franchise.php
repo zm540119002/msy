@@ -12,7 +12,20 @@ class Franchise extends \common\controller\UserBase {
     {
         if (request()->isAjax()) {
         } else {
-
+            //自己提交的申请
+            $modelFranchise = new \app\index\model\Franchise();
+            $condition=[
+                'where'=>[
+                    ['status', '=', 0],
+                    ['user_id','=',$this->user['id']]
+                ],
+                'field'=>[
+                    'id','province','city','name','applicant','mobile','franchise_fee','apply_status'
+                ],
+            ];
+            $apply = $modelFranchise -> getInfo($condition);
+            print_r($apply);exit;
+            $this->assign('apply',json_encode($apply));
             $unlockingFooterCart = unlockingFooterCartConfig([10, 0, 9]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
             return $this->fetch();
