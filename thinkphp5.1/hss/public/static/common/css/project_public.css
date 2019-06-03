@@ -22,7 +22,8 @@
 
 .group_cart_nav a{color:#fff;text-align: center;display: block;}
 
-.bottom_item:last-child{
+.bottom_item:last-child,
+.bottom_item.add_cart{
     background: #FF7BAC;
 }
 
