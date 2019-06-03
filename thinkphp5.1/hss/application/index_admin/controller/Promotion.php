@@ -32,7 +32,7 @@ class Promotion extends Base {
             if($id = input('param.id/d')){
                 $condition = [
                     'field' => [
-                        'id','name','shelf_status','sort','thumb_img','main_img','intro','tag','title','background_img'
+                        'id','name','shelf_status','sort','thumb_img','main_img','intro','tag','title','background_img','price'
                     ], 'where' => [
                         ['id','=',$id]
                     ],
@@ -58,7 +58,6 @@ class Promotion extends Base {
             process_upload_files($data,['thumb_img'],'promotion',false);
             process_upload_files($data,['main_img'],'promotion');
             htmlspecialchars_addslashes($data,['intro']);
-
 
             $data['title'] = $data['name'];
             $data['update_time'] = time();
@@ -140,11 +139,12 @@ class Promotion extends Base {
         $this->assign('list',$list);
 
         $view = 'list_tpl';
-
-
         return view($view);
     }
 
+    /**
+     * 其它的场景里用到
+     */
     public function getListData(){
         $model = new \app\index_admin\model\Promotion();
         $where = [];
@@ -160,7 +160,7 @@ class Promotion extends Base {
 
         $config = [
             'where'=>$where,
-            'field'=>['id','name','thumb_img','main_img','intro','shelf_status','sort','create_time'],
+            'field'=>['id','name','thumb_img','main_img','intro','shelf_status','sort','create_time','price'],
             'order'=>['id'=>'asc',],
         ];
 
