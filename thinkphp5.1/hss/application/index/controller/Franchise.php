@@ -20,7 +20,7 @@ class Franchise extends \common\controller\UserBase {
                     ['user_id','=',$this->user['id']]
                 ],
                 'field'=>[
-                    'id','province','city','name','applicant','mobile','franchise_fee','apply_status'
+                    'id','province','city','area','detail_address','name','applicant','mobile','franchise_fee','apply_status'
                 ],
             ];
             $apply = $modelFranchise -> getInfo($condition);
