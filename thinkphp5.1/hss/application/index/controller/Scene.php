@@ -59,13 +59,6 @@ class Scene extends \common\controller\Base{
     public function detail(){
         if(request()->isAjax()){
         }else{
-  /*          $unlockingFooterCart = unlockingFooterCartConfigTest([0,2,1,3]);
-            array_push($unlockingFooterCart['menu'][0]['class'],'group_btn30');
-            array_push($unlockingFooterCart['menu'][1]['class'],'group_btn30');
-            array_push($unlockingFooterCart['menu'][2]['class'],'group_btn30');
-            array_push($unlockingFooterCart['menu'][3]['class'],'group_btn30');
-            $this->assign('unlockingFooterCart',json_encode($unlockingFooterCart));*/
-
             $id = input('id/d');
             if(!$id) $this->error('此项目已下架');
             // 场景信息 主要是获取同组的场景信息
@@ -105,6 +98,9 @@ class Scene extends \common\controller\Base{
             Promotion::displayPromotionList($id);
 
             $this->assign('relation',config('custom.relation_type.scene'));
+
+            $unlockingFooterCart = unlockingFooterCartConfigTest([0,2,1,3]);
+            $this->assignStandardBottomButton($unlockingFooterCart);
 
             return $this->fetch();
         }
