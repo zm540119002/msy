@@ -52,13 +52,7 @@
 			></product-select>
 		</ul>
 	</section>
-	<div class="bg"></div>
-	<div class="dialogCart">
-		<div class="close" onclick="close">×</div>
-		<div  id="dialogCart">
-			<footer-menu></footer-menu>
-		</div>
-		
+	
 </article>
 
 {/block}
@@ -66,6 +60,23 @@
 {block name="footer"}
 {include file="../../api/public/vue/components/product-select.html" /}
 {include file="../../api/public/vue/components/footer-menu.html" /}
+<div class="bg"></div>
+	<div class="dialogCart">
+		<div class="close" onclick="close">×</div>
+		<div id="foot_cart_menu">
+			<footer-menu></footer-menu>
+		</div>
+	</div>
+<script type="text/javascript">
+	$(function(){
+		new Vue({
+            el:'#foot_cart_menu',
+            data:function(){
+                return {};
+            }
+        });
+	})
+</script>
 <script type="text/javascript">
 	$(function(){
 		let param = {
@@ -115,13 +126,7 @@
 				});
 			}
 		});
-		new Vue({
-            el:'#dialogCart',
-            data:function(){
-                return {};
-            }
-        });
-			});
+	});
 </script>
 {/block}
 {block name="script"}
