@@ -142,18 +142,3 @@ $('body').on('click','.set-shelf-status',function(){
     });
 });
 
-// 预览
-$('body').on('click','.preview',function(){
-    var index = parent.layer.getFrameIndex(window.name);
-    parent.layer.iframeAuto(index);
-    var _thisTr = $(this).parents('tr');
-    var url =  '/index/Promotion/detail/id/' + _thisTr.data('id');
-    layer.open({
-        type: 2,
-        maxmin: true,
-        shade: false,
-        area: ['500px','700px'],
-        title: '项目预览',
-        content: url
-    });
-});

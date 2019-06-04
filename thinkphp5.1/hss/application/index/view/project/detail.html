@@ -80,7 +80,7 @@
 						{volist name="$info.process" id="vo"}
 						<div class="swiper-slide swiper-slide-active" style="text-align: left;margin-right: 10px;">
 							<img src="{:show_img_handle($vo.img)}" alt="" class="common_default_img">
-							{$vo.desc}
+							<span style="font-size: 13px;margin-top:10px;">{$vo.desc}</span>
 						</div>
 						{/volist}
 					</div>
@@ -124,7 +124,7 @@
 <script type="text/javascript">
 	$(function(){
 		let param = {
-			type:0,
+			type:5,
 			init_quantity:1,
 			step_quantity:1,
 			productList:[],
@@ -188,7 +188,8 @@
 		});
 		//轮播
 		var swiper = new Swiper('.swiper-container', {
-			spaceBetween: 30,
+			//spaceBetween: 30,
+			direction: 'horizontal',
 			pagination: {
 				el: '.swiper-pagination',
 				clickable: true

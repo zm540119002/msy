@@ -35,6 +35,7 @@
 										:init_quantity="parseInt(init_quantity)"
 										:step_quantity="parseInt(step_quantity)"
 										:type="type"
+										:init_product_type="parseInt(init_product_type)"
 								></product-select>
 							</div>
 							<div class="title">
@@ -150,6 +151,7 @@
 	$(function(){
 		let param = {
 			type:3,
+			init_product_type:2,
 			init_quantity:1,
 			step_quantity:1,
 			productList:[

@@ -34,9 +34,6 @@
 				</div>
 				<!--排序规则-->
 				<input type="button" id="search" class="btn btn-primary" value="搜索"><i class="fa fa-search"></i>
-
-				<button class="btn" data-clipboard-text="测试1">点击测试1</button>
-
 			</form>
 		</div>
 		<div class="content" id="list"></div>
@@ -68,6 +65,23 @@
 			e.clearSelection();
 		});
 	});
+
+	// 预览
+	$('body').on('click','.preview',function(){
+		var index = parent.layer.getFrameIndex(window.name);
+		parent.layer.iframeAuto(index);
+		var _thisTr = $(this).parents('tr');
+		var url =  '/index/Promotion/detail/id/' + _thisTr.data('id');
+		layer.open({
+			type: 2,
+			maxmin: true,
+			shade: false,
+			area: ['500px','700px'],
+			title: '项目预览',
+			content: url
+		});
+	});
+
 
 </script>
 {/block}
