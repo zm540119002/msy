@@ -319,7 +319,8 @@ class Goods extends \common\controller\Base{
         $condition = [
             'field' => [
                 'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity',
-                'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
+                'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit',
+                'pg.goods_num'
             ], 'where' => [
                 ['pg.promotion_id','=',$id], ['g.status','=', 0], ['g.shelf_status','=', 3],
             ],'join' => [
