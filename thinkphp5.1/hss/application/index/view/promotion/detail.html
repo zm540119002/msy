@@ -137,7 +137,8 @@
 			});
 		}
 		let param = {
-			cart_init_num:total_num
+			cart_init_num:total_num,
+			init_product_type:2
 		};
 		new Vue({
 			el: '#foot_cart_menu',
@@ -151,7 +152,6 @@
 	$(function(){
 		let param = {
 			type:3,
-			init_product_type:2,
 			init_quantity:1,
 			step_quantity:1,
 			productList:[
