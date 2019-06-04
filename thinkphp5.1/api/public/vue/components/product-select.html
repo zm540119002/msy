@@ -1,29 +1,6 @@
 <!-- 产品选择器 -->
 <template id="product_select_tpl">
-    <li v-if="type==0">
-        <div class="product-select">
-            <div class=""><p></p></div>
-            <div class="columns_flex l-r-sides">
-                <div class="left">
-                    <a class="p_img" :href="'/index/Goods/detail/id/' + product_id">
-                        <img class="left" :src="product_src?('public_uploads/' + product_src):('api_common_img/default/no_pic_100.jpg') " alt="">
-                    </a>
-                </div>
-                <div  class="right">
-                    <div class="product_name">
-                        <p class="two-line-omit">{{product_name}}</p>
-                    </div>
-                    <div class="product_specs">
-                        <p class="two-line-omit">{{specification}}</p>
-                    </div>
-                    <div class="quantity_wrapper selected-number columns_flex l-r-sides">
-                        <div><span class="red deal_price">￥{{deal_price}}</span></div>
-                        <div><a href="javascript:void(0);" class="add_cart add_cart_i" @click="dialogCart" :data-jump_url="add_cart_url"><i></i></a></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </li><li v-else-if="type==1">
+    <li v-if="type==1"><!--图片、价格、数字增减-->
         <div class="product-select">
             <div class="columns_flex l-r-sides"><p><span class="red deal_price">￥{{deal_price}}</span></p></div>
             <div class="columns_flex l-r-sides">
@@ -72,15 +49,14 @@
                         <p class="two-line-omit">{{product_name}}</p>
                     </div>
                     <div class=" selected-number">
-                        <a href="javascript:void(0);" class="reduce" @click="reduc
-                        e">-</a>
+                        <a href="javascript:void(0);" class="reduce" @click="reduce">-</a>
                         <input type="text" :value="buy_quantity" class="f24 product_count" readonly="readonly">
                         <a href="javascript:void(0);" class="plus" @click="plus">+</a>
                     </div>
                 </div>
             </div>
         </div>
-    </li><li v-else-if="type==3"><!--只有价格和增减-->
+    </li><li v-else-if="type==3"><!--仅价格、数字增减-->
         <div class="product-select">
             <div class="columns_flex l-r-sides">
                 <div class="left">
@@ -97,7 +73,7 @@
             </div>
             <div class="product_name"><p class="two-line-omit">{{product_name}}</p></div>
         </div>
-    </li><li v-else-if="type==4"><!--用于购物车-->
+    </li><li v-else-if="type==4"><!--价格、数字增减、删除、复选、立即加入购物车-->
         <input type="checkbox" class="item_checkbox check_item" v-model="checked" />
         <a href="" class="cart_goods_img" :href="'/index/Goods/detail/id/' + product_id">
             <img class="left common_default_img" :src="product_src?('public_uploads/' + product_src):('api_common_img/default/no_pic_100.jpg') " alt="">
@@ -115,17 +91,29 @@
                 <a href="javascript:void(0);" class="delete_order goodsDel delete_cart" @click="delCart" :data-jump_url="del_cart_url">删除</a>
             </div>
         </div>
-    </li><li v-else-if="type==5"><!--用于购物车弹出增减-->
-        <div class="cart_eject">
-            <div class="commodity_purchaser f24"><span class="pink">￥{{deal_price}}</span></div>
-            <div class="purchase_goods_num cart_goods_operate">
-                <div class=" selected-number">
-                    <a href="javascript:void(0);" class="reduce" @click="reduce">-</a>
-                    <input type="text" :value="buy_quantity" class="f24 product_count" readonly="readonly">
-                    <a href="javascript:void(0);" class="plus" @click="plus">+</a>
+    </li><li v-else-if="type==5"><!--弹框再增减数字-->
+    <div class="product-select">
+        <div class=""><p></p></div>
+        <div class="columns_flex l-r-sides">
+            <div class="left">
+                <a class="p_img" :href="'/index/Goods/detail/id/' + product_id">
+                    <img class="left" :src="product_src?('public_uploads/' + product_src):('api_common_img/default/no_pic_100.jpg') " alt="">
+                </a>
+            </div>
+            <div  class="right">
+                <div class="product_name">
+                    <p class="two-line-omit">{{product_name}}</p>
+                </div>
+                <div class="product_specs">
+                    <p class="two-line-omit">{{specification}}</p>
+                </div>
+                <div class="quantity_wrapper selected-number columns_flex l-r-sides">
+                    <div><span class="red deal_price">￥{{deal_price}}</span></div>
+                    <div><a href="javascript:void(0);" class="add_cart add_cart_i" @click="dialogCart" :data-jump_url="add_cart_url"><i></i></a></div>
                 </div>
             </div>
         </div>
+    </div>
     </li>
 </template>
 
