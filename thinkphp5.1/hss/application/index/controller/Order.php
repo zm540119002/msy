@@ -16,11 +16,31 @@ class Order extends \common\controller\UserBase
 
         $order_type = input('post.product_type/d');
 
-        if($order_type==2){
-            $goodsIds = array_column($goodsList,'goods_id');
 
-        }else{
-            //$model
+        $goodsIds = array_column($goodsList,'goods_id');
+
+        if(empty($goodsIds)){
+            $this->errorMsg('请求数据不能为空');
+        }
+
+        if($order_type==2 ){
+
+            $promotion_id = reset($goodsIds);
+
+            $modelPromotionGoods = new \app\index\model\PromotionGoods();
+            $config = [
+                'where' => [
+                    ['status', '=', 0],
+                    ['promotion_id', '=', $promotion_id],
+                ], 'field' => [
+                    'goods_id','goods_num num'
+                ]
+            ];
+            $goodsList= $modelPromotionGoods->getList($config);
+
+            if(empty($goodsList)){
+                $this->errorMsg('套餐已失效 !');
+            }
 
             $goodsIds = array_column($goodsList,'goods_id');
         }
