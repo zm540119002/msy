@@ -143,6 +143,7 @@ class CityPartner extends \common\controller\UserBase {
                     ];
                 }
                 $payId = $modelPay->edit($data,$where1);
+                print_r($postData);exit;
                 if(false===$payId){
                     $modelCityPartner ->rollback();
                     return errorMsg('失败');
