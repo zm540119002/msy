@@ -109,7 +109,6 @@ $(function(){
 });
 // 提交申请
 function submitApplicant(_this,postData){
-    console.log(postData)
     var url = module + 'Franchise/franchiseSettlement';
     _this.addClass("nodisabled");//防止重复提交
     $.ajax({

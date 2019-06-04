@@ -61,9 +61,12 @@ class Franchise extends \common\controller\UserBase {
         $postData['sn'] = $sn;
         if(isset($postData['id']) && $postData['id']){
             $where = [
-                ['id','=',$postData['id']],
-                ['user_id','=',$this->user['id']],
-                ['status','=',0],
+                'id'=>$postData['id'],
+                'user_id'=>$this->user['id'],
+                'status'=>0,
+//                ['id','=',$postData['id']],
+//                ['user_id','=',$this->user['id']],
+//                ['status','=',0],
             ];
         }
         if(isset($postData['step']) && $postData['step'] == 1){
@@ -90,14 +93,12 @@ class Franchise extends \common\controller\UserBase {
             ];
             if(isset($postData['pay_id']) && $postData['pay_id']){
                 $where1 = [
-                    ['id','=',$postData['pay_id']],
-                    ['user_id','=',$this->user['id']],
-                    ['status','=',0],
+                    'id'=>$postData['pay_id'],
+                    'user_id'=>$this->user['id'],
+                    'status'=>0,
                 ];
             }
-            print_r($where1);
             $payId = $modelPay->edit($data,$where1);
-            echo $modelPay->getLastSql();exit;
             if(false===$payId){
                 $modelFranchise ->rollback();
                 return errorMsg('失败');
