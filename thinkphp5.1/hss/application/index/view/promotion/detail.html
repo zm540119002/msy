@@ -108,7 +108,16 @@
 			<span>推荐套餐包含产品</span>
 		</div>
 		<!--产品列表-->
-		<ul class="goods_list list" id="list">
+		<ul class="goods_list list" id="product-list">
+			<product-select
+					v-for="(productInfo,index) in productList"
+					:key="index"
+					:product_id="productInfo.id"
+					:deal_price="parseFloat(productInfo.bulk_price)"
+					:init_quantity="parseInt(init_quantity)"
+					:step_quantity="parseInt(step_quantity)"
+					:type="type"
+			></product-select>
 		</ul>
 	</section>
 </article>
