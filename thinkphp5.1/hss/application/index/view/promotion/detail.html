@@ -28,11 +28,8 @@
 						<div>
 								<div class="price">
 									<span>￥2980.00</span>
-								  <div class=" selected-number">
-                    <a href="javascript:void(0);" class="add_cart reduce" @click="reduceCart" :data-jump_url="add_cart_url">-</a>
-                    <input type="text" :value="buy_quantity" class="f24 product_count" readonly="readonly">
-                    <a href="javascript:void(0);" class="add_cart plus" @click="plusCart" :data-jump_url="add_cart_url">+</a>
-                </div>
+									
+									
 								</div>
 								
 							<div class="title">
@@ -116,6 +113,7 @@
 {block name="common"}
 {/block}
 {block name="footer"}
+{include file="../../api/public/vue/components/product-select.html" /}
 {include file="../../api/public/vue/components/footer-menu.html" /}
 <div id="foot_cart_menu">
 	<footer-menu
