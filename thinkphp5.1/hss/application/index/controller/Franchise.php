@@ -99,7 +99,6 @@ class Franchise extends \common\controller\UserBase {
                 ];
             }
             $payId = $modelPay->edit($data,$where1);
-            echo $modelPay->getLastSql();exit;
             if(false===$payId){
                 $modelFranchise ->rollback();
                 return errorMsg('失败');
