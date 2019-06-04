@@ -4,7 +4,7 @@ $(function(){
         applicantData={};
 
     //初始化 未完成的申请
-    if(!$.isEmptyArray(apply)){
+    if(apply!=null){
         applicantData.id= apply.id;
         applicantData = {
             id:apply.id,
