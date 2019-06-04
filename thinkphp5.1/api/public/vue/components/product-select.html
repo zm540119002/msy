@@ -252,7 +252,9 @@
                 },dialogCart: function (event) {
                     let _this = this;
                     // 弹出加入采购车
-                    $('.dialogCart').toggle();
+                    $('.dialogCart').toggle(500,function(){
+                        console.log(_this.deal_price);
+                    });
                     $('.bg').toggle();
                 },editCheckItem:function(param){
                     this.checked = param;
