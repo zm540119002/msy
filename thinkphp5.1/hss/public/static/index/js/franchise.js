@@ -147,11 +147,6 @@ function submitApplicant(_this,postData){
                     $('.weui-flex-item:eq(1)').addClass('current');
                     $('.apply-module:eq(0)').hide();
                     $('.apply-module:eq(1)').show();
-                }else if(postData.step==2){
-                    $('.weui-flex-item:eq(0),.weui-flex-item:eq(1)').removeClass('current');
-                    $('.weui-flex-item:eq(2)').addClass('current');
-                    $('.apply-module:eq(1)').hide();
-                    $('.apply-module:eq(2)').show();
                 }else{
                     location.href = data.data.url;
                 }
