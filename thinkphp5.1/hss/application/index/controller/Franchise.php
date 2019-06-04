@@ -28,6 +28,7 @@ class Franchise extends \common\controller\UserBase {
                 ],
             ];
             $apply = $modelFranchise -> getInfo($condition);
+            print_r($apply);exit;
             $this->assign('apply',json_encode($apply));
             $unlockingFooterCart = unlockingFooterCartConfig([10, 0, 9]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
