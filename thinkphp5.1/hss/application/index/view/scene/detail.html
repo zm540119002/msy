@@ -61,6 +61,7 @@
 {include file="../../api/public/vue/components/footer-menu.html" /}
 <div class="bg"></div>
 <div class="dialogCart">
+	<div class="close" onclick="close">×</div>
 	<product-select
 			v-for="(productInfo,index) in productList"
 			:key="index"
@@ -76,18 +77,11 @@
 </div>
 <script type="text/javascript">
 	$(function(){
-		new Vue({
-            el:'#foot_cart_menu',
-            data:function(){
-                return {};
-            }
-        });
 	})
 </script>
 {include file="../../api/public/vue/components/product-select.html" /}
 <script type="text/javascript">
 	$(function(){
-
 	});
 </script><script type="text/javascript">
 	$(function(){

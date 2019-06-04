@@ -16,7 +16,7 @@ $(function(){
             area:apply.area,
             detail_address:apply.detail_address,
             old_apply_status:apply.apply_status,
-            pay_id:apply.apply_status,
+            pay_id:apply.pay_id,
         };
         console.log(applicantData)
         //省市区初始化
@@ -40,7 +40,10 @@ $(function(){
     //填写基本资料
     $('body').on('click','.one-step',function(){
         var _this = $(this);
-        applicantData=$('.applicant_form').serializeObject();
+        var data=$('.applicant_form').serializeObject();
+        applicantData.name=data.name;
+        applicantData.applicant=data.applicant;
+        applicantData.mobile=data.mobile;
         area_address =$('.area-address-name').getArea();
         applicantData.province = area_address[0];
         applicantData.city = area_address[1];
@@ -98,6 +101,7 @@ $(function(){
         applicantData.city = area_address[1];
         applicantData.area = area_address[2];
         applicantData.pay_code = $('.pay_code').val();
+        applicantData.step = 2;
         _this = $(this);
         if(!applicantData.pay_code){
             dialog.error('请选择结算方式');
@@ -109,6 +113,7 @@ $(function(){
 });
 // 提交申请
 function submitApplicant(_this,postData){
+    console.log(postData)
     var url = module + 'Franchise/franchiseSettlement';
     _this.addClass("nodisabled");//防止重复提交
     $.ajax({
@@ -122,33 +127,16 @@ function submitApplicant(_this,postData){
             $('.loading').hide();
             dialog.error('AJAX错误');
         },
-        // success: function(data){
-        //     _this.removeClass("nodisabled");//删除防止重复提交
-        //     $('.loading').hide();
-        //     if(data.status){
-        //         location.href = data.url;
-        //
-        //     }else{
-        //         dialog.success(data.info);
-        //         //dialog.error('结算提交失败!');
-        //     }
-        // }
         success: function(data){
             _this.removeClass("nodisabled");//删除防止重复提交
             $('.loading').hide();
             if(data.status){
                 applicantData.id = data.data.id;
                 if(postData.step==1){
-                    console.log(1111);
                     $('.weui-flex-item:eq(0)').removeClass('current');
                     $('.weui-flex-item:eq(1)').addClass('current');
                     $('.apply-module:eq(0)').hide();
                     $('.apply-module:eq(1)').show();
-                }else if(postData.step==2){
-                    $('.weui-flex-item:eq(0),.weui-flex-item:eq(1)').removeClass('current');
-                    $('.weui-flex-item:eq(2)').addClass('current');
-                    $('.apply-module:eq(1)').hide();
-                    $('.apply-module:eq(2)').show();
                 }else{
                     location.href = data.data.url;
                 }

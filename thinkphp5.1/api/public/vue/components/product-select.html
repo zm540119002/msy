@@ -250,14 +250,20 @@
                     };
                     asyncVerify(config);
                 },dialogCart: function (event) {
+                    new Vue({
+                        el:'#foot_cart_menu',
+                        data:function(){
+                            return {};
+                        }
+                    });
                     let param = {
                         type:3,
                         init_quantity:1,
                         step_quantity:1,
                         productList:[
                             {
-                                id:1,
-                                bulk_price:299
+                                id:this.product_id,
+                                bulk_price:this.deal_price
                             }
                         ]
                     };
@@ -269,7 +275,15 @@
                     });
                     // 弹出加入采购车
                     $('.dialogCart').slideDown(500);
-                    $('.bg').toggle();
+                    $('.bg').toggle(
+                        function () {
+                            console.log(123);
+                        },
+                        function () {
+                            console.log(456);
+                            $(this).removeClass("selected");
+                        }
+                    );
                 
                 },editCheckItem:function(param){
                     this.checked = param;
