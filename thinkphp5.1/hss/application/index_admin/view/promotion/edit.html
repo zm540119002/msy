@@ -186,6 +186,37 @@
         $('.button_save_black').click(function(){
             location.href = controller + '/manage';
         });
+
+        $("body").on('click','.recommend',function(){
+
+            var id = "{$info['id']}";
+            var url =  controller + 'RecommendGoods/id/' + id;
+
+            layer.open({
+                type: 2,
+                title:'添加推荐商品',
+                shadeClose: false,
+                shade: 0.8,
+                area: ['80%', '90%'],
+                content: url, //iframe的url
+                btn: ['确定添加', '关闭'],
+                yes: function(index, layero){
+
+                    var body = layer.getChildFrame('body', index);
+                    recommendIds = [];
+                    body.find('.selected_goods_list li').each(function () {
+                        var goodsSelectedId=$(this).data('goods-id');
+                        recommendIds.push(goodsSelectedId);
+                    });
+                    $(".recommend").next().html(recommendIds.length);
+                    $('input[name="ids"]').val(recommendIds);
+                    layer.close(index);
+                },
+                no: function(){
+                    layer.close(index);
+                }
+            });
+        });
     });
 </script>
 {/block}
