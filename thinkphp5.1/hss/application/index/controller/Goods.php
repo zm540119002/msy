@@ -328,6 +328,11 @@ class Goods extends \common\controller\Base{
         ];
 
         $list = $model -> pageQuery($condition);
+        $this->assign('list',$list);
+
+        return $this->fetch('list_goods_one_column_tpl');
+
+
         $this->successMsg('成功',$list);
     }
 }

@@ -22,11 +22,9 @@ $(function(){
         };
 
         //省市区初始化
-        var province = apply[0].province;
-        var city = apply[0].city;
         var region = [];
-        region.push(province);
-        region.push(city);
+        region.push(apply[0].province);
+        region.push(apply[0].city);
         $('.area_address').setArea(region);
         //资料初始化
         $('.company_name').val(apply[0].company_name);

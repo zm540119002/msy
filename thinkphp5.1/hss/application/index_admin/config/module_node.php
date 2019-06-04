@@ -28,9 +28,9 @@ return [
                 ['id'=>401,'name'=>'分类管理','display'=>1,'controller'=>'Sort','action'=>'manage',],
             ],
         ],'promotion'=>[
-            'id'=>500,'name'=>'促销','type'=>2,
+            'id'=>500,'name'=>'套餐','type'=>2,
             'sub_menu' => [
-                ['id'=>501,'name'=>'促销管理','display'=>1,'controller'=>'Promotion','action'=>'manage',],
+                ['id'=>501,'name'=>'套餐管理','display'=>1,'controller'=>'Promotion','action'=>'manage',],
             ],
         ],'ad'=>[
             'id'=>600,'name'=>'广告','type'=>2,

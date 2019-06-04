@@ -75,26 +75,19 @@
             });
             //搜索
             $('#searchGoods').click(function(){
+                search_goods();
+            });
+            $('.keyword').bind('keypress',function(){
+                if(event.keyCode == "13") {
+                    search_goods();
+                    return false;
+                }
+            });
+            function search_goods(){
                 var getData = $('#form1').serializeObject();
                 getPagingList(config,getData);
-            });
-
-            // 显示已关联的商品
-            if(id){
-                $.ajax({
-                    url: module+'Goods/getRelationGoods',
-                    data: {id:id,relation:relation},
-                    type: 'get',
-                    beforeSend: function(){
-                    },
-                    error:function (xhr) {
-                        dialog.error('AJAX错误');
-                    },
-                    success: function(data){
-                        $('#selected_list').html(data)
-                    }
-                });
             }
+
             // 选择商品
             $('body').on('click','.add_goods',function(){
                 var selectedGoodsIds = [];
@@ -173,9 +166,24 @@
                         })
                     }
                 });
+            });
 
-            })
-            
+            // 显示已关联的商品
+            if(id){
+                $.ajax({
+                    url: module+'Goods/getRelationGoods',
+                    data: {id:id,relation:relation},
+                    type: 'get',
+                    beforeSend: function(){
+                    },
+                    error:function (xhr) {
+                        dialog.error('AJAX错误');
+                    },
+                    success: function(data){
+                        $('#selected_list').html(data)
+                    }
+                });
+            }
         });
     </script>
 {/block}

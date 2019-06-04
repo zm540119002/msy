@@ -42,7 +42,7 @@
 							</a>
 						</div>
 						<div class="apply-items">
-							<input type="text" class="" name="detail_address" value="" placeholder="详细地址">
+							<input type="text" class="detail_address" name="detail_address" value="" placeholder="详细地址">
 						</div>
 						<a href="javascript:void(0);" class="one-step step">下一步</a>
 					</form>
@@ -119,4 +119,9 @@
 <script type="text/javascript" src="api_common_js/swipe.js"></script>
 <script type="text/javascript" src="public_js/jquery.area.js"></script>
 <script type="text/javascript" src="index_js/franchise.js"></script>
-{/block} 
+<script>
+	var apply = JSON.parse('{$apply|raw}');
+</script>
+
+
+{/block}

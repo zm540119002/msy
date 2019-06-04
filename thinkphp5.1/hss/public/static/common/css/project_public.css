@@ -22,14 +22,17 @@
 
 .group_cart_nav a{color:#fff;text-align: center;display: block;}
 
-.bottom_item:last-child{
-    background: #FF7BAC;
+.bottom_item:last-child,
+.bottom_item.add_cart{
+    background: #e60012;
 }
 
 .group_cart_nav a{
     color:#fff;
 }
-
+.group_cart_nav a:nth-of-type(3){
+    background: #3fa9f5;
+}
 .app_top_bar {
     padding-left:10px;
     padding-right:10px;
@@ -520,9 +523,12 @@ nav .back_prev_page{
     position: absolute;
   bottom: 0;
   width: 100%;
-  display: block;
+  display:flex;
   justify-content: space-between;
 }
+/*.selected-number{
+    display:block;
+}*/
 .four-line-omit{
     line-height:24px;
 }

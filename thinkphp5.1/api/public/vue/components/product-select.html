@@ -50,14 +50,11 @@
                         <p class="two-line-omit">{{product_name}}</p>
                     </div>
                     <div class="product_specs">
-                        <p class="two-line-omit">单品12g*20条/盒 <span class="price">￥198.00</span></p>
-                    </div>
-                    <div class="product_procure">
-                        <p class="two-line-omit-omit">10盒/箱 按整箱采购</p>
+                        <p class="two-line-omit">{{specification}}</p>
                     </div>
                     <div class="quantity_wrapper selected-number columns_flex l-r-sides">
                         <div><span class="red deal_price">￥{{deal_price}}</span></div>
-                        <div><a href="javascript:void(0);" class="add_cart add_cart_i" @click="plusCart" :data-jump_url="add_cart_url"><i></i></a></div>
+                        <div><a href="javascript:void(0);" class="add_cart add_cart_i" @click="dialogCart" :data-jump_url="add_cart_url"><i></i></a></div>
                     </div>
                 </div>
             </div>
@@ -79,7 +76,7 @@
                     <div class="product_name">
                         <p class="two-line-omit">{{product_name}}</p>
                     </div>
-                    <div class="quantity_wrapper selected-number">
+                    <div class=" selected-number">
                         <a href="javascript:void(0);" class="reduce" @click="reduce">-</a>
                         <input type="text" :value="buy_quantity" class="f24 product_count" readonly="readonly">
                         <a href="javascript:void(0);" class="plus" @click="plus">+</a>
@@ -110,8 +107,9 @@
                     <div class="product_name">
                         <p class="two-line-omit">{{product_name}}</p>
                     </div>
-                    <div class="quantity_wrapper selected-number">
-                        <a href="javascript:void(0);" class="reduce" @click="reduce">-</a>
+                    <div class=" selected-number">
+                        <a href="javascript:void(0);" class="reduce" @click="reduc
+                        e">-</a>
                         <input type="text" :value="buy_quantity" class="f24 product_count" readonly="readonly">
                         <a href="javascript:void(0);" class="plus" @click="plus">+</a>
                     </div>
@@ -126,7 +124,7 @@
                     <div class="red subtotal_amount">￥<span class="">{{ parseFloat(subtotal_amount).toFixed(2) }}</span></div>
                 </div>
                 <div class="right">
-                    <div class="quantity_wrapper selected-number">
+                    <div class=" selected-number">
                         <a href="javascript:void(0);" class="reduce" @click="reduce">-</a>
                         <input type="text" :value="buy_quantity" class="f24 product_count" readonly="readonly">
                         <a href="javascript:void(0);" class="plus" @click="plus">+</a>
@@ -145,7 +143,7 @@
             <div>商品规格：<span>{{specification}}</span></div>
             <div class="commodity_purchaser f24"><span class="pink">￥{{deal_price}}</span></div>
             <div class="purchase_goods_num cart_goods_operate">
-                <div class="quantity_wrapper selected-number">
+                <div class=" selected-number">
                     <a href="javascript:void(0);" class="add_cart reduce" @click="reduceCart" :data-jump_url="add_cart_url">-</a>
                     <input type="text" :value="buy_quantity" class="f24 product_count" readonly="readonly">
                     <a href="javascript:void(0);" class="add_cart plus" @click="plusCart" :data-jump_url="add_cart_url">+</a>
@@ -155,6 +153,7 @@
         </div>
     </li>
 </template>
+
 <script type="text/javascript">
     $(function(){
         Vue.component('product-select', {
@@ -287,6 +286,12 @@
                         }
                     };
                     asyncVerify(config);
+                },dialogCart: function (event) {
+                    // 弹出加入采购车
+                    console.log(1)
+                    $('.dialogCart').slideDown(500)
+                    $('.bg').toggle()
+                
                 },editCheckItem:function(param){
                     this.checked = param;
                 }

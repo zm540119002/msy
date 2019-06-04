@@ -2,10 +2,47 @@ $(function(){
     tab_down('.apply-data-nav .switch-item','.apply-module','click');
     var area_address,
         applicantData={};
+
+    //初始化 未完成的申请
+    if(!$.isEmptyArray(apply)){
+        applicantData.id= apply.id;
+        applicantData = {
+            id:apply.id,
+            name:apply.name,
+            applicant:apply.applicant,
+            mobile:apply.mobile,
+            province:apply.province,
+            city:apply.city,
+            area:apply.area,
+            detail_address:apply.detail_address,
+            old_apply_status:apply.apply_status
+        };
+        //省市区初始化
+        var region = [];
+        region.push(apply.province);
+        region.push(apply.city);
+        region.push(apply.area);
+        $('.area_address').setArea(region);
+        $('.detail_address').val(apply.detail_address);
+        //资料初始化
+        $('.name').val(apply.name);
+        $('.applicant').val(apply.applicant);
+        $('.mobile').val(apply.mobile);
+        //定位到已完成步骤
+        var index=apply.apply_status-1;
+        $('nav.apply-data-nav li:eq('+index+')').click(function(){
+            $(this).addClass('current').siblings().removeClass('current');
+        });
+        $('nav.apply-data-nav li:eq('+index+')').click();
+    }
     //填写基本资料
     $('body').on('click','.one-step',function(){
+        var _this = $(this);
         applicantData=$('.applicant_form').serializeObject();
         area_address =$('.area-address-name').getArea();
+        // applicantData.province = area_address[0];
+        // applicantData.city = area_address[1];
+        // applicantData.area = area_address[2];
         var content='';
         if(!applicantData.name){
             content='请填写店家名称';
@@ -21,6 +58,8 @@ $(function(){
         if(content){
             dialog.error(content);
         }else{
+            // applicantData.step = 1;
+            // submitApplicant(_this,applicantData);
             $('.weui-flex-item:eq(0)').removeClass('current');
             $('.weui-flex-item:eq(1)').addClass('current');
             $('.apply-module:eq(0)').hide();
@@ -91,5 +130,27 @@ function submitApplicant(_this,postData){
                 //dialog.error('结算提交失败!');
             }
         }
+        // success: function(data){
+        //     _this.removeClass("nodisabled");//删除防止重复提交
+        //     $('.loading').hide();
+        //     if(data.status){
+        //         applicantData.id = data.data.id;
+        //         if(postData.step==1){
+        //             $('.weui-flex-item:eq(0)').removeClass('current');
+        //             $('.weui-flex-item:eq(1)').addClass('current');
+        //             $('.apply-module:eq(0)').hide();
+        //             $('.apply-module:eq(1)').show();
+        //         }else if(postData.step==2){
+        //             $('.weui-flex-item:eq(0),.weui-flex-item:eq(1)').removeClass('current');
+        //             $('.weui-flex-item:eq(2)').addClass('current');
+        //             $('.apply-module:eq(1)').hide();
+        //             $('.apply-module:eq(2)').show();
+        //         }else if(postData.step==3){
+        //             location.href = data.data.url;
+        //         }
+        //     }else{
+        //         dialog.success(data.info);
+        //     }
+        // }
     });
 }

@@ -47,14 +47,38 @@
 					:product_src="productInfo.thumb_img"
 					:init_quantity="parseInt(init_quantity)"
 					:step_quantity="parseInt(step_quantity)"
+					:specification="productInfo.specification"
 					:type="type"
 			></product-select>
 		</ul>
 	</section>
+	
 </article>
+
 {/block}
 {block name="common"}{/block}
 {block name="footer"}
+{include file="../../api/public/vue/components/footer-menu.html" /}
+<div class="bg"></div>
+	<div class="dialogCart">
+		<div class="close" onclick="close">×</div>
+		<!-- <div id="product-list">
+			<product-select></product-select>
+		</div> -->
+		<div id="foot_cart_menu">
+			<footer-menu></footer-menu>
+		</div>
+	</div>
+<script type="text/javascript">
+	$(function(){
+		new Vue({
+            el:'#foot_cart_menu',
+            data:function(){
+                return {};
+            }
+        });
+	})
+</script>
 {include file="../../api/public/vue/components/product-select.html" /}
 <script type="text/javascript">
 	$(function(){
@@ -89,7 +113,7 @@
 					$.each(data.data.data,function(i,o){
 						_this.productList.push(o);
 					});
-				}
+				},
 			},created:function(){
 				let _thisVue = this;
 				_thisVue.getJsonListParam.callBack = _thisVue.getJsonListCallBack;
@@ -111,6 +135,16 @@
 {block name="script"}
 <script type="text/javascript" src="api_common_js/swiper.min.js"></script>
 <script type="text/javascript">
+$('.close').click(function(){
+	console.log(00);
+	$('.bg').toggle()
+	$('.dialogCart').slideUp(500)
+})
+$('.bg').click(function(){
+	console.log(00);
+	$('.bg').toggle()
+	$('.dialogCart').slideUp(500)
+})
 	$(function(){
 		var id = '{$info.id}';
 		var date=getWeek();
@@ -130,4 +164,58 @@
 		});
 	});
 </script>
+<style scoped>
+	@media (device-height:568px) and (-webkit-min-device-pixel-ratio:2){
+		.product_specs{
+			margin-top: 0;
+		}
+}
+	.red{
+		font-size: 18px;
+	}
+	.quantity_wrapper div:nth-of-type(2){
+		margin-right: 14px;
+	}
+	.bg{
+		width: 100vw;
+		height: 100vh;
+		background: #000;
+		opacity: 0.5;
+		z-index: 998;
+		position: fixed;
+		top: 0;
+		display: none
+	}
+	.close{
+		width: 16px;
+		height: 16px;
+		border-radius: 50%;
+		border:1px solid #fff;
+		color: #fff;
+		text-align: center;
+		line-height: 16px;
+		font-size: 16px;
+		position: absolute;
+		right: 14px;
+		top: -24px;
+	}
+	.dialogCart{
+		width: 100%;
+		height: 200px;
+		background: #fff;
+		position: fixed;
+		bottom: 0;
+		z-index: 999;
+		display: none
+	}
+	.group_cart_nav a:nth-of-type(1){
+		width: 60%
+	}
+	.group_cart_nav a:nth-of-type(3){
+		width: 60%
+	}
+	.group_cart_nav a:nth-of-type(4){
+		width: 60%
+	}
+	</style>
 {/block}
