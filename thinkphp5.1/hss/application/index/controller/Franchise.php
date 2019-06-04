@@ -47,11 +47,10 @@ class Franchise extends \common\controller\UserBase {
             return errorMsg('请求方式错误');
         }
         $postData = input('post.');
-//        print_r($postData);exit;
-//        $validate = new \app\index\validate\Franchise();
-//        if(!$validate->scene('add')->check($postData)) {
-//            return errorMsg($validate->getError());
-//        }
+        $validate = new \app\index\validate\Franchise();
+        if(!$validate->scene('add')->check($postData)) {
+            return errorMsg($validate->getError());
+        }
         $modelFranchise = new \app\index\model\Franchise();
         $modelFranchise -> startTrans();
         $postData['user_id'] = $this->user['id'];
@@ -64,9 +63,6 @@ class Franchise extends \common\controller\UserBase {
                 'id'=>$postData['id'],
                 'user_id'=>$this->user['id'],
                 'status'=>0,
-//                ['id','=',$postData['id']],
-//                ['user_id','=',$this->user['id']],
-//                ['status','=',0],
             ];
         }
         if(isset($postData['step']) && $postData['step'] == 1){
