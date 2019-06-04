@@ -49,6 +49,7 @@
 					:init_quantity="parseInt(init_quantity)"
 					:step_quantity="parseInt(step_quantity)"
 					:specification="productInfo.specification"
+					:by_footer_menu_monitor="by_footer_menu_monitor"
 					:type="type"
 			></product-select>
 		</ul>
@@ -123,6 +124,7 @@
 			type:0,
 			init_quantity:1,
 			step_quantity:1,
+			by_footer_menu_monitor:false,
 			productList:[],
 			getJsonListParam:{
 				url:module+'Goods/getRelationGoods',
@@ -172,16 +174,14 @@
 {block name="script"}
 <script type="text/javascript" src="api_common_js/swiper.min.js"></script>
 <script type="text/javascript">
-$('.close').click(function(){
-	console.log(00);
-	$('.bg').toggle()
-	$('.dialogCart').slideUp(500)
-})
-$('.bg').click(function(){
-	console.log(00);
-	$('.bg').toggle()
-	$('.dialogCart').slideUp(500)
-})
+	$('.close').click(function(){
+		$('.bg').toggle();
+		$('.dialogCart').slideUp(500)
+	});
+	$('.bg').click(function(){
+		$('.bg').toggle();
+		$('.dialogCart').slideUp(500)
+	});
 	$(function(){
 		var id = '{$info.id}';
 		var date=getWeek();
