@@ -145,7 +145,7 @@
 		});
 	});
 </script>
-{include file="../../api/public/vue/components/product-select.html" /}
+<!--{include file="../../api/public/vue/components/product-select.html" /}-->
 <script type="text/javascript">
 	$(function(){
 		let param = {
@@ -195,9 +195,13 @@
 		// 后加载简介
 		$('document').ready(function(){
 		 	$('.intro').html("{$info.intro|raw}");
-			var price = "";
 
-		 	$('.describe').html("{$info.intro|raw}");
+			// 套餐价 "{$info.price}"
+			
+			var normal_price = "";
+			//normal_price - "{$info.price}";
+
+		 	$('.describe').html("正常采购价元 &nbsp;套餐采购价优惠了元");
 		 });
 
 		//轮播
