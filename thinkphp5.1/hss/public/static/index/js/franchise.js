@@ -16,7 +16,7 @@ $(function(){
             area:apply.area,
             detail_address:apply.detail_address,
             old_apply_status:apply.apply_status,
-            pay_id:apply.apply_status,
+            pay_id:apply.pay_id,
         };
         console.log(applicantData)
         //省市区初始化
