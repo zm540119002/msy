@@ -250,6 +250,12 @@
                     };
                     asyncVerify(config);
                 },dialogCart: function (event) {
+                    new Vue({
+                        el:'#foot_cart_menu',
+                        data:function(){
+                            return {};
+                        }
+                    });
                     let param = {
                         type:3,
                         init_quantity:1,
