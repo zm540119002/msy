@@ -278,7 +278,7 @@
 		var offsetHeight=$('.detail-nav').offset().top;
 
 		var _screenHight = window.screen.availHeight;
-		$("#item3").css("height",_screenHight+"px");
+		$("#item3").css("min-height",_screenHight+"px");
 
 
 		$(window).scroll(function() {
@@ -304,7 +304,6 @@
 			});
 
 			// 给相应楼层的a 设置 current, 取消其他链接的current
-			console.log(currentId);
 			var currentLink = menu.find('.active');
 			if(currentId && currentLink.data('item') != currentId) {
 				// currentLink.removeClass('active');
