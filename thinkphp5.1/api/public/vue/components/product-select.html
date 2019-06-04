@@ -274,21 +274,22 @@
                         }
                     });
                     // 弹出加入采购车
-                    let html = $('.dialogCart').html();
-                    layer.open({
-                        className: 'addCart',
-                        type: 1,
-                        shadeClose: false,
-                        content: content,
-                        btn: [''],
-                        success: function (index) {
-                        }, yes: function (index) {
-                            layer.close(index);
-                        }
-                    });
-                },editCheckItem:function(param){
-                    this.checked = param;
+                    // let html = $('.dialogCart').html();
+                    // layer.open({
+                    //     className: 'addCart',
+                    //     type: 1,
+                    //     shadeClose: false,
+                    //     content: content,
+                    //     btn: [''],
+                    //     success: function (index) {
+                    //     }, yes: function (index) {
+                    //         layer.close(index);
+                    //     }
+                    // });
                 }
+                // ,editCheckItem:function(param){
+                //     // this.checked = param;
+                // }
             },created: function(){
                 let _this = this;
                 _this.subtotal_amount_calculate();

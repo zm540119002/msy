@@ -298,7 +298,7 @@
 			// 给相应楼层的a 设置 current, 取消其他链接的current
 			var currentLink = menu.find('.active');
 			if(currentId && currentLink.data('item') != currentId) {
-				currentLink.removeClass('active');
+				// currentLink.removeClass('active');
 				menu.find("[data-item='"+ currentId +"']").addClass('active').siblings().removeClass('active');
 			}
 		});
@@ -319,7 +319,7 @@
 				}
 			});
 		});
-
+	
 		//获取评论
 		var config = {
 			url:module+'Comment/getList',
