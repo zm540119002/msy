@@ -155,14 +155,14 @@ return [
                 'bottom_item',
                 'apply_franchisee_qualification',
             ],
-            'action'=>url('/'),
+            'action'=>url('/index/Franchise/applyFranchise'),
         ],[// 22
             'name'   => '申请黑森森城市合伙人资格',
             'class'=>[
                 'bottom_item',
                 'apply_city_partner_qualification',
             ],
-            'action'=>url('/'),
+            'action'=>url('/index/CityPartner/city'),
         ]
     ],
 ];
