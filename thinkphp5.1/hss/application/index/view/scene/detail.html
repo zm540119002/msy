@@ -77,6 +77,10 @@
 					:type="type"
 			></product-select>
 		</div>
+		<div class="specs">
+			<div>单品12g ￥198.00</div>
+			<div>10盒/箱</div>
+		</div>
 		<div id="foot_cart_menu">
 			<footer-menu></footer-menu>
 		</div>
@@ -145,7 +149,7 @@
 </script><script type="text/javascript">
 	$(function(){
 		let param = {
-			type:5,
+			type:3,
 			init_quantity:1,
 			step_quantity:1,
 			productList:[
@@ -239,6 +243,16 @@ $('.bg').click(function(){
 		bottom: 0;
 		z-index: 999;
 		display: none
+	}.dialogCart .product-select .right{
+		width: 35% !important;
+	}
+	.dialogCart .product-select{
+		border-top: 1px solid #eee;
+		border-bottom: 1px solid #eee;
+		margin-top: 5px;
+	}
+	.dialogCart .red{
+		font-size: 0.2rem;
 	}
 	.group_cart_nav a:nth-of-type(1){
 		width: 60%
@@ -251,6 +265,7 @@ $('.bg').click(function(){
 	}
 	.title{
 		position: relative;
+		height: 50px;
 	}
 	.title img{
 		position: absolute;
@@ -262,7 +277,16 @@ $('.bg').click(function(){
 		border: none;
 	}
 	.title span{
-		font-size: 0.4rem;
+		font-size: 0.3rem;
+		position: absolute;
+		left: 76px;
+		margin-top: 5px;
+	}
+	.specs{
+		font-size: 0.2rem;
+		display: flex;
+		justify-content: space-between;
+		padding: 10px;
 	}
 	</style>
 {/block}

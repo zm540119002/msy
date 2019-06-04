@@ -106,7 +106,8 @@ $('body').on('click','.batchDel',function(){
 //上下架
 $('body').on('click','.set-shelf-status',function(){
     var _this = $(this);
-    var text = _this.attr('title');
+    //var text = _this.attr('title');
+    var text = _this.text();
     var shelf_status = _this.data('shelf-status');
     var _thisTr = $(this).parents('tr');
     var postData ={};
@@ -114,26 +115,45 @@ $('body').on('click','.set-shelf-status',function(){
     postData.shelf_status = shelf_status;
     var url =  controller + 'setInfo';
     layer.open({
-        btn: ['确定','取消'],//按钮
+        btn: ['确定','取消'],//按钮 做到这里
         content:text+' ?',
         yes:function (index) {
             $.post(url,postData,function(msg){
                 dialog.msg(msg,'',function(){
                     if(msg.status){
+
                         if(shelf_status == 3){
-                            _thisTr.find(".shelf-status").html('<span class="label label-defaunt radius">已下架</span>');
+                            //_thisTr.find(".shelf-status").html('<span class="label label-defaunt radius">已下架</span>');
                             _this.data('shelf-status',1);
                             _this.attr('title','上架');
+                            _this.html('上架');
 
                         }else{
-                            _thisTr.find(".shelf-status").html('<span class="label label-success radius">已上架</span>');
+                            //_thisTr.find(".shelf-status").html('<span class="label label-success radius">已上架</span>');
                             _this.data('shelf-status',3);
                             _this.attr('title','下架');
+                            _this.html('下架');
                         }
                     }
                 });
             });
             layer.close(index);
         }
+    });
+});
+
+// 预览
+$('body').on('click','.preview',function(){
+    var index = parent.layer.getFrameIndex(window.name);
+    parent.layer.iframeAuto(index);
+    var _thisTr = $(this).parents('tr');
+    var url =  '/index/Promotion/detail/id/' + _thisTr.data('id');
+    layer.open({
+        type: 2,
+        maxmin: true,
+        shade: false,
+        area: ['500px','700px'],
+        title: '项目预览',
+        content: url
     });
 });
