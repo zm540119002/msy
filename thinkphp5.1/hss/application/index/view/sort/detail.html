@@ -3,7 +3,7 @@
 {block name="content"}
 <article class="f24">
 	<!-- 项目信息 -->
-	<div id="menu">
+	<div id="menu" class="menu">
 		<a href="javascript:void(0);" class="back_prev_page" data-jump_url=""></a>
 		<ul class="columns_flex detail-nav">
 			<li data-item="item1"><a href="javascript:;" class="">品类商品</a></li>
@@ -169,4 +169,12 @@
 		})
 	});
 </script>
+<style>
+		.menu{
+			position: fixed;
+			top: 0;
+			z-index: 10;
+			width: 100%;
+		}
+	</style>
 {/block}
