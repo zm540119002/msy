@@ -32,6 +32,16 @@
         word-break: break-all;
     }.check_all {
          -webkit-appearance: checkbox;
+     }.cart_eject{
+         display: flex;
+         justify-content: space-between;
+         line-height: 40px;
+         margin: 0 20px;
+         padding: 8px 0;
+         border-top: 1px solid #eee;
+         border-bottom: 1px solid #eee;
+     }.purchase_goods_num{
+         padding-top: 0.1rem;
      }
 </style>
 <!-- 产品选择器 -->
@@ -152,7 +162,7 @@
             </div>
         </div>
     </li><li v-else-if="type==5"><!--用于购物车弹出增减-->
-        <div class="cart_list_r">
+        <div class="cart_eject">
             <div class="commodity_purchaser f24"><span class="pink">￥{{deal_price}}</span></div>
             <div class="purchase_goods_num cart_goods_operate">
                 <div class=" selected-number">
