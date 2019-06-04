@@ -120,38 +120,38 @@ function submitApplicant(_this,postData){
             $('.loading').hide();
             dialog.error('AJAX错误');
         },
-        success: function(data){
-            _this.removeClass("nodisabled");//删除防止重复提交
-            $('.loading').hide();
-            if(data.status){
-                location.href = data.url;
-
-            }else{
-                dialog.success(data.info);
-                //dialog.error('结算提交失败!');
-            }
-        }
         // success: function(data){
         //     _this.removeClass("nodisabled");//删除防止重复提交
         //     $('.loading').hide();
         //     if(data.status){
-        //         applicantData.id = data.data.id;
-        //         if(postData.step==1){
-        //             $('.weui-flex-item:eq(0)').removeClass('current');
-        //             $('.weui-flex-item:eq(1)').addClass('current');
-        //             $('.apply-module:eq(0)').hide();
-        //             $('.apply-module:eq(1)').show();
-        //         }else if(postData.step==2){
-        //             $('.weui-flex-item:eq(0),.weui-flex-item:eq(1)').removeClass('current');
-        //             $('.weui-flex-item:eq(2)').addClass('current');
-        //             $('.apply-module:eq(1)').hide();
-        //             $('.apply-module:eq(2)').show();
-        //         }else if(postData.step==3){
-        //             location.href = data.data.url;
-        //         }
+        //         location.href = data.url;
+        //
         //     }else{
         //         dialog.success(data.info);
+        //         //dialog.error('结算提交失败!');
         //     }
         // }
+        success: function(data){
+            _this.removeClass("nodisabled");//删除防止重复提交
+            $('.loading').hide();
+            if(data.status){
+                applicantData.id = data.data.id;
+                if(postData.step==1){
+                    $('.weui-flex-item:eq(0)').removeClass('current');
+                    $('.weui-flex-item:eq(1)').addClass('current');
+                    $('.apply-module:eq(0)').hide();
+                    $('.apply-module:eq(1)').show();
+                }else if(postData.step==2){
+                    $('.weui-flex-item:eq(0),.weui-flex-item:eq(1)').removeClass('current');
+                    $('.weui-flex-item:eq(2)').addClass('current');
+                    $('.apply-module:eq(1)').hide();
+                    $('.apply-module:eq(2)').show();
+                }else{
+                    location.href = data.data.url;
+                }
+            }else{
+                dialog.success(data.info);
+            }
+        }
     });
 }
