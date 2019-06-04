@@ -18,6 +18,7 @@ $(function(){
             old_apply_status:apply.apply_status,
             pay_id:apply.apply_status,
         };
+        console.log(applicantData)
         //省市区初始化
         var region = [];
         region.push(apply.province);
