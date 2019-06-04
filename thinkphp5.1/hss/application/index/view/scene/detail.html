@@ -174,16 +174,14 @@
 {block name="script"}
 <script type="text/javascript" src="api_common_js/swiper.min.js"></script>
 <script type="text/javascript">
-$('.close').click(function(){
-	console.log(00);
-	$('.bg').toggle()
-	$('.dialogCart').slideUp(500)
-})
-$('.bg').click(function(){
-	console.log(00);
-	$('.bg').toggle()
-	$('.dialogCart').slideUp(500)
-})
+	$('.close').click(function(){
+		$('.bg').toggle();
+		$('.dialogCart').slideUp(500)
+	});
+	$('.bg').click(function(){
+		$('.bg').toggle();
+		$('.dialogCart').slideUp(500)
+	});
 	$(function(){
 		var id = '{$info.id}';
 		var date=getWeek();
