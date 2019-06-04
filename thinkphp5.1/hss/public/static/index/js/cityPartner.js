@@ -18,7 +18,8 @@ $(function(){
             company_name:apply[0].company_name,
             applicant:apply[0].applicant,
             mobile:apply[0].mobile,
-            old_apply_status:apply[0].apply_status
+            old_apply_status:apply[0].apply_status,
+            pay_id:apply[0].pay_id,
         };
 
         //省市区初始化
