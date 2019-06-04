@@ -14,8 +14,12 @@ class Order extends \common\controller\UserBase
             $this->errorMsg('请求数据不能为空');
         }
 
-        $modelOrder = new \app\index\model\Order();
-        $modelOrderDetail = new \app\index\model\OrderDetail();
+        $order_type = input('pst.type/d');
+        if(empty($order_type)){
+
+        }
+
+
         $goodsIds = array_column($goodsList,'goods_id');
         $config = [
             'where' => [
@@ -60,6 +64,8 @@ class Order extends \common\controller\UserBase
             }
         }
 
+        $modelOrder = new \app\index\model\Order();
+        $modelOrderDetail = new \app\index\model\OrderDetail();
         //开启事务
         $modelOrder->startTrans();
         //订单编号
