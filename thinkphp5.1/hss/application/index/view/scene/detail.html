@@ -100,6 +100,26 @@
 <script type="text/javascript">
 	$(function(){
 		let param = {
+			type:3,
+			init_quantity:1,
+			step_quantity:1,
+			productList:[
+				{
+					product_id:1,
+					bulk_price:299
+				}
+			]
+		};
+		new Vue({
+			el: '#product-list2',
+			data:function(){
+				return param;
+			}
+		});
+	});
+</script><script type="text/javascript">
+	$(function(){
+		let param = {
 			type:0,
 			init_quantity:1,
 			step_quantity:1,
@@ -144,26 +164,6 @@
 						vueVersionGetJsonList(_thisVue);
 					}
 				});
-			}
-		});
-	});
-</script><script type="text/javascript">
-	$(function(){
-		let param = {
-			type:3,
-			init_quantity:1,
-			step_quantity:1,
-			productList:[
-				{
-					product_id:1,
-					bulk_price:299
-				}
-			]
-		};
-		new Vue({
-			el: '#product-list2',
-			data:function(){
-				return param;
 			}
 		});
 	});
