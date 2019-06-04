@@ -26,12 +26,26 @@
 				<li>
 					<div class="top_radius f20 top_module">
 						<div>
+<<<<<<< HEAD
 								<div class="price">
 									<span>￥2980.00</span>
 									
 									
 								</div>
 								
+=======
+							<div id="product-list">
+								<product-select
+										v-for="(productInfo,index) in productList"
+										:key="index"
+										:product_id="productInfo.id"
+										:deal_price="parseFloat(productInfo.bulk_price)"
+										:init_quantity="parseInt(init_quantity)"
+										:step_quantity="parseInt(step_quantity)"
+										:type="type"
+								></product-select>
+							</div>
+>>>>>>> 32ae8d30eab0d4c8d250fadcd693d723df8ad318
 							<div class="title">
 								{$info.title}
 							</div>
@@ -47,10 +61,8 @@
 							<span>1111</span>
 							<span>1111</span>
 							</div>
-							
 							<div class="tags_item_r">
-								
-								                <a class="collection" href="javascript:;"><span class="icon"></span><span class="text"></span>收藏</a>
+								<a class="collection" href="javascript:;"><span class="icon"></span><span class="text"></span>收藏</a>
 								<a class="share" href="javascript:;"><span class="icon"></span>分享</a>
 							</div>
 						</div>
@@ -145,11 +157,6 @@
 </script>
 {include file="../../api/public/vue/components/product-select.html" /}
 <script type="text/javascript">
-	//初始化分类商品页面
-/*	$('.nav_menu li:eq(0)').addClass('current');
-	postData.category_id = $('.nav_menu li.current').data('category-id');
-	getPagingList(config,postData);*/
-
 	$(function(){
 		let param = {
 			type:3,
@@ -157,8 +164,8 @@
 			step_quantity:1,
 			productList:[
 				{
-					product_id:1,
-					bulk_price:299
+					id:"{$info.id}",
+					bulk_price:"{$info.price}"
 				}
 			]
 		};
@@ -174,6 +181,11 @@
 {block name="script"}
 <script type="text/javascript" src="api_common_js/swiper.min.js"></script>
 <script type="text/javascript">
+	//初始化分类商品页面
+	/*	$('.nav_menu li:eq(0)').addClass('current');
+	 postData.category_id = $('.nav_menu li.current').data('category-id');
+	 getPagingList(config,postData);*/
+
 	var config = {
 		url:module+'Goods/getPromotionGoods',
 		requestEnd:false,

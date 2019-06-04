@@ -57,6 +57,7 @@
                 template:'#footer-menu_tpl',
                 props: {
                     type: {type: Number,default: 1},
+                    init_product_type: {type: Number,default: 1},
                     cart_init_num: {type: Number,default: 0},
                     init_total_amount: {type: Number,default: 0},
                     init_checked: {type: Boolean,default: false},
@@ -71,6 +72,7 @@
                         checkItemList:[],
                         menus: unlockingFooterCart.menu,
                         postData:{
+                            product_type:this.init_product_type,
                             data:[]
                         }
                     }
@@ -260,3 +262,5 @@
         }
     });
 </script>
+<style lang="less" scoped>
+</style>
