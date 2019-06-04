@@ -251,6 +251,8 @@
                     };
                     asyncVerify(config);
                 },dialogCart: function () {
+                    this.deal_price = 288;
+                    this.buy_quantity = 20;
                     let _this = this;
                     // 弹出加入采购车
                     $('.dialogCart').toggle(200);
@@ -258,7 +260,6 @@
                     //触发-弹出采购车点击-事件
                     bus.$emit('dialog_cart_click',_this);
                 },dialog_cart_click: function (param) {
-                    this.deal_price = 288;
 //                    this.deal_price = param.deal_price;
 //                    this.buy_quantity = this.init_quantity;
 //                    console.log(param.buy_quantity);
