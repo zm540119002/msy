@@ -249,7 +249,6 @@
                     let _this = this;
                     //监听-产品选择器初始化-事件
                     bus.$on('product_select_init', function(param){
-                        console.log(param.by_footer_menu_monitor);
                         if(param.by_footer_menu_monitor){
                             _this.total_amount_init(param);
                             _this.editProductList(param);
