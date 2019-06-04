@@ -34,7 +34,6 @@
 										:deal_price="parseFloat(productInfo.bulk_price)"
 										:init_quantity="parseInt(init_quantity)"
 										:step_quantity="parseInt(step_quantity)"
-										:init_product_type="parseInt(init_product_type)"
 										:type="type"
 								></product-select>
 							</div>
@@ -123,6 +122,7 @@
 <div id="foot_cart_menu">
 	<footer-menu
 			:cart_init_num="cart_init_num"
+			:init_product_type="parseInt(init_product_type)"
 	></footer-menu>
 </div>
 <script type="text/javascript">
