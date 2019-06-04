@@ -89,14 +89,14 @@ class Franchise extends \common\controller\UserBase {
                 'create_time' => time(),
             ];
             if(isset($postData['pay_id']) && $postData['pay_id']){
-                $where = [
+                $where1 = [
                     ['id','=',$postData['pay_id']],
                     ['user_id','=',$this->user['id']],
                     ['status','=',0],
                 ];
             }
-            print_r($where);
-            $payId = $modelPay->edit($data,$where);
+            print_r($where1);
+            $payId = $modelPay->edit($data,$where1);
             echo $modelPay->getLastSql();exit;
             if(false===$payId){
                 $modelFranchise ->rollback();
