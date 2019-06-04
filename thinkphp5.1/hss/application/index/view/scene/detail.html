@@ -54,39 +54,26 @@
 			></product-select>
 		</ul>
 	</section>
-	
 </article>
-
 {/block}
 {block name="common"}{/block}
 {block name="footer"}
 {include file="../../api/public/vue/components/footer-menu.html" /}
 <div class="bg"></div>
-	<div class="dialogCart">
-		<div class="close" onclick="close">×</div>
-		<div class="title">
-			<img src=""/>
-			<span>11111111111111</span>
-		</div>
-		<div id="product-list2">
-			<product-select
-					v-for="(productInfo,index) in productList"
-					:key="index"
-					:product_id="productInfo.id"
-					:deal_price="parseFloat(productInfo.bulk_price)"
-					:init_quantity="parseInt(init_quantity)"
-					:step_quantity="parseInt(step_quantity)"
-					:type="type"
-			></product-select>
-		</div>
-		<div class="specs">
-			<div>单品12g ￥198.00</div>
-			<div>10盒/箱</div>
-		</div>
-		<div id="foot_cart_menu">
-			<footer-menu></footer-menu>
-		</div>
+<div class="dialogCart">
+	<product-select
+			v-for="(productInfo,index) in productList"
+			:key="index"
+			:product_id="productInfo.id"
+			:deal_price="parseFloat(productInfo.bulk_price)"
+			:init_quantity="parseInt(init_quantity)"
+			:step_quantity="parseInt(step_quantity)"
+			:type="type"
+	></product-select>
+	<div id="foot_cart_menu">
+		<footer-menu></footer-menu>
 	</div>
+</div>
 <script type="text/javascript">
 	$(function(){
 		new Vue({
@@ -112,7 +99,7 @@
 			]
 		};
 		new Vue({
-			el: '#product-list2',
+			el: '.dialogCart',
 			data:function(){
 				return param;
 			}
@@ -121,7 +108,7 @@
 </script><script type="text/javascript">
 	$(function(){
 		let param = {
-			type:0,
+			type:5,
 			init_quantity:1,
 			step_quantity:1,
 			by_footer_menu_monitor:false,

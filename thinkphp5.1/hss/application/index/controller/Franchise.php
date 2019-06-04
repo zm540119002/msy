@@ -16,11 +16,15 @@ class Franchise extends \common\controller\UserBase {
             $modelFranchise = new \app\index\model\Franchise();
             $condition=[
                 'where'=>[
-                    ['status', '=', 0],
-                    ['user_id','=',$this->user['id']]
+                    ['f.status', '=', 0],
+                    ['f.user_id','=',$this->user['id']],
+                    ['f.apply_status','=',1],
                 ],
                 'field'=>[
-                    'id','province','city','area','detail_address','name','applicant','mobile','franchise_fee','apply_status'
+                    'f.id','f.province','f.city','f.area','f.detail_address','f.name','f.applicant','f.mobile','f.franchise_fee','f.apply_status',
+                    'p.sn','p.id as pay_id'
+                ],'join' => [
+                    ['pay p','p.sn = f.sn','left'],
                 ],
             ];
             $apply = $modelFranchise -> getInfo($condition);
@@ -38,44 +42,67 @@ class Franchise extends \common\controller\UserBase {
      */
     public function franchiseSettlement()
     {
+
         if(!request()->isAjax()){
             return errorMsg('请求方式错误');
         }
         $postData = input('post.');
+        print_r($postData);exit;
         $validate = new \app\index\validate\Franchise();
-        if(!$validate->scene('add')->check($postData)) {
-            return errorMsg($validate->getError());
-        }
+//        if(!$validate->scene('add')->check($postData)) {
+//            return errorMsg($validate->getError());
+//        }
         $modelFranchise = new \app\index\model\Franchise();
         $modelFranchise -> startTrans();
-        $sn = generateSN(); //内部支付编号
-        $postData['sn'] = $sn;
         $postData['user_id'] = $this->user['id'];
         $postData['franchise_fee'] = config('custom.franchise_fee');
         $postData['create_time'] = time();
-        $result  = $modelFranchise->isUpdate(false)->save($postData);
-        if(!$result){
-            $modelFranchise ->rollback();
-            return errorMsg('失败');
+        $sn = generateSN(); //内部支付编号
+        $postData['sn'] = $sn;
+        if(isset($postData['id']) && $postData['id']){
+            $where = [
+                ['id','=',$postData['id']],
+                ['user_id','=',$this->user['id']],
+                ['status','=',0],
+            ];
         }
-
-        //生成支付表数据
-        $modelPay = new \app\index\model\Pay();
-        $data = [
-            'sn' => $sn,
-            'actually_amount' =>config('custom.franchise_fee'),
-            'user_id' => $this->user['id'],
-            'pay_code' => $postData['pay_code'],
-            'type' => config('custom.pay_type')['franchisePay']['code'],
-            'create_time' => time(),
-        ];
-        $result  = $modelPay->isUpdate(false)->save($data);
-        if(!$result){
-            $modelPay ->rollback();
-            return errorMsg('失败');
+        if(isset($postData['step']) && $postData['step'] == 1){
+            $id = $modelFranchise->edit($postData,$where);
+            if(false===$id){
+                $modelFranchise ->rollback();
+                return errorMsg('失败');
+            }
+        }else{
+            $id = $modelFranchise->edit($postData,$where);
+            if(false===$id){
+                $modelFranchise ->rollback();
+                return errorMsg('失败');
+            }
+            //生成支付表数据
+            $modelPay = new \app\index\model\Pay();
+            $data = [
+                'sn' => $sn,
+                'actually_amount' =>config('custom.franchise_fee'),
+                'user_id' => $this->user['id'],
+                'pay_code' => $postData['pay_code'],
+                'type' => config('custom.pay_type')['franchisePay']['code'],
+                'create_time' => time(),
+            ];
+            if(isset($postData['pay_id']) && $postData['pay_id']){
+                $where = [
+                    ['id','=',$postData['pay_id']],
+                    ['user_id','=',$this->user['id']],
+                    ['status','=',0],
+                ];
+            }
+            $payId = $modelPay->edit($data,$where);
+            if(false===$payId){
+                $modelFranchise ->rollback();
+                return errorMsg('失败');
+            };
         }
         $modelFranchise -> commit();
-        return successMsg('成功',['url'=>config('custom.pay_gateway').$sn]);
+        $this->successMsg('成功',['url'=>config('custom.pay_gateway').$sn,'id'=>$id]);
     }
 
     /**
