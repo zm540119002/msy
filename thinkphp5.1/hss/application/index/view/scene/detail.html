@@ -59,6 +59,7 @@
 {block name="common"}{/block}
 {block name="footer"}
 {include file="../../api/public/vue/components/footer-menu.html" /}
+<div id="dialogCart">
 <product-select
 		v-for="(productInfo,index) in productList"
 		:key="index"
@@ -68,6 +69,7 @@
 		:step_quantity="parseInt(step_quantity)"
 		:type="type"
 ></product-select>
+</div>
 <div class="dialogCart">
 
 	<div id="foot_cart_menu">
@@ -99,7 +101,7 @@
 			]
 		};
 		new Vue({
-			el: '.dialogCart',
+			el: '#dialogCart',
 			data:function(){
 				return param;
 			}
