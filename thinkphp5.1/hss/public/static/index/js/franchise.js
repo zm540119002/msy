@@ -113,6 +113,7 @@ $(function(){
 });
 // 提交申请
 function submitApplicant(_this,postData){
+    console.log(postData)
     var url = module + 'Franchise/franchiseSettlement';
     _this.addClass("nodisabled");//防止重复提交
     $.ajax({
@@ -126,17 +127,6 @@ function submitApplicant(_this,postData){
             $('.loading').hide();
             dialog.error('AJAX错误');
         },
-        // success: function(data){
-        //     _this.removeClass("nodisabled");//删除防止重复提交
-        //     $('.loading').hide();
-        //     if(data.status){
-        //         location.href = data.url;
-        //
-        //     }else{
-        //         dialog.success(data.info);
-        //         //dialog.error('结算提交失败!');
-        //     }
-        // }
         success: function(data){
             _this.removeClass("nodisabled");//删除防止重复提交
             $('.loading').hide();
