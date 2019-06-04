@@ -131,7 +131,7 @@ class Cart extends \common\controller\UserBase {
         $user = checkLogin();
         if($user){
             $modelCart = new \app\index\model\Cart();
-            $totalNum = $modelCart->where(['status'=>0,'user_id'=>$user['id']])->sum('num');
+            $totalNum = $modelCart->where(['status'=>0,'user_id'=>$user['id'],'shelf_status'=>3])->sum('num');
             $this -> assign('total_num',$totalNum);
         }
     }
