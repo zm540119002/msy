@@ -250,7 +250,7 @@
                     };
                     asyncVerify(config);
                 },dialogCart: function (event) {
-                    console.log(this.deal_price);
+
                     new Vue({
                         el:'#foot_cart_menu',
                         data:function(){
@@ -275,14 +275,9 @@
 //                        }
 //                    });
                     // 弹出加入采购车
-                    $('.dialogCart').toggle(
-                        function () {
-                            console.log(123);
-                        },
-                        function () {
-                            console.log(456);
-                        }
-                    );
+                    $('.dialogCart').show(function () {
+                        console.log(this.deal_price);
+                    });
                 },editCheckItem:function(param){
                     this.checked = param;
                 }
