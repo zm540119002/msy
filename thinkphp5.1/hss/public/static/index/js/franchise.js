@@ -1,7 +1,8 @@
+var area_address,
+    applicantData={};
+
 $(function(){
     tab_down('.apply-data-nav .switch-item','.apply-module','click');
-    var area_address,
-        applicantData={};
 
     //初始化 未完成的申请
     if(apply!=null){
