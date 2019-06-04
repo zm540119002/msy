@@ -32,7 +32,7 @@ class Promotion extends Base {
             if($id = input('param.id/d')){
                 $condition = [
                     'field' => [
-                        'id','name','shelf_status','sort','thumb_img','main_img','intro','tag','title','background_img','price'
+                        'id','name','shelf_status','sort','thumb_img','main_img','intro','tag','title','background_img','price','remarks'
                     ], 'where' => [
                         ['id','=',$id]
                     ],
@@ -61,6 +61,7 @@ class Promotion extends Base {
 
             $data['title'] = $data['name'];
             $data['update_time'] = time();
+            $data['remarks'] = trim($data['remarks']);
             $data['audit'] = 1; // 暂时没有审核，先固定
 
             if(isset($_POST['id']) && $id=input('post.id/d')){ //修改

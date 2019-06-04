@@ -41,7 +41,8 @@
 							<div class="title">
 								{$info.title}
 							</div>
-							<div class="describe">正常采购价10000元 &nbsp;套餐采购价优惠了1000元</div>
+							<!--<div class="describe">正常采购价10000元 &nbsp;套餐采购价优惠了1000元</div>-->
+							<div class="describe">{$info.remarks}</div>
 							<div class="intro"></div>
 						</div>
 						<div class="tags_item columns_flex l-r-sides">
@@ -202,7 +203,7 @@
 
 			//var normal_price = "";
 			//normal_price - "{$info.price}";
-			$('.deal_price').each(function() {
+/*			$('.deal_price').each(function() {
 				var sum = 0;
 				$('tr', this).each(function () {
 					if (Number($('td', this).eq(0).html()) >= 0) {
@@ -211,7 +212,7 @@
 				});
 			});
 
-		 	$('.describe').html("正常采购价元 ;套餐采购价优惠了元");
+		 	$('.describe').html("正常采购价元 &nbsp;套餐采购价优惠了元");*/
 		 });
 
 		//轮播
@@ -262,9 +263,6 @@
 		}
 		.selected-number{
 			float: right;
-		}
-		.group_cart_nav a:nth-of-type(3){
-			background: red;
 		}
 	</style>
 {/block}

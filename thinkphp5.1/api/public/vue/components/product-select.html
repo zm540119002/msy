@@ -257,23 +257,23 @@
                             return {};
                         }
                     });
-                    let param = {
-                        type:3,
-                        init_quantity:1,
-                        step_quantity:1,
-                        productList:[
-                            {
-                                id:this.product_id,
-                                bulk_price:this.deal_price
-                            }
-                        ]
-                    };
-                    new Vue({
-                        el: '.dialogCart',
-                        data:function(){
-                            return param;
-                        }
-                    });
+//                    let param = {
+//                        type:3,
+//                        init_quantity:1,
+//                        step_quantity:1,
+//                        productList:[
+//                            {
+//                                id:this.product_id,
+//                                bulk_price:this.deal_price
+//                            }
+//                        ]
+//                    };
+//                    new Vue({
+//                        el: '.dialogCart',
+//                        data:function(){
+//                            return param;
+//                        }
+//                    });
                     // 弹出加入采购车
                     $('.dialogCart').toggle(
                         function () {
@@ -281,10 +281,8 @@
                         },
                         function () {
                             console.log(456);
-                            $(this).removeClass("selected");
                         }
                     );
-                
                 },editCheckItem:function(param){
                     this.checked = param;
                 }
