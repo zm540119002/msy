@@ -15,7 +15,8 @@ $(function(){
             city:apply.city,
             area:apply.area,
             detail_address:apply.detail_address,
-            old_apply_status:apply.apply_status
+            old_apply_status:apply.apply_status,
+            pay_id:apply.apply_status,
         };
         //省市区初始化
         var region = [];
@@ -58,12 +59,12 @@ $(function(){
         if(content){
             dialog.error(content);
         }else{
-            // applicantData.step = 1;
-            // submitApplicant(_this,applicantData);
-            $('.weui-flex-item:eq(0)').removeClass('current');
-            $('.weui-flex-item:eq(1)').addClass('current');
-            $('.apply-module:eq(0)').hide();
-            $('.apply-module:eq(1)').show();
+            applicantData.step = 1;
+            submitApplicant(_this,applicantData);
+            // $('.weui-flex-item:eq(0)').removeClass('current');
+            // $('.weui-flex-item:eq(1)').addClass('current');
+            // $('.apply-module:eq(0)').hide();
+            // $('.apply-module:eq(1)').show();
         }
     });
     
