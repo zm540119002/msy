@@ -117,17 +117,23 @@
                 if(param.asyncVerifyCallBack && $.isFunction(param.asyncVerifyCallBack)){
                     param.asyncVerifyCallBack();
                 }
-                if(param.clickObj.attr('class').indexOf('add_cart')!==-1 && param.componentFooterCartMenu){ //底部购物车菜单数量统计
+                if(param.clickObj.attr('class').indexOf('add_cart')!==-1
+                        && param.componentFooterCartMenu
+                ){ //底部购物车菜单数量统计
                     $.each(param.postData.data,function(i,o){
                         param.componentFooterCartMenu.cart_num += o.num;
                     });
                 }
-                if(param.clickObj.attr('class').indexOf('add_cart')!==-1 && param.clickObj.attr('class').indexOf('plus')!==-1){ //加
+                if(param.clickObj.attr('class').indexOf('add_cart')!==-1
+                        && param.clickObj.attr('class').indexOf('plus')!==-1
+                ){ //加
                     $.each(param.postData.data,function(i,o){
                         param.vueObj.buy_quantity += o.num;
                     });
                 }
-                if(param.clickObj.attr('class').indexOf('add_cart')!==-1 && param.clickObj.attr('class').indexOf('reduce')!==-1){ //减
+                if(param.clickObj.attr('class').indexOf('add_cart')!==-1
+                        && param.clickObj.attr('class').indexOf('reduce')!==-1
+                ){ //减
                     $.each(param.postData.data,function(i,o){
                         param.vueObj.buy_quantity += o.num;
                         param.vueObj.buy_quantity_reduce_trigger = true;
@@ -148,7 +154,8 @@
                     }
                 }
                 if(param.clickObj.attr('class').indexOf('add_cart')!==-1
-                        && !(param.clickObj.attr('class').indexOf('plus')!==-1 || param.clickObj.attr('class').indexOf('reduce')!==-1)
+                        && !(param.clickObj.attr('class').indexOf('plus')!==-1
+                        || param.clickObj.attr('class').indexOf('reduce')!==-1)
                 ){ //包含add_cart，但是不能包含plus 或者 reduce才提示
                     dialog.success(param.data.info);
                 }
