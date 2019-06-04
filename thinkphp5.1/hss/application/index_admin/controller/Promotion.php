@@ -79,18 +79,19 @@ class Promotion extends Base {
 
                 //删除旧文件
                 if($info['thumb_img']){
-                    delImgFromPaths($info['thumb_img'],$_POST['thumb_img']);
+                    delImgFromPaths($info['thumb_img'],$data['thumb_img']);
                 }
                 if($info['logo_img']){
-                    delImgFromPaths($info['logo_img'],$_POST['logo_img']);
+                    delImgFromPaths($info['logo_img'],$data['logo_img']);
                 }
                 if($info['background_img']){
-                    delImgFromPaths($info['background_img'],$_POST['background_img']);
+                    delImgFromPaths($info['background_img'],$data['background_img']);
                 }
                 if($info['main_img']){
                     //删除商品详情图
                     $oldImgArr = explode(',',$info['main_img']);
-                    $newImgArr = explode(',',$_POST['main_img']);
+                    $newImgArr = explode(',',$data['main_img']);
+             
                     delImgFromPaths($oldImgArr,$newImgArr);
                 }
 

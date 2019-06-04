@@ -25,15 +25,14 @@ class Order extends \common\controller\UserBase
 
         if($order_type==2 ){
 
-            $promotion_id = reset($goodsIds);
-
+            $promotion = reset($goodsList);
             $modelPromotionGoods = new \app\index\model\PromotionGoods();
             $config = [
                 'where' => [
                     ['status', '=', 0],
-                    ['promotion_id', '=', $promotion_id],
+                    ['promotion_id', '=', $promotion['goods_id']],
                 ], 'field' => [
-                    'goods_id','goods_num num'
+                    'goods_id',"goods_num*{$promotion['num']} num"
                 ]
             ];
             $goodsList= $modelPromotionGoods->getList($config);
@@ -44,7 +43,8 @@ class Order extends \common\controller\UserBase
 
             $goodsIds = array_column($goodsList,'goods_id');
         }
-
+        p($goodsIds);
+        exit;
         //$goodsIds = array_column($goodsList,'goods_id');
         $config = [
             'where' => [
