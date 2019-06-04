@@ -250,33 +250,42 @@
                     };
                     asyncVerify(config);
                 },dialogCart: function (event) {
-                    new Vue({
-                        el:'#foot_cart_menu',
-                        data:function(){
-                            return {};
-                        }
-                    });
-                    let param = {
-                        type:3,
-                        init_quantity:1,
-                        step_quantity:1,
-                        productList:[
-                            {
-                                id:this.product_id,
-                                bulk_price:this.deal_price
-                            }
-                        ]
-                    };
-                    new Vue({
-                        el: '.dialogCart',
-                        data:function(){
-                            return param;
-                        }
-                    });
+                    let _this = this;
                     // 弹出加入采购车
-                    $('.dialogCart').show();
-                    $('body').on('click','.close,.bg',function(){
-                        $('.dialogCart').hide();
+                    let content = $('.dialogCart').html();
+                    layer.open({
+                        className: 'addCart',
+                        type: 1,
+                        shadeClose: false,
+                        content: content,
+                        btn: [''],
+                        success: function (index) {
+                            new Vue({
+                                el:'#foot_cart_menu',
+                                data:function(){
+                                    return {};
+                                }
+                            });
+                            let param = {
+                                type:3,
+                                init_quantity:1,
+                                step_quantity:1,
+                                productList:[
+                                    {
+                                        id:_this.product_id,
+                                        bulk_price:_this.deal_price
+                                    }
+                                ]
+                            };
+                            new Vue({
+                                el: '.dialogCart',
+                                data:function(){
+                                    return param;
+                                }
+                            });
+                        }, yes: function (index) {
+                            layer.close(index);
+                        }
                     });
                 },editCheckItem:function(param){
                     this.checked = param;
