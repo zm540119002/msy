@@ -277,10 +277,12 @@
                 bus.$on('footer_cart_check_all_change', function(param){
                     _this.editCheckItem(param);
                 });
-                //监听-弹出采购车点击-事件
-                bus.$on('dialog_cart_click', function(param){
-                    _this.dialog_cart_click(param);
-                });
+                if(_this.type==5){
+                    //监听-弹出采购车点击-事件
+                    bus.$on('dialog_cart_click', function(param){
+                        _this.dialog_cart_click(param);
+                    });
+                }
             },watch: {
                 buy_quantity: {
                     handler(newVal, oldVal) {
