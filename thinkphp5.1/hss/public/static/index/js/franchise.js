@@ -137,6 +137,7 @@ function submitApplicant(_this,postData){
             if(data.status){
                 applicantData.id = data.data.id;
                 if(postData.step==1){
+                    console.log(1111);
                     $('.weui-flex-item:eq(0)').removeClass('current');
                     $('.weui-flex-item:eq(1)').addClass('current');
                     $('.apply-module:eq(0)').hide();

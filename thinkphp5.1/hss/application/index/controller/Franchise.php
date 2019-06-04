@@ -93,14 +93,14 @@ class Franchise extends \common\controller\UserBase {
                     ['status','=',0],
                 ];
             }
-            $id = $modelPay->edit($data,$where);
-            if(false===$id){
+            $payId = $modelPay->edit($data,$where);
+            if(false===$payId){
                 $modelFranchise ->rollback();
                 return errorMsg('失败');
             };
         }
         $modelFranchise -> commit();
-        return successMsg('成功',['url'=>config('custom.pay_gateway').$sn]);
+        $this->successMsg('成功',['url'=>config('custom.pay_gateway').$sn,'id'=>$id]);
     }
 
     /**
