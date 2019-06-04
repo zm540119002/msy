@@ -14,13 +14,38 @@ class Order extends \common\controller\UserBase
             $this->errorMsg('请求数据不能为空');
         }
 
-        $order_type = input('pst.type/d');
-        if(empty($order_type)){
-
-        }
+        $order_type = input('post.product_type/d');
 
 
         $goodsIds = array_column($goodsList,'goods_id');
+
+        if(empty($goodsIds)){
+            $this->errorMsg('请求数据不能为空');
+        }
+
+        if($order_type==2 ){
+
+            $promotion_id = reset($goodsIds);
+
+            $modelPromotionGoods = new \app\index\model\PromotionGoods();
+            $config = [
+                'where' => [
+                    ['status', '=', 0],
+                    ['promotion_id', '=', $promotion_id],
+                ], 'field' => [
+                    'goods_id','goods_num num'
+                ]
+            ];
+            $goodsList= $modelPromotionGoods->getList($config);
+
+            if(empty($goodsList)){
+                $this->errorMsg('套餐已失效 !');
+            }
+
+            $goodsIds = array_column($goodsList,'goods_id');
+        }
+
+        //$goodsIds = array_column($goodsList,'goods_id');
         $config = [
             'where' => [
                 ['g.status', '=', 0],
