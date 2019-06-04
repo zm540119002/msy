@@ -62,10 +62,6 @@
 <div class="bg"></div>
 <div class="dialogCart">
 	<div class="close">X</div>
-	<div class="title">
-		<img src=""/>
-		<span>11111111111111</span>
-	</div>
 	<div id="product-list2">
 		<product-select
 				v-for="(productInfo,index) in productList"
@@ -76,6 +72,10 @@
 				:step_quantity="parseInt(step_quantity)"
 				:type="type"
 		></product-select>
+	</div>
+	<div class="title">
+		<img src=""/>
+		<span>11111111111111</span>
 	</div>
 	<div class="specs">
 		<div>单品12g ￥198.00</div>
