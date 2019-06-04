@@ -274,9 +274,17 @@
                         }
                     });
                     // 弹出加入采购车
-                    $('.dialogCart').show();
-                    $('body').on('click','.close,.bg',function(){
-                        $('.dialogCart').hide();
+                    let html = $('.dialogCart').html();
+                    layer.open({
+                        className: 'addCart',
+                        type: 1,
+                        shadeClose: false,
+                        content: content,
+                        btn: [''],
+                        success: function (index) {
+                        }, yes: function (index) {
+                            layer.close(index);
+                        }
                     });
                 },editCheckItem:function(param){
                     this.checked = param;
