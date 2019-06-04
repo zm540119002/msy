@@ -6,7 +6,6 @@ $(function(){
 
     //初始化 未完成的申请
     if(apply!=null){
-        applicantData.id= apply.id;
         applicantData = {
             id:apply.id,
             name:apply.name,
@@ -61,6 +60,7 @@ $(function(){
             dialog.error(content);
         }else{
             applicantData.step = 1;
+            console.log(applicantData);
             submitApplicant(_this,applicantData);
             // $('.weui-flex-item:eq(0)').removeClass('current');
             // $('.weui-flex-item:eq(1)').addClass('current');
