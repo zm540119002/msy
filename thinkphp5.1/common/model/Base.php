@@ -5,12 +5,12 @@ class Base extends \think\Model {
 	/**编辑单条记录
 	 */
 	public function edit($data,$where=[]){
+	    print_r($where);
 		if($data['id'] || (count($where) && intval($where['id'])) ){//修改
 			if($data['id']){
 				$res = $this->allowField(true)->isUpdate(true)->save($data);
 				$id = $data['id'];
 			}elseif(count($where) && intval($where['id'])){
-			    echo 222;
 				unset($data['id']);
 				$res = $this->allowField(true)->isUpdate(true)->save($data,$where);
 				$id = $where['id'];
