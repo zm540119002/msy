@@ -1,7 +1,8 @@
+var area_address,
+    applicantData={};
+
 $(function(){
     tab_down('.apply-data-nav .switch-item','.apply-module','click');
-    var area_address,
-        applicantData={};
 
     //初始化 未完成的申请
     if(apply!=null){
@@ -137,6 +138,7 @@ function submitApplicant(_this,postData){
             if(data.status){
                 applicantData.id = data.data.id;
                 if(postData.step==1){
+                    console.log(1111);
                     $('.weui-flex-item:eq(0)').removeClass('current');
                     $('.weui-flex-item:eq(1)').addClass('current');
                     $('.apply-module:eq(0)').hide();
