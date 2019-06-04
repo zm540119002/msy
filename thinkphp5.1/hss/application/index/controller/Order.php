@@ -14,13 +14,18 @@ class Order extends \common\controller\UserBase
             $this->errorMsg('请求数据不能为空');
         }
 
-        $order_type = input('pst.type/d');
-        if(empty($order_type)){
+        $order_type = input('post.product_type/d');
 
+        if($order_type==2){
+            $goodsIds = array_column($goodsList,'goods_id');
+
+        }else{
+            //$model
+
+            $goodsIds = array_column($goodsList,'goods_id');
         }
 
-
-        $goodsIds = array_column($goodsList,'goods_id');
+        //$goodsIds = array_column($goodsList,'goods_id');
         $config = [
             'where' => [
                 ['g.status', '=', 0],

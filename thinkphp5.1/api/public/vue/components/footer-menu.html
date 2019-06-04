@@ -110,9 +110,7 @@
                         register_success_callback_private = function(){
                             _thisJquery.click()
                         };
-                        console.log(_thisVue.postData);
-                        return false;
-
+                        
                         //前端验证
                         if((
                                 (   _thisJquery.attr('class')=='add_cart' //加入购物车
@@ -132,6 +130,7 @@
                                 //_thisJquery.click()
                             }
                         };
+
                         asyncVerify(config);
                     },editProductList:function(param){
                         if(this.type==4 && !param.checked){
