@@ -58,12 +58,12 @@ $(function(){
         if(content){
             dialog.error(content);
         }else{
-            // applicantData.step = 1;
-            // submitApplicant(_this,applicantData);
-            $('.weui-flex-item:eq(0)').removeClass('current');
-            $('.weui-flex-item:eq(1)').addClass('current');
-            $('.apply-module:eq(0)').hide();
-            $('.apply-module:eq(1)').show();
+            applicantData.step = 1;
+            submitApplicant(_this,applicantData);
+            // $('.weui-flex-item:eq(0)').removeClass('current');
+            // $('.weui-flex-item:eq(1)').addClass('current');
+            // $('.apply-module:eq(0)').hide();
+            // $('.apply-module:eq(1)').show();
         }
     });
     
