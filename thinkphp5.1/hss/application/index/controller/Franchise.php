@@ -47,9 +47,9 @@ class Franchise extends \common\controller\UserBase {
         }
         $postData = input('post.');
         $validate = new \app\index\validate\Franchise();
-        if(!$validate->scene('add')->check($postData)) {
-            return errorMsg($validate->getError());
-        }
+//        if(!$validate->scene('add')->check($postData)) {
+//            return errorMsg($validate->getError());
+//        }
         $modelFranchise = new \app\index\model\Franchise();
         $modelFranchise -> startTrans();
         $postData['user_id'] = $this->user['id'];
