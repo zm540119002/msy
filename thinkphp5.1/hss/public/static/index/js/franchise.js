@@ -15,7 +15,8 @@ $(function(){
             city:apply.city,
             area:apply.area,
             detail_address:apply.detail_address,
-            old_apply_status:apply.apply_status
+            old_apply_status:apply.apply_status,
+            pay_id:apply.apply_status,
         };
         //省市区初始化
         var region = [];

@@ -28,7 +28,6 @@ class Franchise extends \common\controller\UserBase {
                 ],
             ];
             $apply = $modelFranchise -> getInfo($condition);
-            print_r($apply);
             $this->assign('apply',json_encode($apply));
             $unlockingFooterCart = unlockingFooterCartConfig([10, 0, 9]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
@@ -87,15 +86,19 @@ class Franchise extends \common\controller\UserBase {
                 'type' => config('custom.pay_type')['franchisePay']['code'],
                 'create_time' => time(),
             ];
-            $result  = $modelPay->isUpdate(false)->save($data);
-            if(!$result){
-                $modelPay ->rollback();
-                return errorMsg('失败');
+            if(isset($postData['pay_id']) && $postData['pay_id']){
+                $where = [
+                    ['id','=',$postData['pay_id']],
+                    ['user_id','=',$this->user['id']],
+                    ['status','=',0],
+                ];
             }
+            $id = $modelPay->edit($data,$where);
+            if(false===$id){
+                $modelFranchise ->rollback();
+                return errorMsg('失败');
+            };
         }
-
-
-
         $modelFranchise -> commit();
         return successMsg('成功',['url'=>config('custom.pay_gateway').$sn]);
     }
