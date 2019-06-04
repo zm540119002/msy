@@ -34,7 +34,6 @@
 										:deal_price="parseFloat(productInfo.bulk_price)"
 										:init_quantity="parseInt(init_quantity)"
 										:step_quantity="parseInt(step_quantity)"
-										:init_product_type="parseInt(init_product_type)"
 										:type="type"
 								></product-select>
 							</div>
@@ -123,6 +122,7 @@
 <div id="foot_cart_menu">
 	<footer-menu
 			:cart_init_num="cart_init_num"
+			:init_product_type="parseInt(init_product_type)"
 	></footer-menu>
 </div>
 <script type="text/javascript">
@@ -137,7 +137,8 @@
 			});
 		}
 		let param = {
-			cart_init_num:total_num
+			cart_init_num:total_num,
+			init_product_type:2
 		};
 		new Vue({
 			el: '#foot_cart_menu',
@@ -151,7 +152,6 @@
 	$(function(){
 		let param = {
 			type:3,
-			init_product_type:2,
 			init_quantity:1,
 			step_quantity:1,
 			productList:[
