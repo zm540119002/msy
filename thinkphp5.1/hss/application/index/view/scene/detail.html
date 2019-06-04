@@ -59,9 +59,7 @@
 {block name="common"}{/block}
 {block name="footer"}
 {include file="../../api/public/vue/components/footer-menu.html" /}
-<div class="bg"></div>
 <div class="dialogCart">
-	<div class="close">×</div>
 	<product-select
 			v-for="(productInfo,index) in productList"
 			:key="index"
@@ -139,6 +137,14 @@
 {block name="script"}
 <script type="text/javascript" src="api_common_js/swiper.min.js"></script>
 <script type="text/javascript">
+	$('.close').click(function(){
+		$('.bg').toggle();
+		$('.dialogCart').slideUp(500)
+	});
+	$('.bg').click(function(){
+		$('.bg').toggle();
+		$('.dialogCart').slideUp(500)
+	});
 	$(function(){
 		var id = '{$info.id}';
 		var date=getWeek();
@@ -178,6 +184,7 @@
 		z-index: 998;
 		position: fixed;
 		top: 0;
+		display: none
 	}
 	.close{
 		width: 16px;
