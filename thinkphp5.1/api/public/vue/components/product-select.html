@@ -259,8 +259,10 @@
                     //触发-弹出采购车点击-事件
                     bus.$emit('dialog_cart_click',_this);
                 },dialog_cart_click: function (param) {
-                    this.deal_price = param.deal_price;
-                    this.buy_quantity = param.buy_quantity;
+//                    this.deal_price = param.deal_price;
+//                    this.buy_quantity = param.buy_quantity;
+                    console.log(param.buy_quantity);
+                    console.log(this.buy_quantity);
                 },editCheckItem:function(param){
                     this.checked = param;
                 }
