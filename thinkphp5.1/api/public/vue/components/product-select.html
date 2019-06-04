@@ -253,19 +253,18 @@
                 },dialogCart: function () {
                     let _this = this;
                     // 弹出加入采购车
-                    $('.dialogCart').toggle(200,function(){
-                        console.log(_this.deal_price);
-                    });
+                    $('.dialogCart').toggle(200);
                     $('.bg').toggle();
                     //触发-弹出采购车点击-事件
                     bus.$emit('dialog_cart_click',_this);
                 },dialog_cart_click: function (param) {
+                    this.buy_quantity = 20;
 //                    this.deal_price = param.deal_price;
-//                    this.buy_quantity = param.buy_quantity;
-                    console.log(param.buy_quantity);
-                    console.log(this.buy_quantity);
-                    console.log(param.deal_price);
-                    console.log(this.deal_price);
+//                    this.buy_quantity = this.init_quantity;
+//                    console.log(param.buy_quantity);
+//                    console.log(param.deal_price);
+//                    console.log(this.buy_quantity);
+//                    console.log(this.deal_price);
                 },editCheckItem:function(param){
                     this.checked = param;
                 }
@@ -278,12 +277,12 @@
                 bus.$on('footer_cart_check_all_change', function(param){
                     _this.editCheckItem(param);
                 });
-                if(_this.monitor_dialog_cart_click){
-                    //监听-弹出采购车点击-事件
-                    bus.$on('dialog_cart_click', function(param){
+                //监听-弹出采购车点击-事件
+                bus.$on('dialog_cart_click', function(param){
+                    if(_this.monitor_dialog_cart_click){
                         _this.dialog_cart_click(param);
-                    });
-                }
+                    }
+                });
             },watch: {
                 buy_quantity: {
                     handler(newVal, oldVal) {

@@ -106,8 +106,8 @@
 			monitor_dialog_cart_click:true,
 			productList:[
 				{
-					id:123,
-					bulk_price:199
+					id:'',
+					bulk_price:0
 				}
 			]
 		};
@@ -291,6 +291,15 @@
 		padding: 10px;
 		position: relative;
 		top: 55px;
+	}
+	nav{
+		z-index: 998;
+		position: fixed !important;
+		top: 0;
+		width: 100%;
+	}
+	.nav_menu{
+		width: 100%;
 	}
 	</style>
 {/block}
