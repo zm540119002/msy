@@ -37,13 +37,13 @@
                 </li>
                 <li>
                     <a href="{:url('order/manage',['order_status'=>1])}" data-order_status="1">
-                        <i class="num">{$orderStatusSum['1']}</i>
+                        <i class="num">{$orderStatusSum['1']|default=''}</i>
                         待付款
                     </a>
                 </li>
                 <li>
                     <a href="{:url('order/manage',['order_status'=>2])}" data-order_status="2">
-                        <i class="num">{$orderStatusSum['2']}</i>
+                        <i class="num">{$orderStatusSum['2']|default=''}</i>
                         待收货
                     </a>
                 </li>
