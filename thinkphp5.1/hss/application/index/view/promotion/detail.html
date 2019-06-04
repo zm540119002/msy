@@ -27,8 +27,14 @@
 					<div class="top_radius f20 top_module">
 						<div>
 								<div class="price">
-									<span>￥</span>2980.00
-									</div>
+									<span>￥2980.00</span>
+								  <div class=" selected-number">
+                    <a href="javascript:void(0);" class="add_cart reduce" @click="reduceCart" :data-jump_url="add_cart_url">-</a>
+                    <input type="text" :value="buy_quantity" class="f24 product_count" readonly="readonly">
+                    <a href="javascript:void(0);" class="add_cart plus" @click="plusCart" :data-jump_url="add_cart_url">+</a>
+                </div>
+								</div>
+								
 							<div class="title">
 								{$info.title}
 							</div>
@@ -242,9 +248,11 @@
 		.price{
 			color: #e60012;
 			font-size: 0.4rem;
+			height: 30px;
 		}
 		.price span{
-			font-size: 0.3rem
+			font-size: 0.3rem;
+			float: left;
 		}
 		.describe{
 			border-bottom: 1px solid #ccc;
@@ -267,6 +275,9 @@
 			border-top: 1px solid #ccc;
 			padding-top: 10px;
 			margin-bottom: 0;
+		}
+		.selected-number{
+			float: right;
 		}
 	</style>
 {/block}
