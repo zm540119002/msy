@@ -250,30 +250,9 @@
                     };
                     asyncVerify(config);
                 },dialogCart: function (event) {
-                    new Vue({
-                        el:'#foot_cart_menu',
-                        data:function(){
-                            return {};
-                        }
-                    });
-                    let param = {
-                        type:3,
-                        init_quantity:1,
-                        step_quantity:1,
-                        productList:[
-                            {
-                                id:this.product_id,
-                                bulk_price:this.deal_price
-                            }
-                        ]
-                    };
-                    new Vue({
-                        el: '.dialogCart',
-                        data:function(){
-                            return param;
-                        }
-                    });
+                    let _this = this;
                     // 弹出加入采购车
+<<<<<<< HEAD
                     // let html = $('.dialogCart').html();
                     // layer.open({
                     //     className: 'addCart',
@@ -286,6 +265,14 @@
                     //         layer.close(index);
                     //     }
                     // });
+=======
+                    $('.dialogCart').toggle(500,function(){
+                        console.log(_this.deal_price);
+                    });
+                    $('.bg').toggle();
+                },editCheckItem:function(param){
+                    this.checked = param;
+>>>>>>> 7f3d635e3200e29a1dacad44b53eb40ad63148c5
                 }
                 // ,editCheckItem:function(param){
                 //     // this.checked = param;

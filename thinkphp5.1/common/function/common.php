@@ -646,6 +646,7 @@ function moveImgFromTemp($newRelativePath,$filename){
     if(!is_dir($uploadPath)){
         if(!mk_dir($uploadPath)){
             return errorMsg('创建Uploads目录失败');
+
         }
     }
 

@@ -61,27 +61,64 @@
 {include file="../../api/public/vue/components/footer-menu.html" /}
 <div class="bg"></div>
 <div class="dialogCart">
-	<div class="close">×</div>
-	<product-select
-			v-for="(productInfo,index) in productList"
-			:key="index"
-			:product_id="productInfo.id"
-			:deal_price="parseFloat(productInfo.bulk_price)"
-			:init_quantity="parseInt(init_quantity)"
-			:step_quantity="parseInt(step_quantity)"
-			:type="type"
-	></product-select>
+	<div class="close">X</div>
+	<div id="product-list2">
+		<product-select
+				v-for="(productInfo,index) in productList"
+				:key="index"
+				:product_id="productInfo.id"
+				:deal_price="parseFloat(productInfo.bulk_price)"
+				:init_quantity="parseInt(init_quantity)"
+				:step_quantity="parseInt(step_quantity)"
+				:type="type"
+		></product-select>
+	</div>
+	<div class="title">
+		<img src=""/>
+		<span>11111111111111</span>
+	</div>
+	<div class="specs">
+		<div>单品12g ￥198.00</div>
+		<div>10盒/箱</div>
+	</div>
 	<div id="foot_cart_menu">
 		<footer-menu></footer-menu>
 	</div>
 </div>
 <script type="text/javascript">
 	$(function(){
+		new Vue({
+			el:'#foot_cart_menu',
+			data:function(){
+				return {};
+			}
+		});
 	})
 </script>
 {include file="../../api/public/vue/components/product-select.html" /}
 <script type="text/javascript">
 	$(function(){
+		let param = {
+			type:3,
+			init_quantity:1,
+			step_quantity:1,
+			productList:[
+				{
+					id:123,
+					bulk_price:199
+				}
+			]
+		};
+		new Vue({
+			el: '#product-list2',
+			data:function(){
+				return param;
+			}
+		});
+		$('body').on('click','.bg,.close',function(){
+			$('.dialogCart').toggle();
+			$('.bg').toggle();
+		});
 	});
 </script><script type="text/javascript">
 	$(function(){
@@ -223,7 +260,7 @@
 	}
 	.title{
 		position: relative;
-		height: 50px;
+		height: 20px;
 	}
 	.title img{
 		position: absolute;
