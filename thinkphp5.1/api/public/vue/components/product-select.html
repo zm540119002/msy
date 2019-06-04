@@ -250,6 +250,23 @@
                     };
                     asyncVerify(config);
                 },dialogCart: function (event) {
+                    let param = {
+                        type:3,
+                        init_quantity:1,
+                        step_quantity:1,
+                        productList:[
+                            {
+                                id:1,
+                                bulk_price:299
+                            }
+                        ]
+                    };
+                    new Vue({
+                        el: '.dialogCart',
+                        data:function(){
+                            return param;
+                        }
+                    });
                     // 弹出加入采购车
                     $('.dialogCart').slideDown(500);
                     $('.bg').toggle();
