@@ -62,9 +62,9 @@
 <div class="bg"></div>
 	<div class="dialogCart">
 		<div class="close" onclick="close">×</div>
-		<!-- <div id="product-list">
+		<div id="product-list2">
 			<product-select></product-select>
-		</div> -->
+		</div>
 		<div id="foot_cart_menu">
 			<footer-menu></footer-menu>
 		</div>
@@ -113,7 +113,7 @@
 					$.each(data.data.data,function(i,o){
 						_this.productList.push(o);
 					});
-				},
+				}
 			},created:function(){
 				let _thisVue = this;
 				_thisVue.getJsonListParam.callBack = _thisVue.getJsonListCallBack;
@@ -127,6 +127,25 @@
 						vueVersionGetJsonList(_thisVue);
 					}
 				});
+			}
+		});
+	});
+</script><script type="text/javascript">
+	$(function(){
+		let param = {
+			init_quantity:1,
+			step_quantity:1,
+			productList:[
+				{
+					product_id:1,
+					product_name:'aaa'
+				}
+			]
+		};
+		new Vue({
+			el: '#product-list2',
+			data:function(){
+				return param;
 			}
 		});
 	});
