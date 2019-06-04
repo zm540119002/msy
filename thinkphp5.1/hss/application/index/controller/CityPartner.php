@@ -34,13 +34,13 @@ class CityPartner extends \common\controller\UserBase {
             $modelCityPartner = new \app\index\model\CityPartner();
             $condition=[
                 'where'=>[
-                    ['status', '=', 0],
-                    ['user_id','=',$this->user['id']]
+                    ['cp.status', '=', 0],
+                    ['cp.user_id','=',$this->user['id']]
                 ], 'field'=>[
-                    'c.id','c.province','c.city','c.company_name','c.applicant','c.mobile','c.city_level','c.earnest','c.amount','c.apply_status'
+                    'cp.id','cp.province','cp.city','cp.company_name','cp.applicant','cp.mobile','cp.city_level','cp.earnest','cp.amount','cp.apply_status'
                     ,'p.sn','p.id as pay_id'
                 ],'join' => [
-                     ['pay p','p.sn = f.sn','left'],
+                     ['pay p','p.sn = cp.earnest_sn','left'],
                 ]
             ];
 
