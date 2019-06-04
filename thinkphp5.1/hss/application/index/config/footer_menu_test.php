@@ -154,6 +154,7 @@ return [
             'class'=>[
                 'bottom_item',
                 'apply_franchisee_qualification',
+                'jump_url'
             ],
             'action'=>url('/index/Franchise/applyFranchise'),
         ],[// 22
@@ -161,6 +162,7 @@ return [
             'class'=>[
                 'bottom_item',
                 'apply_city_partner_qualification',
+                'jump_url'
             ],
             'action'=>url('/index/CityPartner/city'),
         ]
