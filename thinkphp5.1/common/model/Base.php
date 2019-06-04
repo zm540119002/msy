@@ -6,6 +6,8 @@ class Base extends \think\Model {
 	 */
 	public function edit($data,$where=[]){
 	    print_r($where);
+	    print_r(count($where));
+	    print_r(intval($where['id']));
 		if($data['id'] || (count($where) && intval($where['id'])) ){//修改
 		    echo 1;
 			if($data['id']){
