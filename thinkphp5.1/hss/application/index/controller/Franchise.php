@@ -95,6 +95,7 @@ class Franchise extends \common\controller\UserBase {
                     ['status','=',0],
                 ];
             }
+            print_r($where);
             $payId = $modelPay->edit($data,$where);
             echo $modelPay->getLastSql();exit;
             if(false===$payId){
