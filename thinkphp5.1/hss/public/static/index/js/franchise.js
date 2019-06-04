@@ -18,7 +18,6 @@ $(function(){
             old_apply_status:apply.apply_status,
             pay_id:apply.pay_id,
         };
-        console.log(applicantData)
         //省市区初始化
         var region = [];
         region.push(apply.province);
@@ -44,6 +43,7 @@ $(function(){
         applicantData.name=data.name;
         applicantData.applicant=data.applicant;
         applicantData.mobile=data.mobile;
+        applicantData.detail_address=data.detail_address;
         area_address =$('.area-address-name').getArea();
         applicantData.province = area_address[0];
         applicantData.city = area_address[1];
@@ -66,10 +66,6 @@ $(function(){
             applicantData.step = 1;
             console.log(applicantData);
             submitApplicant(_this,applicantData);
-            // $('.weui-flex-item:eq(0)').removeClass('current');
-            // $('.weui-flex-item:eq(1)').addClass('current');
-            // $('.apply-module:eq(0)').hide();
-            // $('.apply-module:eq(1)').show();
         }
     });
     
