@@ -10,6 +10,7 @@ class Base extends \think\Model {
 				$res = $this->allowField(true)->isUpdate(true)->save($data);
 				$id = $data['id'];
 			}elseif(count($where) && intval($where['id'])){
+			    echo 222;
 				unset($data['id']);
 				$res = $this->allowField(true)->isUpdate(true)->save($data,$where);
 				$id = $where['id'];

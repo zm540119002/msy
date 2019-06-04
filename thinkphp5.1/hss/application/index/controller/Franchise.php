@@ -47,8 +47,8 @@ class Franchise extends \common\controller\UserBase {
             return errorMsg('请求方式错误');
         }
         $postData = input('post.');
-        //print_r($postData);exit;
-        $validate = new \app\index\validate\Franchise();
+//        print_r($postData);exit;
+//        $validate = new \app\index\validate\Franchise();
 //        if(!$validate->scene('add')->check($postData)) {
 //            return errorMsg($validate->getError());
 //        }
@@ -89,13 +89,15 @@ class Franchise extends \common\controller\UserBase {
                 'create_time' => time(),
             ];
             if(isset($postData['pay_id']) && $postData['pay_id']){
-                $where = [
+                $where1 = [
                     ['id','=',$postData['pay_id']],
                     ['user_id','=',$this->user['id']],
                     ['status','=',0],
                 ];
             }
-            $payId = $modelPay->edit($data,$where);
+            print_r($where1);
+            $payId = $modelPay->edit($data,$where1);
+            echo $modelPay->getLastSql();exit;
             if(false===$payId){
                 $modelFranchise ->rollback();
                 return errorMsg('失败');
