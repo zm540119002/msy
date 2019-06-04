@@ -37,6 +37,7 @@ $(function(){
     }
     //填写基本资料
     $('body').on('click','.one-step',function(){
+        alert(11);
         var _this = $(this);
         applicantData=$('.applicant_form').serializeObject();
         area_address =$('.area-address-name').getArea();
