@@ -62,7 +62,17 @@
 <div class="bg"></div>
 	<div class="dialogCart">
 		<div class="close" onclick="close">×</div>
-		
+		<div id="product-list2">
+			<product-select
+					v-for="(productInfo,index) in productList"
+					:key="index"
+					:product_id="productInfo.id"
+					:deal_price="parseFloat(productInfo.bulk_price)"
+					:init_quantity="parseInt(init_quantity)"
+					:step_quantity="parseInt(step_quantity)"
+					:type="type"
+			></product-select>
+		</div>
 		<div id="foot_cart_menu">
 			<footer-menu></footer-menu>
 		</div>
@@ -111,7 +121,7 @@
 					$.each(data.data.data,function(i,o){
 						_this.productList.push(o);
 					});
-				},
+				}
 			},created:function(){
 				let _thisVue = this;
 				_thisVue.getJsonListParam.callBack = _thisVue.getJsonListCallBack;
@@ -125,6 +135,26 @@
 						vueVersionGetJsonList(_thisVue);
 					}
 				});
+			}
+		});
+	});
+</script><script type="text/javascript">
+	$(function(){
+		let param = {
+			type:5,
+			init_quantity:1,
+			step_quantity:1,
+			productList:[
+				{
+					product_id:1,
+					bulk_price:299
+				}
+			]
+		};
+		new Vue({
+			el: '#product-list2',
+			data:function(){
+				return param;
 			}
 		});
 	});
@@ -205,6 +235,15 @@ $('.bg').click(function(){
 		bottom: 0;
 		z-index: 999;
 		display: none
+	}
+	.group_cart_nav a:nth-of-type(1){
+		width: 60%
+	}
+	.group_cart_nav a:nth-of-type(3){
+		width: 60%
+	}
+	.group_cart_nav a:nth-of-type(4){
+		width: 60%
 	}
 	</style>
 {/block}
