@@ -151,6 +151,17 @@
                 <a href="javascript:void(0);" class="delete_order goodsDel delete_cart" @click="delCart" :data-jump_url="del_cart_url">删除</a>
             </div>
         </div>
+    </li><li v-else-if="type==5"><!--用于购物车弹出增减-->
+        <div class="cart_list_r">
+            <div class="commodity_purchaser f24"><span class="pink">￥{{deal_price}}</span></div>
+            <div class="purchase_goods_num cart_goods_operate">
+                <div class=" selected-number">
+                    <a href="javascript:void(0);" class="reduce" @click="reduce">-</a>
+                    <input type="text" :value="buy_quantity" class="f24 product_count" readonly="readonly">
+                    <a href="javascript:void(0);" class="plus" @click="plus">+</a>
+                </div>
+            </div>
+        </div>
     </li>
 </template>
 
