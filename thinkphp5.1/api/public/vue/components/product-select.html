@@ -252,18 +252,8 @@
                 },dialogCart: function (event) {
                     let _this = this;
                     // 弹出加入采购车
-                    let content = $('.dialogCart').html();
-                    layer.open({
-                        className: 'addCart',
-                        type: 1,
-                        shadeClose: false,
-                        content: content,
-                        btn: [''],
-                        success: function (index) {
-                        }, yes: function (index) {
-                            layer.close(index);
-                        }
-                    });
+                    $('.dialogCart').toggle();
+                    $('.bg').toggle();
                 },editCheckItem:function(param){
                     this.checked = param;
                 }
