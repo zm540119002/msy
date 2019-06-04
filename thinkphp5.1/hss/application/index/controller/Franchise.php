@@ -42,10 +42,12 @@ class Franchise extends \common\controller\UserBase {
      */
     public function franchiseSettlement()
     {
+
         if(!request()->isAjax()){
             return errorMsg('请求方式错误');
         }
         $postData = input('post.');
+        print_r($postData);exit;
         $validate = new \app\index\validate\Franchise();
 //        if(!$validate->scene('add')->check($postData)) {
 //            return errorMsg($validate->getError());
