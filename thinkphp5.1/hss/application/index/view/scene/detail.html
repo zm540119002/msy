@@ -75,11 +75,34 @@
 </div>
 <script type="text/javascript">
 	$(function(){
+		new Vue({
+			el:'#foot_cart_menu',
+			data:function(){
+				return {};
+			}
+		});
 	})
 </script>
 {include file="../../api/public/vue/components/product-select.html" /}
 <script type="text/javascript">
 	$(function(){
+		let param = {
+			type:3,
+			init_quantity:1,
+			step_quantity:1,
+			productList:[
+				{
+					id:_this.product_id,
+					bulk_price:_this.deal_price
+				}
+			]
+		};
+		new Vue({
+			el: '.dialogCart',
+			data:function(){
+				return param;
+			}
+		});
 	});
 </script><script type="text/javascript">
 	$(function(){
