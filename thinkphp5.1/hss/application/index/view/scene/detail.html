@@ -61,6 +61,7 @@
 {include file="../../api/public/vue/components/footer-menu.html" /}
 <div class="bg"></div>
 <div class="dialogCart">
+	<div class="close" onclick="close">×</div>
 	<product-select
 			v-for="(productInfo,index) in productList"
 			:key="index"
