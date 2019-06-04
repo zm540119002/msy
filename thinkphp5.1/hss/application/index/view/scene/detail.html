@@ -59,16 +59,17 @@
 {block name="common"}{/block}
 {block name="footer"}
 {include file="../../api/public/vue/components/footer-menu.html" /}
+<product-select
+		v-for="(productInfo,index) in productList"
+		:key="index"
+		:product_id="productInfo.id"
+		:deal_price="parseFloat(productInfo.bulk_price)"
+		:init_quantity="parseInt(init_quantity)"
+		:step_quantity="parseInt(step_quantity)"
+		:type="type"
+></product-select>
 <div id="dialogCart">
-	<product-select
-			v-for="(productInfo,index) in productList"
-			:key="index"
-			:product_id="productInfo.id"
-			:deal_price="parseFloat(productInfo.bulk_price)"
-			:init_quantity="parseInt(init_quantity)"
-			:step_quantity="parseInt(step_quantity)"
-			:type="type"
-	></product-select>
+
 	<div id="foot_cart_menu">
 		<footer-menu></footer-menu>
 	</div>
