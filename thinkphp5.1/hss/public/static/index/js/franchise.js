@@ -44,6 +44,7 @@ $(function(){
         applicantData.name=data.name;
         applicantData.applicant=data.applicant;
         applicantData.mobile=data.mobile;
+        applicantData.detail_address=data.detail_address;
         area_address =$('.area-address-name').getArea();
         applicantData.province = area_address[0];
         applicantData.city = area_address[1];
