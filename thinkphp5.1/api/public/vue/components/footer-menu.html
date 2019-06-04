@@ -61,7 +61,7 @@
                 template:'#footer-menu_tpl',
                 props: {
                     type: {type: Number,default: 1},
-                    //init_product_type: {type: Number,default: 1},
+                    init_product_type: {type: Number,default: 1},
                     cart_init_num: {type: Number,default: 0},
                     init_total_amount: {type: Number,default: 0},
                     init_checked: {type: Boolean,default: false},
@@ -76,7 +76,7 @@
                         checkItemList:[],
                         menus: unlockingFooterCart.menu,
                         postData:{
-                            //product_type:this.init_product_type,
+                            product_type:this.init_product_type,
                             data:[]
                         }
                     }
@@ -110,6 +110,7 @@
                         register_success_callback_private = function(){
                             _thisJquery.click()
                         };
+                        
                         //前端验证
                         if((
                                 (   _thisJquery.attr('class')=='add_cart' //加入购物车
@@ -129,6 +130,7 @@
                                 //_thisJquery.click()
                             }
                         };
+
                         asyncVerify(config);
                     },editProductList:function(param){
                         if(this.type==4 && !param.checked){
@@ -246,7 +248,6 @@
                     let _this = this;
                     //监听-产品选择器初始化-事件
                     bus.$on('product_select_init', function(param){
-                        console.log(param.by_footer_menu_monitor);
                         if(param.by_footer_menu_monitor){
                             _this.total_amount_init(param);
                             _this.editProductList(param);

@@ -252,41 +252,22 @@
                 },dialogCart: function (event) {
                     let _this = this;
                     // 弹出加入采购车
-                    let content = $('.dialogCart').html();
-                    layer.open({
-                        className: 'addCart',
-                        type: 1,
-                        shadeClose: false,
-                        content: content,
-                        btn: [''],
-                        success: function (index) {
-                            new Vue({
-                                el:'#foot_cart_menu',
-                                data:function(){
-                                    return {};
-                                }
-                            });
-                            let param = {
-                                type:3,
-                                init_quantity:1,
-                                step_quantity:1,
-                                productList:[
-                                    {
-                                        id:_this.product_id,
-                                        bulk_price:_this.deal_price
-                                    }
-                                ]
-                            };
-                            new Vue({
-                                el: '.dialogCart',
-                                data:function(){
-                                    return param;
-                                }
-                            });
-                        }, yes: function (index) {
-                            layer.close(index);
-                        }
+                    // let html = $('.dialogCart').html();
+                    // layer.open({
+                    //     className: 'addCart',
+                    //     type: 1,
+                    //     shadeClose: false,
+                    //     content: content,
+                    //     btn: [''],
+                    //     success: function (index) {
+                    //     }, yes: function (index) {
+                    //         layer.close(index);
+                    //     }
+                    // });
+                    $('.dialogCart').toggle(200,function(){
+                        console.log(_this.deal_price);
                     });
+                    $('.bg').toggle();
                 },editCheckItem:function(param){
                     this.checked = param;
                 }

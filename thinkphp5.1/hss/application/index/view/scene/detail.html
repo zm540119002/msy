@@ -59,27 +59,66 @@
 {block name="common"}{/block}
 {block name="footer"}
 {include file="../../api/public/vue/components/footer-menu.html" /}
+<div class="bg"></div>
 <div class="dialogCart">
-	<product-select
-			v-for="(productInfo,index) in productList"
-			:key="index"
-			:product_id="productInfo.id"
-			:deal_price="parseFloat(productInfo.bulk_price)"
-			:init_quantity="parseInt(init_quantity)"
-			:step_quantity="parseInt(step_quantity)"
-			:type="type"
-	></product-select>
+	<div class="close">X</div>
+	<div id="product-list2">
+		<product-select
+				v-for="(productInfo,index) in productList"
+				:key="index"
+				:product_id="productInfo.id"
+				:deal_price="parseFloat(productInfo.bulk_price)"
+				:init_quantity="parseInt(init_quantity)"
+				:step_quantity="parseInt(step_quantity)"
+				:type="type"
+		></product-select>
+	</div>
+	<div class="title">
+		<img src=""/>
+		<span>11111111111111</span>
+	</div>
+	<div class="specs">
+		<div>单品12g ￥198.00</div>
+		<div>10盒/箱</div>
+	</div>
 	<div id="foot_cart_menu">
 		<footer-menu></footer-menu>
 	</div>
 </div>
 <script type="text/javascript">
 	$(function(){
+		new Vue({
+			el:'#foot_cart_menu',
+			data:function(){
+				return {};
+			}
+		});
 	})
 </script>
 {include file="../../api/public/vue/components/product-select.html" /}
 <script type="text/javascript">
 	$(function(){
+		let param = {
+			type:3,
+			init_quantity:1,
+			step_quantity:1,
+			productList:[
+				{
+					id:123,
+					bulk_price:199
+				}
+			]
+		};
+		new Vue({
+			el: '#product-list2',
+			data:function(){
+				return param;
+			}
+		});
+		$('body').on('click','.bg,.close',function(){
+			$('.dialogCart').toggle();
+			$('.bg').toggle();
+		});
 	});
 </script><script type="text/javascript">
 	$(function(){
@@ -137,14 +176,6 @@
 {block name="script"}
 <script type="text/javascript" src="api_common_js/swiper.min.js"></script>
 <script type="text/javascript">
-	$('.close').click(function(){
-		$('.bg').toggle();
-		$('.dialogCart').slideUp(500)
-	});
-	$('.bg').click(function(){
-		$('.bg').toggle();
-		$('.dialogCart').slideUp(500)
-	});
 	$(function(){
 		var id = '{$info.id}';
 		var date=getWeek();
@@ -184,7 +215,7 @@
 		z-index: 998;
 		position: fixed;
 		top: 0;
-		display: none
+		display: none;
 	}
 	.close{
 		width: 16px;
@@ -215,6 +246,10 @@
 		border-bottom: 1px solid #eee;
 		margin-top: 5px;
 	}
+	#product-list2 .product-select{
+		position: relative;
+		top: 60px;
+	}
 	.dialogCart .red{
 		font-size: 0.2rem;
 	}
@@ -228,8 +263,9 @@
 		width: 60%
 	}
 	.title{
-		position: relative;
-		height: 50px;
+		position: absolute;
+		height: 60px;
+		top: 0;
 	}
 	.title img{
 		position: absolute;
@@ -251,6 +287,8 @@
 		display: flex;
 		justify-content: space-between;
 		padding: 10px;
+		position: relative;
+		top: 55px;
 	}
 	</style>
 {/block}
