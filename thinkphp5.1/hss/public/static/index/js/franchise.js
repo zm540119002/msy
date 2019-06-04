@@ -101,6 +101,7 @@ $(function(){
         applicantData.city = area_address[1];
         applicantData.area = area_address[2];
         applicantData.pay_code = $('.pay_code').val();
+        applicantData.step = 2;
         _this = $(this);
         if(!applicantData.pay_code){
             dialog.error('请选择结算方式');
@@ -142,7 +143,6 @@ function submitApplicant(_this,postData){
             if(data.status){
                 applicantData.id = data.data.id;
                 if(postData.step==1){
-                    console.log(1111);
                     $('.weui-flex-item:eq(0)').removeClass('current');
                     $('.weui-flex-item:eq(1)').addClass('current');
                     $('.apply-module:eq(0)').hide();
