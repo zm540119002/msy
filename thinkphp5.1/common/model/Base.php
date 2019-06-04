@@ -5,22 +5,16 @@ class Base extends \think\Model {
 	/**编辑单条记录
 	 */
 	public function edit($data,$where=[]){
-	    print_r($where);
-	    print_r(count($where));
-	    print_r(intval($where['id']));
 		if($data['id'] || (count($where) && intval($where['id'])) ){//修改
-		    echo 1;
 			if($data['id']){
 				$res = $this->allowField(true)->isUpdate(true)->save($data);
 				$id = $data['id'];
 			}elseif(count($where) && intval($where['id'])){
-			    echo 2;
 				unset($data['id']);
 				$res = $this->allowField(true)->isUpdate(true)->save($data,$where);
 				$id = $where['id'];
 			}
 		}else{//新增
-		    echo 3;
 			unset($data['id']);
 			$res = $this->allowField(true)->isUpdate(false)->save($data);
 			$id = $this->getAttr('id');

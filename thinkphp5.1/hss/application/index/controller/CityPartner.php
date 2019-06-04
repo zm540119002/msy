@@ -112,9 +112,9 @@ class CityPartner extends \common\controller\UserBase {
                 $postData['create_time'] = time();
                 if($postData['id']){
                     $where = [
-                        ['id','=',$postData['id']],
-                        ['user_id','=',$this->user['id']],
-                        ['status','=',0],
+                        'id'=>$postData['id'],
+                        'user_id'=>$this->user['id'],
+                        'status'=>0,
                     ];
                 }
                 $id  = $modelCityPartner->edit($postData,$where);
