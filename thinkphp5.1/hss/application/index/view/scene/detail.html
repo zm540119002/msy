@@ -59,7 +59,7 @@
 {block name="common"}{/block}
 {block name="footer"}
 {include file="../../api/public/vue/components/footer-menu.html" /}
-<div class="dialogCart">
+<div id="dialogCart">
 	<product-select
 			v-for="(productInfo,index) in productList"
 			:key="index"
@@ -75,11 +75,34 @@
 </div>
 <script type="text/javascript">
 	$(function(){
+		new Vue({
+			el:'#foot_cart_menu',
+			data:function(){
+				return {};
+			}
+		});
 	})
 </script>
 {include file="../../api/public/vue/components/product-select.html" /}
 <script type="text/javascript">
 	$(function(){
+		let param = {
+			type:3,
+			init_quantity:1,
+			step_quantity:1,
+			productList:[
+				{
+					id:123,
+					bulk_price:199
+				}
+			]
+		};
+		new Vue({
+			el: '#dialogCart',
+			data:function(){
+				return param;
+			}
+		});
 	});
 </script><script type="text/javascript">
 	$(function(){
