@@ -250,39 +250,34 @@
                     };
                     asyncVerify(config);
                 },dialogCart: function (event) {
-                    console.log(this.deal_price);
                     new Vue({
                         el:'#foot_cart_menu',
                         data:function(){
                             return {};
                         }
                     });
-//                    let param = {
-//                        type:3,
-//                        init_quantity:1,
-//                        step_quantity:1,
-//                        productList:[
-//                            {
-//                                id:this.product_id,
-//                                bulk_price:this.deal_price
-//                            }
-//                        ]
-//                    };
-//                    new Vue({
-//                        el: '.dialogCart',
-//                        data:function(){
-//                            return param;
-//                        }
-//                    });
-                    // 弹出加入采购车
-                    $('.dialogCart').toggle(
-                        function () {
-                            console.log(123);
-                        },
-                        function () {
-                            console.log(456);
+                    let param = {
+                        type:3,
+                        init_quantity:1,
+                        step_quantity:1,
+                        productList:[
+                            {
+                                id:this.product_id,
+                                bulk_price:this.deal_price
+                            }
+                        ]
+                    };
+                    new Vue({
+                        el: '.dialogCart',
+                        data:function(){
+                            return param;
                         }
-                    );
+                    });
+                    // 弹出加入采购车
+                    $('.dialogCart').show();
+                    $('body').on('click','.close,.bg',function(){
+                        $('.dialogCart').hide();
+                    });
                 },editCheckItem:function(param){
                     this.checked = param;
                 }
