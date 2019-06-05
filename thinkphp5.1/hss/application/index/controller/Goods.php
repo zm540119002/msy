@@ -235,7 +235,7 @@ class Goods extends \common\controller\Base{
             $this->assign('info',$info);
             $this->assign('goodsInfo',json_encode([
                 'goods_id'=>$info['id'],
-                'deal_price'=>$info['bulk_price'],
+                'bulk_price'=>$info['bulk_price'],
                 'thumb_img'=>$info['thumb_img'],
                 'name'=>$info['name'],
                 'specification'=>preg_replace('//s*/', '', $info['specification']),

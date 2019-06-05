@@ -25,13 +25,13 @@
 		<product-select
 				v-for="(productInfo,index) in productList"
 				:key="index"
-				:product_id="productInfo.id"
-				:deal_price="Number(productInfo.bulk_price)"
+				:init_product_id="productInfo.id"
+				:init_deal_price="Number(productInfo.bulk_price)"
 				:init_quantity="parseInt(productInfo.num)"
 				:step_quantity="parseInt(step_quantity)"
-				:product_name="productInfo.name"
-				:product_src="productInfo.thumb_img"
-				:specification="productInfo.specification"
+				:init_product_name="productInfo.name"
+				:init_product_src="productInfo.thumb_img"
+				:init_specification="productInfo.specification"
 				:type="type"
 		></product-select>
 	</ul>
@@ -56,7 +56,7 @@
 <div id="foot_cart_menu">
 	<footer-menu
 			:type="type"
-			:cart_init_num="cart_init_num"
+			:init_cart_num="init_cart_num"
 	></footer-menu>
 </div>
 <script type="text/javascript">
@@ -76,7 +76,7 @@
 		}
 		let param = {
 			type:4,
-			cart_init_num:total_num
+			init_cart_num:total_num
 		};
 		new Vue({
 			el: '#foot_cart_menu',

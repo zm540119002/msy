@@ -121,20 +121,19 @@
         Vue.component('product-select', {
             template:'#product_select_tpl',
             props: {
-                product_id: {type: [String, Number],default:0,required: true},
-                product_name: {type: String,default: ''},
-                specification: {type: String,default: ''},
-                specification_unit: {type: String,default: '盒'},
-                product_src: {type: String,default: ''},
+                init_product_id: {type: [String, Number],default:0,required: true},
+                init_product_name: {type: String,default: ''},
+                init_specification: {type: String,default: ''},
+                init_specification_unit: {type: String,default: '盒'},
+                init_product_src: {type: String,default: ''},
                 quota_quantity: {type: Number,default: 1},
                 type: {type: Number,default: 1},
-                deal_price: {type: Number,required: true},
+                init_deal_price: {type: Number,required: true},
                 init_quantity: {type: Number,default: 1},
                 step_quantity: {type: Number,default: 1},
                 display_quota: {type: Boolean,default: false},
                 init_checked: {type: Boolean,default: true},
                 by_footer_menu_monitor: {type: Boolean,default: true},
-                monitor_dialog_cart_click: {type: Boolean,default: false},
                 productInfo: {type: Array,default:function(){
                     let arr = [];
                     arr['eg'] = '默认值示范';
@@ -142,6 +141,12 @@
                 }}
             },data: function () {
                 return {
+                    product_id:this.init_product_id,
+                    deal_price:this.init_deal_price,
+                    product_name:this.init_product_name,
+                    product_src:this.init_product_src,
+                    specification:this.init_specification,
+                    specification_unit:this.init_specification_unit,
                     buy_quantity:this.init_quantity,
                     buy_quantity_reduce_trigger:true,
                     subtotal_amount:0,
@@ -152,6 +157,9 @@
                 };
             },methods: {
                 subtotal_amount_calculate:function(){
+                    console.log(this.init_deal_price);
+                    console.log(this.deal_price);
+                    console.log(this.buy_quantity);
                     this.subtotal_amount = this.deal_price * this.buy_quantity;
                 },delCart:function(event){
                     if(this.buy_quantity_reduce_trigger){
@@ -279,9 +287,7 @@
                 });
                 //监听-弹出采购车点击-事件
                 bus.$on('dialog_cart_click', function(param){
-                    if(_this.monitor_dialog_cart_click){
-                        _this.dialog_cart_click(param);
-                    }
+                    _this.dialog_cart_click(param);
                 });
             },watch: {
                 buy_quantity: {

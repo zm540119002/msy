@@ -42,13 +42,13 @@
 			<product-select
 					v-for="(productInfo,index) in productList"
 					:key="index"
-					:product_id="productInfo.id"
-					:deal_price="parseFloat(productInfo.bulk_price)"
-					:product_name="productInfo.headline"
-					:product_src="productInfo.thumb_img"
+					:init_product_id="productInfo.id"
+					:init_deal_price="parseFloat(productInfo.bulk_price)"
+					:init_product_name="productInfo.headline"
+					:init_product_src="productInfo.thumb_img"
 					:init_quantity="parseInt(init_quantity)"
 					:step_quantity="parseInt(step_quantity)"
-					:specification="productInfo.specification"
+					:init_specification="productInfo.specification"
 					:by_footer_menu_monitor="by_footer_menu_monitor"
 					:type="type"
 			></product-select>
@@ -66,11 +66,10 @@
 		<product-select
 				v-for="(productInfo,index) in productList"
 				:key="index"
-				:product_id="productInfo.id"
-				:deal_price="parseFloat(productInfo.bulk_price)"
+				:init_product_id="productInfo.id"
+				:init_deal_price="parseFloat(productInfo.bulk_price)"
 				:init_quantity="parseInt(init_quantity)"
 				:step_quantity="parseInt(step_quantity)"
-				:monitor_dialog_cart_click="monitor_dialog_cart_click"
 				:type="type"
 		></product-select>
 	</div>
@@ -103,7 +102,6 @@
 			type:3,
 			init_quantity:1,
 			step_quantity:1,
-			monitor_dialog_cart_click:true,
 			productList:[
 				{
 					id:'',
@@ -265,9 +263,12 @@
 		width: 60%
 	}
 	.title{
-		position: absolute;
+		/* position: absolute;
 		height: 60px;
-		top: 0;
+		top: 0; */
+		/* display: block; */
+		color: #EB6100;
+		margin-bottom: 6px;
 	}
 	.title img{
 		position: absolute;
@@ -283,6 +284,9 @@
 		position: absolute;
 		left: 76px;
 		margin-top: 5px;
+	}
+	.intro p span{
+		font-size: 0.25rem !important;
 	}
 	.specs{
 		font-size: 0.2rem;
@@ -300,6 +304,9 @@
 	}
 	.nav_menu{
 		width: 100%;
+	}
+	.slider_banner{
+		margin-top: 42px;
 	}
 	</style>
 {/block}
