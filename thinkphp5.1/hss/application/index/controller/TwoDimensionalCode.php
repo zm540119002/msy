@@ -14,7 +14,7 @@ class TwoDimensionalCode extends \common\controller\UserBase {
 //            return errorMsg('请求方式错误');
 //        }
         $uploadPath = realpath( config('upload_dir.upload_path')) . '/';
-        $url = request()->domain().'/uid/'.$this->user['id'];
+        $url = request()->domain().'?uid='.$this->user['id'];
         $newRelativePath = config('upload_dir.hss_user_QRCode');
         $shareQRCode = createLogoQRcode($url,$newRelativePath);
         $init = [
