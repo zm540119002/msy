@@ -158,7 +158,7 @@
                             }
                         }
                         //产品不存在产品列表，则添加
-                        if(!existSign && param.buy_quantity>0){
+                        if(!existSign && isPosIntNumber(param.product_id) && isPosIntNumber(param.buy_quantity)){
                             this.postData.data.push(productInfo);
                         }
                     },editProductListWithChecked:function(param){
@@ -177,7 +177,7 @@
                             }
                         }
                         //产品不存在产品列表，则添加
-                        if(!existSign && param.checked && param.buy_quantity>0){
+                        if(!existSign && param.checked && isPosIntNumber(param.product_id) && isPosIntNumber(param.buy_quantity)){
                             this.postData.data.push(productInfo);
                         }
                     },editCheckItemList:function(param){
