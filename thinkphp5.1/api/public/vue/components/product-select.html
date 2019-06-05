@@ -282,8 +282,8 @@
                 },dialogCart: function () {
                     let _this = this;
                     // 弹出加入采购车
-                    $('.dialogCart').toggle(200);
-                    $('.bg').toggle();
+                    $('.dialogCart').show();
+                    $('.bg').show();
                     //触发-弹出采购车点击-事件
                     bus.$emit('dialog_cart_click',_this);
                 },dialog_cart_click: function (param) {
