@@ -61,7 +61,6 @@
 {include file="../../api/public/vue/components/footer-menu.html" /}
 <div class="bg"></div>
 <div class="dialogCart">
-	<div class="close">X</div>
 	<div id="product-list2">
 		<product-select
 				v-for="(productInfo,index) in productList"
@@ -72,17 +71,9 @@
 				:step_quantity="parseInt(step_quantity)"
 				:type="type"
 		></product-select>
-	</div>
-	<div class="title">
-		<img src=""/>
-		<span>11111111111111</span>
-	</div>
-	<div class="specs">
-		<div>单品12g ￥198.00</div>
-		<div>10盒/箱</div>
-	</div>
-	<div id="foot_cart_menu">
-		<footer-menu></footer-menu>
+		<div id="foot_cart_menu">
+			<footer-menu></footer-menu>
+		</div>
 	</div>
 </div>
 <script type="text/javascript">
@@ -99,7 +90,7 @@
 <script type="text/javascript">
 	$(function(){
 		let param = {
-			type:3,
+			type:6,
 			init_quantity:1,
 			step_quantity:1,
 			productList:[
@@ -249,6 +240,7 @@
 	#product-list2 .product-select{
 		position: relative;
 		top: 60px;
+		padding: 8px 0 4px;
 	}
 	.dialogCart .red{
 		font-size: 0.2rem;
@@ -263,9 +255,9 @@
 		width: 60%
 	}
 	.title{
-		/* position: absolute;
+		position: absolute;
 		height: 60px;
-		top: 0; */
+		top: 0;
 		/* display: block; */
 		color: #EB6100;
 		margin-bottom: 6px;
@@ -284,6 +276,7 @@
 		position: absolute;
 		left: 76px;
 		margin-top: 5px;
+		color: #333;
 	}
 	.intro p span{
 		font-size: 0.25rem !important;
