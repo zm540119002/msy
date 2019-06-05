@@ -255,8 +255,9 @@ html,body {
     var content=$('.activitycontent').html();
     $('body').on('click','.activity',function(){
         layer.open({
-            title:['开放日参观预约'],
-            content:content
+            title:['开放日参观预约','border-bottom:1px solid #d9d9d9'],
+            content:content,
+            btn:['确定']
         })
     })
 
