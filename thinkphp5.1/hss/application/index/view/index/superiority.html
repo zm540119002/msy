@@ -42,7 +42,6 @@
         -webkit-align-items: center;
         align-items: center;
     }
-    .swiper-slide:last-child{padding-bottom:0.8rem;}
     .swiper-container-vertical>.swiper-wrapper {
         -webkit-box-orient: vertical;
         -webkit-box-direction: normal;
@@ -127,7 +126,7 @@
         var html =document.getElementsByTagName('html')[0];
         html.style.fontSize='';
         $('.swiper-slide ').css('height',$(window).height()+'px');
-        //$('body').css({height:100+'%',position:'relative'});
+        $('.swiper-slide:last').css('paddingBottom',1+'rem');
     })
     var swiper = new Swiper('.swiper-container', {
         direction: 'vertical',
