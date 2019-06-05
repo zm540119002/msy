@@ -315,7 +315,7 @@
                 buy_quantity: {
                     handler(newVal, oldVal) {
                         this.subtotal_amount_calculate();
-                        if(typeof(oldVal) !== "undefined" && !this.by_footer_menu_monitor){
+                        if(typeof(oldVal) !== "undefined"){
                             this.increment_buy_quantity = parseInt(newVal) - parseInt(oldVal?oldVal:0);
                             //触发--产品选择器购买数量改变-事件
                             bus.$emit('product_select_buy_quantity_change',this);
