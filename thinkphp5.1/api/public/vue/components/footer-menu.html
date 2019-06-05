@@ -112,8 +112,8 @@
                         register_success_callback_private = function(){
                             _thisJquery.click()
                         };
-//                        console.log(_thisVue.postData);
-//                        return;
+                        console.log(_thisVue.postData);
+                        return;
                         //前端验证
                         if((
                                 (   _thisJquery.attr('class')=='add_cart' //加入购物车
@@ -135,6 +135,15 @@
                         };
 
                         asyncVerify(config);
+                    },assignProductList:function(param){
+                        let productInfo = {
+                            'goods_id':param.product_id,
+                            'num':param.buy_quantity
+                        };
+                        if(isPosIntNumber(param.product_id) && isPosIntNumber(param.buy_quantity)){
+                            this.postData.data = [];
+                            this.postData.data.push(productInfo);
+                        }
                     },editProductList:function(param){
                         if(this.type==4 && !param.checked){
                             return false;
@@ -158,7 +167,7 @@
                             }
                         }
                         //产品不存在产品列表，则添加
-                        if(!existSign && param.buy_quantity>0){
+                        if(!existSign && isPosIntNumber(param.product_id) && isPosIntNumber(param.buy_quantity)){
                             this.postData.data.push(productInfo);
                         }
                     },editProductListWithChecked:function(param){
@@ -177,7 +186,7 @@
                             }
                         }
                         //产品不存在产品列表，则添加
-                        if(!existSign && param.checked && param.buy_quantity>0){
+                        if(!existSign && param.checked && isPosIntNumber(param.product_id) && isPosIntNumber(param.buy_quantity)){
                             this.postData.data.push(productInfo);
                         }
                     },editCheckItemList:function(param){
@@ -273,9 +282,10 @@
                         }
                     });
                     //监听-弹出采购车价格或者数量改变-事件
-                    bus.$on('dialog_cart_price_quantity_change', function(param){
+                    bus.$on('dialog_cart_assign', function(param){
                         if(param.by_footer_menu_monitor){
                             _this.total_amount_assign(param);
+                            _this.assignProductList(param);
                         }
                     });
                 }

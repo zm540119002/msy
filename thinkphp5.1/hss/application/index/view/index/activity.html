@@ -88,6 +88,14 @@ html,body {
 .nav_menu li.current a:before{
     background-color:hotpink;
 }
+.swiper-container.hide{
+    display: none;
+}
+.group_cart_nav .activity{
+    width:100%;
+    background: #E40012;
+    color:#fff;
+}
 </style>
 {/block}
 {block name="content"}
@@ -116,6 +124,17 @@ html,body {
     </ul>
 </nav>
 <div class="swiper-container swiper-container-initialized swiper-container-vertical swiper-container-ios">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide ">
+            <img src="public_img/activity01.jpg" alt="" class="common_default_img">
+            <div class="group_cart_nav">
+                <a href="javascript:;" class="activity">开放日参观预约</a>
+            </div>
+        </div>
+    </div>
+    <!--<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"><span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 2"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 3"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 4"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 5"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 6"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 7"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 8"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 9"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 10"></span></div>-->
+</div>
+<div class="swiper-container swiper-container-initialized swiper-container-vertical swiper-container-ios hide">
     <div class="swiper-wrapper">
         <div class="swiper-slide ">
             <img src="public_img/cpy_01.jpg" alt="" class="common_default_img">
@@ -160,15 +179,15 @@ html,body {
 {block name="script"}
 <script type="text/javascript" src="api_common_js/swiper.min.js"></script>
 <script>
-    //     (function($){
-    // var deviceWidth=document.documentElement.clientWidth;
-
-    // })(jQuery);
     $(function(){
         var html =document.getElementsByTagName('html')[0];
         html.style.fontSize='';
         $('.swiper-slide ').css('height',$(window).height()+'px');
-        //$('body').css({height:100+'%',position:'relative'});
+        $('.swiper-slide').find('img').css('paddingBottom',80+'px');
+        $('.nav_menu li').on('click',function(){
+            $(this).addClass('current').siblings().removeClass('current');
+            $('.swiper-container').hide().eq($(this).index()).show();
+        })
     })
     var swiper = new Swiper('.swiper-container', {
         direction: 'vertical',
