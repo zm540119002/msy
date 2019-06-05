@@ -40,6 +40,7 @@ class TwoDimensionalCode extends \common\controller\UserBase {
 //            'font'=>'./static/font/simhei.ttf',   //字体
 //        ];
         $res =  $this->compose($init);
+        print_r($res);exit;
         $this->successMsg('成功',['url'=>$res]);
     }
 
@@ -83,7 +84,7 @@ class TwoDimensionalCode extends \common\controller\UserBase {
             $this->errorMsg('合成图片失败');
         }
         imagedestroy($im);
-        print_r($init['save_path'].'compose/'.$filename);exit;
+//        print_r($init['save_path'].'compose/'.$filename);exit;
         return successMsg($init['save_path'].'compose/'.$filename);
     }
 
