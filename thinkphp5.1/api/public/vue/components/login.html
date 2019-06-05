@@ -304,6 +304,19 @@
             };
             asyncVerify(config);
         });
+        $('body').on('click','.async_login2',function(){
+            let _this = $(this);
+            let config = {
+                clickObj:_this
+            };
+            login_success_callback_private = function(){
+                asyncVerify(config);
+            };
+            register_success_callback_private = function(){
+                asyncVerify(config);
+            };
+            asyncVerify(config);
+        });
         $('body').on('click','.loginLayer .switch_current',function(){
             //触发-切换当前-事件
             let param = {
