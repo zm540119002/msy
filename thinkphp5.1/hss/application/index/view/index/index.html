@@ -3,7 +3,6 @@
 <article class="f24 content_main">
 	<section class="slider_banner">
 		<a href="#">
-			<!--<img src="public_img/banner/top-banner.jpg" alt="{$ads.0.name}" class="common_default_img">-->
 			<img src="{:show_img_handle($ads.top.thumb_img)}" class="common_default_img">
 		</a>
 	</section>
@@ -217,6 +216,7 @@
 		/**查看更多资讯
 		 */
 		$('body').on('click','.news_more',function () {
+			return false;
 			location.href = module + 'Information/index';
 		});
 		//新闻滚动

@@ -25,7 +25,7 @@ return [
     'goods' => 'hss_goods/',        //商品图片
     'project' => 'hss_project/',    //项目图片
     'scene' => 'hss_scene/',        //场景图片
-    'scheme' => 'hss_scheme/',      //方案图片
+    'promotion' => 'hss_promotion/',      //方案图片
     'information' => 'hss_information/',    // ??
     'goods_gategory' => 'hss_goods_gategory/',//商品分类图片
     'user_avatar' => 'user_avatar/',    //用户头像目录

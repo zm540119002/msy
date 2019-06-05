@@ -39,6 +39,10 @@
                 <div v-else-if="menu.class.indexOf('confirm_receive')!==-1" class="confirm_receive" @click="confirm_order" :data-jump_url="menu.action">
                     <span class="s_i"></span>
                 </div>
+                <!-- 跳转 -->
+                <div v-else-if="menu.class.indexOf('jump_url')!==-1" class="jump_url" @click="jump_url" :data-jump_url="menu.action">
+                    <span class="s_i"></span>
+                </div>
                 <!-- 默认 -->
                 <div v-else class="default" class="menu.class" :data-jump_url="menu.action">
                     <span class="s_i"></span>
@@ -57,7 +61,8 @@
                 template:'#footer-menu_tpl',
                 props: {
                     type: {type: Number,default: 1},
-                    cart_init_num: {type: Number,default: 0},
+                    init_product_type: {type: Number,default: 1},
+                    init_cart_num: {type: Number,default: 0},
                     init_total_amount: {type: Number,default: 0},
                     init_checked: {type: Boolean,default: false},
                     buy_now_call_back: {type: Function,default: function(param){
@@ -66,20 +71,25 @@
                 },data: function () {
                     return {
                         total_amount:this.init_total_amount,
-                        cart_num:this.cart_init_num,
+                        cart_num:this.init_cart_num,
                         checked:this.init_checked,
                         checkItemList:[],
                         menus: unlockingFooterCart.menu,
                         postData:{
+                            product_type:this.init_product_type,
                             data:[]
                         }
                     }
                 },methods: {
                     total_amount_init:function (param) {
+                        console.log(param.subtotal_amount);
                         if(this.type==4 && !param.checked){
                             return false;
                         }
                         this.total_amount += param.subtotal_amount;
+                    },total_amount_assign:function (param) {
+                        this.total_amount = param.deal_price * param.increment_buy_quantity;
+                        console.log(this.total_amount);
                     },total_amount_calculate:function (param) {
                         if(this.type==4 && !param.checked){
                             return false;
@@ -96,6 +106,10 @@
                             location.href = jump_url;
                         }
                     },addCart:function(event){
+                        this.total_amount = 555;
+                        console.log(this.total_amount);
+                        console.log(123);
+                        return;
                         let _thisJquery = $(event.currentTarget);
                         let _thisVue = this;
                         login_success_callback_private = function(){
@@ -104,6 +118,7 @@
                         register_success_callback_private = function(){
                             _thisJquery.click()
                         };
+
                         //前端验证
                         if((
                                 (   _thisJquery.attr('class')=='add_cart' //加入购物车
@@ -123,6 +138,7 @@
                                 //_thisJquery.click()
                             }
                         };
+
                         asyncVerify(config);
                     },editProductList:function(param){
                         if(this.type==4 && !param.checked){
@@ -240,23 +256,37 @@
                     let _this = this;
                     //监听-产品选择器初始化-事件
                     bus.$on('product_select_init', function(param){
-                        _this.total_amount_init(param);
-                        _this.editProductList(param);
-                        _this.editCheckItemList(param);
+                        if(param.by_footer_menu_monitor){
+                            _this.total_amount_init(param);
+                            _this.editProductList(param);
+                            _this.editCheckItemList(param);
+                        }
                     });
                     //监听-产品选择器复选框改变-事件
                     bus.$on('product_select_check_item_change', function(param){
-                        _this.total_amount_calculate_with_checked(param);
-                        _this.editProductListWithChecked(param);
-                        _this.editCheckItemList(param);
+                        if(param.by_footer_menu_monitor){
+                            _this.total_amount_calculate_with_checked(param);
+                            _this.editProductListWithChecked(param);
+                            _this.editCheckItemList(param);
+                        }
                     });
                     //监听-产品选择器购买数量改变-事件
                     bus.$on('product_select_buy_quantity_change', function(param){
-                        _this.total_amount_calculate(param);
-                        _this.editProductList(param);
+                        if(param.by_footer_menu_monitor){
+                            _this.total_amount_calculate(param);
+                            _this.editProductList(param);
+                        }
+                    });
+                    //监听-弹出采购车价格或者数量改变-事件
+                    bus.$on('dialog_cart_price_quantity_change', function(param){
+                        if(param.by_footer_menu_monitor){
+                            _this.total_amount_assign(param);
+                        }
                     });
                 }
             });
         }
     });
 </script>
+<style lang="less" scoped>
+</style>

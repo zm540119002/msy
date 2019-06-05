@@ -11,14 +11,14 @@
             </div>
             <div  class="right">
                 <div class="product_name">
-                    <p class="two-line-omit">{$info.headline}</p>
+                    <p class="two-line-omit">{$info.name}</p>
                 </div>
                 <div class="product_specs">
                     <p class="two-line-omit">{$info.specification}</p>
                 </div>
                 <div class="quantity_wrapper selected-number columns_flex l-r-sides">
-                    <div><span class="red deal_price">￥{$info.bulk_price}</span></div>
-                    <div>X 1</div>
+                    <div>￥<span class="red deal_price">{$info.bulk_price}</span></div>
+                    <div>X {$info.goods_num}</div>
                 </div>
             </div>
         </div>

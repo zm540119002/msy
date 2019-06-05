@@ -3,6 +3,7 @@
 {block name="header"}{/block}
 {block name="content"}
 <article class="f24">
+	<div class="back"><</div>
 	<section class="slider_banner">
 		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
 			<div class="swiper-wrapper">
@@ -26,34 +27,34 @@
 				<li>
 					<div class="top_radius f20 top_module">
 						<div>
-								<div class="price">
-									<span>￥2980.00</span>
-								  <div class=" selected-number">
-                    <a href="javascript:void(0);" class="add_cart reduce" @click="reduceCart" :data-jump_url="add_cart_url">-</a>
-                    <input type="text" :value="buy_quantity" class="f24 product_count" readonly="readonly">
-                    <a href="javascript:void(0);" class="add_cart plus" @click="plusCart" :data-jump_url="add_cart_url">+</a>
-                </div>
-								</div>
-								
+							<div id="product-list">
+								<product-select
+										v-for="(productInfo,index) in productList"
+										:key="index"
+										:init_product_id="productInfo.id"
+										:init_deal_price="parseFloat(productInfo.bulk_price)"
+										:init_quantity="parseInt(init_quantity)"
+										:step_quantity="parseInt(step_quantity)"
+										:type="type"
+								></product-select>
+							</div>
 							<div class="title">
 								{$info.title}
 							</div>
-							<div class="describe">正常采购价正常采购价正常采购价正常采购价</div>
-							<div class="intro">商品描述1商品描述1商品描述1商品描述1商品描述1商品描述1商品描述1商品描述1商品描述1商品描述1商品描述1商品描述1</div>
+							<!--<div class="describe">正常采购价10000元 &nbsp;套餐采购价优惠了1000元</div>-->
+							<div class="describe">{$info.remarks}</div>
+							<div class="intro"></div>
 						</div>
 						<div class="tags_item columns_flex l-r-sides">
 							<div>
+								{notempty name="info.tag"}
 								{volist name="$info.tag" id="tag"}
 								<span>{$tag}</span>
 								{/volist}
-								<span>1111</span>
-							<span>1111</span>
-							<span>1111</span>
+								{/notempty}
 							</div>
-							
 							<div class="tags_item_r">
-								
-								                <a class="collection" href="javascript:;"><span class="icon"></span><span class="text"></span>收藏</a>
+								<a class="collection" href="javascript:;"><span class="icon"></span><span class="text"></span>收藏</a>
 								<a class="share" href="javascript:;"><span class="icon"></span>分享</a>
 							</div>
 						</div>
@@ -109,6 +110,7 @@
 		</div>
 		<!--产品列表-->
 		<ul class="goods_list list" id="list">
+
 		</ul>
 	</section>
 </article>
@@ -116,10 +118,12 @@
 {block name="common"}
 {/block}
 {block name="footer"}
+{include file="../../api/public/vue/components/product-select.html" /}
 {include file="../../api/public/vue/components/footer-menu.html" /}
 <div id="foot_cart_menu">
 	<footer-menu
-			:cart_init_num="cart_init_num"
+			:init_cart_num="init_cart_num"
+			:init_product_type="parseInt(init_product_type)"
 	></footer-menu>
 </div>
 <script type="text/javascript">
@@ -134,7 +138,8 @@
 			});
 		}
 		let param = {
-			cart_init_num:total_num
+			init_cart_num:total_num,
+			init_product_type:2
 		};
 		new Vue({
 			el: '#foot_cart_menu',
@@ -144,72 +149,36 @@
 		});
 	});
 </script>
-{include file="../../api/public/vue/components/product-select.html" /}
 <script type="text/javascript">
-
-
-
-
-
-	//初始化分类商品页面
-/*	$('.nav_menu li:eq(0)').addClass('current');
-	postData.category_id = $('.nav_menu li.current').data('category-id');
-	getPagingList(config,postData);*/
-
-/*	$(function(){
+	$(function(){
 		let param = {
-			type:0,
+			type:3,
 			init_quantity:1,
 			step_quantity:1,
-			productList:[],
-			getJsonListParam:{
-				url:module+'Goods/getPromotionGoods',
-				requestEnd:false,
-				loadTrigger:false,
-				postData:{
-					id:'{$info.id}',
-					pageSize:10,
-					page:1
+			productList:[
+				{
+					id:"{$info.id}",
+					bulk_price:"{$info.price}"
 				}
-			}
+			]
 		};
 		new Vue({
 			el: '#product-list',
 			data:function(){
 				return param;
-			},methods:{
-				getJsonListCallBack:function(data){
-					console.log(data);
-					if(data.status==0){
-						dialog.error(data.info);
-						return false;
-					}
-					let _this = this;
-					$.each(data.data.data,function(i,o){
-						_this.productList.push(o);
-					});
-				}
-			},created:function(){
-				let _thisVue = this;
-				_thisVue.getJsonListParam.callBack = _thisVue.getJsonListCallBack;
-				vueVersionGetJsonList(_thisVue);
-				//下拉加载
-				$(window).on('scroll',function(){
-					if(_thisVue.getJsonListParam.loadTrigger
-							&& $(document).scrollTop()+$(window).height()+200>$(document).height()){
-						//停止触发，去其他地方重新放开
-						_thisVue.getJsonListParam.loadTrigger = false;
-						vueVersionGetJsonList(_thisVue);
-					}
-				});
 			}
 		});
-	});*/
+	});
 </script>
 {/block}
 {block name="script"}
 <script type="text/javascript" src="api_common_js/swiper.min.js"></script>
 <script type="text/javascript">
+	//初始化分类商品页面
+	/*	$('.nav_menu li:eq(0)').addClass('current');
+	 postData.category_id = $('.nav_menu li.current').data('category-id');
+	 getPagingList(config,postData);*/
+
 	var config = {
 		url:module+'Goods/getPromotionGoods',
 		requestEnd:false,
@@ -227,9 +196,25 @@
 		var date=getWeek();
 		countDown(date,$('#countDownBox'));
 		// 后加载简介
-		// $('document').ready(function(){
-		// 	$('.intro').html("{$info.intro|raw}");
-		// });
+		$('document').ready(function(){
+		 	$('.intro').html("{$info.intro|raw}");
+
+			// 套餐价 "{$info.price}"
+
+			//var normal_price = "";
+			//normal_price - "{$info.price}";
+/*			$('.deal_price').each(function() {
+				var sum = 0;
+				$('tr', this).each(function () {
+					if (Number($('td', this).eq(0).html()) >= 0) {
+						sum += Number($('td', this).eq(1).html());
+					}
+				});
+			});
+
+		 	$('.describe').html("正常采购价元 &nbsp;套餐采购价优惠了元");*/
+		 });
+
 		//轮播
 		var swiper = new Swiper('.swiper-container', {
 			spaceBetween: 30,
@@ -242,6 +227,19 @@
 
 		//初始化分类商品页面
 		getPagingList(config,postData);
+
+		//下拉加载
+		$(window).on('scroll',function(){
+			if(config.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
+				config.loadTrigger = false;
+				postData.category_id = $('.nav_menu li.current').data('category-id');
+				getPagingList(config,postData);
+			}
+		});
+		// 点击返回上一页
+	$('.back').on("click",function(){
+		history.back(-1)
+	})
 	});
 </script>
 <style scoped>
@@ -278,6 +276,17 @@
 		}
 		.selected-number{
 			float: right;
+		}
+		.back{
+			width: 30px;
+			height: 30px;
+			background: rgba(0, 0, 0, 0.4);
+			z-index: 99;
+			color: #fff;
+			border-radius: 50%;
+			margin: 6px 0 0 8px;
+			text-align: center;
+			line-height: 30px;
 		}
 	</style>
 {/block}

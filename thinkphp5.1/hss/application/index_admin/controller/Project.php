@@ -38,8 +38,7 @@ class Project extends Base {
                 $info['recommend_goods_num'] = $info['recommend_goods'] ? count(explode(',',$info['recommend_goods'])) : 0;
 
                 $info['process'] = $info['process'] ? addslashes($info['process']) : 0;
-             /*   p($info);
-                exit;*/
+
                 $this->assign('info',$info);
             }
             return $this->fetch();
@@ -49,12 +48,14 @@ class Project extends Base {
             $data = input('post.');
             unset($data['editorValue']);
             unset($data['process_desc']);
+            //p($data);
             // 多图上传带描述
             replace_splitter($data,['tag']);
             process_upload_files($data,['thumb_img','video'],'project',false);
             process_upload_files($data,['main_img','process_img','detail_img'],'project');
             htmlspecialchars_addslashes($data,['intro','remarks','description']);
-
+            //p($data);
+            //exit;
             if($data['process_img']){
                 $process = explode(',',$data['process_img']);
                 foreach($process as $k => $v){

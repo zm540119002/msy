@@ -34,13 +34,16 @@ class CityPartner extends \common\controller\UserBase {
             $modelCityPartner = new \app\index\model\CityPartner();
             $condition=[
                 'where'=>[
-                    ['status', '=', 0],
-                    ['user_id','=',$this->user['id']]
-                ],
-                'field'=>[
-                    'id','province','city','company_name','applicant','mobile','city_level','earnest','amount','apply_status'
-                ],
+                    ['cp.status', '=', 0],
+                    ['cp.user_id','=',$this->user['id']]
+                ], 'field'=>[
+                    'cp.id','cp.province','cp.city','cp.company_name','cp.applicant','cp.mobile','cp.city_level','cp.earnest','cp.amount','cp.apply_status'
+                    ,'p.sn','p.id as pay_id'
+                ],'join' => [
+                     ['pay p','p.sn = cp.earnest_sn','left'],
+                ]
             ];
+
             $selfApplyList = $modelCityPartner -> getList($condition);
             //申请中
             $apply = [];
@@ -112,9 +115,9 @@ class CityPartner extends \common\controller\UserBase {
                 $postData['create_time'] = time();
                 if($postData['id']){
                     $where = [
-                        ['id','=',$postData['id']],
-                        ['user_id','=',$this->user['id']],
-                        ['status','=',0],
+                        'id'=>$postData['id'],
+                        'user_id'=>$this->user['id'],
+                        'status'=>0,
                     ];
                 }
                 $id  = $modelCityPartner->edit($postData,$where);
@@ -132,11 +135,18 @@ class CityPartner extends \common\controller\UserBase {
                     'type' => config('custom.pay_type')['cityPartnerSeatPay']['code'],
                     'create_time' => time(),
                 ];
-                $result  = $modelPay->isUpdate(false)->save($data);
-                if(!$result){
-                    $modelPay ->rollback();
-                    $this->errorMsg('失败');
+                if(isset($postData['pay_id']) && $postData['pay_id']){
+                    $where1 = [
+                        'id'=>$postData['pay_id'],
+                        'user_id'=>$this->user['id'],
+                        'status'=>0,
+                    ];
                 }
+                $payId = $modelPay->edit($data,$where1);
+                if(false===$payId){
+                    $modelCityPartner ->rollback();
+                    return errorMsg('失败');
+                };
                 break;
         }
         $modelCityPartner -> commit();
