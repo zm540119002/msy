@@ -285,6 +285,12 @@
                     asyncVerify(config);
                 },dialogCart: function () {
                     let _this = this;
+                    var imgSrc = 'api_common_img/default/no_pic_100.jpg';
+                    if(this.product_src){
+                        imgSrc = 'public_uploads/'+this.product_src; 
+                    }
+                    
+                    $('.dialogCart #product-list2 .p_img img').attr("src",imgSrc)
                     // 弹出加入采购车
                     $('.dialogCart').show();
                     $('.bg').show();
