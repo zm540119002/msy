@@ -126,13 +126,13 @@
                 init_specification: {type: String,default: ''},
                 init_specification_unit: {type: String,default: '盒'},
                 init_product_src: {type: String,default: ''},
-                quota_quantity: {type: Number,default: 1},
-                type: {type: Number,default: 1},
                 init_deal_price: {type: Number,required: true},
-                init_quantity: {type: Number,default: 1},
-                step_quantity: {type: Number,default: 1},
-                display_quota: {type: Boolean,default: false},
                 init_checked: {type: Boolean,default: true},
+                init_quantity: {type: Number,default: 1},
+                quota_quantity: {type: Number,default: 1},
+                display_quota: {type: Boolean,default: false},
+                step_quantity: {type: Number,default: 1},
+                type: {type: Number,default: 1},
                 by_footer_menu_monitor: {type: Boolean,default: true}
             },data: function () {
                 return {
@@ -152,6 +152,7 @@
                 };
             },methods: {
                 subtotal_amount_calculate:function(){
+                    console.log(this.init_product_id);
                     console.log(this.init_deal_price);
                     console.log(this.deal_price);
                     console.log(this.buy_quantity);
