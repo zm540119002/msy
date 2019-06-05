@@ -139,8 +139,7 @@
             <span>{{product_name}}</span>
         </div>
         <div class="specs">
-            <div>单品12g ￥{{deal_price}}</div>
-            <div>10盒/箱</div>
+            <div>{{specification}} ￥{{deal_price}}</div>
         </div>
     </li>
 </template>
@@ -288,6 +287,8 @@
                     bus.$emit('dialog_cart_click',_this);
                 },dialog_cart_click: function (param) {
                     if(this.by_footer_menu_monitor){
+                        this.product_name = param.product_name;
+                        this.specification = param.specification;
                         this.deal_price = param.deal_price;
                         this.buy_quantity = param.init_quantity;
                         this.subtotal_amount_calculate();
