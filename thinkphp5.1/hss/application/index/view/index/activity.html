@@ -183,7 +183,7 @@ html,body {
         var html =document.getElementsByTagName('html')[0];
         html.style.fontSize='';
         $('.swiper-slide ').css('height',$(window).height()+'px');
-        $('.swiper-slide').find('img').css('paddingBottom',80+'px');
+        // $('.swiper-slide').find('img').css('paddingBottom',80+'px');
         $('.nav_menu li').on('click',function(){
             $(this).addClass('current').siblings().removeClass('current');
             $('.swiper-container').hide().eq($(this).index()).show();
