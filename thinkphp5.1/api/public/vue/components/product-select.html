@@ -289,8 +289,8 @@
                     $('.dialogCart').show();
                     $('.bg').show();
                     //触发-弹出采购车点击-事件
-                    bus.$emit('dialog_cart_click',_this);
-                },dialog_cart_click: function (param) {
+                    bus.$emit('dialog_cart_assign',_this);
+                },dialog_cart_assign: function (param) {
                     if(this.by_footer_menu_monitor){
                         this.monitor_buy_quantity = false;
                         this.product_id = param.product_id;
@@ -318,8 +318,8 @@
                     _this.editCheckItem(param);
                 });
                 //监听-弹出采购车点击-事件
-                bus.$on('dialog_cart_click', function(param){
-                    _this.dialog_cart_click(param);
+                bus.$on('dialog_cart_assign', function(param){
+                    _this.dialog_cart_assign(param);
                 });
             },watch: {
                 buy_quantity: {
