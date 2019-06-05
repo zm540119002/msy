@@ -88,6 +88,7 @@
                         this.total_amount += param.subtotal_amount;
                     },total_amount_assign:function (param) {
                         this.total_amount = param.deal_price * param.increment_buy_quantity;
+                        this.total_amount = 555;
                         console.log(this.total_amount);
                     },total_amount_calculate:function (param) {
                         if(this.type==4 && !param.checked){
