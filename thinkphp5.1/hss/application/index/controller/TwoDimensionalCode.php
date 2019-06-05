@@ -1,7 +1,7 @@
 <?php
 namespace app\index\controller;
 
-class TwoDimensionalCode extends \common\controller\Base {
+class TwoDimensionalCode extends \common\controller\UserBase {
 
     /**
      * 获取二维码
