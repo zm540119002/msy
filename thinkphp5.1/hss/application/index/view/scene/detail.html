@@ -2,7 +2,6 @@
 {block name="title"}{$Think.config.custom.tag_category[$info.tag_category]}{/block}
 {block name="content"}
 <article class="f24">
-		<div class="back"><</div>
 	<!-- 标题导航 -->
 	<nav style="position:relative;">
 		<a href="javascript:void(0);" class="back_prev_page" data-jump_url=""><</a>
@@ -185,10 +184,6 @@
 				clickable: true
 			}
 		});
-			// 点击返回上一页
-	$('.back').on("click",function(){
-		history.back(-1)
-	})
 	});
 </script>
 <style scoped>
@@ -306,16 +301,6 @@
 	.slider_banner{
 		margin-top: 42px;
 	}
-	.back{
-			width: 30px;
-			height: 30px;
-			background: rgba(0, 0, 0, 0.4);
-			z-index: 99;
-			color: #fff;
-			border-radius: 50%;
-			margin: 6px 0 0 8px;
-			text-align: center;
-			line-height: 30px;
-		}
+	
 	</style>
 {/block}
