@@ -105,11 +105,13 @@ function process_upload_files(&$data,$arr,$directory,$multiple=true){
             if($multiple){
                 $detailArr = explode(',',$file);
                 $tempArr = array();
+
                 foreach ($detailArr as $item) {
                     if($item){
                         $tempArr[] = moveImgFromTemp(config('upload_dir.'.$directory),$item);
                     }
                 }
+
                 $data[$v] = implode(',',$tempArr);
             }else{
                 $data[$v] = moveImgFromTemp(config('upload_dir.'.$directory),$file);
@@ -129,7 +131,7 @@ function htmlspecialchars_addslashes(&$data,$arr){
         $str = $data[$v];
 
         if($str!=null){
-            $data[$v] = htmlspecialchars(addslashes($str));
+            $data[$v] = htmlspecialchars(addslashes(trim($str)));
         }
     }
 }

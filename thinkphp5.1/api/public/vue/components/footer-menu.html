@@ -62,7 +62,7 @@
                 props: {
                     type: {type: Number,default: 1},
                     init_product_type: {type: Number,default: 1},
-                    cart_init_num: {type: Number,default: 0},
+                    init_cart_num: {type: Number,default: 0},
                     init_total_amount: {type: Number,default: 0},
                     init_checked: {type: Boolean,default: false},
                     buy_now_call_back: {type: Function,default: function(param){
@@ -71,7 +71,7 @@
                 },data: function () {
                     return {
                         total_amount:this.init_total_amount,
-                        cart_num:this.cart_init_num,
+                        cart_num:this.init_cart_num,
                         checked:this.init_checked,
                         checkItemList:[],
                         menus: unlockingFooterCart.menu,
@@ -86,11 +86,19 @@
                             return false;
                         }
                         this.total_amount += param.subtotal_amount;
+                        console.log('init');
+                        console.log(this.total_amount);
+                    },total_amount_assign:function (param) {
+                        this.total_amount = param.deal_price * param.increment_buy_quantity;
+                        console.log('assign');
+                        console.log(this.total_amount);
                     },total_amount_calculate:function (param) {
                         if(this.type==4 && !param.checked){
                             return false;
                         }
                         this.total_amount += param.deal_price * param.increment_buy_quantity;
+                        console.log('calculate');
+                        console.log(this.total_amount);
                     },total_amount_calculate_with_checked:function (param) {
                         param.checked
                                 ? this.total_amount += param.subtotal_amount
@@ -110,7 +118,8 @@
                         register_success_callback_private = function(){
                             _thisJquery.click()
                         };
-                        
+                        console.log(_thisVue.postData);
+                        return;
                         //前端验证
                         if((
                                 (   _thisJquery.attr('class')=='add_cart' //加入购物车
@@ -267,6 +276,12 @@
                         if(param.by_footer_menu_monitor){
                             _this.total_amount_calculate(param);
                             _this.editProductList(param);
+                        }
+                    });
+                    //监听-弹出采购车价格或者数量改变-事件
+                    bus.$on('dialog_cart_price_quantity_change', function(param){
+                        if(param.by_footer_menu_monitor){
+                            _this.total_amount_assign(param);
                         }
                     });
                 }

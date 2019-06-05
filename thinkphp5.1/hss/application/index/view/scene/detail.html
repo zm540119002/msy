@@ -42,13 +42,13 @@
 			<product-select
 					v-for="(productInfo,index) in productList"
 					:key="index"
-					:product_id="productInfo.id"
-					:deal_price="parseFloat(productInfo.bulk_price)"
-					:product_name="productInfo.headline"
-					:product_src="productInfo.thumb_img"
+					:init_product_id="productInfo.id"
+					:init_deal_price="parseFloat(productInfo.bulk_price)"
+					:init_product_name="productInfo.headline"
+					:init_product_src="productInfo.thumb_img"
 					:init_quantity="parseInt(init_quantity)"
 					:step_quantity="parseInt(step_quantity)"
-					:specification="productInfo.specification"
+					:init_specification="productInfo.specification"
 					:by_footer_menu_monitor="by_footer_menu_monitor"
 					:type="type"
 			></product-select>
@@ -61,28 +61,19 @@
 {include file="../../api/public/vue/components/footer-menu.html" /}
 <div class="bg"></div>
 <div class="dialogCart">
-	<div class="close">X</div>
 	<div id="product-list2">
 		<product-select
 				v-for="(productInfo,index) in productList"
 				:key="index"
-				:product_id="productInfo.id"
-				:deal_price="parseFloat(productInfo.bulk_price)"
+				:init_product_id="productInfo.id"
+				:init_deal_price="parseFloat(productInfo.bulk_price)"
 				:init_quantity="parseInt(init_quantity)"
 				:step_quantity="parseInt(step_quantity)"
 				:type="type"
-		></product-select>
-	</div>
-	<div class="title">
-		<img src=""/>
-		<span>11111111111111</span>
-	</div>
-	<div class="specs">
-		<div>单品12g ￥198.00</div>
-		<div>10盒/箱</div>
+		></product-select>	
 	</div>
 	<div id="foot_cart_menu">
-		<footer-menu></footer-menu>
+			<footer-menu></footer-menu>
 	</div>
 </div>
 <script type="text/javascript">
@@ -99,13 +90,13 @@
 <script type="text/javascript">
 	$(function(){
 		let param = {
-			type:3,
+			type:6,
 			init_quantity:1,
 			step_quantity:1,
 			productList:[
 				{
-					id:123,
-					bulk_price:199
+					id:1,
+					bulk_price:10
 				}
 			]
 		};
@@ -116,8 +107,8 @@
 			}
 		});
 		$('body').on('click','.bg,.close',function(){
-			$('.dialogCart').toggle();
-			$('.bg').toggle();
+			$('.dialogCart').hide();
+			$('.bg').hide();
 		});
 	});
 </script><script type="text/javascript">
@@ -237,7 +228,7 @@
 		position: fixed;
 		bottom: 0;
 		z-index: 999;
-		display: none
+		display: none;
 	}.dialogCart .product-select .right{
 		width: 35% !important;
 	}
@@ -249,6 +240,7 @@
 	#product-list2 .product-select{
 		position: relative;
 		top: 60px;
+		padding: 8px 0 0 10px;
 	}
 	.dialogCart .red{
 		font-size: 0.2rem;
@@ -262,11 +254,14 @@
 	.group_cart_nav a:nth-of-type(4){
 		width: 60%
 	}
-	.title{
+/*	.title{
 		position: absolute;
 		height: 60px;
 		top: 0;
-	}
+		 display: block;
+		color: #EB6100;
+		margin-bottom: 6px;
+	}*/
 	.title img{
 		position: absolute;
 		top: -18px;
@@ -281,6 +276,10 @@
 		position: absolute;
 		left: 76px;
 		margin-top: 5px;
+		color: #333;
+	}
+	.intro p span{
+		font-size: 0.25rem !important;
 	}
 	.specs{
 		font-size: 0.2rem;
@@ -290,5 +289,18 @@
 		position: relative;
 		top: 55px;
 	}
+	nav{
+		z-index: 998;
+		position: fixed !important;
+		top: 0;
+		width: 100%;
+	}
+	.nav_menu{
+		width: 100%;
+	}
+	.slider_banner{
+		margin-top: 42px;
+	}
+	
 	</style>
 {/block}

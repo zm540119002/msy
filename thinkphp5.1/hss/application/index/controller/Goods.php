@@ -198,7 +198,7 @@ class Goods extends \common\controller\Base{
             ],'join' => [
                 ['goods g','g.id = '.$goods_id,'left'],
             ],'field' => [
-                'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity',
+                'g.id ','g.name','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity',
                 'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
             ],
         ];
@@ -235,7 +235,7 @@ class Goods extends \common\controller\Base{
             $this->assign('info',$info);
             $this->assign('goodsInfo',json_encode([
                 'goods_id'=>$info['id'],
-                'deal_price'=>$info['bulk_price'],
+                'bulk_price'=>$info['bulk_price'],
                 'thumb_img'=>$info['thumb_img'],
                 'name'=>$info['name'],
                 'specification'=>preg_replace('//s*/', '', $info['specification']),
@@ -318,7 +318,7 @@ class Goods extends \common\controller\Base{
         $model = new \app\index\model\PromotionGoods();
         $condition = [
             'field' => [
-                'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity',
+                'g.id ','g.name','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity',
                 'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit',
                 'pg.goods_num'
             ], 'where' => [
