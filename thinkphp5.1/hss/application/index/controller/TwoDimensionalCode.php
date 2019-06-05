@@ -14,21 +14,20 @@ class TwoDimensionalCode extends \common\controller\UserBase {
 //            return errorMsg('请求方式错误');
 //        }
         $uploadPath = realpath( config('upload_dir.upload_path')) . '/';
-        $url = request()->domain().'/uid/'.$this->user['id'];
+        $url = request()->domain().'?uid='.$this->user['id'];
         $newRelativePath = config('upload_dir.hss_user_QRCode');
         $shareQRCode = createLogoQRcode($url,$newRelativePath);
         $init = [
             'save_path'=>$newRelativePath,   //保存目录  ./uploads/compose/goods....
             'name'=> $this->user['name'], //用户名
-            'avatar'=> $uploadPath.$this->user['avatar'],//用户头像
+            'avatar'=> request()->domain().'/uploads/'.$this->user['avatar'],//用户头像
             'base_map'=> request()->domain().'/static/common/img/hss_base_map.jpg', // 460*534  分享底图
             'hss_share_title'=> request()->domain().'/static/common/img/hss_share_title.jpg', // 460*534  分享底图
             'hss_share_sm'=> request()->domain().'/static/common/img/hss_share_sm.jpg', // 460*534  分享底图
             'hss_share_sm1'=> request()->domain().'/static/common/img/hss_share_sm1.jpg', // 460*534  分享底图
-            'qrcode'=>$uploadPath.$shareQRCode, // 120*120
+            'qrcode'=> request()->domain().'/uploads/'.$shareQRCode, // 120*120
             'font'=>'./static/font/simhei.ttf',   //字体
         ];
-        print_r($init);exit;
 //        $init = [
 //            'save_path'=>$newRelativePath,   //保存目录  ./uploads/compose/goods....
 //            'name'=> '李白', //用户名
@@ -41,6 +40,7 @@ class TwoDimensionalCode extends \common\controller\UserBase {
 //            'font'=>'./static/font/simhei.ttf',   //字体
 //        ];
         $res =  $this->compose($init);
+        print_r($res);exit;
         $this->successMsg('成功',['url'=>$res]);
     }
 
@@ -84,6 +84,7 @@ class TwoDimensionalCode extends \common\controller\UserBase {
             $this->errorMsg('合成图片失败');
         }
         imagedestroy($im);
+//        print_r($init['save_path'].'compose/'.$filename);exit;
         return successMsg($init['save_path'].'compose/'.$filename);
     }
 
