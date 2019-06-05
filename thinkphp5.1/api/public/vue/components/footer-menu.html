@@ -82,14 +82,12 @@
                     }
                 },methods: {
                     total_amount_init:function (param) {
-                        console.log(param.subtotal_amount);
                         if(this.type==4 && !param.checked){
                             return false;
                         }
                         this.total_amount += param.subtotal_amount;
                     },total_amount_assign:function (param) {
                         this.total_amount = param.deal_price * param.increment_buy_quantity;
-                        console.log(this.total_amount);
                     },total_amount_calculate:function (param) {
                         if(this.type==4 && !param.checked){
                             return false;
@@ -106,10 +104,6 @@
                             location.href = jump_url;
                         }
                     },addCart:function(event){
-                        this.total_amount = 555;
-                        console.log(this.total_amount);
-                        console.log(123);
-                        return;
                         let _thisJquery = $(event.currentTarget);
                         let _thisVue = this;
                         login_success_callback_private = function(){
@@ -118,7 +112,8 @@
                         register_success_callback_private = function(){
                             _thisJquery.click()
                         };
-
+                        console.log(_thisVue.postData);
+                        return;
                         //前端验证
                         if((
                                 (   _thisJquery.attr('class')=='add_cart' //加入购物车
