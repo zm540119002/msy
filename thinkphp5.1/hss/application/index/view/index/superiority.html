@@ -126,7 +126,7 @@
         var html =document.getElementsByTagName('html')[0];
         html.style.fontSize='';
         $('.swiper-slide ').css('height',$(window).height()+'px');
-        $('.swiper-slide:last').css('paddingBottom',1+'rem');
+        $('.swiper-slide:last').find('img').css('paddingBottom',100+'px');
     })
     var swiper = new Swiper('.swiper-container', {
         direction: 'vertical',
