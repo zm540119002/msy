@@ -131,7 +131,7 @@ function htmlspecialchars_addslashes(&$data,$arr){
         $str = $data[$v];
 
         if($str!=null){
-            $data[$v] = htmlspecialchars(addslashes($str));
+            $data[$v] = htmlspecialchars(addslashes(trim($str)));
         }
     }
 }
