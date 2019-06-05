@@ -272,7 +272,7 @@
                     //监听-弹出采购车价格或者数量改变-事件
                     bus.$on('dialog_cart_price_quantity_change', function(param){
                         if(param.by_footer_menu_monitor){
-                            _this.total_amount += param.deal_price * param.increment_buy_quantity;
+                            _this.total_amount = param.deal_price * param.increment_buy_quantity;
                             console.log(_this.total_amount);
                         }
                     });
