@@ -289,7 +289,7 @@
                     $('.dialogCart').show();
                     $('.bg').show();
                     //触发-弹出采购车点击-事件
-                    bus.$emit('dialog_cart_assign',_this);
+                    bus.$emit('dialog_cart',_this);
                 },dialog_cart_assign: function (param) {
                     if(this.by_footer_menu_monitor){
                         this.monitor_buy_quantity = false;
@@ -303,7 +303,7 @@
                         this.subtotal_amount_calculate();
                         this.increment_buy_quantity = this.buy_quantity;
                         //监听-弹出采购车价格或者数量改变-事件
-                        bus.$emit('dialog_cart_price_quantity_change', this);
+                        bus.$emit('dialog_cart_assign', this);
                     }
                 },editCheckItem:function(param){
                     this.checked = param;
@@ -318,7 +318,7 @@
                     _this.editCheckItem(param);
                 });
                 //监听-弹出采购车点击-事件
-                bus.$on('dialog_cart_assign', function(param){
+                bus.$on('dialog_cart', function(param){
                     _this.dialog_cart_assign(param);
                 });
             },watch: {
