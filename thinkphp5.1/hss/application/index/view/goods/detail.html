@@ -36,12 +36,12 @@
 							<product-select
 									v-for="(productInfo,index) in productList"
 									:key="index"
-									:product_id="productInfo.id"
-									:deal_price="Number(productInfo.deal_price)"
-									:product_name="productInfo.name"
-									:product_src="productInfo.thumb_img"
-									:specification="productInfo.specification"
-									:specification_unit="productInfo.specification_unit"
+									:init_product_id="productInfo.id"
+									:init_deal_price="Number(productInfo.deal_price)"
+									:init_product_name="productInfo.name"
+									:init_product_src="productInfo.thumb_img"
+									:init_specification="productInfo.specification"
+									:init_specification_unit="productInfo.specification_unit"
 									:init_quantity="parseInt(init_quantity)"
 									:step_quantity="parseInt(step_quantity)"
 									:type="type"
@@ -225,10 +225,10 @@
 			productList:[
 				{
 					'id':goodsInfo.goods_id,
-					'deal_price':goodsInfo.deal_price,
+					'init_deal_price':goodsInfo.deal_price,
 					'headline':goodsInfo.name,
-					'specification':goodsInfo.specification,
-					'specification_unit':goodsInfo.specification_unit,
+					'init_specification':goodsInfo.specification,
+					'init_specification_unit':goodsInfo.specification_unit,
 					'thumb_img':goodsInfo.thumb_img
 				}
 			]
