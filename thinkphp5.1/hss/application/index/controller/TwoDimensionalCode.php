@@ -28,7 +28,6 @@ class TwoDimensionalCode extends \common\controller\UserBase {
             'qrcode'=> request()->domain().'/uploads/'.$shareQRCode, // 120*120
             'font'=>'./static/font/simhei.ttf',   //字体
         ];
-        print_r($init);exit;
 //        $init = [
 //            'save_path'=>$newRelativePath,   //保存目录  ./uploads/compose/goods....
 //            'name'=> '李白', //用户名
