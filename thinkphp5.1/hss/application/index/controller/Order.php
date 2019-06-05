@@ -32,7 +32,7 @@ class Order extends \common\controller\UserBase
                     ['p.status', '=', 0],
                     ['pg.promotion_id', '=', $promotion['goods_id']],
                 ], 'field' => [
-                    'pg.goods_id',"pg.goods_num*{$promotion['num']} num",'p.name','p.price','p.id'
+                    'pg.goods_id',"pg.goods_num*{$promotion['num']} num",'p.name',"p.price*{$promotion['num']} price",'p.id'
                 ],'join' => [
                     ['promotion p','pg.promotion_id=p.id','left']
                 ]
