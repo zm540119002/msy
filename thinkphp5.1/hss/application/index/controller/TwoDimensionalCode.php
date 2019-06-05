@@ -57,7 +57,6 @@ class TwoDimensionalCode extends \common\controller\UserBase {
         if(!empty($twoDimensionalCode)){
             unlink( request()->domain().'/uploads/'.$twoDimensionalCode['two_dimensional_code_url']);
         }
-        $this->successMsg('生成订单成功',$data);
         $this->successMsg('成功！',[
             'code'=> config('code.success.default.code'),
             'url' => $url,
