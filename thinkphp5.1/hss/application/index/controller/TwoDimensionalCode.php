@@ -17,11 +17,13 @@ class TwoDimensionalCode extends \common\controller\UserBase {
         $shareQRCode = createLogoQRcode($url,$newRelativePath);
         if(empty($this->user['avatar'])){
             $this->user['avatar'] = request()->domain().'/static/common/img/default/chat_head.jpg';
+        }else{
+            $this->user['avatar']  =  request()->domain().'/uploads/'.$this->user['avatar'];
         }
         $init = [
             'save_path'=>$newRelativePath,   //保存目录  ./uploads/compose/goods....
             'name'=> $this->user['name'], //用户名
-            'avatar'=> request()->domain().'/uploads/'.$this->user['avatar'],//用户头像
+            'avatar'=> $this->user['avatar'],//用户头像
             'base_map'=> request()->domain().'/static/common/img/hss_base_map.jpg', // 460*534  分享底图
             'hss_share_title'=> request()->domain().'/static/common/img/hss_share_title.jpg', // 460*534  分享底图
             'hss_share_sm'=> request()->domain().'/static/common/img/hss_share_sm.jpg', // 460*534  分享底图
