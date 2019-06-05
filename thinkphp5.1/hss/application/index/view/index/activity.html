@@ -77,10 +77,30 @@ html,body {
 </style>
 {/block}
 {block name="content"}
-<section class="header_title separation-line">
+<!--<section class="header_title separation-line">
     <a href="javascript:void(0);" class="back_prev_page" data-jump_url=""></a>
     <h2 class="f24">开放日</h2>
-</section>
+</section>-->
+<nav style="position:relative;">
+    <a href="javascript:void(0);" class="back_prev_page" data-jump_url=""><</a>
+    <ul class="nav_menu">
+        <li data-scene-id="{$vo.id}" class="">
+            <a href="javascript:void(0);" class="category_nav">开放日</a>
+        </li>
+        <li data-scene-id="{$vo.id}" class="">
+            <a href="javascript:void(0);" class="category_nav">总部简介</a>
+        </li>
+        <li data-scene-id="{$vo.id}" class="">
+            <a href="javascript:void(0);" class="category_nav">研发生产</a>
+        </li>
+        <li data-scene-id="{$vo.id}" class="">
+            <a href="javascript:void(0);" class="category_nav">团队骨干</a>
+        </li>
+        <li data-scene-id="{$vo.id}" class="">
+            <a href="javascript:void(0);" class="category_nav">电话地址</a>
+        </li>
+    </ul>
+</nav>
 <div class="swiper-container swiper-container-initialized swiper-container-vertical swiper-container-ios">
     <div class="swiper-wrapper">
         <div class="swiper-slide ">
