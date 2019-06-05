@@ -134,7 +134,6 @@
                 display_quota: {type: Boolean,default: false},
                 init_checked: {type: Boolean,default: true},
                 by_footer_menu_monitor: {type: Boolean,default: true},
-                monitor_dialog_cart_click: {type: Boolean,default: false},
                 productInfo: {type: Array,default:function(){
                     let arr = [];
                     arr['eg'] = '默认值示范';
@@ -279,9 +278,7 @@
                 });
                 //监听-弹出采购车点击-事件
                 bus.$on('dialog_cart_click', function(param){
-                    if(_this.monitor_dialog_cart_click){
-                        _this.dialog_cart_click(param);
-                    }
+                    _this.dialog_cart_click(param);
                 });
             },watch: {
                 buy_quantity: {
