@@ -133,12 +133,7 @@
                 step_quantity: {type: Number,default: 1},
                 display_quota: {type: Boolean,default: false},
                 init_checked: {type: Boolean,default: true},
-                by_footer_menu_monitor: {type: Boolean,default: true},
-                productInfo: {type: Array,default:function(){
-                    let arr = [];
-                    arr['eg'] = '默认值示范';
-                    return arr;
-                }}
+                by_footer_menu_monitor: {type: Boolean,default: true}
             },data: function () {
                 return {
                     product_id:this.init_product_id,
@@ -277,6 +272,7 @@
                     this.checked = param;
                 }
             },created: function(){
+                console.log(this.init_deal_price);
                 let _this = this;
                 _this.subtotal_amount_calculate();
                 //触发-产品选择器初始化-事件
