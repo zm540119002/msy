@@ -288,6 +288,7 @@
                     bus.$emit('dialog_cart_click',_this);
                 },dialog_cart_click: function (param) {
                     if(this.by_footer_menu_monitor){
+                        this.dialog_cart = true;
                         this.deal_price = param.deal_price;
                         this.buy_quantity = param.init_quantity;
                         this.subtotal_amount_calculate();
@@ -315,13 +316,8 @@
                 buy_quantity: {
                     handler(newVal, oldVal) {
                         this.subtotal_amount_calculate();
-                        if(typeof(oldVal) !== "undefined"){
+                        if(typeof(oldVal) !== "undefined" && !this.dialog_cart){
                             this.increment_buy_quantity = parseInt(newVal) - parseInt(oldVal?oldVal:0);
-                            console.log('-------------------');
-                            console.log(oldVal);
-                            console.log(newVal);
-                            console.log(this.increment_buy_quantity);
-                            console.log('-------------------');
                             //触发--产品选择器购买数量改变-事件
                             bus.$emit('product_select_buy_quantity_change',this);
                         }
