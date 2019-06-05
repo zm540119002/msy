@@ -218,7 +218,7 @@
 <script type="text/javascript">
 	$(function(){
 		let goodsInfo = JSON.parse('{$goodsInfo|raw}');
-		param = {
+		let param = {
 			type:3,
 			init_quantity:1,
 			step_quantity:1,
@@ -233,6 +233,7 @@
 				}
 			]
 		};
+		console.log(param);
 		new Vue({
 			el: '#product-list',
 			data:function(){
