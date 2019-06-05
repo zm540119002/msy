@@ -62,7 +62,7 @@
                 props: {
                     type: {type: Number,default: 1},
                     init_product_type: {type: Number,default: 1},
-                    cart_init_num: {type: Number,default: 0},
+                    init_cart_num: {type: Number,default: 0},
                     init_total_amount: {type: Number,default: 0},
                     init_checked: {type: Boolean,default: false},
                     buy_now_call_back: {type: Function,default: function(param){
@@ -71,7 +71,7 @@
                 },data: function () {
                     return {
                         total_amount:this.init_total_amount,
-                        cart_num:this.cart_init_num,
+                        cart_num:this.init_cart_num,
                         checked:this.init_checked,
                         checkItemList:[],
                         menus: unlockingFooterCart.menu,
