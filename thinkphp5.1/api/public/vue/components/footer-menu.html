@@ -265,6 +265,9 @@
                     //监听-产品选择器购买数量改变-事件
                     bus.$on('product_select_buy_quantity_change', function(param){
                         console.log(param.by_footer_menu_monitor);
+                        console.log(param.type);
+                        console.log(param.deal_price);
+                        console.log(param.increment_buy_quantity);
                         if(param.by_footer_menu_monitor){
                             _this.total_amount_calculate(param);
                             _this.editProductList(param);
