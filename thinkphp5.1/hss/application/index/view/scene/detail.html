@@ -70,10 +70,10 @@
 				:init_quantity="parseInt(init_quantity)"
 				:step_quantity="parseInt(step_quantity)"
 				:type="type"
-		></product-select>
-		<div id="foot_cart_menu">
+		></product-select>	
+	</div>
+	<div id="foot_cart_menu">
 			<footer-menu></footer-menu>
-		</div>
 	</div>
 </div>
 <script type="text/javascript">
@@ -95,8 +95,8 @@
 			step_quantity:1,
 			productList:[
 				{
-					id:'',
-					bulk_price:0
+					id:1,
+					bulk_price:10
 				}
 			]
 		};
@@ -107,8 +107,8 @@
 			}
 		});
 		$('body').on('click','.bg,.close',function(){
-			$('.dialogCart').toggle();
-			$('.bg').toggle();
+			$('.dialogCart').hide();
+			$('.bg').hide();
 		});
 	});
 </script><script type="text/javascript">
@@ -228,7 +228,7 @@
 		position: fixed;
 		bottom: 0;
 		z-index: 999;
-		display: none
+		display: none;
 	}.dialogCart .product-select .right{
 		width: 35% !important;
 	}
@@ -240,7 +240,7 @@
 	#product-list2 .product-select{
 		position: relative;
 		top: 60px;
-		padding: 8px 0 4px;
+		padding: 8px 0 0 10px;
 	}
 	.dialogCart .red{
 		font-size: 0.2rem;
@@ -254,14 +254,14 @@
 	.group_cart_nav a:nth-of-type(4){
 		width: 60%
 	}
-/*	.title{
+	/* .title{
 		position: absolute;
 		height: 60px;
 		top: 0;
 		 display: block;
 		color: #EB6100;
 		margin-bottom: 6px;
-	}*/
+	} */
 	.title img{
 		position: absolute;
 		top: -18px;
@@ -272,11 +272,12 @@
 		border: none;
 	}
 	.title span{
-		font-size: 0.3rem;
+		font-size: 0.25rem;
 		position: absolute;
 		left: 76px;
 		margin-top: 5px;
 		color: #333;
+		top:0
 	}
 	.intro p span{
 		font-size: 0.25rem !important;
@@ -300,6 +301,12 @@
 	}
 	.slider_banner{
 		margin-top: 42px;
+	}
+	.product_name{
+		font-size: 0.2rem;
+	}
+	.add_num{
+		left: 18px;
 	}
 	</style>
 {/block}

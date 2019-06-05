@@ -139,12 +139,12 @@
             <span>{{product_name}}</span>
         </div>
         <div class="specs">
-            <div>单品12g ￥{{deal_price}}</div>
-            <div>10盒/箱</div>
+            <div>{{specification}} ￥{{deal_price}}</div>
         </div>
     </li>
 </template>
 <script type="text/javascript">
+    var ii = 1;
     $(function(){
         Vue.component('product-select', {
             template:'#product_select_tpl',
@@ -172,6 +172,7 @@
                     specification_unit:this.init_specification_unit,
                     buy_quantity:this.init_quantity,
                     buy_quantity_reduce_trigger:true,
+                    monitor_buy_quantity: {type: Boolean,default: true},
                     subtotal_amount:0,
                     checked:this.init_checked,
                     checked_operation_type:'edit',
@@ -203,6 +204,7 @@
                     };
                     asyncVerify(config);
                 },reduce: function () {
+                    this.monitor_buy_quantity = true;
                     //如果开启了样品购买限额
                     if(this.display_quota){
                         if((this.buy_quantity-this.step_quantity)<this.init_quantity){
@@ -214,6 +216,7 @@
                         this.buy_quantity -= this.step_quantity;
                     }
                 },plus: function () {
+                    this.monitor_buy_quantity = true;
                     //如果开启了样品购买限额
                     if(this.display_quota){
                         if((this.buy_quantity+this.step_quantity)>this.quota_quantity){
@@ -225,6 +228,7 @@
                         this.buy_quantity += this.step_quantity;
                     }
                 },reduceCart: function (event) {
+                    this.monitor_buy_quantity = true;
                     if(this.buy_quantity_reduce_trigger && this.buy_quantity>1){
                         this.buy_quantity_reduce_trigger = false;
                     }else{
@@ -255,6 +259,7 @@
                     };
                     asyncVerify(config);
                 },plusCart: function (event) {
+                    this.monitor_buy_quantity = true;
                     let postData = {
                         data:[{
                             goods_id: this.product_id,
@@ -281,18 +286,21 @@
                 },dialogCart: function () {
                     let _this = this;
                     // 弹出加入采购车
-                    $('.dialogCart').toggle(200);
-                    $('.bg').toggle();
+                    $('.dialogCart').show();
+                    $('.bg').show();
                     //触发-弹出采购车点击-事件
                     bus.$emit('dialog_cart_click',_this);
                 },dialog_cart_click: function (param) {
                     if(this.by_footer_menu_monitor){
-                        console.log(this.by_footer_menu_monitor);
+                        this.monitor_buy_quantity = false;
                         this.product_name = param.product_name;
-                        this.buy_quantity = this.init_quantity;
+                        this.specification = param.specification;
                         this.deal_price = param.deal_price;
-                        console.log(param.deal_price);
-                        console.log(this.deal_price);
+                        this.buy_quantity = param.init_quantity;
+                        this.subtotal_amount_calculate();
+                        this.increment_buy_quantity = this.buy_quantity;
+                        //监听-弹出采购车价格或者数量改变-事件
+                        bus.$emit('dialog_cart_price_quantity_change', this);
                     }
                 },editCheckItem:function(param){
                     this.checked = param;
@@ -313,12 +321,8 @@
             },watch: {
                 buy_quantity: {
                     handler(newVal, oldVal) {
-                        if(this.by_footer_menu_monitor){
-                            console.log(oldVal);
-                            console.log(newVal);
-                        }
                         this.subtotal_amount_calculate();
-                        if(typeof(oldVal) !== "undefined"){
+                        if(typeof(oldVal) !== "undefined" && this.monitor_buy_quantity){
                             this.increment_buy_quantity = parseInt(newVal) - parseInt(oldVal?oldVal:0);
                             //触发--产品选择器购买数量改变-事件
                             bus.$emit('product_select_buy_quantity_change',this);
