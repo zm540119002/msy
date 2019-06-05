@@ -40,7 +40,17 @@ class Cart extends \common\controller\UserBase {
 
         $cartList = $model->getList($config);
         $cartList = array_column($cartList,null,'goods_id');
+
+
+        $validate = new \app\index\validate\Cart();
+
         foreach ($goodsList as $k => &$goods){
+
+            if(!$validate->check($goods)) {
+                unset($goodsList[$k]);
+                continue;
+
+            }
 
             $goods['user_id']    = $this->user['id'];
             $goods['buy_type']   = $goods['buy_type'] ? $goods['buy_type'] : 1;
