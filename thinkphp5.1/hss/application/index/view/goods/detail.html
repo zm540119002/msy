@@ -2,6 +2,7 @@
 {block name="title"}商品详情{/block}
 {block name="content"}
 <article class="f24">
+	<div class="back"><</div>
 	<section class="slider_banner">
 		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
 			<div class="swiper-wrapper">
@@ -240,6 +241,10 @@
 			}
 		});
 	});
+	// 点击返回上一页
+	$('.back').on("click",function(){
+		history.back(-1)
+	})
 </script>
 {/block}
 {block name="script"}
@@ -473,6 +478,17 @@
 <style scoped>
 	.product-select div.right {
 		width: 35% !important;
+	}
+	.back{
+		width: 30px;
+		height: 30px;
+		background: rgba(0, 0, 0, 0.4);
+		z-index: 99;
+		color: #fff;
+		border-radius: 50%;
+		margin: 6px 0 0 8px;
+		text-align: center;
+		line-height: 30px;
 	}
 </style>
 {/block}
