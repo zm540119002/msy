@@ -35,8 +35,13 @@
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-2">优惠商品：</label>
             <div class="formControls col-xs-8 col-sm-9">
-                <button type="button" class="btn btn-primary radius recommend"><i class="Hui-iconfont"></i> 添加商品</button>
+                <button type="button" class="btn btn-primary radius recommend">
+                    <i class="Hui-iconfont"></i> 添加商品
+                </button>
                 已选择 <span class="c-red">{$info.recommend_goods_num|default=0}</span> 种商品
+                <div>
+
+                </div>
             </div>
         </div>
         <div class="row cl">
@@ -69,6 +74,7 @@
         <div class="row cl">
             <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
                 <input type="hidden" name='id' value="{$info.id}">
+                <input type="hidden" name='ids' value="">
                 <button class="btn btn-primary radius button_save_black_4" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
                 <button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
                 <span class="c-red">*</span>(图片只显示缩略图，不影响原效果)
@@ -195,12 +201,11 @@
 
         $("body").on('click','.recommend',function(){
 
-            var id = "{$info['id']}";
-            var url =  controller + 'RecommendGoods/id/' + id;
-
+            var url =  module + 'Goods/recommendGoods';
+            var _this = $(this);
             layer.open({
                 type: 2,
-                title:'添加推荐商品',
+                title:'添加商品',
                 shadeClose: false,
                 shade: 0.8,
                 area: ['80%', '90%'],
@@ -211,10 +216,25 @@
                     var body = layer.getChildFrame('body', index);
                     recommendIds = [];
                     body.find('.selected_goods_list li').each(function () {
-                        var goodsSelectedId=$(this).data('goods-id');
+                        var goodsSelectedId = $(this).data('goods-id');
+                        var goods_name = $(this).find('.goods_name').html();
+                        //var str = $(this).find('.list_item').clone();
+
+                        //$(".recommend").parent().append().html(str);
+                        console.log(goods_name);
+                        return false;
                         recommendIds.push(goodsSelectedId);
                     });
-                    $(".recommend").next().html(recommendIds.length);
+
+
+                    var num = parseInt($(".recommend").next().html());
+                    $(".recommend").next().html(num+parseInt(recommendIds.length));
+
+                    var ids = $('input[name="ids"]').val();
+                    if(ids){
+                        recommendIds = ids+','+recommendIds;
+                    }
+
                     $('input[name="ids"]').val(recommendIds);
                     layer.close(index);
                 },
