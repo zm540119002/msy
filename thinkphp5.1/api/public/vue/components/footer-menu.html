@@ -82,14 +82,12 @@
                     }
                 },methods: {
                     total_amount_init:function (param) {
-                        console.log(param.subtotal_amount);
                         if(this.type==4 && !param.checked){
                             return false;
                         }
                         this.total_amount += param.subtotal_amount;
                     },total_amount_assign:function (param) {
                         this.total_amount = param.deal_price * param.increment_buy_quantity;
-                        console.log(this.total_amount);
                     },total_amount_calculate:function (param) {
                         if(this.type==4 && !param.checked){
                             return false;
