@@ -107,6 +107,17 @@ html,body {
     <a href="javascript:void(0);" class="back_prev_page" data-jump_url=""></a>
     <h2 class="f24">开放日</h2>
 </section>-->
+<section class="activitycontent" style="display:none;">
+    <div class="input-filed">
+        <input type="text" placeholder="姓名">
+    </div>
+    <div class="input-filed">
+        <input type="text" placeholder="企业名称">
+    </div>
+    <div class="input-filed">
+        <input type="tel" placeholder="手机号码">
+    </div>
+</section>
 <nav style="position:relative;">
     <a href="javascript:void(0);" class="back_prev_page" data-jump_url=""></a>
     <ul class="nav_menu">
@@ -241,6 +252,14 @@ html,body {
             clickable: true,
         },
     });
+    var content=$('.activitycontent').html();
+    $('body').on('click','.activity',function(){
+        layer.open({
+            title:['开放日参观预约','border-bottom:1px solid #d9d9d9'],
+            content:content,
+            btn:['确定']
+        })
+    })
 
 </script>
 {/block}
