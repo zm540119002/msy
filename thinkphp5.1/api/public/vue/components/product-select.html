@@ -287,12 +287,12 @@
                     bus.$emit('dialog_cart_click',_this);
                 },dialog_cart_click: function (param) {
                     if(this.by_footer_menu_monitor){
+                        console.log(this.by_footer_menu_monitor);
                         this.product_name = param.product_name;
-                        this.deal_price = param.deal_price;
                         this.buy_quantity = this.init_quantity;
+                        this.deal_price = param.deal_price;
                         console.log(param.deal_price);
                         console.log(this.deal_price);
-                        console.log(this.buy_quantity);
                     }
                 },editCheckItem:function(param){
                     this.checked = param;
@@ -313,6 +313,10 @@
             },watch: {
                 buy_quantity: {
                     handler(newVal, oldVal) {
+                        if(this.by_footer_menu_monitor){
+                            console.log(oldVal);
+                            console.log(newVal);
+                        }
                         this.subtotal_amount_calculate();
                         if(typeof(oldVal) !== "undefined"){
                             this.increment_buy_quantity = parseInt(newVal) - parseInt(oldVal?oldVal:0);
