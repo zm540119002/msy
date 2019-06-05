@@ -157,6 +157,7 @@
                 };
             },methods: {
                 subtotal_amount_calculate:function(){
+                    console.log(this.init_deal_price);
                     console.log(this.deal_price);
                     console.log(this.buy_quantity);
                     this.subtotal_amount = this.deal_price * this.buy_quantity;
