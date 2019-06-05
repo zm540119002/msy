@@ -27,6 +27,32 @@ class TwoDimensionalCode extends \common\controller\UserBase {
             'font'=>'./static/font/simhei.ttf',   //字体
         ];
         $url =  $this->compose($init);
+        $model = new \app\index\model\TwoDimensionalCode();
+        $config = [
+            'where' => [
+                ['status', '=', 0],
+                ['user_id', '=', $this->user['id']],
+            ], 'field' => [
+                'id','two_dimensional_code_url'
+            ]
+        ];
+        $twoDimensionalCode = $model->getInfo($config);
+        $data = [
+            'two_dimensional_code_url' => $url,
+            'user_id' => $this->user['id'],
+            'create_time' => time(),
+        ];
+        if(!empty($twoDimensionalCode)){
+           $where1 = [
+               'id'=>$twoDimensionalCode['id'],
+               'user_id'=>$this->user['id'],
+               'status'=>0,
+           ];
+        }
+        $id = $model->edit($data,$where1);
+        if(!$id){
+            $this -> errorMsg('失败');
+        }
         $this->successMsg('成功',['url'=>$url]);
     }
 
