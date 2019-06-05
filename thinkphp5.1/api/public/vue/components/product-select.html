@@ -152,10 +152,6 @@
                 };
             },methods: {
                 subtotal_amount_calculate:function(){
-                    console.log(this.init_product_id);
-                    console.log(this.init_deal_price);
-                    console.log(this.deal_price);
-                    console.log(this.buy_quantity);
                     this.subtotal_amount = this.deal_price * this.buy_quantity;
                 },delCart:function(event){
                     if(this.buy_quantity_reduce_trigger){
@@ -262,13 +258,10 @@
                     //触发-弹出采购车点击-事件
                     bus.$emit('dialog_cart_click',_this);
                 },dialog_cart_click: function (param) {
-                    this.buy_quantity = 20;
+                    console.log(param.deal_price);
+                    console.log(param.product_name);
 //                    this.deal_price = param.deal_price;
 //                    this.buy_quantity = this.init_quantity;
-//                    console.log(param.buy_quantity);
-//                    console.log(param.deal_price);
-//                    console.log(this.buy_quantity);
-//                    console.log(this.deal_price);
                 },editCheckItem:function(param){
                     this.checked = param;
                 }

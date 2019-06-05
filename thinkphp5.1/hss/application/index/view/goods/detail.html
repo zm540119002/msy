@@ -2,6 +2,7 @@
 {block name="title"}商品详情{/block}
 {block name="content"}
 <article class="f24">
+	<div class="back"><</div>
 	<section class="slider_banner">
 		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
 			<div class="swiper-wrapper">
@@ -37,7 +38,7 @@
 									v-for="(productInfo,index) in productList"
 									:key="index"
 									:init_product_id="productInfo.id"
-									:init_deal_price="Number(productInfo.bulk_price)"
+									:init_deal_price="parseFloat(productInfo.bulk_price)"
 									:init_product_name="productInfo.name"
 									:init_product_src="productInfo.thumb_img"
 									:init_specification="productInfo.specification"
@@ -225,10 +226,10 @@
 			productList:[
 				{
 					'id':goodsInfo.goods_id,
-					'init_deal_price':goodsInfo.bulk_price,
+					'bulk_price':goodsInfo.bulk_price,
 					'headline':goodsInfo.name,
-					'init_specification':goodsInfo.specification,
-					'init_specification_unit':goodsInfo.specification_unit,
+					'specification':goodsInfo.specification,
+					'specification_unit':goodsInfo.specification_unit,
 					'thumb_img':goodsInfo.thumb_img
 				}
 			]
@@ -240,6 +241,10 @@
 			}
 		});
 	});
+	// 点击返回上一页
+	$('.back').on("click",function(){
+		history.back(-1)
+	})
 </script>
 {/block}
 {block name="script"}
@@ -473,6 +478,17 @@
 <style scoped>
 	.product-select div.right {
 		width: 35% !important;
+	}
+	.back{
+		width: 30px;
+		height: 30px;
+		background: rgba(0, 0, 0, 0.4);
+		z-index: 99;
+		color: #fff;
+		border-radius: 50%;
+		margin: 6px 0 0 8px;
+		text-align: center;
+		line-height: 30px;
 	}
 </style>
 {/block}
