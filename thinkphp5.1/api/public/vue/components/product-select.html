@@ -322,6 +322,7 @@
                 buy_quantity: {
                     handler(newVal, oldVal) {
                         this.subtotal_amount_calculate();
+                        console.log(this.monitor_buy_quantity);
                         if(typeof(oldVal) !== "undefined" && this.monitor_buy_quantity){
                             this.increment_buy_quantity = parseInt(newVal) - parseInt(oldVal?oldVal:0);
                             //触发--产品选择器购买数量改变-事件
