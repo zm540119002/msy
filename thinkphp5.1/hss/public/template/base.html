@@ -184,7 +184,10 @@
                         content: settlementMethod
                     });
                 }
-            }else{
+            }else if(param.data.data.code == '3000'){ //hss二位码回调
+                console.log(param)
+            }
+            else{
                 dialog.success(param.data.info);
             }
         }else{ //返回页面
