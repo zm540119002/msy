@@ -53,7 +53,14 @@ class TwoDimensionalCode extends \common\controller\UserBase {
         if(!$id){
             $this -> errorMsg('失败');
         }
-        $this->successMsg('成功',['url'=>$url]);
+        unlink($shareQRCode);
+        if(!empty($twoDimensionalCode)){
+            unlink( request()->domain().'/uploads/'.$twoDimensionalCode['two_dimensional_code_url']);
+        }
+        $this->successMsg('成功！',[
+            'code'=> config('code.success.get_user_code.code'),
+            'url' => $url,
+        ]);
     }
 
 

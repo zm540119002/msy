@@ -157,7 +157,7 @@ class Order extends \common\controller\UserBase
         $modelOrder->commit();
 
         $data = [
-            'code'=> config('code.success.default.code'),
+            'code'=> config('code.success.get_user_code.code'),
             'url' => url('Order/confirmOrder',['order_sn'=>$orderSN]),
         ];
         $this->successMsg('生成订单成功',$data);
