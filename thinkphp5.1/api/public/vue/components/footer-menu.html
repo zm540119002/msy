@@ -82,6 +82,7 @@
                     }
                 },methods: {
                     total_amount_init:function (param) {
+                        console.log(param.subtotal_amount);
                         if(this.type==4 && !param.checked){
                             return false;
                         }
@@ -107,6 +108,7 @@
                     },addCart:function(event){
                         this.total_amount = 555;
                         console.log(this.total_amount);
+                        console.log(123);
                         return;
                         let _thisJquery = $(event.currentTarget);
                         let _thisVue = this;
