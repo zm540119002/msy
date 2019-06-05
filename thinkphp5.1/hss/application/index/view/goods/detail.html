@@ -226,15 +226,14 @@
 			productList:[
 				{
 					'id':goodsInfo.goods_id,
-					'init_deal_price':goodsInfo.bulk_price,
+					'bulk_price':goodsInfo.bulk_price,
 					'headline':goodsInfo.name,
-					'init_specification':goodsInfo.specification,
-					'init_specification_unit':goodsInfo.specification_unit,
+					'specification':goodsInfo.specification,
+					'specification_unit':goodsInfo.specification_unit,
 					'thumb_img':goodsInfo.thumb_img
 				}
 			]
 		};
-		console.log(param);
 		new Vue({
 			el: '#product-list',
 			data:function(){
