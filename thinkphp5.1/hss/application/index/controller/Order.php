@@ -23,16 +23,18 @@ class Order extends \common\controller\UserBase
             $this->errorMsg('请求数据不能为空');
         }
 
-        if($order_type==2 ){
+        if( $order_type==2 ){
 
             $promotion = reset($goodsList);
             $modelPromotionGoods = new \app\index\model\PromotionGoods();
             $config = [
                 'where' => [
-                    ['status', '=', 0],
-                    ['promotion_id', '=', $promotion['goods_id']],
+                    ['p.status', '=', 0],
+                    ['pg.promotion_id', '=', $promotion['goods_id']],
                 ], 'field' => [
-                    'goods_id',"goods_num*{$promotion['num']} num"
+                    'pg.goods_id',"pg.goods_num*{$promotion['num']} num",'p.name',"p.price*{$promotion['num']} price",'p.id'
+                ],'join' => [
+                    ['promotion p','pg.promotion_id=p.id','left']
                 ]
             ];
             $goodsList= $modelPromotionGoods->getList($config);
@@ -40,11 +42,13 @@ class Order extends \common\controller\UserBase
             if(empty($goodsList)){
                 $this->errorMsg('套餐已失效 !');
             }
+            $promotion = reset($goodsList);
 
             $goodsIds = array_column($goodsList,'goods_id');
         }
-        p($goodsIds);
-        exit;
+        // 更新套餐总价
+        //p($goodsIds);
+        //exit;
         //$goodsIds = array_column($goodsList,'goods_id');
         $config = [
             'where' => [
@@ -96,13 +100,29 @@ class Order extends \common\controller\UserBase
         //订单编号
         $orderSN = generateSN();
         //组装父订单数组
-        $data = [
+
+        if(isset($promotion)){
+            $data = [
+                'sn' => $orderSN,
+                'user_id' => $this->user['id'],
+                'amount' => $promotion['price'],
+                'actually_amount' => $promotion['price'],
+                'create_time' =>  time(),
+                'type' => 2,
+                'type_id' => $promotion['id'],
+            ];
+
+        }else{
+            $data = [
                 'sn' => $orderSN,
                 'user_id' => $this->user['id'],
                 'amount' => $amount,
                 'actually_amount' => $amount,
                 'create_time' =>  time(),
-        ];
+                'type' => 1,
+            ];
+        }
+
         //生成父订单
         $res = $modelOrder->allowField(true)->save($data);
         if (!$res) {

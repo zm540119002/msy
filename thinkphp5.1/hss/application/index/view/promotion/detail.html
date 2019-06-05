@@ -30,8 +30,8 @@
 								<product-select
 										v-for="(productInfo,index) in productList"
 										:key="index"
-										:product_id="productInfo.id"
-										:deal_price="parseFloat(productInfo.bulk_price)"
+										:init_product_id="productInfo.id"
+										:init_deal_price="parseFloat(productInfo.bulk_price)"
 										:init_quantity="parseInt(init_quantity)"
 										:step_quantity="parseInt(step_quantity)"
 										:type="type"

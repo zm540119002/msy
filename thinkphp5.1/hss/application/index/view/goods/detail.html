@@ -37,12 +37,12 @@
 							<product-select
 									v-for="(productInfo,index) in productList"
 									:key="index"
-									:product_id="productInfo.id"
-									:deal_price="Number(productInfo.deal_price)"
-									:product_name="productInfo.name"
-									:product_src="productInfo.thumb_img"
-									:specification="productInfo.specification"
-									:specification_unit="productInfo.specification_unit"
+									:init_product_id="productInfo.id"
+									:init_deal_price="parseFloat(productInfo.bulk_price)"
+									:init_product_name="productInfo.name"
+									:init_product_src="productInfo.thumb_img"
+									:init_specification="productInfo.specification"
+									:init_specification_unit="productInfo.specification_unit"
 									:init_quantity="parseInt(init_quantity)"
 									:step_quantity="parseInt(step_quantity)"
 									:type="type"
@@ -219,17 +219,17 @@
 <script type="text/javascript">
 	$(function(){
 		let goodsInfo = JSON.parse('{$goodsInfo|raw}');
-		param = {
+		let param = {
 			type:3,
 			init_quantity:1,
 			step_quantity:1,
 			productList:[
 				{
 					'id':goodsInfo.goods_id,
-					'deal_price':goodsInfo.deal_price,
+					'init_deal_price':goodsInfo.bulk_price,
 					'headline':goodsInfo.name,
-					'specification':goodsInfo.specification,
-					'specification_unit':goodsInfo.specification_unit,
+					'init_specification':goodsInfo.specification,
+					'init_specification_unit':goodsInfo.specification_unit,
 					'thumb_img':goodsInfo.thumb_img
 				}
 			]

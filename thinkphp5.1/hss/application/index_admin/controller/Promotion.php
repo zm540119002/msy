@@ -91,7 +91,7 @@ class Promotion extends Base {
                     //删除商品详情图
                     $oldImgArr = explode(',',$info['main_img']);
                     $newImgArr = explode(',',$data['main_img']);
-             
+
                     delImgFromPaths($oldImgArr,$newImgArr);
                 }
 
