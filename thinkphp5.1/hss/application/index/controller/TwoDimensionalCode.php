@@ -15,6 +15,9 @@ class TwoDimensionalCode extends \common\controller\UserBase {
         $url = request()->domain().'?uid='.$this->user['id'];
         $newRelativePath = config('upload_dir.hss_user_QRCode');
         $shareQRCode = createLogoQRcode($url,$newRelativePath);
+        if(empty($this->user['avatar'])){
+            $this->user['avatar'] = request()->domain().'/static/common/img/default/chat_head.jpg';
+        }
         $init = [
             'save_path'=>$newRelativePath,   //保存目录  ./uploads/compose/goods....
             'name'=> $this->user['name'], //用户名
