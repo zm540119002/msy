@@ -47,9 +47,6 @@
                 <div v-else class="default" class="menu.class" :data-jump_url="menu.action">
                     <span class="s_i"></span>
                 </div>
-                <div class="test" @click="test" style="display: block;">
-                    <span class="s_i"></span>
-                </div>
             </a>
         </div>
     </footer>
@@ -89,9 +86,6 @@
                             return false;
                         }
                         this.total_amount += param.subtotal_amount;
-                    },test:function (param) {
-                        this.total_amount = 555;
-                        console.log(this.total_amount);
                     },total_amount_assign:function (param) {
                         this.total_amount = param.deal_price * param.increment_buy_quantity;
                         console.log(this.total_amount);
@@ -111,6 +105,9 @@
                             location.href = jump_url;
                         }
                     },addCart:function(event){
+                        this.total_amount = 555;
+                        console.log(this.total_amount);
+                        return;
                         let _thisJquery = $(event.currentTarget);
                         let _thisVue = this;
                         login_success_callback_private = function(){
