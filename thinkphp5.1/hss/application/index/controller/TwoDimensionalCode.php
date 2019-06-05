@@ -1,7 +1,7 @@
 <?php
 namespace app\index\controller;
 
-class TwoDimensionalCode extends \common\controller\UserBase {
+class TwoDimensionalCode extends \common\controller\Base {
 
     /**
      * 获取二维码
@@ -10,26 +10,9 @@ class TwoDimensionalCode extends \common\controller\UserBase {
      */
     public function getUserQRcode()
     {
-        if(!request()->isAjax()){
-            return errorMsg('请求方式错误');
-        }
-        $ids = input('post.ids/a');
-        $config = [
-            'where'=>[
-                ['id','in',$ids],
-                ['status','=',0]
-            ],'field'=>[
-                'id','headline','specification','thumb_img','bulk_price','rq_code_url'
-            ],
-        ];
-        $model = new \app\index_admin\model\Goods();
-        $list = $model -> getList($config);
-        return $this->generateQRcode($list);
-
-        //$this->successMsg('成功',['url'=>config('custom.pay_gateway').$sn,'id'=>$id]);
-    }
-
-    public function generateQRcode(){
+//        if(!request()->isAjax()){
+//            return errorMsg('请求方式错误');
+//        }
         $uploadPath = realpath( config('upload_dir.upload_path')) . '/';
         $url = request()->domain().'/uid/'.$this->user['id'];
         $newRelativePath = config('upload_dir.hss_user_QRCode');
@@ -38,26 +21,28 @@ class TwoDimensionalCode extends \common\controller\UserBase {
             'save_path'=>$newRelativePath,   //保存目录  ./uploads/compose/goods....
             'name'=> $this->user['name'], //用户名
             'avatar'=> $uploadPath.$this->user['avatar'],//用户头像
-            'base_map'=> request()->domain().'/static/index/img/base_map.png', // 460*534  分享底图
+            'base_map'=> request()->domain().'/static/common/img/hss_base_map.jpg', // 460*534  分享底图
+            'hss_share_title'=> request()->domain().'/static/common/img/hss_share_title.jpg', // 460*534  分享底图
+            'hss_share_sm'=> request()->domain().'/static/common/img/hss_share_sm.jpg', // 460*534  分享底图
+            'hss_share_sm1'=> request()->domain().'/static/common/img/hss_share_sm1.jpg', // 460*534  分享底图
             'qrcode'=>$uploadPath.$shareQRCode, // 120*120
             'font'=>'./static/font/simhei.ttf',   //字体
         ];
+//        $init = [
+//            'save_path'=>$newRelativePath,   //保存目录  ./uploads/compose/goods....
+//            'name'=> '李白', //用户名
+//            'avatar'=> request()->domain().'/uploads/compose/me.jpg',//用户头像
+//            'base_map'=> request()->domain().'/static/common/img/hss_base_map.jpg', // 460*534  分享底图
+//            'hss_share_title'=> request()->domain().'/static/common/img/hss_share_title.jpg', // 460*534  分享底图
+//            'hss_share_sm'=> request()->domain().'/static/common/img/hss_share_sm.jpg', // 460*534  分享底图
+//            'hss_share_sm1'=> request()->domain().'/static/common/img/hss_share_sm1.jpg', // 460*534  分享底图
+//            'qrcode'=>$shareQRCode, // 120*120
+//            'font'=>'./static/font/simhei.ttf',   //字体
+//        ];
         $res =  $this->compose($init);
-        return $res;
-//        if($res['status'] == 1){
-//            $newQRCodes = $res['info'];
-//            $model = new \app\index_admin\model\Goods();
-//            $res= $model->where(['id'=>$info['id']])->setField(['rq_code_url'=>$newQRCodes]);
-//            if(false === $res){
-//                return $this->errorMsg('失败');
-//            }
-//            unlink($uploadPath.$shareQRCodes);
-//            if(!empty($oldQRCodes)){
-//                unlink($uploadPath.$oldQRCodes);
-//            }
-//        }
-
+        $this->successMsg('成功',['url'=>$res]);
     }
+
 
     /**合成商品图片
      *
@@ -71,20 +56,23 @@ class TwoDimensionalCode extends \common\controller\UserBase {
         $avatar = $this->imgInfo($init['avatar']);
         $baseMap = $this->imgInfo($init['base_map']);
         $qrcode = $this->imgInfo($init['qrcode']);
+        $hss_share_title = $this->imgInfo($init['hss_share_title']);
+        $hss_share_sm = $this->imgInfo($init['hss_share_sm']);
+        $hss_share_sm1 = $this->imgInfo($init['hss_share_sm1']);
         if( !$avatar || !$baseMap || !$qrcode){
-            return $this->errorMsg('提供的图片问题');
+            $this->errorMsg('提供的图片问题');
         }
-        $im = imagecreatetruecolor(480, 780);  //图片大小
-        $color = imagecolorallocate($im, 0xFF,0xFF,0xFF);
-        $text_color = imagecolorallocate($im, 87, 87, 87);
-        $text_color1 = imagecolorallocate($im, 137, 137, 137);
-        $red_color = imagecolorallocate($im, 230, 0, 18);
-        imagefill($im, 0, 0, $color);
-        imagettftext($im, 20, 0, 100, 35, $text_color, $init['font'], $init['name']); //名字
-        imagecopyresized($im, $baseMap['obj'], 10, 10, 0, 0, 90, 60, $baseMap['width'], $logoImg['height'] );  //平台logo
-        imagecopyresized($im, $avatar['obj'], 20, 710, 0, 0, 20, 20, $avatar['width'], $RMB_logo['height'] );  //
-        imagecopyresized($im, $qrcode['obj'], 330, 630, 0, 0, 140, 140, $qrcode['width'], $qrcode['height'] );  //二维
-
+        $im = imagecreatetruecolor(900, 1500);  //图片大小
+        $gray_color = imagecolorallocate($im, 87,89,88);
+        $text_color = imagecolorallocate($im, 235, 96, 3);
+        imagefill($im, 0, 0, $gray_color);
+        imagettftext($im, 25, 0, 200, 90, $text_color, $init['font'], $init['name']); //名字
+        imagecopyresized($im,          $avatar['obj'], 60, 50, 0, 0, 100, 100, $avatar['width'], $avatar['height'] );  //
+        imagecopyresized($im, $hss_share_title['obj'], 200, 110, 0, 0, 376, 28, 376,28);  //平台logo
+        imagecopyresized($im,         $baseMap['obj'], 0, 200, 0, 0, 900, 628, 1000,628 );  //平台logo
+        imagecopyresized($im,    $hss_share_sm['obj'], 25, 880, 0, 0, 844, 264, 844,264);  //平台logo
+        imagecopyresized($im,   $hss_share_sm1['obj'], 35, 1210, 0, 0, 380, 244, 382,244);  //平台logo
+        imagecopyresized($im,          $qrcode['obj'], 550, 1230, 0, 0, 200, 200, $qrcode['width'], $qrcode['width'] );  //二维
         $dir = config('upload_dir.upload_path').'/'.$init['save_path'].'compose/';
         if(!is_dir($dir)){
             mkdir($dir, 0777, true);
@@ -92,10 +80,10 @@ class TwoDimensionalCode extends \common\controller\UserBase {
         $filename = generateSN(5).'.jpg';
         $file = $dir.$filename;
         if( !imagejpeg($im, $file, 90) ){
-            return $this->errorMsg('合成图片失败');
+            $this->errorMsg('合成图片失败');
         }
         imagedestroy($im);
-        return  successMsg($init['save_path'].'compose/'.$filename);
+        return successMsg($init['save_path'].'compose/'.$filename);
     }
 
     private function imgInfo($path)
