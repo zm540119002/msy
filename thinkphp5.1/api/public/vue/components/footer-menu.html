@@ -90,6 +90,8 @@
                         if(this.type==4 && !param.checked){
                             return false;
                         }
+                        console.log(param.deal_price);
+                        console.log(param.increment_buy_quantity);
                         this.total_amount += param.deal_price * param.increment_buy_quantity;
                     },total_amount_calculate_with_checked:function (param) {
                         param.checked
@@ -264,10 +266,6 @@
                     });
                     //监听-产品选择器购买数量改变-事件
                     bus.$on('product_select_buy_quantity_change', function(param){
-                        console.log(param.by_footer_menu_monitor);
-                        console.log(param.type);
-                        console.log(param.deal_price);
-                        console.log(param.increment_buy_quantity);
                         if(param.by_footer_menu_monitor){
                             _this.total_amount_calculate(param);
                             _this.editProductList(param);
