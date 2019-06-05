@@ -122,6 +122,9 @@ html,body {
     <div class="swiper-wrapper">
         <div class="swiper-slide ">
             <img src="public_img/activity01.jpg" alt="" class="common_default_img">
+            <div class="group_cart_nav">
+                <a href="javascript:;" class="">开放日参观预约</a>
+            </div>
         </div>
     </div>
     <!--<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"><span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 2"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 3"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 4"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 5"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 6"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 7"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 8"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 9"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 10"></span></div>-->
@@ -175,6 +178,7 @@ html,body {
         var html =document.getElementsByTagName('html')[0];
         html.style.fontSize='';
         $('.swiper-slide ').css('height',$(window).height()+'px');
+        $('.swiper-slide').find('img').css('paddingBottom',80+'px');
         $('.nav_menu li').on('click',function(){
             $(this).addClass('current').siblings().removeClass('current');
             $('.swiper-container').hide().eq($(this).index()).show();
