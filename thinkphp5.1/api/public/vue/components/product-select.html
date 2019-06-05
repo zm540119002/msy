@@ -289,7 +289,10 @@
                 },dialog_cart_click: function (param) {
                     if(this.by_footer_menu_monitor){
                         this.deal_price = param.deal_price;
-                        this.buy_quantity = ++ii;
+                        this.buy_quantity = param.init_quantity;
+                        this.increment_buy_quantity = this.buy_quantity;
+                        //监听-弹出采购车价格或者数量改变-事件
+                        bus.$emit('dialog_cart_price_quantity_change', this);
                     }
                 },editCheckItem:function(param){
                     this.checked = param;
@@ -310,12 +313,8 @@
             },watch: {
                 buy_quantity: {
                     handler(newVal, oldVal) {
-                        if(this.by_footer_menu_monitor){
-//                            console.log(oldVal);
-//                            console.log(newVal);
-                        }
                         this.subtotal_amount_calculate();
-                        if(typeof(oldVal) !== "undefined"){
+                        if(typeof(oldVal) !== "undefined" && !this.by_footer_menu_monitor){
                             this.increment_buy_quantity = parseInt(newVal) - parseInt(oldVal?oldVal:0);
                             //触发--产品选择器购买数量改变-事件
                             bus.$emit('product_select_buy_quantity_change',this);
