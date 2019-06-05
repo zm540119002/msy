@@ -39,9 +39,8 @@ class TwoDimensionalCode extends \common\controller\UserBase {
 //            'qrcode'=>$shareQRCode, // 120*120
 //            'font'=>'./static/font/simhei.ttf',   //字体
 //        ];
-        $res =  $this->compose($init);
-        print_r($res);exit;
-        $this->successMsg('成功',['url'=>$res]);
+        $url =  $this->compose($init);
+        $this->successMsg('成功',['url'=>$url]);
     }
 
 
@@ -85,7 +84,7 @@ class TwoDimensionalCode extends \common\controller\UserBase {
         }
         imagedestroy($im);
 //        print_r($init['save_path'].'compose/'.$filename);exit;
-        return successMsg($init['save_path'].'compose/'.$filename);
+        return $init['save_path'].'compose/'.$filename;
     }
 
     private function imgInfo($path)
