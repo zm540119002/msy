@@ -100,7 +100,7 @@
                 getPagingList(config,getData);
             });
             // 预览
-            $('body').on('click','.preview',function(){
+/*            $('body').on('click','.preview',function(){
                 var _thisTr = $(this).parents('tr');
                 var url =  controller + 'preview/id/' + _thisTr.data('id');
                 //location.href = url;
@@ -110,6 +110,21 @@
                     content: url
                 });
                 layer.full(index);
+            });*/
+
+            // 预览
+            $('body').on('click','.preview',function(){
+                var _thisTr = $(this).parents('tr');
+                var url =  '/index/Goods/detail/id/' + _thisTr.data('id');
+
+                layer.open({
+                    type: 2,
+                    maxmin: true,
+                    shade: false,
+                    shadeClose: false,
+                    area: ['300px','440px'],
+                    content: url
+                });
             });
 
             ////设置为精选

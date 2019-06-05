@@ -25,16 +25,10 @@
                     <input type="button" value="搜索" class="layer-search-btn search" id="search">
                 </div>
             </form>
-            <span class="content-label">所有产品</span>
             <div class="add_layer_content">
-                <div class="thead_title">
-                    <span class="list_item">产品名称</span>
-                    <span class="list_item">所属分类</span>
-                    <span class="list_item">操作</span>
-                </div>
-                <ul class="scroller-container list" id="list">
+                <div class="scroller-container list" id="list">
 
-                </ul>
+                </div>
             </div>
         </div>
     </section>
@@ -89,7 +83,7 @@
             // 搜索 END
 
             // 选择商品
-            $('body').on('click','.add_goods',function(){
+            $('body').on('click','.add-goods',function(){
                 var selectedGoodsIds = [];
                 $('.selected_goods_list li').each(function(){
                     var selectedGoodsId = $(this).data('goods-id');
