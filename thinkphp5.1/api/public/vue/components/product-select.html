@@ -292,8 +292,6 @@
                         this.buy_quantity = param.init_quantity;
                         this.subtotal_amount_calculate();
                         this.increment_buy_quantity = this.buy_quantity;
-                        console.log(this.deal_price);
-                        console.log(param.deal_price);
                         //监听-弹出采购车价格或者数量改变-事件
                         bus.$emit('dialog_cart_price_quantity_change', this);
                     }

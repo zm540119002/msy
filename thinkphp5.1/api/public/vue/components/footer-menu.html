@@ -272,6 +272,8 @@
                     //监听-弹出采购车价格或者数量改变-事件
                     bus.$on('dialog_cart_price_quantity_change', function(param){
                         if(param.by_footer_menu_monitor){
+                            console.log(param.deal_price);
+                            console.log(param.increment_buy_quantity);
                             _this.total_amount_calculate(param);
                         }
                     });
