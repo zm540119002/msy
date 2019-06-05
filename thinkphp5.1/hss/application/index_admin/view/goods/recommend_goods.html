@@ -85,10 +85,11 @@
             // 选择商品
             $('body').on('click','.add-goods',function(){
                 var selectedGoodsIds = [];
-                $('.selected_goods_list li').each(function(){
+                $('.odd').each(function(){
                     var selectedGoodsId = $(this).data('goods-id');
                     selectedGoodsIds.push(selectedGoodsId);
                 });
+
                 var _this=$(this);
                 var goodsId=_this.parents('li').data('id');
                 if($.inArray(goodsId, selectedGoodsIds) !== -1){
@@ -98,10 +99,16 @@
                     });
                     return false;
                 }
-                var goodsImgSrc=_this.find('img').attr('src');
+                var goodsImgSrc=_this.parents('tr').find('img').attr('src');
+
                 var selectedLen=$('.selected_goods_list li').length;
-                var listDiv = _this.parents('li').find('.list_item:eq(0)').html();
+                var listDiv = _this.parents('tr').find('.odd:eq(0)').html();
                 var liTpl=$('.tpl_list').html();
+
+
+                console.log(listDiv);
+                return false;
+
                 if(!selectedLen){
                     $('.selected_goods_list').append(liTpl);
                     $('.selected_goods_list li').append(listDiv);

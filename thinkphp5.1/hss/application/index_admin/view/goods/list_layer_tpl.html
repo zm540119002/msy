@@ -10,7 +10,7 @@
     </thead>
     <tbody>
     {volist name="list" id="vo"}
-    <tr class="text-c va-m odd" role="row">
+    <tr class="text-c va-m odd" role="row" data-goods-id="{$vo.id}">
         <td class="sorting_1">{$vo.number}</td>
         <td><img src="public_uploads/{$vo.thumb_img}" width="60" alt="" class="left"></td>
         <td class="text-l"> {$vo.name}</td>
