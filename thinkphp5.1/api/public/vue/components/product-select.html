@@ -130,7 +130,7 @@
                     </div>
                 </div>
             </div>
-            <div class="product_name"><p class="two-line-omit">{{product_name}}</p></div>
+            <!-- <div class="product_name"><p class="two-line-omit">{{product_name}}</p></div> -->
         </div>
         <div class="title">
             <a class="p_img" :href="'/index/Goods/detail/id/' + product_id">
@@ -289,10 +289,13 @@
                     $('.dialogCart').show();
                     $('.bg').show();
                     //触发-弹出采购车点击-事件
-                    bus.$emit('dialog_cart_click',_this);
-                },dialog_cart_click: function (param) {
+                    bus.$emit('dialog_cart_assign',_this);
+                },dialog_cart_assign: function (param) {
                     if(this.by_footer_menu_monitor){
                         this.monitor_buy_quantity = false;
+                        this.product_id = param.product_id;
+                        console.log(param.product_id);
+                        console.log(this.product_id);
                         this.product_name = param.product_name;
                         this.specification = param.specification;
                         this.deal_price = param.deal_price;
@@ -315,14 +318,13 @@
                     _this.editCheckItem(param);
                 });
                 //监听-弹出采购车点击-事件
-                bus.$on('dialog_cart_click', function(param){
-                    _this.dialog_cart_click(param);
+                bus.$on('dialog_cart_assign', function(param){
+                    _this.dialog_cart_assign(param);
                 });
             },watch: {
                 buy_quantity: {
                     handler(newVal, oldVal) {
                         this.subtotal_amount_calculate();
-                        console.log(this.monitor_buy_quantity);
                         if(typeof(oldVal) !== "undefined" && this.monitor_buy_quantity){
                             this.increment_buy_quantity = parseInt(newVal) - parseInt(oldVal?oldVal:0);
                             //触发--产品选择器购买数量改变-事件

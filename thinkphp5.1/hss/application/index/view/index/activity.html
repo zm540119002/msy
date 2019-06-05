@@ -88,6 +88,9 @@ html,body {
 .nav_menu li.current a:before{
     background-color:hotpink;
 }
+.swiper-container.hide{
+    display: none;
+}
 </style>
 {/block}
 {block name="content"}
@@ -116,6 +119,58 @@ html,body {
     </ul>
 </nav>
 <div class="swiper-container swiper-container-initialized swiper-container-vertical swiper-container-ios">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide ">
+            <div class="weiya_item ">
+                <div class="columns_flex l-r-sides top_title">
+                    <span>
+                        <img class="left" src="index_img/wyyz_logo.png" alt="">
+                        <span class="cpy_name">维雅生物科技</span>
+                    </span>
+                    <span>2017-12-8 9:47</span>
+                </div>
+                <ul id="list">
+                    <li>
+                        <div class="more-text-box">
+                            <p class="more-text"><span class="intro_title">#小分子活性肽系列#</span>小分子美容多肽具有结构简单活性稳定、分子量小极易透皮吸收，护肤作用机理明确、质量可控、安全性高无副作用等特点，成为生物药妆配方系列中最广泛配伍使用的原料，也是国际大牌护肤品牌的最爱，可应用于原液、面膜、乳霜等剂型，研发各类医学护肤功能产品.</p>
+                        </div>
+                        <div class="dynamic_img info_img">
+                            <a href="javascript:void(0);">
+                                <img src="index_img/zjwy_cp01.jpg" alt="">
+                            </a>
+                            <a href="javascript:void(0);">
+                                <img src="index_img/zjwy_cp02.jpg" alt="">
+                            </a>
+                            <a href="javascript:void(0);">
+                                <img src="index_img/zjwy_cp03.jpg" alt="">
+                            </a>
+                            <a href="javascript:void(0);">
+                                <img src="index_img/zjwy_cp04.jpg" alt="">
+                            </a>
+                            <a href="javascript:void(0);">
+                                <img src="index_img/zjwy_cp05.jpg" alt="">
+                            </a>
+                            <a href="javascript:void(0);">
+                                <img src="index_img/zjwy_cp06.jpg" alt="">
+                            </a>
+                            <a href="javascript:void(0);">
+                                <img src="index_img/zjwy_cp07.jpg" alt="">
+                            </a>
+                            <a href="javascript:void(0);">
+                                <img src="index_img/zjwy_cp08.jpg" alt="">
+                            </a>
+                            <a href="javascript:void(0);">
+                                <img src="index_img/zjwy_cp09.jpg" alt="">
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"><span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 2"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 3"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 4"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 5"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 6"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 7"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 8"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 9"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 10"></span></div>-->
+</div>
+<div class="swiper-container swiper-container-initialized swiper-container-vertical swiper-container-ios hide">
     <div class="swiper-wrapper">
         <div class="swiper-slide ">
             <img src="public_img/cpy_01.jpg" alt="" class="common_default_img">
@@ -160,15 +215,14 @@ html,body {
 {block name="script"}
 <script type="text/javascript" src="api_common_js/swiper.min.js"></script>
 <script>
-    //     (function($){
-    // var deviceWidth=document.documentElement.clientWidth;
-
-    // })(jQuery);
     $(function(){
         var html =document.getElementsByTagName('html')[0];
         html.style.fontSize='';
         $('.swiper-slide ').css('height',$(window).height()+'px');
-        //$('body').css({height:100+'%',position:'relative'});
+        $('.nav_menu li').on('click',function(){
+            $(this).addClass('current').siblings().removeClass('current');
+            $('.swiper-container').hide().eq($(this).index()).show();
+        })
     })
     var swiper = new Swiper('.swiper-container', {
         direction: 'vertical',
