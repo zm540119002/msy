@@ -14,7 +14,7 @@ class TwoDimensionalCode extends \common\controller\UserBase {
 //            return errorMsg('请求方式错误');
 //        }
         $uploadPath = realpath( config('upload_dir.upload_path')) . '/';
-        $url = request()->domain().'/uid/'.$this->user['id'];
+        $url = request()->domain().'?uid='.$this->user['id'];
         $newRelativePath = config('upload_dir.hss_user_QRCode');
         $shareQRCode = createLogoQRcode($url,$newRelativePath);
         $init = [
@@ -28,7 +28,6 @@ class TwoDimensionalCode extends \common\controller\UserBase {
             'qrcode'=> request()->domain().'/uploads/'.$shareQRCode, // 120*120
             'font'=>'./static/font/simhei.ttf',   //字体
         ];
-        print_r($init);exit;
 //        $init = [
 //            'save_path'=>$newRelativePath,   //保存目录  ./uploads/compose/goods....
 //            'name'=> '李白', //用户名
@@ -84,6 +83,7 @@ class TwoDimensionalCode extends \common\controller\UserBase {
             $this->errorMsg('合成图片失败');
         }
         imagedestroy($im);
+        print_r($init['save_path'].'compose/'.$filename);exit;
         return successMsg($init['save_path'].'compose/'.$filename);
     }
 
