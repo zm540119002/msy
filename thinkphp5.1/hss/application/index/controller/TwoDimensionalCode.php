@@ -2,7 +2,6 @@
 namespace app\index\controller;
 
 class TwoDimensionalCode extends \common\controller\UserBase {
-
     /**
      * 获取二维码
      * @return array
@@ -10,10 +9,9 @@ class TwoDimensionalCode extends \common\controller\UserBase {
      */
     public function getUserQRcode()
     {
-//        if(!request()->isAjax()){
-//            return errorMsg('请求方式错误');
-//        }
-        $uploadPath = realpath( config('upload_dir.upload_path')) . '/';
+        if(!request()->isAjax()){
+            $this->errorMsg('请求方式错误');
+        }
         $url = request()->domain().'?uid='.$this->user['id'];
         $newRelativePath = config('upload_dir.hss_user_QRCode');
         $shareQRCode = createLogoQRcode($url,$newRelativePath);
@@ -28,17 +26,6 @@ class TwoDimensionalCode extends \common\controller\UserBase {
             'qrcode'=> request()->domain().'/uploads/'.$shareQRCode, // 120*120
             'font'=>'./static/font/simhei.ttf',   //字体
         ];
-//        $init = [
-//            'save_path'=>$newRelativePath,   //保存目录  ./uploads/compose/goods....
-//            'name'=> '李白', //用户名
-//            'avatar'=> request()->domain().'/uploads/compose/me.jpg',//用户头像
-//            'base_map'=> request()->domain().'/static/common/img/hss_base_map.jpg', // 460*534  分享底图
-//            'hss_share_title'=> request()->domain().'/static/common/img/hss_share_title.jpg', // 460*534  分享底图
-//            'hss_share_sm'=> request()->domain().'/static/common/img/hss_share_sm.jpg', // 460*534  分享底图
-//            'hss_share_sm1'=> request()->domain().'/static/common/img/hss_share_sm1.jpg', // 460*534  分享底图
-//            'qrcode'=>$shareQRCode, // 120*120
-//            'font'=>'./static/font/simhei.ttf',   //字体
-//        ];
         $url =  $this->compose($init);
         $this->successMsg('成功',['url'=>$url]);
     }
