@@ -54,6 +54,7 @@
 			var url =  controller + 'manageRelationGoods/id/' + _thisTr.data('id');
 			location.href = url;
 		});
+
 	});
 
 	// 复制链接
@@ -68,20 +69,20 @@
 
 	// 预览
 	$('body').on('click','.preview',function(){
-		var index = parent.layer.getFrameIndex(window.name);
-		parent.layer.iframeAuto(index);
 		var _thisTr = $(this).parents('tr');
 		var url =  '/index/Promotion/detail/id/' + _thisTr.data('id');
+
 		layer.open({
 			type: 2,
 			maxmin: true,
 			shade: false,
 			shadeClose: false,
-			area: ['300px','640px'],
-			title: '项目预览',
+			area: ['300px','440px'],
 			content: url
 		});
 	});
+
+
 
 
 </script>

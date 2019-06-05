@@ -42,6 +42,7 @@ class Promotion extends Base {
 
                 $this->assign('info',$info);
             }
+            $this->assign('relation',config('custom.relation_type.promotion'));
 
             return $this->fetch();
 
