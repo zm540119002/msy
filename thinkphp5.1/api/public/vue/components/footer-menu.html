@@ -82,6 +82,7 @@
                     }
                 },methods: {
                     total_amount_init:function (param) {
+                        console.log(param.subtotal_amount);
                         if(this.type==4 && !param.checked){
                             return false;
                         }
