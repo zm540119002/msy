@@ -87,6 +87,9 @@
                         }
                         this.total_amount += param.subtotal_amount;
                     },total_amount_assign:function (param) {
+                        console.log(param.deal_price);
+                        console.log(param.increment_buy_quantity);
+                        console.log(this.total_amount);
                         this.total_amount = param.deal_price * param.increment_buy_quantity;
                     },total_amount_calculate:function (param) {
                         if(this.type==4 && !param.checked){
