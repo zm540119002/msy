@@ -20,12 +20,12 @@ class TwoDimensionalCode extends \common\controller\UserBase {
         $init = [
             'save_path'=>$newRelativePath,   //保存目录  ./uploads/compose/goods....
             'name'=> $this->user['name'], //用户名
-            'avatar'=> request()->domain().'/uploads'.$this->user['avatar'],//用户头像
+            'avatar'=> request()->domain().'/uploads/'.$this->user['avatar'],//用户头像
             'base_map'=> request()->domain().'/static/common/img/hss_base_map.jpg', // 460*534  分享底图
             'hss_share_title'=> request()->domain().'/static/common/img/hss_share_title.jpg', // 460*534  分享底图
             'hss_share_sm'=> request()->domain().'/static/common/img/hss_share_sm.jpg', // 460*534  分享底图
             'hss_share_sm1'=> request()->domain().'/static/common/img/hss_share_sm1.jpg', // 460*534  分享底图
-            'qrcode'=> request()->domain().'/uploads'.$shareQRCode, // 120*120
+            'qrcode'=> request()->domain().'/uploads/'.$shareQRCode, // 120*120
             'font'=>'./static/font/simhei.ttf',   //字体
         ];
         print_r($init);exit;
