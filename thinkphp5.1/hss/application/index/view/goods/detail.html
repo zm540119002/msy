@@ -38,7 +38,7 @@
 									v-for="(productInfo,index) in productList"
 									:key="index"
 									:init_product_id="productInfo.id"
-									:init_deal_price="parseFloat(12.55)"
+									:init_deal_price="parseFloat(productInfo.bulk_price)"
 									:init_product_name="productInfo.name"
 									:init_product_src="productInfo.thumb_img"
 									:init_specification="productInfo.specification"
