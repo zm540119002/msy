@@ -107,6 +107,11 @@ html,body {
     <a href="javascript:void(0);" class="back_prev_page" data-jump_url=""></a>
     <h2 class="f24">开放日</h2>
 </section>-->
+<section class="activitycontent">
+    <div class="input-filed">
+        <input type="text" placeholder="姓名">
+    </div>
+</section>
 <nav style="position:relative;">
     <a href="javascript:void(0);" class="back_prev_page" data-jump_url=""></a>
     <ul class="nav_menu">
@@ -241,6 +246,13 @@ html,body {
             clickable: true,
         },
     });
+    var content=$('.activitycontent').html();
+    $('body').on('click','.activity',function(){
+        layer.open({
+            title:['开放日参观预约'],
+            content:content
+        })
+    })
 
 </script>
 {/block}
