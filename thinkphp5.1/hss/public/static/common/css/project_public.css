@@ -589,3 +589,6 @@ nav .back_prev_page{
 .product-select div.right{
     width: 56% !important;
 }
+.module-navigation .title {
+    margin-bottom: 6px;
+}
