@@ -29,9 +29,9 @@ class TwoDimensionalCode extends \common\controller\UserBase {
                 'id','two_dimensional_code_url'
             ]
         ];
-        $twoDimensionalCode = $model->getInfo($config);
-        $url = $twoDimensionalCode['two_dimensional_code_url'];
-        if(empty($url)){
+        $info = $model->getInfo($config);
+        $url = $info['two_dimensional_code_url'];
+        if(empty($info)){
             $url =  $model->compose($this->user);
             $data = [
                 'two_dimensional_code_url' => $url,
