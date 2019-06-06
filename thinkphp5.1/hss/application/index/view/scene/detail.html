@@ -96,8 +96,8 @@
 			step_quantity:1,
 			productList:[
 				{
-					id:0,
-					bulk_price:0
+					id:1,
+					bulk_price:10
 				}
 			]
 		};
@@ -107,10 +107,18 @@
 				return param;
 			}
 		});
-		$('body').on('click','.bg,.close',function(){
+		$(".bg").on("click",function(){
 			$('.dialogCart').hide();
 			$('.bg').hide();
-		});
+		})
+		$(".close").on("click",function(){
+			$('.dialogCart').hide();
+			$('.bg').hide();
+		})
+		// $('body').on('click','.bg,.close',function(){
+		// 	$('.dialogCart').hide();
+		// 	$('.bg').hide();
+		// });
 	});
 </script><script type="text/javascript">
 	$(function(){
