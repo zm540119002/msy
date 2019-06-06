@@ -119,7 +119,21 @@
 					</div>
 				</div>
 				<div id="scroller-wrapper" class="list_wrapper content-padding">
-					<ul class="columns_flex flex-both-side goods-content-list" id="product-list"></ul>
+					<ul class="columns_flex flex-both-side goods-content-list" id="product-list">
+						<product-select
+								v-for="(productInfo,index) in productList"
+								:key="index"
+								:init_product_id="productInfo.id"
+								:init_deal_price="parseFloat(productInfo.bulk_price)"
+								:init_product_name="productInfo.headline"
+								:init_product_src="productInfo.thumb_img"
+								:init_quantity="parseInt(init_quantity)"
+								:step_quantity="parseInt(step_quantity)"
+								:init_specification="productInfo.specification"
+								:by_footer_menu_monitor="by_footer_menu_monitor"
+								:type="type"
+						></product-select>
+					</ul>
 				</div>
 			</div>
 		</div>
