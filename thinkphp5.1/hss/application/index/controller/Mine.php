@@ -56,6 +56,7 @@ class Mine extends \common\controller\Base{
         //删除旧详情图
         delImgFromPaths($oldAvatar,$newAvatar);
         setSession($user);
+        //生成平台二维码
         return successMsg('成功',['avatar'=>$newAvatar]);
     }
 
