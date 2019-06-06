@@ -80,7 +80,6 @@ class TwoDimensionalCode extends \common\controller\UserBase {
             'font'=>'./static/font/simhei.ttf',   //字体
         ];
         $init = array_merge($init,$config);
-        print_r($init);exit;
         $avatar = $this->imgInfo($init['avatar']);
         $baseMap = $this->imgInfo($init['base_map']);
         $qrcode = $this->imgInfo($init['qrcode']);
