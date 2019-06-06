@@ -44,7 +44,7 @@ class TwoDimensionalCode extends \common\model\Base {
         if(!empty($info['two_dimensional_code_url'])){
             unlink( request()->domain().'/uploads/'.$info['two_dimensional_code_url']);
         }
-        return errorMsg('成功');
+        return successMsg('成功');
 
 	}
 
@@ -106,7 +106,7 @@ class TwoDimensionalCode extends \common\model\Base {
         }
         imagedestroy($im);
         unlink($shareQRCode);
-        return errorMsg('成功',['url'=>$init['save_path'].$filename]);
+        return successMsg('成功',['url'=>$init['save_path'].$filename]);
     }
 
     private function imgInfo($path)
