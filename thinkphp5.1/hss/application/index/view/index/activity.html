@@ -123,6 +123,9 @@ html,body {
 .weiya_map{
     height:20rem;
 }
+.activityLayer .input-filed{
+    margin:0 0 12px 0;
+}
 </style>
 {/block}
 {block name="content"}
@@ -293,6 +296,7 @@ html,body {
     $('body').on('click','.activity',function(){
         layer.open({
             title:['开放日参观预约','border-bottom:1px solid #d9d9d9'],
+            className:'activityLayer',
             content:content,
             btn:['确定']
         })
