@@ -48,6 +48,9 @@ class TwoDimensionalCode extends \common\controller\UserBase {
     }
 
 
+    /**
+     * 后台 生成二维码和入库
+     */
     public function generatingTwoDimensionalCode(){
         $model = new \app\index\model\TwoDimensionalCode();
         $model->editTable($this->user);

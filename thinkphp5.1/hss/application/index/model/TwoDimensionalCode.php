@@ -11,7 +11,10 @@ class TwoDimensionalCode extends \common\model\Base {
 	//表的别名
 	protected $alias = 'tdc';
 
-
+    /**
+     * @param $user
+     * @return array 生成新的二维码和入库
+     */
     public function editTable($user)
     {
         $result =  $this->compose($user);
