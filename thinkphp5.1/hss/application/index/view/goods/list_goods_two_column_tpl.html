@@ -8,7 +8,7 @@
         <p class="text-intro title_name">{$info.headline}</p>
         <div class="columns_flex l-r-sides">
             <span class="pink">￥<price>{$info.bulk_price}</price></span>
-            <span class="add_cart">购物车</span>
+            <div><a href="javascript:void(0);" class="add_cart add_cart_i" @click="dialogCart" :data-jump_url="add_cart_url"><i></i></a></div>
         </div>
     </div>
 </li>
@@ -16,9 +16,6 @@
 {/notempty}
 
 <style>
-    .add_cart{
-        background: #ccc;
-    }
 </style>
 <script type="text/javascript">
     $('.add_cart').on('click',function(){
