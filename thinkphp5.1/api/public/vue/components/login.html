@@ -3,13 +3,17 @@
         display: none;
     }.show{
         display: block;
-    }#send_sms{
+    }
+    #send_sms{
           width: 45%;
           padding: .14rem 0;
           background: #FF7BAC;
           color: #fff;
           border-radius: 5px;
           text-align: center;
+    }
+    .switch_current{
+        cursor:pointer;
     }
 </style>
 <!-- 模板 -->
@@ -244,7 +248,6 @@
         loginDialogTriggerLayerIndex = layer.open({
             className:'loginLayer',
             type:1,
-            anim:'up',
             shadeClose:false,
             content:content,
             btn:[''],
@@ -328,7 +331,6 @@
             let param = {
                 obj:_this
             };
-            dialog.success(1);
             bus.$emit('switchCurrent',param);
         });
         //登录确定
