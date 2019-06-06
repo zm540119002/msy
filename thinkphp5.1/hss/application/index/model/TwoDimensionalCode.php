@@ -15,7 +15,6 @@ class TwoDimensionalCode extends \common\model\Base {
     public function editTable($user)
     {
         $result =  $this->compose($user);
-        print_r($result);exit;
         if($result['status']){
             $url = $result['url'];
         }else{
