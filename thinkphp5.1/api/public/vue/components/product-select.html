@@ -130,7 +130,6 @@
                     </div>
                 </div>
             </div>
-            <!-- <div class="product_name"><p class="two-line-omit">{{product_name}}</p></div> -->
         </div>
         <div class="title">
             <a class="p_img" :href="'/index/Goods/detail/id/' + product_id">
@@ -207,7 +206,6 @@
                     };
                     asyncVerify(config);
                 },reduce: function () {
-                    this.monitor_buy_quantity = true;
                     //如果开启了样品购买限额
                     if(this.display_quota){
                         if((this.buy_quantity-this.step_quantity)<this.init_quantity){
@@ -231,7 +229,6 @@
                         this.buy_quantity += this.step_quantity;
                     }
                 },reduceCart: function (event) {
-                    this.monitor_buy_quantity = true;
                     if(this.buy_quantity_reduce_trigger && this.buy_quantity>1){
                         this.buy_quantity_reduce_trigger = false;
                     }else{
@@ -262,7 +259,6 @@
                     };
                     asyncVerify(config);
                 },plusCart: function (event) {
-                    this.monitor_buy_quantity = true;
                     let postData = {
                         data:[{
                             goods_id: this.product_id,
