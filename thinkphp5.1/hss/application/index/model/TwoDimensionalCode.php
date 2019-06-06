@@ -14,7 +14,12 @@ class TwoDimensionalCode extends \common\model\Base {
 
     public function editTable($user)
     {
-        $url =  $this->compose($user);
+        $result =  $this->compose($user);
+        if($result['status']){
+            $url = $result['url'];
+        }else{
+            return errorMsg('失败');
+        }
         $config = [
             'where' => [
                 ['status', '=', 0],
@@ -82,7 +87,7 @@ class TwoDimensionalCode extends \common\model\Base {
         $hss_share_sm = $this->imgInfo($init['hss_share_sm']);
         $hss_share_sm1 = $this->imgInfo($init['hss_share_sm1']);
         if( !$avatar || !$baseMap || !$qrcode){
-            $this->errorMsg('提供的图片问题');
+            return errorMsg('提供的图片问题');
         }
         $im = imagecreatetruecolor(900, 1500);  //图片大小
         $gray_color = imagecolorallocate($im, 87,89,88);
