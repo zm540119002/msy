@@ -12,26 +12,14 @@ class TwoDimensionalCode extends \common\controller\UserBase {
         if(!request()->isAjax()){
             $this->errorMsg('请求方式错误');
         }
-        $url = request()->domain().'?uid='.$this->user['id'];
-        $newRelativePath = config('upload_dir.hss_user_QRCode');
-        $shareQRCode = createLogoQRcode($url,$newRelativePath);
-        if(empty($this->user['avatar'])){
-            $this->user['avatar'] = request()->domain().'/static/common/img/default/chat_head.jpg';
-        }else{
-            $this->user['avatar']  =  request()->domain().'/uploads/'.$this->user['avatar'];
-        }
-        $init = [
-            'save_path'=>$newRelativePath,   //保存目录  ./uploads/compose/goods....
-            'name'=> $this->user['name'], //用户名
-            'avatar'=> $this->user['avatar'],//用户头像
-            'base_map'=> request()->domain().'/static/common/img/hss_base_map.jpg', // 460*534  分享底图
-            'hss_share_title'=> request()->domain().'/static/common/img/hss_share_title.jpg', // 460*534  分享底图
-            'hss_share_sm'=> request()->domain().'/static/common/img/hss_share_sm.jpg', // 460*534  分享底图
-            'hss_share_sm1'=> request()->domain().'/static/common/img/hss_share_sm1.jpg', // 460*534  分享底图
-            'qrcode'=> request()->domain().'/uploads/'.$shareQRCode, // 120*120
-            'font'=>'./static/font/simhei.ttf',   //字体
-        ];
-        $url =  $this->compose($init);
+//        $url = request()->domain().'?uid='.$this->user['id'];
+//        $newRelativePath = config('upload_dir.hss_user_QRCode');
+//        $shareQRCode = createLogoQRcode($url,$newRelativePath);
+//        if(empty($this->user['avatar'])){
+//            $this->user['avatar'] = request()->domain().'/static/common/img/default/chat_head.jpg';
+//        }else{
+//            $this->user['avatar']  =  request()->domain().'/uploads/'.$this->user['avatar'];
+//        }
         $model = new \app\index\model\TwoDimensionalCode();
         $config = [
             'where' => [
@@ -42,26 +30,26 @@ class TwoDimensionalCode extends \common\controller\UserBase {
             ]
         ];
         $twoDimensionalCode = $model->getInfo($config);
-        $data = [
-            'two_dimensional_code_url' => $url,
-            'user_id' => $this->user['id'],
-            'create_time' => time(),
-        ];
-        if(!empty($twoDimensionalCode)){
-           $where1 = [
-               'id'=>$twoDimensionalCode['id'],
-               'user_id'=>$this->user['id'],
-               'status'=>0,
-           ];
+        $url = $twoDimensionalCode['two_dimensional_code_url'];
+        if(empty($url)){
+            $init = [
+                'name'=> $this->user['name'], //用户名
+                'avatar'=> $this->user['avatar'],//用户头像
+            ];
+            $url =  $this->compose($init);
+            $data = [
+                'two_dimensional_code_url' => $url,
+                'user_id' => $this->user['id'],
+                'create_time' => time(),
+            ];
+            $id = $model->edit($data);
+            if(!$id){
+                $this -> errorMsg('失败');
+            }
         }
-        $id = $model->edit($data,$where1);
-        if(!$id){
-            $this -> errorMsg('失败');
-        }
-        unlink($shareQRCode);
-        if(!empty($twoDimensionalCode)){
-            unlink( request()->domain().'/uploads/'.$twoDimensionalCode['two_dimensional_code_url']);
-        }
+//        if(!empty($twoDimensionalCode)){
+//            unlink( request()->domain().'/uploads/'.$twoDimensionalCode['two_dimensional_code_url']);
+//        }
         $this->successMsg('成功！',[
             'code'=> config('code.success.get_user_code.code'),
             'url' => $url,
@@ -77,7 +65,24 @@ class TwoDimensionalCode extends \common\controller\UserBase {
      */
     public function compose(array $config=[])
     {
-        $init = $config;
+        $url = request()->domain().'?uid='.$this->user['id'];
+        $shareQRCode = createLogoQRcode($url,config('upload_dir.hss_user_QRCode'));
+        if(empty($this->user['avatar'])){
+            $this->user['avatar'] = request()->domain().'/static/common/img/default/chat_head.jpg';
+        }else{
+            $this->user['avatar']  =  request()->domain().'/uploads/'.$this->user['avatar'];
+        }
+        $init = [
+            'save_path'=>config('upload_dir.hss_user_QRCode'),   //保存目录  ./uploads/compose/goods....
+            'base_map'=> request()->domain().'/static/common/img/hss_base_map.jpg', // 460*534  分享底图
+            'hss_share_title'=> request()->domain().'/static/common/img/hss_share_title.jpg', // 460*534  分享底图
+            'hss_share_sm'=> request()->domain().'/static/common/img/hss_share_sm.jpg', // 460*534  分享底图
+            'hss_share_sm1'=> request()->domain().'/static/common/img/hss_share_sm1.jpg', // 460*534  分享底图
+            'qrcode'=> request()->domain().'/uploads/'.$shareQRCode, // 120*120
+            'font'=>'./static/font/simhei.ttf',   //字体
+        ];
+        $init = array_merge($init,$config);
+
         $avatar = $this->imgInfo($init['avatar']);
         $baseMap = $this->imgInfo($init['base_map']);
         $qrcode = $this->imgInfo($init['qrcode']);
@@ -108,6 +113,7 @@ class TwoDimensionalCode extends \common\controller\UserBase {
             $this->errorMsg('合成图片失败');
         }
         imagedestroy($im);
+        unlink($shareQRCode);
 //        print_r($init['save_path'].'compose/'.$filename);exit;
         return $init['save_path'].'compose/'.$filename;
     }
