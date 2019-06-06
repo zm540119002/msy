@@ -144,8 +144,11 @@
     </li>
 </template>
 <script type="text/javascript">
-    var ii = 1;
     $(function(){
+        $('body').on('click','.bg,.close',function(){
+            $('.dialogCart').hide();
+            $('.bg').hide();
+        });
         Vue.component('product-select', {
             template:'#product_select_tpl',
             props: {
