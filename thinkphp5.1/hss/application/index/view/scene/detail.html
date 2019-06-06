@@ -59,7 +59,7 @@
 {block name="common"}{/block}
 {block name="footer"}
 {include file="../../api/public/vue/components/footer-menu.html" /}
-<div class="bg" onClick="javascript:;"></div>
+<div class="bg"></div>
 <div class="dialogCart">
 	<div id="product-list2">
 		<product-select
@@ -107,10 +107,14 @@
 				return param;
 			}
 		});
-		$('body').on('click','.bg,.close',function(){
+		$(".bg").on("click",function(){
 			$('.dialogCart').hide();
 			$('.bg').hide();
-		});
+		})
+		// $('body').on('click','.bg,.close',function(){
+		// 	$('.dialogCart').hide();
+		// 	$('.bg').hide();
+		// });
 	});
 </script><script type="text/javascript">
 	$(function(){
