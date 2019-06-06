@@ -120,10 +120,31 @@
 				</div>
 				<div id="scroller-wrapper" class="list_wrapper content-padding">
 					<ul class="columns_flex flex-both-side goods-content-list" id="list">
+													
 					</ul>
 				</div>
 			</div>
 		</div>
+		<!-- 1 -->
+		<!-- <div class="bg"></div>
+		<div class="dialogCart">
+			<div id="product-list2">
+				<product-select
+						v-for="(productInfo,index) in productList"
+						:key="index"
+						:init_product_id="productInfo.id"
+						:init_product_src="productInfo.thumb_img"
+						:init_deal_price="parseFloat(productInfo.bulk_price)"
+						:init_quantity="parseInt(init_quantity)"
+						:step_quantity="parseInt(step_quantity)"
+						:type="type"
+				></product-select>	
+			</div>
+			<div id="foot_cart_menu">
+					<footer-menu></footer-menu>
+			</div>
+		</div> -->
+		<!-- 1 -->
 	</section>
 </article>
 {/block}
@@ -131,6 +152,41 @@
 {include file="template/footer_project.html" /}
 {/block}
 {block name="script"}
+<!-- 1 -->
+<script type="text/javascript">
+	$(function(){
+		new Vue({
+			el:'#foot_cart_menu',
+			data:function(){
+				return {};
+			}
+		});
+	})
+</script>
+{include file="../../api/public/vue/components/product-select.html" /}
+<script type="text/javascript">
+	$(function(){
+		let param = {
+			type:6,
+			init_quantity:1,
+			step_quantity:1,
+			productList:[
+				{
+					id:1,
+					bulk_price:10
+				}
+			]
+		};
+		new Vue({
+			el: '#product-list2',
+			data:function(){
+				return param;
+			}
+		});
+	
+	});
+</script>
+<!-- 1 -->
 <script type="text/javascript" src="api_common_js/swiper.min.js"></script>
 <script type="text/javascript">
 	var config = {
@@ -258,4 +314,48 @@
         $('.customer_item span.mobile').text(mobileNHide(mobile));
 	});
 </script>
+<style scoped>
+.bg{
+		width: 100vw;
+		height: 100vh;
+		background: #000;
+		opacity: 0.5;
+		z-index: 998;
+		position: fixed;
+		top: 0;
+		display: none;
+	}
+	.close{
+		width: 16px;
+		height: 16px;
+		border-radius: 50%;
+		border:1px solid #fff;
+		color: #fff;
+		text-align: center;
+		line-height: 16px;
+		font-size: 10px;
+		position: absolute;
+		right: 14px;
+		top: -24px;
+	}
+	.amount{
+		margin-left: 8px;
+	}
+	.dialogCart{
+		width: 100%;
+		height: 200px;
+		background: #fff;
+		position: fixed;
+		bottom: 0;
+		z-index: 999;
+		display: none;
+	}.dialogCart .product-select .right{
+		width: 35% !important;
+	}
+	.dialogCart .product-select{
+		border-top: 1px solid #eee;
+		border-bottom: 1px solid #eee;
+		margin-top: 5px;
+	}
+</style>
 {/block}
