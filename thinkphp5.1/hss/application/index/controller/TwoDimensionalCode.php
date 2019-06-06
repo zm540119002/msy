@@ -32,10 +32,10 @@ class TwoDimensionalCode extends \common\controller\UserBase {
         $twoDimensionalCode = $model->getInfo($config);
         $url = $twoDimensionalCode['two_dimensional_code_url'];
         if(empty($url)){
-//            $init = [
-//                'name'=> $this->user['name'], //用户名
-//                'avatar'=> $this->user['avatar'],//用户头像
-//            ];
+            $init = [
+                'name'=> 22, //用户名
+                'avatar'=> 33,//用户头像
+            ];
             $url =  $this->compose();
             $data = [
                 'two_dimensional_code_url' => $url,
