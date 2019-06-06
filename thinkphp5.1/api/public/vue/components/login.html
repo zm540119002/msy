@@ -3,13 +3,17 @@
         display: none;
     }.show{
         display: block;
-    }#send_sms{
+    }
+    #send_sms{
           width: 45%;
           padding: .14rem 0;
           background: #FF7BAC;
           color: #fff;
           border-radius: 5px;
           text-align: center;
+    }
+    .switch_current{
+        cursor:pointer;
     }
 </style>
 <!-- 模板 -->
@@ -322,8 +326,6 @@
         });
         //切换
         $('body').on('click','.loginLayer .switch_current',function(){
-            dialog.success(1);
-            return false;
             let _this = $(this);
             //触发-切换当前-事件
             let param = {
@@ -333,8 +335,6 @@
         });
         //登录确定
         $('body').on('click','.loginLayer .btn_login',function(){
-            dialog.success(1);
-            return false;
             //触发-登录-事件
             let login_success_callback_param = {
                 index:loginDialogTriggerLayerIndex
@@ -348,8 +348,6 @@
         });
         //注册确定
         $('body').on('click','.loginLayer .btn_register',function(){
-            dialog.success(1);
-            return false;
             //触发-注册-事件
             let register_success_callback_param = {
                 index:loginDialogTriggerLayerIndex
