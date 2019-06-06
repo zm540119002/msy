@@ -36,8 +36,8 @@
                 </div>
                 <div class="login_item">
                     <div class="columns_flex">
-                        <input class="input-filed password" :type="password_type" placeholder="密码" name="password">
-                        <a href="javascript:void(0);" class="hidden view-password" @click="change_password_type"></a>
+                        <input class="input-filed password" type="password" placeholder="密码" name="password">
+                        <a href="javascript:void(0);" class="hidden view-password"></a>
                     </div>
                 </div>
                 <a href="javascript:void(0);" class="entry-button btn_login">登录</a>
@@ -60,8 +60,8 @@
                 </div>
                 <div class="login_item">
                     <div class="columns_flex">
-                        <input class="input-filed password" autocomplete="new-password" :type="password_type" placeholder="设置密码" name="password">
-                        <a href="javascript:void(0);" class="hidden view-password" @click="change_password_type"></a>
+                        <input class="input-filed password" autocomplete="new-password" type="password" placeholder="设置密码" name="password">
+                        <a href="javascript:void(0);" class="hidden view-password"></a>
                     </div>
                 </div>
                 <a href="javascript:void(0);" class="entry-button btn_register">确定</a>
@@ -86,9 +86,7 @@
                 }}
             },
             data: function () {
-                return {
-                    password_type:'password'
-                };
+                return {};
             },
             methods: {
                 switchCurrent:function(param){
@@ -103,14 +101,6 @@
                             $(this).addClass("show").siblings().removeClass("show");
                         }
                     });
-                },change_password_type:function(){
-                    console.log(this.password_type);
-                    if(this.password_type=='password'){
-                        this.password_type = 'text';
-                    }else{
-                        this.password_type = 'password';
-                    }
-                    console.log(this.password_type);
                 },login:function(param){
                     let postData = $('.loginLayer').find('#formLogin').serializeObject();
                     let content='';
@@ -334,7 +324,11 @@
             };
             asyncVerify(config);
         });
-        //切换
+        //眼睛点击
+        $('body').on('click','.loginLayer .view-password',function(){
+            let _this = $(this);
+            console.log(_this.prev().attr('type'));
+        });//切换
         $('body').on('click','.loginLayer .switch_current',function(){
             let _this = $(this);
             //触发-切换当前-事件
