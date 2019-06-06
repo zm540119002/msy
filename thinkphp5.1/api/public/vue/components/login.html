@@ -37,7 +37,7 @@
                 <div class="login_item">
                     <div class="columns_flex">
                         <input class="input-filed password" :type="password_type" placeholder="密码" name="password">
-                        <a href="javascript:void(0);" class="hidden view-password" ></a>
+                        <a href="javascript:void(0);" class="hidden view-password" @click="change_password_type"></a>
                     </div>
                 </div>
                 <a href="javascript:void(0);" class="entry-button btn_login">登录</a>
@@ -87,7 +87,7 @@
             },
             data: function () {
                 return {
-                    password_type:'password'
+                    password_type:'password2'
                 };
             },
             methods: {
