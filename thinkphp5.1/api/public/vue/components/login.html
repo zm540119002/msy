@@ -327,7 +327,7 @@
         //眼睛点击
         $('body').on('click','.loginLayer .view-password',function(){
             let _this = $(this);
-            console.log(_this.prev().attr('type'));
+            _this.prev().attr('type')=='password'?_this.prev().attr('type','text'):_this.prev().attr('type','password');
         });//切换
         $('body').on('click','.loginLayer .switch_current',function(){
             let _this = $(this);
