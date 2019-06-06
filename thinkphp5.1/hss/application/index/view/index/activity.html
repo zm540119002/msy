@@ -88,6 +88,18 @@ html,body {
 .nav_menu li.current a:before{
     background-color:hotpink;
 }
+.swiper-container.hide{
+    display: none;
+}
+.activity_bottom_nav{
+    height:40px;
+    line-height: 40px;
+}
+.group_cart_nav .activity{
+    width:100%;
+    background: #E40012;
+    color:#fff;
+}
 </style>
 {/block}
 {block name="content"}
@@ -95,6 +107,17 @@ html,body {
     <a href="javascript:void(0);" class="back_prev_page" data-jump_url=""></a>
     <h2 class="f24">开放日</h2>
 </section>-->
+<section class="activitycontent" style="display:none;">
+    <div class="input-filed">
+        <input type="text" placeholder="姓名">
+    </div>
+    <div class="input-filed">
+        <input type="text" placeholder="企业名称">
+    </div>
+    <div class="input-filed">
+        <input type="tel" placeholder="手机号码">
+    </div>
+</section>
 <nav style="position:relative;">
     <a href="javascript:void(0);" class="back_prev_page" data-jump_url=""></a>
     <ul class="nav_menu">
@@ -118,6 +141,18 @@ html,body {
 <div class="swiper-container swiper-container-initialized swiper-container-vertical swiper-container-ios">
     <div class="swiper-wrapper">
         <div class="swiper-slide ">
+            <img src="public_img/activity01.jpg" alt="" class="common_default_img">
+            
+        </div>
+    </div>
+    <div class="group_cart_nav activity_bottom_nav">
+        <a href="javascript:;" class="activity">开放日参观预约</a>
+    </div>
+    <!--<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"><span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 2"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 3"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 4"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 5"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 6"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 7"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 8"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 9"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 10"></span></div>-->
+</div>
+<div class="swiper-container swiper-container-initialized swiper-container-vertical swiper-container-ios hide">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide ">
             <img src="public_img/cpy_01.jpg" alt="" class="common_default_img">
         </div>
         <div class="swiper-slide">
@@ -126,9 +161,11 @@ html,body {
         <div class="swiper-slide ">
             <img src="public_img/cpy_03.jpg" alt="" class="common_default_img">
         </div>
-        <div class="swiper-slide ">
-            <img src="public_img/cpy_04.jpg" alt="" class="common_default_img">
-        </div>
+    </div>
+    <!--<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"><span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 2"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 3"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 4"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 5"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 6"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 7"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 8"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 9"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 10"></span></div>-->
+</div>
+<div class="swiper-container swiper-container-initialized swiper-container-vertical swiper-container-ios hide">
+    <div class="swiper-wrapper">
         <div class="swiper-slide ">
             <img src="public_img/develp_01.jpg" alt="" class="common_default_img">
         </div>
@@ -153,6 +190,44 @@ html,body {
     </div>
     <!--<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"><span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 2"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 3"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 4"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 5"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 6"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 7"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 8"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 9"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 10"></span></div>-->
 </div>
+<div class="swiper-container swiper-container-initialized swiper-container-vertical swiper-container-ios hide">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide ">
+            <img src="public_img/cpy_04.jpg" alt="" class="common_default_img">
+        </div>
+    </div>
+    <!--<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"><span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 2"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 3"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 4"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 5"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 6"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 7"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 8"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 9"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 10"></span></div>-->
+</div>
+<div class="swiper-container swiper-container-initialized swiper-container-vertical swiper-container-ios hide">
+    <div class="weiya_item " >
+        <div class="content-padding">
+            <div class="cpy_img_default">
+                <img src="index_img/corporate_culture10.jpg" alt="">
+            </div>
+        </div>
+        <div class="contact_info_item">
+            <div class="c_top">
+                <p class="f28">广州美尚生物医药研究院有限公司</p>
+                <p class="f28">广东维雅生物科技有限公司</p>
+                <p>地址：广州市经济技术开发区科学城开源大道206号第2层</p>
+            </div>
+            <div class="c_mobile">
+                <p class="f26">维雅品牌定制服务中心</p>
+                <p>朱田：<a href="tel:15918567008">13059156679</a></p>
+                <p>宫学莹：<a href="tel:13711326631">13711326631</a></p>
+                <p>叶雯雯：<a href="tel:13660613163">18820019781</a></p>
+                <p>监督热线：<a href="tel:18820019781">13710651399</a></p>
+            </div>
+            <div style="padding-right:0.30rem;">
+                <img src="public_img/contact.gif" alt="" style="width:100%;">
+            </div>
+        </div>
+        <div class="content-padding">
+            <p>维雅工厂的导航定位</p>
+            <div id="allmap" class="weiya_map"></div>
+        </div>
+    </div>
+</div>
 {/block}
 {block name="footer"}
 
@@ -160,15 +235,15 @@ html,body {
 {block name="script"}
 <script type="text/javascript" src="api_common_js/swiper.min.js"></script>
 <script>
-    //     (function($){
-    // var deviceWidth=document.documentElement.clientWidth;
-
-    // })(jQuery);
     $(function(){
         var html =document.getElementsByTagName('html')[0];
         html.style.fontSize='';
         $('.swiper-slide ').css('height',$(window).height()+'px');
-        //$('body').css({height:100+'%',position:'relative'});
+        $('.swiper-slide').find('img').css('paddingBottom',80+'px');
+        $('.nav_menu li').on('click',function(){
+            $(this).addClass('current').siblings().removeClass('current');
+            $('.swiper-container').hide().eq($(this).index()).show();
+        })
     })
     var swiper = new Swiper('.swiper-container', {
         direction: 'vertical',
@@ -177,6 +252,14 @@ html,body {
             clickable: true,
         },
     });
+    var content=$('.activitycontent').html();
+    $('body').on('click','.activity',function(){
+        layer.open({
+            title:['开放日参观预约','border-bottom:1px solid #d9d9d9'],
+            content:content,
+            btn:['确定']
+        })
+    })
 
 </script>
 {/block}

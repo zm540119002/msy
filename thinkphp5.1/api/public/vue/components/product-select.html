@@ -285,14 +285,21 @@
                     asyncVerify(config);
                 },dialogCart: function () {
                     let _this = this;
+                    var imgSrc = 'api_common_img/default/no_pic_100.jpg';
+                    if(this.product_src){
+                        imgSrc = 'public_uploads/'+this.product_src; 
+                    }
+                    
+                    $('.dialogCart #product-list2 .p_img img').attr("src",imgSrc)
                     // 弹出加入采购车
                     $('.dialogCart').show();
                     $('.bg').show();
                     //触发-弹出采购车点击-事件
-                    bus.$emit('dialog_cart_click',_this);
-                },dialog_cart_click: function (param) {
+                    bus.$emit('dialog_cart',_this);
+                },dialog_cart_assign: function (param) {
                     if(this.by_footer_menu_monitor){
                         this.monitor_buy_quantity = false;
+                        this.product_id = param.product_id;
                         this.product_name = param.product_name;
                         this.specification = param.specification;
                         this.deal_price = param.deal_price;
@@ -300,7 +307,7 @@
                         this.subtotal_amount_calculate();
                         this.increment_buy_quantity = this.buy_quantity;
                         //监听-弹出采购车价格或者数量改变-事件
-                        bus.$emit('dialog_cart_price_quantity_change', this);
+                        bus.$emit('dialog_cart_assign', this);
                     }
                 },editCheckItem:function(param){
                     this.checked = param;
@@ -315,8 +322,8 @@
                     _this.editCheckItem(param);
                 });
                 //监听-弹出采购车点击-事件
-                bus.$on('dialog_cart_click', function(param){
-                    _this.dialog_cart_click(param);
+                bus.$on('dialog_cart', function(param){
+                    _this.dialog_cart_assign(param);
                 });
             },watch: {
                 buy_quantity: {
@@ -345,12 +352,6 @@
     });
 </script>
 <style lang="less" scoped>
-/*    .product-select{
-        border-bottom:none;
-        padding:0.12rem;
-        margin:0.12rem;
-        background-color: #ffffff;
-    }*/
     .product-select div.left{
         width:40%;
     }
@@ -365,21 +366,24 @@
     }
     .product-select img.left{
         width:100%;
-    }.two-line-omit {
+    }
+    .two-line-omit {
         overflow: hidden;
         text-overflow: ellipsis;
         display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
         word-break: break-all;
-    }.four-line-omit {
+    }
+    .four-line-omit {
         overflow: hidden;
         text-overflow: ellipsis;
         display: -webkit-box;
         -webkit-line-clamp: 4;
         -webkit-box-orient: vertical;
         word-break: break-all;
-    }.check_all {
+    }
+    .check_all {
         -webkit-appearance: checkbox;
     }
 </style>

@@ -2,7 +2,6 @@
 namespace app\index\controller;
 
 class TwoDimensionalCode extends \common\controller\UserBase {
-
     /**
      * 获取二维码
      * @return array
@@ -10,17 +9,21 @@ class TwoDimensionalCode extends \common\controller\UserBase {
      */
     public function getUserQRcode()
     {
-//        if(!request()->isAjax()){
-//            return errorMsg('请求方式错误');
-//        }
-        $uploadPath = realpath( config('upload_dir.upload_path')) . '/';
+        if(!request()->isAjax()){
+            $this->errorMsg('请求方式错误');
+        }
         $url = request()->domain().'?uid='.$this->user['id'];
         $newRelativePath = config('upload_dir.hss_user_QRCode');
         $shareQRCode = createLogoQRcode($url,$newRelativePath);
+        if(empty($this->user['avatar'])){
+            $this->user['avatar'] = request()->domain().'/static/common/img/default/chat_head.jpg';
+        }else{
+            $this->user['avatar']  =  request()->domain().'/uploads/'.$this->user['avatar'];
+        }
         $init = [
             'save_path'=>$newRelativePath,   //保存目录  ./uploads/compose/goods....
             'name'=> $this->user['name'], //用户名
-            'avatar'=> request()->domain().'/uploads/'.$this->user['avatar'],//用户头像
+            'avatar'=> $this->user['avatar'],//用户头像
             'base_map'=> request()->domain().'/static/common/img/hss_base_map.jpg', // 460*534  分享底图
             'hss_share_title'=> request()->domain().'/static/common/img/hss_share_title.jpg', // 460*534  分享底图
             'hss_share_sm'=> request()->domain().'/static/common/img/hss_share_sm.jpg', // 460*534  分享底图
@@ -28,20 +31,41 @@ class TwoDimensionalCode extends \common\controller\UserBase {
             'qrcode'=> request()->domain().'/uploads/'.$shareQRCode, // 120*120
             'font'=>'./static/font/simhei.ttf',   //字体
         ];
-//        $init = [
-//            'save_path'=>$newRelativePath,   //保存目录  ./uploads/compose/goods....
-//            'name'=> '李白', //用户名
-//            'avatar'=> request()->domain().'/uploads/compose/me.jpg',//用户头像
-//            'base_map'=> request()->domain().'/static/common/img/hss_base_map.jpg', // 460*534  分享底图
-//            'hss_share_title'=> request()->domain().'/static/common/img/hss_share_title.jpg', // 460*534  分享底图
-//            'hss_share_sm'=> request()->domain().'/static/common/img/hss_share_sm.jpg', // 460*534  分享底图
-//            'hss_share_sm1'=> request()->domain().'/static/common/img/hss_share_sm1.jpg', // 460*534  分享底图
-//            'qrcode'=>$shareQRCode, // 120*120
-//            'font'=>'./static/font/simhei.ttf',   //字体
-//        ];
-        $res =  $this->compose($init);
-        print_r($res);exit;
-        $this->successMsg('成功',['url'=>$res]);
+        $url =  $this->compose($init);
+        $model = new \app\index\model\TwoDimensionalCode();
+        $config = [
+            'where' => [
+                ['status', '=', 0],
+                ['user_id', '=', $this->user['id']],
+            ], 'field' => [
+                'id','two_dimensional_code_url'
+            ]
+        ];
+        $twoDimensionalCode = $model->getInfo($config);
+        $data = [
+            'two_dimensional_code_url' => $url,
+            'user_id' => $this->user['id'],
+            'create_time' => time(),
+        ];
+        if(!empty($twoDimensionalCode)){
+           $where1 = [
+               'id'=>$twoDimensionalCode['id'],
+               'user_id'=>$this->user['id'],
+               'status'=>0,
+           ];
+        }
+        $id = $model->edit($data,$where1);
+        if(!$id){
+            $this -> errorMsg('失败');
+        }
+        unlink($shareQRCode);
+        if(!empty($twoDimensionalCode)){
+            unlink( request()->domain().'/uploads/'.$twoDimensionalCode['two_dimensional_code_url']);
+        }
+        $this->successMsg('成功！',[
+            'code'=> config('code.success.get_user_code.code'),
+            'url' => $url,
+        ]);
     }
 
 
@@ -85,7 +109,7 @@ class TwoDimensionalCode extends \common\controller\UserBase {
         }
         imagedestroy($im);
 //        print_r($init['save_path'].'compose/'.$filename);exit;
-        return successMsg($init['save_path'].'compose/'.$filename);
+        return $init['save_path'].'compose/'.$filename;
     }
 
     private function imgInfo($path)

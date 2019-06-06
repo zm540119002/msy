@@ -184,11 +184,17 @@ class Goods extends Base {
         if($keyword){
             $where[] = ['g.name','like', '%' . trim($keyword) . '%'];
         }
+        $ids = input('get.ids/s');
+        if($ids){
+            $ids = addslashes(trim($ids));
+            $where['where'][] = ['g.id','exp',"NOT IN ($ids)"];
+        }
+
         $config = [
             'where'=>$where,
             'field'=>[
                 'g.id','g.name','g.bulk_price','g.sample_price','g.sort','g.is_selection',
-                'g.thumb_img','g.shelf_status','g.create_time','g.rq_code_url','g.belong_to'
+                'g.thumb_img','g.shelf_status','g.create_time','g.rq_code_url','g.belong_to','g.number'
 //                'g.category_id_1',
 //                'gc1.name as category_name_1'
             ],
@@ -205,7 +211,8 @@ class Goods extends Base {
 
         $this->assign('list',$list);
         if($_GET['pageType'] == 'layer'){
-            return view('goods/list_layer_tpl');
+            return view('goods/list_layer_tpl_copy');
+            //return view('goods/list_layer_tpl');
         }
         if($_GET['pageType'] == 'manage'){
             return view('goods/list_tpl');
@@ -627,5 +634,68 @@ class Goods extends Base {
             'mime'   => $info['mime'],
             'obj'    => $fun($path),
         ];
+    }
+
+    /**
+     * 关联结构商品列表 入口
+     */
+    public function recommendGoods(){
+
+        return $this->fetch();
+    }
+
+    /**
+     * 排队已关联的商品
+     */
+    public function excludeRecommendGoods(){
+   /*     if(!request()->get()){
+            return errorMsg('参数有误');
+        }*/
+        if(!$id = input('id/d')){
+            return errorMsg('参数有误');
+        };
+        $relation = input('relation/d');
+
+        $view = 'goods/list_layer_tpl';
+        //$view = 'goods/list_tpl';
+
+        switch($relation){
+            case config('custom.relation_type.scene'):
+                $model = new \app\index_admin\model\SceneGoods();
+                $field_id = 'scene_id';
+                break;
+            case config('custom.relation_type.project'):
+                $model = new \app\index_admin\model\ProjectGoods();
+                $field_id = 'project_id';
+                break;
+            case config('custom.relation_type.promotion'):
+                $model = new \app\index_admin\model\PromotionGoods();
+                $field_id = 'promotion_id';
+                break;
+            case config('custom.relation_type.sort'):
+                $model = new \app\index_admin\model\SortGoods();
+                $field_id = 'sort_id';
+                break;
+            default:
+                return errorMsg('参数有误');
+        }
+
+        $sql = $model->where($field_id,'=',$id)->field('goods_id')->buildSql();
+
+        $condition = [
+            'where' => [
+                ['status','=', 0],
+                ['shelf_status','=', 3],
+                ['id','exp',"NOT IN $sql"],
+            ],'field' => [
+                'id','thumb_img','name',
+            ],
+        ];
+
+        $modelGoods = new \app\index_admin\model\Goods();
+        $list = $modelGoods->pageQuery($condition);
+
+        $this->assign('list',$list);
+        return view($view);
     }
 }
