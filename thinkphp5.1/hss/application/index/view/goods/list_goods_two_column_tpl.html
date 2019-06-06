@@ -21,13 +21,12 @@
     }
 </style>
 <script type="text/javascript">
-    $('.add_cart').on('click',function(){
-        console.log(1)
-        $('.dialogCart').show();
-			$('.bg').show();
-    })
-    $('body').on('click','.bg,.close',function(){
+    $(".bg").on("click",function(){
 			$('.dialogCart').hide();
 			$('.bg').hide();
-		});
+		})
+		$(".close").on("click",function(){
+			$('.dialogCart').hide();
+			$('.bg').hide();
+		})
 </script>
