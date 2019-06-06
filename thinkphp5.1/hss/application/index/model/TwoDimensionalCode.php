@@ -67,7 +67,7 @@ class TwoDimensionalCode extends \common\model\Base {
         if(empty($user['avatar'])){
             $user['avatar'] = request()->domain().'/static/common/img/default/chat_head.jpg';
         }else{
-            $user['avatar']  =  request()->domain().'/uploads/'.$this->user['avatar'];
+            $user['avatar']  =  request()->domain().'/uploads/'.$user['avatar'];
         }
         $init = [
             'name'=> $user['name'], //用户名
