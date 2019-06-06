@@ -91,7 +91,7 @@
                 <a href="javascript:void(0);" class="delete_order goodsDel delete_cart" @click="delCart" :data-jump_url="del_cart_url">删除</a>
             </div>
         </div>
-    </li><li v-else-if="type==5"><!--弹框再增减数字-->
+    </li><li v-else-if="type==5">
         <div class="product-select">
             <div class=""><p></p></div>
             <div class="columns_flex l-r-sides">
@@ -114,7 +114,7 @@
                 </div>
             </div>
         </div>
-    </li><li v-else-if="type==6"><!--弹框再增减数字-->
+    </li><li v-else-if="type==6">
         <div class="close">X</div>
         <div class="product-select">
             <div class="columns_flex l-r-sides">
@@ -130,7 +130,6 @@
                     </div>
                 </div>
             </div>
-            <!-- <div class="product_name"><p class="two-line-omit">{{product_name}}</p></div> -->
         </div>
         <div class="title">
             <a class="p_img" :href="'/index/Goods/detail/id/' + product_id">
@@ -144,8 +143,11 @@
     </li>
 </template>
 <script type="text/javascript">
-    var ii = 1;
     $(function(){
+        $('body').on('click','.bg,.close',function(){
+            $('.dialogCart').hide();
+            $('.bg').hide();
+        });
         Vue.component('product-select', {
             template:'#product_select_tpl',
             props: {
@@ -204,7 +206,6 @@
                     };
                     asyncVerify(config);
                 },reduce: function () {
-                    this.monitor_buy_quantity = true;
                     //如果开启了样品购买限额
                     if(this.display_quota){
                         if((this.buy_quantity-this.step_quantity)<this.init_quantity){
@@ -228,7 +229,6 @@
                         this.buy_quantity += this.step_quantity;
                     }
                 },reduceCart: function (event) {
-                    this.monitor_buy_quantity = true;
                     if(this.buy_quantity_reduce_trigger && this.buy_quantity>1){
                         this.buy_quantity_reduce_trigger = false;
                     }else{
@@ -259,7 +259,6 @@
                     };
                     asyncVerify(config);
                 },plusCart: function (event) {
-                    this.monitor_buy_quantity = true;
                     let postData = {
                         data:[{
                             goods_id: this.product_id,
@@ -285,12 +284,6 @@
                     asyncVerify(config);
                 },dialogCart: function () {
                     let _this = this;
-                    var imgSrc = 'api_common_img/default/no_pic_100.jpg';
-                    if(this.product_src){
-                        imgSrc = 'public_uploads/'+this.product_src; 
-                    }
-                    
-                    $('.dialogCart #product-list2 .p_img img').attr("src",imgSrc)
                     // 弹出加入采购车
                     $('.dialogCart').show();
                     $('.bg').show();
@@ -399,6 +392,7 @@
         z-index: 998;
         position: fixed;
         top: 0;
+        cursor:pointer;
         display: none;
     }
     .close{
@@ -413,6 +407,7 @@
         position: absolute;
         right: 14px;
         top: -24px;
+        cursor:pointer;
     }
     .amount{
         margin-left: 8px;

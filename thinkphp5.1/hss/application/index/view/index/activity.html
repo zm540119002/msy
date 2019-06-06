@@ -123,6 +123,12 @@ html,body {
 .weiya_map{
     height:20rem;
 }
+.activityLayer .input-filed{
+    margin:0 0 12px 0;
+}
+.activityLayer .layui-m-layercont{
+    padding:15px;
+}
 </style>
 {/block}
 {block name="content"}
@@ -131,15 +137,23 @@ html,body {
     <h2 class="f24">开放日</h2>
 </section>-->
 <section class="activitycontent" style="display:none;">
-    <div class="input-filed">
-        <input type="text" placeholder="姓名">
-    </div>
-    <div class="input-filed">
-        <input type="text" placeholder="企业名称">
-    </div>
-    <div class="input-filed">
-        <input type="tel" placeholder="手机号码">
-    </div>
+    <form>
+        <div class="input-filed">
+            <input type="text" placeholder="姓名">
+        </div>
+        <div class="input-filed">
+            <input type="text" placeholder="企业名称">
+        </div>
+        <div class="input-filed">
+            <input type="tel" placeholder="手机号码">
+        </div>
+        <select class="input-filed">
+            <option value="人数">人数</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select>
+    </form>
 </section>
 <nav style="position:relative;">
     <a href="javascript:void(0);" class="back_prev_page" data-jump_url=""></a>
@@ -177,9 +191,6 @@ html,body {
     <div class="swiper-wrapper">
         <div class="swiper-slide ">
             <img src="public_img/cpy_01.jpg" alt="" class="common_default_img">
-        </div>
-        <div class="swiper-slide">
-            <img src="public_img/cpy_02.jpg" alt="" class="common_default_img">
         </div>
         <div class="swiper-slide ">
             <img src="public_img/cpy_03.jpg" alt="" class="common_default_img">
@@ -293,6 +304,7 @@ html,body {
     $('body').on('click','.activity',function(){
         layer.open({
             title:['开放日参观预约','border-bottom:1px solid #d9d9d9'],
+            className:'activityLayer',
             content:content,
             btn:['确定']
         })
