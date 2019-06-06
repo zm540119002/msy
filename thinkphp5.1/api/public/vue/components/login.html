@@ -36,8 +36,8 @@
                 </div>
                 <div class="login_item">
                     <div class="columns_flex">
-                        <input class="input-filed password" type="password" placeholder="密码" name="password">
-                        <a href="javascript:void(0);" class="hidden view-password" ></a>
+                        <input class="input-filed password" :type="password_type" placeholder="密码" name="password">
+                        <a href="javascript:void(0);" class="hidden view-password" @click="change_password_type"></a>
                     </div>
                 </div>
                 <a href="javascript:void(0);" class="entry-button btn_login">登录</a>
@@ -60,8 +60,8 @@
                 </div>
                 <div class="login_item">
                     <div class="columns_flex">
-                        <input class="input-filed password" autocomplete="new-password" type="password" placeholder="设置密码" name="password">
-                        <a href="javascript:void(0);" class="hidden view-password" ></a>
+                        <input class="input-filed password" autocomplete="new-password" :type="password_type" placeholder="设置密码" name="password">
+                        <a href="javascript:void(0);" class="hidden view-password" @click="change_password_type"></a>
                     </div>
                 </div>
                 <a href="javascript:void(0);" class="entry-button btn_register">确定</a>
@@ -86,7 +86,9 @@
                 }}
             },
             data: function () {
-                return {};
+                return {
+                    password_type:'password'
+                };
             },
             methods: {
                 switchCurrent:function(param){
@@ -101,6 +103,14 @@
                             $(this).addClass("show").siblings().removeClass("show");
                         }
                     });
+                },change_password_type:function(){
+                    console.log(this.password_type);
+                    if(this.password_type=='password'){
+                        this.password_type = 'text';
+                    }else{
+                        this.password_type = 'password';
+                    }
+                    console.log(this.password_type);
                 },login:function(param){
                     let postData = $('.loginLayer').find('#formLogin').serializeObject();
                     let content='';
