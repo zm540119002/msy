@@ -36,7 +36,7 @@ class TwoDimensionalCode extends \common\controller\UserBase {
             if($result['status']){
                 $url = $result['url'];
             }else{
-                $this -> errorMsg('失败');
+                $this -> errorMsg('11111失败');
             }
             $data = [
                 'two_dimensional_code_url' => $url,
@@ -45,7 +45,7 @@ class TwoDimensionalCode extends \common\controller\UserBase {
             ];
             $id = $model->edit($data);
             if(!$id){
-                $this -> errorMsg('失败');
+                $this -> errorMsg('2222失败');
             }
         }
         $this->successMsg('成功！',[
