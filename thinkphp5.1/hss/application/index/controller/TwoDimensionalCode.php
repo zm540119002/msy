@@ -32,11 +32,11 @@ class TwoDimensionalCode extends \common\controller\UserBase {
         $twoDimensionalCode = $model->getInfo($config);
         $url = $twoDimensionalCode['two_dimensional_code_url'];
         if(empty($url)){
-            $init = [
-                'name'=> $this->user['name'], //用户名
-                'avatar'=> $this->user['avatar'],//用户头像
-            ];
-            $url =  $this->compose($init);
+//            $init = [
+//                'name'=> $this->user['name'], //用户名
+//                'avatar'=> $this->user['avatar'],//用户头像
+//            ];
+            $url =  $this->compose();
             $data = [
                 'two_dimensional_code_url' => $url,
                 'user_id' => $this->user['id'],
@@ -73,6 +73,8 @@ class TwoDimensionalCode extends \common\controller\UserBase {
             $this->user['avatar']  =  request()->domain().'/uploads/'.$this->user['avatar'];
         }
         $init = [
+            'name'=> $this->user['name'], //用户名
+            'avatar'=> $this->user['avatar'],//用户头像
             'save_path'=>config('upload_dir.hss_user_QRCode'),   //保存目录  ./uploads/compose/goods....
             'base_map'=> request()->domain().'/static/common/img/hss_base_map.jpg', // 460*534  分享底图
             'hss_share_title'=> request()->domain().'/static/common/img/hss_share_title.jpg', // 460*534  分享底图
