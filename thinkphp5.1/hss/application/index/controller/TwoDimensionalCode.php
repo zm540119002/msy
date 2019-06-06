@@ -32,7 +32,7 @@ class TwoDimensionalCode extends \common\controller\UserBase {
         $twoDimensionalCode = $model->getInfo($config);
         $url = $twoDimensionalCode['two_dimensional_code_url'];
         if(empty($url)){
-            $url =  $this->compose($init=[]);
+            $url =  $model->compose($this->user);
             $data = [
                 'two_dimensional_code_url' => $url,
                 'user_id' => $this->user['id'],
@@ -43,9 +43,6 @@ class TwoDimensionalCode extends \common\controller\UserBase {
                 $this -> errorMsg('失败');
             }
         }
-//        if(!empty($twoDimensionalCode)){
-//            unlink( request()->domain().'/uploads/'.$twoDimensionalCode['two_dimensional_code_url']);
-//        }
         $this->successMsg('成功！',[
             'code'=> config('code.success.get_user_code.code'),
             'url' => $url,
