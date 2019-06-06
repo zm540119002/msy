@@ -28,9 +28,9 @@ class Promotion extends \common\controller\Base{
             //$this->assignStandardBottomButton([0,2,3]);
 
             $unlockingFooterCart = unlockingFooterCartConfigTest([0,2,3]);
-            array_push($unlockingFooterCart['menu'][0]['class'],'group_btn25');
-            array_push($unlockingFooterCart['menu'][1]['class'],'group_btn25');
-            array_push($unlockingFooterCart['menu'][2]['class'],'group_btn70');
+            array_push($unlockingFooterCart['menu'][0]['class'],'group_btn40');
+            array_push($unlockingFooterCart['menu'][1]['class'],'group_btn20');
+            array_push($unlockingFooterCart['menu'][2]['class'],'group_btn40');
 
             $this->assign('unlockingFooterCart',json_encode($unlockingFooterCart));
 
