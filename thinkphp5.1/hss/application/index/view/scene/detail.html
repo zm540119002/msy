@@ -66,6 +66,7 @@
 				v-for="(productInfo,index) in productList"
 				:key="index"
 				:init_product_id="productInfo.id"
+				:init_product_src="productInfo.thumb_img"
 				:init_deal_price="parseFloat(productInfo.bulk_price)"
 				:init_quantity="parseInt(init_quantity)"
 				:step_quantity="parseInt(step_quantity)"
@@ -221,6 +222,9 @@
 		right: 14px;
 		top: -24px;
 	}
+	.amount{
+		margin-left: 8px;
+	}
 	.dialogCart{
 		width: 100%;
 		height: 200px;
@@ -268,7 +272,6 @@
 		left: 10px;
 		width: 70px;
 		height: 70px;
-		background: red;
 		border: none;
 	}
 	.title span{
