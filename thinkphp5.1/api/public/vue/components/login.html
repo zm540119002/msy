@@ -86,13 +86,13 @@
             },
             methods: {
                 switchCurrent:function(param){
+                    dialog.success(1);
                     let _thisLi = param.obj;
                     if(!_thisLi.length){
                         return false;
                     }
                     _thisLi.addClass("current").siblings().removeClass("current");
                     let _thisLiIndex = _thisLi.index();
-                    dialog.success(_thisLiIndex);
                     $.each(_thisLi.parents('.userInfoWrapper').find('form'),function(index){
                         if(index==_thisLiIndex){
                             $(this).addClass("show").siblings().removeClass("show");
