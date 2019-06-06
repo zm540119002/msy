@@ -125,29 +125,6 @@
 				</div>
 			</div>
 		</div>
-<<<<<<< HEAD
-=======
-		<!-- 1 -->		
-		<div class="bg"></div>
-		<div class="dialogCart">
-			<div id="product-list2">
-				<product-select
-						v-for="(productInfo,index) in productList"
-						:key="index"
-						:init_product_id="productInfo.id"
-						:init_product_src="productInfo.thumb_img"
-						:init_deal_price="parseFloat(productInfo.bulk_price)"
-						:init_quantity="parseInt(init_quantity)"
-						:step_quantity="parseInt(step_quantity)"
-						:type="type"
-				></product-select>	
-			</div>
-			<div id="foot_cart_menu">
-					<footer-menu></footer-menu>
-			</div>
-		</div>
-		<!-- 1 -->
->>>>>>> f8c473b2f2761047c45276807eef2ba01f084b0e
 	</section>
 </article>
 {/block}
@@ -155,45 +132,6 @@
 {include file="template/footer_project.html" /}
 {/block}
 {block name="script"}
-<<<<<<< HEAD
-=======
-<!-- 1 -->
-<script type="text/javascript">
-	$(function(){
-		new Vue({
-			el:'#foot_cart_menu',
-			data:function(){
-				return {};
-			}
-		});
-	})
-</script>
-{include file="../../api/public/vue/components/footer-menu.html" /}
-{include file="../../api/public/vue/components/product-select.html" /}
-<script type="text/javascript">
-	$(function(){
-		let param = {
-			type:6,
-			init_quantity:1,
-			step_quantity:1,
-			productList:[
-				{
-					id:1,
-					bulk_price:10
-				}
-			]
-		};
-		new Vue({
-			el: '#product-list2',
-			data:function(){
-				return param;
-			}
-		});
-	
-	});
-</script>
-<!-- 1 -->
->>>>>>> f8c473b2f2761047c45276807eef2ba01f084b0e
 <script type="text/javascript" src="api_common_js/swiper.min.js"></script>
 <script type="text/javascript">
 	var config = {
