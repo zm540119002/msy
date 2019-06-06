@@ -11,10 +11,18 @@ class TwoDimensionalCode extends \common\model\Base {
 	//表的别名
 	protected $alias = 'tdc';
 
-
+    /**
+     * @param $user
+     * @return array 生成新的二维码和入库
+     */
     public function editTable($user)
     {
-        $url =  $this->compose($user);
+        $result =  $this->compose($user);
+        if($result['status']){
+            $url = $result['url'];
+        }else{
+            return errorMsg('失败');
+        }
         $config = [
             'where' => [
                 ['status', '=', 0],
@@ -62,7 +70,7 @@ class TwoDimensionalCode extends \common\model\Base {
         if(empty($user['avatar'])){
             $user['avatar'] = request()->domain().'/static/common/img/default/chat_head.jpg';
         }else{
-            $user['avatar']  =  request()->domain().'/uploads/'.$this->user['avatar'];
+            $user['avatar']  =  request()->domain().'/uploads/'.$user['avatar'];
         }
         $init = [
             'name'=> $user['name'], //用户名
@@ -82,7 +90,7 @@ class TwoDimensionalCode extends \common\model\Base {
         $hss_share_sm = $this->imgInfo($init['hss_share_sm']);
         $hss_share_sm1 = $this->imgInfo($init['hss_share_sm1']);
         if( !$avatar || !$baseMap || !$qrcode){
-            $this->errorMsg('提供的图片问题');
+            return errorMsg('提供的图片问题');
         }
         $im = imagecreatetruecolor(900, 1500);  //图片大小
         $gray_color = imagecolorallocate($im, 87,89,88);

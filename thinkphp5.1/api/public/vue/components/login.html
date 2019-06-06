@@ -3,13 +3,17 @@
         display: none;
     }.show{
         display: block;
-    }#send_sms{
+    }
+    #send_sms{
           width: 45%;
           padding: .14rem 0;
           background: #FF7BAC;
           color: #fff;
           border-radius: 5px;
           text-align: center;
+    }
+    .switch_current{
+        cursor:pointer;
     }
 </style>
 <!-- 模板 -->
@@ -21,7 +25,7 @@
         <div class="f24 bomb_box">
             <ul class="loginNav">
                 <li class="switch_current" :class="{current:true}">登录</li>
-                <li class="switch_current" class="switch_current" :class="{current:false}">注册/重置密码</li>
+                <li class="switch_current" :class="{current:false}">注册/重置密码</li>
             </ul>
             <form class="loginTab" :class="{show:true}" id="formLogin">
                 <div class="login_item">
@@ -87,10 +91,13 @@
             methods: {
                 switchCurrent:function(param){
                     let _thisLi = param.obj;
-                    _thisLi.length && _thisLi.addClass("current").siblings().removeClass("current");
-                    let _thisIndex = _thisLi.index();
+                    if(!_thisLi.length){
+                        return false;
+                    }
+                    _thisLi.addClass("current").siblings().removeClass("current");
+                    let _thisLiIndex = _thisLi.index();
                     $.each(_thisLi.parents('.userInfoWrapper').find('form'),function(index){
-                        if(index==_thisIndex){
+                        if(index==_thisLiIndex){
                             $(this).addClass("show").siblings().removeClass("show");
                         }
                     });
@@ -318,13 +325,16 @@
             };
             asyncVerify(config);
         });
+        //切换
         $('body').on('click','.loginLayer .switch_current',function(){
+            let _this = $(this);
             //触发-切换当前-事件
             let param = {
-                obj:$(this)
+                obj:_this
             };
             bus.$emit('switchCurrent',param);
         });
+        //登录确定
         $('body').on('click','.loginLayer .btn_login',function(){
             //触发-登录-事件
             let login_success_callback_param = {
@@ -337,6 +347,7 @@
             };
             bus.$emit('login',param);
         });
+        //注册确定
         $('body').on('click','.loginLayer .btn_register',function(){
             //触发-注册-事件
             let register_success_callback_param = {
