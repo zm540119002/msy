@@ -23,15 +23,16 @@
 		{notempty name="promotionList"}
 			{volist name="promotionList" id="vo"}
 			<a href="{:url('Promotion/detail',['id'=>$vo.id])}" data-id="{$vo.id}" class="">
-				<div class="applay_p_item columns_flex l-r-sides" style="background-image:url({:show_img_handle($vo.thumb_img)})">
-					<div>
+				<div class="applay_p_item columns_flex l-r-sides">
+		<!--			<div>
 						<div class="red">¥<price>{$vo.price}</price></div>
 						<p>{$vo.name}</p>
 						<p class="once-enter">立即进入></p>
 					</div>
-					<!--<div class="group_btn50">
+					<div class="group_btn50">
 						<img class="common_default_img" src="" alt="{$vo.name}">
 					</div>-->
+					<img class="common_default_img" src="{:show_img_handle($vo.thumb_img)}" alt="{$vo.name}">
 				</div>
 			</a>
 			{/volist}
@@ -41,51 +42,83 @@
 			<product-select
 					v-for="(productInfo,index) in productList"
 					:key="index"
-					:product_id="productInfo.id"
-					:deal_price="parseFloat(productInfo.bulk_price)"
-					:product_name="productInfo.headline"
-					:product_src="productInfo.thumb_img"
+					:init_product_id="productInfo.id"
+					:init_deal_price="parseFloat(productInfo.bulk_price)"
+					:init_product_name="productInfo.headline"
+					:init_product_src="productInfo.thumb_img"
 					:init_quantity="parseInt(init_quantity)"
 					:step_quantity="parseInt(step_quantity)"
-					:specification="productInfo.specification"
+					:init_specification="productInfo.specification"
+					:by_footer_menu_monitor="by_footer_menu_monitor"
 					:type="type"
 			></product-select>
 		</ul>
 	</section>
-	
 </article>
-
 {/block}
 {block name="common"}{/block}
 {block name="footer"}
 {include file="../../api/public/vue/components/footer-menu.html" /}
 <div class="bg"></div>
-	<div class="dialogCart">
-		<div class="close" onclick="close">×</div>
-		<!-- <div id="product-list">
-			<product-select></product-select>
-		</div> -->
-		<div id="foot_cart_menu">
-			<footer-menu></footer-menu>
-		</div>
+<div class="dialogCart">
+	<div id="product-list2">
+		<product-select
+				v-for="(productInfo,index) in productList"
+				:key="index"
+				:init_product_id="productInfo.id"
+				:init_product_src="productInfo.thumb_img"
+				:init_deal_price="parseFloat(productInfo.bulk_price)"
+				:init_quantity="parseInt(init_quantity)"
+				:step_quantity="parseInt(step_quantity)"
+				:type="type"
+		></product-select>	
 	</div>
+	<div id="foot_cart_menu">
+			<footer-menu></footer-menu>
+	</div>
+</div>
 <script type="text/javascript">
 	$(function(){
 		new Vue({
-            el:'#foot_cart_menu',
-            data:function(){
-                return {};
-            }
-        });
+			el:'#foot_cart_menu',
+			data:function(){
+				return {};
+			}
+		});
 	})
 </script>
 {include file="../../api/public/vue/components/product-select.html" /}
 <script type="text/javascript">
 	$(function(){
 		let param = {
-			type:0,
+			type:6,
 			init_quantity:1,
 			step_quantity:1,
+			productList:[
+				{
+					id:0,
+					bulk_price:0
+				}
+			]
+		};
+		new Vue({
+			el: '#product-list2',
+			data:function(){
+				return param;
+			}
+		});
+		$('body').on('click','.bg,.close',function(){
+			$('.dialogCart').hide();
+			$('.bg').hide();
+		});
+	});
+</script><script type="text/javascript">
+	$(function(){
+		let param = {
+			type:5,
+			init_quantity:1,
+			step_quantity:1,
+			by_footer_menu_monitor:false,
 			productList:[],
 			getJsonListParam:{
 				url:module+'Goods/getRelationGoods',
@@ -113,7 +146,7 @@
 					$.each(data.data.data,function(i,o){
 						_this.productList.push(o);
 					});
-				},
+				}
 			},created:function(){
 				let _thisVue = this;
 				_thisVue.getJsonListParam.callBack = _thisVue.getJsonListCallBack;
@@ -135,16 +168,6 @@
 {block name="script"}
 <script type="text/javascript" src="api_common_js/swiper.min.js"></script>
 <script type="text/javascript">
-$('.close').click(function(){
-	console.log(00);
-	$('.bg').toggle()
-	$('.dialogCart').slideUp(500)
-})
-$('.bg').click(function(){
-	console.log(00);
-	$('.bg').toggle()
-	$('.dialogCart').slideUp(500)
-})
 	$(function(){
 		var id = '{$info.id}';
 		var date=getWeek();
@@ -184,7 +207,7 @@ $('.bg').click(function(){
 		z-index: 998;
 		position: fixed;
 		top: 0;
-		display: none
+		display: none;
 	}
 	.close{
 		width: 16px;
@@ -194,10 +217,13 @@ $('.bg').click(function(){
 		color: #fff;
 		text-align: center;
 		line-height: 16px;
-		font-size: 16px;
+		font-size: 10px;
 		position: absolute;
 		right: 14px;
 		top: -24px;
+	}
+	.amount{
+		margin-left: 8px;
 	}
 	.dialogCart{
 		width: 100%;
@@ -206,7 +232,22 @@ $('.bg').click(function(){
 		position: fixed;
 		bottom: 0;
 		z-index: 999;
-		display: none
+		display: none;
+	}.dialogCart .product-select .right{
+		width: 35% !important;
+	}
+	.dialogCart .product-select{
+		border-top: 1px solid #eee;
+		border-bottom: 1px solid #eee;
+		margin-top: 5px;
+	}
+	#product-list2 .product-select{
+		position: relative;
+		top: 60px;
+		padding: 8px 0 0 10px;
+	}
+	.dialogCart .red{
+		font-size: 0.2rem;
 	}
 	.group_cart_nav a:nth-of-type(1){
 		width: 60%
@@ -216,6 +257,59 @@ $('.bg').click(function(){
 	}
 	.group_cart_nav a:nth-of-type(4){
 		width: 60%
+	}
+	/* .title{
+		position: absolute;
+		height: 60px;
+		top: 0;
+		 display: block;
+		color: #EB6100;
+		margin-bottom: 6px;
+	} */
+	.title img{
+		position: absolute;
+		top: -18px;
+		left: 10px;
+		width: 70px;
+		height: 70px;
+		border: none;
+	}
+	.title span{
+		font-size: 0.25rem;
+		position: absolute;
+		left: 88px;
+		margin-top: 10px;
+		color: #333;
+		top:0
+	}
+	.intro p span{
+		font-size: 0.25rem !important;
+	}
+	.specs{
+		font-size: 0.2rem;
+		display: flex;
+		justify-content: space-between;
+		padding: 10px;
+		position: relative;
+		top: 55px;
+	}
+	nav{
+		z-index: 998;
+		position: fixed !important;
+		top: 0;
+		width: 100%;
+	}
+	.nav_menu{
+		width: 100%;
+	}
+	.slider_banner{
+		margin-top: 42px;
+	}
+	.product_name{
+		font-size: 0.2rem;
+	}
+	.add_num{
+		left: 18px;
 	}
 	</style>
 {/block}

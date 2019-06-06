@@ -5,25 +5,43 @@
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>名称：</label>
             <div class="formControls col-xs-8 col-sm-9">
-                <input type="text" class="input-text" placeholder="" name="name" value="{$info.name}">
+                <input type="text" class="input-text" style="width:300px;" placeholder="" name="name" value="{$info.name}">
             </div>
         </div>
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>价格：</label>
             <div class="formControls col-xs-8 col-sm-9">
-                <input type="text" class="input-text" placeholder="" name="price" value="{$info.price}">
+                <input type="text" class="input-text" style="width:300px;" placeholder="" name="price" value="{$info.price}">
             </div>
         </div>
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-2">排序：</label>
             <div class="formControls col-xs-8 col-sm-9">
-                <input type="text" class="input-text" placeholder="" name="sort" value="{$info.sort|default=0}">
+                <input type="text" class="input-text" style="width:300px;" placeholder="" name="sort" value="{$info.sort|default=0}">
             </div>
         </div>
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-2">标签：</label>
             <div class="formControls col-xs-8 col-sm-9">
                 <input type="text" class="input-text" placeholder="多个标签请用逗号分隔，例如：正品保障,纳晶水光" name="tag" value="{$info.tag}">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2">优惠描述：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" placeholder="" name="remarks" value="{$info.remarks}">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2">优惠商品：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <button type="button" class="btn btn-primary radius recommend">
+                    <i class="Hui-iconfont"></i> 添加商品
+                </button>
+                已选择 <span class="c-red">{$info.recommend_goods_num|default=0}</span> 种商品
+                <div>
+
+                </div>
             </div>
         </div>
         <div class="row cl">
@@ -56,6 +74,7 @@
         <div class="row cl">
             <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
                 <input type="hidden" name='id' value="{$info.id}">
+                <input type="hidden" name='ids' value="">
                 <button class="btn btn-primary radius button_save_black_4" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
                 <button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
                 <span class="c-red">*</span>(图片只显示缩略图，不影响原效果)
@@ -167,9 +186,9 @@
                 dialog.msg(msg,'',function () {
                     if(msg.status){
                         // 提交后关闭，然后刷新父窗口
+                        window.parent.location.reload();
                         var index = parent.layer.getFrameIndex(window.name);   //先得到当前iframe层的索引
                         parent.layer.close(index);
-                        //window.parent.location.reload();
                     }
                 });
             });
@@ -180,6 +199,50 @@
             location.href = controller + '/manage';
         });
 
+        $("body").on('click','.recommend',function(){
+
+            var url =  module + 'Goods/recommendGoods';
+            var _this = $(this);
+            layer.open({
+                type: 2,
+                title:'添加商品',
+                shadeClose: false,
+                shade: 0.8,
+                area: ['80%', '90%'],
+                content: url, //iframe的url
+                btn: ['确定添加', '关闭'],
+                yes: function(index, layero){
+
+                    var body = layer.getChildFrame('body', index);
+                    recommendIds = [];
+                    body.find('.selected_goods_list li').each(function () {
+                        var goodsSelectedId = $(this).data('goods-id');
+                        var goods_name = $(this).find('.goods_name').html();
+                        //var str = $(this).find('.list_item').clone();
+
+                        //$(".recommend").parent().append().html(str);
+                        console.log(goods_name);
+                        return false;
+                        recommendIds.push(goodsSelectedId);
+                    });
+
+
+                    var num = parseInt($(".recommend").next().html());
+                    $(".recommend").next().html(num+parseInt(recommendIds.length));
+
+                    var ids = $('input[name="ids"]').val();
+                    if(ids){
+                        recommendIds = ids+','+recommendIds;
+                    }
+
+                    $('input[name="ids"]').val(recommendIds);
+                    layer.close(index);
+                },
+                no: function(){
+                    layer.close(index);
+                }
+            });
+        });
     });
 </script>
 {/block}

@@ -1,18 +1,26 @@
-{volist name="list" id="vo"}
-<li data-id="{$vo.id}" class="">
-    <div class="list_item">
-        <div >
-            <img src="public_uploads/{$vo.thumb_img}" alt="" class="left">
-            <p class="goods_name">{$vo.name}</p>
-        </div>
-    </div>
-    <div class="list_item">
-        <a href="javascript:void(0);" class="add_goods">添加</a>
-    </div>
-</li>
-{/volist}
+<table class="table table-border table-bordered table-bg table-hover table-sort dataTable no-footer" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
+    <thead>
+    <tr class="text-c" role="row">
+        <th width="40" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 60px;">商品编号</th>
+        <th width="60" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 60px;">缩略图</th>
+        <th width="100" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 250px;">商品名称</th>
+        <th width="20" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 20px;">添加数量</th>
+        <th width="100" class="sorting_disabled" rowspan="1" colspan="1" aria-label="操作" style="width: 100px;">操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    {volist name="list" id="vo"}
+    <tr class="text-c va-m odd" role="row" data-goods-id="{$vo.id}">
+        <td class="sorting_1">{$vo.number}</td>
+        <td><img src="public_uploads/{$vo.thumb_img}" width="60" alt="" class="left"></td>
+        <td class="text-l"> {$vo.name}</td>
+        <td class="text-l"><input type="text" class="input-text" placeholder="" name="goods_num" value=""></td>
+        <td class="td-manage add-goods"><a style="text-decoration:none" href="javascript:;" title="添加">添加</a></td>
+    </tr>
+    {/volist}
+    </tbody>
+</table>
 {$list|raw}
-
 
 
 

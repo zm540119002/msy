@@ -3,7 +3,7 @@
 {block name="content"}
 <article class="f24">
 	<!-- 项目信息 -->
-	<div id="menu">
+	<div id="menu" class="menu">
 		<a href="javascript:void(0);" class="back_prev_page" data-jump_url=""></a>
 		<ul class="columns_flex detail-nav">
 			<li data-item="item1"><a href="javascript:;" class="">项目产品</a></li>
@@ -20,12 +20,16 @@
 			{notempty name="promotionList"}
 			{volist name="promotionList" id="vo"}
 			<a href="{:url('Promotion/detail',['id'=>$vo.id])}" data-id="{$vo.id}" class="">
-				<div class="applay_p_item columns_flex l-r-sides" style="background-image:url({:show_img_handle($vo.thumb_img)})">
-					<div>
-						<div class="red">¥<price>{$vo.price}</price></div>
-						<p>{$vo.name}</p>
-						<p class="once-enter">立即进入></p>
-					</div>
+				<div class="applay_p_item columns_flex l-r-sides">
+					<!--			<div>
+                                    <div class="red">¥<price>{$vo.price}</price></div>
+                                    <p>{$vo.name}</p>
+                                    <p class="once-enter">立即进入></p>
+                                </div>
+                                <div class="group_btn50">
+                                    <img class="common_default_img" src="" alt="{$vo.name}">
+                                </div>-->
+					<img class="common_default_img" src="{:show_img_handle($vo.thumb_img)}" alt="{$vo.name}">
 				</div>
 			</a>
 			{/volist}
@@ -35,13 +39,13 @@
 				<product-select
 						v-for="(productInfo,index) in productList"
 						:key="index"
-						:product_id="productInfo.id"
-						:deal_price="parseFloat(productInfo.bulk_price)"
-						:product_name="productInfo.headline"
-						:product_src="productInfo.thumb_img"
+						:init_product_id="productInfo.id"
+						:init_deal_price="parseFloat(productInfo.bulk_price)"
+						:init_product_name="productInfo.headline"
+						:init_product_src="productInfo.thumb_img"
 						:init_quantity="parseInt(init_quantity)"
 						:step_quantity="parseInt(step_quantity)"
-						:specification="productInfo.specification"
+						:init_specification="productInfo.specification"
 						:type="type"
 				></product-select>
 			</ul>
@@ -76,7 +80,7 @@
 						{volist name="$info.process" id="vo"}
 						<div class="swiper-slide swiper-slide-active" style="text-align: left;margin-right: 10px;">
 							<img src="{:show_img_handle($vo.img)}" alt="" class="common_default_img">
-							{$vo.desc}
+							<span style="font-size: 13px;margin-top:10px;">{$vo.desc}</span>
 						</div>
 						{/volist}
 					</div>
@@ -120,7 +124,7 @@
 <script type="text/javascript">
 	$(function(){
 		let param = {
-			type:0,
+			type:5,
 			init_quantity:1,
 			step_quantity:1,
 			productList:[],
@@ -142,7 +146,6 @@
 				return param;
 			},methods:{
 				getJsonListCallBack:function(data){
-					console.log(data);
 					if(data.status==0){
 						dialog.error(data.info);
 						return false;
@@ -185,7 +188,8 @@
 		});
 		//轮播
 		var swiper = new Swiper('.swiper-container', {
-			spaceBetween: 30,
+			//spaceBetween: 30,
+			direction: 'horizontal',
 			pagination: {
 				el: '.swiper-pagination',
 				clickable: true
@@ -199,4 +203,15 @@
 
 	});
 </script>
+<style scoped>	
+	.menu{
+		position: fixed;
+		top: 0;
+		z-index: 10;
+		width: 100%;
+	}
+	.f24{
+		margin-top: 42px;
+	}
+</style>
 {/block}

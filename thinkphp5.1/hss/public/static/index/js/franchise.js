@@ -1,11 +1,11 @@
+var area_address,
+    applicantData={};
+
 $(function(){
     tab_down('.apply-data-nav .switch-item','.apply-module','click');
-    var area_address,
-        applicantData={};
 
     //初始化 未完成的申请
-    if(!$.isEmptyArray(apply)){
-        applicantData.id= apply.id;
+    if(apply!=null){
         applicantData = {
             id:apply.id,
             name:apply.name,
@@ -15,7 +15,8 @@ $(function(){
             city:apply.city,
             area:apply.area,
             detail_address:apply.detail_address,
-            old_apply_status:apply.apply_status
+            old_apply_status:apply.apply_status,
+            pay_id:apply.pay_id,
         };
         //省市区初始化
         var region = [];
@@ -38,11 +39,15 @@ $(function(){
     //填写基本资料
     $('body').on('click','.one-step',function(){
         var _this = $(this);
-        applicantData=$('.applicant_form').serializeObject();
+        var data=$('.applicant_form').serializeObject();
+        applicantData.name=data.name;
+        applicantData.applicant=data.applicant;
+        applicantData.mobile=data.mobile;
+        applicantData.detail_address=data.detail_address;
         area_address =$('.area-address-name').getArea();
-        // applicantData.province = area_address[0];
-        // applicantData.city = area_address[1];
-        // applicantData.area = area_address[2];
+        applicantData.province = area_address[0];
+        applicantData.city = area_address[1];
+        applicantData.area = area_address[2];
         var content='';
         if(!applicantData.name){
             content='请填写店家名称';
@@ -58,12 +63,9 @@ $(function(){
         if(content){
             dialog.error(content);
         }else{
-            // applicantData.step = 1;
-            // submitApplicant(_this,applicantData);
-            $('.weui-flex-item:eq(0)').removeClass('current');
-            $('.weui-flex-item:eq(1)').addClass('current');
-            $('.apply-module:eq(0)').hide();
-            $('.apply-module:eq(1)').show();
+            applicantData.step = 1;
+            console.log(applicantData);
+            submitApplicant(_this,applicantData);
         }
     });
     
@@ -95,6 +97,7 @@ $(function(){
         applicantData.city = area_address[1];
         applicantData.area = area_address[2];
         applicantData.pay_code = $('.pay_code').val();
+        applicantData.step = 2;
         _this = $(this);
         if(!applicantData.pay_code){
             dialog.error('请选择结算方式');
@@ -123,34 +126,18 @@ function submitApplicant(_this,postData){
             _this.removeClass("nodisabled");//删除防止重复提交
             $('.loading').hide();
             if(data.status){
-                location.href = data.url;
-
+                applicantData.id = data.data.id;
+                if(postData.step==1){
+                    $('.weui-flex-item:eq(0)').removeClass('current');
+                    $('.weui-flex-item:eq(1)').addClass('current');
+                    $('.apply-module:eq(0)').hide();
+                    $('.apply-module:eq(1)').show();
+                }else{
+                    location.href = data.data.url;
+                }
             }else{
                 dialog.success(data.info);
-                //dialog.error('结算提交失败!');
             }
         }
-        // success: function(data){
-        //     _this.removeClass("nodisabled");//删除防止重复提交
-        //     $('.loading').hide();
-        //     if(data.status){
-        //         applicantData.id = data.data.id;
-        //         if(postData.step==1){
-        //             $('.weui-flex-item:eq(0)').removeClass('current');
-        //             $('.weui-flex-item:eq(1)').addClass('current');
-        //             $('.apply-module:eq(0)').hide();
-        //             $('.apply-module:eq(1)').show();
-        //         }else if(postData.step==2){
-        //             $('.weui-flex-item:eq(0),.weui-flex-item:eq(1)').removeClass('current');
-        //             $('.weui-flex-item:eq(2)').addClass('current');
-        //             $('.apply-module:eq(1)').hide();
-        //             $('.apply-module:eq(2)').show();
-        //         }else if(postData.step==3){
-        //             location.href = data.data.url;
-        //         }
-        //     }else{
-        //         dialog.success(data.info);
-        //     }
-        // }
     });
 }

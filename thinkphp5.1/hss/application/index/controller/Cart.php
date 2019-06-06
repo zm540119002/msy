@@ -40,7 +40,17 @@ class Cart extends \common\controller\UserBase {
 
         $cartList = $model->getList($config);
         $cartList = array_column($cartList,null,'goods_id');
+
+
+        $validate = new \app\index\validate\Cart();
+
         foreach ($goodsList as $k => &$goods){
+
+            if(!$validate->check($goods)) {
+                unset($goodsList[$k]);
+                continue;
+
+            }
 
             $goods['user_id']    = $this->user['id'];
             $goods['buy_type']   = $goods['buy_type'] ? $goods['buy_type'] : 1;
@@ -131,7 +141,11 @@ class Cart extends \common\controller\UserBase {
         $user = checkLogin();
         if($user){
             $modelCart = new \app\index\model\Cart();
-            $totalNum = $modelCart->where(['status'=>0,'user_id'=>$user['id']])->sum('num');
+            $totalNum = $modelCart
+                ->alias('c')
+                ->join('goods g','c.goods_id = g.id')
+                ->where(['c.status'=>0,'c.user_id'=>$user['id'],'g.shelf_status'=>3])
+                ->sum('c.num');
             $this -> assign('total_num',$totalNum);
         }
     }
