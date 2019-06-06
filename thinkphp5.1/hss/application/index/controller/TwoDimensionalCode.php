@@ -36,7 +36,7 @@ class TwoDimensionalCode extends \common\controller\UserBase {
                 'name'=> 22, //用户名
                 'avatar'=> 33,//用户头像
             ];
-            $url =  $this->compose();
+            $url =  $this->compose($init);
             $data = [
                 'two_dimensional_code_url' => $url,
                 'user_id' => $this->user['id'],
