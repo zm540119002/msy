@@ -18,7 +18,6 @@
 <style>
 </style>
 <script type="text/javascript">
-    /*
     $('.add_cart').on('click',function(){
         var imgUrl = $(this).parent().parent().parent().find("a img").attr("src");
         var title = $(this).parent().parent().find(".title_name").html();
@@ -29,23 +28,4 @@
         $('.dialogCart').show();
 			$('.bg').show();
     })
-    */
-   function dialogCart()
-    $(".bg").on("click",function(){
-            /*
-            var imgUrl = $(this).parent().parent().parent().parent().find("a img").attr("src");
-            var title = $(this).parent().parent().parent().find(".title_name").html();
-            var price = $(this).parent()..parent().find("price").html();
-            console.log(imgUrl);
-            console.log(title);
-            console.log(price);
-            */
-           
-			$('.dialogCart').hide();
-			$('.bg').hide();
-		})
-		$(".close").on("click",function(){
-			$('.dialogCart').hide();
-			$('.bg').hide();
-		})
 </script>
