@@ -92,7 +92,7 @@
                     }
                     _thisLi.addClass("current").siblings().removeClass("current");
                     let _thisLiIndex = _thisLi.index();
-                    dialog.error(_thisLiIndex);
+                    dialog.success(_thisLiIndex);
                     $.each(_thisLi.parents('.userInfoWrapper').find('form'),function(index){
                         if(index==_thisLiIndex){
                             $(this).addClass("show").siblings().removeClass("show");
