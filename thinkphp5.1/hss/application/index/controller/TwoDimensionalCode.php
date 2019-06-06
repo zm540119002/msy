@@ -28,8 +28,9 @@ class TwoDimensionalCode extends \common\controller\UserBase {
             if($result['status']){
                 $url = $result['url'];
             }else{
-                $this -> errorMsg('11111失败');
+                $this -> errorMsg('失败');
             }
+
             $data = [
                 'two_dimensional_code_url' => $url,
                 'user_id' => $this->user['id'],
@@ -37,7 +38,7 @@ class TwoDimensionalCode extends \common\controller\UserBase {
             ];
             $id = $model->edit($data);
             if(!$id){
-                $this -> errorMsg('2222失败');
+                $this -> errorMsg('失败');
             }
         }
         $this->successMsg('成功！',[
@@ -47,4 +48,8 @@ class TwoDimensionalCode extends \common\controller\UserBase {
     }
 
 
+    public function generatingTwoDimensionalCode(){
+        $model = new \app\index\model\TwoDimensionalCode();
+        $model->editTable($this->user);
+    }
 }

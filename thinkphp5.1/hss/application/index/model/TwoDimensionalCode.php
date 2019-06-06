@@ -29,7 +29,7 @@ class TwoDimensionalCode extends \common\model\Base {
             'user_id' => $user['id'],
             'create_time' => time(),
         ];
-        if(!empty($info['two_dimensional_code_url'])){
+        if(!empty($info['two_dimensional_code_url'] || !empty($info))){
             //修改
             $where1 = [
                 'id' => $info['id'],

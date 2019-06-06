@@ -232,6 +232,7 @@
                         $(obj).find('.img').val(data.avatar);
                         dialog.success(data.info);
                         $('.user_info_list').find('.user_header').attr('src',uploads+data.avatar);
+                        generatingTwoDimensionalCode();
                     }else{
                         dialog.error(data.info)
                     }
@@ -267,6 +268,7 @@
                                 dialog.success(data.info);
                                 $('.user_info_list').find('.user_name').text(data.name);
                                 $('.userInfoLayer ').find('.old_name').val(data.name);
+                                generatingTwoDimensionalCode();
                             }else{
                                 dialog.error(data.info)
                             }
@@ -276,6 +278,23 @@
                 }
             });
         });
+
+         function generatingTwoDimensionalCode() {
+             $.ajax({
+                 url: module+"TwoDimensionalCode/generatingTwoDimensionalCode",
+                 data: {},
+                 type: 'post',
+                 beforeSend: function(){
+                     $('.loading').show();
+                 },
+                 error:function(){
+                     $('.loading').hide();
+                 },
+                 success: function(data){
+
+                 }
+             });
+         }
     })
 </script>
 {/block}
