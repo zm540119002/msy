@@ -21,6 +21,11 @@
     }
 </style>
 <script type="text/javascript">
+    $('.add_cart').on('click',function(){
+        console.log(1)
+        $('.dialogCart').show();
+			$('.bg').show();
+    })
     $(".bg").on("click",function(){
 			$('.dialogCart').hide();
 			$('.bg').hide();
