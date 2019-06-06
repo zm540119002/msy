@@ -144,20 +144,20 @@
     <li v-else-if="type==7">
             <div class="product-select">
                 <div class=""><p></p></div>
-                <div class="columns_flex card l-r-sides">
-                    <div class="left">
-                        <a class="p_img" :href="'/index/Goods/detail/id/' + product_id">
-                            <img class="left" :src="product_src?('public_uploads/' + product_src):('api_common_img/default/no_pic_100.jpg') " alt="">
+                <div class="">
+                    <div class="">
+                        <a class="p_img img2" :href="'/index/Goods/detail/id/' + product_id">
+                            <img class="" :src="product_src?('public_uploads/' + product_src):('api_common_img/default/no_pic_100.jpg') " alt="">
                         </a>
                     </div>
-                    <div  class="right">
+                    <div  class="">
                         <div class="product_name">
                             <p class="two-line-omit">{{product_name}}</p>
                         </div>
                         <div class="product_specs">
                             <p class="two-line-omit">{{specification}}</p>
                         </div>
-                        <div class="quantity_wrapper selected-number columns_flex l-r-sides">
+                        <div class=" columns_flex l-r-sides">
                             <div><span class="red deal_price">￥{{deal_price}}</span></div>
                             <div><a href="javascript:void(0);" class="add_cart add_cart_i" @click="dialogCart" :data-jump_url="add_cart_url"><i></i></a></div>
                         </div>
@@ -454,7 +454,7 @@
         border-bottom: 1px solid #eee;
         margin-top: 5px;
     }
-   .product-select .card{
+   /* .product-select .card{
        flex-direction:column;
        padding: 5px;
    }
@@ -473,6 +473,9 @@
    .card .right .quantity_wrapper {
        position: relative;
     
+   } */
+   .img2{
+       width: 100% !important;
    }
    .close{
 		width: 16px;
