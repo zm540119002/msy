@@ -212,6 +212,7 @@ class Goods extends Base {
         $this->assign('list',$list);
         if($_GET['pageType'] == 'layer'){
             return view('goods/list_layer_tpl_copy');
+            //return view('goods/list_layer_tpl');
         }
         if($_GET['pageType'] == 'manage'){
             return view('goods/list_tpl');
