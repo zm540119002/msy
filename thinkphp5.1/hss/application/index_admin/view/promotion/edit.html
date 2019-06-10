@@ -38,7 +38,6 @@
                 <button type="button" class="btn btn-primary radius recommend">
                     <i class="Hui-iconfont"></i> 添加商品
                 </button>
-                已选择 <span class="c-red">{$info.recommend_goods_num|default=0}</span> 种商品
                 <div style="margin-bottom: 20px;">
                     <table>
                         <thead>
@@ -271,13 +270,6 @@
                         //recommendIds.push(goodsSelectedId);
                         //recommend.push(parseInt(goods_num));
 
-/*                        var html = '<tr>'+
-                                '<td style="display:none"><input type="checkbox" name="goods_id[]" value="'+goodsSelectedId+'"></td>'+
-                                '<td style="display:none"><input type="checkbox" name="goods_num[]" value="'+goods_num+'"></td>'+
-                                '<td class="text-left">'+goods_name+'</td>'+
-                                '<td class="text-left">'+goods_num+'</td>'+
-                                '<td class="text-left"><a href="javascript:void(0)" onclick="javascript:$(this).parent().parent().remove();">删除</a></td>'+
-                                '</tr>';*/
                         var Obj = {};
                         Obj.goods_id  = $(this).data('goods-id');
                         Obj.goods_name= $(this).find('.goods_name').attr('title');
