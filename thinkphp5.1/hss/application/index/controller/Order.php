@@ -639,7 +639,7 @@ class Order extends \common\controller\UserBase
             case 1:
                 $configFooter = [0,20];
                 $unlockingFooterCart = unlockingFooterCartConfigTest($configFooter);
-                array_push($unlockingFooterCart['menu'][0]['class'],'group_btn70');
+                array_push($unlockingFooterCart['menu'][0]['class'],'group_btn75');
                 array_push($unlockingFooterCart['menu'][1]['class'],'group_btn30');
                 break;
             case "2":
