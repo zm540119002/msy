@@ -4,6 +4,49 @@
         <div class="group_cart_nav">
             <a href="javascript:void(0);" v-for="menu in menus" :class="menu.class">
                 {{menu.name}}
+                <!-- 全选 -->
+                <div v-if="menu.class.indexOf('checked_all')!==-1" class="checked_all">
+                    <input type="checkbox" class="check_all" v-model="checked" @click="checkAll" id="check_all" />
+                    <label for="check_all">全选</label>
+                </div>
+                <!-- 总金额 -->
+                <div v-else-if="menu.class.indexOf('amount')!==-1" class="amount">
+                    <span class="total_amount">￥{{ parseFloat(total_amount).toFixed(2) }}</span>
+                </div>
+                <!-- 购物篮 -->
+                <div v-else-if="menu.class.indexOf('add_cart_icon')!==-1" class="add_cart_icon" @click="jump_url" :data-jump_url="menu.action">
+                    <span class="add_num current" v-if="cart_num > 99">99+</span>
+                    <span class="add_num current" v-else-if="cart_num > 0">{{ cart_num }}</span>
+                    <span class="add_num current" v-else></span>
+                </div>
+                <!-- 加入购物车 -->
+                <div v-else-if="menu.class.indexOf('add_cart')!==-1" class="add_cart" @click="addCart" :data-jump_url="menu.action">
+                    <span class="s_i"></span>
+                </div>
+                <!-- 立即购买 -->
+                <div v-else-if="menu.class.indexOf('buy_now')!==-1" class="buy_now" @click="addCart" :data-jump_url="menu.action">
+                    <span class="s_i"></span>
+                </div>
+                <!-- 结算 -->
+                <div v-else-if="menu.class.indexOf('settlement')!==-1" class="settlement" @click="addCart" :data-jump_url="menu.action">
+                    <span class="s_i"></span>
+                </div>
+                <!-- 提交订单/去结算 -->
+                <div v-else-if="menu.class.indexOf('confirm_order')!==-1" class="confirm_order" @click="confirm_order" :data-jump_url="menu.action">
+                    <span class="s_i"></span>
+                </div>
+                <!-- 确定收货-->
+                <div v-else-if="menu.class.indexOf('confirm_receive')!==-1" class="confirm_receive" @click="confirm_order" :data-jump_url="menu.action">
+                    <span class="s_i"></span>
+                </div>
+                <!-- 跳转 -->
+                <div v-else-if="menu.class.indexOf('jump_url')!==-1" class="jump_url" @click="jump_url" :data-jump_url="menu.action">
+                    <span class="s_i"></span>
+                </div>
+                <!-- 默认 -->
+                <div v-else class="default" class="menu.class" :data-jump_url="menu.action">
+                    <span class="s_i"></span>
+                </div>
             </a>
         </div>
     </footer>
@@ -33,7 +76,7 @@
                     cart_num:this.init_cart_num,
                     checked:this.init_checked,
                     checkItemList:[],
-                    menus: this.init_menus,
+                    menus: this.init_menus.menu,
                     postData:{
                         product_type:this.init_product_type,
                         data:[]
