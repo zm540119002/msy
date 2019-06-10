@@ -106,12 +106,10 @@
 		}
 		let unlockingFooterCart = '{$unlockingFooterCart|raw}';
 		unlockingFooterCart = JSON.parse(unlockingFooterCart);
-		console.log(typeof unlockingFooterCart);
-		console.log(unlockingFooterCart);
 		let param = {
 			type:4,
 			init_cart_num:total_num,
-			init_menus:unlockingFooterCart
+			init_menus:unlockingFooterCart.menu
 		};
 		new Vue({
 			el: '#foot_cart_menu',
