@@ -103,8 +103,6 @@ class Index extends \common\controller\Base{
     public function cartIndex(){
         if(request()->isAjax()){
         }else{
-            $unlockingFooterCart = unlockingFooterCartConfig([10,0,9]);
-            $this->assign('unlockingFooterCart', $unlockingFooterCart);
             $unlockingFooterCart = unlockingFooterCartConfigTest([10,0,9]);
             array_push($unlockingFooterCart['menu'][0]['class'],'group_btn30');
             array_push($unlockingFooterCart['menu'][1]['class'],'group_btn40');
