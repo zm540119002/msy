@@ -93,19 +93,19 @@
 </div>
 <script type="text/javascript">
 	$(function(){
-		// //数据库里购物车里商品数量
-		// let total_num = parseInt("{$total_num|default=0}");
-		// //localStorage里商品信息
-		// if(localStorage.cartList){
-		// 	let goodsList = (JSON.parse(localStorage.cartList)).data;
-		// 	$.each(goodsList,function(i,goods){
-		// 		total_num += goods['num'];
-		// 	});
-		// }
-		// if(!total_num){
- 		// 	var html = $('.no_cart_data').html();
-		// 	$('#product-list').append(html);
-		// }
+		//数据库里购物车里商品数量
+		let total_num = parseInt("{$total_num|default=0}");
+		//localStorage里商品信息
+		if(localStorage.cartList){
+			let goodsList = (JSON.parse(localStorage.cartList)).data;
+			$.each(goodsList,function(i,goods){
+				total_num += goods['num'];
+			});
+		}
+		if(!total_num){
+ 			var html = $('.no_cart_data').html();
+			$('#product-list').append(html);
+		}
 		let unlockingFooterCart = '{$unlockingFooterCart|raw}';
 		unlockingFooterCart = JSON.parse(unlockingFooterCart);
 		let param = {
@@ -122,19 +122,19 @@
 	});
 </script><script type="text/javascript">
 	$(function(){
-		//数据库里购物车里商品数量
-		let total_num = parseInt("{$total_num|default=0}");
-		//localStorage里商品信息
-		if(localStorage.cartList){
-			let goodsList = (JSON.parse(localStorage.cartList)).data;
-			$.each(goodsList,function(i,goods){
-				total_num += goods['num'];
-			});
-		}
-		if(!total_num){
- 			var html = $('.no_cart_data').html();
-			$('#product-list').append(html);
-		}
+		// //数据库里购物车里商品数量
+		// let total_num = parseInt("{$total_num|default=0}");
+		// //localStorage里商品信息
+		// if(localStorage.cartList){
+		// 	let goodsList = (JSON.parse(localStorage.cartList)).data;
+		// 	$.each(goodsList,function(i,goods){
+		// 		total_num += goods['num'];
+		// 	});
+		// }
+		// if(!total_num){
+ 		// 	var html = $('.no_cart_data').html();
+		// 	$('#product-list').append(html);
+		// }
 		let unlockingFooterCart2 = '{$unlockingFooterCart2|raw}';
 		unlockingFooterCart2 = JSON.parse(unlockingFooterCart2);
 		let param = {
