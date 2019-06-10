@@ -115,9 +115,7 @@
                         '</div> </li>';
 
                 $('.selected_goods_list').append(html);
-                //_this.find('a').addClass('label');
-                _this.parents('tr').attr('display','none');
-
+                _this.find('a').addClass('label');
             });
             //移除商品
             $('body').on('click','.close-btn',function(){
