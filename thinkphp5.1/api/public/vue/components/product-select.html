@@ -325,8 +325,8 @@
                         this.specification = param.specification;
                         this.deal_price = param.deal_price;
                         this.buy_quantity = param.init_quantity;
-                        this.subtotal_amount_calculate();
                         this.increment_buy_quantity = this.buy_quantity;
+                        this.subtotal_amount_calculate();
                         //触发-弹出采购车赋值-事件
                         bus.$emit('dialog_cart_assign', this);
                     }
@@ -336,6 +336,7 @@
             },created: function(){
                 let _this = this;
                 if(this.monitor_buy_quantity){
+                    console.log(_this.monitor_buy_quantity);
                     console.log(_this.product_id);
                 }
                 _this.subtotal_amount_calculate();
