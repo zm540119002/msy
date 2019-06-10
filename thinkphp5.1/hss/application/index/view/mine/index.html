@@ -242,7 +242,7 @@
         });
         //昵称修改
         var nick_content=$('.nick_content').html();
-         $('body').on('click','.nick_btn',function () {
+        $('body').on('click','.nick_btn',function () {
             var _this=$(this);
             layer.open({
                 title:['昵称','border-bottom:1px solid #d9d9d9;'],
@@ -280,7 +280,7 @@
             });
         });
 
-         function generatingTwoDimensionalCode() {
+        function generatingTwoDimensionalCode() {
              $.ajax({
                  url: module+"TwoDimensionalCode/generatingTwoDimensionalCode",
                  data: {},
