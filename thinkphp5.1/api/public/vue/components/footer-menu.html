@@ -286,7 +286,6 @@
                 //监听-弹出采购车赋值-事件
                 bus.$on('dialog_cart_assign', function(param){
                     if(param.by_footer_menu_monitor){
-                        console.log(param.product_id);
                         _this.total_amount_assign(param);
                         _this.assignProductList(param);
                     }

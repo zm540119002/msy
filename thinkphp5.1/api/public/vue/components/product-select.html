@@ -187,6 +187,7 @@
                 display_quota: {type: Boolean,default: false},
                 step_quantity: {type: Number,default: 1},
                 type: {type: Number,default: 1},
+                init_monitor_buy_quantity: {type: Boolean,default: true},
                 by_footer_menu_monitor: {type: Boolean,default: true}
             },data: function () {
                 return {
@@ -196,9 +197,9 @@
                     product_src:this.init_product_src,
                     specification:this.init_specification,
                     specification_unit:this.init_specification_unit,
+                    monitor_buy_quantity:this.init_monitor_buy_quantity,
                     buy_quantity:this.init_quantity,
                     buy_quantity_reduce_trigger:true,
-                    monitor_buy_quantity: {type: Boolean,default: true},
                     subtotal_amount:0,
                     checked:this.init_checked,
                     checked_operation_type:'edit',
@@ -325,8 +326,8 @@
                         this.specification = param.specification;
                         this.deal_price = param.deal_price;
                         this.buy_quantity = param.init_quantity;
-                        this.subtotal_amount_calculate();
                         this.increment_buy_quantity = this.buy_quantity;
+                        this.subtotal_amount_calculate();
                         //触发-弹出采购车赋值-事件
                         bus.$emit('dialog_cart_assign', this);
                     }
