@@ -148,9 +148,9 @@
                     if(param.vueObj.checked){
                         param.vueObj.checked_operation_type = 'delete';
                     }
-                    if(!$('#product-list').find('li').length){
-                        $('#product-list').append($('.no_cart_data').html());
-                    }
+                    // if(!$('#product-list').find('li').length){
+                    //     $('#product-list').append($('.no_cart_data').html());
+                    // }
                 }
                 if(param.clickObj.attr('class').indexOf('add_cart')!==-1
                         && !(param.clickObj.attr('class').indexOf('plus')!==-1
