@@ -142,7 +142,6 @@
                         'goods_id':param.product_id,
                         'num':param.buy_quantity
                     };
-                    console.log(param.product_name);
                     if(isPosIntNumber(param.product_id) && isPosIntNumber(param.buy_quantity)){
                         this.postData.data = [];
                         this.postData.data.push(productInfo);
