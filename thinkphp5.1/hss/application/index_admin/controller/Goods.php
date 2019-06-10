@@ -194,7 +194,7 @@ class Goods extends Base {
             'where'=>$where,
             'field'=>[
                 'g.id','g.name','g.bulk_price','g.sample_price','g.sort','g.is_selection',
-                'g.thumb_img','g.shelf_status','g.create_time','g.rq_code_url','g.belong_to','g.number'
+                'g.thumb_img','g.shelf_status','g.create_time','g.rq_code_url','g.belong_to','g.goods_code'
 //                'g.category_id_1',
 //                'gc1.name as category_name_1'
             ],
