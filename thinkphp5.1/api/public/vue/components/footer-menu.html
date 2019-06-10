@@ -114,8 +114,8 @@
                     register_success_callback_private = function(){
                         _thisJquery.click()
                     };
-                    console.log(_thisVue.postData);
-                    return;
+//                    console.log(_thisVue.postData);
+//                    return;
                     //前端验证
                     if((
                             (   _thisJquery.attr('class')=='add_cart' //加入购物车
@@ -283,7 +283,7 @@
                         _this.editProductList(param);
                     }
                 });
-                //监听-弹出采购车价格或者数量改变-事件
+                //监听-弹出采购车赋值-事件
                 bus.$on('dialog_cart_assign', function(param){
                     if(param.by_footer_menu_monitor){
                         _this.total_amount_assign(param);
@@ -295,7 +295,40 @@
     });
 </script>
 <style lang="less" scoped>
-  .group_cart_nav{
-      bottom: 52px;
+    .group_btn30{width:33.3%;box-sizing: border-box;}
+    .group_btn50{width:50%;}
+    .group_btn75{width:85%;}
+    .group_btn100{width:100%;}
+    .group_btn30{width:33.3%;box-sizing: border-box;}
+    .group_btn50{width:50%;}
+    .group_btn100{width:100%;}
+
+  .checked_all{
+      color: red;
   }
+  .group_cart_nav a:nth-of-type(1){
+    text-align: left;
+    /* width: 20%; */
+  }
+  .group_cart_nav a:nth-of-type(2){
+      width: 50%;
+      background: #009fe9;
+      color: #fff;
+  }
+  .group_cart_nav a:nth-of-type(1) .checked_all{
+      margin-left: 10px;
+      
+  }
+  .group_cart_nav a:nth-of-type(3){
+      background: #009fe9;
+      color: #fff;
+  }
+  .group_cart_nav a:nth-of-type(4){
+      background:red;
+      color: #fff;
+  }
+  .add_cart_icon span{
+      left: 68px;
+  }
+ 
 </style>

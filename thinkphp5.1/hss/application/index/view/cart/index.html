@@ -1,7 +1,4 @@
 {extend name="template/base.html" /}
-{block name="css-customize"}
-<link rel="stylesheet" href="public_css/project_public.css">
-{/block}
 {block name="title"}购物车{/block}
 {block name="content"}
 <section class="no_cart_data" style="display:none;">
@@ -122,41 +119,30 @@
 				return param;
 			}
 		});
-	});
-</script><script type="text/javascript">
-	$(function(){
-		//数据库里购物车里商品数量
-		let total_num = parseInt("{$total_num|default=0}");
-		//localStorage里商品信息
-		if(localStorage.cartList){
-			let goodsList = (JSON.parse(localStorage.cartList)).data;
-			$.each(goodsList,function(i,goods){
-				total_num += goods['num'];
-			});
-		}
-		if(!total_num){
- 			var html = $('.no_cart_data').html();
-			$('#product-list').append(html);
-		}
+
 		let unlockingFooterCart2 = '{$unlockingFooterCart2|raw}';
 		unlockingFooterCart2 = JSON.parse(unlockingFooterCart2);
-		let param = {
+		let param2 = {
 			init_cart_num:total_num,
 			init_menus:unlockingFooterCart2
 		};
 		new Vue({
 			el: '#foot_cart_menu2',
 			data:function(){
-				return param;
+				return param2;
 			}
 		});
+	});
+</script><script type="text/javascript">
+	$(function(){
+
 	});
 </script>
 {include file="../../api/public/vue/components/product-select.html" /}
 <script type="text/javascript">
 	$(function(){
 		let param = {
-			type:7,
+			type:8,
 			init_quantity:1,
 			step_quantity:1,
 			by_footer_menu_monitor:false,
@@ -273,10 +259,15 @@
 	});
 </script>
 {if $type}
-	<style>
-		#foot_cart_menu2 .group_cart_nav{
-			bottom:0.88rem;
+	<style>	
+		#foot_cart_menu .group_cart_nav{
+        bottom: 52px;
 		}
+		.group_cart_nav a:nth-of-type(2){
+      width: 50%;
+      background: #fff;
+      color: red;
+  }
 	</style>
 	{include file="template/footer_project.html" /}
 {/if}
