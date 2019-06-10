@@ -107,7 +107,7 @@
         // };
         let unlockingFooterCart = '{$unlockingFooterCart|raw}';
         unlockingFooterCart = JSON.parse(unlockingFooterCart);
-        conole.log("{$orderInfo.actually_amount|default=0}");
+        console.log("{$orderInfo.actually_amount|default=0}");
         let param = {
             init_total_amount:"{$orderInfo.actually_amount|default=0}",
             init_menus:unlockingFooterCart
