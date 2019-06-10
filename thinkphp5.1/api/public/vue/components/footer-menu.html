@@ -65,6 +65,12 @@
                     init_cart_num: {type: Number,default: 0},
                     init_total_amount: {type: Number,default: 0},
                     init_checked: {type: Boolean,default: false},
+                    init_menus: {
+                        type: Object,
+                        default: function () {
+                            return { message: 'hello' }
+                        }
+                    },
                     buy_now_call_back: {type: Function,default: function(param){
                         //console.log(param);
                     }}
@@ -112,7 +118,8 @@
                         register_success_callback_private = function(){
                             _thisJquery.click()
                         };
-                        console.log(_thisVue.postData);
+                        console.log(_thisVue.init_menus);
+//                        console.log(_thisVue.postData);
                         return;
                         //前端验证
                         if((
