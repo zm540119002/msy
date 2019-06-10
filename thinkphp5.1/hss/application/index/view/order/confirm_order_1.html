@@ -47,12 +47,16 @@
 <div id="foot_menu">
     <footer-menu
             :init_total_amount="Number(init_total_amount)"
+            :init_menus="init_menus"
     ></footer-menu>
 </div>
 <script type="text/javascript">
     $(function(){
+        let unlockingFooterCart = '{$unlockingFooterCart|raw}';
+        unlockingFooterCart = JSON.parse(unlockingFooterCart);
         let param = {
-            init_total_amount:"{$orderInfo.actually_amount|default=0}"
+            init_total_amount:"{$orderInfo.actually_amount|default=0}",
+            init_menus:unlockingFooterCart
         };
         new Vue({
             el: '#foot_menu',
