@@ -114,8 +114,8 @@
                     register_success_callback_private = function(){
                         _thisJquery.click()
                     };
-                    console.log(_thisVue.postData);
-                    return;
+//                    console.log(_thisVue.postData);
+//                    return;
                     //前端验证
                     if((
                             (   _thisJquery.attr('class')=='add_cart' //加入购物车
@@ -283,7 +283,7 @@
                         _this.editProductList(param);
                     }
                 });
-                //监听-弹出采购车价格或者数量改变-事件
+                //监听-弹出采购车赋值-事件
                 bus.$on('dialog_cart_assign', function(param){
                     if(param.by_footer_menu_monitor){
                         _this.total_amount_assign(param);
