@@ -40,7 +40,26 @@
                 </button>
                 已选择 <span class="c-red">{$info.recommend_goods_num|default=0}</span> 种商品
                 <div>
-
+                    <table>
+                        <thead>
+                        <tr>
+                            <th style="display:none">选择</th>
+                            <th class="text-left">商品名称</th>
+                            <th class="text-left">价格</th>
+                            <th class="text-left">库存</th>
+                            <th class="text-left">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody id="goods_list">
+                        <tr>
+                            <td style="display:none"><input type="checkbox" name="goods_id[]" checked="checked" value="102"></td>
+                            <td class="text-left">Hundred Generation 佰黛 天然南非钻石情侣对戒 公主戒指 情侣钻戒镀铂金戒指 婚戒款式定做</td>
+                            <td class="text-left">8600.00</td>
+                            <td class="text-left">1000</td>
+                            <td class="text-left"><a href="javascript:void(0)">删除</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -75,6 +94,7 @@
             <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
                 <input type="hidden" name='id' value="{$info.id}">
                 <input type="hidden" name='ids' value="">
+                <input type="hidden" name='ids_num' value="">
                 <button class="btn btn-primary radius button_save_black_4" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
                 <button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
                 <span class="c-red">*</span>(图片只显示缩略图，不影响原效果)
@@ -215,17 +235,15 @@
 
                     var body = layer.getChildFrame('body', index);
                     recommendIds = [];
+                    var recommend = [];
                     body.find('.selected_goods_list li').each(function () {
                         var goodsSelectedId = $(this).data('goods-id');
                         var goods_name = $(this).find('.goods_name').html();
-                        //var str = $(this).find('.list_item').clone();
-
-                        //$(".recommend").parent().append().html(str);
-                        console.log(goods_name);
-                        return false;
+                        var goods_num  = $(this).find('.goods_num').html();
+                        //var goods = {goods_id:goodsSelectedId,num:num};
                         recommendIds.push(goodsSelectedId);
+                        recommend.push(parseInt(goods_num));
                     });
-
 
                     var num = parseInt($(".recommend").next().html());
                     $(".recommend").next().html(num+parseInt(recommendIds.length));
@@ -236,6 +254,7 @@
                     }
 
                     $('input[name="ids"]').val(recommendIds);
+                    $('input[name="ids_num"]').val(recommend);
                     layer.close(index);
                 },
                 no: function(){
