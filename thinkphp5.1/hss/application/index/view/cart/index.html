@@ -45,7 +45,21 @@
 			</div>
 		</div>
 		<div id="scroller-wrapper" class="list_wrapper">
-			<ul class="columns_flex flex-both-side goods-content-list" id="goodsList"></ul>
+			<ul class="columns_flex flex-both-side goods-content-list" id="product-list3">
+				<product-select
+						v-for="(productInfo,index) in productList"
+						:key="index"
+						:init_product_id="productInfo.id"
+						:init_deal_price="parseFloat(productInfo.bulk_price)"
+						:init_product_name="productInfo.headline"
+						:init_product_src="productInfo.thumb_img"
+						:init_quantity="parseInt(init_quantity)"
+						:step_quantity="parseInt(step_quantity)"
+						:init_specification="productInfo.specification"
+						:by_footer_menu_monitor="by_footer_menu_monitor"
+						:type="type"
+				></product-select>
+			</ul>
 		</div>
 	</div>
 	{/if}
@@ -53,10 +67,31 @@
 {/block}
 {block name="footer"}
 {include file="../../api/public/vue/components/footer-menu.html" /}
+<div class="bg"></div>
+<div class="dialogCart">
+	<div id="product-list2">
+		<product-select
+				v-for="(productInfo,index) in productList"
+				:key="index"
+				:init_product_id="productInfo.id"
+				:init_product_src="productInfo.thumb_img"
+				:init_deal_price="parseFloat(productInfo.bulk_price)"
+				:init_quantity="parseInt(init_quantity)"
+				:step_quantity="parseInt(step_quantity)"
+				:type="type"
+		></product-select>
+	</div>
+	<div id="foot_cart_menu2">
+		<footer-menu
+			:init_menus="init_menus"
+		></footer-menu>
+	</div>
+</div>
 <div id="foot_cart_menu">
 	<footer-menu
 			:type="type"
 			:init_cart_num="init_cart_num"
+			:init_menus="init_menus"
 	></footer-menu>
 </div>
 <script type="text/javascript">
@@ -74,9 +109,12 @@
  			var html = $('.no_cart_data').html();
 			$('#product-list').append(html);
 		}
+		let unlockingFooterCart = '{$unlockingFooterCart|raw}';
+		unlockingFooterCart = JSON.parse(unlockingFooterCart);
 		let param = {
 			type:4,
-			init_cart_num:total_num
+			init_cart_num:total_num,
+			init_menus:unlockingFooterCart
 		};
 		new Vue({
 			el: '#foot_cart_menu',
@@ -84,11 +122,108 @@
 				return param;
 			}
 		});
-
+	});
+</script><script type="text/javascript">
+	$(function(){
+		//数据库里购物车里商品数量
+		let total_num = parseInt("{$total_num|default=0}");
+		//localStorage里商品信息
+		if(localStorage.cartList){
+			let goodsList = (JSON.parse(localStorage.cartList)).data;
+			$.each(goodsList,function(i,goods){
+				total_num += goods['num'];
+			});
+		}
+		if(!total_num){
+ 			var html = $('.no_cart_data').html();
+			$('#product-list').append(html);
+		}
+		let unlockingFooterCart2 = '{$unlockingFooterCart2|raw}';
+		unlockingFooterCart2 = JSON.parse(unlockingFooterCart2);
+		let param = {
+			init_cart_num:total_num,
+			init_menus:unlockingFooterCart2
+		};
+		new Vue({
+			el: '#foot_cart_menu2',
+			data:function(){
+				return param;
+			}
+		});
 	});
 </script>
 {include file="../../api/public/vue/components/product-select.html" /}
 <script type="text/javascript">
+	$(function(){
+		let param = {
+			type:7,
+			init_quantity:1,
+			step_quantity:1,
+			by_footer_menu_monitor:false,
+			productList:[],
+			getJsonListParam:{
+				url:module+'Goods/getJsonList',
+				requestEnd:false,
+				loadTrigger:false,
+				postData:{
+					pageSize:10,
+					page:1,
+					is_selection:1
+				}
+			}
+		};
+		new Vue({
+			el: '#product-list3',
+			data:function(){
+				return param;
+			},methods:{
+				getJsonListCallBack:function(data){
+					if(data.status==0){
+						dialog.error(data.info);
+						return false;
+					}
+					let _this = this;
+					$.each(data.data.data,function(i,o){
+						_this.productList.push(o);
+					});
+				}
+			},created:function(){
+				let _thisVue = this;
+				_thisVue.getJsonListParam.callBack = _thisVue.getJsonListCallBack;
+				vueVersionGetJsonList(_thisVue);
+				//下拉加载
+				$(window).on('scroll',function(){
+					if(_thisVue.getJsonListParam.loadTrigger
+							&& $(document).scrollTop()+$(window).height()+200>$(document).height()){
+						//停止触发，去其他地方重新放开
+						_thisVue.getJsonListParam.loadTrigger = false;
+						vueVersionGetJsonList(_thisVue);
+					}
+				});
+			}
+		});
+	});
+</script><script type="text/javascript">
+	$(function(){
+		let param = {
+			type:6,
+			init_quantity:1,
+			step_quantity:1,
+			productList:[
+				{
+					id:0,
+					bulk_price:0
+				}
+			]
+		};
+		new Vue({
+			el: '#product-list2',
+			data:function(){
+				return param;
+			}
+		});
+	});
+</script><script type="text/javascript">
 	$(function(){
 		let param = {
 			type:4,
@@ -138,44 +273,13 @@
 	});
 </script>
 {if $type}
-<style>
-	.group_cart_nav{
-		bottom:0.88rem;
-	}
-</style>
-{include file="template/footer_project.html" /}
+	<style>
+		#foot_cart_menu2 .group_cart_nav{
+			bottom:0.88rem;
+		}
+	</style>
+	{include file="template/footer_project.html" /}
 {/if}
-
 {/block}
 {block name="script"}
-<script type="text/javascript">
-	// 新零售商品获取配置
-	var config_1 = {
-		url:module+'Goods/getList',
-		requestEnd:false,
-		loadTrigger:false,
-		currentPage:1,
-		container:$("#goodsList")
-	};
-	var postData_1 = {
-		pageSize:10,
-		pageType:'index',
-		is_selection:1
-	};
-	$(function(){
-		//购物车页面的类型
-		var type = '{$type}';
-		if(type){
-			//初始化零售商品
-			getPagingList(config_1,postData_1);
-			//下拉加载
-			$(window).on('scroll',function(){
-				if(config_1.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
-					config_1.loadTrigger = false;
-					getPagingList(config_1,postData_1);
-				}
-			});
-		}
-	});
-</script>
 {/block}

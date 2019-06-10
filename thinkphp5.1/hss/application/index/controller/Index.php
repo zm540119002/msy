@@ -103,13 +103,18 @@ class Index extends \common\controller\Base{
     public function cartIndex(){
         if(request()->isAjax()){
         }else{
-            $unlockingFooterCart = unlockingFooterCartConfig([10,0,9]);
-            $this->assign('unlockingFooterCart', $unlockingFooterCart);
             $unlockingFooterCart = unlockingFooterCartConfigTest([10,0,9]);
-            array_push($unlockingFooterCart['menu'][0]['class'],'group_btn20');
-            array_push($unlockingFooterCart['menu'][1]['class'],'group_btn50');
+            array_push($unlockingFooterCart['menu'][0]['class'],'group_btn30');
+            array_push($unlockingFooterCart['menu'][1]['class'],'group_btn40');
             array_push($unlockingFooterCart['menu'][2]['class'],'group_btn30');
             $this->assign('unlockingFooterCart',json_encode($unlockingFooterCart));
+            $unlockingFooterCart2 = unlockingFooterCartConfigTest([0,2,1,3]);
+            array_push($unlockingFooterCart2['menu'][0]['class'],'group_btn25');
+            array_push($unlockingFooterCart2['menu'][1]['class'],'group_btn25');
+            array_push($unlockingFooterCart2['menu'][2]['class'],'group_btn25');
+            array_push($unlockingFooterCart2['menu'][3]['class'],'group_btn25');
+            $this->assign('unlockingFooterCart2',json_encode($unlockingFooterCart2));
+
             $type = input('type');
             $this->assign('type',$type);
             if($type){

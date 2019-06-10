@@ -84,10 +84,10 @@
 									<div class="d-r">
 										<p class="friday_end">每天<span>.</span>联合采购</p>
 										<div id="countDownBox" class="count_down_box">
-											<span class="day"></span>天
-											<span class="hour"></span>小时
-											<span class="minute"></span>分
-											<span class="second"></span>秒
+											<!--<span class="day"></span>天-->
+											<span class="hour"></span>:
+											<span class="minute"></span>:
+											<span class="second"></span>
 										</div>
 									</div>
 								</div>
@@ -191,6 +191,7 @@
 <div id="foot_cart_menu">
 	<footer-menu
 			:init_cart_num="init_cart_num"
+			:init_menus="init_menus"
 	></footer-menu>
 </div>
 <script type="text/javascript">
@@ -204,8 +205,11 @@
 				total_num += goods['num'];
 			});
 		}
+		let unlockingFooterCart = '{$unlockingFooterCart|raw}';
+		unlockingFooterCart = JSON.parse(unlockingFooterCart);
 		let param = {
-			init_cart_num:total_num
+			init_cart_num:total_num,
+			init_menus:unlockingFooterCart
 		};
 		new Vue({
 			el: '#foot_cart_menu',
@@ -406,7 +410,7 @@
 			}
 		});
 		//活动倒计时
-		var date=getWeek();
+		var date=new Date(new Date(new Date().toLocaleDateString()).getTime()+24*60*60*1000-1);
 		countDown(date,$('#countDownBox'));
 		//设置分数
 		var averageScore = '{$averageScore}';

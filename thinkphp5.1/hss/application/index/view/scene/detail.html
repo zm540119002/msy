@@ -74,15 +74,22 @@
 		></product-select>	
 	</div>
 	<div id="foot_cart_menu">
-			<footer-menu></footer-menu>
+			<footer-menu
+					:init_menus="init_menus"
+			></footer-menu>
 	</div>
 </div>
 <script type="text/javascript">
 	$(function(){
+		let unlockingFooterCart = '{$unlockingFooterCart|raw}';
+		unlockingFooterCart = JSON.parse(unlockingFooterCart);
+		let param = {
+			init_menus:unlockingFooterCart
+		};
 		new Vue({
 			el:'#foot_cart_menu',
 			data:function(){
-				return {};
+				return param;
 			}
 		});
 	})
@@ -96,8 +103,8 @@
 			step_quantity:1,
 			productList:[
 				{
-					id:1,
-					bulk_price:10
+					id:0,
+					bulk_price:0
 				}
 			]
 		};
@@ -166,7 +173,8 @@
 <script type="text/javascript">
 	$(function(){
 		var id = '{$info.id}';
-		var date=getWeek();
+		//每天活动倒计时
+		var date=new Date(new Date(new Date().toLocaleDateString()).getTime()+24*60*60*1000-1);;
 		countDown(date,$('#countDownBox'));
 		// 后加载简介
 		$('document').ready(function(){

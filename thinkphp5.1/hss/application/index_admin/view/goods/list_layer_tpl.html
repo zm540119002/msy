@@ -1,7 +1,7 @@
 <table class="table table-border table-bordered table-bg table-hover table-sort dataTable no-footer" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
     <thead>
     <tr class="text-c" role="row">
-        <th width="40" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 60px;">商品编号</th>
+        <th width="40" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 60px;">商品货号</th>
         <th width="60" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 60px;">缩略图</th>
         <th width="100" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 250px;">商品名称</th>
         <th width="20" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 20px;">添加数量</th>
@@ -11,10 +11,10 @@
     <tbody>
     {volist name="list" id="vo"}
     <tr class="text-c va-m odd" role="row" data-goods-id="{$vo.id}">
-        <td class="sorting_1">{$vo.number}</td>
+        <td class="sorting_1">{$vo.goods_code}</td>
         <td><img src="public_uploads/{$vo.thumb_img}" width="60" alt="" class="left"></td>
-        <td class="text-l"> {$vo.name}</td>
-        <td class="text-l"><input type="text" class="input-text" placeholder="" name="goods_num" value=""></td>
+        <td class="text-l goods_name"> {$vo.name}</td>
+        <td class="text-l"><input type="text" class="input-text" placeholder="" name="goods_num" value="1"></td>
         <td class="td-manage add-goods"><a style="text-decoration:none" href="javascript:;" title="添加">添加</a></td>
     </tr>
     {/volist}

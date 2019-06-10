@@ -76,7 +76,7 @@
 			<p class="content-label">项目流程</p>
 			<section class="slider_banner">
 				<div class="swiper-container swiper-container-horizontal swiper-container-ios">
-					<div class="swiper-wrapper">
+					<div class="swiper-wrapper" style="width:60%">
 						{volist name="$info.process" id="vo"}
 						<div class="swiper-slide swiper-slide-active" style="text-align: left;margin-right: 10px;">
 							<img src="{:show_img_handle($vo.img)}" alt="" class="common_default_img">
@@ -178,7 +178,8 @@
 <script type="text/javascript">
 	$(function(){
 		var id = '{$info.id}';
-		var date=getWeek();
+		//每天活动倒计时
+		var date=new Date(new Date(new Date().toLocaleDateString()).getTime()+24*60*60*1000-1);
 		countDown(date,$('#countDownBox'));
 		// 后加载简介
 		$('document').ready(function(){
@@ -188,12 +189,12 @@
 		});
 		//轮播
 		var swiper = new Swiper('.swiper-container', {
-			//spaceBetween: 30,
-			direction: 'horizontal',
-			pagination: {
-				el: '.swiper-pagination',
-				clickable: true
-			}
+			 //spaceBetween: 30,
+			 direction: 'horizontal',
+			 pagination: {
+			 	el: '.swiper-pagination',
+			 	clickable: true
+			 }
 		});
 		// 项目信息切换
 		$('.detail-nav li').on('click',function(){
