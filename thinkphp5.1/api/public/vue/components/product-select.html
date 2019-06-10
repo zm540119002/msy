@@ -317,6 +317,7 @@
                     //触发-弹出采购车点击-事件
                     bus.$emit('dialog_cart',_this);
                 },dialog_cart_assign: function (param) {
+                    console.log(this.monitor_buy_quantity);
                     if(this.by_footer_menu_monitor){
                         this.monitor_buy_quantity = false;
                         this.product_id = param.product_id;
@@ -335,10 +336,6 @@
                 }
             },created: function(){
                 let _this = this;
-                if(this.monitor_buy_quantity){
-                    console.log(_this.monitor_buy_quantity);
-                    console.log(_this.product_id);
-                }
                 _this.subtotal_amount_calculate();
                 //触发-产品选择器初始化-事件
                 bus.$emit('product_select_init',_this);
