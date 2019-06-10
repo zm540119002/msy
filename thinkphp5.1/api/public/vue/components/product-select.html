@@ -140,31 +140,52 @@
         <div class="specs">
             <div>{{specification}} ￥{{deal_price}}</div>
         </div>
-    </li>
-    <li v-else-if="type==7">
-            <div class="product-select index">
-                <div class=""><p></p></div>
+    </li><li v-else-if="type==7">
+        <div class="product-select index">
+            <div class=""><p></p></div>
+            <div class="">
                 <div class="">
-                    <div class="">
-                        <a class="p_img img2" :href="'/index/Goods/detail/id/' + product_id">
-                            <img class="" :src="product_src?('public_uploads/' + product_src):('api_common_img/default/no_pic_100.jpg') " alt="">
-                        </a>
+                    <a class="p_img img2" :href="'/index/Goods/detail/id/' + product_id">
+                        <img class="" :src="product_src?('public_uploads/' + product_src):('api_common_img/default/no_pic_100.jpg') " alt="">
+                    </a>
+                </div>
+                <div  class="">
+                    <div class="product_name">
+                        <p class="two-line-omit">{{product_name}}</p>
                     </div>
-                    <div  class="">
-                        <div class="product_name">
-                            <p class="two-line-omit">{{product_name}}</p>
-                        </div>
-                        <div class="product_specs">
-                            <p class="two-line-omit">{{specification}}</p>
-                        </div>
-                        <div class=" columns_flex l-r-sides">
-                            <div><span class="red deal_price">￥{{deal_price}}</span></div>
-                            <div><a href="javascript:void(0);" class="add_cart add_cart_i" @click="dialogCart" :data-jump_url="add_cart_url"><i></i></a></div>
-                        </div>
+                    <div class="product_specs">
+                        <p class="two-line-omit">{{specification}}</p>
+                    </div>
+                    <div class=" columns_flex l-r-sides">
+                        <div><span class="red deal_price">￥{{deal_price}}</span></div>
+                        <div><a href="javascript:void(0);" class="add_cart add_cart_i" @click="dialogCart" :data-jump_url="add_cart_url"><i></i></a></div>
                     </div>
                 </div>
             </div>
-        </li>
+        </div>
+    </li><li v-else-if="type==8">
+        <div class="product-select index">
+            <div class=""><p></p></div>
+            <div class="">
+                <div class="">
+                    <a class="p_img img2" :href="'/index/Goods/detail/id/' + product_id">
+                        <img class="" :src="product_src?('public_uploads/' + product_src):('api_common_img/default/no_pic_100.jpg') " alt="">
+                    </a>
+                </div>
+                <div  class="">
+                    <div class="product_name">
+                        <p class="two-line-omit">{{product_name}}</p>
+                    </div>
+                    <div class="product_specs">
+                        <p class="two-line-omit">{{specification}}</p>
+                    </div>
+                    <div class=" columns_flex l-r-sides">
+                        <div><span class="red deal_price">￥{{deal_price}}</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
 </template>
 <script type="text/javascript">
     $(function(){
