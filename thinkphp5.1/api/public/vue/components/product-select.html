@@ -142,7 +142,7 @@
         </div>
     </li>
     <li v-else-if="type==7">
-            <div class="product-select">
+            <div class="product-select index">
                 <div class=""><p></p></div>
                 <div class="">
                     <div class="">
@@ -434,9 +434,6 @@
         top: -24px;
         cursor:pointer;
     }
-    /*.amount{
-        margin-left: 8px;
-    }*/
     .dialogCart{
         width: 100%;
         height: 200px;
@@ -454,30 +451,10 @@
         border-bottom: 1px solid #eee;
         margin-top: 5px;
     }
-   /* .product-select .card{
-       flex-direction:column;
-       padding: 5px;
-   }
-   .card div.left{
+    .img2{
        width: 100% !important;
-   }
-   .card a{
-       width: 100% !important;
-   }
-   .card .product_specs{
-       height: 40px;
-   }
-   .product-select div.right{
-       width: 100% !important;
-   }
-   .card .right .quantity_wrapper {
-       position: relative;
-    
-   } */
-   .img2{
-       width: 100% !important;
-   }
-   .close{
+    }
+    .close{
 		width: 16px;
 		height: 16px;
 		border-radius: 50%;
@@ -490,25 +467,14 @@
 		right: 14px;
 		top: -24px;
 	}
-	/*.amount{
-		margin-left: 8px;
-	}*/
-	.dialogCart{
-		width: 100%;
-		height: 200px;
-		background: #fff;
-		position: fixed;
-		bottom: 0;
-		z-index: 999;
-		display: none;
-	}.dialogCart .product-select .right{
+	.dialogCart .product-select .right{
 		width: 35% !important;
 	}
-	.dialogCart .product-select{
+    .dialogCart .product-select{
 		border-top: 1px solid #eee;
 		border-bottom: 1px solid #eee;
 		margin-top: 5px;
-	}
+    }
 	#product-list2 .product-select{
 		position: relative;
 		top: 60px;
@@ -517,7 +483,6 @@
 	.dialogCart .red{
 		font-size: 0.2rem;
 	}
-    
 	.group_cart_nav a:nth-of-type(1){
 		width: 60%
 	}
@@ -554,14 +519,17 @@
 		position: relative;
 		top: 55px;
 	}
-	
-	.nav_menu{
-		width: 100%;
-	}
 	.product_name{
 		font-size: 0.2rem;
 	}
 	.add_num{
 		left: 18px;
 	}
+    .product_specs .two-line-omit{
+        height: 38px;
+    }
+    .index .product_name{
+        font-size: 0.25rem;
+        color: #333;
+    }
 </style>

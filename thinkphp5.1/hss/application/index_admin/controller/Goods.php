@@ -194,7 +194,7 @@ class Goods extends Base {
             'where'=>$where,
             'field'=>[
                 'g.id','g.name','g.bulk_price','g.sample_price','g.sort','g.is_selection',
-                'g.thumb_img','g.shelf_status','g.create_time','g.rq_code_url','g.belong_to'
+                'g.thumb_img','g.shelf_status','g.create_time','g.rq_code_url','g.belong_to','g.number'
 //                'g.category_id_1',
 //                'gc1.name as category_name_1'
             ],
@@ -211,8 +211,8 @@ class Goods extends Base {
 
         $this->assign('list',$list);
         if($_GET['pageType'] == 'layer'){
-            return view('goods/list_layer_tpl_copy');
-            //return view('goods/list_layer_tpl');
+            //return view('goods/list_layer_tpl_copy');
+            return view('goods/list_layer_tpl');
         }
         if($_GET['pageType'] == 'manage'){
             return view('goods/list_tpl');
