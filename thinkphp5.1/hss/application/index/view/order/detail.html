@@ -94,18 +94,33 @@
 {/block}
 {block name="footer"}
 {include file="../../api/public/vue/components/footer-menu.html" /}
-<div id="foot_menu">
+<div id="foot_cart_menu">
     <footer-menu
             :init_total_amount="Number(init_total_amount)"
+            :init_cart_num="init_cart_num"
+            :init_menus="init_menus"
     ></footer-menu>
 </div>
 <script type="text/javascript">
     $(function(){
+        // let param = {
+        //     init_total_amount:"{$orderInfo.actually_amount|default=0}"
+        // };
+        let unlockingFooterCart = '{$unlockingFooterCart|raw}';
+        unlockingFooterCart = JSON.parse(unlockingFooterCart);
         let param = {
-            init_total_amount:"{$orderInfo.actually_amount|default=0}"
+            init_total_amount:"{$orderInfo.actually_amount|default=0}",
+            init_cart_num:total_num,
+            init_menus:unlockingFooterCart
         };
         new Vue({
-            el: '#foot_menu',
+            el: '#foot_cart_menu',
+            data:function(){
+                return param;
+            }
+        });
+        new Vue({
+            el: '#foot_cart_menu',
             data:function(){
                 return param;
             }
