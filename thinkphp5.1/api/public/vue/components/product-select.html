@@ -141,6 +141,30 @@
             <div>{{specification}} ￥{{deal_price}}</div>
         </div>
     </li>
+    <li v-else-if="type==7">
+            <div class="product-select">
+                <div class=""><p></p></div>
+                <div class="">
+                    <div class="">
+                        <a class="p_img img2" :href="'/index/Goods/detail/id/' + product_id">
+                            <img class="" :src="product_src?('public_uploads/' + product_src):('api_common_img/default/no_pic_100.jpg') " alt="">
+                        </a>
+                    </div>
+                    <div  class="">
+                        <div class="product_name">
+                            <p class="two-line-omit">{{product_name}}</p>
+                        </div>
+                        <div class="product_specs">
+                            <p class="two-line-omit">{{specification}}</p>
+                        </div>
+                        <div class=" columns_flex l-r-sides">
+                            <div><span class="red deal_price">￥{{deal_price}}</span></div>
+                            <div><a href="javascript:void(0);" class="add_cart add_cart_i" @click="dialogCart" :data-jump_url="add_cart_url"><i></i></a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
 </template>
 <script type="text/javascript">
     $(function(){
@@ -293,6 +317,7 @@
                     if(this.by_footer_menu_monitor){
                         this.monitor_buy_quantity = false;
                         this.product_id = param.product_id;
+                        this.product_src = param.product_src;
                         this.product_name = param.product_name;
                         this.specification = param.specification;
                         this.deal_price = param.deal_price;
@@ -429,4 +454,114 @@
         border-bottom: 1px solid #eee;
         margin-top: 5px;
     }
+   /* .product-select .card{
+       flex-direction:column;
+       padding: 5px;
+   }
+   .card div.left{
+       width: 100% !important;
+   }
+   .card a{
+       width: 100% !important;
+   }
+   .card .product_specs{
+       height: 40px;
+   }
+   .product-select div.right{
+       width: 100% !important;
+   }
+   .card .right .quantity_wrapper {
+       position: relative;
+    
+   } */
+   .img2{
+       width: 100% !important;
+   }
+   .close{
+		width: 16px;
+		height: 16px;
+		border-radius: 50%;
+		border:1px solid #fff;
+		color: #fff;
+		text-align: center;
+		line-height: 16px;
+		font-size: 10px;
+		position: absolute;
+		right: 14px;
+		top: -24px;
+	}
+	.amount{
+		margin-left: 8px;
+	}
+	.dialogCart{
+		width: 100%;
+		height: 200px;
+		background: #fff;
+		position: fixed;
+		bottom: 0;
+		z-index: 999;
+		display: none;
+	}.dialogCart .product-select .right{
+		width: 35% !important;
+	}
+	.dialogCart .product-select{
+		border-top: 1px solid #eee;
+		border-bottom: 1px solid #eee;
+		margin-top: 5px;
+	}
+	#product-list2 .product-select{
+		position: relative;
+		top: 60px;
+		padding: 8px 0 0 10px;
+	}
+	.dialogCart .red{
+		font-size: 0.2rem;
+	}
+    
+	.group_cart_nav a:nth-of-type(1){
+		width: 60%
+	}
+	.group_cart_nav a:nth-of-type(3){
+		width: 60%
+	}
+	.group_cart_nav a:nth-of-type(4){
+		width: 60%
+	}
+	.title img{
+		position: absolute;
+		top: -18px;
+		left: 10px;
+		width: 70px;
+		height: 70px;
+		border: none;
+	}
+	.title span{
+		font-size: 0.25rem;
+		position: absolute;
+		left: 88px;
+		margin-top: 10px;
+		color: #333;
+		top:0
+	}
+	.intro p span{
+		font-size: 0.25rem !important;
+	}
+	.specs{
+		font-size: 0.2rem;
+		display: flex;
+		justify-content: space-between;
+		padding: 10px;
+		position: relative;
+		top: 55px;
+	}
+	
+	.nav_menu{
+		width: 100%;
+	}
+	.product_name{
+		font-size: 0.2rem;
+	}
+	.add_num{
+		left: 18px;
+	}
 </style>
