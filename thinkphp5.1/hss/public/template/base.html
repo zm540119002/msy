@@ -1,6 +1,5 @@
 {extend name="../../api/public/template/base.html" /}
 {block name="css-customize"}
-<link rel="stylesheet" href="public_css/project_public.css">
 {/block}
 <!-- 项目公共模块-->
 {block name="common-base"}{/block}
@@ -185,7 +184,6 @@
                     });
                 }
             }else if(param.data.data.code == '3000'){ //hss二位码回调
-                console.log(param)
                 var imgSrc=uploads+param.data.data.url;
                 layer.open({
                     skin:'shareqrCodeLayer',
@@ -198,9 +196,8 @@
                         cancleFixedLayer();
                         layer.close(index);
                     }
-                })
-            }
-            else{
+                });
+            }else{
                 dialog.success(param.data.info);
             }
         }else{ //返回页面
