@@ -142,6 +142,8 @@
                         'goods_id':param.product_id,
                         'num':param.buy_quantity
                     };
+                    console.log(param.product_id);
+                    console.log(param.buy_quantity);
                     if(isPosIntNumber(param.product_id) && isPosIntNumber(param.buy_quantity)){
                         this.postData.data = [];
                         this.postData.data.push(productInfo);
@@ -286,7 +288,6 @@
                 //监听-弹出采购车赋值-事件
                 bus.$on('dialog_cart_assign', function(param){
                     if(param.by_footer_menu_monitor){
-//                        console.log(param.product_id);
                         _this.total_amount_assign(param);
                         _this.assignProductList(param);
                     }
