@@ -2,19 +2,6 @@
 namespace app\index\controller;
 
 class Cart extends \common\controller\UserBase {
-    /**首页
-     */
-
-    // 有结算页面
-    public function index(){
-        if(request()->isAjax()){
-        }else{
-            $unlockingFooterCart = unlockingFooterCartConfig([10,0,9]);
-            $this->assign('unlockingFooterCart', $unlockingFooterCart);
-            return $this->fetch();
-        }
-    }
-
     /**
      * 加入购物车
      * @throws \think\exception\PDOException

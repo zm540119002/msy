@@ -69,11 +69,11 @@
                                     <div class="d-r">
                                         <p class="friday_end">品牌定制<span>.</span>周五截止</p>
                                         <div id="countDownBox" class="count_down_box">
-                                            <span class="day"></span>天
-                                            <span class="hour"></span>小时
-                                            <span class="minute"></span>分
-                                            <span class="second"></span>秒
-                                        </div>
+											<!--<span class="day"></span>天-->
+											<span class="hour"></span>:
+											<span class="minute"></span>:
+											<span class="second"></span>
+										</div>
                                     </div>
                                 </div>
                             </div>
@@ -135,7 +135,8 @@
 <script type="text/javascript">
 	$(function(){
 		var id = '{$info.id}';
-		var date=getWeek();
+		//每天活动倒计时
+		var date=new Date(new Date(new Date().toLocaleDateString()).getTime()+24*60*60*1000-1);
 		countDown(date,$('#countDownBox'));
 		//查看文本
 		$('.wk_notice').moreText({

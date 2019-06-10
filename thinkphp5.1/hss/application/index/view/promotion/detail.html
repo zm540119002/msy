@@ -76,10 +76,10 @@
 									<div class="d-r">
 										<p class="friday_end">每天<span>.</span>联合采购</p>
 										<div id="countDownBox" class="count_down_box">
-											<span class="day"></span>天
-											<span class="hour"></span>小时
-											<span class="minute"></span>分
-											<span class="second"></span>秒
+											<!--<span class="day"></span>天-->
+											<span class="hour"></span>:
+											<span class="minute"></span>:
+											<span class="second"></span>
 										</div>
 									</div>
 								</div>
@@ -193,7 +193,8 @@
 	};
 
 	$(function(){
-		var date=getWeek();
+		//每天活动倒计时
+		var date=new Date(new Date(new Date().toLocaleDateString()).getTime()+24*60*60*1000-1);
 		countDown(date,$('#countDownBox'));
 		// 后加载简介
 		$('document').ready(function(){

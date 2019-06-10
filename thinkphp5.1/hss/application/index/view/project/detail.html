@@ -178,7 +178,8 @@
 <script type="text/javascript">
 	$(function(){
 		var id = '{$info.id}';
-		var date=getWeek();
+		//每天活动倒计时
+		var date=new Date(new Date(new Date().toLocaleDateString()).getTime()+24*60*60*1000-1);
 		countDown(date,$('#countDownBox'));
 		// 后加载简介
 		$('document').ready(function(){
@@ -188,12 +189,12 @@
 		});
 		//轮播
 		var swiper = new Swiper('.swiper-container', {
-			//spaceBetween: 30,
-			direction: 'horizontal',
-			pagination: {
-				el: '.swiper-pagination',
-				clickable: true
-			}
+			// spaceBetween: 30,
+			// direction: 'horizontal',
+			// pagination: {
+			// 	el: '.swiper-pagination',
+			// 	clickable: true
+			// }
 		});
 		// 项目信息切换
 		$('.detail-nav li').on('click',function(){

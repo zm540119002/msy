@@ -36,7 +36,7 @@
 		></product-select>
 	</ul>
 	{if $type}
-	<div class="project_wrapper content_main content-padding">
+	<div class="project_wrapper content_main content-padding new-retail-wrapper">
 		<div class="mod-part-title">
 			<div class="mod-part-title-wrap">
 				<span class="icon-title left"></span>
@@ -45,7 +45,21 @@
 			</div>
 		</div>
 		<div id="scroller-wrapper" class="list_wrapper">
-			<ul class="columns_flex flex-both-side goods-content-list" id="goodsList"></ul>
+			<ul class="columns_flex flex-both-side goods-content-list" id="product-list3">
+				<product-select
+						v-for="(productInfo,index) in productList"
+						:key="index"
+						:init_product_id="productInfo.id"
+						:init_deal_price="parseFloat(productInfo.bulk_price)"
+						:init_product_name="productInfo.headline"
+						:init_product_src="productInfo.thumb_img"
+						:init_quantity="parseInt(init_quantity)"
+						:step_quantity="parseInt(step_quantity)"
+						:init_specification="productInfo.specification"
+						:by_footer_menu_monitor="by_footer_menu_monitor"
+						:type="type"
+				></product-select>
+			</ul>
 		</div>
 	</div>
 	{/if}
@@ -53,10 +67,26 @@
 {/block}
 {block name="footer"}
 {include file="../../api/public/vue/components/footer-menu.html" /}
+<div class="bg"></div>
+<div class="dialogCart">
+	<div id="product-list2">
+		<product-select
+				v-for="(productInfo,index) in productList"
+				:key="index"
+				:init_product_id="productInfo.id"
+				:init_product_src="productInfo.thumb_img"
+				:init_deal_price="parseFloat(productInfo.bulk_price)"
+				:init_quantity="parseInt(init_quantity)"
+				:step_quantity="parseInt(step_quantity)"
+				:type="type"
+		></product-select>
+	</div>
+</div>
 <div id="foot_cart_menu">
 	<footer-menu
 			:type="type"
 			:init_cart_num="init_cart_num"
+			:init_menus="init_menus"
 	></footer-menu>
 </div>
 <script type="text/javascript">
@@ -74,9 +104,12 @@
  			var html = $('.no_cart_data').html();
 			$('#product-list').append(html);
 		}
+		let unlockingFooterCart = '{$unlockingFooterCart|raw}';
+		unlockingFooterCart = JSON.parse(unlockingFooterCart);
 		let param = {
 			type:4,
-			init_cart_num:total_num
+			init_cart_num:total_num,
+			init_menus:unlockingFooterCart
 		};
 		new Vue({
 			el: '#foot_cart_menu',
@@ -139,43 +172,15 @@
 </script>
 {if $type}
 <style>
-	.group_cart_nav{
+	#foot_cart_menu2 .group_cart_nav{
 		bottom:0.88rem;
+	}
+	.new-retail-wrapper{
+		padding-bottom:2rem;
 	}
 </style>
 {include file="template/footer_project.html" /}
 {/if}
-
 {/block}
 {block name="script"}
-<script type="text/javascript">
-	// 新零售商品获取配置
-	var config_1 = {
-		url:module+'Goods/getList',
-		requestEnd:false,
-		loadTrigger:false,
-		currentPage:1,
-		container:$("#goodsList")
-	};
-	var postData_1 = {
-		pageSize:10,
-		pageType:'index',
-		is_selection:1
-	};
-	$(function(){
-		//购物车页面的类型
-		var type = '{$type}';
-		if(type){
-			//初始化零售商品
-			getPagingList(config_1,postData_1);
-			//下拉加载
-			$(window).on('scroll',function(){
-				if(config_1.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
-					config_1.loadTrigger = false;
-					getPagingList(config_1,postData_1);
-				}
-			});
-		}
-	});
-</script>
 {/block}

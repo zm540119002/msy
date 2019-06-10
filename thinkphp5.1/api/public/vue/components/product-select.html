@@ -142,7 +142,7 @@
         </div>
     </li>
     <li v-else-if="type==7">
-            <div class="product-select">
+            <div class="product-select index">
                 <div class=""><p></p></div>
                 <div class="">
                     <div class="">
@@ -308,6 +308,9 @@
                     asyncVerify(config);
                 },dialogCart: function () {
                     let _this = this;
+                    if(!_this.product_id){
+                        return false;
+                    }
                     // 弹出加入采购车
                     $('.dialogCart').show();
                     $('.bg').show();
@@ -522,4 +525,14 @@
 	.product_name{
 		font-size: 0.2rem;
 	}
+	.add_num{
+		left: 18px;
+	}
+    .product_specs .two-line-omit{
+        height: 38px;
+    }
+    .index .product_name{
+        font-size: 0.25rem;
+        color: #333;
+    }
 </style>
