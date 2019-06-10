@@ -335,6 +335,9 @@
                 }
             },created: function(){
                 let _this = this;
+                if(this.monitor_buy_quantity){
+                    console.log(_this.product_id);
+                }
                 _this.subtotal_amount_calculate();
                 //触发-产品选择器初始化-事件
                 bus.$emit('product_select_init',_this);
