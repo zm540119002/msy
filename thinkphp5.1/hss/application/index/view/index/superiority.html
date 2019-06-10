@@ -106,7 +106,10 @@
 </div>
 <script type="text/javascript">
     $(function(){
+        let unlockingFooterCart = '{$unlockingFooterCart|raw}';
+        unlockingFooterCart = JSON.parse(unlockingFooterCart);
         let param = {
+            init_menus:unlockingFooterCart
         };
         new Vue({
             el: '#foot_cart_menu',
@@ -118,28 +121,22 @@
     });
 </script>
 {/block}
-
 {block name="script"}
 <script type="text/javascript" src="api_common_js/swiper.min.js"></script>
 <script>
-    //     (function($){
-    // var deviceWidth=document.documentElement.clientWidth;
-
-    // })(jQuery);
     $(function(){
         var html =document.getElementsByTagName('html')[0];
         html.style.fontSize='';
         $('.swiper-slide ').css('height',$(window).height()+'px');
         $('.swiper-slide').find('img').css('paddingBottom',80+'px');
-    })
+    });
     var swiper = new Swiper('.swiper-container', {
         direction: 'vertical',
         pagination: {
             el: '.swiper-pagination',
             clickable: true
-        },
+        }
     });
-
 </script>
 {/block}
 

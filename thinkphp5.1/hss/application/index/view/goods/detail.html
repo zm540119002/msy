@@ -204,8 +204,11 @@
 				total_num += goods['num'];
 			});
 		}
+		let unlockingFooterCart = '{$unlockingFooterCart|raw}';
+		unlockingFooterCart = JSON.parse(unlockingFooterCart);
 		let param = {
-			init_cart_num:total_num
+			init_cart_num:total_num,
+			init_menus:unlockingFooterCart
 		};
 		new Vue({
 			el: '#foot_cart_menu',
