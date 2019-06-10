@@ -337,7 +337,8 @@
 }
 
 .count_down_box{
-    width:2.05rem;
+    width:1rem;
+    text-align: center;
 }
 
 .swiper-list-wrapper a img{width:100%;}
