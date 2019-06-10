@@ -286,7 +286,6 @@
                 //监听-弹出采购车赋值-事件
                 bus.$on('dialog_cart_assign', function(param){
                     if(param.by_footer_menu_monitor){
-                        console.log(param.product_id);
                         _this.total_amount_assign(param);
                         _this.assignProductList(param);
                     }
@@ -300,4 +299,27 @@
   .checked_all{
       color: red;
   }
+  .group_cart_nav a:nth-of-type(1){
+    text-align: left;
+    width: 20%;
+  }
+  .group_cart_nav a:nth-of-type(2){
+      width: 50%;
+  }
+  .group_cart_nav a:nth-of-type(1) .checked_all{
+      margin-left: 10px;
+      
+  }
+  .group_cart_nav a:nth-of-type(3){
+      background: #009fe9;
+      color: #fff;
+  }
+  .group_cart_nav a:nth-of-type(4){
+      background:red;
+      color: #fff;
+  }
+  .add_cart_icon span{
+      left: 68px;
+  }
+ 
 </style>
