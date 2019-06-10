@@ -191,6 +191,7 @@
 <div id="foot_cart_menu">
 	<footer-menu
 			:init_cart_num="init_cart_num"
+			:init_menus="init_menus"
 	></footer-menu>
 </div>
 <script type="text/javascript">
@@ -206,8 +207,6 @@
 		}
 		let unlockingFooterCart = '{$unlockingFooterCart|raw}';
 		unlockingFooterCart = JSON.parse(unlockingFooterCart);
-		console.log(typeof unlockingFooterCart);
-		console.log(unlockingFooterCart);
 		let param = {
 			init_cart_num:total_num,
 			init_menus:unlockingFooterCart
