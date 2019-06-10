@@ -124,6 +124,7 @@
 	<footer-menu
 			:init_cart_num="init_cart_num"
 			:init_product_type="parseInt(init_product_type)"
+			:init_menus="init_menus"
 	></footer-menu>
 </div>
 <script type="text/javascript">
@@ -137,9 +138,12 @@
 				total_num += goods['num'];
 			});
 		}
+		let unlockingFooterCart = '{$unlockingFooterCart|raw}';
+		unlockingFooterCart = JSON.parse(unlockingFooterCart);
 		let param = {
 			init_cart_num:total_num,
-			init_product_type:2
+			init_product_type:2,
+			init_menus:unlockingFooterCart
 		};
 		new Vue({
 			el: '#foot_cart_menu',
