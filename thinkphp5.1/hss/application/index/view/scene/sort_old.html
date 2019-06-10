@@ -51,7 +51,8 @@
 <script type="text/javascript">
 	$(function(){
 		var id = '{$info.id}';
-		var date=getWeek();
+		//每天活动倒计时
+		var date=new Date(new Date(new Date().toLocaleDateString()).getTime()+24*60*60*1000-1);
 		countDown(date,$('#countDownBox'));
 		//查看文本
 		$('.wk_notice').moreText({
