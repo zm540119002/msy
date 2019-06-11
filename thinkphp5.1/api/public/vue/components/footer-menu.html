@@ -131,11 +131,9 @@
                         postData:_thisVue.postData,
                         componentFooterCartMenu:_thisVue,
                         asyncVerifyCallBack:function(){
-                            //console.log('asyncVerifyCallBack');
                             //_thisJquery.click()
                         }
                     };
-
                     asyncVerify(config);
                 },assignProductList:function(param){
                     let productInfo = {
@@ -308,7 +306,6 @@
   }
   .group_cart_nav a:nth-of-type(1){
     text-align: left;
-    /* width: 20%; */
   }
   .group_cart_nav a:nth-of-type(2){
       width: 50%;
@@ -331,5 +328,9 @@
   .add_cart_icon span{
       left: 68px;
   }
- 
+ .group_cart_nav a.confirm_receive{
+     text-align: center;
+     color: #fff;
+     background: #009fe9;
+ }
 </style>
