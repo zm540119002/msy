@@ -135,7 +135,7 @@ class Scene extends \common\controller\Base{
                                 ['sg.status', '=', 0],
                                 ['sg.scene_id', '=', $id],
                             ],'field'=>[
-                                'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity',
+                                'g.id ','g.headline','g.thumb_img','g.franchise_price','g.specification','g.minimum_order_quantity',
                                 'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
                             ],'join'=>[
                                 ['goods g','g.id = sg.goods_id','left']
@@ -227,7 +227,7 @@ class Scene extends \common\controller\Base{
                                     ['status', '=', 0],
                                     ['category_id_1', '=', $category['id']],
                                 ],'field'=>[
-                                    'id ','headline','thumb_img','bulk_price','specification','minimum_order_quantity',
+                                    'id ','headline','thumb_img','franchise_price','specification','minimum_order_quantity',
                                     'minimum_sample_quantity','increase_quantity','purchase_unit'
                                 ],'order'=> [
                                     'sort' => 'desc'
@@ -317,7 +317,7 @@ class Scene extends \common\controller\Base{
                 ['rg.status', '=', 0],
                 ['rg.goods_id', '=', $id],
             ],'field'=>[
-                'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity',
+                'g.id ','g.headline','g.thumb_img','g.franchise_price','g.specification','g.minimum_order_quantity',
                 'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
             ],'join'=>[
                 ['goods g','g.id = rg.recommend_goods_id','left']

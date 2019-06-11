@@ -47,7 +47,7 @@ fafafafa
                     <tr class="radioTypeOption first">
                         <td class=dotted_bottom_gray height=40 width="11%" align=right><span class="c-red">*</span>批量价格：</td>
                         <td class=dotted_bottom_gray width="89%" align=left>
-                            <input style="width: 200px; " class="inputboxadmin" name="bulk_price" value="{$info.bulk_price|default='0.01'}">
+                            <input style="width: 200px; " class="inputboxadmin" name="franchise_price" value="{$info.franchise_price|default='0.01'}">
                             设置为最低价方便测试
                         </td>
                     </tr>
@@ -317,9 +317,9 @@ fafafafa
                 }else if(!postData.headline){
                     content='请填写商品标题文案';
                 }
-                else if(!postData.bulk_price){
+                else if(!postData.franchise_price){
                     content='请填写批量价格';
-                }else if(!isMoney(postData.bulk_price)){
+                }else if(!isMoney(postData.franchise_price)){
                     content='价格格式有误';
                 }
                 else if(!postData.specification){

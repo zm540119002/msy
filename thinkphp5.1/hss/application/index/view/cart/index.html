@@ -23,7 +23,7 @@
 				v-for="(productInfo,index) in productList"
 				:key="index"
 				:init_product_id="productInfo.id"
-				:init_deal_price="Number(productInfo.bulk_price)"
+				:init_deal_price="Number(productInfo.franchise_price)"
 				:init_quantity="parseInt(productInfo.num)"
 				:step_quantity="parseInt(step_quantity)"
 				:init_product_name="productInfo.name"
@@ -47,7 +47,7 @@
 						v-for="(productInfo,index) in productList"
 						:key="index"
 						:init_product_id="productInfo.id"
-						:init_deal_price="parseFloat(productInfo.bulk_price)"
+						:init_deal_price="parseFloat(productInfo.franchise_price)"
 						:init_product_name="productInfo.headline"
 						:init_product_src="productInfo.thumb_img"
 						:init_quantity="parseInt(init_quantity)"
@@ -72,7 +72,7 @@
 				:key="index"
 				:init_product_id="productInfo.id"
 				:init_product_src="productInfo.thumb_img"
-				:init_deal_price="parseFloat(productInfo.bulk_price)"
+				:init_deal_price="parseFloat(productInfo.franchise_price)"
 				:init_quantity="parseInt(init_quantity)"
 				:step_quantity="parseInt(step_quantity)"
 				:type="type"
@@ -194,7 +194,7 @@
 			productList:[
 				{
 					id:0,
-					bulk_price:0
+					franchise_price:0
 				}
 			]
 		};

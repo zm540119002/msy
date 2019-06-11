@@ -118,7 +118,7 @@ class Comment extends \common\controller\Base{
                 ['g.shelf_status', '=', 3],
                 ['g.id', 'in', $recommendGoodsIds],
             ],'field'=>[
-               'g.id as goods_id','g.headline','g.thumb_img','g.bulk_price'
+               'g.id as goods_id','g.headline','g.thumb_img','g.franchise_price'
             ]
         ];
 
