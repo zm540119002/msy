@@ -6,8 +6,6 @@ class User extends \common\controller\UserBaseAdmin{
      */
     public function manage(){
 
-        echo strtoupper(substr(PHP_OS,0,3));
-        exit;
         if(!request()->isGet()){
             return config('custom.not_get');
         }
