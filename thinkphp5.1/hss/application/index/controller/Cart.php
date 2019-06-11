@@ -29,8 +29,7 @@ class Cart extends \common\controller\UserBase {
         $validate = new \app\index\validate\Cart();
         foreach ($goodsList as $k => &$goods){
             if(!$validate->check($goods)) {
-                unset($goodsList[$k]);
-                continue;
+                $this->errorMsg($validate->getError(),config('code.error.default'));
             }
             $goods['user_id']    = $this->user['id'];
             $goods['buy_type']   = $goods['buy_type'] ? $goods['buy_type'] : 1;
