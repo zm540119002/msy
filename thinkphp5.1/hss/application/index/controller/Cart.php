@@ -11,6 +11,8 @@ class Cart extends \common\controller\UserBase {
             $this->errorMsg('请求方式错误',config('code.error.default'));
         }
         $goodsList = input('post.data/a');
+        print_r($goodsList);
+        exit;
         if(empty($goodsList)){
             $this->errorMsg('没有数据',config('code.error.default'));
         }
@@ -52,7 +54,7 @@ class Cart extends \common\controller\UserBase {
                 $goods['id'] = $carInfo['id'];
             }
         }
-print_r($goodsList);
+
         $model->startTrans();
         if(!empty($goodsList)){
             $res =  $model->saveAll($goodsList);
