@@ -58,3 +58,9 @@ nav .back_prev_page{
     background-size: 3.5rem auto;
     background-position: 0 -32px;
 }
+.cart_goods_list li {
+    padding: 0.25rem 0.15rem 0.25rem 0.15rem;
+    border:none;
+    border-bottom: 1px solid #d9d9d9;
+    overflow: hidden;
+}
