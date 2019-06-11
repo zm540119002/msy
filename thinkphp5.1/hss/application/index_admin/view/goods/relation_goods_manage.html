@@ -186,6 +186,18 @@
 
         })
 
+        // 没有数量要求
+        $(document).ready(function(){
+            //var str = $('input[name="goods_num"]').parents('td').html();
+
+            $("input[name='goods_num']").each(function(){
+                var str = $(this).parents('td').html();
+                console.log(str);
+
+            });
+
+        });
+
     });
 </script>
 {/block}
