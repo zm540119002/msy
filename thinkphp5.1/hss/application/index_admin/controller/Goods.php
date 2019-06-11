@@ -533,8 +533,7 @@ class Goods extends Base {
             $url = request()->domain().'/index.php/Index/Goods/detail/id/'.$info['id'];
             $newRelativePath = config('upload_dir.goods');
             $shareQRCodes = createLogoQRcode($url,$newRelativePath);
-    /*        p($shareQRCodes);
-            exit;*/
+  
             if(mb_strlen( $info['headline'], 'utf-8')>20){
                 $name1 =  mb_substr( $info['headline'], 0, 18, 'utf-8' ) ;
                 $name2 =  mb_substr( $info['headline'], 18, 18, 'utf-8' ) ;
