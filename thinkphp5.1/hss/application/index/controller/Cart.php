@@ -52,7 +52,7 @@ class Cart extends \common\controller\UserBase {
                 $goods['id'] = $carInfo['id'];
             }
         }
-
+print_r($goodsList);
         $model->startTrans();
         if(!empty($goodsList)){
             $res =  $model->saveAll($goodsList);
