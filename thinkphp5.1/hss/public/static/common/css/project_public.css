@@ -120,4 +120,12 @@ nav .back_prev_page{
 .new-retail-wrapper{
     padding-bottom:2rem;
 }
+.weui-flex-item .search_city{
+    background:#fff url(../../common/img/search_city.png) no-repeat center 0;
+    background-size:0.68rem auto;
+}
+.weui-flex-item.current .search_city{
+    background:#fff url(../../common/img/search_s_city.png) no-repeat center 0;
+    background-size:0.68rem auto;
+}
 
