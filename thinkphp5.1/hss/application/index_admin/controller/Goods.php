@@ -291,9 +291,7 @@ class Goods extends Base {
         if(!$data=input('post.selectedIds/a'))  return errorMsg('参数有误');
 
         $relation=input('post.relation/d');
-    /*    p($relation);
-        p($data);
-        exit;*/
+
         // custom.php relation_type
         switch($relation){
             case config('custom.relation_type.scene'):
