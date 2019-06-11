@@ -1,0 +1,30 @@
+.foot_nav_bar a span.f_icon{
+    background-image: url(../../common/img/icons/public_bottom_icons.png);
+}
+.foot_nav_bar .current a span.cart{
+    background-position:-0.02rem -4.26rem;
+}
+.customer_list_wrapper{
+    height:1rem;
+    background:#fff;
+    overflow:hidden;
+}
+
+.customer_item span{
+    font-size:0.20rem;
+}
+.count_down_box{
+    width:1rem;
+    margin:0 auto;
+    text-align: center;
+}
+.friday_end{
+    text-align: center;
+}
+.mid_module_left img{
+    max-width:88%;
+}
+
+.mid_module_right .d-r{
+    margin:0 0 0 0.8rem;
+}
