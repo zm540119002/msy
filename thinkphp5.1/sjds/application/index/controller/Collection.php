@@ -64,7 +64,7 @@ class Collection extends \common\controller\UserBase{
                 ['co.user_id', '=', $this->user['id']],
             ],
             'field'=>[
-                'co.id','co.goods_id','g.headline','g.thumb_img','g.bulk_price','g.specification', 'g.purchase_unit'
+                'co.id','co.goods_id','g.headline','g.thumb_img','g.franchise_price','g.specification', 'g.purchase_unit'
 
             ], 'join'=>[
                 ['goods g','g.id = co.goods_id','left'],

@@ -40,7 +40,8 @@
 						v-for="(productInfo,index) in productList"
 						:key="index"
 						:init_product_id="productInfo.id"
-						:init_deal_price="parseFloat(productInfo.bulk_price)"
+						:init_deal_price="parseFloat(productInfo.franchise_price)"
+						:init_compare_price="Number(productInfo.retail_price)"
 						:init_product_name="productInfo.headline"
 						:init_product_src="productInfo.thumb_img"
 						:init_quantity="parseInt(init_quantity)"
@@ -214,5 +215,6 @@
 	.f24{
 		margin-top: 42px;
 	}
+	
 </style>
 {/block}

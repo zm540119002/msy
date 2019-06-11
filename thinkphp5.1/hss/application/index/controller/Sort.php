@@ -128,7 +128,7 @@ class Sort extends \common\controller\Base{
                     ['pg.status', '=', 0],
                     ['pg.sort_id', '=', $id],
                 ],'field'=>[
-                    'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity',
+                    'g.id ','g.headline','g.thumb_img','g.franchise_price','g.specification','g.minimum_order_quantity',
                     'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
                 ],'join'=>[
                     ['goods g','g.id = pg.goods_id','left']

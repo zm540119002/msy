@@ -61,7 +61,9 @@
             <div class="columns_flex l-r-sides">
                 <div class="left">
                     <div></div>
-                    <div class="red subtotal_amount">￥<span class="">{{ parseFloat(subtotal_amount).toFixed(2) }}</span></div>
+                    <div class="red subtotal_amount">￥<span class="">{{ parseFloat(subtotal_amount).toFixed(2) }}</span>
+                    </div>
+                    <del>￥{{compare_price}}</del>
                 </div>
                 <div class="right">
                     <div class=" selected-number">
@@ -202,6 +204,7 @@
                 init_specification_unit: {type: String,default: '盒'},
                 init_product_src: {type: String,default: ''},
                 init_deal_price: {type: Number,required: true},
+                init_compare_price: {type: Number,default: 0.00},
                 init_checked: {type: Boolean,default: true},
                 init_quantity: {type: Number,default: 1},
                 quota_quantity: {type: Number,default: 1},
@@ -214,6 +217,7 @@
                 return {
                     product_id:this.init_product_id,
                     deal_price:this.init_deal_price,
+                    compare_price:this.init_compare_price,
                     product_name:this.init_product_name,
                     product_src:this.init_product_src,
                     specification:this.init_specification,
@@ -534,5 +538,7 @@
     .group_cart_nav a:nth-of-type(2){
       background: #fff; 
     }
-    
+    .product-select.index{
+        padding:0.12rem;
+    }
 </style>

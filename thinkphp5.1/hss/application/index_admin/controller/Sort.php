@@ -392,7 +392,7 @@ class Sort extends Base
                 ['g.status', '=', 0],
                 ['g.id', 'in', $recommend_goods],
             ],'field'=>[
-                'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity',
+                'g.id ','g.headline','g.thumb_img','g.franchise_price','g.specification','g.minimum_order_quantity',
                 'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit','g.name'
             ]
         ];
