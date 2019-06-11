@@ -531,8 +531,10 @@ class Goods extends Base {
             $oldQRCodes = $info['rq_code_url'];
             $uploadPath = realpath( config('upload_dir.upload_path')) . '/';
             $url = request()->domain().'/index.php/Index/Goods/detail/id/'.$info['id'];
-            $newRelativePath = config('upload_dir.weiya_goods');
+            $newRelativePath = config('upload_dir.goods');
             $shareQRCodes = createLogoQRcode($url,$newRelativePath);
+    /*        p($shareQRCodes);
+            exit;*/
             if(mb_strlen( $info['headline'], 'utf-8')>20){
                 $name1 =  mb_substr( $info['headline'], 0, 18, 'utf-8' ) ;
                 $name2 =  mb_substr( $info['headline'], 18, 18, 'utf-8' ) ;
