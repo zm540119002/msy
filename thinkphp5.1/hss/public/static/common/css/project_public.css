@@ -31,6 +31,9 @@
 .goods_list li{
     border:none;
 }
+.scene_wrapper{
+    margin:0.12rem 0 0;
+}
 nav .back_prev_page{
     background-image:none;
     color:#fff;
