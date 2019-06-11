@@ -131,4 +131,8 @@ nav .back_prev_page{
 .once-apply{
     background:#ff7aab;
 }
-
+.wy_list li .p_img,
+.content_main li .p_img{
+    display:block;
+    width:45%;
+}
