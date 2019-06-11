@@ -13,3 +13,9 @@
 .customer_item span{
     font-size:0.20rem;
 }
+.count_down_box{
+    width:1rem;
+    margin:0 auto;
+    text-align: center;
+}
+
