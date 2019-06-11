@@ -128,4 +128,7 @@ nav .back_prev_page{
     background:#fff url(../../common/img/search_s_city.png) no-repeat center 0;
     background-size:0.68rem auto;
 }
+.once-apply{
+    background:hotpink;
+}
 
