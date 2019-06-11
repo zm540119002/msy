@@ -43,3 +43,6 @@ nav .back_prev_page{
 .news_list_wrapper{
     padding:0 .55rem 0 1.3rem;
 }
+.scroll_news .news_tit{
+    top:.15rem;
+}
