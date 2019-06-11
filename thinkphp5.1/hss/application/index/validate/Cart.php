@@ -9,7 +9,7 @@ class Cart extends \think\Validate
             'require','number','gt'=>0
         ],
         'num'  => [
-            'require','number','gt'=>0
+            'require','number','neq'=>0
         ],
     ];
 }
