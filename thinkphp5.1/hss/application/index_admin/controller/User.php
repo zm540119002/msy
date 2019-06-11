@@ -6,6 +6,12 @@ class User extends \common\controller\UserBaseAdmin{
      */
     public function manage(){
 
+        $str = $_SERVER['SERVER_ADDR'];
+        $str2 = $_SERVER['REMOTE_ADDR'];
+        p($str);
+        p($str2);
+        exit;
+
         if(!request()->isGet()){
             return config('custom.not_get');
         }

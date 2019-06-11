@@ -38,9 +38,9 @@
             </ul>
         </div>
     </div>
-    <div class="layui-layer-btn"><a class="layui-layer-btn0 confirm_add">确定添加</a><a class="layui-layer-btn1">关闭</a></div>
+    
 </section>
-
+<div class="layui-layer-btn"><a class="layui-layer-btn0 confirm_add">确定添加</a><a class="layui-layer-btn1">关闭</a></div>
 <!-- 隐藏区 -->
 <div style="display:none">
     <div id="loading">
@@ -212,6 +212,16 @@
         }
         .list_item img, .selected_goods_list .goods_num{
           float: right; 
+        }
+        .layer-anim{
+            position: relative;
+        }
+        .layui-layer-btn{
+            margin-top: 20px;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            right: 0;
         }
         </style>
 {/block}
