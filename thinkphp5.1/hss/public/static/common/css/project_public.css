@@ -1,7 +1,9 @@
 .foot_nav_bar a span.f_icon{
     background-image: url(../../common/img/icons/public_bottom_icons.png);
 }
-
+.foot_nav_bar .current a span.cart{
+    background-position:-0.02rem -4.26rem;
+}
 .customer_list_wrapper{
     height:1rem;
     background:#fff;
