@@ -267,7 +267,7 @@ class Order extends \common\controller\UserBase
 
             $this->assignWalletInfo();*/
 
-            return $this->fetch('confirm_order_1');
+            return $this->fetch('confirm_order');
         }
     }
 

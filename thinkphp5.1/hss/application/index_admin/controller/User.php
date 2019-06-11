@@ -5,7 +5,6 @@ class User extends \common\controller\UserBaseAdmin{
     /**用户-管理
      */
     public function manage(){
-
         if(!request()->isGet()){
             return config('custom.not_get');
         }

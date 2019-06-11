@@ -28,6 +28,11 @@ class Base extends \think\Controller{
 
         $user = checkLogin();
         $this->assign('user',$user);
+
+        if (strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN') {
+            $conf[CURLOPT_NOSIGNAL] = true;
+        }
+
     }
 
 
