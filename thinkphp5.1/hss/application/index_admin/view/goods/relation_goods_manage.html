@@ -191,7 +191,7 @@
             //var str = $('input[name="goods_num"]').parents('td').html();
 
             $("input[name='goods_num']").each(function(){
-                var str = $(this).parents('td').html();
+                $(this).parents('td').remove(' ');
                 console.log(str);
 
             });
@@ -200,4 +200,18 @@
 
     });
 </script>
+ <style>
+        .selected_goods_list li{
+            display: flex;
+            align-items: center;
+            width: 100px;
+        }
+         .list_item img, .selected_goods_list img{
+            min-width: 100%;
+            display: block;
+        }
+        .list_item img, .selected_goods_list .goods_num{
+          float: right; 
+        }
+        </style>
 {/block}
