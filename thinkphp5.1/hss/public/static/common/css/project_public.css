@@ -1,0 +1,8 @@
+.customer_list_wrapper{
+    height:1rem;
+    overflow:hidden;
+}
+
+.customer_item span{
+    font-size:0.20rem;
+}
