@@ -42,7 +42,7 @@
 {/block}
 
 {block name="script"}
-    <script type="text/javascript" src="api_common_js/admin/categoryLinkage.js"></script>
+<script type="text/javascript" src="api_common_js/admin/categoryLinkage.js"></script>
     <script type="text/javascript">
         $(function () {
             //加载第一页
@@ -78,7 +78,6 @@
                 if(ids){
                     getData.ids = ids;
                 }
-
                 getPagingList(config,getData);
             }
             // 搜索 END
@@ -98,6 +97,7 @@
                         tips:[3,'#ff0000'],
                         time:2000
                     });*/
+                    _this.find('a').addClass('label');
                     layer.msg('此商品已选择过 !');
                     return false;
                 }

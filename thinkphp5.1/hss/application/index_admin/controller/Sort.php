@@ -196,7 +196,7 @@ class Sort extends Base
         GoodsCategory::getGoodsCategory();
         $this->assign('relation',config('custom.relation_type.sort'));
 
-        return $this->fetch();
+        return $this->fetch('goods/relation_goods_manage');
     }
 
     // 促销系列方法
