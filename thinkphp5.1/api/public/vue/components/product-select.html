@@ -2,7 +2,7 @@
 <template id="product_select_tpl">
     <li v-if="type==1"><!--图片、价格、数字增减-->
         <div class="product-select">
-            <div class="columns_flex l-r-sides"><p><span class="red deal_price">￥{{deal_price}}</span></p></div>
+            <div class="columns_flex l-r-sides"><p><span class="red deal_price">￥{{deal_price}}{{compare_price}}</span></p></div>
             <div class="columns_flex l-r-sides">
                 <div class="left">
                     <a class="p_img" :href="'/index/Goods/detail/id/' + product_id">
@@ -28,7 +28,7 @@
     </li><li v-else-if="type==2">
         <div class="product-select">
             <div class="columns_flex l-r-sides">
-                <p><span class="red deal_price">￥{{deal_price}}</span></p>
+                <p><span class="red deal_price">￥{{deal_price}}{{compare_price}}</span></p>
                 <p v-if="display_quota">样品购买限额：<span class="quota">{{quota_quantity}}</span></p>
             </div>
             <div class="columns_flex l-r-sides">
@@ -83,7 +83,7 @@
         <div class="cart_list_r">
             <p>{{product_name}}</p>
             <div>商品规格：<span>{{specification}}</span></div>
-            <div class="commodity_purchaser f24"><span class="pink">￥{{deal_price}}</span></div>
+            <div class="commodity_purchaser f24"><span class="pink">￥{{deal_price}}{{compare_price}}</span></div>
             <div class="purchase_goods_num cart_goods_operate">
                 <div class=" selected-number">
                     <a href="javascript:void(0);" class="add_cart reduce" @click="reduceCart" :data-jump_url="add_cart_url">-</a>
@@ -110,7 +110,7 @@
                         <p class="two-line-omit">{{specification}}</p>
                     </div>
                     <div class="quantity_wrapper selected-number columns_flex l-r-sides">
-                        <div><span class="red deal_price">￥{{deal_price}}</span></div>
+                        <div><span class="red deal_price">￥{{deal_price}}{{compare_price}}</span></div>
                         <div><a href="javascript:void(0);" class="add_cart add_cart_i" @click="dialogCart" :data-jump_url="add_cart_url"><i></i></a></div>
                     </div>
                 </div>
@@ -140,7 +140,7 @@
             <span>{{product_name}}</span>
         </div>
         <div class="specs">
-            <div>{{specification}} ￥{{deal_price}}</div>
+            <div>{{specification}} ￥{{deal_price}}{{compare_price}}</div>
         </div>
     </li><li v-else-if="type==7">
         <div class="product-select index">
@@ -159,7 +159,7 @@
                         <p class="two-line-omit">{{specification}}</p>
                     </div>
                     <div class=" columns_flex l-r-sides">
-                        <div><span class="red deal_price">￥{{deal_price}}</span></div>
+                        <div><span class="red deal_price">￥{{deal_price}}{{compare_price}}</span></div>
                         <div><a href="javascript:void(0);" class="add_cart add_cart_i" @click="dialogCart" :data-jump_url="add_cart_url"><i></i></a></div>
                     </div>
                 </div>
@@ -182,7 +182,7 @@
                         <p class="two-line-omit">{{specification}}</p>
                     </div>
                     <div class=" columns_flex l-r-sides">
-                        <div><span class="red deal_price">￥{{deal_price}}</span></div>
+                        <div><span class="red deal_price">￥{{deal_price}}{{compare_price}}</span></div>
                     </div>
                 </div>
             </div>
@@ -204,6 +204,7 @@
                 init_specification_unit: {type: String,default: '盒'},
                 init_product_src: {type: String,default: ''},
                 init_deal_price: {type: Number,required: true},
+                init_compare_price: {type: Number,required: true},
                 init_checked: {type: Boolean,default: true},
                 init_quantity: {type: Number,default: 1},
                 quota_quantity: {type: Number,default: 1},
@@ -216,6 +217,7 @@
                 return {
                     product_id:this.init_product_id,
                     deal_price:this.init_deal_price,
+                    compare_price:this.init_compare_price,
                     product_name:this.init_product_name,
                     product_src:this.init_product_src,
                     specification:this.init_specification,
