@@ -27,7 +27,7 @@ class PromotionGoods extends \common\model\Base {
 
                 $condition = [
                     'field' => [
-                        'sum(g.bulk_price) price',
+                        'sum(g.franchise_price) price',
                     ], 'where' => [
                         ['g.status','=',0],
                         ['g.shelf_status','=',3],

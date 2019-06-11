@@ -40,7 +40,7 @@ class Goods extends \common\controller\Base{
                 ['g.category_id_1', '=', $categoryId],
                 ['g.shelf_status', '=', 3],
             ],'field'=>[
-                'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity',
+                'g.id ','g.headline','g.thumb_img','g.franchise_price','g.specification','g.minimum_order_quantity',
                 'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
             ],
         ];
@@ -66,7 +66,7 @@ class Goods extends \common\controller\Base{
                 ['g.shelf_status', '=', 3],
             ],
             'field'=>[
-                'g.id ','g.headline','g.thumb_img','g.bulk_price','g.sample_price','g.specification','g.minimum_order_quantity',
+                'g.id ','g.headline','g.thumb_img','g.franchise_price','g.sample_price','g.specification','g.minimum_order_quantity',
                 'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
             ],
             'order'=>[
@@ -182,7 +182,7 @@ class Goods extends \common\controller\Base{
                 ['sg.status', '=', 0],
                 ['sg.scene_id', '=', $scene_id],
             ],'field'=>[
-                'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity',
+                'g.id ','g.headline','g.thumb_img','g.franchise_price','g.specification','g.minimum_order_quantity',
                 'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
             ],'join'=>[
                 ['goods g','g.id = sg.goods_id','left']
@@ -209,7 +209,7 @@ class Goods extends \common\controller\Base{
                 ['pg.status','=',0],
             ],
             'field'=>[
-                'g.id ','g.headline','g.thumb_img','g.bulk_price','g.sample_price','g.specification','g.minimum_order_quantity',
+                'g.id ','g.headline','g.thumb_img','g.franchise_price','g.sample_price','g.specification','g.minimum_order_quantity',
                 'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
             ],
             'join'=>[
@@ -255,7 +255,7 @@ class Goods extends \common\controller\Base{
                 ['rg.status', '=', 0],
                 ['rg.goods_id', '=', $goodsId],
             ],'field'=>[
-                'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity',
+                'g.id ','g.headline','g.thumb_img','g.franchise_price','g.specification','g.minimum_order_quantity',
                 'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
             ],'join'=>[
                 ['goods g','g.id = rg.recommend_goods_id','left']

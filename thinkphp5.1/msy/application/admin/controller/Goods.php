@@ -150,7 +150,7 @@ class Goods extends Base {
         $config = [
             'where'=>$where,
             'field'=>[
-                'g.id','g.name','g.bulk_price','g.sample_price','g.sort','g.is_selection',
+                'g.id','g.name','g.franchise_price','g.sample_price','g.sort','g.is_selection',
                 'g.thumb_img','g.shelf_status','g.create_time','g.rq_code_url'
 //                'g.category_id_1',
 //                'gc1.name as category_name_1'
@@ -260,7 +260,7 @@ class Goods extends Base {
             'name1'=> $name1,
             'name2'=> $name2,
             'specification'=> $info['specification'],
-            'money'=>'￥'.$info['bulk_price'].' 元',
+            'money'=>'￥'.$info['franchise_price'].' 元',
             'logo_img'=> request()->domain().'/static/weiya/img/logo.png', // 460*534
             'goods_img'=> $uploadPath.$info['thumb_img'], // 460*534
             'qrcode'=>$uploadPath.$shareQRCodes, // 120*120
@@ -318,7 +318,7 @@ class Goods extends Base {
                 'name1'=> $name1,
                 'name2'=> $name2,
                 'specification'=> $info['specification'],
-                'money'=>'￥'.$info['bulk_price'].' 元',
+                'money'=>'￥'.$info['franchise_price'].' 元',
                 'logo_img'=> request()->domain().'/static/weiya/img/logo.png', // 460*534
                 'goods_img'=> $uploadPath.$info['thumb_img'], // 460*534
                 'qrcode'=>$uploadPath.$shareQRCodes, // 120*120
@@ -487,7 +487,7 @@ class Goods extends Base {
                 ['g.id','=',$id]
             ],
             'field'=>[
-                'g.id','g.name','g.headline','g.minimum_order_quantity','g.minimum_sample_quantity','g.bulk_price','g.sample_price',
+                'g.id','g.name','g.headline','g.minimum_order_quantity','g.minimum_sample_quantity','g.franchise_price','g.sample_price',
                 'g.specification','g.specification','g.specification_unit','g.intro','g.parameters','g.main_img','g.thumb_img','g.shelf_status','g.create_time','g.category_id_1',
                 'g.detail_img','g.tag','gc1.name as category_name_1','g.purchase_unit'
             ],
