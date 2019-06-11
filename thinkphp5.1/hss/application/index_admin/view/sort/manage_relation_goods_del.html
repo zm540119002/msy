@@ -12,8 +12,7 @@
     <section class="recommendGoods_content">
         <!--推荐产品容器-->
         <div id="recommendGoods">
-            <span class="content-label">已推荐产品</span>
-            <a href="javascript:void(0);" class="confirm_add">确定添加</a>
+            <span class="content-label">已增加产品</span>
             <ul class="selected_goods_list" id="selected_list">
 
             </ul>
@@ -39,6 +38,7 @@
                 </ul>
             </div>
         </div>
+        <div class="layui-layer-btn"><a class="layui-layer-btn0 confirm_add">确定添加</a><a class="layui-layer-btn1">关闭</a></div>
     </section>
     
     <!-- 隐藏区 -->
@@ -50,7 +50,7 @@
 {/block}
 
 {block name="script"}
-    <script type="text/javascript" src="api_common_js/admin/categoryLinkage.js"></script>
+<script type="text/javascript" src="api_common_js/admin/categoryLinkage.js"></script>
     <script type="text/javascript">
         $(function () {
             var id = {$id};
@@ -94,34 +94,38 @@
                     }
                 });
             }
+
             // 选择商品
-            $('body').on('click','.add_goods',function(){
+            $('body').on('click','.add-goods',function(){
                 var selectedGoodsIds = [];
-                $('.selected_goods_list li').each(function(){
+                $('#selected_list li').each(function(){
                     var selectedGoodsId = $(this).data('goods-id');
                     selectedGoodsIds.push(selectedGoodsId);
                 });
+
                 var _this=$(this);
-                var goodsId=_this.parents('li').data('id');
+                var goodsId=_this.parents('tr').data('goods-id');
                 if($.inArray(goodsId, selectedGoodsIds) !== -1){
-                    layer.tips('此商品已选择过!','.add_goods',{
-                        tips:[3,'#ff0000'],
-                        time:2000
-                    });
+
+                    _this.find('a').addClass('label');
+                    layer.msg('此商品已选择过 !');
                     return false;
                 }
-                var goodsImgSrc=_this.find('img').attr('src');
-                var selectedLen=$('.selected_goods_list li').length;
-                var listDiv = _this.parents('li').find('.list_item:eq(0)').html();
-                var liTpl=$('.tpl_list').html();
-                if(!selectedLen){
-                    $('.selected_goods_list').append(liTpl);
-                    $('.selected_goods_list li').append(listDiv);
-                }else{
-                    $('.selected_goods_list li:last').after(liTpl);
-                    $('.selected_goods_list li:last').append(listDiv);
-                }
-                $('.selected_goods_list li:last').attr('data-goods-id',goodsId);
+
+                var goodsImgSrc= _this.parents('tr').find('img').attr('src');
+                var goodsName  = _this.parents('tr').find('.goods_name').html();
+                var num        = parseInt(_this.parents('tr').find("input[name='goods_num']").val());
+                var shortName  = goodsName.substr(0,20) + '...' ;
+                var html =
+                        ' <li data-goods-id="'+goodsId+'"><a href="javascript:void(0);" class="close-btn">X</a> <div>'+
+                        '<img src="'+goodsImgSrc+'" alt="" class="left">'+
+                        '<span class="goods_name" title="'+goodsName+'">'+shortName+'</span>'+
+                        '<span>X</span>'+
+                        '<span class="goods_num">'+num+'</span>'+
+                        '</div> </li>';
+
+                $('.selected_goods_list').append(html);
+                _this.find('a').addClass('label');
             });
             //移除商品
             $('body').on('click','.close-btn',function(){
@@ -132,9 +136,13 @@
                     if(_This.data('id')==id){
                         _This.removeClass('current');
                     }
-                })
+                });
+
+                $('tbody').find('tr[data-goods-id="'+id+'"]').find('.add-goods a').removeClass('label');
+
                 _this.parent().remove();
             });
+
             // 提交添加
             $('body').on('click','.confirm_add',function(){
                 var selectedIds=[];
@@ -143,7 +151,7 @@
                 $('.selected_goods_list li').each(function () {
                     var selectedGoods={};
                     var goodsSelectedId=$(this).data('goods-id');
-                    selectedGoods.sort_id=id;
+                    selectedGoods.id=id;
                     selectedGoods.goods_id=goodsSelectedId;
                     selectedIds.push(selectedGoods);
                 });
@@ -168,7 +176,10 @@
                     success: function(data){
                         _this.removeClass("nodisabled");
                         dialog.msg(data,'',function () {
-                            history.go(-1);
+                            // 提交后关闭，然后刷新父窗口
+
+                            var index = parent.layer.getFrameIndex(window.name);   //先得到当前iframe层的索引
+                            parent.layer.close(index);
                         })
                     }
                 });

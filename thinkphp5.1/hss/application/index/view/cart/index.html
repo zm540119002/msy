@@ -24,6 +24,7 @@
 				:key="index"
 				:init_product_id="productInfo.id"
 				:init_deal_price="Number(productInfo.franchise_price)"
+				:init_compare_price="Number(productInfo.retail_price)"
 				:init_quantity="parseInt(productInfo.num)"
 				:step_quantity="parseInt(step_quantity)"
 				:init_product_name="productInfo.name"
@@ -33,7 +34,7 @@
 		></product-select>
 	</ul>
 	{if $type}
-	<div class="project_wrapper content_main content-padding">
+	<div class="project_wrapper content_main content-padding new-retail-wrapper">
 		<div class="mod-part-title">
 			<div class="mod-part-title-wrap">
 				<span class="icon-title left"></span>
@@ -48,6 +49,7 @@
 						:key="index"
 						:init_product_id="productInfo.id"
 						:init_deal_price="parseFloat(productInfo.franchise_price)"
+						:init_compare_price="Number(productInfo.retail_price)"
 						:init_product_name="productInfo.headline"
 						:init_product_src="productInfo.thumb_img"
 						:init_quantity="parseInt(init_quantity)"
@@ -73,6 +75,7 @@
 				:init_product_id="productInfo.id"
 				:init_product_src="productInfo.thumb_img"
 				:init_deal_price="parseFloat(productInfo.franchise_price)"
+				:init_compare_price="Number(productInfo.retail_price)"
 				:init_quantity="parseInt(init_quantity)"
 				:step_quantity="parseInt(step_quantity)"
 				:type="type"
@@ -259,11 +262,6 @@
 		#foot_cart_menu .group_cart_nav{
         bottom: 52px;
 		}
-		.group_cart_nav a:nth-of-type(2){
-      width: 50%;
-      background: #fff;
-      color: red;
-  }
 	</style>
 	{include file="template/footer_project.html" /}
 {/if}

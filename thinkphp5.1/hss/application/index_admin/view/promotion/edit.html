@@ -233,7 +233,7 @@
 
         $("body").on('click','.recommend',function(){
 
-            var url =  module + 'Goods/recommendGoods';
+            var url =  module + 'Goods/relationGoods';
 
             layer.open({
                 type: 2,
@@ -246,16 +246,8 @@
                 yes: function(index, layero){
 
                     var body = layer.getChildFrame('body', index);
-                    //recommendIds = [];
-                    //var recommend = [];
-                    body.find('.selected_goods_list li').each(function () {
-           /*             var goodsSelectedId = $(this).data('goods-id');
-                        var goods_name = $(this).find('.goods_name').attr('title');
-                        var goods_num  = $(this).find('.goods_num').html();*/
-                        //var goods = {goods_id:goodsSelectedId,num:num};
-                        //recommendIds.push(goodsSelectedId);
-                        //recommend.push(parseInt(goods_num));
 
+                    body.find('.selected_goods_list li').each(function () {
                         var Obj = {};
                         Obj.goods_id  = $(this).data('goods-id');
                         Obj.goods_name= $(this).find('.goods_name').attr('title');
@@ -266,17 +258,6 @@
                         $("#goods_list").append(html);
                     });
 
-                    //$("#goods_list").after(html);
-             /*       var num = parseInt($(".recommend").next().html());
-                    $(".recommend").next().html(num+parseInt(recommendIds.length));
-
-                    var ids = $('input[name="ids"]').val();
-                    if(ids){
-                        recommendIds = ids+','+recommendIds;
-                    }
-
-                    $('input[name="ids"]').val(recommendIds);
-                    $('input[name="ids_num"]').val(recommend);*/
                     layer.close(index);
                 },
                 no: function(){

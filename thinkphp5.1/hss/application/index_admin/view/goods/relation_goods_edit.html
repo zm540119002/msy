@@ -42,7 +42,7 @@
 {/block}
 
 {block name="script"}
-    <script type="text/javascript" src="api_common_js/admin/categoryLinkage.js"></script>
+<script type="text/javascript" src="api_common_js/admin/categoryLinkage.js"></script>
     <script type="text/javascript">
         $(function () {
             //加载第一页
@@ -78,7 +78,6 @@
                 if(ids){
                     getData.ids = ids;
                 }
-
                 getPagingList(config,getData);
             }
             // 搜索 END
@@ -98,6 +97,7 @@
                         tips:[3,'#ff0000'],
                         time:2000
                     });*/
+                    _this.find('a').addClass('label');
                     layer.msg('此商品已选择过 !');
                     return false;
                 }
@@ -110,8 +110,7 @@
                         ' <li data-goods-id="'+goodsId+'"><a href="javascript:void(0);" class="close-btn">X</a> <div>'+
                         '<img src="'+goodsImgSrc+'" alt="" class="left">'+
                         '<span class="goods_name" title="'+goodsName+'">'+shortName+'</span>'+
-                        '<span>X</span>'+
-                        '<span class="goods_num">'+num+'</span>'+
+                        '<span class="goods_num">X'+num+'</span>'+
                         '</div> </li>';
 
                 $('.selected_goods_list').append(html);
@@ -134,4 +133,30 @@
             });
         });
     </script>
+    <style>
+        .selected_goods_list li{
+            display: flex;
+            align-items: center;
+            width: 100px;
+        }
+        .selected_goods_list li div{
+        }
+         .list_item img, .selected_goods_list img{
+            min-width: 100%;
+            display: block;
+        }
+        .list_item img, .selected_goods_list .goods_num{
+          float: right; 
+        }
+       /* .selected_goods_list span.goods_name{
+            background: red;
+            display: block
+        }
+            .recommendGoods_content ul.selected_goods_list .left{
+                background: red;
+            }
+            .recommendGoods_content ul.selected_goods_list div span{
+                display: block;
+            } */
+        </style>
 {/block}

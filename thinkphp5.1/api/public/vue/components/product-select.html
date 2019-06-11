@@ -160,6 +160,7 @@
                     </div>
                     <div class=" columns_flex l-r-sides">
                         <div><span class="red deal_price">￥{{deal_price}}</span></div>
+                        <del>￥{{compare_price}}</del>
                         <div><a href="javascript:void(0);" class="add_cart add_cart_i" @click="dialogCart" :data-jump_url="add_cart_url"><i></i></a></div>
                     </div>
                 </div>
@@ -538,5 +539,7 @@
     .group_cart_nav a:nth-of-type(2){
       background: #fff; 
     }
-    
+    .product-select.index{
+        padding:0.12rem;
+    }
 </style>

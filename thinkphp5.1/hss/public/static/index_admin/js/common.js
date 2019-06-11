@@ -41,6 +41,22 @@ function search() {
 }
 // 搜索 END
 
+// 管理关联的商品
+$('body').on('click','.relationGoods',function(){
+    var _thisTr = $(this).parents('tr');
+    var url =  controller + 'manageRelationGoods/id/' + _thisTr.data('id');
+
+    layer.open({
+        type: 2,
+        title:'添加商品',
+        shadeClose: false,
+        skin: 'layui-layer-demo',
+        shade: 0.8,
+        area: ['80%', '90%'],
+        content: url //iframe的url
+    });
+});
+
 // 预览
 function preview(url){
     layer.open({
