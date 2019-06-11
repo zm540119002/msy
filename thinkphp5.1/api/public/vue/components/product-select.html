@@ -86,9 +86,11 @@
         <div class="cart_list_r">
             <p>{{product_name}}</p>
             <div>商品规格：<span>{{specification}}</span></div>
-            <div class="commodity_purchaser f24"><span class="pink">￥{{deal_price}}</span></div>
-            <div class="compare_price" style="width:30%;line-height: 28px;">
-                <del class="f24">￥{{compare_price}}</del>
+            <div class="cart_price">
+                <div class="commodity_purchaser f24"><span class="pink">￥{{deal_price}}</span></div>
+                <div class="compare_price" style="width:30%;line-height: 28px;">
+                    <del class="f24">￥{{compare_price}}</del>
+                </div>
             </div>
 
             <div class="purchase_goods_num cart_goods_operate">
@@ -548,5 +550,9 @@
     }
     .product-select.index{
         padding:0.12rem;
+    }
+    .cart_price{
+        display: flex;
+        justify-content: space-between;
     }
 </style>
