@@ -65,7 +65,10 @@
                     <div></div>
                     <div class="red subtotal_amount">￥<span class="">{{ parseFloat(subtotal_amount).toFixed(2) }}</span>
                     </div>
-                    <del>￥{{compare_price}}</del>
+                   
+                </div>
+                <div class="compare_price" style="width:30%;line-height: 28px;">
+                     <del class="f24">￥{{compare_price}}</del>
                 </div>
                 <div class="right">
                     <div class=" selected-number">
@@ -188,6 +191,7 @@
                     </div>
                     <div class=" columns_flex l-r-sides">
                         <div><span class="red deal_price">￥{{deal_price}}</span></div>
+                        <del>￥{{compare_price}}</del>
                     </div>
                 </div>
             </div>
