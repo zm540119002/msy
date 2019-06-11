@@ -52,37 +52,15 @@
 {/block}
 {block name="script"}
 <script type="text/javascript" src="index_admin_js/commonCrud.js"></script>
+<script type="text/javascript" src="index_admin_js/common.js"></script>
 <script type="text/javascript">
 	$(function () {
-		//加载第一页 这个需要配置公用???
-		var config = {
-			url:controller+'getList'
-		};
-		var getData = $('#form1').serializeObject();
-		getPagingList(config,getData);
 
-		//翻页
-		$('body').on('click','.pager2',function(){
-			var curIndex= $(this).parents('ul.pagination').find('li.active span').text();
-			var selectedPage=$(this).data('page');
-			if(selectedPage=='»'){
-				curIndex++;
-				selectedPage=curIndex;
-			}
-			if(selectedPage=='«'){
-				curIndex--;
-				selectedPage=curIndex;
-			}
-			config.currentPage = selectedPage;
-
-			var getData = $('#form1').serializeObject();
-			getPagingList(config,getData);
-		});
-		//搜索
-		$('#search').click(function(){
-			//config.currentPage = 0;
-			var getData = $('#form1').serializeObject();
-			getPagingList(config,getData);
+		// 预览
+		$('body').on('click','.preview',function(){
+			var _thisTr = $(this).parents('tr');
+			var url =  '/index/Scene/detail/id/' + _thisTr.data('id');
+			preview(url);
 		});
 
 		// 去设置场景下的商品分类
@@ -95,12 +73,6 @@
 		$('body').on('click','.scenePromotion',function(){
 			var _thisTr = $(this).parents('tr');
 			var url =  controller + 'getScenePromotion/id/' + _thisTr.data('id');
-			location.href = url;
-		});
-		// 管理关联的商品
-		$('body').on('click','.relationGoods',function(){
-			var _thisTr = $(this).parents('tr');
-			var url =  controller + 'manageRelationGoods/id/' + _thisTr.data('id');
 			location.href = url;
 		});
 

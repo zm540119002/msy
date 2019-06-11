@@ -223,8 +223,8 @@ class Project extends Base {
         // 暂时先全部写在商品分类里
         GoodsCategory::getGoodsCategory();
         $this->assign('relation',config('custom.relation_type.project'));
-
-        return $this->fetch();
+        // recommend
+        return $this->fetch('goods/relation_goods_manage');
     }
 
     // 促销系列方法

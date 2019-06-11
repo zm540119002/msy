@@ -252,7 +252,7 @@ class Scene extends Base {
         GoodsCategory::getGoodsCategory();
         $this->assign('relation',config('custom.relation_type.scene'));
 
-        return $this->fetch();
+        return $this->fetch('goods/relation_goods_manage');
     }
 
     // 促销系列方法
@@ -441,7 +441,7 @@ class Scene extends Base {
      * @return array|mixed
      * @throws \Exception
      */
-    public function addSceneProject(){
+   /* public function addSceneProject(){
         if(request()->isPost()){
             $model = new \app\index_admin\model\SceneGoods();
             $data = input('post.selectedIds/a');
@@ -481,13 +481,13 @@ class Scene extends Base {
             $this->assign('id',$id);
             return $this->fetch();
         }
-    }
+    }*/
 
     // 到时看下需不需要整合在一起 start
     /**
      * 场景下的商品分类
      */
-    public function manageSceneGoodsCategory(){
+  /*  public function manageSceneGoodsCategory(){
         // 查询
         if(!$id = input('id/d')){
             $this ->error('参数有误',url('manage'));
@@ -524,13 +524,13 @@ class Scene extends Base {
         $this->assign('id',$id);
 
         return $this->fetch();
-    }
+    }*/
 
     /**
      * 修改场景下的商品分类
      *
      */
-    public function editSceneSort(){
+    /*public function editSceneSort(){
 
         if(request()->isPost()){
 
@@ -565,12 +565,12 @@ class Scene extends Base {
             $this->assign('id',$id);
             return $this->fetch();
         }
-    }
+    }*/
 
     /**
      * 取消场景的商品分类
      */
-    public function delSceneGoodsCategory(){
+   /* public function delSceneGoodsCategory(){
         if(!request()->isPost()){
             return config('custom.not_post');
         }
@@ -589,12 +589,12 @@ class Scene extends Base {
 
         return $model->del($condition,false);
 
-    }
+    }*/
 
     /**
      * 单字段设置 scene_scheme 表 暂时先放在这里
      */
-    public function setSceneSchemeInfo(){
+/*    public function setSceneSchemeInfo(){
         if(!request()->isPost()){
             return config('custom.not_post');
         }
@@ -619,7 +619,7 @@ class Scene extends Base {
             return errorMsg('失败');
         }
         return successMsg('成功');
-    }
+    }*/
 
     // 到时看下需不需要整合在一起 end
 

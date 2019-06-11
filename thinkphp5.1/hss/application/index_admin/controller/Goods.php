@@ -280,7 +280,6 @@ class Goods extends Base {
     }
 
 
-
     /**
      * 增加各关联表下的商品 -通用方法
      */
@@ -292,27 +291,38 @@ class Goods extends Base {
         if(!$data=input('post.selectedIds/a'))  return errorMsg('参数有误');
 
         $relation=input('post.relation/d');
-
+    /*    p($relation);
+        p($data);
+        exit;*/
         // custom.php relation_type
         switch($relation){
             case config('custom.relation_type.scene'):
                 $model = new \app\index_admin\model\SceneGoods();
-                $condition = [['scene_id','=',$data[0]['scene_id']]];
+                $condition = [['scene_id','=',$data[0]['id']]];
+                $field = 'scene_id';
                 break;
             case config('custom.relation_type.project'):
                 $model = new \app\index_admin\model\ProjectGoods();
-                $condition = [['project_id','=',$data[0]['project_id']]];
+                $condition = [['project_id','=',$data[0]['id']]];
+                $field = 'project_id';
                 break;
             case config('custom.relation_type.promotion'):
                 $model = new \app\index_admin\model\PromotionGoods();
-                $condition = [['promotion_id','=',$data[0]['promotion_id']]];
+                $condition = [['promotion_id','=',$data[0]['id']]];
+                $field = 'promotion_id';
                 break;
             case config('custom.relation_type.sort'):
                 $model = new \app\index_admin\model\SortGoods();
-                $condition = [['sort_id','=',$data[0]['sort_id']]];
+                $condition = [['sort_id','=',$data[0]['id']]];
+                $field = 'sort_id';
                 break;
             default:
                 return errorMsg('参数有误');
+        }
+
+        foreach($data as $k => &$v){
+            $v[$field] = $v['id'];
+            unset($v['id']);
         }
 
         $model->startTrans();
@@ -639,9 +649,10 @@ class Goods extends Base {
     /**
      * 关联结构商品列表 入口
      */
-    public function recommendGoods(){
+    public function relationGoods(){
 
-        return $this->fetch();
+        $view = 'relation_goods_edit';
+        return $this->fetch($view);
     }
 
     /**
@@ -699,54 +710,4 @@ class Goods extends Base {
         return view($view);
     }
 
-
-    /**
-     * 修改各关联表下的关联商品
-     */
-    public function RelationGoods(){
-        if(!request()->isPost()){
-            return config('custom.not_post');
-        }
-
-        if(!$data=input('post.selectedIds/a'))  return errorMsg('参数有误');
-
-        $relation=input('post.relation/d');
-
-        // custom.php relation_type
-        switch($relation){
-            case config('custom.relation_type.scene'):
-                $model = new \app\index_admin\model\SceneGoods();
-                $condition = [['scene_id','=',$data[0]['scene_id']]];
-                break;
-            case config('custom.relation_type.project'):
-                $model = new \app\index_admin\model\ProjectGoods();
-                $condition = [['project_id','=',$data[0]['project_id']]];
-                break;
-            case config('custom.relation_type.promotion'):
-                $model = new \app\index_admin\model\PromotionGoods();
-                $condition = [['promotion_id','=',$data[0]['promotion_id']]];
-                break;
-            case config('custom.relation_type.sort'):
-                $model = new \app\index_admin\model\SortGoods();
-                $condition = [['sort_id','=',$data[0]['sort_id']]];
-                break;
-            default:
-                return errorMsg('参数有误');
-        }
-
-        $model->startTrans();
-        $rse = $model -> del($condition,false);
-
-        if(false === $rse){
-            $model->rollback();
-            return errorMsg('失败');
-        }
-        $res = $model->allowField(true)->saveAll($data)->toArray();
-        if (!count($res)) {
-            $model->rollback();
-            return errorMsg('失败');
-        }
-        $model -> commit();
-        return successMsg('成功');
-    }
 }
