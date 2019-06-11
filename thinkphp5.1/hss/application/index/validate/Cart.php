@@ -12,5 +12,4 @@ class Cart extends \think\Validate
             'require','number','gt'=>0
         ],
     ];
-
 }

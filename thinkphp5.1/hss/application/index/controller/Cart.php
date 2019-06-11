@@ -44,8 +44,6 @@ class Cart extends \common\controller\UserBase {
             }
         }
         $model->startTrans();
-        print_r($goodsList);
-        exit;
         if(!empty($goodsList)){
             $res =  $model->saveAll($goodsList);
             if (!count($res)) {
