@@ -93,10 +93,7 @@
                 var _this=$(this);
                 var goodsId=_this.parents('tr').data('goods-id');
                 if($.inArray(goodsId, selectedGoodsIds) !== -1){
-      /*              layer.tips('此商品已选择过!','.add_goods',{
-                        tips:[3,'#ff0000'],
-                        time:2000
-                    });*/
+
                     _this.find('a').addClass('label');
                     layer.msg('此商品已选择过 !');
                     return false;
