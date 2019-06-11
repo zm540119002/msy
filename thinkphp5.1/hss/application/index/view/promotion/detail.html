@@ -33,7 +33,6 @@
 										:key="index"
 										:init_product_id="productInfo.id"
 										:init_deal_price="parseFloat(productInfo.franchise_price)"
-										:init_compare_price="Number(productInfo.retail_price)"
 										:init_quantity="parseInt(init_quantity)"
 										:step_quantity="parseInt(step_quantity)"
 										:type="type"
@@ -163,7 +162,6 @@
 			productList:[
 				{
 					id:"{$info.id}",
-					compare_price:"{$info.compare_price}",
 					franchise_price:"{$info.price}"
 				}
 			]
