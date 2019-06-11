@@ -38,9 +38,10 @@
             </ul>
         </div>
     </div>
-    <div class="layui-layer-btn"><a class="layui-layer-btn0 confirm_add">确定添加</a><a class="layui-layer-btn1">关闭</a></div>
+    
 </section>
 
+<div class="layui-layer-btn"><a class="layui-layer-btn0 confirm_add">确定添加</a><a class="layui-layer-btn1">关闭</a></div>
 <!-- 隐藏区 -->
 <div style="display:none">
     <div id="loading">
@@ -191,7 +192,7 @@
             //var str = $('input[name="goods_num"]').parents('td').html();
 
             $("input[name='goods_num']").each(function(){
-                var str = $(this).parents('td').html();
+                $(this).parents('td').remove(' ');
                 console.log(str);
 
             });
@@ -200,4 +201,30 @@
 
     });
 </script>
+ <style>
+        .selected_goods_list li{
+            display: flex;
+            align-items: center;
+            width: 100px;
+        }
+         .list_item img, .selected_goods_list img{
+            min-width: 100%;
+            display: block;
+        }
+        .list_item img, .selected_goods_list .goods_num{
+          float: right; 
+        }
+        
+        .layui-layer-btn{
+            margin-top: 20px;
+            position: fixed; 
+            bottom: 0;
+            width: 100%; 
+            right: 0;
+            background: #fff;
+        }
+        .recommendGoods_content{
+            margin-bottom: 40px;
+        }
+        </style>
 {/block}
