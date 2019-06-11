@@ -102,7 +102,7 @@
                 <a href="javascript:void(0);" class="delete_order goodsDel delete_cart" @click="delCart" :data-jump_url="del_cart_url">删除</a>
             </div>
         </div>
-    </li><li v-else-if="type==5">
+    </li><li v-else-if="type==5"><!--场景页使用-->
         <div class="product-select">
             <div class=""><p></p></div>
             <div class="columns_flex l-r-sides">
@@ -151,7 +151,7 @@
         <div class="specs">
             <div>{{specification}} ￥{{deal_price}}</div>
         </div>
-    </li><li v-else-if="type==7">
+    </li><li v-else-if="type==7"><!--首页使用-->
         <div class="product-select index">
             <div class=""><p></p></div>
             <div class="">
@@ -174,7 +174,7 @@
                 </div>
             </div>
         </div>
-    </li><li v-else-if="type==8">
+    </li><li v-else-if="type==8"><!--购物车精选-->
         <div class="product-select index">
             <div class=""><p></p></div>
             <div class="">
