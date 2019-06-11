@@ -6,6 +6,10 @@ class User extends \common\controller\UserBaseAdmin{
      */
     public function manage(){
 
+        $str = config('database.db_config_common');
+        p($str);
+        exit;
+
         if(!request()->isGet()){
             return config('custom.not_get');
         }
