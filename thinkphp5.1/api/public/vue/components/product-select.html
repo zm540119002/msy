@@ -63,7 +63,7 @@
                     <div></div>
                     <div class="red subtotal_amount">￥<span class="">{{ parseFloat(subtotal_amount).toFixed(2) }}</span>
                     </div>
-                    <del>￥150.00</del>
+                    <del>￥{{compare_price}}</del>
                 </div>
                 <div class="right">
                     <div class=" selected-number">
@@ -84,7 +84,6 @@
             <p>{{product_name}}</p>
             <div>商品规格：<span>{{specification}}</span></div>
             <div class="commodity_purchaser f24"><span class="pink">￥{{deal_price}}</span></div>
-            <div><span class="red deal_price">￥{{compare_price}}</span></div>
             <div class="purchase_goods_num cart_goods_operate">
                 <div class=" selected-number">
                     <a href="javascript:void(0);" class="add_cart reduce" @click="reduceCart" :data-jump_url="add_cart_url">-</a>
