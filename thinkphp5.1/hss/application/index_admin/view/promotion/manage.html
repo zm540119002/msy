@@ -71,15 +71,15 @@
 	$('body').on('click','.preview',function(){
 		var _thisTr = $(this).parents('tr');
 		var url =  '/index/Promotion/detail/id/' + _thisTr.data('id');
-
-		layer.open({
+		preview(url);
+/*		layer.open({
 			type: 2,
 			maxmin: true,
 			shade: false,
 			shadeClose: false,
 			area: ['300px','440px'],
 			content: url
-		});
+		});*/
 	});
 
 
