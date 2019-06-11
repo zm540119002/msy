@@ -136,3 +136,6 @@ nav .back_prev_page{
     display:block;
     width:auto;
 }
+.module-navigation .channel_nav{
+    border-radius:0;
+}
