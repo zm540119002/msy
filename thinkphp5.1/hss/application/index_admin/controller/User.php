@@ -5,8 +5,11 @@ class User extends \common\controller\UserBaseAdmin{
     /**用户-管理
      */
     public function manage(){
-        echo strtoupper(substr(PHP_OS, 0, 3));
+
+        $str = config('database.db_config_common');
+        p($str);
         exit;
+
         if(!request()->isGet()){
             return config('custom.not_get');
         }
