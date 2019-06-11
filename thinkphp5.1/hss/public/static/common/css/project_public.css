@@ -28,3 +28,6 @@
 .mid_module_right .d-r{
     margin:0 0 0 0.8rem;
 }
+.goods_list li{
+    border:none;
+}
