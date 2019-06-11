@@ -24,36 +24,28 @@ class Cart extends \common\controller\UserBase {
                 ['status','=',0],
             ]
         ];
-
         $cartList = $model->getList($config);
         $cartList = array_column($cartList,null,'goods_id');
-
-
         $validate = new \app\index\validate\Cart();
-
         foreach ($goodsList as $k => &$goods){
-
             if(!$validate->check($goods)) {
                 unset($goodsList[$k]);
                 continue;
-
             }
-
             $goods['user_id']    = $this->user['id'];
             $goods['buy_type']   = $goods['buy_type'] ? $goods['buy_type'] : 1;
             $goods['brand_name'] = $goods['brand_name'] ? $goods['brand_name'] : '';
             $goods['brand_id']   = $goods['brand_id'] ? $goods['brand_id'] : 0;
             $goods['create_time']= time();
-
             $carInfo = $cartList[$goods['goods_id']];
-
             if($carInfo != null){
                 $goods['num']= $goods['num']+$carInfo['num'];
                 $goods['id'] = $carInfo['id'];
             }
         }
-
         $model->startTrans();
+        print_r($goodsList);
+        exit;
         if(!empty($goodsList)){
             $res =  $model->saveAll($goodsList);
             if (!count($res)) {
