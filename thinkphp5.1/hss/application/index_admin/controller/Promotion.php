@@ -37,8 +37,24 @@ class Promotion extends Base {
                         ['id','=',$id]
                     ],
                 ];
-                $info = $model->getInfo($condition);
+
+                $info = $model->getinfo($condition);
+
+                $condition = [
+                    'field'   => [
+                        'pg.goods_id','pg.goods_num','g.name goods_name'
+                    ], 'where'=> [
+                        ['promotion_id','=',$info['id']],
+                    ],'join'  => [
+                        ['goods g','pg.goods_id=g.id','left']
+                    ],
+                ];
+
+                $modelPromotionGoods = new \app\index_admin\model\PromotionGoods();
+                $data = $modelPromotionGoods->getList($condition);
+
                 $info['intro'] = htmlspecialchars_decode($info['intro']);
+                $info['goods_list'] = addslashes(json_encode($data));
 
                 $this->assign('info',$info);
             }
@@ -48,7 +64,6 @@ class Promotion extends Base {
 
         }
         else{
-
             // 基础处理
             if(!input('param.name/s')) return errorMsg('失败');
 
@@ -75,8 +90,8 @@ class Promotion extends Base {
 
                 $info = $model->getinfo($condition);
 
-                $result= $model->edit($data,$condition['where']);
-                if(!$result['status']) return $result;
+                $id= $model->edit($data,$condition['where']);
+                if(!$id) return errorMsg();
 
                 //删除旧文件
                 if($info['thumb_img']){
@@ -99,10 +114,34 @@ class Promotion extends Base {
             }
             else{//新增
                 $data['create_time'] = time();
-                $result = $model->edit($data);
-                if(!$result['status']) return $result;
+                $id = $model->edit($data);
+                if(!$id) return errorMsg();
 
             }
+
+            // 更新关联商品
+            if($goods_ids=input('post.goods_id/a')){
+
+                $goods_ids = explode(',',$goods_ids[0]);
+
+                $goods_num = input('post.goods_num/a');
+                $goods_num = $goods_num[0] ? explode(',',$goods_num[0]) : [];
+                $goods_list = [];
+
+                foreach($goods_ids as $k => $v){
+                    $goods_list[$k]['promotion_id'] = $id;
+                    $goods_list[$k]['goods_id']     = $v;
+                    $goods_list[$k]['goods_num']    = $goods_num[$k] ? $goods_num[$k] : 1 ;
+                }
+
+                $model = new \app\index_admin\model\PromotionGoods();
+                $condition = [['promotion_id','=',$id]];
+
+                $model -> del($condition,false);
+                $model->allowField(true)->editAll($goods_list)->toArray();
+            }
+
+
             return successMsg('成功');
         }
     }
