@@ -38,26 +38,17 @@
                 <button type="button" class="btn btn-primary radius recommend">
                     <i class="Hui-iconfont"></i> 添加商品
                 </button>
-                已选择 <span class="c-red">{$info.recommend_goods_num|default=0}</span> 种商品
-                <div>
+                <div style="margin-bottom: 20px;">
                     <table>
                         <thead>
                         <tr>
-                            <th style="display:none">选择</th>
                             <th class="text-left">商品名称</th>
-                            <th class="text-left">价格</th>
-                            <th class="text-left">库存</th>
+                            <th class="text-left">数量</th>
                             <th class="text-left">操作</th>
                         </tr>
                         </thead>
                         <tbody id="goods_list">
-                        <tr>
-                            <td style="display:none"><input type="checkbox" name="goods_id[]" checked="checked" value="102"></td>
-                            <td class="text-left">Hundred Generation 佰黛 天然南非钻石情侣对戒 公主戒指 情侣钻戒镀铂金戒指 婚戒款式定做</td>
-                            <td class="text-left">8600.00</td>
-                            <td class="text-left">1000</td>
-                            <td class="text-left"><a href="javascript:void(0)">删除</a></td>
-                        </tr>
+
                         </tbody>
                     </table>
                 </div>
@@ -93,8 +84,6 @@
         <div class="row cl">
             <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
                 <input type="hidden" name='id' value="{$info.id}">
-                <input type="hidden" name='ids' value="">
-                <input type="hidden" name='ids_num' value="">
                 <button class="btn btn-primary radius button_save_black_4" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
                 <button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
                 <span class="c-red">*</span>(图片只显示缩略图，不影响原效果)
@@ -183,10 +172,15 @@
             postData.main_img = '';
             $.each($('#main_img').find('iframe').contents().find('.view img'),function(){
                 postData.main_img += $(this).attr('src') + ',';
-
             });
 
-            postData.intro = intro.getContent();
+            //var goods_id = ("input[name='goods_id[]']").map(function(){return this.value;}).get().join(",");
+            //var goods_num= ("input[name='goods_num[]']").map(function(){return this.value;}).get().join(",");
+
+            postData.intro    = intro.getContent();
+            postData.goods_id = $("input[name='goods_id']").map(function(){return this.value;}).get().join(",");
+            postData.goods_num= $("input[name='goods_num']").map(function(){return this.value;}).get().join(",");
+
 
             var content='';
             if(!postData.name){
@@ -219,10 +213,42 @@
             location.href = controller + '/manage';
         });
 
+        // 默认商品列表
+        $(document).ready(function(){
+            var data = "{$info['goods_list']|raw}";
+
+            if(data){
+                var Obj=JSON.parse(data);
+
+                for(i = 0; i < Obj.length; i++) {
+                    var html = addHtml(Obj[i]);
+                    $("#goods_list").append(html);
+                }
+            }
+        });
+
+        function addHtml(Obj){
+/*            var imgAdd = $('<li>' +
+                    '<div class="picture-module active"><input class="uploadImg uploadSingleEditImg" name="process_img" value="11">' +
+                    '<img src="/uploads/'+Obj.img+'" class="upload_img">'+
+                    '<a class="delete-picture">X</a>'+
+                    '</div><div><textarea style="height: 60px;width: 200px;" name="process_text"'+
+                    ' cols="30" rows="5" placeholder="请填写描述" class="edit-text">'+Obj.desc+'</textarea></div></li>');
+            $('.multi-picture-moduleDes').append(imgAdd);*/
+            Obj.goods_name  = Obj.goods_name.substr(0,20) + '...' ;
+            return  '<tr>'+
+                    '<td style="display:none"><input type="checkbox" name="goods_id" value="'+Obj.goods_id+'"></td>'+
+                    '<td style="display:none"><input type="checkbox" name="goods_num" value="'+Obj.goods_num+'"></td>'+
+                    '<td class="text-left" width="500">'+Obj.goods_name+'</td>'+
+                    '<td class="text-left">'+Obj.goods_num+'</td>'+
+                    '<td class="text-left"><a href="javascript:void(0)" onclick="javascript:$(this).parent().parent().remove();">删除</a></td>'+
+                    '</tr>';
+        }
+
         $("body").on('click','.recommend',function(){
 
             var url =  module + 'Goods/recommendGoods';
-            var _this = $(this);
+
             layer.open({
                 type: 2,
                 title:'添加商品',
@@ -234,18 +260,28 @@
                 yes: function(index, layero){
 
                     var body = layer.getChildFrame('body', index);
-                    recommendIds = [];
-                    var recommend = [];
+                    //recommendIds = [];
+                    //var recommend = [];
                     body.find('.selected_goods_list li').each(function () {
-                        var goodsSelectedId = $(this).data('goods-id');
-                        var goods_name = $(this).find('.goods_name').html();
-                        var goods_num  = $(this).find('.goods_num').html();
+           /*             var goodsSelectedId = $(this).data('goods-id');
+                        var goods_name = $(this).find('.goods_name').attr('title');
+                        var goods_num  = $(this).find('.goods_num').html();*/
                         //var goods = {goods_id:goodsSelectedId,num:num};
-                        recommendIds.push(goodsSelectedId);
-                        recommend.push(parseInt(goods_num));
+                        //recommendIds.push(goodsSelectedId);
+                        //recommend.push(parseInt(goods_num));
+
+                        var Obj = {};
+                        Obj.goods_id  = $(this).data('goods-id');
+                        Obj.goods_name= $(this).find('.goods_name').attr('title');
+                        Obj.goods_num = parseInt($(this).find('.goods_num').html());
+
+                        var html = addHtml(Obj);
+
+                        $("#goods_list").append(html);
                     });
 
-                    var num = parseInt($(".recommend").next().html());
+                    //$("#goods_list").after(html);
+             /*       var num = parseInt($(".recommend").next().html());
                     $(".recommend").next().html(num+parseInt(recommendIds.length));
 
                     var ids = $('input[name="ids"]').val();
@@ -254,7 +290,7 @@
                     }
 
                     $('input[name="ids"]').val(recommendIds);
-                    $('input[name="ids_num"]').val(recommend);
+                    $('input[name="ids_num"]').val(recommend);*/
                     layer.close(index);
                 },
                 no: function(){

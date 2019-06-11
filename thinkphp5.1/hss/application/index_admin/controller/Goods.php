@@ -698,4 +698,55 @@ class Goods extends Base {
         $this->assign('list',$list);
         return view($view);
     }
+
+
+    /**
+     * 修改各关联表下的关联商品
+     */
+    public function RelationGoods(){
+        if(!request()->isPost()){
+            return config('custom.not_post');
+        }
+
+        if(!$data=input('post.selectedIds/a'))  return errorMsg('参数有误');
+
+        $relation=input('post.relation/d');
+
+        // custom.php relation_type
+        switch($relation){
+            case config('custom.relation_type.scene'):
+                $model = new \app\index_admin\model\SceneGoods();
+                $condition = [['scene_id','=',$data[0]['scene_id']]];
+                break;
+            case config('custom.relation_type.project'):
+                $model = new \app\index_admin\model\ProjectGoods();
+                $condition = [['project_id','=',$data[0]['project_id']]];
+                break;
+            case config('custom.relation_type.promotion'):
+                $model = new \app\index_admin\model\PromotionGoods();
+                $condition = [['promotion_id','=',$data[0]['promotion_id']]];
+                break;
+            case config('custom.relation_type.sort'):
+                $model = new \app\index_admin\model\SortGoods();
+                $condition = [['sort_id','=',$data[0]['sort_id']]];
+                break;
+            default:
+                return errorMsg('参数有误');
+        }
+
+        $model->startTrans();
+        $rse = $model -> del($condition,false);
+
+        if(false === $rse){
+            $model->rollback();
+            return errorMsg('失败');
+        }
+        $res = $model->allowField(true)->saveAll($data)->toArray();
+        if (!count($res)) {
+            $model->rollback();
+            return errorMsg('失败');
+        }
+        $model -> commit();
+        return successMsg('成功');
+    }
 }

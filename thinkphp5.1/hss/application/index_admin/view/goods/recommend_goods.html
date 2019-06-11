@@ -73,7 +73,8 @@
 
             function search(){
                 var getData = $('#form1').serializeObject();
-                var ids  = $(window.parent.document).contents().find('input[name="ids"]').val();
+                //var ids  = $(window.parent.document).contents().find('input[name="ids"]').val();
+                var ids = $(window.parent.document).contents().find("input[name='goods_id']").map(function(){return this.value;}).get().join(",");
                 if(ids){
                     getData.ids = ids;
                 }
@@ -103,8 +104,8 @@
 
                 var goodsImgSrc= _this.parents('tr').find('img').attr('src');
                 var goodsName  = _this.parents('tr').find('.goods_name').html();
-                var num        = _this.parents('tr').find("input[name='goods_num']").val();
-                var shortName  = goodsName.substr(0,15) + '...' ;
+                var num        = parseInt(_this.parents('tr').find("input[name='goods_num']").val());
+                var shortName  = goodsName.substr(0,20) + '...' ;
                 var html =
                         ' <li data-goods-id="'+goodsId+'"><a href="javascript:void(0);" class="close-btn">X</a> <div>'+
                         '<img src="'+goodsImgSrc+'" alt="" class="left">'+
@@ -115,7 +116,6 @@
 
                 $('.selected_goods_list').append(html);
                 _this.find('a').addClass('label');
-
             });
             //移除商品
             $('body').on('click','.close-btn',function(){
