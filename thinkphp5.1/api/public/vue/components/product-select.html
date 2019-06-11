@@ -123,6 +123,7 @@
                 <div class="left">
                     <div></div>
                     <div class="red subtotal_amount">￥<span class="">{{ parseFloat(subtotal_amount).toFixed(2) }}</span></div>
+                    <del>￥{{compare_price}}</del>
                 </div>
                 <div class="right">
                     <div class=" selected-number">
@@ -160,6 +161,7 @@
                     </div>
                     <div class=" columns_flex l-r-sides">
                         <div><span class="red deal_price">￥{{deal_price}}</span></div>
+                        <del>￥{{compare_price}}</del>
                         <div><a href="javascript:void(0);" class="add_cart add_cart_i" @click="dialogCart" :data-jump_url="add_cart_url"><i></i></a></div>
                     </div>
                 </div>
