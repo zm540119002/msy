@@ -5,13 +5,6 @@ class User extends \common\controller\UserBaseAdmin{
     /**用户-管理
      */
     public function manage(){
-
-        $str = $_SERVER['SERVER_ADDR'];
-        $str2 = $_SERVER['REMOTE_ADDR'];
-        p($str);
-        p($str2);
-        exit;
-
         if(!request()->isGet()){
             return config('custom.not_get');
         }
