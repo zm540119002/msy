@@ -276,6 +276,7 @@ class Goods extends \common\controller\Base{
                 'goods_id'=>$info['id'],
                 'franchise_price'=>$info['franchise_price'],
                 'thumb_img'=>$info['thumb_img'],
+                'retail_price'=>$info['retail_price'],
                 'name'=>$info['name'],
                 'specification'=>preg_replace('//s*/', '', $info['specification']),
             ]));
