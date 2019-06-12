@@ -332,6 +332,7 @@
                     //触发-弹出采购车点击-事件
                     bus.$emit('dialog_cart',_this);
                 },dialog_cart_assign: function (param) {
+                    console.log(param.product_id);
                     this.monitor_buy_quantity = false;
                     this.product_id = param.product_id;
                     this.product_src = param.product_src;
