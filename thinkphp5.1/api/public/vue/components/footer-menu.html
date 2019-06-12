@@ -285,7 +285,7 @@
                 });
                 //监听-弹出采购车赋值-事件
                 bus.$on('dialog_cart_assign', function(param){
-                    if(_this.group == 0 && param.group == _this.group){
+                    if(param.group == _this.group){
                         _this.total_amount_assign(param);
                         _this.assignProductList(param);
                     }
