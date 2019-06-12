@@ -151,7 +151,7 @@
         <div class="specs">
             <div>{{specification}} ￥{{deal_price}}</div>
         </div>
-    </li><li v-else-if="type==7"><!--首页/购物车精选-->
+    </li><li v-else-if="type==7"><!--黑森森精选（首页/购物车）-->
         <div class="product-select index">
             <div class=""><p></p></div>
             <div class="">
@@ -537,5 +537,19 @@
     }
     .cart_price div:nth-of-type(2){
         margin-right: 20px;
+    }
+    .cart_goods_img{
+        min-width: 1.8rem;
+        margin-left: 10px;
+        display: block;
+    }
+    .flex-both-side li{
+        padding-top: 0;
+    }
+    .product-select.index{
+        padding-top: 0;
+    }
+    .quantity_wrapper{
+        margin-top: 0.5rem;
     }
 </style>
