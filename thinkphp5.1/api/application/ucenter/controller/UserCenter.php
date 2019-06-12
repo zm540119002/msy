@@ -7,8 +7,13 @@ class UserCenter extends \think\Controller{
         if (request()->isAjax()) {
             $modelUser = new \common\model\UserCenter();
             $postData = input('post.');
-            $modelUser->login($postData);
-            $this->successMsg('登录成功！',config('code.success.login'));
+            $res = $modelUser->login($postData);
+            print_r($res);exit;
+            if($res['status']==0){
+                $this->errorMsg();
+            }else{
+                $this->successMsg('登录成功！',config('code.success.login'));
+            }
         }
     }
     /**后台登录
