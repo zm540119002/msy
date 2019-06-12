@@ -220,11 +220,12 @@
                 display_quota: {type: Boolean,default: false},
                 step_quantity: {type: Number,default: 1},
                 type: {type: Number,default: 1},
-                group: {type: Number,default: 1},
+                init_group: {type: Number,default: 1},
                 init_monitor_buy_quantity: {type: Boolean,default: true},
                 by_footer_menu_monitor: {type: Boolean,default: true}
             },data: function () {
                 return {
+                    group:this.init_group,
                     product_id:this.init_product_id,
                     deal_price:this.init_deal_price,
                     compare_price:this.init_compare_price,
@@ -353,7 +354,7 @@
                     //触发-弹出采购车点击-事件
                     bus.$emit('dialog_cart',_this);
                 },dialog_cart_assign: function (param) {
-                    if(this.by_footer_menu_monitor){
+                    if(this.group == param.group){
                         this.monitor_buy_quantity = false;
                         this.product_id = param.product_id;
                         this.product_src = param.product_src;
