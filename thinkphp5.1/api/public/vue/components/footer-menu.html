@@ -138,6 +138,8 @@
                     };
                     asyncVerify(config);
                 },assignProductList:function(param){
+                    console.log(param.product_id);
+                    console.log(param.buy_quantity);
                     let productInfo = {
                         'goods_id':param.product_id,
                         'num':param.buy_quantity
@@ -285,9 +287,7 @@
                 });
                 //监听-弹出采购车赋值-事件
                 bus.$on('dialog_cart_assign', function(param){
-                    if(param.group == _this.group){
-                        console.log(_this.group);
-                        console.log(param.group);
+                    if(_this.group == 0 && param.group == _this.group){
                         _this.total_amount_assign(param);
                         _this.assignProductList(param);
                     }
