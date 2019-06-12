@@ -334,18 +334,18 @@
                 },dialog_cart_assign: function (param) {
                     console.log(param.group);
                     if(this.group == param.group){
-                        this.monitor_buy_quantity = false;
-                        this.product_id = param.product_id;
-                        this.product_src = param.product_src;
-                        this.product_name = param.product_name;
-                        this.specification = param.specification;
-                        this.deal_price = param.deal_price;
-                        this.compare_price = param.compare_price;
-                        this.buy_quantity = param.init_quantity;
-                        this.increment_buy_quantity = this.buy_quantity;
-                        this.subtotal_amount_calculate();
-                        //触发-弹出采购车赋值-事件
-                        bus.$emit('dialog_cart_assign', this);
+//                        this.monitor_buy_quantity = false;
+//                        this.product_id = param.product_id;
+//                        this.product_src = param.product_src;
+//                        this.product_name = param.product_name;
+//                        this.specification = param.specification;
+//                        this.deal_price = param.deal_price;
+//                        this.compare_price = param.compare_price;
+//                        this.buy_quantity = param.init_quantity;
+//                        this.increment_buy_quantity = this.buy_quantity;
+//                        this.subtotal_amount_calculate();
+//                        //触发-弹出采购车赋值-事件
+//                        bus.$emit('dialog_cart_assign', this);
                     }
                 },editCheckItem:function(param){
                     this.checked = param;
