@@ -148,6 +148,10 @@ nav .back_prev_page{
 .flex_item a span.charge{
     background-position:0 -3.68rem;
 }
+.module-navigation .channel_nav, .top_radius{
+    border-radius: 0;
+
+}
 
 .flex_item a span.brand{
     width:0.51rem;

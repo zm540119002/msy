@@ -151,8 +151,8 @@
 {/block}
 {block name="script"}
 <script type="text/javascript" src="api_common_js/wallet.js"></script>
-<script type="text/javascript" src="{:request()->scheme()}://api.map.baidu.com/api?v=2.0&ak=Fimtwu6FDRrHWvg3oq44YCw0c0YonNpv"></script>
-<script type="text/javascript" src="{:request()->scheme()}://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
+<!--<script type="text/javascript" src="{:request()->scheme()}://api.map.baidu.com/api?v=2.0&ak=Fimtwu6FDRrHWvg3oq44YCw0c0YonNpv"></script>
+<script type="text/javascript" src="{:request()->scheme()}://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>-->
 <script type="text/javascript">
     //退出-弹窗事件
     $('body').on('click','#logout_dialog',function(){
@@ -232,7 +232,7 @@
                     if(data.status == 1){
                         uploadsSingleImgFlag = true;
                         $(obj).find('.img').val(data.avatar);
-                        dialog.success(data.info);
+                        //dialog.success(data.info);
                         $('.user_info_list').find('.user_header').attr('src',uploads+data.avatar);
                         generatingTwoDimensionalCode();
                     }else{
@@ -270,7 +270,7 @@
                                 dialog.success(data.info);
                                 $('.user_info_list').find('.user_name').text(data.name);
                                 $('.userInfoLayer ').find('.old_name').val(data.name);
-                                generatingTwoDimensionalCode();
+                                //generatingTwoDimensionalCode();
                             }else{
                                 dialog.error(data.info)
                             }

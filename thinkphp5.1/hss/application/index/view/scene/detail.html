@@ -72,11 +72,13 @@
 				:init_compare_price="Number(productInfo.retail_price)"
 				:init_quantity="parseInt(init_quantity)"
 				:step_quantity="parseInt(step_quantity)"
+				:init_group="init_group"
 				:type="type"
-		></product-select>	
+		></product-select>
 	</div>
 	<div id="foot_cart_menu">
 			<footer-menu
+					:init_group="init_group"
 					:init_menus="init_menus"
 			></footer-menu>
 	</div>
@@ -86,6 +88,7 @@
 		let unlockingFooterCart = '{$unlockingFooterCart|raw}';
 		unlockingFooterCart = JSON.parse(unlockingFooterCart);
 		let param = {
+			init_group:0,
 			init_menus:unlockingFooterCart
 		};
 		new Vue({
@@ -101,6 +104,7 @@
 	$(function(){
 		let param = {
 			type:6,
+			init_group:0,
 			init_quantity:1,
 			step_quantity:1,
 			productList:[

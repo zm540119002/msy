@@ -76,13 +76,13 @@ class Collection extends \common\controller\UserBase{
             ]
 
         ];
-        if(input('?get.category_id') && input('get.category_id/d')){
+/*        if(input('?get.category_id') && input('get.category_id/d')){
             $config['where'][] = ['o.category_id_1', '=', input('get.category_id/d')];
         }
         $keyword = input('get.keyword','');
         if($keyword) {
             $config['where'][] = ['o.name', 'like', '%' . trim($keyword) . '%'];
-        }
+        }*/
 
         $list = $model -> pageQuery($config);
         $currentPage = input('get.page/d');
@@ -99,12 +99,13 @@ class Collection extends \common\controller\UserBase{
         if(!request()->isAjax()){
             return errorMsg(config('custom.not_ajax'));
         }
-        $ids = input('post.ids/a');
+        $id = input('post.id/d');
         $model = new \app\index\model\Collection();
         $condition = [
             ['user_id','=',$this->user['id']],
-            ['goods_id','in',$ids],
+            ['goods_id','=',$id],
         ];
+
         $result = $model -> del($condition);
         if($result['status']){
             return successMsg('已取消收藏');
