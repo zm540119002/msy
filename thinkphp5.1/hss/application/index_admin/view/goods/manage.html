@@ -156,12 +156,11 @@
                 $.post(url,postData,function(msg){
                     _this.removeClass("nodisabled");//防止重复提交
                     if(msg.status){
-              /*          var imgSrc=uploads+msg.info;
-                        _this.siblings('.ckQRcode').data('img-src',msg.info);
-                        layer.open({
-                            content:'<img src='+imgSrc+' />',
-                        })*/
-                        layer.msg(msg.info);
+
+                        _this.siblings(".ckQRcode").attr('data-img-src',msg.img);
+
+                        layer.msg(msg.info,{icon: 1});
+
                     }else{
                         dialog.error(msg.info);
                     }
@@ -197,8 +196,14 @@
                             $.post(url,postData,function(msg){
                                 _this.removeClass("nodisabled");//防止重复提交
                                 if(msg.status){
-                                    layer.msg(msg.info);
-                                    //dialog.success(msg.info,flushPage())
+                                    layer.msg(msg.info, {
+                                        icon: 1,
+                                        time: 1500,
+                                        end:function(){
+                                            flushPage();
+                                        }
+                                    });
+
                                 }else {
                                     dialog.error(msg.info);
                                 }

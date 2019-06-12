@@ -573,9 +573,10 @@ class Goods extends Base {
             }
 
         }
-/*        if(count($list) == 1){
-            return successMsg($newQRCodes);
-        }*/
+        if(count($list) == 1){
+            return successMsg('成功',['img'=>$newQRCodes]);
+            //return successMsg($newQRCodes);
+        }
         return successMsg('成功');
     }
 
