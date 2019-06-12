@@ -80,15 +80,30 @@
 			<footer-menu
 					:init_group="init_group"
 					:init_menus="init_menus"
+					:init_cart_num="init_cart_num"
 			></footer-menu>
 	</div>
 </div>
 <script type="text/javascript">
 	$(function(){
+		//数据库里购物车里商品数量
+		let total_num = parseInt("{$total_num|default=0}");
+		//localStorage里商品信息
+		if(localStorage.cartList){
+			let goodsList = (JSON.parse(localStorage.cartList)).data;
+			$.each(goodsList,function(i,goods){
+				total_num += goods['num'];
+			});
+		}
+		if(!total_num){
+			var html = $('.no_cart_data').html();
+			$('#product-list').append(html);
+		}
 		let unlockingFooterCart = '{$unlockingFooterCart|raw}';
 		unlockingFooterCart = JSON.parse(unlockingFooterCart);
 		let param = {
 			init_group:0,
+			init_cart_num:total_num,
 			init_menus:unlockingFooterCart
 		};
 		new Vue({
