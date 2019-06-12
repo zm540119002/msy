@@ -521,8 +521,8 @@ class Goods extends Base {
             ];
             $model = new \app\index_admin\model\Goods();
             $list = $model -> getList($config);
-            return $this->generateQRcode($list);
 
+            return $this->generateQRcode($list);
         }
     }
 
@@ -533,7 +533,7 @@ class Goods extends Base {
             $url = request()->domain().'/index.php/Index/Goods/detail/id/'.$info['id'];
             $newRelativePath = config('upload_dir.goods');
             $shareQRCodes = createLogoQRcode($url,$newRelativePath);
-  
+
             if(mb_strlen( $info['headline'], 'utf-8')>20){
                 $name1 =  mb_substr( $info['headline'], 0, 18, 'utf-8' ) ;
                 $name2 =  mb_substr( $info['headline'], 18, 18, 'utf-8' ) ;
@@ -554,6 +554,7 @@ class Goods extends Base {
                 'qrcode'=>$uploadPath.$shareQRCodes, // 120*120
                 'font'=>'./static/font/simhei.ttf',   //字体
             ];
+
             $res =  $this->compose($init);
             if($res['status'] == 1){
                 $newQRCodes = $res['info'];
@@ -567,10 +568,14 @@ class Goods extends Base {
                     unlink($uploadPath.$oldQRCodes);
                 }
 //                    return successMsg($newQRCodes);
+            }else{
+                return $res;
             }
+
         }
         if(count($list) == 1){
-            return successMsg($newQRCodes);
+            return successMsg('成功',['img'=>$newQRCodes]);
+
         }
         return successMsg('成功');
     }
@@ -589,7 +594,7 @@ class Goods extends Base {
         $qrcode = $this->imgInfo($init['qrcode']);
         $RMB_logo = $this->imgInfo($init['RMB_logo']);
         if( !$logoImg || !$goodsImg || !$qrcode){
-            return errorMsg('提供的图片问题');
+            return errorMsg('商品图片不存在');
         }
         $im = imagecreatetruecolor(480, 780);  //图片大小
         $color = imagecolorallocate($im, 0xFF,0xFF,0xFF);

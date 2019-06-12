@@ -44,24 +44,26 @@
 			}
 		});
 
-//		//选择删除购物车
+		//删除
 		$('body').on('click','.delete',function(){
 			var _This=$(this);
 			var postData = {};
-			var ids = [];
+/*			var ids = [];
 			$.each($('.list li'),function(){
 				var _this=$(this);
 				if(_this.find('.sign_checkitem').is(':checked')){
 					var id = _this.data('id');
 					ids.push(id);
 				}
-			});
-			postData.ids =ids;
-			if($.isEmptyArray(ids)){
+			});*/
+			var id = _This.parents('li').data('goods_id');
+
+			if(!id){
 				dialog.error('请选择需要删除的收藏商品！');
 				return false;
 			}
-			var url = module + 'Collection/del'
+			postData.id =id;
+			var url = module + 'Collection/del';
 			_This.addClass("nodisabled");//防止重复提交
 			layer.open({
 				content:'是否删除？',
@@ -83,23 +85,18 @@
 							_This.removeClass("nodisabled");//防止重复提交
 							if(data.status==0){
 								dialog.error(data.info);
-							}else {
-								$.each($('.list li'),function(){
-									var _this=$(this);
-									var id = _this.data('id');
-									if(_this.find('.sign_checkitem').is(':checked')){
-										_this.remove();
-									}
-								});
 
-								if(!$('.list li').length){
-									var html=$('.no_collection').html();
-									$('.list').append(html);
-								}
+							}else {
+
+								dialog.success(data.info);
+								_This.parents('li').remove();
 							}
 						}
 					});
 					layer.close(index);
+				},
+				no:function(){
+					_This.removeClass("nodisabled");//防止重复提交
 				}
 			});
 		});

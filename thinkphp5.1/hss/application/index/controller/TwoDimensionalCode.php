@@ -55,4 +55,26 @@ class TwoDimensionalCode extends \common\controller\UserBase {
         $model = new \app\index\model\TwoDimensionalCode();
         $model->editTable($this->user);
     }
+
+    /**
+     * 获取url的二维码图片
+     */
+    public function getUrlQRcode(){
+
+        $url = input('param_url/s');
+        if(!$url){
+            $url = request()->domain();
+        }
+        $newRelativePath= config('upload_dir.url_QRCode');
+        $shareQRCodes   = createLogoQRcode($url,$newRelativePath);
+
+        if( !isset($shareQRCodes['status']) ){
+            $shareQRCodes = '/'.config('upload_dir.upload_path').'/'.$shareQRCodes;
+
+            return successMsg('成功',['img'=>$shareQRCodes]);
+        }
+
+        return errorMsg('分享失败');
+    }
+
 }

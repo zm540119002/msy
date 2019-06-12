@@ -50,7 +50,6 @@
 					:init_quantity="parseInt(init_quantity)"
 					:step_quantity="parseInt(step_quantity)"
 					:init_specification="productInfo.specification"
-					:by_footer_menu_monitor="by_footer_menu_monitor"
 					:type="type"
 			></product-select>
 		</ul>
@@ -72,20 +71,38 @@
 				:init_compare_price="Number(productInfo.retail_price)"
 				:init_quantity="parseInt(init_quantity)"
 				:step_quantity="parseInt(step_quantity)"
+				:init_group="init_group"
 				:type="type"
-		></product-select>	
+		></product-select>
 	</div>
 	<div id="foot_cart_menu">
 			<footer-menu
+					:init_group="init_group"
 					:init_menus="init_menus"
+					:init_cart_num="init_cart_num"
 			></footer-menu>
 	</div>
 </div>
 <script type="text/javascript">
 	$(function(){
+		//数据库里购物车里商品数量
+		let total_num = parseInt("{$total_num|default=0}");
+		//localStorage里商品信息
+		if(localStorage.cartList){
+			let goodsList = (JSON.parse(localStorage.cartList)).data;
+			$.each(goodsList,function(i,goods){
+				total_num += goods['num'];
+			});
+		}
+		if(!total_num){
+			var html = $('.no_cart_data').html();
+			$('#product-list').append(html);
+		}
 		let unlockingFooterCart = '{$unlockingFooterCart|raw}';
 		unlockingFooterCart = JSON.parse(unlockingFooterCart);
 		let param = {
+			init_group:0,
+			init_cart_num:total_num,
 			init_menus:unlockingFooterCart
 		};
 		new Vue({
@@ -101,6 +118,7 @@
 	$(function(){
 		let param = {
 			type:6,
+			init_group:0,
 			init_quantity:1,
 			step_quantity:1,
 			productList:[
@@ -123,7 +141,6 @@
 			type:5,
 			init_quantity:1,
 			step_quantity:1,
-			by_footer_menu_monitor:false,
 			productList:[],
 			getJsonListParam:{
 				url:module+'Goods/getRelationGoods',
@@ -173,24 +190,46 @@
 {block name="script"}
 <script type="text/javascript" src="api_common_js/swiper.min.js"></script>
 <script type="text/javascript">
-	$(function(){
+	$(function() {
 		var id = '{$info.id}';
 		//每天活动倒计时
-		var date=new Date(new Date(new Date().toLocaleDateString()).getTime()+24*60*60*1000-1);;
-		countDown(date,$('#countDownBox'));
+		var date = new Date(new Date(new Date().toLocaleDateString()).getTime() + 24 * 60 * 60 * 1000 - 1);
+		;
+		countDown(date, $('#countDownBox'));
 		// 后加载简介
-		$('document').ready(function(){
+		$('document').ready(function () {
 			$('.intro').html("{$info.intro|raw}");
 		});
 		//轮播
 		var swiper = new Swiper('.swiper-container', {
 			spaceBetween: 30,
-			autoplay:true,
+			autoplay: true,
 			pagination: {
 				el: '.swiper-pagination',
 				clickable: true
 			}
 		});
+
+		// 分享二维码
+		$('body').on('click', '.url_share', function () {
+			var param_url = window.location.href;
+
+			if (param_url) {
+				$.ajax({
+					url: module + '/TwoDimensionalCode/getUrlQRcode',
+					data: {param_url:param_url},
+					type: 'post',
+					success: function (data) {
+						layer.open({
+							skin: 'shareqrCodeLayer',
+							content: '<img src=' + data.img + ' />',
+							btn: ['X']
+						})
+					}
+				});
+			}
+		});
+
 	});
 </script>
 <style scoped>
