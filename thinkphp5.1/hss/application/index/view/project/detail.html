@@ -79,7 +79,7 @@
 				<div class="swiper-container swiper-container-horizontal swiper-container-ios">
 					<div class="swiper-wrapper" >				
 						{volist name="$info.process" id="vo"}
-						<div class="swiper-slide swiper-slide-active" style="text-align: left;margin-right: 10px;">
+						<div class="swiper-slide details swiper-slide-active" style="text-align: left;margin-right: 10px;">
 							<img src="{:show_img_handle($vo.img)}" alt="" class="common_default_img">
 							<span style="font-size: 13px;margin-top:10px;">{$vo.desc}</span>
 						</div>
@@ -198,10 +198,10 @@
 			if($(this).index()==2){
 				//项目流程轮播
 				var swiper = new Swiper('.swiper-container', {
-					slidesPerView :2,
+					slidesPerView :3,
 					// slidesPerView:"auto",
 					// autoplay:true,
-					slidesOffsetBefore : -50,
+					// slidesOffsetBefore : -50,
 					// spaceBetween: 30,
 					//  direction: 'horizontal',
 					//  pagination: {
@@ -253,6 +253,10 @@
 	.product-select div.right {
 		width: 60%;
 	}
-
+.details{
+	width: 230px !important;
+	border: 1px solid #ccc;
+	margin-right: 10px;
+}
 </style>
 {/block}
