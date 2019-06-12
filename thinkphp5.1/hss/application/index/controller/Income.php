@@ -7,13 +7,23 @@ class Income extends Base {
         parent::__construct();
 
         // 判断是否已开通钱包,后面改进此方法
-        if( in_array(request()->action(),['index']) ){
+/*        if( in_array(request()->action(),['index']) ){
             if(empty($this->wallet['password'])){
                 $this->redirect('walletOpening');
                 exit;
             }
 
             $this->assign('wallet',$this->wallet);
+        }*/
+        // 判断是否已开通钱包,后面改进此方法
+        if( in_array(request()->action(),['index']) ){
+            if(empty($this->wallet['password'])){
+                // 开通钱包
+                $this->assign('user',$this->user);
+                echo $this->fetch('wallet/wallet_opening');
+                exit;
+            }
+
         }
 
     }
@@ -22,7 +32,6 @@ class Income extends Base {
      * 收益钱包详情页面
      */
     public function index(){
-
         if (request()->isAjax()) {
         } else {
 
