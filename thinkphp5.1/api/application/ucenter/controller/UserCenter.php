@@ -8,9 +8,8 @@ class UserCenter extends \think\Controller{
             $modelUser = new \common\model\UserCenter();
             $postData = input('post.');
             $res = $modelUser->login($postData);
-            print_r($res);exit;
             if($res['status']==0){
-                $this->errorMsg();
+                $this->errorMsg($res['info']);
             }else{
                 $this->successMsg('登录成功！',config('code.success.login'));
             }
