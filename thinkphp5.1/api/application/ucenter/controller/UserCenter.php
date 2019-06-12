@@ -52,7 +52,7 @@ class UserCenter extends \think\Controller{
             return config('custom.not_post');
         }
         $mobilePhone = input('post.mobile_phone',0);
-        $captcha = create_random_str();
+        $captcha = create_random_str(4);
         $config = array(
             'mobilePhone' => $mobilePhone,
             'smsSignName' => config('custom.sms_sign_name'),
