@@ -61,7 +61,12 @@
             <div class="columns_flex l-r-sides">
                 <div class="left">
                     <div></div>
-                    <div class="red subtotal_amount">￥<span class="">{{ parseFloat(subtotal_amount).toFixed(2) }}</span></div>
+                    <div class="red subtotal_amount">￥<span class="">{{ parseFloat(subtotal_amount).toFixed(2) }}</span>
+                    </div>
+                   
+                </div>
+                <div class="compare_price" style="width:30%;line-height: 28px;">
+                     <del class="f24">￥{{compare_price}}</del>
                 </div>
                 <div class="right">
                     <div class=" selected-number">
@@ -73,7 +78,7 @@
             </div>
             <div class="product_name"><p class="two-line-omit">{{product_name}}</p></div>
         </div>
-    </li><li v-else-if="type==4"><!--价格、数字增减、删除、复选、立即加入购物车-->
+    </li><li v-else-if="type==4"><!--购物车-->
         <input type="checkbox" class="item_checkbox check_item" v-model="checked" />
         <a href="" class="cart_goods_img" :href="'/index/Goods/detail/id/' + product_id">
             <img class="left common_default_img" :src="product_src?('public_uploads/' + product_src):('api_common_img/default/no_pic_100.jpg') " alt="">
@@ -81,7 +86,13 @@
         <div class="cart_list_r">
             <p>{{product_name}}</p>
             <div>商品规格：<span>{{specification}}</span></div>
-            <div class="commodity_purchaser f24"><span class="pink">￥{{deal_price}}</span></div>
+            <div class="cart_price">
+                <div class="commodity_purchaser f24"><span class="pink">￥{{deal_price}}</span></div>
+                <div class="compare_price" style="width:30%;line-height: 28px;">
+                    <del class="f24">￥{{compare_price}}</del>
+                </div>
+            </div>
+
             <div class="purchase_goods_num cart_goods_operate">
                 <div class=" selected-number">
                     <a href="javascript:void(0);" class="add_cart reduce" @click="reduceCart" :data-jump_url="add_cart_url">-</a>
@@ -91,7 +102,7 @@
                 <a href="javascript:void(0);" class="delete_order goodsDel delete_cart" @click="delCart" :data-jump_url="del_cart_url">删除</a>
             </div>
         </div>
-    </li><li v-else-if="type==5">
+    </li><li v-else-if="type==5"><!--场景页使用-->
         <div class="product-select">
             <div class=""><p></p></div>
             <div class="columns_flex l-r-sides">
@@ -114,7 +125,7 @@
                 </div>
             </div>
         </div>
-    </li><li v-else-if="type==6">
+    </li><li v-else-if="type==6"><!--弹窗-->
         <div class="close">X</div>
         <div class="product-select">
             <div class="columns_flex l-r-sides">
@@ -140,7 +151,7 @@
         <div class="specs">
             <div>{{specification}} ￥{{deal_price}}</div>
         </div>
-    </li><li v-else-if="type==7">
+    </li><li v-else-if="type==7"><!--首页使用-->
         <div class="product-select index">
             <div class=""><p></p></div>
             <div class="">
@@ -163,7 +174,7 @@
                 </div>
             </div>
         </div>
-    </li><li v-else-if="type==8">
+    </li><li v-else-if="type==8"><!--购物车精选-->
         <div class="product-select index">
             <div class=""><p></p></div>
             <div class="">
@@ -202,18 +213,21 @@
                 init_specification_unit: {type: String,default: '盒'},
                 init_product_src: {type: String,default: ''},
                 init_deal_price: {type: Number,required: true},
+                init_compare_price: {type: Number,default: 0.00},
                 init_checked: {type: Boolean,default: true},
                 init_quantity: {type: Number,default: 1},
                 quota_quantity: {type: Number,default: 1},
                 display_quota: {type: Boolean,default: false},
                 step_quantity: {type: Number,default: 1},
                 type: {type: Number,default: 1},
+                group: {type: Number,default: 1},
                 init_monitor_buy_quantity: {type: Boolean,default: true},
                 by_footer_menu_monitor: {type: Boolean,default: true}
             },data: function () {
                 return {
                     product_id:this.init_product_id,
                     deal_price:this.init_deal_price,
+                    compare_price:this.init_compare_price,
                     product_name:this.init_product_name,
                     product_src:this.init_product_src,
                     specification:this.init_specification,
@@ -346,6 +360,7 @@
                         this.product_name = param.product_name;
                         this.specification = param.specification;
                         this.deal_price = param.deal_price;
+                        this.compare_price = param.compare_price;
                         this.buy_quantity = param.init_quantity;
                         this.increment_buy_quantity = this.buy_quantity;
                         this.subtotal_amount_calculate();
@@ -521,7 +536,7 @@
 		left: 18px;
 	}
     .product_specs .two-line-omit{
-        height: 38px;
+        height: 42px;
     }
     .index .product_name{
         font-size: 0.25rem;
@@ -534,5 +549,15 @@
     .group_cart_nav a:nth-of-type(2){
       background: #fff; 
     }
-    
+    .product-select.index{
+        padding:0.15rem;
+    }
+    .cart_price{
+        display: flex;
+        justify-content: space-between;
+        line-height: 28px;
+    }
+    .cart_price div:nth-of-type(2){
+        margin-right: 20px;
+    }
 </style>

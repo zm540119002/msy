@@ -1,0 +1,139 @@
+.foot_nav_bar a span.f_icon{
+    background-image: url(../../common/img/icons/public_bottom_icons.png);
+}
+.foot_nav_bar .current a span.cart{
+    background-position:-0.02rem -4.26rem;
+}
+.customer_list_wrapper{
+    padding:0 0.10rem;
+    height:1rem;
+    background:#fff;
+    overflow:hidden;
+}
+
+.customer_item span{
+    font-size:0.20rem;
+}
+.count_down_box{
+    width:1rem;
+    margin:0 auto;
+    text-align: center;
+}
+.friday_end{
+    text-align: center;
+}
+.mid_module_left img{
+    max-width:88%;
+}
+
+.mid_module_right .d-r{
+    margin:0 0 0 0.8rem;
+}
+.goods_list li{
+    border:none;
+}
+.scene_wrapper{
+    margin:0.12rem 0 0;
+}
+nav .back_prev_page{
+    background-image:none;
+    color:#fff;
+    top:0.1rem;
+    font-size:0.35rem;
+}
+.news_list_wrapper{
+    padding:0 .55rem 0 1.3rem;
+}
+.scroll_news .news_tit{
+    top:.13rem;
+}
+.close_layer_pop {
+    position: absolute;
+    left: 0;
+    top: 0.06rem;
+    width: 0.25rem;
+    height: 0.5rem;
+    display: block;
+    margin-left: 5px;
+    background: url(../../common/img/icons/layer_icon.png) no-repeat center;
+    background-size: 3.5rem auto;
+    background-position: 0 -32px;
+}
+.cart_goods_list li {
+    padding: 0.25rem 0.15rem 0.25rem 0.15rem;
+    border:none;
+    border-bottom: 1px solid #d9d9d9;
+    overflow: hidden;
+}
+/*加盟店家*/
+.franchise_ul li{
+    margin:0 0 0.15rem 0;
+    border-radius:4px;
+}
+.franchise_ul li a{
+    display: block;
+    padding:0.15rem;
+    color:#fff;
+}
+.franchise_ul li:nth-of-type(1){
+    background: #3FA9F5;
+}
+.franchise_ul li:nth-of-type(2){
+    background: #FF931E;
+}
+.franchise_ul li:nth-of-type(3){
+    background: #C7AA53;
+}
+.franchise_ul li a::after{
+    border-bottom-color: #fff;
+    border-left-color: #fff;
+}
+.franchise_ul span{
+    display:inline-block;
+    width:0.85rem;
+    height:0.82rem;
+    background-image:url(../../common/img/icons/apply-icons.png);
+    background-repeat: no-repeat;
+    background-size: 0.65rem 2.5rem;
+    vertical-align: middle;
+}
+.franchise_ul span.zh{
+    background-position:0 0;
+}
+.franchise_ul span.ck{
+    background-position:0 -0.70rem;
+}
+.franchise_ul span.zc{
+    background-position:0 -1.6rem;
+}
+.applay_p_item{
+    height:118px;
+    padding:0.15rem;
+    background: #fff;
+    border-radius:4px;
+    color:#000;
+    background-size:100% auto;
+}
+.gr{
+    color:#009a3e;
+}
+.new-retail-wrapper{
+    padding-bottom:2rem;
+}
+.weui-flex-item .search_city{
+    background:#fff url(../../common/img/search_city.png) no-repeat center 0;
+    background-size:0.68rem auto;
+}
+.weui-flex-item.current .search_city{
+    background:#fff url(../../common/img/search_s_city.png) no-repeat center 0;
+    background-size:0.68rem auto;
+}
+.once-apply{
+    background:#ff7aab;
+}
+.wy_list li .p_img,
+.content_main li .p_img{
+    display:block;
+    width:auto;
+}
+

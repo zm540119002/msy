@@ -38,7 +38,8 @@
 									v-for="(productInfo,index) in productList"
 									:key="index"
 									:init_product_id="productInfo.id"
-									:init_deal_price="parseFloat(productInfo.bulk_price)"
+									:init_deal_price="parseFloat(productInfo.franchise_price)"
+									:init_compare_price="Number(productInfo.retail_price)"
 									:init_product_name="productInfo.name"
 									:init_product_src="productInfo.thumb_img"
 									:init_specification="productInfo.specification"
@@ -230,10 +231,11 @@
 			productList:[
 				{
 					'id':goodsInfo.goods_id,
-					'bulk_price':goodsInfo.bulk_price,
+					'franchise_price':goodsInfo.franchise_price,
 					'headline':goodsInfo.name,
 					'specification':goodsInfo.specification,
 					'specification_unit':goodsInfo.specification_unit,
+					'retail_price':goodsInfo.retail_price,
 					'thumb_img':goodsInfo.thumb_img
 				}
 			]
@@ -390,7 +392,7 @@
 		});
 
 		//打开二维码
-		$('body').on('click','.qrcode_share',function (){
+		$('body').on('click','.share',function (){
 			var rq_code_url = "{$info.rq_code_url}";
 			if(rq_code_url){
 				var imgSrc=uploads+rq_code_url;
@@ -494,10 +496,6 @@
 		text-align: center;
 		line-height: 30px;
 	}
-	.group_cart_nav a:nth-of-type(2){
-      width: 50%;
-      background: #fff;
-      color: #fff;
-  }
+	
 </style>
 {/block}

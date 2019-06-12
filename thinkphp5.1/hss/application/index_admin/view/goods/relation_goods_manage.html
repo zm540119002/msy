@@ -1,0 +1,230 @@
+{extend name="template/admin_pc/base.html" /}
+{block name="content"}
+<section style="display: none" class="tpl_list">
+    <li data-goods-id="">
+        <a href="javascript:void(0);" class="close-btn">X</a>
+        <!--<div>
+            <img src="" alt="" class="left">
+            <p class="goods_name">aaabbb</p>
+        </div>-->
+    </li>
+</section>
+<section class="recommendGoods_content">
+    <!--推荐产品容器-->
+    <div id="recommendGoods">
+        <span class="content-label">已增加产品</span>
+        <ul class="selected_goods_list" id="selected_list">
+
+        </ul>
+        <div class="error_tipc"></div>
+        <form name="form" id="form1">
+            <input type="hidden" name="pageType" value="layer"/>
+            <div class="search_bar">
+                <span class="left">产品分类:</span>
+                {include file="goods_category/linkage_tpl" /}
+                <input type="text" class="search-goods keyword" name="keyword"  placeholder="搜索产品">
+                <input type="button" value="搜索" class="layer-search-btn search" id="searchGoods">
+            </div>
+        </form>
+        <span class="content-label">所有产品(可以从下面商品中点击添加产品到已推荐产品)</span>
+        <div class="add_layer_content">
+            <div class="thead_title">
+                <span class="list_item">产品名称</span>
+                <span class="list_item">所属分类</span>
+                <span class="list_item">操作</span>
+            </div>
+            <ul class="scroller-container list" id="list">
+
+            </ul>
+        </div>
+    </div>
+    
+</section>
+
+<div class="layui-layer-btn"><a class="layui-layer-btn0 confirm_add">确定添加</a><a class="layui-layer-btn1">关闭</a></div>
+<!-- 隐藏区 -->
+<div style="display:none">
+    <div id="loading">
+        <div class='loading'><img src='index_admin_img/default/loading.gif' alt='loading'></div>
+    </div>
+</div>
+{/block}
+
+{block name="script"}
+<script type="text/javascript" src="api_common_js/admin/categoryLinkage.js"></script>
+<script type="text/javascript">
+    $(function () {
+        var id = {$id};
+        var relation = {$relation};
+        //加载第一页
+        var config = {
+            url:module+'goods/getList'
+        };
+        var getData = $('#form1').serializeObject();
+        getPagingList(config,getData);
+        //分类筛选
+        $('body').on('change','[name=category_id_1],[name=category_id_2],[name=category_id_3]',function () {
+            var getData = $('#form1').serializeObject();
+            getPagingList(config,getData);
+        });
+        //翻页
+        $('body').on('click','.pager2',function(){
+            var getData = $('#form1').serializeObject();
+            config.currentPage = $(this).data('page');
+            getPagingList(config,getData);
+        });
+        //搜索
+        $('#searchGoods').click(function(){
+            var getData = $('#form1').serializeObject();
+            getPagingList(config,getData);
+        });
+
+        // 显示已关联的商品
+        if(id){
+            $.ajax({
+                url: module+'Goods/getRelationGoods',
+                data: {id:id,relation:relation},
+                type: 'get',
+                beforeSend: function(){
+                },
+                error:function (xhr) {
+                    dialog.error('AJAX错误');
+                },
+                success: function(data){
+                    $('#selected_list').html(data)
+                }
+            });
+        }
+
+        // 选择商品
+        $('body').on('click','.add-goods',function(){
+            var selectedGoodsIds = [];
+            $('#selected_list li').each(function(){
+                var selectedGoodsId = $(this).data('goods-id');
+                selectedGoodsIds.push(selectedGoodsId);
+            });
+
+            var _this=$(this);
+            var goodsId=_this.parents('tr').data('goods-id');
+            if($.inArray(goodsId, selectedGoodsIds) !== -1){
+
+                _this.find('a').addClass('label');
+                layer.msg('此商品已选择过 !');
+                return false;
+            }
+
+            var goodsImgSrc= _this.parents('tr').find('img').attr('src');
+            var goodsName  = _this.parents('tr').find('.goods_name').html();
+            var num        = parseInt(_this.parents('tr').find("input[name='goods_num']").val());
+            var shortName  = goodsName.substr(0,20) + '...' ;
+            var html =
+                    ' <li data-goods-id="'+goodsId+'"><a href="javascript:void(0);" class="close-btn">X</a> <div>'+
+                    '<img src="'+goodsImgSrc+'" alt="" class="left">'+
+                    '<span class="goods_name" title="'+goodsName+'">'+shortName+'</span>'+
+                    '<span>X</span>'+
+                    '<span class="goods_num">'+num+'</span>'+
+                    '</div> </li>';
+
+            $('.selected_goods_list').append(html);
+            _this.find('a').addClass('label');
+        });
+        //移除商品
+        $('body').on('click','.close-btn',function(){
+            var _this=$(this);
+            var id=_this.parents('li').data('goods-id');
+            $.each($('.list li'),function(){
+                var _This=$(this);
+                if(_This.data('id')==id){
+                    _This.removeClass('current');
+                }
+            });
+
+            $('tbody').find('tr[data-goods-id="'+id+'"]').find('.add-goods a').removeClass('label');
+
+            _this.parent().remove();
+        });
+
+        // 提交添加
+        $('body').on('click','.confirm_add',function(){
+            var selectedIds=[];
+            var postData ={};
+            var _this=$(this);
+            $('.selected_goods_list li').each(function () {
+                var selectedGoods={};
+                var goodsSelectedId=$(this).data('goods-id');
+                selectedGoods.id=id;
+                selectedGoods.goods_id=goodsSelectedId;
+                selectedIds.push(selectedGoods);
+            });
+            if($.isEmptyArray(selectedIds)){
+                dialog.error('未选择商品');
+                return false;
+            }
+            postData.selectedIds = selectedIds;
+            postData.relation    = relation;
+            var url = module+'Goods/addRelationGoods';
+
+            _this.addClass("nodisabled");//防止重复提交
+            $.ajax({
+                url: url,
+                data: postData,
+                type: 'post',
+                beforeSend: function(){
+                },
+                error:function (xhr) {
+                    dialog.error('AJAX错误');
+                },
+                success: function(data){
+                    _this.removeClass("nodisabled");
+                    dialog.msg(data,'',function () {
+                        // 提交后关闭，然后刷新父窗口
+
+                        var index = parent.layer.getFrameIndex(window.name);   //先得到当前iframe层的索引
+                        parent.layer.close(index);
+                    })
+                }
+            });
+
+        })
+
+        // 没有数量要求
+        $(document).ready(function(){
+            //var str = $('input[name="goods_num"]').parents('td').html();
+
+            $("input[name='goods_num']").each(function(){
+                $(this).parents('td').remove(' ');
+                console.log(str);
+
+            });
+
+        });
+
+    });
+</script>
+ <style>
+        .selected_goods_list li{
+            display: flex;
+            align-items: center;
+            width: 100px;
+        }
+         .list_item img, .selected_goods_list img{
+            min-width: 100%;
+            display: block;
+        }
+        .list_item img, .selected_goods_list .goods_num{
+          float: right; 
+        }
+        
+        .layui-layer-btn{
+            margin-top: 20px;
+            position: fixed; 
+            bottom: 0;
+            width: 100%; 
+            right: 0;
+            background: #fff;
+        }
+        .recommendGoods_content{
+            margin-bottom: 40px;
+        }
+        </style>
+{/block}

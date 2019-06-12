@@ -36,7 +36,7 @@
             <label class="form-label col-xs-4 col-sm-2">优惠商品：</label>
             <div class="formControls col-xs-8 col-sm-9">
                 <button type="button" class="btn btn-primary radius recommend">
-                    <i class="Hui-iconfont"></i> 添加商品
+                    <i class="Hui-iconfont"></i> 增加商品
                 </button>
                 <div style="margin-bottom: 20px;">
                     <table>
@@ -174,9 +174,6 @@
                 postData.main_img += $(this).attr('src') + ',';
             });
 
-            //var goods_id = ("input[name='goods_id[]']").map(function(){return this.value;}).get().join(",");
-            //var goods_num= ("input[name='goods_num[]']").map(function(){return this.value;}).get().join(",");
-
             postData.intro    = intro.getContent();
             postData.goods_id = $("input[name='goods_id']").map(function(){return this.value;}).get().join(",");
             postData.goods_num= $("input[name='goods_num']").map(function(){return this.value;}).get().join(",");
@@ -208,12 +205,8 @@
             });
 
         });
-        //返回
-        $('.button_save_black').click(function(){
-            location.href = controller + '/manage';
-        });
 
-        // 默认商品列表
+        // 默认关联的商品列表
         $(document).ready(function(){
             var data = "{$info['goods_list']|raw}";
 
@@ -228,13 +221,6 @@
         });
 
         function addHtml(Obj){
-/*            var imgAdd = $('<li>' +
-                    '<div class="picture-module active"><input class="uploadImg uploadSingleEditImg" name="process_img" value="11">' +
-                    '<img src="/uploads/'+Obj.img+'" class="upload_img">'+
-                    '<a class="delete-picture">X</a>'+
-                    '</div><div><textarea style="height: 60px;width: 200px;" name="process_text"'+
-                    ' cols="30" rows="5" placeholder="请填写描述" class="edit-text">'+Obj.desc+'</textarea></div></li>');
-            $('.multi-picture-moduleDes').append(imgAdd);*/
             Obj.goods_name  = Obj.goods_name.substr(0,20) + '...' ;
             return  '<tr>'+
                     '<td style="display:none"><input type="checkbox" name="goods_id" value="'+Obj.goods_id+'"></td>'+
@@ -247,7 +233,7 @@
 
         $("body").on('click','.recommend',function(){
 
-            var url =  module + 'Goods/recommendGoods';
+            var url =  module + 'Goods/relationGoods';
 
             layer.open({
                 type: 2,
@@ -260,16 +246,8 @@
                 yes: function(index, layero){
 
                     var body = layer.getChildFrame('body', index);
-                    //recommendIds = [];
-                    //var recommend = [];
-                    body.find('.selected_goods_list li').each(function () {
-           /*             var goodsSelectedId = $(this).data('goods-id');
-                        var goods_name = $(this).find('.goods_name').attr('title');
-                        var goods_num  = $(this).find('.goods_num').html();*/
-                        //var goods = {goods_id:goodsSelectedId,num:num};
-                        //recommendIds.push(goodsSelectedId);
-                        //recommend.push(parseInt(goods_num));
 
+                    body.find('.selected_goods_list li').each(function () {
                         var Obj = {};
                         Obj.goods_id  = $(this).data('goods-id');
                         Obj.goods_name= $(this).find('.goods_name').attr('title');
@@ -280,17 +258,6 @@
                         $("#goods_list").append(html);
                     });
 
-                    //$("#goods_list").after(html);
-             /*       var num = parseInt($(".recommend").next().html());
-                    $(".recommend").next().html(num+parseInt(recommendIds.length));
-
-                    var ids = $('input[name="ids"]').val();
-                    if(ids){
-                        recommendIds = ids+','+recommendIds;
-                    }
-
-                    $('input[name="ids"]').val(recommendIds);
-                    $('input[name="ids_num"]').val(recommend);*/
                     layer.close(index);
                 },
                 no: function(){

@@ -57,6 +57,7 @@
             template:'#footer-menu_tpl',
             props: {
                 type: {type: Number,default: 1},
+                group: {type: Number,default: 1},
                 init_product_type: {type: Number,default: 1},
                 init_cart_num: {type: Number,default: 0},
                 init_total_amount: {type: Number,default: 0},
@@ -131,11 +132,9 @@
                         postData:_thisVue.postData,
                         componentFooterCartMenu:_thisVue,
                         asyncVerifyCallBack:function(){
-                            //console.log('asyncVerifyCallBack');
                             //_thisJquery.click()
                         }
                     };
-
                     asyncVerify(config);
                 },assignProductList:function(param){
                     let productInfo = {
@@ -308,18 +307,18 @@
   }
   .group_cart_nav a:nth-of-type(1){
     text-align: left;
-    /* width: 20%; */
   }
   .group_cart_nav a:nth-of-type(2){
       width: 50%;
-      background: #009fe9;
+      /*background: #009fe9;*/
       color: #fff;
   }
   .group_cart_nav a:nth-of-type(1) .checked_all{
       margin-left: 10px;
       
   }
-  .group_cart_nav a:nth-of-type(3){
+  .group_cart_nav a:nth-of-type(3),
+  .group_cart_nav a.confirm_order{
       background: #009fe9;
       color: #fff;
   }
@@ -330,5 +329,9 @@
   .add_cart_icon span{
       left: 68px;
   }
- 
+ .group_cart_nav a.confirm_receive{
+     text-align: center;
+     color: #fff;
+     background: #009fe9;
+ }
 </style>

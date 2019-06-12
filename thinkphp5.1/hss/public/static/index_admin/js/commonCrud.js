@@ -29,14 +29,6 @@ $('body').on('click','.edit',function(){
 
     edit(config);
 });
-function edit(config){
-    var index = layer.open({
-        type: 2,
-        title: config.title,
-        content: config.url
-    });
-    layer.full(index);
-}
 
 //删除
 $('body').on('click','.del',function(){
@@ -121,15 +113,14 @@ $('body').on('click','.set-shelf-status',function(){
             $.post(url,postData,function(msg){
                 dialog.msg(msg,'',function(){
                     if(msg.status){
-
                         if(shelf_status == 3){
-                            //_thisTr.find(".shelf-status").html('<span class="label label-defaunt radius">已下架</span>');
+                            _thisTr.find(".shelf-status").html('<span class="label label-defaunt radius">已下架</span>');
                             _this.data('shelf-status',1);
                             _this.attr('title','上架');
                             _this.html('上架');
 
                         }else{
-                            //_thisTr.find(".shelf-status").html('<span class="label label-success radius">已上架</span>');
+                            _thisTr.find(".shelf-status").html('<span class="label label-success radius">已上架</span>');
                             _this.data('shelf-status',3);
                             _this.attr('title','下架');
                             _this.html('下架');
@@ -141,4 +132,13 @@ $('body').on('click','.set-shelf-status',function(){
         }
     });
 });
+
+function edit(config){
+    var index = layer.open({
+        type: 2,
+        title: config.title,
+        content: config.url
+    });
+    layer.full(index);
+}
 

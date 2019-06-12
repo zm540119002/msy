@@ -55,7 +55,7 @@ class Order extends \common\controller\UserBase
                 ['g.status', '=', 0],
                 ['g.id', 'in', $goodsIds],
             ], 'field' => [
-                'g.id as goods_id','g.name','g.headline','g.thumb_img','g.bulk_price','g.specification','g.sample_price',
+                'g.id as goods_id','g.name','g.headline','g.thumb_img','g.franchise_price','g.specification','g.sample_price',
                 'g.purchase_unit','g.store_id'
             ]
         ];
@@ -84,7 +84,7 @@ class Order extends \common\controller\UserBase
                             $goodsList[$k1]['price'] = $goodsInfoNew['sample_price'];
                              break;
                         default:
-                            $goodsList[$k1]['price'] = $goodsInfoNew['bulk_price'];
+                            $goodsList[$k1]['price'] = $goodsInfoNew['franchise_price'];
                             break;
                     }
                     $totalPrices = $goodsInfo['num'] * $goodsList[$k1]['price'];
@@ -267,7 +267,7 @@ class Order extends \common\controller\UserBase
 
             $this->assignWalletInfo();*/
 
-            return $this->fetch('confirm_order_1');
+            return $this->fetch('confirm_order');
         }
     }
 

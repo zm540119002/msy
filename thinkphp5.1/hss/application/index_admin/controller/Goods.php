@@ -193,7 +193,7 @@ class Goods extends Base {
         $config = [
             'where'=>$where,
             'field'=>[
-                'g.id','g.name','g.bulk_price','g.sample_price','g.sort','g.is_selection',
+                'g.id','g.name','g.franchise_price','g.sample_price','g.sort','g.is_selection',
                 'g.thumb_img','g.shelf_status','g.create_time','g.rq_code_url','g.belong_to','g.goods_code'
 //                'g.category_id_1',
 //                'gc1.name as category_name_1'
@@ -280,7 +280,6 @@ class Goods extends Base {
     }
 
 
-
     /**
      * 增加各关联表下的商品 -通用方法
      */
@@ -297,22 +296,31 @@ class Goods extends Base {
         switch($relation){
             case config('custom.relation_type.scene'):
                 $model = new \app\index_admin\model\SceneGoods();
-                $condition = [['scene_id','=',$data[0]['scene_id']]];
+                $condition = [['scene_id','=',$data[0]['id']]];
+                $field = 'scene_id';
                 break;
             case config('custom.relation_type.project'):
                 $model = new \app\index_admin\model\ProjectGoods();
-                $condition = [['project_id','=',$data[0]['project_id']]];
+                $condition = [['project_id','=',$data[0]['id']]];
+                $field = 'project_id';
                 break;
             case config('custom.relation_type.promotion'):
                 $model = new \app\index_admin\model\PromotionGoods();
-                $condition = [['promotion_id','=',$data[0]['promotion_id']]];
+                $condition = [['promotion_id','=',$data[0]['id']]];
+                $field = 'promotion_id';
                 break;
             case config('custom.relation_type.sort'):
                 $model = new \app\index_admin\model\SortGoods();
-                $condition = [['sort_id','=',$data[0]['sort_id']]];
+                $condition = [['sort_id','=',$data[0]['id']]];
+                $field = 'sort_id';
                 break;
             default:
                 return errorMsg('参数有误');
+        }
+
+        foreach($data as $k => &$v){
+            $v[$field] = $v['id'];
+            unset($v['id']);
         }
 
         $model->startTrans();
@@ -447,7 +455,7 @@ class Goods extends Base {
                 ['rg.status', '=', 0],
                 ['rg.goods_id', '=', $goodsId],
             ],'field'=>[
-                'g.id ','g.headline','g.thumb_img','g.bulk_price','g.specification','g.minimum_order_quantity',
+                'g.id ','g.headline','g.thumb_img','g.franchise_price','g.specification','g.minimum_order_quantity',
                 'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit','g.name'
             ],'join'=>[
                 ['goods g','g.id = rg.recommend_goods_id','left']
@@ -480,7 +488,7 @@ class Goods extends Base {
                 ['g.id','=',$id]
             ],
             'field'=>[
-                'g.id','g.name','g.headline','g.minimum_order_quantity','g.minimum_sample_quantity','g.bulk_price','g.sample_price',
+                'g.id','g.name','g.headline','g.minimum_order_quantity','g.minimum_sample_quantity','g.franchise_price','g.sample_price',
                 'g.specification','g.specification','g.specification_unit','g.intro','g.parameters','g.main_img','g.thumb_img','g.shelf_status','g.create_time','g.category_id_1',
                 'g.detail_img','g.tag','g.purchase_unit','g.rq_code_url',
 //                'gc1.name as category_name_1',
@@ -508,7 +516,7 @@ class Goods extends Base {
                     ['id','in',$ids],
                     ['status','=',0]
                 ],'field'=>[
-                    'id','headline','specification','thumb_img','bulk_price','rq_code_url'
+                    'id','headline','specification','thumb_img','franchise_price','rq_code_url'
                 ],
             ];
             $model = new \app\index_admin\model\Goods();
@@ -523,8 +531,9 @@ class Goods extends Base {
             $oldQRCodes = $info['rq_code_url'];
             $uploadPath = realpath( config('upload_dir.upload_path')) . '/';
             $url = request()->domain().'/index.php/Index/Goods/detail/id/'.$info['id'];
-            $newRelativePath = config('upload_dir.weiya_goods');
+            $newRelativePath = config('upload_dir.goods');
             $shareQRCodes = createLogoQRcode($url,$newRelativePath);
+  
             if(mb_strlen( $info['headline'], 'utf-8')>20){
                 $name1 =  mb_substr( $info['headline'], 0, 18, 'utf-8' ) ;
                 $name2 =  mb_substr( $info['headline'], 18, 18, 'utf-8' ) ;
@@ -539,7 +548,7 @@ class Goods extends Base {
                 'name1'=> $name1,
                 'name2'=> $name2,
                 'RMB_logo'=> './static/common/img/RMB_logo.png',
-                'money'=>$info['bulk_price'].'元',
+                'money'=>$info['franchise_price'].'元',
                 'logo_img'=> request()->domain().'/static/index/img/logo.png', // 460*534
                 'goods_img'=> $uploadPath.$info['thumb_img'], // 460*534
                 'qrcode'=>$uploadPath.$shareQRCodes, // 120*120
@@ -639,9 +648,10 @@ class Goods extends Base {
     /**
      * 关联结构商品列表 入口
      */
-    public function recommendGoods(){
+    public function relationGoods(){
 
-        return $this->fetch();
+        $view = 'relation_goods_edit';
+        return $this->fetch($view);
     }
 
     /**
@@ -699,54 +709,4 @@ class Goods extends Base {
         return view($view);
     }
 
-
-    /**
-     * 修改各关联表下的关联商品
-     */
-    public function RelationGoods(){
-        if(!request()->isPost()){
-            return config('custom.not_post');
-        }
-
-        if(!$data=input('post.selectedIds/a'))  return errorMsg('参数有误');
-
-        $relation=input('post.relation/d');
-
-        // custom.php relation_type
-        switch($relation){
-            case config('custom.relation_type.scene'):
-                $model = new \app\index_admin\model\SceneGoods();
-                $condition = [['scene_id','=',$data[0]['scene_id']]];
-                break;
-            case config('custom.relation_type.project'):
-                $model = new \app\index_admin\model\ProjectGoods();
-                $condition = [['project_id','=',$data[0]['project_id']]];
-                break;
-            case config('custom.relation_type.promotion'):
-                $model = new \app\index_admin\model\PromotionGoods();
-                $condition = [['promotion_id','=',$data[0]['promotion_id']]];
-                break;
-            case config('custom.relation_type.sort'):
-                $model = new \app\index_admin\model\SortGoods();
-                $condition = [['sort_id','=',$data[0]['sort_id']]];
-                break;
-            default:
-                return errorMsg('参数有误');
-        }
-
-        $model->startTrans();
-        $rse = $model -> del($condition,false);
-
-        if(false === $rse){
-            $model->rollback();
-            return errorMsg('失败');
-        }
-        $res = $model->allowField(true)->saveAll($data)->toArray();
-        if (!count($res)) {
-            $model->rollback();
-            return errorMsg('失败');
-        }
-        $model -> commit();
-        return successMsg('成功');
-    }
 }
