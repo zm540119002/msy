@@ -182,6 +182,15 @@
 		//每天活动倒计时
 		var date=new Date(new Date(new Date().toLocaleDateString()).getTime()+24*60*60*1000-1);
 		countDown(date,$('#countDownBox'));
+		//主图轮播
+		var swiper = new Swiper('.master-swiper', {
+			//spaceBetween: 30,
+			direction: 'horizontal',
+			pagination: {
+				el: '.swiper-pagination',
+				clickable: true
+			}
+		});
 		// 项目信息切换
 		$('.detail-nav li').on('click',function(){
 			$(this).addClass('current').siblings().removeClass('current');
