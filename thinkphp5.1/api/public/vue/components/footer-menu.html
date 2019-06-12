@@ -138,8 +138,6 @@
                     };
                     asyncVerify(config);
                 },assignProductList:function(param){
-                    console.log(param.product_id);
-                    console.log(param.buy_quantity);
                     let productInfo = {
                         'goods_id':param.product_id,
                         'num':param.buy_quantity
@@ -148,6 +146,7 @@
                         this.postData.data = [];
                         this.postData.data.push(productInfo);
                     }
+                    console.log(this.postData.data);
                 },editProductList:function(param){
                     if(this.type==4 && !param.checked){
                         return false;
