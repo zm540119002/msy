@@ -278,6 +278,8 @@
                 });
                 //监听-产品选择器购买数量改变-事件
                 bus.$on('product_select_buy_quantity_change', function(param){
+                    console.log(this.group);
+                    console.log(param.group);
                     if(param.group == _this.group){
                         _this.total_amount_calculate(param);
                         _this.editProductList(param);
