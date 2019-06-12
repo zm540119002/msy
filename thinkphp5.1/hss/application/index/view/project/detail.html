@@ -182,28 +182,31 @@
 		//每天活动倒计时
 		var date=new Date(new Date(new Date().toLocaleDateString()).getTime()+24*60*60*1000-1);
 		countDown(date,$('#countDownBox'));
-		// 后加载简介
-		$('document').ready(function(){
-			$('.intro').html("{$info.intro|raw}");
-			$('.remarks').html("{$info.remarks|raw}");
-			$('.description').html("{$info.description|raw}");
-		});
-		//轮播
-		var swiper = new Swiper('.swiper-container', {
-			slidesPerView :2
-			 //spaceBetween: 30,
-			//  direction: 'horizontal',
-			//  pagination: {
-			//  	el: '.swiper-pagination',
-			//  	clickable: true
-			//  }
-		});
 		// 项目信息切换
 		$('.detail-nav li').on('click',function(){
 			$(this).addClass('current').siblings().removeClass('current');
 			$('.project_item').hide().eq($(this).index()).show();
+			if($(this).index()==2){
+				//轮播
+	var swiper = new Swiper('.swiper-container', {
+		slidesPerView :2
+			//spaceBetween: 30,
+		//  direction: 'horizontal',
+		//  pagination: {
+		//  	el: '.swiper-pagination',
+		//  	clickable: true
+		//  }
+	});
+			}
 		});
 
+	});
+	
+	// 后加载简介
+	$('document').ready(function(){
+		$('.intro').html("{$info.intro|raw}");
+		$('.remarks').html("{$info.remarks|raw}");
+		$('.description').html("{$info.description|raw}");
 	});
 </script>
 <style scoped>	
