@@ -182,12 +182,6 @@
 		//每天活动倒计时
 		var date=new Date(new Date(new Date().toLocaleDateString()).getTime()+24*60*60*1000-1);
 		countDown(date,$('#countDownBox'));
-		// 后加载简介
-		$('document').ready(function(){
-			$('.intro').html("{$info.intro|raw}");
-			$('.remarks').html("{$info.remarks|raw}");
-			$('.description').html("{$info.description|raw}");
-		});
 		//轮播
 		var swiper = new Swiper('.swiper-container', {
 			slidesPerView :2
@@ -205,6 +199,12 @@
 		});
 
 	});
+	// 后加载简介
+		$('document').ready(function(){
+			$('.intro').html("{$info.intro|raw}");
+			$('.remarks').html("{$info.remarks|raw}");
+			$('.description').html("{$info.description|raw}");
+		});
 </script>
 <style scoped>	
 	.menu{
