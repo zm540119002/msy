@@ -223,8 +223,9 @@
                         }
                     }
                 },checkAll:function(){
-                    alert(1);
+                   
                     this.checked = !this.checked;
+                     alert(this.checked );
                     for(let i = 0,len = this.checkItemList.length; i < len; i++){
                         this.checkItemList[i].checked = this.checked;
                     }
