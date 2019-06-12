@@ -57,19 +57,24 @@ class TwoDimensionalCode extends \common\controller\UserBase {
     }
 
     /**
-     * 获取url的二维码
+     * 获取url的二维码图片
      */
     public function getUrlQRcode(){
-        $url = json_encode(request()->domain());
-        p($url);
-        exit;
-        $url = input('url/s');
+
+        $url = input('param_url/s');
         if(!$url){
             $url = request()->domain();
         }
-        request();
-        return
-        $shareQRCodes = createLogoQRcode($url,$newRelativePath);
+        $newRelativePath= config('upload_dir.url_QRCode');
+        $shareQRCodes   = createLogoQRcode($url,$newRelativePath);
+
+        if( !isset($shareQRCodes['status']) ){
+            $shareQRCodes = '/'.config('upload_dir.upload_path').'/'.$shareQRCodes;
+
+            return successMsg('成功',['img'=>$shareQRCodes]);
+        }
+
+        return errorMsg('分享失败');
     }
 
 }

@@ -211,33 +211,20 @@
 		});
 
 		// 分享二维码
-		$('body').on('click', '.share', function () {
-			//var param_url = JSON.stringify(window.location.href);
-			var param_url = JSON.stringify(location.href);
-			//console.log(param_url);
-			//return false;
+		$('body').on('click', '.url_share', function () {
+			var param_url = window.location.href;
 
-			if (true) {
+			if (param_url) {
 				$.ajax({
 					url: module + '/TwoDimensionalCode/getUrlQRcode',
-					//data: {url:param_url},
-					type: 'get',
+					data: {param_url:param_url},
+					type: 'post',
 					success: function (data) {
-						console.log(data);
-						return false;
-						/*
 						layer.open({
 							skin: 'shareqrCodeLayer',
-							content: '<img src=' + imgSrc + ' />',
-							btn: ['X'],
-							success: function () {
-								fixedLayer();
-							},
-							yes: function (index) {
-								cancleFixedLayer();
-								layer.close(index);
-							}
-						})*/
+							content: '<img src=' + data.img + ' />',
+							btn: ['X']
+						})
 					}
 				});
 			}
