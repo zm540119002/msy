@@ -196,6 +196,9 @@
 		$('.detail-nav li').on('click',function(){
 			$(this).addClass('current').siblings().removeClass('current');
 			$('.project_item').hide().eq($(this).index()).show();
+			if($(this).index()==2){
+				swiper();
+			}
 		});
 
 	});
