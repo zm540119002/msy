@@ -136,4 +136,7 @@ nav .back_prev_page{
     display:block;
     width:auto;
 }
+.module-navigation .channel_nav, .top_radius{
+    border-radius: 0;
+}
 
