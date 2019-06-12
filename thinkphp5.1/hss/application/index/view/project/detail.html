@@ -177,16 +177,6 @@
 {block name="script"}
 <script type="text/javascript" src="api_common_js/swiper.min.js"></script>
 <script type="text/javascript">
-//轮播
-	var swiper = new Swiper('.swiper-container', {
-		slidesPerView :2
-			//spaceBetween: 30,
-		//  direction: 'horizontal',
-		//  pagination: {
-		//  	el: '.swiper-pagination',
-		//  	clickable: true
-		//  }
-	});
 	$(function(){
 		var id = '{$info.id}';
 		//每天活动倒计时
@@ -197,7 +187,16 @@
 			$(this).addClass('current').siblings().removeClass('current');
 			$('.project_item').hide().eq($(this).index()).show();
 			if($(this).index()==2){
-				swiper();
+				//轮播
+	var swiper = new Swiper('.swiper-container', {
+		slidesPerView :2
+			//spaceBetween: 30,
+		//  direction: 'horizontal',
+		//  pagination: {
+		//  	el: '.swiper-pagination',
+		//  	clickable: true
+		//  }
+	});
 			}
 		});
 
