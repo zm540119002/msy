@@ -30,6 +30,7 @@
 				:init_product_name="productInfo.name"
 				:init_product_src="productInfo.thumb_img"
 				:init_specification="productInfo.specification"
+				:group="group"
 				:type="type"
 		></product-select>
 	</ul>
@@ -56,6 +57,7 @@
 						:step_quantity="parseInt(step_quantity)"
 						:init_specification="productInfo.specification"
 						:by_footer_menu_monitor="by_footer_menu_monitor"
+						:group="group"
 						:type="type"
 				></product-select>
 			</ul>
@@ -78,11 +80,13 @@
 				:init_compare_price="Number(productInfo.retail_price)"
 				:init_quantity="parseInt(init_quantity)"
 				:step_quantity="parseInt(step_quantity)"
+				:group="group"
 				:type="type"
 		></product-select>
 	</div>
 	<div id="foot_cart_menu2">
 		<footer-menu
+				:group="group"
 			:init_menus="init_menus"
 		></footer-menu>
 	</div>
@@ -90,6 +94,7 @@
 <div id="foot_cart_menu">
 	<footer-menu
 			:type="type"
+			:group="group"
 			:init_cart_num="init_cart_num"
 			:init_menus="init_menus"
 	></footer-menu>
@@ -126,6 +131,7 @@
 		let unlockingFooterCart2 = '{$unlockingFooterCart2|raw}';
 		unlockingFooterCart2 = JSON.parse(unlockingFooterCart2);
 		let param2 = {
+			group:2,
 			init_cart_num:total_num,
 			init_menus:unlockingFooterCart2
 		};
@@ -141,8 +147,9 @@
 <script type="text/javascript">
 	$(function(){
 		let param = {
-			type:8,
+			type:7,
 			init_quantity:1,
+			group:3,
 			step_quantity:1,
 			by_footer_menu_monitor:false,
 			productList:[],
@@ -192,6 +199,7 @@
 	$(function(){
 		let param = {
 			type:6,
+			group:2,
 			init_quantity:1,
 			step_quantity:1,
 			productList:[
