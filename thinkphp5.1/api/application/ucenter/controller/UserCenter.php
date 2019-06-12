@@ -7,8 +7,12 @@ class UserCenter extends \think\Controller{
         if (request()->isAjax()) {
             $modelUser = new \common\model\UserCenter();
             $postData = input('post.');
-            $modelUser->login($postData);
-            $this->successMsg('登录成功！',config('code.success.login'));
+            $res = $modelUser->login($postData);
+            if($res['status']==0){
+                $this->errorMsg($res['info']);
+            }else{
+                $this->successMsg('登录成功！',config('code.success.login'));
+            }
         }
     }
     /**后台登录
@@ -27,8 +31,12 @@ class UserCenter extends \think\Controller{
         if (request()->isAjax()) {
             $modelUser = new \common\model\UserCenter();
             $postData = input('post.');
-            $modelUser->register($postData);
-            $this->successMsg('注册成功！',config('code.success.login'));
+            $res = $modelUser->register($postData);
+            if($res['status']==0){
+                $this->errorMsg($res['info']);
+            }else{
+                $this->successMsg('注册成功！',config('code.success.login'));
+            }
         }
     }
     //退出
