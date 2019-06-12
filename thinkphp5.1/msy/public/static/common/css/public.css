@@ -800,8 +800,7 @@ color: #ed6d00;
 .top_radius{
     background: #F7F8F8;
     border: 1px solid transparent;
-    /* border-radius: 20px 20px 0 0; */
-    background: red;
+    border-radius: 20px 20px 0 0;
     padding-top: .15rem;
 }
 .top_radius .product_tit{
