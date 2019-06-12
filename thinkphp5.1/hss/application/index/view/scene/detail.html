@@ -50,7 +50,6 @@
 					:init_quantity="parseInt(init_quantity)"
 					:step_quantity="parseInt(step_quantity)"
 					:init_specification="productInfo.specification"
-					:by_footer_menu_monitor="by_footer_menu_monitor"
 					:type="type"
 			></product-select>
 		</ul>
@@ -142,7 +141,6 @@
 			type:5,
 			init_quantity:1,
 			step_quantity:1,
-			by_footer_menu_monitor:false,
 			productList:[],
 			getJsonListParam:{
 				url:module+'Goods/getRelationGoods',
@@ -192,24 +190,46 @@
 {block name="script"}
 <script type="text/javascript" src="api_common_js/swiper.min.js"></script>
 <script type="text/javascript">
-	$(function(){
+	$(function() {
 		var id = '{$info.id}';
 		//每天活动倒计时
-		var date=new Date(new Date(new Date().toLocaleDateString()).getTime()+24*60*60*1000-1);;
-		countDown(date,$('#countDownBox'));
+		var date = new Date(new Date(new Date().toLocaleDateString()).getTime() + 24 * 60 * 60 * 1000 - 1);
+		;
+		countDown(date, $('#countDownBox'));
 		// 后加载简介
-		$('document').ready(function(){
+		$('document').ready(function () {
 			$('.intro').html("{$info.intro|raw}");
 		});
 		//轮播
 		var swiper = new Swiper('.swiper-container', {
 			spaceBetween: 30,
-			autoplay:true,
+			autoplay: true,
 			pagination: {
 				el: '.swiper-pagination',
 				clickable: true
 			}
 		});
+
+		// 分享二维码
+		$('body').on('click', '.url_share', function () {
+			var param_url = window.location.href;
+
+			if (param_url) {
+				$.ajax({
+					url: module + '/TwoDimensionalCode/getUrlQRcode',
+					data: {param_url:param_url},
+					type: 'post',
+					success: function (data) {
+						layer.open({
+							skin: 'shareqrCodeLayer',
+							content: '<img src=' + data.img + ' />',
+							btn: ['X']
+						})
+					}
+				});
+			}
+		});
+
 	});
 </script>
 <style scoped>
