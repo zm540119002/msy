@@ -6,7 +6,7 @@
 	<div id="menu" class="menu">
 		<a href="javascript:void(0);" class="back_prev_page" data-jump_url=""></a>
 		<ul class="columns_flex detail-nav">
-			<li data-item="item1"><a href="javascript:;" class="">项目产品</a></li>
+			<li data-item="item1" class="current"><a href="javascript:;" class="">项目产品</a></li>
 			<li data-item="item2"><a href="javascript:;" class="">项目详情</a></li>
 			<li data-item="item3"><a href="javascript:;" class="">项目操作</a></li>
 		</ul>
@@ -182,21 +182,49 @@
 		//每天活动倒计时
 		var date=new Date(new Date(new Date().toLocaleDateString()).getTime()+24*60*60*1000-1);
 		countDown(date,$('#countDownBox'));
+		//主图轮播
+		var swiper = new Swiper('.master-swiper', {
+			//spaceBetween: 30,
+			direction: 'horizontal',
+			pagination: {
+				el: '.swiper-pagination',
+				clickable: true
+			}
+		});
 		// 项目信息切换
 		$('.detail-nav li').on('click',function(){
 			$(this).addClass('current').siblings().removeClass('current');
 			$('.project_item').hide().eq($(this).index()).show();
 			if($(this).index()==2){
-				//轮播
-	var swiper = new Swiper('.swiper-container', {
-		slidesPerView :2
-			//spaceBetween: 30,
-		//  direction: 'horizontal',
-		//  pagination: {
-		//  	el: '.swiper-pagination',
-		//  	clickable: true
-		//  }
-	});
+				//项目流程轮播
+				var swiper = new Swiper('.swiper-container', {
+					slidesPerView :2
+					//spaceBetween: 30,
+					//  direction: 'horizontal',
+					//  pagination: {
+					//  	el: '.swiper-pagination',
+					//  	clickable: true
+					//  }
+				});
+			}
+		});
+		// 分享二维码
+		$('body').on('click', '.url_share', function () {
+			var param_url = window.location.href;
+
+			if (param_url) {
+				$.ajax({
+					url: module + '/TwoDimensionalCode/getUrlQRcode',
+					data: {param_url:param_url},
+					type: 'post',
+					success: function (data) {
+						layer.open({
+							skin: 'shareqrCodeLayer',
+							content: '<img src=' + data.img + ' />',
+							btn: ['X']
+						})
+					}
+				});
 			}
 		});
 
