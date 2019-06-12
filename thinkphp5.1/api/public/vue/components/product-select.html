@@ -326,15 +326,13 @@
                     if(!_this.product_id){
                         return false;
                     }
-                    console.log(_this.group);
                     // 弹出加入采购车
                     $('.dialogCart').show();
                     $('.bg').show();
                     //触发-弹出采购车点击-事件
                     bus.$emit('dialog_cart',_this);
                 },dialog_cart_assign: function (param) {
-//                    console.log(this.group);
-//                    console.log(param.group);
+                    console.log(param.group);
                     if(this.group == param.group){
                         this.monitor_buy_quantity = false;
                         this.group = param.group;
