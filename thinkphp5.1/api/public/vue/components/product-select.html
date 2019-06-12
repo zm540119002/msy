@@ -199,6 +199,7 @@
                 step_quantity: {type: Number,default: 1},
                 type: {type: Number,default: 1},
                 init_group: {type: Number,default: 1},
+                init_monitor_buy_quantity: {type: Boolean,default: true},
                 by_footer_menu_monitor: {type: Boolean,default: true}
             },data: function () {
                 return {
@@ -210,6 +211,7 @@
                     product_src:this.init_product_src,
                     specification:this.init_specification,
                     specification_unit:this.init_specification_unit,
+                    monitor_buy_quantity:this.init_monitor_buy_quantity,
                     buy_quantity:this.init_quantity,
                     buy_quantity_reduce_trigger:true,
                     subtotal_amount:0,
@@ -254,6 +256,7 @@
                         this.buy_quantity -= this.step_quantity;
                     }
                 },plus: function () {
+                    this.monitor_buy_quantity = true;
                     //如果开启了样品购买限额
                     if(this.display_quota){
                         if((this.buy_quantity+this.step_quantity)>this.quota_quantity){
@@ -330,6 +333,7 @@
                     bus.$emit('dialog_cart',_this);
                 },dialog_cart_assign: function (param) {
                     if(this.group == 0){
+                        this.monitor_buy_quantity = false;
                         this.product_id = param.product_id;
                         this.product_src = param.product_src;
                         this.product_name = param.product_name;
@@ -362,7 +366,7 @@
                 buy_quantity: {
                     handler(newVal, oldVal) {
                         this.subtotal_amount_calculate();
-                        if(typeof(oldVal) !== "undefined"){
+                        if(typeof(oldVal) !== "undefined" && this.monitor_buy_quantity){
                             this.increment_buy_quantity = parseInt(newVal) - parseInt(oldVal?oldVal:0);
                             //触发--产品选择器购买数量改变-事件
                             bus.$emit('product_select_buy_quantity_change',this);
