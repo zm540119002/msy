@@ -1,5 +1,5 @@
 <section class="slider_banner">
-    <div class="swiper-container swiper-container-horizontal swiper-container-ios">
+    <div class="swiper-container master-swiper swiper-container-horizontal swiper-container-ios">
         <div class="swiper-wrapper">
             {volist name="$info.main_img" id="vo"}
             <div class="swiper-slide swiper-slide-active">
@@ -83,3 +83,14 @@
         </ul>
     </div>
 </section>
+<script type="text/javascript">
+    //轮播
+    var swiper = new Swiper('.master-swiper', {
+        //spaceBetween: 30,
+         direction: 'horizontal',
+         pagination: {
+         	el: '.swiper-pagination',
+         	clickable: true
+         }
+    });
+</script>
