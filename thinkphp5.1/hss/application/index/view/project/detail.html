@@ -188,7 +188,15 @@
 			$('.remarks').html("{$info.remarks|raw}");
 			$('.description').html("{$info.description|raw}");
 		});
-		//轮播
+		
+		// 项目信息切换
+		$('.detail-nav li').on('click',function(){
+			$(this).addClass('current').siblings().removeClass('current');
+			$('.project_item').hide().eq($(this).index()).show();
+		});
+
+	});
+	//轮播
 		var swiper = new Swiper('.swiper-container', {
 			slidesPerView :2
 			 //spaceBetween: 30,
@@ -198,13 +206,6 @@
 			//  	clickable: true
 			//  }
 		});
-		// 项目信息切换
-		$('.detail-nav li').on('click',function(){
-			$(this).addClass('current').siblings().removeClass('current');
-			$('.project_item').hide().eq($(this).index()).show();
-		});
-
-	});
 </script>
 <style scoped>	
 	.menu{
