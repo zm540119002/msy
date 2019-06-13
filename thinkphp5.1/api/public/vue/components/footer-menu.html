@@ -223,10 +223,13 @@
                         }
                     }
                 },checkAll:function(){
+                    let afterClickChecked = this.checked;
+                    alert(browser.versions.ios);
+                    return false;
                     //ios需要取反
-//                    if(browser.versions.mobile || browser.versions.ios){
-//                        this.checked = !this.checked;
-//                    }
+                    if(browser.versions.mobile && browser.versions.ios){
+                        this.checked = !this.checked;
+                    }
                     this.checked = !this.checked;
                     for(let i = 0,len = this.checkItemList.length; i < len; i++){
                         this.checkItemList[i].checked = this.checked;
