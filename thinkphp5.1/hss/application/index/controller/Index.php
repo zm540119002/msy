@@ -118,9 +118,7 @@ class Index extends \common\controller\Base{
                         ['i.user_id', '=', $user['id']],
                     ],'field'=>[
                         'i.id ','i.type',''
-                    ],'join'=>[
-                        ['goods g','g.id = od.goods_id','left'],
-                    ]
+                    ],
                 ];
                 $identity = $identityMode->getInfo($config);
                 $this->assign('identity',$identity);

@@ -9,7 +9,7 @@ class Identity extends \common\model\Base {
 	// 设置当前模型的数据库连接
     protected $connection = 'db_config_1';
 	//表的别名
-	protected $alias = 'I';
+	protected $alias = 'i';
 
 
 }
