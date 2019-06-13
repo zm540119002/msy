@@ -223,11 +223,14 @@
                         }
                     }
                 },checkAll:function(){
-                    //ios需要取反
+                    let afterClickChecked = this.checked;
                     alert(browser.versions.ios);
-                    if(browser.versions.ios){
+                    return false;
+                    //ios需要取反
+                    if(browser.versions.mobile && browser.versions.ios){
                         this.checked = !this.checked;
                     }
+                    this.checked = !this.checked;
                     for(let i = 0,len = this.checkItemList.length; i < len; i++){
                         this.checkItemList[i].checked = this.checked;
                     }
@@ -251,10 +254,12 @@
                     }
                     let address = getAddress();
                     _thisVue.postData.address = JSON.stringify(address);
-                    if( !_thisVue.postData.address ){
+
+                    if( _thisVue.postData.address=='false' ){
                         dialog.error('请选择收货地址 ！');
                         return false;
                     }
+
                     let config = {
                         clickObj:_thisJquery,
                         postData:_thisVue.postData,
