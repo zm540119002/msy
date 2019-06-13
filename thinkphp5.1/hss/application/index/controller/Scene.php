@@ -181,7 +181,7 @@ class Scene extends \common\controller\Base{
             $this->error('此项目已下架');
         }
 
-        $this->displayScene();
+        $this->displayScene($id);
 
         return $this->fetch();
     }
