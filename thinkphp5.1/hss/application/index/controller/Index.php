@@ -80,6 +80,21 @@ class Index extends \common\controller\Base{
     {
         if(request()->isAjax()){
         }else{
+            $user = checkLogin();
+            $this->assign('user',$user);
+            if($user){
+                $identityMode =  new \app\index\model\Identity();
+                $config =[
+                    'where' => [
+                        ['status', '=', 0],
+                        ['user_id', '=', $user['id']],
+                    ],'field'=>[
+                        'id ','type',
+                    ],
+                ];
+                $identity = $identityMode->getInfo($config);
+                $this->assign('identity',$identity);
+            }
             // 底部菜单，见配置文件custom.footer_menu
             $this->assign('currentPage',request()->controller().'/'.request()->action());
             return $this->fetch('franchise/index');
@@ -93,6 +108,21 @@ class Index extends \common\controller\Base{
     public function cityPartnerIndex(){
         if(request()->isAjax()){
         }else{
+            $user = checkLogin();
+            $this->assign('user',$user);
+            if($user){
+                $identityMode =  new \app\index\model\Identity();
+                $config =[
+                    'where' => [
+                        ['status', '=', 0],
+                        ['user_id', '=', $user['id']],
+                    ],'field'=>[
+                        'id ','type',
+                    ],
+                ];
+                $identity = $identityMode->getInfo($config);
+                $this->assign('identity',$identity);
+            }
             // 底部菜单，见配置文件custom.footer_menu
             $this->assign('currentPage',request()->controller().'/'.request()->action());
             return $this->fetch('city_partner/index');
