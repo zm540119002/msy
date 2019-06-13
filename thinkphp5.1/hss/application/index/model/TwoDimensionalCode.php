@@ -82,13 +82,12 @@ class TwoDimensionalCode extends \common\model\Base {
             'qrcode'=> request()->domain().'/uploads/'.$shareQRCode, // 120*120
             'font'=>'./static/font/simhei.ttf',   //字体
         ];
-        print_r($init);exit;
         $avatar = $this->imgInfo($init['avatar']);
         $qrcode = $this->imgInfo($init['qrcode']);
         $hss_1 = $this->imgInfo($init['hss_1']);
         $hss_2 = $this->imgInfo($init['hss_2']);
         $hss_3 = $this->imgInfo($init['hss_3']);
-        if( !$avatar || !$hss_1 || !$qrcode || $hss_2 || $hss_3){
+        if( !$avatar || !$hss_1 || !$qrcode || !$hss_2 || !$hss_3){
             return errorMsg('提供的图片问题');
         }
         $im = imagecreatetruecolor(942, 1475);  //图片大小
