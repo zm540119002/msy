@@ -92,7 +92,7 @@ class TwoDimensionalCode extends \common\model\Base {
         }
         $im = imagecreatetruecolor(942, 1475);  //图片大小
         $gray_color = imagecolorallocate($im, 87,89,88);
-        $text_color = imagecolorallocate($im, ffff, ffff, ffff);
+        $text_color = imagecolorallocate($im, 55, 66, 99);
         imagefill($im, 0, 0, $gray_color);
         imagettftext($im, 25, 0, 200, 90, $text_color, $init['font'], $init['name']); //名字
         imagecopyresized($im, $avatar['obj'], 60, 50, 0, 0, 100, 100, $avatar['width'], $avatar['height'] );  //
