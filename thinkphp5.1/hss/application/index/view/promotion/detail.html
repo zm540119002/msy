@@ -33,6 +33,7 @@
 										:key="index"
 										:init_product_id="productInfo.id"
 										:init_deal_price="parseFloat(productInfo.franchise_price)"
+										:init_compare_price="parseFloat(productInfo.retail_price)"
 										:init_quantity="parseInt(init_quantity)"
 										:step_quantity="parseInt(step_quantity)"
 										:type="type"
@@ -161,7 +162,8 @@
 			productList:[
 				{
 					id:"{$info.id}",
-					franchise_price:"{$info.price}"
+					franchise_price:"{$info.franchise_price}",
+                    retail_price:"{$info.retail_price}"
 				}
 			]
 		};
@@ -203,21 +205,6 @@
 		// 后加载简介
 		$('document').ready(function(){
 		 	$('.intro').html("{$info.intro|raw}");
-
-			// 套餐价 "{$info.price}"
-
-			//var normal_price = "";
-			//normal_price - "{$info.price}";
-/*			$('.deal_price').each(function() {
-				var sum = 0;
-				$('tr', this).each(function () {
-					if (Number($('td', this).eq(0).html()) >= 0) {
-						sum += Number($('td', this).eq(1).html());
-					}
-				});
-			});
-
-		 	$('.describe').html("正常采购价元 &nbsp;套餐采购价优惠了元");*/
 		 });
 
 		//轮播
