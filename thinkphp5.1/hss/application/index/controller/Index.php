@@ -87,6 +87,7 @@ class Index extends \common\controller\Base{
                 $config =[
                     'where' => [
                         ['status', '=', 0],
+                        ['user_id', '=', $user['id']],
                     ],'field'=>[
                         'id ','type',
                     ],
