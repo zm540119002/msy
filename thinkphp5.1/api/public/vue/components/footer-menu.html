@@ -223,19 +223,19 @@
                         }
                     }
                 },checkAll:function(){
-                    this.checked = !this.checked;
+                    let afterClickChecked = !this.checked;
                     //ios需要取反
-                    alert(this.checked);
+                    alert(afterClickChecked);
                     if(browser.versions.ios){
                         alert(browser.versions.ios);
-                        this.checked = !this.checked;
+                        afterClickChecked = !afterClickChecked;
                     }
-                    alert(this.checked);
+                    alert(afterClickChecked);
                     for(let i = 0,len = this.checkItemList.length; i < len; i++){
-                        this.checkItemList[i].checked = this.checked;
+                        this.checkItemList[i].checked = afterClickChecked;
                     }
                     //触发-底部购物车全选改变-事件
-                    bus.$emit('footer_cart_check_all_change',this.checked);
+                    bus.$emit('footer_cart_check_all_change',afterClickChecked);
                 },confirm_order:function(event){
                     let _thisJquery = $(event.currentTarget);
                     let _thisVue = this;
