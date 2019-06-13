@@ -1,8 +1,21 @@
 {notempty name="list"}
 {volist name="list" id="info"}
-    <li data-id="{$info.id}" data-order_sn="{$info.sn}">
-            <p>编号：{$info.sn}</p>
-            <a href="{:url('order/detail',['order_sn'=>$info.sn])}">
+    <li data-id="{$info.id}" data-order_sn="{$info.sn}" class="order">
+            <p><span>编号</span>{$info.sn}</p>
+            <p><span>下单日期</span> 2019-04-09 10:30:30</p>
+            <p><span>商品</span>共{$info.goods_num}个</p>
+            <p><span>金额</span><price class="red">￥{$info.amount}</price></p>
+            <p><span>状态</span><span class="pay">待付款</span> </p>
+            <p class="tips">提示：超过3天未支付的待付款订单将被系统自动清除</p>
+            <div class="line"></div>
+            <div class="address">
+                    <div class="icon"><img src="public_img/default/weizhi.png" alt=""></span></div>
+                    <div class="address_detail">
+                        <div >名字 电话</div>
+                        <div >收货地址： 广东省广州市海珠区</div>
+                    </div>
+                </div>
+            <!-- <a href="{:url('order/detail',['order_sn'=>$info.sn])}">
                 {volist name="info.goods_list" id="goods_info"}
                 <div class="order_item" data-id="{$goods_info.goods_id}"
                      data-brand_id="{$goods_info.brand_id}"  data-brand_name="{$goods_info.brand_name}"  >
@@ -14,9 +27,9 @@
                     </div>
                 </div>
                 {/volist}
-            </a>
-            <div class="order_bottom">
-                <p>共<span>{$info.goods_num}</span>件商品 <span class="red">￥<price>{$info.amount}</price></span></p>
+            </a> -->
+            <!-- <div class="order_bottom">
+                <p>共<span>{$info.goods_num}</span>件商品 <span class="red">￥<price>{$info.amount}</price></span></p> -->
 <!--                <p class="order_operate_btn">
                     {switch $info.order_status}
                         {case Think.config.custom.order_status.1.code} &lt;!&ndash;1:待付款&ndash;&gt;
@@ -40,7 +53,7 @@
                         {default /}
                     {/switch}
                 </p>-->
-            </div>
+            <!-- </div> -->
     </li>
 {/volist}
 {else /}
@@ -51,5 +64,40 @@
 {/if}
 {/notempty}
 <style scoped>
-
+    li.order{
+        padding: 0.2rem;
+    }
+    li.order p{
+        margin: 4px 0;
+    }
+    .order span{
+        margin-right: 10px;
+    }
+    .tips{
+        color: #ccc;
+    }
+    .line{
+        border-top: 1px solid #ccc;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .address{
+        display: flex;
+    }
+    .address .icon{
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+    }
+    .red, .pay{
+        color: red;
+    }
+    .address .address_detail{
+        flex: 7
+    }
+    .icon img{
+        width: 60%;
+    }
 </style>
