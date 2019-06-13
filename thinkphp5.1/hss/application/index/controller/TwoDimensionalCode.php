@@ -24,7 +24,9 @@ class TwoDimensionalCode extends \common\controller\UserBase {
         $info = $model->getInfo($config);
         $url = $info['two_dimensional_code_url'];
         if(empty($info)){
+            echo 11;exit;
             $result =  $model->compose($this->user);
+            print_r($result);exit;
             if($result['status']){
                 $url = $result['url'];
             }else{
