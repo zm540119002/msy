@@ -13,15 +13,16 @@
 	<section class="content-padding">
 		<div class="columns_flex l-r-sides">
 			<div>
-                <span>
-                    非黑森森加盟店
-                </span>
                 {if $user}
                    {if $identity.type == 1}
-                      会员
+                      加盟店
+                      {else /}
+                       非合作伙伴
                    {/if}
                    {else /}
-                111
+                        <span>
+                           未登陆
+                        </span>
                 {/if}
 
             </div>
