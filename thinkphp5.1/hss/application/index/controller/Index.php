@@ -83,7 +83,17 @@ class Index extends \common\controller\Base{
             $user = checkLogin();
             $this->assign('user',$user);
             if($user){
-
+                $identityMode =  new \app\index\model\Identity();
+                $config =[
+                    'where' => [
+                        ['status', '=', 0],
+                    ],'field'=>[
+                        'id ','type',
+                    ],
+                ];
+                $identity = $identityMode->getInfo($config);
+                p($identity);exit;
+                $this->assign('identity',$identity);
             }
             // 底部菜单，见配置文件custom.footer_menu
             $this->assign('currentPage',request()->controller().'/'.request()->action());
@@ -101,17 +111,7 @@ class Index extends \common\controller\Base{
             $user = checkLogin();
             $this->assign('user',$user);
             if($user){
-                $identityMode =  new \app\index\model\Identity();
-                $config =[
-                    'where' => [
-                        ['status', '=', 0],
-                    ],'field'=>[
-                        'id ','type',
-                    ],
-                ];
-                $identity = $identityMode->getInfo($config);
-                p($identity);exit;
-                $this->assign('identity',$identity);
+
             }
             // 底部菜单，见配置文件custom.footer_menu
             $this->assign('currentPage',request()->controller().'/'.request()->action());
