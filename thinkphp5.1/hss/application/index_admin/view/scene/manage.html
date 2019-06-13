@@ -77,15 +77,36 @@
 		});
 		// 去设置场景下的项目
 		$('body').on('click','.relationProject',function(){
-			var _thisTr = $(this).parents('tr');
-			var url =  controller + 'manageSceneGoodsCategory/id/' + _thisTr.data('id');
+			var url =  module + 'Project/manage';
 			location.href = url;
 		});
 		// 去设置场景下的分类
 		$('body').on('click','.relationSort',function(){
-			var _thisTr = $(this).parents('tr');
-			var url =  controller + 'manageSceneGoodsCategory/id/' + _thisTr.data('id');
-			location.href = url;
+			var url =  module + 'Sort/manage';
+
+/*			layer.open({
+				type: 2,
+				//title: config.title,
+				content: url
+			});*/
+
+			var index = layer.open({
+				type: 2,
+				title: '项目品类管理',
+				content: url
+			});
+			layer.full(index);
+
+/*			layer.open({
+				type: 2,
+				title: false,
+				closeBtn: 0,
+				shadeClose: true,
+				content: url
+			});*/
+			//layer.full(index);
+
+			//location.href = url;
 		});
 
 	});
