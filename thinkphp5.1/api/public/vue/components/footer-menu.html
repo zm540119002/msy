@@ -224,8 +224,10 @@
                     }
                 },checkAll:function(){
                     //ios需要取反
+                    alert(browser.versions.mobile);
+                    alert(browser.versions.android);
                     alert(browser.versions.ios);
-                    if(browser.versions.ios){
+                    if(browser.versions.mobile || browser.versions.android || browser.versions.ios){
                         this.checked = !this.checked;
                     }
                     alert(this.checked);
