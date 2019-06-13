@@ -96,7 +96,7 @@ class TwoDimensionalCode extends \common\model\Base {
         imagefill($im, 0, 0, $gray_color);
         imagettftext($im, 25, 0, 200, 90, $text_color, $init['font'], $init['name']); //名字
         imagecopyresized($im, $avatar['obj'], 60, 50, 0, 0, 100, 100, $avatar['width'], $avatar['height'] );  //
-        imagecopyresized($im, $hss_1['obj'], 200, 110, 0, 0, 744, 66, $hss_1['width'],$hss_1['height'] );  //平台logo
+        imagecopyresized($im, $hss_1['obj'], 180, 110, 0, 0, 744, 66, $hss_1['width'],$hss_1['height'] );  //平台logo
         imagecopyresized($im, $hss_2['obj'], 0, 200, 0, 0, 942, 944, $hss_2['width'],$hss_2['height'] );  //平台logo
         imagecopyresized($im, $hss_3['obj'], 0, 1150, 0, 0, 563, 309, $hss_3['width'],$hss_3['height'] );  //平台logo
         imagecopyresized($im, $qrcode['obj'], 600, 1200, 0, 0, 200, 200, $qrcode['width'], $qrcode['width'] );  //二维
