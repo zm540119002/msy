@@ -114,11 +114,13 @@ class Index extends \common\controller\Base{
                 $identityMode =  new \app\index\model\Identity();
                 $config =[
                     'where' => [
-                        ['status', '=', 0],
-                        ['user_id', '=', $user['id']],
+                        ['i.status', '=', 0],
+                        ['i.user_id', '=', $user['id']],
                     ],'field'=>[
-                        'id ','type',
-                    ],
+                        'i.id ','i.type',''
+                    ],'join'=>[
+                        ['goods g','g.id = od.goods_id','left'],
+                    ]
                 ];
                 $identity = $identityMode->getInfo($config);
                 $this->assign('identity',$identity);
