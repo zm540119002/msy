@@ -3,54 +3,18 @@
 {block name="content"}
 <article class="f24">
 	<!-- 项目信息 -->
-	<div id="menu" class="menu">
+	<!--<div id="menu" class="menu">
 		<a href="javascript:void(0);" class="back_prev_page" data-jump_url=""></a>
 		<ul class="columns_flex detail-nav">
 			<li data-item="item1" class="current"><a href="javascript:;" class="">项目产品</a></li>
 			<li data-item="item2"><a href="javascript:;" class="">项目详情</a></li>
 			<li data-item="item3"><a href="javascript:;" class="">项目操作</a></li>
 		</ul>
-	</div>
+	</div>-->
 	<!-- 项目产品 -->
 	<section class="project_item">
 		{include file="template/scene_detail.html" /}
-		<!-- 内容 -->
-		<section class="content-padding content_main wy_list">
-			<!--采购方案列表-->
-			{notempty name="promotionList"}
-			{volist name="promotionList" id="vo"}
-			<a href="{:url('Promotion/detail',['id'=>$vo.id])}" data-id="{$vo.id}" class="">
-				<div class="applay_p_item columns_flex l-r-sides">
-					<!--			<div>
-                                    <div class="red">¥<price>{$vo.price}</price></div>
-                                    <p>{$vo.name}</p>
-                                    <p class="once-enter">立即进入></p>
-                                </div>
-                                <div class="group_btn50">
-                                    <img class="common_default_img" src="" alt="{$vo.name}">
-                                </div>-->
-					<img class="common_default_img" src="{:show_img_handle($vo.thumb_img)}" alt="{$vo.name}">
-				</div>
-			</a>
-			{/volist}
-			{/notempty}
-			<!--产品列表-->
-			<ul class="goods_list list" id="product-list">
-				<product-select
-						v-for="(productInfo,index) in productList"
-						:key="index"
-						:init_product_id="productInfo.id"
-						:init_deal_price="parseFloat(productInfo.franchise_price)"
-						:init_compare_price="Number(productInfo.retail_price)"
-						:init_product_name="productInfo.headline"
-						:init_product_src="productInfo.thumb_img"
-						:init_quantity="parseInt(init_quantity)"
-						:step_quantity="parseInt(step_quantity)"
-						:init_specification="productInfo.specification"
-						:type="type"
-				></product-select>
-			</ul>
-		</section>
+		
 	</section>
 	<!-- 项目详情 -->
 	<section class="project_item hide">
@@ -86,12 +50,7 @@
 						{/volist}
 					</div>
 					
-<!--					<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
-						<span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span>
-						<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 2"></span>
-						<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 3"></span>
-						<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 4"></span>
-					</div>-->
+
 				</div>
 			</section>
 		</div>
@@ -117,6 +76,90 @@
 			<p class="remarks"></p>
 		</div>
 	</section>
+	<div class="scrollwrapper">
+		<div id="menu">
+			<ul class="columns_flex detail-nav">
+				<li data-item="item1" ><a href="javascript:;" class="">项目产品</a></li>
+				<li data-item="item2" ><a href="javascript:;" class="">项目详情</a></li>
+				<li data-item="item3" ><a href="javascript:;" class="">项目操作</a></li>
+			</ul>
+		</div>
+		<div id="content" class="floor-content">
+			<div id="item1" class="floor">
+				<div class="floor_item">
+					<!-- 内容 -->
+					<section class="content-padding content_main wy_list">
+						<!--采购方案列表-->
+						{notempty name="promotionList"}
+						{volist name="promotionList" id="vo"}
+						<a href="{:url('Promotion/detail',['id'=>$vo.id])}" data-id="{$vo.id}" class="">
+							<div class="applay_p_item columns_flex l-r-sides">
+								<!--			<div>
+												<div class="red">¥<price>{$vo.price}</price></div>
+												<p>{$vo.name}</p>
+												<p class="once-enter">立即进入></p>
+											</div>
+											<div class="group_btn50">
+												<img class="common_default_img" src="" alt="{$vo.name}">
+											</div>-->
+								<img class="common_default_img" src="{:show_img_handle($vo.thumb_img)}" alt="{$vo.name}">
+							</div>
+						</a>
+						{/volist}
+						{/notempty}
+						<!--产品列表-->
+						<ul class="goods_list list" id="product-list">
+							<product-select
+									v-for="(productInfo,index) in productList"
+									:key="index"
+									:init_product_id="productInfo.id"
+									:init_deal_price="parseFloat(productInfo.franchise_price)"
+									:init_compare_price="Number(productInfo.retail_price)"
+									:init_product_name="productInfo.headline"
+									:init_product_src="productInfo.thumb_img"
+									:init_quantity="parseInt(init_quantity)"
+									:step_quantity="parseInt(step_quantity)"
+									:init_specification="productInfo.specification"
+									:type="type"
+							></product-select>
+						</ul>
+					</section>
+				</div>
+			</div>
+			<div id="item2" class="floor">
+				<div class="floor_item">
+					<p class="content-label">商品详情</p>
+					{volist name="info.detail_img" id="detail_img"}
+					<div class="">
+						<img src="{:show_img_handle($detail_img)}" alt="" class="common_default_img">
+					</div>
+					{/volist}
+				</div>
+			</div>
+			<div id="item3" class="floor">
+				<div class="floor_item" >
+					<p>评分评价</p>
+					<div class="goods_star_score"  >
+						<div class="five_star">
+							<div class="star_img">
+								<img src="public_img/starred.png" id="0">
+								<img src="public_img/starred.png" id="1">
+								<img src="public_img/starred.png" id="2">
+								<img src="public_img/star.png" id="3">
+								<img src="public_img/star.png" id="4">
+							</div>
+							<span class="fraction" data-score="3.9">{$averageScore}分</span>
+						</div>
+						<a href="javascript:void(0);" class="comment_num">{$total}人评论</a>
+					</div>
+					<ul class="sales_comment_wrapper" id="commentList">
+
+					</ul>
+					<div class="page"><a class="comment-next-page" href="javascript:void(0);" data-page="{$nextPage}">加载更多评论&nbsp;V</a></div>
+				</div>
+			</div>
+		</div>
+	</div>
 </article>
 {/block}
 {block name="common"}
