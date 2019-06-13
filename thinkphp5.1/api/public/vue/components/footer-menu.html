@@ -225,8 +225,8 @@
                 },checkAll:function(){
                     this.checked = !this.checked;
                     //ios需要取反
-                    alert(browser.versions.ios)
                     if(browser.versions.ios){
+                        alert(browser.versions.ios);
                         this.checked = !this.checked;
                     }
                     alert(this.checked);
