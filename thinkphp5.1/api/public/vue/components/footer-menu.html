@@ -225,7 +225,7 @@
                 },checkAll:function(){
                     this.checked = !this.checked;
                     //ios取反
-                    if(browser.versions.ios){
+                    if(browser.versions.ios && !browser.versions.weixin){
                         this.checked = !this.checked;
                     }
                     alert(this.checked);
