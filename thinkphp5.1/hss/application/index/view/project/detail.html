@@ -271,26 +271,7 @@
 				el: '.swiper-pagination'
 			}
 		});
-		// 项目信息切换
-		// $('.detail-nav li').on('click',function(){
-		// 	$(this).addClass('current').siblings().removeClass('current');
-		// 	$('.project_item').hide().eq($(this).index()).show();
-		// 	if($(this).index()==2){
-		// 		//项目流程轮播
-		// 		var swiper = new Swiper('.master-swiper-process', {
-		// 			//slidesPerView :2,
-		// 			slidesPerView:"auto",
-		// 			autoplay:true,
-		// 			//slidesOffsetBefore : -50,
-		// 			//spaceBetween: 30,
-		// 			//direction: 'horizontal',
-		// 			pagination: {
-		// 				el: '.swiper-pagination',
-		// 				clickable: true
-		// 			}
-		// 		});
-		// 	}
-		// });
+		
 		var height=$('.detail-nav').height();
 		var offsetHeight=$('.detail-nav').offset().top;
 		$(window).on('scroll',function(){
@@ -341,6 +322,41 @@
 				// currentLink.removeClass('active');
 				menu.find("[data-item='"+ currentId +"']").addClass('active').siblings().removeClass('active');
                 //menu.find("[data-item='"+ currentId +"']").addClass('active');
+			}
+		});
+		// 项目信息切换
+		$('#menu li').on('click',function(){
+			// $(this).addClass('current').siblings().removeClass('current');
+			// $('.project_item').hide().eq($(this).index()).show();
+			var id=_this.data('item');
+			items.each(function(){
+				var m = $(this);
+				if(m.attr('id')==id){
+				    var itemTop = m.offset().top;
+					_this.addClass('active').siblings().removeClass('active');
+                    var scrollY=itemTop-40;
+					$('html, body').animate({
+						scrollTop: scrollY
+					},500);
+
+				}else{
+					m.removeClass('active');
+				}
+			});
+			if($(this).index()==2){
+				//项目流程轮播
+				var swiper = new Swiper('.master-swiper-process', {
+					//slidesPerView :2,
+					slidesPerView:"auto",
+					autoplay:true,
+					//slidesOffsetBefore : -50,
+					//spaceBetween: 30,
+					//direction: 'horizontal',
+					pagination: {
+						el: '.swiper-pagination',
+						clickable: true
+					}
+				});
 			}
 		});
 	})
