@@ -65,13 +65,28 @@ class TwoDimensionalCode extends \common\controller\UserBase {
         if(!$url){
             $url = request()->domain();
         }
-        $newRelativePath= config('upload_dir.url_QRCode');
-        $shareQRCodes   = createLogoQRcode($url,$newRelativePath);
 
-        if( !isset($shareQRCodes['status']) ){
-            $shareQRCodes = '/'.config('upload_dir.upload_path').'/'.$shareQRCodes;
+        $upload_path  = config('upload_dir.upload_path');
+        $file_path    = config('upload_dir.url_QRCode');
+        $file_name    = $upload_path.'/'.$file_path.md5($url).'.png';
+        //$file_name    = $upload_path.'/'.$file_path.md5($url);
 
-            return successMsg('成功',['img'=>$shareQRCodes]);
+        if(is_file($file_name)){
+            //return $file_name;
+            return successMsg('成功',['img'=>'/'.$file_name]);
+
+        }else{
+            $shareQRCodes = createLogoQRcode($url,$file_path);
+
+            if( !isset($shareQRCodes['status']) ){
+                $old_name     = $upload_path.'/'.$shareQRCodes;
+                //$file_name    = $file_name.'.'.pathinfo($shareQRCodes)['extension'];
+                $res = rename($old_name,$file_name);
+                if(!$res){
+                    $file_name = $old_name;
+                }
+                return successMsg('成功',['img'=>'/'.$file_name]);
+            }
         }
 
         return errorMsg('分享失败');

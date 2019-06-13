@@ -43,8 +43,7 @@
 								{/volist}
 							</div>
 							<div class="tags_item_r">
-								<a class="collection" href="javascript:;"><span class="icon"></span><span class="text">收藏</span></a>
-								<a class="share" href="javascript:;"><span class="icon"></span>分享</a>
+								<a class="url_share" href="javascript:;"><span class="icon"></span>分享</a>
 							</div>
 						</div>
 					</div>
@@ -70,6 +69,7 @@
 {/block}
 {block name="script"}
 <script type="text/javascript" src="api_common_js/swiper.min.js"></script>
+<script type="text/javascript" src="index_js/common.js"></script>
 <script type="text/javascript">
 	// 获取项目列表
 	var config = {
@@ -109,15 +109,16 @@
 </script>
 <style scoped>
 	.back{
-			width: 30px;
-			height: 30px;
-			background: rgba(0, 0, 0, 0.4);
-			z-index: 99;
-			color: #fff;
-			border-radius: 50%;
-			margin: 6px 0 0 8px;
-			text-align: center;
-			line-height: 30px;
+		position:fixed;
+		width: 30px;
+		height: 30px;
+		background: rgba(0, 0, 0, 0.4);
+		z-index: 99;
+		color: #fff;
+		border-radius: 50%;
+		margin: 6px 0 0 8px;
+		text-align: center;
+		line-height: 30px;
 		}
 </style>
 {/block}

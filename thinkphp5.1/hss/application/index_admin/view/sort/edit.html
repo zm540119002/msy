@@ -205,9 +205,9 @@
                 dialog.error(content);
                 return false;
             }
-            if(recommendIds){
+/*            if(recommendIds){
                 postData.recommendIds = recommendIds;
-            }
+            }*/
 
             var url = module +'Sort/edit';
             $.post(url,postData,function(msg){
@@ -224,7 +224,7 @@
         });
 
         // 默认值 如果选择就覆盖 暂时不用
-        var recommendIds="{$info['recommend_goods']}";
+/*        var recommendIds="{$info['recommend_goods']}";
         $("body").on('click','.recommend',function(){
 
             var id = "{$info['id']}";
@@ -255,7 +255,7 @@
                 }
             });
 
-        });
+        });*/
 
         //返回
         $('.button_save_black').click(function(){

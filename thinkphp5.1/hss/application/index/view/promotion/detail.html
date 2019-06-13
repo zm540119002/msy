@@ -54,8 +54,7 @@
 								{/notempty}
 							</div>
 							<div class="tags_item_r">
-								<a class="collection" href="javascript:;"><span class="icon"></span><span class="text"></span>收藏</a>
-								<a class="share" href="javascript:;"><span class="icon"></span>分享</a>
+								<a class="url_share" href="javascript:;"><span class="icon"></span>分享</a>
 							</div>
 						</div>
 						<div class="project_details">
@@ -177,6 +176,7 @@
 {/block}
 {block name="script"}
 <script type="text/javascript" src="api_common_js/swiper.min.js"></script>
+<script type="text/javascript" src="index_js/common.js"></script>
 <script type="text/javascript">
 	//初始化分类商品页面
 	/*	$('.nav_menu li:eq(0)').addClass('current');
@@ -283,6 +283,7 @@
 			float: right;
 		}
 		.back{
+			position:fixed;
 			width: 30px;
 			height: 30px;
 			background: rgba(0, 0, 0, 0.4);
