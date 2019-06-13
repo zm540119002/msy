@@ -92,7 +92,6 @@ class Index extends \common\controller\Base{
                     ],
                 ];
                 $identity = $identityMode->getInfo($config);
-                p($identity);exit;
                 $this->assign('identity',$identity);
             }
             // 底部菜单，见配置文件custom.footer_menu
