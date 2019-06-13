@@ -224,12 +224,12 @@
                     }
                 },checkAll:function(){
                     let afterClickChecked = this.checked;
-                    alert(afterClickChecked);
-                    //ios需要取反
-                    if(browser.versions.ios){
-                        afterClickChecked = !afterClickChecked;
-                    }
-                    alert(afterClickChecked);
+//                    alert(afterClickChecked);
+//                    //ios需要取反
+//                    if(browser.versions.ios){
+//                        afterClickChecked = !afterClickChecked;
+//                    }
+//                    alert(afterClickChecked);
                     for(let i = 0,len = this.checkItemList.length; i < len; i++){
                         this.checkItemList[i].checked = afterClickChecked;
                     }
