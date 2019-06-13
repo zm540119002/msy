@@ -137,14 +137,8 @@ function edit(config){
     var index = layer.open({
         type: 2,
         title: config.title,
-        content: config.url
-/*        success:function(){
-            console.log(222222);
-        }*/
+        content: config.url,
     });
     layer.full(index);
-
-    //var config = {url: controller + 'getList'};
-
 }
 
