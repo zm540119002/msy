@@ -223,9 +223,10 @@
                         }
                     }
                 },checkAll:function(){
-                    alert(this.checked);
-                    return false;
-                    this.checked = !this.checked;
+                    //判断是否ios ，非ios需要取反
+                    if(!browser.versions.ios){
+                        this.checked = !this.checked;
+                    }
                     for(let i = 0,len = this.checkItemList.length; i < len; i++){
                         this.checkItemList[i].checked = this.checked;
                     }
