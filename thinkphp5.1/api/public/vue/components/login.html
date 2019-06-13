@@ -293,7 +293,8 @@
             };
             asyncVerify(config);
         });
-        $('body').on('click','.async_login2',function(){
+        //获取平台二维码
+        $('body').on('click','.platform-two-dimensional-code',function(){
             let _this = $(this);
             let config = {
                 clickObj:_this

@@ -6,7 +6,7 @@
                 {{menu.name}}
                 <!-- 全选 -->
                 <div v-if="menu.class.indexOf('checked_all')!==-1" class="checked_all">
-                    <input type="checkbox" class="check_all" v-model="checked" :value="all" @click="checkAll" id="check_all" />
+                    <input type="checkbox" class="check_all" v-model="checked" @click="checkAll" id="check_all" />
                     <label for="check_all">全选</label>
                 </div>
                 <!-- 总金额 -->
@@ -223,9 +223,12 @@
                         }
                     }
                 },checkAll:function(){
+//                    alert(browser.versions.weixin);
+                    //非ios需要取反
+                    if(!browser.versions.ios || (browser.versions.ios && !browser.versions.weixin)){
+                        this.checked = !this.checked;
+                    }
                     alert(this.checked);
-                    return false;
-                    this.checked = !this.checked;
                     for(let i = 0,len = this.checkItemList.length; i < len; i++){
                         this.checkItemList[i].checked = this.checked;
                     }
@@ -249,10 +252,12 @@
                     }
                     let address = getAddress();
                     _thisVue.postData.address = JSON.stringify(address);
-                    if( !_thisVue.postData.address ){
+
+                    if( _thisVue.postData.address=='false' ){
                         dialog.error('请选择收货地址 ！');
                         return false;
                     }
+
                     let config = {
                         clickObj:_thisJquery,
                         postData:_thisVue.postData,
@@ -310,13 +315,11 @@
     }
     .group_cart_nav a:nth-of-type(1){
         text-align: left;
-        width: 30%;
     }
     .group_cart_nav a:nth-of-type(1) span{
         margin-left: 4px;
     }
     .group_cart_nav a:nth-of-type(2){
-        width: 20%;
         color: #fff;
     }
     .group_cart_nav a:nth-of-type(1) .check_all{
