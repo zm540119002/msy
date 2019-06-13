@@ -64,10 +64,10 @@ class Index extends \common\controller\Base{
         $this->assign('currentPage',request()->controller().'/'.request()->action());
 
         $unlockingFooterCart = unlockingFooterCartConfigTest([0,2,1,3]);
-        array_push($unlockingFooterCart2['menu'][0]['class'],'group_btn30');
-        array_push($unlockingFooterCart2['menu'][1]['class'],'group_btn20');
-        array_push($unlockingFooterCart2['menu'][2]['class'],'group_btn25');
-        array_push($unlockingFooterCart2['menu'][3]['class'],'group_btn25');
+        array_push($unlockingFooterCart['menu'][0]['class'],'group_btn30');
+        array_push($unlockingFooterCart['menu'][1]['class'],'group_btn20');
+        array_push($unlockingFooterCart['menu'][2]['class'],'group_btn25');
+        array_push($unlockingFooterCart['menu'][3]['class'],'group_btn25');
         $this->assign('unlockingFooterCart',json_encode($unlockingFooterCart));
         Cart::getCartTotalNum();
         return $this->fetch();
