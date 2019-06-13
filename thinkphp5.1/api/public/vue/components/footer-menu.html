@@ -6,12 +6,12 @@
                 {{menu.name}}
                 <!-- 全选 -->
                 <div v-if="menu.class.indexOf('checked_all')!==-1" class="checked_all">
-                    <input type="checkbox" class="check_all" v-model="checked" @click="checkAll" id="check_all" />
+                    <input type="checkbox" class="check_all" v-model="checked" :value="all" @click="checkAll" id="check_all" />
                     <label for="check_all">全选</label>
                 </div>
                 <!-- 总金额 -->
                 <div v-else-if="menu.class.indexOf('amount')!==-1" class="amount">
-                    <span class="total_amount">￥{{ parseFloat(total_amount).toFixed(2) }}</span>
+                    <span class="total_amount"><span>￥</span>{{ parseFloat(total_amount).toFixed(2) }}</span>
                 </div>
                 <!-- 购物篮 -->
                 <div v-else-if="menu.class.indexOf('add_cart_icon')!==-1" class="add_cart_icon" @click="jump_url" :data-jump_url="menu.action">
@@ -61,7 +61,7 @@
                 init_product_type: {type: Number,default: 1},
                 init_cart_num: {type: Number,default: 0},
                 init_total_amount: {type: Number,default: 0},
-                init_checked: {type: Boolean,default: false},
+                init_checked: {type: Boolean,default: true},
                 init_menus: {
                     type: Object,
                     default: function () {
@@ -223,6 +223,8 @@
                         }
                     }
                 },checkAll:function(){
+                    alert(this.checked);
+                    return false;
                     this.checked = !this.checked;
                     for(let i = 0,len = this.checkItemList.length; i < len; i++){
                         this.checkItemList[i].checked = this.checked;
@@ -302,38 +304,52 @@
     .group_btn30{width:33.3%;box-sizing: border-box;}
     .group_btn50{width:50%;}
     .group_btn100{width:100%;}
-
-  .checked_all{
-      color: red;
-      cursor:pointer;
-  }
-  .group_cart_nav a:nth-of-type(1){
-    text-align: left;
-  }
-  .group_cart_nav a:nth-of-type(2){
-      width: 50%;
-      /*background: #009fe9;*/
-      color: #fff;
-  }
-  .group_cart_nav a:nth-of-type(1) .check_all{
+    .checked_all{
+        color: red;
+        cursor:pointer;
+    }
+    .group_cart_nav a:nth-of-type(1){
+        text-align: left;
+        width: 30%;
+    }
+    .group_cart_nav a:nth-of-type(1) span{
+        margin-left: 4px;
+    }
+    .group_cart_nav a:nth-of-type(2){
+        width: 20%;
+        color: #fff;
+    }
+    .group_cart_nav a:nth-of-type(1) .check_all{
       margin-left: 10px;
-      
-  }
-  .group_cart_nav a:nth-of-type(3),
-  .group_cart_nav a.confirm_order{
-      background: #009fe9;
-      color: #fff;
-  }
-  .group_cart_nav a:nth-of-type(4){
-      background:red;
-      color: #fff;
-  }
-  .add_cart_icon span{
-      left: 68px;
-  }
- .group_cart_nav a.confirm_receive{
-     text-align: center;
-     color: #fff;
-     background: #009fe9;
- }
+      font-size: 0.2rem
+
+    }
+    .group_cart_nav a:nth-of-type(3),
+    .group_cart_nav a.confirm_order{
+        background: #009fe9;
+        color: #fff;
+    }
+    .group_cart_nav a:nth-of-type(4){
+        background:red;
+        color: #fff;
+    }
+    .add_cart_icon span{
+        left: 40px;
+        font-size: 0.2rem;
+        top: -12px;
+    }
+    .group_cart_nav a.confirm_receive{
+        text-align: center;
+        color: #fff;
+        background: #009fe9;
+    }
+    .add_num.current{
+        -webkit-animation:none;
+    }
+    .total_amount{
+        font-size: 0.4rem;
+    }
+    .total_amount span{
+        font-size: 0.2rem;
+    }
 </style>
