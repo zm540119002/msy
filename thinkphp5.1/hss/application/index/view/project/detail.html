@@ -188,11 +188,17 @@
 		var swiper = new Swiper('.master-swiper', {
 			//spaceBetween: 30,
 			direction: 'horizontal',
+			paginationClickable: true,
+			//……
+			//observer:true,//修改swiper自己或子元素时，自动初始化swiper
+			observeParents:true,//修改swiper的父元素时，自动初始化swiper
 			pagination: {
 				el: '.swiper-pagination',
 				clickable: true
 			}
 		});
+
+
 		// 项目信息切换
 		$('.detail-nav li').on('click',function(){
 			$(this).addClass('current').siblings().removeClass('current');
@@ -200,7 +206,7 @@
 			if($(this).index()==2){
 				//项目流程轮播
 				var swiper = new Swiper('.swiper-container', {
-					slidesPerView :2,
+					slidesPerView :2
 					// slidesPerView:"auto",
 					// autoplay:true,
 					// slidesOffsetBefore : -50,

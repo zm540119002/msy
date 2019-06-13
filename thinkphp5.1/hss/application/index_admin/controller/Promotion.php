@@ -32,7 +32,7 @@ class Promotion extends Base {
             if($id = input('param.id/d')){
                 $condition = [
                     'field' => [
-                        'id','name','shelf_status','sort','thumb_img','main_img','intro','tag','title','background_img','price','remarks'
+                        'id','name','shelf_status','sort','thumb_img','main_img','intro','tag','title','background_img','retail_price','franchise_price','agent_price','remarks'
                     ], 'where' => [
                         ['id','=',$id]
                     ],
@@ -202,7 +202,7 @@ class Promotion extends Base {
 
         $config = [
             'where'=>$where,
-            'field'=>['id','name','thumb_img','main_img','intro','shelf_status','sort','create_time','price'],
+            'field'=>['id','name','thumb_img','main_img','intro','shelf_status','sort','create_time','retail_price','franchise_price'],
             'order'=>['id'=>'asc',],
         ];
 
