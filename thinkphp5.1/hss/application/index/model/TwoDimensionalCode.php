@@ -90,16 +90,16 @@ class TwoDimensionalCode extends \common\model\Base {
         if( !$avatar || !$hss_1 || !$qrcode || !$hss_2 || !$hss_3){
             return errorMsg('提供的图片问题');
         }
-        $im = imagecreatetruecolor(942, 1800);  //图片大小
+        $im = imagecreatetruecolor(942, 1475);  //图片大小
         $gray_color = imagecolorallocate($im, 87,89,88);
-        $text_color = imagecolorallocate($im, 235, 96, 3);
+        $text_color = imagecolorallocate($im, 255, 255, 255);
         imagefill($im, 0, 0, $gray_color);
         imagettftext($im, 25, 0, 200, 90, $text_color, $init['font'], $init['name']); //名字
         imagecopyresized($im, $avatar['obj'], 60, 50, 0, 0, 100, 100, $avatar['width'], $avatar['height'] );  //
-        imagecopyresized($im, $hss_1['obj'], 200, 110, 0, 0, 744, 66, 744,66);  //平台logo
+        imagecopyresized($im, $hss_1['obj'], 180, 110, 0, 0, 744, 66, $hss_1['width'],$hss_1['height'] );  //平台logo
         imagecopyresized($im, $hss_2['obj'], 0, 200, 0, 0, 942, 944, $hss_2['width'],$hss_2['height'] );  //平台logo
-//        imagecopyresized($im, $hss_3['obj'], 0, 1500, 0, 0, 563, 309, 563,306);  //平台logo
-//        imagecopyresized($im, $qrcode['obj'], 550, 1500, 0, 0, 200, 200, $qrcode['width'], $qrcode['width'] );  //二维
+        imagecopyresized($im, $hss_3['obj'], 0, 1150, 0, 0, 563, 309, $hss_3['width'],$hss_3['height'] );  //平台logo
+        imagecopyresized($im, $qrcode['obj'], 600, 1200, 0, 0, 200, 200, $qrcode['width'], $qrcode['width'] );  //二维
         $dir = config('upload_dir.upload_path').'/'.$init['save_path'];
         if(!is_dir($dir)){
             mkdir($dir, 0777, true);
