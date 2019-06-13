@@ -227,7 +227,7 @@
                     //以下情况需再次取反
                     if(
                         (browser.versions.ios && browser.versions.weixin)
-                        || (!browser.versions.ios && browser.versions.webApp)
+                        || (browser.versions.webApp)
                     ){
                         this.checked = !this.checked;
                     }
