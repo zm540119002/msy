@@ -98,7 +98,7 @@ class TwoDimensionalCode extends \common\model\Base {
         imagecopyresized($im, $avatar['obj'], 60, 50, 0, 0, 100, 100, $avatar['width'], $avatar['height'] );  //
         imagecopyresized($im, $hss_1['obj'], 200, 110, 0, 0, 744, 66, 744,66);  //平台logo
         imagecopyresized($im, $hss_2['obj'], 0, 200, 0, 0, 942, 944, 942,944 );  //平台logo
-        imagecopyresized($im, $hss_3['obj'], 25, 1230, 0, 0, 563, 309, 563,306);  //平台logo
+        imagecopyresized($im, $hss_3['obj'], 0, 1000, 0, 0, 563, 309, 563,306);  //平台logo
         imagecopyresized($im, $qrcode['obj'], 550, 1230, 0, 0, 200, 200, $qrcode['width'], $qrcode['width'] );  //二维
         $dir = config('upload_dir.upload_path').'/'.$init['save_path'];
         if(!is_dir($dir)){
