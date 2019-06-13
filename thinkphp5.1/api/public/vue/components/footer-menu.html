@@ -223,11 +223,11 @@
                         }
                     }
                 },checkAll:function(){
-                    //ios需要取反
                     alert(this.checked);
-                    if(browser.versions.ios){
+                    //非ios需要取反
+                    if(!browser.versions.ios){
                         alert(this.checked);
-                        this.checked = this.checked;
+                        this.checked = !this.checked;
                         alert(this.checked);
                     }
                     alert(this.checked);
