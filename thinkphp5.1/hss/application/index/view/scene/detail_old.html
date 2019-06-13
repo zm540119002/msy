@@ -1,8 +1,18 @@
 {extend name="template/base.html" /}
-{block name="title"}{$info.name}{/block}
+{block name="title"}{$Think.config.custom.tag_category[$info.tag_category]}{/block}
 {block name="content"}
 <article class="f24">
-	<div class="back"><</div>
+	<!-- 标题导航 -->
+	<nav style="position:relative;">
+		<a href="javascript:void(0);" class="back_prev_page" data-jump_url="{:url('Index/index')}"><</a>
+		<ul class="nav_menu">
+			{volist name="sceneList" id="vo"}
+				<li data-scene-id="{$vo.id}" class="{if $vo.id==$info.id}current{/if}">
+					<a href="{:url(request()->controller().'/'.$vo.display_type,['id'=>$vo.id])}" class="category_nav">{$vo.name}</a>
+				</li>
+			{/volist}
+		</ul>
+	</nav>
 	{include file="template/scene_detail.html" /}
 	<!-- 内容 -->
 	<section class="content-padding content_main wy_list">
@@ -200,10 +210,6 @@
 				clickable: true
 			}
 		});
-		// 点击返回上一页
-		$('.back').on("click",function(){
-			history.back(-1)
-		})
 	});
 </script>
 <style scoped>
@@ -226,17 +232,5 @@
 	.product-select div.right {
 		width: 60%;
 	}
-	.back{
-		position:fixed;
-		width: 30px;
-		height: 30px;
-		background: rgba(0, 0, 0, 0.4);
-		z-index: 99;
-		color: #fff;
-		border-radius: 50%;
-		margin: 6px 0 0 8px;
-		text-align: center;
-		line-height: 30px;
-	}
-</style>
+	</style>
 {/block}
