@@ -325,11 +325,16 @@
                 _this.removeClass("nodisabled");//防止重复提交
                 dialog.msg(data,'',function () {
 
-                    window.parent.location.reload();
+                    //window.parent.location.reload();
 
+                    //getPagingList(config, getData);
                     // 提交后关闭 保持要搜索的参数
                     var index = parent.layer.getFrameIndex(window.name);   //先得到当前iframe层的索引
+
+                    //console.log(getData);
+                    //return false;
                     parent.layer.close(index);
+
 
                 });
             });
