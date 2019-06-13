@@ -23,54 +23,7 @@
 	<!-- 项目操作 -->
 	<section class="project_item hide">
 
-		{notempty name="$info.video"}
-		<div class="content-padding">
-			<video width="" height="" controls src="{:show_img_handle($info.video)}"></video>
-		</div>
-		{/notempty}
-		<div class="content-padding description">
-
-		</div>
-
-		{notempty name="$info.process"}
-		<div class="content-padding">
-			<p class="content-label">项目流程</p>
-			<section class="slider_banner">
-				<div class="swiper-container master-swiper-process swiper-container-horizontal swiper-container-ios">
-					<div class="swiper-wrapper" >
-						{volist name="$info.process" id="vo"}
-						<div class="swiper-slide details swiper-slide-active" style="text-align: left;margin-right: 10px;">
-							<img src="{:show_img_handle($vo.img)}" alt="" class="common_default_img">
-							<span style="font-size: 13px;margin-top:10px;">{$vo.desc}</span>
-						</div>
-						{/volist}
-					</div>
-					
-
-				</div>
-			</section>
-		</div>
-		{/notempty}
-
-		{notempty name="$info.recommend_goods"}
-		<div class="content-padding content_main ">
-			<p class="content-label">推荐搭配居家产品</p>
-			<ul class="columns_flex flex-both-side goods-content-list">
-				{volist name="$info.recommend_goods" id="vo"}
-				<li>
-					<a href="{:url('Index/Goods/detail',['id'=>$vo.id])}">
-						<img src="{:show_img_handle($vo.thumb_img)}" alt="{$vo.name}">
-					</a>
-					<p>{$vo.name}</p>
-					<p>规格：{$vo.specification}</p>
-				</li>
-				{/volist}
-			</ul>
-		</div>
-		{/notempty}
-		<div class="content-padding">
-			<p class="remarks"></p>
-		</div>
+		
 	</section>
 	<div class="scrollwrapper">
 		<div id="menu">
@@ -134,24 +87,55 @@
 			</div>
 			<div id="item3" class="floor">
 				<div class="floor_item" >
-					<p>评分评价</p>
-					<div class="goods_star_score"  >
-						<div class="five_star">
-							<div class="star_img">
-								<img src="public_img/starred.png" id="0">
-								<img src="public_img/starred.png" id="1">
-								<img src="public_img/starred.png" id="2">
-								<img src="public_img/star.png" id="3">
-								<img src="public_img/star.png" id="4">
-							</div>
-							<span class="fraction" data-score="3.9">{$averageScore}分</span>
-						</div>
-						<a href="javascript:void(0);" class="comment_num">{$total}人评论</a>
+					<p>项目操作</p>
+					{notempty name="$info.video"}
+					<div class="content-padding">
+						<video width="" height="" controls src="{:show_img_handle($info.video)}"></video>
 					</div>
-					<ul class="sales_comment_wrapper" id="commentList">
+					{/notempty}
+					<div class="content-padding description">
 
-					</ul>
-					<div class="page"><a class="comment-next-page" href="javascript:void(0);" data-page="{$nextPage}">加载更多评论&nbsp;V</a></div>
+					</div>
+
+					{notempty name="$info.process"}
+					<div class="content-padding">
+						<p class="content-label">项目流程</p>
+						<section class="slider_banner">
+							<div class="swiper-container master-swiper-process swiper-container-horizontal swiper-container-ios">
+								<div class="swiper-wrapper" >
+									{volist name="$info.process" id="vo"}
+									<div class="swiper-slide details swiper-slide-active" style="text-align: left;margin-right: 10px;">
+										<img src="{:show_img_handle($vo.img)}" alt="" class="common_default_img">
+										<span style="font-size: 13px;margin-top:10px;">{$vo.desc}</span>
+									</div>
+									{/volist}
+								</div>
+								
+
+							</div>
+						</section>
+					</div>
+					{/notempty}
+
+					{notempty name="$info.recommend_goods"}
+					<div class="content-padding content_main ">
+						<p class="content-label">推荐搭配居家产品</p>
+						<ul class="columns_flex flex-both-side goods-content-list">
+							{volist name="$info.recommend_goods" id="vo"}
+							<li>
+								<a href="{:url('Index/Goods/detail',['id'=>$vo.id])}">
+									<img src="{:show_img_handle($vo.thumb_img)}" alt="{$vo.name}">
+								</a>
+								<p>{$vo.name}</p>
+								<p>规格：{$vo.specification}</p>
+							</li>
+							{/volist}
+						</ul>
+					</div>
+					{/notempty}
+					<div class="content-padding">
+						<p class="remarks"></p>
+					</div>
 				</div>
 			</div>
 		</div>
