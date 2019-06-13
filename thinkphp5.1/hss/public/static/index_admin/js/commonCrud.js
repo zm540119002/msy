@@ -134,15 +134,15 @@ $('body').on('click','.set-shelf-status',function(){
 });
 
 function edit(config){
-    layer.open({
+    var index = layer.open({
         type: 2,
         title: config.title,
-        content: config.url,
+        content: config.url
 /*        success:function(){
             console.log(222222);
         }*/
     });
-    //layer.full(index);
+    layer.full(index);
 
     //var config = {url: controller + 'getList'};
 
