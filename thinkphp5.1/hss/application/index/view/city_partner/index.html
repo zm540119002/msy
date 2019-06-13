@@ -24,10 +24,13 @@
                 {/if}
             </div>
             <div>
-                <a href="javascript:void(0)" class="async_login gr"  data-jump_url="{:url('CityPartner/city')}">
-                    城市合伙人资格申请>
-                </a>
-                <!--<a href="{:url('Franchise/applyFranchise')}">加盟店资格申请 ></a>-->
+                {if $identity.type == 2}
+                     xxx城市合伙人
+                    {else /}
+                    <a href="javascript:void(0)" class="async_login gr"  data-jump_url="{:url('CityPartner/city')}">
+                        城市合伙人资格申请>
+                    </a>
+                {/if}
             </div>
 		</div>
         <ul class="franchise_ul">

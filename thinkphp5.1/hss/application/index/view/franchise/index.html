@@ -26,10 +26,13 @@
                 {/if}
             </div>
             <div>
+                {if $identity.type == 1}
+                 xxxx加盟店
+                {else /}
                 <a href="javascript:void(0)" class="gr async_login"  data-jump_url="{:url('Franchise/applyFranchise')}">
                     加盟店资格申请  >
                 </a>
-                <!--<a href="{:url('Franchise/applyFranchise')}">加盟店资格申请 ></a>-->
+                {/if}
             </div>
 		</div>
         <ul class="franchise_ul">
