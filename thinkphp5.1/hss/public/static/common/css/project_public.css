@@ -171,3 +171,6 @@ nav .back_prev_page{
 .detail-nav li.current a{
     color:#ff7aab;
 }
+.project-list .list li{
+    padding:0;
+}
