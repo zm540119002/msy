@@ -136,9 +136,9 @@ class Index extends \common\controller\Base{
         if(request()->isAjax()){
         }else{
             $unlockingFooterCart = unlockingFooterCartConfigTest([10,0,9]);
-            array_push($unlockingFooterCart['menu'][0]['class'],'group_btn30');
+            array_push($unlockingFooterCart['menu'][0]['class'],'group_btn20');
             array_push($unlockingFooterCart['menu'][1]['class'],'group_btn40');
-            array_push($unlockingFooterCart['menu'][2]['class'],'group_btn30');
+            array_push($unlockingFooterCart['menu'][2]['class'],'group_btn40');
             $this->assign('unlockingFooterCart',json_encode($unlockingFooterCart));
             $unlockingFooterCart2 = unlockingFooterCartConfigTest([0,2,1,3]);
             array_push($unlockingFooterCart2['menu'][0]['class'],'group_btn30');
