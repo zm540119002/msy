@@ -117,7 +117,7 @@ class Index extends \common\controller\Base{
                         ['i.status', '=', 0],
                         ['i.user_id', '=', $user['id']],
                     ],'field'=>[
-                        'i.id ','i.type',''
+                        'i.id ','i.type',
                     ],
                 ];
                 $identity = $identityMode->getInfo($config);
