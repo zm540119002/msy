@@ -58,7 +58,7 @@
         </div>
     </li><li v-else-if="type==3"><!--仅价格、数字增减-->
         <div class="product-select">
-            <div class="columns_flex l-r-sides">
+            <div class="columns_flex l-r-sides details_add" >
                 <div class="left">
                     <div></div>
                     <div class="red subtotal_amount">￥<span class="">{{deal_price}}</span></div>
@@ -66,8 +66,8 @@
                 <div class="compare_price" style="width:30%;line-height: 28px;">
                      <del class="f24">￥{{compare_price}}</del>
                 </div>
-                <div class="right add">
-                    <div class=" selected-number">
+                <div class="right">
+                    <div class="selected-number">
                         <a href="javascript:void(0);" class="reduce" @click="reduce">-</a>
                         <input type="text" :value="buy_quantity" class="f24 product_count" readonly="readonly">
                         <a href="javascript:void(0);" class="plus" @click="plus">+</a>
@@ -566,11 +566,15 @@
     .sale_price, .subtotal_amount span{
         font-size: 0.25rem
     }
-    .sale_price, .subtotal_amount span,.price{
-        font-size: 0.25rem !important;
-    }
+  
     .cart_goods_list li{
         margin: 0
     }
-    
+    .details_add{
+        display: flex;
+        align-items: center ;
+    }
+    .details_add .left span{
+        font-size: 0.4rem;
+    }
 </style>
