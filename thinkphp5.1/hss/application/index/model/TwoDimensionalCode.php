@@ -90,7 +90,7 @@ class TwoDimensionalCode extends \common\model\Base {
         if( !$avatar || !$hss_1 || !$qrcode || !$hss_2 || !$hss_3){
             return errorMsg('提供的图片问题');
         }
-        $im = imagecreatetruecolor(942, 1475);  //图片大小
+        $im = imagecreatetruecolor(942, 1800);  //图片大小
         $gray_color = imagecolorallocate($im, 87,89,88);
         $text_color = imagecolorallocate($im, 235, 96, 3);
         imagefill($im, 0, 0, $gray_color);
