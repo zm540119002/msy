@@ -138,7 +138,13 @@ function edit(config){
         type: 2,
         title: config.title,
         content: config.url
+/*        success:function(){
+            console.log(222222);
+        }*/
     });
     layer.full(index);
+
+    //var config = {url: controller + 'getList'};
+
 }
 

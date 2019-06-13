@@ -75,6 +75,18 @@
 			var url =  controller + 'getScenePromotion/id/' + _thisTr.data('id');
 			location.href = url;
 		});
+		// 去设置场景下的项目
+		$('body').on('click','.relationProject',function(){
+			var _thisTr = $(this).parents('tr');
+			var url =  controller + 'manageSceneGoodsCategory/id/' + _thisTr.data('id');
+			location.href = url;
+		});
+		// 去设置场景下的分类
+		$('body').on('click','.relationSort',function(){
+			var _thisTr = $(this).parents('tr');
+			var url =  controller + 'manageSceneGoodsCategory/id/' + _thisTr.data('id');
+			location.href = url;
+		});
 
 	});
 
