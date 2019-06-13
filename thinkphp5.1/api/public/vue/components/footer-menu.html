@@ -223,7 +223,6 @@
                         }
                     }
                 },checkAll:function(){
-//                    alert(browser.versions.weixin);
                     //非ios，或者 ios并且非微信浏览器 ，则取反
                     if(!browser.versions.ios || (browser.versions.ios && !browser.versions.weixin)){
                         this.checked = !this.checked;
