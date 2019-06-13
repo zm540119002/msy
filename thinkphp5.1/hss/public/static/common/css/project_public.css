@@ -171,6 +171,9 @@ nav .back_prev_page{
 .detail-nav li.current a{
     color:#ff7aab;
 }
-.project-list .list li{
+.floor_item.project-list{
     padding:0;
+}
+.floor_item.project-list li{
+    border-bottom:4px solid #f2f2f2;
 }
