@@ -200,20 +200,6 @@
                         }
                     });
                 }
-            }else if(param.data.data.code == '3000'){ //hss二位码回调
-                var imgSrc=uploads+param.data.data.url;
-                layer.open({
-                    skin:'shareqrCodeLayer',
-                    content:'<img src='+imgSrc+' />',
-                    btn:['X'],
-                    success:function(){
-                        fixedLayer();
-                    },
-                    yes:function(index){
-                        cancleFixedLayer();
-                        layer.close(index);
-                    }
-                });
             }else{
                 dialog.success(param.data.info);
             }
