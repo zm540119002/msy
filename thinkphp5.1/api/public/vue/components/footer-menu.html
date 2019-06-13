@@ -224,11 +224,10 @@
                     }
                 },checkAll:function(){
                     this.checked = !this.checked;
-                    //ios取反
+                    //取反
                     if(browser.versions.ios && browser.versions.weixin){
                         this.checked = !this.checked;
                     }
-                    alert(this.checked);
                     for(let i = 0,len = this.checkItemList.length; i < len; i++){
                         this.checkItemList[i].checked = this.checked;
                     }
