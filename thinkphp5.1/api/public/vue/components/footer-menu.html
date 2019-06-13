@@ -225,7 +225,10 @@
                 },checkAll:function(){
                     this.checked = !this.checked;
                     //以下情况需再次取反
-                    if(browser.versions.ios && browser.versions.weixin){
+                    if(
+                        (browser.versions.ios && browser.versions.weixin)
+                        || (browser.versions.webApp)
+                    ){
                         this.checked = !this.checked;
                     }
                     for(let i = 0,len = this.checkItemList.length; i < len; i++){
