@@ -11,7 +11,7 @@
                 </div>
                 <!-- 总金额 -->
                 <div v-else-if="menu.class.indexOf('amount')!==-1" class="amount">
-                    <span class="total_amount">￥{{ parseFloat(total_amount).toFixed(2) }}</span>
+                    <span class="total_amount"><span>￥</span>{{ parseFloat(total_amount).toFixed(2) }}</span>
                 </div>
                 <!-- 购物篮 -->
                 <div v-else-if="menu.class.indexOf('add_cart_icon')!==-1" class="add_cart_icon" @click="jump_url" :data-jump_url="menu.action">
@@ -313,7 +313,7 @@
     width: 30%;
   }
   .group_cart_nav a:nth-of-type(1) span{
-      margin-left: 10px;
+      margin-left: 4px;
   }
   .group_cart_nav a:nth-of-type(2){
       width: 20%;
@@ -321,6 +321,7 @@
     }
     .group_cart_nav a:nth-of-type(1) .check_all{
       margin-left: 10px;
+      font-size: 0.2rem
 
     }
     .group_cart_nav a:nth-of-type(3),
@@ -333,8 +334,8 @@
       color: #fff;
   }
   .add_cart_icon span{
-      left: 35px;
-      font-size: 0.1rem;
+      left: 40px;
+      font-size: 0.2rem;
       top: -12px;
   }
  .group_cart_nav a.confirm_receive{
@@ -345,4 +346,11 @@
  .add_num.current{
     -webkit-animation:none;
  }
+ .total_amount{
+     font-size: 0.4rem;
+ }
+ .total_amount span{
+     font-size: 0.2rem;
+ }
+
 </style>
