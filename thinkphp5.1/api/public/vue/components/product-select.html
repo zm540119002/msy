@@ -125,7 +125,7 @@
     </li><li v-else-if="type==6"><!--弹窗-->
         <div class="close">X</div>
         <div class="product-select">
-            <div class="columns_flex l-r-sides">
+            <div class="index columns_flex l-r-sides">
                 <div class="left">
                     <div></div>
                     <div class="red subtotal_amount">￥<span class="">{{deal_price}}</span><span class="price">￥{{compare_price}}</span></div>
@@ -436,17 +436,17 @@
         display: none;
     }
     .close{
-        width: 16px;
-        height: 16px;
+        width: 20px;
+        height: 20px;
         border-radius: 50%;
         border:1px solid #fff;
         color: #fff;
         text-align: center;
-        line-height: 16px;
-        font-size: 10px;
+        line-height: 20px;
+        font-size: 14px;
         position: absolute;
         right: 14px;
-        top: -24px;
+        top: -30px;
         cursor:pointer;
     }
     .dialogCart{
@@ -555,5 +555,9 @@
         font-style: normal;
         float: right;
         line-height: 30px;
+    }
+    .index{
+        display: flex;
+        align-items: center;
     }
 </style>
