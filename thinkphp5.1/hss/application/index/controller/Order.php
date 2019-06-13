@@ -195,6 +195,12 @@ class Order extends \common\controller\UserBase
             $data['order_status'] = 1;
             $modelOrder ->startTrans();
             $address = json_decode($data['address'],true);
+            
+            if(!$address){
+                //return false;
+                $this->errorMsg('请先选择收货地址 ');
+            }
+
             unset($data['address']);
             $data = array_merge($data,$address);
 
