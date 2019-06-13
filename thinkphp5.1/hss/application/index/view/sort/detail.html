@@ -89,8 +89,84 @@
 {block name="common"}
 {/block}
 {block name="footer"}
+{include file="../../api/public/vue/components/footer-menu.html" /}
+<div class="bg"></div>
+<div class="dialogCart">
+	<div id="product-list2">
+		<product-select
+				v-for="(productInfo,index) in productList"
+				:key="index"
+				:init_product_id="productInfo.id"
+				:init_product_src="productInfo.thumb_img"
+				:init_deal_price="parseFloat(productInfo.franchise_price)"
+				:init_compare_price="Number(productInfo.retail_price)"
+				:init_quantity="parseInt(init_quantity)"
+				:step_quantity="parseInt(step_quantity)"
+				:init_group="init_group"
+				:type="type"
+		></product-select>
+	</div>
+	<div id="foot_cart_menu">
+		<footer-menu
+				:init_group="init_group"
+				:init_menus="init_menus"
+				:init_cart_num="init_cart_num"
+		></footer-menu>
+	</div>
+</div>
+<script type="text/javascript">
+	$(function(){
+		//数据库里购物车里商品数量
+		let total_num = parseInt("{$total_num|default=0}");
+		//localStorage里商品信息
+		if(localStorage.cartList){
+			let goodsList = (JSON.parse(localStorage.cartList)).data;
+			$.each(goodsList,function(i,goods){
+				total_num += goods['num'];
+			});
+		}
+		if(!total_num){
+			var html = $('.no_cart_data').html();
+			$('#product-list').append(html);
+		}
+		let unlockingFooterCart = '{$unlockingFooterCart|raw}';
+		unlockingFooterCart = JSON.parse(unlockingFooterCart);
+		let param = {
+			init_group:0,
+			init_cart_num:total_num,
+			init_menus:unlockingFooterCart
+		};
+		new Vue({
+			el:'#foot_cart_menu',
+			data:function(){
+				return param;
+			}
+		});
+	})
+</script>
 {include file="../../api/public/vue/components/product-select.html" /}
 <script type="text/javascript">
+	$(function(){
+		let param = {
+			type:6,
+			init_group:0,
+			init_quantity:1,
+			step_quantity:1,
+			productList:[
+				{
+					id:0,
+					franchise_price:0
+				}
+			]
+		};
+		new Vue({
+			el: '#product-list2',
+			data:function(){
+				return param;
+			}
+		});
+	});
+</script><script type="text/javascript">
 	$(function(){
 		let param = {
 			type:5,
