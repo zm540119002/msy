@@ -18,11 +18,7 @@
 	</section>
 	<!-- 项目详情 -->
 	<section class="project_item hide">
-		<p>
-			{volist name="$info.detail_img" id="vo"}
-			<img src="{:show_img_handle($vo)}" alt="" class="common_default_img">
-			{/volist}
-		</p>
+		
 	</section>
 	<!-- 项目操作 -->
 	<section class="project_item hide">
@@ -128,12 +124,12 @@
 			</div>
 			<div id="item2" class="floor">
 				<div class="floor_item">
-					<p class="content-label">商品详情</p>
-					{volist name="info.detail_img" id="detail_img"}
-					<div class="">
-						<img src="{:show_img_handle($detail_img)}" alt="" class="common_default_img">
-					</div>
-					{/volist}
+					<p class="content-label">项目详情</p>
+					<p>
+						{volist name="$info.detail_img" id="vo"}
+						<img src="{:show_img_handle($vo)}" alt="" class="common_default_img">
+						{/volist}
+					</p>
 				</div>
 			</div>
 			<div id="item3" class="floor">
