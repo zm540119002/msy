@@ -56,7 +56,7 @@ class Scene extends \common\controller\Base{
      * 二级场景页 -场景(默认)
      * 需要同组的各场景的名，场景信息，场景下的商品，场景下的方案
      */
-    public function detail(){
+    /*public function detail_old(){
         if(request()->isAjax()){
         }else{
             $id = input('id/d');
@@ -108,6 +108,66 @@ class Scene extends \common\controller\Base{
             Cart::getCartTotalNum();
             return $this->fetch();
         }
+    }*/
+
+    public function detail(){
+        if(request()->isAjax()){
+        }else{
+/*            $id = input('id/d');
+            if(!$id) $this->error('此项目已下架');
+            // 场景信息 主要是获取同组的场景信息
+            $model = new\app\index\model\Scene();
+            $condition =[
+                'field' => [
+                    'ss.id','ss.name','ss.main_img','ss.tag','ss.intro','ss.tag_category','ss.display_type','ss.title'
+                ], 'where' => [
+                    ['ss.status', '=', 0],
+                    ['ss.shelf_status', '=', 3],
+                    ['s.id', '=', $id],
+                ], 'join' => [
+                    ['scene ss ','s.tag_category=ss.tag_category','left']
+                ],'order' => ['ss.sort desc'],
+
+            ];
+
+            $sceneList = $model->getList($condition);
+            $this->assign('sceneList',$sceneList);
+            if(empty($sceneList)){
+                $this->error('此场景已下架');
+            }
+
+            // 当前的场景
+            $scene = [];
+            foreach($sceneList as $v){
+                if($v['id']==$id){
+                    $scene = $v;
+                    break;
+                }
+            }
+
+            scene_handle($scene);
+
+            $this->assign('info',$scene);*/
+
+            $id = intval(input('id'));
+            if(!$id){
+                $this->error('此项目已下架');
+            }
+            $this->displayScene($id);
+
+            Promotion::displayPromotionList($id);
+
+            $this->assign('relation',config('custom.relation_type.scene'));
+
+            $unlockingFooterCart = unlockingFooterCartConfigTest([0,2,1,3]);
+            array_push($unlockingFooterCart['menu'][0]['class'],'group_btn30');
+            array_push($unlockingFooterCart['menu'][1]['class'],'group_btn20');
+            array_push($unlockingFooterCart['menu'][2]['class'],'group_btn25');
+            array_push($unlockingFooterCart['menu'][3]['class'],'group_btn25');
+            $this->assign('unlockingFooterCart',json_encode($unlockingFooterCart));
+            Cart::getCartTotalNum();
+            return $this->fetch();
+        }
     }
 
     /**
@@ -131,21 +191,19 @@ class Scene extends \common\controller\Base{
      * @return mixed
      */
     public function project(){
-        if(request()->isAjax()){
-        }else{
-            $id = intval(input('id'));
-            if(!$id){
-                $this->error('此项目已下架');
-            }
-
-            $this->displayScene($id);
-
-            return $this->fetch();
+        $id = intval(input('id'));
+        if(!$id){
+            $this->error('此项目已下架');
         }
+        $this->displayScene($id);
+
+        return $this->fetch();
+
     }
 
     // 输出场景信息
     private function displayScene($id){
+
         $model = new\app\index\model\Scene();
         $config =[
             'field' => [
