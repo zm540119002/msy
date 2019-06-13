@@ -13,8 +13,15 @@
 	<section class="content-padding">
 		<div class="columns_flex l-r-sides">
 			<div>
-                <span></span>
-                非黑森森城市合伙人
+                {if $user}
+                {if $identity.type == 2}
+                <span>城市合伙人</span>
+                {else /}
+                <span>非合作伙伴</span>
+                {/if}
+                {else /}
+                <span>未登陆</span>
+                {/if}
             </div>
             <div>
                 <a href="javascript:void(0)" class="async_login gr"  data-jump_url="{:url('CityPartner/city')}">
