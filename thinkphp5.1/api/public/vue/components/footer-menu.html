@@ -6,7 +6,7 @@
                 {{menu.name}}
                 <!-- 全选 -->
                 <div v-if="menu.class.indexOf('checked_all')!==-1" class="checked_all">
-                    <input type="checkbox" class="check_all" v-model="checked" :value="all" @click="checkAll" id="check_all" />
+                    <input type="checkbox" class="check_all" v-model="checked" @click="checkAll" id="check_all" />
                     <label for="check_all">全选</label>
                 </div>
                 <!-- 总金额 -->
@@ -223,11 +223,10 @@
                         }
                     }
                 },checkAll:function(){
-                    //ios需要取反
-//                    if(browser.versions.mobile || browser.versions.ios){
-//                        this.checked = !this.checked;
-//                    }
-                    this.checked = !this.checked;
+                    //非ios取反
+                    if(!browser.versions.ios){
+                        this.checked = !this.checked;
+                    }
                     for(let i = 0,len = this.checkItemList.length; i < len; i++){
                         this.checkItemList[i].checked = this.checked;
                     }

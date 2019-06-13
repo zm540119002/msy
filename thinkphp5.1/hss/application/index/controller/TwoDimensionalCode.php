@@ -28,7 +28,7 @@ class TwoDimensionalCode extends \common\controller\UserBase {
             if($result['status']){
                 $url = $result['url'];
             }else{
-                $this -> errorMsg('失败');
+                $this -> errorMsg($result['info']);
             }
 
             $data = [
@@ -42,7 +42,7 @@ class TwoDimensionalCode extends \common\controller\UserBase {
             }
         }
         $this->successMsg('成功！',[
-            'code'=> config('code.success.get_user_code.code'),
+            'code'=> config('code.success.default.code'),
             'url' => $url,
         ]);
     }

@@ -32,7 +32,7 @@ class Order extends \common\controller\UserBase
                     ['p.status', '=', 0],
                     ['pg.promotion_id', '=', $promotion['goods_id']],
                 ], 'field' => [
-                    'pg.goods_id',"pg.goods_num*{$promotion['num']} num",'p.name',"p.price*{$promotion['num']} price",'p.id'
+                    'pg.goods_id',"pg.goods_num*{$promotion['num']} num",'p.name',"p.franchise_price*{$promotion['num']} price",'p.id'
                 ],'join' => [
                     ['promotion p','pg.promotion_id=p.id','left']
                 ]
@@ -195,7 +195,7 @@ class Order extends \common\controller\UserBase
             $data['order_status'] = 1;
             $modelOrder ->startTrans();
             $address = json_decode($data['address'],true);
-            
+
             if(!$address){
                 //return false;
                 $this->errorMsg('请先选择收货地址 ');

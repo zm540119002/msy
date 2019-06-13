@@ -137,7 +137,7 @@ function edit(config){
     var index = layer.open({
         type: 2,
         title: config.title,
-        content: config.url
+        content: config.url,
     });
     layer.full(index);
 }

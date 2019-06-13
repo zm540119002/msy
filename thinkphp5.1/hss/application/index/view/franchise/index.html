@@ -13,14 +13,26 @@
 	<section class="content-padding">
 		<div class="columns_flex l-r-sides">
 			<div>
-                <span></span>
-                非黑森森加盟店
+                {if $user}
+                   {if $identity.type == 1}
+                      加盟店
+                      {else /}
+                       非合作伙伴
+                   {/if}
+                   {else /}
+                        <span>
+                           未登陆
+                        </span>
+                {/if}
             </div>
             <div>
+                {if $identity.type == 1}
+                 xxxx加盟店
+                {else /}
                 <a href="javascript:void(0)" class="gr async_login"  data-jump_url="{:url('Franchise/applyFranchise')}">
-                    加盟店资格申请>
+                    加盟店资格申请  >
                 </a>
-                <!--<a href="{:url('Franchise/applyFranchise')}">加盟店资格申请 ></a>-->
+                {/if}
             </div>
 		</div>
         <ul class="franchise_ul">
