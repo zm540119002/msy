@@ -224,7 +224,7 @@
                     }
                 },checkAll:function(){
                     //非ios，或者 ios并且非微信浏览器 ，则取反
-                    if(!browser.versions.ios || (browser.versions.ios && !browser.versions.weixin)){
+                    if(!browser.versions.ios){
                         this.checked = !this.checked;
                     }
                     for(let i = 0,len = this.checkItemList.length; i < len; i++){
