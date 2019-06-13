@@ -128,7 +128,7 @@
             <div class="columns_flex l-r-sides">
                 <div class="left">
                     <div></div>
-                    <div class="red subtotal_amount">￥<span class="">{{deal_price}}</span></div>
+                    <div class="red subtotal_amount">￥<span class="">{{deal_price}}</span><span class="price">￥{{compare_price}}</span></div>
                 </div>
                 <div class="right">
                     <div class=" selected-number">
@@ -146,7 +146,7 @@
             <span>{{product_name}}</span>
         </div>
         <div class="specs">
-            <div>{{specification}} ￥{{compare_price}}</div>
+            <div>{{specification}} </div>
         </div>
     </li><li v-else-if="type==7"><!--黑森森精选（首页/购物车）-->
         <div class="product-select index">
@@ -548,5 +548,12 @@
     }
     .quantity_wrapper{
         margin-top: 0.5rem;
+    }
+    .price{
+        color: #717171;
+        font-size: 0.2rem !important;
+        font-style: normal;
+        float: right;
+        line-height: 30px;
     }
 </style>
