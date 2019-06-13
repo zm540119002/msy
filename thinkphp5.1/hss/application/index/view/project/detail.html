@@ -328,6 +328,7 @@
 		$('#menu li').on('click',function(){
 			// $(this).addClass('current').siblings().removeClass('current');
 			// $('.project_item').hide().eq($(this).index()).show();
+			var _this=$(this);
 			var id=_this.data('item');
 			items.each(function(){
 				var m = $(this);
@@ -343,7 +344,7 @@
 					m.removeClass('active');
 				}
 			});
-			if($(this).index()==2){
+			if(_this.index()==2){
 				//项目流程轮播
 				var swiper = new Swiper('.master-swiper-process', {
 					//slidesPerView :2,
