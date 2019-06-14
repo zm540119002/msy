@@ -44,11 +44,32 @@ class CityPartner extends \common\controller\UserBase {
                 ], 'field'=>[
                     'cp.id','cp.province','cp.city','cp.company_name','cp.applicant','cp.mobile','cp.city_level','cp.earnest','cp.amount','cp.apply_status'
                     ,'p.sn','p.id as pay_id'
-                ],'join' => [
-                     ['pay p','p.sn = cp.earnest_sn','left'],
                 ]
+//                ,'join' => [
+//                     ['pay p','p.sn = cp.earnest_sn','left'],
+//                ]
             ];
             $selfApplyList = $modelCityPartner -> getList($condition);
+            foreach ($selfApplyList as $k=>$selfApply){
+                $modelPay = new \app\index\model\Pay();
+                $condition=[
+                    'where'=>[
+                        ['p.status', '=', 0],
+                        ['p.user_id','=',$this->user['id']],
+                        ['p.pay_sn','=',$selfApply['earnest_sn']]
+                    ],
+                    'whereOr'=>[
+                        ['p.pay_sn','=',$selfApply['earnest_sn']],
+                        ['p.pay_sn','=',$selfApply['balance_sn']],
+                    ],
+                    'field'=>[
+                       'p.id as pay_id'
+                    ]
+                ];
+                $modelPay->getInfo();
+                echo $modelPay->getLastSql();exit;
+            }
+
             print_r($selfApplyList);exit;
             //申请中
             $apply = [];
