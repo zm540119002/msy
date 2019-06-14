@@ -54,16 +54,16 @@ class CityPartner extends \common\controller\UserBase {
                 $modelPay = new \app\index\model\Pay();
                 $condition=[
                     'where'=>[
-                        ['p.status', '=', 0],
-                        ['p.user_id','=',$this->user['id']],
-                        ['p.pay_sn','=',$selfApply['earnest_sn']]
+                        ['status', '=', 0],
+                        ['user_id','=',$this->user['id']],
+                        ['pay_sn','=',$selfApply['earnest_sn']]
                     ],
                     'whereOr'=>[
-                        ['p.pay_sn','=',$selfApply['earnest_sn']],
-                        ['p.pay_sn','=',$selfApply['balance_sn']],
+                        ['pay_sn','=',$selfApply['earnest_sn']],
+                        ['pay_sn','=',$selfApply['balance_sn']],
                     ],
                     'field'=>[
-                       'p.id as pay_id'
+                       'id as pay_id'
                     ]
                 ];
                 $modelPay->getInfo($condition);
