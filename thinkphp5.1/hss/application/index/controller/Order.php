@@ -14,7 +14,7 @@ class Order extends \common\controller\UserBase
             ['update_time'=>time()],
         ];
         $res = $memberModel->allowField(true)->isUpdate(false)->save($data);
-        print_r($memberModel->getAttr('id'));
+        print_r($memberModel);
         exit;
         if(!$member = $memberModel->getMemberInfo($this->user['id'])){
             $data = [
