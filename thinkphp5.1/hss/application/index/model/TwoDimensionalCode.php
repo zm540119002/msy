@@ -94,7 +94,7 @@ class TwoDimensionalCode extends \common\model\Base {
         $gray_color = imagecolorallocate($im, 87,89,88);
         $text_color = imagecolorallocate($im, 255, 255, 255);
         imagefill($im, 0, 0, $gray_color);
-        imagettftext($im, 25, 0, 200, 110, $text_color, $init['font'], $init['name']); //名字
+        imagettftext($im, 25, 0, 200, 120, $text_color, $init['font'], $init['name']); //名字
         imagecopyresized($im, $avatar['obj'], 60, 97, 0, 0, 100, 100, $avatar['width'], $avatar['height'] );  //
         imagecopyresized($im, $hss_1['obj'], 180, 152, 0, 0, 662, 82, $hss_1['width'],$hss_1['height'] );  //平台logo
         imagecopyresized($im, $hss_2['obj'], 0, 255, 0, 0, 850, 963, $hss_2['width'],$hss_2['height'] );  //平台logo
