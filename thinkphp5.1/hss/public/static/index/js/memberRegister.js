@@ -40,25 +40,35 @@ $(function(){
     $('body').on('click','.one-step',function(){
         var _this = $(this);
         var data=$('.applicant_form').serializeObject();
-        applicantData.name=data.name;
+        // applicantData.name=data.name;
         applicantData.applicant=data.applicant;
         applicantData.mobile=data.mobile;
-        applicantData.detail_address=data.detail_address;
-        area_address =$('.area-address-name').getArea();
-        applicantData.province = area_address[0];
-        applicantData.city = area_address[1];
-        applicantData.area = area_address[2];
+        // applicantData.detail_address=data.detail_address;
+        // area_address =$('.area-address-name').getArea();
+        // applicantData.province = area_address[0];
+        // applicantData.city = area_address[1];
+        // applicantData.area = area_address[2];
         var content='';
-        if(!applicantData.name){
-            content='请填写店家名称';
-        }else if(!applicantData.applicant){
-            content='请填写申请人姓名';
-        }else if(!register.phoneCheck(applicantData.mobile)){
-            content='请填写手机号码';
-        }else if(!area_address){
-            content='请选择地区';
-        }else if(!applicantData.detail_address){
-            content='请填写详细地址';
+        // if(!applicantData.name){
+        //     content='请填写店家名称';
+        // }else if(!applicantData.applicant){
+        //     content='请填写申请人姓名';
+        // }else if(!register.phoneCheck(applicantData.mobile)){
+        //     content='请填写手机号码';
+        // }else if(!area_address){
+        //     content='请选择地区';
+        // }else if(!applicantData.detail_address){
+        //     content='请填写详细地址';
+        // }
+        // if(content){
+        //     dialog.error(content);
+        // }else{
+        //     applicantData.step = 1;
+        //     console.log(applicantData);
+        //     submitApplicant(_this,applicantData);
+        // }
+        if(!applicantData.applicant){
+            content='请填写你的姓名';
         }
         if(content){
             dialog.error(content);
