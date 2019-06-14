@@ -43,6 +43,7 @@ $(function(){
     }
 
     var statusType=apply[0].apply_status-1;
+    consonle.log(statusType);
     //待审核
     //资格完款
     if(statusType==4 || statusType==3){
