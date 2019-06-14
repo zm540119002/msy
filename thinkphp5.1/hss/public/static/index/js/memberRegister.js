@@ -79,43 +79,6 @@ $(function(){
         }
     });
     
-    //确定通过入驻
-    $('body').on('click','.three-step',function(){
-    });
-    // 弹出支付方式
-    $('body').on('click','.recharge_money',function(){
-        var settlementMethod=$('.settlementMethod').html();
-        layer.open({
-            type: 1
-            ,anim: 'up'
-            ,style: 'position:fixed; bottom:0; left:0; width: 100%; height: 50%; padding:10px 0; border:none;',
-            className:'settlementMethod bankTransferLayer',
-            content: settlementMethod
-        });
-    });
-    // 选择充值结算方式
-    $('body').on('click','.settlementMethod .pay_nav li',function(){
-        $(this).addClass('current').siblings().removeClass('current');
-        var pay_code = $(this).data('paycode');
-        $(this).find('input[type="checkbox"]').prop('checked',true);
-        $('.pay_code').val(pay_code);
-    });
-
-    // 结算
-    $('body').on('click','.settlement_btn',function () {
-        applicantData.province = area_address[0];
-        applicantData.city = area_address[1];
-        applicantData.area = area_address[2];
-        applicantData.pay_code = $('.pay_code').val();
-        applicantData.step = 2;
-        _this = $(this);
-        if(!applicantData.pay_code){
-            dialog.error('请选择结算方式');
-        }else{
-            submitApplicant(_this,applicantData);
-        }
-        
-    });
 });
 // 提交申请
 function submitApplicant(_this,postData){
