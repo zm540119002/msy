@@ -129,7 +129,7 @@ return [
      * sql 查询语句  Select * from seller where card_status & 2; 查询所有选择了2的商品.
      */
     'belong_to'=>[
-        '1' => '沙龙',
+        '1' => '沙龙装',
         '2' => '居家',
     ],
 ];
