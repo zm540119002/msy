@@ -20,13 +20,12 @@
     </div>
 </section>
 <script type="text/javascript">
-    var beforehandRegisterTriggerLayerIndex = null;
+    var beforehandRegisterTriggerLayerIndex = -1;
     function beforehandRegisterTrigger(){
         let memberRegisterTpl=$('.member-register-tpl').html();
         beforehandRegisterTriggerLayerIndex = layer.open({
             title:['会员预先登记','border-bottom:1px solid #d9d9d9;'],
             type:1,
-            anim:'up',
             className:'memberRegTpl',
             content:memberRegisterTpl
         });
