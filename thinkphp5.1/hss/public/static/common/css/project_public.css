@@ -244,3 +244,7 @@ nav .back_prev_page{
     width:auto;
     padding-left:0.55rem;
 }
+/*会员预登记*/
+.memberRegTpl .one-step{
+    background: #0066cc;
+}
