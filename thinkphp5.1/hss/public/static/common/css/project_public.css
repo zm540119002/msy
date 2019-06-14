@@ -244,6 +244,11 @@ nav .back_prev_page{
     width:auto;
     padding-left:0.55rem;
 }
+.switch-item.nodisabled{
+    pointer-events: none;
+    cursor: default;
+    opacity: 0.6;
+}
 /*城市合伙人*/
 .cy-head span.cy-icon{
     display: inline-block;

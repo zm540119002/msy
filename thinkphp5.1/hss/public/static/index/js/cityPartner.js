@@ -51,6 +51,7 @@ $(function(){
                     $(this).addClass('current').siblings().removeClass('current');
                 });
                 $('nav.apply-data-nav li:eq(3)').click();
+                $('.weui-flex li:eq(0),.weui-flex li:eq(1),.weui-flex li:eq(2)').addClass('nodisabled');
             }
         }
     }
