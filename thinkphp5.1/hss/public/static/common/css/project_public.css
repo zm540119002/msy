@@ -181,17 +181,6 @@ nav .back_prev_page{
     border-bottom:none;
 }
 
-
-.header_title{
-    position:relative;
-    left:0;
-    top:0;
-    width:100%;
-    padding:0.5rem 0;
-}
-.foot_nav_bar{
-    padding: 0.3rem 0;
-}
 .nav_menu{
     padding:0.6rem 0.6rem 0.6rem 2rem;
     background: #fff;
