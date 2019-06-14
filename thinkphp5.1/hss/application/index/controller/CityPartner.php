@@ -32,6 +32,11 @@ class CityPartner extends \common\controller\UserBase {
             $this->assign('cityList',json_encode($cityList));
             //自己提交的申请
             $modelCityPartner = new \app\index\model\CityPartner();
+            /***
+             * select a.id,(CASE WHEN a.type = 0 THEN b.name else c.name END) from a
+            left join b on a.target_id=b.id
+            left join c on a.target_id=c.id
+             */
             $condition=[
                 'where'=>[
                     ['cp.status', '=', 0],
@@ -43,8 +48,8 @@ class CityPartner extends \common\controller\UserBase {
                      ['pay p','p.sn = cp.earnest_sn','left'],
                 ]
             ];
-
             $selfApplyList = $modelCityPartner -> getList($condition);
+            print_r($selfApplyList);exit;
             //申请中
             $apply = [];
             //已交定金或尾款申请
@@ -151,15 +156,17 @@ class CityPartner extends \common\controller\UserBase {
             //尾款支付
             case 4:
                 $paySn = generateSN(); //内部支付编号
-                $postData['balance_sn'] = $paySn;
                 if($postData['id']){
+                    $data = [
+                        'balance_sn' => $paySn
+                    ];
                     $where = [
                         'id'=>$postData['id'],
                         'user_id'=>$this->user['id'],
                         'status'=>0,
                     ];
                 }
-                $id  = $modelCityPartner->edit($postData,$where);
+                $id  = $modelCityPartner->edit($data,$where);
                 if(false===$id){
                     $modelCityPartner ->rollback();
                     $this->errorMsg('失败');
@@ -174,6 +181,7 @@ class CityPartner extends \common\controller\UserBase {
                     'type' => config('custom.pay_type')['cityPartnerSeatPay']['code'],
                     'create_time' => time(),
                 ];
+
                 if(isset($postData['pay_id']) && $postData['pay_id']){
                     $where1 = [
                         'id'=>$postData['pay_id'],

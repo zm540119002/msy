@@ -168,6 +168,21 @@ class Index extends \common\controller\Base{
         return $this->fetch();
     }
 
+    // 页面
+    public function staticPage(){
+        $html_name = input('page/s');
+
+        $this->assignStandardBottomButton([21,22]);
+        if($html_name){
+            $view = strtolower($html_name);
+
+        }else{
+            $view = 'activity';
+        }
+
+        return $this->fetch($view);
+    }
+
 
 
 }

@@ -55,7 +55,7 @@ class Goods extends Base {
                 $_POST['goods_video'] = moveImgFromTemp(config('upload_dir.goods'),$_POST['goods_video']);
             }
 
-            // 选中的店铺类型 十进制
+            // 选中的类型 十进制
             $_POST['belong_to'] = bindec(strrev(implode(input('post.belong_to/a'))));
             $_POST['specification'] = trim(input('post.specification/s'));
             $_POST['purchase_specification_description'] = trim(input('post.purchase_specification_description/s'));
@@ -131,7 +131,7 @@ class Goods extends Base {
                 ];
                 $goodsInfo = $modelGoods->getInfo($config);
 
-                // 选中的店铺
+                // 选中的类别
                 $goodsInfo['belong_to'] = strrev(decbin($goodsInfo['belong_to']));
 
                 $this->assign('info',$goodsInfo);
