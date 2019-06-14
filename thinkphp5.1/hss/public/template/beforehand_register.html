@@ -20,18 +20,20 @@
     </div>
 </section>
 <script type="text/javascript">
+    var beforehandRegisterTriggerLayerIndex = null;
     function beforehandRegisterTrigger(){
         let memberRegisterTpl=$('.member-register-tpl').html();
-        layer.open({
+        beforehandRegisterTriggerLayerIndex = layer.open({
             title:['会员预先登记','border-bottom:1px solid #d9d9d9;'],
             type:1,
             anim:'up',
-            btn:['确定','取消'],
             className:'memberRegTpl',
-            content:memberRegisterTpl,
-            yes:function(index){
-                console.log(index);
-            }
+            content:memberRegisterTpl
         });
     }
+    $(function(){
+        $('body').on('click','.next-step',function(){
+            console.log(beforehandRegisterTriggerLayerIndex);
+        });
+    });
 </script>
