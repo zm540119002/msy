@@ -5,6 +5,7 @@ class Base extends \think\Model {
 	/**编辑单条记录
 	 */
 	public function edit($data,$where=[]){
+		return $data;
 		if($data['id'] || (count($where) && intval($where['id'])) ){//修改
 			if($data['id']){
 				$res = $this->allowField(true)->isUpdate(true)->save($data);
