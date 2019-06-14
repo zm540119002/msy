@@ -23,6 +23,23 @@ class Order extends \common\controller\UserBase
             $this->errorMsg('请求数据不能为空');
         }
 
+
+        // 身份认证
+        $identityModel = new \app\index\model\Identity();
+        $condition = [
+            'where' => [
+                ['user_id','=',$this->user['id']]
+            ],
+        ];
+
+        $res = $identityModel->getInfo($condition);
+
+        if(true){
+
+        }
+
+
+
         if( $order_type==2 ){
 
             $promotion = reset($goodsList);
