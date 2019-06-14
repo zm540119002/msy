@@ -19,6 +19,7 @@ class Base extends \think\Model {
 			$res = $this->allowField(true)->isUpdate(false)->save($data);
 			return $this;
 //			$id = $this->getAttr('id');
+//			$id = $this->getAttr('id');
 		}
 		if($res === false){
 			return false;

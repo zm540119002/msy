@@ -14,8 +14,9 @@ class Order extends \common\controller\UserBase
                 ['create_time'=>time()],
                 ['update_time'=>time()],
             ];
+            $memberModel->allowField(true)->isUpdate(false)->save($data);
             $var = $memberModel->edit($data);
-            p($var);
+            p($memberModel->getAttr('id'));
             exit;
         }
     }
