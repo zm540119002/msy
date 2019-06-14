@@ -44,12 +44,12 @@ class CityPartner extends \common\controller\UserBase {
                 ], 'field'=>[
                     'cp.id','cp.province','cp.city','cp.company_name','cp.applicant','cp.mobile','cp.city_level','cp.earnest','cp.amount','cp.apply_status'
                     ,'p.sn','p.id as pay_id'
-                ],'join' => [
+                ]
+                ,'join' => [
                      ['pay p','p.sn = cp.earnest_sn','left'],
                 ]
             ];
             $selfApplyList = $modelCityPartner -> getList($condition);
-            print_r($selfApplyList);exit;
             //申请中
             $apply = [];
             //已交定金或尾款申请
@@ -182,14 +182,14 @@ class CityPartner extends \common\controller\UserBase {
                     'create_time' => time(),
                 ];
 
-                if(isset($postData['pay_id']) && $postData['pay_id']){
-                    $where1 = [
-                        'id'=>$postData['pay_id'],
-                        'user_id'=>$this->user['id'],
-                        'status'=>0,
-                    ];
-                }
-                $payId = $modelPay->edit($data,$where1);
+//                if(isset($postData['pay_id']) && $postData['pay_id']){
+//                    $where1 = [
+//                        'id'=>$postData['pay_id'],
+//                        'user_id'=>$this->user['id'],
+//                        'status'=>0,
+//                    ];
+//                }
+                $payId = $modelPay->edit($data);
                 if(false===$payId){
                     $modelCityPartner ->rollback();
                     return errorMsg('失败');

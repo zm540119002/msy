@@ -12,9 +12,8 @@ $(function(){
     });
 
      //初始化 未完成的申请
-    var statusType=apply[0].apply_status-1;
-    console.log(statusType);
     if(!$.isEmptyArray(apply)){
+        var statusType=apply[0].apply_status-1;
         applicantData.id= apply[0].id;
         applicantData = {
             id:apply[0].id,
@@ -142,7 +141,7 @@ $(function(){
 
     // 资格结算
     $('body').on('click','.settlement_btn',function () {
-        applicantData.step =  $('.apply-data-nav .switch-item.current').index();
+        applicantData.step =  $('.apply-data-nav .switch-item.current').index()+1;
         applicantData.pay_code = $('.pay_code').val();
         _this = $(this);
         if(!applicantData.pay_code){
