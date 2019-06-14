@@ -124,8 +124,10 @@ class Goods extends \common\controller\Base{
         if(input('?get.category_id') && input('get.category_id/d')){
             $config['where'][] = ['g.category_id_1', '=', input('get.category_id/d')];
         }
-        if(input('get.belong_to/d')){
-            $config['where'][] = ['g.belong_to', '=', input('get.belong_to/d')];
+        $belong_to = input('get.belong_to/d');
+        if($belong_to){
+            //$config['where'][] = ['g.belong_to', '=', input('get.belong_to/d')];
+            $config['where'][] = ['g.belong_to', 'exp', "& $belong_to"];
         }
         if(input('get.is_selection/d')){
             $config['where'][] = ['g.is_selection', '=', input('get.is_selection/d')];
