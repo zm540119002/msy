@@ -535,26 +535,23 @@ class Goods extends Base {
             $shareQRCodes = createLogoQRcode($url,$newRelativePath);
 
             $name_len = mb_strlen( $info['headline'], 'utf-8');
+            $name   = [];
             if($name_len>20){
 
-                // 待优化
-
-
-                $name1 =  mb_substr( $info['headline'], 0, 16, 'utf-8' ) ;
-                $name2 =  mb_substr( $info['headline'], 16, 18, 'utf-8' ) ;
-
-
+                $number = 16;
+                for($i=0;$i<=$name_len/$number;$i++){
+                    $name[] = mb_substr( $info['headline'], $number*$i, $number, 'utf-8' ) ;
+                }
 
             }else{
-                $name1 = $info['headline'];
-                $name2 = '';
+                $name[] = $info['headline'];
             }
+
             $init = [
                 'save_path'=>$newRelativePath,   //保存目录  ./uploads/compose/goods....
           /*      'title'=>'维雅生物药妆',
                 'slogan'=>'领先的品牌定制平台',*/
-                'name1'=> $name1,
-                'name2'=> $name2,
+                'name' => $name,
                 'RMB_logo'=> './static/common/img/RMB_logo.png',
                 'money'=>$info['franchise_price'].'元',
                 //'logo_img'=> request()->domain().'/static/index/img/logo.png', // 460*534
@@ -615,8 +612,10 @@ class Goods extends Base {
         imagefill($im, 0, 0, $color);
         imagettftext($im, 20, 0, 100, 35, $text_color, $init['font'], $init['title']); //XX官方旗舰店
         imagettftext($im, 16, 0, 100, 60, $text_color1, $init['font'], $init['slogan']);   //标语
-        imagettftext($im, 13, 0, 20, 650, $text_color, $init['font'], $init['name1']); //说明
-        imagettftext($im, 13, 0, 20, 675, $text_color, $init['font'], $init['name2']); //说明
+
+        // 只显示二行
+        imagettftext($im, 13, 0, 20, 650, $text_color, $init['font'], $init['name'][0]); //说明
+        imagettftext($im, 13, 0, 20, 675, $text_color, $init['font'], $init['name'][1]); //说明
         imagettftext($im, 20, 0, 50, 730, $red_color, $init['font'], $init['money']); //金额
         imagecopyresized($im, $RMB_logo['obj'], 20, 710, 0, 0, 20, 20, $RMB_logo['width'], $RMB_logo['height'] );  //
         //imagecopyresized($im, $logoImg['obj'], 10, 10, 0, 0, 90, 60, $logoImg['width'], $logoImg['height'] );  //平台logo

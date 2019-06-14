@@ -14,7 +14,7 @@
 		<div class="columns_flex l-r-sides">
 			<div>
                 {if $user}
-                   {if $identity.type == 1 || $identity.type == 2}
+                   {if $member.type == 1 || $member.type == 2}
                       加盟店
                       {else /}
                        非合作伙伴
@@ -26,7 +26,7 @@
                 {/if}
             </div>
             <div>
-                {if $identity.type == 1 || $identity.type == 2}
+                {if $member.type == 1 || $member.type == 2}
                  xxxx加盟店
                 {else /}
                 <a href="javascript:void(0)" class="gr async_login"  data-jump_url="{:url('Franchise/applyFranchise')}">
