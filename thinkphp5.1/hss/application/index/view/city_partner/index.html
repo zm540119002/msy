@@ -11,12 +11,13 @@
 		</div>
 	</section>
 	<section class="content-padding">
-		<div class="columns_flex l-r-sides">
+		<div class="columns_flex l-r-sides cy-head">
 			<div>
                 {if $user}
                 {if $member.type == 2}
                 <span>城市合伙人</span>
                 {else /}
+                <span class="cy-icon"></span>
                 <span>非合作伙伴</span>
                 {/if}
                 {else /}
@@ -28,7 +29,7 @@
                      xxx城市合伙人
                     {else /}
                     <a href="javascript:void(0)" class="async_login gr"  data-jump_url="{:url('CityPartner/city')}">
-                        城市合伙人资格申请>
+                        城市合伙人资格申请&nbsp;&nbsp;>
                     </a>
                 {/if}
             </div>
