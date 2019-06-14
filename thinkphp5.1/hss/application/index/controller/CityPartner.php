@@ -66,7 +66,7 @@ class CityPartner extends \common\controller\UserBase {
                        'p.id as pay_id'
                     ]
                 ];
-                $modelPay->getInfo();
+                $modelPay->getInfo($condition);
                 echo $modelPay->getLastSql();exit;
             }
 
