@@ -37,7 +37,7 @@ $(function(){
         $('nav.apply-data-nav li:eq('+index+')').click();
     }
     //填写基本资料
-    $('body').on('click','.one-step',function(){
+    $('body').on('click','.next-step',function(){
         var _this = $(this);
         var data=$('.applicant_form').serializeObject();
         // applicantData.name=data.name;

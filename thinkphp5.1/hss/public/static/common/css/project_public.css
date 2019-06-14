@@ -245,6 +245,6 @@ nav .back_prev_page{
     padding-left:0.55rem;
 }
 /*会员预登记*/
-.memberRegTpl .one-step{
+.memberRegTpl .next-step{
     background: #00A0E9;
 }
