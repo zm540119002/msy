@@ -14,7 +14,7 @@
 		<div class="columns_flex l-r-sides">
 			<div>
                 {if $user}
-                {if $identity.type == 2}
+                {if $member.type == 2}
                 <span>城市合伙人</span>
                 {else /}
                 <span>非合作伙伴</span>
@@ -24,7 +24,7 @@
                 {/if}
             </div>
             <div>
-                {if $identity.type == 2}
+                {if $member.type == 2}
                      xxx城市合伙人
                     {else /}
                     <a href="javascript:void(0)" class="async_login gr"  data-jump_url="{:url('CityPartner/city')}">
