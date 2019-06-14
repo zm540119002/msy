@@ -41,7 +41,13 @@ $(function(){
         });
         $('nav.apply-data-nav li:eq('+index+')').click();
     }
-
+    var statusType=apply[0].apply_status-1;
+    if(statusType==3){
+        $('nav.apply-data-nav li:eq('+statusType+')').click(function(){
+            $(this).addClass('current').siblings().removeClass('current');
+        });
+        $('nav.apply-data-nav li:eq('+statusType+')').click();
+    }
     //填写地址
     $('body').on('click','.search-city',function(){
         area_address =$('.area-address-name').getArea();
