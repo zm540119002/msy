@@ -39,7 +39,7 @@ class Order extends \common\controller\UserBase
             ['update_time'=>time()],
         ];
         $res = $memberModel->allowField(true)->isUpdate(false)->save($data);
-        print_r($memberModel);
+        print_r($memberModel->getAttr('id'));
         exit;
         if (!request()->isPost()) {
             $this->errorMsg('请求方式错误');
