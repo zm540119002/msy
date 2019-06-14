@@ -1,6 +1,6 @@
 {extend name="template/base.html" /}
 {block name="content"}
-<!--会员预登记-->
+<!--会员预登记模板-->
 <section class="member-register-tpl" style="display:none;">
 	<div id="wizard" class="page-bd">
 		<nav class="apply-data-nav">
@@ -17,7 +17,7 @@
 					<input type="hidden" name="store_id" class="store_id" value="{$factoryInfo.id|default=''}">
 					{/notempty}
 					<div class="apply-items">
-						<input type="text" class="name " name="name" value="" placeholder="机构名称(选填)">
+						<input type="text" class="name " name="organizationName" value="" placeholder="机构名称(选填)">
 					</div>
 					<div class="apply-items">
 						<input type="text" class="applicant " name="applicant" value="" placeholder="你的姓名(必填)">
@@ -31,7 +31,7 @@
 			<div class="apply-module hide">
 				<form class="applicant_form">
 					<div class="apply-items">
-						<input type="text" class="applicant " name="applicant" value="" placeholder="收件人姓名">
+						<input type="text" class="applicant consignee" name="consignee" value="" placeholder="收件人姓名">
 					</div>
 					<div class="apply-items">
 						<input type="tel" class="mobile " name="mobile" value="" placeholder="收件人手机号码">
@@ -181,6 +181,7 @@
 <script type="text/javascript" src="api_common_js/swipe.js"></script>
 <script type="text/javascript" src="public_js/jquery.area.js"></script>
 <script type="text/javascript" src="index_js/franchise.js"></script>
+<script type="text/javascript" src="index_js/memberRegister.js"></script>
 <script>
 	var apply = JSON.parse('{$apply|raw}');
 	$(function(){
