@@ -93,7 +93,7 @@ $(function(){
                     layer.close(index);
                 }
             });
-           
+
         }
     });
      //填写基本资料
@@ -145,24 +145,12 @@ $(function(){
         applicantData.step =  $('.apply-data-nav .switch-item.current').index();
         applicantData.pay_code = $('.pay_code').val();
         _this = $(this);
+        console.log(applicantData);return false;
         if(!applicantData.pay_code){
             dialog.error('请选择结算方式');
         }else{
             submitApplicant(_this,applicantData);
         }
-        
-    });
-    // 尾款结算
-    $('body').on('click','.settlement_btn',function () {
-        applicantData.pay_code = $('.pay_code').val();
-        applicantData.step = 5;
-        _this = $(this);
-        if(!applicantData.pay_code){
-            dialog.error('请选择结算方式');
-        }else{
-            submitApplicant(_this,applicantData);
-        }
-
     });
 });
 
