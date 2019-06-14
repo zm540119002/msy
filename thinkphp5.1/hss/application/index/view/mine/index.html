@@ -80,7 +80,7 @@
                 收藏
             </a>
 
-            <a href="javascript:void(0)" class="person-td async_login2" data-jump_url="{:url('TwoDimensionalCode/getUserQRcode')}"/>
+            <a href="javascript:void(0)" class="person-td platform-two-dimensional-code" data-jump_url="{:url('TwoDimensionalCode/getUserQRcode')}"/>
                 <span class="notice" ></span>
                   二维码
             </a>
@@ -270,7 +270,7 @@
                                 dialog.success(data.info);
                                 $('.user_info_list').find('.user_name').text(data.name);
                                 $('.userInfoLayer ').find('.old_name').val(data.name);
-                                //generatingTwoDimensionalCode();
+                                generatingTwoDimensionalCode();
                             }else{
                                 dialog.error(data.info)
                             }

@@ -113,6 +113,7 @@ nav .back_prev_page{
     border-radius:4px;
     color:#000;
     background-size:100% auto;
+    margin:0 0 15px 0;
 }
 .gr{
     color:#009a3e;
@@ -169,4 +170,13 @@ nav .back_prev_page{
 }
 .detail-nav li.current a{
     color:#ff7aab;
+}
+.floor_item.project-list{
+    padding:0;
+}
+.floor_item.project-list li{
+    border-bottom:6px solid #f2f2f2;
+}
+.floor_item.project-list li:last-child{
+    border-bottom:none;
 }

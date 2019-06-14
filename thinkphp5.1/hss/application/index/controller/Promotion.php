@@ -10,7 +10,7 @@ class Promotion extends \common\controller\Base{
             $model = new\app\index\model\Promotion();
             $condition =[
                 'field' => [
-                    'id','name','main_img','tag','intro','title','price','remarks',
+                    'id','name','main_img','tag','intro','title','retail_price','franchise_price','agent_price','remarks',
                 ], 'where' => [
                     ['status', '=', 0],
                     ['shelf_status', '=', 3],

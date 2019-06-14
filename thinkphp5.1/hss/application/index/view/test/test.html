@@ -1,0 +1,44 @@
+{extend name="template/base.html" /}
+{block name="content"}
+<article class="f24">
+	<div id='example-3'>
+		<input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+		<label for="jack">Jack</label>
+		<input type="checkbox" id="john" value="John" v-model="checkedNames">
+		<label for="john">John</label>
+		<input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+		<label for="mike">Mike</label>
+		<br>
+		<span>Checked names: {{ checkedNames }}</span>
+	</div>
+	<div id='example-2'>
+		<input type="checkbox" id="checkbox" v-model="checked" @click="checkAll">
+		<label for="checkbox">{{ checked }}</label>
+	</div>
+</article>
+{/block}
+{block name="footer"}
+{/block}
+{block name="script"}
+<script type="text/javascript">
+	$(function(){
+		new Vue({
+			el: '#example-3',
+			data: {
+				checked: true,
+				checkedNames: []
+			}
+		});
+		new Vue({
+			el: '#example-2',
+			data: {
+				checked: true
+			},methods: {
+				checkAll:function(){
+					console.log(this.checked);
+				}
+			}
+		});
+	});
+</script>
+{/block}

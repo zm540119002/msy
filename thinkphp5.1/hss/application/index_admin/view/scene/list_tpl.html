@@ -33,6 +33,10 @@
             {if $vo.display_type=='detail'}
             <a href="javascript:void(0);" class="relationGoods">增加商品</a>
             | <a href="javascript:void(0);" class="scenePromotion">增加促销</a>
+            {elseif $vo.display_type=='project'}
+                <a href="javascript:void(0);" class="relationProject">项目管理</a>
+            {elseif $vo.display_type='sort'}
+                <a href="javascript:void(0);" class="relationSort">分类管理</a>
             {/if}
         </td>
         <td class="w96">

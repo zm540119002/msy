@@ -76,33 +76,30 @@ class TwoDimensionalCode extends \common\model\Base {
             'name'=> $user['name'], //用户名
             'avatar'=> $user['avatar'],//用户头像
             'save_path'=>config('upload_dir.hss_user_QRCode'),   //保存目录  ./uploads/compose/goods....
-            'base_map'=> request()->domain().'/static/common/img/hss_base_map.jpg', // 460*534  分享底图
-            'hss_share_title'=> request()->domain().'/static/common/img/hss_share_title.jpg', // 460*534  分享底图
-            'hss_share_sm'=> request()->domain().'/static/common/img/hss_share_sm.jpg', // 460*534  分享底图
-            'hss_share_sm1'=> request()->domain().'/static/common/img/hss_share_sm1.jpg', // 460*534  分享底图
+            'hss_1'=> request()->domain().'/static/index/img/hss_1.jpg', // 460*534  分享底图
+            'hss_2'=> request()->domain().'/static/index/img/hss_2.jpg', // 460*534  分享底图
+            'hss_3'=> request()->domain().'/static/index/img/hss_3.jpg', // 460*534  分享底图
             'qrcode'=> request()->domain().'/uploads/'.$shareQRCode, // 120*120
             'font'=>'./static/font/simhei.ttf',   //字体
         ];
         $avatar = $this->imgInfo($init['avatar']);
-        $baseMap = $this->imgInfo($init['base_map']);
         $qrcode = $this->imgInfo($init['qrcode']);
-        $hss_share_title = $this->imgInfo($init['hss_share_title']);
-        $hss_share_sm = $this->imgInfo($init['hss_share_sm']);
-        $hss_share_sm1 = $this->imgInfo($init['hss_share_sm1']);
-        if( !$avatar || !$baseMap || !$qrcode){
+        $hss_1 = $this->imgInfo($init['hss_1']);
+        $hss_2 = $this->imgInfo($init['hss_2']);
+        $hss_3 = $this->imgInfo($init['hss_3']);
+        if( !$avatar || !$hss_1 || !$qrcode || !$hss_2 || !$hss_3){
             return errorMsg('提供的图片问题');
         }
-        $im = imagecreatetruecolor(900, 1500);  //图片大小
+        $im = imagecreatetruecolor(942, 1475);  //图片大小
         $gray_color = imagecolorallocate($im, 87,89,88);
-        $text_color = imagecolorallocate($im, 235, 96, 3);
+        $text_color = imagecolorallocate($im, 255, 255, 255);
         imagefill($im, 0, 0, $gray_color);
         imagettftext($im, 25, 0, 200, 90, $text_color, $init['font'], $init['name']); //名字
-        imagecopyresized($im,          $avatar['obj'], 60, 50, 0, 0, 100, 100, $avatar['width'], $avatar['height'] );  //
-        imagecopyresized($im, $hss_share_title['obj'], 200, 110, 0, 0, 376, 28, 376,28);  //平台logo
-        imagecopyresized($im,         $baseMap['obj'], 0, 200, 0, 0, 900, 628, 1000,628 );  //平台logo
-        imagecopyresized($im,    $hss_share_sm['obj'], 25, 880, 0, 0, 844, 264, 844,264);  //平台logo
-        imagecopyresized($im,   $hss_share_sm1['obj'], 35, 1210, 0, 0, 380, 244, 382,244);  //平台logo
-        imagecopyresized($im,          $qrcode['obj'], 550, 1230, 0, 0, 200, 200, $qrcode['width'], $qrcode['width'] );  //二维
+        imagecopyresized($im, $avatar['obj'], 60, 50, 0, 0, 100, 100, $avatar['width'], $avatar['height'] );  //
+        imagecopyresized($im, $hss_1['obj'], 180, 110, 0, 0, 744, 66, $hss_1['width'],$hss_1['height'] );  //平台logo
+        imagecopyresized($im, $hss_2['obj'], 0, 200, 0, 0, 942, 944, $hss_2['width'],$hss_2['height'] );  //平台logo
+        imagecopyresized($im, $hss_3['obj'], 0, 1150, 0, 0, 563, 309, $hss_3['width'],$hss_3['height'] );  //平台logo
+        imagecopyresized($im, $qrcode['obj'], 600, 1200, 0, 0, 200, 200, $qrcode['width'], $qrcode['width'] );  //二维
         $dir = config('upload_dir.upload_path').'/'.$init['save_path'];
         if(!is_dir($dir)){
             mkdir($dir, 0777, true);

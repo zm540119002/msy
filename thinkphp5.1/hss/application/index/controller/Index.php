@@ -64,8 +64,8 @@ class Index extends \common\controller\Base{
         $this->assign('currentPage',request()->controller().'/'.request()->action());
 
         $unlockingFooterCart = unlockingFooterCartConfigTest([0,2,1,3]);
-        array_push($unlockingFooterCart['menu'][0]['class'],'group_btn25');
-        array_push($unlockingFooterCart['menu'][1]['class'],'group_btn25');
+        array_push($unlockingFooterCart['menu'][0]['class'],'group_btn30');
+        array_push($unlockingFooterCart['menu'][1]['class'],'group_btn20');
         array_push($unlockingFooterCart['menu'][2]['class'],'group_btn25');
         array_push($unlockingFooterCart['menu'][3]['class'],'group_btn25');
         $this->assign('unlockingFooterCart',json_encode($unlockingFooterCart));
@@ -80,6 +80,21 @@ class Index extends \common\controller\Base{
     {
         if(request()->isAjax()){
         }else{
+            $user = checkLogin();
+            $this->assign('user',$user);
+            if($user){
+                $identityMode =  new \app\index\model\Identity();
+                $config =[
+                    'where' => [
+                        ['status', '=', 0],
+                        ['user_id', '=', $user['id']],
+                    ],'field'=>[
+                        'id ','type',
+                    ],
+                ];
+                $identity = $identityMode->getInfo($config);
+                $this->assign('identity',$identity);
+            }
             // 底部菜单，见配置文件custom.footer_menu
             $this->assign('currentPage',request()->controller().'/'.request()->action());
             return $this->fetch('franchise/index');
@@ -93,6 +108,21 @@ class Index extends \common\controller\Base{
     public function cityPartnerIndex(){
         if(request()->isAjax()){
         }else{
+            $user = checkLogin();
+            $this->assign('user',$user);
+            if($user){
+                $identityMode =  new \app\index\model\Identity();
+                $config =[
+                    'where' => [
+                        ['i.status', '=', 0],
+                        ['i.user_id', '=', $user['id']],
+                    ],'field'=>[
+                        'i.id ','i.type',
+                    ],
+                ];
+                $identity = $identityMode->getInfo($config);
+                $this->assign('identity',$identity);
+            }
             // 底部菜单，见配置文件custom.footer_menu
             $this->assign('currentPage',request()->controller().'/'.request()->action());
             return $this->fetch('city_partner/index');
@@ -104,13 +134,13 @@ class Index extends \common\controller\Base{
         if(request()->isAjax()){
         }else{
             $unlockingFooterCart = unlockingFooterCartConfigTest([10,0,9]);
-            array_push($unlockingFooterCart['menu'][0]['class'],'group_btn30');
+            array_push($unlockingFooterCart['menu'][0]['class'],'group_btn20');
             array_push($unlockingFooterCart['menu'][1]['class'],'group_btn40');
-            array_push($unlockingFooterCart['menu'][2]['class'],'group_btn30');
+            array_push($unlockingFooterCart['menu'][2]['class'],'group_btn40');
             $this->assign('unlockingFooterCart',json_encode($unlockingFooterCart));
             $unlockingFooterCart2 = unlockingFooterCartConfigTest([0,2,1,3]);
-            array_push($unlockingFooterCart2['menu'][0]['class'],'group_btn25');
-            array_push($unlockingFooterCart2['menu'][1]['class'],'group_btn25');
+            array_push($unlockingFooterCart2['menu'][0]['class'],'group_btn30');
+            array_push($unlockingFooterCart2['menu'][1]['class'],'group_btn20');
             array_push($unlockingFooterCart2['menu'][2]['class'],'group_btn25');
             array_push($unlockingFooterCart2['menu'][3]['class'],'group_btn25');
             $this->assign('unlockingFooterCart2',json_encode($unlockingFooterCart2));
