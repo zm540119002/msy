@@ -180,6 +180,73 @@ nav .back_prev_page{
 .floor_item.project-list li:last-child{
     border-bottom:none;
 }
+
+.detail-nav li{
+    width:18%;
+}
+.header_title{
+    position:relative;
+    left:0;
+    top:0;
+    width:100%;
+    padding:0.5rem 0;
+}
+.foot_nav_bar{
+    padding: 0.3rem 0;
+}
+.nav_menu{
+    padding:0.6rem 0.6rem 0.6rem 2rem;
+    background: #fff;
+    border-bottom:8px solid #f2f2f2;
+}
+.nav_menu li a {
+     color:#333;
+     font-size:14px;
+}
+.nav_menu li.current a{
+    color:hotpink;
+}
+.nav_menu li.current a:before{
+    background-color:hotpink;
+}
+.activity_bottom_nav{
+    height:40px;
+    line-height: 40px;
+}
+.group_cart_nav .activity{
+    width:100%;
+    background: #E40012;
+    color:#fff;
+}
+.content-padding{
+    padding:15px;
+}
+.weiya_item a{
+    color:#0066cc;
+}
+.weiya_item .head{
+    margin:0 0 12px 0;
+    overflow:hidden;
+}
+.weiya_item .head img{
+    width:15%;
+}
+.head .h-r{
+    margin:0 0 0 58px;
+}
+.weiya_map{
+    height:5.5rem;
+}
+.activityLayer .input-filed{
+    
+    margin:0 0 12px 0;
+}
+.activityLayer .input-filed input{
+    width:100%;
+}
+.activityLayer .layui-m-layercont{
+    padding:15px;
+}
 .scrollwrapper ul.detail-nav{
     width:auto;
     padding-left:0.55rem;
