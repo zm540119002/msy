@@ -11,5 +11,18 @@ class Member extends \common\model\Base {
 	//表的别名
 	protected $alias = 'm';
 
+    /**
+     * 获取账号信息
+     */
+    public function getMemberInfo($uid){
+        $where = [
+            ['user_id','=',$uid],
+        ];
+        $field = [
+            'id','user_id','status','amount','password','salt'
+        ];
+        return $this->where($where)->field($field)->find();
+    }
+
 
 }
