@@ -263,14 +263,101 @@ html,body {
 <script type="text/javascript" src="{:request()->scheme()}://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
 <script>
     $(function(){
-        var html =document.getElementsByTagName('html')[0];
-        html.style.fontSize='';
-        $('.swiper-slide ').css('height',$(window).height()+'px');
-        $('.swiper-slide').find('img').css('paddingBottom',80+'px');
-        $('.nav_menu li').on('click',function(){
-            $(this).addClass('current').siblings().removeClass('current');
-            $('.swiper-container').hide().eq($(this).index()).show();
-        })
+        // var html =document.getElementsByTagName('html')[0];
+        // html.style.fontSize='';
+        // $('.swiper-slide ').css('height',$(window).height()+'px');
+        // $('.swiper-slide').find('img').css('paddingBottom',80+'px');
+        // $('.nav_menu li').on('click',function(){
+        //     $(this).addClass('current').siblings().removeClass('current');
+        //     $('.swiper-container').hide().eq($(this).index()).show();
+        // })
+        var height=$('.detail-nav').height();
+		var offsetHeight=$('.detail-nav').offset().top;
+		$(window).on('scroll',function(){
+			var scrollHeight=$(document).scrollTop();
+
+			if(scrollHeight>offsetHeight){
+				$('.detail-nav').addClass('top-fixed');
+			}else {
+				$('.detail-nav').removeClass('top-fixed');
+			}
+		});
+		//楼层
+
+		var menu = $('#menu');
+		var items = $('#content').find('.floor');
+		var height=$('.detail-nav').height();
+		var offsetHeight=$('.detail-nav').offset().top;
+
+		var _screenHight = window.screen.availHeight;
+		$("#item3").css("min-height",_screenHight+"px");
+
+
+		$(window).scroll(function() {
+			//滚动
+			var top = $(document).scrollTop();
+			var currentId = '';
+			if(top>offsetHeight){
+				$('.detail-nav').addClass('top-fixed');
+			}else {
+				$('.detail-nav').removeClass('top-fixed');
+			}
+			items.each(function(){
+				var m = $(this);
+				var itemTop = m.offset().top;
+
+				if(top + 43>= itemTop ){
+					//currentId = '#' + m.attr('id');
+					currentId = m.attr('id');
+				} else {
+					return false;
+				}
+
+			});
+
+			// 给相应楼层的a 设置 current, 取消其他链接的current
+			var currentLink = menu.find('.active');
+			if(currentId && currentLink.data('item') != currentId) {
+				// currentLink.removeClass('active');
+				menu.find("[data-item='"+ currentId +"']").addClass('active').siblings().removeClass('active');
+                //menu.find("[data-item='"+ currentId +"']").addClass('active');
+			}
+		});
+		// 项目信息切换
+		$('#menu li').on('click',function(){
+		//$(document).ready(function(){
+			var _this=$(this);
+			var id=_this.data('item');
+			items.each(function(){
+				var m = $(this);
+				if(m.attr('id')==id){
+				    var itemTop = m.offset().top;
+					_this.addClass('active').siblings().removeClass('active');
+                    var scrollY=itemTop-40;
+					$('html, body').animate({
+						scrollTop: scrollY
+					},500);
+
+				}else{
+					m.removeClass('active');
+				}
+			});
+			if(_this.index()==2){
+				//项目流程轮播
+				var swiper = new Swiper('.master-swiper-process', {
+					//slidesPerView :2,
+					slidesPerView:"auto",
+					autoplay:true,
+					//slidesOffsetBefore : -50,
+					//spaceBetween: 30,
+					//direction: 'horizontal',
+					pagination: {
+						el: '.swiper-pagination',
+						clickable: true
+					}
+				});
+			}
+		});
     })
     var swiper = new Swiper('.swiper-container', {
         direction: 'vertical',
