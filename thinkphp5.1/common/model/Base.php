@@ -22,8 +22,7 @@ class Base extends \think\Model {
 		if($res === false){
 			return false;
 		}
-
-//		return $id;
+		return $id;
 	}
 
 	/**编辑多条记录

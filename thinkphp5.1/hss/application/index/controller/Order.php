@@ -6,7 +6,32 @@ class Order extends \common\controller\UserBase
     public function __construct(){
         parent::__construct();
 
-        // 自动开通会员
+//        // 自动开通会员
+//        $memberModel = new \app\index\model\Member();
+//        $data = [
+//            ['user_id'=>$this->user['id']],
+//            ['create_time'=>time()],
+//            ['update_time'=>time()],
+//        ];
+//        $res = $memberModel->allowField(true)->isUpdate(false)->save($data);
+//        print_r($memberModel);
+//        exit;
+//        if(!$member = $memberModel->getMemberInfo($this->user['id'])){
+//            $data = [
+//                ['user_id'=>$this->user['id']],
+//                ['create_time'=>time()],
+//                ['update_time'=>time()],
+//            ];
+//            $var = $memberModel->edit($data);
+//            $var = $memberModel->id;
+//            p($var);
+//            exit;
+//        }
+    }
+
+    //生成订单
+    public function generate()
+    {
         $memberModel = new \app\index\model\Member();
         $data = [
             ['user_id'=>$this->user['id']],
@@ -16,22 +41,6 @@ class Order extends \common\controller\UserBase
         $res = $memberModel->allowField(true)->isUpdate(false)->save($data);
         print_r($memberModel);
         exit;
-        if(!$member = $memberModel->getMemberInfo($this->user['id'])){
-            $data = [
-                ['user_id'=>$this->user['id']],
-                ['create_time'=>time()],
-                ['update_time'=>time()],
-            ];
-            $var = $memberModel->edit($data);
-            $var = $memberModel->id;
-            p($var);
-            exit;
-        }
-    }
-
-    //生成订单
-    public function generate()
-    {
         if (!request()->isPost()) {
             $this->errorMsg('请求方式错误');
         }

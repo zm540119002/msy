@@ -1,7 +1,7 @@
 <?php
 namespace app\index\model;
 
-class Member extends \think\Model {
+class Member extends \common\model\Base {
 	// 设置当前模型对应的完整数据表名称
 	protected $table = 'member';
 	// 设置主键
