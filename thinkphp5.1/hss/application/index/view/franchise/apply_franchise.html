@@ -31,16 +31,16 @@
 			<div class="apply-module hide">
 				<form class="applicant_form">
 					<div class="apply-items">
-						<input type="text" class="applicant consignee" name="consignee" value="" placeholder="收件人姓名">
+						<input type="text" class="applicant consignee" name="consignee" value="" placeholder="收件人姓名(必填)">
 					</div>
 					<div class="apply-items">
-						<input type="tel" class="mobile " name="mobile" value="" placeholder="收件人手机号码">
+						<input type="tel" class="mobile " name="mobile" value="" placeholder="收件人手机号码(必填)">
 					</div>
 					<div class="express-area ">
 						<a id="expressArea" href="javascript:void(0)" class="f24 form-group box-flex">
 							<label class="form-label">选择地区：</label>
 							{empty name="address"}
-								<div class="area_address">省 &gt; 市 &gt; 区/县</div>
+								<div class="area_address">省 &gt; 市 &gt; 区/县(必填)</div>
 								{else /}
 								<div class="area_address"></div>
 							{/empty}
@@ -48,7 +48,7 @@
 						</a>
 					</div>
 					<div class="apply-items">
-						<input type="text" class="detail_address" name="detail_address" value="" placeholder="详细地址">
+						<input type="text" class="detail_address" name="detail_address" value="" placeholder="详细地址(必填)">
 					</div>
 					<a href="javascript:void(0);" class="two-step step">下一步</a>
 				</form>
