@@ -19,18 +19,15 @@
         </div>
     </div>
 </section>
-<script>
+<script type="text/javascript">
     function beforehand_register_trigger(){
-        console.log(123);
         let memberRegisterTpl=$('.member-register-tpl').html();
-        $('.test').on('click',function(){
-            layer.open({
-                title:['会员预先登记','border-bottom:1px solid #d9d9d9;'],
-                type:1,
-                anim:'up',
-                className:'memberRegTpl',
-                content:memberRegisterTpl
-            })
-        })
+        layer.open({
+            title:['会员预先登记','border-bottom:1px solid #d9d9d9;'],
+            type:1,
+            anim:'up',
+            className:'memberRegTpl',
+            content:memberRegisterTpl
+        });
     }
 </script>
