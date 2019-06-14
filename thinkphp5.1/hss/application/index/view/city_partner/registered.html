@@ -68,8 +68,11 @@
 					</div>
 				</div>
 				<div class="apply-module hide">
+					{if $apply.apply_status == 4}
+					<div>待审核</div>
+					{else if $apply.apply_status == 5}
 					<div class="columns_flex l-r-sides">
-                        <div>
+						<div>
 							<p>城市名称：<span>广州</span></p>
 							<p>城市级别分类：<span>3线城市</span></p>
 							<p>合伙人级别：<span>二类市场城市合伙人</span></p>
@@ -102,6 +105,8 @@
 							<a href="javascript:void(0);" class="recharge_money">补齐资格款<span class="total_num"></span></a>
 						</div>
 					</footer>
+					{/if}
+
 				</div> 
 			</div>
 		</div>
