@@ -357,6 +357,10 @@
 				}
 			});
 		});
+		// 点击返回上一页
+		$('.back').on("click",function(){
+			history.back(-1)
+		})
 	})
 	// 后加载简介
 	$('document').ready(function(){
