@@ -74,10 +74,10 @@ $(function(){
             dialog.error(content);
             return false;
         }else{
-            $('.weui-flex-item:eq(0)').removeClass('current');
-            $('.weui-flex-item:eq(1)').addClass('current');
-            $('.apply-module:eq(0)').hide();
-            $('.apply-module:eq(1)').show();
+            $('.memberRegTpl .weui-flex-item:eq(0)').removeClass('current');
+            $('.memberRegTpl .weui-flex-item:eq(1)').addClass('current');
+            $('.memberRegTpl .apply-module:eq(0)').hide();
+            $('.memberRegTpl .apply-module:eq(1)').show();
             console.log(applicantData);
             //submitApplicant(_this,applicantData);
         }
