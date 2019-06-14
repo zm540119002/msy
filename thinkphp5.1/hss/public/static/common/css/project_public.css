@@ -180,3 +180,7 @@ nav .back_prev_page{
 .floor_item.project-list li:last-child{
     border-bottom:none;
 }
+.scrollwrapper ul.detail-nav{
+    width:auto;
+    padding-left:0.55rem;
+}
