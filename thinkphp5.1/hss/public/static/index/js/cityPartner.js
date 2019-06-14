@@ -15,35 +15,6 @@ $(function(){
     var statusType=apply[0].apply_status-1;
     console.log(statusType);
     if(statusType<3){
-        if(!$.isEmptyArray(apply)){
-            applicantData.id= apply[0].id;
-            applicantData = {
-                id:apply[0].id,
-                province:apply[0].province,
-                city:apply[0].city,
-                company_name:apply[0].company_name,
-                applicant:apply[0].applicant,
-                mobile:apply[0].mobile,
-                old_apply_status:apply[0].apply_status,
-                pay_id:apply[0].pay_id,
-            };
-
-            //省市区初始化
-            var region = [];
-            region.push(apply[0].province);
-            region.push(apply[0].city);
-            $('.area_address').setArea(region);
-            //资料初始化
-            $('.company_name').val(apply[0].company_name);
-            $('.applicant').val(apply[0].applicant);
-            $('.mobile').val(apply[0].mobile);
-            //定位到已完成步骤
-            var index=apply[0].apply_status-1;
-            $('nav.apply-data-nav li:eq('+index+')').click(function(){
-                $(this).addClass('current').siblings().removeClass('current');
-            });
-            $('nav.apply-data-nav li:eq('+index+')').click();
-        }
 
     }else{
         //待审核
