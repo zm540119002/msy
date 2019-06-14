@@ -6,7 +6,7 @@
 </section>-->
 <article class="f24">
     <div class="scrollwrapper">
-        <div id="menu">
+        <div id="activity-menu" class="scroll-menu">
             <a href="javascript:void(0);" class="back_prev_page" data-jump_url=""></a>
             <ul class="columns_flex detail-nav">
                 <li data-item="item1" ><a href="javascript:;" class="">开放日</a></li>
@@ -141,14 +141,14 @@
 			var scrollHeight=$(document).scrollTop();
 
 			if(scrollHeight>offsetHeight){
-				$('.detail-nav').addClass('top-fixed');
+				$('.scroll-menu').addClass('top-fixed');
 			}else {
-				$('.detail-nav').removeClass('top-fixed');
+				$('.scroll-menu').removeClass('top-fixed');
 			}
 		});
 		//楼层
 
-		var menu = $('#menu');
+		var menu = $('#activity-menu');
 		var items = $('#content').find('.floor');
 		var height=$('.detail-nav').height();
 		var offsetHeight=$('.detail-nav').offset().top;
@@ -162,9 +162,9 @@
 			var top = $(document).scrollTop();
 			var currentId = '';
 			if(top>offsetHeight){
-				$('.detail-nav').addClass('top-fixed');
+				$('.scroll-menu').addClass('top-fixed');
 			}else {
-				$('.detail-nav').removeClass('top-fixed');
+				$('.scroll-menu').removeClass('top-fixed');
 			}
 			items.each(function(){
 				var m = $(this);
@@ -188,7 +188,7 @@
 			}
 		});
 		// 项目信息切换
-		$('#menu li').on('click',function(){
+		$('#activity-menu li').on('click',function(){
 		//$(document).ready(function(){
 			var _this=$(this);
 			var id=_this.data('item');
