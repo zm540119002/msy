@@ -57,7 +57,7 @@ return [
     'cityPartner_fee'=>[
         //一类城市
         1=>[
-            'earnest'=>5000,
+            'earnest'=>0.01,
             'amount'=>0.01,
         ],
         //二类城市
