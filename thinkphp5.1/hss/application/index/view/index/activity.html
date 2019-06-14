@@ -1,283 +1,122 @@
 {extend name="template/base.html" /}
-{block name="css-customize"}
-<style>
-html,body {
-    position: relative;
-    height: 100%;
-}
-.back, .back_prev_page {
-    position: absolute;
-    left: 0;
-    top: 0.82rem;
-    width: 1rem;
-    height: 1rem;
-    display: block;
-    margin-left: 5px;
-    background: url(../../static/common/img/icons/back.png) no-repeat center;
-    background-size: 0.45rem auto;
-}
-.foot_nav_bar a span.f_icon{
-    width:1.8rem;
-    height:1.5rem;
-    background-size: 1.8rem 26rem;
-    background-image:url(../../static/common/img/icons/public_bottom_icons.png);
-}
-.swiper-container {
-    width: 100%;
-    height: 100%;
-}
-.swiper-slide {
-    text-align: center;
-    font-size: 18px;
-    background: #fff;
-
-    /* Center slide text vertically */
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    -webkit-justify-content: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    -webkit-align-items: center;
-    align-items: center;
-}
-.swiper-container-vertical>.swiper-wrapper {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-}
-.header_title{
-    position:relative;
-    left:0;
-    top:0;
-    width:100%;
-    padding:0.5rem 0;
-}
-.foot_nav_bar{
-    padding: 0.3rem 0;
-}
-.foot_nav_bar a span.practitioners {
-    background-position: 0 -2rem;
-}
-.foot_nav_bar a span.business {
-    background-position: 0 -3.8rem;
-}
-.foot_nav_bar a span.cart {
-    background-position: -0.028rem -12rem;
-}
-.foot_nav_bar a span.my {
-    background-position: 0 -14.6rem;
-}
-.nav_menu{
-    padding:0.6rem 0.6rem 0.6rem 2rem;
-    background: #fff;
-    border-bottom:8px solid #f2f2f2;
-}
-.nav_menu li a {
-     color:#333;
-     font-size:14px;
-}
-.nav_menu li.current a{
-    color:hotpink;
-}
-.nav_menu li.current a:before{
-    background-color:hotpink;
-}
-.swiper-container.hide{
-    display: none;
-}
-.activity_bottom_nav{
-    height:40px;
-    line-height: 40px;
-}
-.group_cart_nav .activity{
-    width:100%;
-    background: #E40012;
-    color:#fff;
-}
-.content-padding{
-    padding:15px;
-}
-.f28{
-    font-size:14px;
-}
-.weiya_item a{
-    color:#0066cc;
-}
-.weiya_item .head{
-    margin:0 0 12px 0;
-    overflow:hidden;
-}
-.weiya_item .head img{
-    width:15%;
-}
-.head .h-r{
-    margin:0 0 0 58px;
-}
-.weiya_map{
-    height:20rem;
-}
-.activityLayer .input-filed{
-    
-    margin:0 0 12px 0;
-}
-.activityLayer .input-filed input{
-    width:100%;
-}
-.activityLayer .layui-m-layercont{
-    padding:15px;
-}
-</style>
-{/block}
 {block name="content"}
 <!--<section class="header_title separation-line">
     <a href="javascript:void(0);" class="back_prev_page" data-jump_url=""></a>
     <h2 class="f24">开放日</h2>
 </section>-->
-<section class="activitycontent" style="display:none;">
-    <form>
-        <div class="input-filed">
-            <input type="text" placeholder="姓名">
+<article class="f24">
+    <div class="scrollwrapper">
+        <div id="menu">
+            <a href="javascript:void(0);" class="back_prev_page" data-jump_url=""></a>
+            <ul class="columns_flex detail-nav">
+                <li data-item="item1" ><a href="javascript:;" class="">开放日</a></li>
+                <li data-item="item2" ><a href="javascript:;" class="">总部简介</a></li>
+                <li data-item="item3" ><a href="javascript:;" class="">研发生产</a></li>
+                <li data-item="item4" ><a href="javascript:;" class="">团队骨干</a></li>
+                <li data-item="item5" ><a href="javascript:;" class="">电话地址</a></li>
+            </ul>
         </div>
-        <div class="input-filed">
-            <input type="text" placeholder="企业名称">
-        </div>
-        <div class="input-filed">
-            <input type="tel" placeholder="手机号码">
-        </div>
-        <select class="input-filed">
-            <option value="人数">人数</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-        </select>
-    </form>
-</section>
-<nav style="position:relative;">
-    <a href="javascript:void(0);" class="back_prev_page" data-jump_url=""></a>
-    <ul class="nav_menu">
-        <li data-scene-id="{$vo.id}" class="current">
-            <a href="javascript:void(0);" class="category_nav">开放日</a>
-        </li>
-        <li data-scene-id="{$vo.id}" class="">
-            <a href="javascript:void(0);" class="category_nav">总部简介</a>
-        </li>
-        <li data-scene-id="{$vo.id}" class="">
-            <a href="javascript:void(0);" class="category_nav">研发生产</a>
-        </li>
-        <li data-scene-id="{$vo.id}" class="">
-            <a href="javascript:void(0);" class="category_nav">团队骨干</a>
-        </li>
-        <li data-scene-id="{$vo.id}" class="">
-            <a href="javascript:void(0);" class="category_nav">电话地址</a>
-        </li>
-    </ul>
-</nav>
-<div class="swiper-container swiper-container-initialized swiper-container-vertical swiper-container-ios">
-    <div class="swiper-wrapper">
-        <div class="swiper-slide ">
-            <img src="public_img/activity01.jpg" alt="" class="common_default_img">
-            
-        </div>
-    </div>
-    <div class="group_cart_nav activity_bottom_nav">
-        <a href="javascript:;" class="activity">开放日参观预约</a>
-    </div>
-    <!--<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"><span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 2"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 3"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 4"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 5"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 6"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 7"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 8"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 9"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 10"></span></div>-->
-</div>
-<div class="swiper-container swiper-container-initialized swiper-container-vertical swiper-container-ios hide">
-    <div class="swiper-wrapper">
-        <div class="swiper-slide ">
-            <img src="public_img/cpy_01.jpg" alt="" class="common_default_img">
-        </div>
-        <div class="swiper-slide ">
-            <img src="public_img/cpy_03.jpg" alt="" class="common_default_img">
-        </div>
-    </div>
-    <!--<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"><span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 2"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 3"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 4"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 5"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 6"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 7"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 8"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 9"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 10"></span></div>-->
-</div>
-<div class="swiper-container swiper-container-initialized swiper-container-vertical swiper-container-ios hide">
-    <div class="swiper-wrapper">
-        <div class="swiper-slide ">
-            <img src="public_img/develp_01.jpg" alt="" class="common_default_img">
-        </div>
-        <div class="swiper-slide ">
-            <img src="public_img/develp_02.jpg" alt="" class="common_default_img">
-        </div>
-        <div class="swiper-slide ">
-            <img src="public_img/develp_03.jpg" alt="" class="common_default_img">
-        </div>
-        <div class="swiper-slide ">
-            <img src="public_img/develp_04.jpg" alt="" class="common_default_img">
-        </div>
-        <div class="swiper-slide ">
-            <img src="public_img/develp_05.jpg" alt="" class="common_default_img">
-        </div>
-        <div class="swiper-slide ">
-            <img src="public_img/develp_06.jpg" alt="" class="common_default_img">
-        </div>
-        <div class="swiper-slide ">
-            <img src="public_img/develp_07.jpg" alt="" class="common_default_img">
-        </div>
-    </div>
-    <!--<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"><span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 2"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 3"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 4"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 5"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 6"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 7"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 8"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 9"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 10"></span></div>-->
-</div>
-<div class="swiper-container swiper-container-initialized swiper-container-vertical swiper-container-ios hide">
-    <div class="swiper-wrapper">
-        <div class="swiper-slide ">
-            <img src="public_img/cpy_04.jpg" alt="" class="common_default_img">
-        </div>
-    </div>
-    <!--<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"><span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 2"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 3"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 4"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 5"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 6"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 7"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 8"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 9"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 10"></span></div>-->
-</div>
-<div class="swiper-container swiper-container-initialized swiper-container-vertical swiper-container-ios hide">
-    <div class="weiya_item " >
-        <div class="content-padding">
-            <div class="head">
-                <img src="public_img/hss-logo.png" alt="" class="left">
-                <div class="h-r">
-                    <p>运营部</p>
-                    <p>黑森森官方</p>
+        <div id="content" class="floor-content">
+            <div id="item1" class="floor">
+                <div class="floor_item project-list">
+                    <div class="">
+                        <img src="public_img/activity01.jpg" alt="" class="common_default_img">
+                    </div>
                 </div>
             </div>
-            <div class="columns_flex l-r-sides">
-                <p>何鑫：<a href="tel:15918567008">13828468086</a></p>
-                <p>胡意元：<a href="tel:15918567008">18165511166</a></p>
+            <div id="item2" class="floor">
+                <div class="floor_item">
+                    <p class="content-label">总部简介</p>
+                    <div class="">
+                        <img src="public_img/cpy_01.jpg" alt="" class="common_default_img">
+                    </div>
+                    <div class="">
+                        <img src="public_img/cpy_03.jpg" alt="" class="common_default_img">
+                    </div>
+                </div>
             </div>
-            <div class="columns_flex l-r-sides">
-                <p>申文影：<a href="tel:15918567008">13202029172</a></p>
-                <p>周清萍：<a href="tel:15918567008">13660613163</a></p>
+            <div id="item3" class="floor">
+                <div class="floor_item" >
+                    <p>研发生产</p>
+                    <div class="">
+                        <img src="public_img/develp_01.jpg" alt="" class="common_default_img">
+                    </div>
+                    <div class="">
+                        <img src="public_img/develp_02.jpg" alt="" class="common_default_img">
+                    </div>
+                    <div class="">
+                        <img src="public_img/develp_03.jpg" alt="" class="common_default_img">
+                    </div>
+                    <div class="">
+                        <img src="public_img/develp_04.jpg" alt="" class="common_default_img">
+                    </div>
+                    <div class="">
+                        <img src="public_img/develp_05.jpg" alt="" class="common_default_img">
+                    </div>
+                    <div class="">
+                        <img src="public_img/develp_06.jpg" alt="" class="common_default_img">
+                    </div>
+                    <div class="">
+                        <img src="public_img/develp_07.jpg" alt="" class="common_default_img">
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="content-padding">
-            <div class="c_top">
-                <p class="f28">广州美尚生物医药研究院有限公司</p>
-                <p class="f28">广东维雅生物科技有限公司</p>
-                <p class="f28">地址：广州市经济技术开发区科学城开源大道206号第2层</p>
+            <div id="item4" class="floor">
+                <div class="floor_item" >
+                    <p>团队骨干</p>
+                    <div class="swiper-slide ">
+                        <img src="public_img/cpy_04.jpg" alt="" class="common_default_img">
+                    </div>
+                </div>
             </div>
-            <!--<div class="c_mobile">
-                <p class="f26">维雅品牌定制服务中心</p>
-                <p>朱田：<a href="tel:15918567008">13059156679</a></p>
-                <p>宫学莹：<a href="tel:13711326631">13711326631</a></p>
-                <p>叶雯雯：<a href="tel:13660613163">18820019781</a></p>
-                <p>监督热线：<a href="tel:18820019781">13710651399</a></p>
+            <div id="item5" class="floor">
+                <div class="floor_item" >
+                    <p>电话地址</p>
+                    <div class="weiya_item " >
+                        <div class="content-padding">
+                            <div class="head">
+                                <img src="public_img/hss-logo.png" alt="" class="left">
+                                <div class="h-r">
+                                    <p>运营部</p>
+                                    <p>黑森森官方</p>
+                                </div>
+                            </div>
+                            <div class="columns_flex l-r-sides">
+                                <p>何鑫：<a href="tel:15918567008">13828468086</a></p>
+                                <p>胡意元：<a href="tel:15918567008">18165511166</a></p>
+                            </div>
+                            <div class="columns_flex l-r-sides">
+                                <p>申文影：<a href="tel:15918567008">13202029172</a></p>
+                                <p>周清萍：<a href="tel:15918567008">13660613163</a></p>
+                            </div>
+                        </div>
+                        <div class="content-padding">
+                            <div class="c_top">
+                                <p class="f28">广州美尚生物医药研究院有限公司</p>
+                                <p class="f28">广东维雅生物科技有限公司</p>
+                                <p class="f28">地址：广州市经济技术开发区科学城开源大道206号第2层</p>
+                            </div>
+                            <!--<div class="c_mobile">
+                                <p class="f26">维雅品牌定制服务中心</p>
+                                <p>朱田：<a href="tel:15918567008">13059156679</a></p>
+                                <p>宫学莹：<a href="tel:13711326631">13711326631</a></p>
+                                <p>叶雯雯：<a href="tel:13660613163">18820019781</a></p>
+                                <p>监督热线：<a href="tel:18820019781">13710651399</a></p>
+                            </div>
+                            <div style="padding-right:0.30rem;">
+                                <img src="public_img/contact.gif" alt="" style="width:100%;">
+                            </div>-->
+                        </div>
+                        <div class="content-padding">
+                            <p>维雅工厂的导航定位</p>
+                            <div id="allmap" class="weiya_map"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div style="padding-right:0.30rem;">
-                <img src="public_img/contact.gif" alt="" style="width:100%;">
-            </div>-->
-        </div>
-        <div class="content-padding">
-            <p>维雅工厂的导航定位</p>
-            <div id="allmap" class="weiya_map"></div>
         </div>
     </div>
-</div>
+</article>
 {/block}
 {block name="footer"}
 
@@ -288,14 +127,101 @@ html,body {
 <script type="text/javascript" src="{:request()->scheme()}://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
 <script>
     $(function(){
-        var html =document.getElementsByTagName('html')[0];
-        html.style.fontSize='';
-        $('.swiper-slide ').css('height',$(window).height()+'px');
-        $('.swiper-slide').find('img').css('paddingBottom',80+'px');
-        $('.nav_menu li').on('click',function(){
-            $(this).addClass('current').siblings().removeClass('current');
-            $('.swiper-container').hide().eq($(this).index()).show();
-        })
+        // var html =document.getElementsByTagName('html')[0];
+        // html.style.fontSize='';
+        // $('.swiper-slide ').css('height',$(window).height()+'px');
+        // $('.swiper-slide').find('img').css('paddingBottom',80+'px');
+        // $('.nav_menu li').on('click',function(){
+        //     $(this).addClass('current').siblings().removeClass('current');
+        //     $('.swiper-container').hide().eq($(this).index()).show();
+        // })
+        var height=$('.detail-nav').height();
+		var offsetHeight=$('.detail-nav').offset().top;
+		$(window).on('scroll',function(){
+			var scrollHeight=$(document).scrollTop();
+
+			if(scrollHeight>offsetHeight){
+				$('.detail-nav').addClass('top-fixed');
+			}else {
+				$('.detail-nav').removeClass('top-fixed');
+			}
+		});
+		//楼层
+
+		var menu = $('#menu');
+		var items = $('#content').find('.floor');
+		var height=$('.detail-nav').height();
+		var offsetHeight=$('.detail-nav').offset().top;
+
+		var _screenHight = window.screen.availHeight;
+		$("#item3").css("min-height",_screenHight+"px");
+
+
+		$(window).scroll(function() {
+			//滚动
+			var top = $(document).scrollTop();
+			var currentId = '';
+			if(top>offsetHeight){
+				$('.detail-nav').addClass('top-fixed');
+			}else {
+				$('.detail-nav').removeClass('top-fixed');
+			}
+			items.each(function(){
+				var m = $(this);
+				var itemTop = m.offset().top;
+
+				if(top + 43>= itemTop ){
+					//currentId = '#' + m.attr('id');
+					currentId = m.attr('id');
+				} else {
+					return false;
+				}
+
+			});
+
+			// 给相应楼层的a 设置 current, 取消其他链接的current
+			var currentLink = menu.find('.active');
+			if(currentId && currentLink.data('item') != currentId) {
+				// currentLink.removeClass('active');
+				menu.find("[data-item='"+ currentId +"']").addClass('active').siblings().removeClass('active');
+                //menu.find("[data-item='"+ currentId +"']").addClass('active');
+			}
+		});
+		// 项目信息切换
+		$('#menu li').on('click',function(){
+		//$(document).ready(function(){
+			var _this=$(this);
+			var id=_this.data('item');
+			items.each(function(){
+				var m = $(this);
+				if(m.attr('id')==id){
+				    var itemTop = m.offset().top;
+					_this.addClass('active').siblings().removeClass('active');
+                    var scrollY=itemTop-40;
+					$('html, body').animate({
+						scrollTop: scrollY
+					},500);
+
+				}else{
+					m.removeClass('active');
+				}
+			});
+			if(_this.index()==2){
+				//项目流程轮播
+				var swiper = new Swiper('.master-swiper-process', {
+					//slidesPerView :2,
+					slidesPerView:"auto",
+					autoplay:true,
+					//slidesOffsetBefore : -50,
+					//spaceBetween: 30,
+					//direction: 'horizontal',
+					pagination: {
+						el: '.swiper-pagination',
+						clickable: true
+					}
+				});
+			}
+		});
     })
     var swiper = new Swiper('.swiper-container', {
         direction: 'vertical',
