@@ -15,7 +15,7 @@ class Order extends \common\controller\UserBase
                 ['update_time'=>time()],
             ];
             $var = $memberModel->edit($data);
-            p($var);
+            p($memberModel->id);
             exit;
         }
     }
