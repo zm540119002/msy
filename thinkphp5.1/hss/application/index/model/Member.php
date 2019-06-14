@@ -15,13 +15,16 @@ class Member extends \common\model\Base {
      * 获取账号信息
      */
     public function getMemberInfo($uid){
-        $where = [
-            ['user_id','=',$uid],
+        $config = [
+
+            'where' => [
+                ['user_id','=',$uid],
+            ]
         ];
-        $field = [
-            'id','user_id','status','amount','password','salt'
-        ];
-        return $this->where($where)->field($field)->find();
+        //p($config);
+        //exit;
+        //return $this->where($where)->field($field)->find();
+        return $this->getInfo($config);
     }
 
 
