@@ -14,20 +14,19 @@ $(function(){
      //初始化 未完成的申请
     var statusType=apply[0].apply_status-1;
     console.log(statusType);
-    if(statusType<3){
-        if(!$.isEmptyArray(apply)){
-            applicantData.id= apply[0].id;
-            applicantData = {
-                id:apply[0].id,
-                province:apply[0].province,
-                city:apply[0].city,
-                company_name:apply[0].company_name,
-                applicant:apply[0].applicant,
-                mobile:apply[0].mobile,
-                old_apply_status:apply[0].apply_status,
-                pay_id:apply[0].pay_id,
-            };
-
+    if(!$.isEmptyArray(apply)){
+        applicantData.id= apply[0].id;
+        applicantData = {
+            id:apply[0].id,
+            province:apply[0].province,
+            city:apply[0].city,
+            company_name:apply[0].company_name,
+            applicant:apply[0].applicant,
+            mobile:apply[0].mobile,
+            old_apply_status:apply[0].apply_status,
+            pay_id:apply[0].pay_id,
+        };
+        if(statusType<3){
             //省市区初始化
             var region = [];
             region.push(apply[0].province);
@@ -43,19 +42,20 @@ $(function(){
                 $(this).addClass('current').siblings().removeClass('current');
             });
             $('nav.apply-data-nav li:eq('+index+')').click();
-        }
 
-    }else{
-        //待审核
-        //资格完款
-        if(statusType==4 || statusType==3){
-            statusType = 3;
-            $('nav.apply-data-nav li:eq(3)').click(function(){
-                $(this).addClass('current').siblings().removeClass('current');
-            });
-            $('nav.apply-data-nav li:eq(3)').click();
+        }else{
+            //待审核
+            //资格完款
+            if(statusType==4 || statusType==3){
+                statusType = 3;
+                $('nav.apply-data-nav li:eq(3)').click(function(){
+                    $(this).addClass('current').siblings().removeClass('current');
+                });
+                $('nav.apply-data-nav li:eq(3)').click();
+            }
         }
     }
+
 
     //填写地址
     $('body').on('click','.search-city',function(){
