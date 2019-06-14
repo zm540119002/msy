@@ -49,7 +49,7 @@ class Order extends \common\controller\UserBase
         }else{
 
         }*/
-
+        //$res['type'] = 1;
 
         if( $order_type==2 ){
 
