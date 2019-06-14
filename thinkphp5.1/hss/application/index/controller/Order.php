@@ -7,16 +7,16 @@ class Order extends \common\controller\UserBase
         parent::__construct();
 
         // 自动开通会员
-        $memberModel = new \app\index\model\Member();
+        $memberModel = new \app\index\model\Member();;
         if(!$member = $memberModel->getMemberInfo($this->user['id'])){
             $data = [
                 ['user_id'=>$this->user['id']],
                 ['create_time'=>time()],
                 ['update_time'=>time()],
             ];
-            $memberModel->allowField(true)->isUpdate(false)->save($data);
             $var = $memberModel->edit($data);
-            p($memberModel->getAttr('id'));
+            $var = $memberModel->id;
+            p($var);
             exit;
         }
     }
