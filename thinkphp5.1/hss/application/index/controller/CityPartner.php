@@ -46,7 +46,6 @@ class CityPartner extends \common\controller\UserBase {
                     ,'p.sn','p.id as pay_id'
                 ],'join' => [
                      ['pay p','p.sn = cp.earnest_sn','left'],
-                     ['pay p','p.sn = cp.balance_sn','left'],
                 ]
             ];
             $selfApplyList = $modelCityPartner -> getList($condition);
