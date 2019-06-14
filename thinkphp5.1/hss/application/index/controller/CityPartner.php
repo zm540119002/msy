@@ -151,15 +151,17 @@ class CityPartner extends \common\controller\UserBase {
             //尾款支付
             case 4:
                 $paySn = generateSN(); //内部支付编号
-                $postData['balance_sn'] = $paySn;
                 if($postData['id']){
+                    $data = [
+                        'balance_sn' => $paySn
+                    ];
                     $where = [
                         'id'=>$postData['id'],
                         'user_id'=>$this->user['id'],
                         'status'=>0,
                     ];
                 }
-                $id  = $modelCityPartner->edit($postData,$where);
+                $id  = $modelCityPartner->edit($data,$where);
                 if(false===$id){
                     $modelCityPartner ->rollback();
                     $this->errorMsg('失败');
