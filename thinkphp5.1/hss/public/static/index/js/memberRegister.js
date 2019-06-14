@@ -95,7 +95,7 @@ $(function(){
         applicantData.area = area_address[2];
         var content='';
         if(!applicantData.consignee){
-            content='收件人姓名';
+            content='请填写收件人姓名';
         }else if(!register.phoneCheck(applicantData.mobile)){
             content='请填写手机号码';
         }else if(!area_address){
