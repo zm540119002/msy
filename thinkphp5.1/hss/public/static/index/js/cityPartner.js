@@ -57,10 +57,6 @@ $(function(){
         }
     }
 
-
-
-
-
     //填写地址
     $('body').on('click','.search-city',function(){
         area_address =$('.area-address-name').getArea();
@@ -144,10 +140,12 @@ $(function(){
         $('.pay_code').val(pay_code);
     });
 
-    // 结算
+    // 资格结算
     $('body').on('click','.settlement_btn',function () {
+        applicantData.step =  $('.apply-data-nav .switch-item.current').index();
+        console.log(applicantData.step);
+        return false;
         applicantData.pay_code = $('.pay_code').val();
-        applicantData.step = 3;
         _this = $(this);
         if(!applicantData.pay_code){
             dialog.error('请选择结算方式');
@@ -155,6 +153,18 @@ $(function(){
             submitApplicant(_this,applicantData);
         }
         
+    });
+    // 尾款结算
+    $('body').on('click','.settlement_btn',function () {
+        applicantData.pay_code = $('.pay_code').val();
+        applicantData.step = 5;
+        _this = $(this);
+        if(!applicantData.pay_code){
+            dialog.error('请选择结算方式');
+        }else{
+            submitApplicant(_this,applicantData);
+        }
+
     });
 });
 
@@ -205,7 +215,7 @@ function submitApplicant(_this,postData){
                     $('.weui-flex-item:eq(2)').addClass('current');
                     $('.apply-module:eq(1)').hide();
                     $('.apply-module:eq(2)').show();
-                }else if(postData.step==3){
+                }else if(postData.step==3 ||postData.step==4 ){
                     location.href = data.data.url;
                 }
             }else{

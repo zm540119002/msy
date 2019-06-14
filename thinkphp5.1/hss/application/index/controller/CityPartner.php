@@ -108,8 +108,8 @@ class CityPartner extends \common\controller\UserBase {
                 }
                 break;
             case 3:
-                $earnestSn = generateSN(); //内部支付编号
-                $postData['earnest_sn'] = $earnestSn;
+                $paySn = generateSN(); //内部支付编号
+                $postData['earnest_sn'] = $paySn;
                 $postData['earnest'] = config('custom.cityPartner_fee')[1]['earnest'];
                 $postData['amount'] = config('custom.cityPartner_fee')[1]['amount'];
                 $postData['create_time'] = time();
@@ -128,7 +128,7 @@ class CityPartner extends \common\controller\UserBase {
                 //生成支付表数据
                 $modelPay = new \app\index\model\Pay();
                 $data = [
-                    'sn' => $earnestSn,
+                    'sn' => $paySn,
                     'actually_amount' =>config('custom.cityPartner_fee')[1]['earnest'],
                     'user_id' => $this->user['id'],
                     'pay_code' => $postData['pay_code'],
@@ -148,9 +148,47 @@ class CityPartner extends \common\controller\UserBase {
                     return errorMsg('失败');
                 };
                 break;
+            //尾款支付
+            case 4:
+                $paySn = generateSN(); //内部支付编号
+                $postData['balance_sn'] = $paySn;
+                if($postData['id']){
+                    $where = [
+                        'id'=>$postData['id'],
+                        'user_id'=>$this->user['id'],
+                        'status'=>0,
+                    ];
+                }
+                $id  = $modelCityPartner->edit($postData,$where);
+                if(false===$id){
+                    $modelCityPartner ->rollback();
+                    $this->errorMsg('失败');
+                }
+                //生成支付表数据
+                $modelPay = new \app\index\model\Pay();
+                $data = [
+                    'sn' => $paySn,
+                    'actually_amount' =>config('custom.cityPartner_fee')[1]['amount'],
+                    'user_id' => $this->user['id'],
+                    'pay_code' => $postData['pay_code'],
+                    'type' => config('custom.pay_type')['cityPartnerSeatPay']['code'],
+                    'create_time' => time(),
+                ];
+                if(isset($postData['pay_id']) && $postData['pay_id']){
+                    $where1 = [
+                        'id'=>$postData['pay_id'],
+                        'user_id'=>$this->user['id'],
+                        'status'=>0,
+                    ];
+                }
+                $payId = $modelPay->edit($data,$where1);
+                if(false===$payId){
+                    $modelCityPartner ->rollback();
+                    return errorMsg('失败');
+                };
         }
         $modelCityPartner -> commit();
-        $this->successMsg('成功',['url'=>config('custom.pay_gateway').$earnestSn,'id'=>$id]);
+        $this->successMsg('成功',['url'=>config('custom.pay_gateway').$paySn,'id'=>$id]);
     }
 
     //尾款结算
