@@ -2,6 +2,25 @@
 namespace app\index\controller;
 class Order extends \common\controller\UserBase
 {
+
+    public function __construct(){
+        parent::__construct();
+
+        // 自动开通会员
+        $memberModel = new \app\index\model\Member();;
+        if(!$member = $memberModel->getMemberInfo($this->user['id'])){
+            $data = [
+                ['user_id'=>$this->user['id']],
+                ['create_time'=>time()],
+                ['update_time'=>time()],
+            ];
+            $var = $memberModel->edit($data);
+            $var = $memberModel->id;
+            p($var);
+            exit;
+        }
+    }
+
     //生成订单
     public function generate()
     {
@@ -22,34 +41,10 @@ class Order extends \common\controller\UserBase
         if(empty($goodsIds)){
             $this->errorMsg('请求数据不能为空');
         }
-
+        p(2222);
+        exit;
 
         // 非会员可以购买的商品
-        $identityModel = new \app\index\model\Member();
-        $condition = [
-            'field' => [
-                'type'
-            ],
-            'where' => [
-                ['user_id','=',$this->user['id']]
-            ],
-        ];
-
-        $res = $identityModel->getInfo($condition);
-
-/*        if( $order_type==2 ){
-            $condition = [
-                'field' => [
-                    'id'
-                ],'where' => [
-                    ['g.id','=',$id]
-                ],
-            ];
-
-        }else{
-
-        }*/
-        //$res['type'] = 1;
 
         if( $order_type==2 ){
 
