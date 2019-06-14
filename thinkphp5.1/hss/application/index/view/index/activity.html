@@ -1,41 +1,11 @@
 {extend name="template/base.html" /}
 {block name="css-customize"}
 <style>
-.foot_nav_bar a span.f_icon{
-    width:1.8rem;
-    height:1.5rem;
-    background-size: 1.8rem 26rem;
-    background-image:url(../../static/common/img/icons/public_bottom_icons.png);
-}
-.swiper-container {
-    width: 100%;
-    height: 100%;
-}
-.swiper-slide {
-    text-align: center;
-    font-size: 18px;
-    background: #fff;
-
-    /* Center slide text vertically */
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    -webkit-justify-content: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    -webkit-align-items: center;
-    align-items: center;
-}
-.swiper-container-vertical>.swiper-wrapper {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
+ .scrollwrapper ul{
+     padding-left:0.55rem;
+ }
+.detail-nav li{
+    width:18%;
 }
 .header_title{
     position:relative;
@@ -46,18 +16,6 @@
 }
 .foot_nav_bar{
     padding: 0.3rem 0;
-}
-.foot_nav_bar a span.practitioners {
-    background-position: 0 -2rem;
-}
-.foot_nav_bar a span.business {
-    background-position: 0 -3.8rem;
-}
-.foot_nav_bar a span.cart {
-    background-position: -0.028rem -12rem;
-}
-.foot_nav_bar a span.my {
-    background-position: 0 -14.6rem;
 }
 .nav_menu{
     padding:0.6rem 0.6rem 0.6rem 2rem;
@@ -74,9 +32,6 @@
 .nav_menu li.current a:before{
     background-color:hotpink;
 }
-.swiper-container.hide{
-    display: none;
-}
 .activity_bottom_nav{
     height:40px;
     line-height: 40px;
@@ -88,9 +43,6 @@
 }
 .content-padding{
     padding:15px;
-}
-.f28{
-    font-size:14px;
 }
 .weiya_item a{
     color:#0066cc;
