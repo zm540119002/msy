@@ -38,8 +38,7 @@ class Order extends \common\controller\UserBase
             ['create_time'=>time()],
             ['update_time'=>time()],
         ];
-        $memberModel->edit($data);
-        echo $memberModel->getLastSql();exit;
+
         $res = $memberModel->allowField(true)->isUpdate(false)->save($data);
         print_r($memberModel->id);
         exit;
