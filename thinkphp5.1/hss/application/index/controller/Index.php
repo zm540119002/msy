@@ -83,16 +83,16 @@ class Index extends \common\controller\Base{
             $user = checkLogin();
             $this->assign('user',$user);
             if($user){
-                $identityMode =  new \app\index\model\Identity();
+                $memberMode =  new \app\index\model\Member();
                 $config =[
                     'where' => [
-                        ['status', '=', 0],
-                        ['user_id', '=', $user['id']],
+                        ['m.status', '=', 0],
+                        ['m.user_id', '=', $user['id']],
                     ],'field'=>[
-                        'id ','type',
+                        'm.id ','m.type',
                     ],
                 ];
-                $identity = $identityMode->getInfo($config);
+                $identity = $memberMode->getInfo($config);
                 $this->assign('identity',$identity);
             }
             // 底部菜单，见配置文件custom.footer_menu
@@ -111,17 +111,17 @@ class Index extends \common\controller\Base{
             $user = checkLogin();
             $this->assign('user',$user);
             if($user){
-                $identityMode =  new \app\index\model\Identity();
+                $memberMode =  new \app\index\model\Member();
                 $config =[
                     'where' => [
-                        ['i.status', '=', 0],
-                        ['i.user_id', '=', $user['id']],
+                        ['m.status', '=', 0],
+                        ['m.user_id', '=', $user['id']],
                     ],'field'=>[
-                        'i.id ','i.type',
+                        'm.id ','m.type',
                     ],
                 ];
-                $identity = $identityMode->getInfo($config);
-                $this->assign('identity',$identity);
+                $member = $memberMode->getInfo($config);
+                $this->assign('identity',$member);
             }
             // 底部菜单，见配置文件custom.footer_menu
             $this->assign('currentPage',request()->controller().'/'.request()->action());
