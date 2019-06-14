@@ -74,20 +74,8 @@ class Order extends \common\controller\UserBase
 
             $goodsIds = array_column($goodsList,'goods_id');
 
-            $beFoundGoodsList = $promotion;
-            $findGoodsList = [];
-            foreach ($beFoundGoodsList as $value){
-                $goodsBinary = strrev(decbin($value['belong_to_member_buy']));
-                $findBinary = strrev(decbin($res['type']));
-                $findBinaryLen = strlen($findBinary);
-                $find = substr_compare ($goodsBinary,$findBinary,- $findBinaryLen,$findBinaryLen);
-                if($find==0){
-                    $findGoodsList[] = $value;
-                }
-            }
-
-            if($promotion['belong_to_member_buy']!=$res['type']){
-                $this->errorMsg('非会员 !');
+            if(!($promotion['belong_to_member_buy']&$res['type'])){
+                $this->errorMsg('仅限会员 !');
             }
 
 
