@@ -11,12 +11,13 @@
 		</div>
 	</section>
 	<section class="content-padding">
-		<div class="columns_flex l-r-sides">
+		<div class="columns_flex l-r-sides cy-head">
 			<div>
                 {if $user}
                 {if $member.type == 2}
                 <span>城市合伙人</span>
                 {else /}
+                <span class="cy-icon"></span>
                 <span>非合作伙伴</span>
                 {/if}
                 {else /}
