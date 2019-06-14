@@ -1,78 +1,4 @@
 {extend name="template/base.html" /}
-{block name="css-customize"}
-<style>
- .scrollwrapper ul.detail-nav{
-     width:auto;
-     padding-left:0.55rem;
- }
-.detail-nav li{
-    width:18%;
-}
-.header_title{
-    position:relative;
-    left:0;
-    top:0;
-    width:100%;
-    padding:0.5rem 0;
-}
-.foot_nav_bar{
-    padding: 0.3rem 0;
-}
-.nav_menu{
-    padding:0.6rem 0.6rem 0.6rem 2rem;
-    background: #fff;
-    border-bottom:8px solid #f2f2f2;
-}
-.nav_menu li a {
-     color:#333;
-     font-size:14px;
-}
-.nav_menu li.current a{
-    color:hotpink;
-}
-.nav_menu li.current a:before{
-    background-color:hotpink;
-}
-.activity_bottom_nav{
-    height:40px;
-    line-height: 40px;
-}
-.group_cart_nav .activity{
-    width:100%;
-    background: #E40012;
-    color:#fff;
-}
-.content-padding{
-    padding:15px;
-}
-.weiya_item a{
-    color:#0066cc;
-}
-.weiya_item .head{
-    margin:0 0 12px 0;
-    overflow:hidden;
-}
-.weiya_item .head img{
-    width:15%;
-}
-.head .h-r{
-    margin:0 0 0 58px;
-}
-.weiya_map{
-    height:5.5rem;
-}
-.activityLayer .input-filed{
-    
-    margin:0 0 12px 0;
-}
-.activityLayer .input-filed input{
-    width:100%;
-}
-.activityLayer .layui-m-layercont{
-    padding:15px;
-}
-</style>
-{/block}
 {block name="content"}
 <!--<section class="header_title separation-line">
     <a href="javascript:void(0);" class="back_prev_page" data-jump_url=""></a>
@@ -80,7 +6,7 @@
 </section>-->
 <article class="f24">
     <div class="scrollwrapper">
-        <div id="menu">
+        <div id="activity-menu" class="scroll-menu">
             <a href="javascript:void(0);" class="back_prev_page" data-jump_url=""></a>
             <ul class="columns_flex detail-nav">
                 <li data-item="item1" ><a href="javascript:;" class="">开放日</a></li>
@@ -215,14 +141,14 @@
 			var scrollHeight=$(document).scrollTop();
 
 			if(scrollHeight>offsetHeight){
-				$('.detail-nav').addClass('top-fixed');
+				$('.scroll-menu').addClass('top-fixed');
 			}else {
-				$('.detail-nav').removeClass('top-fixed');
+				$('.scroll-menu').removeClass('top-fixed');
 			}
 		});
 		//楼层
 
-		var menu = $('#menu');
+		var menu = $('#activity-menu');
 		var items = $('#content').find('.floor');
 		var height=$('.detail-nav').height();
 		var offsetHeight=$('.detail-nav').offset().top;
@@ -236,9 +162,9 @@
 			var top = $(document).scrollTop();
 			var currentId = '';
 			if(top>offsetHeight){
-				$('.detail-nav').addClass('top-fixed');
+				$('.scroll-menu').addClass('top-fixed');
 			}else {
-				$('.detail-nav').removeClass('top-fixed');
+				$('.scroll-menu').removeClass('top-fixed');
 			}
 			items.each(function(){
 				var m = $(this);
@@ -262,7 +188,7 @@
 			}
 		});
 		// 项目信息切换
-		$('#menu li').on('click',function(){
+		$('#activity-menu li').on('click',function(){
 		//$(document).ready(function(){
 			var _this=$(this);
 			var id=_this.data('item');

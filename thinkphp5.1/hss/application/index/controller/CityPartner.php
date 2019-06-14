@@ -152,4 +152,15 @@ class CityPartner extends \common\controller\UserBase {
         $modelCityPartner -> commit();
         $this->successMsg('成功',['url'=>config('custom.pay_gateway').$earnestSn,'id'=>$id]);
     }
+
+    //尾款结算
+    public function balance()
+    {
+        if(request()->isAjax()){
+
+        }else{
+           return $this->fetch();
+        }
+
+    }
 }
