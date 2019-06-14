@@ -248,3 +248,7 @@ nav .back_prev_page{
 .memberRegTpl .next-step{
     background: #00A0E9;
 }
+.weui-flex-item .base_add {
+    background: #fff url(../../common/img/base_add.png) no-repeat center 0;
+    background-size: 40px auto;
+}
