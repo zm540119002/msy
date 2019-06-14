@@ -171,6 +171,8 @@ class Index extends \common\controller\Base{
     // 页面
     public function staticPage(){
         $html_name = input('page/s');
+
+        $this->assignStandardBottomButton([21,22]);
         if($html_name){
             $view = strtolower($html_name);
 
