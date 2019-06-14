@@ -8,7 +8,8 @@ class Order extends \common\controller\UserBase
 
         // 自动开通会员
         $memberModel = new \app\index\model\Member();
-        if(!$member = $memberModel->getMemberInfo($this->user['id'])){
+        p($memberModel);
+        exit;
             $data = [
                 ['user_id'=>$this->user['id']],
                 ['create_time'=>time()],
