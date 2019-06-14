@@ -74,7 +74,7 @@ class Order extends \common\controller\UserBase
 
             $goodsIds = array_column($goodsList,'goods_id');
 
-            // 
+            //
         }
 
 
