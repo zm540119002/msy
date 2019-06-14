@@ -38,7 +38,7 @@ class Order extends \common\controller\UserBase
             ['create_time'=>time()],
             ['update_time'=>time()],
         ];
-        $res = $memberModel->isUpdate(false)->save($data);
+        $res = $memberModel->allowField(true)->isUpdate(false)->save($data);
         print_r($memberModel->id);
         exit;
         if (!request()->isPost()) {
