@@ -185,6 +185,7 @@ nav .back_prev_page{
     left:0;
     top:0;
     width:100%;
+    z-index:100;
 }
 .nav_menu{
     padding:0.6rem 0.6rem 0.6rem 2rem;
