@@ -28,7 +28,7 @@
 
 .mid_module_right .d-r{
     margin:0 0 0 0.8rem;
-}
+} 
 .goods_list li{
     border:none;
 }
@@ -240,7 +240,7 @@ nav .back_prev_page{
 .activityLayer .layui-m-layercont{
     padding:15px;
 }
-#menu ul.detail-nav{
+#activity-menu ul.detail-nav{
     width:auto;
     padding-left:0.55rem;
 }
