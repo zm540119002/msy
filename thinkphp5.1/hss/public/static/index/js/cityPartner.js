@@ -145,6 +145,8 @@ $(function(){
         applicantData.step =  $('.apply-data-nav .switch-item.current').index();
         applicantData.pay_code = $('.pay_code').val();
         _this = $(this);
+        consloe.log(applicantData);
+        return false;
         if(!applicantData.pay_code){
             dialog.error('请选择结算方式');
         }else{
