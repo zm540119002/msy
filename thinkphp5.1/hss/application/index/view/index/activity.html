@@ -1,56 +1,12 @@
 {extend name="template/base.html" /}
 {block name="css-customize"}
 <style>
-html,body {
-    position: relative;
-    height: 100%;
-}
-.back, .back_prev_page {
-    position: absolute;
-    left: 0;
-    top: 0.82rem;
-    width: 1rem;
-    height: 1rem;
-    display: block;
-    margin-left: 5px;
-    background: url(../../static/common/img/icons/back.png) no-repeat center;
-    background-size: 0.45rem auto;
-}
-.foot_nav_bar a span.f_icon{
-    width:1.8rem;
-    height:1.5rem;
-    background-size: 1.8rem 26rem;
-    background-image:url(../../static/common/img/icons/public_bottom_icons.png);
-}
-.swiper-container {
-    width: 100%;
-    height: 100%;
-}
-.swiper-slide {
-    text-align: center;
-    font-size: 18px;
-    background: #fff;
-
-    /* Center slide text vertically */
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    -webkit-justify-content: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    -webkit-align-items: center;
-    align-items: center;
-}
-.swiper-container-vertical>.swiper-wrapper {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
+ .scrollwrapper ul.detail-nav{
+     width:auto;
+     padding-left:0.55rem;
+ }
+.detail-nav li{
+    width:18%;
 }
 .header_title{
     position:relative;
@@ -61,18 +17,6 @@ html,body {
 }
 .foot_nav_bar{
     padding: 0.3rem 0;
-}
-.foot_nav_bar a span.practitioners {
-    background-position: 0 -2rem;
-}
-.foot_nav_bar a span.business {
-    background-position: 0 -3.8rem;
-}
-.foot_nav_bar a span.cart {
-    background-position: -0.028rem -12rem;
-}
-.foot_nav_bar a span.my {
-    background-position: 0 -14.6rem;
 }
 .nav_menu{
     padding:0.6rem 0.6rem 0.6rem 2rem;
@@ -89,9 +33,6 @@ html,body {
 .nav_menu li.current a:before{
     background-color:hotpink;
 }
-.swiper-container.hide{
-    display: none;
-}
 .activity_bottom_nav{
     height:40px;
     line-height: 40px;
@@ -103,9 +44,6 @@ html,body {
 }
 .content-padding{
     padding:15px;
-}
-.f28{
-    font-size:14px;
 }
 .weiya_item a{
     color:#0066cc;
@@ -140,29 +78,10 @@ html,body {
     <a href="javascript:void(0);" class="back_prev_page" data-jump_url=""></a>
     <h2 class="f24">开放日</h2>
 </section>-->
-<section class="activitycontent" style="display:none;">
-    <form>
-        <div class="input-filed">
-            <input type="text" placeholder="姓名">
-        </div>
-        <div class="input-filed">
-            <input type="text" placeholder="企业名称">
-        </div>
-        <div class="input-filed">
-            <input type="tel" placeholder="手机号码">
-        </div>
-        <select class="input-filed">
-            <option value="人数">人数</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-        </select>
-    </form>
-</section>
-
 <article class="f24">
     <div class="scrollwrapper">
         <div id="menu">
+            <a href="javascript:void(0);" class="back_prev_page" data-jump_url=""></a>
             <ul class="columns_flex detail-nav">
                 <li data-item="item1" ><a href="javascript:;" class="">开放日</a></li>
                 <li data-item="item2" ><a href="javascript:;" class="">总部简介</a></li>
