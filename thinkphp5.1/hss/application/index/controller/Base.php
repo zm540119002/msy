@@ -14,12 +14,20 @@ class Base extends \common\controller\UserBase{
         // 平台初始化
         if (!$wallet = session(config('app.app_name'))) {
             // 自动开通钱包
-            $model = new \app\index\model\Wallet();;
-            if(!$wallet = $model->getWalletInfo($this->user['id'])){
+            $walletModel = new \app\index\model\Wallet();;
+            if(!$wallet = $walletModel->getWalletInfo($this->user['id'])){
 
-                $model->edit(['user_id'=>$this->user['id']]);
-                $wallet = $model->getWalletInfo($this->user['id']);
+                $walletModel->edit(['user_id'=>$this->user['id']]);
+                $wallet = $walletModel->getWalletInfo($this->user['id']);
             }
+            // 自动开通会员
+            $memberModel = new \app\index\model\Member();;
+            if(!$member = $memberModel->getMemberInfo($this->user['id'])){
+
+                $memberModel->edit(['user_id'=>$this->user['id']]);
+                //$member = $memberModel->$memberModel($this->user['id']);
+            }
+
             session(config('app.app_name'), $wallet);
         }
         session(config('app.app_name'), null);
