@@ -245,6 +245,14 @@ nav .back_prev_page{
     padding-left:0.55rem;
 }
 /*会员预登记*/
-.memberRegTpl .one-step{
+.memberRegTpl .step{
     background: #00A0E9;
+}
+.weui-flex-item .base_add {
+    background: #fff url(../../common/img/base_add.png) no-repeat center 0;
+    background-size: 40px auto;
+}
+.weui-flex-item.current .base_add {
+    background: #fff url(../../common/img/base_f_add.png) no-repeat center 0;
+    background-size: 40px auto;
 }

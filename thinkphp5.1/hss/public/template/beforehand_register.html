@@ -1,0 +1,51 @@
+<!--会员预登记模板-->
+<section class="member-register-tpl" style="display:none;">
+    <div id="wizard" class="page-bd">
+        <div class="apply-data-content">
+            <div class="apply-module ">
+                <form class="applicant_form">
+                    <div class="apply-items">
+                        <input type="text" class="name " name="company_name" value="" placeholder="机构名称(选填)">
+                    </div>
+                    <div class="apply-items">
+                        <input type="text" class="applicant " name="name" value="" placeholder="你的姓名(必填)">
+                    </div>
+                    <div class="apply-items">
+                        <input type="tel" class="mobile " name="mobile_phone" value="" placeholder="手机号码(必填)">
+                    </div>
+                    <a href="javascript:void(0);" class="next-step step">确定</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<script type="text/javascript">
+    var beforehandRegisterTriggerLayerIndex = -1;
+    function beforehandRegisterTrigger(){
+        let memberRegisterTpl=$('.member-register-tpl').html();
+        beforehandRegisterTriggerLayerIndex = layer.open({
+            title:['会员预先登记','border-bottom:1px solid #d9d9d9;'],
+            type:1,
+            anim:'up',
+            className:'memberRegTpl',
+            content:memberRegisterTpl
+        });
+    }
+    $(function(){
+        $('body').on('click','.next-step',function(){
+            console.log(beforehandRegisterTriggerLayerIndex);
+            var postData = $('.applicant_form').serializeObject();
+            var content='';
+            if(!postData.name){
+                content='请填写你的姓名';
+            }else if(!register.phoneCheck(postData.mobile_phone)){
+                content='请填写手机号码';
+            }
+            if(content){
+                dialog.error(content);
+                return false;
+            }
+            console.log(postData);
+        });
+    });
+</script>

@@ -11,11 +11,11 @@
 					<li class="weui-flex-item switch-item current"><span class="search_city"></span><em></em>城市查询</li>
 					<li class="weui-flex-item switch-item "><span class="base_info"></span><em></em>登记资料</li>
 					<li class="weui-flex-item switch-item "><span class="base_money"></span><em></em>席位订金</li>
-					<li class="weui-flex-item "><span class="opening"></span>资格完款</li>
+					<li class="weui-flex-item switch-item"><span class="opening"></span>资格完款</li>
 				</ul>
 			</nav>
 			<div class="apply-data-content">
-				<div class="apply-module ">
+				<div class="apply-module">
 					<form class="applicant_form">
 						<div class="express-area ">
 							<a id="expressArea" href="javascript:void(0)" class="f24 form-group box-flex">
@@ -68,10 +68,45 @@
 					</div>
 				</div>
 				<div class="apply-module hide">
-					<div class="success-tipc">
-						<p>恭喜,已加盟!</p>
+					{if $apply.apply_status == 4}
+					<div>待审核</div>
+					{else if $apply.apply_status == 5}
+					<div class="columns_flex l-r-sides">
+						<div>
+							<p>城市名称：<span>广州</span></p>
+							<p>城市级别分类：<span>3线城市</span></p>
+							<p>合伙人级别：<span>二类市场城市合伙人</span></p>
+							<p>合伙人资格款：<span>¥198000</span></p>
+							<p>已交席位订金：<span>¥5000</span></p>
+							<p>需补交资格余款：<span>¥193000</span></p>
+						</div>
+						<div>
+							<p class="friday_end">支付倒计时</p>
+							<div id="countDownBox" class="count_down_box">
+								<!--<span class="day"></span>天-->
+								<span class="hour"></span>:
+								<span class="minute"></span>:
+								<span class="second"></span>
+							</div>
+						</div>
 					</div>
-					<a href="javascript:void(0);" class="three-step cofirm-btn step">确定</a>
+					<dl>
+						<dt>说明：</dt>
+						<dd>1、补齐城市合伙人资格余款后正式签约为黑森森城市合伙人；</dd>
+						<dd>2、在规定7天期限内未能补齐资格余款，保留的城市资格将被释放出来，将可能导致所申请的城市合伙人被他人签约，原先缴纳的席位订金可于发出无法签约通知之日起7天内无息退回；</dd>
+						<dd>3、黑森森城市合伙人资格款项将转存入用户充值账户，用于采购结算专用。</dd>
+
+					</dl>
+					<footer class="f24 group_cart_nav">
+						<div class="group_btn50 bottom_item">
+							<span class="amount">￥<price>193000.00</price></span>
+						</div>
+						<div class="group_btn50 bottom_item">
+							<a href="javascript:void(0);" class="recharge_money">补齐资格款<span class="total_num"></span></a>
+						</div>
+					</footer>
+					{/if}
+
 				</div> 
 			</div>
 		</div>

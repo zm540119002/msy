@@ -2,6 +2,9 @@ var area_address,
     applicantData={
     };
 $(function(){
+    //补款倒计时
+    var date=new Date(new Date(new Date().toLocaleDateString()).getTime()+24*60*60*1000-1);
+    countDown(date,$('#countDownBox'));
     //nav切换
     $('body').on('click','.apply-data-nav .switch-item',function(){
         $(this).addClass('current').siblings().removeClass('current');
@@ -9,6 +12,8 @@ $(function(){
     });
 
      //初始化 未完成的申请
+    var statusType=apply[0].apply_status-1;
+    console.log(statusType);
     if(!$.isEmptyArray(apply)){
         applicantData.id= apply[0].id;
         applicantData = {
@@ -21,23 +26,36 @@ $(function(){
             old_apply_status:apply[0].apply_status,
             pay_id:apply[0].pay_id,
         };
+        if(statusType<3){
+            //省市区初始化
+            var region = [];
+            region.push(apply[0].province);
+            region.push(apply[0].city);
+            $('.area_address').setArea(region);
+            //资料初始化
+            $('.company_name').val(apply[0].company_name);
+            $('.applicant').val(apply[0].applicant);
+            $('.mobile').val(apply[0].mobile);
+            //定位到已完成步骤
+            var index=apply[0].apply_status-1;
+            $('nav.apply-data-nav li:eq('+index+')').click(function(){
+                $(this).addClass('current').siblings().removeClass('current');
+            });
+            $('nav.apply-data-nav li:eq('+index+')').click();
 
-        //省市区初始化
-        var region = [];
-        region.push(apply[0].province);
-        region.push(apply[0].city);
-        $('.area_address').setArea(region);
-        //资料初始化
-        $('.company_name').val(apply[0].company_name);
-        $('.applicant').val(apply[0].applicant);
-        $('.mobile').val(apply[0].mobile);
-        //定位到已完成步骤
-        var index=apply[0].apply_status-1;
-        $('nav.apply-data-nav li:eq('+index+')').click(function(){
-            $(this).addClass('current').siblings().removeClass('current');
-        });
-        $('nav.apply-data-nav li:eq('+index+')').click();
+        }else{
+            //待审核
+            //资格完款
+            if(statusType==4 || statusType==3){
+                statusType = 3;
+                $('nav.apply-data-nav li:eq(3)').click(function(){
+                    $(this).addClass('current').siblings().removeClass('current');
+                });
+                $('nav.apply-data-nav li:eq(3)').click();
+            }
+        }
     }
+
 
     //填写地址
     $('body').on('click','.search-city',function(){
@@ -75,7 +93,7 @@ $(function(){
                     layer.close(index);
                 }
             });
-           
+
         }
     });
      //填写基本资料
@@ -122,17 +140,17 @@ $(function(){
         $('.pay_code').val(pay_code);
     });
 
-    // 结算
+    // 资格结算
     $('body').on('click','.settlement_btn',function () {
+        applicantData.step =  $('.apply-data-nav .switch-item.current').index();
         applicantData.pay_code = $('.pay_code').val();
-        applicantData.step = 3;
         _this = $(this);
+        console.log(applicantData);return false;
         if(!applicantData.pay_code){
             dialog.error('请选择结算方式');
         }else{
             submitApplicant(_this,applicantData);
         }
-        
     });
 });
 
@@ -183,7 +201,7 @@ function submitApplicant(_this,postData){
                     $('.weui-flex-item:eq(2)').addClass('current');
                     $('.apply-module:eq(1)').hide();
                     $('.apply-module:eq(2)').show();
-                }else if(postData.step==3){
+                }else if(postData.step==3 ||postData.step==4 ){
                     location.href = data.data.url;
                 }
             }else{

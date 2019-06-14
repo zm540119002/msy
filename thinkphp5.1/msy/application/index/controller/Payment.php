@@ -237,9 +237,9 @@ class Payment extends \common\controller\Base {
                 $this->setOrderPayStatus($info,$systemId);
             }elseif($payInfo['type'] == 2){
                 $this->setRechargePayStatus($info,$systemId);
-            }elseif($payInfo['type'] == 3){
+            }elseif($payInfo['type'] == 3){ //hss 加盟店家
                 $this->setFranchisePayStatus($info,$systemId);
-            }elseif($payInfo['type'] == 4|| $payInfo['type'] == 5){
+            }elseif($payInfo['type'] == 4|| $payInfo['type'] == 5){ //hss加盟城市合伙人
                 $this->setCityPartnerPayStatus($info,$systemId);
             }
         }
@@ -381,8 +381,35 @@ class Payment extends \common\controller\Base {
         if($result === false){
             $modelFranchise ->rollback();
             $info['mysql_error'] = $modelFranchise->getError();
-            return $this->writeLog("订单支付更新失败",$info);
+            return $this->writeLog("加盟店表更新失败",$info);
         }
+        //增加平台member
+        $modelMember = new \app\index\model\Member();
+        $modelMember ->setConnection(config('custom.system_id')[$systemId]['db']);
+        $config =[
+            'where' => [
+                ['status', '=', 0],
+                ['user_id', '=', $info['user_id']],
+            ],'field'=>[
+                'id','type'
+            ],
+        ];
+        $data = [
+            'type'=>1,                              // hss 加盟店会员
+            'user_id'=> $info['user_id'],
+            'create_time'=>time(),
+        ];
+        $memberInfo = $modelMember -> getInfo($config);
+        if($memberInfo ){
+            $data['id'] = $memberInfo['id'];
+        }
+        $memberId = $modelMember -> edit($data);
+        if(!$memberId){
+            $modelFranchise ->rollback();
+            $info['mysql_error'] = $modelMember->getError();
+            return $this->writeLog("hss 会员表增加失败",$info);
+        }
+
         $modelFranchise ->commit();
         echo 'SUCCESS';
     }
@@ -412,9 +439,37 @@ class Payment extends \common\controller\Base {
             $condition['earnest_sn'] = $info['sn'];
             $data['apply_status']=4;
         }elseif($info['type'] == 5){
+            //增加平台member
+            $modelMember = new \app\index\model\Member();
+            $modelMember ->setConnection(config('custom.system_id')[$systemId]['db']);
+            $config =[
+                'where' => [
+                    ['status', '=', 0],
+                    ['user_id', '=', $info['user_id']],
+                ],'field'=>[
+                    'id','type'
+                ],
+            ];
+            $data = [
+                'type'=>2,                              // hss 城市合伙人
+                'user_id'=> $info['user_id'],
+                'create_time'=>time(),
+            ];
+            $memberInfo = $modelMember -> getInfo($config);
+            if($memberInfo){
+                $data['id'] = $memberInfo['id'];
+            }
+            $memberId = $modelMember -> edit($data);
+            if(!$memberId){
+                $modelCityPartner ->rollback();
+                $info['mysql_error'] = $modelMember->getError();
+                return $this->writeLog("hss 会员表增加失败",$info);
+            }
+
             //尾款支付
             $condition['balance_sn'] = $info['sn'];
             $data['apply_status']=6;
+
         }
         $result = $modelCityPartner -> allowField(true) -> save($data,$condition);
         if($result === false){
