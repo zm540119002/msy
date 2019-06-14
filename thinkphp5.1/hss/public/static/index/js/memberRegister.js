@@ -82,7 +82,38 @@ $(function(){
             //submitApplicant(_this,applicantData);
         }
     });
-    
+    $('body').on('click','.two-step',function(){
+        var _this = $(this);
+        var data=$('.applicant_form').serializeObject();
+        // applicantData.name=data.name;
+        applicantData.consignee=data.consignee;
+        applicantData.mobile=data.mobile;
+        applicantData.detail_address=data.detail_address;
+        area_address =$('.area-address-name').getArea();
+        applicantData.province = area_address[0];
+        applicantData.city = area_address[1];
+        applicantData.area = area_address[2];
+        var content='';
+        if(!applicantData.consignee){
+            content='收件人姓名';
+        }else if(!register.phoneCheck(applicantData.mobile)){
+            content='请填写手机号码';
+        }else if(!area_address){
+            content='请选择地区';
+        }else if(!applicantData.detail_address){
+            content='请填写详细地址';
+        }
+        if(content){
+            dialog.error(content);
+        }else{
+            $('.memberRegTpl .weui-flex-item:eq(0)').removeClass('current');
+            $('.memberRegTpl .weui-flex-item:eq(1)').addClass('current');
+            $('.memberRegTpl .apply-module:eq(0)').hide();
+            $('.memberRegTpl .apply-module:eq(1)').show();
+            console.log(applicantData);
+            //submitApplicant(_this,applicantData);
+        }
+    });
 });
 // 提交申请
 function submitApplicant(_this,postData){
