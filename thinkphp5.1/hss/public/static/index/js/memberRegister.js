@@ -106,10 +106,10 @@ $(function(){
         if(content){
             dialog.error(content);
         }else{
-            $('.memberRegTpl .weui-flex-item:eq(0)').removeClass('current');
+            $('.memberRegTpl .weui-flex-item:eq(2)').removeClass('current');
             $('.memberRegTpl .weui-flex-item:eq(1)').addClass('current');
-            $('.memberRegTpl .apply-module:eq(0)').hide();
-            $('.memberRegTpl .apply-module:eq(1)').show();
+            $('.memberRegTpl .apply-module:eq(1)').hide();
+            $('.memberRegTpl .apply-module:eq(2)').show();
             console.log(applicantData);
             //submitApplicant(_this,applicantData);
         }
