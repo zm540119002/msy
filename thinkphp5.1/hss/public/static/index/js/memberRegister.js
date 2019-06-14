@@ -72,6 +72,7 @@ $(function(){
         }
         if(content){
             dialog.error(content);
+            return false;
         }else{
             applicantData.step = 1;
             console.log(applicantData);
