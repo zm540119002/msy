@@ -168,6 +168,19 @@ class Index extends \common\controller\Base{
         return $this->fetch();
     }
 
+    // 页面
+    public function staticPage(){
+        $html_name = input('page/s');
+        if($html_name){
+            $view = $html_name;
+
+        }else{
+            $view = 'activity';
+        }
+
+        return $this->fetch($view);
+    }
+
 
 
 }
