@@ -247,11 +247,11 @@ nav .back_prev_page{
 /*城市合伙人*/
 .cy-head span.cy-icon{
     display: inline-block;
-    width:0.25rem;
-    height: 0.25rem;
+    width: 0.30rem;
+    height: 0.30rem;
     background: url(../../common/img/icons/city_partner_icon.png);
     background-repeat: no-repeat;
-    background-size: 40px auto;
+    background-size: 0.30rem auto;
 }
 /*会员预登记*/
 .memberRegTpl .step{
