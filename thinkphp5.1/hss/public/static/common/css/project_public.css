@@ -180,7 +180,7 @@ nav .back_prev_page{
 .floor_item.project-list li:last-child{
     border-bottom:none;
 }
-.scroll-menu{
+.scroll-menu.top-fixed{
     position:fixed;
     left:0;
     top:0;

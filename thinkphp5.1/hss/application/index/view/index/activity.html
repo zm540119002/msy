@@ -141,9 +141,9 @@
 			var scrollHeight=$(document).scrollTop();
 
 			if(scrollHeight>offsetHeight){
-				$('.detail-nav').addClass('top-fixed');
+				$('.scroll-menu').addClass('top-fixed');
 			}else {
-				$('.detail-nav').removeClass('top-fixed');
+				$('.scroll-menu').removeClass('top-fixed');
 			}
 		});
 		//楼层
@@ -162,9 +162,9 @@
 			var top = $(document).scrollTop();
 			var currentId = '';
 			if(top>offsetHeight){
-				$('.detail-nav').addClass('top-fixed');
+				$('.scroll-menu').addClass('top-fixed');
 			}else {
-				$('.detail-nav').removeClass('top-fixed');
+				$('.scroll-menu').removeClass('top-fixed');
 			}
 			items.each(function(){
 				var m = $(this);
