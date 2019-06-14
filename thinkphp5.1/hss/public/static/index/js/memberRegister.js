@@ -106,8 +106,8 @@ $(function(){
         if(content){
             dialog.error(content);
         }else{
-            $('.memberRegTpl .weui-flex-item:eq(2)').removeClass('current');
-            $('.memberRegTpl .weui-flex-item:eq(1)').addClass('current');
+            $('.memberRegTpl .weui-flex-item:eq(1)').removeClass('current');
+            $('.memberRegTpl .weui-flex-item:eq(2)').addClass('current');
             $('.memberRegTpl .apply-module:eq(1)').hide();
             $('.memberRegTpl .apply-module:eq(2)').show();
             console.log(applicantData);
