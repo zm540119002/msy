@@ -181,9 +181,7 @@ nav .back_prev_page{
     border-bottom:none;
 }
 
-.detail-nav li{
-    width:18%;
-}
+
 .header_title{
     position:relative;
     left:0;
@@ -246,6 +244,9 @@ nav .back_prev_page{
 }
 .activityLayer .layui-m-layercont{
     padding:15px;
+}
+.scrollwrapper .detail-nav li{
+    width:18%;
 }
 .scrollwrapper ul.detail-nav{
     width:auto;
