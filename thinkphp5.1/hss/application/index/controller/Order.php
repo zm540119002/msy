@@ -75,7 +75,7 @@ class Order extends \common\controller\UserBase
             $goodsIds = array_column($goodsList,'goods_id');
 
             if(!($promotion['belong_to_member_buy']&$res['type'])){
-                $this->errorMsg('非会员 !');
+                $this->errorMsg('仅限会员 !');
             }
 
 
