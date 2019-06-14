@@ -252,6 +252,7 @@ nav .back_prev_page{
     background: url(../../common/img/icons/city_partner_icon.png);
     background-repeat: no-repeat;
     background-size: 0.30rem auto;
+    vertical-align: middle;
 }
 /*会员预登记*/
 .memberRegTpl .step{
