@@ -20,7 +20,7 @@ $(function(){
         //待审核
         //资格完款
         if(statusType==4 || statusType==3){
-            console.log(11)
+            statusType = 3;
             $('nav.apply-data-nav li:eq('+statusType+')').click(function(){
                 $(this).addClass('current').siblings().removeClass('current');
             });
