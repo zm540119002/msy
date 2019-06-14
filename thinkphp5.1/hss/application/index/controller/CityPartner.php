@@ -51,7 +51,7 @@ class CityPartner extends \common\controller\UserBase {
             $applied = [];
             if($selfApplyList){
                 foreach ($selfApplyList as $selfapply){
-                    if ($selfapply['apply_status']<4){
+                    if ($selfapply['apply_status']<6){
                         $apply[] = $selfapply;
                     }else{
                         $applied[] = $selfapply;
@@ -156,11 +156,10 @@ class CityPartner extends \common\controller\UserBase {
     //尾款结算
     public function balance()
     {
-        if(request()->isAjax()){
-
-        }else{
-           return $this->fetch();
+        if(!request()->isAjax()){
+            $this->errorMsg('请求方式错误');
         }
+
 
     }
 }
