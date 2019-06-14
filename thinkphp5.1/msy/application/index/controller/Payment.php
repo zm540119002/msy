@@ -187,6 +187,9 @@ class Payment extends \common\controller\Base {
      * wxPayNotifyCallBack
      * */
     public function wxPayNotifyCallBack(){
+        $xml = file_get_contents('php://input');
+
+        file_put_contents('a.txt',$xml);
         $wxPay = new \common\component\payment\weixin\weixinpay;
         $data  = $wxPay->wxNotify();
         if($data){
