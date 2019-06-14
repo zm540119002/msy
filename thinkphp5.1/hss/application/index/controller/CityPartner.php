@@ -43,7 +43,7 @@ class CityPartner extends \common\controller\UserBase {
                     ['cp.user_id','=',$this->user['id']]
                 ], 'field'=>[
                     'cp.id','cp.province','cp.city','cp.company_name','cp.applicant','cp.mobile','cp.city_level','cp.earnest','cp.amount','cp.apply_status'
-//                    ,'p.sn','p.id as pay_id'
+                    ,'cp.earnest_sn','cp.balance_sn'
                 ]
 //                ,'join' => [
 //                     ['pay p','p.sn = cp.earnest_sn','left'],
@@ -56,7 +56,6 @@ class CityPartner extends \common\controller\UserBase {
                     'where'=>[
                         ['status', '=', 0],
                         ['user_id','=',$this->user['id']],
-                        ['pay_sn','=',$selfApply['earnest_sn']]
                     ],
 //                    'whereOr'=>[
 //                        ['pay_sn','=',$selfApply['earnest_sn']],
