@@ -206,7 +206,21 @@
 					m.removeClass('active');
 				}
 			});
-			
+			if(_this.index()==2){
+				//项目流程轮播
+				var swiper = new Swiper('.master-swiper-process', {
+					//slidesPerView :2,
+					slidesPerView:"auto",
+					autoplay:true,
+					//slidesOffsetBefore : -50,
+					//spaceBetween: 30,
+					//direction: 'horizontal',
+					pagination: {
+						el: '.swiper-pagination',
+						clickable: true
+					}
+				});
+			}
 		});
     })
     var swiper = new Swiper('.swiper-container', {
