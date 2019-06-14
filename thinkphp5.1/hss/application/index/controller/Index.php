@@ -172,7 +172,7 @@ class Index extends \common\controller\Base{
     public function staticPage(){
         $html_name = input('page/s');
         if($html_name){
-            $view = $html_name;
+            $view = strtolower($html_name);
 
         }else{
             $view = 'activity';
