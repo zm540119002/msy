@@ -191,6 +191,7 @@ class Base extends \think\Controller{
             foreach($configFooter as $k => $v){
                 array_push($unlockingFooterCart['menu'][$k]['class'],'group_btn'.$num);
             }
+
             $this->assign('unlockingFooterCart',json_encode($unlockingFooterCart));
         }
     }

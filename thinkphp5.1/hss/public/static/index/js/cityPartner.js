@@ -142,7 +142,7 @@ $(function(){
 
     // 资格结算
     $('body').on('click','.settlement_btn',function () {
-        applicantData.step =  $('.apply-data-nav .switch-item.current').index();
+        applicantData.step =  $('.apply-data-nav .switch-item.current').index()+1;
         applicantData.pay_code = $('.pay_code').val();
         _this = $(this);
         if(!applicantData.pay_code){
