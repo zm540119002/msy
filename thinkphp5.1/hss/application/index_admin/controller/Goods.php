@@ -543,13 +543,13 @@ class Goods extends Base {
             }
             $init = [
                 'save_path'=>$newRelativePath,   //保存目录  ./uploads/compose/goods....
-                'title'=>'维雅生物药妆',
-                'slogan'=>'领先的品牌定制平台',
+          /*      'title'=>'维雅生物药妆',
+                'slogan'=>'领先的品牌定制平台',*/
                 'name1'=> $name1,
                 'name2'=> $name2,
                 'RMB_logo'=> './static/common/img/RMB_logo.png',
                 'money'=>$info['franchise_price'].'元',
-                'logo_img'=> request()->domain().'/static/index/img/logo.png', // 460*534
+                'logo_img'=> request()->domain().'/static/index/img/logo1.png', // 460*534
                 'goods_img'=> $uploadPath.$info['thumb_img'], // 460*534
                 'qrcode'=>$uploadPath.$shareQRCodes, // 120*120
                 'font'=>'./static/font/simhei.ttf',   //字体
