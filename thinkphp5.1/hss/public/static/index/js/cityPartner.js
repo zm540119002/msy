@@ -50,10 +50,10 @@ $(function(){
         //资格完款
         if(statusType==4 || statusType==3){
             statusType = 3;
-            $('nav.apply-data-nav li:eq('+statusType+')').click(function(){
+            $('nav.apply-data-nav li:eq(3)').click(function(){
                 $(this).addClass('current').siblings().removeClass('current');
             });
-            $('nav.apply-data-nav li:eq('+statusType+')').click();
+            $('nav.apply-data-nav li:eq(3)').click();
         }
     }
 
