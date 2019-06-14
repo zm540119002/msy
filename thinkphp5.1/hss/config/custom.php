@@ -122,4 +122,14 @@ return [
         'project'  => 3,
         'promotion'=> 4,
     ],
+
+    /**商品归属 参考连接 https://blog.csdn.net/ztchun/article/details/82356664
+     * 使用二进制来保存店铺的类型.
+     * key为值,个数相加的和表示选中的类型; 例：1+2=3; 表示同时选择了'中心店','工作室;
+     * sql 查询语句  Select * from seller where card_status & 2; 查询所有选择了2的商品.
+     */
+    'belong_to'=>[
+        '1' => '沙龙',
+        '2' => '居家',
+    ],
 ];

@@ -14,6 +14,19 @@
                 {include file="goods_category/linkage_tpl" /}
             </div>
         </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>类别：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                {volist name="$Think.config.custom.belong_to" id ='vo' key="k"}
+                {if ($info.belong_to[$k-1])}
+                <input type="checkbox" name="belong_to" value="" checked="checked">{$vo}
+                {else /}
+                <input type="checkbox" name="belong_to" value="">{$vo}
+                {/if}
+                {/volist}
+            </div>
+        </div>
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>商品名称：</label>
             <div class="formControls col-xs-8 col-sm-9">
