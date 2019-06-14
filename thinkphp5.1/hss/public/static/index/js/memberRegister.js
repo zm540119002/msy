@@ -16,10 +16,8 @@ $(function(){
             dialog.error(content);
             return false;
         }else{
-            $('.memberRegTpl .weui-flex-item:eq(0)').removeClass('current');
-            $('.memberRegTpl .weui-flex-item:eq(1)').addClass('current');
-            $('.memberRegTpl .apply-module:eq(0)').hide();
-            $('.memberRegTpl .apply-module:eq(1)').show();
+            $('.memberRegTpl').parents('.layui-m-layer').remove();
+            submitMemberInfo(_this,applicantData);
         }
     });
 });
@@ -40,6 +38,7 @@ function submitMemberInfo(_this,postData){
         },
         success: function(data){
             _this.removeClass("nodisabled");//删除防止重复提交
+            
             $('.loading').hide();
             if(data.status){
                 location.href = data.data.url;
