@@ -108,11 +108,9 @@
 </section>
 <!--遮罩层-->
 <div id="areaMask" class="address_mask"></div>
-<a href="javascript:void(0);" class="test">测试</a>
 {include file="template/apply_settlement_method.html" /}
 {/block}
 {block name="common"}
-{include file="template/beforehand_register.html" /}
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
@@ -120,19 +118,4 @@
 <script type="text/javascript" src="public_js/jquery.area.js"></script>
 <script type="text/javascript" src="index_js/franchise.js"></script>
 <script type="text/javascript" src="index_js/memberRegister.js"></script>
-<script>
-	var apply = JSON.parse('{$apply|raw}');
-	$(function(){
-		var memberRegisterTpl=$('.member-register-tpl').html();
-		$('.test').on('click',function(){
-			layer.open({
-				title:['会员预先登记','border-bottom:1px solid #d9d9d9;'],
-				type:1,
-				anim:'up',
-				className:'memberRegTpl',
-				content:memberRegisterTpl
-			})
-		})
-	})
-</script>
 {/block}
