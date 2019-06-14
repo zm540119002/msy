@@ -245,10 +245,10 @@ nav .back_prev_page{
 .activityLayer .layui-m-layercont{
     padding:15px;
 }
-.scrollwrapper .detail-nav li{
+#menu .detail-nav li{
     width:18%;
 }
-.scrollwrapper ul.detail-nav{
+#menu ul.detail-nav{
     width:auto;
     padding-left:0.55rem;
 }
