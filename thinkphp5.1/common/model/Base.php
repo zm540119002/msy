@@ -17,13 +17,13 @@ class Base extends \think\Model {
 		}else{//新增
 			unset($data['id']);
 			$res = $this->allowField(true)->isUpdate(false)->save($data);
-			$id = $this->getAttr('id');
+//			$id = $this->getAttr('id');
 		}
 		if($res === false){
 			return false;
 		}
 
-		return $id;
+//		return $id;
 	}
 
 	/**编辑多条记录
