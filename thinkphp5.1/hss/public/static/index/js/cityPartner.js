@@ -41,9 +41,11 @@ $(function(){
         });
         $('nav.apply-data-nav li:eq('+index+')').click();
     }
-    //资格完款
+
     var statusType=apply[0].apply_status-1;
-    if(statusType==3){
+    //待审核
+    //资格完款
+    if(statusType==4 || statusType==3){
         $('nav.apply-data-nav li:eq('+statusType+')').click(function(){
             $(this).addClass('current').siblings().removeClass('current');
         });
