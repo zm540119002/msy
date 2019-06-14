@@ -24,9 +24,12 @@ class Order extends \common\controller\UserBase
         }
 
 
-        // 身份认证
-        $identityModel = new \app\index\model\Identity();
+        // 非会员可以购买的商品
+        $identityModel = new \app\index\model\Member();
         $condition = [
+            'field' => [
+                'type'
+            ],
             'where' => [
                 ['user_id','=',$this->user['id']]
             ],
@@ -34,10 +37,18 @@ class Order extends \common\controller\UserBase
 
         $res = $identityModel->getInfo($condition);
 
-        if(true){
+/*        if( $order_type==2 ){
+            $condition = [
+                'field' => [
+                    'id'
+                ],'where' => [
+                    ['g.id','=',$id]
+                ],
+            ];
 
-        }
+        }else{
 
+        }*/
 
 
         if( $order_type==2 ){
@@ -49,7 +60,7 @@ class Order extends \common\controller\UserBase
                     ['p.status', '=', 0],
                     ['pg.promotion_id', '=', $promotion['goods_id']],
                 ], 'field' => [
-                    'pg.goods_id',"pg.goods_num*{$promotion['num']} num",'p.name',"p.franchise_price*{$promotion['num']} price",'p.id'
+                    'pg.goods_id',"pg.goods_num*{$promotion['num']} num",'p.name',"p.franchise_price*{$promotion['num']} price",'p.id','p.belong_to_member_buy'
                 ],'join' => [
                     ['promotion p','pg.promotion_id=p.id','left']
                 ]
@@ -62,11 +73,12 @@ class Order extends \common\controller\UserBase
             $promotion = reset($goodsList);
 
             $goodsIds = array_column($goodsList,'goods_id');
+
+            // 
         }
+
+
         // 更新套餐总价
-        //p($goodsIds);
-        //exit;
-        //$goodsIds = array_column($goodsList,'goods_id');
         $config = [
             'where' => [
                 ['g.status', '=', 0],
@@ -81,6 +93,8 @@ class Order extends \common\controller\UserBase
         //计算订单总价
         $modeGoods = new \app\index\model\Goods();
         $goodsListNew = $modeGoods->getList($config);
+
+
 
         if(empty($goodsListNew)){
             $this->errorMsg('商品已失效');
