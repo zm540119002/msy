@@ -17,7 +17,6 @@ class Base extends \think\Model {
 		}else{//新增
 			unset($data['id']);
 			$res = $this->allowField(true)->isUpdate(false)->save($data);
-			$id = $this->getAttr('id');
 		}
 		if($res === false){
 			return false;

@@ -7,7 +7,7 @@ class Order extends \common\controller\UserBase
         parent::__construct();
 
         // 自动开通会员
-        $memberModel = new \app\index\model\Member();;
+        $memberModel = new \app\index\model\Member();
         if(!$member = $memberModel->getMemberInfo($this->user['id'])){
             $data = [
                 ['user_id'=>$this->user['id']],
@@ -15,7 +15,7 @@ class Order extends \common\controller\UserBase
                 ['update_time'=>time()],
             ];
             $var = $memberModel->edit($data);
-            $var = $memberModel->id;
+            $var = $memberModel->getAttr('id');
             p($var);
             exit;
         }
