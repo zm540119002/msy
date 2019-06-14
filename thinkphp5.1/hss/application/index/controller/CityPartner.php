@@ -58,10 +58,10 @@ class CityPartner extends \common\controller\UserBase {
                         ['user_id','=',$this->user['id']],
                         ['pay_sn','=',$selfApply['earnest_sn']]
                     ],
-                    'whereOr'=>[
-                        ['pay_sn','=',$selfApply['earnest_sn']],
-                        ['pay_sn','=',$selfApply['balance_sn']],
-                    ],
+//                    'whereOr'=>[
+//                        ['pay_sn','=',$selfApply['earnest_sn']],
+//                        ['pay_sn','=',$selfApply['balance_sn']],
+//                    ],
                     'field'=>[
                        'id as pay_id'
                     ]
