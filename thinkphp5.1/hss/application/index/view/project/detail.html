@@ -2,6 +2,7 @@
 {block name="title"}项目详情{/block}
 {block name="content"}
 <article class="f24">
+	<div class="back"><</div>
 	<section class="project_item">
 		{include file="template/scene_detail.html" /}
 	</section>
@@ -271,7 +272,19 @@
 				el: '.swiper-pagination'
 			}
 		});
-		
+		//流程图轮播
+		var swiper = new Swiper('.master-swiper-process', {
+			//slidesPerView :2,
+			slidesPerView:"auto",
+			autoplay:true,
+			//slidesOffsetBefore : -50,
+			//spaceBetween: 30,
+			//direction: 'horizontal',
+			pagination: {
+				el: '.swiper-pagination',
+				clickable: true
+			}
+		});
 		var height=$('.detail-nav').height();
 		var offsetHeight=$('.detail-nav').offset().top;
 		$(window).on('scroll',function(){
@@ -343,21 +356,6 @@
 					m.removeClass('active');
 				}
 			});
-			if(_this.index()==2){
-				//项目流程轮播
-				var swiper = new Swiper('.master-swiper-process', {
-					//slidesPerView :2,
-					slidesPerView:"auto",
-					autoplay:true,
-					//slidesOffsetBefore : -50,
-					//spaceBetween: 30,
-					//direction: 'horizontal',
-					pagination: {
-						el: '.swiper-pagination',
-						clickable: true
-					}
-				});
-			}
 		});
 	})
 	// 后加载简介
@@ -374,9 +372,9 @@
 		z-index: 10;
 		width: 100%;
 	}
-	.f24{
+	/*.f24{
 		margin-top: 42px;
-	}
+	}*/
 	.product-select div.right {
 		width: 60%;
 	}
@@ -386,6 +384,18 @@
 	}
 	.list li{
 		margin: 0 0 0.10rem 0;
+	}
+	.back {
+		position: fixed;
+		width: 30px;
+		height: 30px;
+		background: rgba(0, 0, 0, 0.4);
+		z-index: 99;
+		color: #fff;
+		border-radius: 50%;
+		margin: 6px 0 0 8px;
+		text-align: center;
+		line-height: 30px;
 	}
 </style>
 {/block}

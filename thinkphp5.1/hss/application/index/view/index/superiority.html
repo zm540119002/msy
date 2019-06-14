@@ -5,17 +5,6 @@
         position: relative;
         height: 100%;
     }
-    .back, .back_prev_page {
-        position: absolute;
-        left: 0;
-        top: 0.56rem;
-        width: 1rem;
-        height: 1rem;
-        display: block;
-        margin-left: 5px;
-        background: url(../../static/common/img/icons/back.png) no-repeat center;
-        background-size: 0.45rem auto;
-    }
     .foot_nav_bar a span.f_icon{
         background-size: 0.8rem 6.5rem;
     }
@@ -50,11 +39,10 @@
         flex-direction: column;
     }
     .header_title{
-        position:relative;
+        position:fixed;
         left:0;
         top:0;
         width:100%;
-        padding:0.5rem 0;
     }
     .header_title h2{
         font-size:14px;
@@ -87,10 +75,10 @@
     <a href="javascript:void(0);" class="back_prev_page" data-jump_url=""></a>
     <h2 class="f24">项目优势</h2>
 </section>
-<div class="swiper-container swiper-container-initialized swiper-container-vertical swiper-container-ios">
-    <div class="swiper-wrapper">
+<div class="">
+    <div class="">
         {for start="1" end="13"}
-            <div class="swiper-slide ">
+            <div class="">
                 <img src="public_img/superiority_0{$i}.jpg" alt="" class="common_default_img">
             </div>
         {/for}
@@ -126,19 +114,19 @@
 {block name="script"}
 <script type="text/javascript" src="api_common_js/swiper.min.js"></script>
 <script>
-    $(function(){
-        var html =document.getElementsByTagName('html')[0];
-        html.style.fontSize='';
-        $('.swiper-slide ').css('height',$(window).height()+'px');
-        $('.swiper-slide').find('img').css('paddingBottom',80+'px');
-    });
-    var swiper = new Swiper('.swiper-container', {
-        direction: 'vertical',
-        pagination: {
-            el: '.swiper-pagination',
-            clickable: true
-        }
-    });
+    // $(function(){
+    //     var html =document.getElementsByTagName('html')[0];
+    //     html.style.fontSize='';
+    //     $('.swiper-slide ').css('height',$(window).height()+'px');
+    //     $('.swiper-slide').find('img').css('paddingBottom',80+'px');
+    // });
+    // var swiper = new Swiper('.swiper-container', {
+    //     direction: 'vertical',
+    //     pagination: {
+    //         el: '.swiper-pagination',
+    //         clickable: true
+    //     }
+    // });
 </script>
 {/block}
 
