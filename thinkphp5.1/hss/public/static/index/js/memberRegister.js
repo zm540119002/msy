@@ -11,6 +11,8 @@ $(function(){
         var content='';
         if(!applicantData.applicant){
             content='请填写你的姓名';
+        }else if(!register.phoneCheck(applicantData.mobile)){
+            content='请填写手机号码';
         }
         if(content){
             dialog.error(content);
