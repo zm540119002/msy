@@ -10,12 +10,14 @@ class Order extends \common\controller\UserBase
         $memberModel = new \app\index\model\Member();
         p($memberModel);
         exit;
+        if(!$member = $memberModel->getMemberInfo($this->user['id'])){
             $data = [
                 ['user_id'=>$this->user['id']],
                 ['create_time'=>time()],
                 ['update_time'=>time()],
             ];
             $var = $memberModel->edit($data);
+            $var = $memberModel->id;
             p($var);
             exit;
         }
