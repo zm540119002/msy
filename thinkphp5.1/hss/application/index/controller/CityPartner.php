@@ -43,33 +43,13 @@ class CityPartner extends \common\controller\UserBase {
                     ['cp.user_id','=',$this->user['id']]
                 ], 'field'=>[
                     'cp.id','cp.province','cp.city','cp.company_name','cp.applicant','cp.mobile','cp.city_level','cp.earnest','cp.amount','cp.apply_status'
-                    ,'cp.earnest_sn','cp.balance_sn'
+                    ,'p.sn','p.id as pay_id'
                 ]
-//                ,'join' => [
-//                     ['pay p','p.sn = cp.earnest_sn','left'],
-//                ]
+                ,'join' => [
+                     ['pay p','p.sn = cp.earnest_sn','left'],
+                ]
             ];
             $selfApplyList = $modelCityPartner -> getList($condition);
-            foreach ($selfApplyList as $k=>$selfApply){
-                $modelPay = new \app\index\model\Pay();
-                $condition=[
-                    'where'=>[
-                        ['status', '=', 0],
-                        ['user_id','=',$this->user['id']],
-                    ],
-                    'whereOr'=>[
-                        ['pay_sn','=',$selfApply['earnest_sn']],
-                        ['pay_sn','=',$selfApply['balance_sn']],
-                    ],
-                    'field'=>[
-                       'id as pay_id'
-                    ]
-                ];
-                $modelPay->getInfo($condition);
-                echo $modelPay->getLastSql();exit;
-            }
-
-            print_r($selfApplyList);exit;
             //申请中
             $apply = [];
             //已交定金或尾款申请
@@ -202,14 +182,14 @@ class CityPartner extends \common\controller\UserBase {
                     'create_time' => time(),
                 ];
 
-                if(isset($postData['pay_id']) && $postData['pay_id']){
-                    $where1 = [
-                        'id'=>$postData['pay_id'],
-                        'user_id'=>$this->user['id'],
-                        'status'=>0,
-                    ];
-                }
-                $payId = $modelPay->edit($data,$where1);
+//                if(isset($postData['pay_id']) && $postData['pay_id']){
+//                    $where1 = [
+//                        'id'=>$postData['pay_id'],
+//                        'user_id'=>$this->user['id'],
+//                        'status'=>0,
+//                    ];
+//                }
+                $payId = $modelPay->edit($data);
                 if(false===$payId){
                     $modelCityPartner ->rollback();
                     return errorMsg('失败');
