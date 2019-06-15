@@ -67,6 +67,18 @@
         margin-left: 4%;
         background: #009fe9;
     }
+    .back{
+		position:fixed;
+		width: 30px;
+		height: 30px;
+		background: rgba(0, 0, 0, 0.4);
+		z-index: 99;
+		color: #fff;
+		border-radius: 50%;
+		margin: 6px 0 0 8px;
+		text-align: center;
+		line-height: 30px;
+	}
 </style>
 {/block}
 
@@ -75,6 +87,7 @@
     <a href="javascript:void(0);" class="back_prev_page" data-jump_url=""></a>
     <h2 class="f24">诚邀加盟</h2>
 </section>-->
+<div class="back f24"><</div>
 <div class="">
     <div class="">
         {for start="1" end="13"}
@@ -107,6 +120,10 @@
                 return param;
             }
         });
+        // 点击返回上一页
+        $('.back').on("click",function(){
+            history.back(-1)
+        })
 
     });
 </script>
