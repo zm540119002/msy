@@ -45,6 +45,39 @@
             </div>
         </div>
         <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2">允许那个等级的会员可以购买：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                {volist name="$Think.config.custom.member_level" id ='vo' key="k"}
+                {if ($info.belong_to_member_buy[$k-1])}
+                <input type="checkbox" name="belong_to_member_buy" value="" checked="checked">{$vo.type}
+                {else /}
+                <input type="checkbox" name="belong_to_member_buy" value="">{$vo.type}
+                {/if}
+                {/volist}
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2">是否需要预先登记：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                {if $info.is_company_info}
+                <input type="checkbox" name="is_company_info" value="" checked>{$vo}
+                {/elseif}
+                <input type="checkbox" name="is_company_info" value="">{$vo}
+                {/if}
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"> 升级到对应的会员等级：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <select name="upgrade_level" class="form-control">
+                    <option value="" selected="selected">会员等级</option>
+                    {volist name="$Think.config.custom.member_level" id ='vo' key="k"}
+                    <option value="{$vo.level}">{$vo.type}</option>
+                    {/volist}
+                </select>
+            </div>
+        </div>
+        <div class="row cl">
             <label class="form-label col-xs-4 col-sm-2">优惠商品：</label>
             <div class="formControls col-xs-8 col-sm-9">
                 <button type="button" class="btn btn-primary radius recommend">

@@ -142,7 +142,7 @@ class Address extends \common\controller\UserBase {
     /**
      * 获取地址列表  弹窗
      */
-    public function _popGetList(){
+    public function popGetList(){
 
         $model= new \common\model\Address();
 
