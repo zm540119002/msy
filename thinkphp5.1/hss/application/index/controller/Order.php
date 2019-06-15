@@ -108,6 +108,14 @@ class Order extends \common\controller\UserBase
         $amount = 0;
         foreach ($goodsList as $k1 => &$goodsInfo) {
             foreach ($goodsListNew as $k2 => &$goodsInfoNew) {
+                // 购买权限
+                if(!($goodsListNew['belong_to_member_buy']&(int)$member['type'])){
+                    $error = config('code.error.for_members_only');
+                    $this->errorMsg($error['msg'], $error);
+                    break;
+                }
+
+
                 if($goodsInfo['goods_id'] == $goodsInfoNew['goods_id']){
                     $goodsList[$k1]['headline'] = $goodsInfoNew['headline'];
                     $goodsList[$k1]['thumb_img'] = $goodsInfoNew['thumb_img'];
