@@ -223,6 +223,7 @@
                         }
                     }
                 },checkAll:function(){
+                    alert(this.checked);
                     this.checked = !this.checked;
                     for(let i = 0,len = this.checkItemList.length; i < len; i++){
                         this.checkItemList[i].checked = this.checked;
@@ -261,7 +262,6 @@
                     asyncVerify(config);
                 }
             },created:function(){
-                alert(this.checked);
                 let _this = this;
                 //监听-产品选择器初始化-事件
                 bus.$on('product_select_init', function(param){
