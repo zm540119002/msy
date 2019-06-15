@@ -13,7 +13,7 @@
                     <div class="apply-items">
                         <input type="tel" class="mobile " name="mobile_phone" value="" placeholder="手机号码(必填)">
                     </div>
-                    <a href="javascript:void(0);" class="next-step step">确定</a>
+                    <a href="javascript:void(0);" class="next-step step beforehand-register" data-jump_url="{:url('Company/add')}">确定</a>
                 </form>
             </div>
         </div>
@@ -32,8 +32,8 @@
         });
     }
     $(function(){
+        //确定
         $('body').on('click','.next-step',function(){
-            console.log(beforehandRegisterTriggerLayerIndex);
             var postData = $('.applicant_form').serializeObject();
             var content='';
             if(!postData.name){
@@ -45,11 +45,11 @@
                 dialog.error(content);
                 return false;
             }
-            console.log(postData);
-            return false;
             let _this = $(this);
             let config = {
-                clickObj:_this
+                clickObj:_this,
+                postData:postData,
+                layerIndex:beforehandRegisterTriggerLayerIndex
             };
             login_success_callback_private = function(){
                 asyncVerify(config);

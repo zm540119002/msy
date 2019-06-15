@@ -187,8 +187,11 @@ class Payment extends \common\controller\Base {
      * wxPayNotifyCallBack
      * */
     public function wxPayNotifyCallBack(){
+//        $xml = file_get_contents('php://input');
+//        file_put_contents('a.txt',$xml);
         $wxPay = new \common\component\payment\weixin\weixinpay;
         $data  = $wxPay->wxNotify();
+
         if($data){
             $attach = json_decode($data['attach'],true);
             $systemId = $attach['system_id'];
@@ -196,6 +199,7 @@ class Payment extends \common\controller\Base {
             if(empty($payInfo)){
                 return $this->writeLog("数据库没有此订单",$payInfo);
             }
+            p($payInfo);exit;
             //此订单回调已处理过
             if($payInfo['pay_status']>=2){
                 echo 'SUCCESS';
@@ -232,6 +236,7 @@ class Payment extends \common\controller\Base {
                 'pay_sn' => $data['transaction_id'],
                 'actually_amount' => $data['total_fee']/100,
             ];
+            p($payInfo);exit;
             if($payInfo['type'] == 1){
                 $this->setOrderPayStatus($info,$systemId);
             }elseif($payInfo['type'] == 2){
@@ -239,6 +244,7 @@ class Payment extends \common\controller\Base {
             }elseif($payInfo['type'] == 3){ //hss 加盟店家
                 $this->setFranchisePayStatus($info,$systemId);
             }elseif($payInfo['type'] == 4|| $payInfo['type'] == 5){ //hss加盟城市合伙人
+                echo 11;exit;
                 $this->setCityPartnerPayStatus($info,$systemId);
             }
         }
@@ -430,16 +436,14 @@ class Payment extends \common\controller\Base {
         $condition = [
             ['status', '=', 0],
             ['user_id', '=', $info['user_id']],
-            ['apply_status', '=', 1],
+            ['apply_status', '<', 4],
         ];
 
         if($info['type'] == 4){
             //席位支付
-            //$condition['earnest_sn'] = $info['sn'];
             $condition[] = ['earnest_sn','=',$info['sn']];
             $data['apply_status']=4;
         }elseif($info['type'] == 5){
-
             //增加平台member
             $modelMember = new \app\index\model\Member();
             $modelMember ->setConnection(config('custom.system_id')[$systemId]['db']);
@@ -468,12 +472,11 @@ class Payment extends \common\controller\Base {
             }
 
             //尾款支付
-            $condition['balance_sn'] = $info['sn'];
+            $condition[] = ['balance_sn','=',$info['sn']];
             $data['apply_status']=6;
 
         }
         $result = $modelCityPartner  -> allowField(true)-> save($data,$condition);
-        print_r($modelCityPartner->getLastSql());exit;
         if(false === $result){
             $modelCityPartner ->rollback();
             $info['mysql_error'] = $modelCityPartner->getError();
