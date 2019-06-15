@@ -60,5 +60,9 @@
             };
             asyncVerify(config);
         });
+        // 关闭层
+        $('body').on('click','.addressLayer .close_layer_pop',function(){
+            $(this).parents('.layui-m-layer').remove();
+        });
     });
 </script>
