@@ -34,7 +34,7 @@ class CityPartner extends \common\controller\UserBase {
             $selfApplyList = $modelCityPartner -> getList($condition);
             //申请中
             $apply = [];
-            //已申请
+            //已交定金或尾款申请
             $applied = [];
             if($selfApplyList){
                 foreach ($selfApplyList as $selfapply){
