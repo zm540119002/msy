@@ -17,19 +17,19 @@ class CityPartner extends \common\controller\UserBase {
     public function registered(){
         if (request()->isAjax()) {
         } else {
-            //平台已审核通过的申请
-            $modelCityPartner = new \app\index\model\CityPartner();
-            $condition=[
-                'where'=>[
-                    ['status', '=', 0],
-                    ['apply_status','=',5]
-                ],
-                'field'=>[
-                    'province','city',
-                ],
-            ];
-            $cityList = $modelCityPartner -> getList($condition);
-            //$this->assign('cityList',json_encode($cityList));
+//            //平台已审核通过的申请
+//            $modelCityPartner = new \app\index\model\CityPartner();
+//            $condition=[
+//                'where'=>[
+//                    ['status', '=', 0],
+//                    ['apply_status','=',5]
+//                ],
+//                'field'=>[
+//                    'province','city',
+//                ],
+//            ];
+//            $cityList = $modelCityPartner -> getList($condition);
+//            //$this->assign('cityList',json_encode($cityList));
             //自己提交的申请
             $modelCityPartner = new \app\index\model\CityPartner();
             $condition=[
@@ -58,7 +58,6 @@ class CityPartner extends \common\controller\UserBase {
                     }
                 }
             }
-            //git p($apply);exit;
             $this->assign('apply1',$apply);
             $this->assign('apply',json_encode($apply));
             $this->assign('applied',json_encode($applied));
