@@ -57,7 +57,6 @@ class Payment extends \common\controller\Base {
             $this->assign('system_id',$systemId);
             $sn = input('sn','','string');
             $info = $this->getPayInfo($systemId,$sn);
-            p($info);
             if(empty($info) OR !$info['actually_amount']){
                 $this->error('订单不存在或金额不能为0 !');
             }
@@ -86,7 +85,6 @@ class Payment extends \common\controller\Base {
                 ];
                 $attach = json_encode($attach);
                 $jump_url =config('custom.system_id')[$systemId]['jump_url'][$info['type']];
-                print_r($jump_url);exit;
                 $return_url = config('wx_config.return_url');
                 $payInfo = [
                     'sn'=>$info['sn'],
