@@ -191,7 +191,7 @@ class Payment extends \common\controller\Base {
 //        file_put_contents('a.txt',$xml);
         $wxPay = new \common\component\payment\weixin\weixinpay;
         $data  = $wxPay->wxNotify();
-      p($data);exit;
+
         if($data){
             $attach = json_decode($data['attach'],true);
             $systemId = $attach['system_id'];
@@ -199,6 +199,7 @@ class Payment extends \common\controller\Base {
             if(empty($payInfo)){
                 return $this->writeLog("数据库没有此订单",$payInfo);
             }
+            p($payInfo);exit;
             //此订单回调已处理过
             if($payInfo['pay_status']>=2){
                 echo 'SUCCESS';
@@ -235,6 +236,7 @@ class Payment extends \common\controller\Base {
                 'pay_sn' => $data['transaction_id'],
                 'actually_amount' => $data['total_fee']/100,
             ];
+            p($payInfo);exit;
             if($payInfo['type'] == 1){
                 $this->setOrderPayStatus($info,$systemId);
             }elseif($payInfo['type'] == 2){
