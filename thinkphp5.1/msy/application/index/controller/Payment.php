@@ -259,7 +259,7 @@ class Payment extends \common\controller\Base {
                 ['sn', '=', $info['sn']],
                 ['order_status', '=', 1],
             ],'field' => [
-                'id', 'sn', 'amount','pay_code','actually_amount',
+                'id', 'user_id','sn', 'amount','pay_code','actually_amount','type','type_id',
                 'user_id','order_status'
             ],
         ];
@@ -281,7 +281,7 @@ class Payment extends \common\controller\Base {
             'order_status'=>2,                              // 订单状态
             'payment_time'=>time(),
             'pay_sn'=>$info['pay_sn'],                      // 支付单号 退款用
-            'pay_code'=>$info['pay_code'],                      // 支付单号 退款用
+            'pay_code'=>$info['pay_code'],                  // 支付单号 退款用
         ];
         $result = $modelOrder -> allowField(true) -> save($data,$condition['where']);
         if(!$result){
@@ -289,6 +289,44 @@ class Payment extends \common\controller\Base {
             $info['mysql_error'] = $modelOrder->getError();
             return $this->writeLog("订单支付更新失败",$info);
         }
+
+        // 会员升级 // 每个平台都有自己的支付后业务 后期修改
+        if($orderInfo['type']==2){
+
+            $modelPromotion = new \app\index\model\Promotion();
+            $modelPromotion ->setConnection(config('custom.system_id')[$systemId]['db']);
+            $condition = [
+                'where' => [
+                    ['status', '=', 0],
+                    ['id', '=', $orderInfo['type_id']],
+                ], 'field' => [
+                    'upgrade_level'
+                ]
+            ];
+            $promotion = $modelPromotion->getInfo($condition);
+            // 会员升级 只升不降
+            if( $promotion['upgrade_level'] ){
+                $data = [
+                    'type' => $promotion['upgrade_level'],
+                    'update_time' => time(),
+                ];
+                $where = [
+                    ['user_id','=',$orderInfo['user_id']],
+                    ['upgrade_level','<',$promotion['upgrade_level']],
+                ];
+                $memberModel = new \app\index\model\Member();
+                $modelPromotion ->setConnection(config('custom.system_id')[$systemId]['db']);
+
+                $result = $memberModel->edit($data,$where);
+
+                if(!$result){
+                    $modelOrder->rollback();
+                    $info['mysql_error'] = $modelOrder->getError();
+                    return $this->writeLog("订单支付更新失败",$info);
+                }
+            }
+        }
+
         $modelOrder->commit();
         echo 'SUCCESS';
     }

@@ -13,7 +13,8 @@ class Order extends \common\controller\UserBase
                 'update_time'=>time(),
             ];
             $memberModel->edit($data);
-            $member['type'] = 1;
+            $member['type'] = config('custom.member_level.1.level');
+            //$member['type'] = 1;
         }
 
         if (!request()->isPost()) {
@@ -65,7 +66,7 @@ class Order extends \common\controller\UserBase
             }
 
             // 是否需要验证公司信息
-            if( $member['type']==1 && $promotion['is_company_info'] ) {
+            if( $member['type']==config('custom.member_level.1.level') && $promotion['is_company_info'] ) {
                 $modelCompany = new \app\index\model\MemberBeforehandRegister();
 
                 $condition = [
@@ -75,7 +76,7 @@ class Order extends \common\controller\UserBase
                     ]
                 ];
                 $res = $modelCompany->getInfo($condition);
-         
+
                 if (!$res) {
                     $error = config('code.error.need_beforehand_register');
                     $this->errorMsg($error['msg'], $error);
