@@ -35,10 +35,9 @@
 
 <!--添加收货人信息-->
 <section class="section-address bg-eae pt-5" style="display:none;">
-    <div class="close_top">
-        <span>X</span>  
-        <span>保存</span>
-    </div>
+    <!-- <div class="close_top">
+        <a href="javascript:void(0);" class="close_layer_pop" style="top:0.25rem;left:0.25rem;"></a>
+    </div> -->
     <form action='#' method="post" class="bg-fff address_form">
         <input type="hidden" class="" name="address_id" value="" />
         <div class="form-group box-flex clearfixed">
@@ -88,7 +87,7 @@
 <!--遮罩层-->
 <div id="areaMask" class="address_mask"></div>
 <style>
-    .close_top{
+    /* .close_top{
         width: 100%;
         box-sizing: border-box;
         padding: 0 10px;
@@ -96,5 +95,25 @@
         top: 19px;
         display: flex;
         justify-content: space-between;
+    }*/
+    .layui-m-layerbtn{
+        background-color:transparent;
+        border-top: none;
+        position: fixed;
+        top: 0;
+        height: 60px;
+        line-height: 60px;
     }
+    .layui-m-layerbtn span:nth-of-type(1){
+        position: fixed;
+        top: 0;
+        left: 16px;
+        border-right: none;
+    } 
+    .layui-m-layerbtn span:nth-of-type(2){
+        position: fixed;
+        top: 0;
+        right: 16px;
+    } 
+    
 </style>
