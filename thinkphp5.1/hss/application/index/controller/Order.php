@@ -54,7 +54,7 @@ class Order extends \common\controller\UserBase
         }
 
         $order_type = input('post.product_type/d');
-        
+
         $goodsIds = array_column($goodsList,'goods_id');
 
         if(empty($goodsIds)){
