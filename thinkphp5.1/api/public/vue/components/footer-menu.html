@@ -228,6 +228,7 @@
                         }
                     }
                 },checkAll:function(){
+                    console.log(1);
 //                    this.checked = !this.checked;
 //                    for(let i = 0,len = this.checkItemList.length; i < len; i++){
 //                        this.checkItemList[i].checked = this.checked;
@@ -299,6 +300,8 @@
             },watch: {
                 checked: {
                     handler(newVal, oldVal) {
+                        console.log(newVal);
+                        console.log(2);
                         if(this.monitor_checked){
                             for(let i = 0,len = this.checkItemList.length; i < len; i++){
                                 this.checkItemList[i].checked = newVal;
