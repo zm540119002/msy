@@ -6,7 +6,7 @@
                 {{menu.name}}
                 <!-- 全选 -->
                 <div v-if="menu.class.indexOf('checked_all')!==-1" class="checked_all">
-                    <input type="checkbox" class="check_all" @click="checkAll" id="check_all" />
+                    <input type="checkbox" class="check_all" @click="checkAll" id="check_all" v-model.lazy="checked" />
                     <label for="check_all">全选</label>
                 </div>
                 <!-- 总金额 -->
@@ -61,7 +61,7 @@
                 init_product_type: {type: Number,default: 1},
                 init_cart_num: {type: Number,default: 0},
                 init_total_amount: {type: Number,default: 0},
-                init_checked: {type: Boolean,default: true},
+                init_checked: {type: Boolean,default: false},
                 init_menus: {
                     type: Object,
                     default: function () {
@@ -191,6 +191,11 @@
                     if(!existSign && param.checked && isPosIntNumber(param.product_id) && isPosIntNumber(param.buy_quantity)){
                         this.postData.data.push(productInfo);
                     }
+                },initCheckAll:function(param){
+                    if(this.group != 0 && this.group == param.group){
+                        this.checked = param.checked;
+                        this.editCheckItemList(param);
+                    }
                 },editCheckItemList:function(param){
                     let tmp = {
                         product_id:param.product_id,
@@ -211,7 +216,6 @@
                     if(!find){
                         this.checkItemList.push(tmp);
                     }
-                    this.editCheckAll(param);
                 },editCheckAll:function(param){
                     if(param.checked_operation_type=='edit'){ //修改选择状态
                         this.checked = true;
@@ -223,7 +227,6 @@
                         }
                     }
                 },checkAll:function(){
-                    alert(this.checked);
                     this.checked = !this.checked;
                     for(let i = 0,len = this.checkItemList.length; i < len; i++){
                         this.checkItemList[i].checked = this.checked;
@@ -248,12 +251,10 @@
                     }
                     let address = getAddress();
                     _thisVue.postData.address = JSON.stringify(address);
-
                     if( _thisVue.postData.address=='false' ){
                         dialog.error('请选择收货地址 ！');
                         return false;
                     }
-
                     let config = {
                         clickObj:_thisJquery,
                         postData:_thisVue.postData,
@@ -268,7 +269,7 @@
                     if(param.group == _this.group){
                         _this.total_amount_init(param);
                         _this.editProductList(param);
-//                        _this.editCheckItemList(param);
+                        _this.initCheckAll(param);
                     }
                 });
                 //监听-产品选择器复选框改变-事件
@@ -277,6 +278,7 @@
                         _this.total_amount_calculate_with_checked(param);
                         _this.editProductListWithChecked(param);
                         _this.editCheckItemList(param);
+                        _this.editCheckAll(param);
                     }
                 });
                 //监听-产品选择器购买数量改变-事件
