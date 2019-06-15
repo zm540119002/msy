@@ -74,7 +74,7 @@ class Order extends \common\controller\UserBase
                     ['p.status', '=', 0],
                     ['pg.promotion_id', '=', $promotion['goods_id']],
                 ], 'field' => [
-                    'pg.goods_id',"pg.goods_num*{$promotion['num']} num",'p.name',"p.franchise_price*{$promotion['num']} price",'p.id','p.belong_to_member_buy'
+                    'pg.goods_id',"pg.goods_num*{$promotion['num']} num",'p.name',"p.franchise_price*{$promotion['num']} price",'p.id','p.belong_to_member_buy','p.is_company_info'
                 ],'join' => [
                     ['promotion p','pg.promotion_id=p.id','left']
                 ]
@@ -97,16 +97,32 @@ class Order extends \common\controller\UserBase
                 $this->errorMsg(config('code.error.for_members_only.msg'),$data);
             }
 
-            if($promotion['id']==97){
+/*            if($promotion['id']==97){
 
                 $data = [
                     'code'=> config('code.error.need_beforehand_register.code'),
                     //'url' => url('Order/confirmOrder',['order_sn'=>$orderSN]),
                 ];
                 $this->errorMsg(config('code.error.need_beforehand_register.msg'),$data);
+            }*/
+
+            if($promotion['is_company_info']){
+                $modelCompany = new \app\index\model\Company();
+
+                $condition = [
+                    'where' => [
+                        ['user_id','=',$this->user['id']],
+                        ['status','=',0]
+                    ]
+                ];
+                $res = $modelCompany->getInfo($condition);
+                if(!$res){
+                    $error = config('code.error.need_beforehand_register');
+
+                    $this->errorMsg($error['msg'],$error);
+                }
             }
 
-            //
         }
 
 
