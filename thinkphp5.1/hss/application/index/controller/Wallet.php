@@ -251,8 +251,44 @@ class Wallet extends Base {
                 return errorMsg('失败');
             }
 
-            $modelOrder -> commit();
+            // 会员升级 // 每个平台都有自己的支付后业务 后期修改
+            if($orderInfo['type']==2) {
 
+                $modelPromotion = new \app\index\model\Promotion();
+                $condition = [
+                    'where' => [
+                        ['status', '=', 0],
+                        ['id', '=', $orderInfo['type_id']],
+                    ], 'field' => [
+                        'upgrade_member_level'
+                    ]
+                ];
+                $promotion = $modelPromotion->getInfo($condition);
+                // 会员升级 只升不降
+                if ($promotion['upgrade_member_level']) {
+                    $where = [
+                        'where' => [
+                            ['user_id', '=', $orderInfo['user_id']],
+                            ['type', '<', $promotion['upgrade_member_level']],
+                        ]
+                    ];
+                    $data = [
+                        'type' => $promotion['upgrade_member_level'],
+                        'update_time' => time(),
+                    ];
+
+                    $memberModel = new \app\index\model\Member();
+
+                    $result = $memberModel->allowField(true)->isUpdate(true)->save($data,$where['where']);
+
+                    if (!$result) {
+                        $modelOrder->rollback();
+                        return errorMsg('失败');
+                    }
+                }
+            }
+
+            $modelOrder -> commit();
             $url = url('Order/manage',['order_status'=>2],true,true);
             return successMsg('支付成功',['url' =>$url]);
 

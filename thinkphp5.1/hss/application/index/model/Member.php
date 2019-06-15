@@ -21,9 +21,7 @@ class Member extends \common\model\Base {
                 ['user_id','=',$uid],
             ]
         ];
-        //p($config);
-        //exit;
-        //return $this->where($where)->field($field)->find();
+
         return $this->getInfo($config);
     }
 
