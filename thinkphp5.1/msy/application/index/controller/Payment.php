@@ -473,6 +473,7 @@ class Payment extends \common\controller\Base {
 
         }
         $result = $modelCityPartner  -> allowField(true)-> save($data,$condition);
+        print_r($modelCityPartner->getLastSql());exit;
         if(false === $result){
             $modelCityPartner ->rollback();
             $info['mysql_error'] = $modelCityPartner->getError();
