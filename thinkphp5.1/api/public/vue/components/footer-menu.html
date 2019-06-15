@@ -218,7 +218,6 @@
                     if(!find){
                         this.checkItemList.push(tmp);
                     }
-//                    this.editCheckAll(param);
                 },editCheckAll:function(param){
                     if(param.checked_operation_type=='edit'){ //修改选择状态
                         this.checked = true;
@@ -281,6 +280,7 @@
                         _this.total_amount_calculate_with_checked(param);
                         _this.editProductListWithChecked(param);
                         _this.editCheckItemList(param);
+                        _this.editCheckAll(param);
                     }
                 });
                 //监听-产品选择器购买数量改变-事件
