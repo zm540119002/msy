@@ -435,7 +435,8 @@ class Payment extends \common\controller\Base {
 
         if($info['type'] == 4){
             //席位支付
-            $condition['earnest_sn'] = $info['sn'];
+            //$condition['earnest_sn'] = $info['sn'];
+            $condition[] = ['earnest_sn','=',$info['sn']];
             $data['apply_status']=4;
         }elseif($info['type'] == 5){
 
