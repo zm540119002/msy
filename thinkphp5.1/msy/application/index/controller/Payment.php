@@ -85,6 +85,7 @@ class Payment extends \common\controller\Base {
                 ];
                 $attach = json_encode($attach);
                 $jump_url =config('custom.system_id')[$systemId]['jump_url'][$info['type']];
+                print_r($jump_url);exit;
                 $return_url = config('wx_config.return_url');
                 $payInfo = [
                     'sn'=>$info['sn'],
@@ -191,6 +192,7 @@ class Payment extends \common\controller\Base {
 //        file_put_contents('a.txt',$xml);
         $wxPay = new \common\component\payment\weixin\weixinpay;
         $data  = $wxPay->wxNotify();
+
         if($data){
             $attach = json_decode($data['attach'],true);
             $systemId = $attach['system_id'];
@@ -241,7 +243,6 @@ class Payment extends \common\controller\Base {
             }elseif($payInfo['type'] == 3){ //hss 加盟店家
                 $this->setFranchisePayStatus($info,$systemId);
             }elseif($payInfo['type'] == 4|| $payInfo['type'] == 5){ //hss加盟城市合伙人
-                echo 11;exit;
                 $this->setCityPartnerPayStatus($info,$systemId);
             }
         }
@@ -377,7 +378,6 @@ class Payment extends \common\controller\Base {
             ['status', '=', 0],
             ['sn', '=', $info['sn']],
             ['user_id', '=', $info['user_id']],
-            ['apply_status', '=', 1],
         ];
         $result = $modelFranchise -> allowField(true) -> save($data,$condition);
         if($result === false){
@@ -433,7 +433,6 @@ class Payment extends \common\controller\Base {
         $condition = [
             ['status', '=', 0],
             ['user_id', '=', $info['user_id']],
-            ['apply_status', '<', 4],
         ];
 
         if($info['type'] == 4){
@@ -473,6 +472,7 @@ class Payment extends \common\controller\Base {
             $data['apply_status']=6;
 
         }
+        unset($data['id']);
         $result = $modelCityPartner  -> allowField(true)-> save($data,$condition);
         if(false === $result){
             $modelCityPartner ->rollback();
