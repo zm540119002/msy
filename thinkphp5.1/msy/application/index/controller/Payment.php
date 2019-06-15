@@ -458,11 +458,11 @@ class Payment extends \common\controller\Base {
                 'create_time'=>time(),
             ];
             $memberInfo = $modelMember -> getInfo($config);
-            print_r($memberInfo);exit;
             if($memberInfo){
                 $data['id'] = $memberInfo['id'];
             }
             $memberId = $modelMember -> edit($data);
+            p($modelMember->getLastSql());exit;
             if(!$memberId){
                 $modelCityPartner ->rollback();
                 $info['mysql_error'] = $modelMember->getError();
