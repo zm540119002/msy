@@ -77,6 +77,7 @@
                     total_amount:this.init_total_amount,
                     cart_num:this.init_cart_num,
                     checked:this.init_checked,
+                    monitor_checked:true,
                     checkItemList:[],
                     menus: this.init_menus.menu,
                     postData:{
@@ -298,8 +299,12 @@
             },watch: {
                 checked: {
                     handler(newVal, oldVal) {
-                        alert(newVal);
-                        if(typeof(oldVal) !== "undefined"){
+                        if(this.monitor_checked){
+                            for(let i = 0,len = this.checkItemList.length; i < len; i++){
+                                this.checkItemList[i].checked = newVal;
+                            }
+                            //触发-底部购物车全选改变-事件
+                            bus.$emit('footer_cart_check_all_change',newVal);
                         }
                     },
                     deep: false,
