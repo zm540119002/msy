@@ -473,8 +473,7 @@ class Payment extends \common\controller\Base {
 
         }
         $result = $modelCityPartner  -> allowField(true)-> save($data,$condition);
-        print_r($modelCityPartner->getLastSql());exit;
-        if(!$result){
+        if(false === $result){
             $modelCityPartner ->rollback();
             $info['mysql_error'] = $modelCityPartner->getError();
             return $this->writeLog("城市人申请席位定金支付更新失败",$info);
