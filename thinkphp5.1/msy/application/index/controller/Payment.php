@@ -85,6 +85,7 @@ class Payment extends \common\controller\Base {
                 ];
                 $attach = json_encode($attach);
                 $jump_url =config('custom.system_id')[$systemId]['jump_url'][$info['type']];
+                print_r($jump_url);exit;
                 $return_url = config('wx_config.return_url');
                 $payInfo = [
                     'sn'=>$info['sn'],
@@ -377,7 +378,6 @@ class Payment extends \common\controller\Base {
             ['status', '=', 0],
             ['sn', '=', $info['sn']],
             ['user_id', '=', $info['user_id']],
-            ['apply_status', '=', 1],
         ];
         $result = $modelFranchise -> allowField(true) -> save($data,$condition);
         if($result === false){
