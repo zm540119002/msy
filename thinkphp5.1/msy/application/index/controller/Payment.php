@@ -242,7 +242,6 @@ class Payment extends \common\controller\Base {
             }elseif($payInfo['type'] == 3){ //hss 加盟店家
                 $this->setFranchisePayStatus($info,$systemId);
             }elseif($payInfo['type'] == 4|| $payInfo['type'] == 5){ //hss加盟城市合伙人
-                echo 11;exit;
                 $this->setCityPartnerPayStatus($info,$systemId);
             }
         }
@@ -459,6 +458,8 @@ class Payment extends \common\controller\Base {
                 'create_time'=>time(),
             ];
             $memberInfo = $modelMember -> getInfo($config);
+            p($modelMember->getLastSql());exit;
+            print_r($memberInfo);
             if($memberInfo){
                 $data['id'] = $memberInfo['id'];
             }
