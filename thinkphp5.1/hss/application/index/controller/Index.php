@@ -121,6 +121,7 @@ class Index extends \common\controller\Base{
                     ],
                 ];
                 $member = $memberMode->getInfo($config);
+                p($member);
                 $this->assign('identity',$member);
             }
             // 底部菜单，见配置文件custom.footer_menu
