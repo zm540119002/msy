@@ -92,6 +92,7 @@
                     reduce:config.reduce,
                     jump_url:data.data && data.data.url?data.data.url:jump_url,
                     responsePageCallBack:config.responsePageCallBack,
+                    layerIndex:config.layerIndex,
                     asyncVerifyCallBack:config.asyncVerifyCallBack
                 };
                 async_verify_judge(param);
@@ -187,8 +188,7 @@
                     });
                 }
                 if(param.clickObj.attr('class').indexOf('beforehand-register')!==-1){ //会员预登记
-                    console.log(param.index);
-                    layer.close(param.index);
+                    layer.close(param.layerIndex);
                 }
                 if(param.clickObj.attr('class').indexOf('platform-two-dimensional-code')!==-1){ //获取平台二维码
                     var imgSrc=uploads+param.data.data.url;
