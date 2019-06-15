@@ -95,7 +95,15 @@ class Order extends \common\controller\UserBase
                     //'url' => url('Order/confirmOrder',['order_sn'=>$orderSN]),
                 ];
                 $this->errorMsg(config('code.error.for_members_only.msg'),$data);
+            }
 
+            if($promotion['id']==97){
+
+                $data = [
+                    'code'=> config('code.error.need_beforehand_register.code'),
+                    //'url' => url('Order/confirmOrder',['order_sn'=>$orderSN]),
+                ];
+                $this->errorMsg(config('code.error.need_beforehand_register.msg'),$data);
             }
 
             //
