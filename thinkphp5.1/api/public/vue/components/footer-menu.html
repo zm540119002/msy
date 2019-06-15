@@ -103,7 +103,6 @@
                             ? this.total_amount += param.subtotal_amount
                             : this.total_amount -= param.subtotal_amount;
                     this.total_amount = Math.abs(this.total_amount);
-                    console.log(this.total_amount-param.subtotal_amount);
                 },jump_url:function (event) {
                     let obj = $(event.currentTarget);
                     let jump_url = obj.data('jump_url');
