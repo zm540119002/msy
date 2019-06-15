@@ -78,9 +78,9 @@ var areaObject={
 	/*选择城市*/
 	selectC:function(p,c) {
 		areaCont = "";
-		for (var k=0; k<district[p][c].length; k++) {
-			areaCont += '<li onClick="areaObject.selectD(' + p + ',' + c + ',' + k + ');">' + district[p][c][k] + '</li>';
-		}
+		// for (var k=0; k<district[p][c].length; k++) {
+		// 	areaCont += '<li onClick="areaObject.selectD(' + p + ',' + c + ',' + k + ');">' + district[p][c][k] + '</li>';
+		// }
 		areaList.html(areaCont);
 		$("#areaBox").scrollTop(0);
 		var sCity = city[p][c];
@@ -100,7 +100,7 @@ var areaObject={
 		return sCity;
 	},
 
-	
+
 	setArea:function(optionArr){
 		var provinceName=areaObject.selectP(optionArr[0]);
 		var cityName=areaObject.selectC(optionArr[0],optionArr[1]);
