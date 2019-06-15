@@ -13,6 +13,7 @@ $(function(){
 
      //初始化 未完成的申请
     if(!$.isEmptyArray(apply)){
+        console.log(apply)
         var statusType=apply[0].apply_status-1;
         applicantData.id= apply[0].id;
         applicantData = {
