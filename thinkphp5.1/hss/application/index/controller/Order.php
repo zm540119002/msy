@@ -40,11 +40,10 @@ class Order extends \common\controller\UserBase
                 'create_time'=>time(),
                 'update_time'=>time(),
             ];
-            $id = $memberModel->edit($data);
-
-            p($var);
-            exit;
+            $memberModel->edit($data);
+            $member['type'] = 1;
         }
+
 
         if (!request()->isPost()) {
             $this->errorMsg('请求方式错误');
@@ -63,8 +62,6 @@ class Order extends \common\controller\UserBase
         if(empty($goodsIds)){
             $this->errorMsg('请求数据不能为空');
         }
-        p(2222);
-        exit;
 
         // 非会员可以购买的商品
 
@@ -91,10 +88,13 @@ class Order extends \common\controller\UserBase
 
             $goodsIds = array_column($goodsList,'goods_id');
 
-            if(!($promotion['belong_to_member_buy']&$res['type'])){
-                $this->errorMsg('仅限会员 !');
+            if(!($promotion['belong_to_member_buy']&$member['type'])){
+                $this->errorMsg(config('code.error.for_members_only.msg'),config('code.error.for_members_only'));
             }
 
+            if($promotion['id']==97){
+                $this->errorMsg(config('code.error.need_beforehand_register.msg'),config('code.error.need_beforehand_register'));
+            }
 
             //
         }
