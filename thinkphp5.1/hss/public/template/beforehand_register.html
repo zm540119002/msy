@@ -1,6 +1,6 @@
 <!--会员预登记模板-->
 <section class="member-register-tpl" style="display:none;">
-    <a href="javascript:void(0);" class="close_layer_pop"></a>
+    <a href="javascript:void(0);" class="close_layer_pop" style="top:0.25rem;left:0.25rem;"></a>
     <div id="wizard" class="page-bd">
         <div class="apply-data-content">
             <div class="apply-module ">
@@ -61,7 +61,7 @@
             asyncVerify(config);
         });
         // 关闭层
-        $('body').on('click','.addressLayer .close_layer_pop',function(){
+        $('body').on('click','.memberRegTpl .close_layer_pop',function(){
             $(this).parents('.layui-m-layer').remove();
         });
     });

@@ -67,8 +67,8 @@ $(function(){
             return false;
         }
         var cityArr=[];
-		for (var key=0;key<cityList.length;key++) {
-			cityArr.push([parseInt(cityList[key].province),parseInt(cityList[key].city)]);
+		for (var key=0;key<applied.length;key++) {
+			cityArr.push([parseInt(applied[key].province),parseInt(applied[key].city)]);
 		}
         var cityData=[];
         cityData.push(parseInt(area_address[0]),parseInt(area_address[1]));
