@@ -295,6 +295,17 @@
                         _this.assignProductList(param);
                     }
                 });
+            },watch: {
+                checked: {
+                    handler(newVal, oldVal) {
+                        console.log(newVal);
+                        console.log(oldVal);
+                        if(typeof(oldVal) !== "undefined"){
+                        }
+                    },
+                    deep: false,
+                    immediate: true
+                }
             }
         });
     });
