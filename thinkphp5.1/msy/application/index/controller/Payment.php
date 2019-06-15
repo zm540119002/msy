@@ -291,38 +291,42 @@ class Payment extends \common\controller\Base {
         }
 
         // 会员升级 // 每个平台都有自己的支付后业务 后期修改
-        if($orderInfo['type']==2){
+
+        // 会员升级 // 每个平台都有自己的支付后业务 后期修改
+        if($orderInfo['type']==2) {
 
             $modelPromotion = new \app\index\model\Promotion();
-            $modelPromotion ->setConnection(config('custom.system_id')[$systemId]['db']);
+            $modelOrder ->setConnection(config('custom.system_id')[$systemId]['db']);
             $condition = [
                 'where' => [
                     ['status', '=', 0],
                     ['id', '=', $orderInfo['type_id']],
                 ], 'field' => [
-                    'upgrade_level'
+                    'upgrade_member_level'
                 ]
             ];
             $promotion = $modelPromotion->getInfo($condition);
             // 会员升级 只升不降
-            if( $promotion['upgrade_member_level'] ){
+            if ($promotion['upgrade_member_level']) {
+                $where = [
+                    'where' => [
+                        ['user_id', '=', $orderInfo['user_id']],
+                        ['type', '<', $promotion['upgrade_member_level']],
+                    ]
+                ];
                 $data = [
                     'type' => $promotion['upgrade_member_level'],
                     'update_time' => time(),
                 ];
-                $where = [
-                    ['user_id','=',$orderInfo['user_id']],
-                    ['type','<',$promotion['upgrade_member_level']],
-                ];
+
                 $memberModel = new \app\index\model\Member();
-                $modelPromotion ->setConnection(config('custom.system_id')[$systemId]['db']);
+                $modelOrder ->setConnection(config('custom.system_id')[$systemId]['db']);
 
-                $result = $memberModel->edit($data,$where);
+                $result = $memberModel->allowField(true)->isUpdate(true)->save($data,$where['where']);
 
-                if(!$result){
+                if (!$result) {
                     $modelOrder->rollback();
-                    $info['mysql_error'] = $modelOrder->getError();
-                    return $this->writeLog("订单支付更新失败",$info);
+                    return errorMsg('失败');
                 }
             }
         }

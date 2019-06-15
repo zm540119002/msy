@@ -83,7 +83,6 @@ class Promotion extends Base {
             $data['audit'] = 1; // 暂时没有审核，先固定
             $data['belong_to_member_buy'] = bindec(strrev(implode(input('post.belong_to_member_buy/a'))));
 
-
             if(isset($_POST['id']) && $id=input('post.id/d')){ //修改
 
                 // 编辑

@@ -194,8 +194,8 @@
                 },initCheckAll:function(param){
                     if(this.group != 0 && this.group == param.group){
                         console.log(this.checked);
-                        console.log(this.group);
-//                        this.checkAll = param.checked;
+                        this.checked = param.checked;
+                        console.log(this.checked);
                         this.editCheckItemList(param);
                     }
                 },editCheckItemList:function(param){
@@ -218,7 +218,7 @@
                     if(!find){
                         this.checkItemList.push(tmp);
                     }
-                    this.editCheckAll(param);
+//                    this.editCheckAll(param);
                 },editCheckAll:function(param){
                     if(param.checked_operation_type=='edit'){ //修改选择状态
                         this.checked = true;
