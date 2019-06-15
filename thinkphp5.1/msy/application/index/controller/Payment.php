@@ -458,8 +458,7 @@ class Payment extends \common\controller\Base {
                 'create_time'=>time(),
             ];
             $memberInfo = $modelMember -> getInfo($config);
-            p($modelMember->getLastSql());exit;
-            print_r($memberInfo);
+            print_r($memberInfo);exit;
             if($memberInfo){
                 $data['id'] = $memberInfo['id'];
             }
