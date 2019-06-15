@@ -41,7 +41,7 @@ class Order extends \common\controller\UserBase
                 'update_time'=>time(),
             ];
             $memberModel->edit($data);
-            $member['type'] = 0;
+            $member['type'] = 1;
         }
 
 
