@@ -193,7 +193,9 @@
                     }
                 },initCheckAll:function(param){
                     if(this.group != 0 && this.group == param.group){
+                        console.log(this.checked);
                         this.checked = param.checked;
+                        console.log(this.checked);
                         this.editCheckItemList(param);
                     }
                 },editCheckItemList:function(param){
