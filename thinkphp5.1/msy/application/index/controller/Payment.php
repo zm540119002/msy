@@ -218,13 +218,11 @@ class Payment extends \common\controller\Base {
             ];
             $payModel ->startTrans();
             $result = $payModel->isUpdate(true)->save($data1,$condition);
-            print_r($payModel->getLastSql());exit;
             if($result === false){
                 $payModel ->rollback();
                 $payInfo['mysql_error'] = $payModel->getError();
                 return $this->writeLog("支付订单更新失败",$payInfo);
             }
-            echo $result;
             //组装 回调的数据
             $info = [
                 'sn' => $data['out_trade_no'],
@@ -473,6 +471,7 @@ class Payment extends \common\controller\Base {
 
         }
         $result = $modelCityPartner -> allowField(true) -> save($data,$condition);
+        print_r($modelCityPartner->getLastSql());exit;
         if($result === false){
             $modelCityPartner ->rollback();
             $info['mysql_error'] = $modelCityPartner->getError();
