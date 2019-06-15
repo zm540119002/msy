@@ -227,11 +227,11 @@
                         }
                     }
                 },checkAll:function(){
-                    alert(this.checked);
                     this.checked = !this.checked;
                     for(let i = 0,len = this.checkItemList.length; i < len; i++){
                         this.checkItemList[i].checked = this.checked;
                     }
+                    alert(this.checked);
                     //触发-底部购物车全选改变-事件
                     bus.$emit('footer_cart_check_all_change',this.checked);
                 },confirm_order:function(event){
