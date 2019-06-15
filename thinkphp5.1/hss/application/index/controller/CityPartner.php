@@ -178,7 +178,7 @@ class CityPartner extends \common\controller\UserBase {
                     'actually_amount' =>config('custom.cityPartner_fee')[1]['amount'],
                     'user_id' => $this->user['id'],
                     'pay_code' => $postData['pay_code'],
-                    'type' => config('custom.pay_type')['cityPartnerSeatPay']['code'],
+                    'type' => config('custom.pay_type')['cityPartnerBalancePay']['code'],
                     'create_time' => time(),
                 ];
 
@@ -190,7 +190,7 @@ class CityPartner extends \common\controller\UserBase {
 //                    ];
 //                }
                 $payId = $modelPay->edit($data);
-                if(false===$payId){
+                if(!$payId){
                     $modelCityPartner ->rollback();
                     return errorMsg('失败');
                 };
