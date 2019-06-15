@@ -17,26 +17,21 @@ class CityPartner extends \common\controller\UserBase {
     public function registered(){
         if (request()->isAjax()) {
         } else {
-            //平台已审核通过的申请
-            $modelCityPartner = new \app\index\model\CityPartner();
-            $condition=[
-                'where'=>[
-                    ['status', '=', 0],
-                    ['apply_status','=',5]
-                ],
-                'field'=>[
-                    'province','city',
-                ],
-            ];
-            $cityList = $modelCityPartner -> getList($condition);
-            $this->assign('cityList',json_encode($cityList));
+//            //平台已审核通过的申请
+//            $modelCityPartner = new \app\index\model\CityPartner();
+//            $condition=[
+//                'where'=>[
+//                    ['status', '=', 0],
+//                    ['apply_status','=',5]
+//                ],
+//                'field'=>[
+//                    'province','city',
+//                ],
+//            ];
+//            $cityList = $modelCityPartner -> getList($condition);
+//            $this->assign('cityList',json_encode($cityList));
             //自己提交的申请
             $modelCityPartner = new \app\index\model\CityPartner();
-            /***
-             * select a.id,(CASE WHEN a.type = 0 THEN b.name else c.name END) from a
-            left join b on a.target_id=b.id
-            left join c on a.target_id=c.id
-             */
             $condition=[
                 'where'=>[
                     ['cp.status', '=', 0],
@@ -56,7 +51,7 @@ class CityPartner extends \common\controller\UserBase {
             $applied = [];
             if($selfApplyList){
                 foreach ($selfApplyList as $selfapply){
-                    if ($selfapply['apply_status']<6){
+                    if ($selfapply['apply_status']<4){
                         $apply[] = $selfapply;
                     }else{
                         $applied[] = $selfapply;
