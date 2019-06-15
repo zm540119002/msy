@@ -26,7 +26,7 @@ return [
             'msg' => '仅限会员购买 ！',
         ],'need_beforehand_register' => [
             'code' => '1003',
-            'msg' => '必须预先登记！',
+            'msg' => '请预先登记！',
         ],
     ],'success' => [
         'default' => [
