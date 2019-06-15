@@ -261,6 +261,7 @@
                     asyncVerify(config);
                 }
             },created:function(){
+                alert(this.checked);
                 let _this = this;
                 //监听-产品选择器初始化-事件
                 bus.$on('product_select_init', function(param){
