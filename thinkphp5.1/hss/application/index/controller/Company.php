@@ -19,13 +19,14 @@ class Company extends \common\controller\Base{
             return errorMsg('请求方式错误');
         }
         $postData = input('post.');
-        p($postData);
-        exit;
-        $validate = new \app\index\validate\Franchise();
+
+        $validate = new \app\index\validate\Company();
         if(!$validate->scene('add')->check($postData)) {
             return errorMsg($validate->getError());
         }
 
+
+        
 
         $data['mobile_phone'] = trim($data['company_name']);
         $data['mobile_phone'] = trim($data['name']);
