@@ -92,8 +92,8 @@ class Index extends \common\controller\Base{
                         'm.id ','m.type',
                     ],
                 ];
-                $identity = $memberMode->getInfo($config);
-                $this->assign('identity',$identity);
+                $member = $memberMode->getInfo($config);
+                $this->assign('member',$member);
             }
             // 底部菜单，见配置文件custom.footer_menu
             $this->assign('currentPage',request()->controller().'/'.request()->action());
