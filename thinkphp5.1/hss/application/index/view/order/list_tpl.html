@@ -2,7 +2,7 @@
 {volist name="list" id="info"}
     <li data-id="{$info.id}" data-order_sn="{$info.sn}" class="order">
             <p><span>编号</span>{$info.sn}</p>
-            <p><span>下单日期</span> 2019-04-09 10:30:30</p>
+            <p><span>下单日期</span> {$info.create_time}</p>
             <p><span>商品</span>共{$info.goods_num}个</p>
             <p><span>金额</span><price class="red">￥{$info.amount}</price></p>
             <p><span>状态</span><span class="pay">{$info.order_status}</span> </p>
@@ -11,7 +11,7 @@
             <div class="address">
                     <div class="icon"><img src="public_img/default/weizhi.png" alt=""></span></div>
                     <div class="address_detail">
-                        <div >名字 电话</div>
+                        <div >{$info.consignee} {$info.mobile}</div>
                         <div >收货地址：{$info.detail_address}</div>
                     </div>
                 </div>
