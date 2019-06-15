@@ -187,6 +187,8 @@ class Payment extends \common\controller\Base {
      * wxPayNotifyCallBack
      * */
     public function wxPayNotifyCallBack(){
+        $xml = file_get_contents('php://input');
+        file_put_contents('a.txt',$xml);
         $wxPay = new \common\component\payment\weixin\weixinpay;
         $data  = $wxPay->wxNotify();
         if($data){
@@ -430,16 +432,14 @@ class Payment extends \common\controller\Base {
         $condition = [
             ['status', '=', 0],
             ['user_id', '=', $info['user_id']],
-            ['apply_status', '=', 1],
+            ['apply_status', '<', 4],
         ];
 
         if($info['type'] == 4){
             //席位支付
-            //$condition['earnest_sn'] = $info['sn'];
             $condition[] = ['earnest_sn','=',$info['sn']];
             $data['apply_status']=4;
         }elseif($info['type'] == 5){
-
             //增加平台member
             $modelMember = new \app\index\model\Member();
             $modelMember ->setConnection(config('custom.system_id')[$systemId]['db']);
@@ -468,12 +468,11 @@ class Payment extends \common\controller\Base {
             }
 
             //尾款支付
-            $condition['balance_sn'] = $info['sn'];
+            $condition[] = ['balance_sn','=',$info['sn']];
             $data['apply_status']=6;
 
         }
         $result = $modelCityPartner  -> allowField(true)-> save($data,$condition);
-        print_r($modelCityPartner->getLastSql());exit;
         if(false === $result){
             $modelCityPartner ->rollback();
             $info['mysql_error'] = $modelCityPartner->getError();
