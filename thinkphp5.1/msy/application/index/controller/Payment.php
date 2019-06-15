@@ -462,7 +462,7 @@ class Payment extends \common\controller\Base {
                 $data['id'] = $memberInfo['id'];
             }
             $memberId = $modelMember -> edit($data);
-            p($modelMember->getLastSql());exit;
+            p($memberId);exit;
             if(!$memberId){
                 $modelCityPartner ->rollback();
                 $info['mysql_error'] = $modelMember->getError();
