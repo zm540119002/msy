@@ -60,7 +60,12 @@ class Order extends \common\controller\UserBase
             $goodsIds = array_column($goodsList,'goods_id');
 
             // 购买权限
-            if(!($promotion['belong_to_member_buy']&$member['type'])){
+/*            if(!($promotion['belong_to_member_buy']&$member['type'])){
+                $error = config('code.error.for_members_only');
+                $this->errorMsg($error['msg'], $error);
+            }*/
+
+            if(!($promotion['belong_to_member_buy']&1)){
                 $error = config('code.error.for_members_only');
                 $this->errorMsg($error['msg'], $error);
             }
