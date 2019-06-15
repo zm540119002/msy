@@ -17,19 +17,6 @@ class CityPartner extends \common\controller\UserBase {
     public function registered(){
         if (request()->isAjax()) {
         } else {
-//            //平台已审核通过的申请
-//            $modelCityPartner = new \app\index\model\CityPartner();
-//            $condition=[
-//                'where'=>[
-//                    ['status', '=', 0],
-//                    ['apply_status','=',5]
-//                ],
-//                'field'=>[
-//                    'province','city',
-//                ],
-//            ];
-//            $cityList = $modelCityPartner -> getList($condition);
-//            //$this->assign('cityList',json_encode($cityList));
             //自己提交的申请
             $modelCityPartner = new \app\index\model\CityPartner();
             $condition=[
@@ -47,7 +34,7 @@ class CityPartner extends \common\controller\UserBase {
             $selfApplyList = $modelCityPartner -> getList($condition);
             //申请中
             $apply = [];
-            //已交定金或尾款申请
+            //已申请
             $applied = [];
             if($selfApplyList){
                 foreach ($selfApplyList as $selfapply){

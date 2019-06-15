@@ -93,19 +93,7 @@ class Index extends \common\controller\Base{
                     ],
                 ];
                 $member = $memberMode->getInfo($config);
-
-                $modelCityPartner = new \app\index\model\CityPartner();
-                $condition=[
-                    'where'=>[
-                        ['status', '=', 0],
-                        ['apply_status','=',5]
-                    ],
-                    'field'=>[
-                        'province','city',
-                    ],
-                ];
-                $cityList = $modelCityPartner -> getList($condition);
-                $this->assign('cityList',json_encode($cityList));
+                $this->assign('member',$member);
                 //自己提交的申请
                 $modelCityPartner = new \app\index\model\CityPartner();
                 $condition=[
@@ -113,17 +101,14 @@ class Index extends \common\controller\Base{
                         ['cp.status', '=', 0],
                         ['cp.user_id','=',$this->user['id']]
                     ], 'field'=>[
-                        'cp.id','cp.province','cp.city','cp.company_name','cp.applicant','cp.mobile','cp.city_level','cp.earnest','cp.amount','cp.apply_status'
-                        ,'p.sn','p.id as pay_id'
-                    ]
-                    ,'join' => [
-                        ['pay p','p.sn = cp.earnest_sn','left'],
+                        'cp.id','cp.province','cp.city','cp.company_name','cp.applicant',
+                        'cp.mobile','cp.city_level','cp.earnest','cp.amount','cp.apply_status'
                     ]
                 ];
                 $selfApplyList = $modelCityPartner -> getList($condition);
                 //申请中
                 $apply = [];
-                //已交定金或尾款申请
+                //已申请
                 $applied = [];
                 if($selfApplyList){
                     foreach ($selfApplyList as $selfapply){
@@ -134,7 +119,8 @@ class Index extends \common\controller\Base{
                         }
                     }
                 }
-                $this->assign('member',$member);
+                $this->assign('apply',$apply);
+                $this->assign('applied',$applied);
             }
             // 底部菜单，见配置文件custom.footer_menu
             $this->assign('currentPage',request()->controller().'/'.request()->action());
