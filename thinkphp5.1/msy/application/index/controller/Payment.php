@@ -305,6 +305,13 @@ class Payment extends \common\controller\Base {
                 ]
             ];
             $promotion = $modelPromotion->getInfo($condition);
+
+            if (!$promotion) {
+                $modelOrder->rollback();
+                $info['mysql_error'] = $modelOrder->getError();
+                return $this->writeLog("订单支付更新失败",$modelPromotion->getLastSql());
+            }
+
             // 会员升级 只升不降
             if ($promotion['upgrade_member_level']) {
                 $where = [
@@ -326,7 +333,7 @@ class Payment extends \common\controller\Base {
                 if (!$result) {
                     $modelOrder->rollback();
                     $info['mysql_error'] = $modelOrder->getError();
-                    return errorMsg('失败');
+                    return $this->writeLog("订单支付更新失败",$memberModel->getLastSql());
                 }
             }
         }
