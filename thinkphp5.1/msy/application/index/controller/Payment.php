@@ -187,8 +187,8 @@ class Payment extends \common\controller\Base {
      * wxPayNotifyCallBack
      * */
     public function wxPayNotifyCallBack(){
-        $xml = file_get_contents('php://input');
-        file_put_contents('a.txt',$xml);
+//        $xml = file_get_contents('php://input');
+//        file_put_contents('a.txt',$xml);
         $wxPay = new \common\component\payment\weixin\weixinpay;
         $data  = $wxPay->wxNotify();
         if($data){
@@ -241,6 +241,7 @@ class Payment extends \common\controller\Base {
             }elseif($payInfo['type'] == 3){ //hss 加盟店家
                 $this->setFranchisePayStatus($info,$systemId);
             }elseif($payInfo['type'] == 4|| $payInfo['type'] == 5){ //hss加盟城市合伙人
+                echo 11;exit;
                 $this->setCityPartnerPayStatus($info,$systemId);
             }
         }
