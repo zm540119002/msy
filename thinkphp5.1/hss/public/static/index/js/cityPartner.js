@@ -76,6 +76,9 @@ $(function(){
         applicantData.city = area_address[1];
         applicantData.step = 1;
         var provinces=arrayHasElement(cityArr,cityData);
+        console.log(cityArr);
+        console.log(cityData);
+        console.log(provinces);return false;
         if(!provinces){
             layer.open({
                 content:'所查询的城市可以申请城市合伙人<br/>声明：同一城市可能存在多位申请人,同等条件下按先申请先审核签约原则。',
