@@ -377,7 +377,6 @@ class Payment extends \common\controller\Base {
             ['status', '=', 0],
             ['sn', '=', $info['sn']],
             ['user_id', '=', $info['user_id']],
-            ['apply_status', '=', 1],
         ];
         $result = $modelFranchise -> allowField(true) -> save($data,$condition);
         if($result === false){
