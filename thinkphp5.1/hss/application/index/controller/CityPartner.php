@@ -66,6 +66,7 @@ class CityPartner extends \common\controller\UserBase {
             $this->assign('apply1',$apply);
             $this->assign('apply',json_encode($apply));
             $this->assign('applied',json_encode($applied));
+            p($applied);exit;
             $unlockingFooterCart = unlockingFooterCartConfig([10, 0, 9]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
             return $this->fetch();
