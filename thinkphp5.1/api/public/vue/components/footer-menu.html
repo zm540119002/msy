@@ -99,10 +99,11 @@
                     }
                     this.total_amount += param.deal_price * param.increment_buy_quantity;
                 },total_amount_calculate_with_checked:function (param) {
-                    console.log(this.total_amount-param.subtotal_amount);
                     param.checked
                             ? this.total_amount += param.subtotal_amount
                             : this.total_amount -= param.subtotal_amount;
+                    console.log(typeof this.total_amount);
+                    console.log(this.total_amount);
                 },jump_url:function (event) {
                     let obj = $(event.currentTarget);
                     let jump_url = obj.data('jump_url');
