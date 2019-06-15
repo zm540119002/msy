@@ -32,7 +32,6 @@ class CityPartner extends \common\controller\UserBase {
                 ]
             ];
             $selfApplyList = $modelCityPartner -> getList($condition);
-            p($modelCityPartner->getLastSql());exit;
             //申请中
             $apply = [];
             //已交定金或尾款申请
