@@ -193,7 +193,6 @@ class Payment extends \common\controller\Base {
             $attach = json_decode($data['attach'],true);
             $systemId = $attach['system_id'];
             $payInfo = $this->getPayInfo($systemId,$data['out_trade_no']);
-            print_r($payInfo);exit;
             if(empty($payInfo)){
                 return $this->writeLog("数据库没有此订单",$payInfo);
             }
@@ -219,6 +218,7 @@ class Payment extends \common\controller\Base {
             ];
             $payModel ->startTrans();
             $result = $payModel->isUpdate(true)->save($data1,$condition);
+            print_r($payModel->getLastSql());exit;
             if($result === false){
                 $payModel ->rollback();
                 $payInfo['mysql_error'] = $payModel->getError();
