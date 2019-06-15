@@ -32,7 +32,8 @@ class Promotion extends Base {
             if($id = input('param.id/d')){
                 $condition = [
                     'field' => [
-                        'id','name','shelf_status','sort','thumb_img','main_img','intro','tag','title','background_img','retail_price','franchise_price','agent_price','remarks'
+                        'id','name','shelf_status','sort','thumb_img','main_img','intro','tag','title','background_img','retail_price','franchise_price',
+                        'agent_price','remarks','belong_to_member_buy','is_company_info','upgrade_member_level'
                     ], 'where' => [
                         ['id','=',$id]
                     ],
@@ -54,6 +55,7 @@ class Promotion extends Base {
                 $data = $modelPromotionGoods->getList($condition);
 
                 $info['intro'] = htmlspecialchars_decode($info['intro']);
+                $info['belong_to_member_buy'] = strrev(decbin($info['belong_to_member_buy']));
                 $info['goods_list'] = addslashes(json_encode($data));
 
                 $this->assign('info',$info);
@@ -79,6 +81,8 @@ class Promotion extends Base {
             $data['update_time'] = time();
             $data['remarks'] = trim($data['remarks']);
             $data['audit'] = 1; // 暂时没有审核，先固定
+            $data['belong_to_member_buy'] = bindec(strrev(implode(input('post.belong_to_member_buy/a'))));
+
 
             if(isset($_POST['id']) && $id=input('post.id/d')){ //修改
 
