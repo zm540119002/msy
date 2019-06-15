@@ -32,7 +32,6 @@ class Order extends \common\controller\UserBase
     //生成订单
     public function generate()
     {
-        // 做到这里
         $memberModel = new \app\index\model\Member();
         if(!$member = $memberModel->getMemberInfo($this->user['id'])){
            $data = [
@@ -55,8 +54,7 @@ class Order extends \common\controller\UserBase
         }
 
         $order_type = input('post.product_type/d');
-
-
+        
         $goodsIds = array_column($goodsList,'goods_id');
 
         if(empty($goodsIds)){
@@ -74,7 +72,7 @@ class Order extends \common\controller\UserBase
                     ['p.status', '=', 0],
                     ['pg.promotion_id', '=', $promotion['goods_id']],
                 ], 'field' => [
-                    'pg.goods_id',"pg.goods_num*{$promotion['num']} num",'p.name',"p.franchise_price*{$promotion['num']} price",'p.id','p.belong_to_member_buy'
+                    'pg.goods_id',"pg.goods_num*{$promotion['num']} num",'p.name',"p.franchise_price*{$promotion['num']} price",'p.id','p.belong_to_member_buy','p.is_company_info'
                 ],'join' => [
                     ['promotion p','pg.promotion_id=p.id','left']
                 ]
@@ -88,15 +86,28 @@ class Order extends \common\controller\UserBase
 
             $goodsIds = array_column($goodsList,'goods_id');
 
+            // 购买权限
             if(!($promotion['belong_to_member_buy']&$member['type'])){
-                $this->errorMsg(config('code.error.for_members_only.msg'),config('code.error.for_members_only'));
+                $error = config('code.error.need_beforehand_register');
+                $this->errorMsg($error['msg'], $error);
             }
 
-            if($promotion['id']==97){
-                $this->errorMsg(config('code.error.need_beforehand_register.msg'),config('code.error.need_beforehand_register'));
-            }
+            // 是否需要验证公司信息
+            if($promotion['is_company_info']) {
+                $modelCompany = new \app\index\model\Company();
 
-            //
+                $condition = [
+                    'where' => [
+                        ['user_id','=',$this->user['id']],
+                        ['status','=',0]
+                    ]
+                ];
+                $res = $modelCompany->getInfo($condition);
+                if (!$res) {
+                    $error = config('code.error.need_beforehand_register');
+                    $this->errorMsg($error['msg'], $error);
+                }
+            }
         }
 
 
@@ -115,8 +126,6 @@ class Order extends \common\controller\UserBase
         //计算订单总价
         $modeGoods = new \app\index\model\Goods();
         $goodsListNew = $modeGoods->getList($config);
-
-
 
         if(empty($goodsListNew)){
             $this->errorMsg('商品已失效');
