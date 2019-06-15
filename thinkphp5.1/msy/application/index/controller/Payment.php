@@ -193,13 +193,13 @@ class Payment extends \common\controller\Base {
         $data  = $wxPay->wxNotify();
 
         if($data){
-            p(1);exit;
             $attach = json_decode($data['attach'],true);
             $systemId = $attach['system_id'];
             $payInfo = $this->getPayInfo($systemId,$data['out_trade_no']);
             if(empty($payInfo)){
                 return $this->writeLog("数据库没有此订单",$payInfo);
             }
+            p($payInfo);exit;
             //此订单回调已处理过
             if($payInfo['pay_status']>=2){
                 echo 'SUCCESS';
