@@ -292,7 +292,7 @@ class Payment extends \common\controller\Base {
 
         // 会员升级 // 每个平台都有自己的支付后业务 后期修改
        // if($orderInfo['type']==2) {
-        if(true) {
+/*        if(true) {
 
             $modelPromotion = new \app\index\model\Promotion();
             $modelPromotion ->setConnection(config('custom.system_id')[$systemId]['db']);
@@ -326,10 +326,10 @@ class Payment extends \common\controller\Base {
                 if (!$result) {
                     $modelOrder->rollback();
                     $info['mysql_error'] = $modelOrder->getError();
-                    return errorMsg('失败');
+                    return $this->writeLog("订单支付更新失败",$result);
                 }
             }
-        }
+        }*/
 
         $modelOrder->commit();
         echo 'SUCCESS';
