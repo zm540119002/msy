@@ -89,9 +89,15 @@ class Order extends \common\controller\UserBase
             $goodsIds = array_column($goodsList,'goods_id');
 
             if(!($promotion['belong_to_member_buy']&$member['type'])){
-                $this->errorMsg('仅限会员 !');
+
+                $data = [
+                    'code'=> config('code.error.for_members_only.code'),
+                    //'url' => url('Order/confirmOrder',['order_sn'=>$orderSN]),
+                ];
+                $this->errorMsg(config('code.error.for_members_only.msg'),$data);
+
             }
-            
+
             //
         }
 
