@@ -41,6 +41,7 @@ $(function(){
                 $(this).addClass('current').siblings().removeClass('current');
             });
             $('nav.apply-data-nav li:eq('+index+')').click();
+            $('.weui-flex li:eq(3)').addClass('nodisabled');
 
         }else{
             //待审核
