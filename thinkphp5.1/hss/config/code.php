@@ -23,10 +23,10 @@ return [
             'msg' => '您还未登录平台，请先登录！',
         ],'for_members_only' => [
             'code' => '1002',
-            'msg' => '仅限会员！',
+            'msg' => '仅限会员购买 ！',
         ],'need_beforehand_register' => [
             'code' => '1003',
-            'msg' => '必须预先登记！',
+            'msg' => '请预先登记！',
         ],
     ],'success' => [
         'default' => [
