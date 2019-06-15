@@ -120,6 +120,10 @@
                 return param;
             }
         });
+        // 点击返回上一页
+        $('.back').on("click",function(){
+            history.back(-1)
+        })
 
     });
 </script>
