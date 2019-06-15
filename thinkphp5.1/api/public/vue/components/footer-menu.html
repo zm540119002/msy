@@ -6,7 +6,7 @@
                 {{menu.name}}
                 <!-- 全选 -->
                 <div v-if="menu.class.indexOf('checked_all')!==-1" class="checked_all">
-                    <input type="checkbox" class="check_all" @click="checkAll" id="check_all" />
+                    <input type="checkbox" class="check_all" v-model="checked" @click="checkAll" id="check_all" />
                     <label for="check_all">全选</label>
                 </div>
                 <!-- 总金额 -->
@@ -192,6 +192,9 @@
                         this.postData.data.push(productInfo);
                     }
                 },editCheckItemList:function(param){
+                    if(param.group == this.group){
+                        console.log(param.checked);
+                    }
                     let tmp = {
                         product_id:param.product_id,
                         checked:param.checked
@@ -261,14 +264,13 @@
                     asyncVerify(config);
                 }
             },created:function(){
-                alert(this.checked);
                 let _this = this;
                 //监听-产品选择器初始化-事件
                 bus.$on('product_select_init', function(param){
                     if(param.group == _this.group){
                         _this.total_amount_init(param);
                         _this.editProductList(param);
-//                        _this.editCheckItemList(param);
+                        _this.editCheckItemList(param);
                     }
                 });
                 //监听-产品选择器复选框改变-事件
