@@ -29,7 +29,7 @@ class CityPartner extends \common\controller\UserBase {
                 ],
             ];
             $cityList = $modelCityPartner -> getList($condition);
-            $this->assign('cityList',json_encode($cityList));
+            //$this->assign('cityList',json_encode($cityList));
             //自己提交的申请
             $modelCityPartner = new \app\index\model\CityPartner();
             $condition=[
