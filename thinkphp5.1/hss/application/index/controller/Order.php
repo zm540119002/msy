@@ -67,9 +67,12 @@ class Order extends \common\controller\UserBase
 
             // 是否需要验证公司信息
             if( $member['type']==config('custom.member_level.1.level') && $promotion['is_company_info'] ) {
-                $modelCompany = new \app\index\model\MemberBeforehandRegister();
+                $modelCompany = new \app\index\model\Franchise();
 
                 $condition = [
+                    'field' => [
+                        'id'
+                    ],
                     'where' => [
                         ['user_id','=',$this->user['id']],
                         ['status','=',0]
@@ -96,7 +99,6 @@ class Order extends \common\controller\UserBase
             ]
         ];
 
-
         //计算订单总价
         $modeGoods = new \app\index\model\Goods();
         $goodsListNew = $modeGoods->getList($config);
@@ -109,7 +111,7 @@ class Order extends \common\controller\UserBase
         foreach ($goodsList as $k1 => &$goodsInfo) {
             foreach ($goodsListNew as $k2 => &$goodsInfoNew) {
 
-                // 购买权限
+                // 商品购买权限
                 if(!($goodsInfoNew['belong_to_member_buy']&(int)$member['type'])){
                     $error = config('code.error.for_members_only');
                     $this->errorMsg($error['msg'], $error);
