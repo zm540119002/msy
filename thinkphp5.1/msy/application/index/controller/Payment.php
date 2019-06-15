@@ -305,37 +305,35 @@ class Payment extends \common\controller\Base {
                 ]
             ];
             $promotion = $modelPromotion->getInfo($condition);
+            $this->writeLog("订单支付更新失败",$modelPromotion->getLastSql());
 
-            if (!$promotion) {
-                $modelOrder->rollback();
-                $info['mysql_error'] = $modelOrder->getError();
-                return $this->writeLog("订单支付更新失败",$modelPromotion->getLastSql());
-            }
+            /*if($promotion){
+                $upgrade_member_level = (int)$promotion['upgrade_member_level'];
 
-            // 会员升级 只升不降
-            if ($promotion['upgrade_member_level']) {
-                $where = [
-                    'where' => [
-                        ['user_id', '=', $orderInfo['user_id']],
-                        ['type', '<', $promotion['upgrade_member_level']],
-                    ]
-                ];
-                $data = [
-                    'type' => $promotion['upgrade_member_level'],
-                    'update_time' => time(),
-                ];
+                if ($upgrade_member_level) {
+                    $where = [
+                        'where' => [
+                            ['user_id', '=', $orderInfo['user_id']],
+                            ['type', '<', $upgrade_member_level],
+                        ]
+                    ];
+                    $data = [
+                        'type' => $upgrade_member_level,
+                        'update_time' => time(),
+                    ];
 
-                $memberModel = new \app\index\model\Member();
-                $memberModel ->setConnection(config('custom.system_id')[$systemId]['db']);
+                    $memberModel = new \app\index\model\Member();
+                    $memberModel ->setConnection(config('custom.system_id')[$systemId]['db']);
 
-                $result = $memberModel->allowField(true)->save($data,$where['where']);
+                    $result = $memberModel->allowField(true)->save($data,$where);
 
-                if (!$result) {
-                    $modelOrder->rollback();
-                    $info['mysql_error'] = $modelOrder->getError();
-                    return $this->writeLog("订单支付更新失败",$memberModel->getLastSql());
+                    if (!$result) {
+                        $modelOrder->rollback();
+                        $info['mysql_error'] = $modelOrder->getError();
+                        return $this->writeLog("订单支付更新失败",$memberModel->getLastSql());
+                    }
                 }
-            }
+            }*/
         }
 
         $modelOrder->commit();
