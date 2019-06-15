@@ -473,7 +473,7 @@ class Payment extends \common\controller\Base {
 
         }
         print_r($condition);
-        $result = $modelCityPartner -> edit($data,$condition);
+        $result = $modelCityPartner -> save($data,$condition);
         print_r($modelCityPartner->getLastSql());exit;
         if(!$result){
             $modelCityPartner ->rollback();
