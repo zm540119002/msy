@@ -291,10 +291,11 @@ class Payment extends \common\controller\Base {
         }
 
         // 会员升级 // 每个平台都有自己的支付后业务 后期修改
-        /*if($orderInfo['type']==2) {
+       // if($orderInfo['type']==2) {
+        if(true) {
 
             $modelPromotion = new \app\index\model\Promotion();
-            $modelOrder ->setConnection(config('custom.system_id')[$systemId]['db']);
+            $modelPromotion ->setConnection(config('custom.system_id')[$systemId]['db']);
             $condition = [
                 'where' => [
                     ['status', '=', 0],
@@ -318,16 +319,17 @@ class Payment extends \common\controller\Base {
                 ];
 
                 $memberModel = new \app\index\model\Member();
-                $modelOrder ->setConnection(config('custom.system_id')[$systemId]['db']);
+                $memberModel ->setConnection(config('custom.system_id')[$systemId]['db']);
 
-                $result = $memberModel->allowField(true)->isUpdate(true)->save($data,$where['where']);
+                $result = $memberModel->allowField(true)->save($data,$where['where']);
 
                 if (!$result) {
                     $modelOrder->rollback();
+                    $info['mysql_error'] = $modelOrder->getError();
                     return errorMsg('失败');
                 }
             }
-        }*/
+        }
 
         $modelOrder->commit();
         echo 'SUCCESS';

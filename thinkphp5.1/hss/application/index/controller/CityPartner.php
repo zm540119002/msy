@@ -29,14 +29,9 @@ class CityPartner extends \common\controller\UserBase {
                 ],
             ];
             $cityList = $modelCityPartner -> getList($condition);
-            $this->assign('cityList',json_encode($cityList));
+            //$this->assign('cityList',json_encode($cityList));
             //自己提交的申请
             $modelCityPartner = new \app\index\model\CityPartner();
-            /***
-             * select a.id,(CASE WHEN a.type = 0 THEN b.name else c.name END) from a
-            left join b on a.target_id=b.id
-            left join c on a.target_id=c.id
-             */
             $condition=[
                 'where'=>[
                     ['cp.status', '=', 0],
@@ -63,6 +58,7 @@ class CityPartner extends \common\controller\UserBase {
                     }
                 }
             }
+            //git p($apply);exit;
             $this->assign('apply1',$apply);
             $this->assign('apply',json_encode($apply));
             $this->assign('applied',json_encode($applied));
