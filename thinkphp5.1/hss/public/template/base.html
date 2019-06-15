@@ -103,6 +103,7 @@
     function async_verify_judge(param){
         if(param.data.status==0){ //失败回调
             if(param.data.data.code == '1000'){ //默认
+                dialog.error(param.data.info);
             }else if(param.data.data.code == '1001'){ //未登录
                 if(param.clickObj.attr('class').indexOf('add_cart')!==-1 && param.postData){ //加入购物车
                     editLocalStorageCartList(param);
