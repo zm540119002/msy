@@ -189,10 +189,10 @@ class Payment extends \common\controller\Base {
     public function wxPayNotifyCallBack(){
         $wxPay = new \common\component\payment\weixin\weixinpay;
         $data  = $wxPay->wxNotify();
-        print_r($data);exit;
         if($data){
             $attach = json_decode($data['attach'],true);
             $systemId = $attach['system_id'];
+            print_r($systemId);exit;
             $payInfo = $this->getPayInfo($systemId,$data['out_trade_no']);
             if(empty($payInfo)){
                 return $this->writeLog("数据库没有此订单",$payInfo);
