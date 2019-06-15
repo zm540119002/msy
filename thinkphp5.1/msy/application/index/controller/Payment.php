@@ -433,7 +433,6 @@ class Payment extends \common\controller\Base {
         $condition = [
             ['status', '=', 0],
             ['user_id', '=', $info['user_id']],
-            ['apply_status', '<', 6],
         ];
 
         if($info['type'] == 4){
