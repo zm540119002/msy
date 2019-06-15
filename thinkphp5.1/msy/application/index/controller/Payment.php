@@ -187,9 +187,6 @@ class Payment extends \common\controller\Base {
      * wxPayNotifyCallBack
      * */
     public function wxPayNotifyCallBack(){
-        $xml = file_get_contents('php://input');
-
-        file_put_contents('a.txt',$xml);
         $wxPay = new \common\component\payment\weixin\weixinpay;
         $data  = $wxPay->wxNotify();
         if($data){
@@ -226,7 +223,6 @@ class Payment extends \common\controller\Base {
                 $payInfo['mysql_error'] = $payModel->getError();
                 return $this->writeLog("支付订单更新失败",$payInfo);
             }
-            echo $result;
             //组装 回调的数据
             $info = [
                 'sn' => $data['out_trade_no'],
@@ -475,6 +471,7 @@ class Payment extends \common\controller\Base {
 
         }
         $result = $modelCityPartner -> allowField(true) -> save($data,$condition);
+        print_r($modelCityPartner->getLastSql());exit;
         if($result === false){
             $modelCityPartner ->rollback();
             $info['mysql_error'] = $modelCityPartner->getError();
