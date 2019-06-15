@@ -115,7 +115,7 @@ function addressLayer(title,data){
         anim:'up',
         className:'addressLayer',
         content:addressInfo,
-        btn:['保存','关闭'],
+        // btn:['保存','关闭'],
         success:function(){
             // 写入显示数据
 
