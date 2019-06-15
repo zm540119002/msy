@@ -186,7 +186,11 @@
                         content: settlementMethod
                     });
                 }
-                 //获取平台二维码
+                //会员预登记
+                if(param.clickObj.attr('class').indexOf('beforehand-register')!==-1){
+                    layer.close(param.index);
+                }
+                //获取平台二维码
                 if(param.clickObj.attr('class').indexOf('platform-two-dimensional-code')!==-1){
                     var imgSrc=uploads+param.data.data.url;
                     layer.open({
