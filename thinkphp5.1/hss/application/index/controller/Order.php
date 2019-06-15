@@ -2,33 +2,6 @@
 namespace app\index\controller;
 class Order extends \common\controller\UserBase
 {
-
-    public function __construct(){
-        parent::__construct();
-
-//        // 自动开通会员
-//        $memberModel = new \app\index\model\Member();
-//        $data = [
-//            ['user_id'=>$this->user['id']],
-//            ['create_time'=>time()],
-//            ['update_time'=>time()],
-//        ];
-//        $res = $memberModel->allowField(true)->isUpdate(false)->save($data);
-//        print_r($memberModel);
-//        exit;
-//        if(!$member = $memberModel->getMemberInfo($this->user['id'])){
-//            $data = [
-//                ['user_id'=>$this->user['id']],
-//                ['create_time'=>time()],
-//                ['update_time'=>time()],
-//            ];
-//            $var = $memberModel->edit($data);
-//            $var = $memberModel->id;
-//            p($var);
-//            exit;
-//        }
-    }
-
     //生成订单
     public function generate()
     {
@@ -93,8 +66,8 @@ class Order extends \common\controller\UserBase
             }
 
             // 是否需要验证公司信息
-            if($promotion['is_company_info']) {
-                $modelCompany = new \app\index\model\Company();
+            if( $member['type']==1 && $promotion['is_company_info'] ) {
+                $modelCompany = new \app\index\model\MemberBeforehandRegister();
 
                 $condition = [
                     'where' => [
