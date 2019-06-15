@@ -191,8 +191,9 @@ class Payment extends \common\controller\Base {
 //        file_put_contents('a.txt',$xml);
         $wxPay = new \common\component\payment\weixin\weixinpay;
         $data  = $wxPay->wxNotify();
-        p($data);exit;
+
         if($data){
+            p(1);exit;
             $attach = json_decode($data['attach'],true);
             $systemId = $attach['system_id'];
             $payInfo = $this->getPayInfo($systemId,$data['out_trade_no']);
