@@ -227,24 +227,24 @@ EOF;
             //获取通知的数据
             //$xml = $GLOBALS['HTTP_RAW_POST_DATA'];
             $xml = file_get_contents('php://input');
-            $xml = '<xml><appid><![CDATA[wx9eee7ee8c2ae57dc]]></appid>
-<attach><![CDATA[{"system_id":"3"}]]></attach>
-<bank_type><![CDATA[CFT]]></bank_type>
-<cash_fee><![CDATA[1]]></cash_fee>
-<fee_type><![CDATA[CNY]]></fee_type>
-<is_subscribe><![CDATA[Y]]></is_subscribe>
-<mch_id><![CDATA[1234887902]]></mch_id>
-<nonce_str><![CDATA[p3v4lw9mmf3hao7r4qjuw8d2rfvzy3nj]]></nonce_str>
-<openid><![CDATA[oNalMuA6iE-T45TPb_ZeQYlJ3Jjk]]></openid>
-<out_trade_no><![CDATA[20190615102640112697230722091263]]></out_trade_no>
-<result_code><![CDATA[SUCCESS]]></result_code>
-<return_code><![CDATA[SUCCESS]]></return_code>
-<sign><![CDATA[E0CA1ADA7E74ED2E703C9FE371507622]]></sign>
-<time_end><![CDATA[20190615102654]]></time_end>
-<total_fee>1</total_fee>
-<trade_type><![CDATA[JSAPI]]></trade_type>
-<transaction_id><![CDATA[4200000309201906153434938618]]></transaction_id>
-</xml>';
+//            $xml = '<xml><appid><![CDATA[wx9eee7ee8c2ae57dc]]></appid>
+//<attach><![CDATA[{"system_id":"3"}]]></attach>
+//<bank_type><![CDATA[CFT]]></bank_type>
+//<cash_fee><![CDATA[1]]></cash_fee>
+//<fee_type><![CDATA[CNY]]></fee_type>
+//<is_subscribe><![CDATA[Y]]></is_subscribe>
+//<mch_id><![CDATA[1234887902]]></mch_id>
+//<nonce_str><![CDATA[p3v4lw9mmf3hao7r4qjuw8d2rfvzy3nj]]></nonce_str>
+//<openid><![CDATA[oNalMuA6iE-T45TPb_ZeQYlJ3Jjk]]></openid>
+//<out_trade_no><![CDATA[20190615102640112697230722091263]]></out_trade_no>
+//<result_code><![CDATA[SUCCESS]]></result_code>
+//<return_code><![CDATA[SUCCESS]]></return_code>
+//<sign><![CDATA[E0CA1ADA7E74ED2E703C9FE371507622]]></sign>
+//<time_end><![CDATA[20190615102654]]></time_end>
+//<total_fee>1</total_fee>
+//<trade_type><![CDATA[JSAPI]]></trade_type>
+//<transaction_id><![CDATA[4200000309201906153434938618]]></transaction_id>
+//</xml>';
 /*            file_put_contents('./array2.json',json_encode($xml));
             exit;*/
 
