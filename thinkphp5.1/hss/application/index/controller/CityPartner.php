@@ -51,7 +51,7 @@ class CityPartner extends \common\controller\UserBase {
             $applied = [];
             if($selfApplyList){
                 foreach ($selfApplyList as $selfapply){
-                    if ($selfapply['apply_status']<4){
+                    if ($selfapply['apply_status']<6){
                         $apply[] = $selfapply;
                     }else{
                         $applied[] = $selfapply;
