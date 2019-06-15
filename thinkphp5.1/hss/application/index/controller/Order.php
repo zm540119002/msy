@@ -16,7 +16,6 @@ class Order extends \common\controller\UserBase
             $member['type'] = 1;
         }
 
-
         if (!request()->isPost()) {
             $this->errorMsg('请求方式错误');
         }
@@ -61,7 +60,7 @@ class Order extends \common\controller\UserBase
 
             // 购买权限
             if(!($promotion['belong_to_member_buy']&$member['type'])){
-                $error = config('code.error.need_beforehand_register');
+                $error = config('code.error.for_members_only');
                 $this->errorMsg($error['msg'], $error);
             }
 
@@ -76,6 +75,7 @@ class Order extends \common\controller\UserBase
                     ]
                 ];
                 $res = $modelCompany->getInfo($condition);
+         
                 if (!$res) {
                     $error = config('code.error.need_beforehand_register');
                     $this->errorMsg($error['msg'], $error);
