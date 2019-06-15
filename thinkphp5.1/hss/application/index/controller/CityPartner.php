@@ -189,6 +189,7 @@ class CityPartner extends \common\controller\UserBase {
 //                        'status'=>0,
 //                    ];
 //                }
+                p($data);
                 $payId = $modelPay->edit($data);
                 print_r($modelPay->getLastSql());exit;
                 if(false===$payId){
