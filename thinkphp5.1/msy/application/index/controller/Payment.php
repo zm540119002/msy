@@ -85,6 +85,7 @@ class Payment extends \common\controller\Base {
                 ];
                 $attach = json_encode($attach);
                 $jump_url =config('custom.system_id')[$systemId]['jump_url'][$info['type']];
+                print_r($jump_url);exit;
                 $return_url = config('wx_config.return_url');
                 $payInfo = [
                     'sn'=>$info['sn'],
@@ -377,7 +378,6 @@ class Payment extends \common\controller\Base {
             ['status', '=', 0],
             ['sn', '=', $info['sn']],
             ['user_id', '=', $info['user_id']],
-            ['apply_status', '=', 1],
         ];
         $result = $modelFranchise -> allowField(true) -> save($data,$condition);
         if($result === false){
@@ -433,7 +433,6 @@ class Payment extends \common\controller\Base {
         $condition = [
             ['status', '=', 0],
             ['user_id', '=', $info['user_id']],
-            ['apply_status', '<', 4],
         ];
 
         if($info['type'] == 4){
@@ -458,8 +457,6 @@ class Payment extends \common\controller\Base {
                 'create_time'=>time(),
             ];
             $memberInfo = $modelMember -> getInfo($config);
-            p($modelMember->getLastSql());exit;
-            print_r($memberInfo);
             if($memberInfo){
                 $data['id'] = $memberInfo['id'];
             }
@@ -475,6 +472,7 @@ class Payment extends \common\controller\Base {
             $data['apply_status']=6;
 
         }
+        unset($data['id']);
         $result = $modelCityPartner  -> allowField(true)-> save($data,$condition);
         if(false === $result){
             $modelCityPartner ->rollback();
