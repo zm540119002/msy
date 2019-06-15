@@ -199,7 +199,6 @@ class Payment extends \common\controller\Base {
             if(empty($payInfo)){
                 return $this->writeLog("数据库没有此订单",$payInfo);
             }
-            p($payInfo);exit;
             //此订单回调已处理过
             if($payInfo['pay_status']>=2){
                 echo 'SUCCESS';
@@ -236,7 +235,6 @@ class Payment extends \common\controller\Base {
                 'pay_sn' => $data['transaction_id'],
                 'actually_amount' => $data['total_fee']/100,
             ];
-            p($payInfo);exit;
             if($payInfo['type'] == 1){
                 $this->setOrderPayStatus($info,$systemId);
             }elseif($payInfo['type'] == 2){
@@ -244,7 +242,6 @@ class Payment extends \common\controller\Base {
             }elseif($payInfo['type'] == 3){ //hss 加盟店家
                 $this->setFranchisePayStatus($info,$systemId);
             }elseif($payInfo['type'] == 4|| $payInfo['type'] == 5){ //hss加盟城市合伙人
-                echo 11;exit;
                 $this->setCityPartnerPayStatus($info,$systemId);
             }
         }
@@ -436,7 +433,6 @@ class Payment extends \common\controller\Base {
         $condition = [
             ['status', '=', 0],
             ['user_id', '=', $info['user_id']],
-            ['apply_status', '<', 4],
         ];
 
         if($info['type'] == 4){
@@ -476,6 +472,7 @@ class Payment extends \common\controller\Base {
             $data['apply_status']=6;
 
         }
+        unset($data['id']);
         $result = $modelCityPartner  -> allowField(true)-> save($data,$condition);
         if(false === $result){
             $modelCityPartner ->rollback();
