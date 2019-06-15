@@ -46,6 +46,18 @@
                 return false;
             }
             console.log(postData);
+            return false;
+            let _this = $(this);
+            let config = {
+                clickObj:_this
+            };
+            login_success_callback_private = function(){
+                asyncVerify(config);
+            };
+            register_success_callback_private = function(){
+                asyncVerify(config);
+            };
+            asyncVerify(config);
         });
     });
 </script>
