@@ -235,7 +235,6 @@ class Payment extends \common\controller\Base {
                 'pay_sn' => $data['transaction_id'],
                 'actually_amount' => $data['total_fee']/100,
             ];
-            p($payInfo);exit;
             if($payInfo['type'] == 1){
                 $this->setOrderPayStatus($info,$systemId);
             }elseif($payInfo['type'] == 2){
