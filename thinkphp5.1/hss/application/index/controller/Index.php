@@ -128,7 +128,7 @@ class Index extends \common\controller\Base{
                 $condition=[
                     'where'=>[
                         ['cp.status', '=', 0],
-                        ['cp.user_id','=',$this->user['id']]
+                        ['cp.user_id','=',$user['id']]
                     ], 'field'=>[
                         'cp.id','cp.province','cp.city','cp.company_name','cp.applicant',
                         'cp.mobile','cp.city_level','cp.earnest','cp.amount','cp.apply_status'
