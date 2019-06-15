@@ -294,7 +294,7 @@ class Payment extends \common\controller\Base {
         if($orderInfo['type']==2) {
 
             $modelPromotion = new \app\index\model\Promotion();
-            $modelOrder ->setConnection(config('custom.system_id')[$systemId]['db']);
+            $modelPromotion ->setConnection(config('custom.system_id')[$systemId]['db']);
             $condition = [
                 'where' => [
                     ['status', '=', 0],
@@ -320,7 +320,7 @@ class Payment extends \common\controller\Base {
                 $memberModel = new \app\index\model\Member();
                 $memberModel ->setConnection(config('custom.system_id')[$systemId]['db']);
 
-                $result = $memberModel->allowField(true)->isUpdate(true)->save($data,$where['where']);
+                $result = $memberModel->allowField(true)->save($data,$where['where']);
 
                 if (!$result) {
                     $modelOrder->rollback();
