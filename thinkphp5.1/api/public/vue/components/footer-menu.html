@@ -192,9 +192,7 @@
                         this.postData.data.push(productInfo);
                     }
                 },editCheckItemList:function(param){
-                    console.log(this.group);
-                    console.log(param.group);
-                    if(param.group == this.group){
+                    if(this.group != 0 && param.group == this.group){
                         console.log(param.product_id);
                     }
                     let tmp = {
