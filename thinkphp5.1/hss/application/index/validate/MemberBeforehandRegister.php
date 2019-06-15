@@ -1,7 +1,7 @@
 <?php
 namespace app\index\validate;
 
-class Company extends \think\Validate
+class MemberBeforehandRegister extends \think\Validate
 {
     //验证规则
     protected $rule = [
