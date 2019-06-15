@@ -32,7 +32,6 @@ class Order extends \common\controller\UserBase
     //生成订单
     public function generate()
     {
-        // 做到这里
         $memberModel = new \app\index\model\Member();
         if(!$member = $memberModel->getMemberInfo($this->user['id'])){
            $data = [
@@ -55,8 +54,7 @@ class Order extends \common\controller\UserBase
         }
 
         $order_type = input('post.product_type/d');
-
-
+        
         $goodsIds = array_column($goodsList,'goods_id');
 
         if(empty($goodsIds)){
@@ -88,25 +86,14 @@ class Order extends \common\controller\UserBase
 
             $goodsIds = array_column($goodsList,'goods_id');
 
+            // 购买权限
             if(!($promotion['belong_to_member_buy']&$member['type'])){
-
-                $data = [
-                    'code'=> config('code.error.for_members_only.code'),
-                    //'url' => url('Order/confirmOrder',['order_sn'=>$orderSN]),
-                ];
-                $this->errorMsg(config('code.error.for_members_only.msg'),$data);
+                $error = config('code.error.need_beforehand_register');
+                $this->errorMsg($error['msg'], $error);
             }
 
-/*            if($promotion['id']==97){
-
-                $data = [
-                    'code'=> config('code.error.need_beforehand_register.code'),
-                    //'url' => url('Order/confirmOrder',['order_sn'=>$orderSN]),
-                ];
-                $this->errorMsg(config('code.error.need_beforehand_register.msg'),$data);
-            }*/
-
-            if($promotion['is_company_info']){
+            // 是否需要验证公司信息
+            if($promotion['is_company_info']) {
                 $modelCompany = new \app\index\model\Company();
 
                 $condition = [
@@ -116,13 +103,11 @@ class Order extends \common\controller\UserBase
                     ]
                 ];
                 $res = $modelCompany->getInfo($condition);
-                if(!$res){
+                if (!$res) {
                     $error = config('code.error.need_beforehand_register');
-
-                    $this->errorMsg($error['msg'],$error);
+                    $this->errorMsg($error['msg'], $error);
                 }
             }
-
         }
 
 
@@ -141,8 +126,6 @@ class Order extends \common\controller\UserBase
         //计算订单总价
         $modeGoods = new \app\index\model\Goods();
         $goodsListNew = $modeGoods->getList($config);
-
-
 
         if(empty($goodsListNew)){
             $this->errorMsg('商品已失效');
