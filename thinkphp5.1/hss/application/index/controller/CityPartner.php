@@ -63,7 +63,6 @@ class CityPartner extends \common\controller\UserBase {
                     }
                 }
             }
-            p($apply);
             $this->assign('apply1',$apply);
             $this->assign('apply',json_encode($apply));
             $this->assign('applied',json_encode($applied));
