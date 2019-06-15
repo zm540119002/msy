@@ -291,8 +291,7 @@ class Payment extends \common\controller\Base {
         }
 
         // 会员升级 // 每个平台都有自己的支付后业务 后期修改
-       // if($orderInfo['type']==2) {
-        if(true) {
+       if($orderInfo['type']==2) {
 
             $modelPromotion = new \app\index\model\Promotion();
             $modelPromotion ->setConnection(config('custom.system_id')[$systemId]['db']);
@@ -305,9 +304,8 @@ class Payment extends \common\controller\Base {
                 ]
             ];
             $promotion = $modelPromotion->getInfo($condition);
-            $this->writeLog("订单支付更新失败",$modelPromotion->getLastSql());
 
-            /*if($promotion){
+            if($promotion && $promotion['upgrade_member_level']){
                 $upgrade_member_level = (int)$promotion['upgrade_member_level'];
 
                 if ($upgrade_member_level) {
@@ -330,10 +328,10 @@ class Payment extends \common\controller\Base {
                     if (!$result) {
                         $modelOrder->rollback();
                         $info['mysql_error'] = $modelOrder->getError();
-                        return $this->writeLog("订单支付更新失败",$memberModel->getLastSql());
+                        return $this->writeLog("会员等级更新失败",$memberModel->getLastSql());
                     }
                 }
-            }*/
+            }
         }
 
         $modelOrder->commit();
