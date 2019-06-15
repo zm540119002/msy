@@ -14,7 +14,6 @@ class Order extends \common\controller\UserBase
             ];
             $memberModel->edit($data);
             $member['type'] = config('custom.member_level.1.level');
-            //$member['type'] = 1;
         }
 
         if (!request()->isPost()) {
