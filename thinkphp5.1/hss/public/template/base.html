@@ -109,6 +109,8 @@
                 }else{
                     loginDialogTrigger();
                 }
+            }else if(param.data.data.code == '1003'){ //未预登记
+                beforehandRegisterTrigger();
             }else{
                 dialog.error(param.data.info);
             }

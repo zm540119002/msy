@@ -21,14 +21,17 @@ return [
         ],'login' => [
             'code' => '1001',
             'msg' => '您还未登录平台，请先登录！',
+        ],'for_members_only' => [
+            'code' => '1002',
+            'msg' => '仅限会员购买 ！',
+        ],'need_beforehand_register' => [
+            'code' => '1003',
+            'msg' => '请预先登记！',
         ],
     ],'success' => [
         'default' => [
             'code' => '2000',
             'msg' => '成功！',
-        ],'login' => [
-            'code' => '2001',
-            'msg' => '已登录！',
-        ]
+        ],
     ],
 ];

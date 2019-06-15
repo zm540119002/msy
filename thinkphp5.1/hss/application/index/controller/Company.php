@@ -9,7 +9,7 @@ class Company extends \common\controller\Base{
         return $this->fetch();
     }
 
-    public function company(){
-        
+    public function add(){
+
     }
 }
