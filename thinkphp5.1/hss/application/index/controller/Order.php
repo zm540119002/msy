@@ -32,16 +32,20 @@ class Order extends \common\controller\UserBase
     //生成订单
     public function generate()
     {
+        // 做到这里
         $memberModel = new \app\index\model\Member();
-        $data = [
-            ['user_id'=>$this->user['id']],
-            ['create_time'=>time()],
-            ['update_time'=>time()],
-        ];
+        if(!$member = $memberModel->getMemberInfo($this->user['id'])){
+           $data = [
+                'user_id'=>$this->user['id'],
+                'create_time'=>time(),
+                'update_time'=>time(),
+            ];
+            $id = $memberModel->edit($data);
 
-        $res = $memberModel->allowField(true)->isUpdate(false)->save($data);
-        print_r($memberModel->id);
-        exit;
+            p($var);
+            exit;
+        }
+
         if (!request()->isPost()) {
             $this->errorMsg('请求方式错误');
         }
