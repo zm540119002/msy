@@ -473,6 +473,7 @@ class Payment extends \common\controller\Base {
             $data['apply_status']=6;
 
         }
+        unset($data['id']);
         $result = $modelCityPartner  -> allowField(true)-> save($data,$condition);
         p($modelCityPartner->getLastSql());exit;
         if(false === $result){
