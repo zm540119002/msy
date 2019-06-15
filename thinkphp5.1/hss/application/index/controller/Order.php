@@ -89,21 +89,11 @@ class Order extends \common\controller\UserBase
             $goodsIds = array_column($goodsList,'goods_id');
 
             if(!($promotion['belong_to_member_buy']&$member['type'])){
-
-                $data = [
-                    'code'=> config('code.error.for_members_only.code'),
-                    //'url' => url('Order/confirmOrder',['order_sn'=>$orderSN]),
-                ];
-                $this->errorMsg(config('code.error.for_members_only.msg'),$data);
+                $this->errorMsg(config('code.error.for_members_only.msg'),config('code.error.for_members_only'));
             }
 
             if($promotion['id']==97){
-
-                $data = [
-                    'code'=> config('code.error.need_beforehand_register.code'),
-                    //'url' => url('Order/confirmOrder',['order_sn'=>$orderSN]),
-                ];
-                $this->errorMsg(config('code.error.need_beforehand_register.msg'),$data);
+                $this->errorMsg(config('code.error.need_beforehand_register.msg'),config('code.error.need_beforehand_register'));
             }
 
             //
