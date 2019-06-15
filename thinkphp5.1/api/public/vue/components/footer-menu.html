@@ -192,7 +192,9 @@
                         this.postData.data.push(productInfo);
                     }
                 },initCheckAll:function(param){
-                    this.checkAll = param.checked;
+                    console.log(param.checked);
+                    console.log(this.checked);
+//                    this.checkAll = param.checked;
                     this.editCheckItemList(param);
                 },editCheckItemList:function(param){
                     let tmp = {
