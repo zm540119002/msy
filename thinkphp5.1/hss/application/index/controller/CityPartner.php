@@ -190,6 +190,7 @@ class CityPartner extends \common\controller\UserBase {
 //                    ];
 //                }
                 $payId = $modelPay->edit($data);
+                print_r($modelPay->getLastSql());exit;
                 if(false===$payId){
                     $modelCityPartner ->rollback();
                     return errorMsg('失败');
