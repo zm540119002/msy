@@ -77,7 +77,7 @@
                     total_amount:this.init_total_amount,
                     cart_num:this.init_cart_num,
                     checked:this.init_checked,
-                    monitor_checked:true,
+                    monitor_checked:false,
                     checkItemList:[],
                     menus: this.init_menus.menu,
                     postData:{
@@ -228,7 +228,7 @@
                         }
                     }
                 },checkAll:function(){
-                    console.log(1);
+                    this.monitor_checked = true;
 //                    this.checked = !this.checked;
 //                    for(let i = 0,len = this.checkItemList.length; i < len; i++){
 //                        this.checkItemList[i].checked = this.checked;
@@ -300,12 +300,11 @@
             },watch: {
                 checked: {
                     handler(newVal, oldVal) {
-                        console.log(newVal);
-                        console.log(2);
                         if(this.monitor_checked){
                             for(let i = 0,len = this.checkItemList.length; i < len; i++){
                                 this.checkItemList[i].checked = newVal;
                             }
+                            this.monitor_checked = false;
                             //触发-底部购物车全选改变-事件
                             bus.$emit('footer_cart_check_all_change',newVal);
                         }
