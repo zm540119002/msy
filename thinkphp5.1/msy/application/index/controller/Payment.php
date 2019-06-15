@@ -291,9 +291,7 @@ class Payment extends \common\controller\Base {
         }
 
         // 会员升级 // 每个平台都有自己的支付后业务 后期修改
-
-        // 会员升级 // 每个平台都有自己的支付后业务 后期修改
-        if($orderInfo['type']==2) {
+        /*if($orderInfo['type']==2) {
 
             $modelPromotion = new \app\index\model\Promotion();
             $modelOrder ->setConnection(config('custom.system_id')[$systemId]['db']);
@@ -329,7 +327,7 @@ class Payment extends \common\controller\Base {
                     return errorMsg('失败');
                 }
             }
-        }
+        }*/
 
         $modelOrder->commit();
         echo 'SUCCESS';
