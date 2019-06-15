@@ -305,14 +305,14 @@ class Payment extends \common\controller\Base {
             ];
             $promotion = $modelPromotion->getInfo($condition);
             // 会员升级 只升不降
-            if( $promotion['upgrade_level'] ){
+            if( $promotion['upgrade_member_level'] ){
                 $data = [
-                    'type' => $promotion['upgrade_level'],
+                    'type' => $promotion['upgrade_member_level'],
                     'update_time' => time(),
                 ];
                 $where = [
                     ['user_id','=',$orderInfo['user_id']],
-                    ['upgrade_member_level','<',$promotion['upgrade_member_level']],
+                    ['type','<',$promotion['upgrade_member_level']],
                 ];
                 $memberModel = new \app\index\model\Member();
                 $modelPromotion ->setConnection(config('custom.system_id')[$systemId]['db']);
