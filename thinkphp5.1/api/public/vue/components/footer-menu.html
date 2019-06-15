@@ -192,11 +192,6 @@
                     if(!existSign && param.checked && isPosIntNumber(param.product_id) && isPosIntNumber(param.buy_quantity)){
                         this.postData.data.push(productInfo);
                     }
-                },initCheckAll:function(param){
-                    if(this.group != 0 && this.group == param.group){
-//                        this.checked = param.checked;
-                        this.editCheckItemList(param);
-                    }
                 },editCheckItemList:function(param){
                     let tmp = {
                         product_id:param.product_id,
@@ -266,7 +261,6 @@
                     if(param.group == _this.group){
                         _this.total_amount_init(param);
                         _this.editProductList(param);
-//                        _this.initCheckAll(param);
                         _this.editCheckItemList(param);
                     }
                 });
@@ -276,7 +270,6 @@
                         _this.total_amount_calculate_with_checked(param);
                         _this.editProductListWithChecked(param);
                         _this.editCheckItemList(param);
-//                        _this.editCheckAll(param);
                     }
                 });
                 //监听-产品选择器购买数量改变-事件
