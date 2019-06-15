@@ -37,9 +37,9 @@
         $('body').on('click','.next-step',function(){
             var postData = $('.applicant_form').serializeObject();
             var content='';
-            if(!postData.name){
+            if(!postData.applicant){
                 content='请填写你的姓名';
-            }else if(!register.phoneCheck(postData.mobile_phone)){
+            }else if(!register.phoneCheck(postData.mobile)){
                 content='请填写手机号码';
             }
             if(content){
