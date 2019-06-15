@@ -194,7 +194,7 @@
                     }
                 },initCheckAll:function(param){
                     if(this.group != 0 && this.group == param.group){
-                        this.checked = param.checked;
+//                        this.checked = param.checked;
                         this.editCheckItemList(param);
                     }
                 },editCheckItemList:function(param){
@@ -217,6 +217,7 @@
                     if(!find){
                         this.checkItemList.push(tmp);
                     }
+                    this.editCheckAll(param);
                 },editCheckAll:function(param){
                     if(param.checked_operation_type=='edit'){ //修改选择状态
                         this.checked = true;
@@ -229,12 +230,6 @@
                     }
                 },checkAll:function(){
                     this.monitor_checked = true;
-//                    this.checked = !this.checked;
-//                    for(let i = 0,len = this.checkItemList.length; i < len; i++){
-//                        this.checkItemList[i].checked = this.checked;
-//                    }
-//                    //触发-底部购物车全选改变-事件
-//                    bus.$emit('footer_cart_check_all_change',this.checked);
                 },confirm_order:function(event){
                     let _thisJquery = $(event.currentTarget);
                     let _thisVue = this;
@@ -271,7 +266,8 @@
                     if(param.group == _this.group){
                         _this.total_amount_init(param);
                         _this.editProductList(param);
-                        _this.initCheckAll(param);
+//                        _this.initCheckAll(param);
+                        _this.editCheckItemList(param);
                     }
                 });
                 //监听-产品选择器复选框改变-事件
@@ -280,7 +276,7 @@
                         _this.total_amount_calculate_with_checked(param);
                         _this.editProductListWithChecked(param);
                         _this.editCheckItemList(param);
-                        _this.editCheckAll(param);
+//                        _this.editCheckAll(param);
                     }
                 });
                 //监听-产品选择器购买数量改变-事件
