@@ -92,6 +92,7 @@
                     reduce:config.reduce,
                     jump_url:data.data && data.data.url?data.data.url:jump_url,
                     responsePageCallBack:config.responsePageCallBack,
+                    layerIndex:config.layerIndex,
                     asyncVerifyCallBack:config.asyncVerifyCallBack
                 };
                 async_verify_judge(param);
@@ -101,7 +102,8 @@
     //异步验证判断
     function async_verify_judge(param){
         if(param.data.status==0){ //失败回调
-            if(param.data.data.code == '1001'){ //未登录
+            if(param.data.data.code == '1000'){ //默认
+            }else if(param.data.data.code == '1001'){ //未登录
                 if(param.clickObj.attr('class').indexOf('add_cart')!==-1 && param.postData){ //加入购物车
                     editLocalStorageCartList(param);
                 }else if(param.clickObj.attr('class').indexOf('delete_cart')!==-1 && param.postData){
@@ -186,8 +188,10 @@
                         content: settlementMethod
                     });
                 }
-                 //获取平台二维码
-                if(param.clickObj.attr('class').indexOf('platform-two-dimensional-code')!==-1){
+                if(param.clickObj.attr('class').indexOf('beforehand-register')!==-1){ //会员预登记
+                    layer.close(param.layerIndex);
+                }
+                if(param.clickObj.attr('class').indexOf('platform-two-dimensional-code')!==-1){ //获取平台二维码
                     var imgSrc=uploads+param.data.data.url;
                     layer.open({
                         skin:'shareqrCodeLayer',
