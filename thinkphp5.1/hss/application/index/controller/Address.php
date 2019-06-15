@@ -156,8 +156,8 @@ class Address extends \common\controller\UserBase {
 
         $this->assign('addressList',$data);
 
-        //return $this->fetch('pop_list');
-        echo  $this->fetch('pop_list');
+        return view('pop_list');
+        //echo  $this->fetch('pop_list');
     }
 
 
