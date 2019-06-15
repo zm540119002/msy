@@ -13,10 +13,18 @@ class Company extends \common\controller\Base{
 
 
 
-        $this->successMsg('成功',config('code.success.default'));
+        //$this->successMsg('成功',config('code.success.default'));
 
-
-        $data = input('post.');
+        if(!request()->isPost()){
+            return errorMsg('请求方式错误');
+        }
+        $postData = input('post.');
+        p($postData);
+        exit;
+        $validate = new \app\index\validate\Franchise();
+        if(!$validate->scene('add')->check($postData)) {
+            return errorMsg($validate->getError());
+        }
 
 
         $data['mobile_phone'] = trim($data['company_name']);
