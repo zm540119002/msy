@@ -312,7 +312,7 @@ class Payment extends \common\controller\Base {
                 ];
                 $where = [
                     ['user_id','=',$orderInfo['user_id']],
-                    ['upgrade_level','<',$promotion['upgrade_level']],
+                    ['upgrade_member_level','<',$promotion['upgrade_member_level']],
                 ];
                 $memberModel = new \app\index\model\Member();
                 $modelPromotion ->setConnection(config('custom.system_id')[$systemId]['db']);
