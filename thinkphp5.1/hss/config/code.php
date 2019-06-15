@@ -25,7 +25,7 @@ return [
             'code' => '1002',
             'msg' => '仅限会员！',
         ],'need_beforehand_register' => [
-            'code' => '1002',
+            'code' => '1003',
             'msg' => '必须预先登记！',
         ],
     ],'success' => [
