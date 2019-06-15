@@ -44,6 +44,7 @@ $(function(){
 
         }else{
             //待审核
+
             //资格完款
             if(statusType==4 || statusType==3){
                 statusType = 3;
