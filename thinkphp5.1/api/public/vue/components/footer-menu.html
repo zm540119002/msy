@@ -300,6 +300,7 @@
             },watch: {
                 checked: {
                     handler(newVal, oldVal) {
+                        console.log(newVal);
                         console.log(2);
                         if(this.monitor_checked){
                             for(let i = 0,len = this.checkItemList.length; i < len; i++){
