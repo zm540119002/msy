@@ -183,6 +183,20 @@ class Index extends \common\controller\Base{
         return $this->fetch($view);
     }
 
+    // 项目优势页
+    public function invited(){
+        $this->assignStandardBottomButton([21]);
+
+        return $this->fetch();
+    }
+
+    // 项目优势页
+    public function recruit(){
+        $this->assignStandardBottomButton([22]);
+
+        return $this->fetch();
+    }
+
 
 
 }
