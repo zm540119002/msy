@@ -434,10 +434,12 @@ class Payment extends \common\controller\Base {
         ];
 
         if($info['type'] == 4){
+            echo 1;
             //席位支付
             $condition['earnest_sn'] = $info['sn'];
             $data['apply_status']=4;
         }elseif($info['type'] == 5){
+            echo 2;exit;
             //增加平台member
             $modelMember = new \app\index\model\Member();
             $modelMember ->setConnection(config('custom.system_id')[$systemId]['db']);
