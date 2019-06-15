@@ -247,12 +247,10 @@
                     }
                     let address = getAddress();
                     _thisVue.postData.address = JSON.stringify(address);
-
                     if( _thisVue.postData.address=='false' ){
                         dialog.error('请选择收货地址 ！');
                         return false;
                     }
-
                     let config = {
                         clickObj:_thisJquery,
                         postData:_thisVue.postData,
@@ -267,7 +265,6 @@
                     if(param.group == _this.group){
                         _this.total_amount_init(param);
                         _this.editProductList(param);
-                        _this.editCheckItemList(param);
                     }
                 });
                 //监听-产品选择器复选框改变-事件
