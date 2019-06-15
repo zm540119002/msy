@@ -61,7 +61,7 @@
                 init_product_type: {type: Number,default: 1},
                 init_cart_num: {type: Number,default: 0},
                 init_total_amount: {type: Number,default: 0},
-                init_checked: {type: Boolean,default: false},
+                init_checked: {type: Boolean,default: true},
                 init_menus: {
                     type: Object,
                     default: function () {
@@ -223,8 +223,6 @@
                         }
                     }
                 },checkAll:function(){
-                    alert(this.checked);
-                    return false;
                     this.checked = !this.checked;
                     for(let i = 0,len = this.checkItemList.length; i < len; i++){
                         this.checkItemList[i].checked = this.checked;
