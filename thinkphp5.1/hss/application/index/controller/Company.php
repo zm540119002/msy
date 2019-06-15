@@ -13,9 +13,9 @@ class Company extends \common\controller\Base{
 
 
 
-        $this->successMsg('成功',config('code.success.default.code'));
+        $this->successMsg('成功',config('code.success.default'));
 
-        
+
         $data = input('post.');
 
 
