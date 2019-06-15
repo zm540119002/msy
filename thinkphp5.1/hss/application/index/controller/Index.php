@@ -119,6 +119,7 @@ class Index extends \common\controller\Base{
                         }
                     }
                 }
+                p($apply);exit;
                 $this->assign('apply',$apply);
                 $this->assign('applied',$applied);
             }
