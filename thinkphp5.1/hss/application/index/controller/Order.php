@@ -91,7 +91,7 @@ class Order extends \common\controller\UserBase
                 ['g.status', '=', 0],
                 ['g.id', 'in', $goodsIds],
             ], 'field' => [
-                'g.id as goods_id','g.name','g.headline','g.thumb_img','g.franchise_price','g.specification','g.sample_price',
+                'g.id as goods_id','g.name','g.headline','g.thumb_img','g.franchise_price','g.specification','g.sample_price','g.belong_to_member_buy',
                 'g.purchase_unit','g.store_id'
             ]
         ];
@@ -108,13 +108,13 @@ class Order extends \common\controller\UserBase
         $amount = 0;
         foreach ($goodsList as $k1 => &$goodsInfo) {
             foreach ($goodsListNew as $k2 => &$goodsInfoNew) {
+
                 // 购买权限
-                if(!($goodsListNew['belong_to_member_buy']&(int)$member['type'])){
+                if(!($goodsInfoNew['belong_to_member_buy']&(int)$member['type'])){
                     $error = config('code.error.for_members_only');
                     $this->errorMsg($error['msg'], $error);
                     break;
                 }
-
 
                 if($goodsInfo['goods_id'] == $goodsInfoNew['goods_id']){
                     $goodsList[$k1]['headline'] = $goodsInfoNew['headline'];
