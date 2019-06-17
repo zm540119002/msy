@@ -33,7 +33,7 @@ class Order extends \common\controller\UserBase
             $this->errorMsg('请求数据不能为空');
         }
 
-
+        // 订单
         if( $order_type==2 ){
 
             $promotion = reset($goodsList);
@@ -85,8 +85,7 @@ class Order extends \common\controller\UserBase
             }
 
         }
-
-
+        
         // 更新套餐总价
         $config = [
             'where' => [
