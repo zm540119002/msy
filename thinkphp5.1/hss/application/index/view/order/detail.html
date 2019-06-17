@@ -82,7 +82,7 @@
                                 </div>
                             </div>
                     <div class="columns_flex l-r-sides content-padding">
-                        <span>共{$goods_info.num}件商品</span>
+                        <span>共{$goods_info.num}件商品，</span>
                         小计：<span class="red">￥<price>{$goods_info.price*$goods_info.num}</price></span>
                     </div>
                     {/volist}
@@ -116,6 +116,12 @@
         });
     });
 </script>
+<style>
+    .l-r-sides{
+        justify-content: flex-end;
+        align-items: center;
+    }
+</style>
 {/block}
 {block name="script"}
 
