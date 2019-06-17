@@ -112,9 +112,9 @@ class Order extends \common\controller\UserBase
 
                 // 商品购买权限
                 if(  ($order_type!=2) && (!($goodsInfoNew['belong_to_member_buy']&$member['type'])) ){
-                    $error = config("code.error.for_members_only");
-                    $this->errorMsg($error['msg'][$goodsInfoNew['belong_to_member_buy']], $error);
-                    break;
+//                    $error = config("code.error.for_members_only");
+//                    $this->errorMsg($error['msg'][$goodsInfoNew['belong_to_member_buy']], $error);
+                    continue;
                 }
 
                 if($goodsInfo['goods_id'] == $goodsInfoNew['goods_id']){
