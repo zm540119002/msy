@@ -80,7 +80,9 @@
             let config = {
                 clickObj:$(this),
                 postData:postData,
-                layerIndex:beforehandRegisterTriggerLayerIndex
+                asyncVerifyCallBack:function(){
+                    layer.close(beforehandRegisterTriggerLayerIndex);
+                }
             };
             asyncVerify(config);
         });
