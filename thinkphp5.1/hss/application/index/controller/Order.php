@@ -15,8 +15,7 @@ class Order extends \common\controller\UserBase
             $memberModel->edit($data);
             $member['type'] = config('custom.member_level.1.level');
         }
-        p($member);
-        exit;
+
         if (!request()->isPost()) {
             $this->errorMsg('请求方式错误');
         }
@@ -58,6 +57,11 @@ class Order extends \common\controller\UserBase
             $promotion = reset($goodsList);
 
             $goodsIds = array_column($goodsList,'goods_id');
+
+            p($promotion);
+            p(($promotion['belong_to_member_buy']&(int)$member['type']));
+            p(7&1);
+            exit;
 
             // 购买权限
             if(!($promotion['belong_to_member_buy']&(int)$member['type'])){
