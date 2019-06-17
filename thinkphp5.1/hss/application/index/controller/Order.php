@@ -56,16 +56,9 @@ class Order extends \common\controller\UserBase
             $promotion = reset($goodsList);
 
             $goodsIds = array_column($goodsList,'goods_id');
-<<<<<<< HEAD
 print_r($member['type']);
             // 购买权限
             if(!($promotion['belong_to_member_buy']&(int)$member['type'])){
-=======
-
-            // 购买权限 // 非会员可以购买的商品
-            if( $promotion['belong_to_member_buy']&$member['type']<1 ){
-
->>>>>>> 50b471bdd8398bee48cb509e825a45b6cb43a07b
                 $error = config('code.error.for_members_only');
                 $this->errorMsg($error['msg'], $error);
             }
