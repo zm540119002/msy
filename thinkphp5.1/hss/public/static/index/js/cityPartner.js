@@ -7,7 +7,7 @@ $(function(){
 
     console.log(start_pay_time*1000);
     console.log(24*60*60*1000-1)
-    var date=new Date(start_pay_time+24*60*60*1000-1);
+    var date=new Date(start_pay_time+(24*60*60*1000-1));
     countDown(date,$('#countDownBox'));
     //nav切换
     $('body').on('click','.apply-data-nav .switch-item',function(){
