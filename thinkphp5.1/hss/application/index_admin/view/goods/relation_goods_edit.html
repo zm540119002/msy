@@ -106,9 +106,7 @@
                 var html =
                         ' <li data-goods-id="'+goodsId+'"><a href="javascript:void(0);" class="close-btn">X</a> <div>'+
                         '<img src="'+goodsImgSrc+'" alt="" class="left">'+
-                        '<span class="goods_name" title="'+goodsName+'">'+shortName+'</span>'+
-                        '<span class="calc">X</span>'+
-                        '<span class="goods_num">'+num+'</span>'+
+                        '<div class="detail"><span class="goods_name" title="'+goodsName+'">'+shortName+'</span><span>X<span class="goods_num">'+num+'</span></span></div>'+
                         '</div> </li>';
 
                 $('.selected_goods_list').append(html);
@@ -141,11 +139,9 @@
             min-width: 100%;
             display: block;
         }
-        .list_item img, .selected_goods_list .goods_num{
-          float: right;      
-        }
-        .calc{
+       .detail span:nth-of-type(2){
+           float: right;
+       }
 
-        }
         </style>
 {/block}
