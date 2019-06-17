@@ -63,11 +63,14 @@
         //确定
         $('body').on('click','.next-step',function(){
             var postData = $('.applicant_form').serializeObject();
+            var area_address =$('.area-address-name').getArea();
             var content='';
             if(!postData.applicant){
                 content='请填写你的姓名';
             }else if(!register.phoneCheck(postData.mobile)){
                 content='请填写手机号码';
+            }else if(!area_address){
+                content='请选择地区';
             }
             if(content){
                 dialog.error(content);
