@@ -18,7 +18,7 @@ class Franchise extends \common\controller\UserBase {
                 'where'=>[
                     ['f.status', '=', 0],
                     ['f.user_id','=',$this->user['id']],
-                    ['f.apply_status','>',0],
+                    ['f.apply_status','=',1],
                 ],
                 'field'=>[
                     'f.id','f.province','f.city','f.area','f.detail_address','f.name','f.applicant','f.mobile','f.franchise_fee','f.apply_status',
