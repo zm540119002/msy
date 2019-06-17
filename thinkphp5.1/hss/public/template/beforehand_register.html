@@ -79,7 +79,17 @@
                 clickObj:$(this),
                 postData:postData,
                 asyncVerifyCallBack:function(){
-                    dialog.success('成功！');
+
+/*                    layer.open({
+                        content : '成功',
+                        time : 1000,
+                        skin: 'msg',
+                        end : function(){
+                            layer.close(beforehandRegisterTriggerLayerIndex);
+                        }
+                    });*/
+
+                    dialog.success('成功');
                     layer.close(beforehandRegisterTriggerLayerIndex);
                 }
             };
