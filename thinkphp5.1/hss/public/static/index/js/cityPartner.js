@@ -3,7 +3,7 @@ var area_address,
     };
 $(function(){
     //补款倒计时
-    var start_pay_time = apply[0]['payment_time'];
+    var start_pay_time = apply[0]['payment_time']*1000;
 
     console.log(start_pay_time*1000);
     console.log(24*60*60*1000-1)
