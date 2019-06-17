@@ -410,9 +410,6 @@
 		});
 		//活动倒计时
 		var date=new Date(new Date(new Date().toLocaleDateString()).getTime()+24*60*60*1000-1);
-		console.log(new Date().toLocaleDateString());
-		console.log(new Date(new Date().toLocaleDateString()).getTime());
-		console.log(new Date(new Date().toLocaleDateString()).getTime()+24*60*60*1000-1);
 		countDown(date,$('#countDownBox'));
 		//设置分数
 		var averageScore = '{$averageScore}';
