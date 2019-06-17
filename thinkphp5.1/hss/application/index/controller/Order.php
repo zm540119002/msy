@@ -85,8 +85,9 @@ class Order extends \common\controller\UserBase
                     $this->errorMsg($error['msg'], $error);
                 }
             }
+            p(333);
+            exit;
 
-            
         }
 
 
