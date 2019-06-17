@@ -81,12 +81,12 @@
 				<div class="apply-module hide">
 					{if $apply1[0]['apply_status'] == 4}
 					<div style="text-align: center;">待审核</div>
-					{else if $apply1[0].apply_status == 5}
+					{else if $apply1[0]['apply_status'] == 5}
 					<div class="columns_flex l-r-sides">
 						<div>
 							<p >城市名称：<span class="apply_city"></span></p>
-							<p>城市级别分类：<span>3线城市</span></p>
-							<p>合伙人级别：<span>二类市场城市合伙人</span></p>
+							<p>城市级别分类：<span class="city_level">3线城市</span></p>
+							<p>合伙人级别：<span class="">二类市场城市合伙人</span></p>
 							<p>合伙人资格款：<span>¥198000</span></p>
 							<p>已交席位订金：<span>¥5000</span></p>
 							<p>需补交资格余款：<span>¥193000</span></p>
@@ -147,10 +147,9 @@
 <script type="text/javascript" src="public_js/jquery.area.js"></script>
 <script type="text/javascript" src="index_js/cityPartner.js"></script>
 <script type="text/javascript" >
-	//var cityList = JSON.parse('{$cityList|raw}');
 	//申请中
 	var apply = JSON.parse('{$apply|raw}');
-	//已交定金或尾款
+	//已申请
 	var applied = JSON.parse('{$applied|raw}');
 
 </script>
