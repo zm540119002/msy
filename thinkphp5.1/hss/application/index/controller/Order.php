@@ -65,9 +65,10 @@ class Order extends \common\controller\UserBase
             p(($promotion['belong_to_member_buy']&$member['type']));
 
             $res = ($promotion['belong_to_member_buy']&$member['type']);
-            
+/*            var_dump($res);
+            exit;*/
             // 购买权限
-            if( ($promotion['belong_to_member_buy']&$member['type'])>0 ){
+            if( !$promotion['belong_to_member_buy']&$member['type'] ){
                 echo 222222;
 
                 $error = config('code.error.for_members_only');
