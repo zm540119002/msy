@@ -18,7 +18,7 @@ class Franchise extends \common\controller\UserBase {
                 'where'=>[
                     ['f.status', '=', 0],
                     ['f.user_id','=',$this->user['id']],
-                    ['f.apply_status','=',1],
+                    ['f.apply_status','>',1],
                 ],
                 'field'=>[
                     'f.id','f.province','f.city','f.area','f.detail_address','f.name','f.applicant','f.mobile','f.franchise_fee','f.apply_status',
@@ -27,8 +27,22 @@ class Franchise extends \common\controller\UserBase {
                     ['pay p','p.sn = f.sn','left'],
                 ],
             ];
-            $apply = $modelFranchise -> getInfo($condition);
+            $selfApplyList = $modelFranchise -> getInfo($condition);
+            //申请中
+            $apply = [];
+            //已申请
+            $applied = [];
+            if($selfApplyList){
+                foreach ($selfApplyList as $selfapply){
+                    if ($selfapply['apply_status']>0&&$selfapply['apply_status']<2){
+                        $apply[] = $selfapply;
+                    }else{
+                        $applied[] = $selfapply;
+                    }
+                }
+            }
             $this->assign('apply',json_encode($apply));
+            $this->assign('applied',json_encode($applied));
             $unlockingFooterCart = unlockingFooterCartConfig([10, 0, 9]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
             return $this->fetch();
