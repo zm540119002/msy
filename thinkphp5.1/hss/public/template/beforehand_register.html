@@ -60,6 +60,12 @@
         $('body').on('click','.next-step',function(){
             var postData = $('.applicant_form').serializeObject();
             var area_address =$('.area-address-name').getArea();
+            postData.province = area_address[0];
+            postData.city = area_address[1];
+            postData.area = area_address[2];
+            postData.step = 1;
+            postData.type = 2;
+
             var content='';
             if(!postData.applicant){
                 content='请填写你的姓名';

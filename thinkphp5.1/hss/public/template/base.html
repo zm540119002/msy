@@ -190,7 +190,8 @@
                     });
                 }
                 if(param.clickObj.attr('class').indexOf('beforehand-register')!==-1){ //会员预登记
-                    layer.close(param.layerIndex);
+                    layer.close(index);
+                    //layer.close(param.layerIndex);
                 }
                 if(param.clickObj.attr('class').indexOf('platform-two-dimensional-code')!==-1){ //获取平台二维码
                     var imgSrc=uploads+param.data.data.url;
