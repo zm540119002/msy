@@ -24,11 +24,12 @@ $(function(){
         region.push(apply[0].city);
         region.push(apply[0].area);
         $('.area_address').setArea(region);
-        $('.detail_address').val(apply.detail_address);
+        $('.detail_address').val(apply[0].detail_address);
         //资料初始化
         $('.name').val(apply[0].name);
         $('.applicant').val(apply[0].applicant);
         $('.mobile').val(apply[0].mobile);
+
         //定位到已完成步骤
         var index=apply.apply_status-1;
         $('nav.apply-data-nav li:eq('+index+')').click(function(){
@@ -64,7 +65,6 @@ $(function(){
             dialog.error(content);
         }else{
             applicantData.step = 1;
-            console.log(applicantData);
             submitApplicant(_this,applicantData);
         }
     });
