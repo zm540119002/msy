@@ -81,6 +81,7 @@ class Franchise extends \common\controller\UserBase {
 
         }else{
             $id = $modelFranchise->edit($postData,$where);
+           echo  $modelFranchise->getLastSql();exit;
             if(!$id){
                 $modelFranchise ->rollback();
                 return errorMsg('失败');
