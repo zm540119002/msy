@@ -107,7 +107,7 @@
                         ' <li data-goods-id="'+goodsId+'"><a href="javascript:void(0);" class="close-btn">X</a> <div>'+
                         '<img src="'+goodsImgSrc+'" alt="" class="left">'+
                         '<span class="goods_name" title="'+goodsName+'">'+shortName+'</span>'+
-                        '<span>X</span>'+
+                        '<span class="calc">X</span>'+
                         '<span class="goods_num">'+num+'</span>'+
                         '</div> </li>';
 
@@ -142,8 +142,12 @@
             display: block;
         }
         .list_item img, .selected_goods_list .goods_num{
-          float: right; 
-          background: red;
+          float: right;      
+        }
+        .calc{
+            float: right; 
+            position: relative;
+            right: 15px;
         }
         </style>
 {/block}
