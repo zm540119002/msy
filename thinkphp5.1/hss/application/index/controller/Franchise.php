@@ -115,7 +115,7 @@ class Franchise extends \common\controller\UserBase {
             'code '=> config('code.success.default.code'),
             'url ' => config('custom.pay_gateway').$sn,'id'=>$id,
         ];
-        
+
         //$this->successMsg('成功',['url'=>config('custom.pay_gateway').$sn,'id'=>$id]);
         $this->successMsg('成功',$data);
     }
