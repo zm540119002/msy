@@ -33,7 +33,6 @@ class Order extends \common\controller\UserBase
             $this->errorMsg('请求数据不能为空');
         }
 
-        // 非会员可以购买的商品
 
         if( $order_type==2 ){
 
@@ -58,28 +57,16 @@ class Order extends \common\controller\UserBase
 
             $goodsIds = array_column($goodsList,'goods_id');
 
-
-            p($promotion['belong_to_member_buy']);
-            p($member['type']);
-
-            p(($promotion['belong_to_member_buy']&$member['type']));
-
-            $res = ($promotion['belong_to_member_buy']&$member['type']);
-/*            var_dump($res);
-            exit;*/
-            // 购买权限
-            if( !$promotion['belong_to_member_buy']&$member['type'] ){
-                echo 222222;
+            // 购买权限 // 非会员可以购买的商品
+            if( $promotion['belong_to_member_buy']&$member['type']<1 ){
 
                 $error = config('code.error.for_members_only');
                 $this->errorMsg($error['msg'], $error);
             }
 
-            echo 111111;
-            exit;
 
             // 是否需要验证公司信息
-            if( (int)$member['type']==(int)config('custom.member_level.1.level') && $promotion['is_company_info'] ) {
+            if( ($member['type']==config('custom.member_level.1.level')) && $promotion['is_company_info'] ) {
                 $modelCompany = new \app\index\model\Franchise();
 
                 $condition = [
@@ -98,9 +85,7 @@ class Order extends \common\controller\UserBase
                     $this->errorMsg($error['msg'], $error);
                 }
             }
-/*            p($member);
-            p($promotion);
-            exit;*/
+
         }
 
 
@@ -128,11 +113,11 @@ class Order extends \common\controller\UserBase
             foreach ($goodsListNew as $k2 => &$goodsInfoNew) {
 
                 // 商品购买权限
-                if(!($goodsInfoNew['belong_to_member_buy']&(int)$member['type'])){
+  /*              if(!($goodsInfoNew['belong_to_member_buy']&(int)$member['type'])){
                     $error = config('code.error.for_members_only');
                     $this->errorMsg($error['msg'], $error);
                     break;
-                }
+                }*/
 
                 if($goodsInfo['goods_id'] == $goodsInfoNew['goods_id']){
                     $goodsList[$k1]['headline'] = $goodsInfoNew['headline'];
