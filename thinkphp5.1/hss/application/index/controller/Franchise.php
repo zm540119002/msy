@@ -72,12 +72,14 @@ class Franchise extends \common\controller\UserBase {
                 'status'=>0,
             ];
         }
+
         if(isset($postData['step']) && $postData['step'] == 1){
             $id = $modelFranchise->edit($postData,$where);
             if(!$id){
                 $modelFranchise ->rollback();
                 return errorMsg('失败');
             }
+
         }else{
             $id = $modelFranchise->edit($postData,$where);
             if(!$id){
@@ -108,7 +110,20 @@ class Franchise extends \common\controller\UserBase {
             };
         }
         $modelFranchise -> commit();
-        $this->successMsg('成功',['url'=>config('custom.pay_gateway').$sn,'id'=>$id]);
+
+        $data = [
+            'code '=> config('code.success.default.code'),
+            'url ' => config('custom.pay_gateway').$sn,'id'=>$id,
+        ];
+
+/*        $data = [
+            'code'=> config('code.success.default.code'),
+            'url' => url('Order/confirmOrder',['order_sn'=>$orderSN]),
+        ];
+        $this->successMsg('生成订单成功',$data);*/
+
+        //$this->successMsg('成功',['url'=>config('custom.pay_gateway').$sn,'id'=>$id]);
+        $this->successMsg('成功',$data);
     }
 
     /**

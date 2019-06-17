@@ -67,7 +67,6 @@ class Franchise extends \think\Validate
             'mobile',
             'province',
             'city',
-            'area',
         ],
     ];
 }

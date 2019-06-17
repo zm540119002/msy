@@ -62,7 +62,6 @@
             var area_address =$('.area-address-name').getArea();
             postData.province = area_address[0];
             postData.city = area_address[1];
-            postData.area = area_address[2];
             postData.step = 1;
             postData.type = 2;
 
@@ -82,7 +81,12 @@
             let config = {
                 clickObj:_this,
                 postData:postData,
-                layerIndex:beforehandRegisterTriggerLayerIndex
+                layerIndex:beforehandRegisterTriggerLayerIndex,
+                asyncVerifyCallBack:function(){
+                    _thisJquery.click();
+                    location.reload();
+                    //layer.close(param.layerIndex);
+                }
             };
             login_success_callback_private = function(){
                 asyncVerify(config);
