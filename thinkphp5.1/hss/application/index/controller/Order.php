@@ -111,11 +111,11 @@ class Order extends \common\controller\UserBase
             foreach ($goodsListNew as $k2 => &$goodsInfoNew) {
 
                 // 商品购买权限
-  /*              if(!($goodsInfoNew['belong_to_member_buy']&(int)$member['type'])){
+                if(  ($order_type!=2) && (!($goodsInfoNew['belong_to_member_buy']&$member['type'])) ){
                     $error = config('code.error.for_members_only');
                     $this->errorMsg($error['msg'], $error);
                     break;
-                }*/
+                }
 
                 if($goodsInfo['goods_id'] == $goodsInfoNew['goods_id']){
                     $goodsList[$k1]['headline'] = $goodsInfoNew['headline'];
