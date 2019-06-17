@@ -1,0 +1,33 @@
+{extend name="template/base.html" /}
+{block name="title"}城市测试{/block}
+{block name="content"}
+<article class="f24">
+	<!--选择地区弹层-->
+	<section id="areaLayer" class="express-area-box" style="display:none;">
+		<header>
+			<h3>选择地区</h3>
+			<a id="backUp" class="back" href="javascript:void(0);" title="返回" style="display: none;"></a>
+			<a id="closeArea" class="close" href="javascript:void(0);" title="关闭"></a>
+		</header>
+		<article id="areaBox">
+			<ul id="areaList" class="area-list" data-type="1">
+			</ul>
+		</article>
+	</section>
+	<!--遮罩层-->
+	<div id="areaMask" class="address_mask"></div>
+</article>
+{/block}
+{block name="footer"}
+{/block}
+{block name="script"}
+<script type="text/javascript" src="public_js/jquery.area.js"></script>
+<script type="text/javascript">
+	$(function(){
+	});
+</script>
+<script type="text/javascript">
+	$(function(){
+	});
+</script>
+{/block}

@@ -61,5 +61,12 @@ class Franchise extends \think\Validate
             'detail_address',
             'pay_code',
         ],
+        // 预约
+        'reservation' =>  [
+            'name',
+            'mobile',
+            'province',
+            'city',
+        ],
     ];
 }

@@ -16,7 +16,6 @@ class Member extends \common\model\Base {
      */
     public function getMemberInfo($uid){
         $config = [
-
             'where' => [
                 ['user_id','=',$uid],
             ]
