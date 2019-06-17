@@ -76,17 +76,9 @@
                 dialog.error(content);
                 return false;
             }
-            let _this = $(this);
             let config = {
-                clickObj:_this,
                 postData:postData,
-                layerIndex:beforehandRegisterTriggerLayerIndex,
-                asyncVerifyCallBack:function(){
-//                    location.reload();
-                    console.log(555);
-                    console.log(111);
-                    console.log(beforehandRegisterTriggerLayerIndex);
-                }
+                layerIndex:beforehandRegisterTriggerLayerIndex
             };
             asyncVerify(config);
         });
