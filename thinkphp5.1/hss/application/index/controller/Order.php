@@ -60,7 +60,6 @@ class Order extends \common\controller\UserBase
             // 购买权限
             if( !($promotion['belong_to_member_buy']&$member['type']) ){
 
-                //$error = config('custom.member_level');
                 $error = config("code.error.for_members_only");
                 $this->errorMsg($error['msg'][$promotion['belong_to_member_buy']], $error);
             }
@@ -113,8 +112,8 @@ class Order extends \common\controller\UserBase
 
                 // 商品购买权限
                 if(  ($order_type!=2) && (!($goodsInfoNew['belong_to_member_buy']&$member['type'])) ){
-                    $error = config('code.error.for_members_only');
-                    $this->errorMsg($error['msg'], $error);
+                    $error = config("code.error.for_members_only");
+                    $this->errorMsg($error['msg'][$goodsInfoNew['belong_to_member_buy']], $error);
                     break;
                 }
 
