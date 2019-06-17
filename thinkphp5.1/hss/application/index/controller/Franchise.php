@@ -42,7 +42,6 @@ class Franchise extends \common\controller\UserBase {
      */
     public function franchiseSettlement()
     {
-
         if(!request()->isAjax()){
             return errorMsg('请求方式错误');
         }
@@ -83,6 +82,7 @@ class Franchise extends \common\controller\UserBase {
 
         }else{
             $id = $modelFranchise->edit($postData,$where);
+           echo  $modelFranchise->getLastSql();exit;
             if(!$id){
                 $modelFranchise ->rollback();
                 return errorMsg('失败');
