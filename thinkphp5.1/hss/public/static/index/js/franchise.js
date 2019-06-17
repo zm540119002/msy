@@ -65,7 +65,6 @@ $(function(){
             dialog.error(content);
         }else{
             applicantData.step = 1;
-            console.log(applicantData);
             submitApplicant(_this,applicantData);
         }
     });
