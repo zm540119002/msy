@@ -22,7 +22,8 @@ class CityPartner extends \common\controller\UserBase {
             $condition=[
                 'where'=>[
                     ['cp.status', '=', 0],
-                    ['cp.user_id','=',$this->user['id']]
+                    ['cp.user_id','=',$this->user['id']],
+                    ['cp.apply_status','>',0],
                 ], 'field'=>[
                     'cp.id','cp.province','cp.city','cp.company_name','cp.applicant',
                     'cp.mobile','cp.city_level','cp.earnest','cp.amount','cp.apply_status','cp.payment_time'
