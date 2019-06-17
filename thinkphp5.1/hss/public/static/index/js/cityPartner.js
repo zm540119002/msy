@@ -6,7 +6,7 @@ $(function(){
     var start_pay_time = apply[0]['payment_time'];
 
     console.log(start_pay_time);
-    consloe.log(24*60*60*1000-1)
+    console.log(24*60*60*1000-1)
     var date=new Date(start_pay_time+24*60*60*1000-1);
     countDown(date,$('#countDownBox'));
     //nav切换
