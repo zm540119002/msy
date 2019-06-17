@@ -116,12 +116,6 @@ class Franchise extends \common\controller\UserBase {
             'url ' => config('custom.pay_gateway').$sn,'id'=>$id,
         ];
 
-/*        $data = [
-            'code'=> config('code.success.default.code'),
-            'url' => url('Order/confirmOrder',['order_sn'=>$orderSN]),
-        ];
-        $this->successMsg('生成订单成功',$data);*/
-
         //$this->successMsg('成功',['url'=>config('custom.pay_gateway').$sn,'id'=>$id]);
         $this->successMsg('成功',$data);
     }
