@@ -76,22 +76,12 @@
                 dialog.error(content);
                 return false;
             }
-            let _this = $(this);
             let config = {
-                clickObj:_this,
+                clickObj:$(this),
                 postData:postData,
-                layerIndex:beforehandRegisterTriggerLayerIndex,
                 asyncVerifyCallBack:function(){
-//                    location.reload();
-                    console.log(111);
-                    console.log(beforehandRegisterTriggerLayerIndex);
+                    layer.close(beforehandRegisterTriggerLayerIndex);
                 }
-            };
-            login_success_callback_private = function(){
-                asyncVerify(config);
-            };
-            register_success_callback_private = function(){
-                asyncVerify(config);
             };
             asyncVerify(config);
         });
