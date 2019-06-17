@@ -28,8 +28,6 @@ class Franchise extends \common\controller\UserBase {
                 ],
             ];
             $selfApplyList = $modelFranchise -> getList($condition);
-            p($selfApplyList);exit;
-            p($selfApplyList);exit;
             //申请中
             $apply = [];
             //已申请
