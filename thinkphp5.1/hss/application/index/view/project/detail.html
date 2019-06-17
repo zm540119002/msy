@@ -275,15 +275,16 @@
 		// 流程图 不要轮播
 		var swiper = new Swiper('.master-swiper-process', {
 			//slidesPerView :2,
-			//slidesPerView:"auto",
-			//autoplay:true,
+			slidesPerView:"auto",
+			autoplay:false,
 			//slidesOffsetBefore : -50,
-			spaceBetween: 30,
-			direction: 'horizontal',
+			//spaceBetween: 30,
+			//direction: 'horizontal',
 			pagination: {
 				el: '.swiper-pagination',
-				//clickable: true
+				clickable: true
 			}
+
 		});
 		var height=$('.detail-nav').height();
 		var offsetHeight=$('.detail-nav').offset().top;
