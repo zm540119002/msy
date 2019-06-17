@@ -64,7 +64,8 @@
             postData.city = area_address[1];
             postData.step = 1;
             postData.type = 2;
-
+            console.log(postData);
+            return;
             var content='';
             if(!postData.applicant){
                 content='请填写你的姓名';
@@ -83,9 +84,9 @@
                 postData:postData,
                 layerIndex:beforehandRegisterTriggerLayerIndex,
                 asyncVerifyCallBack:function(){
-                    _thisJquery.click();
-                    location.reload();
-                    //layer.close(param.layerIndex);
+//                    location.reload();
+                    console.log(111);
+                    console.log(beforehandRegisterTriggerLayerIndex);
                 }
             };
             login_success_callback_private = function(){
