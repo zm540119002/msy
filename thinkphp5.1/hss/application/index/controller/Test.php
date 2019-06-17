@@ -26,6 +26,8 @@ class Test extends \common\controller\Base{
     public function city(){
         if(!(7&1)){
             print_r(123);
+        }else{
+            print_r(456);
         }
         if(request()->isAjax()){
         }else{
