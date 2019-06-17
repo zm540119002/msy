@@ -125,7 +125,7 @@
 				return param;
 			}
 		});
-
+		//用于弹框
 		let unlockingFooterCart2 = '{$unlockingFooterCart2|raw}';
 		unlockingFooterCart2 = JSON.parse(unlockingFooterCart2);
 		let param2 = {
@@ -142,6 +142,7 @@
 	});
 </script>
 {include file="../../api/public/vue/components/product-select.html" /}
+{if $type}
 <script type="text/javascript">
 	$(function(){
 		let param = {
@@ -193,7 +194,9 @@
 			}
 		});
 	});
-</script><script type="text/javascript">
+</script>
+{/if}
+<script type="text/javascript">
 	$(function(){
 		let param = {
 			type:6,
