@@ -67,13 +67,13 @@ class Franchise extends \common\controller\UserBase {
         }
         if(isset($postData['step']) && $postData['step'] == 1){
             $id = $modelFranchise->edit($postData,$where);
-            if(false===$id){
+            if(!$id){
                 $modelFranchise ->rollback();
                 return errorMsg('失败');
             }
         }else{
             $id = $modelFranchise->edit($postData,$where);
-            if(false===$id){
+            if(!$id){
                 $modelFranchise ->rollback();
                 return errorMsg('失败');
             }
@@ -95,7 +95,7 @@ class Franchise extends \common\controller\UserBase {
                 ];
             }
             $payId = $modelPay->edit($data,$where1);
-            if(false===$payId){
+            if(!$payId){
                 $modelFranchise ->rollback();
                 return errorMsg('失败');
             };

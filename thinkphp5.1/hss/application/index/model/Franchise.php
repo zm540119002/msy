@@ -11,5 +11,18 @@ class Franchise extends \common\model\Base {
 	//表的别名
 	protected $alias = 'f';
 
+    /**
+     * 获取账号信息
+     */
+    public function getMemberInfo($uid){
+        $config = [
+
+            'where' => [
+                ['user_id','=',$uid],
+            ]
+        ];
+
+        return $this->getInfo($config);
+    }
 
 }

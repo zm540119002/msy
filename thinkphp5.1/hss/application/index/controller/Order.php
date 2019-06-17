@@ -14,7 +14,6 @@ class Order extends \common\controller\UserBase
             ];
             $memberModel->edit($data);
             $member['type'] = config('custom.member_level.1.level');
-            //$member['type'] = 1;
         }
 
         if (!request()->isPost()) {
@@ -67,9 +66,12 @@ class Order extends \common\controller\UserBase
 
             // 是否需要验证公司信息
             if( $member['type']==config('custom.member_level.1.level') && $promotion['is_company_info'] ) {
-                $modelCompany = new \app\index\model\MemberBeforehandRegister();
+                $modelCompany = new \app\index\model\Franchise();
 
                 $condition = [
+                    'field' => [
+                        'id'
+                    ],
                     'where' => [
                         ['user_id','=',$this->user['id']],
                         ['status','=',0]
@@ -91,11 +93,10 @@ class Order extends \common\controller\UserBase
                 ['g.status', '=', 0],
                 ['g.id', 'in', $goodsIds],
             ], 'field' => [
-                'g.id as goods_id','g.name','g.headline','g.thumb_img','g.franchise_price','g.specification','g.sample_price',
+                'g.id as goods_id','g.name','g.headline','g.thumb_img','g.franchise_price','g.specification','g.sample_price','g.belong_to_member_buy',
                 'g.purchase_unit','g.store_id'
             ]
         ];
-
 
         //计算订单总价
         $modeGoods = new \app\index\model\Goods();
@@ -108,6 +109,14 @@ class Order extends \common\controller\UserBase
         $amount = 0;
         foreach ($goodsList as $k1 => &$goodsInfo) {
             foreach ($goodsListNew as $k2 => &$goodsInfoNew) {
+
+                // 商品购买权限
+                if(!($goodsInfoNew['belong_to_member_buy']&(int)$member['type'])){
+                    $error = config('code.error.for_members_only');
+                    $this->errorMsg($error['msg'], $error);
+                    break;
+                }
+
                 if($goodsInfo['goods_id'] == $goodsInfoNew['goods_id']){
                     $goodsList[$k1]['headline'] = $goodsInfoNew['headline'];
                     $goodsList[$k1]['thumb_img'] = $goodsInfoNew['thumb_img'];
