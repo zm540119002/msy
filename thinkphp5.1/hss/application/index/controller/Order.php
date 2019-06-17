@@ -58,10 +58,6 @@ class Order extends \common\controller\UserBase
 
             $goodsIds = array_column($goodsList,'goods_id');
 
-            p($promotion);
-            p(($promotion['belong_to_member_buy']&(int)$member['type']));
-            p(7&1);
-            exit;
 
             // 购买权限
             if(!($promotion['belong_to_member_buy']&(int)$member['type'])){
@@ -89,6 +85,8 @@ class Order extends \common\controller\UserBase
                     $this->errorMsg($error['msg'], $error);
                 }
             }
+
+            
         }
 
 
