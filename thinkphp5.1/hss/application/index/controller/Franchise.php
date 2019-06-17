@@ -18,7 +18,7 @@ class Franchise extends \common\controller\UserBase {
                 'where'=>[
                     ['f.status', '=', 0],
                     ['f.user_id','=',$this->user['id']],
-                    ['f.apply_status','=',1],
+                    ['f.apply_status','=',0],
                 ],
                 'field'=>[
                     'f.id','f.province','f.city','f.area','f.detail_address','f.name','f.applicant','f.mobile','f.franchise_fee','f.apply_status',
@@ -73,6 +73,7 @@ class Franchise extends \common\controller\UserBase {
         }
 
         if(isset($postData['step'])){
+            $postData['apply_status'] = 1; //待付款
             if($postData['step'] == 1){
                 $id = $modelFranchise->edit($postData,$where);
                 if(!$id){
@@ -111,20 +112,14 @@ class Franchise extends \common\controller\UserBase {
             }
 
         }else{
-            $id = $modelFranchise->edit($postData,$where);
+            $postData['apply_status'] = 1; //预登记
+            $id = $modelFranchise->edit($postData);
             if(!$id){
                 $modelFranchise ->rollback();
                 return errorMsg('失败');
             }
         }
-//        if(isset($postData['step']) && $postData['step'] == 1){
-//
-//
-//        }else if(isset($postData['step']) && $postData['step'] == 2){
-//
-//        }
         $modelFranchise -> commit();
-
         $data = [
             'code'=> config('code.success.default.code'),
             'url' => config('custom.pay_gateway').$sn,'id'=>$id,
