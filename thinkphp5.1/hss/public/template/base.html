@@ -63,12 +63,17 @@
 <script type="text/javascript" src="api_common_js/paging.js"></script>
 <script type="text/javascript">
     //异步验证
+    var asyncVerifyRepeat = true;
     function asyncVerify(config){
         let jump_url = config.clickObj.data('jump_url');
         if(!config.clickObj || !jump_url){
             dialog.error('参数错误！');
             return false;
         }
+        if(!asyncVerifyRepeat){
+            return false;
+        }
+        asyncVerifyRepeat = false;
         $.ajax({
             url: jump_url,
             data: config.postData,
@@ -82,6 +87,7 @@
             },
             success: function(data){
                 $('.loading').hide();
+                asyncVerifyRepeat = true;
                 //异步验证判断
                 let param = {
                     data:data,
@@ -92,7 +98,6 @@
                     reduce:config.reduce,
                     jump_url:data.data && data.data.url?data.data.url:jump_url,
                     responsePageCallBack:config.responsePageCallBack,
-                    layerIndex:config.layerIndex,
                     asyncVerifyCallBack:config.asyncVerifyCallBack
                 };
                 async_verify_judge(param);
@@ -188,9 +193,6 @@
                         className:'settlementMethod bankTransferLayer',
                         content: settlementMethod
                     });
-                }
-                if(param.clickObj.attr('class').indexOf('beforehand-register')!==-1){ //会员预登记
-                    layer.close(param.layerIndex);
                 }
                 if(param.clickObj.attr('class').indexOf('platform-two-dimensional-code')!==-1){ //获取平台二维码
                     var imgSrc=uploads+param.data.data.url;

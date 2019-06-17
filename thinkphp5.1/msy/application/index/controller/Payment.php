@@ -292,7 +292,6 @@ class Payment extends \common\controller\Base {
 
         // 会员升级 // 每个平台都有自己的支付后业务 后期修改
        if($orderInfo['type']==2) {
-
             $modelPromotion = new \app\index\model\Promotion();
             $modelPromotion ->setConnection(config('custom.system_id')[$systemId]['db']);
             $condition = [
@@ -441,7 +440,7 @@ class Payment extends \common\controller\Base {
             ],
         ];
         $data = [
-            'type'=>1,                              // hss 加盟店会员
+            'type'=>2,                              // hss 加盟店会员
             'user_id'=> $info['user_id'],
             'create_time'=>time(),
         ];
@@ -496,7 +495,7 @@ class Payment extends \common\controller\Base {
                 ],
             ];
             $data = [
-                'type'=>2,                              // hss 城市合伙人
+                'type'=>4,                              // hss 城市合伙人
                 'user_id'=> $info['user_id'],
                 'create_time'=>time(),
             ];

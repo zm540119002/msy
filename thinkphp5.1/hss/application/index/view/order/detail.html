@@ -11,7 +11,7 @@
         <!-- 订单信息 -->
         <div class="separation-line content-padding">
             <div>
-                <span>订单号&nbsp;</span>
+                <span>订单编号&nbsp;</span>
                 <input type="hidden" class="order_sn" value="{$orderInfo.sn}"/>
                 <input type="hidden" class="order_id" value="{$orderInfo.id}"/>
                 <span>{$orderInfo.sn}</span>
@@ -26,7 +26,7 @@
             </div>
             <div>
                 <span>金额&nbsp;</span>
-                <span>￥<price>{$orderInfo.amount}</price></span>
+                <span class="red">￥<price class="red">{$orderInfo.amount}</price></span>
             </div>
             <div>
                 <span>状态：</span>
@@ -35,6 +35,7 @@
         </div>
 
         {if $orderInfo.order_status == 1}
+
             {include file="template/address_info.html" /}
             {include file="template/settlement_method.html" /}
 
@@ -82,7 +83,7 @@
                                 </div>
                             </div>
                     <div class="columns_flex l-r-sides content-padding">
-                        <span>共{$goods_info.num}件商品</span>
+                        <span>共{$goods_info.num}件商品，</span>
                         小计：<span class="red">￥<price>{$goods_info.price*$goods_info.num}</price></span>
                     </div>
                     {/volist}
@@ -116,6 +117,13 @@
         });
     });
 </script>
+<style>
+    .l-r-sides{
+        justify-content: flex-end;
+        align-items: center;
+    }
+    
+</style>
 {/block}
 {block name="script"}
 

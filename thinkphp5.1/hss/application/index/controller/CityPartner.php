@@ -22,9 +22,11 @@ class CityPartner extends \common\controller\UserBase {
             $condition=[
                 'where'=>[
                     ['cp.status', '=', 0],
-                    ['cp.user_id','=',$this->user['id']]
+                    ['cp.user_id','=',$this->user['id']],
+                    ['cp.apply_status','>',0],
                 ], 'field'=>[
-                    'cp.id','cp.province','cp.city','cp.company_name','cp.applicant','cp.mobile','cp.city_level','cp.earnest','cp.amount','cp.apply_status'
+                    'cp.id','cp.province','cp.city','cp.company_name','cp.applicant',
+                    'cp.mobile','cp.city_level','cp.earnest','cp.amount','cp.apply_status','cp.payment_time'
                     ,'p.sn','p.id as pay_id'
                 ]
                 ,'join' => [
@@ -34,7 +36,7 @@ class CityPartner extends \common\controller\UserBase {
             $selfApplyList = $modelCityPartner -> getList($condition);
             //申请中
             $apply = [];
-            //已交定金或尾款申请
+            //已申请
             $applied = [];
             if($selfApplyList){
                 foreach ($selfApplyList as $selfapply){
@@ -164,14 +166,6 @@ class CityPartner extends \common\controller\UserBase {
                     'type' => config('custom.pay_type')['cityPartnerBalancePay']['code'],
                     'create_time' => time(),
                 ];
-
-//                if(isset($postData['pay_id']) && $postData['pay_id']){
-//                    $where1 = [
-//                        'id'=>$postData['pay_id'],
-//                        'user_id'=>$this->user['id'],
-//                        'status'=>0,
-//                    ];
-//                }
                 $payId = $modelPay->edit($data);
                 if(!$payId){
                     $modelCityPartner ->rollback();
@@ -182,13 +176,4 @@ class CityPartner extends \common\controller\UserBase {
         $this->successMsg('成功',['url'=>config('custom.pay_gateway').$paySn,'id'=>$id]);
     }
 
-    //尾款结算
-    public function balance()
-    {
-        if(!request()->isAjax()){
-            $this->errorMsg('请求方式错误');
-        }
-
-
-    }
 }

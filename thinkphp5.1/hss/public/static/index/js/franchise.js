@@ -3,32 +3,32 @@ var area_address,
 
 $(function(){
     tab_down('.apply-data-nav .switch-item','.apply-module','click');
-
     //初始化 未完成的申请
     if(apply!=null){
         applicantData = {
-            id:apply.id,
-            name:apply.name,
-            applicant:apply.applicant,
-            mobile:apply.mobile,
-            province:apply.province,
-            city:apply.city,
-            area:apply.area,
-            detail_address:apply.detail_address,
-            old_apply_status:apply.apply_status,
-            pay_id:apply.pay_id,
+            id:apply[0].id,
+            name:apply[0].name,
+            applicant:apply[0].applicant,
+            mobile:apply[0].mobile,
+            province:apply[0].province,
+            city:apply[0].city,
+            area:apply[0].area,
+            detail_address:apply[0].detail_address,
+            old_apply_status:apply[0].apply_status,
+            pay_id:apply[0].pay_id,
         };
         //省市区初始化
         var region = [];
-        region.push(apply.province);
-        region.push(apply.city);
-        region.push(apply.area);
+        region.push(apply[0].province);
+        region.push(apply[0].city);
+        region.push(apply[0].area);
         $('.area_address').setArea(region);
-        $('.detail_address').val(apply.detail_address);
+        $('.detail_address').val(apply[0].detail_address);
         //资料初始化
-        $('.name').val(apply.name);
-        $('.applicant').val(apply.applicant);
-        $('.mobile').val(apply.mobile);
+        $('.name').val(apply[0].name);
+        $('.applicant').val(apply[0].applicant);
+        $('.mobile').val(apply[0].mobile);
+
         //定位到已完成步骤
         var index=apply.apply_status-1;
         $('nav.apply-data-nav li:eq('+index+')').click(function(){
@@ -64,7 +64,6 @@ $(function(){
             dialog.error(content);
         }else{
             applicantData.step = 1;
-            console.log(applicantData);
             submitApplicant(_this,applicantData);
         }
     });

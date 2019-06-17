@@ -3,7 +3,7 @@
 {block name="header"}{/block}
 {block name="content"}
 <article class="f24">
-	<div class="back"><</div>
+	<div class="back go-back"><</div>
 	<section class="slider_banner">
 		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
 			<div class="swiper-wrapper">
@@ -230,21 +230,13 @@
 			}
 		});
 		// 点击返回上一页
-	$('.back').on("click",function(){
+	$('.go-back').on("click",function(){
 		history.back(-1)
 	})
 	});
 </script>
 <style scoped>
-		.price{
-			color: #e60012;
-			font-size: 0.4rem;
-			height: 30px;
-		}
-		.price span{
-			font-size: 0.3rem;
-			float: left;
-		}
+	
 		.describe{
 			border-bottom: 1px solid #ccc;
 			padding-bottom: 10px;
@@ -267,9 +259,7 @@
 			padding-top: 10px;
 			margin-bottom: 0;
 		}
-		.selected-number{
-			float: right;
-		}
+		
 		.back{
 			position:fixed;
 			width: 30px;
@@ -282,8 +272,6 @@
 			text-align: center;
 			line-height: 30px;
 		}
-		.product-select div.right {
-			width: 60%;
-		}
+	
 	</style>
 {/block}
