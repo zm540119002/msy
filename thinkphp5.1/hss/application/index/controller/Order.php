@@ -57,7 +57,7 @@ class Order extends \common\controller\UserBase
 
             $goodsIds = array_column($goodsList,'goods_id');
 
-            print_r(!($promotion['belong_to_member_buy']&$member['type']));
+            print_r(($promotion['belong_to_member_buy']&$member['type']));
             exit;
             // 购买权限 // 非会员可以购买的商品
             if( ($promotion['belong_to_member_buy']&$member['type'])<1 ){
