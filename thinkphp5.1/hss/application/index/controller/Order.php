@@ -56,13 +56,14 @@ class Order extends \common\controller\UserBase
             $promotion = reset($goodsList);
 
             $goodsIds = array_column($goodsList,'goods_id');
-            // 购买权限
-            if(!($promotion['belong_to_member_buy']&(int)$member['type'])){
+
+            // 购买权限 // 非会员可以购买的商品
+            if( !$promotion['belong_to_member_buy']&$member['type'] ){
+
                 $error = config('code.error.for_members_only');
                 $this->errorMsg($error['msg'], $error);
             }
-
-
+            
             // 是否需要验证公司信息
             if( ($member['type']==config('custom.member_level.1.level')) && $promotion['is_company_info'] ) {
                 $modelCompany = new \app\index\model\Franchise();
