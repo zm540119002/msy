@@ -33,7 +33,6 @@ class Order extends \common\controller\UserBase
             $this->errorMsg('请求数据不能为空');
         }
 
-        // 非会员可以购买的商品
 
         if( $order_type==2 ){
 
@@ -57,15 +56,23 @@ class Order extends \common\controller\UserBase
             $promotion = reset($goodsList);
 
             $goodsIds = array_column($goodsList,'goods_id');
+<<<<<<< HEAD
 print_r($member['type']);
             // 购买权限
             if(!($promotion['belong_to_member_buy']&(int)$member['type'])){
+=======
+
+            // 购买权限 // 非会员可以购买的商品
+            if( $promotion['belong_to_member_buy']&$member['type']<1 ){
+
+>>>>>>> 50b471bdd8398bee48cb509e825a45b6cb43a07b
                 $error = config('code.error.for_members_only');
                 $this->errorMsg($error['msg'], $error);
             }
 
+
             // 是否需要验证公司信息
-            if( $member['type']==config('custom.member_level.1.level') && $promotion['is_company_info'] ) {
+            if( ($member['type']==config('custom.member_level.1.level')) && $promotion['is_company_info'] ) {
                 $modelCompany = new \app\index\model\Franchise();
 
                 $condition = [
@@ -84,6 +91,7 @@ print_r($member['type']);
                     $this->errorMsg($error['msg'], $error);
                 }
             }
+
         }
 
 
@@ -111,11 +119,11 @@ print_r($member['type']);
             foreach ($goodsListNew as $k2 => &$goodsInfoNew) {
 
                 // 商品购买权限
-                if(!($goodsInfoNew['belong_to_member_buy']&(int)$member['type'])){
+  /*              if(!($goodsInfoNew['belong_to_member_buy']&(int)$member['type'])){
                     $error = config('code.error.for_members_only');
                     $this->errorMsg($error['msg'], $error);
                     break;
-                }
+                }*/
 
                 if($goodsInfo['goods_id'] == $goodsInfoNew['goods_id']){
                     $goodsList[$k1]['headline'] = $goodsInfoNew['headline'];
