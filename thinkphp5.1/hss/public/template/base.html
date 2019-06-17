@@ -65,7 +65,6 @@
     //异步验证
     function asyncVerify(config){
         console.log(config);
-        return false;
         let jump_url = config.clickObj.data('jump_url');
         if(!config.clickObj || !jump_url){
             dialog.error('参数错误！');
