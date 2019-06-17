@@ -59,11 +59,22 @@ class Order extends \common\controller\UserBase
             $goodsIds = array_column($goodsList,'goods_id');
 
 
+            p($promotion['belong_to_member_buy']);
+            p($member['type']);
+            
+            p(($promotion['belong_to_member_buy']&$member['type']));
+
+
             // 购买权限
-            if(!(int)($promotion['belong_to_member_buy']&(int)$member['type'])){
+            if( !($promotion['belong_to_member_buy']&$member['type']) ){
+                echo 222222;
+
                 $error = config('code.error.for_members_only');
                 $this->errorMsg($error['msg'], $error);
             }
+
+            echo 111111;
+            exit;
 
             // 是否需要验证公司信息
             if( (int)$member['type']==(int)config('custom.member_level.1.level') && $promotion['is_company_info'] ) {
