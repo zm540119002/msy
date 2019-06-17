@@ -27,7 +27,7 @@ class Franchise extends \common\controller\UserBase {
                     ['pay p','p.sn = f.sn','left'],
                 ],
             ];
-            $selfApplyList = $modelFranchise -> getInfo($condition);
+            $selfApplyList = $modelFranchise -> getList($condition);
             //申请中
             $apply = [];
             //已申请
