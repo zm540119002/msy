@@ -72,43 +72,57 @@ class Franchise extends \common\controller\UserBase {
             ];
         }
 
-        if(isset($postData['step']) && $postData['step'] == 1){
-            $id = $modelFranchise->edit($postData,$where);
-            if(!$id){
-                $modelFranchise ->rollback();
-                return errorMsg('失败');
+        if(isset($postData['step'])){
+            if($postData['step'] == 1){
+                $id = $modelFranchise->edit($postData,$where);
+                if(!$id){
+                    $modelFranchise ->rollback();
+                    return errorMsg('失败');
+                }
+            }
+            if($postData['step'] == 2){
+                $id = $modelFranchise->edit($postData,$where);
+                if(!$id){
+                    $modelFranchise ->rollback();
+                    return errorMsg('失败');
+                }
+                //生成支付表数据
+                $modelPay = new \app\index\model\Pay();
+                $data = [
+                    'sn' => $sn,
+                    'actually_amount' =>config('custom.franchise_fee'),
+                    'user_id' => $this->user['id'],
+                    'pay_code' => $postData['pay_code'],
+                    'type' => config('custom.pay_type')['franchisePay']['code'],
+                    'create_time' => time(),
+                ];
+                if(isset($postData['pay_id']) && $postData['pay_id']){
+                    $where1 = [
+                        'id'=>$postData['pay_id'],
+                        'user_id'=>$this->user['id'],
+                        'status'=>0,
+                    ];
+                }
+                $payId = $modelPay->edit($data,$where1);
+                if(!$payId){
+                    $modelFranchise ->rollback();
+                    return errorMsg('失败');
+                };
             }
 
         }else{
             $id = $modelFranchise->edit($postData,$where);
-           echo  $modelFranchise->getLastSql();exit;
             if(!$id){
                 $modelFranchise ->rollback();
                 return errorMsg('失败');
             }
-            //生成支付表数据
-            $modelPay = new \app\index\model\Pay();
-            $data = [
-                'sn' => $sn,
-                'actually_amount' =>config('custom.franchise_fee'),
-                'user_id' => $this->user['id'],
-                'pay_code' => $postData['pay_code'],
-                'type' => config('custom.pay_type')['franchisePay']['code'],
-                'create_time' => time(),
-            ];
-            if(isset($postData['pay_id']) && $postData['pay_id']){
-                $where1 = [
-                    'id'=>$postData['pay_id'],
-                    'user_id'=>$this->user['id'],
-                    'status'=>0,
-                ];
-            }
-            $payId = $modelPay->edit($data,$where1);
-            if(!$payId){
-                $modelFranchise ->rollback();
-                return errorMsg('失败');
-            };
         }
+//        if(isset($postData['step']) && $postData['step'] == 1){
+//
+//
+//        }else if(isset($postData['step']) && $postData['step'] == 2){
+//
+//        }
         $modelFranchise -> commit();
 
         $data = [
