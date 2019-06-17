@@ -6,7 +6,7 @@
                 {{menu.name}}
                 <!-- 全选 -->
                 <div v-if="menu.class.indexOf('checked_all')!==-1" class="checked_all">
-                    <input type="checkbox" class="check_all" v-model="checked" @click="checkAll" id="check_all" />
+                    <input type="checkbox" class="check_all" @click="checkAll" id="check_all" v-model="checked" />
                     <label for="check_all">全选</label>
                 </div>
                 <!-- 总金额 -->
@@ -61,7 +61,7 @@
                 init_product_type: {type: Number,default: 1},
                 init_cart_num: {type: Number,default: 0},
                 init_total_amount: {type: Number,default: 0},
-                init_checked: {type: Boolean,default: true},
+                init_checked: {type: Boolean,default: false},
                 init_menus: {
                     type: Object,
                     default: function () {
@@ -77,6 +77,7 @@
                     total_amount:this.init_total_amount,
                     cart_num:this.init_cart_num,
                     checked:this.init_checked,
+                    monitor_checked:false,
                     checkItemList:[],
                     menus: this.init_menus.menu,
                     postData:{
@@ -101,6 +102,7 @@
                     param.checked
                             ? this.total_amount += param.subtotal_amount
                             : this.total_amount -= param.subtotal_amount;
+                    this.total_amount = Math.abs(this.total_amount);
                 },jump_url:function (event) {
                     let obj = $(event.currentTarget);
                     let jump_url = obj.data('jump_url');
@@ -223,15 +225,7 @@
                         }
                     }
                 },checkAll:function(){
-                    //非ios取反
-                    if(!browser.versions.ios){
-                        this.checked = !this.checked;
-                    }
-                    for(let i = 0,len = this.checkItemList.length; i < len; i++){
-                        this.checkItemList[i].checked = this.checked;
-                    }
-                    //触发-底部购物车全选改变-事件
-                    bus.$emit('footer_cart_check_all_change',this.checked);
+                    this.monitor_checked = true;
                 },confirm_order:function(event){
                     let _thisJquery = $(event.currentTarget);
                     let _thisVue = this;
@@ -250,12 +244,10 @@
                     }
                     let address = getAddress();
                     _thisVue.postData.address = JSON.stringify(address);
-
                     if( _thisVue.postData.address=='false' ){
                         dialog.error('请选择收货地址 ！');
                         return false;
                     }
-
                     let config = {
                         clickObj:_thisJquery,
                         postData:_thisVue.postData,
@@ -295,6 +287,21 @@
                         _this.assignProductList(param);
                     }
                 });
+            },watch: {
+                checked: {
+                    handler(newVal, oldVal) {
+                        if(this.monitor_checked){
+                            for(let i = 0,len = this.checkItemList.length; i < len; i++){
+                                this.checkItemList[i].checked = newVal;
+                            }
+                            this.monitor_checked = false;
+                            //触发-底部购物车全选改变-事件
+                            bus.$emit('footer_cart_check_all_change',newVal);
+                        }
+                    },
+                    deep: false,
+                    immediate: true
+                }
             }
         });
     });

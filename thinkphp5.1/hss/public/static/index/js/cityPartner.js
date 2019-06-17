@@ -25,11 +25,11 @@ $(function(){
             old_apply_status:apply[0].apply_status,
             pay_id:apply[0].pay_id,
         };
+        var region = [];
+        region.push(apply[0].province);
+        region.push(apply[0].city);
         if(statusType<3){
             //省市区初始化
-            var region = [];
-            region.push(apply[0].province);
-            region.push(apply[0].city);
             $('.area_address').setArea(region);
             //资料初始化
             $('.company_name').val(apply[0].company_name);
@@ -41,17 +41,21 @@ $(function(){
                 $(this).addClass('current').siblings().removeClass('current');
             });
             $('nav.apply-data-nav li:eq('+index+')').click();
+            $('.weui-flex li:eq(3)').addClass('nodisabled');
 
         }else{
             //待审核
             //资格完款
             if(statusType==4 || statusType==3){
-                statusType = 3;
                 $('nav.apply-data-nav li:eq(3)').click(function(){
                     $(this).addClass('current').siblings().removeClass('current');
                 });
                 $('nav.apply-data-nav li:eq(3)').click();
                 $('.weui-flex li:eq(0),.weui-flex li:eq(1),.weui-flex li:eq(2)').addClass('nodisabled');
+                if(statusType == 4){
+
+                    $('.apply_city').setArea(region);
+                }
             }
         }
     }
@@ -65,8 +69,8 @@ $(function(){
             return false;
         }
         var cityArr=[];
-		for (var key=0;key<cityList.length;key++) {
-			cityArr.push([parseInt(cityList[key].province),parseInt(cityList[key].city)]);
+		for (var key=0;key<applied.length;key++) {
+			cityArr.push([parseInt(applied[key].province),parseInt(applied[key].city)]);
 		}
         var cityData=[];
         cityData.push(parseInt(area_address[0]),parseInt(area_address[1]));

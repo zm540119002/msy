@@ -31,7 +31,7 @@ $(function(){
 
     // 显示地址列表&&选择地址
     $('body').on('click','.select_address',function () {
-        var url = module + 'Address/_popGetList';
+        var url = module + 'Address/popGetList';
         $.ajax({
             url: url,
             data: '',

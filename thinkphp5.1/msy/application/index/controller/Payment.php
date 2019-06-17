@@ -187,11 +187,11 @@ class Payment extends \common\controller\Base {
      * wxPayNotifyCallBack
      * */
     public function wxPayNotifyCallBack(){
-        $xml = file_get_contents('php://input');
-
-        file_put_contents('a.txt',$xml);
+//        $xml = file_get_contents('php://input');
+//        file_put_contents('a.txt',$xml);
         $wxPay = new \common\component\payment\weixin\weixinpay;
         $data  = $wxPay->wxNotify();
+
         if($data){
             $attach = json_decode($data['attach'],true);
             $systemId = $attach['system_id'];
@@ -226,7 +226,6 @@ class Payment extends \common\controller\Base {
                 $payInfo['mysql_error'] = $payModel->getError();
                 return $this->writeLog("支付订单更新失败",$payInfo);
             }
-            echo $result;
             //组装 回调的数据
             $info = [
                 'sn' => $data['out_trade_no'],
@@ -260,7 +259,7 @@ class Payment extends \common\controller\Base {
                 ['sn', '=', $info['sn']],
                 ['order_status', '=', 1],
             ],'field' => [
-                'id', 'sn', 'amount','pay_code','actually_amount',
+                'id', 'user_id','sn', 'amount','pay_code','actually_amount','type','type_id',
                 'user_id','order_status'
             ],
         ];
@@ -282,7 +281,7 @@ class Payment extends \common\controller\Base {
             'order_status'=>2,                              // 订单状态
             'payment_time'=>time(),
             'pay_sn'=>$info['pay_sn'],                      // 支付单号 退款用
-            'pay_code'=>$info['pay_code'],                      // 支付单号 退款用
+            'pay_code'=>$info['pay_code'],                  // 支付单号 退款用
         ];
         $result = $modelOrder -> allowField(true) -> save($data,$condition['where']);
         if(!$result){
@@ -290,6 +289,51 @@ class Payment extends \common\controller\Base {
             $info['mysql_error'] = $modelOrder->getError();
             return $this->writeLog("订单支付更新失败",$info);
         }
+
+        // 会员升级 // 每个平台都有自己的支付后业务 后期修改
+       if($orderInfo['type']==2) {
+
+            $modelPromotion = new \app\index\model\Promotion();
+            $modelPromotion ->setConnection(config('custom.system_id')[$systemId]['db']);
+            $condition = [
+                'where' => [
+                    ['status', '=', 0],
+                    ['id', '=', $orderInfo['type_id']],
+                ], 'field' => [
+                    'upgrade_member_level'
+                ]
+            ];
+            $promotion = $modelPromotion->getInfo($condition);
+
+            if($promotion && $promotion['upgrade_member_level']){
+                $upgrade_member_level = (int)$promotion['upgrade_member_level'];
+
+                if ($upgrade_member_level) {
+                    $where = [
+                        'where' => [
+                            ['user_id', '=', $orderInfo['user_id']],
+                            ['type', '<', $upgrade_member_level],
+                        ]
+                    ];
+                    $data = [
+                        'type' => $upgrade_member_level,
+                        'update_time' => time(),
+                    ];
+
+                    $memberModel = new \app\index\model\Member();
+                    $memberModel ->setConnection(config('custom.system_id')[$systemId]['db']);
+
+                    $result = $memberModel->allowField(true)->save($data,$where);
+
+                    if (!$result) {
+                        $modelOrder->rollback();
+                        $info['mysql_error'] = $modelOrder->getError();
+                        return $this->writeLog("会员等级更新失败",$memberModel->getLastSql());
+                    }
+                }
+            }
+        }
+
         $modelOrder->commit();
         echo 'SUCCESS';
     }
@@ -378,7 +422,6 @@ class Payment extends \common\controller\Base {
             ['status', '=', 0],
             ['sn', '=', $info['sn']],
             ['user_id', '=', $info['user_id']],
-            ['apply_status', '=', 1],
         ];
         $result = $modelFranchise -> allowField(true) -> save($data,$condition);
         if($result === false){
@@ -434,12 +477,11 @@ class Payment extends \common\controller\Base {
         $condition = [
             ['status', '=', 0],
             ['user_id', '=', $info['user_id']],
-            ['apply_status', '=', 1],
         ];
 
         if($info['type'] == 4){
             //席位支付
-            $condition['earnest_sn'] = $info['sn'];
+            $condition[] = ['earnest_sn','=',$info['sn']];
             $data['apply_status']=4;
         }elseif($info['type'] == 5){
             //增加平台member
@@ -470,12 +512,13 @@ class Payment extends \common\controller\Base {
             }
 
             //尾款支付
-            $condition['balance_sn'] = $info['sn'];
+            $condition[] = ['balance_sn','=',$info['sn']];
             $data['apply_status']=6;
 
         }
-        $result = $modelCityPartner -> allowField(true) -> save($data,$condition);
-        if($result === false){
+        unset($data['id']);
+        $result = $modelCityPartner  -> allowField(true)-> save($data,$condition);
+        if(false === $result){
             $modelCityPartner ->rollback();
             $info['mysql_error'] = $modelCityPartner->getError();
             return $this->writeLog("城市人申请席位定金支付更新失败",$info);

@@ -92,8 +92,9 @@ class Index extends \common\controller\Base{
                         'm.id ','m.type',
                     ],
                 ];
-                $identity = $memberMode->getInfo($config);
-                $this->assign('identity',$identity);
+                $member = $memberMode->getInfo($config);
+                $this->assign('member',$member);
+
             }
             // 底部菜单，见配置文件custom.footer_menu
             $this->assign('currentPage',request()->controller().'/'.request()->action());
@@ -121,7 +122,34 @@ class Index extends \common\controller\Base{
                     ],
                 ];
                 $member = $memberMode->getInfo($config);
-                $this->assign('identity',$member);
+                $this->assign('member',$member);
+                //自己提交的申请
+                $modelCityPartner = new \app\index\model\CityPartner();
+                $condition=[
+                    'where'=>[
+                        ['cp.status', '=', 0],
+                        ['cp.user_id','=',$user['id']]
+                    ], 'field'=>[
+                        'cp.id','cp.province','cp.city','cp.company_name','cp.applicant',
+                        'cp.mobile','cp.city_level','cp.earnest','cp.amount','cp.apply_status'
+                    ]
+                ];
+                $selfApplyList = $modelCityPartner -> getList($condition);
+                //申请中
+                $apply = [];
+                //已申请
+                $applied = [];
+                if($selfApplyList){
+                    foreach ($selfApplyList as $selfapply){
+                        if ($selfapply['apply_status']<6){
+                            $apply[] = $selfapply;
+                        }else{
+                            $applied[] = $selfapply;
+                        }
+                    }
+                }
+                $this->assign('apply',$apply);
+                $this->assign('applied',$applied);
             }
             // 底部菜单，见配置文件custom.footer_menu
             $this->assign('currentPage',request()->controller().'/'.request()->action());
@@ -181,6 +209,20 @@ class Index extends \common\controller\Base{
         }
 
         return $this->fetch($view);
+    }
+
+    // 项目优势页
+    public function invited(){
+        $this->assignStandardBottomButton([21]);
+
+        return $this->fetch();
+    }
+
+    // 项目优势页
+    public function recruit(){
+        $this->assignStandardBottomButton([22]);
+
+        return $this->fetch();
     }
 
 

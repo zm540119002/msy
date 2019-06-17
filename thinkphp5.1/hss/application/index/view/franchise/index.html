@@ -15,7 +15,7 @@
 			<div>
                 {if $user}
                    {if $member.type == 1 || $member.type == 2}
-                      加盟店
+                    合作伙伴
                       {else /}
                       <span class="cy-icon"></span>
                        非合作伙伴
@@ -27,13 +27,16 @@
                 {/if}
             </div>
             <div>
-                {if $member.type == 1 || $member.type == 2}
-                 xxxx加盟店
-                {else /}
+                <!--{if $member.type == 1 || $member.type == 2}-->
+                 <!--xxxx加盟店-->
+                <!--{else /}-->
+                <!--<a href="javascript:void(0)" class="gr async_login"  data-jump_url="{:url('Franchise/applyFranchise')}">-->
+                    <!--加盟店资格申请  >-->
+                <!--</a>-->
+                <!--{/if}-->
                 <a href="javascript:void(0)" class="gr async_login"  data-jump_url="{:url('Franchise/applyFranchise')}">
                     加盟店资格申请  >
                 </a>
-                {/if}
             </div>
 		</div>
         <ul class="franchise_ul">
@@ -44,7 +47,7 @@
                 </a>
             </li>
             <li>
-                <a href="{:url('Franchise/makersManage')}" class="right-arrow">
+                <a href="" class="right-arrow">
                     <span class="ck"></span>
                     黑森森加盟店新零售创客管理
                 </a>

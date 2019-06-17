@@ -1,5 +1,5 @@
 {extend name="template/base.html" /}
-{block name="title"}购物车{/block}
+{block name="title"}采购车{/block}
 {block name="content"}
 <section class="no_cart_data" style="display:none;">
 	<li class="no_data">
@@ -14,7 +14,7 @@
 	{else /}
 		<section class="header_title separation-line">
 			<a href="javascript:void(0);" class="back_prev_page"></a>
-			<h2 class="f24">购物车</h2>
+			<h2 class="f24">采购车</h2>
 		</section>
 	{/if}
 	<!--产品列表-->
@@ -266,7 +266,7 @@
 {if $type}
 	<style>	
 		#foot_cart_menu .group_cart_nav{
-        bottom: 52px;
+        bottom: 0.88rem;
 		}
 	</style>
 	{include file="template/footer_project.html" /}

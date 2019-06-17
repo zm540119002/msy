@@ -25,13 +25,17 @@
                 {/if}
             </div>
             <div>
-                {if $member.type == 2}
-                     xxx城市合伙人
+                <a href="javascript:void(0)" class="async_login gr"  data-jump_url="{:url('CityPartner/registered')}">
+
+                    {if $apply[0]['apply_status'] == 4}
+                    城市合伙人资格审核中...
+                    {elseif $apply[0]['apply_status'] == 5}
+                    城市合伙人资格余额限时支付...
                     {else /}
-                    <a href="javascript:void(0)" class="async_login gr"  data-jump_url="{:url('CityPartner/city')}">
-                        城市合伙人资格申请&nbsp;&nbsp;>
-                    </a>
-                {/if}
+                    城市合伙人资格申请&nbsp;&nbsp;>
+                    {/if}
+
+                </a>
             </div>
 		</div>
         <ul class="franchise_ul">

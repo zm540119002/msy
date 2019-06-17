@@ -2,46 +2,20 @@
 namespace app\index\controller;
 class Order extends \common\controller\UserBase
 {
-
-    public function __construct(){
-        parent::__construct();
-
-//        // 自动开通会员
-//        $memberModel = new \app\index\model\Member();
-//        $data = [
-//            ['user_id'=>$this->user['id']],
-//            ['create_time'=>time()],
-//            ['update_time'=>time()],
-//        ];
-//        $res = $memberModel->allowField(true)->isUpdate(false)->save($data);
-//        print_r($memberModel);
-//        exit;
-//        if(!$member = $memberModel->getMemberInfo($this->user['id'])){
-//            $data = [
-//                ['user_id'=>$this->user['id']],
-//                ['create_time'=>time()],
-//                ['update_time'=>time()],
-//            ];
-//            $var = $memberModel->edit($data);
-//            $var = $memberModel->id;
-//            p($var);
-//            exit;
-//        }
-    }
-
     //生成订单
     public function generate()
     {
         $memberModel = new \app\index\model\Member();
-        $data = [
-            ['user_id'=>$this->user['id']],
-            ['create_time'=>time()],
-            ['update_time'=>time()],
-        ];
+        if(!$member = $memberModel->getMemberInfo($this->user['id'])){
+           $data = [
+                'user_id'=>$this->user['id'],
+                'create_time'=>time(),
+                'update_time'=>time(),
+            ];
+            $memberModel->edit($data);
+            $member['type'] = config('custom.member_level.1.level');
+        }
 
-        $res = $memberModel->allowField(true)->isUpdate(false)->save($data);
-        print_r($memberModel->id);
-        exit;
         if (!request()->isPost()) {
             $this->errorMsg('请求方式错误');
         }
@@ -53,14 +27,11 @@ class Order extends \common\controller\UserBase
 
         $order_type = input('post.product_type/d');
 
-
         $goodsIds = array_column($goodsList,'goods_id');
 
         if(empty($goodsIds)){
             $this->errorMsg('请求数据不能为空');
         }
-        p(2222);
-        exit;
 
         // 非会员可以购买的商品
 
@@ -73,7 +44,7 @@ class Order extends \common\controller\UserBase
                     ['p.status', '=', 0],
                     ['pg.promotion_id', '=', $promotion['goods_id']],
                 ], 'field' => [
-                    'pg.goods_id',"pg.goods_num*{$promotion['num']} num",'p.name',"p.franchise_price*{$promotion['num']} price",'p.id','p.belong_to_member_buy'
+                    'pg.goods_id',"pg.goods_num*{$promotion['num']} num",'p.name',"p.franchise_price*{$promotion['num']} price",'p.id','p.belong_to_member_buy','p.is_company_info'
                 ],'join' => [
                     ['promotion p','pg.promotion_id=p.id','left']
                 ]
@@ -87,12 +58,32 @@ class Order extends \common\controller\UserBase
 
             $goodsIds = array_column($goodsList,'goods_id');
 
-            if(!($promotion['belong_to_member_buy']&$res['type'])){
-                $this->errorMsg('仅限会员 !');
+            // 购买权限
+            if(!($promotion['belong_to_member_buy']&(int)$member['type'])){
+                $error = config('code.error.for_members_only');
+                $this->errorMsg($error['msg'], $error);
             }
 
+            // 是否需要验证公司信息
+            if( $member['type']==config('custom.member_level.1.level') && $promotion['is_company_info'] ) {
+                $modelCompany = new \app\index\model\Franchise();
 
-            //
+                $condition = [
+                    'field' => [
+                        'id'
+                    ],
+                    'where' => [
+                        ['user_id','=',$this->user['id']],
+                        ['status','=',0]
+                    ]
+                ];
+                $res = $modelCompany->getInfo($condition);
+
+                if (!$res) {
+                    $error = config('code.error.need_beforehand_register');
+                    $this->errorMsg($error['msg'], $error);
+                }
+            }
         }
 
 
@@ -102,17 +93,14 @@ class Order extends \common\controller\UserBase
                 ['g.status', '=', 0],
                 ['g.id', 'in', $goodsIds],
             ], 'field' => [
-                'g.id as goods_id','g.name','g.headline','g.thumb_img','g.franchise_price','g.specification','g.sample_price',
+                'g.id as goods_id','g.name','g.headline','g.thumb_img','g.franchise_price','g.specification','g.sample_price','g.belong_to_member_buy',
                 'g.purchase_unit','g.store_id'
             ]
         ];
 
-
         //计算订单总价
         $modeGoods = new \app\index\model\Goods();
         $goodsListNew = $modeGoods->getList($config);
-
-
 
         if(empty($goodsListNew)){
             $this->errorMsg('商品已失效');
@@ -121,6 +109,14 @@ class Order extends \common\controller\UserBase
         $amount = 0;
         foreach ($goodsList as $k1 => &$goodsInfo) {
             foreach ($goodsListNew as $k2 => &$goodsInfoNew) {
+
+                // 商品购买权限
+                if(!($goodsInfoNew['belong_to_member_buy']&(int)$member['type'])){
+                    $error = config('code.error.for_members_only');
+                    $this->errorMsg($error['msg'], $error);
+                    break;
+                }
+
                 if($goodsInfo['goods_id'] == $goodsInfoNew['goods_id']){
                     $goodsList[$k1]['headline'] = $goodsInfoNew['headline'];
                     $goodsList[$k1]['thumb_img'] = $goodsInfoNew['thumb_img'];
