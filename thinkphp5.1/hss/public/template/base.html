@@ -64,7 +64,6 @@
 <script type="text/javascript">
     //异步验证
     function asyncVerify(config){
-        console.log(config);
         let jump_url = config.clickObj.data('jump_url');
         if(!config.clickObj || !jump_url){
             dialog.error('参数错误！');
@@ -120,6 +119,7 @@
         }else if(param.data.status==1){ //成功回调
             if(param.data.data.code == '2000'){ //默认
                 if(param.asyncVerifyCallBack && $.isFunction(param.asyncVerifyCallBack)){
+                    console.log(222);
                     param.asyncVerifyCallBack();
                 }
                 if(param.clickObj.attr('class').indexOf('add_cart')!==-1
