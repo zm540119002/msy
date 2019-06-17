@@ -57,7 +57,7 @@ class Order extends \common\controller\UserBase
             $promotion = reset($goodsList);
 
             $goodsIds = array_column($goodsList,'goods_id');
-
+print_r($member['type']);
             // 购买权限
             if(!($promotion['belong_to_member_buy']&(int)$member['type'])){
                 $error = config('code.error.for_members_only');
