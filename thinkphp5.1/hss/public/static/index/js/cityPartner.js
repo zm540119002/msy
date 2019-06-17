@@ -4,8 +4,10 @@ var area_address,
 $(function(){
     //补款倒计时
     var start_pay_time = apply[0]['payment_time'];
+
     console.log(start_pay_time);
-    var date=new Date(new Date(new Date().toLocaleDateString()).getTime()+24*60*60*1000-1);
+
+    var date=new Date(start_pay_time+24*60*60*1000-1);
     countDown(date,$('#countDownBox'));
     //nav切换
     $('body').on('click','.apply-data-nav .switch-item',function(){
