@@ -63,12 +63,17 @@
 <script type="text/javascript" src="api_common_js/paging.js"></script>
 <script type="text/javascript">
     //异步验证
+    var asyncVerifyRepeat = true;
     function asyncVerify(config){
         let jump_url = config.clickObj.data('jump_url');
         if(!config.clickObj || !jump_url){
             dialog.error('参数错误！');
             return false;
         }
+        if(!asyncVerifyRepeat){
+            return false;
+        }
+        asyncVerifyRepeat = false;
         $.ajax({
             url: jump_url,
             data: config.postData,
@@ -82,6 +87,7 @@
             },
             success: function(data){
                 $('.loading').hide();
+                asyncVerifyRepeat = true;
                 //异步验证判断
                 let param = {
                     data:data,
