@@ -119,6 +119,7 @@
         }else if(param.data.status==1){ //成功回调
             console.log(param.data);
             if(param.data.data.code == '2000'){ //默认
+                console.log(param.data.data.code);
                 console.log(param.asyncVerifyCallBack);
                 if(param.asyncVerifyCallBack && $.isFunction(param.asyncVerifyCallBack)){
                     console.log(222);
