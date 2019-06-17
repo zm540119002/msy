@@ -3,7 +3,7 @@
 {block name="header"}{/block}
 {block name="content"}
 <article class="f24">
-	<div class="back"><</div>
+	<div class="back go-back"><</div>
 	<section class="slider_banner">
 		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
 			<div class="swiper-wrapper">
@@ -230,7 +230,7 @@
 			}
 		});
 		// 点击返回上一页
-	$('.back').on("click",function(){
+	$('.go-back').on("click",function(){
 		history.back(-1)
 	})
 	});
