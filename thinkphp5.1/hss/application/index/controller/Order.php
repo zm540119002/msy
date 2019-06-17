@@ -105,16 +105,20 @@ class Order extends \common\controller\UserBase
         if(empty($goodsListNew)){
             $this->errorMsg('商品已失效');
         }
-
+        p($goodsListNew);
+        exit;
         $amount = 0;
         foreach ($goodsList as $k1 => &$goodsInfo) {
             foreach ($goodsListNew as $k2 => &$goodsInfoNew) {
-
+                //p($goodsInfoNew);
                 // 商品购买权限
                 if(  ($order_type!=2) && (!($goodsInfoNew['belong_to_member_buy']&$member['type'])) ){
-                    $error = config("code.error.for_members_only");
-                    $this->errorMsg($error['msg'][$goodsInfoNew['belong_to_member_buy']], $error);
-                    break;
+//                    $error = config("code.error.for_members_only");
+//                    $this->errorMsg($error['msg'][$goodsInfoNew['belong_to_member_buy']], $error);
+                    p($goodsInfoNew['belong_to_member_buy']);
+                    //exit;
+                    //unset($goodsList[$k1]);
+                    //continue(1);
                 }
 
                 if($goodsInfo['goods_id'] == $goodsInfoNew['goods_id']){
@@ -137,7 +141,8 @@ class Order extends \common\controller\UserBase
                 }
             }
         }
-
+        p($goodsList);
+        exit;
         $modelOrder = new \app\index\model\Order();
         $modelOrderDetail = new \app\index\model\OrderDetail();
         //开启事务
