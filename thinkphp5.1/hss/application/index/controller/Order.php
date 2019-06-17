@@ -15,7 +15,8 @@ class Order extends \common\controller\UserBase
             $memberModel->edit($data);
             $member['type'] = config('custom.member_level.1.level');
         }
-
+        p($member);
+        exit;
         if (!request()->isPost()) {
             $this->errorMsg('请求方式错误');
         }
