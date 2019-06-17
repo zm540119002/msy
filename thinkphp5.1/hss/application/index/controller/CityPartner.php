@@ -36,7 +36,7 @@ class CityPartner extends \common\controller\UserBase {
             $selfApplyList = $modelCityPartner -> getList($condition);
             //申请中
             $apply = [];
-            //已交定金或尾款申请
+            //已申请
             $applied = [];
             if($selfApplyList){
                 foreach ($selfApplyList as $selfapply){
@@ -166,14 +166,6 @@ class CityPartner extends \common\controller\UserBase {
                     'type' => config('custom.pay_type')['cityPartnerBalancePay']['code'],
                     'create_time' => time(),
                 ];
-
-//                if(isset($postData['pay_id']) && $postData['pay_id']){
-//                    $where1 = [
-//                        'id'=>$postData['pay_id'],
-//                        'user_id'=>$this->user['id'],
-//                        'status'=>0,
-//                    ];
-//                }
                 $payId = $modelPay->edit($data);
                 if(!$payId){
                     $modelCityPartner ->rollback();
