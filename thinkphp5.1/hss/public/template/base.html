@@ -119,7 +119,10 @@
             }
         }else if(param.data.status==1){ //成功回调
             if(param.data.data.code == '2000'){ //默认
+                console.log(222);
                 if(param.asyncVerifyCallBack && $.isFunction(param.asyncVerifyCallBack)){
+                    console.log(333);
+                    console.log(param.asyncVerifyCallBack);
                     param.asyncVerifyCallBack();
                 }
                 if(param.clickObj.attr('class').indexOf('add_cart')!==-1
