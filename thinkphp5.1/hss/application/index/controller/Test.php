@@ -24,8 +24,9 @@ class Test extends \common\controller\Base{
     /**测试-城市
      */
     public function city(){
-        print_r((7&1));
-        print_r(!(7));
+        if(!(7&1)){
+            print_r(123);
+        }
         if(request()->isAjax()){
         }else{
             return $this->fetch();
