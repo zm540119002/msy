@@ -63,8 +63,7 @@ class Order extends \common\controller\UserBase
                 $error = config('code.error.for_members_only');
                 $this->errorMsg($error['msg'], $error);
             }
-
-
+            
             // 是否需要验证公司信息
             if( ($member['type']==config('custom.member_level.1.level')) && $promotion['is_company_info'] ) {
                 $modelCompany = new \app\index\model\Franchise();
