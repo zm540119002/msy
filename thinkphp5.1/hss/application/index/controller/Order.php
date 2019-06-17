@@ -59,8 +59,10 @@ class Order extends \common\controller\UserBase
 
             // 购买权限
             if( !($promotion['belong_to_member_buy']&$member['type']) ){
-                $error = config('code.error.for_members_only');
-                $this->errorMsg($error['msg'], $error);
+
+                //$error = config('custom.member_level');
+                $error = config("code.error.for_members_only");
+                $this->errorMsg($error['msg'][$promotion['belong_to_member_buy']], $error);
             }
             
             // 是否需要验证公司信息
@@ -85,7 +87,7 @@ class Order extends \common\controller\UserBase
             }
 
         }
-        
+
         // 更新套餐总价
         $config = [
             'where' => [
