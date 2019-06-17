@@ -3,9 +3,7 @@ var area_address,
     };
 $(function(){
     //补款倒计时
-    var start_pay_time = apply[0]['payment_time']*1000;
-    var date=new Date(start_pay_time+(24*60*60*1000-1));
-    countDown(date,$('#countDownBox'));
+
     //nav切换
     $('body').on('click','.apply-data-nav .switch-item',function(){
         $(this).addClass('current').siblings().removeClass('current');
@@ -54,7 +52,9 @@ $(function(){
                 $('nav.apply-data-nav li:eq(3)').click();
                 $('.weui-flex li:eq(0),.weui-flex li:eq(1),.weui-flex li:eq(2)').addClass('nodisabled');
                 if(statusType == 4){
-
+                    var start_pay_time = apply[0]['payment_time']*1000;
+                    var date=new Date(start_pay_time+(24*60*60*1000-1));
+                    countDown(date,$('#countDownBox'));
                     $('.apply_city').setArea(region);
                 }
             }
