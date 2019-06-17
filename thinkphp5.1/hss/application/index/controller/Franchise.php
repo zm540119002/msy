@@ -43,6 +43,7 @@ class Franchise extends \common\controller\UserBase {
     public function franchiseSettlement()
     {
 
+        p(input('post.'));exit;
         if(!request()->isAjax()){
             return errorMsg('请求方式错误');
         }
