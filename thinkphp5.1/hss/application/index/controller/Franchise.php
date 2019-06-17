@@ -47,10 +47,17 @@ class Franchise extends \common\controller\UserBase {
             return errorMsg('请求方式错误');
         }
         $postData = input('post.');
+
+        $scene = 'add';
+        if((int)$postData['type']==2){
+            $scene = 'reservation';
+        }
+
         $validate = new \app\index\validate\Franchise();
-        if(!$validate->scene('add')->check($postData)) {
+        if(!$validate->scene($scene)->check($postData)) {
             return errorMsg($validate->getError());
         }
+
         $modelFranchise = new \app\index\model\Franchise();
         $modelFranchise -> startTrans();
         $postData['user_id'] = $this->user['id'];
@@ -65,12 +72,14 @@ class Franchise extends \common\controller\UserBase {
                 'status'=>0,
             ];
         }
+
         if(isset($postData['step']) && $postData['step'] == 1){
             $id = $modelFranchise->edit($postData,$where);
             if(!$id){
                 $modelFranchise ->rollback();
                 return errorMsg('失败');
             }
+
         }else{
             $id = $modelFranchise->edit($postData,$where);
             if(!$id){
@@ -101,7 +110,14 @@ class Franchise extends \common\controller\UserBase {
             };
         }
         $modelFranchise -> commit();
-        $this->successMsg('成功',['url'=>config('custom.pay_gateway').$sn,'id'=>$id]);
+
+        $data = [
+            'code'=> config('code.success.default.code'),
+            'url' => config('custom.pay_gateway').$sn,'id'=>$id,
+        ];
+
+        //$this->successMsg('成功',['url'=>config('custom.pay_gateway').$sn,'id'=>$id]);
+        $this->successMsg('成功',$data);
     }
 
     /**

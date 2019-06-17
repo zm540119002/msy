@@ -27,14 +27,13 @@ class Order extends \common\controller\UserBase
 
         $order_type = input('post.product_type/d');
 
-        $goodsIds = array_column($goodsList,'goods_id');
+        $goodsIds = array_column($goodsList,'goods_id','goods_id');
 
         if(empty($goodsIds)){
             $this->errorMsg('请求数据不能为空');
         }
 
-        // 非会员可以购买的商品
-
+        // 订单
         if( $order_type==2 ){
 
             $promotion = reset($goodsList);
@@ -59,13 +58,14 @@ class Order extends \common\controller\UserBase
             $goodsIds = array_column($goodsList,'goods_id');
 
             // 购买权限
-            if(!($promotion['belong_to_member_buy']&(int)$member['type'])){
-                $error = config('code.error.for_members_only');
-                $this->errorMsg($error['msg'], $error);
-            }
+            if( !($promotion['belong_to_member_buy']&$member['type']) ){
 
+                $error = config("code.error.for_members_only");
+                $this->errorMsg($error['msg'][$promotion['belong_to_member_buy']], $error);
+            }
+            
             // 是否需要验证公司信息
-            if( $member['type']==config('custom.member_level.1.level') && $promotion['is_company_info'] ) {
+            if( ($member['type']==config('custom.member_level.1.level')) && $promotion['is_company_info'] ) {
                 $modelCompany = new \app\index\model\Franchise();
 
                 $condition = [
@@ -84,8 +84,8 @@ class Order extends \common\controller\UserBase
                     $this->errorMsg($error['msg'], $error);
                 }
             }
-        }
 
+        }
 
         // 更新套餐总价
         $config = [
@@ -106,18 +106,22 @@ class Order extends \common\controller\UserBase
             $this->errorMsg('商品已失效');
         }
 
+        $permission = false;
         $amount = 0;
         foreach ($goodsList as $k1 => &$goodsInfo) {
             foreach ($goodsListNew as $k2 => &$goodsInfoNew) {
 
-                // 商品购买权限
-                if(!($goodsInfoNew['belong_to_member_buy']&(int)$member['type'])){
-                    $error = config('code.error.for_members_only');
-                    $this->errorMsg($error['msg'], $error);
-                    break;
-                }
-
                 if($goodsInfo['goods_id'] == $goodsInfoNew['goods_id']){
+
+                    // 商品购买权限
+                    if(  ($order_type!=2) && (!($goodsInfoNew['belong_to_member_buy']&$member['type'])) ){
+//                    $error = config("code.error.for_members_only");
+//                    $this->errorMsg($error['msg'][$goodsInfoNew['belong_to_member_buy']], $error);
+                        unset($goodsList[$k1]);
+                        $permission = true;
+                        break;
+                    }
+
                     $goodsList[$k1]['headline'] = $goodsInfoNew['headline'];
                     $goodsList[$k1]['thumb_img'] = $goodsInfoNew['thumb_img'];
                     $goodsList[$k1]['specification'] = $goodsInfoNew['specification'];
@@ -191,6 +195,11 @@ class Order extends \common\controller\UserBase
             $dataDetail[$item]['goods_img'] = $goodsInfo['thumb_img'];
             $dataDetail[$item]['goods_name'] = $goodsInfo['name'];
             $dataDetail[$item]['specification'] = $goodsInfo['specification'];
+        }
+
+        if( empty($goodsList)&&$permission){
+            $error = config("code.error.for_members_only.msg.6");
+            $this->errorMsg($error);
         }
 
         //生成订单明细
