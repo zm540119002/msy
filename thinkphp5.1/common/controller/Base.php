@@ -20,20 +20,22 @@ class Base extends \think\Controller{
 
         //微信处理
         if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
-            if(empty( $this->weixin_user )){
+            $weiXinUserInfo =  session('weiXinUserInfo');
+            if(!$weiXinUserInfo){
                 echo 1111111;
                 $mineTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
-                $this->weixin_user = $mineTools->getOauthUserInfo();
+                $weiXinUserInfo = $mineTools->getOauthUserInfo();
+                session('weiXinUserInfo',$weiXinUserInfo);
             }
             $user = checkLogin();
-            if((!$user['name'] || !$user['avatar']) && $user && isset($this->weixin_user['openid'])){
+            if((!$user['name'] || !$user['avatar']) && $user && isset($weiXinUserInfo['openid'])){
                 //临时相对路径
                 $relativeSavePath = config('upload_dir.user_avatar');
-                $weiXinAvatarUrl = $this->weixin_user['headimgurl'];
+                $weiXinAvatarUrl = $weiXinUserInfo['headimgurl'];
                 $avatar = saveImageFromHttp($weiXinAvatarUrl,$relativeSavePath);
                 $data = [
                     'id'=>$user['id'],
-                    'name'=>$this->weixin_user['nickname'],
+                    'name'=>$weiXinUserInfo['nickname'],
                     'avatar'=>$avatar,
                 ];
                 if($user['avatar']){
