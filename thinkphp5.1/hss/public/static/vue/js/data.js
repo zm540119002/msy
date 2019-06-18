@@ -1,4 +1,3 @@
-export { iosProvinces ,iosCitys, iosCountys}
 // 省份列表
 var iosProvinces = [
     /*******华北五省********/

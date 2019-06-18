@@ -1,596 +1,162 @@
-<!-- 产品选择器 -->
-<template id="product_select_tpl">
-    <li v-if="type==1"><!--图片、价格、数字增减-->
-        <div class="product-select">
-            <div class="columns_flex l-r-sides"><p><span class="red deal_price">￥{{deal_price}}</span></p></div>
-            <div class="columns_flex l-r-sides">
-                <div class="left">
-                    <a class="p_img" :href="'/index/Goods/detail/id/' + product_id">
-                        <img class="left" :src="product_src?('public_uploads/' + product_src):('api_common_img/default/no_pic_100.jpg') " alt="">
-                    </a>
-                </div>
-                <div class="middle">
-                    <div></div>
-                    <div class="red subtotal_amount">￥{{ parseFloat(subtotal_amount).toFixed(2) }}</div>
-                </div>
-                <div  class="right">
-                    <div class="product_name">
-                        <p class="two-line-omit">{{product_name}}</p>
-                    </div>
-                    <div class=" selected-number">
-                        <a href="javascript:void(0);" class="reduce" @click="reduce">-</a>
-                        <input type="text" :value="buy_quantity" class="f24 product_count" readonly="readonly">
-                        <a href="javascript:void(0);" class="plus" @click="plus">+</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </li><li v-else-if="type==2">
-        <div class="product-select">
-            <div class="columns_flex l-r-sides">
-                <p><span class="red deal_price">￥{{deal_price}}</span></p>
-                <p v-if="display_quota">样品购买限额：<span class="quota">{{quota_quantity}}</span></p>
-            </div>
-            <div class="columns_flex l-r-sides">
-                <div class="left">
-                    <p>采购数量：(单位:{{specification_unit}})</p>
-                    <p>
-                        <span class="step-named">起订数量：</span>
-                        <span class="step-quantity">{{init_quantity}}</span>
-                        <span class="specification_unit">{{specification_unit}}</span>
-                    </p>
-                </div>
-                <div class="middle">
-                    <div></div>
-                    <div class="red subtotal_amount">￥{{ parseFloat(subtotal_amount).toFixed(2) }}</div>
-                </div>
-                <div  class="right">
-                    <div class="product_name">
-                        <p class="two-line-omit">{{product_name}}</p>
-                    </div>
-                    <div class=" selected-number">
-                        <a href="javascript:void(0);" class="reduce" @click="reduce">-</a>
-                        <input type="text" :value="buy_quantity" class="f24 product_count" readonly="readonly">
-                        <a href="javascript:void(0);" class="plus" @click="plus">+</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </li><li v-else-if="type==3"><!--仅价格、数字增减-->
-        <div class="product-select">
-            <div class="columns_flex l-r-sides details_add" >
-                <div class="left">
-                    <div></div>
-                    <div class="red subtotal_amount">￥<span class="">{{deal_price}}</span></div>
-                </div>
-                <div class="compare_price" style="width:30%;line-height: 28px;">
-                     <del class="f24">￥{{compare_price}}</del>
-                </div>
-                <div class="right">
-                    <div class="selected-number">
-                        <a href="javascript:void(0);" class="reduce" @click="reduce">-</a>
-                        <input type="text" :value="buy_quantity" class="f24 product_count" readonly="readonly">
-                        <a href="javascript:void(0);" class="plus" @click="plus">+</a>
-                    </div>
-                </div>
-            </div>
-            <div class="product_name"><p class="two-line-omit">{{product_name}}</p></div>
-        </div>
-    </li><li v-else-if="type==4"><!--购物车-->
-        <input type="checkbox" class="item_checkbox check_item" v-model="checked" />
-        <a href="" class="cart_goods_img" :href="'/index/Goods/detail/id/' + product_id">
-            <img class="left common_default_img" :src="product_src?('public_uploads/' + product_src):('api_common_img/default/no_pic_100.jpg') " alt="">
-        </a>
-        <div class="cart_list_r">
-            <p>{{product_name}}</p>
-            <div>商品规格：<span>{{specification}}</span></div>
-            <div class="cart_price">
-                <div class="commodity_purchaser f24"><span class="pink">￥{{deal_price}}</span></div>
-                <div class="compare_price" style="width:30%;line-height: 28px;">
-                    <del class="f24">￥{{compare_price}}</del>
-                </div>
-            </div>
-            <div class="purchase_goods_num cart_goods_operate">
-                <div class=" selected-number">
-                    <a href="javascript:void(0);" class="add_cart reduce" @click="reduceCart" :data-jump_url="add_cart_url">-</a>
-                    <input type="text" :value="buy_quantity" class="f24 product_count" readonly="readonly">
-                    <a href="javascript:void(0);" class="add_cart plus" @click="plusCart" :data-jump_url="add_cart_url">+</a>
-                </div>
-                <a href="javascript:void(0);" class="delete_order goodsDel delete_cart" @click="delCart" :data-jump_url="del_cart_url">删除</a>
-            </div>
-        </div>
-    </li><li v-else-if="type==5"><!--场景页使用-->
-        <div class="product-select">
-            <div class=""><p></p></div>
-            <div class="columns_flex l-r-sides">
-                <div class="left">
-                    <a class="p_img" :href="'/index/Goods/detail/id/' + product_id">
-                        <img class="left" :src="product_src?('public_uploads/' + product_src):('api_common_img/default/no_pic_100.jpg') " alt="">
-                    </a>
-                </div>
-                <div  class="right">
-                    <div class="product_name">
-                        <p class="two-line-omit">{{product_name}}</p>
-                    </div>
-                    <div class="product_specs">
-                        <p class="two-line-omit">{{specification}}</p>
-                    </div>
-                    <div class="quantity_wrapper selected-number columns_flex l-r-sides">
-                        <div><span class="red deal_price">￥{{deal_price}}</span></div>
-                        <div><a href="javascript:void(0);" class="add_cart add_cart_i" @click="dialogCart" :data-jump_url="add_cart_url"><i></i></a></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </li><li v-else-if="type==6"><!--弹窗-->
-        <div class="close">X</div>
-        <div class="product-select">
-            <div class="index columns_flex l-r-sides">
-                <div class="left">
-                    <div></div>
-                    <div class="red subtotal_amount"><span class="">￥{{deal_price}}</span><span class="price">￥{{compare_price}}</span></div>
-                </div>
-                <div class="right">
-                    <div class=" selected-number">
-                        <a href="javascript:void(0);" class="reduce" @click="reduce">-</a>
-                        <input type="text" :value="buy_quantity" class="f24 product_count" readonly="readonly">
-                        <a href="javascript:void(0);" class="plus" @click="plus">+</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="title">
-            <a class="p_img" :href="'/index/Goods/detail/id/' + product_id">
-                <img :src="product_src?('public_uploads/' + product_src):('api_common_img/default/no_pic_100.jpg') " alt="">
-            </a>
-            <span>{{product_name}}</span>
-        </div>
-        <div class="specs">
-            <div>{{specification}} </div>
-        </div>
-    </li><li v-else-if="type==7"><!--黑森森精选（首页/购物车）-->
-        <div class="product-select index">
-            <div class=""><p></p></div>
-            <div class="">
-                <div class="">
-                    <a class="p_img img2" :href="'/index/Goods/detail/id/' + product_id">
-                        <img class="" :src="product_src?('public_uploads/' + product_src):('api_common_img/default/no_pic_100.jpg') " alt="">
-                    </a>
-                </div>
-                <div  class="">
-                    <div class="product_name">
-                        <p class="two-line-omit">{{product_name}}</p>
-                    </div>
-                    <div class="product_specs">
-                        <p class="two-line-omit">{{specification}}</p>
-                    </div>
-                    <div class=" columns_flex l-r-sides">
-                        <div><span class="red deal_price">￥{{deal_price}}</span></div>
-                        <div><a href="javascript:void(0);" class="add_cart add_cart_i" @click="dialogCart" :data-jump_url="add_cart_url"><i></i></a></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </li>
+<template>
+    <div class="bg-grey" @click.self="toParent" v-if="!show">
+        <mt-picker :slots="slots" @change="onValuesChange" value-key="value" showToolbar>
+            <mt-header title="选择省市区">
+                <mt-button slot="left" class="cancle" @click="toParent">取消</mt-button>
+                <mt-button slot="right" class="sure" @click="sure">确定</mt-button>
+            </mt-header>
+        </mt-picker>
+    </div>
 </template>
 <script type="text/javascript">
     $(function(){
-        $('body').on('click','.bg,.close',function(){
-            $('.dialogCart').hide();
-            $('.bg').hide();
-        });
-        Vue.component('product-select', {
+        Vue.component('province-city', {
             template:'#product_select_tpl',
             props: {
-                init_product_id: {type: [String, Number],default:0,required: true},
-                init_product_name: {type: String,default: ''},
-                init_specification: {type: String,default: ''},
-                init_specification_unit: {type: String,default: '盒'},
-                init_product_src: {type: String,default: ''},
-                init_deal_price: {type: Number,required: true},
-                init_compare_price: {type: Number,default: 0.00},
-                init_checked: {type: Boolean,default: true},
-                init_quantity: {type: Number,default: 1},
-                quota_quantity: {type: Number,default: 1},
-                display_quota: {type: Boolean,default: false},
-                step_quantity: {type: Number,default: 1},
-                type: {type: Number,default: 1},
-                init_group: {type: Number,default: 1},
-                init_monitor_buy_quantity: {type: Boolean,default: true}
+                show: {type: Boolean,default: true},
+                province: {type: String,default: ''},
+                city: {type: String,default: ''},
+                county: {type: String,default: ''}
             },data: function () {
                 return {
-                    group:this.init_group,
-                    product_id:this.init_product_id,
-                    deal_price:this.init_deal_price,
-                    compare_price:this.init_compare_price,
-                    product_name:this.init_product_name,
-                    product_src:this.init_product_src,
-                    specification:this.init_specification,
-                    specification_unit:this.init_specification_unit,
-                    monitor_buy_quantity:this.init_monitor_buy_quantity,
-                    buy_quantity:this.init_quantity,
-                    buy_quantity_reduce_trigger:true,
-                    subtotal_amount:0,
-                    checked:this.init_checked,
-                    checked_operation_type:'edit',
-                    add_cart_url:'{:url("Cart/addCart")}',
-                    del_cart_url:'{:url("Cart/del")}'
+                    result: '',
+                    provinceValue: '',
+                    cityValue: '',
+                    countyValue: '',
+                    first: '',
+                    second: '',
+                    third: '',
+                    slots: [{
+                        flex: 1,
+                        values: iosProvinces,
+                        className: 'slot1',
+                        textAlign: 'left',
+                        defaultIndex: 0
+                    }, {
+                        flex: 1,
+                        values: iosCitys,
+                        className: 'slot2',
+                        textAlign: 'center',
+                        defaultIndex: 0
+                    }, {
+                        flex: 1,
+                        values: iosCountys,
+                        className: 'slot3',
+                        textAlign: 'right',
+                        defaultIndex: 0
+                    }]
                 };
             },methods: {
-                subtotal_amount_calculate:function(){
-                    this.subtotal_amount = this.deal_price * this.buy_quantity;
-                },delCart:function(event){
-                    if(this.buy_quantity_reduce_trigger){
-                        this.buy_quantity_reduce_trigger = false;
-                    }else{
-                        return false;
-                    }
-                    let postData = {
-                        data:[{
-                            goods_id: this.product_id,
-                            num: -this.buy_quantity
-                        }]
-                    };
-                    let _thisJquery = $(event.currentTarget);
-                    let _thisVue = this;
-                    let config = {
-                        clickObj:_thisJquery,
-                        vueObj:_thisVue,
-                        postData:postData,
-                        reduce:true
-                    };
-                    asyncVerify(config);
-                },reduce: function () {
-                    //如果开启了样品购买限额
-                    if(this.display_quota){
-                        if((this.buy_quantity-this.step_quantity)<this.init_quantity){
-                            this.buy_quantity = this.init_quantity;
-                        }else{
-                            this.buy_quantity -= this.step_quantity;
+                // 筛选器值变化时调用
+                onValuesChange(picker, values) {
+                    var cityArray = [],
+                            countyArray = [];
+                    if(values[0]){
+                        for(let i=0; i<iosCitys.length; i++){
+                            if(values[0].id == iosCitys[i].parentId){
+                                cityArray.push(iosCitys[i]);
+                            }
                         }
-                    }else if(this.buy_quantity>this.init_quantity){
-                        this.buy_quantity -= this.step_quantity;
+                        picker.setSlotValues(1, cityArray);
                     }
-                },plus: function () {
-                    this.monitor_buy_quantity = true;
-                    //如果开启了样品购买限额
-                    if(this.display_quota){
-                        if((this.buy_quantity+this.step_quantity)>this.quota_quantity){
-                            this.buy_quantity = this.quota_quantity;
-                        }else{
-                            this.buy_quantity += this.step_quantity;
+
+                    if(values[1]){
+                        for(let j=0; j<iosCountys.length; j++){
+                            if(values[1].id == iosCountys[j].parentId){
+                                countyArray.push(iosCountys[j]);
+                            }
                         }
-                    }else{
-                        this.buy_quantity += this.step_quantity;
+                        picker.setSlotValues(2, countyArray);
                     }
-                },reduceCart: function (event) {
-                    if(this.buy_quantity_reduce_trigger && this.buy_quantity>1){
-                        this.buy_quantity_reduce_trigger = false;
-                    }else{
-                        return false;
-                    }
-                    let postData = {
-                        data:[{
-                            goods_id: this.product_id,
-                            num: -this.step_quantity
-                        }]
-                    };
-                    let _thisJquery = $(event.currentTarget);
-                    let _thisVue = this;
-                    login_success_callback_private = function(){
-                        _thisJquery.click();
-                    };
-                    register_success_callback_private = function(){
-                        _thisJquery.click();
-                    };
-                    let config = {
-                        clickObj:_thisJquery,
-                        vueObj:_thisVue,
-                        postData:postData,
-                        reduce:true,
-                        func:function(){
-                            _thisJquery.click();
+                    var result = this.result;
+
+                    if(typeof(values[1]) == 'object' && typeof(values[2]) == 'object'){
+                        result = values[0].value + values[1].value + values[2].value;
+                        this.provinceValue = values[0].value;
+                        this.cityValue = values[1].value;
+                        this.countyValue = values[2].value;
+                        for(let i=0; i<iosProvinces.length; i++){
+                            if(iosProvinces[i].value == this.province){
+                                this.first = i;
+                            }
                         }
-                    };
-                    asyncVerify(config);
-                },plusCart: function (event) {
-                    let postData = {
-                        data:[{
-                            goods_id: this.product_id,
-                            num: this.step_quantity
-                        }]
-                    };
-                    let _thisJquery = $(event.currentTarget);
-                    let _thisVue = this;
-                    login_success_callback_private = function(){
-                        _thisJquery.click();
-                    };
-                    register_success_callback_private = function(){
-                        _thisJquery.click();
-                    };
-                    let config = {
-                        clickObj:_thisJquery,
-                        vueObj:_thisVue,
-                        postData:postData,
-                        func:function(){
-                            _thisJquery.click();
+                        for(let i=0; i<cityArray.length; i++){
+                            if(this.city == cityArray[i].value){
+                                this.second = i;
+                            }
                         }
-                    };
-                    asyncVerify(config);
-                },dialogCart: function () {
-                    let _this = this;
-                    if(!_this.product_id){
-                        return false;
+                        for(var j=0; j<countyArray.length; j++){
+                            if(this.county == countyArray[j].value){
+                                this.third = j;
+                            }
+                        }
+                        this.slots[0].defaultIndex = parseInt(this.first);
+                        this.slots[1].defaultIndex = parseInt(this.second);
+                    }else if(typeof(values[1]) != 'object' && typeof(values[2]) == 'object'){
+                        values[1] = this.iosCitys;
+                        result = values[0].value + this.city + values[2].value;
+                        this.provinceValue = values[0].value;
+                        this.cityValue = this.city;
+                        this.countyValue = values[2].value;
                     }
-                    // 弹出加入采购车
-                    $('.dialogCart').show();
-                    $('.bg').show();
-                    //触发-弹出采购车点击-事件
-                    bus.$emit('dialog_cart',_this);
-                },dialog_cart_assign: function (param) {
-                    if(this.group == 0){
-                        this.monitor_buy_quantity = false;
-                        this.product_id = param.product_id;
-                        this.product_src = param.product_src;
-                        this.product_name = param.product_name;
-                        this.specification = param.specification;
-                        this.deal_price = param.deal_price;
-                        this.compare_price = param.compare_price;
-                        this.buy_quantity = param.init_quantity;
-                        this.increment_buy_quantity = this.buy_quantity;
-                        this.subtotal_amount_calculate();
-                        //触发-弹出采购车赋值-事件
-                        bus.$emit('dialog_cart_assign', this);
+                    this.result = result;
+                },
+                // 传值
+                toParent(){
+                    var show = false;
+                    var result, province, city, county;
+                    if(this.province + this.city + this.county){
+                        result = this.province + this.city + this.county;
+                        province = this.province;
+                        city = this.city;
+                        county = this.county;
                     }
-                },editCheckItem:function(param){
-                    this.checked = param;
+                    this.$emit('changeValue', {show, result, province, city, county});
+                },
+                // 点击确定按钮
+                sure(){
+                    var show = false;
+                    var result = this.result;
+                    var province = this.provinceValue;
+                    var city = this.cityValue;
+                    var county = this.countyValue;
+                    this.$emit('changeValue', {show, result, province, city, county});
                 }
-            },created: function(){
-                let _this = this;
-                _this.subtotal_amount_calculate();
-                //触发-产品选择器初始化-事件
-                bus.$emit('product_select_init',_this);
-                //监听-底部购物车全选改变-事件
-                bus.$on('footer_cart_check_all_change', function(param){
-                    _this.editCheckItem(param);
+            },mounted(){
+                this.slots[1].values = [];
+                this.slots[2].values = [];
+            },updated: function () {
+                this.$nextTick(function () {
+                    console.log(this.province + this.city + this.county);
+                    this.slots[2].defaultIndex = parseInt(this.third);
                 });
-                //监听-弹出采购车点击-事件
-                bus.$on('dialog_cart', function(param){
-                    _this.dialog_cart_assign(param);
-                });
-            },watch: {
-                buy_quantity: {
-                    handler(newVal, oldVal) {
-                        this.subtotal_amount_calculate();
-                        if(typeof(oldVal) !== "undefined" && this.monitor_buy_quantity){
-                            this.increment_buy_quantity = parseInt(newVal) - parseInt(oldVal?oldVal:0);
-                            //触发--产品选择器购买数量改变-事件
-                            bus.$emit('product_select_buy_quantity_change',this);
-                        }
-                    },
-                    deep: false,
-                    immediate: true
-                },checked: {
-                    handler(newVal, oldVal) {
-                        if(typeof(oldVal) !== "undefined"){
-                            //触发-产品选择器复选框改变-事件
-                            bus.$emit('product_select_check_item_change',this);
-                        }
-                    },
-                    deep: false,
-                    immediate: true
-                }
             }
         });
     });
 </script>
-<style lang="less" scoped>
-    @media (device-height:568px) and (-webkit-min-device-pixel-ratio:2){
-		.product_specs{
-			margin-top: 0;
-		}
-    }
-    .product-select div.left{
-        width:44%;
-    }
-    .product-select div.middle{
-        width:20%;
-    }
-    .product-select div.right{
-        width:40%;
-    }
-    .product-select div.middle div{
-        height:50%;
-    }
-    .product-select img.left{
-        width:100%;
-    }
-    .two-line-omit {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        word-break: break-all;
-    }
-    .four-line-omit {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 4;
-        -webkit-box-orient: vertical;
-        word-break: break-all;
-    }
-    .check_all {
-        -webkit-appearance: checkbox;
-    }
-    .bg{
-        width: 100vw;
-        height: 100vh;
-        background: #000;
-        opacity: 0.5;
-        z-index: 998;
-        position: fixed;
-        top: 0;
-        cursor:pointer;
-        display: none;
-    }
-    .close{
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        border:1px solid #fff;
-        color: #fff;
-        text-align: center;
-        line-height: 20px;
-        font-size: 14px;
-        position: absolute;
-        right: 14px;
-        top: -30px;
-        cursor:pointer;
-    }
-    .dialogCart{
+<style scoped>
+    .bg-grey{
+        background: rgba(0,0,0,.5);
+        height: 100%;
         width: 100%;
-        height: 200px;
-        background: #fff;
+        position: fixed;
+        z-index: 10;
+        top: 0;
+    }
+    .picker{
         position: fixed;
         bottom: 0;
-        z-index: 999;
-        display: none;
+        background: #fff;
+        width: 100%;
     }
-    .dialogCart .product-select .right{
-         width: 35% !important;
-    }
-    .dialogCart .product-select{
-        border-top: 1px solid #eee;
-        border-bottom: 1px solid #eee;
-        margin-top: 5px;
-    }
-    .img2{
-       width: 100% !important;
-    }
-	#product-list2 .product-select{
-		position: relative;
-		top: 60px;
-		padding: 8px 0 0 10px;
-	}
-	.dialogCart .red{
-		font-size: 0.2rem;
-	}
-	.title img{
-		position: absolute;
-		top: -18px;
-		left: 10px;
-		width: 70px;
-		height: 70px;
-		border: none;
-	}
-	.title span{
-		font-size: 0.25rem;
-		position: absolute;
-		left: 88px;
-		margin-top: 10px;
-		color: #333;
-		top:0
-	}
-	.intro p span{
-		font-size: 0.25rem !important;
-	}
-	.specs{
-		font-size: 0.2rem;
-		display: flex;
-		justify-content: space-between;
-		padding: 10px;
-		position: relative;
-		top: 60px;
-	}
-	.product_name{
-		font-size: 0.2rem;
-	}
-	.add_num{
-		left: 18px;
-	}
-    .product_specs .two-line-omit{
-        height: 42px;
-    }
-    .index .product_name{
-        font-size: 0.25rem;
+    .mint-header{
+        background: #f7f7f8;
         color: #333;
     }
-    .add_cart_icon{
-        position: absolute;
-        top:0;
+    .cancle{
+        color: #999;
     }
-    .group_cart_nav a:nth-of-type(2){
-      background: #fff; 
+    .sure{
+        color: #0575f2;
     }
-    .product-select.index{
-        padding:0.15rem;
-    }
-    .cart_price{
-        display: flex;
-        justify-content: space-between;
-        line-height: 28px;
-    }
-    .cart_price div:nth-of-type(2){
-        margin-right: 20px;
-    }
-    .cart_goods_img{
-        min-width: 1.8rem;
-        margin-left: 10px;
-        display: block;
-    }
-    .flex-both-side li{
-        padding-top: 0;
-    }
-    .product-select.index{
-        padding-top: 0;
-    }
-    .quantity_wrapper{
-        width: 100%;
-        margin-top: 0.5rem;
-    }
-    .price{
-        color: #717171;
-        font-size: 0.2rem !important;
-        font-style: normal;
-        float: right;
-        line-height: 30px;
-    }
-    .index{
-        display: flex;
-        align-items: center;
-    }
-    .index .left{
-        line-height: 30px;
-    }
-    .sale_price, .subtotal_amount span{
-        font-size: 0.25rem
-    }
-  
-    .cart_goods_list li{
-        margin: 0
-    }
-    .details_add{
-        display: flex;
-        align-items: center ;
-    }
-    .details_add .left span{
-        font-size: 0.4rem;
-    }
-    .product-select div.right {
-		width: 60%;
-	}
-    .selected-number{
-		float: right;
-	}
-    .price{
-		color: #e60012;
-		font-size: 0.4rem;
-		height: 30px;
-	}
-	.price span{
-		font-size: 0.3rem;
-		float: left;
-	}
 </style>

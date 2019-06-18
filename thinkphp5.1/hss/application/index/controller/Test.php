@@ -37,4 +37,12 @@ class Test extends \common\controller\Base{
             return $this->fetch();
         }
     }
+    /**测试-城市
+     */
+    public function city3(){
+        if(request()->isAjax()){
+        }else{
+            return $this->fetch();
+        }
+    }
 }
