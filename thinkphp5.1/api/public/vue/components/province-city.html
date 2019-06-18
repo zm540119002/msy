@@ -1,4 +1,4 @@
-<template>
+<template id="city_picker_tpl">
     <div class="bg-grey" @click.self="toParent" v-if="!show">
         <mt-picker :slots="slots" @change="onValuesChange" value-key="value" showToolbar>
             <mt-header title="选择省市区">
@@ -10,8 +10,8 @@
 </template>
 <script type="text/javascript">
     $(function(){
-        Vue.component('province-city', {
-            template:'#product_select_tpl',
+        Vue.component('city_picker', {
+            template:'#city_picker_tpl',
             props: {
                 show: {type: Boolean,default: true},
                 province: {type: String,default: ''},
