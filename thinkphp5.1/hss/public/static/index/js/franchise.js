@@ -4,7 +4,8 @@ var area_address,
 $(function(){
     tab_down('.apply-data-nav .switch-item','.apply-module','click');
     //初始化 未完成的申请
-    if(apply!=null){
+
+    if(apply!=null && !$.isEmptyArray(apply)){
         applicantData = {
             id:apply[0].id,
             name:apply[0].name,
@@ -22,6 +23,7 @@ $(function(){
         region.push(apply[0].province);
         region.push(apply[0].city);
         region.push(apply[0].area);
+
         $('.area_address').setArea(region);
         $('.detail_address').val(apply[0].detail_address);
         //资料初始化

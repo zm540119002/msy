@@ -1,0 +1,32 @@
+<template>
+    <div class="bg-grey" @click.self="toParent" v-if="!show">
+        <mt-picker :slots="slots" @change="onValuesChange" value-key="value" showToolbar>
+            <mt-header title="选择省市区">
+                <mt-button slot="left" class="cancle" @click="toParent">取消</mt-button>
+                <mt-button slot="right" class="sure" @click="sure">确定</mt-button>
+            </mt-header>
+        </mt-picker>
+    </div>
+</template>
+<script type="text/javascript">
+    $(function(){
+        Vue.component('province-city', {
+            template:'#product_select_tpl',
+            props: {
+                show: {type: Boolean,default: true},
+                province: {type: String,default: ''},
+                city: {type: String,default: ''},
+                county: {type: String,default: ''}
+            },data: function () {
+                return {
+                };
+            },methods: {
+            },mounted(){
+                this.slots[1].values = [];
+                this.slots[2].values = [];
+            }
+        });
+    });
+</script>
+<style scoped>
+</style>

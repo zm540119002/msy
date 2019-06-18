@@ -105,6 +105,7 @@ class Order extends Base{
                 'num'        => $v['num'],
             ];
             $orderInfo['goods_info'][] = $goods;
+            $orderInfo['goods_info'][] = $goods;
         }
         $type = input('type/s');
 

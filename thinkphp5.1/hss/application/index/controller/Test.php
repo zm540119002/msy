@@ -29,4 +29,20 @@ class Test extends \common\controller\Base{
             return $this->fetch();
         }
     }
+    /**测试-城市2
+     */
+    public function city2(){
+        if(request()->isAjax()){
+        }else{
+            return $this->fetch();
+        }
+    }
+    /**测试-城市3
+     */
+    public function city3(){
+        if(request()->isAjax()){
+        }else{
+            return $this->fetch();
+        }
+    }
 }
