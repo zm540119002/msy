@@ -26,7 +26,7 @@ class Base extends \think\Controller{
             }
             $user = checkLogin();
             if($user){
-                if(!$user['name'] || $user['avatar']){
+                if(!$user['name'] || !$user['avatar']){
                     //临时相对路径
                     $tempRelativePath = config('upload_dir.user_avatar');
                     $weiXinAvatarUrl = $this->weixin_user['headimgurl'];
@@ -38,7 +38,6 @@ class Base extends \think\Controller{
                     ];
                     if($user['avatar']){
                         unset($data['avatar']);
-
                     }else{
                         $user['avatar'] = $data['avatar'];
                     }
