@@ -42,9 +42,10 @@
 							_this.cities = item.cities;
 						}
 					});
-					//初始化默认值
-					_this.postData.selectedCity = _this.cities[0].code;
-					_this.postData.selectedCityLevel = _this.cities[0].level;
+					if(_this.cities[0].code){
+						_this.postData.selectedCity = _this.cities[0].code;
+						_this.postData.selectedCityLevel = _this.cities[0].level;
+					}
 				},test:function(){
 					let _this = this;
 					console.log(_this.postData);
