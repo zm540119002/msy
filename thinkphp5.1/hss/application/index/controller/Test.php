@@ -45,10 +45,4 @@ class Test extends \common\controller\Base{
             return $this->fetch();
         }
     }
-    public function edit1(){
-        if(request()->isAjax()){
-        }else{
-            return $this->fetch();
-        }
-    }
 }
