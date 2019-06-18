@@ -40,12 +40,19 @@ class Base extends \think\Controller{
                     ];
                     if($user['avatar']){
                         unset($data['avatar']);
+
+                    }else{
+                        $user['avatar'] = $data['avatar'];
                     }
                     if($user['name']){
                         unset($data['name']);
+                    }else{
+                        $user['name'] = $data['name'];
                     }
                     $userModel = new \common\model\User();
                     $result = $userModel->isUpdate(true)->save($data);
+                    $user['hss_openid'] = $data['hss_openid'];
+                    setSession($user);
 //                    if( false === $result){
 ////                        return $this->errorMsg('添加微信信息失败');
 ////                    }
