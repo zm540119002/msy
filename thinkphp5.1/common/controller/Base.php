@@ -6,7 +6,7 @@ use \common\component\image\Image;
 class Base extends \think\Controller{
     protected $http_type = null;
     protected $host = null;
-    protected $weixin_user;
+    protected $weixin_user = null;
     public function __construct(){
         parent::__construct();
         //登录验证后跳转回原验证发起页
@@ -20,8 +20,10 @@ class Base extends \think\Controller{
 
         //微信处理
         if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
-            $mineTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
-            $this->weixin_user = $mineTools->getOauthUserInfo();
+            if(empty( $this->weixin_user )){
+                $mineTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
+                $this->weixin_user = $mineTools->getOauthUserInfo();
+            }
             //p($this->weixin_user);
             $user = checkLogin();
             if($user){
