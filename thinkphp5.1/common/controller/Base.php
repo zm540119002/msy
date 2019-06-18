@@ -28,9 +28,9 @@ class Base extends \think\Controller{
             if($user){
                 if(!$user['name'] || !$user['avatar']){
                     //临时相对路径
-                    $tempRelativePath = config('upload_dir.user_avatar');
+                    $relativeSavePath = config('upload_dir.user_avatar');
                     $weiXinAvatarUrl = $this->weixin_user['headimgurl'];
-                    $avatar = saveImageFromHttp($weiXinAvatarUrl,$tempRelativePath);
+                    $avatar = saveImageFromHttp($weiXinAvatarUrl,$relativeSavePath);
                     $data = [
                         'id'=>$user['id'],
                         'name'=>$this->weixin_user['nickname'],
