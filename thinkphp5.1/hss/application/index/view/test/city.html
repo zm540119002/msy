@@ -2,41 +2,60 @@
 {block name="title"}城市测试{/block}
 {block name="content"}
 <article class="f24">
-	
-	<!--选择地区弹层-->
-	<section id="areaLayer" class="express-area-box" style="display:none;">
-		<header>
-			<h3>选择地区</h3>
-			<a id="backUp" class="back" href="javascript:void(0);" title="返回" style="display: none;"></a>
-			<a id="closeArea" class="close" href="javascript:void(0);" title="关闭"></a>
-		</header>
-		<article id="areaBox">
-			<ul id="areaList" class="area-list" data-type="1">
-
-			</ul>
-		</article>
-	</section>
-	<!--遮罩层-->
-	<div id="areaMask" class="address_mask">
-		
+	<div id="province_city_linkage">
+		<!-- 省 -->
+		<select v-model="postData.selectedProvince" @change="updateCity();">
+			<option v-for='province in provinces' :value="province.code">{{province.name}}</option>
+		</select>
+		<!-- 市 -->
+		<select v-model="postData.selectedCity" v-show="cities.length">
+			<option v-for='city in cities' :value="city.code">{{city.name}}</option>
+		</select>
+		<a href="javascript:void(0);" class="next-step step beforehand-register" @click="test">确定</a>
 	</div>
 </article>
 {/block}
 {block name="footer"}
 {/block}
 {block name="script"}
-<<<<<<< HEAD
-<script type="text/javascript" src="public_js/jquery.area.js"></script>
-=======
 <script type="text/javascript" src="vue_js/province_city.js"></script>
->>>>>>> e9d4399c6273291f6d7eaa878305bc79c896800f
 <script type="text/javascript">
 	$(function(){
+		new Vue({
+			el: "#province_city_linkage",
+			data: {
+				provinces: provinces, //所有省份
+				cities:[], //被选择的省对应的市数据
+				postData:{
+					selectedProvince: '', //被选择的省
+					selectedCity:'',  //被选择的市
+					selectedCityLevel:''  //被选择的市的级别
+				}
+			},
+			methods: {
+				//更新市数据
+				updateCity:function(){
+					let _this = this;
+					_this.provinces.map(function(item,index){
+						if(item.code == _this.postData.selectedProvince){
+							_this.cities = item.cities;
+						}
+					});
+					//初始化默认值
+					_this.postData.selectedCity = _this.cities[0].code;
+					_this.postData.selectedCityLevel = _this.cities[0].level;
+				},test:function(){
+					let _this = this;
+					console.log(_this.postData);
+				}
+			},created:function(){
+				let _this = this;
+			}
+		});
 	});
 </script>
 <script type="text/javascript">
 	$(function(){
 	});
 </script>
-
 {/block}
