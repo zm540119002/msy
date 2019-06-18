@@ -126,7 +126,7 @@ function saveImageFromHttp($url,$savePath) {
     curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
     curl_setopt($curl, CURLOPT_ENCODING, 'gzip');
     curl_setopt($curl, CURLOPT_HTTPHEADER, $header);
-    $newFileName = generateSN(15);
+    $newFileName = generateSN(10);
     $data = curl_exec($curl);
     $code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
     curl_close($curl);
