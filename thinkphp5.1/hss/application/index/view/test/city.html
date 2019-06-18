@@ -4,14 +4,13 @@
 <article class="f24">
 	<div id="province_city_linkage">
 		<!-- 省 -->
-		<select v-model="selectedProvince" @change="updateCity();">
+		<select v-model="postData.selectedProvince" @change="updateCity();">
 			<option v-for='province in provinces' :value="province.code">{{province.name}}</option>
 		</select>
 		<!-- 市 -->
-		<select v-model="selectedCity" v-show="cities.length">
+		<select v-model="postData.selectedCity" v-show="cities.length">
 			<option v-for='city in cities' :value="city.code">{{city.name}}</option>
 		</select>
-		<input type="button" @click="test" />
 		<a href="javascript:void(0);" class="next-step step beforehand-register" @click="test">确定</a>
 	</div>
 </article>
@@ -26,14 +25,11 @@
 			el: "#province_city_linkage",
 			data: {
 				provinces: provinces, //所有省份
-				selectedProvince: '', //被选择的省
 				cities:[], //被选择的省对应的市数据
-				selectedCity:'',  //被选择的市
-				selectedCityLevel:'',  //被选择的市的级别
 				postData:{
-					province:this.selectedProvince,
-					city:this.selectedCity,
-					city_level:this.selectedCityLevel
+					selectedProvince: '', //被选择的省
+					selectedCity:'',  //被选择的市
+					selectedCityLevel:''  //被选择的市的级别
 				}
 			},
 			methods: {
@@ -41,13 +37,13 @@
 				updateCity:function(){
 					let _this = this;
 					_this.provinces.map(function(item,index){
-						if(item.code == _this.selectedProvince){
+						if(item.code == _this.postData.selectedProvince){
 							_this.cities = item.cities;
 						}
 					});
 					//初始化默认值
-					_this.selectedCity = _this.cities[0].code;
-					_this.selectedCityLevel = _this.cities[0].level;
+					_this.postData.selectedCity = _this.cities[0].code;
+					_this.postData.selectedCityLevel = _this.cities[0].level;
 				},test:function(){
 					let _this = this;
 					console.log(_this.postData);
