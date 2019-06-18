@@ -3,7 +3,6 @@ var area_address,
 
 $(function(){
     tab_down('.apply-data-nav .switch-item','.apply-module','click');
-
     //初始化 未完成的申请
     if(apply!=null){
         applicantData = {
