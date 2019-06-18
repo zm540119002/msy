@@ -6,7 +6,7 @@ use \common\component\image\Image;
 class Base extends \think\Controller{
     protected $http_type = null;
     protected $host = null;
-    protected $weixin_user;
+    protected $weixin_user = null;
     public function __construct(){
         parent::__construct();
         //登录验证后跳转回原验证发起页
@@ -20,32 +20,38 @@ class Base extends \think\Controller{
 
         //微信处理
         if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
-            $mineTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
-            $this->weixin_user = $mineTools->getOauthUserInfo();
+            if(empty( $this->weixin_user )){
+                $mineTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
+                $this->weixin_user = $mineTools->getOauthUserInfo();
+            }
             $user = checkLogin();
             if($user){
-                if(!$user['hss_openid']){
+                if(!$user['name'] || !$user['avatar']){
                     //临时相对路径
-                    $tempRelativePath = config('upload_dir.user_avatar');
+                    $relativeSavePath = config('upload_dir.user_avatar');
                     $weiXinAvatarUrl = $this->weixin_user['headimgurl'];
-                    $avatar = saveImageFromHttp($weiXinAvatarUrl,$tempRelativePath);
+                    $avatar = saveImageFromHttp($weiXinAvatarUrl,$relativeSavePath);
                     $data = [
                         'id'=>$user['id'],
                         'name'=>$this->weixin_user['nickname'],
                         'avatar'=>$avatar,
-                        'hss_openid'=>$this->weixin_user['openid'],
                     ];
                     if($user['avatar']){
                         unset($data['avatar']);
+                    }else{
+                        $user['avatar'] = $data['avatar'];
                     }
                     if($user['name']){
                         unset($data['name']);
+                    }else{
+                        $user['name'] = $data['name'];
                     }
                     $userModel = new \common\model\User();
                     $result = $userModel->isUpdate(true)->save($data);
+                    setSession($user);
 //                    if( false === $result){
-//                        return $this->errorMsg('添加微信信息失败');
-//                    }
+////                        return $this->errorMsg('添加微信信息失败');
+////                    }
                 }
             }
 
