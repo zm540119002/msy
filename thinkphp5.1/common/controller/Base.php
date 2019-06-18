@@ -24,13 +24,13 @@ class Base extends \think\Controller{
             $this->weixin_user = $mineTools->getOauthUserInfo();
             $user = checkLogin();
             if($user){
-                if(!$this -> user['hss_openid']){
+                if(!$user['hss_openid']){
                     //临时相对路径
                     $tempRelativePath = config('upload_dir.user_avatar');
                     $weiXinAvatarUrl = $this->weixin_user['headimgurl'];
                     $avatar = saveImageFromHttp($weiXinAvatarUrl,$tempRelativePath);
                     $data = [
-                        'id'=>$this->user['id'],
+                        'id'=>$user['id'],
                         'name'=>$this->weixin_user['nickname'],
                         'avatar'=>$avatar,
                         'hss_openid'=>$this->weixin_user['openid'],
