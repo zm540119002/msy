@@ -39,6 +39,10 @@ return [
         'api_common_js' => 'https://api.worldview.com.cn/static/common/js',
         'api_common_css' => 'https://api.worldview.com.cn/static/common/css',
         'api_common_img' => 'https://api.worldview.com.cn/static/common/img',
+        //api-vue   资源路径
+        'api_vue_js' => 'https://api.worldview.com.cn/static/vue/js',
+        'api_vue_css' => 'https://api.worldview.com.cn/static/vue/css',
+        'api_vue_img' => 'https://api.worldview.com.cn/static/vue/img',
 
         //index     资源路径
         'index_js' => Request::domain() .'/static/index/js',
