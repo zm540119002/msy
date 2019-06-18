@@ -8,7 +8,7 @@
 			<option v-for='province in provinces' :value="province.code">{{province.name}}</option>
 		</select>
 		<!-- 市 -->
-		<select v-model="selectedCity" v-show="cities">
+		<select v-model="selectedCity" v-show="cities.length">
 			<option v-for='city in cities' :value="city.code">{{city.name}}</option>
 		</select>
 	</div>
@@ -42,7 +42,7 @@
 				}
 			},created:function(){
 				let _this = this;
-				if(_this.cities){
+				if(_this.cities.length){
 					console.log(123);
 				}else{
 					console.log(456);
