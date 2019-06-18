@@ -33,6 +33,7 @@
 				updateCity:function(){
 					let _this = this;
 					this.provinces.map(function(item,index){
+						console.log(item);
 						if(item.code == _this.selectedProvince){
 							this.cities = item.cities;
 						}
