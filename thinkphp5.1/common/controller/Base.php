@@ -16,15 +16,15 @@ class Base extends \think\Controller{
         session('backUrl',$_SERVER['REQUEST_URI'] ? $this->host . $_SERVER['REQUEST_URI'] : $this->host . $_SERVER['HTTP_REFERER']);
         //多步跳转后回原发起页
         session('returnUrl',input('get.returnUrl','')?:input('post.returnUrl',''));
-        if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
-            $weiXinUserInfo =  session('weiXinUserInfo');
-            if(empty($weiXinUserInfo)){
-                $mineTools = new \common\component\payment\weixin\Jssdk('wx96c39ff73741ada3','4f4a925b2cd3e3c9edd27247873fd3d2');
-                $weiXinUserInfo = $mineTools->getOauthUserInfo();
-                session('weiXinUserInfo',$weiXinUserInfo);
-        }
-            $this->assign('weiXinUserInfo',$weiXinUserInfo);
-        }
+//        if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
+//            $weiXinUserInfo =  session('weiXinUserInfo');
+//            if(empty($weiXinUserInfo)){
+//                $mineTools = new \common\component\payment\weixin\Jssdk('wx96c39ff73741ada3','4f4a925b2cd3e3c9edd27247873fd3d2');
+//                $weiXinUserInfo = $mineTools->getOauthUserInfo();
+//                session('weiXinUserInfo',$weiXinUserInfo);
+//           }
+//            $this->assign('weiXinUserInfo',$weiXinUserInfo);
+//        }
 
         $user = checkLogin();
         $this->assign('user',$user);
