@@ -14,7 +14,7 @@
 					<div class="swiper-wrapper">
 						{volist name="ads.carousel" id="vo"}
 						<div class="swiper-slide">
-							<a href="{$vo.ad_link}">
+							<a href="{$vo.ad_link}" target="_self">
 								<img src="{:show_img_handle($vo.thumb_img)}" alt="{$vo.name}" class="common_default_img">
 							</a>
 						</div>
@@ -101,7 +101,7 @@
 					$row = config("custom.scene_arrangement.$t");
 					{/php}
 
-					<a href="{:url('Scene'.'/'.$vo.display_type,['id'=>$vo.id])}" class="graphic_item">
+					<a href="{:url('Scene'.'/'.$vo.display_type,['id'=>$vo.id])}" class="graphic_item" target="_self">
 						<img src="{:show_img_handle($vo.thumb_img)}" alt="{$vo.name}">
 					</a>
 
