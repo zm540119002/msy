@@ -32,21 +32,16 @@
 				//更新市数据
 				updateCity:function(){
 					let _this = this;
-					this.provinces.map(function(item,index){
+					_this.provinces.map(function(item,index){
 						if(item.code == _this.selectedProvince){
 							_this.cities = item.cities;
-							console.log(item);
 						}
 					});
-					console.log(this.cities);
+					//初始化默认值
+					_this.selectedCity = _this.cities[0].code;
 				}
 			},created:function(){
 				let _this = this;
-				if(_this.cities.length){
-					console.log(123);
-				}else{
-					console.log(456);
-				}
 			}
 		});
 	});
