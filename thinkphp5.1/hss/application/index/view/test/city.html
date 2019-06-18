@@ -31,9 +31,11 @@
 			methods: {
 				//更新市数据
 				updateCity:function(){
+					let _this = this;
 					this.provinces.forEach(function(item,index){
 						console.log(item.code);
-						if(item.code == this.selectedProvince){
+						console.log(_this.selectedProvince);
+						if(item.code == _this.selectedProvince){
 							this.cities = item.cities;
 						}
 					});
