@@ -45,4 +45,10 @@ class Test extends \common\controller\Base{
             return $this->fetch();
         }
     }
+
+    public function jin(){
+
+        return $this->fetch();
+
+    }
 }
