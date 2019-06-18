@@ -402,21 +402,7 @@
 		};
 		var mobile=$('.customer_item span.mobile').text();
         $('.customer_item span.mobile').text(mobileNHide(mobile));
-
-		$(window).scroll(function(){
-			if($(document).scrollTop()!=0){
-				sessionStorage.setItem("offsetTop", $(window).scrollTop());
-				console.log($(window).scrollTop());
-			}
-		});
-
-		$(document).ready(function(){
-			var offset = sessionStorage.getItem("offsetTop");
-			$(document).scrollTop(offset);
-
-			//console.log(offset);
-		});
-
+		
 	});
 
 </script>
