@@ -31,8 +31,10 @@
 			methods: {
 				//更新市数据
 				updateCity:function(){
-					this.provinces.forEach(function(value,i){
-						console.log('forEach遍历:'+i+'--'+value);
+					this.provinces.forEach(function(item,index){
+						if(item.code == this.selectedProvince){
+							this.cities = item.cities;
+						}
 					});
 				}
 			}
