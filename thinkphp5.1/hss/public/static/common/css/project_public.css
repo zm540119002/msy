@@ -215,6 +215,9 @@ nav .back_prev_page{
 .new-retail-wrapper{
     padding-bottom:2rem;
 }
+.cart_goods_list {
+    padding: 0 0 1rem 0;
+}
 .weiya_item a{
     color:#0066cc;
 }
