@@ -11,6 +11,7 @@
 		<select v-model="selectedCity" v-show="cities.length">
 			<option v-for='city in cities' :value="city.code">{{city.name}}</option>
 		</select>
+		<input type="button" @click="test" />
 	</div>
 </article>
 {/block}
@@ -26,7 +27,13 @@
 				provinces: provinces, //所有省份
 				selectedProvince: '', //被选择的省
 				cities:[], //被选择的省对应的市数据
-				selectedCity:''  //被选择的市
+				selectedCity:'',  //被选择的市
+				selectedCityLevel:'',  //被选择的市的级别
+				postData:{
+					province:selectedProvince,
+					city:selectedCity,
+					city_level:selectedCityLevel
+				}
 			},
 			methods: {
 				//更新市数据
@@ -39,6 +46,10 @@
 					});
 					//初始化默认值
 					_this.selectedCity = _this.cities[0].code;
+					_this.selectedCityLevel = _this.cities[0].level;
+				},test:function(){
+					let _this = this;
+					console.log(_this.postData);
 				}
 			},created:function(){
 				let _this = this;
