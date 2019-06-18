@@ -1,7 +1,5 @@
 {extend name="template/base.html" /}
-
 {block name="content"}
-
 	<!--选择地区弹层-->
 	<section id="areaLayer" class="express-area-box" style="">
 		<header>
@@ -43,8 +41,7 @@
 	<div id="areaMask" class="address_mask"></div>
 {/block}
 {block name="common"}
-
+{include file="../../api/public/vue/components/province-city.html" /}
 {/block}
 {block name="footer"}
-{include file="template/footer_menu.html" /}
 {/block}
