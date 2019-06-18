@@ -33,8 +33,7 @@
 				updateCity:function(){
 					let _this = this;
 					this.provinces.forEach(function(item,index){
-						console.log(item.code);
-						console.log(_this.selectedProvince);
+						console.log(item);
 						if(item.code == _this.selectedProvince){
 							this.cities = item.cities;
 						}
