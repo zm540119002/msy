@@ -21,12 +21,11 @@ class Base extends \think\Controller{
         //微信处理
         if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
             if(empty( $this->weixin_user )){
+                echo 1111111;
                 $mineTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
                 $this->weixin_user = $mineTools->getOauthUserInfo();
             }
             $user = checkLogin();
-//            P($user);
-//            P($this->weixin_user);
             if((!$user['name'] || !$user['avatar']) && $user && isset($this->weixin_user['openid'])){
                 //临时相对路径
                 $relativeSavePath = config('upload_dir.user_avatar');
