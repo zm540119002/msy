@@ -1,7 +1,7 @@
 {notempty name="list"}
 {volist name="list" id="info"}
 <li data-goods_id="{$info.goods_id}" data-id="{$info.id}">
-    <input type="checkbox" class="item_checkbox checkitem sign_checkitem" >
+    <!-- <input type="checkbox" class="item_checkbox checkitem sign_checkitem" > -->
     <a  href="{:url('Goods/detail',['id'=>$info.goods_id])}" class="cart_goods_img">
         <img src="{:show_img_handle($info.thumb_img)}" alt="" class="c_img">
     </a>
@@ -20,6 +20,12 @@
 </li>
 {/if}
 {/notempty}
+<style>
+    .cart_goods_img{
+        min-width: 1.8rem;
+        margin-left: 0.3rem;
+    }
+</style>
 
 
   
