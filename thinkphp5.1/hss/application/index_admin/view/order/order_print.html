@@ -5,8 +5,12 @@
 <title>订单打印</title>
 </head>
 <style>
-body{font-size:13px;}
-td,th{padding:2px;}
+  body{font-size:13px;}
+  td,th{padding:2px;}
+  @media print {
+    @page { margin: 0; }
+    body { margin: 1.6cm; }
+  }
 </style>
 <body>
 <table width='100%' border='0'>
@@ -14,22 +18,20 @@ td,th{padding:2px;}
     <td colspan='8' style='text-align:center;font-weight:bold;font-size:26px'>订单信息</td>
   </tr>
   <tr>
+    <td width='100' align="right">订单号：</td>
+    <td width='250'>{$info.sn}</td>
     <td width='100' align="right">下单时间：</td>
     <td width='250'>{$info.create_time}</td>
-    <td width='100' align="right">支付方式：</td>
-    <td width='250'>{$Think.config.custom.pay_code[$info.pay_code]}</td>
-    <td width='100' align="right">订单编号：</td>
-    <td width='250'>{$info.sn}</td>
   </tr>
   <tr>
-    <td width='100' align="right">快递单号：</td>
-    <td>{$info.express_sn}</td>
+    <td width='100' align="right">支付方式：</td>
+    <td width='250'>{$Think.config.custom.pay_code[$info.pay_code]}</td>
   </tr>
   <tr>
     <td width='100' align="right">收货信息：</td>
     <td colspan="">{$info.consignee}&nbsp;&nbsp;{$info.mobile} <br />{$info.complete_address}</td>
     <td width='130' align="right">快递单号：</td>
-    <td width='250'>{$info.create_time}</td>
+    <td width='250'>{$info.express_sn}</td>
   </tr>
   {if $info.remark!=''}
   <tr>
@@ -79,6 +81,6 @@ td,th{padding:2px;}
 </table>
 </body>
 <script>
-window.print();
+    window.print();
 </script>
 </html>
