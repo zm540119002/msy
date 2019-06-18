@@ -37,6 +37,7 @@
 				updateCity:function(){
 					let _this = this;
 					_this.provinces.map(function(item,index){
+						console.log(item.code);
 						if(item.code == _this.postData.selectedProvince){
 							_this.cities = item.cities;
 						}
