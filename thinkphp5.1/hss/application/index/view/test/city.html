@@ -2,33 +2,53 @@
 {block name="title"}城市测试{/block}
 {block name="content"}
 <article class="f24">
-	
-	<!--选择地区弹层-->
-	<section id="areaLayer" class="express-area-box" style="display:none;">
-		<header>
-			<h3>选择地区</h3>
-			<a id="backUp" class="back" href="javascript:void(0);" title="返回" style="display: none;"></a>
-			<a id="closeArea" class="close" href="javascript:void(0);" title="关闭"></a>
-		</header>
-		<article id="areaBox">
-			<ul id="areaList" class="area-list" data-type="1">
-
-			</ul>
-		</article>
-	</section>
-	<!--遮罩层-->
-	<div id="areaMask" class="address_mask">
-		
+	<div id="province_city_linkage">
+		<!-- 省 -->
+		<select v-model="selectedProvince" @change="updateCity();">
+			<option v-for='province in provinces' :value="province.code">{{province.name}}</option>
+		</select>
+		<!-- 市 -->
+		<select v-model="selectedCity" v-show="cities.length">
+			<option v-for='city in cities' :value="city.code">{{city.name}}</option>
+		</select>
 	</div>
 </article>
 {/block}
 {block name="footer"}
 {/block}
 {block name="script"}
-<script type="text/javascript" src="public_js/jquery.area.js"></script>
+<script type="text/javascript" src="public_js/province_city.js"></script>
 <script type="text/javascript">
 	$(function(){
-	
+		new Vue({
+			el: "#province_city_linkage",
+			data: {
+				provinces: provinces, //所有省份
+				selectedProvince: '', //被选择的省
+				cities:[], //被选择的省对应的市数据
+				selectedCity:''  //被选择的市
+			},
+			methods: {
+				//更新市数据
+				updateCity:function(){
+					let _this = this;
+					this.provinces.map(function(item,index){
+						if(item.code == _this.selectedProvince){
+							_this.cities = item.cities;
+							console.log(item);
+						}
+					});
+					console.log(this.cities);
+				}
+			},created:function(){
+				let _this = this;
+				if(_this.cities.length){
+					console.log(123);
+				}else{
+					console.log(456);
+				}
+			}
+		});
 	});
 </script>
 <script type="text/javascript">
