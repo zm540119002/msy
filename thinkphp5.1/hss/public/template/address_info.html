@@ -1,6 +1,7 @@
 <div id="address_info">
     {notempty name="addressInfo"}
     <div class="item_addr address_info" >
+        <div class="icon"><img src="public_img/default/weizhi.png" alt=""></div>
         <div class="ia-l"></div>
         <div class="item_info">
             <input type="hidden" value=" {$addressInfo.id}" class="address_id">
@@ -115,5 +116,19 @@
         top: 0;
         right: 16px;
     } 
-    
+    .address_info{
+        display: flex;
+    }
+    .address_info .icon{
+        flex: 1;
+    }
+    .address_info .item_info{
+        flex: 9;
+    }
+    .address_info .icon img{
+        width: 60%;
+    }
+    .edit_operate{
+        flex: 1
+    }
 </style>
