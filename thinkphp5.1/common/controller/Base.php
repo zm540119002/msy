@@ -24,6 +24,7 @@ class Base extends \think\Controller{
                 $mineTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
                 $this->weixin_user = $mineTools->getOauthUserInfo();
             }
+            p( $this->weixin_user);
             $user = checkLogin();
             if($user){
                 if(!$user['name'] || !$user['avatar']){
