@@ -118,9 +118,7 @@ nav .back_prev_page{
 .gr{
     color:#009a3e;
 }
-.new-retail-wrapper{
-    padding-bottom:2rem;
-}
+
 .weui-flex-item .search_city{
     background:#fff url(../../common/img/search_city.png) no-repeat center 0;
     background-size:0.68rem auto;
@@ -213,6 +211,9 @@ nav .back_prev_page{
 }
 .content-padding{
     padding:15px;
+}
+.new-retail-wrapper{
+    padding-bottom:2rem;
 }
 .weiya_item a{
     color:#0066cc;
