@@ -5,11 +5,11 @@
 	<div id="province_city_linkage">
 		<!-- 省 -->
 		<select v-model="selectedProvince" @change="updateCity();">
-			<option v-for='province in provinces' value="province">{{province.name}}</option>
+			<option v-for='province in provinces' :value="province.code">{{province.name}}</option>
 		</select>
 		<!-- 市 -->
 		<select v-model="selectedCity" v-if="cities">
-			<option v-for='city in cities' value="city.code">{{city.name}}</option>
+			<option v-for='city in cities' :value="city.code">{{city.name}}</option>
 		</select>
 	</div>
 </article>
