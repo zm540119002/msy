@@ -16,29 +16,10 @@ class Comment extends \common\controller\UserBase{
         }
     }
 
-    /**
-     *
-     */
+
     public function add(){
 
-        /**
-         * user_id
-        status
-        score
-        order_id
-        goods_id
-        title
-        content
-        img
-        create_time
-        update_time
-
-         */
-
-
         if(request()->isPost()){
-
-
 
             $userId = $this->user['id'];
             if( isset($_POST['main_img']) && $_POST['main_img'] ){

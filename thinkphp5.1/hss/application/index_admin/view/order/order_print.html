@@ -15,9 +15,9 @@ td,th{padding:2px;}
   </tr>
   <tr>
     <td width='100' align="right">下单时间：</td>
-    <td width='250'>{$info.createTime}</td>
+    <td width='250'>{$info.create_time}</td>
     <td width='100' align="right">支付方式：</td>
-    <td width='250'>{$info.pay_code}</td>
+    <td width='250'>{$Think.config.custom.pay_code[$info.pay_code]}</td>
     <td width='100' align="right">订单编号：</td>
     <td width='250'>{$info.sn}</td>
   </tr>
@@ -26,8 +26,10 @@ td,th{padding:2px;}
     <td>{$info.express_sn}</td>
   </tr>
   <tr>
-    <td width='100' align="right">收货地址：</td>
-    <td colspan="6">{$info.complete_address}</td>
+    <td width='100' align="right">收货信息：</td>
+    <td colspan="">{$info.consignee}&nbsp;&nbsp;{$info.mobile} <br />{$info.complete_address}</td>
+    <td width='130' align="right">快递单号：</td>
+    <td width='250'>{$info.create_time}</td>
   </tr>
   {if $info.remark!=''}
   <tr>

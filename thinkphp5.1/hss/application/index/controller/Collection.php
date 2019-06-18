@@ -99,18 +99,22 @@ class Collection extends \common\controller\UserBase{
         if(!request()->isAjax()){
             return errorMsg(config('custom.not_ajax'));
         }
-        $id = input('post.id/d');
+        $ids = input('post.ids/a');
+
+        if(empty($ids)){
+            return errorMsg('取消失败');
+        }
         $model = new \app\index\model\Collection();
         $condition = [
             ['user_id','=',$this->user['id']],
-            ['goods_id','=',$id],
+            ['goods_id','in',$ids],
         ];
 
         $result = $model -> del($condition);
         if($result['status']){
             return successMsg('已取消收藏');
         }else{
-            return errorMsg('删除失败');
+            return errorMsg('取消失败');
         }
     }
 }
