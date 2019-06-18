@@ -105,7 +105,7 @@ function saveImageFromHttp($url,$savePath) {
         'Accept-Language: zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3',
         'Accept-Encoding: gzip, deflate',);
     //上传公共路径
-    $uploadPath = config('upload_dir.upload_path'). '/';
+    $uploadPath = config('upload_dir.upload_path');
     if(!is_dir($uploadPath)){
         if(!mk_dir($uploadPath)){
             return  errorMsg('创建Uploads目录失败');
