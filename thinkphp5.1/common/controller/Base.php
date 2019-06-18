@@ -43,9 +43,9 @@ class Base extends \think\Controller{
                     }
                     $userModel = new \common\model\User();
                     $result = $userModel->isUpdate(true)->save($data);
-                    if( false === $result){
-                        return $this->errorMsg('添加微信信息失败');
-                    }
+//                    if( false === $result){
+//                        return $this->errorMsg('添加微信信息失败');
+//                    }
                 }
             }
 
