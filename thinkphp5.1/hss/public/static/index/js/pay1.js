@@ -97,12 +97,14 @@ function getAddress() {
     // 详细地址
     var region = [];
     region.push(postData.province);
-    //region.push(postData.city);
+    region.push(postData.city);
     region.push(postData.area);
+
+    //var provinceName=areaObject.selectP(postData.province);
+    //var cityName=areaObject.selectC(postData.city);
+    //var areaName=areaObject.selectD(postData.area);
     region = areaObject.setArea(region);
 
-    console.log(region);
-    return false;
     postData.complete_address = region+postData.detail_address;
 
     return postData;
