@@ -4,12 +4,12 @@
 <article class="f24">
 	<div id="province_city_linkage">
 		<!-- 省 -->
-		<select v-model="prov" @change="updateCity();">
-			<option v-for='province in provinces'>{{province.name}}</option>
+		<select v-model="selectedProvince" @change="updateCity();">
+			<option v-for='province in provinces' value="province.code">{{province.name}}</option>
 		</select>
 		<!-- 市 -->
-		<select v-model="city" v-if="city">
-			<option v-for='city in cities'>{{city.name}}</option>
+		<select v-model="selectedCity" v-if="city">
+			<option v-for='city in cities' value="city.code">{{city.name}}</option>
 		</select>
 	</div>
 </article>
@@ -23,15 +23,15 @@
 		new Vue({
 			el: "#province_city_linkage",
 			data: {
-				provinces: provinces,
+				provinces: provinces, //所有省份
 				selectedProvince: '', //被选择的省
-				cities:[], //选择对应省的市数据
+				cities:[], //被选择的省对应的市数据
 				selectedCity:''  //被选择的市
 			},
 			methods: {
 				//更新市数据
 				updateCity:function(){
-					this.city = this.city[0].name;
+					console.log(this.selectedProvince);
 				}
 			}
 		});
