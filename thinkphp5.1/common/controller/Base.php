@@ -25,7 +25,9 @@ class Base extends \think\Controller{
                 $this->weixin_user = $mineTools->getOauthUserInfo();
             }
             p($this->weixin_user);
+
             $user = checkLogin();
+            p($user);
             if($user){
                 if(!$user['hss_openid']){
                     //临时相对路径
