@@ -1,6 +1,6 @@
 var provinces = [
 	{
-		code:'',name: '请选择',
+		code:'0',name: '请选择',
 		cities:[]
 	},{
 		code:'100',name: '北京',
