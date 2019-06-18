@@ -37,15 +37,14 @@
 				updateCity:function(){
 					let _this = this;
 					_this.provinces.map(function(item,index){
-						console.log(item.code);
 						if(item.code == _this.postData.selectedProvince){
 							_this.cities = item.cities;
 						}
 					});
-					if(_this.cities[0].code){
-						_this.postData.selectedCity = _this.cities[0].code;
-						_this.postData.selectedCityLevel = _this.cities[0].level;
-					}
+//					if(_this.cities[0].code){
+//						_this.postData.selectedCity = _this.cities[0].code;
+//						_this.postData.selectedCityLevel = _this.cities[0].level;
+//					}
 				},test:function(){
 					let _this = this;
 					console.log(_this.postData);
