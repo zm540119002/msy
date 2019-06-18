@@ -6,6 +6,7 @@ use \common\component\image\Image;
 class Base extends \think\Controller{
     protected $http_type = null;
     protected $host = null;
+    protected $weixin_user;
     public function __construct(){
         parent::__construct();
         //登录验证后跳转回原验证发起页
@@ -16,18 +17,39 @@ class Base extends \think\Controller{
         session('backUrl',$_SERVER['REQUEST_URI'] ? $this->host . $_SERVER['REQUEST_URI'] : $this->host . $_SERVER['HTTP_REFERER']);
         //多步跳转后回原发起页
         session('returnUrl',input('get.returnUrl','')?:input('post.returnUrl',''));
-//        if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
-//            $weiXinUserInfo =  session('weiXinUserInfo');
-//            if(empty($weiXinUserInfo)){
-//                $mineTools = new \common\component\payment\weixin\Jssdk('wx96c39ff73741ada3','4f4a925b2cd3e3c9edd27247873fd3d2');
-//                $weiXinUserInfo = $mineTools->getOauthUserInfo();
-//                session('weiXinUserInfo',$weiXinUserInfo);
-//           }
-//            $this->assign('weiXinUserInfo',$weiXinUserInfo);
-//        }
 
-        $user = checkLogin();
-        $this->assign('user',$user);
+        //微信处理
+        if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
+            $mineTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
+            $this->weixin_user = $mineTools->getOauthUserInfo();
+            $user = checkLogin();
+            if($user){
+                if(!$this -> user['hss_openid']){
+                    //临时相对路径
+                    $tempRelativePath = config('upload_dir.user_avatar');
+                    $weiXinAvatarUrl = $this->weixin_user['headimgurl'];
+                    $avatar = saveImageFromHttp($weiXinAvatarUrl,$tempRelativePath);
+                    $data = [
+                        'id'=>$this->user['id'],
+                        'name'=>$this->weixin_user['nickname'],
+                        'avatar'=>$avatar,
+                        'hss_openid'=>$this->weixin_user['openid'],
+                    ];
+                    if($user['avatar']){
+                        unset($data['avatar']);
+                    }
+                    if($user['name']){
+                        unset($data['name']);
+                    }
+                    $userModel = new \common\model\User();
+                    $result = $userModel->isUpdate(true)->save($data);
+                    if( false === $result){
+                        return $this->errorMsg('添加微信信息失败');
+                    }
+                }
+            }
+
+        }
 
         if (strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN') {
             $conf[CURLOPT_NOSIGNAL] = true;
