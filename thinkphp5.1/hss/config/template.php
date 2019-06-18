@@ -40,9 +40,9 @@ return [
         'api_common_css' => 'https://api.worldview.com.cn/static/common/css',
         'api_common_img' => 'https://api.worldview.com.cn/static/common/img',
         //vue     资源路径
-        'vue_js' => Request::domain() .'/vue/js',
-        'vue_css' => Request::domain() .'/vue/css',
-        'vue_img' => Request::domain() .'/vue/img',
+        'vue_js' => Request::domain() .'/static/js',
+        'vue_css' => Request::domain() .'/static/css',
+        'vue_img' => Request::domain() .'/static/img',
 
         //index     资源路径
         'index_js' => Request::domain() .'/static/index/js',
