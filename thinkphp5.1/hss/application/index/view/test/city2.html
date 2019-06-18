@@ -1,15 +1,23 @@
 {extend name="template/base.html" /}
 {block name="title"}城市测试{/block}
+{block name="css-page-customize"}
+<link rel="stylesheet" href="vue_css/style.css">
+<link rel="stylesheet" href="vue_css/reset.css">
+{/block}
 {block name="content"}
 <article class="f24">
 </article>
 {/block}
+{block name="common"}
+{include file="../../api/public/vue/components/province-city.html" /}
+{/block}
 {block name="footer"}
 {/block}
 {block name="script"}
-<script type="text/javascript" src="public_js/province_city.js"></script>
+<script type="text/javascript" src="vue_js/data.js"></script>
 <script type="text/javascript">
 	$(function(){
+		console.log(iosProvinces);
 	});
 </script>
 <script type="text/javascript">
