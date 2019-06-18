@@ -63,7 +63,7 @@ class Franchise extends \common\controller\UserBase {
 
         $scene = 'add';
         // 预约登记
-        if((int)$postData['type']==2){
+        if(isset($postData['type']) && $postData['type']==2){
             $scene = 'reservation';
         }
 

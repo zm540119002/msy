@@ -99,7 +99,12 @@ function getAddress() {
     region.push(postData.province);
     region.push(postData.city);
     region.push(postData.area);
+
+    //var provinceName=areaObject.selectP(postData.province);
+    //var cityName=areaObject.selectC(postData.city);
+    //var areaName=areaObject.selectD(postData.area);
     region = areaObject.setArea(region);
+
     postData.complete_address = region+postData.detail_address;
 
     return postData;
