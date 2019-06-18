@@ -76,4 +76,12 @@ class Mine extends \common\controller\Base{
         return successMsg('成功',['name'=>$newName]);
     }
 
+
+    public function test()
+    {
+        $url = 'http://thirdwx.qlogo.cn/mmopen/vi_32/YsGBcc3ZDjXFOGGCG6KTSTxTJY39nNLbibPHW3iaex8U9WQatoTfz2bPUQOM9d7NCE265NmoZ1mCEarcn6uGb4Zw/132';
+        $tempRelativePath = config('upload_dir.user_avatar');
+        $avatar = saveImageFromHttp($url,$tempRelativePath);
+        p($avatar);exit;
+    }
 }
