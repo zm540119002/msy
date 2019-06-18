@@ -25,36 +25,34 @@ class Base extends \think\Controller{
                 $this->weixin_user = $mineTools->getOauthUserInfo();
             }
             $user = checkLogin();
-            P($user);
-            P($this->weixin_user);
-            if($user){
-                if(!$user['name'] || !$user['avatar']){
-                    //临时相对路径
-                    $relativeSavePath = config('upload_dir.user_avatar');
-                    $weiXinAvatarUrl = $this->weixin_user['headimgurl'];
-                    $avatar = saveImageFromHttp($weiXinAvatarUrl,$relativeSavePath);
-                    $data = [
-                        'id'=>$user['id'],
-                        'name'=>$this->weixin_user['nickname'],
-                        'avatar'=>$avatar,
-                    ];
-                    if($user['avatar']){
-                        unset($data['avatar']);
-                    }else{
-                        $user['avatar'] = $data['avatar'];
-                    }
-                    if($user['name']){
-                        unset($data['name']);
-                    }else{
-                        $user['name'] = $data['name'];
-                    }
-                    $userModel = new \common\model\User();
-                    $result = $userModel->isUpdate(true)->save($data);
-                    setSession($user);
+//            P($user);
+//            P($this->weixin_user);
+            if((!$user['name'] || !$user['avatar']) && $user && isset($this->weixin_user['openid'])){
+                //临时相对路径
+                $relativeSavePath = config('upload_dir.user_avatar');
+                $weiXinAvatarUrl = $this->weixin_user['headimgurl'];
+                $avatar = saveImageFromHttp($weiXinAvatarUrl,$relativeSavePath);
+                $data = [
+                    'id'=>$user['id'],
+                    'name'=>$this->weixin_user['nickname'],
+                    'avatar'=>$avatar,
+                ];
+                if($user['avatar']){
+                    unset($data['avatar']);
+                }else{
+                    $user['avatar'] = $data['avatar'];
+                }
+                if($user['name']){
+                    unset($data['name']);
+                }else{
+                    $user['name'] = $data['name'];
+                }
+                $userModel = new \common\model\User();
+                $result = $userModel->isUpdate(true)->save($data);
+                setSession($user);
 //                    if( false === $result){
 ////                        return $this->errorMsg('添加微信信息失败');
 ////                    }
-                }
             }
 
         }
