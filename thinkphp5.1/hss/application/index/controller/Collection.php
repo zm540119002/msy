@@ -102,8 +102,8 @@ class Collection extends \common\controller\UserBase{
         $id = input('post.id/d');
         $model = new \app\index\model\Collection();
         $condition = [
-            ['user_id','=',$this->user['id']],
-            ['goods_id','=',$id],
+            'user_id','=',$this->user['id'],
+            'goods_id','=',$id,
         ];
 
         $result = $model -> del($condition);
