@@ -116,7 +116,7 @@ function saveImageFromHttp($url,$savePath) {
         return  errorMsg('获取Uploads实际路径失败');
     }
     //存储路径
-    $storePath = $uploadPath . $savePath;
+    $storePath = $uploadPath .'/'. $savePath;
     if(!mk_dir($storePath)){
         return errorMsg('创建临时目录失败');
     }
