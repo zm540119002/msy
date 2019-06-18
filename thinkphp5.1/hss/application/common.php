@@ -105,7 +105,7 @@ function saveImageFromHttp($url,$savePath) {
         'Accept-Language: zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3',
         'Accept-Encoding: gzip, deflate',);
     //上传公共路径
-    $uploadPath = config('upload_dir.upload_path'). '/';
+    $uploadPath = config('upload_dir.upload_path');
     if(!is_dir($uploadPath)){
         if(!mk_dir($uploadPath)){
             return  errorMsg('创建Uploads目录失败');
@@ -116,7 +116,7 @@ function saveImageFromHttp($url,$savePath) {
         return  errorMsg('获取Uploads实际路径失败');
     }
     //存储路径
-    $storePath = $uploadPath . $savePath;
+    $storePath = $uploadPath .'/'. $savePath;
     if(!mk_dir($storePath)){
         return errorMsg('创建临时目录失败');
     }
@@ -126,7 +126,7 @@ function saveImageFromHttp($url,$savePath) {
     curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
     curl_setopt($curl, CURLOPT_ENCODING, 'gzip');
     curl_setopt($curl, CURLOPT_HTTPHEADER, $header);
-    $newFileName = generateSN(15);
+    $newFileName = generateSN(10);
     $data = curl_exec($curl);
     $code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
     curl_close($curl);

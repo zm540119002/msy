@@ -62,7 +62,6 @@
             var area_address =$('.area-address-name').getArea();
             postData.province = area_address[0];
             postData.city = area_address[1];
-            postData.step = 1;
             postData.type = 2;
             var content='';
             if(!postData.applicant){
@@ -80,6 +79,17 @@
                 clickObj:$(this),
                 postData:postData,
                 asyncVerifyCallBack:function(){
+
+/*                    layer.open({
+                        content : '成功',
+                        time : 1000,
+                        skin: 'msg',
+                        end : function(){
+                            layer.close(beforehandRegisterTriggerLayerIndex);
+                        }
+                    });*/
+
+                    dialog.success('成功');
                     layer.close(beforehandRegisterTriggerLayerIndex);
                 }
             };

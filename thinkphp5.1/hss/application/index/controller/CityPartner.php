@@ -176,13 +176,4 @@ class CityPartner extends \common\controller\UserBase {
         $this->successMsg('成功',['url'=>config('custom.pay_gateway').$paySn,'id'=>$id]);
     }
 
-    //尾款结算
-    public function balance()
-    {
-        if(!request()->isAjax()){
-            $this->errorMsg('请求方式错误');
-        }
-
-
-    }
 }
