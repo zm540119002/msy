@@ -42,7 +42,11 @@
 				}
 			},created:function(){
 				let _this = this;
-				console.log(_this.cities);
+				if(_this.cities){
+					console.log(123);
+				}else{
+					console.log(456);
+				}
 			}
 		});
 	});
