@@ -32,7 +32,7 @@
 				//更新市数据
 				updateCity:function(){
 					this.provinces.forEach(function(item,index){
-						console.log(item.code);
+						console.log(item);
 						console.log(this.selectedProvince);
 						if(item.code == this.selectedProvince){
 							this.cities = item.cities;
