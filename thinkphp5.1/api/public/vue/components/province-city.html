@@ -60,8 +60,10 @@
                 },backUp:function(){
                     let _this = this;
                     this.displayProvince = true;
-                },close:function(){
+                },close:function(event){
                     let _this = this;
+                    let _thisJquery = $(event.currentTarget);
+                    _thisJquery.parent().hide();
                 },created:function(){
                     let _this = this;
                 },closeMask:function(){
