@@ -6,7 +6,7 @@
 	<city_picker
 			v-show="display"
 			@toggle="toggle"
-			@getCity="getCity"
+			@get="get"
 			:init_provinces="provinces"
 	></city_picker>
 </div>
@@ -30,7 +30,7 @@
 				toggle:function(){
 					let _this = this;
 					_this.display = !_this.display;
-				},getCity:function(param){
+				},get:function(param){
 					let _this = this;
 					console.log(param);
 				},created:function(){
