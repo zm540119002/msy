@@ -95,11 +95,11 @@ class TwoDimensionalCode extends \common\model\Base {
         $text_color = imagecolorallocate($im, 255, 255, 255);
         imagefill($im, 0, 0, $gray_color);
         imagettftext($im, 25, 0, 200, 130, $text_color, $init['font'], $init['name']); //名字
-        imagecopyresized($im, $avatar['obj'], 60, 97, 0, 0, 100, 100, $avatar['width'], $avatar['height'] );  //
-        imagecopyresized($im, $hss_1['obj'], 180, 152, 0, 0, 662, 82, $hss_1['width'],$hss_1['height'] );  //平台logo
-        imagecopyresized($im, $hss_2['obj'], 0, 240, 0, 0, 850, 963, $hss_2['width'],$hss_2['height'] );  //平台logo
-        imagecopyresized($im, $hss_3['obj'], 0, 1200, 0, 0, 538, 320, $hss_3['width'],$hss_3['height'] );  //平台logo
-        imagecopyresized($im, $qrcode['obj'], 580, 1230, 0, 0, 160, 160, $qrcode['width'], $qrcode['width'] );  //二维
+        imagecopyresampled ($im, $avatar['obj'], 60, 97, 0, 0, 100, 100, $avatar['width'], $avatar['height'] );  //
+        imagecopyresampled ($im, $hss_1['obj'], 180, 152, 0, 0, 662, 82, $hss_1['width'],$hss_1['height'] );  //平台logo
+        imagecopyresampled ($im, $hss_2['obj'], 0, 240, 0, 0, 850, 963, $hss_2['width'],$hss_2['height'] );  //平台logo
+        imagecopyresampled ($im, $hss_3['obj'], 0, 1200, 0, 0, 538, 320, $hss_3['width'],$hss_3['height'] );  //平台logo
+        imagecopyresampled ($im, $qrcode['obj'], 580, 1230, 0, 0, 160, 160, $qrcode['width'], $qrcode['width'] );  //二维
         $dir = config('upload_dir.upload_path').'/'.$init['save_path'];
         if(!is_dir($dir)){
             mkdir($dir, 0777, true);
