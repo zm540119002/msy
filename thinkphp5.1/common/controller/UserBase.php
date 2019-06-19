@@ -19,7 +19,5 @@ class UserBase extends Base{
                 exit;
             }
         }
-
-
     }
 }
