@@ -37,8 +37,20 @@
 </div>
 {/block}
 {block name="common"}
-{include file="../../api/public/vue/components/footer-menu.html" /}
 {include file="../../api/public/vue/components/province-city.html" /}
+<script type="text/javascript">
+	$(function(){
+		new Vue({
+			el: "#province_city_linkage",
+			data: {
+				init_provinces:provinces
+			}
+		});
+	});
+</script>
+{/block}
+{block name="footer"}
+{include file="../../api/public/vue/components/footer-menu.html" /}
 <script type="text/javascript">
 	let unlockingFooterCart = '{$unlockingFooterCart|raw}';
 	unlockingFooterCart = JSON.parse(unlockingFooterCart);
@@ -52,15 +64,5 @@
 			return param;
 		}
 	});
-	$(function(){
-		new Vue({
-			el: "#province_city_linkage",
-			data: {
-				init_provinces:provinces
-			}
-		});
-	});
 </script>
-{/block}
-{block name="footer"}
 {/block}
