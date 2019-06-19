@@ -56,7 +56,8 @@ class Test extends \common\controller\Base{
     {
         $mineTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
         $weiXinUserInfo = $mineTools->getUserInfo();
-        $weiXinUserInfo = $mineTools->getOauthUserInfo();
+        $weiXinUserInfo1 = $mineTools->getOauthUserInfo();
         P($weiXinUserInfo);
+        P($weiXinUserInfo1);
     }
 }
