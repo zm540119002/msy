@@ -91,14 +91,16 @@ class Sort extends \common\controller\Base{
             Promotion::displayPromotionList($id,'sort');
 
             $this->assign('relation',config('custom.relation_type.sort'));
-            $this->assign('relation',config('custom.relation_type.project'));
-            $unlockingFooterCart = unlockingFooterCartConfigTest([0,2,1,3]);
+            //$this->assign('relation',config('custom.relation_type.project'));
+/*            $unlockingFooterCart = unlockingFooterCartConfigTest([0,2,1,3]);
             array_push($unlockingFooterCart['menu'][0]['class'],'group_btn30');
             array_push($unlockingFooterCart['menu'][1]['class'],'group_btn20');
             array_push($unlockingFooterCart['menu'][2]['class'],'group_btn25');
             array_push($unlockingFooterCart['menu'][3]['class'],'group_btn25');
             $this->assign('unlockingFooterCart',json_encode($unlockingFooterCart));
-            Cart::getCartTotalNum();
+            Cart::getCartTotalNum();*/
+
+            foot_cart_menu();
 
             return $this->fetch();
         }

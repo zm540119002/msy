@@ -8,6 +8,8 @@ class Base extends \think\Controller{
     protected $host = null;
     public function __construct(){
         parent::__construct();
+
+
         //登录验证后跳转回原验证发起页
         $this->http_type = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') || (isset($_SERVER['HTTP_X_FORWARDED_PROTO'])
                 && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')) ? 'https://' : 'http://';
@@ -18,40 +20,40 @@ class Base extends \think\Controller{
         session('returnUrl',input('get.returnUrl','')?:input('post.returnUrl',''));
 
         //微信处理
-        if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
-            $weiXinUserInfo =  session('weiXinUserInfo');
-            if(!$weiXinUserInfo){
-                $mineTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
-                $weiXinUserInfo = $mineTools->getOauthUserInfo();
-                session('weiXinUserInfo',$weiXinUserInfo);
-            }
-            $user = checkLogin();
-            if((!$user['name'] || !$user['avatar']) && $user && isset($weiXinUserInfo['openid'])){
-                //临时相对路径
-                $relativeSavePath = config('upload_dir.user_avatar');
-                $weiXinAvatarUrl = $weiXinUserInfo['headimgurl'];
-                $avatar = saveImageFromHttp($weiXinAvatarUrl,$relativeSavePath);
-                $data = [
-                    'id'=>$user['id'],
-                    'name'=>$weiXinUserInfo['nickname'],
-                    'avatar'=>$avatar,
-                ];
-                if($user['avatar']){
-                    unset($data['avatar']);
-                }else{
-                    $user['avatar'] = $data['avatar'];
-                }
-                if($user['name']){
-                    unset($data['name']);
-                }else{
-                    $user['name'] = $data['name'];
-                }
-                $userModel = new \common\model\User();
-                $result = $userModel->isUpdate(true)->save($data);
-                setSession($user);
-            }
-
-        }
+//        if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
+//            $weiXinUserInfo =  session('weiXinUserInfo');
+//            if(!$weiXinUserInfo){
+//                $mineTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
+//                $weiXinUserInfo = $mineTools->getOauthUserInfo();
+//                session('weiXinUserInfo',$weiXinUserInfo);
+//            }
+//            $user = checkLogin();
+//            if((!$user['name'] || !$user['avatar']) && $user && isset($weiXinUserInfo['openid'])){
+//                //临时相对路径
+//                $relativeSavePath = config('upload_dir.user_avatar');
+//                $weiXinAvatarUrl = $weiXinUserInfo['headimgurl'];
+//                $avatar = saveImageFromHttp($weiXinAvatarUrl,$relativeSavePath);
+//                $data = [
+//                    'id'=>$user['id'],
+//                    'name'=>$weiXinUserInfo['nickname'],
+//                    'avatar'=>$avatar,
+//                ];
+//                if($user['avatar']){
+//                    unset($data['avatar']);
+//                }else{
+//                    $user['avatar'] = $data['avatar'];
+//                }
+//                if($user['name']){
+//                    unset($data['name']);
+//                }else{
+//                    $user['name'] = $data['name'];
+//                }
+//                $userModel = new \common\model\User();
+//                $result = $userModel->isUpdate(true)->save($data);
+//                setSession($user);
+//            }
+//
+//        }
 
         if (strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN') {
             $conf[CURLOPT_NOSIGNAL] = true;

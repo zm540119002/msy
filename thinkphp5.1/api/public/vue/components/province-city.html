@@ -1,23 +1,26 @@
 <template id="city_picker_tpl">
-    <section class="express-area-box" style="bottom: 0px;">
-        <header>
-            <h3>选择地区</h3>
-            <a href="javascript:void(0);" class="backUp" title="返回" v-show="!displayProvince" @click="backUp"></a>
-            <a href="javascript:void(0);" class="close" title="关闭" @click="close"></a>
-        </header>
-        <article id="areaBox">
-            <ul id="provinceList" class="area-list" v-if="displayProvince">
-                <li v-for="province in provinces" :code="province.code" @click="updateCity">{{province.name}}</li>
-            </ul>
-            <ul id="cityList" class="area-list" v-else>
-                <li v-for="city in cities" :code="city.code">{{city.name}}</li>
-            </ul>
-        </article>
-        <div id="areaMask" class="address_mask"></div>
-    </section>
+    <div class="city_picker">
+        <section class="express-area-box" style="bottom: 0px;">
+            <header>
+                <h3>选择地区</h3>
+                <a href="javascript:void(0);" class="backUp" title="返回" v-show="!displayProvince" @click="backUp"></a>
+                <a href="javascript:void(0);" class="close" title="关闭" @click="close"></a>
+            </header>
+            <article id="areaBox">
+                <ul id="provinceList" class="area-list" v-if="displayProvince">
+                    <li v-for="province in provinces" :code="province.code" @click="updateProvince">{{province.name}}</li>
+                </ul>
+                <ul id="cityList" class="area-list" v-else>
+                    <li v-for="city in cities" :code="city.code" @click="updateCity">{{city.name}}</li>
+                </ul>
+            </article>
+        </section>
+        <div class="address_mask city_mask" @click="close"></div>
+    </div>
 </template>
 <script type="text/javascript">
     $(function(){
+        //城市选择
         Vue.component('city_picker', {
             template:'#city_picker_tpl',
             props: {
@@ -41,7 +44,7 @@
                 }
             },methods: {
                 //更新市数据
-                updateCity:function(event){
+                updateProvince:function(event){
                     let _thisJquery = $(event.currentTarget);
                     let _this = this;
                     _this.postData.selectedProvince = _thisJquery.attr('code');
@@ -55,11 +58,22 @@
                         _this.postData.selectedCityLevel = _this.cities[0].level;
                     }
                     this.displayProvince = false;
+                },updateCity:function(event){
+                    let _thisJquery = $(event.currentTarget);
+                    let _this = this;
+                    _this.postData.selectedCity = _thisJquery.attr('code');
+                    _this.cities.map(function(item,index){
+                        if(item.code == _this.postData.selectedCity){
+                            _this.postData.selectedCityLevel = item.level;
+                        }
+                    });
+                    console.log(_this.postData);
                 },backUp:function(){
                     let _this = this;
                     this.displayProvince = true;
                 },close:function(){
                     let _this = this;
+                    _this.$emit('toggle')
                 },created:function(){
                     let _this = this;
                 }

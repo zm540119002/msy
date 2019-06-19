@@ -51,3 +51,19 @@ function promotion_handle(&$info){
     $info['main_img'] = $info['main_img'] ? explode(',',(string)$info['main_img']) : '';
     $info['intro']    = $info['intro']    ? htmlspecialchars_decode($info['intro']) : '';
 };
+
+/**
+ * 底部购物车栏
+ */
+function foot_cart_menu(){
+    $unlockingFooterCart = unlockingFooterCartConfigTest([0,2,1,3]);
+    array_push($unlockingFooterCart['menu'][0]['class'],'group_btn30');
+    array_push($unlockingFooterCart['menu'][1]['class'],'group_btn20');
+    array_push($unlockingFooterCart['menu'][2]['class'],'group_btn25');
+    array_push($unlockingFooterCart['menu'][3]['class'],'group_btn25');
+    think\View::share('unlockingFooterCart',json_encode($unlockingFooterCart));
+
+    controller('index')->getCartTotalNum();
+
+    //app\index\controller\Cart::getCartTotalNum();
+}
