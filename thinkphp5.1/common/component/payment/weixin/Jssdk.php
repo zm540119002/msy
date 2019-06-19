@@ -11,32 +11,21 @@ class Jssdk {
     $this->appId = $appId;
     $this->appSecret = $appSecret;
     $this->path = __DIR__ . 'Jssdk.php/';
-      $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appId=$this->appId&secret=$this->appSecret";
-      $res = json_decode($this->httpGet($url));
-      print_r($res);
-      exit;
-    $data = json_decode(file_get_contents("access_token.txt"));
-      print_r($data);
-    if ($data->expire_time < time() || !$data) {
+    $data = json_decode($this->get_php_file("access_token.php"));
+    if ($data->expire_time < time()) {
       // 如果是企业号用以下URL获取access_token
       // $url = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=$this->appId&corpsecret=$this->appSecret";
       $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appId=$this->appId&secret=$this->appSecret";
       $res = json_decode($this->httpGet($url));
-      print_r($res);
       $access_token = $res->access_token;
       if ($access_token) {
         $data->expire_time = time() + 7000;
         $data->access_token = $access_token;
-          file_put_contents("access_token.txt", json_encode($data));
+        $this->set_php_file("access_token.php", json_encode($data));
       }
-      print_r(111);
-        print_r($access_token);
     } else {
       $access_token = $data->access_token;
     }
-      print_r(222);
-      print_r($access_token);exit;
-
     $this -> access_token = $access_token;
   }
 
