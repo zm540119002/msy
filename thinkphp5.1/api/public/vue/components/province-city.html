@@ -57,13 +57,6 @@
                     let _thisJquery = $(event.currentTarget);
                     let _this = this;
                     _this.postData.selectedCity = _thisJquery.attr('code');
-                    console.log(456);
-//                    _this.cities.map(function(item,index){
-//                        if(item.code == _this.postData.selectedCity){
-//                            _this.postData.selectedCityLevel = item.level;
-//                            _this.selected_name.city_name = item.name;
-//                        }
-//                    });
                     let response = {
                         selected_code:_this.postData,
                         selected_name:_this.selected_name
@@ -107,7 +100,12 @@
                     handler(newVal, oldVal) {
                         let _this = this;
                         if(typeof(oldVal) !== "undefined"){
-                            console.log(newVal);
+                            _this.cities.map(function(item,index){
+                                if(item.code == newVal){
+                                    _this.postData.selectedCityLevel = item.level;
+                                    _this.selected_name.city_name = item.name;
+                                }
+                            });
                         }
                     },
                     deep: true,
