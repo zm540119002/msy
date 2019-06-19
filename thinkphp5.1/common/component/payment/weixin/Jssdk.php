@@ -207,8 +207,8 @@ class Jssdk {
   {
     $data = $this -> GetAccessTokenAndOpenid();
     $access_token = $data['access_token'];
-    $openid =  $data['openid'];
-    $url = "https://api.weixin.qq.com/sns/userinfo?access_token=".$access_token."&openid=".$openid."&lang=zh_CN";
+    $openid = $this->getOpenid();
+    $url = "https://api.weixin.qq.com/sns/userinfo?access_token=".$this->auto_access_token."&openid=".$openid."&lang=zh_CN";
     $res = $this->http_request($url);
     return json_decode($res, true);
   }
