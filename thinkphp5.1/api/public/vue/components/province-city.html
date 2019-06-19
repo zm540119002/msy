@@ -1,6 +1,6 @@
 <template id="city_picker_tpl">
     <ul id="areaList" class="area-list">
-        <li v-for="province in provinces" @click="updateCity">北京市</li>
+        <li v-for="province in provinces" :value="province.code" @click="updateCity">{{province.name}}</li>
     </ul>
 </template>
 <script type="text/javascript">
