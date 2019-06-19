@@ -1,6 +1,6 @@
 <template id="city_picker_tpl">
     <ul id="areaList" class="area-list">
-        <li @click="updateCity" v-for="province in provinces">北京市</li>
+        <li v-for="province in provinces" @click="updateCity">北京市</li>
     </ul>
 </template>
 <script type="text/javascript">
@@ -29,7 +29,6 @@
                 //更新市数据
                 updateCity:function(){
                     let _this = this;
-                    console.log(_this.init_provinces);
                     console.log(provinces);
                     return;
                     _this.provinces.map(function(item,index){
