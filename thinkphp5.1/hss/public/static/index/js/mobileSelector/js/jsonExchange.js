@@ -12,7 +12,7 @@
     var Data;
     var cityData = $.get(areaJson).done(function(cityData){
         //cityData = data;
-
+console.log(134);
         Data = cityData;
 
         //console.log(cityData);
@@ -27,7 +27,7 @@
     //console.info(document.currentScript.src);
     //return false;
     //console.log(dataJson);
-    console.log(cityData.responseText);
+    console.log(123);
     return false;
     //return false;
     cityData = JSON.stringify(cityData).replace(/\"id\":/g, "\"value\":");
