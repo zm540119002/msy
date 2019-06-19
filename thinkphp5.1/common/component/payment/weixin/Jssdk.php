@@ -11,6 +11,10 @@ class Jssdk {
     $this->appId = $appId;
     $this->appSecret = $appSecret;
     $this->path = __DIR__ . 'Jssdk.php/';
+      $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appId=$this->appId&secret=$this->appSecret";
+      $res = json_decode($this->httpGet($url));
+      print_r($res);
+      exit;
     $data = json_decode(file_get_contents("access_token.txt"));
       print_r($data);
     if ($data->expire_time < time() || !$data) {
