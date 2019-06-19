@@ -30,7 +30,8 @@ class Jssdk {
       $access_token = $data->access_token;
     }
     P(222);
-    P($access_token);
+    P($access_token);exit;
+
     $this -> access_token = $access_token;
   }
 
