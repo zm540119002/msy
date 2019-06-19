@@ -40,6 +40,10 @@
                         selectedCity:'',  //被选择的市
                         selectedCityLevel:''  //被选择的市的级别
                     },
+                    selected_name:{
+                        province_name: '', //被选择的省份名称
+                        city_name:''  //被选择的市名称
+                    },
                     displayProvince: {type: Boolean,default: true}
                 };
             },methods: {
@@ -51,11 +55,13 @@
                     _this.provinces.map(function(item,index){
                         if(item.code == _this.postData.selectedProvince){
                             _this.cities = item.cities;
+                            _this.selected_name.province_name = item.name;
                         }
                     });
                     if(_this.cities.length){
                         _this.postData.selectedCity = _this.cities[0].code;
                         _this.postData.selectedCityLevel = _this.cities[0].level;
+                        _this.selected_name.city_name = _this.cities[0].name;
                     }
                     this.displayProvince = false;
                 },updateCity:function(event){
@@ -65,9 +71,14 @@
                     _this.cities.map(function(item,index){
                         if(item.code == _this.postData.selectedCity){
                             _this.postData.selectedCityLevel = item.level;
+                            _this.selected_name.city_name = _this.cities[0].name;
                         }
                     });
-                    _this.$emit('update_city',_this.postData);
+                    let response = {
+                        selected_code:_this.postData,
+                        selected_name:_this.selected_name
+                    };
+                    _this.$emit('update_city',response);
                     _this.close();
                 },backUp:function(){
                     let _this = this;
