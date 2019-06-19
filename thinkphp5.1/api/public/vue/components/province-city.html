@@ -3,7 +3,7 @@
         <header>
             <h3>选择地区</h3>
             <a href="javascript:void(0);" class="backUp" title="返回" v-show="!displayProvince" @click="backUp"></a>
-            <a href="javascript:void(0);" class="close" title="关闭"></a>
+            <a href="javascript:void(0);" class="close" title="关闭" @click="close"></a>
         </header>
         <article id="areaBox">
             <ul id="provinceList" class="area-list" v-if="displayProvince">
@@ -57,6 +57,8 @@
                 },backUp:function(){
                     let _this = this;
                     this.displayProvince = true;
+                },close:function(){
+                    let _this = this;
                 },created:function(){
                     let _this = this;
                 }
