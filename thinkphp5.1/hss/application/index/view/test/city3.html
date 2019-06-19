@@ -5,8 +5,8 @@
 	<label class="form-label" @click="toggle">选择地区：</label>
 	<city_picker
 			v-show="display"
-			:init_provinces="provinces"
 			@toggle="toggle"
+			:init_provinces="provinces"
 	></city_picker>
 	<a href="javascript:void(0);" class="sure" @click="sure">确定</a>
 </div>
@@ -16,12 +16,15 @@
 {include file="../../api/public/vue/components/province-city.html" /}
 <script type="text/javascript">
 	$(function(){
+		let param = {
+			provinces:{provinces},
+			display:false,
+			province_code:[]
+		};
 		new Vue({
 			el: "#province_city_linkage",
-			data: {
-				provinces:{provinces},
-				display:false,
-				display2:true
+			data: function () {
+				return param;
 			},methods: {
 				//更新市数据
 				toggle:function(){
