@@ -1,10 +1,20 @@
 <template id="city_picker_tpl">
-    <ul id="provinceList" class="area-list" v-if="displayProvince">
-        <li v-for="province in provinces" :code="province.code" @click="updateCity">{{province.name}}</li>
-    </ul>
-    <ul id="cityList" class="area-list" v-else>
-        <li v-for="city in cities" :code="city.code">{{city.name}}</li>
-    </ul>
+    <section id="areaLayer" class="express-area-box" style="bottom: 0px;">
+        <header>
+            <h3>选择地区</h3>
+            <a id="backUp" class="back" href="javascript:void(0);" title="返回" style="display: inline;"></a>
+            <a id="closeArea" class="close" href="javascript:void(0);" title="关闭"></a>
+        </header>
+        <article id="areaBox">
+            <ul id="provinceList" class="area-list" v-if="displayProvince">
+                <li v-for="province in provinces" :code="province.code" @click="updateCity">{{province.name}}</li>
+            </ul>
+            <ul id="cityList" class="area-list" v-else>
+                <li v-for="city in cities" :code="city.code">{{city.name}}</li>
+            </ul>
+        </article>
+    </section>
+    <div id="areaMask" class="address_mask" style="display: block;"></div>
 </template>
 <script type="text/javascript">
     $(function(){
