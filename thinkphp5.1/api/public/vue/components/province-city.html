@@ -15,11 +15,12 @@
                 </ul>
             </article>
         </section>
-        <div class="address_mask city_mask" @click="closeMask"></div>
+        <div class="address_mask city_mask" @click="close"></div>
     </div>
 </template>
 <script type="text/javascript">
     $(function(){
+        //城市选择
         Vue.component('city_picker', {
             template:'#city_picker_tpl',
             props: {
@@ -60,14 +61,11 @@
                 },backUp:function(){
                     let _this = this;
                     this.displayProvince = true;
-                },close:function(event){
+                },close:function(){
                     let _this = this;
-                    let _thisJquery = $(event.currentTarget);
-                    _thisJquery.parents('div.city_picker').hide();
+                    _this.$emit('toggle')
                 },created:function(){
                     let _this = this;
-                },closeMask:function(){
-                    console.log(123);
                 }
             }
         });
