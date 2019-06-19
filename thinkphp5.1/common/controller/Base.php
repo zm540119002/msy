@@ -24,7 +24,7 @@ class Base extends \think\Controller{
             $weiXinUserInfo = $mineTools->getUserInfo();
             P($weiXinUserInfo);
             $weiXinUserInfo = $mineTools->getOauthUserInfo();
-            P($weiXinUserInfo);
+            //P($weiXinUserInfo);
            // session('weiXinUserInfo',$weiXinUserInfo);
             if(!$weiXinUserInfo){
 
