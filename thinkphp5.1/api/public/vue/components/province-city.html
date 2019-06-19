@@ -1,7 +1,4 @@
 <template id="city_picker_tpl">
-    <select >
-        <option ></option>
-    </select>
     <!-- 省 -->
     <select v-model="postData.selectedProvince" @change="updateCity();">
         <option v-for='province in provinces' :value="province.code">{{province.name}}</option>
@@ -11,14 +8,21 @@
         <option v-for='city in cities' :value="city.code">{{city.name}}</option>
     </select>
 </template>
-<script type="text/javascript" src="vue_js/province_city.js"></script>
 <script type="text/javascript">
     $(function(){
         Vue.component('city_picker', {
             template:'#city_picker_tpl',
-            data: function () {
+            props: {
+                type: {type: Number,default: 1},
+                init_provinces: {
+                    type: Object,
+                    default: function () {
+                        return {}
+                    }
+                }
+            },data: function () {
                 return {
-                    provinces: provinces, //所有省份
+                    provinces: this.init_provinces, //所有省份
                     cities:[], //被选择的省对应的市数据
                     postData:{
                         selectedProvince: '', //被选择的省
@@ -44,6 +48,7 @@
                     console.log(_this.postData);
                 },created:function(){
                     let _this = this;
+                    console.log(123);
                     console.log(_this.provinces);
                 }
             }
