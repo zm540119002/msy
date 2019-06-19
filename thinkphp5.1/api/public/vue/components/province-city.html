@@ -1,17 +1,11 @@
 <template id="city_picker_tpl">
-    <select>
-        <option>aaaaaaaaaaaaaaaa</option>
-        <option>aaaaaaaaaaaaaaaa</option>
-        <option>aaaaaaaaaaaaaaaa</option>
-    </select>
-    <!-- 省 -->
-    <select v-model="postData.selectedProvince" @change="updateCity();">
-        <option v-for='province in provinces' :value="province.code">{{province.name}}</option>
-    </select>
-    <!-- 市 -->
-    <select v-model="postData.selectedCity" v-show="cities.length">
-        <option v-for='city in cities' :value="city.code">{{city.name}}</option>
-    </select>
+    <ul id="areaList" class="area-list">-->
+        <li onclick="selectP(0);">北京市</li>
+        <li onclick="selectP(0);">北京市</li>
+        <li onclick="selectP(0);">北京市</li>
+        <li onclick="selectP(0);">北京市</li>
+        <li onclick="selectP(0);">北京市</li>
+    </ul>
 </template>
 <script type="text/javascript" src="vue_js/province_city.js"></script>
 <script type="text/javascript">
