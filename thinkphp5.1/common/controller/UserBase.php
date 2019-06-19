@@ -11,6 +11,8 @@ class UserBase extends Base{
         parent::__construct();
         //判断是否登录
         $this->user = checkLogin();
+        print_r($this->user);
+        eixt;
         if (!$this->user) {
             if(request()->isAjax()){
                 $this->errorMsg(config('code.error.login.msg'),config('code.error.login'));
