@@ -1,5 +1,5 @@
 <template id="city_picker_tpl">
-    <div>
+    <div class="city_picker">
         <section class="express-area-box" style="bottom: 0px;">
             <header>
                 <h3>选择地区</h3>
@@ -63,7 +63,7 @@
                 },close:function(event){
                     let _this = this;
                     let _thisJquery = $(event.currentTarget);
-                    _thisJquery.parents('section').hide();
+                    _thisJquery.parents('div.city_picker').hide();
                 },created:function(){
                     let _this = this;
                 },closeMask:function(){
