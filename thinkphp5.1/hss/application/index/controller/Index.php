@@ -9,7 +9,8 @@ class Index extends \common\controller\Base{
      * 促销列表，场景列表，商品列表 -ajax
      */
     public function index(){
-        
+        print_r(123);
+        eixt;
         // 促销列表 7个
         $modelPromotion = new \app\index\model\Promotion();
         $condition =[
