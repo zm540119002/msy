@@ -24,10 +24,13 @@ class Jssdk {
         $data->access_token = $access_token;
         $this->set_php_file("access_token.php", json_encode($data));
       }
+      P(111);
       P($access_token);
     } else {
       $access_token = $data->access_token;
     }
+    P(222);
+    P($access_token);
     $this -> access_token = $access_token;
   }
 
