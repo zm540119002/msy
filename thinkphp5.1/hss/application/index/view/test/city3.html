@@ -20,6 +20,7 @@
 		var city_picker_param = {
 			provinces:{provinces},
 			display:false,
+			init_assign:{},
 			selected_code:{},
 			selected_name:{}
 		};
@@ -36,21 +37,29 @@
 					let _this = this;
 					_this.selected_code = param.selected_code;
 					_this.selected_name = param.selected_name;
-					console.log(_this.selected_name);
 				},get:function(){
 					return this.selected_code;
-				},created:function(){
-					let _this = this;
 				}
+			},created:function(){
+				let _this = this;
 			}
 		});
 		//外部获取
 		$('body').on('click','.sure',function(){
 			console.log(city_picker.get());
 		});
+		//外部赋值
+		$('body').on('click','.set',function(){
+			let assign_value = {
+				province:102,
+				city:104
+			};
+			city_picker.init_assign = assign_value;
+		});
 	});
 </script>
 {/block}
 {block name="footer"}
 <a href="javascript:void(0);" class="sure">确定</a>
+<a href="javascript:void(0);" class="set">赋值</a>
 {/block}
