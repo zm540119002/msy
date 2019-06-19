@@ -1,14 +1,21 @@
 <template id="city_picker_tpl">
-    <!-- 省 -->
-    <select v-model="postData.selectedProvince" @change="updateCity();">
-        <option v-for='province in provinces' :value="province.code">{{province.name}}</option>
-    </select>
-    <!-- 市 -->
-    <select v-model="postData.selectedCity" v-show="cities.length">
-        <option v-for='city in cities' :value="city.code">{{city.name}}</option>
-    </select>
+    <section class="express-area-box" style="bottom: 0px;">
+        <header>
+            <h3>选择地区</h3>
+            <a href="javascript:void(0);" class="backUp" title="返回" v-show="!displayProvince" @click="backUp"></a>
+            <a href="javascript:void(0);" class="close" title="关闭" @click="close"></a>
+        </header>
+        <article id="areaBox">
+            <ul id="provinceList" class="area-list" v-if="displayProvince">
+                <li v-for="province in provinces" :code="province.code" @click="updateCity">{{province.name}}</li>
+            </ul>
+            <ul id="cityList" class="area-list" v-else>
+                <li v-for="city in cities" :code="city.code">{{city.name}}</li>
+            </ul>
+        </article>
+        <div id="areaMask" class="address_mask"></div>
+    </section>
 </template>
-<script type="text/javascript" src="vue_js/province_city.js"></script>
 <script type="text/javascript">
     $(function(){
         Vue.component('city_picker', {
@@ -23,18 +30,21 @@
                 }
             },data: function () {
                 return {
-//                    provinces: provinces, //所有省份
+                    provinces: this.init_provinces.provinces, //所有省份
                     cities:[], //被选择的省对应的市数据
                     postData:{
                         selectedProvince: '', //被选择的省
                         selectedCity:'',  //被选择的市
                         selectedCityLevel:''  //被选择的市的级别
-                    }
+                    },
+                    displayProvince: {type: Boolean,default: true}
                 }
             },methods: {
                 //更新市数据
-                updateCity:function(){
+                updateCity:function(event){
+                    let _thisJquery = $(event.currentTarget);
                     let _this = this;
+                    _this.postData.selectedProvince = _thisJquery.attr('code');
                     _this.provinces.map(function(item,index){
                         if(item.code == _this.postData.selectedProvince){
                             _this.cities = item.cities;
@@ -44,13 +54,14 @@
                         _this.postData.selectedCity = _this.cities[0].code;
                         _this.postData.selectedCityLevel = _this.cities[0].level;
                     }
-                },test:function(){
+                    this.displayProvince = false;
+                },backUp:function(){
                     let _this = this;
-                    console.log(_this.postData);
+                    this.displayProvince = true;
+                },close:function(){
+                    let _this = this;
                 },created:function(){
                     let _this = this;
-                    console.log(123);
-                    console.log(_this.provinces);
                 }
             }
         });

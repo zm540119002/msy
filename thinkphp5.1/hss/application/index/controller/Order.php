@@ -451,69 +451,57 @@ class Order extends \common\controller\UserBase
             return config('custom.not_post');
         }
 
-        $id = input('post.id/d');
+        $id = input('post.order_id/d');
+        $sn = input('post.order_sn/s');
         $orderStatus = input('post.order_status/d');
 
-        if(!input('?post.id') && !$id){
-            $this->errorMsg('失败');
-        }
+        if( $id && $sn){
+            $where = [
+                'where' => [
+                    ['id','=',$id],
+                    ['sn','=',$sn],
+                    ['user_id','=',$this->user['id']],
+                ]
+            ];
 
-        $where = [
-            'where' => [
-                ['id','=',$id],
-                ['user_id','=',$this->user['id']],
-            ]
-        ];
+            $model = new \app\index\model\Order();
+            $orderInfo = $model->getInfo($where);
 
-        $model = new \app\index\model\Order();
-        $orderInfo = $model->getInfo($where);
-
-        $type = true;
-        // 订单状态：1:待付款 2:待发货 3:待收货 4:待评价 5:已完成 6:已取消
-        switch($orderStatus){
-            case 4 : // 去确定收货
-                $where[] = ['order_status','in','2,3'];
-                $result = [
-                    'code'=> config('code.success.default.code'),
-                    'url' => url('order/detail',['order_sn'=>$orderInfo['sn']]),
-                ];
-                $msg = '收货成功';
-                break;
-            case 5 : // 去评价
-                $where[] = ['order_status','=',4];
-                break;
-            case 6 : // 取消订单
-                $where[] = ['order_status','=',1];
-                break;
-            case 7 : // 申请退款
-                // system_id,order_sn
-/*                $curl = new \common\component\curl\Curl();
-                $res = $curl->get('https://msy.meishangyun.com/index/Order/refundOrder',array('system_id'=>3,'order_sn'=>$orderInfo['sn']));
-                $res = json_decode($res,true);
-                if(!$res['status'] || $res==null){
+            $type = true;
+            // 订单状态：1:待付款 2:待发货 3:待收货 4:待评价 5:已完成 6:已取消
+            switch($orderStatus){
+                case 4 : // 去确定收货
+                    $where[] = ['order_status','in','2,3'];
+                    $msg = '收货成功';
+                    break;
+                case 6 : // 取消订单
+                    $where[] = ['order_status','=',6];
+                    $msg = '订单取消成功';
+                    break;
+                default:
                     $type = false;
-                }*/
+                    break;
+            }
 
-                break;
-            default:
-                $type = false;
-                break;
+            if($type){
+
+                $data = [
+                    'order_status' => $orderStatus,
+                ];
+                $rse = $model->where($where['where'])->setField($data);
+
+                if($rse){
+                    $result = [
+                        'code'=> config('code.success.default.code'),
+                        'url' => url('order/detail',['order_sn'=>$orderInfo['sn']]),
+                    ];
+                    $this->successMsg($msg,$result);
+                }
+            }
+
         }
+        $this->errorMsg('失败');
 
-        if(!$type){
-            return errorMsg('失败');
-        }
-
-        $data = [
-            'order_status' => $orderStatus,
-        ];
-        $rse = $model->where($where['where'])->setField($data);
-        if(!$rse){
-            return errorMsg('失败');
-
-        }else{
-            $this->successMsg($msg,$result);
-        }
 
         //$this->successMsg('收货成功 ！',config('code.success.default'));
     }
@@ -692,15 +680,16 @@ class Order extends \common\controller\UserBase
 
         $unlockingFooterCart = false;
         // 底部按钮
-        // 0：临时 1:待付款 2:待收货 3:待收货 4:待评价 5:已完成 6:已取消',
+        // 0：临时 1:待付款 2:待收货(没有待发货) 3:待收货 4:待评价 5:已完成 6:已取消',
         switch ($info['order_status'])
         {
             case 0:
             case 1:
-                $configFooter = [0,20];
+                $configFooter = [0,23,20];
                 $unlockingFooterCart = unlockingFooterCartConfigTest($configFooter);
-                array_push($unlockingFooterCart['menu'][0]['class'],'group_btn70');
+                array_push($unlockingFooterCart['menu'][0]['class'],'group_btn30');
                 array_push($unlockingFooterCart['menu'][1]['class'],'group_btn30');
+                array_push($unlockingFooterCart['menu'][2]['class'],'group_btn40');
                 break;
             case "2":
             case "3":
