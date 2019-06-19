@@ -2,8 +2,8 @@
     <section id="areaLayer" class="express-area-box" style="bottom: 0px;">
         <header>
             <h3>选择地区</h3>
-            <a class="back" href="javascript:void(0);" title="返回" v-show="!displayProvince" @click="backUp"></a>
-            <a id="closeArea" class="close" href="javascript:void(0);" title="关闭"></a>
+            <a href="javascript:void(0);" class="backUp" title="返回" v-show="!displayProvince" @click="backUp"></a>
+            <a href="javascript:void(0);" class="close" title="关闭"></a>
         </header>
         <article id="areaBox">
             <ul id="provinceList" class="area-list" v-if="displayProvince">
