@@ -1,6 +1,9 @@
 <template id="city_picker_tpl">
-    <ul id="areaList" class="area-list">
+    <ul id="provinceList" class="area-list">
         <li v-for="province in provinces" :value="province.code" @click="updateCity">{{province.name}}</li>
+    </ul>
+    <ul id="cityList" class="area-list">
+        <li v-for="city in cities" :value="city.code">{{city.name}}</li>
     </ul>
 </template>
 <script type="text/javascript">
@@ -30,7 +33,6 @@
                 updateCity:function(){
                     let _this = this;
                     console.log(_this.provinces);
-                    return;
                     _this.provinces.map(function(item,index){
                         if(item.code == _this.postData.selectedProvince){
                             _this.cities = item.cities;
