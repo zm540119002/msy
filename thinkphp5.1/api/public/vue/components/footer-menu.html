@@ -308,6 +308,55 @@
                         }
                     });
 
+                },to_evaluate:function(event){
+                    let _thisJquery = $(event.currentTarget);
+                    let _thisVue = this;
+                    login_success_callback_private = function(){
+                        _thisJquery.click()
+                    };
+                    register_success_callback_private = function(){
+                        _thisJquery.click()
+                    };
+
+
+                    console.log('这个是评价');
+                    return false;
+                    let class_name = _thisJquery.context.className;
+
+                    let content = '确定已收到货 ?';
+                    _thisVue.postData.order_status = 4;
+
+                    if(class_name=='cancel_order'){
+                        content = '确定要取消该订单 ?';
+                        _thisVue.postData.order_status = 6;
+                    }
+
+                    layer.open({
+                        content : content,
+                        btn:['确定','取消'],
+                        end : function(){
+                            return false;
+                        },
+                        yes:function(index){
+                            _thisVue.postData.order_id = "{$orderInfo.id|default=0}";
+                            _thisVue.postData.order_sn = "{$orderInfo.sn|default=''}";
+
+                            //前端验证
+                            if( !_thisVue.postData.order_id || !_thisVue.postData.order_sn ){
+                                dialog.error('请选择要提交的订单 ！');
+                                return false;
+                            }
+
+                            let config = {
+                                clickObj:_thisJquery,
+                                postData:_thisVue.postData,
+                                componentFooterCartMenu:_thisVue
+                            };
+
+                            asyncVerify(config);
+                        }
+                    });
+
                 }
             },created:function(){
                 let _this = this;
