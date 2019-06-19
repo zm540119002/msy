@@ -4,11 +4,16 @@
 <div id="province_city_linkage" @click="dialog">
 	<label class="form-label">选择地区：</label>
 	<city_picker
-			v-show="display"
 			:init_provinces="provinces"
 	></city_picker>
 	<div @click="test">
 		测试
+	</div>
+	<div @click="test2">
+		测试2
+	</div>
+	<div v-show="display">
+		测试3
 	</div>
 </div>
 {/block}
@@ -29,6 +34,10 @@
 					_this.display = true;
 					console.log(_this.display);
 				},test:function(){
+					let _this = this;
+					_this.display = false;
+					console.log(_this.display);
+				},test2:function(){
 					let _this = this;
 					_this.display = false;
 					console.log(_this.display);
