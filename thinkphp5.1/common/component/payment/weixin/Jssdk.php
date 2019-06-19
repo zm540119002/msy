@@ -30,6 +30,7 @@ class Jssdk {
 //    $this -> access_token = $access_token;
 
       $auto_access_token_data = json_decode($this->get_php_file("auto_access_token.php"));
+      P($auto_access_token_data);
       if ($auto_access_token_data->expire_time < time()) {
           $auto_access_token_data = $this -> GetAccessTokenAndOpenid();
           $auto_access_token = $this -> $auto_access_token_data->access_token;
@@ -41,6 +42,7 @@ class Jssdk {
       } else {
           $auto_access_token = $auto_access_token_data->access_token;
       }
+      P($auto_access_token);
       $this -> auto_access_token = $auto_access_token;
 
 
