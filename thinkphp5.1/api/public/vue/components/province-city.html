@@ -61,11 +61,11 @@
                 },backUp:function(){
                     let _this = this;
                     this.displayProvince = true;
-                },close:function(event){
+                },close:function(){
                     let _this = this;
-                    _this.$parent.display = false;
-//                    let _thisJquery = $(event.currentTarget);
-//                    _thisJquery.parents('div.city_picker').hide();
+                    console.log(_this.$parent.$data);
+                    _this.$parent.$data.display = false;
+                    console.log(_this.$parent.$data);
                 },created:function(){
                     let _this = this;
                 }
