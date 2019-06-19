@@ -61,8 +61,12 @@
                 },updateCity:function(event){
                     let _thisJquery = $(event.currentTarget);
                     let _this = this;
-                    console.log(_this.postData.selectedCity);
                     _this.postData.selectedCity = _thisJquery.attr('code');
+                    _this.cities.map(function(item,index){
+                        if(item.code == _this.postData.selectedCity){
+                            _this.postData.selectedCityLevel = item.level;
+                        }
+                    });
                     console.log(_this.postData.selectedCity);
                 },backUp:function(){
                     let _this = this;
