@@ -110,19 +110,4 @@ class Cart extends \common\controller\UserBase {
             $this->errorMsg('删除失败！',config('code.default'));
         }
     }
-
-    //统计购物车商品数量
-    public function getCartTotalNum(){
-        //统计购物车商品数量
-        $user = checkLogin();
-        if($user){
-            $modelCart = new \app\index\model\Cart();
-            $totalNum = $modelCart
-                ->alias('c')
-                ->join('goods g','c.goods_id = g.id')
-                ->where(['c.status'=>0,'c.user_id'=>$user['id'],'g.shelf_status'=>3])
-                ->sum('c.num');
-            $this -> assign('total_num',$totalNum);
-        }
-    }
 }
