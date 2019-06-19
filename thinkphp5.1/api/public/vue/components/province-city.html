@@ -8,10 +8,10 @@
             </header>
             <article id="areaBox">
                 <ul id="provinceList" class="area-list" v-if="displayProvince">
-                    <li v-for="province in provinces" :code="province.code" @click="updateCity">{{province.name}}</li>
+                    <li v-for="province in provinces" :code="province.code" @click="updateProvince">{{province.name}}</li>
                 </ul>
                 <ul id="cityList" class="area-list" v-else>
-                    <li v-for="city in cities" :code="city.code" @click="submit">{{city.name}}</li>
+                    <li v-for="city in cities" :code="city.code" @click="updateCity">{{city.name}}</li>
                 </ul>
             </article>
         </section>
@@ -44,7 +44,7 @@
                 }
             },methods: {
                 //更新市数据
-                updateCity:function(event){
+                updateProvince:function(event){
                     let _thisJquery = $(event.currentTarget);
                     let _this = this;
                     _this.postData.selectedProvince = _thisJquery.attr('code');
@@ -58,15 +58,22 @@
                         _this.postData.selectedCityLevel = _this.cities[0].level;
                     }
                     this.displayProvince = false;
+                },updateCity:function(event){
+                    let _thisJquery = $(event.currentTarget);
+                    let _this = this;
+                    _this.postData.selectedCity = _thisJquery.attr('code');
+                    _this.cities.map(function(item,index){
+                        if(item.code == _this.postData.selectedCity){
+                            _this.postData.selectedCityLevel = item.level;
+                        }
+                    });
+                    console.log(_this.postData);
                 },backUp:function(){
                     let _this = this;
                     this.displayProvince = true;
                 },close:function(){
                     let _this = this;
                     _this.$emit('toggle')
-                },submit:function(){
-                    let _this = this;
-                    console.log(_this.postData);
                 },created:function(){
                     let _this = this;
                 }
