@@ -1,4 +1,7 @@
 <template id="city_picker_tpl">
+    <select >
+        <option ></option>
+    </select>
     <!-- 省 -->
     <select v-model="postData.selectedProvince" @change="updateCity();">
         <option v-for='province in provinces' :value="province.code">{{province.name}}</option>
@@ -7,7 +10,6 @@
     <select v-model="postData.selectedCity" v-show="cities.length">
         <option v-for='city in cities' :value="city.code">{{city.name}}</option>
     </select>
-    <a href="javascript:void(0);" class="next-step step beforehand-register" @click="test">确定</a>
 </template>
 <script type="text/javascript" src="vue_js/province_city.js"></script>
 <script type="text/javascript">
@@ -40,6 +42,9 @@
                 },test:function(){
                     let _this = this;
                     console.log(_this.postData);
+                },created:function(){
+                    let _this = this;
+                    console.log(_this.provinces);
                 }
             }
         });
