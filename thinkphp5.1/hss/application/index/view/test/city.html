@@ -15,8 +15,7 @@
 	</div>
 </article>
 {/block}
-{block name="footer"}
-{/block}
+{block name="footer"}{/block}
 {block name="script"}
 <script type="text/javascript" src="vue_js/province_city.js"></script>
 <script type="text/javascript">
@@ -31,8 +30,7 @@
 					selectedCity:'',  //被选择的市
 					selectedCityLevel:''  //被选择的市的级别
 				}
-			},
-			methods: {
+			},methods: {
 				//更新市数据
 				updateCity:function(){
 					let _this = this;
@@ -41,9 +39,10 @@
 							_this.cities = item.cities;
 						}
 					});
-					//初始化默认值
-					_this.postData.selectedCity = _this.cities[0].code;
-					_this.postData.selectedCityLevel = _this.cities[0].level;
+					if(_this.cities.length){
+						_this.postData.selectedCity = _this.cities[0].code;
+						_this.postData.selectedCityLevel = _this.cities[0].level;
+					}
 				},test:function(){
 					let _this = this;
 					console.log(_this.postData);

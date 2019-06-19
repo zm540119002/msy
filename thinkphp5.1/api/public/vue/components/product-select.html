@@ -157,7 +157,7 @@
                         <img class="" :src="product_src?('public_uploads/' + product_src):('api_common_img/default/no_pic_100.jpg') " alt="">
                     </a>
                 </div>
-                <div  class="">
+                <div  class="index_product">
                     <div class="product_name">
                         <p class="two-line-omit">{{product_name}}</p>
                     </div>
@@ -510,9 +510,7 @@
 	.add_num{
 		left: 18px;
 	}
-    .product_specs .two-line-omit{
-        height: 42px;
-    }
+
     .index .product_name{
         font-size: 0.25rem;
         color: #333;
@@ -592,5 +590,8 @@
 	.price span{
 		font-size: 0.3rem;
 		float: left;
-	}
+    }
+   .index_product .product_specs{
+       min-height: 0.6rem;
+   }
 </style>
