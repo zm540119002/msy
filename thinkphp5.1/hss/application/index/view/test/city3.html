@@ -2,11 +2,11 @@
 {block name="title"}城市测试3{/block}
 {block name="content"}
 <div id="province_city_linkage">
-	<label class="form-label" @toggle="toggle">选择地区：</label>
+	<label class="form-label" @click="toggle">选择地区：</label>
 	<city_picker
 			v-show="display"
 			:init_provinces="provinces"
-			:toggle="toggle"
+			@toggle="toggle"
 	></city_picker>
 </div>
 {/block}
