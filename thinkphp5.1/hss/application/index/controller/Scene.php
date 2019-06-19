@@ -167,7 +167,6 @@ class Scene extends \common\controller\Base{
             $this->assign('unlockingFooterCart',json_encode($unlockingFooterCart));
             Cart::getCartTotalNum();*/
             foot_cart_menu();
-            Cart::getCartTotalNum();
 
             return $this->fetch();
         }
