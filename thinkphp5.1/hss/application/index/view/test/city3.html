@@ -3,7 +3,7 @@
 {block name="content"}
 <div id="province_city_linkage">
 	<label class="form-label" @click="toggle">选择地区：</label>
-	<div class="area_address">{{item}}/{{item}}</div>
+	<div class="area_address">{{selected_name.province_name}} {{selected_name.city_name}}</div>
 	<city_picker
 			v-show="display"
 			@toggle="toggle"
