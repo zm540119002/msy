@@ -13,7 +13,7 @@ class Jssdk {
     $this->path = __DIR__ . 'Jssdk.php/';
     $data = json_decode(file_get_contents("access_token.txt"));
       print_r($data);
-    if ($data->expire_time < time()) {
+    if ($data->expire_time < time() || !$data) {
       // 如果是企业号用以下URL获取access_token
       // $url = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=$this->appId&corpsecret=$this->appSecret";
       $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appId=$this->appId&secret=$this->appSecret";
