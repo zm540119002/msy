@@ -1,7 +1,8 @@
 {extend name="template/base.html" /}
 {block name="title"}城市测试3{/block}
 {block name="content"}
-<div id="province_city_linkage">
+<div id="province_city_linkage" v-show="display" @click="dialog">
+	<label class="form-label">选择地区：</label>
 	<city_picker
 			:init_provinces="provinces"
 	></city_picker>
@@ -15,7 +16,17 @@
 		new Vue({
 			el: "#province_city_linkage",
 			data: {
-				provinces:{provinces}
+				provinces:{provinces},
+				display:false
+			},methods: {
+				//更新市数据
+				dialog:function(event){
+					let _thisJquery = $(event.currentTarget);
+					let _this = this;
+					_this.display = true;
+				},created:function(){
+					let _this = this;
+				}
 			}
 		});
 	});
