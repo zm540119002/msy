@@ -17,7 +17,7 @@
                 }
             },data: function () {
                 return {
-                    provinces: this.init_provinces, //所有省份
+                    provinces: this.init_provinces.provinces, //所有省份
                     cities:[], //被选择的省对应的市数据
                     postData:{
                         selectedProvince: '', //被选择的省
@@ -30,6 +30,7 @@
                 updateCity:function(){
                     let _this = this;
                     console.log(_this.provinces);
+                    console.log(_this.init_provinces);
                     return;
                     _this.provinces.map(function(item,index){
                         if(item.code == _this.postData.selectedProvince){
@@ -45,7 +46,6 @@
                     console.log(_this.postData);
                 },created:function(){
                     let _this = this;
-                    console.log(_this.init_provinces);
                 }
             }
         });
