@@ -52,7 +52,6 @@
                     let _thisJquery = $(event.currentTarget);
                     let _this = this;
                     _this.postData.selectedProvince = _thisJquery.attr('code');
-                    this.displayProvince = false;
                 },updateCity:function(event){
                     let _thisJquery = $(event.currentTarget);
                     let _this = this;
@@ -86,6 +85,7 @@
                                 _this.postData.selectedCityLevel = _this.cities[0].level;
                                 _this.selected_name.city_name = _this.cities[0].name;
                             }
+                            this.displayProvince = false;
                         }
                     },
                     deep: true,
