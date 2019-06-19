@@ -6,9 +6,9 @@
 	<city_picker
 			v-show="display"
 			@toggle="toggle"
+			@getCity="getCity"
 			:init_provinces="provinces"
 	></city_picker>
-	<a href="javascript:void(0);" class="sure" @click="sure">确定</a>
 </div>
 {/block}
 {block name="common"}
@@ -30,10 +30,9 @@
 				toggle:function(){
 					let _this = this;
 					_this.display = !_this.display;
-				},sure:function(){
+				},getCity:function(param){
 					let _this = this;
-					let postData = _this.$children;
-					console.log(postData);
+					console.log(param);
 				},created:function(){
 					let _this = this;
 				}
