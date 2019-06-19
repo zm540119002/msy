@@ -8,6 +8,8 @@ class Base extends \think\Controller{
     protected $host = null;
     public function __construct(){
         parent::__construct();
+
+
         //登录验证后跳转回原验证发起页
         $this->http_type = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') || (isset($_SERVER['HTTP_X_FORWARDED_PROTO'])
                 && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')) ? 'https://' : 'http://';

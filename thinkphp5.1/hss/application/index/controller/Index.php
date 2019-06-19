@@ -64,15 +64,14 @@ class Index extends \common\controller\Base{
         // 底部菜单，见配置文件custom.footer_menu
         $this->assign('currentPage',request()->controller().'/'.request()->action());
 
-/*        $unlockingFooterCart = unlockingFooterCartConfigTest([0,2,1,3]);
+        $unlockingFooterCart = unlockingFooterCartConfigTest([0,2,1,3]);
         array_push($unlockingFooterCart['menu'][0]['class'],'group_btn30');
         array_push($unlockingFooterCart['menu'][1]['class'],'group_btn20');
         array_push($unlockingFooterCart['menu'][2]['class'],'group_btn25');
         array_push($unlockingFooterCart['menu'][3]['class'],'group_btn25');
         $this->assign('unlockingFooterCart',json_encode($unlockingFooterCart));
-        Cart::getCartTotalNum();*/
-
-        foot_cart_menu();
+        Cart::getCartTotalNum();
+        //foot_cart_menu();
 
         return $this->fetch();
     }
