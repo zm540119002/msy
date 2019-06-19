@@ -7,7 +7,6 @@
         <li onclick="selectP(0);">北京市</li>
     </ul>
 </template>
-<script type="text/javascript" src="vue_js/province_city.js"></script>
 <script type="text/javascript">
     $(function(){
         Vue.component('city_picker', {
@@ -22,7 +21,7 @@
                 }
             },data: function () {
                 return {
-                    provinces: provinces, //所有省份
+                    provinces: this.init_provinces, //所有省份
                     cities:[], //被选择的省对应的市数据
                     postData:{
                         selectedProvince: '', //被选择的省

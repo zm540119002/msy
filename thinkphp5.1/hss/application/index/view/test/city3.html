@@ -2,7 +2,9 @@
 {block name="title"}城市测试3{/block}
 {block name="content"}
 <div id="province_city_linkage">
-	<city_picker></city_picker>
+	<city_picker
+		:init_provinces:init_provinces
+	></city_picker>
 </div>
 
 	<!--&lt;!&ndash;选择地区弹层&ndash;&gt;-->
@@ -32,6 +34,7 @@
 	<!--<div id="areaMask" class="address_mask" style="display: block;"></div>-->
 {/block}
 {block name="common"}
+<script type="text/javascript" src="vue_js/province_city.js"></script>
 {include file="../../api/public/vue/components/province-city.html" /}
 <script type="text/javascript">
 	$(function(){
