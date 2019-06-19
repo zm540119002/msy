@@ -63,7 +63,7 @@
                 },close:function(event){
                     let _this = this;
                     let _thisJquery = $(event.currentTarget);
-                    _thisJquery.parent().hide();
+                    _thisJquery.parents('section').hide();
                 },created:function(){
                     let _this = this;
                 },closeMask:function(){
