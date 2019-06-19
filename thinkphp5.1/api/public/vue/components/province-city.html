@@ -86,9 +86,21 @@
                 },close:function(){
                     let _this = this;
                     _this.$emit('toggle');
-                },created:function(){
-                    let _this = this;
                 }
+            },watch: {
+                postData: {
+                    handler(newVal, oldVal) {
+                        let _this = this;
+                        if(typeof(oldVal) !== "undefined"){
+                            console.log(newVal);
+                            console.log(oldVal);
+                        }
+                    },
+                    deep: true,
+                    immediate: true
+                }
+            },created:function(){
+                let _this = this;
             }
         });
     });
