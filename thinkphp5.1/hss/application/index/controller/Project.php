@@ -108,6 +108,7 @@ class Project extends \common\controller\Base{
             Cart::getCartTotalNum();*/
 
             foot_cart_menu();
+            Cart::getCartTotalNum();
 
             return $this->fetch();
         }
