@@ -21,12 +21,14 @@ class Base extends \think\Controller{
 
         //微信处理
         if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
-            $weiXinUserInfo =  session('weiXinUserInfo');
-            if(!$weiXinUserInfo){
-                $mineTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
-                $weiXinUserInfo = $mineTools->getOauthUserInfo();
-                session('weiXinUserInfo',$weiXinUserInfo);
-            }
+//            $weiXinUserInfo =  session('weiXinUserInfo');
+//            if(!$weiXinUserInfo){
+//                $mineTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
+//                $weiXinUserInfo = $mineTools->getOauthUserInfo();
+//                session('weiXinUserInfo',$weiXinUserInfo);
+//            }
+            $mineTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
+            $weiXinUserInfo = $mineTools->getOauthUserInfo();
             $user = checkLogin();
             if((!$user['name'] || !$user['avatar']) && $user && isset($weiXinUserInfo['openid'])){
                 //临时相对路径
@@ -53,9 +55,12 @@ class Base extends \think\Controller{
                 setSession($user);
             }
 
+            //判断是否关注平台
             $weiXinUserInfo2= $mineTools->get_user_info($weiXinUserInfo['openid']);
-            P($weiXinUserInfo2);
-
+            //P($weiXinUserInfo2);
+            if(isset($weiXinUserInfo2['subscribe'])){
+                $this -> assign('subscribe',$weiXinUserInfo2['subscribe']);
+            }
 
         }
 
