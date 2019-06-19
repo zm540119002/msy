@@ -1,6 +1,6 @@
 <template id="city_picker_tpl">
-    <select @change="updateCity();">
-        <option v-for='province in provinces' :value="province.code">{{province.name}}</option>
+    <select >
+        <option ></option>
     </select>
     <!-- 省 -->
     <select v-model="postData.selectedProvince" @change="updateCity();">
