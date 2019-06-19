@@ -26,10 +26,6 @@
 					_this.display = true;
 				},created:function(){
 					let _this = this;
-					//监听-城市选择关闭-事件
-					bus.$on('city_picker_close', function(){
-						_this.display = false;
-					});
 				}
 			}
 		});
