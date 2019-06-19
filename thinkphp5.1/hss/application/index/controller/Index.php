@@ -9,7 +9,7 @@ class Index extends \common\controller\Base{
      * 促销列表，场景列表，商品列表 -ajax
      */
     public function index(){
-        
+
         // 促销列表 7个
         $modelPromotion = new \app\index\model\Promotion();
         $condition =[
@@ -71,7 +71,10 @@ class Index extends \common\controller\Base{
         $this->assign('unlockingFooterCart',json_encode($unlockingFooterCart));
         Cart::getCartTotalNum();*/
 
+
         foot_cart_menu();
+
+        //Cart::getCartTotalNum();
 
         return $this->fetch();
     }
@@ -183,7 +186,7 @@ class Index extends \common\controller\Base{
                 // 底部菜单，见配置文件custom.footer_menu
                 $this->assign('currentPage',request()->controller().'/'.request()->action());
             }
-            Cart::getCartTotalNum();
+            $this->getCartTotalNum();
             return $this->fetch('cart/index');
         }
     }
@@ -227,6 +230,22 @@ class Index extends \common\controller\Base{
         $this->assignStandardBottomButton([22]);
 
         return $this->fetch();
+    }
+
+
+    //统计购物车商品数量
+    public function getCartTotalNum(){
+        //统计购物车商品数量
+        $user = checkLogin();
+        if($user){
+            $modelCart = new \app\index\model\Cart();
+            $totalNum = $modelCart
+                ->alias('c')
+                ->join('goods g','c.goods_id = g.id')
+                ->where(['c.status'=>0,'c.user_id'=>$user['id'],'g.shelf_status'=>3])
+                ->sum('c.num');
+            $this -> assign('total_num',$totalNum);
+        }
     }
 
 

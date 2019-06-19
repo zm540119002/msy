@@ -63,5 +63,7 @@ function foot_cart_menu(){
     array_push($unlockingFooterCart['menu'][3]['class'],'group_btn25');
     think\View::share('unlockingFooterCart',json_encode($unlockingFooterCart));
 
-    controller('Cart')->getCartTotalNum();
+    controller('index')->getCartTotalNum();
+
+    //app\index\controller\Cart::getCartTotalNum();
 }

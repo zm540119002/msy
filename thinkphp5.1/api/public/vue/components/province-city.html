@@ -11,7 +11,7 @@
                     <li v-for="province in provinces" :code="province.code" @click="updateCity">{{province.name}}</li>
                 </ul>
                 <ul id="cityList" class="area-list" v-else>
-                    <li v-for="city in cities" :code="city.code">{{city.name}}</li>
+                    <li v-for="city in cities" :code="city.code" @click="submit">{{city.name}}</li>
                 </ul>
             </article>
         </section>
@@ -63,7 +63,10 @@
                     this.displayProvince = true;
                 },close:function(){
                     let _this = this;
-                    _this.$parent.display = false;
+                    _this.$emit('toggle')
+                },submit:function(){
+                    let _this = this;
+                    console.log(_this.postData);
                 },created:function(){
                     let _this = this;
                 }
