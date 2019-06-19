@@ -29,7 +29,7 @@
                 //更新市数据
                 updateCity:function(){
                     let _this = this;
-                    console.log(provinces);
+                    console.log(_this.provinces);
                     return;
                     _this.provinces.map(function(item,index){
                         if(item.code == _this.postData.selectedProvince){
@@ -45,7 +45,6 @@
                     console.log(_this.postData);
                 },created:function(){
                     let _this = this;
-                    console.log(123);
                     console.log(_this.init_provinces);
                 }
             }
