@@ -9,11 +9,9 @@
 			<a id="closeArea" class="close" href="javascript:void(0);" title="关闭"></a>
 		</header>
 		<article id="areaBox">
-			<ul id="areaList" class="area-list">
-				<city_picker
-						:init_provinces="provinces"
-				></city_picker>
-			</ul>
+			<city_picker
+					:init_provinces="provinces"
+			></city_picker>
 		</article>
 	</section>
 	<!--遮罩层-->
@@ -25,7 +23,7 @@
 <script type="text/javascript">
 	$(function(){
 		new Vue({
-			el: "#areaList",
+			el: "#areaBox",
 			data: {
 				provinces:{provinces}
 			}
