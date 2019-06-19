@@ -61,9 +61,9 @@
                 },updateCity:function(event){
                     let _thisJquery = $(event.currentTarget);
                     let _this = this;
+                    console.log(_this.postData.selectedCity);
                     _this.postData.selectedCity = _thisJquery.attr('code');
-                    console.log(_this.cities);
-                    console.log(_this.postData);
+                    console.log(_this.postData.selectedCity);
                 },backUp:function(){
                     let _this = this;
                     this.displayProvince = true;
