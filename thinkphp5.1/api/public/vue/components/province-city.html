@@ -20,6 +20,7 @@
 </template>
 <script type="text/javascript">
     $(function(){
+        //城市选择
         Vue.component('city_picker', {
             template:'#city_picker_tpl',
             props: {
@@ -62,6 +63,8 @@
                     this.displayProvince = true;
                 },close:function(event){
                     let _this = this;
+                    //触发-城市选择关闭-事件
+                    bus.$emit('city_picker_close');
 //                    let _thisJquery = $(event.currentTarget);
 //                    _thisJquery.parents('div.city_picker').hide();
                 },created:function(){
