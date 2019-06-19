@@ -27,7 +27,7 @@
     //console.info(document.currentScript.src);
     //return false;
     //console.log(dataJson);
-    console.log(Data.responseText);
+    console.log(Data);
     return false;
     //return false;
     cityData = JSON.stringify(cityData).replace(/\"id\":/g, "\"value\":");
