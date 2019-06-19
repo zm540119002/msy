@@ -178,6 +178,7 @@ class Jssdk {
   public function getUserInfo()
   {
     $openid = $this->getOpenid();
+    print_r($openid);exit;
 //    $access_token = $this->getAccessToken();
     $url = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=".$this->access_token."&openid=".$openid."&lang=zh_CN";
     $res = $this->http_request($url);
