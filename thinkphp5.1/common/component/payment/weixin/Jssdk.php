@@ -5,28 +5,47 @@ class Jssdk {
   private $appId;
   private $appSecret;
   private $path;
-  private $access_token;
+  private $access_token; //普通$access_token
+  private $auto_access_token; // 授权$auto_access_token
 
   public function __construct($appId, $appSecret) {
     $this->appId = $appId;
     $this->appSecret = $appSecret;
     $this->path = __DIR__ . 'Jssdk.php/';
-    $data = json_decode($this->get_php_file("access_token.php"));
-    if ($data->expire_time < time()) {
+    $access_token_data = json_decode($this->get_php_file("access_token.php"));
+      p($access_token_data);exit;
+    if ($access_token_data->expire_time < time()) {
       // 如果是企业号用以下URL获取access_token
       // $url = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=$this->appId&corpsecret=$this->appSecret";
       $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appId=$this->appId&secret=$this->appSecret";
       $res = json_decode($this->httpGet($url));
       $access_token = $res->access_token;
       if ($access_token) {
-        $data->expire_time = time() + 7000;
-        $data->access_token = $access_token;
-        $this->set_php_file("access_token.php", json_encode($data));
+          $access_token_data->expire_time = time() + 7000;
+          $access_token_data->access_token = $access_token;
+          $this->set_php_file("access_token.php", json_encode($access_token_data));
       }
     } else {
-      $access_token = $data->access_token;
+      $access_token = $access_token_data->access_token;
     }
     $this -> access_token = $access_token;
+
+      $auto_access_token_data = json_decode($this->get_php_file("auto_access_token.php"));
+      if ($auto_access_token_data->expire_time < time()) {
+          // 如果是企业号用以下URL获取access_token
+          // $url = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=$this->appId&corpsecret=$this->appSecret";
+          $auto_access_token = $this -> GetAccessTokenAndOpenid();
+          if ($auto_access_token) {
+              $auto_access_token_data->expire_time = time() + 7000;
+              $auto_access_token_data->access_token = $access_token;
+              $this->set_php_file("auto_access_token.php", json_encode($auto_access_token_data));
+          }
+      } else {
+          $auto_access_token = $auto_access_token_data->access_token;
+      }
+      $this -> auto_access_token = $auto_access_token;
+
+
   }
 
   /**
@@ -107,6 +126,7 @@ class Jssdk {
   private function getAccessToken() {
     // access_token 应该全局存储与更新，以下代码以写入到文件中做示例
     $data = json_decode($this->get_php_file("access_token.php"));
+
     if ($data->expire_time < time()) {
       // 如果是企业号用以下URL获取access_token
       // $url = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=$this->appId&corpsecret=$this->appSecret";
@@ -188,7 +208,6 @@ class Jssdk {
   public function getOauthUserInfo()
   {
     $data = $this -> GetAccessTokenAndOpenid();
-    p($data);
     $access_token = $data['access_token'];
     $openid =  $data['openid'];
     $url = "https://api.weixin.qq.com/sns/userinfo?access_token=".$access_token."&openid=".$openid."&lang=zh_CN";
