@@ -15,14 +15,7 @@
         console.log(provinces);
         Vue.component('city_picker', {
             template:'#city_picker_tpl',
-            props: {
-                init_provinces: {
-                    type: Object,
-                    default: function () {
-                        return {}
-                    }
-                }
-            },data: {
+            data: {
                 provinces: provinces, //所有省份
                 cities:[], //被选择的省对应的市数据
                 postData:{
