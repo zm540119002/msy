@@ -15,15 +15,17 @@
         console.log(provinces);
         Vue.component('city_picker', {
             template:'#city_picker_tpl',
-            data: {
-                provinces: provinces, //所有省份
-                cities:[], //被选择的省对应的市数据
-                postData:{
-                    selectedProvince: '', //被选择的省
-                    selectedCity:'',  //被选择的市
-                    selectedCityLevel:''  //被选择的市的级别
+            data: function () {
+                return {
+                    provinces: provinces, //所有省份
+                    cities:[], //被选择的省对应的市数据
+                    postData:{
+                        selectedProvince: '', //被选择的省
+                        selectedCity:'',  //被选择的市
+                        selectedCityLevel:''  //被选择的市的级别
+                    }
                 }
-            }, methods: {
+            },methods: {
                 //更新市数据
                 updateCity:function(){
                     let _this = this;
