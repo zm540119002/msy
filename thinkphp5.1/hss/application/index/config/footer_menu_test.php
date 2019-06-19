@@ -101,11 +101,12 @@ return [
             ],
             'action'=>url('Order/setOrderStatus'),
         ], [//13
-            'name'   => '去评价',
+            'name'   => '立即评价',
             'class'=>[
                 'bottom_item',
                 'to_evaluate',
             ],
+            'action'=>url('Order/setOrderStatus'),
         ],[//14
             'name'   => '再次购买',
             'class'=>[
@@ -165,6 +166,13 @@ return [
                 'jump_url'
             ],
             'action'=>url('/index/CityPartner/city'),
-        ]
+        ],[// 23
+            'name'   => '取消订单',
+            'class'=>[
+                'bottom_item',
+                'cancel_order',
+            ],
+            'action'=>url('Order/setOrderStatus'),
+        ],
     ],
 ];
