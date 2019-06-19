@@ -3,6 +3,11 @@
     <link rel="stylesheet" href="public_css/project_public.css">
 {/block}
 <!-- 项目公共模块-->
+<section id="subscribe" style="display:none;">
+    <a>关注</a>
+</section>
+
+
 {block name="common-base"}{/block}
 {block name="login_dialog"}
 <script type="text/javascript">
@@ -305,6 +310,11 @@
         //删除已选择产品
         if(param.vueObj.checked){
             param.vueObj.checked_operation_type = 'delete';
+        }
+
+        //判断是否为微信浏览器
+        if(isWeiXin()){
+            $('#subscribe').css('display','block');
         }
     }
 </script>
