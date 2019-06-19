@@ -6,7 +6,7 @@
 	<city_picker
 			v-show="display"
 			@toggle="toggle"
-			@get="get"
+			@update_city="update_city"
 			:init_provinces="provinces"
 	></city_picker>
 </div>
@@ -21,7 +21,7 @@
 			display:false,
 			province_code:{}
 		};
-		new Vue({
+		var city_picker = new Vue({
 			el: "#province_city_linkage",
 			data: function () {
 				return city_picker_param;
@@ -30,16 +30,18 @@
 				toggle:function(){
 					let _this = this;
 					_this.display = !_this.display;
-				},get:function(param){
+				},update_city:function(param){
 					let _this = this;
 					this.province_code = param;
+				},get:function(){
+					return this.province_code;
 				},created:function(){
 					let _this = this;
 				}
 			}
 		});
 		$('body').on('click','.sure',function(){
-			console.log(city_picker_param.province_code);
+			console.log(city_picker.get());
 		});
 	});
 </script>
