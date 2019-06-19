@@ -67,13 +67,14 @@
                             _this.postData.selectedCityLevel = item.level;
                         }
                     });
-                    console.log(_this.postData);
+                    _this.close();
                 },backUp:function(){
                     let _this = this;
                     this.displayProvince = true;
                 },close:function(){
                     let _this = this;
-                    _this.$emit('toggle')
+                    _this.$emit('toggle');
+                    _this.$emit('getCity',_this.postData);
                 },created:function(){
                     let _this = this;
                 }
