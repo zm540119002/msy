@@ -3,11 +3,6 @@
     <link rel="stylesheet" href="public_css/project_public.css">
 {/block}
 <!-- 项目公共模块-->
-<section id="subscribe" style="display:none;">
-    <a>关注</a>
-</section>
-
-
 {block name="common-base"}{/block}
 {block name="login_dialog"}
 <script type="text/javascript">
@@ -19,6 +14,7 @@
     };
 </script>
 {include file="../../api/public/vue/components/login.html" /}
+{include file="./subscribe.html" /}
 {/block}
 {block name="pre-script"}
 <script type="text/javascript">
