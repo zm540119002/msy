@@ -71,7 +71,7 @@
                     _this.cities.map(function(item,index){
                         if(item.code == _this.postData.selectedCity){
                             _this.postData.selectedCityLevel = item.level;
-                            _this.selected_name.city_name = _this.cities[0].name;
+                            _this.selected_name.city_name = item.name;
                         }
                     });
                     let response = {
