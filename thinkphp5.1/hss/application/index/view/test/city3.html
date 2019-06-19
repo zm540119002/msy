@@ -3,7 +3,6 @@
 {block name="content"}
 <div id="province_city_linkage">
 	<city_picker></city_picker>
-	<test></test>
 </div>
 
 	<!--&lt;!&ndash;选择地区弹层&ndash;&gt;-->
@@ -31,12 +30,6 @@
 	<!--</section>-->
 	<!--&lt;!&ndash;遮罩层&ndash;&gt;-->
 	<!--<div id="areaMask" class="address_mask" style="display: block;"></div>-->
-<div id="foot_cart_menu">
-	<footer-menu
-			:type="type"
-			:init_menus="init_menus"
-	></footer-menu>
-</div>
 {/block}
 {block name="common"}
 {include file="../../api/public/vue/components/province-city.html" /}
@@ -52,19 +45,4 @@
 </script>
 {/block}
 {block name="footer"}
-{include file="../../api/public/vue/components/footer-menu.html" /}
-<script type="text/javascript">
-	let unlockingFooterCart = '{$unlockingFooterCart|raw}';
-	unlockingFooterCart = JSON.parse(unlockingFooterCart);
-	let param = {
-		type:4,
-		init_menus:unlockingFooterCart
-	};
-	new Vue({
-		el: '#foot_cart_menu',
-		data:function(){
-			return param;
-		}
-	});
-</script>
 {/block}
