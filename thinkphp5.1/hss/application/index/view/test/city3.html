@@ -1,31 +1,32 @@
 {extend name="template/base.html" /}
 {block name="title"}城市测试3{/block}
 {block name="content"}
-	<!--选择地区弹层-->
-	<section id="areaLayer" class="express-area-box" style="bottom:0;">
-		<header>
-			<h3>选择地区</h3>
-			<a id="backUp" class="back" href="javascript:void(0);" title="返回" style="display: none;"></a>
-			<a id="closeArea" class="close" href="javascript:void(0);" title="关闭"></a>
-		</header>
-		<article id="areaBox">
-			<ul id="areaList" class="area-list">
-				<li onclick="selectP(0);">北京市</li>
-				<li onclick="selectP(0);">北京市</li>
-				<li onclick="selectP(0);">北京市</li>
-				<li onclick="selectP(0);">北京市</li>
-				<li onclick="selectP(0);">北京市</li>
-				<li onclick="selectP(0);">北京市</li>
-				<li onclick="selectP(0);">北京市</li>
-				<li onclick="selectP(0);">北京市</li>
-				<li onclick="selectP(0);">北京市</li>
-				<li onclick="selectP(0);">北京市</li>
-				<li onclick="selectP(0);">北京市</li>
-			</ul>
-		</article>
-	</section>
-	<!--遮罩层-->
-	<div id="areaMask" class="address_mask" style="display: block;"></div>
+	<city_picker></city_picker>
+	<!--&lt;!&ndash;选择地区弹层&ndash;&gt;-->
+	<!--<section id="areaLayer" class="express-area-box" style="bottom:0;">-->
+		<!--<header>-->
+			<!--<h3>选择地区</h3>-->
+			<!--<a id="backUp" class="back" href="javascript:void(0);" title="返回" style="display: none;"></a>-->
+			<!--<a id="closeArea" class="close" href="javascript:void(0);" title="关闭"></a>-->
+		<!--</header>-->
+		<!--<article id="areaBox">-->
+			<!--<ul id="areaList" class="area-list">-->
+				<!--<li onclick="selectP(0);">北京市</li>-->
+				<!--<li onclick="selectP(0);">北京市</li>-->
+				<!--<li onclick="selectP(0);">北京市</li>-->
+				<!--<li onclick="selectP(0);">北京市</li>-->
+				<!--<li onclick="selectP(0);">北京市</li>-->
+				<!--<li onclick="selectP(0);">北京市</li>-->
+				<!--<li onclick="selectP(0);">北京市</li>-->
+				<!--<li onclick="selectP(0);">北京市</li>-->
+				<!--<li onclick="selectP(0);">北京市</li>-->
+				<!--<li onclick="selectP(0);">北京市</li>-->
+				<!--<li onclick="selectP(0);">北京市</li>-->
+			<!--</ul>-->
+		<!--</article>-->
+	<!--</section>-->
+	<!--&lt;!&ndash;遮罩层&ndash;&gt;-->
+	<!--<div id="areaMask" class="address_mask" style="display: block;"></div>-->
 {/block}
 {block name="common"}
 {include file="../../api/public/vue/components/province-city.html" /}
