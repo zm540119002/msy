@@ -34,8 +34,9 @@
 					_this.display = !_this.display;
 				},update_city:function(param){
 					let _this = this;
-					this.selected_code = param.selected_code;
-					this.selected_name = param.selected_name;
+					_this.selected_code = param.selected_code;
+					_this.selected_name = param.selected_name;
+					console.log(_this.selected_name);
 				},get:function(){
 					return this.selected_code;
 				},created:function(){
