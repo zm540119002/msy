@@ -1,11 +1,14 @@
 {extend name="template/base.html" /}
 {block name="title"}城市测试3{/block}
 {block name="content"}
-<div id="province_city_linkage">
-	<city_picker
-			:init_provinces="provinces"
-	></city_picker>
-</div>
+<a id="expressArea" href="javascript:void(0)" class="f24 form-group box-flex">
+	<label class="form-label">选择地区：</label>
+	<div id="province_city_linkage">
+		<city_picker
+				:init_provinces="provinces"
+		></city_picker>
+	</div>
+</a>
 {/block}
 {block name="common"}
 <script type="text/javascript" src="vue_js/province_city.js"></script>
