@@ -5,6 +5,7 @@
     </ul>
     <!--<ul id="cityList" class="area-list">-->
     <!--</ul>-->
+    <a href="javascript:void(0);" class="next-step step beforehand-register" @click="test">确定</a>
 </template>
 <script type="text/javascript">
     $(function(){
@@ -32,7 +33,7 @@
                 //更新市数据
                 updateCity:function(){
                     let _this = this;
-                    console.log(_this.provinces);
+                    console.log(_this.cities);
                     _this.provinces.map(function(item,index){
                         if(item.code == _this.postData.selectedProvince){
                             _this.cities = item.cities;
@@ -47,6 +48,7 @@
                     console.log(_this.postData);
                 },created:function(){
                     let _this = this;
+                    console.log(_this.cities);
                 }
             }
         });
