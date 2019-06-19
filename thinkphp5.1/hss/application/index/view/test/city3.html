@@ -3,6 +3,7 @@
 {block name="content"}
 <div id="province_city_linkage">
 	<label class="form-label" @click="toggle">选择地区：</label>
+	<div class="area_address"><li v-for="item in selected_name">{{item}}</li></div>
 	<city_picker
 			v-show="display"
 			@toggle="toggle"
@@ -19,7 +20,8 @@
 		var city_picker_param = {
 			provinces:{provinces},
 			display:false,
-			province_code:{}
+			selected_code:{},
+			selected_name:{}
 		};
 		var city_picker = new Vue({
 			el: "#province_city_linkage",
@@ -32,14 +34,17 @@
 					_this.display = !_this.display;
 				},update_city:function(param){
 					let _this = this;
-					this.province_code = param;
+					_this.selected_code = param.selected_code;
+					_this.selected_name = param.selected_name;
+					console.log(_this.selected_name);
 				},get:function(){
-					return this.province_code;
+					return this.selected_code;
 				},created:function(){
 					let _this = this;
 				}
 			}
 		});
+		//外部获取
 		$('body').on('click','.sure',function(){
 			console.log(city_picker.get());
 		});
