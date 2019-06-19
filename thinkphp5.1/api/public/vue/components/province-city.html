@@ -76,17 +76,18 @@
                         let _this = this;
                         if(typeof(oldVal) !== "undefined"){
                             _this.provinces.map(function(item,index){
-                                if(item.code == newVal){
-                                    _this.cities = item.cities;
-                                    _this.selected_name.province_name = item.name;
-                                }
+                                console.log(item.code);
+                                console.log(newVal);
+//                                if(item.code == newVal){
+//                                    _this.cities = item.cities;
+//                                    _this.selected_name.province_name = item.name;
+//                                }
                             });
 //                            if(_this.cities.length){
 //                                _this.postData.selectedCity = _this.cities[0].code;
 //                                _this.postData.selectedCityLevel = _this.cities[0].level;
 //                                _this.selected_name.city_name = _this.cities[0].name;
 //                            }
-                            console.log(_this.cities);
                         }
                     },
                     deep: true,
