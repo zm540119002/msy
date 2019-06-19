@@ -11,7 +11,7 @@ class Jssdk {
     $this->appId = $appId;
     $this->appSecret = $appSecret;
     $this->path = __DIR__ . 'Jssdk.php/';
-    $data = json_decode($this->get_php_file("access_token.txt"));
+    $data = json_decode(file_get_contents("access_token.txt"));
       print_r($data);
     if ($data->expire_time < time()) {
       // 如果是企业号用以下URL获取access_token
@@ -22,7 +22,7 @@ class Jssdk {
       if ($access_token) {
         $data->expire_time = time() + 7000;
         $data->access_token = $access_token;
-        $this->set_php_file("access_token.txt", json_encode($data));
+          file_put_contents("access_token.txt", json_encode($data));
       }
       print_r(111);
         print_r($access_token);
