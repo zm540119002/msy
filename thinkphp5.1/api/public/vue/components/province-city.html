@@ -91,8 +91,10 @@
                 postData: {
                     handler(newVal, oldVal) {
                         let _this = this;
-                        console.log(newVal);
-                        console.log(oldVal);
+                        if(typeof(oldVal) !== "undefined" && this.monitor_buy_quantity){
+                            console.log(newVal);
+                            console.log(oldVal);
+                        }
                     },
                     deep: false,
                     immediate: true
