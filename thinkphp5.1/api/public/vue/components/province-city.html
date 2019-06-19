@@ -1,7 +1,5 @@
 <template id="city_picker_tpl">
-    <ul id="areaList" class="area-list">
-        <li v-for="province in provinces" :value="province.code" @click="updateCity">{{province.name}}</li>
-    </ul>
+    <li v-for="province in provinces" :value="province.code" @click="updateCity">{{province.name}}</li>
 </template>
 <script type="text/javascript">
     $(function(){
