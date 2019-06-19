@@ -1,14 +1,12 @@
 {extend name="template/base.html" /}
 {block name="title"}城市测试3{/block}
 {block name="content"}
-<a id="expressArea" href="javascript:void(0)" class="f24 form-group box-flex">
+<div id="province_city_linkage" v-show="display" @click="dialog">
 	<label class="form-label">选择地区：</label>
-	<div id="province_city_linkage">
-		<city_picker
-				:init_provinces="provinces"
-		></city_picker>
-	</div>
-</a>
+	<city_picker
+			:init_provinces="provinces"
+	></city_picker>
+</div>
 {/block}
 {block name="common"}
 <script type="text/javascript" src="vue_js/province_city.js"></script>
@@ -18,7 +16,17 @@
 		new Vue({
 			el: "#province_city_linkage",
 			data: {
-				provinces:{provinces}
+				provinces:{provinces},
+				display:false
+			},methods: {
+				//更新市数据
+				dialog:function(event){
+					let _thisJquery = $(event.currentTarget);
+					let _this = this;
+					_this.display = true;
+				},created:function(){
+					let _this = this;
+				}
 			}
 		});
 	});
