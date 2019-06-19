@@ -4,6 +4,7 @@
 <div id="province_city_linkage" @click="dialog">
 	<label class="form-label">选择地区：</label>
 	<city_picker
+			v-show="display"
 			:init_provinces="provinces"
 	></city_picker>
 	<div @click="test">
