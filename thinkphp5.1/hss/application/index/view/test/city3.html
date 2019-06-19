@@ -6,13 +6,8 @@
 	<city_picker
 			v-show="display"
 			:init_provinces="provinces"
+			:toggle="toggle"
 	></city_picker>
-	<div @click="test">
-		测试
-	</div>
-	<div v-show="display2">
-		测试3
-	</div>
 </div>
 {/block}
 {block name="common"}
@@ -28,13 +23,9 @@
 				display2:true
 			},methods: {
 				//更新市数据
-				dialog:function(){
+				toggle:function(){
 					let _this = this;
-					_this.display = true;
-					console.log(_this.display);
-				},test:function(){
-					let _this = this;
-					_this.display2 = !_this.display2;
+					_this.display = !_this.display;
 					console.log(_this.display);
 				},created:function(){
 					let _this = this;

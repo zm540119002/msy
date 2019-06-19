@@ -63,7 +63,7 @@
                     this.displayProvince = true;
                 },close:function(){
                     let _this = this;
-                    _this.$parent.display = false;
+                    _this.$emit('toggle')
                 },created:function(){
                     let _this = this;
                 }
