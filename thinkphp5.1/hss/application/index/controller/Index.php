@@ -10,7 +10,7 @@ class Index extends \common\controller\Base{
      */
     public function index(){
         print_r(123);
-        eixt;
+        exit;
         // 促销列表 7个
         $modelPromotion = new \app\index\model\Promotion();
         $condition =[
