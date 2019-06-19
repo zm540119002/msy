@@ -89,6 +89,10 @@
                     let _this = this;
                     _this.$emit('toggle');
                 }
+            },computed: {
+                selectedProvince() {
+                    return this.postData.selectedProvince
+                }
             },watch: {
                 selectedProvince: {
                     handler(newVal, oldVal) {
