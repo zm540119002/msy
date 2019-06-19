@@ -16,15 +16,15 @@
 {include file="../../api/public/vue/components/province-city.html" /}
 <script type="text/javascript">
 	$(function(){
-		let param = {
+		var city_picker_param = {
 			provinces:{provinces},
 			display:false,
-			province_code:[]
+			province_code:{}
 		};
 		new Vue({
 			el: "#province_city_linkage",
 			data: function () {
-				return param;
+				return city_picker_param;
 			},methods: {
 				//更新市数据
 				toggle:function(){
@@ -32,14 +32,18 @@
 					_this.display = !_this.display;
 				},get:function(param){
 					let _this = this;
-					console.log(param);
+					this.province_code = param;
 				},created:function(){
 					let _this = this;
 				}
 			}
 		});
+		$('body').on('click','.sure',function(){
+			city_picker_param.display = false;
+		});
 	});
 </script>
 {/block}
 {block name="footer"}
+<a href="javascript:void(0);" class="sure">确定</a>
 {/block}
