@@ -7,6 +7,9 @@
 			v-show="display"
 			:init_provinces="provinces"
 	></city_picker>
+	<div @click="test">
+		测试
+	</div>
 </div>
 {/block}
 {block name="common"}
@@ -24,6 +27,9 @@
 				dialog:function(){
 					let _this = this;
 					_this.display = true;
+				},test:function(){
+					let _this = this;
+					_this.display = false;
 				},created:function(){
 					let _this = this;
 				}
