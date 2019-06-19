@@ -8,21 +8,22 @@ class Collection extends \common\controller\UserBase{
     /**首页
      */
     public function index(){
-        $unlockingFooterCart = unlockingFooterCartConfig([10,17]);
-        $this->assign('unlockingFooterCart', $unlockingFooterCart);
+
+        foot_cart_menu();
+
         return $this->fetch();
     }
 
     /**
      * 收藏
      */
-    public function collect(){
+    public function add(){
         if(!request()->isAjax()){
-            return errorMsg('请求方式错误');
+            $this->errorMsg('请求方式错误');
         }
         $goodsId = input('post.goods_id/d');
         if(!$goodsId){
-            return errorMsg('参数错误');
+            $this->errorMsg('没有要收藏的商品');
         }
         $model = new \app\index\model\Collection();
         $config = [
@@ -36,7 +37,7 @@ class Collection extends \common\controller\UserBase{
         ];
         $info = $model -> getInfo($config);
         if(count($info)){
-            return successMsg('收藏成功');
+            $this->successMsg('收藏成功');
         }
         $data = [
             'user_id'=>$this->user['id'],
@@ -45,76 +46,70 @@ class Collection extends \common\controller\UserBase{
         ];
         $result = $model -> isUpdate(false) -> save($data);
         if($result){
-            return successMsg('收藏成功');
+            $this->successMsg('收藏成功');
         }else{
-            return errorMsg('收藏失败');
+            $this->errorMsg('收藏失败');
         }
     }
-
 
     /**
      * @return array|mixed
      * 查出产商相关收藏 分页查询
      */
-    public function getList(){
+    public function getJsonList(){
         if(!request()->isGet()){
-            return errorMsg('请求方式错误');
+            $this->errorMsg('请求方式错误');
         }
         $model = new \app\index\model\Collection();
         $config=[
             'where'=>[
                 ['co.status', '=', 0],
                 ['co.user_id', '=', $this->user['id']],
+                ['g.status', '=', 0],
             ],
             'field'=>[
-                'co.id','co.goods_id','g.headline','g.thumb_img','g.franchise_price','g.specification', 'g.purchase_unit'
-
+                'g.id ','g.headline','g.thumb_img','g.franchise_price','g.retail_price','g.sample_price','g.specification','g.minimum_order_quantity',
+                'g.minimum_sample_quantity','g.increase_quantity','g.purchase_unit'
             ], 'join'=>[
                 ['goods g','g.id = co.goods_id','left'],
             ],'order'=>[
-                'co.id'=>'desc'
+                'co.create_time'=>'desc'
             ]
 
         ];
-/*        if(input('?get.category_id') && input('get.category_id/d')){
-            $config['where'][] = ['o.category_id_1', '=', input('get.category_id/d')];
-        }
-        $keyword = input('get.keyword','');
-        if($keyword) {
-            $config['where'][] = ['o.name', 'like', '%' . trim($keyword) . '%'];
-        }*/
 
         $list = $model -> pageQuery($config);
-        $currentPage = input('get.page/d');
+        $this->successMsg('成功',$list);
+/*        $currentPage = input('get.page/d');
         $this->assign('currentPage',$currentPage);
         $this->assign('list',$list);
         if(isset($_GET['pageType'])){
             $pageType = $_GET['pageType'];
             return $this->fetch($pageType);
-        }
+        }*/
     }
 
     //删除
     public function del(){
         if(!request()->isAjax()){
-            return errorMsg(config('custom.not_ajax'));
+            $this->errorMsg(config('custom.not_ajax'));
         }
-        $ids = input('post.ids/a');
+        $goods_id = input('post.goods_id/d');
 
         if(empty($ids)){
-            return errorMsg('取消失败');
+            $this->errorMsg('取消失败');
         }
         $model = new \app\index\model\Collection();
         $condition = [
             ['user_id','=',$this->user['id']],
-            ['goods_id','in',$ids],
+            ['goods_id','=',$goods_id],
         ];
 
         $result = $model -> del($condition);
         if($result['status']){
-            return successMsg('已取消收藏');
+            $this->successMsg('已取消收藏');
         }else{
-            return errorMsg('取消失败');
+            $this->errorMsg('取消失败');
         }
     }
 }
