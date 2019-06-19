@@ -1,21 +1,21 @@
 <template id="city_picker_tpl">
     <div>
-    <section class="express-area-box" style="bottom: 0px;">
-        <header>
-            <h3>选择地区</h3>
-            <a href="javascript:void(0);" class="backUp" title="返回" v-show="!displayProvince" @click="backUp"></a>
-            <a href="javascript:void(0);" class="close" title="关闭" @click="close"></a>
-        </header>
-        <article id="areaBox">
-            <ul id="provinceList" class="area-list" v-if="displayProvince">
-                <li v-for="province in provinces" :code="province.code" @click="updateCity">{{province.name}}</li>
-            </ul>
-            <ul id="cityList" class="area-list" v-else>
-                <li v-for="city in cities" :code="city.code">{{city.name}}</li>
-            </ul>
-        </article>
-    </section>
-    <div id="" class="address_mask city_mask" @click="closeMask"></div>
+        <section class="express-area-box" style="bottom: 0px;">
+            <header>
+                <h3>选择地区</h3>
+                <a href="javascript:void(0);" class="backUp" title="返回" v-show="!displayProvince" @click="backUp"></a>
+                <a href="javascript:void(0);" class="close" title="关闭" @click="close"></a>
+            </header>
+            <article id="areaBox">
+                <ul id="provinceList" class="area-list" v-if="displayProvince">
+                    <li v-for="province in provinces" :code="province.code" @click="updateCity">{{province.name}}</li>
+                </ul>
+                <ul id="cityList" class="area-list" v-else>
+                    <li v-for="city in cities" :code="city.code">{{city.name}}</li>
+                </ul>
+            </article>
+        </section>
+        <div class="address_mask city_mask" @click="closeMask"></div>
     </div>
 </template>
 <script type="text/javascript">
@@ -60,12 +60,13 @@
                 },backUp:function(){
                     let _this = this;
                     this.displayProvince = true;
-                },close:function(){
+                },close:function(event){
                     let _this = this;
+                    let _thisJquery = $(event.currentTarget);
+                    _thisJquery.parents('section').hide();
                 },created:function(){
                     let _this = this;
-                },
-                closeMask:function(){
+                },closeMask:function(){
                     console.log(123);
                 }
             }
