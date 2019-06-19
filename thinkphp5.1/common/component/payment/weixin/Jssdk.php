@@ -13,6 +13,7 @@ class Jssdk {
     $this->appSecret = $appSecret;
     $this->path = __DIR__ . 'Jssdk.php/';
     $access_token_data = json_decode($this->get_php_file("access_token.php"));
+      p($access_token_data);exit;
     if ($access_token_data->expire_time < time()) {
       // 如果是企业号用以下URL获取access_token
       // $url = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=$this->appId&corpsecret=$this->appSecret";
@@ -125,7 +126,7 @@ class Jssdk {
   private function getAccessToken() {
     // access_token 应该全局存储与更新，以下代码以写入到文件中做示例
     $data = json_decode($this->get_php_file("access_token.php"));
-    p($data);exit;
+
     if ($data->expire_time < time()) {
       // 如果是企业号用以下URL获取access_token
       // $url = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=$this->appId&corpsecret=$this->appSecret";
