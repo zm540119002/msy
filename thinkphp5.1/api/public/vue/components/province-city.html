@@ -1,7 +1,8 @@
 <template id="city_picker_tpl">
-    <ul id="provinceList" class="area-list">
+    <ul id="provinceList" class="area-list" v-if="displayProvince">
         <li v-for="province in provinces" :code="province.code" @click="updateCity">{{province.name}}</li>
-    </ul><ul id="cityList" class="area-list">
+    </ul>
+    <ul id="cityList" class="area-list" v-else>
         <li v-for="city in cities" :code="city.code">{{city.name}}</li>
     </ul>
 </template>
@@ -25,7 +26,8 @@
                         selectedProvince: '', //被选择的省
                         selectedCity:'',  //被选择的市
                         selectedCityLevel:''  //被选择的市的级别
-                    }
+                    },
+                    displayProvince: {type: Boolean,default: true}
                 }
             },methods: {
                 //更新市数据
@@ -42,6 +44,7 @@
                         _this.postData.selectedCity = _this.cities[0].code;
                         _this.postData.selectedCityLevel = _this.cities[0].level;
                     }
+                    this.displayProvince = false;
                     console.log(_this.cities);
                 },test:function(){
                     let _this = this;
