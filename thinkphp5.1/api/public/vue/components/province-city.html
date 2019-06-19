@@ -63,10 +63,7 @@
                     this.displayProvince = true;
                 },close:function(){
                     let _this = this;
-                    console.log(_this.$parent.$data);
-                    _this.$parent.display = false;
-//                    let _thisJquery = $(event.currentTarget);
-//                    _thisJquery.parents('div.city_picker').hide();
+                    _this.$parent.$data.display = false;
                 },created:function(){
                     let _this = this;
                 }
