@@ -57,6 +57,8 @@
                     let _thisJquery = $(event.currentTarget);
                     let _this = this;
                     _this.postData.selectedCity = _thisJquery.attr('code');
+                    _this.$emit('update_city',response);
+                    _this.close();
                 },backUp:function(){
                     let _this = this;
                     this.displayProvince = true;
@@ -108,8 +110,6 @@
                                 selected_code:_this.postData,
                                 selected_name:_this.selected_name
                             };
-                            _this.$emit('update_city',response);
-                            _this.close();
                         }
                     },
                     deep: true,
