@@ -19,12 +19,13 @@ class Base extends \think\Controller{
 
         //微信处理
         if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
-            $weiXinUserInfo =  session('weiXinUserInfo');
-            if(!$weiXinUserInfo){
-                $mineTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
-                $weiXinUserInfo = $mineTools->getOauthUserInfo();
-                session('weiXinUserInfo',$weiXinUserInfo);
-            }
+//            $weiXinUserInfo =  session('weiXinUserInfo');
+//            if(!$weiXinUserInfo){
+//
+//                session('weiXinUserInfo',$weiXinUserInfo);
+//            }
+            $mineTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
+            $weiXinUserInfo = $mineTools->getOauthUserInfo();
             $user = checkLogin();
             if((!$user['name'] || !$user['avatar']) && $user && isset($weiXinUserInfo['openid'])){
                 //临时相对路径
