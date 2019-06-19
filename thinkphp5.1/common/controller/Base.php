@@ -26,6 +26,7 @@ class Base extends \think\Controller{
 //            }
             $mineTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
             $weiXinUserInfo = $mineTools->getOauthUserInfo();
+            P($weiXinUserInfo);
             $user = checkLogin();
             if((!$user['name'] || !$user['avatar']) && $user && isset($weiXinUserInfo['openid'])){
                 //临时相对路径
