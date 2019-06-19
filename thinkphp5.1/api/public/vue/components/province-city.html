@@ -88,17 +88,11 @@
                     _this.$emit('toggle');
                 }
             },watch: {
-                selectedProvince: {
+                postData: {
                     handler(newVal, oldVal) {
                         let _this = this;
                         console.log(newVal);
                         console.log(oldVal);
-                    },
-                    deep: false,
-                    immediate: true
-                },selectedCity: {
-                    handler(newVal, oldVal) {
-                        let _this = this;
                     },
                     deep: false,
                     immediate: true
