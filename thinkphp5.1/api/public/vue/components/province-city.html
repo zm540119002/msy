@@ -1,6 +1,6 @@
 <template id="city_picker_tpl">
     <ul id="provinceList" class="area-list">
-        <li v-for="province in provinces" v-model="postData.selectedProvince" @click="updateCity">{{province.name}}</li>
+        <li v-for="province in provinces" :code="province.code" @click="updateCity">{{province.name}}</li>
     </ul>
 </template>
 <script type="text/javascript">
@@ -27,9 +27,10 @@
                 }
             },methods: {
                 //更新市数据
-                updateCity:function(){
+                updateCity:function(event){
                     let _this = this;
-                    console.log(_this.selectedProvince);
+                    let _thisJquery = $(event.currentTarget);
+                    console.log(_thisJquery.attr('code'));
                     _this.provinces.map(function(item,index){
                         if(item.code == _this.postData.selectedProvince){
                             _this.cities = item.cities;
