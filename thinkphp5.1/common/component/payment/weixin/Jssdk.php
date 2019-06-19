@@ -12,32 +12,30 @@ class Jssdk {
     $this->appId = $appId;
     $this->appSecret = $appSecret;
     $this->path = __DIR__ . 'Jssdk.php/';
-    $access_token_data = json_decode($this->get_php_file("access_token.php"));
-      p($access_token_data);exit;
-    if ($access_token_data->expire_time < time()) {
-      // 如果是企业号用以下URL获取access_token
-      // $url = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=$this->appId&corpsecret=$this->appSecret";
-      $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appId=$this->appId&secret=$this->appSecret";
-      $res = json_decode($this->httpGet($url));
-      $access_token = $res->access_token;
-      if ($access_token) {
-          $access_token_data->expire_time = time() + 7000;
-          $access_token_data->access_token = $access_token;
-          $this->set_php_file("access_token.php", json_encode($access_token_data));
-      }
-    } else {
-      $access_token = $access_token_data->access_token;
-    }
-    $this -> access_token = $access_token;
+//    $access_token_data = json_decode($this->get_php_file("access_token.php"));
+//    if ($access_token_data->expire_time < time()) {
+//      // 如果是企业号用以下URL获取access_token
+//      // $url = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=$this->appId&corpsecret=$this->appSecret";
+//      $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appId=$this->appId&secret=$this->appSecret";
+//      $res = json_decode($this->httpGet($url));
+//      $access_token = $res->access_token;
+//      if ($access_token) {
+//          $access_token_data->expire_time = time() + 7000;
+//          $access_token_data->access_token = $access_token;
+//          $this->set_php_file("access_token.php", json_encode($access_token_data));
+//      }
+//    } else {
+//      $access_token = $access_token_data->access_token;
+//    }
+//    $this -> access_token = $access_token;
 
       $auto_access_token_data = json_decode($this->get_php_file("auto_access_token.php"));
       if ($auto_access_token_data->expire_time < time()) {
-          // 如果是企业号用以下URL获取access_token
-          // $url = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=$this->appId&corpsecret=$this->appSecret";
-          $auto_access_token = $this -> GetAccessTokenAndOpenid();
+          $auto_access_token_data = $this -> GetAccessTokenAndOpenid();
+          $auto_access_token = $this -> $auto_access_token_data->access_token;
           if ($auto_access_token) {
               $auto_access_token_data->expire_time = time() + 7000;
-              $auto_access_token_data->access_token = $access_token;
+              $auto_access_token_data->access_token = $auto_access_token;
               $this->set_php_file("auto_access_token.php", json_encode($auto_access_token_data));
           }
       } else {
