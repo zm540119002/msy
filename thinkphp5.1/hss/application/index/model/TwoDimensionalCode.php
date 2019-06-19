@@ -106,7 +106,7 @@ class TwoDimensionalCode extends \common\model\Base {
         }
         $filename = generateSN(5).'.jpg';
         $file = $dir.$filename;
-        if( !imagejpeg($im, $file, 90) ){
+        if( !imagejpeg($im, $file) ){
             return errorMsg('合成图片失败');
         }
         imagedestroy($im);
