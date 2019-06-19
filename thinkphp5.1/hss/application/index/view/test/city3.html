@@ -8,6 +8,7 @@
 			:init_provinces="provinces"
 			@toggle="toggle"
 	></city_picker>
+	<a href="javascript:void(0);" class="sure" @click="sure">确定</a>
 </div>
 {/block}
 {block name="common"}
@@ -27,6 +28,10 @@
 					let _this = this;
 					_this.display = !_this.display;
 					console.log(_this.display);
+				},sure:function(){
+					let _this = this;
+					let postData = _this.$children.postData;
+					console.log(postData);
 				},created:function(){
 					let _this = this;
 				}
