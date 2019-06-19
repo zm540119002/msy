@@ -1,10 +1,6 @@
 <template id="city_picker_tpl">
     <ul id="areaList" class="area-list">
-        <li onclick="selectP(0);">北京市</li>
-        <li onclick="selectP(0);">北京市</li>
-        <li onclick="selectP(0);">北京市</li>
-        <li onclick="selectP(0);">北京市</li>
-        <li onclick="selectP(0);">北京市</li>
+        <li @click="updateCity">北京市</li>
     </ul>
 </template>
 <script type="text/javascript">
@@ -33,6 +29,9 @@
                 //更新市数据
                 updateCity:function(){
                     let _this = this;
+                    console.log(_this.init_provinces);
+                    console.log(provinces);
+                    return;
                     _this.provinces.map(function(item,index){
                         if(item.code == _this.postData.selectedProvince){
                             _this.cities = item.cities;
