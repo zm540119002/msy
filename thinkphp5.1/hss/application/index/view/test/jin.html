@@ -5,6 +5,26 @@
 <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/bootstrap-3.3.4.css">
 <style type="text/css">
 	/*自定义样式*/
+	body,html{
+		margin: 0;
+		padding: 0;
+	}
+	html{
+		font-size:10px !important;
+	}
+	body {
+		font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+		font-size: 14px;
+		line-height: 1.42857143;
+		color: #333;
+		background-color: #fff;
+	}
+
+	.slide-wapper {
+		padding:20px;
+		overflow-y: scroll;
+		/* background: #eee; */
+	}
 
 
 </style>
@@ -48,43 +68,6 @@
 	$(function() {
 
 		/**
-		 * 联动的picker
-		 * 三级
-		 */
-		$('.select-value').mPicker({
-			level:3,
-			dataJson: city3,
-			Linkage:true,
-			rows:6,
-			idDefault:true,
-			splitStr:'-',
-			header:'<div class="mPicker-header">三级联动选择插件</div>',
-			confirm:function(json){
-				console.info('当前选中json：',json);
-				console.info('【json里有不带value时】');
-				console.info('选中的id序号为：', json.ids);
-				console.info('选中的value为：', json.values);
-				// var id1= $('.select-value').data('id1');
-				// var id2 = $('.select-value').data('id2');
-				// var id3 = $('.select-value').data('id3');
-				// console.info('第一列json：',city3[id1]);
-				// console.info('第二列json：', city3[id1].child[id2]);
-				// console.info('第三列json：', city3[id1].child[id2].child[id3]);
-			},
-			cancel:function(json){
-				console.info('当前选中json：',json);
-			}
-		})
-		//获取mpicker实例
-		var method= $('.select-value').data('mPicker');
-		console.info('第一个mpicker的实例为：',method);
-		//mpicker方法
-		// method.showPicker();
-		// method.hidePicker(function(){
-		//     console.info(this)
-		// });
-
-		/**
 		 * 联动的picker--添加修改后修改数据的效果
 		 * 两级
 		 */
@@ -95,7 +78,6 @@
 			rows: 6,
 			idDefault: true,
 			splitStr: '-',
-			header: '<div class="mPicker-header">两级联动选择插件</div>',
 			confirm: function (json) {
 				console.info('当前选中json：', json);
 				var _this= this;
@@ -114,7 +96,7 @@
 			},
 			cancel: function (json) {
 			}
-		})
+		});
 		//获取value
 		function getVal(){
 			var value1 = $('.select-value1').data('value1');
@@ -134,39 +116,6 @@
 			};
 		}
 
-		/**
-		 * 不联动的picker
-		 * 两级
-		 */
-		var method2=$('.select-value2').mPicker({
-			level:2,
-			dataJson:level3,
-			rows:5,
-			Linkage:false,
-			header:'<div class="mPicker-header">非联动选择插件</div>',
-			idDefault:true,
-			confirm:function(json){
-				console.info('当前选中json：', json);
-			}
-		})
-
-		/**
-		 * 一级
-		 */
-		var method3=$('.select-value3').mPicker({
-			level:1,
-			dataJson:dataJson,
-			Linkage:false,
-			rows:6,
-			idDefault:true,
-			header:'<div class="mPicker-header">单级选择</div>',
-			confirm:function(json){
-				console.info('当前选中json：', json);
-			},
-			cancel:function(json){
-				console.info('当前选中json：', json);
-			}
-		})
 	});
 </script>
 {/block}

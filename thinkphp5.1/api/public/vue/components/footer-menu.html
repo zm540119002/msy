@@ -36,7 +36,15 @@
                     <span class="s_i"></span>
                 </div>
                 <!-- 确定收货-->
-                <div v-else-if="menu.class.indexOf('confirm_receive')!==-1" class="confirm_receive" @click="confirm_order" :data-jump_url="menu.action">
+                <div v-else-if="menu.class.indexOf('confirm_receive')!==-1" class="confirm_receive" @click="set_order_status" :data-jump_url="menu.action">
+                    <span class="s_i"></span>
+                </div>
+                <!-- 评价-->
+                <div v-else-if="menu.class.indexOf('to_evaluate')!==-1" class="to_evaluate" @click="to_evaluate" :data-jump_url="menu.action">
+                    <span class="s_i"></span>
+                </div>
+                <!-- 取消订单-->
+                <div v-else-if="menu.class.indexOf('cancel_order')!==-1" class="cancel_order" @click="set_order_status" :data-jump_url="menu.action">
                     <span class="s_i"></span>
                 </div>
                 <!-- 跳转 -->
@@ -244,7 +252,7 @@
                     }
                     let address = getAddress();
                     _thisVue.postData.address = JSON.stringify(address);
-                    if( _thisVue.postData.address=='false' ){
+                    if( _thisVue.postData.address=='false'){
                         dialog.error('请选择收货地址 ！');
                         return false;
                     }
@@ -253,7 +261,53 @@
                         postData:_thisVue.postData,
                         componentFooterCartMenu:_thisVue
                     };
+
                     asyncVerify(config);
+                },set_order_status:function(event){
+                    let _thisJquery = $(event.currentTarget);
+                    let _thisVue = this;
+                    login_success_callback_private = function(){
+                        _thisJquery.click()
+                    };
+                    register_success_callback_private = function(){
+                        _thisJquery.click()
+                    };
+                    let class_name = _thisJquery.context.className;
+
+                    let content = '确定已收到货 ?';
+                    _thisVue.postData.order_status = 4;
+
+                    if(class_name=='cancel_order'){
+                        content = '确定要取消该订单 ?';
+                        _thisVue.postData.order_status = 6;
+                    }
+
+                    layer.open({
+                        content : content,
+                        btn:['确定','取消'],
+                        end : function(){
+                            return false;
+                        },
+                        yes:function(index){
+                            _thisVue.postData.order_id = "{$orderInfo.id|default=0}";
+                            _thisVue.postData.order_sn = "{$orderInfo.sn|default=''}";
+
+                            //前端验证
+                            if( !_thisVue.postData.order_id || !_thisVue.postData.order_sn ){
+                                dialog.error('请选择要提交的订单 ！');
+                                return false;
+                            }
+
+                            let config = {
+                                clickObj:_thisJquery,
+                                postData:_thisVue.postData,
+                                componentFooterCartMenu:_thisVue
+                            };
+
+                            asyncVerify(config);
+                        }
+                    });
+
                 }
             },created:function(){
                 let _this = this;
@@ -352,6 +406,16 @@
         text-align: center;
         color: #fff;
         background: #009fe9;
+    }
+    .group_cart_nav a.to_evaluate{
+        text-align: center;
+        color: #fff;
+        background: #009fe9;
+    }
+    .group_cart_nav a.cancel_order{
+        text-align: center;
+        color: #fff;
+        background: #b5b5b5;
     }
     .add_num.current{
         -webkit-animation:none;
