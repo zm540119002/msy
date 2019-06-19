@@ -15,7 +15,7 @@
             </ul>
         </article>
     </section>
-    <div id="" class="address_mask city_mask"></div>
+    <div id="" class="address_mask city_mask" @click="closeMask"></div>
     </div>
 </template>
 <script type="text/javascript">
@@ -64,6 +64,9 @@
                     let _this = this;
                 },created:function(){
                     let _this = this;
+                },
+                closeMask:function(){
+                    console.log(123);
                 }
             }
         });
