@@ -78,8 +78,7 @@
                 },updateProvince:function(province){
                     let _this = this;
                     _this.cities = province.cities;
-                    //_this.selected_name.province_name = province.name;
-                    _this.temp_province_name = province.name;
+                    _this.temp_province_name = province.name; //省份名称暂存起来
                 },updateCity:function(city){
                     let _this = this;
                     _this.postData.selectedCity = city.code;
@@ -140,6 +139,7 @@
                 }
             },created:function(){
                 let _this = this;
+                console.log(_this.init_selected_code);
             }
         });
     });
