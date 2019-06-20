@@ -224,9 +224,13 @@
 <script type="text/javascript">
     
 $(function(){
-    function delCart(){
-        
-        alert($(this).attr("product_id"));
+    function delCart(e){
+        timeOutEvent = setTimeout("longPress()",500);
+	e.preventDefault();
+        //alert($(this).attr("product_id"));
+    }
+    function longPress(){
+        alert("hh");
     }
     /*
         $("#product-list li").click(function(){
