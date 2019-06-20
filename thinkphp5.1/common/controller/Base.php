@@ -32,6 +32,7 @@ class Base extends \think\Controller{
             $openId = $mineTools ->getOpenid();
             $weiXinUserInfo= $mineTools->get_user_info($openId);
             if(isset($weiXinUserInfo['subscribe']) && !$weiXinUserInfo['subscribe']){
+                echo 11;
                 $this -> assign('subscribe',1);
                 $weiXinUserInfo = $mineTools->getOauthUserInfo();
             }
