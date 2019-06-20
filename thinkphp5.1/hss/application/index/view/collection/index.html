@@ -221,43 +221,6 @@
 			});
 		});
 </script>
-<script type="text/javascript">
-    
-$(function(){
-    function delCart(e){
-        timeOutEvent = setTimeout("longPress()",500);
-	e.preventDefault();
-        //alert($(this).attr("product_id"));
-    }
-    function longPress(){
-        alert("hh");
-    }
-    /*
-        $("#product-list li").click(function(){
-            alert('hhe');
-        //var product_id = $(this).attr("product_id");
-        //console.log(product_id);
-        return;
-        $.ajax({
-            url:'/del_url',
-            type:'post',
-            dataType:'json',
-            data:{product_id:product_id},
-            success:function(rs){
-                $(this).remove();
-            },
-            error:function(e){
-                console.log(e.statusText);
-            }
-        })
-        //console.log(product_id);
-    })
-    */
-    
-    
-})
-    
-</script>
 
 {/block}
 
