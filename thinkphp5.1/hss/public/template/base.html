@@ -3,7 +3,9 @@
     <link rel="stylesheet" href="public_css/project_public.css">
 {/block}
 <!-- 项目公共模块-->
-{block name="common-base"}{/block}
+{block name="common-base"}
+{include file="../../api/public/template/subscribe.html" /}
+{/block}
 {block name="login_dialog"}
 <script type="text/javascript">
     var login_success_callback_private = function(){
@@ -14,7 +16,7 @@
     };
 </script>
 {include file="../../api/public/vue/components/login.html" /}
-{include file="../../api/public/template/subscribe.html" /}
+
 {/block}
 {block name="pre-script"}
 <script type="text/javascript">
