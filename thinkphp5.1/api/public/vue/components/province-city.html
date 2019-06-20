@@ -66,15 +66,19 @@
                     let _this = this;
                     _this.postData.selectedProvince = code;
                     _this.displayProvince = false;
+                    _this.trigger_update_data();
                 },selectCity:function(code){
                     let _this = this;
                     _this.postData.selectedCity = code;
+                    _this.trigger_update_data();
+                    _this.close();
+                },trigger_update_data:function(){
+                    let _this = this;
                     let param = {
                         selected_code:_this.postData,
                         selected_name:_this.selected_name
                     };
-                    _this.$emit('update_city',param);
-                    _this.close();
+                    _this.$emit('update_data',param);
                 },updateProvince:function(province){
                     let _this = this;
                     _this.cities = province.cities;

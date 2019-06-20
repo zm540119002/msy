@@ -7,7 +7,7 @@
 	<city_picker
 			v-show="display"
 			@toggle="toggle"
-			@update_city="update_city"
+			@update_data="update_data"
 			:init_provinces="provinces"
 			:init_selected_code="selected_code"
 	></city_picker>
@@ -33,7 +33,7 @@
 				toggle:function(){
 					let _this = this;
 					_this.display = !_this.display;
-				},update_city:function(param){
+				},update_data:function(param){
 					console.log(param);
 					let _this = this;
 					_this.selected_code = param.selected_code;
