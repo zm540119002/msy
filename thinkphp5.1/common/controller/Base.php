@@ -35,6 +35,7 @@ class Base extends \think\Controller{
                 $this -> assign('subscribe',1);
                 $weiXinUserInfo = $mineTools->getOauthUserInfo();
             }
+            P($weiXinUserInfo);
             $user = checkLogin();
             if((!$user['name'] || !$user['avatar']) && $user && isset($weiXinUserInfo['openid'])){
                 //临时相对路径
