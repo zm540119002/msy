@@ -72,8 +72,9 @@ class AdPositions extends Base {
         ];
         // 条件
         $keyword = input('get.keyword/s');
-        if($keyword) $condition['where'] = ['name','like', '%' . trim($keyword) . '%'];
-
+        if($keyword) $condition['where'][] = ['name','like', '%' . trim($keyword) . '%'];
+        //p($condition);
+        //exit;
         $list = $this->obj->pageQuery($condition);
         $this->assign('list',$list);
 

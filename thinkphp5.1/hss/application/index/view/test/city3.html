@@ -7,8 +7,9 @@
 	<city_picker
 			v-show="display"
 			@toggle="toggle"
-			@update_city="update_city"
+			@update_data="update_data"
 			:init_provinces="provinces"
+			:init_selected_code="selected_code"
 	></city_picker>
 </div>
 {/block}
@@ -20,8 +21,10 @@
 		var city_picker_param = {
 			provinces:{provinces},
 			display:false,
-			init_assign:{},
-			selected_code:{},
+			selected_code:{
+				province_code:102,
+				city_code:103
+			},
 			selected_name:{}
 		};
 		var city_picker = new Vue({
@@ -33,7 +36,7 @@
 				toggle:function(){
 					let _this = this;
 					_this.display = !_this.display;
-				},update_city:function(param){
+				},update_data:function(param){
 					let _this = this;
 					_this.selected_code = param.selected_code;
 					_this.selected_name = param.selected_name;
@@ -48,18 +51,9 @@
 		$('body').on('click','.sure',function(){
 			console.log(city_picker.get());
 		});
-		//外部赋值
-		$('body').on('click','.set',function(){
-			let assign_value = {
-				province:102,
-				city:104
-			};
-			city_picker.init_assign = assign_value;
-		});
 	});
 </script>
 {/block}
 {block name="footer"}
 <a href="javascript:void(0);" class="sure">确定</a>
-<a href="javascript:void(0);" class="set">赋值</a>
 {/block}
