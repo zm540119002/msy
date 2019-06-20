@@ -9,7 +9,7 @@
 		padding: 0;
 	}
 	.mPicker-header,.mPicker-content li,.mPicker-confirm,.mPicker-cancel{
-		font-size: 10px;
+		font-size: 12px;
 	}
 	body {
 		font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -47,7 +47,7 @@
 							<a id="expressArea" href="javascript:void(0)" class="f24 form-group box-flex">
 								<label class="form-label">选择地区：</label>
 						<!--		<div class="area_address">省 &gt; 市 &gt; 区/县</div>-->
-								<input type="text" class="select-value1 form-control" value="广东省-东莞市">
+								<input type="text" class="select-value1 form-control" value="广东省-东莞市" >
 								<input type="hidden"  data-key="" value="" class="area-address-name" >
 							</a>
 						</div>
@@ -208,7 +208,7 @@
 
 				var postData = {'data':cityData};
 
-				//console.log(cityData);
+				console.log(cityData);
 				//return false;
 				//console.log(postData);
 				$.post(url,postData,function (data) {
