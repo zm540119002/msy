@@ -11,14 +11,14 @@
                     <li v-for="(province,index) in provinces"
                         :key="index"
                         :class="currentProvinceClass == province.code ? 'current':''"
-                        @click="selectProvince(province.code);setCurrentProvinceCode(province.code);"
+                        @click="selectProvince(province.code);"
                     >{{province.name}}</li>
                 </ul>
                 <ul id="cityList" class="area-list" v-else>
                     <li v-for="(city,index) in cities"
                         :key="index"
                         :class="currentCityClass == city.code ? 'current':''"
-                        @click="selectCity(city.code);setCurrentCityCode(city.code);"
+                        @click="selectCity(city.code);"
                     >{{city.name}}</li>
                 </ul>
             </article>
@@ -86,6 +86,8 @@
                     _this.postData.selectedCityLevel = city.level;
                     _this.selected_name.city_name = city.name;
                     _this.selected_name.province_name = _this.temp_province_name;
+                    _this.setCurrentProvinceCode(_this.postData.selectedProvince);
+                    _this.setCurrentCityCode(_this.postData.selectedCity);
                     _this.trigger_update_data();
                 },trigger_update_data:function(){
                     let _this = this;
