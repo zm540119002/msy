@@ -142,6 +142,9 @@
 					$.each(data.data.data,function(i,o){
 						_this.productList.push(o);
 					});
+                                        $("#product-list li").click(function(){
+                                            delCart();
+                                        });
 				}
 			},created:function(){
 				let _thisVue = this;
@@ -222,7 +225,10 @@
 <script type="text/javascript">
     
 $(function(){
-    
+    function delCart(){
+        
+        alert("hh");
+    }
         $("#product-list li").click(function(){
             alert('hhe');
         //var product_id = $(this).attr("product_id");
