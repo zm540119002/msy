@@ -11,7 +11,7 @@
                     <li v-for="(province,index) in provinces"
                         :key="index"
                         :class="currentClass == index ? 'current':''"
-                        @click.stop.prevent="setCurrent(index);updateProvince($event);"
+                        @click.stop="setCurrent(index);updateProvince($event);"
                         :code="province.code"
                     >{{province.name}}</li>
                 </ul>
@@ -19,8 +19,7 @@
                     <li v-for="(city,index) in cities"
                         :key="index"
                         :class="currentClass == index ? 'current':''"
-                        @click.stop.prevent="setCurrent(index);"
-                        @click.stop.prevent="updateCity($event);"
+                        @click.stop="setCurrent(index);updateCity($event);"
                         :code="city.code"
                     >{{city.name}}</li>
                 </ul>
