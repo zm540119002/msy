@@ -40,43 +40,77 @@
                         selectedCity:'',  //被选择的市
                         selectedCityLevel:''  //被选择的市的级别
                     },
+                    selected_name:{
+                        province_name: '', //被选择的省份名称
+                        city_name:''  //被选择的市名称
+                    },
                     displayProvince: {type: Boolean,default: true}
-                }
+                };
             },methods: {
                 //更新市数据
                 updateProvince:function(event){
                     let _thisJquery = $(event.currentTarget);
                     let _this = this;
                     _this.postData.selectedProvince = _thisJquery.attr('code');
-                    _this.provinces.map(function(item,index){
-                        if(item.code == _this.postData.selectedProvince){
-                            _this.cities = item.cities;
-                        }
-                    });
-                    if(_this.cities.length){
-                        _this.postData.selectedCity = _this.cities[0].code;
-                        _this.postData.selectedCityLevel = _this.cities[0].level;
-                    }
                     this.displayProvince = false;
                 },updateCity:function(event){
                     let _thisJquery = $(event.currentTarget);
                     let _this = this;
                     _this.postData.selectedCity = _thisJquery.attr('code');
-                    _this.cities.map(function(item,index){
-                        if(item.code == _this.postData.selectedCity){
-                            _this.postData.selectedCityLevel = item.level;
-                        }
-                    });
-                    console.log(_this.postData);
+                    let response = {
+                        selected_code:_this.postData,
+                        selected_name:_this.selected_name
+                    };
+                    _this.$emit('update_city',response);
+                    _this.close();
                 },backUp:function(){
                     let _this = this;
                     this.displayProvince = true;
                 },close:function(){
                     let _this = this;
-                    _this.$emit('toggle')
-                },created:function(){
-                    let _this = this;
+                    _this.$emit('toggle');
                 }
+            },computed: {
+                selectedProvince(){
+                    return this.postData.selectedProvince
+                },selectedCity(){
+                    return this.postData.selectedProvince
+                }
+            },watch: {
+                selectedProvince: {
+                    handler(newVal, oldVal) {
+                        let _this = this;
+                        if(typeof(oldVal) !== "undefined"){
+                            _this.provinces.map(function(item,index){
+                                if(item.code == newVal){
+                                    _this.cities = item.cities;
+                                    _this.selected_name.province_name = item.name;
+                                }
+                            });
+                            if(_this.cities.length){
+                                _this.postData.selectedCity = _this.cities[0].code;
+                            }
+                        }
+                    },
+                    deep: true,
+                    immediate: true
+                },selectedCity: {
+                    handler(newVal, oldVal) {
+                        let _this = this;
+                        if(typeof(oldVal) !== "undefined"){
+                            _this.cities.map(function(item,index){
+                                if(item.code == newVal){
+                                    _this.postData.selectedCityLevel = item.level;
+                                    _this.selected_name.city_name = item.name;
+                                }
+                            });
+                        }
+                    },
+                    deep: true,
+                    immediate: true
+                }
+            },created:function(){
+                let _this = this;
             }
         });
     });

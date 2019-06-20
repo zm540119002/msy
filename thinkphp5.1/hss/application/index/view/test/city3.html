@@ -3,12 +3,13 @@
 {block name="content"}
 <div id="province_city_linkage">
 	<label class="form-label" @click="toggle">选择地区：</label>
+	<div class="area_address">{{selected_name.province_name}} {{selected_name.city_name}}</div>
 	<city_picker
 			v-show="display"
-			:init_provinces="provinces"
 			@toggle="toggle"
+			@update_city="update_city"
+			:init_provinces="provinces"
 	></city_picker>
-	<a href="javascript:void(0);" class="sure" @click="sure">确定</a>
 </div>
 {/block}
 {block name="common"}
@@ -16,28 +17,49 @@
 {include file="../../api/public/vue/components/province-city.html" /}
 <script type="text/javascript">
 	$(function(){
-		new Vue({
+		var city_picker_param = {
+			provinces:{provinces},
+			display:false,
+			init_assign:{},
+			selected_code:{},
+			selected_name:{}
+		};
+		var city_picker = new Vue({
 			el: "#province_city_linkage",
-			data: {
-				provinces:{provinces},
-				display:false,
-				display2:true
+			data: function () {
+				return city_picker_param;
 			},methods: {
 				//更新市数据
 				toggle:function(){
 					let _this = this;
 					_this.display = !_this.display;
-				},sure:function(){
+				},update_city:function(param){
 					let _this = this;
-					let postData = _this.$children;
-					console.log(postData);
-				},created:function(){
-					let _this = this;
+					_this.selected_code = param.selected_code;
+					_this.selected_name = param.selected_name;
+				},get:function(){
+					return this.selected_code;
 				}
+			},created:function(){
+				let _this = this;
 			}
+		});
+		//外部获取
+		$('body').on('click','.sure',function(){
+			console.log(city_picker.get());
+		});
+		//外部赋值
+		$('body').on('click','.set',function(){
+			let assign_value = {
+				province:102,
+				city:104
+			};
+			city_picker.init_assign = assign_value;
 		});
 	});
 </script>
 {/block}
 {block name="footer"}
+<a href="javascript:void(0);" class="sure">确定</a>
+<a href="javascript:void(0);" class="set">赋值</a>
 {/block}

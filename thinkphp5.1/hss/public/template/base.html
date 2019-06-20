@@ -14,6 +14,7 @@
     };
 </script>
 {include file="../../api/public/vue/components/login.html" /}
+{include file="../../api/public/template/subscribe.html" /}
 {/block}
 {block name="pre-script"}
 <script type="text/javascript">
@@ -62,6 +63,11 @@
 <script type="text/javascript" src="api_common_js/dialog.js"></script>
 <script type="text/javascript" src="api_common_js/paging.js"></script>
 <script type="text/javascript">
+    //判断是否为微信浏览器
+    // if(isWeiXin()){
+    //     alert(11);
+    //     $('#subscribe').css('display','block');
+    // }
     //异步验证
     var asyncVerifyRepeat = true;
     function asyncVerify(config){

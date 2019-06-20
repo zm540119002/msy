@@ -5,14 +5,13 @@ class Jssdk {
   private $appId;
   private $appSecret;
   private $path;
-  private $access_token;
+  private $access_token; //普通$access_token
 
   public function __construct($appId, $appSecret) {
     $this->appId = $appId;
     $this->appSecret = $appSecret;
     $this->path = __DIR__ . 'Jssdk.php/';
-    $data = json_decode($this->get_php_file("access_token.txt"));
-      print_r($data);
+    $data = json_decode($this->get_php_file("access_token.php"));
     if ($data->expire_time < time()) {
       // 如果是企业号用以下URL获取access_token
       // $url = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=$this->appId&corpsecret=$this->appSecret";
@@ -22,16 +21,11 @@ class Jssdk {
       if ($access_token) {
         $data->expire_time = time() + 7000;
         $data->access_token = $access_token;
-        $this->set_php_file("access_token.txt", json_encode($data));
+        $this->set_php_file("access_token.php", json_encode($data));
       }
-      print_r(111);
-        print_r($access_token);
     } else {
       $access_token = $data->access_token;
     }
-      print_r(222);
-      print_r($access_token);exit;
-
     $this -> access_token = $access_token;
   }
 
