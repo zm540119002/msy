@@ -11,8 +11,8 @@
                     <li v-for="(province,index) in provinces"
                         :key="index"
                         :class="currentClass == index ? 'current':''"
-                        @click="setCurrent(index);"
-                        @click="updateProvince();"
+                        @click.stop="setCurrent(index);"
+                        @click.stop="updateProvince();"
                         :code="province.code"
                     >{{province.name}}</li>
                 </ul>
@@ -20,8 +20,8 @@
                     <li v-for="(city,index) in cities"
                         :key="index"
                         :class="currentClass == index ? 'current':''"
-                        @click="setCurrent(index);"
-                        @click="updateCity();"
+                        @click.stop="setCurrent(index);"
+                        @click.stop="updateCity();"
                         :code="city.code"
                     >{{city.name}}</li>
                 </ul>
@@ -62,6 +62,7 @@
             },methods: {
                 //更新市数据
                 updateProvince:function(event){
+                    console.log(event);
                     let _thisJquery = $(event.currentTarget);
                     let _this = this;
                     _this.postData.selectedProvince = _thisJquery.attr('code');
