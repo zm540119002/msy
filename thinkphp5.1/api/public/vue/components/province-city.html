@@ -11,16 +11,14 @@
                     <li v-for="(province,index) in provinces"
                         :key="index"
                         :class="currentClass == index ? 'current':''"
-                        @click="updateProvince"
-                        :code="province.code"
+                        @click="selectProvince(province.code)"
                     >{{province.name}}</li>
                 </ul>
                 <ul id="cityList" class="area-list" v-else>
                     <li v-for="(city,index) in cities"
                         :key="index"
                         :class="currentClass == index ? 'current':''"
-                        @click="updateCity"
-                        :code="city.code"
+                        @click="selectCity(city.code)"
                     >{{city.name}}</li>
                 </ul>
             </article>
@@ -35,7 +33,16 @@
             template:'#city_picker_tpl',
             props: {
                 type: {type: Number,default: 1},
-                init_provinces: {
+                init_selected_code: {
+                    type: Object,
+                    default: function () {
+                        return {
+                            selectedProvince:'',
+                            selectedCity:'',
+                            selectedCityLevel:''
+                        }
+                    }
+                },init_provinces: {
                     type: Object,
                     default: function () {
                         return {}
@@ -59,27 +66,38 @@
                 };
             },methods: {
                 //更新市数据
-                updateProvince:function(event){
-                    let _thisJquery = $(event.currentTarget);
+                selectProvince:function(code){
                     let _this = this;
-                    _this.postData.selectedProvince = _thisJquery.attr('code');
-                    this.displayProvince = false;
-                    _this.currentClass = -1;
-                },updateCity:function(event){
-                    let _thisJquery = $(event.currentTarget);
+                    _this.postData.selectedProvince = code;
+                    _this.displayProvince = false;
+                    _this.trigger_update_data();
+                },selectCity:function(code){
                     let _this = this;
-                    _this.postData.selectedCity = _thisJquery.attr('code');
-                    let response = {
+                    _this.postData.selectedCity = code;
+                    _this.trigger_update_data();
+                    _this.close();
+                },trigger_update_data:function(){
+                    let _this = this;
+                    let param = {
                         selected_code:_this.postData,
                         selected_name:_this.selected_name
                     };
-                    _this.$emit('update_city',response);
-                    _this.close();
+                    _this.$emit('update_data',param);
+                },updateProvince:function(province){
+                    let _this = this;
+                    _this.cities = province.cities;
+                    _this.selected_name.province_name = province.name;
+                },updateCity:function(city){
+                    let _this = this;
+                    _this.postData.selectedCity = city.code;
+                    _this.postData.selectedCityLevel = city.level;
+                    _this.selected_name.city_name = city.name;
                 },setCurrent(index) {
-                    this.currentClass = index;  //把当前点击元素的index，赋值给currentClass
+                    let _this = this;
+                    _this.currentClass = index;  //把当前点击元素的index，赋值给currentClass
                 },backUp:function(){
                     let _this = this;
-                    this.displayProvince = true;
+                    _this.displayProvince = true;
                 },close:function(){
                     let _this = this;
                     _this.$emit('toggle');
@@ -95,14 +113,14 @@
                     handler(newVal, oldVal) {
                         let _this = this;
                         if(typeof(oldVal) !== "undefined"){
-                            _this.provinces.map(function(item,index){
+                            _this.provinces.map(function(item){
                                 if(item.code == newVal){
-                                    _this.cities = item.cities;
-                                    _this.selected_name.province_name = item.name;
+                                    _this.updateProvince(item)
                                 }
                             });
+                            //城市初始化
                             if(_this.cities.length){
-                                //_this.postData.selectedCity = _this.cities[0].code;
+                                _this.updateCity(_this.cities[0]);
                             }
                         }
                     },
@@ -112,10 +130,9 @@
                     handler(newVal, oldVal) {
                         let _this = this;
                         if(typeof(oldVal) !== "undefined"){
-                            _this.cities.map(function(item,index){
+                            _this.cities.map(function(item){
                                 if(item.code == newVal){
-                                    _this.postData.selectedCityLevel = item.level;
-                                    _this.selected_name.city_name = item.name;
+                                    _this.updateCity(item);
                                 }
                             });
                         }
