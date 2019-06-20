@@ -42,8 +42,6 @@
 					_this.selected_name = param.selected_name;
 				},get:function(){
 					return this.selected_code;
-				},set:function(param){
-					console.log(param);
 				}
 			},created:function(){
 				let _this = this;
@@ -52,14 +50,6 @@
 		//外部获取
 		$('body').on('click','.sure',function(){
 			console.log(city_picker.get());
-		});
-		//外部赋值
-		$('body').on('click','.set',function(){
-			let param = {
-				province_code:101,
-				city_code:103
-			};
-			city_picker.selected_code = param;
 		});
 	});
 </script>
