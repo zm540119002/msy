@@ -8,7 +8,6 @@
 			v-show="display"
 			@toggle="toggle"
 			@update_data="update_data"
-			@set="set(selected_code);"
 			:init_provinces="provinces"
 	></city_picker>
 </div>
@@ -52,8 +51,11 @@
 		});
 		//外部赋值
 		$('body').on('click','.set',function(){
-			let param = city_picker.get();
-			console.log(param);
+			let param = {
+				province_code:102,
+				city_code:103
+			};
+			city_picker.set(param);
 		});
 	});
 </script>

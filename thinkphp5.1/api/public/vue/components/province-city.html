@@ -74,13 +74,6 @@
                     let _this = this;
                     _this.postData.selectedCity = code;
                     _this.close();
-                },trigger_update_data:function(){
-                    let _this = this;
-                    let param = {
-                        selected_code:_this.postData,
-                        selected_name:_this.selected_name
-                    };
-                    _this.$emit('update_data',param);
                 },updateProvince:function(province){
                     let _this = this;
                     _this.cities = province.cities;
@@ -91,6 +84,13 @@
                     _this.postData.selectedCityLevel = city.level;
                     _this.selected_name.city_name = city.name;
                     _this.trigger_update_data();
+                },trigger_update_data:function(){
+                    let _this = this;
+                    let param = {
+                        selected_code:_this.postData,
+                        selected_name:_this.selected_name
+                    };
+                    _this.$emit('update_data',param);
                 },setCurrent(index) {
                     let _this = this;
                     _this.currentClass = index;  //把当前点击元素的index，赋值给currentClass
