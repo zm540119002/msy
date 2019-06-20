@@ -10,7 +10,7 @@
                 <ul id="provinceList" class="area-list" v-if="displayProvince">
                     <li v-for="(province,index) in provinces"
                         :key="index"
-                        :class="index"
+                        :class="currentClass == index ? 'current':''"
                         @click="setCurrent(index);"
                         @click="updateProvince();"
                         :code="province.code"
@@ -78,7 +78,6 @@
 //                    _this.$emit('update_city',response);
 //                    _this.close();
                 },setCurrent(index) {
-                    console.log(index);
                     this.currentClass = index;  // 把当前点击元素的index，赋值给currentClass
                 },backUp:function(){
                     let _this = this;
