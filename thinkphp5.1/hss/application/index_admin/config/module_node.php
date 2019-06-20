@@ -16,7 +16,7 @@ return [
                 ['id'=>202,'name'=>'整体场景管理','display'=>1,'controller'=>'Scene','action'=>'manage',],
             ],
         ],
-        'project'=>[
+/*        'project'=>[
             'id'=>300,'name'=>'项目','type'=>2,
             'sub_menu' => [
                 ['id'=>301,'name'=>'项目管理','display'=>1,'controller'=>'Project','action'=>'manage',],
@@ -27,7 +27,8 @@ return [
             'sub_menu' => [
                 ['id'=>401,'name'=>'分类管理','display'=>1,'controller'=>'Sort','action'=>'manage',],
             ],
-        ],'promotion'=>[
+        ],*/
+        'promotion'=>[
             'id'=>500,'name'=>'套餐','type'=>2,
             'sub_menu' => [
                 ['id'=>501,'name'=>'套餐管理','display'=>1,'controller'=>'Promotion','action'=>'manage',],
@@ -41,6 +42,11 @@ return [
             'id'=>700,'name'=>'订单','type'=>2,
             'sub_menu' => [
                 ['id'=>701,'name'=>'订单管理','display'=>1,'controller'=>'Order','action'=>'manage',],
+            ],
+        ], 'city_partner'=>[
+            'id'=>700,'name'=>'城市合伙人','type'=>2,
+            'sub_menu' => [
+                ['id'=>701,'name'=>'管理','display'=>1,'controller'=>'CityPartner','action'=>'manage',],
             ],
         ],'customer'=>[
             'id'=>800,'name'=>'客服','type'=>2,

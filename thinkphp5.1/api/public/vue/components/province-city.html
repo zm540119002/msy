@@ -10,17 +10,15 @@
                 <ul id="provinceList" class="area-list" v-if="displayProvince">
                     <li v-for="(province,index) in provinces"
                         :key="index"
-                        :class="currentClass == index ? 'current':''"
-                        @click.stop="setCurrent(index);updateProvince($event);"
-                        :code="province.code"
+                        :class="currentProvinceClass == province.code ? 'current':''"
+                        @click="selectProvince(province.code);"
                     >{{province.name}}</li>
                 </ul>
                 <ul id="cityList" class="area-list" v-else>
                     <li v-for="(city,index) in cities"
                         :key="index"
-                        :class="currentClass == index ? 'current':''"
-                        @click.stop="setCurrent(index);updateCity($event);"
-                        :code="city.code"
+                        :class="currentCityClass == city.code ? 'current':''"
+                        @click="selectCity(city.code);"
                     >{{city.name}}</li>
                 </ul>
             </article>
@@ -35,7 +33,16 @@
             template:'#city_picker_tpl',
             props: {
                 type: {type: Number,default: 1},
-                init_provinces: {
+                init_selected_code: {
+                    type: Object,
+                    default: function () {
+                        return {
+                            selectedProvince:'',
+                            selectedCity:'',
+                            selectedCityLevel:''
+                        }
+                    }
+                },init_provinces: {
                     type: Object,
                     default: function () {
                         return {}
@@ -54,32 +61,50 @@
                         province_name: '', //被选择的省份名称
                         city_name:''  //被选择的市名称
                     },
+                    temp_province_name:'',
                     displayProvince: {type: Boolean,default: true},
-                    currentClass: -1
+                    currentProvinceClass: -1,
+                    currentCityClass: -1
                 };
             },methods: {
                 //更新市数据
-                updateProvince:function(event){
-                    let _thisJquery = $(event.currentTarget);
+                selectProvince:function(code){
                     let _this = this;
-                    _this.postData.selectedProvince = _thisJquery.attr('code');
-                    this.displayProvince = false;
-                    _this.currentClass = -1;
-                },updateCity:function(event){
-                    let _thisJquery = $(event.currentTarget);
+                    _this.postData.selectedProvince = code;
+                    _this.displayProvince = false;
+                },selectCity:function(code){
                     let _this = this;
-                    _this.postData.selectedCity = _thisJquery.attr('code');
-                    let response = {
+                    _this.postData.selectedCity = code;
+                    _this.close();
+                },updateProvince:function(province){
+                    let _this = this;
+                    _this.cities = province.cities;
+                    _this.temp_province_name = province.name; //省份名称暂存起来
+                },updateCity:function(city){
+                    let _this = this;
+                    _this.postData.selectedCity = city.code;
+                    _this.postData.selectedCityLevel = city.level;
+                    _this.selected_name.city_name = city.name;
+                    _this.selected_name.province_name = _this.temp_province_name;
+                    _this.setCurrentProvinceCode(_this.postData.selectedProvince);
+                    _this.setCurrentCityCode(_this.postData.selectedCity);
+                    _this.trigger_update_data();
+                },trigger_update_data:function(){
+                    let _this = this;
+                    let param = {
                         selected_code:_this.postData,
                         selected_name:_this.selected_name
                     };
-//                    _this.$emit('update_city',response);
-//                    _this.close();
-                },setCurrent(index) {
-                    this.currentClass = index;  // 把当前点击元素的index，赋值给currentClass
+                    _this.$emit('update_data',param);
+                },setCurrentProvinceCode(code) {
+                    let _this = this;
+                    _this.currentProvinceClass = code;
+                },setCurrentCityCode(code) {
+                    let _this = this;
+                    _this.currentCityClass = code;
                 },backUp:function(){
                     let _this = this;
-                    this.displayProvince = true;
+                    _this.displayProvince = true;
                 },close:function(){
                     let _this = this;
                     _this.$emit('toggle');
@@ -95,15 +120,11 @@
                     handler(newVal, oldVal) {
                         let _this = this;
                         if(typeof(oldVal) !== "undefined"){
-                            _this.provinces.map(function(item,index){
+                            _this.provinces.map(function(item){
                                 if(item.code == newVal){
-                                    _this.cities = item.cities;
-                                    _this.selected_name.province_name = item.name;
+                                    _this.updateProvince(item)
                                 }
                             });
-                            if(_this.cities.length){
-                                //_this.postData.selectedCity = _this.cities[0].code;
-                            }
                         }
                     },
                     deep: true,
@@ -112,11 +133,9 @@
                     handler(newVal, oldVal) {
                         let _this = this;
                         if(typeof(oldVal) !== "undefined"){
-                            _this.cities.map(function(item,index){
+                            _this.cities.map(function(item){
                                 if(item.code == newVal){
-                                    console.log(item);
-                                    _this.postData.selectedCityLevel = item.level;
-                                    _this.selected_name.city_name = item.name;
+                                    _this.updateCity(item);
                                 }
                             });
                         }
@@ -126,6 +145,12 @@
                 }
             },created:function(){
                 let _this = this;
+                if(_this.init_selected_code.province_code){
+                    _this.postData.selectedProvince = _this.init_selected_code.province_code;
+                }
+                if(_this.init_selected_code.city_code){
+                    _this.postData.selectedCity = _this.init_selected_code.city_code;
+                }
             }
         });
     });

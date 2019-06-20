@@ -75,6 +75,10 @@ class CityPartner extends \common\controller\UserBase {
         if(!$validate->scene($validateName)->check($postData)) {
             $this->errorMsg($validate->getError());
         }
+
+        $this->errorMsg('失败');
+        p($postData);
+        exit;
         switch ($postData['step']){
             case 1:
             case 2:
