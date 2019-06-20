@@ -142,14 +142,16 @@
 					$.each(data.data.data,function(i,o){
 						_this.productList.push(o);
 					});
-                                        $("#product-list li").click(function(){
-                                            delCart();
-                                        });
+
 				}
 			},created:function(){
 				let _thisVue = this;
 				_thisVue.getJsonListParam.callBack = _thisVue.getJsonListCallBack;
 				vueVersionGetJsonList(_thisVue);
+                                 $("#product-list li").click(function(){
+                                            //delCart();
+                                            alert(123);
+                                   });
 				//下拉加载
 				$(window).on('scroll',function(){
 					if(_thisVue.getJsonListParam.loadTrigger
@@ -157,6 +159,10 @@
 						//停止触发，去其他地方重新放开
 						_thisVue.getJsonListParam.loadTrigger = false;
 						vueVersionGetJsonList(_thisVue);
+                                                $("#product-list li").click(function(){
+                                                    //delCart();
+                                                    alert(1234);
+                                                 });
 					}
 				});
 			}
@@ -229,6 +235,7 @@ $(function(){
         
         alert("hh");
     }
+    /*
         $("#product-list li").click(function(){
             alert('hhe');
         //var product_id = $(this).attr("product_id");
@@ -248,6 +255,7 @@ $(function(){
         })
         //console.log(product_id);
     })
+    */
     
     
 })
