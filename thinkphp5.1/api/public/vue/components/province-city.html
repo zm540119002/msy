@@ -11,7 +11,7 @@
                     <li v-for="(province,index) in provinces"
                         :key="index"
                         :class="currentClass == index ? 'current':''"
-                        @click.stop="setCurrent(index);updateProvince($event);"
+                        @click="updateProvince"
                         :code="province.code"
                     >{{province.name}}</li>
                 </ul>
@@ -19,7 +19,7 @@
                     <li v-for="(city,index) in cities"
                         :key="index"
                         :class="currentClass == index ? 'current':''"
-                        @click.stop="setCurrent(index);updateCity($event);"
+                        @click="updateCity"
                         :code="city.code"
                     >{{city.name}}</li>
                 </ul>
@@ -73,10 +73,10 @@
                         selected_code:_this.postData,
                         selected_name:_this.selected_name
                     };
-//                    _this.$emit('update_city',response);
-//                    _this.close();
+                    _this.$emit('update_city',response);
+                    _this.close();
                 },setCurrent(index) {
-                    this.currentClass = index;  // 把当前点击元素的index，赋值给currentClass
+                    this.currentClass = index;  //把当前点击元素的index，赋值给currentClass
                 },backUp:function(){
                     let _this = this;
                     this.displayProvince = true;
