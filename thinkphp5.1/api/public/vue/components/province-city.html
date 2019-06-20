@@ -11,16 +11,14 @@
                     <li v-for="(province,index) in provinces"
                         :key="index"
                         :class="currentClass == index ? 'current':''"
-                        @click="updateProvince"
-                        :code="province.code"
+                        @click="updateProvince(province.code)"
                     >{{province.name}}</li>
                 </ul>
                 <ul id="cityList" class="area-list" v-else>
                     <li v-for="(city,index) in cities"
                         :key="index"
                         :class="currentClass == index ? 'current':''"
-                        @click="updateCity"
-                        :code="city.code"
+                        @click="updateCity(city.code)"
                     >{{city.name}}</li>
                 </ul>
             </article>
@@ -35,7 +33,12 @@
             template:'#city_picker_tpl',
             props: {
                 type: {type: Number,default: 1},
-                init_provinces: {
+                init_selected_code: {
+                    type: Object,
+                    default: function () {
+                        return {}
+                    }
+                },init_provinces: {
                     type: Object,
                     default: function () {
                         return {}
@@ -59,16 +62,16 @@
                 };
             },methods: {
                 //更新市数据
-                updateProvince:function(event){
+                updateProvince:function(code){
                     let _thisJquery = $(event.currentTarget);
                     let _this = this;
-                    _this.postData.selectedProvince = _thisJquery.attr('code');
+                    _this.postData.selectedProvince = code;
                     this.displayProvince = false;
                     _this.currentClass = -1;
-                },updateCity:function(event){
+                },updateCity:function(code){
                     let _thisJquery = $(event.currentTarget);
                     let _this = this;
-                    _this.postData.selectedCity = _thisJquery.attr('code');
+                    _this.postData.selectedCity = code;
                     let response = {
                         selected_code:_this.postData,
                         selected_name:_this.selected_name

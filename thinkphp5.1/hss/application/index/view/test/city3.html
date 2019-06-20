@@ -9,6 +9,7 @@
 			@toggle="toggle"
 			@update_city="update_city"
 			:init_provinces="provinces"
+			:init_selected_code="selected_code"
 	></city_picker>
 </div>
 {/block}
@@ -49,7 +50,11 @@
 		});
 		//外部赋值
 		$('body').on('click','.set',function(){
-			console.log(city_picker_param.selected_code);
+			let assign_value = {
+				province:102,
+				city:104
+			};
+			city_picker.selected_code = assign_value;
 		});
 	});
 </script>
