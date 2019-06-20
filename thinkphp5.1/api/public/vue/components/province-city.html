@@ -53,9 +53,9 @@
                     provinces: this.init_provinces.provinces, //所有省份
                     cities:[], //被选择的省对应的市数据
                     postData:{
-                        selectedProvince: this.init_selected_code.selectedProvince, //被选择的省
-                        selectedCity:this.init_selected_code.selectedCity,  //被选择的市
-                        selectedCityLevel:this.init_selected_code.selectedCityLevel  //被选择的市的级别
+                        selectedProvince: '', //被选择的省
+                        selectedCity:'',  //被选择的市
+                        selectedCityLevel:''  //被选择的市的级别
                     },
                     selected_name:{
                         province_name: '', //被选择的省份名称
@@ -142,7 +142,6 @@
                 }
             },created:function(){
                 let _this = this;
-                console.log(_this.postData);
             }
         });
     });
