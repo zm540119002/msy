@@ -1,19 +1,17 @@
 <?php
 namespace common\controller;
 
-use component\wx_pay_api\Jssdk;
-
-class WXBase extends UserBase{
+class WeiXinBase extends UserBase{
     private $_jssdk = null;
     public function __construct(){
         parent::__construct();
-        $this->_jssdk = new Jssdk(config('custom.wx_config')['APPID'], config('custom.wx_config')['APPSECRET']);
+        $this->_jssdk = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
         $this -> signPackage = $this -> weiXinShareInit();
     }
 
     //微信分享初始化
     public function weiXinShareInit(){
-        $signPackage =  $this->_jssdk->GetSignPackage();
+        $signPackage =  $this->_jssdk->getSignPackage();
         return $signPackage;
     }
 
@@ -137,7 +135,7 @@ class WXBase extends UserBase{
         if($rst['errmsg'] != 'ok'){
             \Think\Log::write('发送返现通知失败', 'NOTIC');
         }
-        
+
     }
 
     //发送团购成功模板信息
