@@ -31,9 +31,7 @@ class Base extends \think\Controller{
             //判断是否关注平台
             $openId = $mineTools ->getOpenid();
             $weiXinUserInfo= $mineTools->get_user_info($openId);
-            p($weiXinUserInfo);
             if(isset($weiXinUserInfo['subscribe']) && !$weiXinUserInfo['subscribe']){
-                echo 11;
                 $this -> assign('subscribe',1);
                 $weiXinUserInfo = $mineTools->getOauthUserInfo();
             }
