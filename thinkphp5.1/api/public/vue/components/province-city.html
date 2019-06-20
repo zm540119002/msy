@@ -12,6 +12,7 @@
                         :key="index"
                         :class="index"
                         @click="setCurrent(index);"
+                        @click="updateProvince();"
                         :code="province.code"
                     >{{province.name}}</li>
                 </ul>
@@ -20,6 +21,7 @@
                         :key="index"
                         :class="currentClass == index ? 'current':''"
                         @click="setCurrent(index);"
+                        @click="updateCity();"
                         :code="city.code"
                     >{{city.name}}</li>
                 </ul>
@@ -65,8 +67,6 @@
                     _this.postData.selectedProvince = _thisJquery.attr('code');
                     this.displayProvince = false;
                     _this.currentClass = -1;
-                },setCurrent(index) {
-                    this.currentClass = index;  // 把当前点击元素的index，赋值给currentClass
                 },updateCity:function(event){
                     let _thisJquery = $(event.currentTarget);
                     let _this = this;
@@ -77,6 +77,9 @@
                     };
 //                    _this.$emit('update_city',response);
 //                    _this.close();
+                },setCurrent(index) {
+                    console.log(index);
+                    this.currentClass = index;  // 把当前点击元素的index，赋值给currentClass
                 },backUp:function(){
                     let _this = this;
                     this.displayProvince = true;
