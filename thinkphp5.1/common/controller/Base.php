@@ -27,40 +27,40 @@ class Base extends \think\Controller{
 //                $weiXinUserInfo = $mineTools->getOauthUserInfo();
 //                session('weiXinUserInfo',$weiXinUserInfo);
 //            }
-            $mineTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
-            $weiXinUserInfo = $mineTools->getOauthUserInfo();
-            $user = checkLogin();
-            if((!$user['name'] || !$user['avatar']) && $user && isset($weiXinUserInfo['openid'])){
-                //临时相对路径
-                $relativeSavePath = config('upload_dir.user_avatar');
-                $weiXinAvatarUrl = $weiXinUserInfo['headimgurl'];
-                $avatar = saveImageFromHttp($weiXinAvatarUrl,$relativeSavePath);
-                $data = [
-                    'id'=>$user['id'],
-                    'name'=>$weiXinUserInfo['nickname'],
-                    'avatar'=>$avatar,
-                ];
-                if($user['avatar']){
-                    unset($data['avatar']);
-                }else{
-                    $user['avatar'] = $data['avatar'];
-                }
-                if($user['name']){
-                    unset($data['name']);
-                }else{
-                    $user['name'] = $data['name'];
-                }
-                $userModel = new \common\model\User();
-                $result = $userModel->isUpdate(true)->save($data);
-                setSession($user);
-            }
-
-            //判断是否关注平台
-            $weiXinUserInfo2= $mineTools->get_user_info($weiXinUserInfo['openid']);
-            //P($weiXinUserInfo2);
-            if(isset($weiXinUserInfo2['subscribe'])){
-                $this -> assign('subscribe',$weiXinUserInfo2['subscribe']);
-            }
+//            $mineTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
+//            $weiXinUserInfo = $mineTools->getOauthUserInfo();
+//            $user = checkLogin();
+//            if((!$user['name'] || !$user['avatar']) && $user && isset($weiXinUserInfo['openid'])){
+//                //临时相对路径
+//                $relativeSavePath = config('upload_dir.user_avatar');
+//                $weiXinAvatarUrl = $weiXinUserInfo['headimgurl'];
+//                $avatar = saveImageFromHttp($weiXinAvatarUrl,$relativeSavePath);
+//                $data = [
+//                    'id'=>$user['id'],
+//                    'name'=>$weiXinUserInfo['nickname'],
+//                    'avatar'=>$avatar,
+//                ];
+//                if($user['avatar']){
+//                    unset($data['avatar']);
+//                }else{
+//                    $user['avatar'] = $data['avatar'];
+//                }
+//                if($user['name']){
+//                    unset($data['name']);
+//                }else{
+//                    $user['name'] = $data['name'];
+//                }
+//                $userModel = new \common\model\User();
+//                $result = $userModel->isUpdate(true)->save($data);
+//                setSession($user);
+//            }
+//
+//            //判断是否关注平台
+//            $weiXinUserInfo2= $mineTools->get_user_info($weiXinUserInfo['openid']);
+//            //P($weiXinUserInfo2);
+//            if(isset($weiXinUserInfo2['subscribe'])){
+//                $this -> assign('subscribe',$weiXinUserInfo2['subscribe']);
+//            }
 
         }
 

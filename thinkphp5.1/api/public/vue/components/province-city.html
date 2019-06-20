@@ -7,17 +7,17 @@
                 <a href="javascript:void(0);" class="close" title="关闭" @click="close"></a>
             </header>
             <article id="areaBox">
-                <ul id="provinceList" class="area-list" v-if="displayProvince">
+                <ul class="area-list" v-if="displayProvince">
                     <li v-for="(province,index) in provinces"
                         :key="index"
-                        :class="currentClass == index ? 'current':''"
+                        :class="currentProvinceClass == province.code ? 'current':''"
                         @click="selectProvince(province.code);"
                     >{{province.name}}</li>
                 </ul>
-                <ul id="cityList" class="area-list" v-else>
+                <ul class="area-list" v-else>
                     <li v-for="(city,index) in cities"
                         :key="index"
-                        :class="currentClass == index ? 'current':''"
+                        :class="currentCityClass == city.code ? 'current':''"
                         @click="selectCity(city.code);"
                     >{{city.name}}</li>
                 </ul>
@@ -63,7 +63,8 @@
                     },
                     temp_province_name:'',
                     displayProvince: {type: Boolean,default: true},
-                    currentClass: -1
+                    currentProvinceClass: -1,
+                    currentCityClass: -1
                 };
             },methods: {
                 //更新市数据
@@ -85,6 +86,8 @@
                     _this.postData.selectedCityLevel = city.level;
                     _this.selected_name.city_name = city.name;
                     _this.selected_name.province_name = _this.temp_province_name;
+                    _this.setCurrentProvinceCode(_this.postData.selectedProvince);
+                    _this.setCurrentCityCode(_this.postData.selectedCity);
                     _this.trigger_update_data();
                 },trigger_update_data:function(){
                     let _this = this;
@@ -93,9 +96,12 @@
                         selected_name:_this.selected_name
                     };
                     _this.$emit('update_data',param);
-                },setCurrent(index) {
+                },setCurrentProvinceCode(code) {
                     let _this = this;
-                    _this.currentClass = index;  //把当前点击元素的index，赋值给currentClass
+                    _this.currentProvinceClass = code;
+                },setCurrentCityCode(code) {
+                    let _this = this;
+                    _this.currentCityClass = code;
                 },backUp:function(){
                     let _this = this;
                     _this.displayProvince = true;
