@@ -8,18 +8,18 @@
             </header>
             <article id="areaBox">
                 <ul id="provinceList" class="area-list" v-if="displayProvince">
-                    <li :class="index"
-                        v-for="(province,index) in provinces"
+                    <li v-for="(province,index) in provinces"
                         :key="index"
-                        @click="updateProvince();setCurrent(index);"
+                        :class="currentClass == index ? 'current':''"
+                        @click.stop="setCurrent(index);updateProvince($event);"
                         :code="province.code"
                     >{{province.name}}</li>
                 </ul>
                 <ul id="cityList" class="area-list" v-else>
-                    <li :class="currentClass == index ? 'current':''"
-                        v-for="(city,index) in cities"
+                    <li v-for="(city,index) in cities"
                         :key="index"
-                        @click="updateCity();setCurrent(index);"
+                        :class="currentClass == index ? 'current':''"
+                        @click.stop="setCurrent(index);updateCity($event);"
                         :code="city.code"
                     >{{city.name}}</li>
                 </ul>
@@ -60,13 +60,12 @@
             },methods: {
                 //更新市数据
                 updateProvince:function(event){
+                    console.log(event);
                     let _thisJquery = $(event.currentTarget);
                     let _this = this;
                     _this.postData.selectedProvince = _thisJquery.attr('code');
                     this.displayProvince = false;
                     _this.currentClass = -1;
-                },setCurrent(index) {
-                    this.currentClass = index;  // 把当前点击元素的index，赋值给currentClass
                 },updateCity:function(event){
                     let _thisJquery = $(event.currentTarget);
                     let _this = this;
@@ -77,6 +76,8 @@
                     };
 //                    _this.$emit('update_city',response);
 //                    _this.close();
+                },setCurrent(index) {
+                    this.currentClass = index;  // 把当前点击元素的index，赋值给currentClass
                 },backUp:function(){
                     let _this = this;
                     this.displayProvince = true;
