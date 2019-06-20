@@ -60,7 +60,6 @@
             },methods: {
                 //更新市数据
                 updateProvince:function(event){
-                    console.log(event);
                     let _thisJquery = $(event.currentTarget);
                     let _this = this;
                     _this.postData.selectedProvince = _thisJquery.attr('code');
