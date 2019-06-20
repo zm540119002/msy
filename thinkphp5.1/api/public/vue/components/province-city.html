@@ -8,10 +8,16 @@
             </header>
             <article id="areaBox">
                 <ul id="provinceList" class="area-list" v-if="displayProvince">
-                    <li v-for="province in provinces" :code="province.code" @click="updateProvince">{{province.name}}</li>
+                    <li :class="currentClass == index ? 'current':''"
+                        v-for="(province,index) in provinces"
+                        :code="province.code"
+                        @click="updateProvince();setCurrent();">{{province.name}}</li>
                 </ul>
                 <ul id="cityList" class="area-list" v-else>
-                    <li v-for="city in cities" :code="city.code" @click="updateCity">{{city.name}}</li>
+                    <li :class="currentClass == index ? 'current':''"
+                        v-for="(city,index) in cities" 
+                        :code="city.code"
+                        @click="updateCity();setCurrent();">{{city.name}}</li>
                 </ul>
             </article>
         </section>
@@ -44,7 +50,8 @@
                         province_name: '', //被选择的省份名称
                         city_name:''  //被选择的市名称
                     },
-                    displayProvince: {type: Boolean,default: true}
+                    displayProvince: {type: Boolean,default: true},
+                    currentClass: -1
                 };
             },methods: {
                 //更新市数据
@@ -53,6 +60,9 @@
                     let _this = this;
                     _this.postData.selectedProvince = _thisJquery.attr('code');
                     this.displayProvince = false;
+                    _this.currentClass = -1;
+                },setCurrent(index) {
+                    this.currentClass = index;  // 把当前点击元素的index，赋值给currentClass
                 },updateCity:function(event){
                     let _thisJquery = $(event.currentTarget);
                     let _this = this;
