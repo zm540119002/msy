@@ -107,4 +107,24 @@ class Test extends \common\controller\Base{
 //        $weiXinUserInfo2= $mineTools->get_user_info($weiXinUserInfo1['openid']);
 //        P($weiXinUserInfo2);
     }
+
+    public function create_menu_raw()
+    {
+        $menu = '{
+            "button":[
+                {
+                "type":"view",
+                "name":"美容机构",
+                "url":"http://m.meishangyun.com/sys_mrjg/do.php"
+                },
+                {
+                "type":"view",
+                "name":"美容机构",
+                "url":"http://m.meishangyun.com/sys_employee/do.php"
+                }
+           ]
+        }';
+
+        return  $this->_jssdk -> create_menu_raw($menu);
+    }
 }

@@ -72,7 +72,7 @@ class WeiXinBase extends UserBase{
     }
 
     //自定义菜单
-    public function  create_menu_raw($menu){
+    public function  createMenuRaw($menu){
         /**
          *        $menu = '{
         "button":[
