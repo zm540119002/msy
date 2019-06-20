@@ -11,14 +11,14 @@
                     <li v-for="(province,index) in provinces"
                         :key="index"
                         :class="currentClass == index ? 'current':''"
-                        @click="selectProvince(province.code)"
+                        @click="selectProvince(province.code);"
                     >{{province.name}}</li>
                 </ul>
                 <ul id="cityList" class="area-list" v-else>
                     <li v-for="(city,index) in cities"
                         :key="index"
                         :class="currentClass == index ? 'current':''"
-                        @click="selectCity(city.code)"
+                        @click="selectCity(city.code);"
                     >{{city.name}}</li>
                 </ul>
             </article>

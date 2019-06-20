@@ -51,11 +51,8 @@
 		});
 		//外部赋值
 		$('body').on('click','.set',function(){
-			let assign_value = {
-				province:102,
-				city:104
-			};
-			city_picker.selected_code = assign_value;
+			let param = city_picker.get();
+			console.log(param);
 		});
 	});
 </script>
