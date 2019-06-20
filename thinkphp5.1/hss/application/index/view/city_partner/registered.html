@@ -1,5 +1,30 @@
 {extend name="template/base.html" /}
 {block name="content"}
+<link rel="stylesheet" type="text/css"  href="index_js/mobileSelector/css/mpicker.css">
+<link rel="stylesheet" type="text/css" href="index_js/mobileSelector/css/bootstrap-3.3.4.css">
+<style type="text/css">
+	/*自定义样式*/
+	body,html{
+		margin: 0;
+		padding: 0;
+	}
+	.mPicker-header,.mPicker-content li,.mPicker-confirm,.mPicker-cancel{
+		font-size: 10px;
+	}
+	body {
+		font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+		font-size: 14px;
+		line-height: 1.42857143;
+		color: #333;
+		background-color: #fff;
+	}
+
+	.slide-wapper {
+		padding:20px;
+		overflow-y: scroll;
+		/* background: #eee; */
+	}
+</style>
 <div class="f24">
     <section class="f20 header_title separation-line">
 		<a href="javascript:void(0);" class="back_prev_page"></a>
@@ -21,7 +46,8 @@
 						<div class="express-area ">
 							<a id="expressArea" href="javascript:void(0)" class="f24 form-group box-flex">
 								<label class="form-label">选择地区：</label>
-								<div class="area_address">省 &gt; 市 &gt; 区/县</div>
+						<!--		<div class="area_address">省 &gt; 市 &gt; 区/县</div>-->
+								<input type="text" class="select-value1 form-control" value="广东省-东莞市">
 								<input type="hidden"  data-key="" value="" class="area-address-name" >
 							</a>
 						</div>
@@ -30,9 +56,9 @@
 							<p>请先查询拟申请的城市是否有空缺，如有空缺可填写资料，在线支付城市合伙人订金￥5000.00，黑森森城市合伙人资格审核通过后再补交资格余款，如不通过订金将7天内无息退回；通过后资格款项将转存入用户充值账户，用于采购结算专用。</p>
 							<dl>
 								<dt>黑森森城市合伙人资格政策：</dt>
-								<dd>一类市场城市合伙人：按区域位于中国1线城市或2线城市的申请人，其黑森森城市合伙人资格款29.8万元；</dd>
-								<dd>二类市场城市合伙人：按区域位于中国3线城市或4线城市的申请人，其黑森森城市合伙人资格款19.8万元；</dd>
-								<dd>三类市场城市合伙人：按区域位于中国5线城市或5线以下城市的申请人，其黑森森城市合伙人资格款9.8万元。</dd>
+								<dd>A类市场城市合伙人：按区域位于中国1线城市或2线城市的申请人，其黑森森城市合伙人资格款29.8万元；</dd>
+								<dd>B类市场城市合伙人：按区域位于中国3线城市或4线城市的申请人，其黑森森城市合伙人资格款19.8万元；</dd>
+								<dd>C类市场城市合伙人：按区域位于中国5线城市或5线以下城市的申请人，其黑森森城市合伙人资格款9.8万元。</dd>
 							</dl>
 						</div>
 						<a href="javascript:void(0);" class="step search-city">查询</a>
@@ -153,5 +179,78 @@
 	//已申请
 	var applied = JSON.parse('{$applied|raw}');
 
+</script>
+
+<script src="index_js/mobileSelector/js/json.js"></script>
+<script src="index_js/mobileSelector/js/jsonExchange.js"></script>
+<script src="index_js/mobileSelector/js/mPicker.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+
+		/**
+		 * 联动的picker--添加修改后修改数据的效果
+		 * 两级
+		 */
+		$('.select-value1').mPicker({
+			level: 2,
+			dataJson: dataJson,
+			Linkage: true,
+			rows: 6,
+			idDefault: true,
+			splitStr: '-',
+			header:'<div class="mPicker-header">城市选择</div>',
+			confirm: function (json) {
+				//console.info('当前选中json：', json);
+				var _this= this;
+
+
+				var url = module+'Test/jin1';
+
+				var postData = {'data':cityData};
+
+				//console.log(cityData);
+				//return false;
+				//console.log(postData);
+				$.post(url,postData,function (data) {
+					console.log(data);
+				},'JSON');
+
+				//console.info('【json里有带value的情况】');
+				//更新json
+				//console.info('3s后更新json...');
+				/*setTimeout(function(){
+				 _this.container.data('mPicker').updateData.call(_this,level3);
+				 var json = getVal();
+				 var valArr = json.value;
+				 console.info(json);
+				 //console.info(valArr);
+				 console.info('更新后的value为空', valArr[0], valArr[1]);
+				 console.info('更新后的value拼接值为空', json.result);
+				 },3000);*/
+
+			},
+			cancel: function (json) {
+			}
+		});
+		//获取value
+		function getVal(){
+			var value1 = $('.select-value1').data('value1');
+			var value2 = $('.select-value1').data('value2');
+			var result='';
+			value1 = value1 || '';
+			value2 = value2 || '';
+			if(value1){
+				result= value1;
+			}
+			if(value2){
+				result = result+'-'+ value2;
+			}
+			return {
+				value:[value1, value2],
+				result: result
+			};
+		}
+
+	});
 </script>
 {/block} 
