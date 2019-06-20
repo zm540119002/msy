@@ -61,6 +61,7 @@
                         province_name: '', //被选择的省份名称
                         city_name:''  //被选择的市名称
                     },
+                    temp_province_name:'',
                     displayProvince: {type: Boolean,default: true},
                     currentClass: -1
                 };
@@ -77,11 +78,12 @@
                 },updateProvince:function(province){
                     let _this = this;
                     _this.cities = province.cities;
-                    _this.selected_name.province_name = province.name;
+                    _this.temp_province_name = province.name;
                 },updateCity:function(city){
                     let _this = this;
                     _this.postData.selectedCity = city.code;
                     _this.postData.selectedCityLevel = city.level;
+                    _this.selected_name.province_name = _this.temp_province_name;
                     _this.selected_name.city_name = city.name;
                     _this.trigger_update_data();
                 },trigger_update_data:function(){
