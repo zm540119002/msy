@@ -10,14 +10,18 @@
                 <ul id="provinceList" class="area-list" v-if="displayProvince">
                     <li :class="currentClass == index ? 'current':''"
                         v-for="(province,index) in provinces"
+                        :key="index"
+                        @click="updateProvince();setCurrent(index);"
                         :code="province.code"
-                        @click="updateProvince();setCurrent();">{{province.name}}</li>
+                    >{{province.name}}</li>
                 </ul>
                 <ul id="cityList" class="area-list" v-else>
                     <li :class="currentClass == index ? 'current':''"
-                        v-for="(city,index) in cities" 
+                        v-for="(city,index) in cities"
+                        :key="index"
+                        @click="updateCity();setCurrent(index);"
                         :code="city.code"
-                        @click="updateCity();setCurrent();">{{city.name}}</li>
+                    >{{city.name}}</li>
                 </ul>
             </article>
         </section>
