@@ -148,10 +148,7 @@
 				let _thisVue = this;
 				_thisVue.getJsonListParam.callBack = _thisVue.getJsonListCallBack;
 				vueVersionGetJsonList(_thisVue);
-                                 $("#product-list li").click(function(){
-                                            //delCart();
-                                            alert(123);
-                                   });
+                                 console.log(_thisVue);
 				//下拉加载
 				$(window).on('scroll',function(){
 					if(_thisVue.getJsonListParam.loadTrigger
@@ -159,10 +156,7 @@
 						//停止触发，去其他地方重新放开
 						_thisVue.getJsonListParam.loadTrigger = false;
 						vueVersionGetJsonList(_thisVue);
-                                                $("#product-list li").click(function(){
-                                                    //delCart();
-                                                    alert(1234);
-                                                 });
+                                                
 					}
 				});
 			}
