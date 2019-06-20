@@ -104,8 +104,9 @@
                             });
                             //城市初始化
                             if(_this.cities.length){
-                                console.log(_this.cities[0]);
                                 _this.postData.selectedCity = _this.cities[0].code;
+                                _this.postData.selectedCityLevel = _this.cities[0].level;
+                                _this.selected_name.city_name = _this.cities[0].name;
                             }
                         }
                     },
@@ -117,6 +118,7 @@
                         if(typeof(oldVal) !== "undefined"){
                             _this.cities.map(function(item){
                                 if(item.code == newVal){
+                                    _this.postData.selectedCity = item.code;
                                     _this.postData.selectedCityLevel = item.level;
                                     _this.selected_name.city_name = item.name;
                                 }
