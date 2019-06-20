@@ -52,6 +52,53 @@ class Test extends \common\controller\Base{
 
     }
 
+    public function jin1(){
+
+        $file = 'static/index/js/mobileSelector/js/json1.js';
+        $data = file_get_contents($file);
+        $data = json_decode($data,true);
+
+        $province = [];
+        foreach ($data as $k => $v){
+
+            if($v['level']==1){
+                $v1['area_id'] = $v['id'];
+                $v1['province_name'] = $v['name'];
+                $v1['city_name'] = $v['shortName'];
+                $v1['area_parent_id'] = $v['parentId'];
+                $province[$v['id']] = $v1;
+            }
+
+        }
+
+        $city = [];
+        foreach ($data as $k => $v){
+
+            if($v['level']==2){
+                $v1['area_id'] = $v['id'];
+                $v1['province_name'] = $province[$v['parentId']]['province_name'];
+                $v1['city_name'] = $v['name'];
+                $v1['area_parent_id'] = $v['parentId'];
+                $city[] = $v1;
+            }
+        }
+
+        $model = new \app\index\model\CityArea();
+        $res = $model->editAll($city);
+        //p($data);
+        p($res);
+        echo '<hr>';
+        //p($province);
+        exit;
+
+        $data = input('post.');
+
+        p($data);
+        exit;
+        return $this->fetch();
+
+    }
+
     public function weixin()
     {
         $mineTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));

@@ -1,8 +1,8 @@
 {extend name="template/base.html" /}
 {block name="title"}测试{/block}
 {block name="content"}
-<!--<link rel="stylesheet" type="text/css"  href="http://www.jq22.com/demo/mobileSelector201708161250/css/mpicker.css">
-<link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/bootstrap-3.3.4.css">-->
+<link rel="stylesheet" type="text/css"  href="index_js/mobileSelector/css/mpicker.css">
+<link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/bootstrap-3.3.4.css">
 <style type="text/css">
 	/*自定义样式*/
 	body,html{
@@ -61,11 +61,16 @@
 {block name="footer"}
 {/block}
 {block name="script"}
-<!--<script src="http://www.jq22.com/demo/mobileSelector201708161250/js/json.js"></script>
-<script src="http://www.jq22.com/demo/mobileSelector201708161250/js/jsonExchange.js"></script>
-<script src="http://www.jq22.com/demo/mobileSelector201708161250/js/mPicker.min.js"></script>-->
+<!--<script src="http://www.jq22.com/demo/mobileSelector201708161250/js/json.js"></script>-->
 
-<!--<script src="index_js/mobileSelector/json.js"></script>-->
+
+<!--
+<script src="http://www.jq22.com/demo/mobileSelector201708161250/js/jsonExchange.js"></script>
+<script src="http://www.jq22.com/demo/mobileSelector201708161250/js/mPicker.min.js"></script>
+-->
+
+
+<script src="index_js/mobileSelector/js/json.js"></script>
 <script src="index_js/mobileSelector/js/jsonExchange.js"></script>
 <script src="index_js/mobileSelector/js/mPicker.min.js"></script>
 <script type="text/javascript">
@@ -75,7 +80,7 @@
 		 * 联动的picker--添加修改后修改数据的效果
 		 * 两级
 		 */
-/*		$('.select-value1').mPicker({
+		$('.select-value1').mPicker({
 			level: 2,
 			dataJson: dataJson,
 			Linkage: true,
@@ -83,24 +88,38 @@
 			idDefault: true,
 			splitStr: '-',
 			confirm: function (json) {
-				console.info('当前选中json：', json);
+				//console.info('当前选中json：', json);
 				var _this= this;
-				console.info('【json里有带value的情况】');
+
+
+				var url = module+'Test/jin1';
+
+				var postData = {'data':cityData};
+
+				//console.log(cityData);
+				//return false;
+				//console.log(postData);
+				$.post(url,postData,function (data) {
+					console.log(data);
+				},'JSON');
+
+				//console.info('【json里有带value的情况】');
 				//更新json
-				console.info('3s后更新json...');
-				setTimeout(function(){
+				//console.info('3s后更新json...');
+				/*setTimeout(function(){
 					_this.container.data('mPicker').updateData.call(_this,level3);
 					var json = getVal();
 					var valArr = json.value;
-					console.info('更新成功!!');
+					console.info(json);
+					//console.info(valArr);
 					console.info('更新后的value为空', valArr[0], valArr[1]);
 					console.info('更新后的value拼接值为空', json.result);
-				},3000);
+				},3000);*/
 
 			},
 			cancel: function (json) {
 			}
-		});*/
+		});
 		//获取value
 		function getVal(){
 			var value1 = $('.select-value1').data('value1');
