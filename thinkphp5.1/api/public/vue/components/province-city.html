@@ -11,14 +11,14 @@
                     <li v-for="(province,index) in provinces"
                         :key="index"
                         :class="currentClass == index ? 'current':''"
-                        @click="updateProvince(province.code)"
+                        @click="selectProvince(province.code)"
                     >{{province.name}}</li>
                 </ul>
                 <ul id="cityList" class="area-list" v-else>
                     <li v-for="(city,index) in cities"
                         :key="index"
                         :class="currentClass == index ? 'current':''"
-                        @click="updateCity(city.code)"
+                        @click="selectCity(city.code)"
                     >{{city.name}}</li>
                 </ul>
             </article>
@@ -62,19 +62,28 @@
                 };
             },methods: {
                 //更新市数据
-                updateProvince:function(code){
+                selectProvince:function(code){
                     let _this = this;
                     _this.postData.selectedProvince = code;
                     _this.displayProvince = false;
-                },updateCity:function(code){
+                },selectCity:function(code){
                     let _this = this;
                     _this.postData.selectedCity = code;
-                    let response = {
+                    let param = {
                         selected_code:_this.postData,
                         selected_name:_this.selected_name
                     };
-                    _this.$emit('update_city',response);
+                    _this.$emit('update_city',param);
                     _this.close();
+                },updateProvince:function(province){
+                    let _this = this;
+                    _this.cities = province.cities;
+                    _this.selected_name.province_name = province.name;
+                },updateCity:function(city){
+                    let _this = this;
+                    _this.postData.selectedCity = city.code;
+                    _this.postData.selectedCityLevel = city.level;
+                    _this.selected_name.city_name = city.name;
                 },setCurrent(index) {
                     let _this = this;
                     _this.currentClass = index;  //把当前点击元素的index，赋值给currentClass
@@ -98,15 +107,12 @@
                         if(typeof(oldVal) !== "undefined"){
                             _this.provinces.map(function(item){
                                 if(item.code == newVal){
-                                    _this.cities = item.cities;
-                                    _this.selected_name.province_name = item.name;
+                                    _this.updateProvince(item)
                                 }
                             });
                             //城市初始化
                             if(_this.cities.length){
-                                _this.postData.selectedCity = _this.cities[0].code;
-                                _this.postData.selectedCityLevel = _this.cities[0].level;
-                                _this.selected_name.city_name = _this.cities[0].name;
+                                _this.updateCity(_this.cities[0]);
                             }
                         }
                     },
@@ -118,9 +124,7 @@
                         if(typeof(oldVal) !== "undefined"){
                             _this.cities.map(function(item){
                                 if(item.code == newVal){
-                                    _this.postData.selectedCity = item.code;
-                                    _this.postData.selectedCityLevel = item.level;
-                                    _this.selected_name.city_name = item.name;
+                                    _this.updateCity(item);
                                 }
                             });
                         }
