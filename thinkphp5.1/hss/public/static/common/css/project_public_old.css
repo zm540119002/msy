@@ -425,13 +425,13 @@
     vertical-align: middle;
 }
 .franchise_ul span.zh{
-    background-position:0 0;
+    background-position:0 0.08rem;
 }
 .franchise_ul span.ck{
-    background-position:0 -0.70rem;
+    background-position:0 -0.80rem;
 }
 .franchise_ul span.zc{
-    background-position:0 -1.6rem;
+    background-position:0 -1.72rem;
 }
 .applay_p_item{
     height:118px;
