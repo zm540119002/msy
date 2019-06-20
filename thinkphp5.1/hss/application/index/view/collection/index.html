@@ -148,7 +148,10 @@
 				let _thisVue = this;
 				_thisVue.getJsonListParam.callBack = _thisVue.getJsonListCallBack;
 				vueVersionGetJsonList(_thisVue);
-                                 console.log(_thisVue);
+                                 for(var i in _thisVue){
+                                     console.log(i);
+                                     console.log(_thisVue.i);
+                                 }
 				//下拉加载
 				$(window).on('scroll',function(){
 					if(_thisVue.getJsonListParam.loadTrigger
