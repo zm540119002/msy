@@ -20,7 +20,6 @@
 		var city_picker_param = {
 			provinces:{provinces},
 			display:false,
-			init_assign:{},
 			selected_code:{},
 			selected_name:{}
 		};
@@ -34,8 +33,6 @@
 					let _this = this;
 					_this.display = !_this.display;
 				},update_city:function(param){
-					console.log(param);
-					return;
 					let _this = this;
 					_this.selected_code = param.selected_code;
 					_this.selected_name = param.selected_name;
@@ -52,11 +49,7 @@
 		});
 		//外部赋值
 		$('body').on('click','.set',function(){
-			let assign_value = {
-				province:102,
-				city:104
-			};
-			city_picker.init_assign = assign_value;
+			console.log(city_picker_param.selected_code);
 		});
 	});
 </script>
