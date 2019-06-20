@@ -68,6 +68,24 @@
     if(isWeiXin()){
         $('#subscribe').css('display','block');
     }
+    $('body').on('click','.subscribe',function () {
+        var imgSrc = domain +'static/index/img/hss_wechat_public.jpg';
+        console.log(imgSrc);
+        layer.open({
+            skin:'shareqrCodeLayer',
+            content:'<img src='+imgSrc+' />',
+            btn:['X'],
+            success:function(){
+                fixedLayer();
+            },
+            yes:function(index){
+                cancleFixedLayer();
+                layer.close(index);
+            }
+        });
+    });
+
+
     //异步验证
     var asyncVerifyRepeat = true;
     function asyncVerify(config){
