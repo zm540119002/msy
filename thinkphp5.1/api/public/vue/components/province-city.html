@@ -7,14 +7,14 @@
                 <a href="javascript:void(0);" class="close" title="关闭" @click="close"></a>
             </header>
             <article id="areaBox">
-                <ul id="provinceList" class="area-list">
+                <ul id="provinceList" class="area-list" v-if="displayProvince">
                     <li v-for="(province,index) in provinces"
                         :key="index"
                         :class="currentClass == index ? 'current':''"
                         @click="selectProvince(province.code);"
                     >{{province.name}}</li>
                 </ul>
-                <ul id="cityList" class="area-list">
+                <ul id="cityList" class="area-list" v-else>
                     <li v-for="(city,index) in cities"
                         :key="index"
                         :class="currentClass == index ? 'current':''"
