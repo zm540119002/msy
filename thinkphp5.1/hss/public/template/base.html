@@ -79,7 +79,7 @@
             anim:'up',
             title:['长按二维码关注','color:#fff;'],
             content:'<img src='+imgSrc+' />',
-            // btn:['X'],
+            btn:['X'],
             success:function(){
                 fixedLayer();
             },
@@ -87,7 +87,7 @@
                 cancleFixedLayer();
                 layer.close(index);
             },
-            cancle:function(){
+            end:function(){
                 cancleFixedLayer();
             }
         });

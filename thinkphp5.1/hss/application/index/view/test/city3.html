@@ -42,8 +42,6 @@
 					_this.selected_name = param.selected_name;
 				},get:function(){
 					return this.selected_code;
-				},set:function(param){
-					console.log(param);
 				}
 			},created:function(){
 				let _this = this;
@@ -53,18 +51,9 @@
 		$('body').on('click','.sure',function(){
 			console.log(city_picker.get());
 		});
-		//外部赋值
-		$('body').on('click','.set',function(){
-			let param = {
-				province_code:102,
-				city_code:103
-			};
-			city_picker.selected_code = param;
-		});
 	});
 </script>
 {/block}
 {block name="footer"}
 <a href="javascript:void(0);" class="sure">确定</a>
-<a href="javascript:void(0);" class="set">赋值</a>
 {/block}
