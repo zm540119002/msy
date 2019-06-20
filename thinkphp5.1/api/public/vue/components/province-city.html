@@ -56,9 +56,7 @@
                 },updateCity:function(event){
                     let _thisJquery = $(event.currentTarget);
                     let _this = this;
-                    console.log(_this.postData.selectedCity);
                     _this.postData.selectedCity = _thisJquery.attr('code');
-                    console.log(_this.postData.selectedCity);
                     let response = {
                         selected_code:_this.postData,
                         selected_name:_this.selected_name
@@ -98,12 +96,11 @@
                     immediate: true
                 },selectedCity: {
                     handler(newVal, oldVal) {
-                        console.log(oldVal);
-                        console.log(newVal);
                         let _this = this;
                         if(typeof(oldVal) !== "undefined"){
                             _this.cities.map(function(item,index){
                                 if(item.code == newVal){
+                                    console.log(item);
                                     _this.postData.selectedCityLevel = item.level;
                                     _this.selected_name.city_name = item.name;
                                 }
