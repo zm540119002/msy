@@ -18,7 +18,7 @@
                     <li v-for="(city,index) in cities"
                         :key="index"
                         :class="currentCityClass == city.code ? 'current':''"
-                        @click="setCurrentCityCode(city.code);"
+                        @click="selectCity(city.code);setCurrentCityCode(city.code);"
                     >{{city.name}}</li>
                 </ul>
             </article>
