@@ -9,6 +9,7 @@
 			@toggle="toggle"
 			@update_data="update_data"
 			:init_provinces="provinces"
+			:init_selected_code="selected_code"
 	></city_picker>
 </div>
 {/block}
@@ -20,7 +21,10 @@
 		var city_picker_param = {
 			provinces:{provinces},
 			display:false,
-			selected_code:{},
+			selected_code:{
+				province_code:102,
+				city_code:103
+			},
 			selected_name:{}
 		};
 		var city_picker = new Vue({
@@ -55,7 +59,7 @@
 				province_code:102,
 				city_code:103
 			};
-			city_picker.set(param);
+			city_picker.selected_code = param;
 		});
 	});
 </script>
