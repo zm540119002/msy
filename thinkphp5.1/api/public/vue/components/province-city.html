@@ -139,8 +139,12 @@
                 }
             },created:function(){
                 let _this = this;
-                console.log(_this.init_selected_code.province_code);
-                console.log(_this.postData.selectedProvince);
+                if(_this.init_selected_code.province_code){
+                    _this.postData.selectedProvince = _this.init_selected_code.province_code;
+                }
+                if(_this.init_selected_code.city_code){
+                    _this.postData.selectedCity = _this.init_selected_code.city_code;
+                }
             }
         });
     });
