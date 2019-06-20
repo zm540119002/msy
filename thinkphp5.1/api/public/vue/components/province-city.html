@@ -11,7 +11,7 @@
                     <li v-for="(province,index) in provinces"
                         :key="index"
                         :class="index"
-                        @click="updateProvince();setCurrent(index);"
+                        @click="setCurrent(index);"
                         :code="province.code"
                     >{{province.name}}</li>
                 </ul>
@@ -19,7 +19,7 @@
                     <li v-for="(city,index) in cities"
                         :key="index"
                         :class="currentClass == index ? 'current':''"
-                        @click="updateCity();setCurrent(index);"
+                        @click="setCurrent(index);"
                         :code="city.code"
                     >{{city.name}}</li>
                 </ul>
