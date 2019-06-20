@@ -114,7 +114,7 @@ class Test extends \common\controller\Base{
             "button":[
                 {
                 "type":"view",
-                "name":"采购商",
+                "name":"采购商城",
                 "url":"https://hss.meishangyun.com/index/Index/index.html"
                 },
                 {
