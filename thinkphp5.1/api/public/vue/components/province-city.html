@@ -70,11 +70,9 @@
                     let _this = this;
                     _this.postData.selectedProvince = code;
                     _this.displayProvince = false;
-                    _this.trigger_update_data();
                 },selectCity:function(code){
                     let _this = this;
                     _this.postData.selectedCity = code;
-                    _this.trigger_update_data();
                     _this.close();
                 },trigger_update_data:function(){
                     let _this = this;
@@ -92,6 +90,7 @@
                     _this.postData.selectedCity = city.code;
                     _this.postData.selectedCityLevel = city.level;
                     _this.selected_name.city_name = city.name;
+                    _this.trigger_update_data();
                 },setCurrent(index) {
                     let _this = this;
                     _this.currentClass = index;  //把当前点击元素的index，赋值给currentClass
@@ -118,10 +117,6 @@
                                     _this.updateProvince(item)
                                 }
                             });
-                            //城市初始化
-                            if(_this.cities.length){
-                                _this.updateCity(_this.cities[0]);
-                            }
                         }
                     },
                     deep: true,
