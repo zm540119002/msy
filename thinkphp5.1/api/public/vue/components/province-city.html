@@ -63,13 +63,10 @@
             },methods: {
                 //更新市数据
                 updateProvince:function(code){
-                    let _thisJquery = $(event.currentTarget);
                     let _this = this;
                     _this.postData.selectedProvince = code;
-                    this.displayProvince = false;
-                    _this.currentClass = -1;
+                    _this.displayProvince = false;
                 },updateCity:function(code){
-                    let _thisJquery = $(event.currentTarget);
                     let _this = this;
                     _this.postData.selectedCity = code;
                     let response = {
@@ -79,10 +76,11 @@
                     _this.$emit('update_city',response);
                     _this.close();
                 },setCurrent(index) {
-                    this.currentClass = index;  //把当前点击元素的index，赋值给currentClass
+                    let _this = this;
+                    _this.currentClass = index;  //把当前点击元素的index，赋值给currentClass
                 },backUp:function(){
                     let _this = this;
-                    this.displayProvince = true;
+                    _this.displayProvince = true;
                 },close:function(){
                     let _this = this;
                     _this.$emit('toggle');
@@ -98,7 +96,7 @@
                     handler(newVal, oldVal) {
                         let _this = this;
                         if(typeof(oldVal) !== "undefined"){
-                            _this.provinces.map(function(item,index){
+                            _this.provinces.map(function(item){
                                 if(item.code == newVal){
                                     _this.cities = item.cities;
                                     _this.selected_name.province_name = item.name;
@@ -115,7 +113,7 @@
                     handler(newVal, oldVal) {
                         let _this = this;
                         if(typeof(oldVal) !== "undefined"){
-                            _this.cities.map(function(item,index){
+                            _this.cities.map(function(item){
                                 if(item.code == newVal){
                                     _this.postData.selectedCityLevel = item.level;
                                     _this.selected_name.city_name = item.name;
