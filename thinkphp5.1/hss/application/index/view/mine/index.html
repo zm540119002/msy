@@ -157,14 +157,16 @@
     //退出-弹窗事件
     $('body').on('click','#logout_dialog',function(){
         logoutDialogTrigger();
+        $("body,html").css({"overflow":"auto","height":"auto"});
     });
-    $("body,html").css({"overflow":"auto","height":"auto"});
+    
     //登录-弹窗事件
     $('body').on('click','#login_dialog',function(){
         loginDialogTrigger();
-    });
-    var h=$(window).height(); 
+        var h=$(window).height(); 
 $("body,html").css({"overflow":"hidden","height":h+"px"});
+    });
+  
 </script>
 <script type="text/javascript">
     $(function () {
