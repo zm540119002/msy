@@ -146,6 +146,8 @@ button, input, textarea {
     background-repeat: no-repeat;
     background-size:30px 34px;
     background-position:15px 22px;
+    display: block!important;
+    visibility:visible!important;
 }
 .login_item .columns_flex .hidden.active{
      background-position:15px -7px;
