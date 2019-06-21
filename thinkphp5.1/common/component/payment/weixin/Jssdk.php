@@ -5,7 +5,7 @@ class Jssdk {
   private $appId;
   private $appSecret;
   private $path;
-  private $access_token;
+  private $access_token; //普通$access_token
 
   public function __construct($appId, $appSecret) {
     $this->appId = $appId;

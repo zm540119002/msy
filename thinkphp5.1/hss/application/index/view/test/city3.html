@@ -1,35 +1,69 @@
 {extend name="template/base.html" /}
 {block name="title"}城市测试3{/block}
 {block name="content"}
-	<city_picker></city_picker>
-	<!--选择地区弹层-->
-	<section id="areaLayer" class="express-area-box" style="bottom:0;">
-		<header>
-			<h3>选择地区</h3>
-			<a id="backUp" class="back" href="javascript:void(0);" title="返回" style="display: none;"></a>
-			<a id="closeArea" class="close" href="javascript:void(0);" title="关闭"></a>
-		</header>
-		<article id="areaBox">
-			<ul id="areaList" class="area-list">
-				<li onclick="selectP(0);">北京市</li>
-				<li onclick="selectP(0);">北京市</li>
-				<li onclick="selectP(0);">北京市</li>
-				<li onclick="selectP(0);">北京市</li>
-				<li onclick="selectP(0);">北京市</li>
-				<li onclick="selectP(0);">北京市</li>
-				<li onclick="selectP(0);">北京市</li>
-				<li onclick="selectP(0);">北京市</li>
-				<li onclick="selectP(0);">北京市</li>
-				<li onclick="selectP(0);">北京市</li>
-				<li onclick="selectP(0);">北京市</li>
-			</ul>
-		</article>
-	</section>
-	<!--遮罩层-->
-	<div id="areaMask" class="address_mask" style="display: block;"></div>
+<div id="province_city_linkage">
+	<label class="form-label" @click="toggle">选择地区：</label>
+	<div class="area_address">{{selected_name.province_name}} {{selected_name.city_name}}</div>
+	<city_picker
+			v-show="display"
+			@toggle="toggle"
+			@update_city="update_city"
+			:init_provinces="provinces"
+	></city_picker>
+</div>
 {/block}
 {block name="common"}
+<script type="text/javascript" src="vue_js/province_city.js"></script>
 {include file="../../api/public/vue/components/province-city.html" /}
+<script type="text/javascript">
+	$(function(){
+		var city_picker_param = {
+			provinces:{provinces},
+			display:false,
+			init_assign:{},
+			selected_code:{},
+			selected_name:{}
+		};
+		var city_picker = new Vue({
+			el: "#province_city_linkage",
+			data: function () {
+				return city_picker_param;
+			},methods: {
+				//更新市数据
+				toggle:function(){
+					let _this = this;
+					_this.display = !_this.display;
+				},update_city:function(param){
+					let _this = this;
+					_this.selected_code = param.selected_code;
+					_this.selected_name = param.selected_name;
+				},get:function(){
+					return this.selected_code;
+				}
+			},created:function(){
+				let _this = this;
+			}
+		});
+		//外部获取
+		$('body').on('click','.sure',function(){
+			console.log(city_picker.get());
+		});
+		//外部赋值
+		$('body').on('click','.set',function(){
+			let assign_value = {
+				province:102,
+				city:104
+			};
+			city_picker.init_assign = assign_value;
+		});
+	});
+</script>
 {/block}
 {block name="footer"}
+<div>
+	<a href="javascript:void(0);" class="sure">确定</a>
+</div>
+<div>
+	<a href="javascript:void(0);" class="set">赋值</a>
+</div>
 {/block}

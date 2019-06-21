@@ -1,45 +1,116 @@
 <template id="city_picker_tpl">
-    <!-- 省 -->
-    <select v-model="postData.selectedProvince" @change="updateCity();">
-        <option v-for='province in provinces' :value="province.code">{{province.name}}</option>
-    </select>
-    <!-- 市 -->
-    <select v-model="postData.selectedCity" v-show="cities.length">
-        <option v-for='city in cities' :value="city.code">{{city.name}}</option>
-    </select>
-    <a href="javascript:void(0);" class="next-step step beforehand-register" @click="test">确定</a>
+    <div class="city_picker">
+        <section class="express-area-box" style="bottom: 0px;">
+            <header>
+                <h3>选择地区</h3>
+                <a href="javascript:void(0);" class="backUp" title="返回" v-show="!displayProvince" @click="backUp"></a>
+                <a href="javascript:void(0);" class="close" title="关闭" @click="close"></a>
+            </header>
+            <article id="areaBox">
+                <ul id="provinceList" class="area-list" v-if="displayProvince">
+                    <li v-for="province in provinces" :code="province.code" @click="updateProvince">{{province.name}}</li>
+                </ul>
+                <ul id="cityList" class="area-list" v-else>
+                    <li v-for="city in cities" :code="city.code" @click="updateCity">{{city.name}}</li>
+                </ul>
+            </article>
+        </section>
+        <div class="address_mask city_mask" @click="close"></div>
+    </div>
 </template>
-<script type="text/javascript" src="vue_js/province_city.js"></script>
 <script type="text/javascript">
     $(function(){
-        console.log(provinces);
+        //城市选择
         Vue.component('city_picker', {
             template:'#city_picker_tpl',
-            data: {
-                provinces: provinces, //所有省份
-                cities:[], //被选择的省对应的市数据
-                postData:{
-                    selectedProvince: '', //被选择的省
-                    selectedCity:'',  //被选择的市
-                    selectedCityLevel:''  //被选择的市的级别
-                }
-            }, methods: {
-                //更新市数据
-                updateCity:function(){
-                    let _this = this;
-                    _this.provinces.map(function(item,index){
-                        if(item.code == _this.postData.selectedProvince){
-                            _this.cities = item.cities;
-                        }
-                    });
-                    if(_this.cities.length){
-                        _this.postData.selectedCity = _this.cities[0].code;
-                        _this.postData.selectedCityLevel = _this.cities[0].level;
+            props: {
+                type: {type: Number,default: 1},
+                init_provinces: {
+                    type: Object,
+                    default: function () {
+                        return {}
                     }
-                },test:function(){
-                    let _this = this;
-                    console.log(_this.postData);
                 }
+            },data: function () {
+                return {
+                    provinces: this.init_provinces.provinces, //所有省份
+                    cities:[], //被选择的省对应的市数据
+                    postData:{
+                        selectedProvince: '', //被选择的省
+                        selectedCity:'',  //被选择的市
+                        selectedCityLevel:''  //被选择的市的级别
+                    },
+                    selected_name:{
+                        province_name: '', //被选择的省份名称
+                        city_name:''  //被选择的市名称
+                    },
+                    displayProvince: {type: Boolean,default: true}
+                };
+            },methods: {
+                //更新市数据
+                updateProvince:function(event){
+                    let _thisJquery = $(event.currentTarget);
+                    let _this = this;
+                    _this.postData.selectedProvince = _thisJquery.attr('code');
+                    this.displayProvince = false;
+                },updateCity:function(event){
+                    let _thisJquery = $(event.currentTarget);
+                    let _this = this;
+                    _this.postData.selectedCity = _thisJquery.attr('code');
+                    let response = {
+                        selected_code:_this.postData,
+                        selected_name:_this.selected_name
+                    };
+                    _this.$emit('update_city',response);
+                    _this.close();
+                },backUp:function(){
+                    let _this = this;
+                    this.displayProvince = true;
+                },close:function(){
+                    let _this = this;
+                    _this.$emit('toggle');
+                }
+            },computed: {
+                selectedProvince(){
+                    return this.postData.selectedProvince
+                },selectedCity(){
+                    return this.postData.selectedProvince
+                }
+            },watch: {
+                selectedProvince: {
+                    handler(newVal, oldVal) {
+                        let _this = this;
+                        if(typeof(oldVal) !== "undefined"){
+                            _this.provinces.map(function(item,index){
+                                if(item.code == newVal){
+                                    _this.cities = item.cities;
+                                    _this.selected_name.province_name = item.name;
+                                }
+                            });
+                            if(_this.cities.length){
+                                _this.postData.selectedCity = _this.cities[0].code;
+                            }
+                        }
+                    },
+                    deep: true,
+                    immediate: true
+                },selectedCity: {
+                    handler(newVal, oldVal) {
+                        let _this = this;
+                        if(typeof(oldVal) !== "undefined"){
+                            _this.cities.map(function(item,index){
+                                if(item.code == newVal){
+                                    _this.postData.selectedCityLevel = item.level;
+                                    _this.selected_name.city_name = item.name;
+                                }
+                            });
+                        }
+                    },
+                    deep: true,
+                    immediate: true
+                }
+            },created:function(){
+                let _this = this;
             }
         });
     });

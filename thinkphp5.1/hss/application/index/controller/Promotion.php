@@ -24,7 +24,7 @@ class Promotion extends \common\controller\Base{
             promotion_handle($info);
             $this->assign('info',$info);
 
-            Cart::getCartTotalNum();
+            Index::getCartTotalNum();
             //$this->assignStandardBottomButton([0,2,3]);
 
             $unlockingFooterCart = unlockingFooterCartConfigTest([0,2,3]);
