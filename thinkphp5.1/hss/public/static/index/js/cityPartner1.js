@@ -10,8 +10,17 @@ $(function(){
         $('.apply-module').hide().eq($(this).index()).show();
     });
 
+    // 城市回显
+    var cityPartner = localStorage.getItem("cityPartner");
+    if(cityPartner){
+        cityPartner = JSON.parse(cityPartner);
+        $('input[name="province"]').val(cityPartner.province);
+        $('input[name="city"]').val(cityPartner.city);
+        $('.select-value').val(cityPartner.area_address);
+    }
+
      //初始化 未完成的申请
-    if(!$.isEmptyArray(apply)){
+/*    if(!$.isEmptyArray(apply)){
         var statusType=apply[0].apply_status-1;
         applicantData.id= apply[0].id;
         applicantData = {
@@ -60,72 +69,102 @@ $(function(){
                 }
             }
         }
-    }
+    }*/
 
 
     //填写地址
+    // 地区查询
     $('body').on('click','.search-city',function(){
-        area_address =$('.area-address-name').val();
-        if(!area_address){
-            dialog.error('请选择城市');
+        //area_address =$('.area-address-name').val();
+
+/*        var province    = $('input[name="province"]').val();
+        var city        = $('input[name="city"]').val();
+        var area_address= $('.select-value').val();*/
+/*        if(!province || !city){
+            dialog.error('请先选择城市');
             return false;
-        }
-/*        console.log(area_address);
+        }*/
+
+        var data=$('.applicant_form').serializeObject();
+        step1(data);
+
+        /*        applicantData.company_name=data.company_name;
+         applicantData.applicant=data.applicant;
+         applicantData.mobile=data.mobile;*/
+        data.step = 1;
+/*        console.log(data);
         return false;*/
 
-/*        var cityArr=[];
-		for (var key=0;key<applied.length;key++) {
-			cityArr.push([parseInt(applied[key].province),parseInt(applied[key].city)]);
-		}
-        var cityData=[];
-        cityData.push(parseInt(area_address[0]),parseInt(area_address[1]));
-        applicantData.province = area_address[0];*/
-        applicantData.area = area_address;
-        applicantData.step = 1;
-/*        var provinces=arrayHasElement(cityArr,cityData);*/
-        if(area_address){
-            layer.open({
-                content:'所查询的城市可以申请城市合伙人<br/>声明：同一城市可能存在多位申请人,同等条件下按先申请先审核签约原则。',
-                btn:['确定'],
-                className:'confirm',
-                yes:function(index){
-                    _this = $(".confirm span[type='1']");
-                    submitApplicant(_this,applicantData);
-                    layer.close(index);
-                }
-            });
-        }else{
-            layer.open({
-                content:'所查询的城市暂时没有空缺<br/>备注：城市合伙人可能已被签约，或者正处于保留状态，建议过段时间再查询。',
-                btn:['确定'],
-                yes:function(index){
-                    layer.close(index);
-                }
-            });
+/*        applicantData.province = province;
+        applicantData.city = city;
+        applicantData.step = 1;*/
 
-        }
+        layer.open({
+            content:'所查询的城市可以申请城市合伙人<br/>声明：同一城市可能存在多位申请人,同等条件下按先申请先审核签约原则。',
+            btn:['确定'],
+            className:'confirm',
+            yes:function(index){
+                var _this = $(this);
+                submitApplicant(_this,data);
+
+/*                _this = $(".confirm span[type='1']");
+
+                _this.addClass("nodisabled");//防止重复提交
+                $.ajax({
+                    url: module + 'CityPartner/submitApplicant',
+                    data: data,
+                    type: 'post',
+                    beforeSend: function(){
+                        $('.loading').show();
+                    },
+                    error:function(){
+                        $('.loading').hide();
+                        dialog.error('AJAX错误');
+                    },
+                    success: function(data){
+                        _this.removeClass("nodisabled");//删除防止重复提交
+                        $('.loading').hide();
+                        if(data.status){
+                            // 开放下一步
+
+                            $('.weui-flex-item:eq(0)').removeClass('current');
+                            $('.weui-flex-item:eq(1)').addClass('current');
+                            $('.apply-module:eq(0)').hide();
+                            $('.apply-module:eq(1)').show();
+
+                            layer.close(index);
+                        }else{
+                            if(data.data.status){
+                                layer.open({
+                                    content: '所查询的城市暂时没有空缺<br/>备注：城市合伙人可能已被签约，或者正处于保留状态，建议过段时间再查询。',
+                                    time: 2 //2秒后自动关闭
+                                });
+                            }else{
+                                dialog.error(data.info);
+                            }
+                        }
+                    }
+                });*/
+            }
+        });
+
     });
      //填写基本资料
     $('body').on('click','.one-step',function(){
         var _this = $(this);
         var data=$('.applicant_form').serializeObject();
-        applicantData.company_name=data.company_name;
+/*        applicantData.company_name=data.company_name;
         applicantData.applicant=data.applicant;
-        applicantData.mobile=data.mobile;
-        applicantData.step = 2;
-        var content='';
-        if(!applicantData.company_name){
-            content='请填写企业名称';
-        }else if(!applicantData.applicant){
-            content='请填写申请人姓名';
-        }else if(!register.phoneCheck(applicantData.mobile)){
-            content='请填写手机号码';
-        }
-        if(content){
-            dialog.error(content);
-            return false;
-        }
-        submitApplicant(_this,applicantData);
+        applicantData.mobile=data.mobile;*/
+        data.step = 2;
+/*        console.log(data);
+        return false;*/
+
+        step1(data);
+
+        step2(data);
+
+        submitApplicant(_this,data);
     });
     //确定通过入驻
     $('body').on('click','.three-step',function(){
@@ -212,9 +251,45 @@ function submitApplicant(_this,postData){
                 }else if(postData.step==3 ||postData.step==4 ){
                     location.href = data.data.url;
                 }
+                layer.close(index);
+
             }else{
-                dialog.success(data.info);
+                if(data.data.status){
+                    layer.open({
+                        content: '所查询的城市暂时没有空缺<br/>备注：城市合伙人可能已被签约，或者正处于保留状态，建议过段时间再查询。',
+                        time: 2 //2秒后自动关闭
+                    });
+                }else{
+                    dialog.error(data.info);
+                }
             }
         }
     });
+}
+
+
+function step1(data) {
+    var content;
+    if(!data.province || !data.city){
+        content='请先选择城市';
+    }
+    if(content){
+        dialog.error(content);
+        return false;
+    }
+}
+
+function step2(data) {
+    var content;
+    if(!data.company_name){
+        content='请填写企业名称';
+    }else if(!data.applicant){
+        content='请填写申请人姓名';
+    }else if(!register.phoneCheck(data.mobile)){
+        content='请填写手机号码';
+    }
+    if(content){
+        dialog.error(content);
+        return false;
+    }
 }

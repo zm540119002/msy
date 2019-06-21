@@ -24,11 +24,12 @@
 		overflow-y: scroll;
 		/* background: #eee; */
 	}
+
 </style>
 <div class="f24">
     <section class="f20 header_title separation-line">
 		<a href="javascript:void(0);" class="back_prev_page"></a>
-        <h2 class="">城市合伙人</h2>
+        <h2 class="">黑森森城市合伙人</h2>
     </section>
 	<section>
 		<div id="wizard" class="page-bd">
@@ -47,8 +48,11 @@
 							<a id="expressArea" href="javascript:void(0)" class="f24 form-group box-flex">
 								<label class="form-label">选择地区：</label>
 						<!--		<div class="area_address">省 &gt; 市 &gt; 区/县</div>-->
-								<input type="text" class="select-value form-control" value="选择城市" >
-								<input type="hidden"  data-key="" value="" class="area-address-name" >
+								<input type="text" class="select-value form-control" value="城市列表" >
+						<!--		<input type="hidden"  data-key="" name="province" value="" class="area-address-name" >
+								<input type="hidden"  data-key="" name="city" value="" class="area-address-name" >-->
+								<input type="hidden"  data-key="" name="province" value="">
+								<input type="hidden"  data-key="" name="city" value="">
 							</a>
 						</div>
 						<div class="content-padding">
@@ -199,11 +203,42 @@
 			idDefault: true,
 			splitStr: '-',
 			header:'<div class="mPicker-header">城市选择</div>',
+			param: ['level','class','amount','earnest'],
 			confirm: function (json) {
 
-				$(".area-address-name").val(json.values);
-				console.info($('.select-value').val());
-				//console.info('当前选中json：', json.values);
+				//console.info('当前选中json：', json);
+
+				area = json.values.split('-');
+				//$('.select-value').data('class1');
+				$('input[name="province"]').val(area[0]);
+				$('input[name="city"]').val(area[1]);
+
+				// 记录选中的城市
+				//var storage=window.localStorage;
+				var cityPartner = {province:area[0],city:area[1],area_address:$('.select-value').val()};
+				localStorage.setItem('cityPartner',JSON.stringify(cityPartner));
+
+				//.cityPartner = ['city'=>1,'city2'=>2];
+				// storage.cityPartner = ['city'=>1,'city2'=>2];
+				//storage['city'] = area[1];
+				//storage['area_address']= $('.select-value').val();
+
+				//var area_address= $('.select-value').val();
+
+				//console.log(arr);
+				//$(".area-address-name").val(json.values);
+				//console.info(json);
+				//var value = $('.select-value');
+				//console.info(json);
+			/*	console.info('当前选中class：', value.data('value1'));
+				console.info('当前选中class：', value.data('value2'));
+				console.info('当前选中class：', value.data('class2'));
+				console.info('当前选中amount：', value.data('amount2'));
+				console.info('当前选中earnest：', value.data('earnest2'));*/
+				//console.info('当前选中classa：', $('.select-value').data('class1'));
+				//console.info('当前选中classa：', $('.select-value').data('value2'));
+/*				console.info('当前选中json：', $('.select-value1').data('class'));
+				console.info('当前选中json：', $('.select-value1').data('class'));*/
 				//console.info($('.select-value1').data('values'));
 				//console.info($('.select-value1').data('id2'));
 				//var _this= this;
@@ -236,8 +271,8 @@
 		});
 		//获取value
 		function getVal(){
-			var value1 = $('.select-value1').data('value1');
-			var value2 = $('.select-value1').data('value2');
+			var value1 = $('.select-value').data('value1');
+			var value2 = $('.select-value').data('value2');
 			var result='';
 			value1 = value1 || '';
 			value2 = value2 || '';
