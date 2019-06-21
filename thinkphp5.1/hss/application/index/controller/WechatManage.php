@@ -39,7 +39,7 @@ class WechatManage extends \common\controller\Base {
     {
         $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
         if (!empty($postStr)){
-//            $this->logger("R".$postStr);
+            $this->logger("R".$postStr);
             $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
             $RX_TYPE = trim($postObj->MsgType);
             //消息类型分离
@@ -89,28 +89,28 @@ class WechatManage extends \common\controller\Base {
         switch ($object->Event)
         {
             case "subscribe":
-//                $info = $weixin->get_user_info($openid);
-//                $municipalities = array("北京", "上海", "天津", "重庆", "香港", "澳门");
-//                $sexes = array("", "男", "女");
-//                $data = array();
-//                $data['openid'] = $openid;
-//                $data['nickname'] = str_replace("'", "", $info['nickname']);
-//                $data['sex'] = $sexes[$info['sex']];
-//                $data['country'] = $info['country'];
-//                $data['province'] = $info['province'];
-//                $data['city'] = (in_array($info['province'], $municipalities))?$info['province'] : $info['city'];
-//                $data['scene'] = (isset($object->EventKey) && (stripos(strval($object->EventKey),"qrscene_")))?str_replace("qrscene_","",$object->EventKey):"0";
-//
-//                $data['headimgurl'] = $info['headimgurl'];
-//                $data['subscribe'] = $info['subscribe_time'];
-//                $data['heartbeat'] = time();
-//                $data['remark'] = $info['remark'];
-//                $data['tagid'] = $info['tagid_list'];
-//
-//                $weixinUser->add($data, array(), true); // 根据条件更新记录
+                $info = $weixin->get_user_info($openid);
+                $municipalities = array("北京", "上海", "天津", "重庆", "香港", "澳门");
+                $sexes = array("", "男", "女");
+                $data = array();
+                $data['openid'] = $openid;
+                $data['nickname'] = str_replace("'", "", $info['nickname']);
+                $data['sex'] = $sexes[$info['sex']];
+                $data['country'] = $info['country'];
+                $data['province'] = $info['province'];
+                $data['city'] = (in_array($info['province'], $municipalities))?$info['province'] : $info['city'];
+                $data['scene'] = (isset($object->EventKey) && (stripos(strval($object->EventKey),"qrscene_")))?str_replace("qrscene_","",$object->EventKey):"0";
+
+                $data['headimgurl'] = $info['headimgurl'];
+                $data['subscribe'] = $info['subscribe_time'];
+                $data['heartbeat'] = time();
+                $data['remark'] = $info['remark'];
+                $data['tagid'] = $info['tagid_list'];
+
+                // $User->add($data, array(), true); // 根据条件更新记录
 
                 // $sexadj = array("1"=>"英俊的", "2"=>"漂亮的", "0"=>"");
-                $content = "欢迎关注，";
+                $content = "欢迎关注，".$info['nickname'];
                 // $weixin->send_custom_message($openid, "text", $content.time());
 
                 break;
