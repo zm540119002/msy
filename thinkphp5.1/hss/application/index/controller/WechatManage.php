@@ -89,6 +89,7 @@ class WechatManage extends \common\controller\Base {
         {
             case "subscribe":
                 $info = $weixin->get_user_info($openid);
+                file_put_contents('weixin.txt',json_encode($info));
                 $municipalities = array("北京", "上海", "天津", "重庆", "香港", "澳门");
                 $sexes = array("", "男", "女");
                 $data = array();
@@ -105,9 +106,9 @@ class WechatManage extends \common\controller\Base {
                 $data['heartbeat'] = time();
                 $data['remark'] = $info['remark'];
                 $data['tagid'] = $info['tagid_list'];
-                $content = "欢迎关注，".$info['nickname'];
-                $userModel = new \app\index\model\WeixinUser();
-                $userModel->save($data);
+                $content = "欢迎关注，".json_encode($info);
+//                $userModel = new \app\index\model\WeixinUser();
+//                $userModel->save($data);
                 break;
             case "unsubscribe":
                 $userModel = new \app\index\model\WeixinUser();
