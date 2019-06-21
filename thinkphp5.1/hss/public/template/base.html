@@ -3,7 +3,9 @@
     <link rel="stylesheet" href="public_css/project_public.css">
 {/block}
 <!-- 项目公共模块-->
-{block name="common-base"}{/block}
+{block name="common-base"}
+
+{/block}
 {block name="login_dialog"}
 <script type="text/javascript">
     var login_success_callback_private = function(){
@@ -64,10 +66,34 @@
 <script type="text/javascript" src="api_common_js/paging.js"></script>
 <script type="text/javascript">
     //判断是否为微信浏览器
-    // if(isWeiXin()){
-    //     alert(11);
-    //     $('#subscribe').css('display','block');
-    // }
+    if(isWeiXin()){
+        $('#subscribe').css('display','block');
+    }
+    $('body').on('click','.subscribe',function () {
+        var imgSrc = domain +'static/index/img/hss_wechat_public.jpg';
+        console.log(imgSrc);
+        layer.open({
+            // skin:'shareqrCodeLayer',
+            className:'shareqrCodeLayer',
+            type:1,
+            anim:'up',
+            title:['长按二维码关注','color:#fff;'],
+            content:'<img src='+imgSrc+' />',
+            btn:['X'],
+            success:function(){
+                fixedLayer();
+            },
+            yes:function(index){
+                cancleFixedLayer();
+                layer.close(index);
+            },
+            end:function(){
+                cancleFixedLayer();
+            }
+        });
+    });
+
+
     //异步验证
     var asyncVerifyRepeat = true;
     function asyncVerify(config){
