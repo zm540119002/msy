@@ -6,7 +6,6 @@ class Index extends Base{
     public function index(){
         if(request()->isAjax()){
         }else{
-            print_r(123);
             return $this->fetch();
         }
     }
