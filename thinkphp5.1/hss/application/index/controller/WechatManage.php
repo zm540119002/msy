@@ -120,31 +120,6 @@ class WechatManage extends \common\controller\Base {
                 // $data['heartbeat'] = 0;
                 // $User->where("`openid` = '".$openid."'")->save($data); // 根据条件更新记录
                 break;
-            case "CLICK":
-                switch ($object->EventKey)
-                {
-                    case "TEXT":
-                        $content = "微笑：/::)\n乒乓：/:oo\n中国：".$this->bytes_to_emoji(0x1F1E8).$this->bytes_to_emoji(0x1F1F3)."\n仙人掌：".$this->bytes_to_emoji(0x1F335);
-                        break;
-                    case "SINGLENEWS":
-                        $content = array();
-                        $content[] = array("Title"=>"单图文标题",  "Description"=>"单图文内容", "PicUrl"=>"http://images2015.cnblogs.com/blog/340216/201605/340216-20160515215306820-740762359.jpg", "Url" =>"http://m.cnblogs.com/?u=txw1958");
-                        break;
-                    case "MULTINEWS":
-                        $content = array();
-                        $content[] = array("Title"=>"多图文1标题", "Description"=>"", "PicUrl"=>"http://images2015.cnblogs.com/blog/340216/201605/340216-20160515215306820-740762359.jpg", "Url" =>"http://m.cnblogs.com/?u=txw1958");
-                        $content[] = array("Title"=>"多图文2标题", "Description"=>"", "PicUrl"=>"http://d.hiphotos.bdimg.com/wisegame/pic/item/f3529822720e0cf3ac9f1ada0846f21fbe09aaa3.jpg", "Url" =>"http://m.cnblogs.com/?u=txw1958");
-                        $content[] = array("Title"=>"多图文3标题", "Description"=>"", "PicUrl"=>"http://g.hiphotos.bdimg.com/wisegame/pic/item/18cb0a46f21fbe090d338acc6a600c338644adfd.jpg", "Url" =>"http://m.cnblogs.com/?u=txw1958");
-                        break;
-                    case "MUSIC":
-                        $content = array();
-                        $content = array("Title"=>"最炫民族风", "Description"=>"歌手：凤凰传奇", "MusicUrl"=>"http://mascot-music.stor.sinaapp.com/zxmzf.mp3", "HQMusicUrl"=>"http://mascot-music.stor.sinaapp.com/zxmzf.mp3");
-                        break;
-                    default:
-                        $content = "点击菜单：".$object->EventKey;
-                        break;
-                }
-                break;
             case "VIEW":
                 $content = "跳转链接 ".$object->EventKey;
                 break;
@@ -155,29 +130,6 @@ class WechatManage extends \common\controller\Base {
 
                 $content = "上传位置：纬度 ".$object->Latitude.";经度 ".$object->Longitude;
                 $content = "";
-                break;
-            case "scancode_waitmsg":
-                if ($object->ScanCodeInfo->ScanType == "qrcode"){
-                    $content = "扫码带提示：类型 二维码 结果：".$object->ScanCodeInfo->ScanResult;
-                }else if ($object->ScanCodeInfo->ScanType == "barcode"){
-                    $codeinfo = explode(",",strval($object->ScanCodeInfo->ScanResult));
-                    $codeValue = $codeinfo[1];
-                    $content = "扫码带提示：类型 条形码 结果：".$codeValue;
-                }else{
-                    $content = "扫码带提示：类型 ".$object->ScanCodeInfo->ScanType." 结果：".$object->ScanCodeInfo->ScanResult;
-                }
-                break;
-            case "scancode_push":
-                $content = "扫码推事件";
-                break;
-            case "pic_sysphoto":
-                $content = "系统拍照";
-                break;
-            case "pic_weixin":
-                $content = "相册发图：数量 ".$object->SendPicsInfo->Count;
-                break;
-            case "pic_photo_or_album":
-                $content = "拍照或者相册：数量 ".$object->SendPicsInfo->Count;
                 break;
             case "location_select":
                 $content = "发送位置：标签 ".$object->SendLocationInfo->Label;
@@ -205,55 +157,8 @@ class WechatManage extends \common\controller\Base {
         $keyword = trim($object->Content);
         $openid = strval($object->FromUserName);
         $content = "";
-
-        //多客服人工回复模式
-        if (strstr($keyword, "在线客服_") || strstr($keyword, "你好_")){
-            $result = $this->transmitService($object);
-        }
-        //自动回复模式
-        else{
-            if (strstr($keyword, "文本")){
-                $content = "这是个文本消息\n".$openid;
-
-            }else if (strstr($keyword, "单图文")){
-                $content = array();
-                $content[] = array("Title"=>"单图文标题",  "Description"=>"单图文内容", "PicUrl"=>"http://files.cnblogs.com/files/txw1958/cartoon.gif", "Url" =>"http://m.cnblogs.com/?u=txw1958");
-                $weixin = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
-                $template = array('touser' => $openid,
-                    'template_id' => "_yFpVtfHd0pSWy6ffApi6isjY8HmmWC8aKW-Uqz8viU",
-                    'url' => "http://www.baidu.com/",
-                    'topcolor' => "#0000C6",
-                    'data' => array('content'    => array('value' => "你妈妈\\n喊你\\n回家吃饭了！",
-                        'color' => "#743A3A",
-                    ),
-                    )
-                );
-                $weixin->send_template_message($template);
-            }else if (strstr($keyword, "图文") || strstr($keyword, "多图文")){
-                $content = array();
-                $content[] = array("Title"=>"多图文1标题", "Description"=>"", "PicUrl"=>"http://files.cnblogs.com/files/txw1958/cartoon.gif", "Url" =>"http://m.cnblogs.com/?u=txw1958");
-                $content[] = array("Title"=>"多图文2标题", "Description"=>"", "PicUrl"=>"http://d.hiphotos.bdimg.com/wisegame/pic/item/f3529822720e0cf3ac9f1ada0846f21fbe09aaa3.jpg", "Url" =>"http://m.cnblogs.com/?u=txw1958");
-                $content[] = array("Title"=>"多图文3标题", "Description"=>"", "PicUrl"=>"http://g.hiphotos.bdimg.com/wisegame/pic/item/18cb0a46f21fbe090d338acc6a600c338644adfd.jpg", "Url" =>"http://m.cnblogs.com/?u=txw1958");
-
-            }else if (strstr($keyword, "音乐")){
-                $content = array();
-                $content = array("Title"=>"最炫民族风", "Description"=>"歌手：凤凰传奇", "MusicUrl"=>"http://121.199.4.61/music/zxmzf.mp3", "HQMusicUrl"=>"http://121.199.4.61/music/zxmzf.mp3");
-            }else{
-                // $content = date("Y-m-d H:i:s",time())."\n".$object->FromUserName."";
-                $content = $this->xiaoirobot($openid, $keyword);
-            }
-
-            if(is_array($content)){
-                if (isset($content[0]['PicUrl'])){
-                    $result = $this->transmitNews($object, $content);
-                }else if (isset($content['MusicUrl'])){
-                    $result = $this->transmitMusic($object, $content);
-                }
-            }else{
-                $result = $this->transmitText($object, $content);
-            }
-        }
-
+        $content = "欢迎使用黑森森公众号，请点击底部菜单访问网站\n";
+        $result = $this->transmitText($object, $content);
         return $result;
     }
 
