@@ -2,6 +2,17 @@
 {block name="title"}城市测试{/block}
 {block name="css-customize"}
 <style>
+	.bg {
+    width: 100vw;
+    height: 100vh;
+    background: #000;
+    opacity: 0.5;
+    z-index: 998;
+    position: fixed;
+    top: 0;
+    cursor: pointer;
+    display: none;
+}
 #testblock{
 				background: #00ff00;
 				width: 200px;
@@ -17,6 +28,7 @@
 			</style>
 			{/block}
 {block name="content"}
+<div class="bg" style="display: block;"></div>
 <div id="testblock">
 	<div style="margin:0 0 15px 0;">
     	<input type="tel" name="" value="">
