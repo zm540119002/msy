@@ -51,7 +51,7 @@ class WechatManage extends \common\controller\Base {
                     $result = $this->receiveEvent($postObj);
                     break;
                 case "text":
-                    echo 'nihao ';exit;
+                    return 123;
                     $result = $this->receiveText($postObj);
                     break;
                 case "image":
