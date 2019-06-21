@@ -47,7 +47,7 @@
 							<a id="expressArea" href="javascript:void(0)" class="f24 form-group box-flex">
 								<label class="form-label">选择地区：</label>
 						<!--		<div class="area_address">省 &gt; 市 &gt; 区/县</div>-->
-								<input type="text" class="select-value1 form-control" value="选择城市" >
+								<input type="text" class="select-value form-control" value="选择城市" >
 								<input type="hidden"  data-key="" value="" class="area-address-name" >
 							</a>
 						</div>
@@ -191,7 +191,7 @@
 		 * 联动的picker--添加修改后修改数据的效果
 		 * 两级
 		 */
-		$('.select-value1').mPicker({
+		$('.select-value').mPicker({
 			level: 2,
 			dataJson: dataJson,
 			Linkage: true,
@@ -202,7 +202,7 @@
 			confirm: function (json) {
 
 				$(".area-address-name").val(json.values);
-				console.info($('.select-value1').val());
+				console.info($('.select-value').val());
 				//console.info('当前选中json：', json.values);
 				//console.info($('.select-value1').data('values'));
 				//console.info($('.select-value1').data('id2'));
