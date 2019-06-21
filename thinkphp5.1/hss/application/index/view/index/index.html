@@ -280,17 +280,6 @@
 {block name="script"}
 <script type="text/javascript" src="api_common_js/swiper.min.js"></script>
 <script type="text/javascript">
-//	var config = {
-//		url:module+'Goods/getList',
-//		requestEnd:false,
-//		loadTrigger:false,
-//		currentPage:1
-//	};
-//	var postData = {
-//		pageSize:10,
-//		pageType:'index',
-//		is_selection:1
-//	};
 	$(function(){
 		//轮播
 		var swiper = new Swiper('.swiper-container', {
@@ -302,33 +291,6 @@
 				clickable: true
 			}
 		});
-		
-//		//初始化分类商品页面
-//		$('.nav_menu li:eq(0)').addClass('current');
-//		postData.category_id = $('.nav_menu li.current').data('category-id');
-//		getPagingList(config,postData);
-//
-//		$('body').on('click','.nav_menu li',function(){
-//			var _this = $(this);
-//			$(this).addClass('current').siblings().removeClass('current');
-//			config = {
-//				url:module+'Goods/getList',
-//				requestEnd:false,
-//				loadTrigger:false,
-//				currentPage:1
-//			};
-//			postData.category_id = _this.data('category-id');
-//			getPagingList(config,postData);
-//		});
-//
-//		//下拉加载
-//		$(window).on('scroll',function(){
-//			if(config.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
-//				config.loadTrigger = false;
-//				postData.category_id = $('.nav_menu li.current').data('category-id');
-//				getPagingList(config,postData);
-//			}
-//		});
 
 		$('body').on('click','.my_cart',function () {
 			var url = module + 'Cart/index';
