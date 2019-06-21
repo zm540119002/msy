@@ -61,6 +61,14 @@ class Test extends \common\controller\Base{
             return $this->fetch();
         }
     }
+    /**测试-布局3
+     */
+    public function layout3(){
+        if(request()->isAjax()){
+        }else{
+            return $this->fetch();
+        }
+    }
 
     public function jin(){
 
@@ -166,6 +174,14 @@ class Test extends \common\controller\Base{
         }';
         $mineTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
         $a =  $mineTools -> create_menu_raw($menu);
+        p($a);
+    }
+
+    public function createQrcode()
+    {
+        $mineTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
+
+        $a = $mineTools-> create_qrcode('QR_SCENE', 16);
         p($a);
     }
 }
