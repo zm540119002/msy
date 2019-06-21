@@ -110,7 +110,6 @@ class Test extends \common\controller\Base{
     public function weixin()
     {
         $mineTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
-        $weiXinUserInfo1 = $mineTools->getOauthUserInfo();
         $info = $mineTools->getUserInfo();
         p($info);
         $municipalities = array("北京", "上海", "天津", "重庆", "香港", "澳门");
