@@ -1,6 +1,5 @@
 <?php
 namespace app\index\controller;
-use app\index\model\Member;
 use app\index\model\WeixinUser;
 
 /**
@@ -52,6 +51,7 @@ class WechatManage extends \common\controller\Base {
                     $result = $this->receiveEvent($postObj);
                     break;
                 case "text":
+                    echo 'nihao ';exit;
                     $result = $this->receiveText($postObj);
                     break;
                 case "image":
