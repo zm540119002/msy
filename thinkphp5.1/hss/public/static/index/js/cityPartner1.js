@@ -106,6 +106,7 @@ $(function(){
             yes:function(index){
                 var _this = $(this);
                 submitApplicant(_this,data);
+                layer.close(index);
 
 /*                _this = $(".confirm span[type='1']");
 
@@ -165,6 +166,7 @@ $(function(){
         step2(data);
 
         submitApplicant(_this,data);
+
     });
     //确定通过入驻
     $('body').on('click','.three-step',function(){
@@ -248,10 +250,15 @@ function submitApplicant(_this,postData){
                     $('.weui-flex-item:eq(2)').addClass('current');
                     $('.apply-module:eq(1)').hide();
                     $('.apply-module:eq(2)').show();
+
+                    $('.city_name').html(data.data.city_name);
+                    $('.market_name').html(data.data.market_name+'城市合伙人');
+                    $('.amount').find('price').html(data.data.amount);
+                    $('.earnest').find('price').html(data.data.earnest);
+
                 }else if(postData.step==3 ||postData.step==4 ){
                     location.href = data.data.url;
                 }
-                layer.close(index);
 
             }else{
                 if(data.data.status){

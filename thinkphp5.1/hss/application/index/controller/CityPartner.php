@@ -162,7 +162,11 @@ class CityPartner extends \common\controller\UserBase {
                 if(!$res){
                     $this->errorMsg('失败');
                 }
-
+                $data = $info;
+                unset($data['user_id']);
+                unset($data['city_status']);
+                unset($data['alone_amount']);
+                unset($data['alone_earnest']);
                 break;
             case 3:
                 $paySn = generateSN(); //内部支付编号
@@ -239,7 +243,8 @@ class CityPartner extends \common\controller\UserBase {
                     return errorMsg('失败');
                 };
         }
-
+        //p($data);
+        //exit;
         $this->successMsg('成功',$data);
         //$this->successMsg($result);
         //$modelCityPartner -> commit();
