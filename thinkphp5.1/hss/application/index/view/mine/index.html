@@ -167,7 +167,7 @@
     //登录-弹窗事件
     $('body').on('click','#login_dialog',function(){
         console.log(11)
-        $('.tc').toggle()
+        $('.tc').show()
         // loginDialogTrigger();
         // document.querySelector('body').setAttribute('style', 'position:fixed')
     });
@@ -311,11 +311,18 @@
 </script>
 <style>
     .tc{
-        background: #ccc;
+        background: #fff;
         width: 90%;
         position: absolute;
         top:30%;
         left: 5%;
+        display: none;
+    }
+    .tc input{
+        width: 90%;
+        height: 30px;
+        margin: 0 auto;
+        border: 1px solid red;
     }
     /* .layui-m-layersection{
         position: relative;
