@@ -98,4 +98,7 @@
     /*height:.8rem;*/
     background:#fff;
 }
+.layui-layer-page .layui-layer-content{
+  padding:20px;
+}
 
