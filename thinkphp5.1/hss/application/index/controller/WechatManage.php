@@ -7,7 +7,6 @@ namespace app\index\controller;
  */
 define("TOKEN", "meishangyun");
 class WechatManage extends \common\controller\Base {
-
     public function index(){
         if (!isset($_GET['echostr'])) {
             $this->responseMsg();
@@ -106,16 +105,13 @@ class WechatManage extends \common\controller\Base {
                 $data['heartbeat'] = time();
                 $data['remark'] = $info['remark'];
                 $data['tagid'] = $info['tagid_list'];
-
-                // $User->add($data, array(), true); // 根据条件更新记录
-
-                // $sexadj = array("1"=>"英俊的", "2"=>"漂亮的", "0"=>"");
                 $content = "欢迎关注，".$info['nickname'];
-                // $weixin->send_custom_message($openid, "text", $content.time());
-
+                $userModel = new \app\index\model\WeixinUser();
+                $userModel->save($data);
                 break;
             case "unsubscribe":
-                db('user')->where('openid',$openid)->delete();
+                $userModel = new \app\index\model\WeixinUser();
+                $userModel->where('openid',$openid)->delete();
                 // $User->where("`openid` = '".$openid."'")->delete();
                 // $data['heartbeat'] = 0;
                 // $User->where("`openid` = '".$openid."'")->save($data); // 根据条件更新记录
