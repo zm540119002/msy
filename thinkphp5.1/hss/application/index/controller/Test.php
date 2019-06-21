@@ -183,6 +183,6 @@ class Test extends \common\controller\Base{
 
         $a = $mineTools-> create_qrcode('QR_SCENE', 16);
         $shareQRCode = createLogoQRcode($a['url'],config('upload_dir.hss_user_QRCode'));
-        p($a);
+        p($shareQRCode);
     }
 }
