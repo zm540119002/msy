@@ -224,7 +224,6 @@
                 layer.close(index);
             }
         });
-        document.querySelector('body').setAttribute('style', 'position:static')
     }
     //登录-弹窗触发
     var loginDialogTriggerLayerIndex = 0;
@@ -245,7 +244,6 @@
                 cancleFixedLayer();
             }
         });
-        document.querySelector('body').setAttribute('style', 'position:fixed')
     }
     var login_success_callback_common = function(param){
         //localStorage.cartList 入库
@@ -436,15 +434,12 @@
         z-index: 10;
     } */
     .layui-m-anim-scale{
-        position: absolute;
-        width: 90%;
-        left: 5%;
-        top: 25%
+        background: #ccc;
     }
-    .layui-m-layersection{
+    /* .layui-m-layersection{
         position: relative;
         
-    }
+    } */
     /* body{
         position: fixed;
         width: 100%;
