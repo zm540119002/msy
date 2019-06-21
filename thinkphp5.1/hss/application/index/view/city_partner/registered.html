@@ -1,7 +1,7 @@
 {extend name="template/base.html" /}
 {block name="content"}
 <link rel="stylesheet" type="text/css"  href="index_js/mobileSelector/css/mpicker.css">
-<link rel="stylesheet" type="text/css" href="index_js/mobileSelector/css/bootstrap-3.3.4.css">
+<!--<link rel="stylesheet" type="text/css" href="index_js/mobileSelector/css/bootstrap-3.3.4.css">-->
 <style type="text/css">
 	/*自定义样式*/
 	body,html{
@@ -24,13 +24,22 @@
 		overflow-y: scroll;
 		/* background: #eee; */
 	}
+
 </style>
 <div class="f24">
     <section class="f20 header_title separation-line">
 		<a href="javascript:void(0);" class="back_prev_page"></a>
-        <h2 class="">城市合伙人</h2>
+        <h2 class="">黑森森城市合伙人</h2>
     </section>
 	<section>
+		<div class="columns_flex l-r-sides" style="padding:0 0 0.15rem 0;border-bottom:1px solid #d9d9d9;">
+			<span>
+				已授权城市：<span>暂无</span>
+			</span>
+			<span>
+				<a>资格完款任务(0) ></a>
+			</span>
+		</div>
 		<div id="wizard" class="page-bd">
 			<nav class="apply-data-nav">
 				<ul id="status " class="status f24 weui-flex">
@@ -47,8 +56,11 @@
 							<a id="expressArea" href="javascript:void(0)" class="f24 form-group box-flex">
 								<label class="form-label">选择地区：</label>
 						<!--		<div class="area_address">省 &gt; 市 &gt; 区/县</div>-->
-								<input type="text" class="select-value1 form-control" value="广东省-东莞市" >
-								<input type="hidden"  data-key="" value="" class="area-address-name" >
+								<input type="text" class="select-value form-control" value="城市列表" >
+						<!--		<input type="hidden"  data-key="" name="province" value="" class="area-address-name" >
+								<input type="hidden"  data-key="" name="city" value="" class="area-address-name" >-->
+								<input type="hidden"  data-key="" name="province" value="">
+								<input type="hidden"  data-key="" name="city" value="">
 							</a>
 						</div>
 						<div class="content-padding">
@@ -96,7 +108,7 @@
                         </dl>
                         <footer class="f24 group_cart_nav">
                             <div class="group_btn50 bottom_item">
-                                <span class="amount">￥<price>5000.00</price></span>
+                                <span class="earnest">￥<price>5000.00</price></span>
                             </div>
                             <div class="group_btn50 bottom_item">
                                 <a href="javascript:void(0);" class="recharge_money">支付席位订金<span class="total_num"></span></a>
@@ -172,7 +184,7 @@
 {block name="script"}
 <script type="text/javascript" src="api_common_js/swipe.js"></script>
 <script type="text/javascript" src="public_js/jquery.area.js"></script>
-<script type="text/javascript" src="index_js/cityPartner.js"></script>
+<script type="text/javascript" src="index_js/cityPartner1.js"></script>
 <script type="text/javascript" >
 	//申请中
 	var apply = JSON.parse('{$apply|raw}');
@@ -181,9 +193,9 @@
 
 </script>
 
-<script src="index_js/mobileSelector/js/json.js"></script>
+<script src="index_js/mobileSelector/js/json2.js"></script>
 <script src="index_js/mobileSelector/js/jsonExchange.js"></script>
-<script src="index_js/mobileSelector/js/mPicker.min.js"></script>
+<script src="index_js/mobileSelector/js/mPicker.js"></script>
 <script type="text/javascript">
 	$(function() {
 
@@ -191,7 +203,7 @@
 		 * 联动的picker--添加修改后修改数据的效果
 		 * 两级
 		 */
-		$('.select-value1').mPicker({
+		$('.select-value').mPicker({
 			level: 2,
 			dataJson: dataJson,
 			Linkage: true,
@@ -199,21 +211,54 @@
 			idDefault: true,
 			splitStr: '-',
 			header:'<div class="mPicker-header">城市选择</div>',
+			param: ['level','class','amount','earnest'],
 			confirm: function (json) {
+
 				//console.info('当前选中json：', json);
-				var _this= this;
+
+				area = json.values.split('-');
+				//$('.select-value').data('class1');
+				$('input[name="province"]').val(area[0]);
+				$('input[name="city"]').val(area[1]);
+
+				// 记录选中的城市
+				//var storage=window.localStorage;
+				var cityPartner = {province:area[0],city:area[1],area_address:$('.select-value').val()};
+				localStorage.setItem('cityPartner',JSON.stringify(cityPartner));
+
+				//.cityPartner = ['city'=>1,'city2'=>2];
+				// storage.cityPartner = ['city'=>1,'city2'=>2];
+				//storage['city'] = area[1];
+				//storage['area_address']= $('.select-value').val();
+
+				//var area_address= $('.select-value').val();
+
+				//console.log(arr);
+				//$(".area-address-name").val(json.values);
+				//console.info(json);
+				//var value = $('.select-value');
+				//console.info(json);
+			/*	console.info('当前选中class：', value.data('value1'));
+				console.info('当前选中class：', value.data('value2'));
+				console.info('当前选中class：', value.data('class2'));
+				console.info('当前选中amount：', value.data('amount2'));
+				console.info('当前选中earnest：', value.data('earnest2'));*/
+				//console.info('当前选中classa：', $('.select-value').data('class1'));
+				//console.info('当前选中classa：', $('.select-value').data('value2'));
+/*				console.info('当前选中json：', $('.select-value1').data('class'));
+				console.info('当前选中json：', $('.select-value1').data('class'));*/
+				//console.info($('.select-value1').data('values'));
+				//console.info($('.select-value1').data('id2'));
+				//var _this= this;
 
 
-				var url = module+'Test/jin1';
 
-				var postData = {'data':cityData};
 
-				console.log(cityData);
+				//var postData = {'data':cityData};
+
+				//console.log(cityData);
 				//return false;
 				//console.log(postData);
-				$.post(url,postData,function (data) {
-					console.log(data);
-				},'JSON');
 
 				//console.info('【json里有带value的情况】');
 				//更新json
@@ -234,8 +279,8 @@
 		});
 		//获取value
 		function getVal(){
-			var value1 = $('.select-value1').data('value1');
-			var value2 = $('.select-value1').data('value2');
+			var value1 = $('.select-value').data('value1');
+			var value2 = $('.select-value').data('value2');
 			var result='';
 			value1 = value1 || '';
 			value2 = value2 || '';

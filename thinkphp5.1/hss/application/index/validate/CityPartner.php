@@ -6,10 +6,10 @@ class CityPartner extends \think\Validate
     //验证规则
     protected $rule = [
         'province'  => [
-            'require', 'max' => 5,'number'
+            'require', 'max' => 6,'number'
         ],
         'city'  => [
-            'require', 'max' => 5,'number'
+            'require', 'max' => 6,'number'
         ],
         'company_name'  => [
             'require','max' => 200,
@@ -27,9 +27,9 @@ class CityPartner extends \think\Validate
 
     //验证消息
     protected $message  =   [
-        'province.require' => '省份必须！',
+        'province.require' => '请选择省份！',
         'province.max' => '提交省份数据不符！',
-        'city.require' => '城市必须！',
+        'city.require' => '请选择城市！',
         'city.max' => '提交城市数据不符！',
         'company_name.require' => '加盟店名称必须！',
         'company_name.max' => '加盟店名称过长！',

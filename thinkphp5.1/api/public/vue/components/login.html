@@ -9,7 +9,7 @@
                 <li class="switch_current" :class="{current:true}">登录</li>
                 <li class="switch_current" :class="{current:false}">注册/重置密码</li>
             </ul>
-            <form class="loginTab" :class="{show:true}" id="formLogin">
+            <form class="loginTab" :class="{show:true}" name="formLogin">
                 <div class="login_item">
                     <div class="columns_flex">
                         <span>中国(+86)</span>
@@ -24,7 +24,7 @@
                 </div>
                 <a href="javascript:void(0);" class="entry-button btn_login">登录</a>
             </form>
-            <form class="loginTab" :class="{show:false}" id="formRegister">
+            <form class="loginTab" :class="{show:false}" name="formRegister">
                 <div class="error_tipc" ></div>
                 <div class="login_item">
                     <div class="columns_flex">
@@ -86,7 +86,7 @@
                         }
                     });
                 },login:function(param){
-                    let postData = $('.loginLayer').find('#formLogin').serializeObject();
+                    let postData = $('.loginLayer').find('[name=formLogin]').serializeObject();
                     let content='';
                     if(!register.phoneCheck(postData.mobile_phone)){
                         content='请输入正确手机号码';
@@ -128,7 +128,7 @@
                         }
                     });
                 },register:function(param){
-                    let postData = $('.loginLayer').find('#formRegister').serializeObject();
+                    let postData = $('.loginLayer').find('[name=formRegister]').serializeObject();
                     let content='';
                     if(!register.phoneCheck(postData.mobile_phone)){
                         content='请输入正确手机号码';
@@ -196,7 +196,7 @@
     </div>
 </div>
 <script type="text/javascript">
-    //退出-弹窗触发
+    // //退出-弹窗触发
     function logoutDialogTrigger(){
         var url = domain+'ucenter/UserCenter/logout';
         layer.open({
@@ -231,10 +231,10 @@
         var content = $('#loginDialogTpl').html();
         loginDialogTriggerLayerIndex = layer.open({
             className:'loginLayer',
+            skin:'loginLayer',
             type:1,
             shadeClose:false,
             content:content,
-            btn:[''],
             success:function(index){
                 fixedLayer();
             },yes:function(index){
@@ -328,7 +328,7 @@
             bus.$emit('switchCurrent',param);
         });
         //登录-确定
-        $('body').on('click','.loginLayer .btn_login',function(){
+        $('body').on('click','#loginDialogRoot .btn_login',function(){
             //触发-登录-事件
             let login_success_callback_param = {
                 index:loginDialogTriggerLayerIndex
@@ -425,7 +425,10 @@
     .switch_current{
         cursor:pointer;
     }
-    /* .layui-m-layermain, .layui-m-layershade{
+    .layui-m-layer.layui-m-layer1{
+        position: absolute;
+    }
+    /* .layui-m-layermain{
         position: absolute;
         top:0;
         left: 0;
