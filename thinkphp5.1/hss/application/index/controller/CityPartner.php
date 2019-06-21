@@ -66,15 +66,30 @@ class CityPartner extends \common\controller\UserBase {
         if(!request()->isAjax()){
             $this->errorMsg('请求方式错误');
         }
-        $modelCityPartner = new \app\index\model\CityPartner();
         $postData = input('post.');
+/*        p($postData);
+        exit;*/
+
+        $postData = input('post.');
+        // 做到这里
+        if($postData['area']){
+            $area = explode('-',$postData['area']);
+            $postData['province'] = $area[0];
+            $postData['city'] = $area[1];
+        }
+
+        p($postData);
+        exit;
         $validate = new \app\index\validate\CityPartner();
-        $modelCityPartner -> startTrans();
         $postData['apply_status'] = $postData['step'];
         $validateName = 'step'.$postData['apply_status'];
         if(!$validate->scene($validateName)->check($postData)) {
             $this->errorMsg($validate->getError());
         }
+
+        $modelCityPartner = new \app\index\model\CityPartner();
+        $modelCityPartner -> startTrans();
+
 
         $this->errorMsg('失败');
         p($postData);

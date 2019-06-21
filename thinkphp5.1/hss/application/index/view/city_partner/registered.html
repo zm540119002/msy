@@ -1,7 +1,7 @@
 {extend name="template/base.html" /}
 {block name="content"}
 <link rel="stylesheet" type="text/css"  href="index_js/mobileSelector/css/mpicker.css">
-<link rel="stylesheet" type="text/css" href="index_js/mobileSelector/css/bootstrap-3.3.4.css">
+<!--<link rel="stylesheet" type="text/css" href="index_js/mobileSelector/css/bootstrap-3.3.4.css">-->
 <style type="text/css">
 	/*自定义样式*/
 	body,html{
@@ -47,7 +47,7 @@
 							<a id="expressArea" href="javascript:void(0)" class="f24 form-group box-flex">
 								<label class="form-label">选择地区：</label>
 						<!--		<div class="area_address">省 &gt; 市 &gt; 区/县</div>-->
-								<input type="text" class="select-value1 form-control" value="广东省-东莞市" >
+								<input type="text" class="select-value1 form-control" value="选择城市" >
 								<input type="hidden"  data-key="" value="" class="area-address-name" >
 							</a>
 						</div>
@@ -172,7 +172,7 @@
 {block name="script"}
 <script type="text/javascript" src="api_common_js/swipe.js"></script>
 <script type="text/javascript" src="public_js/jquery.area.js"></script>
-<script type="text/javascript" src="index_js/cityPartner.js"></script>
+<script type="text/javascript" src="index_js/cityPartner1.js"></script>
 <script type="text/javascript" >
 	//申请中
 	var apply = JSON.parse('{$apply|raw}');
@@ -181,9 +181,9 @@
 
 </script>
 
-<script src="index_js/mobileSelector/js/json.js"></script>
+<script src="index_js/mobileSelector/js/json2.js"></script>
 <script src="index_js/mobileSelector/js/jsonExchange.js"></script>
-<script src="index_js/mobileSelector/js/mPicker.min.js"></script>
+<script src="index_js/mobileSelector/js/mPicker.js"></script>
 <script type="text/javascript">
 	$(function() {
 
@@ -200,20 +200,22 @@
 			splitStr: '-',
 			header:'<div class="mPicker-header">城市选择</div>',
 			confirm: function (json) {
-				//console.info('当前选中json：', json);
-				var _this= this;
 
 
-				var url = module+'Test/jin1';
+				$(".area-address-name").val(json.values);
+				//console.info('当前选中json：', json.values);
+				//console.info($('.select-value1').data('values'));
+				//console.info($('.select-value1').data('id2'));
+				//var _this= this;
 
-				var postData = {'data':cityData};
 
-				console.log(cityData);
+
+
+				//var postData = {'data':cityData};
+
+				//console.log(cityData);
 				//return false;
 				//console.log(postData);
-				$.post(url,postData,function (data) {
-					console.log(data);
-				},'JSON');
 
 				//console.info('【json里有带value的情况】');
 				//更新json

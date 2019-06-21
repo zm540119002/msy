@@ -82,9 +82,15 @@ class Test extends \common\controller\Base{
                 $city[] = $v1;
             }
         }
-
+        //p($city);
+        //exit;
         $model = new \app\index\model\CityArea();
-        $res = $model->editAll($city);
+
+        $res = $model->getInfo($city);
+        if(!$res){
+            $res = $model->editAll($city);
+        }
+
         //p($data);
         p($res);
         echo '<hr>';

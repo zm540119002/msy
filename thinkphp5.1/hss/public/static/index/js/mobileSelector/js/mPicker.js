@@ -263,8 +263,8 @@ $(function () {
             var _this = this;
             
             _this.mask.addClass('hide');
-            console.info(22, _this.mask.hasClass('hide'))
-            console.info(22, _this.mask)
+            //console.info(22, _this.mask.hasClass('hide'))
+            //console.info(22, _this.mask)
             if (_this.options.display === 'bottom') {
                 _this.mpicker.find('.mPicker-main').addClass('down').transitionEnd(function () {
                     _this.mpicker.addClass('hide');
@@ -304,7 +304,7 @@ $(function () {
             // _this.mpicker.find('.mPicker-main').remove();
         },
         confirm: function () {
-            console.info('confirm')
+            //console.info('confirm')
             var _this = this;
             var str = '';
             var $list = _this.mpicker.find('.mPicker-main').find('.mPicker-list');
@@ -325,7 +325,7 @@ $(function () {
 
         },
         cancel: function () {
-            console.info('cancel')
+            //console.info('cancel')
             var _this = this;
             _this.hidePicker(_this.options.cancel);
         },
