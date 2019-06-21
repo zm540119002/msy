@@ -51,7 +51,9 @@
         </div>
     </section>
 </template>
+
 <script type="text/javascript">
+
     $(function(){
         //表单切换
         Vue.component('login', {
@@ -234,8 +236,12 @@
             content:content,
             btn:[''],
             success:function(index){
+                fixedLayer();
             },yes:function(index){
                 layer.close(index);
+            },
+            end:function(){
+                cancleFixedLayer();
             }
         });
     }
@@ -401,6 +407,7 @@
         });
     });
 </script>
+
 <style lang="less" scoped>
     .loginTab{
         display: none;
@@ -418,4 +425,23 @@
     .switch_current{
         cursor:pointer;
     }
+    .layui-m-layermain{
+        position: absolute;
+        top:0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 10;
+    }
+    /* .layui-m-anim-scale{
+        background: #ccc;
+    } */
+    /* .layui-m-layersection{
+        position: relative;
+        
+    } */
+    /* body{
+        position: fixed;
+        width: 100%;
+    } */
 </style>
