@@ -237,6 +237,7 @@
                 layer.close(index);
             }
         });
+        $("body,html").css({"overflow":"auto","height":"auto"});
     }
     //登录-弹窗触发
     var loginDialogTriggerLayerIndex = 0;
@@ -255,8 +256,11 @@
             },
             end:function(){
                 cancleFixedLayer();
-            }
+            },
+           
         });
+        var h=$(window).height(); 
+            $("body,html").css({"overflow":"hidden","height":h+"px"});
     }
     var login_success_callback_common = function(param){
         //localStorage.cartList 入库
@@ -438,16 +442,13 @@
     .switch_current{
         cursor:pointer;
     }
-    .layui-m-anim-scale{
+    /* .layui-m-layermain, .layui-m-layershade{
         position: absolute;
         top:0;
         left: 0;
         right: 0;
         bottom: 0;
         z-index: 10;
-    }
-    .layui-m-layer .loginLayer.layui-m-layerchild, .layui-m-layer .forgetPasswordLayer.layui-m-layerchild{
-        border-radius: 0;
-    }
+    } */
     
 </style>

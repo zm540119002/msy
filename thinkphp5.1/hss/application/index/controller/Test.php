@@ -135,7 +135,7 @@ class Test extends \common\controller\Base{
         $data['subscribe'] = $info['subscribe_time'];
         $data['heartbeat'] = time();
         $data['remark'] = $info['remark'];
-        $data['tagid'] = $info['tagid_list'];
+
         p($data);
         $content = "欢迎关注，".$info['nickname'];
         $userModel = new \app\index\model\WeixinUser();
