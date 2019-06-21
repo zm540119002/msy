@@ -58,6 +58,14 @@ button, input, textarea {
   margin: 0; !important;
 }
 /*登录*/
+.input-filed {
+    display: block;
+    width: 100%;
+    padding:10px 0;
+    border: 1px solid #d9d9d9;
+    border-radius: 5px;
+    text-indent: 10px;
+}
 .loginNav {
     height:28px;
     line-height:28px;
