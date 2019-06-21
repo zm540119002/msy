@@ -413,4 +413,35 @@ $item_str
         file_put_contents($log_filename, date('H:i:s')." ".$log_content."\r\n", FILE_APPEND);
     }
 
+    /**
+     * 生成公众号菜单
+     */
+    public function createMenuRaw()
+    {
+        $menu = '{
+            "button":[
+                {
+                "type":"view",
+                "name":"采购商城",
+                "url":"https://hss.meishangyun.com/index/Index/index.html"
+                },
+                {
+                "type":"view",
+                "name":"加盟店",
+                "url":"https://hss.meishangyun.com/index/Index/franchiseIndex.html"
+                },
+                {
+                "type":"view",
+                "name":"合伙人",
+                "url":"https://hss.meishangyun.com/index/Index/cityPartnerIndex.html"
+                }
+           ]
+        }';
+        $mineTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
+        $a =  $mineTools -> create_menu_raw($menu);
+        p($a);
+    }
+
+
+
 }
