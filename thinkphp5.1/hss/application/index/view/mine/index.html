@@ -157,11 +157,14 @@
     //退出-弹窗事件
     $('body').on('click','#logout_dialog',function(){
         logoutDialogTrigger();
+        document.querySelector('body').removeAttribute('style')
+        
     });
     
     //登录-弹窗事件
     $('body').on('click','#login_dialog',function(){
         loginDialogTrigger();
+        document.querySelector('body').setAttribute('style', 'position:fixed')
     });
   
 </script>
@@ -302,7 +305,7 @@
     })
 </script>
 <style>
-    .layui-m-layersection{
+    /* .layui-m-layersection{
         position: relative;
     }
 .layui-m-anim-scale{
@@ -314,6 +317,6 @@
     body{
         position: fixed;
         width: 100%;
-    }
+    } */
 </style>
 {/block}
