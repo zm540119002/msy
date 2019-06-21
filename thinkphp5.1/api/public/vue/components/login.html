@@ -51,20 +51,7 @@
         </div>
     </section>
 </template>
-<script type="text/javascript">
-//     $(function(){
-//         $('textarea,input[type=text]').focus(function () {
-//          window.setTimeout('scrollBottom()', 500);
-//  });
- 
- 
-//  function scrollBottom() {
-//          window.scrollTo(0, $('body').height());
-//   }
 
-//     })
-    
-</script>
 <script type="text/javascript">
 
     $(function(){
@@ -237,6 +224,7 @@
                 layer.close(index);
             }
         });
+        document.querySelector('body').setAttribute('style', 'position:static')
     }
     //登录-弹窗触发
     var loginDialogTriggerLayerIndex = 0;
@@ -257,6 +245,7 @@
                 cancleFixedLayer();
             }
         });
+        document.querySelector('body').setAttribute('style', 'position:fixed')
     }
     var login_success_callback_common = function(param){
         //localStorage.cartList 入库
