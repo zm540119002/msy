@@ -157,14 +157,14 @@
     //退出-弹窗事件
     $('body').on('click','#logout_dialog',function(){
         logoutDialogTrigger();
-        $("body,html").css({"overflow":"auto","height":"auto"});
+        document.querySelector('body').setAttribute('style', 'position:absolute')
+        
     });
     
     //登录-弹窗事件
     $('body').on('click','#login_dialog',function(){
         loginDialogTrigger();
-        var h=$(window).height(); 
-$("body,html").css({"overflow":"hidden","height":h+"px"});
+        document.querySelector('body').setAttribute('style', 'position:fixed')
     });
   
 </script>
@@ -304,4 +304,19 @@ $("body,html").css({"overflow":"hidden","height":h+"px"});
          }
     })
 </script>
+<style>
+    /* .layui-m-layersection{
+        position: relative;
+    }
+.layui-m-anim-scale{
+        position: absolute;
+    width: 90%;
+    left: 5%;
+    top: 20%;
+    }
+    body{
+        position: fixed;
+        width: 100%;
+    } */
+</style>
 {/block}

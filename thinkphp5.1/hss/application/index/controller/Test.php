@@ -53,6 +53,22 @@ class Test extends \common\controller\Base{
             return $this->fetch();
         }
     }
+    /**测试-布局2
+     */
+    public function layout2(){
+        if(request()->isAjax()){
+        }else{
+            return $this->fetch();
+        }
+    }
+    /**测试-布局3
+     */
+    public function layout3(){
+        if(request()->isAjax()){
+        }else{
+            return $this->fetch();
+        }
+    }
 
     public function jin(){
 
