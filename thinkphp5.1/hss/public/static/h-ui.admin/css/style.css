@@ -1,5 +1,10 @@
 @charset "utf-8";
 /* 你自己的样式 */
+button, input, textarea {
+    outline: none;
+    -webkit-tap-highlight-color: rgba(255,0,0,0);
+    vertical-align: middle;
+}
 .order-box .goods-head{
   display: flex;
   background: #f8f8f8;

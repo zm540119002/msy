@@ -208,10 +208,7 @@ class WechatManage extends \common\controller\Base {
 
 
         //自动回复模式
-        if (strstr($keyword, "文本")){
-            $content = "这是个文本消息\n".$openid;
-
-        }
+        $content = "这是个文本消息\n".$openid;
 
         $result = $this->transmitText($object, $content);
 
