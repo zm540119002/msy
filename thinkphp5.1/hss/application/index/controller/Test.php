@@ -75,6 +75,11 @@ class Test extends \common\controller\Base{
         return $this->fetch();
 
     }
+    public function position(){
+
+        return $this->fetch();
+
+    }
 
     public function jin1(){
 
