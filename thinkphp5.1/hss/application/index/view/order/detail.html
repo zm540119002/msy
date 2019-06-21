@@ -74,7 +74,7 @@
                             <div class="columns_flex order_item" data-id="{$goods_info.goods_id}" data-buy_type="{$goods_info.buy_type}"
                                  data-brand_id="{$goods_info.brand_id}" data-brand_name="{$goods_info.brand_name}">
                                 <a href="{:url('Goods/detail',['id'=>$goods_info.goods_id])}">
-                                    <div class="list_left_img">
+                                    <div class="list_left_img detail_img">
                                         <img src="{:show_img_handle($goods_info.thumb_img)}" class="left">
                                     </div>
                                 </a>
@@ -135,6 +135,9 @@
     }
     .icon img{
         width: 60%;
+    }
+    .detail_img{
+        width: 1rem;
     }
 </style>
 {/block}

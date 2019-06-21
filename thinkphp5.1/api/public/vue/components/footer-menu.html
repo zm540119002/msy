@@ -320,7 +320,7 @@
 
 
                     console.log('这个是评价');
-                    return false;
+                    // return false;
                     let class_name = _thisJquery.context.className;
 
                     let content = '确定已收到货 ?';
@@ -335,7 +335,7 @@
                         content : content,
                         btn:['确定','取消'],
                         end : function(){
-                            return false;
+                            // return false;
                         },
                         yes:function(index){
                             _thisVue.postData.order_id = "{$orderInfo.id|default=0}";
