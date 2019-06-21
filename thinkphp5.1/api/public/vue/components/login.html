@@ -52,6 +52,19 @@
     </section>
 </template>
 <script type="text/javascript">
+    window.reload(
+        $(function(){
+            $("input").blur(function(){
+                setTimeout(function(){
+                var scrollHeight = document.documentElement.scrollTop || document.body.scrollTop || 0;
+                window.scrollTo(0, Math.max(scrollHeight - 1, 0));
+                },100)
+            }) 
+    
+        }) 
+    )  
+</script>
+<script type="text/javascript">
 
     $(function(){
         //表单切换
@@ -406,17 +419,7 @@
         });
     });
 </script>
-<script type="text/javascript">
-    $(function(){
-        $("input").blur(function(){
-	setTimeout(function(){
-	var scrollHeight = document.documentElement.scrollTop || document.body.scrollTop || 0;
-    window.scrollTo(0, Math.max(scrollHeight - 1, 0));
-	},100)
-}) 
 
-    })
-</script>
 <style lang="less" scoped>
     .loginTab{
         display: none;
