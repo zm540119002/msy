@@ -87,7 +87,6 @@
                     });
                 },login:function(param){
                     let postData = $('.loginLayer').find('[name=formLogin]').serializeObject();
-                    console.log(postData);
                     let content='';
                     if(!register.phoneCheck(postData.mobile_phone)){
                         content='请输入正确手机号码';
@@ -232,10 +231,10 @@
         var content = $('#loginDialogTpl').html();
         loginDialogTriggerLayerIndex = layer.open({
             className:'loginLayer',
+            skin:'loginLayer',
             type:1,
             shadeClose:false,
             content:content,
-            btn:[''],
             success:function(index){
                 fixedLayer();
             },yes:function(index){
@@ -329,7 +328,7 @@
             bus.$emit('switchCurrent',param);
         });
         //登录-确定
-        $('body').on('click','.loginLayer .btn_login',function(){
+        $('body').on('click','#loginDialogRoot .btn_login',function(){
             //触发-登录-事件
             let login_success_callback_param = {
                 index:loginDialogTriggerLayerIndex
