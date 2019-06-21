@@ -106,7 +106,7 @@ class WechatManage extends \common\controller\Base {
                 $data['heartbeat'] = time();
                 $data['remark'] = $info['remark'];
                 $data['tagid'] = $info['tagid_list'];
-                $content = "欢迎关注，".json_encode($info);
+                $content = "欢迎关注，".$info['nickname'];
 //                $userModel = new \app\index\model\WeixinUser();
 //                $userModel->save($data);
                 break;
@@ -438,10 +438,7 @@ $item_str
            ]
         }';
         $mineTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
-        $a =  $mineTools -> create_menu_raw($menu);
-        p($a);
+        return $mineTools -> create_menu_raw($menu);
     }
-
-
 
 }
