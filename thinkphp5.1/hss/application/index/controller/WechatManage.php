@@ -1,6 +1,5 @@
 <?php
 namespace app\index\controller;
-use app\index\model\Member;
 use app\index\model\WeixinUser;
 
 /**
@@ -13,6 +12,7 @@ class WechatManage extends \common\controller\Base {
 
     public function index(){
         if (!isset($_GET['echostr'])) {
+            return 123;
             $this->responseMsg();
         }else{
             $this->valid();
@@ -52,6 +52,7 @@ class WechatManage extends \common\controller\Base {
                     $result = $this->receiveEvent($postObj);
                     break;
                 case "text":
+                    return 123;
                     $result = $this->receiveText($postObj);
                     break;
                 case "image":
