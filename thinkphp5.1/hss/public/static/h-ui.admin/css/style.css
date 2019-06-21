@@ -135,8 +135,7 @@ button, input, textarea {
 }
 .login_item .columns_flex .password{
     width:80%;
-    border-right:none;
-    border-radius:5px 0 0 5px;
+    border-left:none;
 }
 .login_item .columns_flex .hidden{
     width:20%;
