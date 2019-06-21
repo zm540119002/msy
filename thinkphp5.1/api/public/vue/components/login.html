@@ -235,8 +235,12 @@
             content:content,
             btn:[''],
             success:function(index){
+                fixedLayer();
             },yes:function(index){
                 layer.close(index);
+            },
+            end:function(){
+                cancleFixedLayer();
             }
         });
     }
