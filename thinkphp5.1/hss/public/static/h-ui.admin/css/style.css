@@ -99,6 +99,7 @@
     background:#fff;
 }
 .layui-layer-page .layui-layer-content img{
+    display: block;
     width:60px;
     margin:0 auto;
 }
