@@ -151,37 +151,6 @@ class Test extends \common\controller\Base{
         echo $userModel->getLastSql();
     }
 
-    public function createMenuRaw()
-    {
-        $menu = '{
-            "button":[
-                {
-                "type":"view",
-                "name":"采购商城",
-                "url":"https://hss.meishangyun.com/index/Index/index.html"
-                },
-                {
-                "type":"view",
-                "name":"加盟店",
-                "url":"https://hss.meishangyun.com/index/Index/franchiseIndex.html"
-                },
-                {
-                "type":"view",
-                "name":"合伙人",
-                "url":"https://hss.meishangyun.com/index/Index/cityPartnerIndex.html"
-                }
-           ]
-        }';
-        $mineTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
-        $a =  $mineTools -> create_menu_raw($menu);
-        p($a);
-    }
 
-    public function createQrcode()
-    {
-        $mineTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
-        $a = $mineTools-> create_qrcode('QR_SCENE', 16);
-        $shareQRCode = createLogoQRcode($a['url'],config('upload_dir.hss_user_QRCode'));
-        p($shareQRCode);
-    }
+
 }
