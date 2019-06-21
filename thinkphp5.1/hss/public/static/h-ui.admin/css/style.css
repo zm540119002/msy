@@ -98,9 +98,7 @@
     /*height:.8rem;*/
     background:#fff;
 }
-.loginNav{
-  overflow: hidden;
-}
+
 .layui-layer-page .layui-layer-content img{
     display: block;
     width:60px;
