@@ -98,9 +98,15 @@
     /*height:.8rem;*/
     background:#fff;
 }
+.loginNav{
+  overflow: hidden;
+}
 .layui-layer-page .layui-layer-content img{
     display: block;
     width:60px;
-    margin:0 auto;
+    margin:25px auto 20px;
+}
+.layui-layer-page .layui-layer-content .loginTab {
+    padding:50px;
 }
 
