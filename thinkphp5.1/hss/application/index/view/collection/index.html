@@ -142,6 +142,7 @@
 					$.each(data.data.data,function(i,o){
 						_this.productList.push(o);
 					});
+
 				}
 			},created:function(){
 				let _thisVue = this;
@@ -154,6 +155,7 @@
 						//停止触发，去其他地方重新放开
 						_thisVue.getJsonListParam.loadTrigger = false;
 						vueVersionGetJsonList(_thisVue);
+                                                
 					}
 				});
 			}
