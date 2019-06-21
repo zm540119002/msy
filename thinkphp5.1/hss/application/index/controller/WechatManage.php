@@ -218,7 +218,7 @@ class WechatManage extends \common\controller\Base {
             }else if (strstr($keyword, "单图文")){
                 $content = array();
                 $content[] = array("Title"=>"单图文标题",  "Description"=>"单图文内容", "PicUrl"=>"http://files.cnblogs.com/files/txw1958/cartoon.gif", "Url" =>"http://m.cnblogs.com/?u=txw1958");
-                $weixin = new \weixin\Wxapi();
+                $weixin = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
                 $template = array('touser' => $openid,
                     'template_id' => "_yFpVtfHd0pSWy6ffApi6isjY8HmmWC8aKW-Uqz8viU",
                     'url' => "http://www.baidu.com/",
