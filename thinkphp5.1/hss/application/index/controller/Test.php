@@ -121,13 +121,14 @@ class Test extends \common\controller\Base{
         $data['country'] = $info['country'];
         $data['province'] = $info['province'];
         $data['city'] = (in_array($info['province'], $municipalities))?$info['province'] : $info['city'];
-        $data['scene'] = (isset($object->EventKey) && (stripos(strval($object->EventKey),"qrscene_")))?str_replace("qrscene_","",$object->EventKey):"0";
+//        $data['scene'] = (isset($object->EventKey) && (stripos(strval($object->EventKey),"qrscene_")))?str_replace("qrscene_","",$object->EventKey):"0";
 
         $data['headimgurl'] = $info['headimgurl'];
         $data['subscribe'] = $info['subscribe_time'];
         $data['heartbeat'] = time();
         $data['remark'] = $info['remark'];
         $data['tagid'] = $info['tagid_list'];
+        p($data);
         $content = "欢迎关注，".$info['nickname'];
         $userModel = new \app\index\model\WeixinUser();
         $userModel->edit($data);
