@@ -55,6 +55,11 @@
 <script type="text/javascript" src="api_common_js/public.js"></script>
 <script type="text/javascript" src="api_common_js/common.js"></script>
 <script type="text/javascript" src="api_common_js/admin/dialog.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+<!-- 用于vue组件通信 -->
+<script type="text/javascript">
+    var bus = new Vue();
+</script>
 <script type="text/javascript">
     var domain = '{:request()->domain()}/';
     var uploads = domain + 'uploads/';
