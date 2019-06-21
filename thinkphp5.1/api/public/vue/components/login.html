@@ -237,7 +237,6 @@
                 layer.close(index);
             }
         });
-        $("body,html").css({"overflow":"auto","height":"auto"});
     }
     //登录-弹窗触发
     var loginDialogTriggerLayerIndex = 0;
@@ -256,11 +255,8 @@
             },
             end:function(){
                 cancleFixedLayer();
-            },
-           
+            }
         });
-        var h=$(window).height(); 
-            $("body,html").css({"overflow":"hidden","height":h+"px"});
     }
     var login_success_callback_common = function(param){
         //localStorage.cartList 入库
@@ -450,5 +446,6 @@
         bottom: 0;
         z-index: 10;
     } */
+    
     
 </style>
