@@ -89,6 +89,7 @@ class WechatManage extends \common\controller\Base {
         {
             case "subscribe":
                 $info = $weixin->get_user_info($openid);
+                file_put_contents('weixin.txt',json_encode($info));
                 $municipalities = array("北京", "上海", "天津", "重庆", "香港", "澳门");
                 $sexes = array("", "男", "女");
                 $data = array();
@@ -105,9 +106,9 @@ class WechatManage extends \common\controller\Base {
                 $data['heartbeat'] = time();
                 $data['remark'] = $info['remark'];
                 $data['tagid'] = $info['tagid_list'];
-                $content = "欢迎关注，".$info['nickname'];
-                $userModel = new \app\index\model\WeixinUser();
-                $userModel->save($data);
+                $content = "欢迎关注，".json_encode($info);
+//                $userModel = new \app\index\model\WeixinUser();
+//                $userModel->save($data);
                 break;
             case "unsubscribe":
                 $userModel = new \app\index\model\WeixinUser();
@@ -411,5 +412,36 @@ $item_str
         if(file_exists($log_filename) and (abs(filesize($log_filename)) > $max_size)){unlink($log_filename);}
         file_put_contents($log_filename, date('H:i:s')." ".$log_content."\r\n", FILE_APPEND);
     }
+
+    /**
+     * 生成公众号菜单
+     */
+    public function createMenuRaw()
+    {
+        $menu = '{
+            "button":[
+                {
+                "type":"view",
+                "name":"采购商城",
+                "url":"https://hss.meishangyun.com/index/Index/index.html"
+                },
+                {
+                "type":"view",
+                "name":"加盟店",
+                "url":"https://hss.meishangyun.com/index/Index/franchiseIndex.html"
+                },
+                {
+                "type":"view",
+                "name":"合伙人",
+                "url":"https://hss.meishangyun.com/index/Index/cityPartnerIndex.html"
+                }
+           ]
+        }';
+        $mineTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
+        $a =  $mineTools -> create_menu_raw($menu);
+        p($a);
+    }
+
+
 
 }
