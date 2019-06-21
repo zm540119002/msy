@@ -112,6 +112,7 @@ class Test extends \common\controller\Base{
         $mineTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
         $weiXinUserInfo1 = $mineTools->getOauthUserInfo();
         $info = $mineTools->getUserInfo();
+        p($info);
         $municipalities = array("北京", "上海", "天津", "重庆", "香港", "澳门");
         $sexes = array("", "男", "女");
         $data = array();
