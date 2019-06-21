@@ -1,9 +1,13 @@
 <?php
 namespace app\index\controller;
-use app\index\model\WeixinUser;
-use common\controller\Base;
+/**
+ * Class WechatManage
+ * @package app\index\controller
+ * 微信处理
+ */
 define("TOKEN", "meishangyun");
-class WechatManage extends Base {
+class WechatManage extends \common\controller\Base {
+
     public function index(){
         if (!isset($_GET['echostr'])) {
             $this->responseMsg();
@@ -11,70 +15,33 @@ class WechatManage extends Base {
             $this->valid();
         }
     }
-    //启用并设置服务器配置后，用户发给公众号的消息以及开发者需要的事件推送，将被微信转发到该URL中
+
+    //验证签名
     public function valid()
     {
         $echoStr = $_GET["echostr"];
-        if($this->checkSignature()){
+        $signature = $_GET["signature"];
+        $timestamp = $_GET["timestamp"];
+        $nonce = $_GET["nonce"];
+        $token = TOKEN;
+        $tmpArr = array($token, $timestamp, $nonce);
+        sort($tmpArr);
+        $tmpStr = implode($tmpArr);
+        $tmpStr = sha1($tmpStr);
+        if($tmpStr == $signature){
             echo $echoStr;
             exit;
         }
     }
 
-    //验证签名
-    private function checkSignature()
-    {
-        $signature = $_GET["signature"];
-        $timestamp = $_GET["timestamp"];
-        $nonce = $_GET["nonce"];
-
-        $token = TOKEN;
-        $tmpArr = array($token, $timestamp, $nonce);
-        sort($tmpArr);
-        $tmpStr = implode( $tmpArr );
-        $tmpStr = sha1( $tmpStr );
-
-        if( $tmpStr == $signature ){
-            return true;
-        }else{
-            return false;
-        }
-    }
-
-    //创建自定义菜单
-    public function createMenuRaw(){
-        $menu = '{
-        "button":[
-        {
-        "type":"view",
-        "name":"美尚云",
-        "url":"http://msy.meishangyun.com"
-
-        },
-        {
-        "type":"view",
-        "name":"美妍美社",
-        "url":"http://myms.meishangyun.com"
-        }]
-        }';
-        $this-> create_menu_raw($menu);
-    }
-
     //响应
     public function responseMsg()
     {
-        $postStr = file_get_contents('php://input');
+        $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
         if (!empty($postStr)){
-            $this->logger("R ".$postStr);
+//            $this->logger("R".$postStr);
             $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
             $RX_TYPE = trim($postObj->MsgType);
-
-            if (($postObj->MsgType == "event") && ($postObj->Event == "subscribe" || $postObj->Event == "unsubscribe" || $postObj->Event == "TEMPLATESENDJOBFINISH")){
-                //过滤关注和取消关注事件
-            }else{
-                //更新互动记录
-            }
-
             //消息类型分离
             switch ($RX_TYPE)
             {
@@ -84,21 +51,21 @@ class WechatManage extends Base {
                 case "text":
                     $result = $this->receiveText($postObj);
                     break;
-//                case "image":
-//                    $result = $this->receiveImage($postObj);
-//                    break;
-//                case "location":
-//                    $result = $this->receiveLocation($postObj);
-//                    break;
-//                case "voice":
-//                    $result = $this->receiveVoice($postObj);
-//                    break;
-//                case "video":
-//                    $result = $this->receiveVideo($postObj);
-//                    break;
-//                case "link":
-//                    $result = $this->receiveLink($postObj);
-//                    break;
+                case "image":
+                    $result = $this->receiveImage($postObj);
+                    break;
+                case "location":
+                    $result = $this->receiveLocation($postObj);
+                    break;
+                case "voice":
+                    $result = $this->receiveVoice($postObj);
+                    break;
+                case "video":
+                    $result = $this->receiveVideo($postObj);
+                    break;
+                case "link":
+                    $result = $this->receiveLink($postObj);
+                    break;
                 default:
                     $result = "unknown msg type: ".$RX_TYPE;
                     break;
@@ -115,158 +82,109 @@ class WechatManage extends Base {
     //接收事件消息
     private function receiveEvent($object)
     {
-        $weixin = new Jssdk(C('WX_CONFIG')['APPID'], C('WX_CONFIG')['APPSECRET']);
+        $weixin = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
         $openid = strval($object->FromUserName);
         $content = "";
 
         switch ($object->Event)
         {
             case "subscribe":
-                $info = $weixin->get_user_info($openid);
-                $municipalities = array("北京", "上海", "天津", "重庆", "香港", "澳门");
-                $sexes = array("", "男", "女");
-                $data = array();
-                $data['openid'] = $openid;
-                $data['nickname'] = str_replace("'", "", $info['nickname']);
-                $data['sex'] = $sexes[$info['sex']];
-                $data['country'] = $info['country'];
-                $data['province'] = $info['province'];
-                $data['city'] = (in_array($info['province'], $municipalities))?$info['province'] : $info['city'];
-                $data['scene'] = (isset($object->EventKey) && (stripos(strval($object->EventKey),"qrscene_")))?str_replace("qrscene_","",$object->EventKey):"0";
+//                $info = $weixin->get_user_info($openid);
+//                $municipalities = array("北京", "上海", "天津", "重庆", "香港", "澳门");
+//                $sexes = array("", "男", "女");
+//                $data = array();
+//                $data['openid'] = $openid;
+//                $data['nickname'] = str_replace("'", "", $info['nickname']);
+//                $data['sex'] = $sexes[$info['sex']];
+//                $data['country'] = $info['country'];
+//                $data['province'] = $info['province'];
+//                $data['city'] = (in_array($info['province'], $municipalities))?$info['province'] : $info['city'];
+//                $data['scene'] = (isset($object->EventKey) && (stripos(strval($object->EventKey),"qrscene_")))?str_replace("qrscene_","",$object->EventKey):"0";
+//
+//                $data['headimgurl'] = $info['headimgurl'];
+//                $data['subscribe'] = $info['subscribe_time'];
+//                $data['heartbeat'] = time();
+//                $data['remark'] = $info['remark'];
+//                $data['tagid'] = $info['tagid_list'];
+//
+//                $weixinUser->add($data, array(), true); // 根据条件更新记录
 
-                $data['headimgurl'] = $info['headimgurl'];
-                $data['subscribe'] = $info['subscribe_time'];
-                $data['heartbeat'] = time();
-                $data['remark'] = $info['remark'];
-                $data['tagid'] = $info['tagid_list'];
-                /**
-                 *  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '序号',
-                `openid` varchar(30) NOT NULL COMMENT '微信openid',
-                `nickname` varchar(20) NOT NULL COMMENT '昵称',
-                `sex` varchar(2) NOT NULL COMMENT '性别',
-                `country` varchar(10) NOT NULL COMMENT '国家',
-                `province` varchar(16) NOT NULL COMMENT '省份',
-                `city` varchar(16) NOT NULL COMMENT '城市',
-                `latitude` float(10,6) NOT NULL COMMENT '纬度',
-                `longitude` float(10,6) NOT NULL COMMENT '经度',
-                `headimgurl` varchar(200) NOT NULL COMMENT '头像',
-                `latest` varchar(100) NOT NULL COMMENT '最后互动',
-                 */
-                //插入wx_user表
-                $user = new WeixinUser();
-                $isSubscribe = $user -> where(array('openid'=>$openid))->count()?true:false;
-                if(!$isSubscribe){
-                    $user -> save($data);
-                }
-                $scene = substr($object->EventKey,8);
-//                if($scene){//场景关注
-//                    $data['openid'] = $openid;
-//                    $data['studio_id'] = intval($scene);
-//                    $data['create_time'] = time();
-//                    $data['is_default'] = 1;
-//                    $result = M('studio_binding') -> add($data);
-//                }
-                $content = "您来啦，感谢您关注美尚云平台!";
-                $content .= "美尚云是广东美尚网络科技有限公司打造的中国美容业领先的采购平台，";
-                $content .= "聚焦医美抗衰和药妆美容项目产品的采购业务，";
-                $content .= "通过联合采购模式帮助全国中小型美容院减低采购成本，实行更好的利润规划；";
-                $content .= "同时美尚云作为行业生态圈平台通过大众创业万众创新机制帮助从业人员实行创业创富，";
-                $content .= "弹指之间把资源转化为财富，帮平台用户巧赚钱！".$scene;
+                // $sexadj = array("1"=>"英俊的", "2"=>"漂亮的", "0"=>"");
+                $content = "欢迎关注，";
                 // $weixin->send_custom_message($openid, "text", $content.time());
 
                 break;
             case "unsubscribe":
-                //删除不关注用户
-                $user = new WeixinUser();
-                $user -> where(array('openid'=>$openid))->delete();
+                db('user')->where('openid',$openid)->delete();
                 // $User->where("`openid` = '".$openid."'")->delete();
                 // $data['heartbeat'] = 0;
                 // $User->where("`openid` = '".$openid."'")->save($data); // 根据条件更新记录
                 break;
-//            case "CLICK":
-//                switch ($object->EventKey)
-//                {
-//                    case "TEXT":
-//                        $content = "微笑：/::)\n乒乓：/:oo\n中国：".$this->bytes_to_emoji(0x1F1E8).$this->bytes_to_emoji(0x1F1F3)."\n仙人掌：".$this->bytes_to_emoji(0x1F335);
-//                        break;
-//                    case "SINGLENEWS":
-//                        $content = array();
-//                        $content[] = array("Title"=>"单图文标题",  "Description"=>"单图文内容", "PicUrl"=>"http://images2015.cnblogs.com/blog/340216/201605/340216-20160515215306820-740762359.jpg", "Url" =>"http://m.cnblogs.com/?u=txw1958");
-//                        break;
-//                    case "MULTINEWS":
-//                        $content = array();
-//                        $content[] = array("Title"=>"多图文1标题", "Description"=>"", "PicUrl"=>"http://images2015.cnblogs.com/blog/340216/201605/340216-20160515215306820-740762359.jpg", "Url" =>"http://m.cnblogs.com/?u=txw1958");
-//                        $content[] = array("Title"=>"多图文2标题", "Description"=>"", "PicUrl"=>"http://d.hiphotos.bdimg.com/wisegame/pic/item/f3529822720e0cf3ac9f1ada0846f21fbe09aaa3.jpg", "Url" =>"http://m.cnblogs.com/?u=txw1958");
-//                        $content[] = array("Title"=>"多图文3标题", "Description"=>"", "PicUrl"=>"http://g.hiphotos.bdimg.com/wisegame/pic/item/18cb0a46f21fbe090d338acc6a600c338644adfd.jpg", "Url" =>"http://m.cnblogs.com/?u=txw1958");
-//                        break;
-//                    case "MUSIC":
-//                        $content = array();
-//                        $content = array("Title"=>"最炫民族风", "Description"=>"歌手：凤凰传奇", "MusicUrl"=>"http://mascot-music.stor.sinaapp.com/zxmzf.mp3", "HQMusicUrl"=>"http://mascot-music.stor.sinaapp.com/zxmzf.mp3");
-//                        break;
-//                    default:
-//                        $content = "点击菜单：".$object->EventKey;
-//                        break;
-//                }
-//                break;
-//            case "VIEW":
-//                $content = "跳转链接 ".$object->EventKey;
-//                break;
-            case "SCAN":
-                $studio_id = intval($object->EventKey);
-                $studioInfo = M('studio') -> where(array('id'=>$studio_id))->find();
-                $isSubscribe = M('studio_binding') -> where(array('studio_id'=>$studio_id,'openid'=>$openid))->count();
-                if($isSubscribe){
-                    $content = "你已绑定".$studioInfo['name'];
-                    break;
-                }
-                $isSubscribe = M('studio_binding') -> where(array('openid'=>$openid))->count();
-                $data['openid'] = $openid;
-                $data['studio_id'] = $studio_id;
-                $data['create_time'] = time();
-                if(!$isSubscribe){
-                    $data['is_default'] = 1;
-                }
-                $result = M('studio_binding') -> add($data);
-                if($result){
-                    $content = "您成功绑定".$studioInfo['name'];
-                }else{
-                    $content = "绑定".$studioInfo['name'].'失败！';
+            case "CLICK":
+                switch ($object->EventKey)
+                {
+                    case "TEXT":
+                        $content = "微笑：/::)\n乒乓：/:oo\n中国：".$this->bytes_to_emoji(0x1F1E8).$this->bytes_to_emoji(0x1F1F3)."\n仙人掌：".$this->bytes_to_emoji(0x1F335);
+                        break;
+                    case "SINGLENEWS":
+                        $content = array();
+                        $content[] = array("Title"=>"单图文标题",  "Description"=>"单图文内容", "PicUrl"=>"http://images2015.cnblogs.com/blog/340216/201605/340216-20160515215306820-740762359.jpg", "Url" =>"http://m.cnblogs.com/?u=txw1958");
+                        break;
+                    case "MULTINEWS":
+                        $content = array();
+                        $content[] = array("Title"=>"多图文1标题", "Description"=>"", "PicUrl"=>"http://images2015.cnblogs.com/blog/340216/201605/340216-20160515215306820-740762359.jpg", "Url" =>"http://m.cnblogs.com/?u=txw1958");
+                        $content[] = array("Title"=>"多图文2标题", "Description"=>"", "PicUrl"=>"http://d.hiphotos.bdimg.com/wisegame/pic/item/f3529822720e0cf3ac9f1ada0846f21fbe09aaa3.jpg", "Url" =>"http://m.cnblogs.com/?u=txw1958");
+                        $content[] = array("Title"=>"多图文3标题", "Description"=>"", "PicUrl"=>"http://g.hiphotos.bdimg.com/wisegame/pic/item/18cb0a46f21fbe090d338acc6a600c338644adfd.jpg", "Url" =>"http://m.cnblogs.com/?u=txw1958");
+                        break;
+                    case "MUSIC":
+                        $content = array();
+                        $content = array("Title"=>"最炫民族风", "Description"=>"歌手：凤凰传奇", "MusicUrl"=>"http://mascot-music.stor.sinaapp.com/zxmzf.mp3", "HQMusicUrl"=>"http://mascot-music.stor.sinaapp.com/zxmzf.mp3");
+                        break;
+                    default:
+                        $content = "点击菜单：".$object->EventKey;
+                        break;
                 }
                 break;
-//            case "LOCATION":
-//
-//                $content = "上传位置：纬度 ".$object->Latitude.";经度 ".$object->Longitude;
-//                $content = "";
-//                break;
-//            case "scancode_waitmsg":
-//                if ($object->ScanCodeInfo->ScanType == "qrcode"){
-//                    $content = "扫码带提示：类型 二维码 结果：".$object->ScanCodeInfo->ScanResult;
-//                }else if ($object->ScanCodeInfo->ScanType == "barcode"){
-//                    $codeinfo = explode(",",strval($object->ScanCodeInfo->ScanResult));
-//                    $codeValue = $codeinfo[1];
-//                    $content = "扫码带提示：类型 条形码 结果：".$codeValue;
-//                }else{
-//                    $content = "扫码带提示：类型 ".$object->ScanCodeInfo->ScanType." 结果：".$object->ScanCodeInfo->ScanResult;
-//                }
-//                break;
-//            case "scancode_push":
-//                $content = "扫码推事件";
-//                break;
-//            case "pic_sysphoto":
-//                $content = "系统拍照";
-//                break;
-//            case "pic_weixin":
-//                $content = "相册发图：数量 ".$object->SendPicsInfo->Count;
-//                break;
-//            case "pic_photo_or_album":
-//                $content = "拍照或者相册：数量 ".$object->SendPicsInfo->Count;
-//                break;
-//            case "location_select":
-//                $content = "发送位置：标签 ".$object->SendLocationInfo->Label;
-//                break;
-//            default:
-//                $content = "receive a new event: ".$object->Event;
-//                break;
+            case "VIEW":
+                $content = "跳转链接 ".$object->EventKey;
+                break;
+            case "SCAN":
+                $content = "扫描参数二维码，场景ID：".$object->EventKey;
+                break;
+            case "LOCATION":
+
+                $content = "上传位置：纬度 ".$object->Latitude.";经度 ".$object->Longitude;
+                $content = "";
+                break;
+            case "scancode_waitmsg":
+                if ($object->ScanCodeInfo->ScanType == "qrcode"){
+                    $content = "扫码带提示：类型 二维码 结果：".$object->ScanCodeInfo->ScanResult;
+                }else if ($object->ScanCodeInfo->ScanType == "barcode"){
+                    $codeinfo = explode(",",strval($object->ScanCodeInfo->ScanResult));
+                    $codeValue = $codeinfo[1];
+                    $content = "扫码带提示：类型 条形码 结果：".$codeValue;
+                }else{
+                    $content = "扫码带提示：类型 ".$object->ScanCodeInfo->ScanType." 结果：".$object->ScanCodeInfo->ScanResult;
+                }
+                break;
+            case "scancode_push":
+                $content = "扫码推事件";
+                break;
+            case "pic_sysphoto":
+                $content = "系统拍照";
+                break;
+            case "pic_weixin":
+                $content = "相册发图：数量 ".$object->SendPicsInfo->Count;
+                break;
+            case "pic_photo_or_album":
+                $content = "拍照或者相册：数量 ".$object->SendPicsInfo->Count;
+                break;
+            case "location_select":
+                $content = "发送位置：标签 ".$object->SendLocationInfo->Label;
+                break;
+            default:
+                $content = "receive a new event: ".$object->Event;
+                break;
         }
         if(is_array($content)){
             if (isset($content[0])){
@@ -282,87 +200,62 @@ class WechatManage extends Base {
     }
 
     //接收文本消息
-//    private function receiveText($object)
-//    {
-//        $keyword = trim($object->Content);
-//        $openid = strval($object->FromUserName);
-//        $content = "";
-//
-//        //多客服人工回复模式
-//        if (strstr($keyword, "在线客服_") || strstr($keyword, "你好_")){
-//            $result = $this->transmitService($object);
-//        }
-//        //自动回复模式
-//        else{
-//            if (strstr($keyword, "文本")){
-//                $content = "这是个文本消息\n".$openid;
-//
-//            }else if (strstr($keyword, "单图文")){
-//                $content = array();
-//                $content[] = array("Title"=>"单图文标题",  "Description"=>"单图文内容", "PicUrl"=>"http://files.cnblogs.com/files/txw1958/cartoon.gif", "Url" =>"http://m.cnblogs.com/?u=txw1958");
-//                $weixin = new Jssdk(C('WX_CONFIG')['APPID'], C('WX_CONFIG')['APPSECRET']);
-//                $template = array('touser' => $openid,
-//                    'template_id' => "_yFpVtfHd0pSWy6ffApi6isjY8HmmWC8aKW-Uqz8viU",
-//                    'url' => "http://www.baidu.com/",
-//                    'topcolor' => "#0000C6",
-//                    'data' => array('content'    => array('value' => "你妈妈\\n喊你\\n回家吃饭了！",
-//                        'color' => "#743A3A",
-//                    ),
-//                    )
-//                );
-//                $weixin->send_template_message($template);
-//            }else if (strstr($keyword, "图文") || strstr($keyword, "多图文")){
-//                $content = array();
-//                $content[] = array("Title"=>"多图文1标题", "Description"=>"", "PicUrl"=>"http://files.cnblogs.com/files/txw1958/cartoon.gif", "Url" =>"http://m.cnblogs.com/?u=txw1958");
-//                $content[] = array("Title"=>"多图文2标题", "Description"=>"", "PicUrl"=>"http://d.hiphotos.bdimg.com/wisegame/pic/item/f3529822720e0cf3ac9f1ada0846f21fbe09aaa3.jpg", "Url" =>"http://m.cnblogs.com/?u=txw1958");
-//                $content[] = array("Title"=>"多图文3标题", "Description"=>"", "PicUrl"=>"http://g.hiphotos.bdimg.com/wisegame/pic/item/18cb0a46f21fbe090d338acc6a600c338644adfd.jpg", "Url" =>"http://m.cnblogs.com/?u=txw1958");
-//
-//            }else if (strstr($keyword, "音乐")){
-//                $content = array();
-//                $content = array("Title"=>"最炫民族风", "Description"=>"歌手：凤凰传奇", "MusicUrl"=>"http://121.199.4.61/music/zxmzf.mp3", "HQMusicUrl"=>"http://121.199.4.61/music/zxmzf.mp3");
-//            }else{
-//                // $content = date("Y-m-d H:i:s",time())."\n".$object->FromUserName."";
-//                $content = $this->xiaoirobot($openid, $keyword);
-//            }
-//
-//            if(is_array($content)){
-//                if (isset($content[0]['PicUrl'])){
-//                    $result = $this->transmitNews($object, $content);
-//                }else if (isset($content['MusicUrl'])){
-//                    $result = $this->transmitMusic($object, $content);
-//                }
-//            }else{
-//                $result = $this->transmitText($object, $content);
-//            }
-//        }
-//
-//        return $result;
-//    }
+    private function receiveText($object)
+    {
+        $keyword = trim($object->Content);
+        $openid = strval($object->FromUserName);
+        $content = "";
 
-//    private function AttentionReply1(){
-//        $textTpl=" <xml>
-//                    <ToUserName><![CDATA[%s]]></ToUserName>
-//                    <FromUserName><![CDATA[%s]]></FromUserName>
-//                    <CreateTime>%s</CreateTime>
-//                    <MsgType><![CDATA[news]]></MsgType>
-//                    <ArticleCount>1</ArticleCount>
-//                    <Articles>
-//                        <item>
-//                            <Title><![CDATA[%s]]></Title>
-//                            <Description><![CDATA[%s]]></Description>
-//                            <PicUrl><![CDATA[%s]]></PicUrl>
-//                            <Url><![CDATA[%s]]></Url>
-//                        </item>
-//                    </Articles>
-//                    <FuncFlag>1</FuncFlag>
-//                </xml>";
-//        $title1="美尚云欢迎您";
-//        $Description1="亲，欢迎您关注美尚云，";
-//        $PicUrl1="http://mch.meishangyun.com/Uploads/myms/goods-main-img/1503293931.jpeg";
-//        $Url1="http://mch.meishangyun.com";
-//        $resultStr = sprintf($textTpl, $this->fromUsername, $this->toUsername, $this->time,$title1,$Description1,$PicUrl1,$Url1);
-//        echo $resultStr;
-//    }
+        //多客服人工回复模式
+        if (strstr($keyword, "在线客服_") || strstr($keyword, "你好_")){
+            $result = $this->transmitService($object);
+        }
+        //自动回复模式
+        else{
+            if (strstr($keyword, "文本")){
+                $content = "这是个文本消息\n".$openid;
+
+            }else if (strstr($keyword, "单图文")){
+                $content = array();
+                $content[] = array("Title"=>"单图文标题",  "Description"=>"单图文内容", "PicUrl"=>"http://files.cnblogs.com/files/txw1958/cartoon.gif", "Url" =>"http://m.cnblogs.com/?u=txw1958");
+                $weixin = new \weixin\Wxapi();
+                $template = array('touser' => $openid,
+                    'template_id' => "_yFpVtfHd0pSWy6ffApi6isjY8HmmWC8aKW-Uqz8viU",
+                    'url' => "http://www.baidu.com/",
+                    'topcolor' => "#0000C6",
+                    'data' => array('content'    => array('value' => "你妈妈\\n喊你\\n回家吃饭了！",
+                        'color' => "#743A3A",
+                    ),
+                    )
+                );
+                $weixin->send_template_message($template);
+            }else if (strstr($keyword, "图文") || strstr($keyword, "多图文")){
+                $content = array();
+                $content[] = array("Title"=>"多图文1标题", "Description"=>"", "PicUrl"=>"http://files.cnblogs.com/files/txw1958/cartoon.gif", "Url" =>"http://m.cnblogs.com/?u=txw1958");
+                $content[] = array("Title"=>"多图文2标题", "Description"=>"", "PicUrl"=>"http://d.hiphotos.bdimg.com/wisegame/pic/item/f3529822720e0cf3ac9f1ada0846f21fbe09aaa3.jpg", "Url" =>"http://m.cnblogs.com/?u=txw1958");
+                $content[] = array("Title"=>"多图文3标题", "Description"=>"", "PicUrl"=>"http://g.hiphotos.bdimg.com/wisegame/pic/item/18cb0a46f21fbe090d338acc6a600c338644adfd.jpg", "Url" =>"http://m.cnblogs.com/?u=txw1958");
+
+            }else if (strstr($keyword, "音乐")){
+                $content = array();
+                $content = array("Title"=>"最炫民族风", "Description"=>"歌手：凤凰传奇", "MusicUrl"=>"http://121.199.4.61/music/zxmzf.mp3", "HQMusicUrl"=>"http://121.199.4.61/music/zxmzf.mp3");
+            }else{
+                // $content = date("Y-m-d H:i:s",time())."\n".$object->FromUserName."";
+                $content = $this->xiaoirobot($openid, $keyword);
+            }
+
+            if(is_array($content)){
+                if (isset($content[0]['PicUrl'])){
+                    $result = $this->transmitNews($object, $content);
+                }else if (isset($content['MusicUrl'])){
+                    $result = $this->transmitMusic($object, $content);
+                }
+            }else{
+                $result = $this->transmitText($object, $content);
+            }
+        }
+
+        return $result;
+    }
 
     //接收图片消息
     private function receiveImage($object)
@@ -433,24 +326,26 @@ class WechatManage extends Base {
         if(!is_array($newsArray)){
             return "";
         }
-        $itemTpl = "<item>
-         <Title><![CDATA[%s]]></Title>
+        $itemTpl = "    <item>
+        <Title><![CDATA[%s]]></Title>
         <Description><![CDATA[%s]]></Description>
         <PicUrl><![CDATA[%s]]></PicUrl>
         <Url><![CDATA[%s]]></Url>
-        </item>";
+    </item>
+";
         $item_str = "";
         foreach ($newsArray as $item){
             $item_str .= sprintf($itemTpl, $item['Title'], $item['Description'], $item['PicUrl'], $item['Url']);
         }
         $xmlTpl = "<xml>
-        <ToUserName><![CDATA[%s]]></ToUserName>
-        <FromUserName><![CDATA[%s]]></FromUserName>
-        <CreateTime>%s</CreateTime>
-        <MsgType><![CDATA[news]]></MsgType>
-        <ArticleCount>%s</ArticleCount>
-        <Articles>$item_str</Articles>
-        </xml>";
+<ToUserName><![CDATA[%s]]></ToUserName>
+<FromUserName><![CDATA[%s]]></FromUserName>
+<CreateTime>%s</CreateTime>
+<MsgType><![CDATA[news]]></MsgType>
+<ArticleCount>%s</ArticleCount>
+<Articles>
+$item_str</Articles>
+</xml>";
 
         $result = sprintf($xmlTpl, $object->FromUserName, $object->ToUserName, time(), count($newsArray));
         return $result;
@@ -610,16 +505,10 @@ $item_str
     //日志记录
     private function logger($log_content)
     {
-        if(isset($_SERVER['HTTP_APPNAME'])){   //SAE
-            sae_set_display_errors(false);
-            sae_debug($log_content);
-            sae_set_display_errors(true);
-        }else if($_SERVER['REMOTE_ADDR'] != "127.0.0.2"){ //LOCAL
-            $max_size = 1000000;
-            $log_filename = "log.xml";
-            if(file_exists($log_filename) and (abs(filesize($log_filename)) > $max_size)){unlink($log_filename);}
-            file_put_contents($log_filename, date('H:i:s')." ".$log_content."\r\n", FILE_APPEND);
-        }
+        $max_size = 1000000;
+        $log_filename = "log.xml";
+        if(file_exists($log_filename) and (abs(filesize($log_filename)) > $max_size)){unlink($log_filename);}
+        file_put_contents($log_filename, date('H:i:s')." ".$log_content."\r\n", FILE_APPEND);
     }
-}
 
+}
