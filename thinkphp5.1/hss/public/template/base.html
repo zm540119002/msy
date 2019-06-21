@@ -4,7 +4,7 @@
 {/block}
 <!-- 项目公共模块-->
 {block name="common-base"}
-
+{include file="../../api/public/template/subscribe.html" /}
 {/block}
 {block name="login_dialog"}
 <script type="text/javascript">
@@ -16,7 +16,6 @@
     };
 </script>
 {include file="../../api/public/vue/components/login.html" /}
-{include file="../../api/public/template/subscribe.html" /}
 {/block}
 {block name="pre-script"}
 <script type="text/javascript">
@@ -92,8 +91,8 @@
             }
         });
     });
-
-
+</script>
+<script type="text/javascript">
     //异步验证
     var asyncVerifyRepeat = true;
     function asyncVerify(config){
