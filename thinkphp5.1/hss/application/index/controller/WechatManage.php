@@ -106,7 +106,7 @@ class WechatManage extends \common\controller\Base {
                 $data['heartbeat'] = time();
                 $data['remark'] = $info['remark'];
                 $data['tagid'] = $info['tagid_list'];
-                $content = "欢迎关注，".$info['nickname'];
+                $content = "欢迎关注，".json_encode($info);
 //                $userModel = new \app\index\model\WeixinUser();
 //                $userModel->save($data);
                 break;
