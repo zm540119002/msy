@@ -110,10 +110,29 @@ class Test extends \common\controller\Base{
     public function weixin()
     {
         $mineTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
-        $weiXinUserInfo1 = $mineTools->getOauthUserInfo();
-        P($weiXinUserInfo1);
-//        $weiXinUserInfo2= $mineTools->get_user_info($weiXinUserInfo1['openid']);
-//        P($weiXinUserInfo2);
+        $info = $mineTools->getUserInfo();
+        p($info);
+        $municipalities = array("北京", "上海", "天津", "重庆", "香港", "澳门");
+        $sexes = array("", "男", "女");
+        $data = array();
+        $data['openid'] = $info['openid'];
+        $data['nickname'] = str_replace("'", "", $info['nickname']);
+        $data['sex'] = $sexes[$info['sex']];
+        $data['country'] = $info['country'];
+        $data['province'] = $info['province'];
+        $data['city'] = (in_array($info['province'], $municipalities))?$info['province'] : $info['city'];
+//        $data['scene'] = (isset($object->EventKey) && (stripos(strval($object->EventKey),"qrscene_")))?str_replace("qrscene_","",$object->EventKey):"0";
+
+        $data['headimgurl'] = $info['headimgurl'];
+        $data['subscribe'] = $info['subscribe_time'];
+        $data['heartbeat'] = time();
+        $data['remark'] = $info['remark'];
+        $data['tagid'] = $info['tagid_list'];
+        p($data);
+        $content = "欢迎关注，".$info['nickname'];
+        $userModel = new \app\index\model\WeixinUser();
+        $userModel->edit($data);
+        echo $userModel->getLastSql();
     }
 
     public function createMenuRaw()
