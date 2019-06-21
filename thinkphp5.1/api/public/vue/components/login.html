@@ -52,6 +52,21 @@
     </section>
 </template>
 <script type="text/javascript">
+//     $(function(){
+//         $('textarea,input[type=text]').focus(function () {
+//          window.setTimeout('scrollBottom()', 500);
+//  });
+ 
+ 
+//  function scrollBottom() {
+//          window.scrollTo(0, $('body').height());
+//   }
+
+//     })
+    
+</script>
+<script type="text/javascript">
+
     $(function(){
         //表单切换
         Vue.component('login', {
@@ -405,6 +420,7 @@
         });
     });
 </script>
+
 <style lang="less" scoped>
     .loginTab{
         display: none;
@@ -421,5 +437,8 @@
     }
     .switch_current{
         cursor:pointer;
+    }
+    .layui-m-layermain, .layui-m-layershade{
+        position: absolute;
     }
 </style>

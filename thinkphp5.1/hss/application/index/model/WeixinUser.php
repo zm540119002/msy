@@ -3,7 +3,7 @@ namespace app\index\model;
 
 class WeixinUser extends \common\model\Base {
 	// 设置当前模型对应的完整数据表名称
-	protected $table = 'member';
+	protected $table = 'weixin_user';
 	// 设置主键
     protected $pk = 'id';
 	// 设置当前模型的数据库连接
