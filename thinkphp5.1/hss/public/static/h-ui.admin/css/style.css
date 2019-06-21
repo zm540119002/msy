@@ -209,7 +209,7 @@ button, input, textarea {
     display: -webkit-flex;
 }
 .columns_flex input{
-  border:none;
+  border:1px solid #d9d9d9;
 }
 .loginBtn ,.registerBtn,.forgetPasswordBtn,.entry-button,
 .entry_btn{
