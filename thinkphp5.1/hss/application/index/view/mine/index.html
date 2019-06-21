@@ -158,13 +158,14 @@
     $('body').on('click','#logout_dialog',function(){
         logoutDialogTrigger();
         // document.querySelector('body').setAttribute('style', 'position:static')
-        
+        $('body').css({'position': 'relative'});
     });
     
     //登录-弹窗事件
     $('body').on('click','#login_dialog',function(){
         loginDialogTrigger();
         // document.querySelector('body').setAttribute('style', 'position:fixed')
+        $('body').css({'position': 'fixed', 'width': '100%'});
     });
   
 </script>
