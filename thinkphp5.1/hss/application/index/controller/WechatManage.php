@@ -12,6 +12,7 @@ class WechatManage extends \common\controller\Base {
 
     public function index(){
         if (!isset($_GET['echostr'])) {
+            return 123;
             $this->responseMsg();
         }else{
             $this->valid();
