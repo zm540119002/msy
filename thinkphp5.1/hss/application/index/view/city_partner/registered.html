@@ -135,14 +135,14 @@
 					</div>
 				</div>
 				<div class="apply-module hide">
-					{if $info['apply_status'] == 4}
+					{if $info['apply_status'] == 3}
 					<div style="text-align: center;">待审核</div>
-					{else if $info['apply_status'] == 5}
+					{else if $info['apply_status'] == 4}
 					<div class="columns_flex l-r-sides">
 						<div>
 							<p >城市名称：<span class="apply_city">{$info.city_name}</span></p>
 							<p>城市级别分类：<span class="city_level">{$info.city_level}线城市</span></p>
-							<p>合伙人级别：<span class="">{$info.market_name}市场城市合伙人</span></p>
+							<p>合伙人级别：<span class="">{$info.market_name}类市场城市合伙人</span></p>
 							<p>合伙人资格款：<span>¥{$info['amount']}</span></p>
 							<p>已交席位订金：<span>¥{$info['earnest']}</span></p>
 							<p>需补交资格余款：<span>¥{$info['amount']-$info['earnest']}</span></p>
@@ -230,88 +230,18 @@
 			param: ['level','class','amount','earnest'],
 			confirm: function (json) {
 
-				//console.info('当前选中json：', json);
-
 				area = json.values.split('-');
-				//$('.select-value').data('class1');
 				$('input[name="province"]').val(area[0]);
 				$('input[name="city"]').val(area[1]);
-				//console.log(json);
 
 				// 记录选中的城市
 				//var storage=window.localStorage;
 				var cityPartner = {province:area[0],city:area[1],area_address:$('.select-value').val()};
 				localStorage.setItem('cityPartner',JSON.stringify(cityPartner));
-
-				//.cityPartner = ['city'=>1,'city2'=>2];
-				// storage.cityPartner = ['city'=>1,'city2'=>2];
-				//storage['city'] = area[1];
-				//storage['area_address']= $('.select-value').val();
-
-				//var area_address= $('.select-value').val();
-
-				//console.log(arr);
-				//$(".area-address-name").val(json.values);
-				//console.info(json);
-				//var value = $('.select-value');
-				//console.info(json);
-			/*	console.info('当前选中class：', value.data('value1'));
-				console.info('当前选中class：', value.data('value2'));
-				console.info('当前选中class：', value.data('class2'));
-				console.info('当前选中amount：', value.data('amount2'));
-				console.info('当前选中earnest：', value.data('earnest2'));*/
-				//console.info('当前选中classa：', $('.select-value').data('class1'));
-				//console.info('当前选中classa：', $('.select-value').data('value2'));
-/*				console.info('当前选中json：', $('.select-value1').data('class'));
-				console.info('当前选中json：', $('.select-value1').data('class'));*/
-				//console.info($('.select-value1').data('values'));
-				//console.info($('.select-value1').data('id2'));
-				//var _this= this;
-
-
-
-
-				//var postData = {'data':cityData};
-
-				//console.log(cityData);
-				//return false;
-				//console.log(postData);
-
-				//console.info('【json里有带value的情况】');
-				//更新json
-				//console.info('3s后更新json...');
-				/*setTimeout(function(){
-				 _this.container.data('mPicker').updateData.call(_this,level3);
-				 var json = getVal();
-				 var valArr = json.value;
-				 console.info(json);
-				 //console.info(valArr);
-				 console.info('更新后的value为空', valArr[0], valArr[1]);
-				 console.info('更新后的value拼接值为空', json.result);
-				 },3000);*/
-
 			},
 			cancel: function (json) {
 			}
 		});
-		//获取value
-		function getVal(){
-			var value1 = $('.select-value').data('value1');
-			var value2 = $('.select-value').data('value2');
-			var result='';
-			value1 = value1 || '';
-			value2 = value2 || '';
-			if(value1){
-				result= value1;
-			}
-			if(value2){
-				result = result+'-'+ value2;
-			}
-			return {
-				value:[value1, value2],
-				result: result
-			};
-		}
 
 	});
 </script>
