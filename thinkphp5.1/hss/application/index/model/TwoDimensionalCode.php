@@ -71,14 +71,14 @@ class TwoDimensionalCode extends \common\model\Base {
             'where' => [
                 ['user_id','=',$user['id']]
             ],'field'=>[
-                'code_url','id','two_dimensional_code_url'
+                'id','code_url','two_dimensional_code_url'
             ]
         ];
         $shareQRCodeInfo = $this -> getInfo($config);
         if($shareQRCodeInfo['code_url']){
             $shareQRCode = $shareQRCodeInfo['code_url'];
         }
-        if(($shareQRCodeInfo && $shareQRCodeInfo['code_url']) || empty($shareQRCodeInfo)){
+        if(($shareQRCodeInfo && !$shareQRCodeInfo['code_url']) || empty($shareQRCodeInfo)){
             $mineTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
             $a = $mineTools-> create_qrcode('QR_SCENE', $user['id']);
             $shareQRCode = createLogoQRcode($a['url'],config('upload_dir.hss_user_QRCode'));
@@ -86,16 +86,20 @@ class TwoDimensionalCode extends \common\model\Base {
                 $data = [
                     'id' => $shareQRCodeInfo['id'],
                     'code_url' => $shareQRCode,
+                    'user_id' => $user['id'],
                 ];
             }
             if(empty($shareQRCodeInfo)){
                 $data = [
+                    'user_id' => $user['id'],
                     'code_url' => $shareQRCode,
                 ];
             }
 
-            $this->edit($data);
-            echo $this->getLastSql();exit;
+            $id = $this->edit($data);
+            if(!$id){
+                return errorMsg('失败');
+            }
         }
         if(empty($user['avatar'])){
             $user['avatar'] = request()->domain().'/static/common/img/default/chat_head.jpg';
@@ -140,7 +144,28 @@ class TwoDimensionalCode extends \common\model\Base {
             return errorMsg('合成图片失败');
         }
         imagedestroy($im);
-        unlink($shareQRCode);
+        //unlink($shareQRCode);
+        if(($shareQRCodeInfo && !$shareQRCodeInfo['two_dimensional_code_url']) || empty($shareQRCodeInfo)){
+            if($shareQRCodeInfo && !$shareQRCodeInfo['two_dimensional_code_url']){
+                $data = [
+                    'id' => $shareQRCodeInfo['id'],
+                    'two_dimensional_code_url' => $init['save_path'].$filename,
+                    'user_id' => $user['id'],
+                    'create_time' => time(),
+                ];
+            }
+            if(empty($shareQRCodeInfo)){
+                $data = [
+                    'two_dimensional_code_url' => $init['save_path'].$filename,
+                    'user_id' => $user['id'],
+                    'create_time' => time(),
+                ];
+            }
+            $id = $this->edit($data);
+            if(!$id){
+                return errorMsg('失败');
+            }
+        }
         return successMsg('成功',['url'=>$init['save_path'].$filename]);
     }
 
