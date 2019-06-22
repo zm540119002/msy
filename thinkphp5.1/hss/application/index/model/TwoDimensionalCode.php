@@ -93,6 +93,7 @@ class TwoDimensionalCode extends \common\model\Base {
                     'code_url' => $shareQRCode,
                 ];
             }
+            print_r($data);exit;
             $this->edit($data);
         }
         if(empty($user['avatar'])){
