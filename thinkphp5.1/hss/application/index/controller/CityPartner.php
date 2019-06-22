@@ -165,8 +165,8 @@ class CityPartner extends \common\controller\UserBase {
 
         $modelCityPartner = new \app\index\model\CityPartner();
         //$modelCityPartner -> startTrans();
-
-        $data = [];
+        $where = [];
+        //$data = [];
         // 1、城市查询 2、登记资料 3、支付定金 4、支付尾款
         switch ($postData['step']){
             case 1:
@@ -227,18 +227,24 @@ class CityPartner extends \common\controller\UserBase {
                 $postData['create_time'] = time();
                 $postData['update_time'] = time();
                 //$postData['sn'] = 1115 . generateSN(14);
-
-                $res = $modelCityPartner->edit($postData);
+                if(isset($postData['id'])){
+                    $where = [
+                        'id'=>$postData['id'],
+                        'user_id'=>$this->user['id'],
+                        'status'=>0,
+                    ];
+                }
+                $res = $modelCityPartner->edit($postData,$where);
 
                 if(!$res){
                     $this->errorMsg('失败');
                 }
-                $data = $info;
+                //$data = $info;
                 //$data['url'] = url('CityPartner/registered',['sn'=>$postData['sn']]);
-                unset($data['user_id']);
-                unset($data['city_status']);
-                unset($data['alone_amount']);
-                unset($data['alone_earnest']);
+                //unset($data['user_id']);
+                //unset($data['city_status']);
+                //unset($data['alone_amount']);
+                //unset($data['alone_earnest']);
                 break;
             case 3:
                 $paySn = generateSN(); //内部支付编号
@@ -253,12 +259,14 @@ class CityPartner extends \common\controller\UserBase {
                 //$postData['apply_status']= 3;
                 //$postData['sn'] = 1115 . generateSN(14);
                 //$postData['create_time'] = time();
+                if(isset($postData['id'])){
+                    $where = [
+                        'id'=>$postData['id'],
+                        'user_id'=>$this->user['id'],
+                        'status'=>0,
+                    ];
+                }
 
-                $where = [
-                    'id'=>$info['id'],
-                    'user_id'=>$this->user['id'],
-                    'status'=>0,
-                ];
 /*                p($postData);
                 exit;*/
                 $id  = $modelCityPartner->edit($postData,$where);
