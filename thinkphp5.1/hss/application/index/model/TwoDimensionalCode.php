@@ -155,28 +155,14 @@ class TwoDimensionalCode extends \common\model\Base {
                 'create_time' => time(),
             ];
         }else{
-            print_r($shareQRCodeInfo);
-            if(($shareQRCodeInfo && !$shareQRCodeInfo['two_dimensional_code_url']) || empty($shareQRCodeInfo)){
-                if($shareQRCodeInfo && !$shareQRCodeInfo['two_dimensional_code_url']){
-                    echo 2;
-                    $data = [
-                        'id' => $shareQRCodeInfo['id'],
-                        'two_dimensional_code_url' => $init['save_path'].$filename,
-                        'user_id' => $user['id'],
-                        'create_time' => time(),
-                    ];
-                }
-                if(empty($shareQRCodeInfo)){
-                    echo 3;
-                    $data = [
-                        'two_dimensional_code_url' => $init['save_path'].$filename,
-                        'user_id' => $user['id'],
-                        'create_time' => time(),
-                    ];
-                }
-            }
+            $data = [
+                'id' => $shareQRCodeInfo['id'],
+                'two_dimensional_code_url' => $init['save_path'].$filename,
+                'user_id' => $user['id'],
+                'create_time' => time(),
+            ];
+
         }
-        exit;
         $id = $this->edit($data);
         if(!$id){
             return errorMsg('失败');
