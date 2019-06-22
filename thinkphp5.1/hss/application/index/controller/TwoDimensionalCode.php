@@ -23,22 +23,12 @@ class TwoDimensionalCode extends \common\controller\UserBase {
         ];
         $info = $model->getInfo($config);
         $url = $info['two_dimensional_code_url'];
-        if(empty($info)){
+        if(empty($url)){
             $result =  $model->compose($this->user);
             if($result['status']){
                 $url = $result['url'];
             }else{
-                $this -> errorMsg($result['info']);
-            }
-
-            $data = [
-                'two_dimensional_code_url' => $url,
-                'user_id' => $this->user['id'],
-                'create_time' => time(),
-            ];
-            $id = $model->edit($data);
-            if(!$id){
-                $this -> errorMsg('失败');
+                $this->errorMsg('失败');
             }
         }
         $this->successMsg('成功！',[
