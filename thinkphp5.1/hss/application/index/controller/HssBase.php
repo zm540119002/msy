@@ -36,9 +36,7 @@ class HssBase extends \common\controller\Base{
                 $weixinUserInfo = $weixnTools->getOauthUserInfo();
                 session('weixinUserInfo',$weixinUserInfo);
             }
-            print_r($weixinUserInfo);exit;
             $openid = $weixinUserInfo['openid'];
-
             //保存获取微信用户表的信息
             $model = new \app\index\model\WeixinUser();
             $config = [
