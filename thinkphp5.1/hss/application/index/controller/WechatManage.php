@@ -104,7 +104,7 @@ class WechatManage extends \common\controller\Base {
                 $data['subscribe_time'] = $info['subscribe_time'];
                 $data['heartbeat'] = time();
                 $data['remark'] = $info['remark'];
-                $data['referee'] = $info['qr_scene'];
+                $data['referee'] = $info['qr_scene']; //带参场景关注类型
 
                 $userModel = new \app\index\model\WeixinUser();
                 $config = [
@@ -118,21 +118,23 @@ class WechatManage extends \common\controller\Base {
                 if($weixinUserInfo && !$weixinUserInfo['subscribe']){
                     $data['id'] = $weixinUserInfo['id'];
                 }
-                //带参场景关注类型
-//                if(strpos($object->EventKey,'qrscene') !==false){
-//                    $data['referee'] =  substr($object->EventKey,8);
-//                }
                 if($object->EventKey){
                     echo substr($object->EventKey,8);
                 }
                 $userModel->edit($data);
                 $content = "欢迎关注，".$object->EventKey.json_encode($info);
-//                $userModel = new \app\index\model\WeixinUser();
-//                $userModel->save($data);
+
                 break;
             case "unsubscribe":
                 $userModel = new \app\index\model\WeixinUser();
-                $userModel->where('openid',$openid)->delete();
+                $data = [
+                    'subscribe' => 0
+                ];
+                $where = [
+                    'openid' => $openid
+                ];
+                $userModel -> allowField(true)->isUpdate(true)->save($data,$where);
+
                 // $User->where("`openid` = '".$openid."'")->delete();
                 // $data['heartbeat'] = 0;
                 // $User->where("`openid` = '".$openid."'")->save($data); // 根据条件更新记录
