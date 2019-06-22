@@ -102,13 +102,23 @@ class WechatManage extends \common\controller\Base {
                 $data['scene'] = (isset($object->EventKey) && (stripos(strval($object->EventKey),"qrscene_")))?str_replace("qrscene_","",$object->EventKey):"0";
 
                 $data['headimgurl'] = $info['headimgurl'];
-                $data['subscribe'] = $info['subscribe_time'];
-                $data['heartbeat'] = 1;
+                $data['subscribe'] = $info['subscribe'];
+                $data['subscribe_time'] = $info['subscribe_time'];
+                $data['heartbeat'] = time();
                 $data['remark'] = $info['remark'];
 
-                p($data);
-                $content = "欢迎关注，".$info['nickname'];
                 $userModel = new \app\index\model\WeixinUser();
+                $config = [
+                    'where'=>[
+                        ['openid','=',$info['openid']]
+                    ],'field'=>[
+                        'id','subscribe'
+                    ]
+                ];
+                $weixinUserInfo = $userModel->getInfo($config);
+                if($weixinUserInfo && !$weixinUserInfo['subscribe']){
+                    $data['id'] = $weixinUserInfo['id'];
+                }
                 $userModel->edit($data);
 
 

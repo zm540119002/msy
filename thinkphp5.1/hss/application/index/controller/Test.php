@@ -155,8 +155,6 @@ class Test extends \common\controller\Base{
         $data['subscribe_time'] = $info['subscribe_time'];
         $data['heartbeat'] = time();
         $data['remark'] = $info['remark'];
-
-        p($data);
         $content = "欢迎关注，".$info['nickname'];
         $userModel = new \app\index\model\WeixinUser();
         $config = [
@@ -167,16 +165,10 @@ class Test extends \common\controller\Base{
             ]
         ];
         $weixinUserInfo = $userModel->getInfo($config);
-        if(empty($weixinUserInfo)){
-            $userModel->edit($data);
-        }
         if($weixinUserInfo && !$weixinUserInfo['subscribe']){
-            echo 222;
             $data['id'] = $weixinUserInfo['id'];
-            $userModel->edit($data);
         }
-
-
+        $userModel->edit($data);
         echo $userModel->getLastSql();
     }
 
