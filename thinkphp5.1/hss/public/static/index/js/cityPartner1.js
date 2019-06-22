@@ -10,14 +10,54 @@ $(function(){
         $('.apply-module').hide().eq($(this).index()).show();
     });
 
-    // 城市回显
-    var cityPartner = localStorage.getItem("cityPartner");
-    if(cityPartner){
-        cityPartner = JSON.parse(cityPartner);
-        $('input[name="province"]').val(cityPartner.province);
-        $('input[name="city"]').val(cityPartner.city);
-        $('.select-value').val(cityPartner.area_address);
+
+    if(info){
+
+        // 步骤
+
+        var step = $('.weui-flex-item');
+        var step_list = $('.apply-module');
+        switch(info.apply_status){
+            case 2:
+                step.removeClass('current');
+                step_list.hide();
+                $('.weui-flex-item:eq(2)').addClass('current');
+                $('.apply-module:eq(2)').show();
+
+                break;
+            case 3:
+            case 4:
+            case 5:
+                step.removeClass('current');
+                step_list.hide();
+                $('.weui-flex-item:eq(3)').addClass('current');
+                $('.apply-module:eq(3)').show();
+                // 禁止修改记录
+                $(".step").remove();
+                $(".express-area").removeClass('express-area');
+                
+
+                break;
+        }
+
+
+
+    }else{
+        // 城市回显
+        var cityPartner = localStorage.getItem("cityPartner");
+        if(cityPartner){
+            cityPartner = JSON.parse(cityPartner);
+            $('input[name="province"]').val(cityPartner.province);
+            $('input[name="city"]').val(cityPartner.city);
+            $('.select-value').val(cityPartner.area_address);
+        }else{
+            $('.select-value').val('城市列表');
+        }
     }
+
+
+
+
 
      //初始化 未完成的申请
 /*    if(!$.isEmptyArray(apply)){

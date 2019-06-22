@@ -19,6 +19,7 @@ class CityPartner extends \common\controller\UserBase {
         } else {
             // 做到这里
             $sn = addslashes(trim(input('sn/s')));
+            $modelCityPartner = new \app\index\model\CityPartner();
             if($sn){
                 $modelCityPartner = new \app\index\model\CityPartner();
                 $condition=[
@@ -29,19 +30,20 @@ class CityPartner extends \common\controller\UserBase {
                         ['cp.is_partner','=',0],
                         ['cp.sn','=',$sn],
                     ], 'field'=>[
-                        'cp.id','cp.province','cp.city','cp.company_name','cp.applicant','cp.market_name',
-                        'cp.mobile','cp.city_level','cp.earnest','cp.amount','cp.apply_status','cp.payment_time'
-                        ,'p.sn pay_sn','p.id as pay_id'
+                        'cp.id','cp.company_name','cp.applicant','cp.market_name','cp.mobile','cp.city_level',
+                        'cp.earnest','cp.amount','cp.apply_status','cp.update_time','cp.city_level',
+                        'ca.province_name','ca.city_name'
+                        //,'p.sn pay_sn','p.id as pay_id'
                     ]
                     ,'join' => [
-                        ['pay p','p.sn = cp.earnest_sn','left'],
+                        //['pay p','p.sn = cp.earnest_sn','left'],
+                        ['city_area ca','cp.city_code = ca.city_code','left'],
                     ]
                 ];
-                $selfApplyList = $modelCityPartner -> getList($condition);
-                p($selfApplyList);
-                exit;
-
-
+                $info = $modelCityPartner -> getInfo($condition);
+                $this->assign('info',$info);
+                //p($info);
+                //exit;
             //自己提交的申请
 /*            $modelCityPartner = new \app\index\model\CityPartner();
             $condition=[
@@ -82,9 +84,39 @@ class CityPartner extends \common\controller\UserBase {
 
 
             }
-            $this->assign('apply1',[]);
-            $this->assign('apply',json_encode([]));
-            $this->assign('applied',json_encode([]));
+            // 申请中的记录 apply_status：2:提交资料 3:交席位定金 4:待审核（已交定金） 5审核通过  6 交清尾款
+            // 申请中的记录 apply_status：2:已提交资料 3:待审核（已交定金） 4审核通过  5 交清尾款
+            // 已授权的城市 is_partner：1
+            $condition = [
+                'field' => [
+                    'cp.city_code','cp.is_partner',
+                    'ca.city_name',
+                ],'where' => [
+                  ['cp.user_id','=', $this->user['id']],
+                  ['cp.apply_status','in', '2,3,4,5,6'],
+                  ['cp.status','=', 0],
+                ],'join' => [
+                    ['city_area ca','cp.city_area_id=ca.id','left']
+                ],
+            ];
+            $list = $modelCityPartner->getList($condition);
+
+            $apply_count = 0;
+            if($list){
+                foreach($list as $k => $v){
+                    if($v['is_partner']){
+                        $apply_count++;
+                        unset($list[$k]);
+                    }
+                }
+            }
+            $this->assign('auth_city',$list);
+            $this->assign('apply_count',$apply_count);
+
+
+            //$this->assign('apply1',[]);
+            //$this->assign('apply',json_encode([]));
+            //$this->assign('applied',json_encode([]));
 
             $unlockingFooterCart = unlockingFooterCartConfig([10, 0, 9]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
@@ -184,13 +216,15 @@ class CityPartner extends \common\controller\UserBase {
                     $this->errorMsg('失败');
                 }*/
                 $postData['user_id']     = $this->user['id'];
+                //$postData['city_name']   = $info['city_name'];
                 $postData['city_level']  = $info['level'];
                 $postData['earnest']     = $info['earnest'];
                 $postData['amount']      = $info['amount'];
                 $postData['apply_status']= 2;
                 $postData['city_area_id']= $info['id'];
-                $postData['market_name']= $info['market_name'];
+                $postData['market_name'] = $info['market_name'];
                 $postData['create_time'] = time();
+                $postData['update_time'] = time();
                 $postData['sn'] = 1115 . generateSN(14);
                 //p($postData);
                 //exit;

@@ -25,6 +25,10 @@
 		overflow-y: scroll;
 		/* background: #eee; */
 	}
+	.step {
+		width: 100%;
+		margin: 0;
+	}
 
 </style>
 <div class="f24">
@@ -35,10 +39,21 @@
 	<section>
 		<div class="columns_flex l-r-sides" style="padding:0.15rem;border-bottom:1px solid #d9d9d9;">
 			<span>
-				已授权城市：<span>暂无</span>
+				已授权城市：
+				{empty name="auth_city"}
+					<span>暂无</span>
+				{else /}
+					{volist name="auth_city" id="vo" key="k"}
+						{if $k>3}
+							<span title="sssss">...</span>
+							<?php break; ?>
+						{/if}
+						<span>{$vo.city_name}</span>
+					{/volist}
+				{/empty}
 			</span>
 			<span>
-				<a>资格完款任务(0) ></a>
+				<a href="{:url('list')}">申请中 ( <span style="color:red;">{$apply_count>99 ? '99+' : $apply_count}</span> ) ></a>
 			</span>
 		</div>
 		<div id="wizard" class="page-bd">
@@ -53,11 +68,11 @@
 			<div class="apply-data-content">
 				<div class="apply-module">
 					<form class="applicant_form">
-						<div class="express-area ">
-							<a id="expressArea" href="javascript:void(0)" class="f24 form-group box-flex">
-								<label class="form-label">选择地区：</label>
+						<div class="express-area">
+							<a href="javascript:void(0)" class="f24 form-group box-flex">
+								<label class="form-label">选择城市：</label>
 						<!--		<div class="area_address">省 &gt; 市 &gt; 区/县</div>-->
-								<input type="text" class="select-value form-control" value="城市列表" >
+								<input type="text" class="select-value form-control" value="{$info.province_name}-{$info.city_name}" >
 						<!--		<input type="hidden"  data-key="" name="province" value="" class="area-address-name" >
 								<input type="hidden"  data-key="" name="city" value="" class="area-address-name" >-->
 								<input type="hidden"  data-key="" name="province" value="">
@@ -81,13 +96,13 @@
 				<div class="apply-module hide">
 					<form class="applicant_form">
                         <div class="apply-items">
-							<input type="text" class="company_name" name="company_name" value="" placeholder="企业名称">
+							<input type="text" class="company_name" name="company_name" value="{$info.company_name}" placeholder="企业名称">
 						</div>
 						<div class="apply-items">
-							<input type="text" class="applicant" name="applicant" value="" placeholder="姓名">
+							<input type="text" class="applicant" name="applicant" value="{$info.applicant}" placeholder="姓名">
 						</div>
 						<div class="apply-items">
-							<input type="tel" class="mobile" name="mobile" value="" placeholder="手机号码">
+							<input type="tel" class="mobile" name="mobile" value="{$info.mobile}" placeholder="手机号码">
 						</div>
 						<a href="javascript:void(0);" class="one-step step">下一步</a>
 					</form>
@@ -95,11 +110,11 @@
 				<div class="apply-module hide">
 					<div>
                         <div>
-							<p>城市名称：<span class="city_name">广州</span></p>
+							<p>城市名称：<span class="city_name">{$info.city_name}</span></p>
 					<!--		<p>城市级别分类：<span>3线城市</span></p>-->
-							<p>合伙人级别：<span class="market_name">二类市场城市合伙人</span></p>
-							<p>合伙人资格款：<span class="amount">￥<price>5000.00</price></span>
-							<p>申请席位订金：<span class="earnest">￥<price>5000.00</price></span></p>
+							<p>合伙人级别：<span class="market_name">{$info.market_name}市场城市合伙人</span></p>
+							<p>合伙人资格款：<span class="amount">￥<price>{$info.amount}</price></span>
+							<p>申请席位订金：<span class="earnest">￥<price>{$info.earnest}</price></span></p>
 						</div>
                         <dl>
                             <dt>说明：</dt>
@@ -119,17 +134,17 @@
 					</div>
 				</div>
 				<div class="apply-module hide">
-					{if $apply1[0]['apply_status'] == 4}
+					{if $info['apply_status'] == 4}
 					<div style="text-align: center;">待审核</div>
-					{else if $apply1[0]['apply_status'] == 5}
+					{else if $info['apply_status'] == 5}
 					<div class="columns_flex l-r-sides">
 						<div>
 							<p >城市名称：<span class="apply_city"></span></p>
 							<p>城市级别分类：<span class="city_level">3线城市</span></p>
 							<p>合伙人级别：<span class="">二类市场城市合伙人</span></p>
-							<p>合伙人资格款：<span>¥{$apply1[0]['earnest'] + $apply1[0]['amount'] }</span></p>
-							<p>已交席位订金：<span>¥{$apply1[0]['earnest']}</span></p>
-							<p>需补交资格余款：<span>¥{$apply1[0]['amount']}</span></p>
+							<p>合伙人资格款：<span>¥{$info['earnest'] + $info['amount'] }</span></p>
+							<p>已交席位订金：<span>¥{$info['earnest']}</span></p>
+							<p>需补交资格余款：<span>¥{$info['amount']}</span></p>
 						</div>
 						<div>
 							<p class="friday_end">支付倒计时</p>
@@ -164,7 +179,7 @@
 	</section>
 </div>
 <!--选择地区弹层-->
-<section id="areaLayer" class="express-area-box" style="display:none;">
+<!--<section id="areaLayer" class="express-area-box" style="display:none;">
 	<header>
 		<h3>选择地区</h3>
 		<a id="backUp" class="back" href="javascript:void(0);" title="返回" style="display: none;"></a>
@@ -174,7 +189,7 @@
 		<ul id="areaList" class="area-list" data-type="1">
 		</ul>
 	</article>
-</section>
+</section>-->
 <!--遮罩层-->
 <div id="areaMask" class="address_mask"></div>
 {include file="template/apply_settlement_method.html" /}
@@ -183,16 +198,14 @@
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
+<script type="text/javascript" >
+	//var info = "{$info}";
+	var info = JSON.parse('{$info|raw}');
+
+</script>
 <script type="text/javascript" src="api_common_js/swipe.js"></script>
 <script type="text/javascript" src="public_js/jquery.area.js"></script>
 <script type="text/javascript" src="index_js/cityPartner1.js"></script>
-<script type="text/javascript" >
-	//申请中
-	var apply = JSON.parse('{$apply|raw}');
-	//已申请
-	var applied = JSON.parse('{$applied|raw}');
-
-</script>
 
 <script src="index_js/mobileSelector/js/json2.js"></script>
 <script src="index_js/mobileSelector/js/jsonExchange.js"></script>
@@ -204,7 +217,7 @@
 		 * 联动的picker--添加修改后修改数据的效果
 		 * 两级
 		 */
-		$('.select-value').mPicker({
+		$('.express-area .select-value').mPicker({
 			level: 2,
 			dataJson: dataJson,
 			Linkage: true,
