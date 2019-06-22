@@ -88,12 +88,12 @@ class WechatManage extends \common\controller\Base {
         switch ($object->Event)
         {
             case "subscribe":
-                $info = $weixin->get_user_info($openid);
-                file_put_contents('weixin.txt',json_encode($info));
+                $info = $weixin->getUserInfo();
+                p($info);
                 $municipalities = array("北京", "上海", "天津", "重庆", "香港", "澳门");
                 $sexes = array("", "男", "女");
                 $data = array();
-                $data['openid'] = $openid;
+                $data['openid'] = $info['openid'];
                 $data['nickname'] = str_replace("'", "", $info['nickname']);
                 $data['sex'] = $sexes[$info['sex']];
                 $data['country'] = $info['country'];
@@ -103,9 +103,16 @@ class WechatManage extends \common\controller\Base {
 
                 $data['headimgurl'] = $info['headimgurl'];
                 $data['subscribe'] = $info['subscribe_time'];
-                $data['heartbeat'] = time();
+                $data['heartbeat'] = 1;
                 $data['remark'] = $info['remark'];
-                $data['tagid'] = $info['tagid_list'];
+
+                p($data);
+                $content = "欢迎关注，".$info['nickname'];
+                $userModel = new \app\index\model\WeixinUser();
+                $userModel->edit($data);
+
+
+
                 $content = "欢迎关注，".$object->EventKey;
 //                $userModel = new \app\index\model\WeixinUser();
 //                $userModel->save($data);

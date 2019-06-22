@@ -194,8 +194,11 @@ class Jssdk {
     $res = $this->http_request($url);
     return json_decode($res, true);
   }
-  
-  function getJson($url){
+
+
+
+
+    function getJson($url){
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
