@@ -143,6 +143,7 @@ class TwoDimensionalCode extends \common\model\Base {
         }
         imagedestroy($im);
         echo 3333;
+
         //unlink($shareQRCode);
         if($id){
             echo 1;
@@ -153,6 +154,7 @@ class TwoDimensionalCode extends \common\model\Base {
                 'create_time' => time(),
             ];
         }else{
+            echo 25;
             if(($shareQRCodeInfo && !$shareQRCodeInfo['two_dimensional_code_url']) || empty($shareQRCodeInfo)){
                 if($shareQRCodeInfo && !$shareQRCodeInfo['two_dimensional_code_url']){
                     echo 2;
