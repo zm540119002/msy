@@ -9,15 +9,56 @@ $(function(){
         $(this).addClass('current').siblings().removeClass('current');
         $('.apply-module').hide().eq($(this).index()).show();
     });
+    //console.log(info.apply_status);
 
-    // 城市回显
-    var cityPartner = localStorage.getItem("cityPartner");
-    if(cityPartner){
-        cityPartner = JSON.parse(cityPartner);
-        $('input[name="province"]').val(cityPartner.province);
-        $('input[name="city"]').val(cityPartner.city);
-        $('.select-value').val(cityPartner.area_address);
+    if(info){
+
+        // 步骤
+
+        var step = $('.weui-flex-item');
+        var step_list = $('.apply-module');
+        switch(parseInt(info.apply_status)){
+            case 2:
+                step.removeClass('current');
+                step_list.hide();
+                $('.weui-flex-item:eq(2)').addClass('current');
+                $('.apply-module:eq(2)').show();
+                break;
+            case 3:
+            case 4:
+            case 5:
+                //console.log(1111111);
+                step.removeClass('current');
+                step_list.hide();
+                $('.weui-flex-item:eq(3)').addClass('current');
+                $('.apply-module:eq(3)').show();
+
+                // 禁止修改记录
+                $(".step").remove();
+                $(".express-area").removeClass('express-area');
+                $('.apply-items input,.applicant_form .select-value').addClass('nodisabled');
+
+                break;
+        }
+
+
+
+    }else{
+        // 城市回显
+        var cityPartner = localStorage.getItem("cityPartner");
+        if(cityPartner){
+            cityPartner = JSON.parse(cityPartner);
+            $('input[name="province"]').val(cityPartner.province);
+            $('input[name="city"]').val(cityPartner.city);
+            $('.select-value').val(cityPartner.area_address);
+        }else{
+            $('.select-value').val('城市列表');
+        }
     }
+
+
+
+
 
      //初始化 未完成的申请
 /*    if(!$.isEmptyArray(apply)){
@@ -106,6 +147,7 @@ $(function(){
             yes:function(index){
                 var _this = $(this);
                 submitApplicant(_this,data);
+                layer.close(index);
 
 /*                _this = $(".confirm span[type='1']");
 
@@ -165,6 +207,7 @@ $(function(){
         step2(data);
 
         submitApplicant(_this,data);
+
     });
     //确定通过入驻
     $('body').on('click','.three-step',function(){
@@ -248,10 +291,18 @@ function submitApplicant(_this,postData){
                     $('.weui-flex-item:eq(2)').addClass('current');
                     $('.apply-module:eq(1)').hide();
                     $('.apply-module:eq(2)').show();
+
+                    $('.city_name').html(data.data.city_name);
+                    $('.market_name').html(data.data.market_name+'城市合伙人');
+                    $('.amount').find('price').html(data.data.amount);
+                    $('.earnest').find('price').html(data.data.earnest);
+
+                    location.href = data.data.url;
+
+
                 }else if(postData.step==3 ||postData.step==4 ){
                     location.href = data.data.url;
                 }
-                layer.close(index);
 
             }else{
                 if(data.data.status){
