@@ -90,7 +90,8 @@ class TwoDimensionalCode extends \common\model\Base {
                 ];
             }
             if(empty($shareQRCodeInfo)){
-                echo 22;exit;
+                echo 33
+                ;exit;
                 $data = [
                     'code_url' => $shareQRCode,
                 ];
