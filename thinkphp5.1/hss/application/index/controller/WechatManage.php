@@ -104,6 +104,7 @@ class WechatManage extends \common\controller\Base {
                 $data['subscribe_time'] = $info['subscribe_time'];
                 $data['heartbeat'] = time();
                 $data['remark'] = $info['remark'];
+                $data['referee'] = $info['qr_scene'];
 
                 $userModel = new \app\index\model\WeixinUser();
                 $config = [
@@ -118,9 +119,9 @@ class WechatManage extends \common\controller\Base {
                     $data['id'] = $weixinUserInfo['id'];
                 }
                 //带参场景关注类型
-                if(strpos($object->EventKey,'qrscene') !==false){
-                    $data['referee'] =  substr($object->EventKey,8);
-                }
+//                if(strpos($object->EventKey,'qrscene') !==false){
+//                    $data['referee'] =  substr($object->EventKey,8);
+//                }
                 if($object->EventKey){
                     echo substr($object->EventKey,8);
                 }
