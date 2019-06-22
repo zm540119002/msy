@@ -17,12 +17,21 @@ $(function(){
 
         var step = $('.weui-flex-item');
         var step_list = $('.apply-module');
+
+/*        if(){
+
+        }else{
+
+        }*/
+
         switch(parseInt(info.apply_status)){
             case 2:
                 step.removeClass('current');
                 step_list.hide();
                 $('.weui-flex-item:eq(2)').addClass('current');
                 $('.apply-module:eq(2)').show();
+
+                $('.weui-flex li:eq(3)').addClass('nodisabled');
                 break;
             case 3:
             case 4:
@@ -296,6 +305,14 @@ function submitApplicant(_this,postData){
                     $('.weui-flex-item:eq(1)').addClass('current');
                     $('.apply-module:eq(0)').hide();
                     $('.apply-module:eq(1)').show();
+
+                     $('.city_name').html(data.data.city_name);
+                     $('.market_name').html(data.data.market_name+'类市场城市合伙人');
+                     $('.amount').find('price').html(data.data.amount);
+                     $('.earnest').find('price').html(data.data.earnest);
+
+
+
                 }else if(postData.step==2){
 /*                    $('.weui-flex-item:eq(0),.weui-flex-item:eq(1)').removeClass('current');
                     $('.weui-flex-item:eq(2)').addClass('current');

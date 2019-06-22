@@ -128,10 +128,6 @@ class CityPartner extends \common\controller\UserBase {
             $this->assign('auth_city',$list);
             $this->assign('apply_count',$apply_count);
 
-            //$this->assign('apply1',[]);
-            //$this->assign('apply',json_encode([]));
-            //$this->assign('applied',json_encode([]));
-
             $unlockingFooterCart = unlockingFooterCartConfig([10, 0, 9]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
             return $this->fetch();
@@ -197,30 +193,15 @@ class CityPartner extends \common\controller\UserBase {
                     $this->errorMsg('失败',['status'=>1000]);
                 }*/
 
+                $data = $info;
+                unset($data['user_id']);
+                unset($data['city_status']);
+                unset($data['alone_amount']);
+                unset($data['alone_earnest']);
+
                 break;
 
             case 2:
-                // 添加记录
-                //p($postData);
-                //p($info);
-                //exit;
-                //exit;
-
-/*                $postData['user_id'] = $this->user['id'];
-                $postData['create_time'] = time();
-                if($postData['id']){
-                    $where = [
-                        ['id','=',$postData['id']],
-                        ['user_id','=',$this->user['id']],
-                        ['status','=',0],
-                    ];
-
-                }
-                $id  = $modelCityPartner->edit($postData,$where);
-                if(false===$id){
-                    $modelCityPartner ->rollback();
-                    $this->errorMsg('失败');
-                }*/
                 // 添加记录
                 $postData['user_id']     = $this->user['id'];
                 $postData['province_code']= $postData['province'];
@@ -233,9 +214,7 @@ class CityPartner extends \common\controller\UserBase {
                 $postData['market_name'] = $info['market_name'];
                 $postData['create_time'] = time();
                 $postData['update_time'] = time();
-                //p($postData);
-                //exit;
-                //$postData['sn'] = 1115 . generateSN(14);
+
                 if($postData['id']>0){
                     $where = [
                         'id'=>$postData['id'],
@@ -243,21 +222,13 @@ class CityPartner extends \common\controller\UserBase {
                         'status'=>0,
                     ];
                 }
-                //unset();
-                //p($where);
-                //p($postData);
-                //exit;
+
                 $res = $modelCityPartner->edit($postData,$where);
 
                 if(!$res){
                     $this->errorMsg('失败');
                 }
-                //$data = $info;
-                //$data['url'] = url('CityPartner/registered',['sn'=>$postData['sn']]);
-                //unset($data['user_id']);
-                //unset($data['city_status']);
-                //unset($data['alone_amount']);
-                //unset($data['alone_earnest']);
+
                 break;
             case 3:
                 $paySn = generateSN(); //内部支付编号
@@ -281,10 +252,7 @@ class CityPartner extends \common\controller\UserBase {
                         'status'=>0,
                     ];
                 }
-                //p($info);
-                //exit;
-/*                p($postData);
-                exit;*/
+
                 $id  = $modelCityPartner->edit($postData,$where);
                 if(false===$id){
                     $modelCityPartner ->rollback();
@@ -350,8 +318,7 @@ class CityPartner extends \common\controller\UserBase {
                     return errorMsg('失败');
                 };
         }
-        //p($data);
-        //exit;
+
         $this->successMsg('成功',$data);
         //$this->successMsg($result);
         //$modelCityPartner -> commit();
