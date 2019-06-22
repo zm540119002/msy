@@ -22,6 +22,7 @@ class CityPartner extends \common\controller\UserBase {
             $info = [];
             $modelCityPartner = new \app\index\model\CityPartner();
             if($sn){
+
                 $modelCityPartner = new \app\index\model\CityPartner();
                 $condition=[
                     'where'=>[
@@ -42,6 +43,9 @@ class CityPartner extends \common\controller\UserBase {
                     ]
                 ];
                 $info = $modelCityPartner -> getInfo($condition);
+                if(!$info){
+
+                }
                 //p($info);
                 //exit;
             //自己提交的申请
