@@ -140,11 +140,11 @@
 					<div class="columns_flex l-r-sides">
 						<div>
 							<p >城市名称：<span class="apply_city"></span></p>
-							<p>城市级别分类：<span class="city_level">3线城市</span></p>
-							<p>合伙人级别：<span class="">二类市场城市合伙人</span></p>
-							<p>合伙人资格款：<span>¥{$info['earnest'] + $info['amount'] }</span></p>
+							<p>城市级别分类：<span class="city_level">{$info.city_level}线城市</span></p>
+							<p>合伙人级别：<span class="">{$info.market_name}市场城市合伙人</span></p>
+							<p>合伙人资格款：<span>¥{$info['amount']}</span></p>
 							<p>已交席位订金：<span>¥{$info['earnest']}</span></p>
-							<p>需补交资格余款：<span>¥{$info['amount']}</span></p>
+							<p>需补交资格余款：<span>¥{$info['amount']-$info['earnest']}</span></p>
 						</div>
 						<div>
 							<p class="friday_end">支付倒计时</p>
@@ -161,11 +161,10 @@
 						<dd>1、补齐城市合伙人资格余款后正式签约为黑森森城市合伙人；</dd>
 						<dd>2、在规定7天期限内未能补齐资格余款，保留的城市资格将被释放出来，将可能导致所申请的城市合伙人被他人签约，原先缴纳的席位订金可于发出无法签约通知之日起7天内无息退回；</dd>
 						<dd>3、黑森森城市合伙人资格款项将转存入用户充值账户，用于采购结算专用。</dd>
-
 					</dl>
 					<footer class="f24 group_cart_nav">
 						<div class="group_btn50 bottom_item">
-							<span class="amount">￥<price>193000.00</price></span>
+							<span class="amount">￥<price>{$info['amount']-$info['earnest']}</price></span>
 						</div>
 						<div class="group_btn50 bottom_item">
 							<a href="javascript:void(0);" class="recharge_money">补齐资格款<span class="total_num"></span></a>

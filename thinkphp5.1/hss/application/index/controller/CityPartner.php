@@ -30,7 +30,7 @@ class CityPartner extends \common\controller\UserBase {
                         ['cp.user_id','=',$this->user['id']],
                         ['cp.apply_status','>',0],
                         ['cp.is_partner','=',0],
-                        ['cp.sn','=',$sn],
+                        //['cp.sn','=',$sn],
                     ], 'field'=>[
                         'cp.id','cp.company_name','cp.applicant','cp.market_name','cp.mobile','cp.city_level',
                         'cp.earnest','cp.amount','cp.apply_status','cp.update_time','cp.city_level',
@@ -43,7 +43,16 @@ class CityPartner extends \common\controller\UserBase {
                     ]
                 ];
                 $info = $modelCityPartner -> getInfo($condition);
+/*                p($info);
+                exit;*/
 
+                $where = [
+                    ['cp.status', '=', 0],
+                    ['cp.user_id','=',$this->user['id']],
+                    ['cp.apply_status','>',0],
+                    ['cp.is_partner','=',0],
+                    ['cp.sn','=',$sn],
+                ];
             //自己提交的申请
 /*            $modelCityPartner = new \app\index\model\CityPartner();
             $condition=[
@@ -82,14 +91,37 @@ class CityPartner extends \common\controller\UserBase {
                 $this->assign('apply',json_encode($apply));
                 $this->assign('applied',json_encode($applied));*/
 
-
+            }else{
+                $where = [
+                    ['cp.status', '=', 0],
+                    ['cp.user_id','=',$this->user['id']],
+                    ['cp.apply_status','=',2],
+                    ['cp.is_partner','=',0],
+                    //['cp.sn','=',$sn],
+                ];
             }
+            $modelCityPartner = new \app\index\model\CityPartner();
+            $condition=[
+                 'field'=>[
+                    'cp.id','cp.company_name','cp.applicant','cp.market_name','cp.mobile','cp.city_level',
+                    'cp.earnest','cp.amount','cp.apply_status','cp.update_time','cp.city_level',
+                    'ca.province_name','ca.city_name'
+                    //,'p.sn pay_sn','p.id as pay_id'
+                ],
+                'where' => $where,
+                'join' => [
+                    //['pay p','p.sn = cp.earnest_sn','left'],
+                    ['city_area ca','cp.city_code = ca.city_code','left'],
+                ]
+            ];
+            $info = $modelCityPartner -> getInfo($condition);
+
             // 申请中的记录 apply_status：2:提交资料 3:交席位定金 4:待审核（已交定金） 5审核通过  6 交清尾款
             // 申请中的记录 apply_status：2:已提交资料 3:待审核（已交定金） 4审核通过  5 交清尾款
             // 已授权的城市 is_partner：1
             $condition = [
                 'field' => [
-                    'cp.city_code','cp.is_partner',
+                    'cp.city_code','cp.is_partner','cp.apply_status',
                     'ca.city_name',
                 ],'where' => [
                   ['cp.user_id','=', $this->user['id']],
@@ -104,8 +136,10 @@ class CityPartner extends \common\controller\UserBase {
             $apply_count = 0;
             if($list){
                 foreach($list as $k => $v){
-                    if($v['is_partner']){
-                        $apply_count++;
+                    if(!$v['is_partner']){
+                        if($v['apply_status']>2){
+                            $apply_count++;
+                        }
                         unset($list[$k]);
                     }
                 }
@@ -113,7 +147,6 @@ class CityPartner extends \common\controller\UserBase {
             $this->assign('info',$info);
             $this->assign('auth_city',$list);
             $this->assign('apply_count',$apply_count);
-
 
             //$this->assign('apply1',[]);
             //$this->assign('apply',json_encode([]));
