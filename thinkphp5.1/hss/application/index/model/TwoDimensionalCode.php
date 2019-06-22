@@ -151,6 +151,7 @@ class TwoDimensionalCode extends \common\model\Base {
                     'id' => $shareQRCodeInfo['id'],
                     'two_dimensional_code_url' => $init['save_path'].$filename,
                     'user_id' => $user['id'],
+                    'create_time' => time(),
                 ];
             }
             if(empty($shareQRCodeInfo)){
