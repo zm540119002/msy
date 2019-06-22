@@ -10,6 +10,14 @@
 {block name="common"}{/block}
 {block name="footer"}{/block}
 {block name="script"}
+<script type="text/javascript">
+	var a = {n:1};
+	var b = a;
+	a = a.x = {n:2};
+	console.log(a.x);
+	console.log(a);
+	console.log(b);
+</script>
 <style>
 	.frame {
 		position: relative;
