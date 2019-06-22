@@ -256,6 +256,9 @@ function submitApplicant(_this,postData){
                     $('.amount').find('price').html(data.data.amount);
                     $('.earnest').find('price').html(data.data.earnest);
 
+                    location.href = data.data.url;
+
+
                 }else if(postData.step==3 ||postData.step==4 ){
                     location.href = data.data.url;
                 }

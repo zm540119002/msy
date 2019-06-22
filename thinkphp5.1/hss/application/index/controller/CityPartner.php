@@ -17,40 +17,75 @@ class CityPartner extends \common\controller\UserBase {
     public function registered(){
         if (request()->isAjax()) {
         } else {
+            // 做到这里
+            $sn = addslashes(trim(input('sn/s')));
+            if($sn){
+                $modelCityPartner = new \app\index\model\CityPartner();
+                $condition=[
+                    'where'=>[
+                        ['cp.status', '=', 0],
+                        ['cp.user_id','=',$this->user['id']],
+                        ['cp.apply_status','>',0],
+                        ['cp.is_partner','=',0],
+                        ['cp.sn','=',$sn],
+                    ], 'field'=>[
+                        'cp.id','cp.province','cp.city','cp.company_name','cp.applicant','cp.market_name',
+                        'cp.mobile','cp.city_level','cp.earnest','cp.amount','cp.apply_status','cp.payment_time'
+                        ,'p.sn pay_sn','p.id as pay_id'
+                    ]
+                    ,'join' => [
+                        ['pay p','p.sn = cp.earnest_sn','left'],
+                    ]
+                ];
+                $selfApplyList = $modelCityPartner -> getList($condition);
+                p($selfApplyList);
+                exit;
+
+
             //自己提交的申请
-            $modelCityPartner = new \app\index\model\CityPartner();
+/*            $modelCityPartner = new \app\index\model\CityPartner();
             $condition=[
                 'where'=>[
                     ['cp.status', '=', 0],
                     ['cp.user_id','=',$this->user['id']],
                     ['cp.apply_status','>',0],
                     ['cp.is_partner','=',0],
+                    ['cp.id','=',$id],
                 ], 'field'=>[
                     'cp.id','cp.province','cp.city','cp.company_name','cp.applicant',
                     'cp.mobile','cp.city_level','cp.earnest','cp.amount','cp.apply_status','cp.payment_time'
                     ,'p.sn','p.id as pay_id'
                 ]
                 ,'join' => [
-                     ['pay p','p.sn = cp.earnest_sn','left'],
+                    ['pay p','p.sn = cp.earnest_sn','left'],
                 ]
             ];
             $selfApplyList = $modelCityPartner -> getList($condition);
-            //申请中
-            $apply = [];
-            //已申请
-            $applied = [];
-            if($selfApplyList){
-                foreach ($selfApplyList as $selfapply){
-                    if ($selfapply['apply_status']<6){
-                        $apply[] = $selfapply;
-                    }else{
-                        $applied[] = $selfapply;
+
+            $selfApplyInfo = reset($selfApplyList);*/
+                //申请中
+/*                $apply = [];
+                //已申请
+                $applied = [];
+                if($selfApplyList){
+                    foreach ($selfApplyList as $selfapply){
+                        if ($selfapply['apply_status']<6){
+                            $apply[] = $selfapply;
+                        }else{
+                            $applied[] = $selfapply;
+                        }
                     }
                 }
+                $this->assign('apply1',$apply);
+                $this->assign('apply',json_encode($apply));
+                $this->assign('applied',json_encode($applied));*/
+
+
             }
-            $this->assign('apply1',$apply);
-            $this->assign('apply',json_encode($apply));
-            $this->assign('applied',json_encode($applied));
+            $this->assign('apply1',[]);
+            $this->assign('apply',json_encode([]));
+            $this->assign('applied',json_encode([]));
+
             $unlockingFooterCart = unlockingFooterCartConfig([10, 0, 9]);
             $this->assign('unlockingFooterCart', $unlockingFooterCart);
             return $this->fetch();
@@ -154,7 +189,11 @@ class CityPartner extends \common\controller\UserBase {
                 $postData['amount']      = $info['amount'];
                 $postData['apply_status']= 2;
                 $postData['city_area_id']= $info['id'];
+                $postData['market_name']= $info['market_name'];
                 $postData['create_time'] = time();
+                $postData['sn'] = 1115 . generateSN(14);
+                //p($postData);
+                //exit;
                 //p($postData);
                 //exit;
                 $res = $modelCityPartner->edit($postData);
@@ -163,6 +202,7 @@ class CityPartner extends \common\controller\UserBase {
                     $this->errorMsg('失败');
                 }
                 $data = $info;
+                $data['url'] = url('CityPartner/registered',['sn'=>$postData['sn']]);
                 unset($data['user_id']);
                 unset($data['city_status']);
                 unset($data['alone_amount']);
