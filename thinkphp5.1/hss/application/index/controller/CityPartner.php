@@ -234,7 +234,7 @@ class CityPartner extends \common\controller\UserBase {
                     $this->errorMsg('失败');
                 }
                 $data = $info;
-                $data['url'] = url('CityPartner/registered',['sn'=>$postData['sn']]);
+                //$data['url'] = url('CityPartner/registered',['sn'=>$postData['sn']]);
                 unset($data['user_id']);
                 unset($data['city_status']);
                 unset($data['alone_amount']);
