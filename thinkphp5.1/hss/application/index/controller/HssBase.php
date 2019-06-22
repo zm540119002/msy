@@ -32,8 +32,8 @@ class HssBase extends \common\controller\Base{
 
             $weixinUserInfo =  session('weixinUserInfo');
             if(!$weixinUserInfo){
-                $mineTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
-                $weiXinUserInfo = $mineTools->getOauthUserInfo();
+                $weixnTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
+                $weiXinUserInfo = $weixnTools->getOauthUserInfo();
                 session('weixinUserInfo',$weixinUserInfo);
             }
             $openid = $weixinUserInfo['openid'];
