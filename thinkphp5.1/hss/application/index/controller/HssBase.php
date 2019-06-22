@@ -4,7 +4,7 @@ namespace app\index\controller;
 /**
  * 平台基类
  */
-class HssBase extends \common\controller\UserBase{
+class HssBase extends \common\controller\Base{
 
     protected $wallet = null;
 
@@ -12,84 +12,83 @@ class HssBase extends \common\controller\UserBase{
         parent::__construct();
         //微信处理
         if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
-
             $weiXinUserInfo =  session('weiXinUserInfo');
             if(!$weiXinUserInfo){
                 $mineTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
                 $weiXinUserInfo = $mineTools->getOauthUserInfo();
                 session('weiXinUserInfo',$weiXinUserInfo);
             }
-            //获取微信用户表的信息
-            $model = new \app\index\model\WeixinUser();
-            $config = [
-                'where' => [
-                    ['openid','=',$weiXinUserInfo['openid']]
-                ],'field'=>[
-                    'id','user_id',
-                    'referee','headimgurl','subscribe','nickname'
-                ]
-            ];
-            $info = $model -> getInfo($config);
-            p($info);exit;
-            //判断是否关注平台
-            if(empty($info) || !$info['subscribe']){
-                 //没有关注
-                $this -> assign('subscribe',1);
-            }
-            //没有获取到微信的信息
-            if(($info && !$info['headimgurl']) || empty($info)){
-                $weixinUserInfo = $weixinTools -> oauth2_get_user_info($accessToken, $openid);
-                $municipalities = array("北京", "上海", "天津", "重庆", "香港", "澳门");
-                $sexes = array("", "男", "女");
-                $data = array();
-                $data['openid'] = $weixinUserInfo['openid'];
-                $data['nickname'] = str_replace("'", "", $weixinUserInfo['nickname']);
-                $data['sex'] = $sexes[$weixinUserInfo['sex']];
-                $data['country'] = $weixinUserInfo['country'];
-                $data['province'] = $weixinUserInfo['province'];
-                $data['city'] = (in_array($weixinUserInfo['province'], $municipalities))?$weixinUserInfo['province'] : $info['city'];
-                $data['subscribe_scene'] = $weixinUserInfo['subscribe_scene'];
-                $data['headimgurl'] = $weixinUserInfo['headimgurl'];
-                $data['subscribe'] = $weixinUserInfo['subscribe'];
-                $data['subscribe_time'] = $weixinUserInfo['subscribe_time'];
-                $data['heartbeat'] = time();
-                $data['remark'] = $weixinUserInfo['remark'];
-                $data['referee'] = $weixinUserInfo['qr_scene']; //带参场景关注类型
-                if($info && !$info['headimgurl']){
-                    $data['id'] = $info['id'];
-                }
-                $id = $model->edit($data);
-                if(!$id){
-                    return errorMsg('失败');
-                }
-
-                //修改用户表
-                $user = checkLogin();
-                if((!$user['name'] || !$user['avatar']) && $user && isset($weiXinUserInfo['openid'])){
-                    //临时相对路径
-                    $relativeSavePath = config('upload_dir.user_avatar');
-                    $weiXinAvatarUrl = $weixinUserInfo['headimgurl'];
-                    $avatar = saveImageFromHttp($weiXinAvatarUrl,$relativeSavePath);
-                    $data = [
-                        'id'=>$user['id'],
-                        'name'=>$weixinUserInfo['nickname'],
-                        'avatar'=>$avatar,
-                    ];
-                    if($user['avatar']){
-                        unset($data['avatar']);
-                    }else{
-                        $user['avatar'] = $data['avatar'];
-                    }
-                    if($user['name']){
-                        unset($data['name']);
-                    }else{
-                        $user['name'] = $data['name'];
-                    }
-                    $userModel = new \common\model\User();
-                    $result = $userModel->isUpdate(true)->save($data);
-                    setSession($user);
-                }
-            }
+//            //获取微信用户表的信息
+//            $model = new \app\index\model\WeixinUser();
+//            $config = [
+//                'where' => [
+//                    ['openid','=',$weiXinUserInfo['openid']]
+//                ],'field'=>[
+//                    'id','user_id',
+//                    'referee','headimgurl','subscribe','nickname'
+//                ]
+//            ];
+//            $info = $model -> getInfo($config);
+//            p($info);exit;
+//            //判断是否关注平台
+//            if(empty($info) || !$info['subscribe']){
+//                 //没有关注
+//                $this -> assign('subscribe',1);
+//            }
+//            //没有获取到微信的信息
+//            if(($info && !$info['headimgurl']) || empty($info)){
+//                $weixinUserInfo = $weixinTools -> oauth2_get_user_info($accessToken, $openid);
+//                $municipalities = array("北京", "上海", "天津", "重庆", "香港", "澳门");
+//                $sexes = array("", "男", "女");
+//                $data = array();
+//                $data['openid'] = $weixinUserInfo['openid'];
+//                $data['nickname'] = str_replace("'", "", $weixinUserInfo['nickname']);
+//                $data['sex'] = $sexes[$weixinUserInfo['sex']];
+//                $data['country'] = $weixinUserInfo['country'];
+//                $data['province'] = $weixinUserInfo['province'];
+//                $data['city'] = (in_array($weixinUserInfo['province'], $municipalities))?$weixinUserInfo['province'] : $info['city'];
+//                $data['subscribe_scene'] = $weixinUserInfo['subscribe_scene'];
+//                $data['headimgurl'] = $weixinUserInfo['headimgurl'];
+//                $data['subscribe'] = $weixinUserInfo['subscribe'];
+//                $data['subscribe_time'] = $weixinUserInfo['subscribe_time'];
+//                $data['heartbeat'] = time();
+//                $data['remark'] = $weixinUserInfo['remark'];
+//                $data['referee'] = $weixinUserInfo['qr_scene']; //带参场景关注类型
+//                if($info && !$info['headimgurl']){
+//                    $data['id'] = $info['id'];
+//                }
+//                $id = $model->edit($data);
+//                if(!$id){
+//                    return errorMsg('失败');
+//                }
+//
+//                //修改用户表
+//                $user = checkLogin();
+//                if((!$user['name'] || !$user['avatar']) && $user && isset($weiXinUserInfo['openid'])){
+//                    //临时相对路径
+//                    $relativeSavePath = config('upload_dir.user_avatar');
+//                    $weiXinAvatarUrl = $weixinUserInfo['headimgurl'];
+//                    $avatar = saveImageFromHttp($weiXinAvatarUrl,$relativeSavePath);
+//                    $data = [
+//                        'id'=>$user['id'],
+//                        'name'=>$weixinUserInfo['nickname'],
+//                        'avatar'=>$avatar,
+//                    ];
+//                    if($user['avatar']){
+//                        unset($data['avatar']);
+//                    }else{
+//                        $user['avatar'] = $data['avatar'];
+//                    }
+//                    if($user['name']){
+//                        unset($data['name']);
+//                    }else{
+//                        $user['name'] = $data['name'];
+//                    }
+//                    $userModel = new \common\model\User();
+//                    $result = $userModel->isUpdate(true)->save($data);
+//                    setSession($user);
+//                }
+//            }
         }
     }
 }
