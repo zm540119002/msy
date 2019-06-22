@@ -190,7 +190,8 @@
         });
     });
 </script>
-<div id="loginDialogTpl" style="display: none">
+<div class="bg"></div>
+<div id="loginDialogTpl" class="loginDialogTpl" style="display: none">
     <div id="loginDialogRoot">
         <login></login>
     </div>
@@ -229,21 +230,23 @@
     var loginDialogTriggerLayerIndex = 0;
     function loginDialogTrigger(){
         var content = $('#loginDialogTpl').html();
-        loginDialogTriggerLayerIndex = layer.open({
-            className:'loginLayer',
-            skin:'loginLayer',
-            type:1,
-            shadeClose:false,
-            content:content,
-            success:function(index){
-                fixedLayer();
-            },yes:function(index){
-                layer.close(index);
-            },
-            end:function(){
-                cancleFixedLayer();
-            }
-        });
+        $('.loginDialogTpl').show();
+        $('.bg').show();
+        // loginDialogTriggerLayerIndex = layer.open({
+        //     className:'loginLayer',
+        //     skin:'loginLayer',
+        //     type:1,
+        //     shadeClose:false,
+        //     content:content,
+        //     success:function(index){
+        //         fixedLayer();
+        //     },yes:function(index){
+        //         layer.close(index);
+        //     },
+        //     end:function(){
+        //         cancleFixedLayer();
+        //     }
+        // });
     }
     var login_success_callback_common = function(param){
         //localStorage.cartList 入库
@@ -427,6 +430,18 @@
     }
     .layui-m-layer.layui-m-layer1{
         position: absolute;
+    }
+    .loginDialogTpl{
+        background: #00ff00;
+        width: 200px;
+        height: 200px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        margin:auto;
+        z-index:1000;
     }
     /* .layui-m-layermain{
         position: absolute;
