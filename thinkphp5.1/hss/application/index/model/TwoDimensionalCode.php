@@ -93,8 +93,9 @@ class TwoDimensionalCode extends \common\model\Base {
                     'code_url' => $shareQRCode,
                 ];
             }
-            print_r($data);exit;
+
             $this->edit($data);
+            echo $this->getLastSql();exit;
         }
         if(empty($user['avatar'])){
             $user['avatar'] = request()->domain().'/static/common/img/default/chat_head.jpg';
