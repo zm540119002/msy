@@ -239,54 +239,16 @@
                     if(data.status == 1){
                         uploadsSingleImgFlag = true;
                         $(obj).find('.img').val(data.avatar);
-                        //dialog.success(data.info);
+                        dialog.success(data.info);
                         $('.user_info_list').find('.user_header').attr('src',uploads+data.avatar);
-                        // generatingTwoDimensionalCode();
+                        generatingTwoDimensionalCode();
                     }else{
                         dialog.error(data.info)
                     }
                 })
             }
         });
-        //选择头像图片
-        // var nick_content=$('.nick_content').html();
-        // $('body').on('change','.editAvatar',function () {
-        //     var _this=$(this);
-        //     layer.open({
-        //         title:['昵称','border-bottom:1px solid #d9d9d9;'],
-        //         type:1,
-        //         anim:'up',
-        //         className:'nickInfoLayer',
-        //         content:nick_content,
-        //         btn:['确定'],
-        //         success:function(){
-        //             var user_name=_this.find('.user_name').text();
-        //             $('.nickInfoLayer .user_name').val(user_name);
-        //         },
-        //         yes:function(index){
-        //           var user_name=  $('.nickInfoLayer .user_name').val();
-        //           $('.userInfoLayer').find('.user_name').text(user_name);
-        //            var  postData = {
-        //                name:user_name
-        //            };
-        //             var old_name =   $('.userInfoLayer ').find('.old_name').val();
-        //             if(old_name !== user_name){
-        //                 //提交
-        //                 $.post(module+"Mine/editName",postData,function(data){
-        //                     if(data.status == 1){
-        //                         dialog.success(data.info);
-        //                         $('.user_info_list').find('.user_name').text(data.name);
-        //                         $('.userInfoLayer ').find('.old_name').val(data.name);
-        //                         // generatingTwoDimensionalCode();
-        //                     }else{
-        //                         dialog.error(data.info)
-        //                     }
-        //                 })
-        //             }
-        //           layer.close(index);
-        //         }
-        //     });
-        // });
+        
         //昵称修改
         var nick_content=$('.nick_content').html();
          $('body').on('click','.nick_btn',function () {
@@ -316,6 +278,7 @@
                                 dialog.success(data.info);
                                 $('.user_info_list').find('.user_name').text(data.name);
                                 $('.userInfoLayer ').find('.old_name').val(data.name);
+                                generatingTwoDimensionalCode();
                             }else{
                                 dialog.error(data.info)
                             }
