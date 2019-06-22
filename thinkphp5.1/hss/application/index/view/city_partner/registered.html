@@ -199,9 +199,12 @@
 {block name="footer"}{/block}
 {block name="script"}
 <script type="text/javascript" >
-	//var info = "{$info}";
+	var info = "{$info}";
+	if(info){
+		info = JSON.parse('{$info|raw}');
+	}
 
-	var info = JSON.parse('{$info|raw}');
+	//var info = JSON.parse('{$info.apply_status|raw}');
 
 </script>
 <script type="text/javascript" src="api_common_js/swipe.js"></script>
