@@ -88,8 +88,7 @@ class WechatManage extends \common\controller\Base {
         switch ($object->Event)
         {
             case "subscribe":
-                $info = $weixin->getUserInfo();
-                p($info);
+                $info = $weixin->get_user_info($openid);
                 $municipalities = array("北京", "上海", "天津", "重庆", "香港", "澳门");
                 $sexes = array("", "男", "女");
                 $data = array();
@@ -120,10 +119,7 @@ class WechatManage extends \common\controller\Base {
                     $data['id'] = $weixinUserInfo['id'];
                 }
                 $userModel->edit($data);
-
-
-
-                $content = "欢迎关注，".$object->EventKey;
+                $content = "欢迎关注，".$object->EventKey.json_encode($info);
 //                $userModel = new \app\index\model\WeixinUser();
 //                $userModel->save($data);
                 break;
@@ -464,7 +460,7 @@ $item_str
     public function createQrcode()
     {
         $mineTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
-        $a = $mineTools-> create_qrcode('QR_SCENE', 16);
+        $a = $mineTools-> create_qrcode('QR_SCENE', 15);
         $shareQRCode = createLogoQRcode($a['url'],config('upload_dir.hss_user_QRCode'));
         p($shareQRCode);
     }
