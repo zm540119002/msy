@@ -270,13 +270,13 @@ class CityPartner extends \common\controller\UserBase {
                 $modelPay = new \app\index\model\Pay();
                 $data = [
                     'sn' => $paySn,
-                    'actually_amount' =>config('custom.cityPartner_fee')[1]['earnest'],
+                    'actually_amount' => $info['earnest'],
                     'user_id' => $this->user['id'],
                     'pay_code' => $postData['pay_code'],
                     'type' => config('custom.pay_type')['cityPartnerSeatPay']['code'],
                     'create_time' => time(),
                 ];
-
+           
                 if(isset($postData['pay_id']) && $postData['pay_id']){
                     $where1 = [
                         'id'=>$postData['pay_id'],
