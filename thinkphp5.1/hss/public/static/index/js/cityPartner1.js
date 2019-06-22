@@ -9,7 +9,7 @@ $(function(){
         $(this).addClass('current').siblings().removeClass('current');
         $('.apply-module').hide().eq($(this).index()).show();
     });
-    console.log(info.apply_status);
+    //console.log(info.apply_status);
 
     if(info){
 
@@ -17,7 +17,7 @@ $(function(){
 
         var step = $('.weui-flex-item');
         var step_list = $('.apply-module');
-        switch(info.apply_status){
+        switch(parseInt(info.apply_status)){
             case 2:
                 step.removeClass('current');
                 step_list.hide();
@@ -27,7 +27,7 @@ $(function(){
             case 3:
             case 4:
             case 5:
-                console.log(1111111);
+                //console.log(1111111);
                 step.removeClass('current');
                 step_list.hide();
                 $('.weui-flex-item:eq(3)').addClass('current');
