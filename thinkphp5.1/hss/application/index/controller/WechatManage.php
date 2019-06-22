@@ -89,7 +89,6 @@ class WechatManage extends \common\controller\Base {
         {
             case "subscribe":
                 $info = $weixin->getUserInfo();
-                p($info);
                 $municipalities = array("北京", "上海", "天津", "重庆", "香港", "澳门");
                 $sexes = array("", "男", "女");
                 $data = array();
@@ -120,9 +119,6 @@ class WechatManage extends \common\controller\Base {
                     $data['id'] = $weixinUserInfo['id'];
                 }
                 $userModel->edit($data);
-
-
-
                 $content = "欢迎关注，".$object->EventKey;
 //                $userModel = new \app\index\model\WeixinUser();
 //                $userModel->save($data);
