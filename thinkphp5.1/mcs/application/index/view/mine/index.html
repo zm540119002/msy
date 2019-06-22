@@ -197,6 +197,7 @@
         var uploadsSingleImgFlag = true; //上传单图片成功标识位
         // 选择头像图片
         $('body').on('change','.editAvatar',function () {
+            console.log(12);
             var _this=$(this);
             uploadsSingleImgFlag = false;
             var img = event.target.files[0];
