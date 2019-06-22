@@ -77,9 +77,10 @@ class TwoDimensionalCode extends \common\model\Base {
             $shareQRCode = $shareQRCodeInfo['code_url'];
         }
         if(($shareQRCodeInfo && !$shareQRCodeInfo['code_url']) || empty($shareQRCodeInfo)){
-            $mineTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
-            $a = $mineTools-> create_qrcode('QR_SCENE', $user['id']);
-            $shareQRCode = createLogoQRcode($a['url'],config('upload_dir.hss_user_QRCode'));
+           // $mineTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
+            //$a = $mineTools-> create_qrcode('QR_SCENE', $user['id']);
+           // $shareQRCode = createLogoQRcode($a['url'],config('upload_dir.hss_user_QRCode'));
+           $shareQRCode = 'hss_user_QRCode/2019062215251176030nologo.png';
             if($shareQRCodeInfo && $shareQRCodeInfo['code_url']){
                 $data = [
                     'id' => $shareQRCodeInfo['id'],
@@ -154,7 +155,7 @@ class TwoDimensionalCode extends \common\model\Base {
                 'create_time' => time(),
             ];
         }else{
-            echo 25;
+            print_r($shareQRCodeInfo);
             if(($shareQRCodeInfo && !$shareQRCodeInfo['two_dimensional_code_url']) || empty($shareQRCodeInfo)){
                 if($shareQRCodeInfo && !$shareQRCodeInfo['two_dimensional_code_url']){
                     echo 2;
