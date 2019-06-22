@@ -71,7 +71,7 @@ class TwoDimensionalCode extends \common\model\Base {
             'where' => [
                 ['user_id','=',$user['id']]
             ],'field'=>[
-                'code_url','id'
+                'code_url','id','two_dimensional_code_url'
             ]
         ];
         $shareQRCodeInfo = $this -> getInfo($config);
