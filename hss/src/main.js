@@ -25,7 +25,7 @@ import router from './router.js'
 
 // 导入App组件
 import app from './App.vue'
-
+console.log(app);
 var vm = new Vue({
   el: '#app',
   render: c => c(app),
