@@ -75,8 +75,8 @@
 								<input type="text" class="select-value form-control" value="{$info.province_name}-{$info.city_name}" >
 						<!--		<input type="hidden"  data-key="" name="province" value="" class="area-address-name" >
 								<input type="hidden"  data-key="" name="city" value="" class="area-address-name" >-->
-								<input type="hidden"  data-key="" name="province_code" value="{$info.province_code}">
-								<input type="hidden"  data-key="" name="city_code" value="{$info.city_code}">
+								<input type="hidden"  data-key="" name="province" value="{$info.province_code}">
+								<input type="hidden"  data-key="" name="city" value="{$info.city_code}">
 								<input type="hidden"  data-key="" name="id" value="{$info.id}">
 							</a>
 						</div>
@@ -234,13 +234,13 @@
 
 				area = json.values.split('-');
 				//$('.select-value').data('class1');
-				$('input[name="province_code"]').val(area[0]);
-				$('input[name="city_code"]').val(area[1]);
+				$('input[name="province"]').val(area[0]);
+				$('input[name="city"]').val(area[1]);
 				//console.log(json);
 
 				// 记录选中的城市
 				//var storage=window.localStorage;
-				var cityPartner = {province_code:area[0],city_code:area[1],area_address:$('.select-value').val()};
+				var cityPartner = {province_:area[0],city:area[1],area_address:$('.select-value').val()};
 				localStorage.setItem('cityPartner',JSON.stringify(cityPartner));
 
 				//.cityPartner = ['city'=>1,'city2'=>2];

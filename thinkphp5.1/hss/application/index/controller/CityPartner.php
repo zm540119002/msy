@@ -221,6 +221,8 @@ class CityPartner extends \common\controller\UserBase {
                 }*/
                 // 添加记录
                 $postData['user_id']     = $this->user['id'];
+                $postData['province_code']= $postData['province'];
+                $postData['city_code']   = $postData['city'];
                 $postData['city_level']  = $info['level'];
                 $postData['earnest']     = $info['earnest'];
                 $postData['amount']      = $info['amount'];
@@ -254,6 +256,8 @@ class CityPartner extends \common\controller\UserBase {
             case 3:
                 $paySn = generateSN(); //内部支付编号
                 $postData['earnest_sn']  = $paySn;
+                $postData['province_code']= $postData['province'];
+                $postData['city_code']   = $postData['city'];
                 $postData['city_level']  = $info['level'];
                 $postData['earnest']     = $info['earnest'];
                 $postData['amount']      = $info['amount'];
@@ -271,8 +275,8 @@ class CityPartner extends \common\controller\UserBase {
                         'status'=>0,
                     ];
                 }
-                p($info);
-                exit;
+                //p($info);
+                //exit;
 /*                p($postData);
                 exit;*/
                 $id  = $modelCityPartner->edit($postData,$where);

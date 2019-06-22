@@ -47,8 +47,8 @@ $(function(){
         var cityPartner = localStorage.getItem("cityPartner");
         if(cityPartner){
             cityPartner = JSON.parse(cityPartner);
-            $('input[name="province_code"]').val(cityPartner.province);
-            $('input[name="city_code"]').val(cityPartner.city);
+            $('input[name="province"]').val(cityPartner.province);
+            $('input[name="city"]').val(cityPartner.city);
             $('.select-value').val(cityPartner.area_address);
         }else{
             $('.select-value').val('城市列表');
@@ -332,7 +332,7 @@ function submitApplicant(_this,postData){
 
 function step1(data) {
     var content;
-    if(!data.province_code || !data.city_code){
+    if(!data.province || !data.city){
         content='请先选择城市';
     }
     if(content){
