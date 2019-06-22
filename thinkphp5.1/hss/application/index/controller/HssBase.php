@@ -30,11 +30,11 @@ class HssBase extends \common\controller\Base{
             `subscribe_time` varchar(20) NOT NULL DEFAULT '' COMMENT '关注时间',
              */
 
-            $weixinUserInfo =  session('weiXinUserInfo');
+            $weixinUserInfo =  session('weixinUserInfo');
             if(!$weixinUserInfo){
                 $mineTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
                 $weiXinUserInfo = $mineTools->getOauthUserInfo();
-                session('$weixinUserInfo',$weixinUserInfo);
+                session('weixinUserInfo',$weixinUserInfo);
             }
 
             $openid = $weixinUserInfo['openid'];
@@ -80,8 +80,8 @@ class HssBase extends \common\controller\Base{
                 if((!$user['name'] || !$user['avatar']) && $user && isset($weiXinUserInfo['openid'])){
                     //临时相对路径
                     $relativeSavePath = config('upload_dir.user_avatar');
-                    $weiXinAvatarUrl = $weixinUserInfo['headimgurl'];
-                    $avatar = saveImageFromHttp($weiXinAvatarUrl,$relativeSavePath);
+                    $weixinAvatarUrl = $weixinUserInfo['headimgurl'];
+                    $avatar = saveImageFromHttp($weixinAvatarUrl,$relativeSavePath);
                     $data = [
                         'id'=>$user['id'],
                         'name'=>$weixinUserInfo['nickname'],
