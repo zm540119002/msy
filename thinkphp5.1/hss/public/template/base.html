@@ -64,10 +64,7 @@
 <script type="text/javascript" src="api_common_js/dialog.js"></script>
 <script type="text/javascript" src="api_common_js/paging.js"></script>
 <script type="text/javascript">
-    //判断是否为微信浏览器
-    if(isWeiXin()){
-        $('#subscribe').css('display','block');
-    }
+
     $('body').on('click','.subscribe',function () {
         var imgSrc = domain +'static/index/img/hss_wechat_public.jpg';
         console.log(imgSrc);
