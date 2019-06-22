@@ -111,7 +111,7 @@
 					<div>
                         <div>
 							<p>城市名称：<span class="city_name">{$info.city_name}</span></p>
-					<!--		<p>城市级别分类：<span>3线城市</span></p>-->
+							<p>城市级别分类：<span>{$info.city_level}线城市</span></p>
 							<p>合伙人级别：<span class="market_name">{$info.market_name}市场城市合伙人</span></p>
 							<p>合伙人资格款：<span class="amount">￥<price>{$info.amount}</price></span>
 							<p>申请席位订金：<span class="earnest">￥<price>{$info.earnest}</price></span></p>
@@ -124,7 +124,7 @@
                         </dl>
                         <footer class="f24 group_cart_nav">
                             <div class="group_btn50 bottom_item">
-                                <span class="earnest">￥<price>5000.00</price></span>
+                                <span class="earnest">￥<price>{$info.earnest}</price></span>
                             </div>
                             <div class="group_btn50 bottom_item">
                                 <a href="javascript:void(0);" class="recharge_money">支付席位订金<span class="total_num"></span></a>
@@ -203,8 +203,6 @@
 	if(info){
 		info = JSON.parse('{$info|raw}');
 	}
-
-	//var info = JSON.parse('{$info.apply_status|raw}');
 
 </script>
 <script type="text/javascript" src="api_common_js/swipe.js"></script>
