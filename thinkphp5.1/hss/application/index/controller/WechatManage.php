@@ -38,7 +38,6 @@ class WechatManage extends \common\controller\Base {
     {
         $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
         if (!empty($postStr)){
-            $this->logger("R".$postStr);
             $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
             $RX_TYPE = trim($postObj->MsgType);
             //消息类型分离
@@ -69,7 +68,6 @@ class WechatManage extends \common\controller\Base {
                     $result = "unknown msg type: ".$RX_TYPE;
                     break;
             }
-            $this->logger("T ".$result);
             echo $result;
         }else {
             echo "";
@@ -122,11 +120,11 @@ class WechatManage extends \common\controller\Base {
                     echo substr($object->EventKey,8);
                 }
                 $userModel->edit($data);
-                $content = "欢迎关注，".$object->EventKey.json_encode($info);
+                //$content = "欢迎关注，".$object->EventKey.json_encode($info);
+                $content = "欢迎关注黑森森公众号，请点击底部菜单访问网站\n";
 
                 break;
             case "unsubscribe":
-                file_put_contents('aaa.txt',json_encode($object));
                 $userModel = new \app\index\model\WeixinUser();
                 $data = [
                     'subscribe' => 0
@@ -135,17 +133,13 @@ class WechatManage extends \common\controller\Base {
                     'openid' => $openid
                 ];
                 $userModel -> allowField(true)->isUpdate(true)->save($data,$where);
-                file_put_contents('bbb.txt',$userModel->getLastSql());
-
-                // $User->where("`openid` = '".$openid."'")->delete();
-                // $data['heartbeat'] = 0;
-                // $User->where("`openid` = '".$openid."'")->save($data); // 根据条件更新记录
                 break;
             case "VIEW":
                 $content = "跳转链接 ".$object->EventKey;
                 break;
             case "SCAN":
-                $content = "扫描参数二维码，场景ID：".$object->EventKey;
+//                $content = "扫描参数二维码，场景ID：".$object->EventKey;
+                $content = "欢迎使用黑森森公众号，请点击底部菜单访问网站\n";
                 break;
             case "LOCATION":
 
