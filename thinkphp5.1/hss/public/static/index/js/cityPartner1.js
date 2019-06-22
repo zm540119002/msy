@@ -36,7 +36,7 @@ $(function(){
                 // 禁止修改记录
                 $(".step").remove();
                 $(".express-area").removeClass('express-area');
-                $('.weui-flex li:eq(0),.weui-flex li:eq(1),.weui-flex li:eq(2)').addClass('nodisabled');
+                //$('.weui-flex li:eq(0),.weui-flex li:eq(1),.weui-flex li:eq(2)').addClass('nodisabled');
 
                 break;
         }
