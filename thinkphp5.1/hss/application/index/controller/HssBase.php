@@ -4,7 +4,7 @@ namespace app\index\controller;
 /**
  * 平台基类
  */
-class HssBase extends \common\controller\UserBase{
+class HssBase extends \common\controller\Base{
 
     protected $wallet = null;
 
@@ -30,13 +30,14 @@ class HssBase extends \common\controller\UserBase{
             `subscribe_time` varchar(20) NOT NULL DEFAULT '' COMMENT '关注时间',
              */
 
-            $weixinTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
-            //获取微信auto2AccessToken和openid
-            $accessTokenAndOpenid = $weixinTools -> getAccessTokenAndOpenid();
-            p($accessTokenAndOpenid);exit;
-            $openid = $accessTokenAndOpenid['openid'];
-            $accessToken = $accessTokenAndOpenid['access_token'];
-            //获取微信用户表的信息
+            $weixinUserInfo =  session('weixinUserInfo');
+            if(!$weixinUserInfo){
+                $weixnTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
+                $weixinUserInfo = $weixnTools->getOauthUserInfo();
+                session('weixinUserInfo',$weixinUserInfo);
+            }
+            $openid = $weixinUserInfo['openid'];
+            //保存获取微信用户表的信息
             $model = new \app\index\model\WeixinUser();
             $config = [
                 'where' => [
@@ -47,15 +48,24 @@ class HssBase extends \common\controller\UserBase{
                 ]
             ];
             $info = $model -> getInfo($config);
-            p($info);exit;
-            //判断是否关注平台
-            if(empty($info) || !$info['subscribe']){
-                 //没有关注
-                $this -> assign('subscribe',1);
-            }
+            /**
+             *  [openid] => oxFkSs_72n49f1my5YDDKpt4EMtA
+            [nickname] => 杨观保
+            [sex] => 1
+            [language] => zh_CN
+            [city] => 深圳
+            [province] => 广东
+            [country] => 中国
+            [headimgurl] => http://thirdwx.qlogo.cn/mmopen/vi_32/YsGBcc3ZDjXFOGGCG6KTSTxTJY39nNLbibPHW3iaex8U9WQatoTfz2bPUQOM9d7NCE265NmoZ1mCEarcn6uGb4Zw/132
+            [privilege] => Array
+            (
+            )
+
+            [unionid] => oHg2ht3eC4OgmdAHaUldzp7SsQUA
+            )
+             */
             //没有获取到微信的信息
             if(($info && !$info['headimgurl']) || empty($info)){
-                $weixinUserInfo = $weixinTools -> oauth2_get_user_info($accessToken, $openid);
                 $municipalities = array("北京", "上海", "天津", "重庆", "香港", "澳门");
                 $sexes = array("", "男", "女");
                 $data = array();
@@ -65,13 +75,7 @@ class HssBase extends \common\controller\UserBase{
                 $data['country'] = $weixinUserInfo['country'];
                 $data['province'] = $weixinUserInfo['province'];
                 $data['city'] = (in_array($weixinUserInfo['province'], $municipalities))?$weixinUserInfo['province'] : $info['city'];
-                $data['subscribe_scene'] = $weixinUserInfo['subscribe_scene'];
                 $data['headimgurl'] = $weixinUserInfo['headimgurl'];
-                $data['subscribe'] = $weixinUserInfo['subscribe'];
-                $data['subscribe_time'] = $weixinUserInfo['subscribe_time'];
-                $data['heartbeat'] = time();
-                $data['remark'] = $weixinUserInfo['remark'];
-                $data['referee'] = $weixinUserInfo['qr_scene']; //带参场景关注类型
                 if($info && !$info['headimgurl']){
                     $data['id'] = $info['id'];
                 }
@@ -85,8 +89,8 @@ class HssBase extends \common\controller\UserBase{
                 if((!$user['name'] || !$user['avatar']) && $user && isset($weiXinUserInfo['openid'])){
                     //临时相对路径
                     $relativeSavePath = config('upload_dir.user_avatar');
-                    $weiXinAvatarUrl = $weixinUserInfo['headimgurl'];
-                    $avatar = saveImageFromHttp($weiXinAvatarUrl,$relativeSavePath);
+                    $weixinAvatarUrl = $weixinUserInfo['headimgurl'];
+                    $avatar = saveImageFromHttp($weixinAvatarUrl,$relativeSavePath);
                     $data = [
                         'id'=>$user['id'],
                         'name'=>$weixinUserInfo['nickname'],
@@ -107,6 +111,12 @@ class HssBase extends \common\controller\UserBase{
                     setSession($user);
                 }
             }
+            //判断是否关注平台
+            if(empty($info) || !$info['subscribe']){
+                 //没有关注
+                $this -> assign('subscribe',1);
+            }
+
         }
     }
 }
