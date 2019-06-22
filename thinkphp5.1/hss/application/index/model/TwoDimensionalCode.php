@@ -84,12 +84,12 @@ class TwoDimensionalCode extends \common\model\Base {
             $shareQRCode = createLogoQRcode($a['url'],config('upload_dir.hss_user_QRCode'));
             if($shareQRCodeInfo && $shareQRCodeInfo['code_url']){
                 $data = [
+                    'id' => $shareQRCodeInfo['id'],
                     'code_url' => $shareQRCode,
                 ];
             }
             if(empty($shareQRCodeInfo)){
                 $data = [
-                    'id' => $shareQRCodeInfo['id'],
                     'code_url' => $shareQRCode,
                 ];
             }
