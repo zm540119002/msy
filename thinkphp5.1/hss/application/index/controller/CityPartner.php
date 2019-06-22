@@ -93,7 +93,9 @@ class CityPartner extends \common\controller\UserBase {
                 ],
             ];
             $info = $modelCityPartner -> getInfo($condition);
-
+            p($where);
+            p($info);
+            exit;
             // 申请中的记录 apply_status：2:提交资料 3:交席位定金 4:待审核（已交定金） 5审核通过  6 交清尾款
             // 申请中的记录 apply_status：2:已提交资料 3:待审核（已交定金） 4审核通过  5 交清尾款
             // 已授权的城市 is_partner：1
