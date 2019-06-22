@@ -170,7 +170,8 @@ class Test extends \common\controller\Base{
         if(empty($weixinUserInfo)){
             $userModel->edit($data);
         }
-        if(!$weixinUserInfo['subscribe']){
+        if($weixinUserInfo && !$weixinUserInfo['subscribe']){
+            echo 222;
             $data['id'] = $weixinUserInfo['id'];
             $userModel->edit($data);
         }
