@@ -75,11 +75,11 @@ class TwoDimensionalCode extends \common\model\Base {
             ]
         ];
         $shareQRCodeInfo = $this -> getInfo($config);
-        p($shareQRCodeInfo);exit;
         if($shareQRCodeInfo['code_url']){
             $shareQRCode = $shareQRCodeInfo['code_url'];
         }
         if(($shareQRCodeInfo && $shareQRCodeInfo['code_url']) || empty($shareQRCodeInfo)){
+           echo 22;exit;
             $mineTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
             $a = $mineTools-> create_qrcode('QR_LIMIT_SCENE', $user['id']);
             $shareQRCode = createLogoQRcode($a['url'],config('upload_dir.hss_user_QRCode'));
