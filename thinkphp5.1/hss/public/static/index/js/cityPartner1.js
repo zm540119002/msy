@@ -9,7 +9,7 @@ $(function(){
         $(this).addClass('current').siblings().removeClass('current');
         $('.apply-module').hide().eq($(this).index()).show();
     });
-
+    console.log(info.apply_status);
 
     if(info){
 
@@ -23,15 +23,16 @@ $(function(){
                 step_list.hide();
                 $('.weui-flex-item:eq(2)').addClass('current');
                 $('.apply-module:eq(2)').show();
-
                 break;
             case 3:
             case 4:
             case 5:
+                console.log(1111111);
                 step.removeClass('current');
                 step_list.hide();
                 $('.weui-flex-item:eq(3)').addClass('current');
                 $('.apply-module:eq(3)').show();
+
                 // 禁止修改记录
                 $(".step").remove();
                 $(".express-area").removeClass('express-area');
