@@ -65,8 +65,38 @@ class TwoDimensionalCode extends \common\model\Base {
 
     public function compose($user)
     {
-        $url = request()->domain().'?uid='.$user['id'];
-        $shareQRCode = createLogoQRcode($url,config('upload_dir.hss_user_QRCode'));
+//        $url = request()->domain().'?uid='.$user['id'];
+//        $shareQRCode = createLogoQRcode($url,config('upload_dir.hss_user_QRCode'));
+        $config = [
+            'where' => [
+                ['user_id','=',$user['id']]
+            ],'field'=>[
+                'code_url','id'
+            ]
+        ];
+        $shareQRCodeInfo = $this -> getInfo($config);
+        if($shareQRCodeInfo['code_url']){
+            $shareQRCode = $shareQRCodeInfo['code_url'];
+        }
+        if(($shareQRCodeInfo && $shareQRCodeInfo['code_url']) || empty($shareQRCodeInfo)){
+            $mineTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
+            $a = $mineTools-> create_qrcode('QR_SCENE', $user['id']);
+            $shareQRCode = createLogoQRcode($a['url'],config('upload_dir.hss_user_QRCode'));
+            if($shareQRCodeInfo && $shareQRCodeInfo['code_url']){
+                $data = [
+                    'id' => $shareQRCodeInfo['id'],
+                    'code_url' => $shareQRCode,
+                ];
+            }
+            if(empty($shareQRCodeInfo)){
+                $data = [
+                    'code_url' => $shareQRCode,
+                ];
+            }
+
+            $this->edit($data);
+            echo $this->getLastSql();exit;
+        }
         if(empty($user['avatar'])){
             $user['avatar'] = request()->domain().'/static/common/img/default/chat_head.jpg';
         }else{
