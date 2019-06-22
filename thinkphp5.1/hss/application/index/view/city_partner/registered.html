@@ -69,10 +69,10 @@
 				<div class="apply-module">
 					<form class="applicant_form">
 						<div class="express-area">
-							<a href="javascript:void(0)" class="f24 form-group box-flex">
+							<a href="javascript:void(0)" class="f24 form-group box-flex select-value">
 								<label class="form-label">选择城市：</label>
 						<!--		<div class="area_address">省 &gt; 市 &gt; 区/县</div>-->
-								<input type="text" class="select-value form-control" value="{$info.province_name}-{$info.city_name}" >
+								<input type="text" class="form-control" value="{$info.province_name}-{$info.city_name}" >
 						<!--		<input type="hidden"  data-key="" name="province" value="" class="area-address-name" >
 								<input type="hidden"  data-key="" name="city" value="" class="area-address-name" >-->
 								<input type="hidden"  data-key="" name="province" value="">
@@ -199,9 +199,12 @@
 {block name="footer"}{/block}
 {block name="script"}
 <script type="text/javascript" >
-	//var info = "{$info}";
+	var info = "{$info}";
+	if(info){
+		info = JSON.parse('{$info|raw}');
+	}
 
-	var info = JSON.parse('{$info|raw}');
+	//var info = JSON.parse('{$info.apply_status|raw}');
 
 </script>
 <script type="text/javascript" src="api_common_js/swipe.js"></script>
