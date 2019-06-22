@@ -87,7 +87,10 @@ class CityPartner extends \common\controller\UserBase {
                 'join' => [
                     //['pay p','p.sn = cp.earnest_sn','left'],
                     ['city_area ca','cp.city_code = ca.city_code','left'],
-                ]
+                ],
+                'order' => [
+                    'update_time' => 'desc'
+                ],
             ];
             $info = $modelCityPartner -> getInfo($condition);
 
@@ -226,6 +229,8 @@ class CityPartner extends \common\controller\UserBase {
                 $postData['market_name'] = $info['market_name'];
                 $postData['create_time'] = time();
                 $postData['update_time'] = time();
+                //p($postData);
+                //exit;
                 //$postData['sn'] = 1115 . generateSN(14);
                 if(isset($postData['id'])){
                     $where = [
@@ -266,7 +271,8 @@ class CityPartner extends \common\controller\UserBase {
                         'status'=>0,
                     ];
                 }
-
+                p($info);
+                exit;
 /*                p($postData);
                 exit;*/
                 $id  = $modelCityPartner->edit($postData,$where);
