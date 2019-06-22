@@ -33,6 +33,7 @@ class HssBase extends \common\controller\UserBase{
             $weixinTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
             //获取微信auto2AccessToken和openid
             $accessTokenAndOpenid = $weixinTools -> getAccessTokenAndOpenid();
+            p($accessTokenAndOpenid);exit;
             $openid = $accessTokenAndOpenid['openid'];
             $accessToken = $accessTokenAndOpenid['access_token'];
             //获取微信用户表的信息
@@ -41,7 +42,7 @@ class HssBase extends \common\controller\UserBase{
                 'where' => [
                     ['openid','=',$openid]
                 ],'field'=>[
-                    'id','code_url','two_dimensional_code_url','user_id',
+                    'id','user_id',
                     'referee','headimgurl','subscribe','nickname'
                 ]
             ];
