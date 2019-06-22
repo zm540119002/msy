@@ -29,11 +29,12 @@
 			</style>
 			{/block}
 {block name="content"}
+<a href="javascript:;" class="trigger">触发</a>
 <div style="height:300px;">aaaaaaaaaaaaa</div>
 <div style="height:300px;">bbbbbbbbbbbbbb</div>
 <div style="height:300px;">ccccccccccccccccc</div>
-<div class="bg" style="display: block;"></div>
-<div id="testblock">
+<div class="bg" style="display: none;"></div>
+<div id="testblock" style="display: none;">
 	<div style="margin:0 0 10px 0;">
     	<input type="tel" name="" value="" style="padding:8px 0;">
 	</div>
@@ -45,4 +46,13 @@
 {block name="footer"}{/block}
 {block name="script"}
 <script type="text/javascript" src="vue_js/province_city.js"></script>
+<script>
+	$(function(){
+		$('.trigger').on('click',function(){
+			$('body').css({height:($(window).height())+'px',overflow:'hidden'});
+			$('#testblock').show();
+			$('.bg').show();
+		})
+	})
+</script>
 {/block}
