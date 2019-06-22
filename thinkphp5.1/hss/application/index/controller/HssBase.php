@@ -12,33 +12,18 @@ class HssBase extends \common\controller\UserBase{
         parent::__construct();
         //微信处理
         if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
-            /**
-             *   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '序号',
-            `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '平台user_id',
-            `referee` int(11) NOT NULL DEFAULT '0' COMMENT '推荐人',
-            `openid` varchar(30) NOT NULL DEFAULT '' COMMENT '微信id',
-            `nickname` varchar(20) NOT NULL DEFAULT '' COMMENT '昵称',
-            `remark` varchar(20) NOT NULL DEFAULT '' COMMENT '备注',
-            `sex` varchar(4) NOT NULL DEFAULT '' COMMENT '性别',
-            `country` varchar(10) NOT NULL DEFAULT '' COMMENT '国家',
-            `province` varchar(16) NOT NULL DEFAULT '' COMMENT '省份',
-            `city` varchar(16) NOT NULL DEFAULT '' COMMENT '城市',
-            `headimgurl` varchar(200) NOT NULL DEFAULT '' COMMENT '头像',
-            `heartbeat` varchar(15) NOT NULL DEFAULT '' COMMENT '最后心跳',
-            `subscribe` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0：没关注 1：关注',
-            `subscribe_scene` varchar(20) NOT NULL DEFAULT '' COMMENT '返回用户关注的渠道来源，ADD_SCENE_SEARCH 公众号搜索，ADD_SCENE_ACCOUNT_MIGRATION 公众号迁移，ADD_SCENE_PROFILE_CARD 名片分享，ADD_SCENE_QR_CODE 扫描二维码，ADD_SCENEPROFILE LINK 图文页内名称点击，ADD_SCENE_PROFILE_ITEM 图文页右上角菜单，ADD_SCENE_PAID 支付后关注，ADD_SCENE_OTHERS 其他',
-            `subscribe_time` varchar(20) NOT NULL DEFAULT '' COMMENT '关注时间',
-             */
-            $weixinTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
-            //获取微信auto2AccessToken和openid
-            $accessTokenAndOpenid = $weixinTools -> getAccessTokenAndOpenid();
-            $openid = $accessTokenAndOpenid['openid'];
-            $accessToken = $accessTokenAndOpenid['access_token'];
+
+            $weiXinUserInfo =  session('weiXinUserInfo');
+            if(!$weiXinUserInfo){
+                $mineTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
+                $weiXinUserInfo = $mineTools->getOauthUserInfo();
+                session('weiXinUserInfo',$weiXinUserInfo);
+            }
             //获取微信用户表的信息
             $model = new \app\index\model\WeixinUser();
             $config = [
                 'where' => [
-                    ['openid','=',$openid]
+                    ['openid','=',$weiXinUserInfo['openid']]
                 ],'field'=>[
                     'id','user_id',
                     'referee','headimgurl','subscribe','nickname'
