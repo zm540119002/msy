@@ -136,7 +136,7 @@ class Index extends \common\controller\Base{
                         ['cp.status', '=', 0],
                         ['cp.user_id','=',$user['id']]
                     ], 'field'=>[
-                        'cp.id','cp.province','cp.city','cp.company_name','cp.applicant',
+                        'cp.id','cp.province_code','cp.city_code','cp.company_name','cp.applicant',
                         'cp.mobile','cp.city_level','cp.earnest','cp.amount','cp.apply_status'
                     ]
                 ];
