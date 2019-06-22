@@ -232,8 +232,6 @@
                 }
                 //提交
                 $.post(module+"Mine/editAvatar",postData,function(data){
-                    console.log(123);
-                    return false;
                     if(data.status == 1){
                         uploadsSingleImgFlag = true;
                         $(obj).find('.img').val(data.avatar);
@@ -248,7 +246,6 @@
         //昵称修改
         var nick_content=$('.nick_content').html();
          $('body').on('click','.nick_btn',function () {
-             alert(123);
             var _this=$(this);
             layer.open({
                 title:['昵称','border-bottom:1px solid #d9d9d9;'],

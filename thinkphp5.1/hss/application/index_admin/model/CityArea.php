@@ -19,6 +19,29 @@ class CityArea extends \common\model\Base {
      * @return false || $res
      */
     public function getPartner($province,$city){
+
+
+
+/*        $config = [
+            'field' => [
+                'ca.id','ca.city_code','ca.province_name','ca.city_name','ca.city_status','ca.alone_amount','ca.alone_earnest','ca.level',
+                'ca.province_code parentId','ca.cpmi_id class',
+                'cpmi.amount','cpmi.earnest','cpmi.name market_name',
+                'cp.company_name','cp.applicant','cp.mobile','cp.user_id','cp.is_partner'
+            ],
+            'join' => [
+                ['city_partner_market_info cpmi','ca.cpmi_id = cpmi.id','left'],
+                ['city_partner cp','ca.id = cp.city_area_id','left'],
+            ],
+            'where' => [
+                ['ca.city_status','=',0],
+                ['ca.province_code','=',$province],
+                ['ca.city_code','=',$city],
+                //['cp.is_partner','=',0],
+            ],
+        ];
+        $res = $this->getInfo($config);*/
+
         $config = [
             'field' => [
                 'ca.id','ca.city_code','ca.province_name','ca.city_name','ca.city_status','ca.alone_amount','ca.alone_earnest','ca.level',

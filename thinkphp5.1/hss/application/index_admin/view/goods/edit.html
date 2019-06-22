@@ -305,6 +305,9 @@
             });
             //简介
             postData.parameters = ueParam.getContent();
+
+
+            postData.franchise_price = postData.franchise_price.replace(/^\s*|\s*$/g,"");
 //                console.log(postData.belong_to);
 //                console.log(sum(postData.belong_to));
 //                console.log(sum(postData.belong_to));return false;

@@ -29,6 +29,7 @@
 -moz-transform: translateX(-50%) translateY(-50%);
 -ms-transform: translateX(-50%) translateY(-50%);
 transform: translateX(-50%) translateY(-50%);*/
+background: #00ff00;
 width: 50%;
   margin: auto;
   position: absolute;
@@ -64,7 +65,7 @@ z-index:1000;
 <script>
 	$(function(){
 		$('.trigger').on('click',function(){
-			$('body').css({height:($(window).height())+'px',overflow:'hidden'});
+			// $('body').css({height:($(window).height())+'px',overflow:'hidden'});
 			$('#testblock').show();
 			$('.bg').show();
 		})

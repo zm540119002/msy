@@ -239,18 +239,19 @@
                     if(data.status == 1){
                         uploadsSingleImgFlag = true;
                         $(obj).find('.img').val(data.avatar);
-                        //dialog.success(data.info);
+                        dialog.success(data.info);
                         $('.user_info_list').find('.user_header').attr('src',uploads+data.avatar);
-                        // generatingTwoDimensionalCode();
+                        generatingTwoDimensionalCode();
                     }else{
                         dialog.error(data.info)
                     }
                 })
             }
         });
+        
         //昵称修改
         var nick_content=$('.nick_content').html();
-        $('body').on('change','.editAvatar',function () {
+         $('body').on('click','.nick_btn',function () {
             var _this=$(this);
             layer.open({
                 title:['昵称','border-bottom:1px solid #d9d9d9;'],
@@ -268,7 +269,7 @@
                   $('.userInfoLayer').find('.user_name').text(user_name);
                    var  postData = {
                        name:user_name
-                   };
+                   }
                     var old_name =   $('.userInfoLayer ').find('.old_name').val();
                     if(old_name !== user_name){
                         //提交
@@ -277,17 +278,17 @@
                                 dialog.success(data.info);
                                 $('.user_info_list').find('.user_name').text(data.name);
                                 $('.userInfoLayer ').find('.old_name').val(data.name);
-                                // generatingTwoDimensionalCode();
+                                generatingTwoDimensionalCode();
                             }else{
                                 dialog.error(data.info)
                             }
                         })
                     }
+
                   layer.close(index);
                 }
             });
         });
-
         function generatingTwoDimensionalCode() {
              $.ajax({
                  url: module+"TwoDimensionalCode/generatingTwoDimensionalCode",
@@ -305,6 +306,7 @@
              });
          }
     })
+
 </script>
 <style>
     /* .layui-m-layersection{
