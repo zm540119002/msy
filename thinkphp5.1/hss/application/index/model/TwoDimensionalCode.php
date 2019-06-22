@@ -70,7 +70,7 @@ class TwoDimensionalCode extends \common\model\Base {
         $config = [
             'where' => [
                 ['user_id','=',$user['id']]
-            ],'filed'=>[
+            ],'field'=>[
                 ['code_url','id']
             ]
         ];
