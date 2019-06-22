@@ -46,6 +46,7 @@ class HssBase extends \common\controller\UserBase{
                 ]
             ];
             $info = $model -> getInfo($config);
+            p($info);exit;
             //判断是否关注平台
             if(empty($info) || !$info['subscribe']){
                  //没有关注
