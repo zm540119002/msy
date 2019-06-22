@@ -232,13 +232,24 @@ $(function(){
 
     // 资格结算
     $('body').on('click','.settlement_btn',function () {
-        applicantData.step =  $('.apply-data-nav .switch-item.current').index()+1;
-        applicantData.pay_code = $('.pay_code').val();
+        var data=$('.applicant_form').serializeObject();
+        data.step =  $('.apply-data-nav .switch-item.current').index()+1;
+        data.pay_code = $('.pay_code').val();
         _this = $(this);
-        if(!applicantData.pay_code){
+        if(!data.pay_code){
             dialog.error('请选择结算方式');
         }else{
-            submitApplicant(_this,applicantData);
+
+            /*        applicantData.company_name=data.company_name;
+             applicantData.applicant=data.applicant;
+             applicantData.mobile=data.mobile;*/
+            //data.step = 3;
+
+            step1(data);
+
+            step2(data);
+
+            submitApplicant(_this,data);
         }
     });
 });
