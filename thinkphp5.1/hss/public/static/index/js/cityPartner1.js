@@ -49,9 +49,9 @@ $(function(){
             cityPartner = JSON.parse(cityPartner);
             $('input[name="province"]').val(cityPartner.province);
             $('input[name="city"]').val(cityPartner.city);
-            $('.select-value').val(cityPartner.area_address);
+            $('.select-value .select').val(cityPartner.area_address);
         }else{
-            $('.select-value').val('城市列表');
+            $('.select-value .select').val('城市列表');
         }
     }
 
