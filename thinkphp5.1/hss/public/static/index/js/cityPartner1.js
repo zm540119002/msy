@@ -45,11 +45,8 @@ $(function(){
                 $(".step").remove();
                 $(".express-area").removeClass('express-area');
                 $('.apply-items input,.applicant_form .select-value').addClass('nodisabled');
-
                 break;
         }
-
-
 
     }else{
         // 城市回显
@@ -62,6 +59,8 @@ $(function(){
         }else{
             $('.select-value').val('城市列表');
         }
+
+        $('.weui-flex li:eq(2),.weui-flex li:eq(3)').addClass('nodisabled');
     }
 
 
