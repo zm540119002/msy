@@ -50,6 +50,22 @@ class HssBase extends \common\controller\Base{
                 ]
             ];
             $info = $model -> getInfo($config);
+            /**
+             *  [openid] => oxFkSs_72n49f1my5YDDKpt4EMtA
+            [nickname] => 杨观保
+            [sex] => 1
+            [language] => zh_CN
+            [city] => 深圳
+            [province] => 广东
+            [country] => 中国
+            [headimgurl] => http://thirdwx.qlogo.cn/mmopen/vi_32/YsGBcc3ZDjXFOGGCG6KTSTxTJY39nNLbibPHW3iaex8U9WQatoTfz2bPUQOM9d7NCE265NmoZ1mCEarcn6uGb4Zw/132
+            [privilege] => Array
+            (
+            )
+
+            [unionid] => oHg2ht3eC4OgmdAHaUldzp7SsQUA
+            )
+             */
             //没有获取到微信的信息
             if(($info && !$info['headimgurl']) || empty($info)){
                 $municipalities = array("北京", "上海", "天津", "重庆", "香港", "澳门");
@@ -61,13 +77,7 @@ class HssBase extends \common\controller\Base{
                 $data['country'] = $weixinUserInfo['country'];
                 $data['province'] = $weixinUserInfo['province'];
                 $data['city'] = (in_array($weixinUserInfo['province'], $municipalities))?$weixinUserInfo['province'] : $info['city'];
-                $data['subscribe_scene'] = $weixinUserInfo['subscribe_scene'];
                 $data['headimgurl'] = $weixinUserInfo['headimgurl'];
-                $data['subscribe'] = $weixinUserInfo['subscribe'];
-                $data['subscribe_time'] = $weixinUserInfo['subscribe_time'];
-                $data['heartbeat'] = time();
-                $data['remark'] = $weixinUserInfo['remark'];
-                $data['referee'] = $weixinUserInfo['qr_scene']; //带参场景关注类型
                 if($info && !$info['headimgurl']){
                     $data['id'] = $info['id'];
                 }
