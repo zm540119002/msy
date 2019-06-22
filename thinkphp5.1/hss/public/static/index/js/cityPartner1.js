@@ -35,7 +35,7 @@ $(function(){
                 // 禁止修改记录
                 $(".step").remove();
                 $(".express-area").removeClass('express-area');
-                
+
 
                 break;
         }

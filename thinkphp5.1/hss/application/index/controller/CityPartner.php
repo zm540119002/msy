@@ -19,6 +19,7 @@ class CityPartner extends \common\controller\UserBase {
         } else {
             // 做到这里
             $sn = addslashes(trim(input('sn/s')));
+            $info = [];
             $modelCityPartner = new \app\index\model\CityPartner();
             if($sn){
                 $modelCityPartner = new \app\index\model\CityPartner();
@@ -41,7 +42,6 @@ class CityPartner extends \common\controller\UserBase {
                     ]
                 ];
                 $info = $modelCityPartner -> getInfo($condition);
-                $this->assign('info',$info);
                 //p($info);
                 //exit;
             //自己提交的申请
@@ -110,6 +110,7 @@ class CityPartner extends \common\controller\UserBase {
                     }
                 }
             }
+            $this->assign('info',$info);
             $this->assign('auth_city',$list);
             $this->assign('apply_count',$apply_count);
 
