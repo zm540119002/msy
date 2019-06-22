@@ -98,8 +98,7 @@ class WechatManage extends \common\controller\Base {
                 $data['country'] = $info['country'];
                 $data['province'] = $info['province'];
                 $data['city'] = (in_array($info['province'], $municipalities))?$info['province'] : $info['city'];
-                $data['scene'] = (isset($object->EventKey) && (stripos(strval($object->EventKey),"qrscene_")))?str_replace("qrscene_","",$object->EventKey):"0";
-
+                $data['subscribe_scene'] = $info['subscribe_scene'];
                 $data['headimgurl'] = $info['headimgurl'];
                 $data['subscribe'] = $info['subscribe'];
                 $data['subscribe_time'] = $info['subscribe_time'];
@@ -117,6 +116,13 @@ class WechatManage extends \common\controller\Base {
                 $weixinUserInfo = $userModel->getInfo($config);
                 if($weixinUserInfo && !$weixinUserInfo['subscribe']){
                     $data['id'] = $weixinUserInfo['id'];
+                }
+                //带参场景关注类型
+                if(strpos($object->EventKey,'qrscene') !==false){
+                    $data['referee'] =  substr($object->EventKey,8);
+                }
+                if($object->EventKey){
+                    echo substr($object->EventKey,8);
                 }
                 $userModel->edit($data);
                 $content = "欢迎关注，".$object->EventKey.json_encode($info);
