@@ -144,6 +144,7 @@ class TwoDimensionalCode extends \common\model\Base {
         imagedestroy($im);
         //unlink($shareQRCode);
         if($id){
+            echo 1;
             $data = [
                 'id' =>$id,
                 'two_dimensional_code_url' => $init['save_path'].$filename,
@@ -153,6 +154,7 @@ class TwoDimensionalCode extends \common\model\Base {
         }else{
             if(($shareQRCodeInfo && !$shareQRCodeInfo['two_dimensional_code_url']) || empty($shareQRCodeInfo)){
                 if($shareQRCodeInfo && !$shareQRCodeInfo['two_dimensional_code_url']){
+                    echo 2;
                     $data = [
                         'id' => $shareQRCodeInfo['id'],
                         'two_dimensional_code_url' => $init['save_path'].$filename,
@@ -161,6 +163,7 @@ class TwoDimensionalCode extends \common\model\Base {
                     ];
                 }
                 if(empty($shareQRCodeInfo)){
+                    echo 3;
                     $data = [
                         'two_dimensional_code_url' => $init['save_path'].$filename,
                         'user_id' => $user['id'],
