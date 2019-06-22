@@ -33,11 +33,12 @@ class HssBase extends \common\controller\Base{
             $weixinUserInfo =  session('weixinUserInfo');
             if(!$weixinUserInfo){
                 $weixnTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
-                $weiXinUserInfo = $weixnTools->getOauthUserInfo();
+                $weixinUserInfo = $weixnTools->getOauthUserInfo();
                 session('weixinUserInfo',$weixinUserInfo);
             }
-            $openid = $weixinUserInfo['openid'];
             print_r($weixinUserInfo);exit;
+            $openid = $weixinUserInfo['openid'];
+
             //保存获取微信用户表的信息
             $model = new \app\index\model\WeixinUser();
             $config = [
