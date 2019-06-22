@@ -84,7 +84,7 @@ class WechatManage extends \common\controller\Base {
         $weixin = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
         $openid = strval($object->FromUserName);
         $content = "";
-        file_put_contents('bbbb.txt',json_encode($object));
+
         switch ($object->Event)
         {
             case "subscribe":
@@ -126,7 +126,7 @@ class WechatManage extends \common\controller\Base {
 
                 break;
             case "unsubscribe":
-
+                file_put_contents('aaa.txt',json_encode($object));
                 $userModel = new \app\index\model\WeixinUser();
                 $data = [
                     'subscribe' => 0
@@ -135,6 +135,7 @@ class WechatManage extends \common\controller\Base {
                     'openid' => $openid
                 ];
                 $userModel -> allowField(true)->isUpdate(true)->save($data,$where);
+                file_put_contents('bbb.txt',$userModel->getLastSql());
 
                 // $User->where("`openid` = '".$openid."'")->delete();
                 // $data['heartbeat'] = 0;
