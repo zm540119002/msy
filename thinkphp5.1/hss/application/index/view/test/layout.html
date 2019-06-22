@@ -11,7 +11,10 @@
 {block name="footer"}{/block}
 {block name="script"}
 <script type="text/javascript">
-	console.log(~1);
+	var a = {n:1};
+	var b = a;
+	a.x = a = {n:2};
+	console.log(a.x);
 </script>
 <style>
 	.frame {
