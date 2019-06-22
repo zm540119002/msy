@@ -1,0 +1,1 @@
+UPDATE `weixin_user`  SET `subscribe` = 0  WHERE  `openid` = 'oxFkSs_72n49f1my5YDDKpt4EMtA'
