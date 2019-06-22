@@ -9,7 +9,7 @@ $(function(){
         $(this).addClass('current').siblings().removeClass('current');
         $('.apply-module').hide().eq($(this).index()).show();
     });
-    console.log(info);
+    console.log(info.apply_status));
 
     if(info){
 
