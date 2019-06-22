@@ -23,11 +23,11 @@ $(function(){
                 step_list.hide();
                 $('.weui-flex-item:eq(2)').addClass('current');
                 $('.apply-module:eq(2)').show();
-
                 break;
             case 3:
             case 4:
             case 5:
+                console.log(1111111);
                 step.removeClass('current');
                 step_list.hide();
                 $('.weui-flex-item:eq(3)').addClass('current');
