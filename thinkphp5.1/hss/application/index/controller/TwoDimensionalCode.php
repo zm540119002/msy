@@ -43,7 +43,7 @@ class TwoDimensionalCode extends \common\controller\UserBase {
      */
     public function generatingTwoDimensionalCode(){
         $model = new \app\index\model\TwoDimensionalCode();
-        $model->editTable($this->user);
+        $model->compose($this->user);
     }
 
     /**
