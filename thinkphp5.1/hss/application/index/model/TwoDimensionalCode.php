@@ -72,29 +72,27 @@ class TwoDimensionalCode extends \common\model\Base {
                 'id','code_url','two_dimensional_code_url'
             ]
         ];
-        $shareQRCodeInfo = $this -> getInfo($config);
-        if($shareQRCodeInfo['code_url']){
-            $shareQRCode = $shareQRCodeInfo['code_url'];
+        $info = $this -> getInfo($config);
+        if($info['code_url']){
+            $shareQRCode = $info['code_url'];
         }
-        if(($shareQRCodeInfo && !$shareQRCodeInfo['code_url']) || empty($shareQRCodeInfo)){
-           // $mineTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
-            //$a = $mineTools-> create_qrcode('QR_SCENE', $user['id']);
-           // $shareQRCode = createLogoQRcode($a['url'],config('upload_dir.hss_user_QRCode'));
-           $shareQRCode = 'hss_user_QRCode/2019062215251176030nologo.png';
-            if($shareQRCodeInfo && $shareQRCodeInfo['code_url']){
+        if(($info && !$info['code_url']) || empty($info)){
+            $weixinTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
+            $codeUrl = $weixinTools-> create_qrcode('QR_SCENE', $user['id']);
+            $shareQRCode = createLogoQRcode($codeUrl['url'],config('upload_dir.hss_user_QRCode'));
+            if($info && $info['code_url']){
                 $data = [
-                    'id' => $shareQRCodeInfo['id'],
+                    'id' => $info['id'],
                     'code_url' => $shareQRCode,
                     'user_id' => $user['id'],
                 ];
             }
-            if(empty($shareQRCodeInfo)){
+            if(empty($info)){
                 $data = [
                     'user_id' => $user['id'],
                     'code_url' => $shareQRCode,
                 ];
             }
-
             $id = $this->edit($data);
             if(!$id){
                 return errorMsg('失败');
@@ -143,7 +141,6 @@ class TwoDimensionalCode extends \common\model\Base {
             return errorMsg('合成图片失败');
         }
         imagedestroy($im);
-        //unlink($shareQRCode);
         if($id){
             $data = [
                 'id' =>$id,
@@ -153,12 +150,12 @@ class TwoDimensionalCode extends \common\model\Base {
             ];
         }else{
             $data = [
-                'id' => $shareQRCodeInfo['id'],
+                'id' => $info['id'],
                 'two_dimensional_code_url' => $init['save_path'].$filename,
                 'user_id' => $user['id'],
                 'create_time' => time(),
             ];
-
+            unlink( request()->domain().'/uploads/'.$info['two_dimensional_code_url']);
         }
         $id = $this->edit($data);
         if(!$id){
