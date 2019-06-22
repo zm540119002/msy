@@ -332,7 +332,7 @@ function submitApplicant(_this,postData){
 
 function step1(data) {
     var content;
-    if(!data.province || !data.city){
+    if(!data.province_code || !data.city_code){
         content='请先选择城市';
     }
     if(content){
