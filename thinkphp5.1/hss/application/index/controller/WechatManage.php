@@ -84,7 +84,7 @@ class WechatManage extends \common\controller\Base {
         $weixin = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
         $openid = strval($object->FromUserName);
         $content = "";
-        file_put_contents('weixin.txt',json_encode($object,JSON_FORCE_OBJECT));
+        file_put_contents('weixin.txt',json_encode($object));
         switch ($object->Event)
         {
             case "subscribe":
