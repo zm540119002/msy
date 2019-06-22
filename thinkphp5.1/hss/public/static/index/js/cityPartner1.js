@@ -308,6 +308,7 @@ function submitApplicant(_this,postData){
                     $('.earnest').find('price').html(data.data.earnest);*/
 
                     //location.href = data.data.url;
+                    localStorage.removeItem("cityPartner");
                     location.reload();
 
 

@@ -236,13 +236,17 @@ class CityPartner extends \common\controller\UserBase {
                 //p($postData);
                 //exit;
                 //$postData['sn'] = 1115 . generateSN(14);
-                if(isset($postData['id'])){
+                if($postData['id']>0){
                     $where = [
                         'id'=>$postData['id'],
                         'user_id'=>$this->user['id'],
                         'status'=>0,
                     ];
                 }
+                //unset();
+                //p($where);
+                //p($postData);
+                //exit;
                 $res = $modelCityPartner->edit($postData,$where);
 
                 if(!$res){
@@ -270,7 +274,7 @@ class CityPartner extends \common\controller\UserBase {
                 //$postData['apply_status']= 3;
                 //$postData['sn'] = 1115 . generateSN(14);
                 //$postData['create_time'] = time();
-                if(isset($postData['id'])){
+                if($postData['id']>0){
                     $where = [
                         'id'=>$postData['id'],
                         'user_id'=>$this->user['id'],
