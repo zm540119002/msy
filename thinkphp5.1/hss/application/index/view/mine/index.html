@@ -241,7 +241,7 @@
                         $(obj).find('.img').val(data.avatar);
                         //dialog.success(data.info);
                         $('.user_info_list').find('.user_header').attr('src',uploads+data.avatar);
-                        generatingTwoDimensionalCode();
+                        // generatingTwoDimensionalCode();
                     }else{
                         dialog.error(data.info)
                     }
@@ -277,7 +277,7 @@
                                 dialog.success(data.info);
                                 $('.user_info_list').find('.user_name').text(data.name);
                                 $('.userInfoLayer ').find('.old_name').val(data.name);
-                                generatingTwoDimensionalCode();
+                                // generatingTwoDimensionalCode();
                             }else{
                                 dialog.error(data.info)
                             }
