@@ -38,7 +38,6 @@ class WechatManage extends \common\controller\Base {
     {
         $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
         if (!empty($postStr)){
-            $this->logger("R".$postStr);
             $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
             $RX_TYPE = trim($postObj->MsgType);
             //消息类型分离
@@ -69,7 +68,6 @@ class WechatManage extends \common\controller\Base {
                     $result = "unknown msg type: ".$RX_TYPE;
                     break;
             }
-            $this->logger("T ".$result);
             echo $result;
         }else {
             echo "";
@@ -122,7 +120,8 @@ class WechatManage extends \common\controller\Base {
                     echo substr($object->EventKey,8);
                 }
                 $userModel->edit($data);
-                $content = "欢迎关注，".$object->EventKey.json_encode($info);
+                //$content = "欢迎关注，".$object->EventKey.json_encode($info);
+                $content = "欢迎关注黑森森公众号，请点击底部菜单访问网站\n";
 
                 break;
             case "unsubscribe":
