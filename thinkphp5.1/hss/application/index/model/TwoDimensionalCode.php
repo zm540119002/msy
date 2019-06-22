@@ -143,11 +143,8 @@ class TwoDimensionalCode extends \common\model\Base {
             return errorMsg('合成图片失败');
         }
         imagedestroy($im);
-        echo 3333;
-
         //unlink($shareQRCode);
         if($id){
-            echo 1;
             $data = [
                 'id' =>$id,
                 'two_dimensional_code_url' => $init['save_path'].$filename,
