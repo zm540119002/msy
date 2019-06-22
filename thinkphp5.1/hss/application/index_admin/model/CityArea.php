@@ -38,7 +38,8 @@ class CityArea extends \common\model\Base {
             ],
         ];
         $res = $this->getInfo($config);
-
+        p($res);
+        exit;
         if( !$res || $res['is_partner']){
             return false;
         }else{

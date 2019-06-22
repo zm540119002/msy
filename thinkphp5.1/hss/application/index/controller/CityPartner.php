@@ -19,32 +19,7 @@ class CityPartner extends \common\controller\UserBase {
         } else {
             // 做到这里
             $sn = addslashes(trim(input('sn/s')));
-            $info = [];
-            $modelCityPartner = new \app\index\model\CityPartner();
             if($sn){
-
-                $modelCityPartner = new \app\index\model\CityPartner();
-                $condition=[
-                    'where'=>[
-                        ['cp.status', '=', 0],
-                        ['cp.user_id','=',$this->user['id']],
-                        ['cp.apply_status','>',0],
-                        ['cp.is_partner','=',0],
-                        //['cp.sn','=',$sn],
-                    ], 'field'=>[
-                        'cp.id','cp.company_name','cp.applicant','cp.market_name','cp.mobile','cp.city_level',
-                        'cp.earnest','cp.amount','cp.apply_status','cp.update_time','cp.city_level',
-                        'ca.province_name','ca.city_name'
-                        //,'p.sn pay_sn','p.id as pay_id'
-                    ]
-                    ,'join' => [
-                        //['pay p','p.sn = cp.earnest_sn','left'],
-                        ['city_area ca','cp.city_code = ca.city_code','left'],
-                    ]
-                ];
-                $info = $modelCityPartner -> getInfo($condition);
-/*                p($info);
-                exit;*/
 
                 $where = [
                     ['cp.status', '=', 0],
@@ -103,7 +78,7 @@ class CityPartner extends \common\controller\UserBase {
             $modelCityPartner = new \app\index\model\CityPartner();
             $condition=[
                  'field'=>[
-                    'cp.id','cp.company_name','cp.applicant','cp.market_name','cp.mobile','cp.city_level',
+                    'cp.id','cp.province_code','cp.city_code','cp.company_name','cp.applicant','cp.market_name','cp.mobile','cp.city_level',
                     'cp.earnest','cp.amount','cp.apply_status','cp.update_time','cp.city_level',
                     'ca.province_name','ca.city_name'
                     //,'p.sn pay_sn','p.id as pay_id'
@@ -174,8 +149,7 @@ class CityPartner extends \common\controller\UserBase {
         if(!$postData){
             $this->errorMsg('失败');
         }
-/*        p($postData);
-        exit;*/
+
         $validate = new \app\index\validate\CityPartner();
         $postData['apply_status'] = $postData['step'];
         $validateName = 'step'.$postData['apply_status'];
@@ -259,11 +233,8 @@ class CityPartner extends \common\controller\UserBase {
                 $postData['market_name'] = $info['market_name'];
                 $postData['create_time'] = time();
                 $postData['update_time'] = time();
-                $postData['sn'] = 1115 . generateSN(14);
-                //p($postData);
-                //exit;
-                //p($postData);
-                //exit;
+                //$postData['sn'] = 1115 . generateSN(14);
+
                 $res = $modelCityPartner->edit($postData);
 
                 if(!$res){
