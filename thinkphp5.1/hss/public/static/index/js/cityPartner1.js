@@ -12,17 +12,10 @@ $(function(){
     //console.log(info.apply_status);
 
     if(info){
-        //info = JSON.parse('{info|raw}');
         // 步骤
 
         var step = $('.weui-flex-item');
         var step_list = $('.apply-module');
-
-/*        if(){
-
-        }else{
-
-        }*/
 
         switch(parseInt(info.apply_status)){
             case 2:
@@ -135,17 +128,7 @@ $(function(){
 
         var data=$('.applicant_form').serializeObject();
         step1(data);
-
-        /*        applicantData.company_name=data.company_name;
-         applicantData.applicant=data.applicant;
-         applicantData.mobile=data.mobile;*/
         data.step = 1;
-/*        console.log(data);
-        return false;*/
-
-/*        applicantData.province = province;
-        applicantData.city = city;
-        applicantData.step = 1;*/
 
         layer.open({
             content:'所查询的城市可以申请城市合伙人<br/>声明：同一城市可能存在多位申请人,同等条件下按先申请先审核签约原则。',
@@ -202,15 +185,8 @@ $(function(){
     $('body').on('click','.one-step',function(){
         var _this = $(this);
         var data=$('.applicant_form').serializeObject();
-/*        applicantData.company_name=data.company_name;
-        applicantData.applicant=data.applicant;
-        applicantData.mobile=data.mobile;*/
         data.step = 2;
-/*        console.log(data);
-        return false;*/
-
         step1(data);
-
         step2(data);
 
         submitApplicant(_this,data);

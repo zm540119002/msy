@@ -325,34 +325,4 @@ class CityPartner extends \common\controller\UserBase {
         //$this->successMsg('成功',['url'=>config('custom.pay_gateway').$paySn,'id'=>$id]);
     }
 
-    /**
-     * 城市查询
-     */
-/*    public function searchCity(){
-
-        if(!request()->isAjax()){
-            $this->errorMsg('请求方式错误');
-        }
-
-        $postData = input('post.');
-
-        if(!$postData){
-            $this->errorMsg('城市不能为空');
-        }
-        p($postData);
-        // 做到这里
-        $postData['apply_status'] = $postData['step'];
-        $validateName = 'step'.$postData['apply_status'];
-        $validate = new \app\index\validate\CityPartner();
-        if(!$validate->scene($validateName)->check($postData)) {
-            $this->errorMsg($validate->getError());
-        }
-
-
-        $this->successMsg('成功');
-        $this->errorMsg('失败');
-        p($postData);
-        exit;
-    }*/
-
 }
