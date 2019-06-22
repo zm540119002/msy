@@ -9,7 +9,6 @@ $(function(){
         $(this).addClass('current').siblings().removeClass('current');
         $('.apply-module').hide().eq($(this).index()).show();
     });
-    //console.log(info.apply_status);
 
     if(info){
         // 步骤
@@ -36,8 +35,10 @@ $(function(){
 
                 // 禁止修改记录
                 $(".step").remove();
+                $(".apply-module:eq(2) .group_cart_nav").remove();
                 $(".express-area").removeClass('express-area');
                 $('.apply-items input,.applicant_form .select-value').addClass('nodisabled');
+
                 break;
         }
 
