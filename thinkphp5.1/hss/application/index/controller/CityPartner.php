@@ -276,7 +276,7 @@ class CityPartner extends \common\controller\UserBase {
                     'type' => config('custom.pay_type')['cityPartnerSeatPay']['code'],
                     'create_time' => time(),
                 ];
-           
+
                 if(isset($postData['pay_id']) && $postData['pay_id']){
                     $where1 = [
                         'id'=>$postData['pay_id'],
