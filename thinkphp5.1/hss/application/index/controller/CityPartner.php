@@ -43,9 +43,9 @@ class CityPartner extends \common\controller\UserBase {
                     ]
                 ];
                 $info = $modelCityPartner -> getInfo($condition);
-  
-                //p($info);
-                //exit;
+
+                p($info);
+                exit;
             //自己提交的申请
 /*            $modelCityPartner = new \app\index\model\CityPartner();
             $condition=[

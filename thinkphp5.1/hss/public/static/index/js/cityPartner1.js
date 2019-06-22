@@ -32,6 +32,7 @@ $(function(){
                 step_list.hide();
                 $('.weui-flex-item:eq(3)').addClass('current');
                 $('.apply-module:eq(3)').show();
+
                 // 禁止修改记录
                 $(".step").remove();
                 $(".express-area").removeClass('express-area');
