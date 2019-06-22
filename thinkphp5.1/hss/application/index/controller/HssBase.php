@@ -36,7 +36,7 @@ class HssBase extends \common\controller\UserBase{
             $openid = $accessTokenAndOpenid['openid'];
             $accessToken = $accessTokenAndOpenid['access_token'];
             //获取微信用户表的信息
-            $model = new \app\index\model\TwoDimensionalCode();
+            $model = new \app\index\model\WeixinUser();
             $config = [
                 'where' => [
                     ['openid','=',$openid]
