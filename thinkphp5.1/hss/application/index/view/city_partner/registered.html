@@ -69,10 +69,10 @@
 				<div class="apply-module">
 					<form class="applicant_form">
 						<div class="express-area">
-							<a href="javascript:void(0)" class="f24 form-group box-flex select-value">
+							<a href="javascript:void(0)" class="f24 form-group box-flex">
 								<label class="form-label">选择城市：</label>
 						<!--		<div class="area_address">省 &gt; 市 &gt; 区/县</div>-->
-								<input type="text" class="select form-control" value="{$info.province_name}-{$info.city_name}" >
+								<input type="text" class="select-value form-control" value="{$info.province_name}-{$info.city_name}" >
 						<!--		<input type="hidden"  data-key="" name="province" value="" class="area-address-name" >
 								<input type="hidden"  data-key="" name="city" value="" class="area-address-name" >-->
 								<input type="hidden"  data-key="" name="province" value="">
@@ -238,6 +238,7 @@
 				//$('.select-value').data('class1');
 				$('input[name="province"]').val(area[0]);
 				$('input[name="city"]').val(area[1]);
+				//console.log(json);
 
 				// 记录选中的城市
 				//var storage=window.localStorage;
