@@ -88,12 +88,12 @@ class WechatManage extends \common\controller\Base {
         switch ($object->Event)
         {
             case "subscribe":
-                $info = $weixin->get_user_info($openid);
-                file_put_contents('weixin.txt',json_encode($info));
+                $info = $weixin->getUserInfo();
+                p($info);
                 $municipalities = array("北京", "上海", "天津", "重庆", "香港", "澳门");
                 $sexes = array("", "男", "女");
                 $data = array();
-                $data['openid'] = $openid;
+                $data['openid'] = $info['openid'];
                 $data['nickname'] = str_replace("'", "", $info['nickname']);
                 $data['sex'] = $sexes[$info['sex']];
                 $data['country'] = $info['country'];
@@ -102,10 +102,27 @@ class WechatManage extends \common\controller\Base {
                 $data['scene'] = (isset($object->EventKey) && (stripos(strval($object->EventKey),"qrscene_")))?str_replace("qrscene_","",$object->EventKey):"0";
 
                 $data['headimgurl'] = $info['headimgurl'];
-                $data['subscribe'] = $info['subscribe_time'];
+                $data['subscribe'] = $info['subscribe'];
+                $data['subscribe_time'] = $info['subscribe_time'];
                 $data['heartbeat'] = time();
                 $data['remark'] = $info['remark'];
-                $data['tagid'] = $info['tagid_list'];
+
+                $userModel = new \app\index\model\WeixinUser();
+                $config = [
+                    'where'=>[
+                        ['openid','=',$info['openid']]
+                    ],'field'=>[
+                        'id','subscribe'
+                    ]
+                ];
+                $weixinUserInfo = $userModel->getInfo($config);
+                if($weixinUserInfo && !$weixinUserInfo['subscribe']){
+                    $data['id'] = $weixinUserInfo['id'];
+                }
+                $userModel->edit($data);
+
+
+
                 $content = "欢迎关注，".$object->EventKey;
 //                $userModel = new \app\index\model\WeixinUser();
 //                $userModel->save($data);
