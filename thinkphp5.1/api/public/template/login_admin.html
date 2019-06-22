@@ -19,6 +19,7 @@
     <script type="text/javascript" src="hui_lib/DD_belatedPNG_0.0.8a-min.js" ></script>
     <script>DD_belatedPNG.fix('*');</script>
     <![endif]-->
+    <script type="text/javascript" src="api_common_js/jquery/jquery-1.9.1.min.js"></script>
     <title>维雅后台登录</title>
 </head><body>
 <input type="hidden" id="TenantId" name="TenantId" value="" />
@@ -29,7 +30,15 @@
 <div class="loginWraper">
     <div class="loginBox">
         <h2 class="welcome">欢迎登录</h2>
-        {include file="../../api/public/template/login_dialog.html" /}
+        <script type="text/javascript">
+            var login_success_callback_private = function(){
+                location.reload();
+            };
+            var register_success_callback_private = function(){
+                location.reload();
+            };
+        </script>
+        {include file="../../api/public/vue/components/login.html" /}
     </div>
 </div>
 <footer class="f24 bottom_footer">
@@ -38,16 +47,19 @@
         <span class="icp_icon">粤ICP备18130945号-1</span>
     </a>
 </footer>
-<script type="text/javascript" src="hui_lib/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="hui_lib/layer/2.4/layer.js"></script>
 <script type="text/javascript" src="hui_js/H-ui.js"></script>
 <script type="text/javascript" src="hui_admin_js/H-ui.admin.js"></script>
 <script type="text/javascript" src="hui_lib/jquery.contextmenu/jquery.contextmenu.r2.js"></script>
 <!--自定义js-->
-<script type="text/javascript" src="api_common_js/login.js"></script>
 <script type="text/javascript" src="api_common_js/public.js"></script>
 <script type="text/javascript" src="api_common_js/common.js"></script>
-<script type="text/javascript" src="api_common_js/dialog_admin.js"></script>
+<script type="text/javascript" src="api_common_js/admin/dialog.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+<!-- 用于vue组件通信 -->
+<script type="text/javascript">
+    var bus = new Vue();
+</script>
 <script type="text/javascript">
     var domain = '{:request()->domain()}/';
     var uploads = domain + 'uploads/';
@@ -55,11 +67,7 @@
     var controller = module + '{:request()->controller()}/';
     var action = controller + '{:request()->action()}';
     $(function(){
-        loginDialog();
-        //登录-弹窗事件
-        $('body').on('click','.login',function(){
-            loginDialog();
-        });
+        loginDialogTrigger();
     });
 </script>
 </body></html>

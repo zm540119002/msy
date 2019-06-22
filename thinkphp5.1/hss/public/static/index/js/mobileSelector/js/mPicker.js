@@ -76,6 +76,7 @@ $(function () {
         jsonName:'name',
         jsonChild:'child',
         jsonValue:'value',
+        param:[],
         header: '<div class="mPicker-header"></div>',
         footer: '<div class="mPicker-footer"><a href="javascript:;" class="mPicker-confirm">确定</a><a href="javascript:;" class="mPicker-cancel">取消</a></div>',
         confirm: function () { },
@@ -184,6 +185,7 @@ $(function () {
                 }
             }
             listStr = concatHtmlList.call(_this, jsonData);
+
             mainStr = '<div class="mPicker-main ' + _this.disy + '" data-pickerId="' + _this.pickerId + '">' + _this.options.header + '<div class="mPicker-content">' + listStr + '</div><div class="mPicker-shadow"></div>' + _this.options.footer + '</div>';
             _this.mpicker.append(mainStr);
             /**
@@ -263,8 +265,8 @@ $(function () {
             var _this = this;
             
             _this.mask.addClass('hide');
-            console.info(22, _this.mask.hasClass('hide'))
-            console.info(22, _this.mask)
+            //console.info(22, _this.mask.hasClass('hide'))
+            //console.info(22, _this.mask)
             if (_this.options.display === 'bottom') {
                 _this.mpicker.find('.mPicker-main').addClass('down').transitionEnd(function () {
                     _this.mpicker.addClass('hide');
@@ -304,7 +306,7 @@ $(function () {
             // _this.mpicker.find('.mPicker-main').remove();
         },
         confirm: function () {
-            console.info('confirm')
+            //console.info('confirm')
             var _this = this;
             var str = '';
             var $list = _this.mpicker.find('.mPicker-main').find('.mPicker-list');
@@ -317,15 +319,24 @@ $(function () {
                     index = index + 1;
                     _this.container.data('value' + index, $active.data('value'));
                     _this.container.data('id' + index, $active.data('id'));
+
+                    // 增加业务需要的属性 start
+                    for(i=0;i<_this.options.param.length;i++){
+
+                        _this.container.data(_this.options.param[i] + index, $active.data(_this.options.param[i]));
+                    }
+                    // END
+
                     str += splitStr + $active.text();
                 }
             });
+
             _this.container.val(str);
             _this.hidePicker(_this.options.confirm);
 
         },
         cancel: function () {
-            console.info('cancel')
+            //console.info('cancel')
             var _this = this;
             _this.hidePicker(_this.options.cancel);
         },
@@ -632,7 +643,26 @@ $(function () {
         $.each(data, function (index, val) {
             var name = val[_this.options.jsonName];
             var value = val[_this.options.jsonValue] || name;
-            str += '<li data-value="' + value + '" data-id="' + index + '">' + name + '</li>';
+            //str += '<li data-value="' + value + '" data-id="' + index + '">' + name + '</li>';
+
+            // 增加业务需要的属性 start
+
+            // 增加业务需要的属性 start
+            var str1 = '';
+            for(i=0;i<_this.options.param.length;i++){
+                str1 += ' data-'+_this.options.param[i]+'="' + val[_this.options.param[i]] + '"';
+            }
+
+            //var str1 = ' data-level="' + val['level'] + '" data-class="' + val['class'] + '"';
+            //str1 += ' data-amount="' + val['amount'] + '" data-earnest="' + val['earnest'] + '"';
+
+            if(val['have']){
+                //str1 += ' data-have="' + val['have'] + '"';
+                str1 += ' style="color:red"';
+            }
+            // END
+
+            str += '<li data-value="' + value + '" data-id="' + index + '"'+str1+'>' + name + '</li>';
         });
         return str;
     }
@@ -643,6 +673,7 @@ $(function () {
         var html = '';
         for (var i = 0; i < data.length; i++) {
             var itemStr = concatHtmlItem.call(this, data[i]);
+
             html += '<div class="mPicker-list"><ul>' + itemStr + '</ul></div>';
         }
         return html;
