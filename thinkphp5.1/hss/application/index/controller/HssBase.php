@@ -55,6 +55,7 @@ class HssBase extends \common\controller\Base{
             $user = checkLogin();
             //修改用户表
             if((!$user['name'] || !$user['avatar']) && $user && isset($weiXinUserInfo['openid'])){
+                echo 123;
                 //临时相对路径
                 $relativeSavePath = config('upload_dir.user_avatar');
                 $weixinAvatarUrl = $weixinUserInfo['headimgurl'];
@@ -76,6 +77,7 @@ class HssBase extends \common\controller\Base{
                 }
                 $userModel = new \common\model\User();
                 $result = $userModel->isUpdate(true)->save($data);
+                echo $userModel->getLastSql();
                 if(false===$result){
 
                 }else{
