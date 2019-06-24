@@ -79,6 +79,7 @@ class TwoDimensionalCode extends \common\model\Base {
         if(($info && !$info['code_url']) || empty($info)){
             $weixinTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
             $codeUrl = $weixinTools-> create_qrcode('QR_SCENE', $user['id']);
+            print_r($codeUrl);exit;
             $shareQRCode = createLogoQRcode($codeUrl['url'],config('upload_dir.hss_user_QRCode'));
             if($info && !$info['code_url']){
                 $data = [
