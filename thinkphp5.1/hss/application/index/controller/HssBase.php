@@ -48,26 +48,6 @@ class HssBase extends \common\controller\Base{
                 }
 
                 $user = checkLogin();
-                print_r($user);
-                if($user && !$user['openid']){
-                    echo 123;
-                    $model = new \app\index\model\WeixinUser();
-                    $where = [
-                        ['openid','=',$openid]
-                    ];
-                    $data = [
-                        'user_id'=>$user['id']
-                    ];
-                    $result = $model->isUpdate(true)->save($data,$where);
-                    echo $model->getLastSql();
-                    if(false===$result){
-
-                    }else{
-                        $user['openid'] = $openid;
-                        setSession($user);
-                    }
-                }
-
                 //修改用户表
                 if((!$user['name'] || !$user['avatar']) && $user && isset($weiXinUserInfo['openid'])){
                     //临时相对路径
@@ -94,6 +74,27 @@ class HssBase extends \common\controller\Base{
                     setSession($user);
                 }
             }
+
+            $user = checkLogin();
+            if($user && !$user['openid']){
+                echo 123;
+                $model = new \app\index\model\WeixinUser();
+                $where = [
+                    ['openid','=',$openid]
+                ];
+                $data = [
+                    'user_id'=>$user['id']
+                ];
+                $result = $model->isUpdate(true)->save($data,$where);
+                echo $model->getLastSql();
+                if(false===$result){
+
+                }else{
+                    $user['openid'] = $openid;
+                    setSession($user);
+                }
+            }
+
             //判断是否关注平台
             if(empty($info) || !$info['subscribe']){
                  //没有关注
