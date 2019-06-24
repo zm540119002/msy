@@ -47,14 +47,10 @@ class HssBase extends \common\controller\Base{
                 if(!$id){
                     return errorMsg('失败');
                 }
-
-
-
-
             }
             $user = checkLogin();
             //修改用户表
-            if((!$user['name'] || !$user['avatar']) && $user && isset($weiXinUserInfo['openid'])){
+            if((!$user['name'] || !$user['avatar']) && $user && isset($weixinUserInfo['openid'])){
                 echo 123;
                 //临时相对路径
                 $relativeSavePath = config('upload_dir.user_avatar');
