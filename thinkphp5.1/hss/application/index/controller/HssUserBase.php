@@ -13,7 +13,7 @@ class HssUserBase extends \common\controller\UserBase {
             $openid = $weixinUserInfo['openid'];
             print_r($weixinUserInfo);
             if(!$this->user['openid']){
-                echo 11;exit;
+                echo 11;
                 $model = new \app\index\model\WeixinUser();
                 $where = [
                    ['openid','=',$openid]
