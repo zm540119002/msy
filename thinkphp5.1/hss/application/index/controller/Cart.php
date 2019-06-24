@@ -1,7 +1,7 @@
 <?php
 namespace app\index\controller;
 
-class Cart extends \common\controller\UserBase {
+class Cart extends HssUserBase {
     /**
      * 加入购物车
      * @throws \think\exception\PDOException
