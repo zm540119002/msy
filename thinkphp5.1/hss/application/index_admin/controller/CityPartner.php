@@ -85,12 +85,9 @@ class CityPartner extends Base {
         // 条件
         $keyword = input('get.keyword/s');
         if($keyword) $condition['where'][] = ['ca.city_name','like', '%' . trim($keyword) . '%'];
-        //p($condition);
-        //exit;
+
         $list = $modelCityArea->pageQuery($condition);
-        //p($modelCityArea->getLastSql());
-        //p($list);
-        //exit;
+
         $this->assign('list',$list);
 
         return view('list_tpl');

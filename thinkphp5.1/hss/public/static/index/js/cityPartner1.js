@@ -271,7 +271,8 @@ function submitApplicant(_this,postData){
                     $('.apply-module:eq(1)').show();
 
                      $('.city_name').html(data.data.city_name);
-                     $('.market_name').html(data.data.market_name+'类市场城市合伙人');
+                     $('.city_level').html(data.data.level);
+                     $('.market_name').html(data.data.market_name);
                      $('.amount').find('price').html(data.data.amount);
                      $('.earnest').find('price').html(data.data.earnest);
 
