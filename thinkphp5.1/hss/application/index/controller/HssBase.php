@@ -27,6 +27,7 @@ class HssBase extends \common\controller\Base{
                 ]
             ];
             $info = $model -> getInfo($config);
+
             //没有获取到微信的信息
             if(($info && !$info['headimgurl']) || empty($info)){
                 $municipalities = array("北京", "上海", "天津", "重庆", "香港", "澳门");
@@ -37,7 +38,7 @@ class HssBase extends \common\controller\Base{
                 $data['sex'] = $sexes[$weixinUserInfo['sex']];
                 $data['country'] = $weixinUserInfo['country'];
                 $data['province'] = $weixinUserInfo['province'];
-                $data['city'] = (in_array($weixinUserInfo['province'], $municipalities))?$weixinUserInfo['province'] : $info['city'];
+                $data['city'] = (in_array($weixinUserInfo['province'], $municipalities))?$weixinUserInfo['province'] : $weixinUserInfo['city'];
                 $data['headimgurl'] = $weixinUserInfo['headimgurl'];
                 if($info && !$info['headimgurl']){
                     $data['id'] = $info['id'];
@@ -46,34 +47,55 @@ class HssBase extends \common\controller\Base{
                 if(!$id){
                     return errorMsg('失败');
                 }
+            }
+            $user = checkLogin();
+            //修改用户表
+            if((!$user['name'] || !$user['avatar']) && $user && isset($weixinUserInfo['openid'])){
+                //临时相对路径
+                $relativeSavePath = config('upload_dir.user_avatar');
+                $weixinAvatarUrl = $weixinUserInfo['headimgurl'];
+                $avatar = saveImageFromHttp($weixinAvatarUrl,$relativeSavePath);
+                $data = [
+                    'id'=>$user['id'],
+                    'name'=>$weixinUserInfo['nickname'],
+                    'avatar'=>$avatar,
+                ];
+                if($user['avatar']){
+                    unset($data['avatar']);
+                }else{
+                    $user['avatar'] = $data['avatar'];
+                }
+                if($user['name']){
+                    unset($data['name']);
+                }else{
+                    $user['name'] = $data['name'];
+                }
+                $userModel = new \common\model\User();
+                $result = $userModel->isUpdate(true)->save($data);
+                if(false===$result){
 
-                //修改用户表
-                $user = checkLogin();
-                if((!$user['name'] || !$user['avatar']) && $user && isset($weiXinUserInfo['openid'])){
-                    //临时相对路径
-                    $relativeSavePath = config('upload_dir.user_avatar');
-                    $weixinAvatarUrl = $weixinUserInfo['headimgurl'];
-                    $avatar = saveImageFromHttp($weixinAvatarUrl,$relativeSavePath);
-                    $data = [
-                        'id'=>$user['id'],
-                        'name'=>$weixinUserInfo['nickname'],
-                        'avatar'=>$avatar,
-                    ];
-                    if($user['avatar']){
-                        unset($data['avatar']);
-                    }else{
-                        $user['avatar'] = $data['avatar'];
-                    }
-                    if($user['name']){
-                        unset($data['name']);
-                    }else{
-                        $user['name'] = $data['name'];
-                    }
-                    $userModel = new \common\model\User();
-                    $result = $userModel->isUpdate(true)->save($data);
+                }else{
                     setSession($user);
                 }
             }
+            //openid 关联 平台user_id
+            if($user && !$user['openid']){
+                $model = new \app\index\model\WeixinUser();
+                $where = [
+                    ['openid','=',$openid]
+                ];
+                $data = [
+                    'user_id'=>$user['id']
+                ];
+                $result = $model->isUpdate(true)->save($data,$where);
+                if(false===$result){
+
+                }else{
+                    $user['openid'] = $openid;
+                    setSession($user);
+                }
+            }
+
             //判断是否关注平台
             if(empty($info) || !$info['subscribe']){
                  //没有关注
