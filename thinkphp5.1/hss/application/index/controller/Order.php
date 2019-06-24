@@ -1,6 +1,6 @@
 <?php
 namespace app\index\controller;
-class Order extends HssUserBase
+class Order extends \common\controller\UserBase
 {
     //生成订单
     public function generate()
