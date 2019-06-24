@@ -43,7 +43,7 @@ return [
                 1 => 'https://hss.meishangyun.com/index/Order/manage/order_status/2',
                 2 => 'https://hss.meishangyun.com/index/Wallet/index',
                 3 => 'https://hss.meishangyun.com/index/Franchise/applyFranchise',
-                4 => 'https://hss.meishangyun.com/index/CityPartner/registered',
+                4 => 'https://hss.meishangyun.com/index/CityPartner/applicationList',
             ],
         ],
     ],
