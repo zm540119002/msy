@@ -71,7 +71,11 @@ class HssBase extends \common\controller\Base{
                     }
                     $userModel = new \common\model\User();
                     $result = $userModel->isUpdate(true)->save($data);
-                    setSession($user);
+                    if(false===$result){
+
+                    }else{
+                        setSession($user);
+                    }
                 }
             }
 
@@ -86,7 +90,6 @@ class HssBase extends \common\controller\Base{
                     'user_id'=>$user['id']
                 ];
                 $result = $model->isUpdate(true)->save($data,$where);
-                echo $model->getLastSql();
                 if(false===$result){
 
                 }else{
