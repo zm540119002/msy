@@ -72,7 +72,6 @@ class HssBase extends \common\controller\Base{
                 }
                 $userModel = new \common\model\User();
                 $result = $userModel->isUpdate(true)->save($data);
-                echo $userModel->getLastSql();
                 if(false===$result){
 
                 }else{
