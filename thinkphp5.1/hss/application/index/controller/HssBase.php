@@ -75,9 +75,9 @@ class HssBase extends \common\controller\Base{
                 }
             }
 
+            //openid 关联 平台user_id
             $user = checkLogin();
             if($user && !$user['openid']){
-                echo 123;exit;
                 $model = new \app\index\model\WeixinUser();
                 $where = [
                     ['openid','=',$openid]
