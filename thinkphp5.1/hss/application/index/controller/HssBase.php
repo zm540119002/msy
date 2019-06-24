@@ -39,6 +39,7 @@ class HssBase extends \common\controller\Base{
                 $data['province'] = $weixinUserInfo['province'];
                 $data['city'] = (in_array($weixinUserInfo['province'], $municipalities))?$weixinUserInfo['province'] : $info['city'];
                 $data['headimgurl'] = $weixinUserInfo['headimgurl'];
+                print_r($data);
                 if($info && !$info['headimgurl']){
                     $data['id'] = $info['id'];
                 }
