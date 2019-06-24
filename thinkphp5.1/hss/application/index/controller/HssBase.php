@@ -49,6 +49,7 @@ class HssBase extends \common\controller\Base{
 
                 $user = checkLogin();
                 if($user && !$user['openid']){
+                    echo 123;
                     $model = new \app\index\model\WeixinUser();
                     $where = [
                         ['openid','=',$openid]
@@ -57,6 +58,7 @@ class HssBase extends \common\controller\Base{
                         'user_id'=>$user['id']
                     ];
                     $result = $model->isUpdate(true)->save($data,$where);
+                    echo $model->getLastSql();
                     if(false===$result){
 
                     }else{
