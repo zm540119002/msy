@@ -112,7 +112,7 @@ class CityPartner extends Base {
                 //'cp.company_name','cp.applicant','cp.mobile','cp.user_id'
             ],
             'where' => [
-                //['cp.is_partner','=',1]
+                ['cp.status','=',0]
             ],
             'join' => [
                 ['city_partner_market_info cpmi','ca.cpmi_id = cpmi.id','left'],
