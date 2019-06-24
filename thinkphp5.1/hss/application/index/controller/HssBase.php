@@ -16,6 +16,7 @@ class HssBase extends \common\controller\Base{
                 session('weixinUserInfo',$weixinUserInfo);
             }
             $openid = $weixinUserInfo['openid'];
+            print_r($weixinUserInfo);
             //保存获取微信用户表的信息
             $model = new \app\index\model\WeixinUser();
             $config = [
@@ -27,7 +28,7 @@ class HssBase extends \common\controller\Base{
                 ]
             ];
             $info = $model -> getInfo($config);
-            print_r($info);
+
             //没有获取到微信的信息
             if(($info && !$info['headimgurl']) || empty($info)){
                 $municipalities = array("北京", "上海", "天津", "重庆", "香港", "澳门");
