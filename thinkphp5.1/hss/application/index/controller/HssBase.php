@@ -4,7 +4,7 @@ namespace app\index\controller;
 /**
  * 平台基类
  */
-class HssBase extends HssBase{
+class HssBase extends \common\controller\Base{
     public function __construct(){
         parent::__construct();
         //微信处理
