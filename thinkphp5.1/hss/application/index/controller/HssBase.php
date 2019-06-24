@@ -39,15 +39,12 @@ class HssBase extends \common\controller\Base{
                 $data['sex'] = $sexes[$weixinUserInfo['sex']];
                 $data['country'] = $weixinUserInfo['country'];
                 $data['province'] = $weixinUserInfo['province'];
-                $data['city'] = (in_array($weixinUserInfo['province'], $municipalities))?$weixinUserInfo['province'] : $info['city'];
+                $data['city'] = (in_array($weixinUserInfo['province'], $municipalities))?$weixinUserInfo['province'] : $weixinUserInfo['city'];
                 $data['headimgurl'] = $weixinUserInfo['headimgurl'];
-                print_r($data);
                 if($info && !$info['headimgurl']){
                     $data['id'] = $info['id'];
                 }
-                echo 11;
                 $id = $model->edit($data);
-                echo $model ->getLastSql();exit;
                 if(!$id){
                     return errorMsg('失败');
                 }
