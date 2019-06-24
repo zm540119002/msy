@@ -1,7 +1,7 @@
 <?php
 namespace app\index\controller;
 
-class AfterSale extends \common\controller\Base{
+class AfterSale extends HssBase{
     /**首页
      */
     public function index(){

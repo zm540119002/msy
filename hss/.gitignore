@@ -1,4 +1,5 @@
-./vue*
+node_modules
+src
 .idea/
 .vscode/
 .project

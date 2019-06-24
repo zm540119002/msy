@@ -1,7 +1,7 @@
 <?php
 namespace app\index\controller;
 
-class OnlineService extends \common\controller\Base{
+class OnlineService extends HssBase{
     private $user = null;
     public function __construct(){
         parent::__construct();
