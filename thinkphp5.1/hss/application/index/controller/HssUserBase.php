@@ -11,6 +11,7 @@ class HssUserBase extends \common\controller\UserBase {
         if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
             $weixinUserInfo =  session('weixinUserInfo');
             $openid = $weixinUserInfo['openid'];
+            print_r($weixinUserInfo);
             if(!$this->user['openid']){
                 echo 11;exit;
                 $model = new \app\index\model\WeixinUser();
