@@ -250,6 +250,7 @@ class CityPartner extends \common\controller\UserBase {
                         'id'=>$postData['id'],
                         'user_id'=>$this->user['id'],
                         'status'=>0,
+                        'apply_status'=> 2,
                     ];
                 }
 
@@ -295,6 +296,7 @@ class CityPartner extends \common\controller\UserBase {
                         'id'=>$postData['id'],
                         'user_id'=>$this->user['id'],
                         'status'=>0,
+                        'apply_status'=> 4,
                     ];
                 }
                 $id  = $modelCityPartner->edit($data,$where);
