@@ -4,11 +4,12 @@ namespace app\index\controller;
 /**
  * 平台基类
  */
-class HssBase extends \common\controller\Base{
+class HssUserBase extends \common\controller\UserBase {
     public function __construct(){
         parent::__construct();
         //微信处理
         if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
+
             $weixinUserInfo =  session('weixinUserInfo');
             if(!$weixinUserInfo){
                 $weixnTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
@@ -27,6 +28,22 @@ class HssBase extends \common\controller\Base{
                 ]
             ];
             $info = $model -> getInfo($config);
+            /**
+             *  [openid] => oxFkSs_72n49f1my5YDDKpt4EMtA
+            [nickname] => 杨观保
+            [sex] => 1
+            [language] => zh_CN
+            [city] => 深圳
+            [province] => 广东
+            [country] => 中国
+            [headimgurl] => http://thirdwx.qlogo.cn/mmopen/vi_32/YsGBcc3ZDjXFOGGCG6KTSTxTJY39nNLbibPHW3iaex8U9WQatoTfz2bPUQOM9d7NCE265NmoZ1mCEarcn6uGb4Zw/132
+            [privilege] => Array
+            (
+            )
+
+            [unionid] => oHg2ht3eC4OgmdAHaUldzp7SsQUA
+            )
+             */
             //没有获取到微信的信息
             if(($info && !$info['headimgurl']) || empty($info)){
                 $municipalities = array("北京", "上海", "天津", "重庆", "香港", "澳门");

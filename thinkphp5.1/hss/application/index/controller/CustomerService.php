@@ -3,7 +3,7 @@ namespace app\index\controller;
 
 use common\component\GatewayClient\Gateway;
 
-class CustomerService extends \common\controller\Base{
+class CustomerService extends HssBase{
     private $user = null;
     public function __construct(){
         parent::__construct();

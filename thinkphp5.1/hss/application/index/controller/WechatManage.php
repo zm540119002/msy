@@ -6,7 +6,7 @@ namespace app\index\controller;
  * 微信处理
  */
 define("TOKEN", "meishangyun");
-class WechatManage extends \common\controller\Base {
+class WechatManage extends HssBase {
     public function index(){
         if (!isset($_GET['echostr'])) {
             $this->responseMsg();

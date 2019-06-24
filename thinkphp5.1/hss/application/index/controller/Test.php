@@ -4,7 +4,7 @@ namespace app\index\controller;
 // 前台首页
 use think\Console;
 
-class Test extends \common\controller\Base{
+class Test extends HssBase{
     /**首页
      */
     public function index(){

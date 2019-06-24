@@ -1,7 +1,7 @@
 <?php
 namespace app\index\controller;
 
-class Mine extends \common\controller\Base{
+class Mine extends HssBase{
 
     //我的首页
     public function index(){
