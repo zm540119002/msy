@@ -47,8 +47,25 @@ class HssBase extends \common\controller\Base{
                     return errorMsg('失败');
                 }
 
-                //修改用户表
                 $user = checkLogin();
+                if($user && !$user['openid']){
+                    $model = new \app\index\model\WeixinUser();
+                    $where = [
+                        ['openid','=',$openid]
+                    ];
+                    $data = [
+                        'user_id'=>$user['id']
+                    ];
+                    $result = $model->isUpdate(true)->save($data,$where);
+                    if(false===$result){
+
+                    }else{
+                        $user['openid'] = $openid;
+                        setSession($user);
+                    }
+                }
+
+                //修改用户表
                 if((!$user['name'] || !$user['avatar']) && $user && isset($weiXinUserInfo['openid'])){
                     //临时相对路径
                     $relativeSavePath = config('upload_dir.user_avatar');
