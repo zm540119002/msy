@@ -48,40 +48,41 @@ class HssBase extends \common\controller\Base{
                     return errorMsg('失败');
                 }
 
-                $user = checkLogin();
-                //修改用户表
-                if((!$user['name'] || !$user['avatar']) && $user && isset($weiXinUserInfo['openid'])){
-                    //临时相对路径
-                    $relativeSavePath = config('upload_dir.user_avatar');
-                    $weixinAvatarUrl = $weixinUserInfo['headimgurl'];
-                    $avatar = saveImageFromHttp($weixinAvatarUrl,$relativeSavePath);
-                    $data = [
-                        'id'=>$user['id'],
-                        'name'=>$weixinUserInfo['nickname'],
-                        'avatar'=>$avatar,
-                    ];
-                    if($user['avatar']){
-                        unset($data['avatar']);
-                    }else{
-                        $user['avatar'] = $data['avatar'];
-                    }
-                    if($user['name']){
-                        unset($data['name']);
-                    }else{
-                        $user['name'] = $data['name'];
-                    }
-                    $userModel = new \common\model\User();
-                    $result = $userModel->isUpdate(true)->save($data);
-                    if(false===$result){
 
-                    }else{
-                        setSession($user);
-                    }
+
+
+            }
+            $user = checkLogin();
+            //修改用户表
+            if((!$user['name'] || !$user['avatar']) && $user && isset($weiXinUserInfo['openid'])){
+                //临时相对路径
+                $relativeSavePath = config('upload_dir.user_avatar');
+                $weixinAvatarUrl = $weixinUserInfo['headimgurl'];
+                $avatar = saveImageFromHttp($weixinAvatarUrl,$relativeSavePath);
+                $data = [
+                    'id'=>$user['id'],
+                    'name'=>$weixinUserInfo['nickname'],
+                    'avatar'=>$avatar,
+                ];
+                if($user['avatar']){
+                    unset($data['avatar']);
+                }else{
+                    $user['avatar'] = $data['avatar'];
+                }
+                if($user['name']){
+                    unset($data['name']);
+                }else{
+                    $user['name'] = $data['name'];
+                }
+                $userModel = new \common\model\User();
+                $result = $userModel->isUpdate(true)->save($data);
+                if(false===$result){
+
+                }else{
+                    setSession($user);
                 }
             }
-
             //openid 关联 平台user_id
-            $user = checkLogin();
             if($user && !$user['openid']){
                 $model = new \app\index\model\WeixinUser();
                 $where = [
