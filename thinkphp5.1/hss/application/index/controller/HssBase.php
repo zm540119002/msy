@@ -27,7 +27,6 @@ class HssBase extends \common\controller\Base{
                 ]
             ];
             $info = $model -> getInfo($config);
-            print_r($info);exit;
             //没有获取到微信的信息
             if(($info && !$info['headimgurl']) || empty($info)){
                 $municipalities = array("北京", "上海", "天津", "重庆", "香港", "澳门");
@@ -43,7 +42,9 @@ class HssBase extends \common\controller\Base{
                 if($info && !$info['headimgurl']){
                     $data['id'] = $info['id'];
                 }
+                echo 11;
                 $id = $model->edit($data);
+                echo $model ->getLastSql();exit;
                 if(!$id){
                     return errorMsg('失败');
                 }
