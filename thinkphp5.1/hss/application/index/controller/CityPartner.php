@@ -15,6 +15,7 @@ class CityPartner extends \common\controller\UserBase {
      * 合伙人申请
      */
     public function registered(){
+
         if (request()->isAjax()) {
         } else {
             // 做到这里
@@ -71,7 +72,7 @@ class CityPartner extends \common\controller\UserBase {
                     ['cp.status', '=', 0],
                     ['cp.user_id','=',$this->user['id']],
                     ['cp.apply_status','=',2],
-                    ['cp.is_partner','=',0],
+                    //['cp.apply_status','<>',5],
                     //['cp.sn','=',$sn],
                 ];
             }
@@ -101,7 +102,7 @@ class CityPartner extends \common\controller\UserBase {
             // 已授权的城市 is_partner：1
             $condition = [
                 'field' => [
-                    'cp.city_code','cp.is_partner','cp.apply_status',
+                    'cp.city_code','cp.apply_status',
                     'ca.city_name',
                 ],'where' => [
                   ['cp.user_id','=', $this->user['id']],
@@ -116,14 +117,15 @@ class CityPartner extends \common\controller\UserBase {
             $apply_count = 0;
             if($list){
                 foreach($list as $k => $v){
-                    if(!$v['is_partner']){
-                        if($v['apply_status']>2){
+                    if($v['apply_status']!=5){
+                        if(in_array($v['apply_status'],[3,4])){
                             $apply_count++;
                         }
                         unset($list[$k]);
                     }
                 }
             }
+
             $this->assign('info',$info);
             $this->assign('auth_city',$list);
             $this->assign('apply_count',$apply_count);
@@ -242,6 +244,7 @@ class CityPartner extends \common\controller\UserBase {
                 $postData['market_name'] = $info['market_name'];
                 $postData['update_time'] = time();
 
+                unset($postData['apply_status']);
                 //$postData['apply_status']= 3;
                 //$postData['sn'] = 1115 . generateSN(14);
                 //$postData['create_time'] = time();
@@ -250,6 +253,7 @@ class CityPartner extends \common\controller\UserBase {
                         'id'=>$postData['id'],
                         'user_id'=>$this->user['id'],
                         'status'=>0,
+                        'apply_status'=> 2,
                     ];
                 }
 
@@ -295,6 +299,7 @@ class CityPartner extends \common\controller\UserBase {
                         'id'=>$postData['id'],
                         'user_id'=>$this->user['id'],
                         'status'=>0,
+                        'apply_status'=> 4,
                     ];
                 }
                 $id  = $modelCityPartner->edit($data,$where);
@@ -323,6 +328,41 @@ class CityPartner extends \common\controller\UserBase {
         //$this->successMsg($result);
         //$modelCityPartner -> commit();
         //$this->successMsg('成功',['url'=>config('custom.pay_gateway').$paySn,'id'=>$id]);
+    }
+
+    /**
+     * 申请中
+     */
+    public function applicationList(){
+        return $this->fetch();
+    }
+
+    public function getList(){
+
+        if(!request()->isGet()){
+            return errorMsg('请求方式错误');
+        }
+
+        $condition = [
+            'field' => [
+                'cp.id','cp.sn','cp.apply_status','cp.create_time','cp.update_time',
+                'ca.city_name',
+            ],'where' => [
+                ['cp.status','=',0],
+                ['cp.apply_status','in','3,4,-1'],
+                ['cp.user_id','=',$this->user['id']],
+            ],'join' => [
+                ['city_area ca','cp.city_area_id=ca.id','left']
+            ],
+        ];
+
+        $modelCityPartner = new \app\index\model\CityPartner();
+        $list = $modelCityPartner->pageQuery($condition);
+        //p($condition);
+        //exit;
+        $this->assign('list',$list);
+        return $this->fetch('list_tpl');
+
     }
 
 }
