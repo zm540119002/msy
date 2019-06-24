@@ -2,9 +2,6 @@ var area_address,
     applicantData={
     };
 $(function(){
-    //补款倒计时
-    var date=new Date(new Date(new Date().toLocaleDateString()).getTime()+24*60*60*1000-1);
-    countDown(date,$('#countDownBox'));
     //nav切换
     $('body').on('click','.apply-data-nav .switch-item',function(){
         $(this).addClass('current').siblings().removeClass('current');
@@ -29,6 +26,24 @@ $(function(){
             case 3:
             case 4:
             case 5:
+                // 做到这里时间转换 
+                var strtime = '2014-04-23 18:55:49:123';
+                var date = new Date(strtime); //传入一个时间格式，如果不传入就是获取现在的时间了，这样做不兼容火狐。
+// 可以这样做
+                date = new Date(strtime.replace(/-/g, '/'));
+
+
+                //var time = new Date('2019/6/22 17:47:44');
+                console.log(date);
+
+                //console.log(time);
+                //console.log(new Date('2019/6/23 0:0:0').getTime());
+
+                // 补款倒计时
+                var start_pay_time = info['update_time']*1000;
+                //var date=new Date(start_pay_time+(24*60*60*1000-1));
+                //countDown(date,$('#countDownBox'));
+
                 step.removeClass('current');
                 step_list.hide();
                 $('.weui-flex-item:eq(3)').addClass('current');

@@ -325,4 +325,39 @@ class CityPartner extends \common\controller\UserBase {
         //$this->successMsg('成功',['url'=>config('custom.pay_gateway').$paySn,'id'=>$id]);
     }
 
+    /**
+     * 申请中
+     */
+    public function applicationList(){
+        return $this->fetch();
+    }
+
+    public function getList(){
+
+        if(!request()->isGet()){
+            return errorMsg('请求方式错误');
+        }
+
+        $condition = [
+            'field' => [
+                'cp.id','cp.sn','cp.apply_status','cp.create_time','cp.update_time',
+                'ca.city_name',
+            ],'where' => [
+                ['cp.status','=',0],
+                ['cp.apply_status','in','3,4,-1'],
+                ['cp.user_id','=',$this->user['id']],
+            ],'join' => [
+                ['city_area ca','cp.city_area_id=ca.id','left']
+            ],
+        ];
+
+        $modelCityPartner = new \app\index\model\CityPartner();
+        $list = $modelCityPartner->pageQuery($condition);
+        //p($condition);
+        //exit;
+        $this->assign('list',$list);
+        return $this->fetch('list_tpl');
+
+    }
+
 }

@@ -1,0 +1,72 @@
+{notempty name="list"}
+{volist name="list" id="info"}
+    <li class="order">
+           <a href="{:url('registered',['sn'=>$info.sn])}">
+                <p><span>申请城市：</span>{$info.city_name}</p>
+                <p><span>申请编号：</span>{$info.sn}</p>
+                <p><span>申请日期：</span>{$info.create_time|date='Y-m-d H:i'}</p>
+                <p><span>更新日期：</span>{$info.update_time|date='Y-m-d H:i'}</p>
+                <p><span>状态：
+                    {switch $info.apply_status}
+                        {case -1}
+                            <span class="text-color-84">申请已拒绝!</span>
+                            <span class="text-color-84">该城市已有合伙人</span>
+                        {/case}
+                        {case 3}
+                            <span class="">待审核</span>
+                        {/case}
+                        {case 4}
+                            <span class="red">审核已通过</span>
+                        {/case}
+                        {default /}default
+                    {/switch}
+                    </span>
+                </p>
+           </a>
+    </li>
+{/volist}
+{else /}
+{if $currentPage ==1}
+<li class="no_data">
+    <img src="public_img/no-order.png" alt="">
+</li>
+{/if}
+{/notempty}
+<style scoped>
+    li.order{
+        padding: 0.2rem;
+    }
+    li.order p{
+        margin: 4px 0;
+    }
+    .order span{
+        margin-right: 10px;
+    }
+    .tips{
+        color: #ccc;
+    }
+    .line{
+        border-top: 1px solid #ccc;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .address{
+        display: flex;
+    }
+    .address .icon{
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+    }
+    .red, .pay{
+        color: red;
+    }
+    .address .address_detail{
+        flex: 7
+    }
+    .icon img{
+        width: 60%;
+    }
+</style>
