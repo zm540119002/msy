@@ -48,6 +48,7 @@ class HssBase extends \common\controller\Base{
                 }
 
                 $user = checkLogin();
+                print_r($user);
                 if($user && !$user['openid']){
                     echo 123;
                     $model = new \app\index\model\WeixinUser();
