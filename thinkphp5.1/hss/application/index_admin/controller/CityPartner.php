@@ -109,21 +109,35 @@ class CityPartner extends Base {
                 'ca.id','ca.city_code','ca.province_name','ca.city_name','ca.city_status','ca.alone_amount','ca.alone_earnest','ca.level',
                 'ca.province_code parentId','ca.cpmi_id class',
                 'cpmi.amount','cpmi.earnest','cpmi.name market_name',
-                'cp.company_name','cp.applicant','cp.mobile','cp.user_id'
+                //'cp.company_name','cp.applicant','cp.mobile','cp.user_id'
+            ],
+            'where' => [
+                //['cp.is_partner','=',1]
             ],
             'join' => [
                 ['city_partner_market_info cpmi','ca.cpmi_id = cpmi.id','left'],
-                ['city_partner cp','ca.id = cp.city_area_id','left'],
-            ],
+                //['city_partner cp','ca.id = cp.city_area_id','left'],
+            ],'group' => 'city_code',
         ];
 
 
         $data = $modelCityArea->getList($config);
+        $modelCityPartner = new \app\index_admin\model\CityPartner();
+        $config = [
+            'field' => [
+                'cp.company_name','cp.applicant','cp.mobile','cp.user_id','cp.city_code'
+            ],'where' => [
+                ['cp.apply_status','=',5]
+            ],
+        ];
+        $dataPartner = $modelCityPartner->getList($config);
+
+        $temp_key   = array_column($dataPartner,'city_code');  //键值
+        $dataPartner= array_combine($temp_key,$dataPartner) ;
 
         $city = [];
         $province = [];
         foreach($data as $k => $v){
-
 
             if(!isset($province[$v['parentId']])){
 
@@ -145,7 +159,8 @@ class CityPartner extends Base {
             $c['level']   = $v['level'];                                           // 城市等级
             $c['amount']  = $v['alone_amount']>0 ? $v['alone_amount'] : $v['amount'];    // 资格款
             $c['earnest'] = $v['alone_earnest']>0 ? $v['alone_earnest'] : $v['earnest']; // 定金
-            $c['have']    = $v['applicant'] ? 1 : 0;  // 已有合伙人
+
+            $c['have']    = isset($dataPartner[$v['city_code']]) ? 1 : 0;  // 已有合伙人
             $city[] = $c;
 
         }
