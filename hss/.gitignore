@@ -1,0 +1,6 @@
+node_modules
+src
+.idea/
+.vscode/
+.project
+/thinkphp5.1/hss/config/database.php
