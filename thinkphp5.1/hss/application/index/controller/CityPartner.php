@@ -244,6 +244,7 @@ class CityPartner extends \common\controller\UserBase {
                 $postData['market_name'] = $info['market_name'];
                 $postData['update_time'] = time();
 
+                unset($postData['apply_status']);
                 //$postData['apply_status']= 3;
                 //$postData['sn'] = 1115 . generateSN(14);
                 //$postData['create_time'] = time();
