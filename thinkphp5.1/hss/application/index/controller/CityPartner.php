@@ -15,6 +15,52 @@ class CityPartner extends \common\controller\UserBase {
      * 合伙人申请
      */
     public function registered(){
+/*        $str = '无锡，佛山，合肥，大连，福州，厦门，哈尔滨，
+济南，温州，南宁，长春，泉州，石家庄，贵阳，
+南昌，金华，常州，南通，嘉兴，太原，徐州，
+惠州，珠海，中山，台州，烟台，兰州，绍兴，
+海口，扬州';
+        $arr = explode('，',$str);
+
+        $model = new \app\index\model\CityArea();
+        foreach ($arr as $k => &$v){
+            //$v = "'".trim($v).'市'."'";
+            //$v = trim($v).'市';
+            $v = trim($v);
+            //$v = "SELECT province_code,city_code,city_name,level,cpmi_id FROM city_area WHERE city_name LIKE '%{$v}%'";
+            $v = "update city_area set level=2,cpmi_id=1 WHERE city_name LIKE '%{$v}%'";
+            $v = $model->query($v);
+            //p($res);
+        }
+        p($arr);
+        exit;
+        $arrs = implode(',',$arr);*/
+/*        p($arr);
+        exit;*/
+        //p($arrs);
+        //exit;
+/*        $model = new \app\index\model\CityArea();
+        $config = [
+            'where' => [
+                ['city_name','in',$arrs]
+            ]
+        ];
+
+        $str = "'韶关市','常德市','六安市','汕尾市','西宁市','茂名市','驻马店市','邢台市','南充市','宜春市','大理市','丽江市','延边市','衢州市','黔东南市','景德镇市','开封市','红河市','北海市','黄冈市','东营市','怀化市','阳江市','菏泽市','黔南市','宿州市','日照市','黄石市','周口市','晋中市','许昌市','拉萨市','锦州市','佳木斯市','淮南市','抚州市','营口市','曲晴市','齐齐哈尔市','牡丹江市','河源市','德阳市','邵阳市','孝感市','焦作市','益阳市','张家口市','运城市','大同市','德州市','玉林市','榆林市','平顶山市','盘锦市','渭南市','安阳市','铜仁市','宣城市','永州市','黄山市','西双版纳市','十堰市','宜宾市','丹东市','乐山市','吉安市','宝鸡市','鄂尔多斯市','铜陵市','娄底市','六盘水市','承德市','保山市','毕节市','泸州市','恩施市','安顺市','枣庄市','聊城市','百色市','临汾市','梧州市','毫州市','德宏市','鹰潭市','滨州市','绥化市','眉山市','赤峰市','咸宁市'";
+        $sql = "SELECT province_code,city_code,city_name,level,cpmi_id FROM city_area WHERE city_name in ($str)";
+
+
+        $res = $model->query($sql);
+
+        $res = array_column($res,'city_name');
+        foreach($arr as $k => $v){
+            if(!in_array($v,$res)){
+                //p($v);
+            }
+        }
+        p($res);
+        exit;*/
+
         if (request()->isAjax()) {
         } else {
             // 做到这里
