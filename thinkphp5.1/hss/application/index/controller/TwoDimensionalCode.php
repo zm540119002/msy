@@ -50,12 +50,10 @@ class TwoDimensionalCode extends \common\controller\UserBase {
      * 获取url的二维码图片
      */
     public function getUrlQRcode(){
-
         $url = input('param_url/s');
         if(!$url){
             $url = request()->domain();
         }
-
         $upload_path  = config('upload_dir.upload_path');
         $file_path    = config('upload_dir.url_QRCode');
         $file_name    = $upload_path.'/'.$file_path.md5($url).'.png';

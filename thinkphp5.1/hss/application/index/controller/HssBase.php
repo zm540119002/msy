@@ -79,7 +79,7 @@ class HssBase extends \common\controller\Base{
                 }
             }
             //openid 关联 平台user_id
-            if($user && !$user['openid']){
+            if($user && !$user['openid'] && !$info['user_id']){
                 $model = new \app\index\model\WeixinUser();
                 $where = [
                     ['openid','=',$openid]
