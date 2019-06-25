@@ -161,7 +161,8 @@ class CityPartner extends Base {
             $city[] = $c;
 
         }
-
+/*        p($city);
+        exit;*/
         $cityData = 'var cityData='.json_encode($city);
 
         file_put_contents('static/index/js/mobileSelector/js/json2.js',$cityData);
