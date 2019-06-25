@@ -144,7 +144,7 @@ class CityPartner extends \common\controller\UserBase {
         if(!request()->isAjax()){
             $this->errorMsg('请求方式错误');
         }
-        
+
         $postData = input('post.');
         if(!$postData){
             $this->errorMsg('失败');

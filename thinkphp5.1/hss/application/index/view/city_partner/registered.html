@@ -236,15 +236,13 @@
 				$('input[name="city"]').val(area[1]);
 				var select = $('.select-value');
 
-				//console.log(select.val());
-				//console.log(select.data('earnest2'));
-
 				// 记录选中的城市
-				//var storage=window.localStorage;
 				var cityPartner = {province:area[0],city:area[1],area_address:select.val()};
 				localStorage.setItem('cityPartner',JSON.stringify(cityPartner));
 
-				$('.city_name').html(select.val());
+				val = select.val().split('-');
+
+				$('.city_name').html(val[1]);
 				$('.city_level').html(select.data('level2'));
 				$('.market_name').html(select.data('class2'));
 				$('.amount').find('price').html(select.data('amount2'));
