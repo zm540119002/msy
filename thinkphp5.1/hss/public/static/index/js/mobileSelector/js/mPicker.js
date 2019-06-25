@@ -643,9 +643,6 @@ $(function () {
         $.each(data, function (index, val) {
             var name = val[_this.options.jsonName];
             var value = val[_this.options.jsonValue] || name;
-            //str += '<li data-value="' + value + '" data-id="' + index + '">' + name + '</li>';
-
-            // 增加业务需要的属性 start
 
             // 增加业务需要的属性 start
             var str1 = '';
@@ -653,11 +650,7 @@ $(function () {
                 str1 += ' data-'+_this.options.param[i]+'="' + val[_this.options.param[i]] + '"';
             }
 
-            //var str1 = ' data-level="' + val['level'] + '" data-class="' + val['class'] + '"';
-            //str1 += ' data-amount="' + val['amount'] + '" data-earnest="' + val['earnest'] + '"';
-            console.log(val);
             if(val['have']){
-                //str1 += ' data-have="' + val['have'] + '"';
                 str1 += ' style="color:red"';
             }
             // END
