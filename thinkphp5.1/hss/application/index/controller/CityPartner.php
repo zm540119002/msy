@@ -165,41 +165,12 @@ class CityPartner extends \common\controller\UserBase {
         ///$data = ['url'=>config('custom.pay_gateway').$paySn,'id'=>$id];
 
         $modelCityPartner = new \app\index\model\CityPartner();
-        //$modelCityPartner -> startTrans();
-        //$where = [];
+        $modelCityPartner -> startTrans();
 
         $data = [];
         // 1、城市查询 2、登记资料 3、支付定金 4、支付尾款
         switch ($postData['step']){
             case 1:
-                // 查询状态，设置不开放&&已签约
-/*                $condition = [
-                    'field' => [
-                        'ca.city_code','ca.province_name','ca.city_name','ca.city_status','ca.alone_amount','ca.alone_earnest',
-                        'cp.company_name','cp.applicant','cp.mobile','cp.user_id'
-                    ],
-                    'join' => [
-                        //['city_partner cp','ca.id = cp.city_area_id','left'],
-                        ['city_area ca','ca.id = cp.city_area_id','right'],
-                    ],
-                    'where' => [
-                        ['ca.city_status','=',0],
-                        ['ca.province_code','=',$postData['province']],
-                        ['ca.city_code','=',$postData['city']],
-                        ['cp.is_partner','=',0],
-                    ],
-                ];
-                $res = $modelCityPartner->getInfo($condition);
-                if($res){
-                    $this->errorMsg('失败',['status'=>1000]);
-                }*/
-
-/*                $data = $info;
-                unset($data['user_id']);
-                unset($data['city_status']);
-                unset($data['alone_amount']);
-                unset($data['alone_earnest']);*/
-
                 break;
 
             case 2: // 更新资料
@@ -219,24 +190,6 @@ class CityPartner extends \common\controller\UserBase {
 
                 $res = $modelCityPartner->paymentUpdateBeforeInfo($postData,$info);
 
-/*                unset($data['apply_status']);
-                $paySn = generateSN(); //内部支付编号
-                $data['earnest_sn']  = $paySn;
-
-                if(isset($postData['sn']) && !empty($postData['sn'])){
-                    $where = [
-                        'sn'      => $postData['sn'],
-                        'user_id' => $this->user['id'],
-                        'status'  => 0,
-                        'apply_status' => 2,
-                    ];
-                    unset($data['sn']);
-
-                }else{
-                    $data['create_time']  = time();
-                }
-
-                $id  = $modelCityPartner->edit($data,$where);*/
                 if(false===$res){
                     $modelCityPartner ->rollback();
                     $this->errorMsg('失败');
@@ -317,9 +270,6 @@ class CityPartner extends \common\controller\UserBase {
         }
 
         $this->successMsg('成功',$data);
-        //$this->successMsg($result);
-        //$modelCityPartner -> commit();
-        //$this->successMsg('成功',['url'=>config('custom.pay_gateway').$paySn,'id'=>$id]);
     }
 
     /**
