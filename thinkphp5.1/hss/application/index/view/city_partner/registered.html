@@ -31,10 +31,12 @@
 	}
 
 </style>
+
 <section class="selected-city" style="display: none;">
 	<ul>
-		<li>深圳</li>
-		<li>佛山</li>
+		{volist name="auth_city" id="vo"}
+		<li>{$vo.city_name}</li>
+		{/volist}
 	</ul>
 </section>
 <div class="f24">
@@ -44,7 +46,7 @@
     </section>
 	<section>
 		<div class="columns_flex l-r-sides" style="padding:0.15rem;border-bottom:1px solid #d9d9d9;">
-			<span>
+			<span class="selectedcity">
 				已授权城市：
 				{empty name="auth_city"}
 					<span>上海市</span>
