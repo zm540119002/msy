@@ -43,7 +43,7 @@ return [
                 1 => 'https://hss.meishangyun.com/index/Order/manage/order_status/2', //订单支付成功跳转
                 2 => 'https://hss.meishangyun.com/index/Wallet/index',  //钱包支付成功跳转
                 3 => 'https://hss.meishangyun.com/index/Franchise/applyFranchise', //申请加盟店家支付成功跳转
-                4 => 'https://hss.meishangyun.com/index/CityPartner/applicationList', //申请城市合伙人支付成功跳转
+                4 => 'https://hss.meishangyun.com/index/CityPartner/applicationList', //申请城市合伙人定金支付成功跳转
             ],
         ],
     ],
