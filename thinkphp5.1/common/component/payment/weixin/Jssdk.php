@@ -879,9 +879,9 @@ class Jssdk {
     $url = "https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=".$this->access_token;
     $res = $this->http_request($url, json_encode($msg));
     $result = json_decode($res, true);
-     $imgurl = "https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=".urlencode($result["ticket"]);
-     $imgdata = $this->http_request($imgurl);
-     return file_put_contents($scene_type."_".$scene_id.".jpg", $imgdata);
+    // $imgurl = "https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=".urlencode($result["ticket"]);
+    // $imgdata = $this->http_request($imgurl);
+    // return file_put_contents($scene_type."_".$scene_id.".jpg", $imgdata);
     return $result;
   }
 
