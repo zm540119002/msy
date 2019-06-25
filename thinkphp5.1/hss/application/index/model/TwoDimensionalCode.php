@@ -78,9 +78,27 @@ class TwoDimensionalCode extends \common\model\Base {
         }
         if(($info && !$info['code_url']) || empty($info)){
             $weixinTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
-            $codeUrl = $weixinTools-> create_qrcode('QR_SCENE', $user['id']);
-            print_r($codeUrl);exit;
-            $shareQRCode = createLogoQRcode($codeUrl['url'],config('upload_dir.hss_user_QRCode'));
+            $codeUrl = $weixinTools-> create_qrcode('QR_LIMIT_SCENE', $user['id']);
+            $imgurl = "https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=".urlencode($codeUrl["ticket"]);
+            $imgdata = $weixinTools->http_request($imgurl);
+            $uploadPath = realpath( config('upload_dir.upload_path')) . '/';
+            if(!is_dir($uploadPath)){
+                if(!mk_dir($uploadPath)){
+                    return errorMsg('创建Uploads目录失败');
+                }
+            }
+            //二维码图片保存路径
+            $newPath = $uploadPath . config('upload_dir.hss_user_QRCode'); //绝对路经
+            if(!mk_dir($newPath)){
+                return errorMsg('创建新目录失败');
+            }
+            //生产没有logo二维码图片
+            $filename = generateSN(5).'.jpg';
+            $saveFile = $newPath.$filename;
+            file_put_contents($saveFile, $imgdata);
+            //保存数据库路径
+            $shareQRCode = config('upload_dir.hss_user_QRCode').$filename;
+            //$shareQRCode = createLogoQRcode($codeUrl['url'],config('upload_dir.hss_user_QRCode'));
             if($info && !$info['code_url']){
                 $data = [
                     'id' => $info['id'],
@@ -95,6 +113,7 @@ class TwoDimensionalCode extends \common\model\Base {
                 ];
             }
             $id = $this->edit($data);
+
             if(!$id){
                 return errorMsg('失败');
             }

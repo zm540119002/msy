@@ -130,7 +130,7 @@ class Index extends HssBase{
                 $member = $memberMode->getInfo($config);
                 $this->assign('member',$member);
                 //自己提交的申请
-                $modelCityPartner = new \app\index\model\CityPartner();
+                /*$modelCityPartner = new \app\index\model\CityPartner();
                 $condition=[
                     'where'=>[
                         ['cp.status', '=', 0],
@@ -155,8 +155,9 @@ class Index extends HssBase{
                     }
                 }
                 $this->assign('apply',$apply);
-                $this->assign('applied',$applied);
+                $this->assign('applied',$applied);*/
             }
+
             // 底部菜单，见配置文件custom.footer_menu
             $this->assign('currentPage',request()->controller().'/'.request()->action());
             return $this->fetch('city_partner/index');

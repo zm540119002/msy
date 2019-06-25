@@ -472,7 +472,6 @@ class Payment extends \common\controller\Base {
             'payment_time'=>time(),
             'pay_sn'=>$info['pay_sn'],                      // 支付单号 退款用
             'pay_code'=>$info['pay_code'],                   // 支付方式
-            'sn' => 1115 . generateSN(14),
             'update_time' => time(),
         ];
         $condition = [

@@ -98,11 +98,6 @@ class CityPartner extends Base {
         $modelCityArea = new \app\index_admin\model\CityArea();
         $config = [
             'field' => [
-                'id','area_id','province_name','city_name','area_parent_id parentId','cpmi_id level'
-            ]
-        ];
-        $config = [
-            'field' => [
                 'ca.id','ca.city_code','ca.province_name','ca.city_name','ca.city_status','ca.alone_amount','ca.alone_earnest','ca.level',
                 'ca.province_code parentId','ca.cpmi_id class',
                 'cpmi.amount','cpmi.earnest','cpmi.name market_name',
@@ -161,7 +156,8 @@ class CityPartner extends Base {
             $city[] = $c;
 
         }
-
+/*        p($city);
+        exit;*/
         $cityData = 'var cityData='.json_encode($city);
 
         file_put_contents('static/index/js/mobileSelector/js/json2.js',$cityData);

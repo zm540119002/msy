@@ -77,7 +77,7 @@
 								<input type="hidden"  data-key="" name="city" value="" class="area-address-name" >-->
 								<input type="hidden"  data-key="" name="province" value="{$info.province_code}">
 								<input type="hidden"  data-key="" name="city" value="{$info.city_code}">
-								<input type="hidden"  data-key="" name="id" value="{$info.id}">
+								<input type="hidden"  data-key="" name="sn" value="{$info.sn}">
 							</a>
 						</div>
 						<div class="content-padding">
@@ -140,7 +140,7 @@
 					{else if $info['apply_status'] == 4}
 					<div class="columns_flex l-r-sides">
 						<div>
-							<p >城市名称：<span class="apply_city">{$info.city_name}</span></p>
+							<p>城市名称：<span class="apply_city">{$info.city_name}</span></p>
 							<p>城市级别分类：<span class="city_level">{$info.city_level}线城市</span></p>
 							<p>合伙人级别：<span class="">{$info.market_name}类市场城市合伙人</span></p>
 							<p>合伙人资格款：<span>¥{$info['amount']}</span></p>
@@ -210,7 +210,7 @@
 <!--<script type="text/javascript" src="public_js/jquery.area.js"></script>-->
 <script type="text/javascript" src="index_js/cityPartner1.js"></script>
 
-<script src="index_js/mobileSelector/js/json2.js"></script>
+<script src="index_js/mobileSelector/js/json2.js?v={:time();}"></script>
 <script src="index_js/mobileSelector/js/jsonExchange.js"></script>
 <script src="index_js/mobileSelector/js/mPicker.js"></script>
 <script type="text/javascript">
@@ -231,23 +231,22 @@
 			param: ['level','class','amount','earnest'],
 			confirm: function (json) {
 
-				//console.log($('.select-value').data('amount2'));
-
 				area = json.values.split('-');
 				$('input[name="province"]').val(area[0]);
 				$('input[name="city"]').val(area[1]);
 				var select = $('.select-value');
 
 				// 记录选中的城市
-				//var storage=window.localStorage;
 				var cityPartner = {province:area[0],city:area[1],area_address:select.val()};
 				localStorage.setItem('cityPartner',JSON.stringify(cityPartner));
 
-/*				$('.city_name').html(data.data.city_name);
-				$('.city_level').html(data.data.level);
-				$('.market_name').html(data.data.market_name);
-				$('.amount').find('price').html(data.data.amount);
-				$('.earnest').find('price').html(data.data.earnest);*/
+				val = select.val().split('-');
+
+				$('.city_name').html(val[1]);
+				$('.city_level').html(select.data('level2'));
+				$('.market_name').html(select.data('class2'));
+				$('.amount').find('price').html(select.data('amount2'));
+				$('.earnest').find('price').html(select.data('earnest2'));
 
 			},
 			cancel: function (json) {

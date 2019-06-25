@@ -15,18 +15,26 @@
 			<div>
                 {if $user}
                     {if $member.type == 4}
-                        <span>黑森森城市合伙人</span>
+                        <span>城市合伙人</span>
                     {else /}
                         <span class="cy-icon"></span>
-                        <span>黑森森城市合伙人</span>
+                        <span>非合作伙伴</span>
                     {/if}
                 {else /}
                     <span>未登陆</span>
                 {/if}
             </div>
             <div>
-                <a href="javascript:void(0)" class="async_login" style="font-size: 10px;" data-jump_url="{:url('CityPartner/registered')}">
+                <a href="javascript:void(0)" class="async_login gr"  data-jump_url="{:url('CityPartner/registered')}">
+
+                    {if $apply[0]['apply_status'] == 4}
+                    城市合伙人资格审核中...
+                    {elseif $apply[0]['apply_status'] == 5}
+                    城市合伙人资格余额限时支付...
+                    {else /}
                     城市合伙人资格申请&nbsp;&nbsp;>
+                    {/if}
+
                 </a>
             </div>
 		</div>

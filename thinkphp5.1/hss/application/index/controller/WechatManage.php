@@ -466,8 +466,8 @@ $item_str
     {
         $mineTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
         $a = $mineTools-> create_qrcode('QR_LIMIT_SCENE', 15);
-        $shareQRCode = createLogoQRcode($a['url'],config('upload_dir.hss_user_QRCode'));
-        p($shareQRCode);
+       // $shareQRCode = createLogoQRcode($a['url'],config('upload_dir.hss_user_QRCode'));
+      print_r($a);
     }
 
 }
