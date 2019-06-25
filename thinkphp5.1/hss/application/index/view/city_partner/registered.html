@@ -31,6 +31,12 @@
 	}
 
 </style>
+<section class="selected-city" style="display: none;">
+	<ul>
+		<li>深圳</li>
+		<li>佛山</li>
+	</ul>
+</section>
 <div class="f24">
     <section class="f20 header_title separation-line">
 		<a href="javascript:void(0);" class="back_prev_page"></a>
@@ -252,6 +258,24 @@
 			cancel: function (json) {
 			}
 		});
+		//已选城市列表
+		$('body').on('click','.selectedcity',function(){
+			var selectedCityList=$('.selected-city').html();
+			layer.open({
+				className:'',
+				btn:['确定'],
+				type: 1
+				,anim: 'up'
+				,style: 'position:fixed; bottom:0; left:0; width: 100%; height: 50%; padding:10px 0; border:none;',
+				content:selectedCityList,
+				success:function(){
+
+				},
+				yes:function(){
+
+				}
+			})
+		})
 
 	});
 </script>
