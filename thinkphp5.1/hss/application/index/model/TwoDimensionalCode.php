@@ -113,7 +113,6 @@ class TwoDimensionalCode extends \common\model\Base {
                 ];
             }
             $id = $this->edit($data);
-
             if(!$id){
                 return errorMsg('失败');
             }
