@@ -1204,7 +1204,7 @@ class Jssdk {
 
 
   //HTTP请求（支持HTTP/HTTPS，支持GET/POST）
-  protected function http_request($url, $data = null)
+  public function http_request($url, $data = null)
   {
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_URL, $url);
