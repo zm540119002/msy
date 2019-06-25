@@ -31,10 +31,12 @@
 	}
 
 </style>
+
 <section class="selected-city" style="display: none;">
 	<ul>
-		<li>深圳</li>
-		<li>佛山</li>
+		{volist name="auth_city" id="vo"}
+		<li>{$vo.city_name}</li>
+		{/volist}
 	</ul>
 </section>
 <div class="f24">
