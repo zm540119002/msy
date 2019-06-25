@@ -80,7 +80,7 @@ class TwoDimensionalCode extends \common\model\Base {
             $weixinTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
             $codeUrl = $weixinTools-> create_qrcode('QR_LIMIT_SCENE', $user['id']);
              $imgurl = "https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=".urlencode($codeUrl["ticket"]);
-             $imgdata = $this->http_request($imgurl);
+             $imgdata = $weixinTools->http_request($imgurl);
             $uploadPath = realpath( config('upload_dir.upload_path')) . '/';
             if(!is_dir($uploadPath)){
                 if(!mk_dir($uploadPath)){
