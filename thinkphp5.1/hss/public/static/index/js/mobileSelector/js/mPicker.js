@@ -655,7 +655,7 @@ $(function () {
 
             //var str1 = ' data-level="' + val['level'] + '" data-class="' + val['class'] + '"';
             //str1 += ' data-amount="' + val['amount'] + '" data-earnest="' + val['earnest'] + '"';
-
+            console.log(val);
             if(val['have']){
                 //str1 += ' data-have="' + val['have'] + '"';
                 str1 += ' style="color:red"';

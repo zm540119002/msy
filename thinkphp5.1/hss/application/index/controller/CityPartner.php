@@ -275,11 +275,14 @@ class CityPartner extends \common\controller\UserBase {
                 }
 
                 $where = [
-                    'sn'=>$postData['sn'],
-                    'user_id'=>$this->user['id'],
-                    'status'=>0,
-                    'apply_status'=> 4,
+                    'where' => [
+                        'sn' => $postData['sn'],
+                        'user_id'=>$this->user['id'],
+                        'status'=>0,
+                        'apply_status'=> 4,
+                    ]
                 ];
+
                 $res = $modelCityPartner->getInfo($where);
                 if(!$res){
                     $modelCityPartner ->rollback();
@@ -289,7 +292,7 @@ class CityPartner extends \common\controller\UserBase {
                 $paySn = generateSN(); //内部支付编号
                 $data = ['balance_sn' => $paySn];
 
-                $res = $modelCityPartner->allowField(true)->isUpdate(true)->save($data,$where);
+                $res = $modelCityPartner->allowField(true)->isUpdate(true)->save($data,$where['where']);
                 if(false===$res){
                     $modelCityPartner ->rollback();
                     $this->errorMsg('失败');
