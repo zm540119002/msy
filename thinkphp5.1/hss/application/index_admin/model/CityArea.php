@@ -47,7 +47,7 @@ class CityArea extends \common\model\Base {
                 'ca.id','ca.city_code','ca.province_name','ca.city_name','ca.city_status','ca.alone_amount','ca.alone_earnest','ca.level',
                 'ca.province_code parentId','ca.cpmi_id class',
                 'cpmi.amount','cpmi.earnest','cpmi.name market_name',
-                'cp.company_name','cp.applicant','cp.mobile','cp.user_id','cp.is_partner'
+                'cp.company_name','cp.applicant','cp.mobile','cp.user_id','cp.apply_status'
             ],
             'join' => [
                 ['city_partner_market_info cpmi','ca.cpmi_id = cpmi.id','left'],
@@ -63,7 +63,7 @@ class CityArea extends \common\model\Base {
         $res = $this->getInfo($config);
         //p($res);
         //exit;
-        if( !$res || $res['is_partner']){
+        if( !$res || $res['apply_status']==5){
             return false;
         }else{
 

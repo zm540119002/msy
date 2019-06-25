@@ -1,0 +1,48 @@
+{extend name="template/base.html" /}
+
+{block name="title"}资格申请{/block}
+{block name="content"}
+
+<article class="f24 ">
+    <section class="header_title separation-line">
+        <a href="javascript:void(0);" class="back_prev_page"></a>
+		<h2 class="f24">黑森森城市合伙人</h2>
+	</section>
+    <section class="order_main_wrapper">
+        <ul class="order_list list" id="list">
+
+        </ul>
+    </section>
+</article>
+{/block}
+{block name="footer"}
+{include file="template/footer_menu.html" /}
+{/block}
+
+{block name="script"}
+    <script type="text/javascript" src="index_js/pay.js"></script>
+    <script type="text/javascript">
+        var config = {
+            url:module+'CityPartner/getList',
+            requestEnd:false,
+            loadTrigger:false,
+            currentPage:1
+
+        };
+        var postData = {
+            pageSize:4,
+            //pageType:'list_tpl'
+        };
+        $(function(){
+            getPagingList(config,postData);
+            //下拉加载
+            $(window).on('scroll',function(){
+                if(config.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
+                    config.loadTrigger = false;
+                    getPagingList(config,postData);
+                }
+            });
+
+        });
+    </script>
+{/block}

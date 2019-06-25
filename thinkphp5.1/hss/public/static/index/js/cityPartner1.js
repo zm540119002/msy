@@ -2,9 +2,6 @@ var area_address,
     applicantData={
     };
 $(function(){
-    //补款倒计时
-    var date=new Date(new Date(new Date().toLocaleDateString()).getTime()+24*60*60*1000-1);
-    countDown(date,$('#countDownBox'));
     //nav切换
     $('body').on('click','.apply-data-nav .switch-item',function(){
         $(this).addClass('current').siblings().removeClass('current');
@@ -29,6 +26,13 @@ $(function(){
             case 3:
             case 4:
             case 5:
+                // 补款倒计时
+                var update_time = info.update_time;
+                var date = new Date(update_time.replace(/-/g, '/'));
+
+                date = new Date(date.getTime()+(24*60*60*1000-1));
+                countDown(date,$('#countDownBox'));
+
                 step.removeClass('current');
                 step_list.hide();
                 $('.weui-flex-item:eq(3)').addClass('current');
@@ -240,23 +244,6 @@ $(function(){
     });
 });
 
-var arrayHasElement = function(array, element) {  
-    // 判断二维数组array中是否存在一维数组element
-    for (var el of array) {
-        if (el.length === element.length) {
-        for (var index in el) {
-            if (el[index] !== element[index]) {
-            break;
-        }
-        // 判断二维数组array中是否存在一维数组element
-            if (index == (el.length - 1)) {   
-                return true;
-            }
-        }
-        }
-    }
-    return false;
-}
 // 提交申请
 function submitApplicant(_this,postData){
     var url = module + 'CityPartner/submitApplicant';
@@ -284,7 +271,8 @@ function submitApplicant(_this,postData){
                     $('.apply-module:eq(1)').show();
 
                      $('.city_name').html(data.data.city_name);
-                     $('.market_name').html(data.data.market_name+'类市场城市合伙人');
+                     $('.city_level').html(data.data.level);
+                     $('.market_name').html(data.data.market_name);
                      $('.amount').find('price').html(data.data.amount);
                      $('.earnest').find('price').html(data.data.earnest);
 

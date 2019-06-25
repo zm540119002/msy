@@ -53,7 +53,7 @@
 				{/empty}
 			</span>
 			<span>
-				<a href="{:url('list')}">申请中 ( <span style="color:red;">{$apply_count>99 ? '99+' : $apply_count}</span> ) ></a>
+				<a href="{:url('applicationList')}">资格完款任务 ( <span style="color:red;">{$apply_count>99 ? '99+' : $apply_count}</span> ) ></a>
 			</span>
 		</div>
 		<div id="wizard" class="page-bd">
@@ -112,8 +112,8 @@
 					<div>
                         <div>
 							<p>城市名称：<span class="city_name">{$info.city_name}</span></p>
-							<p>城市级别分类：<span>{$info.city_level}线城市</span></p>
-							<p>合伙人级别：<span class="market_name">{$info.market_name}类市场城市合伙人</span></p>
+							<p>城市级别分类：<span class="city_level">{$info.city_level}</span><span>线城市</span></p>
+							<p>合伙人级别：<span class="market_name">{$info.market_name}</span><span>类市场城市合伙人</span></p>
 							<p>合伙人资格款：<span class="amount">￥<price>{$info.amount}</price></span>
 							<p>申请席位订金：<span class="earnest">￥<price>{$info.earnest}</price></span></p>
 						</div>
@@ -202,6 +202,7 @@
 	var info = "{$info}";
 	if(info){
 		info = JSON.parse('{$info|raw}');
+		//var time = "{$info.update_time|raw}";
 	}
 
 </script>
@@ -230,14 +231,24 @@
 			param: ['level','class','amount','earnest'],
 			confirm: function (json) {
 
+				//console.log($('.select-value').data('amount2'));
+
 				area = json.values.split('-');
 				$('input[name="province"]').val(area[0]);
 				$('input[name="city"]').val(area[1]);
+				var select = $('.select-value');
 
 				// 记录选中的城市
 				//var storage=window.localStorage;
-				var cityPartner = {province:area[0],city:area[1],area_address:$('.select-value').val()};
+				var cityPartner = {province:area[0],city:area[1],area_address:select.val()};
 				localStorage.setItem('cityPartner',JSON.stringify(cityPartner));
+
+/*				$('.city_name').html(data.data.city_name);
+				$('.city_level').html(data.data.level);
+				$('.market_name').html(data.data.market_name);
+				$('.amount').find('price').html(data.data.amount);
+				$('.earnest').find('price').html(data.data.earnest);*/
+
 			},
 			cancel: function (json) {
 			}
