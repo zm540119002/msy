@@ -26,7 +26,7 @@ class CityPartner extends \common\controller\UserBase {
                     ['cp.status', '=', 0],
                     ['cp.user_id','=',$this->user['id']],
                     ['cp.apply_status','>',0],
-                    ['cp.is_partner','=',0],
+                    //['cp.is_partner','=',0],
                     ['cp.sn','=',$sn],
                 ];
             //自己提交的申请
@@ -76,16 +76,17 @@ class CityPartner extends \common\controller\UserBase {
                     //['cp.sn','=',$sn],
                 ];
             }
+
             $modelCityPartner = new \app\index\model\CityPartner();
-            $condition=[
-                 'field'=>[
-                    'cp.id','cp.province_code','cp.city_code','cp.company_name','cp.applicant','cp.market_name','cp.mobile','cp.city_level',
+            $condition = [
+                'field' => [
+                    'cp.id','cp.sn','cp.province_code','cp.city_code','cp.company_name','cp.applicant','cp.market_name','cp.mobile','cp.city_level',
                     'cp.earnest','cp.amount','cp.apply_status','cp.update_time','cp.city_level',
                     'ca.province_name','ca.city_name'
                     //,'p.sn pay_sn','p.id as pay_id'
                 ],
                 'where' => $where,
-                'join' => [
+                'join'  => [
                     //['pay p','p.sn = cp.earnest_sn','left'],
                     ['city_area ca','cp.city_code = ca.city_code','left'],
                 ],
@@ -94,19 +95,15 @@ class CityPartner extends \common\controller\UserBase {
                 ],
             ];
             $info = $modelCityPartner -> getInfo($condition);
-            //p($where);
-            //p($info);
-            //exit;
-            // 申请中的记录 apply_status：2:提交资料 3:交席位定金 4:待审核（已交定金） 5审核通过  6 交清尾款
-            // 申请中的记录 apply_status：2:已提交资料 3:待审核（已交定金） 4审核通过  5 交清尾款
-            // 已授权的城市 is_partner：1
+
+            // 申请中的记录 apply_status：2:已提交资料 3:待审核（已交定金） 4审核通过  5 交清尾款|已授权的城市
             $condition = [
                 'field' => [
                     'cp.city_code','cp.apply_status',
                     'ca.city_name',
                 ],'where' => [
                   ['cp.user_id','=', $this->user['id']],
-                  ['cp.apply_status','in', '2,3,4,5,6'],
+                  ['cp.apply_status','in', '2,3,4,5'],
                   ['cp.status','=', 0],
                 ],'join' => [
                     ['city_area ca','cp.city_area_id=ca.id','left']
@@ -114,6 +111,7 @@ class CityPartner extends \common\controller\UserBase {
             ];
             $list = $modelCityPartner->getList($condition);
 
+            // 已授权城市&&申请中的城市数量
             $apply_count = 0;
             if($list){
                 foreach($list as $k => $v){
@@ -146,16 +144,14 @@ class CityPartner extends \common\controller\UserBase {
         if(!request()->isAjax()){
             $this->errorMsg('请求方式错误');
         }
-
-
+        
         $postData = input('post.');
         if(!$postData){
             $this->errorMsg('失败');
         }
 
         $validate = new \app\index\validate\CityPartner();
-        $postData['apply_status'] = $postData['step'];
-        $validateName = 'step'.$postData['apply_status'];
+        $validateName = 'step'.$postData['step'];
         if(!$validate->scene($validateName)->check($postData)) {
             $this->errorMsg($validate->getError());
         }
@@ -166,10 +162,13 @@ class CityPartner extends \common\controller\UserBase {
             $this->errorMsg('已有合伙人',['status'=>1000]);
         }
 
+        ///$data = ['url'=>config('custom.pay_gateway').$paySn,'id'=>$id];
+
         $modelCityPartner = new \app\index\model\CityPartner();
         //$modelCityPartner -> startTrans();
-        $where = [];
-        //$data = [];
+        //$where = [];
+
+        $data = [];
         // 1、城市查询 2、登记资料 3、支付定金 4、支付尾款
         switch ($postData['step']){
             case 1:
@@ -195,70 +194,50 @@ class CityPartner extends \common\controller\UserBase {
                     $this->errorMsg('失败',['status'=>1000]);
                 }*/
 
-                $data = $info;
+/*                $data = $info;
                 unset($data['user_id']);
                 unset($data['city_status']);
                 unset($data['alone_amount']);
-                unset($data['alone_earnest']);
+                unset($data['alone_earnest']);*/
 
                 break;
 
-            case 2:
-                // 添加记录
-                $postData['user_id']     = $this->user['id'];
-                $postData['province_code']= $postData['province'];
-                $postData['city_code']   = $postData['city'];
-                $postData['city_level']  = $info['level'];
-                $postData['earnest']     = $info['earnest'];
-                $postData['amount']      = $info['amount'];
-                $postData['apply_status']= 2;
-                $postData['city_area_id']= $info['id'];
-                $postData['market_name'] = $info['market_name'];
-                $postData['create_time'] = time();
-                $postData['update_time'] = time();
+            case 2: // 更新资料
+                $postData['user_id'] = $this->user['id'];
+                $res = $modelCityPartner->paymentUpdateBeforeInfo($postData,$info);
 
-                if($postData['id']>0){
-                    $where = [
-                        'id'=>$postData['id'],
-                        'user_id'=>$this->user['id'],
-                        'status'=>0,
-                    ];
-                }
-
-                $res = $modelCityPartner->edit($postData,$where);
-
-                if(!$res){
+                if(false===$res){
                     $this->errorMsg('失败');
                 }
 
                 break;
-            case 3:
-                $paySn = generateSN(); //内部支付编号
-                $postData['earnest_sn']  = $paySn;
-                $postData['province_code']= $postData['province'];
-                $postData['city_code']   = $postData['city'];
-                $postData['city_level']  = $info['level'];
-                $postData['earnest']     = $info['earnest'];
-                $postData['amount']      = $info['amount'];
-                $postData['city_area_id']= $info['id'];
-                $postData['market_name'] = $info['market_name'];
-                $postData['update_time'] = time();
 
-                unset($postData['apply_status']);
-                //$postData['apply_status']= 3;
-                //$postData['sn'] = 1115 . generateSN(14);
-                //$postData['create_time'] = time();
-                if($postData['id']>0){
+            case 3: // 支付定金
+                $paySn = generateSN(); //内部支付编号
+                $postData['earnest_sn']  = $paySn; //内部支付编号
+                $postData['user_id'] = $this->user['id'];
+
+                $res = $modelCityPartner->paymentUpdateBeforeInfo($postData,$info);
+
+/*                unset($data['apply_status']);
+                $paySn = generateSN(); //内部支付编号
+                $data['earnest_sn']  = $paySn;
+
+                if(isset($postData['sn']) && !empty($postData['sn'])){
                     $where = [
-                        'id'=>$postData['id'],
-                        'user_id'=>$this->user['id'],
-                        'status'=>0,
-                        'apply_status'=> 2,
+                        'sn'      => $postData['sn'],
+                        'user_id' => $this->user['id'],
+                        'status'  => 0,
+                        'apply_status' => 2,
                     ];
+                    unset($data['sn']);
+
+                }else{
+                    $data['create_time']  = time();
                 }
 
-                $id  = $modelCityPartner->edit($postData,$where);
-                if(false===$id){
+                $id  = $modelCityPartner->edit($data,$where);*/
+                if(false===$res){
                     $modelCityPartner ->rollback();
                     $this->errorMsg('失败');
                 }
@@ -267,7 +246,7 @@ class CityPartner extends \common\controller\UserBase {
                 $data = [
                     'sn' => $paySn,
                     'actually_amount' => $info['earnest'],
-                    'user_id' => $this->user['id'],
+                    'user_id'  => $this->user['id'],
                     'pay_code' => $postData['pay_code'],
                     'type' => config('custom.pay_type')['cityPartnerSeatPay']['code'],
                     'create_time' => time(),
@@ -286,24 +265,32 @@ class CityPartner extends \common\controller\UserBase {
                     return errorMsg('失败');
                 };
 
-                $data = ['url'=>config('custom.pay_gateway').$paySn,'id'=>$id];
+                //$data = ['url'=>config('custom.pay_gateway').$paySn];
+                $data['url'] = config('custom.pay_gateway').$paySn;
                 break;
-            //尾款支付
-            case 4:
-                $paySn = generateSN(); //内部支付编号
-                if($postData['id']){
-                    $data = [
-                        'balance_sn' => $paySn
-                    ];
-                    $where = [
-                        'id'=>$postData['id'],
-                        'user_id'=>$this->user['id'],
-                        'status'=>0,
-                        'apply_status'=> 4,
-                    ];
+
+            case 4: // 支付尾款
+                if(!isset($postData['sn']) || empty($postData['sn'])){
+                    $this->errorMsg('失败');
                 }
-                $id  = $modelCityPartner->edit($data,$where);
-                if(false===$id){
+
+                $where = [
+                    'sn'=>$postData['sn'],
+                    'user_id'=>$this->user['id'],
+                    'status'=>0,
+                    'apply_status'=> 4,
+                ];
+                $res = $modelCityPartner->getInfo($where);
+                if(!$res){
+                    $modelCityPartner ->rollback();
+                    $this->errorMsg('失败');
+                }
+
+                $paySn = generateSN(); //内部支付编号
+                $data = ['balance_sn' => $paySn];
+
+                $res = $modelCityPartner->allowField(true)->isUpdate(true)->save($data,$where);
+                if(false===$res){
                     $modelCityPartner ->rollback();
                     $this->errorMsg('失败');
                 }
@@ -311,7 +298,7 @@ class CityPartner extends \common\controller\UserBase {
                 $modelPay = new \app\index\model\Pay();
                 $data = [
                     'sn' => $paySn,
-                    'actually_amount' =>config('custom.cityPartner_fee')[1]['amount'],
+                    'actually_amount' => (double)($info['amount']-$info['earnest']),
                     'user_id' => $this->user['id'],
                     'pay_code' => $postData['pay_code'],
                     'type' => config('custom.pay_type')['cityPartnerBalancePay']['code'],
@@ -322,6 +309,8 @@ class CityPartner extends \common\controller\UserBase {
                     $modelCityPartner ->rollback();
                     return errorMsg('失败');
                 };
+                $data['url'] = config('custom.pay_gateway').$paySn;
+                //$data = ['url'=>config('custom.pay_gateway').$paySn,'id'=>$id];
         }
 
         $this->successMsg('成功',$data);
@@ -364,5 +353,6 @@ class CityPartner extends \common\controller\UserBase {
         return $this->fetch('list_tpl');
 
     }
+
 
 }

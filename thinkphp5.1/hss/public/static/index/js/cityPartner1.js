@@ -270,11 +270,11 @@ function submitApplicant(_this,postData){
                     $('.apply-module:eq(0)').hide();
                     $('.apply-module:eq(1)').show();
 
-                     $('.city_name').html(data.data.city_name);
+    /*                 $('.city_name').html(data.data.city_name);
                      $('.city_level').html(data.data.level);
                      $('.market_name').html(data.data.market_name);
                      $('.amount').find('price').html(data.data.amount);
-                     $('.earnest').find('price').html(data.data.earnest);
+                     $('.earnest').find('price').html(data.data.earnest);*/
 
 
 
