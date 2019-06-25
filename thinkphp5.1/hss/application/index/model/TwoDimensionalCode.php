@@ -102,14 +102,14 @@ class TwoDimensionalCode extends \common\model\Base {
             if($info && !$info['code_url']){
                 $data = [
                     'id' => $info['id'],
-                    'code_url' => config('upload_dir.hss_user_QRCode').$filename,
+                    'code_url' => $filename,
                     'user_id' => $user['id'],
                 ];
             }
             if(empty($info)){
                 $data = [
                     'user_id' => $user['id'],
-                    'code_url' => config('upload_dir.hss_user_QRCode').$filename,
+                    'code_url' => $shareQRCode,
                 ];
             }
             $id = $this->edit($data);
@@ -130,7 +130,7 @@ class TwoDimensionalCode extends \common\model\Base {
             'hss_1'=> request()->domain().'/static/index/img/hss_1.jpg', // 460*534  分享底图
             'hss_2'=> request()->domain().'/static/index/img/hss_2.jpg', // 460*534  分享底图
             'hss_3'=> request()->domain().'/static/index/img/hss_3.jpg', // 460*534  分享底图
-            'qrcode'=> request()->domain().'/uploads/'.config('upload_dir.hss_user_QRCode').$filename, // 120*120
+            'qrcode'=> request()->domain().'/uploads/'.$shareQRCode, // 120*120
             'font'=>'./static/font/simhei.ttf',   //字体
         ];
         $avatar = $this->imgInfo($init['avatar']);
