@@ -32,13 +32,15 @@
 
 </style>
 
+{notempty name="$auth_city"}
 <section class="selected-city" style="display: none;">
 	<ul>
-		{volist name="auth_city" id="vo"}
+		{volist name="$auth_city" id="vo"}
 		<li>{$vo.city_name}</li>
 		{/volist}
 	</ul>
 </section>
+{/notempty}
 <div class="f24">
     <section class="f20 header_title separation-line">
 		<a href="javascript:void(0);" class="back_prev_page"></a>
@@ -46,14 +48,15 @@
     </section>
 	<section>
 		<div class="columns_flex l-r-sides" style="padding:0.15rem;border-bottom:1px solid #d9d9d9;">
-			<span class="selectedcity">
+
+			<span>
 				已授权城市：
 				{empty name="auth_city"}
 					<span>暂无</span>
 				{else /}
 					{volist name="auth_city" id="vo" key="k"}
 						{if $k>3}
-							<span title="sssss">...</span>
+							<span class="selectedcity">...</span>
 							<?php break; ?>
 						{/if}
 						<span>{$vo.city_name}</span>
@@ -265,7 +268,6 @@
 			var selectedCityList=$('.selected-city').html();
 			layer.open({
 				className:'',
-				btn:['确定'],
 				type: 1
 				,anim: 'up'
 				,style: 'position:fixed; bottom:0; left:0; width: 100%; height: 50%; padding:10px 0; border:none;',
