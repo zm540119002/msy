@@ -123,32 +123,6 @@ class CityPartner extends \common\controller\UserBase {
                     }
                 }
             }
-            $list = [
-                0 =>
-                    [
-                        'city_name' => '上海',
-                    ],
-                1 =>
-                    [
-                        'city_name' => '上海',
-                    ],
-                2 =>
-                    [
-                        'city_name' => '上海',
-                    ],
-                3 =>
-                    [
-                        'city_name' => '上海',
-                    ],
-                4 =>
-                    [
-                        'city_name' => '上海',
-                    ],
-                5 =>
-                    [
-                        'city_name' => '上海',
-                    ],
-            ];
 
             $this->assign('info',$info);
             $this->assign('auth_city',$list);
