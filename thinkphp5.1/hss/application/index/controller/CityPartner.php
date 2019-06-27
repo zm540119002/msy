@@ -176,7 +176,6 @@ class CityPartner extends \common\controller\UserBase {
             case 2: // 更新资料
                 $postData['user_id'] = $this->user['id'];
                 $res = $modelCityPartner->paymentUpdateBeforeInfo($postData,$info);
-
                 if(false===$res){
                     $this->errorMsg('失败');
                 }
@@ -268,6 +267,8 @@ class CityPartner extends \common\controller\UserBase {
                 $data['url'] = config('custom.pay_gateway').$paySn;
                 //$data = ['url'=>config('custom.pay_gateway').$paySn,'id'=>$id];
         }
+
+        $modelCityPartner->commit();
 
         $this->successMsg('成功',$data);
     }
