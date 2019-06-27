@@ -6,57 +6,42 @@
     </nav>
     <div class="page-container">
         <div class="cl pd-5 bg-1 bk-gray">
-            <span class="l">
-                <a href="javascript:void(0);" class="add btn btn-primary radius" data-id="60" title="促销" >
-                <i class="Hui-iconfont"></i> A类市场</a>
+            <span>
+                <i class="Hui-iconfont"></i>资格款设置：
             </span>
-
-            &nbsp;
-            <span class="l">
-                <a href="javascript:void(0);" class="add btn btn-primary radius" data-id="60" title="促销">
-                <i class="Hui-iconfont"></i> B类市场</a>
-            </span>
-
-            &nbsp;
-            <span class="l">
-                <a href="javascript:void(0);" class="add btn btn-primary radius" data-id="60" title="促销">
-                <i class="Hui-iconfont"></i> C类市场</a>
-            </span>
+            {volist name="marketList" id="vo"}
+            <span>
+                <a href="javascript:void(0);" class="market btn btn-primary radius" data-id="{$vo.id}" data-amount="{$vo.amount}" data-earnest="{$vo.earnest}">
+                <i class="Hui-iconfont"></i> {$vo.name}类市场</a>
+            </span>&nbsp;
+            {/volist}
         </div>
         <div class="main-content mt-20" id="mainContent">
             <div class="navbar-default mb-20">
                 <form id="form1" >
                     <div class="form-group">
-                        <select name="order_status" class="form-control">
+                        <select name="cpmi_id" class="form-control">
                             <option value="" selected="selected">市场分类</option>
-                            <option value="1">待付款</option>
-                            <option value="2">待收货</option>
-                            <option value="3">待评价</option>
-                            <option value="4">已完成</option>
-                            <option value="5">已取消</option>
-                            <option value="6">售后申请</option>
+
+                            {volist name="marketList" id="vo"}
+                            <option value="{$vo.id}">{$vo.name}类市场</option>
+                            {/volist}
+
                         </select>
                     </div>
                     <div class="form-group">
-                        <select name="order_status" class="form-control">
+                        <select name="province_code" class="form-control">
                             <option value="" selected="selected">省份</option>
-                            <option value="1">待付款</option>
-                            <option value="2">待收货</option>
-                            <option value="3">待评价</option>
-                            <option value="4">已完成</option>
-                            <option value="5">已取消</option>
-                            <option value="6">售后申请</option>
+                            {volist name="provinceList" id="vo"}
+                            <option value="{$vo.province_code}">{$vo.province_name}</option>
+                            {/volist}
                         </select>
                     </div>
                     <div class="form-group">
-                        <select name="order_status" class="form-control">
-                            <option value="" selected="selected">状态</option>
-                            <option value="1">待付款</option>
-                            <option value="2">待收货</option>
-                            <option value="3">待评价</option>
-                            <option value="4">已完成</option>
-                            <option value="5">已取消</option>
-                            <option value="6">售后申请</option>
+                        <select name="city_status" class="form-control">
+                            <option value="" selected="selected">申请状态</option>
+                            <option value="0">开放</option>
+                            <option value="1">关闭</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -84,7 +69,87 @@
     <script type="text/javascript" src="index_admin_js/common.js"></script>
     <script type="text/javascript">
         $(function () {
+            $('body').on('click','.market',function(){
+                var _this  = $(this);
+                var id     = _this.data('id');
+                var name   = _this.text().replace(/^\s*|\s*$/g,"");
+                var amount = _this.data('amount');
+                var earnest= _this.data('earnest');
+/*                _this.data('amount',44444);
+                $(".market").attr('data-amount',5555);
+                console.log(amount);*/
+                //postData.franchise_price = postData.franchise_price.replace(/^\s*|\s*$/g,"");
+       /*         console.log(id);
+                console.log(name);
+                console.log(amount);
+                console.log(earnest);
+                return false;*/
+                //return false;
+                var content = '<article class="page-container"> <form action="" id="fromMarket" method="post" class="form form-horizontal">'+
+                        '<div class="row cl"> <label class="form-label col-xs-4 col-sm-3">资格款：</label>'+
+                        '<div class="formControls col-xs-8 col-sm-9">'+
+                        '<input type="text" class="input-text" value="'+amount+'" placeholder="" name="amount"> </div></div> '+
+                        '<div class="row cl"> <label class="form-label col-xs-4 col-sm-3">订金：</label>'+
+                        '<div class="formControls col-xs-8 col-sm-9">'+
+                        '<input type="hidden" class="input-text" value="'+id+'" name="id">'+
+                        '<input type="text" class="input-text" value="'+earnest+'" placeholder="" name="earnest"> </div> </div>'+
+                        '<div class="row cl"> <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3"></div> </div> </form> </article>';
 
+                layer.open({
+                    title:['编辑'+name,'border-bottom:1px solid #d9d9d9;'],
+                    className:'forgetWalletPasswordLayer',
+                    content:content,
+                    type:1,
+                    area: ['400px', '240px'],
+                    btn:['保存'],
+                    success:function(){
+
+                    },
+                    yes:function(index){
+                        var postForm = $('#fromMarket');
+                        postData = postForm.serializeObject();
+
+                        postData.amount = postData.amount.replace(/^\s*|\s*$/g,"");
+                        postData.earnest= postData.earnest.replace(/^\s*|\s*$/g,"");
+
+                        if(!postData.id){
+                            dialog.error('类型不能为空');
+                            return false;
+                        }
+                        if(!postData.amount){
+                            dialog.error('资格款不能为空');
+                            return false;
+                        }
+                        if(!postData.earnest){
+                            dialog.error('订金不能为空');
+                            return false;
+                        }
+
+                        var url = module+'CityPartner/editMarket';
+                        $.post(url,postData,function (data) {
+                            if(data.status){
+                                layer.close(layer.index);
+                                _this.data('amount',postData.amount);
+                                _this.data('earnest',postData.earnest);
+
+                                layer.msg(data.info);
+             /*                   layer.msg(data.info, {
+                                    icon: 1,
+                                    time: 1500
+                                });*/
+
+                            }else{
+                                dialog.success(data.info);
+                                return false;
+                            }
+
+                        },'JSON');
+                    }
+                });
+
+
+                //console.log(id);
+            });
         });
     </script>
 {/block}
