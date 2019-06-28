@@ -99,11 +99,29 @@ class CityPartner extends Base {
     }
 
 
-    public function setField(){
+    public function setInfo(){
+
         $postData = input('post.');
-        $data     = reset($postData);
 
+        $postData = [
+            'id' => 11,
+            //'city_status' => 3,
+        ];
 
+        if($postData['id']){
+            $where = [
+                'id' => $postData['id'],
+            ];
+            unset($postData['id']);
+            $data = each($postData);
+
+            if($data){
+                $modelCityArea = new \app\index_admin\model\CityArea();
+
+                $res = $modelCityArea->where($where)->setField($data['key'], $data['value']);
+            }
+        }
+        //$data     = reset($postData);
     }
 
 
