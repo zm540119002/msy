@@ -1,6 +1,6 @@
 <?php
 namespace app\index\controller;
-class CallBack extends \common\controller\Base
+class CallBack extends HssBase
 {
     public function weixinBack(){
         $xml = file_get_contents('php://input');

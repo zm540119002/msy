@@ -7,7 +7,7 @@ namespace app\index\controller;
  * @package app\index\controller
  */
 
-class Sort extends \common\controller\Base{
+class Sort extends HssBase{
     /**首页
      */
     public function index(){

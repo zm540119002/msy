@@ -4,7 +4,7 @@ namespace app\index\controller;
 /**
  * 场景控制器
  */
-class Scene extends \common\controller\Base{
+class Scene extends HssBase{
     /**首页
      */
     public function index(){

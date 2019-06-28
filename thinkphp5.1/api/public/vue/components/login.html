@@ -190,6 +190,7 @@
         });
     });
 </script>
+<div class="bg"></div>
 <div id="loginDialogTpl" style="display: none">
     <div id="loginDialogRoot">
         <login></login>
@@ -229,6 +230,9 @@
     var loginDialogTriggerLayerIndex = 0;
     function loginDialogTrigger(){
         var content = $('#loginDialogTpl').html();
+        // $('.loginDialogTpl').show();
+        // $('.bg').show();
+        // $('body').css('overflow','hidden');
         loginDialogTriggerLayerIndex = layer.open({
             className:'loginLayer',
             skin:'loginLayer',
@@ -428,5 +432,40 @@
     .layui-m-layer.layui-m-layer1{
         position: absolute;
     }
+<<<<<<< HEAD
 
+=======
+    .loginDialogTpl{
+        background: #fff;
+        width:318px;
+        height:400px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        margin:auto;
+        z-index:1000;
+        border-radius:4px;
+    }
+    /* .layui-m-layermain{
+        position: absolute;
+        top:0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 10;
+    } */
+    /* .layui-m-anim-scale{
+        background: #ccc;
+    } */
+    /* .layui-m-layersection{
+        position: relative;
+        
+    } */
+    /* body{
+        position: fixed;
+        width: 100%;
+    } */
+>>>>>>> cd48e8f66666d9547528ad4534e9ca2196b15e3f
 </style>

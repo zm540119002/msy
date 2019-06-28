@@ -187,15 +187,18 @@ class Jssdk {
   //要授权取用户基本信息；
   public function getOauthUserInfo()
   {
-    $data = $this -> GetAccessTokenAndOpenid();
+    $data = $this -> getAccessTokenAndOpenid();
     $access_token = $data['access_token'];
     $openid =  $data['openid'];
     $url = "https://api.weixin.qq.com/sns/userinfo?access_token=".$access_token."&openid=".$openid."&lang=zh_CN";
     $res = $this->http_request($url);
     return json_decode($res, true);
   }
-  
-  function getJson($url){
+
+
+
+
+    function getJson($url){
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
@@ -238,7 +241,7 @@ class Jssdk {
 
 
   //通过code换取网页授权access_token与openid
-  public function GetAccessTokenAndOpenid(){
+  public function getAccessTokenAndOpenid(){
     if ( !isset($_GET['code'])){
       //触发微信返回code码
 //			$baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].$_SERVER['QUERY_STRING']);
@@ -1201,7 +1204,7 @@ class Jssdk {
 
 
   //HTTP请求（支持HTTP/HTTPS，支持GET/POST）
-  protected function http_request($url, $data = null)
+  public function http_request($url, $data = null)
   {
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_URL, $url);

@@ -2,7 +2,7 @@
 namespace app\index\controller;
 
 
-class Project extends \common\controller\Base{
+class Project extends HssBase{
     /**首页
      */
     public function index(){

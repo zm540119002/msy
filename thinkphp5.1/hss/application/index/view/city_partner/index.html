@@ -14,27 +14,19 @@
 		<div class="columns_flex l-r-sides cy-head">
 			<div>
                 {if $user}
-                {if $member.type == 2}
-                <span>城市合伙人</span>
+                    {if $member.type == 4}
+                        <span>黑森森城市合伙人</span>
+                    {else /}
+                        <span class="cy-icon"></span>
+                        <span>黑森森城市合伙人</span>
+                    {/if}
                 {else /}
-                <span class="cy-icon"></span>
-                <span>非合作伙伴</span>
-                {/if}
-                {else /}
-                <span>未登陆</span>
+                    <span>未登陆</span>
                 {/if}
             </div>
             <div>
-                <a href="javascript:void(0)" class="async_login gr"  data-jump_url="{:url('CityPartner/registered')}">
-
-                    {if $apply[0]['apply_status'] == 4}
-                    城市合伙人资格审核中...
-                    {elseif $apply[0]['apply_status'] == 5}
-                    城市合伙人资格余额限时支付...
-                    {else /}
+                <a href="javascript:void(0)" class="async_login" data-jump_url="{:url('CityPartner/registered')}">
                     城市合伙人资格申请&nbsp;&nbsp;>
-                    {/if}
-
                 </a>
             </div>
 		</div>
@@ -46,7 +38,11 @@
                 </a>
             </li>
             <li>
-                <a href="{:url('Franchise/makersManage')}" class="right-arrow">
+                <!--<a href="{:url('Franchise/makersManage')}" class="right-arrow">-->
+                    <!--<span class="ck"></span>-->
+                    <!--黑森森城市合伙人新零售创客管理-->
+                <!--</a>-->
+                <a href="" class="right-arrow">
                     <span class="ck"></span>
                     黑森森城市合伙人新零售创客管理
                 </a>

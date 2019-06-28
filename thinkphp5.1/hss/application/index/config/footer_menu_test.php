@@ -165,7 +165,7 @@ return [
                 'apply_city_partner_qualification',
                 'jump_url'
             ],
-            'action'=>url('/index/CityPartner/city'),
+            'action'=>url('/index/CityPartner/registered'),
         ],[// 23
             'name'   => '取消订单',
             'class'=>[

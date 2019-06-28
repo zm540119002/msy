@@ -1,6 +1,6 @@
 <?php
 namespace app\index\controller;
-class Promotion extends \common\controller\Base{
+class Promotion extends HssBase{
     /**促销详情
      */
     public function detail(){

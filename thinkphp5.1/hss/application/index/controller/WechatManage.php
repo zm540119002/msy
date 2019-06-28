@@ -6,7 +6,7 @@ namespace app\index\controller;
  * 微信处理
  */
 define("TOKEN", "meishangyun");
-class WechatManage extends \common\controller\Base {
+class WechatManage extends HssBase {
     public function index(){
         if (!isset($_GET['echostr'])) {
             $this->responseMsg();
@@ -38,7 +38,6 @@ class WechatManage extends \common\controller\Base {
     {
         $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
         if (!empty($postStr)){
-            $this->logger("R".$postStr);
             $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
             $RX_TYPE = trim($postObj->MsgType);
             //消息类型分离
@@ -69,7 +68,6 @@ class WechatManage extends \common\controller\Base {
                     $result = "unknown msg type: ".$RX_TYPE;
                     break;
             }
-            $this->logger("T ".$result);
             echo $result;
         }else {
             echo "";
@@ -89,39 +87,59 @@ class WechatManage extends \common\controller\Base {
         {
             case "subscribe":
                 $info = $weixin->get_user_info($openid);
-                file_put_contents('weixin.txt',json_encode($info));
                 $municipalities = array("北京", "上海", "天津", "重庆", "香港", "澳门");
                 $sexes = array("", "男", "女");
                 $data = array();
-                $data['openid'] = $openid;
+                $data['openid'] = $info['openid'];
                 $data['nickname'] = str_replace("'", "", $info['nickname']);
                 $data['sex'] = $sexes[$info['sex']];
                 $data['country'] = $info['country'];
                 $data['province'] = $info['province'];
                 $data['city'] = (in_array($info['province'], $municipalities))?$info['province'] : $info['city'];
-                $data['scene'] = (isset($object->EventKey) && (stripos(strval($object->EventKey),"qrscene_")))?str_replace("qrscene_","",$object->EventKey):"0";
-
+                $data['subscribe_scene'] = $info['subscribe_scene'];
                 $data['headimgurl'] = $info['headimgurl'];
-                $data['subscribe'] = $info['subscribe_time'];
+                $data['subscribe'] = $info['subscribe'];
+                $data['subscribe_time'] = $info['subscribe_time'];
                 $data['heartbeat'] = time();
                 $data['remark'] = $info['remark'];
-                $data['tagid'] = $info['tagid_list'];
-                $content = "欢迎关注，".$object->EventKey;
-//                $userModel = new \app\index\model\WeixinUser();
-//                $userModel->save($data);
+                $data['referee'] = $info['qr_scene']; //带参场景关注类型
+
+                $userModel = new \app\index\model\WeixinUser();
+                $config = [
+                    'where'=>[
+                        ['openid','=',$info['openid']]
+                    ],'field'=>[
+                        'id','subscribe'
+                    ]
+                ];
+                $weixinUserInfo = $userModel->getInfo($config);
+                if($weixinUserInfo && !$weixinUserInfo['subscribe']){
+                    $data['id'] = $weixinUserInfo['id'];
+                }
+                if($object->EventKey){
+                    echo substr($object->EventKey,8);
+                }
+                $userModel->edit($data);
+                //$content = "欢迎关注，".$object->EventKey.json_encode($info);
+                $content = "欢迎关注黑森森公众号，请点击底部菜单访问网站\n";
+
                 break;
             case "unsubscribe":
                 $userModel = new \app\index\model\WeixinUser();
-                $userModel->where('openid',$openid)->delete();
-                // $User->where("`openid` = '".$openid."'")->delete();
-                // $data['heartbeat'] = 0;
-                // $User->where("`openid` = '".$openid."'")->save($data); // 根据条件更新记录
+                $data = [
+                    'subscribe' => 0
+                ];
+                $where = [
+                    'openid' => $openid
+                ];
+                $userModel -> allowField(true)->isUpdate(true)->save($data,$where);
                 break;
             case "VIEW":
                 $content = "跳转链接 ".$object->EventKey;
                 break;
             case "SCAN":
-                $content = "扫描参数二维码，场景ID：".$object->EventKey;
+//                $content = "扫描参数二维码，场景ID：".$object->EventKey;
+                $content = "欢迎使用黑森森公众号，请点击底部菜单访问网站\n";
                 break;
             case "LOCATION":
 
@@ -447,9 +465,9 @@ $item_str
     public function createQrcode()
     {
         $mineTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
-        $a = $mineTools-> create_qrcode('QR_SCENE', 16);
-        $shareQRCode = createLogoQRcode($a['url'],config('upload_dir.hss_user_QRCode'));
-        p($shareQRCode);
+        $a = $mineTools-> create_qrcode('QR_LIMIT_SCENE', 15);
+       // $shareQRCode = createLogoQRcode($a['url'],config('upload_dir.hss_user_QRCode'));
+      print_r($a);
     }
 
 }

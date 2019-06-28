@@ -1,7 +1,7 @@
 <?php
 namespace app\index\controller;
 
-class Consultation extends \common\controller\Base{
+class Consultation extends HssBase{
     /**首页
      */
     public function index(){

@@ -468,10 +468,11 @@ class Payment extends \common\controller\Base {
         $modelCityPartner ->setConnection(config('custom.system_id')[$systemId]['db']);
 
         $data = [
-            'apply_status'=>4,                              // 状态
+            'apply_status'=>3,                              // 状态
             'payment_time'=>time(),
             'pay_sn'=>$info['pay_sn'],                      // 支付单号 退款用
-            'pay_code'=>$info['pay_code'],                      // 支付方式
+            'pay_code'=>$info['pay_code'],                   // 支付方式
+            'update_time' => time(),
         ];
         $condition = [
             ['status', '=', 0],
@@ -481,7 +482,7 @@ class Payment extends \common\controller\Base {
         if($info['type'] == 4){
             //席位支付
             $condition[] = ['earnest_sn','=',$info['sn']];
-            $data['apply_status']=4;
+            $data['apply_status']=3;
         }elseif($info['type'] == 5){
             //增加平台member
             $modelMember = new \app\index\model\Member();
@@ -512,7 +513,7 @@ class Payment extends \common\controller\Base {
 
             //尾款支付
             $condition[] = ['balance_sn','=',$info['sn']];
-            $data['apply_status']=6;
+            $data['apply_status']=5;
 
         }
         unset($data['id']);
