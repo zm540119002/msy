@@ -101,27 +101,27 @@ class CityPartner extends Base {
 
     public function setInfo(){
 
-        $postData = input('post.');
-
-        $postData = [
-            'id' => 11,
-            //'city_status' => 3,
-        ];
-
-        if($postData['id']){
-            $where = [
-                'id' => $postData['id'],
-            ];
-            unset($postData['id']);
-            $data = each($postData);
-
-            if($data){
-                $modelCityArea = new \app\index_admin\model\CityArea();
-
-                $res = $modelCityArea->where($where)->setField($data['key'], $data['value']);
-            }
+        $id  = input('post.id/d');
+        if (!$id){
+            return errorMsg('失败');
         }
-        //$data     = reset($postData);
+
+        $info= array();
+        // 上下架
+        if (input('?shelf_status')){
+            $city_status = input('post.city_status/d')==2 ? 1 : 2 ;
+
+            $info = ['city_status'=>$city_status];
+        }
+
+        $modelCityArea = new \app\index_admin\model\CityArea();
+        $rse = $modelCityArea->where(['id'=>$id])->setField($info);
+
+        if(!$rse){
+            return errorMsg('失败');
+        }
+        return successMsg('成功');
+
     }
 
 
