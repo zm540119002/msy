@@ -48,7 +48,11 @@
                     <span class="s_i"></span>
                 </div>
                 <!-- 跳转 -->
-                <div v-else-if="menu.class.indexOf('jump_url')!==-1" class="async_login" :data-jump_url="menu.action">
+                <div v-else-if="menu.class.indexOf('jump_url')!==-1" class="jump_url" @click="jump_url" :data-jump_url="menu.action">
+                    <span class="s_i"></span>
+                </div>
+                <!-- 异步验证 -->
+                <div v-else-if="menu.class.indexOf('async_login')!==-1" class="async_login" :data-jump_url="menu.action">
                     <span class="s_i"></span>
                 </div>
                 <!-- 默认 -->

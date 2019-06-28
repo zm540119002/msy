@@ -155,7 +155,7 @@ return [
             'class'=>[
                 'bottom_item',
                 'apply_franchisee_qualification',
-                'jump_url'
+                'async_login'
             ],
             'action'=>url('/index/Franchise/applyFranchise'),
         ],[// 22
@@ -163,7 +163,7 @@ return [
             'class'=>[
                 'bottom_item',
                 'apply_city_partner_qualification',
-                'jump_url'
+                'async_login'
             ],
             'action'=>url('/index/CityPartner/registered'),
         ],[// 23
