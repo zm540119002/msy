@@ -75,16 +75,7 @@
                 var name   = _this.text().replace(/^\s*|\s*$/g,"");
                 var amount = _this.data('amount');
                 var earnest= _this.data('earnest');
-/*                _this.data('amount',44444);
-                $(".market").attr('data-amount',5555);
-                console.log(amount);*/
-                //postData.franchise_price = postData.franchise_price.replace(/^\s*|\s*$/g,"");
-       /*         console.log(id);
-                console.log(name);
-                console.log(amount);
-                console.log(earnest);
-                return false;*/
-                //return false;
+
                 var content = '<article class="page-container"> <form action="" id="fromMarket" method="post" class="form form-horizontal">'+
                         '<div class="row cl"> <label class="form-label col-xs-4 col-sm-3">资格款：</label>'+
                         '<div class="formControls col-xs-8 col-sm-9">'+
@@ -133,10 +124,6 @@
                                 _this.data('earnest',postData.earnest);
 
                                 layer.msg(data.info);
-             /*                   layer.msg(data.info, {
-                                    icon: 1,
-                                    time: 1500
-                                });*/
 
                             }else{
                                 dialog.success(data.info);
@@ -147,8 +134,6 @@
                     }
                 });
 
-
-                //console.log(id);
             });
         });
     </script>
