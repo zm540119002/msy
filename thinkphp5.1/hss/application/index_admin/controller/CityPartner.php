@@ -17,41 +17,32 @@ class CityPartner extends Base {
     }
 
     public function manage(){
+
         $modelCityArea = new \app\index_admin\model\CityArea();
-        $config = [
+        $condition = [
             'field' => [
-                'id','area_id','province_name','city_name','area_parent_id parentId','cpmi_id level'
-            ]
+                'province_name','province_code'
+            ],
+            'where' => [
+                ['status','=',0],
+            ],
+            'group' => 'province_code'
         ];
-        $data = $modelCityArea->getList($config);
+        $provinceList = $modelCityArea->getList($condition);
 
-        $city = [];
-        $province = [];
-        foreach($data as $k => $v){
+        $modelCityPartnerMarketInfo = new \app\index_admin\model\CityPartnerMarketInfo();
+        $condition2 = [
+            'field' => [
+                'id','name','amount','earnest'
+            ],
+            'where' => [
+                ['status','=',0]
+            ],
+        ];
+        $marketList = $modelCityPartnerMarketInfo->getList($condition2);
 
-            //unset();
-            if(!isset($province[$v['parentId']])){
-                //$v['parentId'] = 10000;
-                $province[$v['parentId']] = $v;
-                //$i = $v;
-                $p['id'] = $v['parentId'];
-                $p['name'] = $v['province_name'];
-                $p['parentId'] = 100000;
-                $p['level'] = 0;
-                $city[] = $p;
-            }
-            $c['id'] = $v['area_id'];
-            $c['name'] = $v['city_name'];
-            $c['parentId'] = $v['parentId'];
-            $c['level'] = $v['level'];
-            $city[] = $c;
-
-        }
-
-        $cityData = 'var cityData='.json_encode($city);
-
-        file_put_contents('static/index/js/mobileSelector/js/json2.js',$cityData);
-
+        $this->assign('provinceList',$provinceList);
+        $this->assign('marketList',$marketList);
 
         return $this->fetch();
     }
@@ -69,13 +60,15 @@ class CityPartner extends Base {
 
         $condition = [
             'field' => [
-                'ca.area_id id','ca.province_name','ca.city_name','ca.city_status','ca.alone_amount','ca.alone_earnest',
+                'ca.id','ca.province_name','ca.city_name','ca.city_status','ca.alone_amount','ca.alone_earnest',
                 'cpmi.amount','cpmi.earnest','cpmi.name market_name',
                 'cp.company_name','cp.applicant','cp.mobile','cp.user_id'
             ],
             'join' => [
                 ['city_partner_market_info cpmi','ca.cpmi_id = cpmi.id','left'],
                 ['city_partner cp','ca.id = cp.city_area_id','left'],
+            ],'where' => [
+                //['ca.id','=',25]
             ],
             'order'=>[
                 'ca.id'=>'asc',
@@ -87,11 +80,49 @@ class CityPartner extends Base {
         if($keyword) $condition['where'][] = ['ca.city_name','like', '%' . trim($keyword) . '%'];
 
         $list = $modelCityArea->pageQuery($condition);
+        //$list = $modelCityArea->getList($condition);
+
+        //$cityIds = array_column($list,'province_name');  //键值
+
+/*        foreach($list as $k => $v){
+
+            unset($v['']);
+            $list[$k]['child'][] = $v;
+            p($v['id']);
+
+        }
+        exit;*/
 
         $this->assign('list',$list);
 
         return view('list_tpl');
     }
+
+
+    public function setField(){
+        $postData = input('post.');
+        $data     = reset($postData);
+
+
+    }
+
+
+    public function editMarket(){
+        $data = input('post.');
+
+        $modelCityPartnerMarketInfo = new \app\index_admin\model\CityPartnerMarketInfo();
+        $data['update_time'] = time();
+        $res = $modelCityPartnerMarketInfo->edit($data);
+        if($res){
+            $this->putDataJson();
+
+            return successMsg();
+        }else{
+            return errorMsg();
+        }
+    }
+
+
 
     // 城市生成json文件  // {"id":"542600","name":"林芝地区","shortName":"林芝","parentId":"540000","level":"2"}
     public function putDataJson(){
