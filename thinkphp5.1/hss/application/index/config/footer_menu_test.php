@@ -154,16 +154,14 @@ return [
             'name'   => '申请加盟店资格',
             'class'=>[
                 'bottom_item',
-                'apply_franchisee_qualification',
-                'async_login'
+                'apply_franchisee_qualification'
             ],
             'action'=>url('/index/Franchise/applyFranchise'),
         ],[// 22
             'name'   => '申请城市合伙人资格',
             'class'=>[
                 'bottom_item',
-                'apply_city_partner_qualification',
-                'async_login'
+                'apply_city_partner_qualification'
             ],
             'action'=>url('/index/CityPartner/registered'),
         ],[// 23
