@@ -108,7 +108,7 @@
                         <img class="left" :src="product_src?('public_uploads/' + product_src):('api_common_img/default/no_pic_100.jpg') " alt="">
                     </a>
                 </div>
-                <div  class="right">
+                <div  class="right scene">
                     <div class="product_name">
                         <p class="two-line-omit">{{product_name}}</p>
                     </div>
@@ -593,5 +593,11 @@
     }
    .index_product .product_specs{
        min-height: 0.6rem;
+   }
+   .scene .product_name p{
+       font-size: 0.28rem;
+   }
+   .scene .product_specs p{
+       color: #999;
    }
 </style>
