@@ -93,7 +93,7 @@ class TwoDimensionalCode extends \common\model\Base {
                 return errorMsg('创建新目录失败');
             }
             //生产没有logo二维码图片
-            $filename = 'platform_rqcode_user_id_'.$this->user['id'].'.jpg';
+            $filename = 'platform_rqcode_user_id_'.$user['id'].'.jpg';
             $saveFile = $newPath.$filename;
             file_put_contents($saveFile, $imgdata);
             //保存数据库路径
