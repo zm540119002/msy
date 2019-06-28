@@ -286,7 +286,7 @@
                 return {};
             }
         });
-        //异步验证
+        //异步验证，登录成功跳转
         $('body').on('click','.async_login',function(){
             let _this = $(this);
             login_success_callback_private = function(){
