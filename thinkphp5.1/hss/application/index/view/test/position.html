@@ -27,14 +27,15 @@
 <script>
 	// <input class="aaa" type="text" placeholder="111"/><br/><input class="aaa" type="text" placeholder="222"/>
 	$(function(){
-		var content=$('.userInfoWrapper').html();
+		var content=$('#loginDialogTpl').html();
 		 new Vue({
 			el: '#app',
 			methods: {
 				handleClick: function() {
 					this.$messagebox({
-						title:'111',
-						message:content
+						title:'',
+						message:content,
+						showConfirmButton:false
 					});
 				}
 			},

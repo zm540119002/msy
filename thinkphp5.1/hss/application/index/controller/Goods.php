@@ -319,6 +319,18 @@ class Goods extends HssBase{
             array_push($unlockingFooterCart['menu'][3]['class'],'group_btn30');
             $this->assign('unlockingFooterCart',json_encode($unlockingFooterCart));
 
+            //微信分享
+            //获取当前url
+            $currentLink =  $this->host.$_SERVER['REQUEST_URI'];
+            $shareImgUrl =  $this->host.'/'.config('upload_dir.upload_path').'/'.$info['thumb_img'];
+            $shareInfo = [
+                'title'=>$info['name'], //分享的标题
+                'shareLink'=>$currentLink, //分享的url
+                'desc'=> $info['specification'], //分享的描述
+                'shareImgUrl'=>$shareImgUrl, //分享的图片
+                'backUrl'=>$currentLink //分享完成后跳转的url
+            ];
+            $this->assign('shareInfo',$shareInfo);
             return $this->fetch();
         }
     }

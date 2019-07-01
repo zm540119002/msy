@@ -28,11 +28,13 @@
                 // 获取"分享到朋友圈"按钮点击状态及自定义分享内容接口
                 wx.onMenuShareTimeline({
                     title: '{$shareInfo["title"]}', // 分享标题
-                    link: '{$shareInfo["shareLink"]}',
-                    desc: '{$shareInfo["desc"]}',
+                    link: '{$shareInfo["shareLink"]}', //分享链接
+                    desc: '{$shareInfo["desc"]}', //分享描述
                     imgUrl:'{$shareInfo["shareImgUrl"]}', // 分享图标
                     success: function () {
-                        window.location.href='{$shareInfo["backUrl"]}';
+                        var url = '{$shareInfo["backUrl"]}';
+                        dialog.success('分享成功',url);
+                       // window.location.href='{$shareInfo["backUrl"]}'; //分享成功跳转页
                     },
                     cancel: function () {
                         return false;
