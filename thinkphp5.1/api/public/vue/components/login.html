@@ -227,25 +227,25 @@
         });
     }
     //登录-弹窗触发
-    // var loginDialogTriggerLayerIndex = 0;
-    // function loginDialogTrigger(){
-    //     var content = $('#loginDialogTpl').html();
-    //     loginDialogTriggerLayerIndex = layer.open({
-    //         className:'loginLayer',
-    //         skin:'loginLayer',
-    //         type:1,
-    //         shadeClose:false,
-    //         content:content,
-    //         success:function(index){
-    //             fixedLayer();
-    //         },yes:function(index){
-    //             layer.close(index);
-    //         },
-    //         end:function(){
-    //             cancleFixedLayer();
-    //         }
-    //     });
-    // }
+    var loginDialogTriggerLayerIndex = 0;
+    function loginDialogTrigger(){
+        var content = $('#loginDialogTpl').html();
+        loginDialogTriggerLayerIndex = layer.open({
+            className:'loginLayer',
+            skin:'loginLayer',
+            type:1,
+            shadeClose:false,
+            content:content,
+            success:function(index){
+                fixedLayer();
+            },yes:function(index){
+                layer.close(index);
+            },
+            end:function(){
+                cancleFixedLayer();
+            }
+        });
+    }
     var login_success_callback_common = function(param){
         //localStorage.cartList 入库
         add_localStorage_cartList();
@@ -277,21 +277,10 @@
         }
     };
     $(function(){
-        var content = $('#loginDialogTpl').html();
         new Vue({
             el:'#loginDialogRoot',
             data:function(){
                 return {};
-            },
-            methods:{
-
-            },
-            created:function(){
-                this.$messagebox({
-						title:'',
-						message:content,
-						showConfirmButton:false
-					});
             }
         });
         //异步验证，登录成功跳转
