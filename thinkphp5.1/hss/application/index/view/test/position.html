@@ -23,7 +23,11 @@
 				}
 			},
 			created:function(){
-				this.$messagebox('提示', '操作成功');
+				this.$messagebox({
+					title: '提示',
+					message: '<input type="text" placeholder="111"/>',
+					showCancelButton: true
+				});
 			}
 		})
 	})
