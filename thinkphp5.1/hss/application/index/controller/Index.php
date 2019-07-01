@@ -53,7 +53,8 @@ class Index extends HssBase {
         $list = $modelUser->getList($condition);
 
         foreach($list as $k => $v){
-            $list[$k]['create_time'] = strtotime("-{$k} day");
+            $time = $k+1;
+            $list[$k]['create_time'] = strtotime("-$time day");
         }
 
         $this->assign('spaceList',$list);
