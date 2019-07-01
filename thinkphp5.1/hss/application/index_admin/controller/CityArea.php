@@ -4,17 +4,21 @@ namespace app\index_admin\controller;
 /**
  * 城市合伙人控制器
  */
-class CityPartner extends Base {
+class CityArea extends Base {
+
+    protected $obj;
+
+    protected $beforeActionList = [
+        'currentModelClass'  =>  ['only'=>'manage,edit,getList,setField'],
+    ];
+
+    protected  function currentModelClass(){
+        $this->obj = new \app\index_admin\model\CityArea();
+    }
 
     public function manage(){
 
-        $id = input('id/d');
-
-        if($id){
-
-        }
-
-        $modelCityArea = new \app\index_admin\model\CityPartner();
+        //$modelCityArea = new \app\index_admin\model\CityArea();
         $condition = [
             'field' => [
                 'province_name','province_code'
@@ -24,7 +28,7 @@ class CityPartner extends Base {
             ],
             'group' => 'province_code'
         ];
-        $provinceList = $modelCityArea->getList($condition);
+        $provinceList = $this->obj->getList($condition);
 
         $modelCityPartnerMarketInfo = new \app\index_admin\model\CityPartnerMarketInfo();
         $condition2 = [
@@ -40,7 +44,7 @@ class CityPartner extends Base {
         $this->assign('provinceList',$provinceList);
         $this->assign('marketList',$marketList);
 
-        return $this->fetch('city_area_manage');
+        return $this->fetch();
     }
 
     /**
@@ -48,11 +52,7 @@ class CityPartner extends Base {
      */
     public function getList(){
 
-/*        $condition = [
-            'field'=>['id','name','shelf_status'],
-        ];*/
-
-        $modelCityArea = new \app\index_admin\model\CityArea();
+        //$modelCityArea = new \app\index_admin\model\CityArea();
 
         $condition = [
             'field' => [
@@ -75,47 +75,11 @@ class CityPartner extends Base {
         $keyword = input('get.keyword/s');
         if($keyword) $condition['where'][] = ['ca.city_name','like', '%' . trim($keyword) . '%'];
 
-        $list = $modelCityArea->pageQuery($condition);
-        //$list = $modelCityArea->getList($condition);
-
-        //$cityIds = array_column($list,'province_name');  //键值
-
-/*        foreach($list as $k => $v){
-
-            unset($v['']);
-            $list[$k]['child'][] = $v;
-            p($v['id']);
-
-        }
-        exit;*/
+        $list = $this->obj->pageQuery($condition);
 
         $this->assign('list',$list);
 
         return view('list_tpl');
-    }
-
-    public function getInfo(){
-        $id = input('id/d');
-        if (!$id){
-            return errorMsg('失败');
-        }
-
-        $condition = [
-            'field' => [
-                '*'
-            ],
-            'where' => [
-                ['cp.status','=',0],
-            ],'order' => [
-                'cp.update_time' => 'desc'
-            ],
-        ];
-
-        $modelCityPartner = new \app\index_admin\model\CityPartner();
-        $list = $modelCityPartner->getList($condition);
-
-        $this->assign('list',$list);
-        return $this->fetch('manage');
     }
 
     public function setField(){
@@ -133,8 +97,8 @@ class CityPartner extends Base {
             $info = ['city_status'=>$city_status];
         }
 
-        $modelCityArea = new \app\index_admin\model\CityArea();
-        $rse = $modelCityArea->where(['id'=>$id])->setField($info);
+        //$modelCityArea = new \app\index_admin\model\CityArea();
+        $rse = $this->obj->where(['id'=>$id])->setField($info);
 
         if(!$rse){
             return errorMsg('失败');
@@ -159,7 +123,6 @@ class CityPartner extends Base {
             return errorMsg();
         }
     }
-
 
 
     // 城市生成json文件  // {"id":"542600","name":"林芝地区","shortName":"林芝","parentId":"540000","level":"2"}
