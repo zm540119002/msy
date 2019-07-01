@@ -322,7 +322,7 @@ class Goods extends HssBase{
             //微信分享
             //获取当前url
             $currentLink =  $this->host.$_SERVER['REQUEST_URI'];
-            $shareImgUrl =  $this->host.config('upload_dir.upload_path').$info['thumb_img'];
+            $shareImgUrl =  $this->host.'/'.config('upload_dir.upload_path').'/'.$info['thumb_img'];
             $shareInfo = [
                 'title'=>$info['name'],
                 'shareLink'=>$currentLink,
