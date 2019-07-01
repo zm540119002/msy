@@ -4,7 +4,7 @@ namespace app\index\controller;
 // 前台首页
 use think\Console;
 
-class Index extends HssBase{
+class Index extends HssBase {
     /**
      * 促销列表，场景列表，商品列表 -ajax
      */
