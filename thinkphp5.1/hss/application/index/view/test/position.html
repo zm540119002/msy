@@ -17,7 +17,7 @@
 <div style="height:200px;"></div>
 <div style="height:200px;"></div>
 <div id="app">
-	<el-button @click="visible = true">Button</el-button>
+	<el-button @click="open">Button</el-button>
 	<el-dialog :visible.sync="visible" title="Hello world">
 		<p>Try Element</p>
 	</el-dialog>
@@ -33,6 +33,19 @@
 			el: '#app',
 			data: function() {
 				return { visible: false }
+			},
+			methods: {
+				open() {
+					this.$alert('这是一段内容', '标题名称', {
+					confirmButtonText: '确定',
+					callback: action => {
+						this.$message({
+						type: 'info',
+						message: `action: ${ action }`
+						});
+					}
+					});
+				}
 			}
 		})
 	})
