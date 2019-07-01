@@ -107,7 +107,7 @@ $('body').on('click','.set-shelf-status',function(){
     postData.shelf_status = shelf_status;
     var url =  controller + 'setInfo';
     layer.open({
-        btn: ['确定','取消'],//按钮 做到这里
+        btn: ['确定','取消'],
         content:text+' ?',
         yes:function (index) {
             $.post(url,postData,function(msg){

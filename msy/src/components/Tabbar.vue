@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div>
     <nav class="mui-bar mui-bar-tab">
 			<router-link class="mui-tab-item" to="/" exact>
 				<span class="mui-icon mui-icon-home"></span>

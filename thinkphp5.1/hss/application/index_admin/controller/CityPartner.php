@@ -11,7 +11,15 @@ class CityPartner extends Base {
         $city_id = input('id/d');
 
         if($city_id){
-            $this->assign('city_id',$city_id);
+            $modelCityArea = new \app\index_admin\model\CityArea();
+            $condition = [
+                'where' => [
+                    ['id','=',$city_id]
+                ],
+            ];
+            $info = $modelCityArea->getInfo($condition);
+
+            $this->assign('info',$info);
         }
 
         return $this->fetch();
@@ -22,21 +30,14 @@ class CityPartner extends Base {
      */
     public function getList(){
 
-/*        $model = new \app\index_admin\model\CityPartner();
-        $table = $model->getTableFields();
-        foreach($table as $k => $v){
-            $table[$k] = "'".$v."'";
-        }
-        $table = implode(',',$table);
-
-        p($table);
-        exit;*/
-
-        $modelCityArea = new \app\index_admin\model\CityPartner();
+        $modelCityPartner = new \app\index_admin\model\CityPartner();
 
         $condition = [
             'field' => [
                 'id','sn','user_id','company_name','applicant','mobile','earnest','amount','payment_time','pay_sn','pay_code','balance_sn','apply_status','create_time','update_time','earnest_sn',
+            ],
+            'where' => [
+                ['status','=',0],
             ],
             'order'=>[
                 'update_time' => 'desc',
@@ -46,34 +47,61 @@ class CityPartner extends Base {
         // 条件
         $keyword = input('get.keyword/s');
         $city_id = input('get.city_id/d');
-        if($keyword) $condition['where'][] = ['mobile','like', '%' . trim($keyword) . '%'];
-        //if($city_id) $condition['where'][] = ['city_area_id','=',$city_id];
+        if($keyword) $condition['where'][] = ['sn','like', '%' . trim($keyword) . '%'];
+        if($city_id) $condition['where'][] = ['city_area_id','=',$city_id];
 
         $condition['where'][] = ['apply_status','>',1];
 
-        $list = $modelCityArea->pageQuery($condition);
+        $list = $modelCityPartner->pageQuery($condition);
 
         $this->assign('list',$list);
 
         return view('list_tpl');
     }
 
-    public function setField(){
+    public function setApplyStatus(){
 
         $id  = input('post.id/d');
         $apply_status = input('post.apply_status/d');
+
         if (!$id || !$apply_status){
             return errorMsg('失败');
         }
 
+        $modelCityPartner = new \app\index_admin\model\CityPartner();
+
         if($apply_status==4){
             $info = ['apply_status'=>4];
+
+            $where = [
+                ['id','=',$id],
+                ['apply_status','=',3],
+                ['status','=',0],
+            ];
+            $buildSql = $modelCityPartner->where($where)->field('city_area_id')->buildSql();
+
+            $condition = [
+                'field' => [
+                    'cp.id'
+                ],
+                'where' => [
+                    ['cp.status','=',0],
+                    ['cp.apply_status','in','4,5'],
+                    ['cp.city_area_id','EXP','='.$buildSql],
+                ],
+            ];
+            $res = $modelCityPartner->getInfo($condition);
+
+            if($res){
+                return errorMsg('当前城市已有合伙人或有已通过审核通过的合伙人 !');
+            }
+
         }else{
             $info = ['apply_status'=>-1];
         }
 
-        $modelCityArea = new \app\index_admin\model\CityArea();
-        $rse = $modelCityArea->where(['id'=>$id])->setField($info);
+
+        $rse = $modelCityPartner->where(['id'=>$id])->setField($info);
 
         if(!$rse){
             return errorMsg('失败');
