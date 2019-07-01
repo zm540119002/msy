@@ -326,7 +326,7 @@ class Goods extends HssBase{
             $shareInfo = [
                 'title'=>$info['name'], //分享的标题
                 'shareLink'=>$currentLink, //分享的url
-                'desc'=> $info['specification'], //分享的描述
+                'desc'=> $info['intro'], //分享的描述
                 'shareImgUrl'=>$shareImgUrl, //分享的图片
                 'backUrl'=>$currentLink //分享完成后跳转的url
             ];
