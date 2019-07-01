@@ -1,0 +1,60 @@
+<div class="search-result">
+    {notempty name='list'}
+    <table class="table tb-type2">
+        <thead>
+        <tr class="thead">
+<!--            <th></th>-->
+            <th>省份</th>
+            <th>城市</th>
+            <th>市场分类</th>
+            <th>资格款</th>
+            <th>定金</th>
+            <th>状态</th>
+            <th>当前合伙人</th>
+            <th>申请记录</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        {volist name="list" id="vo"}
+        <tr class="hover" data-id="{$vo.id}">
+            <td class="w48">{$vo.province_name}
+            <td class="w48 city-name">{$vo.city_name}
+            <td class="w50pre name"><span title="" class="editable ">{$vo.market_name}</span></td>
+            <td class="w50pre name"><span title="" class="editable ">{$vo.alone_amount>0 ? ($vo.alone_amount) : ($vo.amount);}</span></td>
+            <td class="w50pre name"><span title="" class="editable ">{$vo.alone_earnest>0 ? ($vo.alone_earnest) : ($vo.earnest);}</span></td>
+            <td class="w96 shelf-status">
+                {if $vo.city_status == 0}
+                <span class="label label-success radius">开放申请</span>
+                {else /}
+                <span class="label label-defaunt radius">关闭申请</span>
+                {/if}
+            </td>
+            <td class="w50pre name">
+                {if $vo.applicant}
+                <span>{$vo.applicant}</span>
+                {else /}
+                <span class="label label-defaunt radius">暂无</span>
+                {/if}
+            </td>
+            <td class="w50pre name">
+                <a href="javascript:void(0);" class="record-view" title="查询">查询</a>
+            </td>
+            <td class="w96">
+                <input type="hidden" name="id" value="id">
+                <a href="javascript:void(0);" data-shelf-status="{$vo.city_status}" class="set-city-status" style="text-decoration:none" title="{$vo.city_status==1 ? '开放申请': '关闭申请';}">{$vo.city_status==1 ? '开放申请': '关闭申请';}</a>
+                &nbsp;
+<!--                <a href="javascript:void(0);" class="edit" title="编辑">编辑</a>-->
+            </td>
+        </tr>
+        {/volist}
+        </tbody>
+    </table>
+    {else/}
+    <div>没有数据</div>
+    {/notempty}
+</div>
+{$list|raw}
+
+
+
