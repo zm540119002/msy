@@ -328,7 +328,7 @@ class Goods extends HssBase{
                 'shareLink'=>$currentLink,
                 'desc'=> $info['specification'],
                 'shareImgUrl'=>$shareImgUrl,
-                'backUrl'=>'baidu.com'
+                'backUrl'=>'https://www.baidu.com'
             ];
             $this->assign('shareInfo',$shareInfo);
 
