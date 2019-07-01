@@ -69,6 +69,7 @@
     <script type="text/javascript" src="index_admin_js/common.js"></script>
     <script type="text/javascript">
         $(function () {
+            // 市场设置
             $('body').on('click','.market',function(){
                 var _this  = $(this);
                 var id     = _this.data('id');
@@ -137,7 +138,7 @@
             });
 
             // 申请开放||关闭
-            $('body').on('click','.set-shelf-status',function(){
+            $('body').on('click','.set-city-status',function(){
                 var _this = $(this);
                 //var text = _this.attr('title');
                 var text = _this.text();
@@ -145,8 +146,8 @@
                 var _thisTr = $(this).parents('tr');
                 var postData ={};
                 postData.id = _thisTr.data('id');
-                postData.shelf_status = shelf_status;
-                var url =  controller + 'setInfo';
+                postData.city_status = shelf_status;
+                var url =  controller + 'setField';
                 layer.open({
                     btn: ['确定','取消'],//按钮 做到这里
                     content:text+' ?',
@@ -154,17 +155,17 @@
                         $.post(url,postData,function(msg){
                             dialog.msg(msg,'',function(){
                                 if(msg.status){
-                                    if(shelf_status == 3){
-                                        _thisTr.find(".shelf-status").html('<span class="label label-defaunt radius">已下架</span>');
+                                    if(shelf_status == 0){
+                                        _thisTr.find(".shelf-status").html('<span class="label label-defaunt radius">关闭申请</span>');
                                         _this.data('shelf-status',1);
-                                        _this.attr('title','上架');
-                                        _this.html('上架');
+                                        _this.attr('title','开放申请');
+                                        _this.html('开放申请');
 
                                     }else{
-                                        _thisTr.find(".shelf-status").html('<span class="label label-success radius">已上架</span>');
-                                        _this.data('shelf-status',3);
-                                        _this.attr('title','下架');
-                                        _this.html('下架');
+                                        _thisTr.find(".shelf-status").html('<span class="label label-success radius">开放申请</span>');
+                                        _this.data('shelf-status',0);
+                                        _this.attr('title','关闭申请');
+                                        _this.html('关闭申请');
                                     }
                                 }
                             });
@@ -172,6 +173,15 @@
                         layer.close(index);
                     }
                 });
+            });
+
+            // 申请记录
+            $('body').on('click','.record-view',function(){
+                var url = controller + 'getInfo/id/' + $(this).parents('tr').data('id');
+                var city_name = $(this).parents('tr').find('.city-name').html();
+                city_name = city_name.replace(/^\s*|\s*$/g,"");
+
+                layer_show(city_name+'合伙人申请详情',url);
             });
 
         });

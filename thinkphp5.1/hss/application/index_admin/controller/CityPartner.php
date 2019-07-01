@@ -98,8 +98,32 @@ class CityPartner extends Base {
         return view('list_tpl');
     }
 
+    public function getInfo(){
+        $id = input('id/d');
+        if (!$id){
+            return errorMsg('失败');
+        }
 
-    public function setInfo(){
+        $condition = [
+            'field' => [
+                '*'
+            ],
+            'where' => [
+                ['cp.status','=',0],
+            ],'order' => [
+                'cp.update_time' => 'desc'
+            ],
+        ];
+
+        $modelCityPartner = new \app\index_admin\model\CityPartner();
+        $list = $modelCityPartner->getList($condition);
+
+        $this->assign('list',$list);
+        return $this->fetch('city_partner_list');
+    }
+
+
+    public function setField(){
 
         $id  = input('post.id/d');
         if (!$id){
@@ -108,8 +132,8 @@ class CityPartner extends Base {
 
         $info= array();
         // 上下架
-        if (input('?shelf_status')){
-            $city_status = input('post.city_status/d')==2 ? 1 : 2 ;
+        if (input('?city_status')){
+            $city_status = input('post.city_status/d')==0 ? 1 : 0 ;
 
             $info = ['city_status'=>$city_status];
         }
@@ -120,6 +144,7 @@ class CityPartner extends Base {
         if(!$rse){
             return errorMsg('失败');
         }
+        $this->putDataJson();
         return successMsg('成功');
 
     }

@@ -1,0 +1,44 @@
+{extend name="template/admin_pc/base.html" /}
+
+{block name="content"}
+
+<div class="page-container">
+    <div class="form form-horizontal" id="form1">
+        <div class="order-box">
+            <div class="goods-head">
+                <div>编号</div>
+                <div>用户</div>
+                <div>企业名称</div>
+                <div>申请人</div>
+                <div>手机电话</div>
+                <div>定金</div>
+                <div>资格款</div>
+                <div>支付方式</div>
+                <div>申请状态</div>
+            </div>
+            <div class="goods-item">
+                <div class="goods-list">
+                    {volist name="info['goods_info']" id="vo"}
+                    <div class="item j-g4">
+                        <div class="goods">
+                            <div class="img">
+                                <a href="{:url('Goods/detail',['id'=>$vo.id])}" target="_blank">
+                                    <img src="{:show_img_handle($vo.goods_img)}" width="80" height="80" title="{$vo.goods_name}">
+                                </a>                              
+                            </div>   
+                            <div class="name">{$vo.goods_name}</div>                         
+                        </div>
+                        
+                        <div class="spec"></div>
+                        <div class="price">¥{$vo.price}</div>
+                        <div class="num">{$vo.num}</div>
+                        <div class="t-price">¥{$vo.price*$vo.num}</div>
+                        <div class="f-clear"></div>
+                    </div>
+                    {/volist}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
