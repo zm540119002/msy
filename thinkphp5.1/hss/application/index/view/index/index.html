@@ -174,16 +174,6 @@
 	</div>
 </div>
 <script type="text/javascript">
-	var value = {};
-	var obj = Object(value); // 返回原对象
-	console.log(obj === value); //true
-	console.log('------------------');
-	obj = Object({});
-	console.log(obj === {}); //false
-	console.log('------------------');
-	var obj2 = {};
-	console.log(obj === obj2); //false
-	console.log('------------------');
 	$(function(){
 		//数据库里购物车里商品数量
 		let total_num = parseInt("{$total_num|default=0}");

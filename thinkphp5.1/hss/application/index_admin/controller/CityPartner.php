@@ -8,39 +8,13 @@ class CityPartner extends Base {
 
     public function manage(){
 
-        $id = input('id/d');
+        $city_id = input('id/d');
 
-        if($id){
-
+        if($city_id){
+            $this->assign('city_id',$city_id);
         }
 
-        $modelCityArea = new \app\index_admin\model\CityPartner();
-        $condition = [
-            'field' => [
-                'province_name','province_code'
-            ],
-            'where' => [
-                ['status','=',0],
-            ],
-            'group' => 'province_code'
-        ];
-        $provinceList = $modelCityArea->getList($condition);
-
-        $modelCityPartnerMarketInfo = new \app\index_admin\model\CityPartnerMarketInfo();
-        $condition2 = [
-            'field' => [
-                'id','name','amount','earnest'
-            ],
-            'where' => [
-                ['status','=',0]
-            ],
-        ];
-        $marketList = $modelCityPartnerMarketInfo->getList($condition2);
-
-        $this->assign('provinceList',$provinceList);
-        $this->assign('marketList',$marketList);
-
-        return $this->fetch('city_area_manage');
+        return $this->fetch();
     }
 
     /**
@@ -48,89 +22,54 @@ class CityPartner extends Base {
      */
     public function getList(){
 
-/*        $condition = [
-            'field'=>['id','name','shelf_status'],
-        ];*/
+/*        $model = new \app\index_admin\model\CityPartner();
+        $table = $model->getTableFields();
+        foreach($table as $k => $v){
+            $table[$k] = "'".$v."'";
+        }
+        $table = implode(',',$table);
 
-        $modelCityArea = new \app\index_admin\model\CityArea();
+        p($table);
+        exit;*/
+
+        $modelCityArea = new \app\index_admin\model\CityPartner();
 
         $condition = [
             'field' => [
-                'ca.id','ca.province_name','ca.city_name','ca.city_status','ca.alone_amount','ca.alone_earnest',
-                'cpmi.amount','cpmi.earnest','cpmi.name market_name',
-                'cp.company_name','cp.applicant','cp.mobile','cp.user_id'
-            ],
-            'join' => [
-                ['city_partner_market_info cpmi','ca.cpmi_id = cpmi.id','left'],
-                ['city_partner cp','ca.id = cp.city_area_id','left'],
-            ],'where' => [
-                //['ca.id','=',25]
+                'id','sn','user_id','company_name','applicant','mobile','earnest','amount','payment_time','pay_sn','pay_code','balance_sn','apply_status','create_time','update_time','earnest_sn',
             ],
             'order'=>[
-                'ca.id'=>'asc',
+                'update_time' => 'desc',
             ],
         ];
 
         // 条件
         $keyword = input('get.keyword/s');
-        if($keyword) $condition['where'][] = ['ca.city_name','like', '%' . trim($keyword) . '%'];
+        $city_id = input('get.city_id/d');
+        if($keyword) $condition['where'][] = ['mobile','like', '%' . trim($keyword) . '%'];
+        //if($city_id) $condition['where'][] = ['city_area_id','=',$city_id];
+
+        $condition['where'][] = ['apply_status','>',1];
 
         $list = $modelCityArea->pageQuery($condition);
-        //$list = $modelCityArea->getList($condition);
-
-        //$cityIds = array_column($list,'province_name');  //键值
-
-/*        foreach($list as $k => $v){
-
-            unset($v['']);
-            $list[$k]['child'][] = $v;
-            p($v['id']);
-
-        }
-        exit;*/
 
         $this->assign('list',$list);
 
         return view('list_tpl');
     }
 
-    public function getInfo(){
-        $id = input('id/d');
-        if (!$id){
-            return errorMsg('失败');
-        }
-
-        $condition = [
-            'field' => [
-                '*'
-            ],
-            'where' => [
-                ['cp.status','=',0],
-            ],'order' => [
-                'cp.update_time' => 'desc'
-            ],
-        ];
-
-        $modelCityPartner = new \app\index_admin\model\CityPartner();
-        $list = $modelCityPartner->getList($condition);
-
-        $this->assign('list',$list);
-        return $this->fetch('manage');
-    }
-
     public function setField(){
 
         $id  = input('post.id/d');
-        if (!$id){
+        $apply_status = input('post.apply_status/d');
+        if (!$id || !$apply_status){
             return errorMsg('失败');
         }
 
-        $info= array();
-        // 上下架
-        if (input('?city_status')){
-            $city_status = input('post.city_status/d')==0 ? 1 : 0 ;
-
-            $info = ['city_status'=>$city_status];
+        if($apply_status==4){
+            $info = ['apply_status'=>4];
+        }else{
+            $info = ['apply_status'=>-1];
         }
 
         $modelCityArea = new \app\index_admin\model\CityArea();
@@ -143,23 +82,6 @@ class CityPartner extends Base {
         return successMsg('成功');
 
     }
-
-
-    public function editMarket(){
-        $data = input('post.');
-
-        $modelCityPartnerMarketInfo = new \app\index_admin\model\CityPartnerMarketInfo();
-        $data['update_time'] = time();
-        $res = $modelCityPartnerMarketInfo->edit($data);
-        if($res){
-            $this->putDataJson();
-
-            return successMsg();
-        }else{
-            return errorMsg();
-        }
-    }
-
 
 
     // 城市生成json文件  // {"id":"542600","name":"林芝地区","shortName":"林芝","parentId":"540000","level":"2"}
