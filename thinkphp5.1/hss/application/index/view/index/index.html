@@ -176,29 +176,13 @@
 <script type="text/javascript">
 	var value = {};
 	var obj = Object(value); // 返回原对象
-	console.log(obj === value);
+	console.log(obj === value); //true
 	console.log('------------------');
 	obj = Object({});
-	console.log(obj === undefined);
-	console.log(obj === null);
-	console.log(obj === {});
-	console.log(obj === Object);
-	console.log(obj);
+	console.log(obj === {}); //false
 	console.log('------------------');
-	// 等同于
-	var obj = Object(undefined);
-	console.log(obj === undefined);
-	console.log(obj === null);
-	console.log(obj === {});
-	console.log(obj === Object);
-	console.log(obj);
-	console.log('------------------');
-	obj = Object(null);
-	console.log(obj === undefined);
-	console.log(obj === null);
-	console.log(obj === {});
-	console.log(obj === Object);
-	console.log(obj);
+	var obj2 = {};
+	console.log(obj === obj2); //false
 	console.log('------------------');
 	$(function(){
 		//数据库里购物车里商品数量
