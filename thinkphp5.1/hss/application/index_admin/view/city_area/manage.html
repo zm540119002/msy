@@ -46,7 +46,7 @@
                 </div>
                 <div class="form-group">
                     <div class="input-group">
-                        <input type="text" name="keyword" value="" placeholder="搜索城市"  class="keyword form-control input-order-id">
+                        <input type="text" name="keyword" value="" placeholder="城市名"  class="keyword form-control input-order-id">
                     </div>
                 </div>
                 <!--排序规则-->
@@ -177,17 +177,16 @@
 
         // 申请记录
         $('body').on('click','.record-view',function(){
-            var url = module + 'CityPartner/id/' + $(this).parents('tr').data('id');
+            var url = module + 'CityPartner/manage/id/' + $(this).parents('tr').data('id');
             var city_name = $(this).parents('tr').find('.city-name').html();
             city_name = city_name.replace(/^\s*|\s*$/g,"");
 
             var index = layer.open({
                 type: 2,
-                title: city_name+'合伙人申请详情',
+                title: city_name+'合伙人申请记录详情',
                 content: url
             });
             layer.full(index);
-
         });
 
     });

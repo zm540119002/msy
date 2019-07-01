@@ -63,8 +63,6 @@ class CityArea extends Base {
             'join' => [
                 ['city_partner_market_info cpmi','ca.cpmi_id = cpmi.id','left'],
                 ['city_partner cp','ca.id = cp.city_area_id','left'],
-            ],'where' => [
-                //['ca.id','=',25]
             ],
             'order'=>[
                 'ca.id'=>'asc',
