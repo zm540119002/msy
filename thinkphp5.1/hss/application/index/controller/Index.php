@@ -59,7 +59,6 @@ class Index extends HssBase {
         $ads['top'] = reset($modelAdPositions->getAds('index_top'));
         $ads['carousel'] = $modelAdPositions->getAds('index_carousel');
         $this->assign('ads',$ads);
-        p($ads);
 
         // 底部菜单，见配置文件custom.footer_menu
         $this->assign('currentPage',request()->controller().'/'.request()->action());
@@ -80,7 +79,7 @@ class Index extends HssBase {
             'title'=>'黑森森-采购商城首页', //分享的标题
             'shareLink'=>$this->host.$_SERVER['REQUEST_URI'], //分享的url
             'desc'=> '海量产品、仪器、套餐等您选购！', //分享的描述
-            'shareImgUrl'=>$this->host.'/'.config('upload_dir.upload_path').'/'.$ads['thumb_img'], //分享的图片
+            'shareImgUrl'=>$this->host.'/'.config('upload_dir.upload_path').'/'.$ads['top']['thumb_img'], //分享的图片
             'backUrl'=>$this->host.$_SERVER['REQUEST_URI'] //分享完成后跳转的url
         ];
         $this->assign('shareInfo',$shareInfo);
