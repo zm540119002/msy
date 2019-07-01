@@ -19,12 +19,11 @@
 			methods: {
 				handleClick: function() {
 				// this.$toast('Hello world!')
-					MessageBox({
-						title: '提示',
-						message: '确定执行此操作?',
-						showCancelButton: true
-					});
+					
 				}
+			},
+			created:function(){
+				this.$messageBox('提示', '操作成功');
 			}
 		})
 	})
