@@ -32,7 +32,8 @@
                     desc: '{$shareInfo["desc"]}', //分享描述
                     imgUrl:'{$shareInfo["shareImgUrl"]}', // 分享图标
                     success: function () {
-                        //window.location.href='{$shareInfo["backUrl"]}'; //分享成功跳转页
+                        dialog.success('分享成功');
+                        window.location.href='{$shareInfo["backUrl"]}'; //分享成功跳转页
                     },
                     cancel: function () {
                         return false;
