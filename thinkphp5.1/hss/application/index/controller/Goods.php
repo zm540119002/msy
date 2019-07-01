@@ -321,7 +321,7 @@ class Goods extends HssBase{
 
             //微信分享
             $shareInfo = [
-                'title'=>'黑森森-'.$info['name'].'产品详情', //分享的标题
+                'title'=>$info['share_title'], //分享的标题
                 'shareLink'=>$this->host.$_SERVER['REQUEST_URI'], //分享的url
                 'desc'=> $info['share_desc'], //分享的描述
                 'shareImgUrl'=>$this->host.'/'.config('upload_dir.upload_path').'/'.$info['thumb_img'], //分享的图片
