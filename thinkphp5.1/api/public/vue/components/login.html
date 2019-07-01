@@ -284,16 +284,14 @@
                 return {};
             },
             methods:{
-                loginDialogTrigger:function(){
+
+            },
+            created:function(){
                 this.$messagebox({
 						title:'',
 						message:content,
 						showConfirmButton:false
 					});
-                    }
-            },
-            created:function(){
-                
             }
         });
         //异步验证，登录成功跳转
