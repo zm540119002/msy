@@ -18,13 +18,12 @@
 			el: '#app',
 			methods: {
 				handleClick: function() {
-				// this.$toast('Hello world!')
-					MessageBox({
-						title: '提示',
-						message: '确定执行此操作?',
-						showCancelButton: true
-					});
+				this.$toast('Hello world!')
+					
 				}
+			},
+			created:function(){
+				// messageBox('提示', '操作成功');
 			}
 		})
 	})
