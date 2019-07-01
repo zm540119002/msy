@@ -2,6 +2,12 @@
 {block name="title"}弹窗登录测试{/block}
 {block name="css-customize"}
 <link rel="stylesheet" href="https://unpkg.com/mint-ui/lib/style.css">
+<style>
+	.aaa{
+		border:1px solid #d9d9d9;
+		margin:0 0 15px 0;
+	}
+</style>
 {/block}
 {block name="content"}
 <div id="app">
@@ -18,12 +24,15 @@
 			el: '#app',
 			methods: {
 				handleClick: function() {
-				this.$toast('Hello world!')
-					
+					this.$messagebox({
+						title: '提示',
+						message: '<input class="aaa" type="text" placeholder="111"/><br/><input class="aaa" type="text" placeholder="222"/>',
+						showCancelButton: true
+					});
 				}
 			},
 			created:function(){
-				this.$messagebox('提示', '操作成功');
+				
 			}
 		})
 	})
