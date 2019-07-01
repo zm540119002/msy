@@ -18,16 +18,14 @@
 			el: '#app',
 			methods: {
 				handleClick: function() {
-				this.$toast('Hello world!')
-					
-				}
-			},
-			created:function(){
 				this.$messagebox({
 					title: '提示',
 					message: '<input type="text" placeholder="111"/><br/><input type="text" placeholder="222"/>',
 					showCancelButton: true
 				});
+			},
+			created:function(){
+				
 			}
 		})
 	})
