@@ -2,8 +2,20 @@
 {block name="title"}弹窗登录测试{/block}
 {block name="css-customize"}
 <link rel="stylesheet" href="https://unpkg.com/mint-ui/lib/style.css">
+<style>
+	.aaa{
+		border:1px solid #d9d9d9;
+		margin:0 0 15px 0;
+	}
+</style>
 {/block}
 {block name="content"}
+<div style="height:200px;"></div>
+<div style="height:200px;"></div>
+<div style="height:200px;"></div>
+<div style="height:200px;"></div>
+<div style="height:200px;"></div>
+<div style="height:200px;"></div>
 <div id="app">
     <mt-button @click.native="handleClick">按钮</mt-button>
   </div>
@@ -13,17 +25,20 @@
 <script src="https://unpkg.com/mint-ui/lib/index.js"></script>
 <script type="text/javascript" src="vue_js/province_city.js"></script>
 <script>
+	// <input class="aaa" type="text" placeholder="111"/><br/><input class="aaa" type="text" placeholder="222"/>
 	$(function(){
+		var content=$('.userInfoWrapper').html();
 		 new Vue({
 			el: '#app',
 			methods: {
 				handleClick: function() {
-				this.$toast('Hello world!')
-					
+					this.$messagebox({
+						message:content
+					});
 				}
 			},
 			created:function(){
-				this.$messagebox('提示', '操作成功');
+				
 			}
 		})
 	})
