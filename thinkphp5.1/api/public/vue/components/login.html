@@ -230,36 +230,21 @@
     var loginDialogTriggerLayerIndex = 0;
     function loginDialogTrigger(){
         var content = $('#loginDialogTpl').html();
-        // loginDialogTriggerLayerIndex = layer.open({
-        //     className:'loginLayer',
-        //     skin:'loginLayer',
-        //     type:1,
-        //     shadeClose:false,
-        //     content:content,
-        //     success:function(index){
-        //         fixedLayer();
-        //     },yes:function(index){
-        //         layer.close(index);
-        //     },
-        //     end:function(){
-        //         cancleFixedLayer();
-        //     }
-        // });
-        new Vue({
-			el: '#loginDialogRoot',
-			methods: {
-			
-					
-			
-			},
-			created:function(){
-				this.$messagebox({
-						title:'',
-						message:content,
-						showConfirmButton:false
-					});
-			}
-		})
+        loginDialogTriggerLayerIndex = layer.open({
+            className:'loginLayer',
+            skin:'loginLayer',
+            type:1,
+            shadeClose:false,
+            content:content,
+            success:function(index){
+                fixedLayer();
+            },yes:function(index){
+                layer.close(index);
+            },
+            end:function(){
+                cancleFixedLayer();
+            }
+        });
     }
     var login_success_callback_common = function(param){
         //localStorage.cartList 入库
@@ -292,12 +277,12 @@
         }
     };
     $(function(){
-        // new Vue({
-        //     el:'#loginDialogRoot',
-        //     data:function(){
-        //         return {};
-        //     }
-        // });
+        new Vue({
+            el:'#loginDialogRoot',
+            data:function(){
+                return {};
+            }
+        });
         //异步验证，登录成功跳转
         $('body').on('click','.async_login',function(){
             let _this = $(this);
