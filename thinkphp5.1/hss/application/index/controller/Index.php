@@ -59,6 +59,7 @@ class Index extends HssBase {
         $ads['top'] = reset($modelAdPositions->getAds('index_top'));
         $ads['carousel'] = $modelAdPositions->getAds('index_carousel');
         $this->assign('ads',$ads);
+        p($ads);
 
         // 底部菜单，见配置文件custom.footer_menu
         $this->assign('currentPage',request()->controller().'/'.request()->action());
