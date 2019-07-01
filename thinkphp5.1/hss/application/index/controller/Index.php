@@ -74,7 +74,15 @@ class Index extends HssBase {
 
         foot_cart_menu();
 
-        //Cart::getCartTotalNum();
+        //微信分享
+        $shareInfo = [
+            'title'=>'黑森森-采购商城首页', //分享的标题
+            'shareLink'=>$this->host.$_SERVER['REQUEST_URI'], //分享的url
+            'desc'=> '海量产品、仪器、套餐等您选购！', //分享的描述
+            'shareImgUrl'=>$this->host.'/'.config('upload_dir.upload_path').'/'.$ads['thumb_img'], //分享的图片
+            'backUrl'=>$this->host.$_SERVER['REQUEST_URI'] //分享完成后跳转的url
+        ];
+        $this->assign('shareInfo',$shareInfo);
 
         return $this->fetch();
     }
