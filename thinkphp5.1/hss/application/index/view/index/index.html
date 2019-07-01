@@ -177,8 +177,11 @@
 	var obj = Object();
 	// 等同于
 	var obj = Object(undefined);
-	var obj = Object(null);
-	console.log(obj instanceof Object);
+	console.log(obj === undefined);
+	console.log(obj === null);
+	obj = Object(null);
+	console.log(obj === undefined);
+	console.log(obj === null);
 	$(function(){
 		//数据库里购物车里商品数量
 		let total_num = parseInt("{$total_num|default=0}");
