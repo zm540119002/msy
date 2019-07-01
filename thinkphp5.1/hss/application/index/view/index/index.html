@@ -175,8 +175,8 @@
 </div>
 <script type="text/javascript">
 	var value = {};
-	var obj = Object(value) // 返回原对象
-	obj === value // true
+	var obj = Object(value); // 返回原对象
+	console.log(obj === value);
 	console.log('------------------');
 	obj = Object({});
 	console.log(obj === undefined);
