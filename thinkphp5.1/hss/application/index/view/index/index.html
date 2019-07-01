@@ -175,15 +175,24 @@
 </div>
 <script type="text/javascript">
 	var obj = Object();
+	console.log(obj === undefined);
+	console.log(obj === null);
+	console.log(obj === {});
+	console.log(obj);
+	console.log('------------------');
 	// 等同于
 	var obj = Object(undefined);
 	console.log(obj === undefined);
 	console.log(obj === null);
+	console.log(obj === {});
+	console.log(obj);
+	console.log('------------------');
 	obj = Object(null);
 	console.log(obj === undefined);
 	console.log(obj === null);
 	console.log(obj === {});
 	console.log(obj);
+	console.log('------------------');
 	$(function(){
 		//数据库里购物车里商品数量
 		let total_num = parseInt("{$total_num|default=0}");
