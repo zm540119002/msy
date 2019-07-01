@@ -324,16 +324,13 @@ class Goods extends HssBase{
             $currentLink =  $this->host.$_SERVER['REQUEST_URI'];
             $shareImgUrl =  $this->host.'/'.config('upload_dir.upload_path').'/'.$info['thumb_img'];
             $shareInfo = [
-                'title'=>$info['name'],
-                'shareLink'=>$currentLink,
-                'desc'=> $info['specification'],
-                'shareImgUrl'=>$shareImgUrl,
-                'backUrl'=>$currentLink
+                'title'=>$info['name'], //分享的标题
+                'shareLink'=>$currentLink, //分享的url
+                'desc'=> $info['specification'], //分享的描述
+                'shareImgUrl'=>$shareImgUrl, //分享的图片
+                'backUrl'=>$currentLink //分享完成后跳转的url
             ];
             $this->assign('shareInfo',$shareInfo);
-
-
-
             return $this->fetch();
         }
     }
