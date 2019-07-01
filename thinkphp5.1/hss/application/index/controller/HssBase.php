@@ -9,6 +9,7 @@ class HssBase extends \common\controller\Base{
         parent::__construct();
         //微信处理
         if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
+            print_r(123) ;
             $weixinUserInfo =  session('weixinUserInfo');
             if(!$weixinUserInfo){
                 $weixnTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
