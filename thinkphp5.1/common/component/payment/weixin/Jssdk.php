@@ -188,7 +188,6 @@ class Jssdk {
   public function getOauthUserInfo()
   {
     $data = $this -> getAccessTokenAndOpenid();
-    print_r($data);exit;
     $access_token = $data['access_token'];
     $openid =  $data['openid'];
     $url = "https://api.weixin.qq.com/sns/userinfo?access_token=".$access_token."&openid=".$openid."&lang=zh_CN";
