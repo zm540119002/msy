@@ -66,49 +66,7 @@
 {/block}
 {block name="script"}
 <script type="text/javascript" src="index_admin_js/commonCrud.js"></script>
-<script type="text/javascript">
-    $(function () {
-        //加载第一页
-        var getData = $('#form1').serializeObject();
-        getPagingList(config, getData);
-    });
-    var config = {url: controller + 'getList'};
-    var title = $("#title").attr('title');
-
-    //翻页
-    $('body').on('click', '.pager2', function () {
-        var curIndex = $(this).parents('ul.pagination').find('li.active span').text();
-        var selectedPage = $(this).data('page');
-        if (selectedPage == '»') {
-            curIndex++;
-            selectedPage = curIndex;
-        }
-        if (selectedPage == '«') {
-            curIndex--;
-            selectedPage = curIndex;
-        }
-        config.currentPage = selectedPage;
-
-        var getData = $('#form1').serializeObject();
-
-        getPagingList(config, getData);
-    });
-
-    // 搜索 STATUS
-    $('body').on('click','#search',function(){
-        search();
-    });
-    $('.keyword').bind('keypress', function () {
-        if (event.keyCode == "13") {
-            search();
-            return false;
-        }
-    });
-    function search() {
-        var getData = $('#form1').serializeObject();
-        getPagingList(config, getData);
-    }
-</script>
+<script type="text/javascript" src="index_admin_js/common.js"></script>
 <script type="text/javascript">
     $(function () {
         // 市场设置
@@ -219,7 +177,7 @@
 
         // 申请记录
         $('body').on('click','.record-view',function(){
-            var url = controller + 'getInfo/id/' + $(this).parents('tr').data('id');
+            var url = module + 'CityPartner/id/' + $(this).parents('tr').data('id');
             var city_name = $(this).parents('tr').find('.city-name').html();
             city_name = city_name.replace(/^\s*|\s*$/g,"");
 
