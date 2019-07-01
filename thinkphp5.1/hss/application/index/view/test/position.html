@@ -19,14 +19,16 @@
 <script src="https://unpkg.com/mint-ui/lib/index.js"></script>
 <script type="text/javascript" src="vue_js/province_city.js"></script>
 <script>
+	// <input class="aaa" type="text" placeholder="111"/><br/><input class="aaa" type="text" placeholder="222"/>
 	$(function(){
+		var content=$('.userInfoWrapper').html();
 		 new Vue({
 			el: '#app',
 			methods: {
 				handleClick: function() {
 					this.$messagebox({
 						title: '提示',
-						message: '<input class="aaa" type="text" placeholder="111"/><br/><input class="aaa" type="text" placeholder="222"/>',
+						message:content,
 						showCancelButton: true
 					});
 				}
