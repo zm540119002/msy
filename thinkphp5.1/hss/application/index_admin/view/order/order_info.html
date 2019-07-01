@@ -39,13 +39,12 @@
                             <div class="img">
                                 <a href="{:url('Goods/detail',['id'=>$vo.id])}" target="_blank">
                                     <img src="{:show_img_handle($vo.goods_img)}" width="80" height="80" title="{$vo.goods_name}">
-                                    商品名称
                                 </a>                              
                             </div>   
                             <div class="name">{$vo.goods_name}</div>                         
                         </div>
                         
-                        <div class="spec">商品编号</div>
+                        <div class="spec"></div>
                         <div class="price">¥{$vo.price}</div>
                         <div class="num">{$vo.num}</div>
                         <div class="t-price">¥{$vo.price*$vo.num}</div>
