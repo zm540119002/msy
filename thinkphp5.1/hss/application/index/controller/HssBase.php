@@ -8,9 +8,7 @@ class HssBase extends \common\controller\Base{
     public function __construct(){
         parent::__construct();
         //微信处理
-
         if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
-            return errorMsg('111');
             $weixinUserInfo =  session('weixinUserInfo');
             if(!$weixinUserInfo){
                 $weixnTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
@@ -44,7 +42,6 @@ class HssBase extends \common\controller\Base{
                 $data['headimgurl'] = $weixinUserInfo['headimgurl'];
                 if($info && !$info['headimgurl']){
                     $data['id'] = $info['id'];
-
                 }
                 $id = $model->edit($data);
                 if(!$id){
@@ -101,7 +98,7 @@ class HssBase extends \common\controller\Base{
 
             //判断是否关注平台
             if(empty($info) || !$info['subscribe']){
-                //没有关注
+                 //没有关注
                 $this -> assign('subscribe',1);
             }
 
@@ -109,5 +106,7 @@ class HssBase extends \common\controller\Base{
             $weixnTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
             $signPackage =  $weixnTools->GetSignPackage();
             $this->assign('signPackage',$signPackage);
+
+        }
     }
 }
