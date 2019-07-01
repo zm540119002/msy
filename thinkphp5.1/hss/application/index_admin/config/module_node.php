@@ -46,7 +46,7 @@ return [
         ], 'city_partner'=>[
             'id'=>700,'name'=>'城市合伙人','type'=>2,
             'sub_menu' => [
-                ['id'=>701,'name'=>'管理','display'=>1,'controller'=>'CityPartner','action'=>'manage',],
+                ['id'=>701,'name'=>'管理','display'=>1,'controller'=>'CityArea','action'=>'manage',],
             ],
         ],'customer'=>[
             'id'=>800,'name'=>'客服','type'=>2,
