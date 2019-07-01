@@ -19,10 +19,10 @@
 			methods: {
 				handleClick: function() {
 				// this.$toast('Hello world!')
-					this.$toast({
-						message: '提示',
-						iconClass: 'icon icon-success',
-						duration: 100000
+					this.$messageBox({
+						title: '提示',
+						message: '确定执行此操作?',
+						showCancelButton: true
 					});
 				}
 			}
