@@ -175,13 +175,6 @@
 </div>
 <script type="text/javascript">
 	$(function(){
-		function isObject(value) {
-			return value === Object(value);
-		}
-		console.log(isObject([])); // true
-		console.log(isObject(true)); // false
-		console.log(isObject(1)); // false
-		console.log(isObject('abc')); // false
 		//数据库里购物车里商品数量
 		let total_num = parseInt("{$total_num|default=0}");
 		//localStorage里商品信息
