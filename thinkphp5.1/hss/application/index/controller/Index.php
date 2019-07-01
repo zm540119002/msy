@@ -47,18 +47,22 @@ class Index extends HssBase {
             'where' => [
                 ['id','>',20]
             ],
-            'limit' => 5,
+            'limit' => 50,
         ];
 
         $list = $modelUser->getList($condition);
 
         foreach($list as $k => $v){
-            $time = $k+1;
+            $time = $k;
+            if(mt_rand(1,10)%2){
+                $time = $time+1;
+            }
+
             $list[$k]['create_time'] = strtotime("-$time day");
         }
 
         $this->assign('spaceList',$list);
-
+ 
         // 广告
         $ads = [];
         $modelAdPositions = new \app\index\model\AdPositions();
