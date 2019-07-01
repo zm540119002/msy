@@ -30,9 +30,9 @@
             <td class="w50pre name">{$vo.update_time|date='Y-m-d H:i'}</td>
             <td class="w96">
                 {if $vo.apply_status==3}
-                <a href="javascript:void(0);" class="edit">同意</a>
+                <a href="javascript:void(0);" class="apply" data-apply_status="4">同意</a>
                 &nbsp;
-                <a href="javascript:void(0);" class="edit">拒绝</a>
+                <a href="javascript:void(0);" class="apply" data-apply_status="-1">拒绝</a>
                 {else /}
                 <a href="javascript:void(0);">暂无</a>
                 {/if}
