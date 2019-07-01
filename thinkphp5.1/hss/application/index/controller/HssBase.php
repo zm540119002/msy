@@ -106,9 +106,9 @@ class HssBase extends \common\controller\Base{
             $this -> assign('subscribe',1);
         }
 
-        //微信分享初始化
-        $weixnTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
-        $signPackage =  $weixnTools->GetSignPackage();
-        $this->assign('signPackage',$signPackage);
+//        //微信分享初始化
+//        $weixnTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
+//        $signPackage =  $weixnTools->GetSignPackage();
+//        $this->assign('signPackage',$signPackage);
     }
 }
