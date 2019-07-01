@@ -209,6 +209,15 @@ class Index extends HssBase {
 
     // 开放日活动
     public function activity(){
+        //微信分享
+        $shareInfo = [
+            'title'=>'黑森森-总部开放日', //分享的标题
+            'shareLink'=>$this->host.$_SERVER['REQUEST_URI'], //分享的url
+            'desc'=> '黑森森诚邀您参加每周五总部开放日！', //分享的描述
+            'shareImgUrl'=>'https://hss.meishangyun.com/uploads/2019061315524548068.jpeg', //分享的图片
+            'backUrl'=>$this->host.$_SERVER['REQUEST_URI'] //分享完成后跳转的url
+        ];
+        $this->assign('shareInfo',$shareInfo);
         return $this->fetch();
     }
 
