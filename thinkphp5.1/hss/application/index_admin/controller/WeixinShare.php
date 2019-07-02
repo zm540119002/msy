@@ -18,13 +18,6 @@ class WeixinShare extends Base {
     }
 
     public function manage(){
-        $id = input('id/d');
-
-        if(!$id){
-            $this->errorMsg('参数错误');
-        }
-
-        $this->assign('pid',$id);
         return $this->fetch('manage');
     }
 
