@@ -218,6 +218,10 @@ class Index extends HssBase {
 
     // 项目优势页
     public function superiority(){
+        //微信分享
+        $WeixinShareModel = new \app\index\model\WeixinShare();
+        $shareInfo = $WeixinShareModel ->getShareInfo();
+        $this->assign('shareInfo',$shareInfo);
         $this->assignStandardBottomButton([21,22]);
 
         return $this->fetch();
