@@ -101,22 +101,15 @@ class WeixinShare extends Base {
      */
     public function getList(){
 
-        $pid = input('id/d');
-
-        if(!$pid){
-            $this->errorMsg('参数错误');
-        }
-
         $condition = [
-            'field' => ['id','name','sort','shelf_status'],
+            'field' => ['id','link','sort','status'],
             'where' => [
-                ['ad_position_id','=',$pid],
                 ['status','=',0],
             ],
         ];
 
         $keyword = input('get.keyword/s');
-        if($keyword) $condition['where'] = ['name','like', '%' . trim($keyword) . '%'];
+        if($keyword) $condition['where'] = ['link','like', '%' . trim($keyword) . '%'];
 
         $list = $this->obj->pageQuery($condition);
         $this->assign('list',$list);
