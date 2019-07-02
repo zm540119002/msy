@@ -42,14 +42,13 @@ class WeixinShare extends Base {
         }else{
             // 基础处理
             $data = input('post.');
+            process_upload_files($data,['thumb_img'],'shortcut',false);
 
-            p( process_upload_files($data,['thumb_img'],'shortcut',false));
-            exit;
             htmlspecialchars_addslashes($data,['link']);
 
             $data['update_time'] = time();
             $data['sort'] = input('sort/d');
-
+            print_r($data);exit;
             if(isset($data['id']) && $id=input('post.id/d')){//修改
                 // 编辑
                 $condition = ['where' => ['id' => $id,]];
@@ -69,7 +68,6 @@ class WeixinShare extends Base {
                 if(!$result['status']) return $result;
 
             }
-            exit;
             return successMsg('成功');
        }
     }
