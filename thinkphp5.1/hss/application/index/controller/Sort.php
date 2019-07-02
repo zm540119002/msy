@@ -102,7 +102,7 @@ class Sort extends HssBase{
             Cart::getCartTotalNum();*/
 
             foot_cart_menu();
-            print_r($info->data);exit;
+            print_r($info->toArray());exit;
             //微信分享
             $shareInfo = [
                 'title'=>$info['share_title'], //分享的标题
