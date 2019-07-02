@@ -87,7 +87,7 @@ class Scene extends Base {
                 // 编辑
                 $condition = [
                     'where' => ['id' => $id,],
-                    'field' => ['thumb_img,logo_img,background_img,main_img','intro']
+                    'field' => ['thumb_img,logo_img,background_img,main_img','intro','share_title','share_desc']
                 ];
 
                 $info = $model->getinfo($condition);
