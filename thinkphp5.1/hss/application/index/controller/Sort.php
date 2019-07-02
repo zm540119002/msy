@@ -58,7 +58,8 @@ class Sort extends HssBase{
             $model = new \app\index\model\Sort();
             $config =[
                 'field' => [
-                    'id','name','main_img','intro','tag','detail_img','title','process_img','recommend_goods'
+                    'id','name','main_img','intro','tag','detail_img','title','process_img','recommend_goods',
+                    'share_title','share_desc','thumb_img'
                 ],
                 'where' => [
                     ['status', '=', 0],
@@ -75,7 +76,7 @@ class Sort extends HssBase{
             $modelGoods = new \app\index\model\Goods();
             $condition = [
                 'field' => [
-                    'id','name','specification','thumb_img','share_title','share_desc'
+                    'id','name','specification','thumb_img',
                 ],'where' => [
                     ['status','=',0],
                     ['shelf_status','=',3],
