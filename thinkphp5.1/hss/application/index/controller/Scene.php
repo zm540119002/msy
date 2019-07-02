@@ -168,14 +168,7 @@ class Scene extends HssBase{
             Cart::getCartTotalNum();*/
             foot_cart_menu();
             //微信分享
-            $shareInfo = [
-                'title'=>$info['share_title'], //分享的标题
-                'shareLink'=>$this->host.$_SERVER['REQUEST_URI'], //分享的url
-                'desc'=> $info['share_desc'], //分享的描述
-                'shareImgUrl'=>$this->host.'/'.config('upload_dir.upload_path').'/'.$info['thumb_img'], //分享的图片
-                'backUrl'=>$this->host.$_SERVER['REQUEST_URI'] //分享完成后跳转的url
-            ];
-            $this->assign('shareInfo',$shareInfo);
+
             return $this->fetch();
         }
     }
@@ -235,7 +228,14 @@ class Scene extends HssBase{
 /*        $scene['tag'] = explode('|',(string)$scene['tag']);
         $scene['main_img'] = explode(',',(string)$scene['main_img']);
         $scene['intro'] = $scene['intro'] ? htmlspecialchars_decode($scene['intro']) : $scene['intro'] ;*/
-
+        $shareInfo = [
+            'title'=>$scene['share_title'], //分享的标题
+            'shareLink'=>$this->host.$_SERVER['REQUEST_URI'], //分享的url
+            'desc'=> $scene['share_desc'], //分享的描述
+            'shareImgUrl'=>$this->host.'/'.config('upload_dir.upload_path').'/'.$scene['thumb_img'], //分享的图片
+            'backUrl'=>$this->host.$_SERVER['REQUEST_URI'] //分享完成后跳转的url
+        ];
+        $this->assign('shareInfo',$shareInfo);
         $this->assign('info',$scene);
         return $scene;
     }
