@@ -17,6 +17,10 @@ class WeixinShare extends \common\model\Base {
 
     public function getShareInfo()
     {
+        $this->http_type = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') || (isset($_SERVER['HTTP_X_FORWARDED_PROTO'])
+                && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')) ? 'https://' : 'http://';
+        $this->host = $this->http_type . (isset($_SERVER['HTTP_X_FORWARDED_HOST']) ? $_SERVER['HTTP_X_FORWARDED_HOST'] :
+                (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : ''));
         $link = strtolower(request()->module() . '/' . request()->controller() . '/' . request()->action());
         $config = [
             'where'=>[
