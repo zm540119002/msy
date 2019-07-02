@@ -167,7 +167,7 @@ class Scene extends HssBase{
             $this->assign('unlockingFooterCart',json_encode($unlockingFooterCart));
             Cart::getCartTotalNum();*/
             foot_cart_menu();
-            //微信分享
+
 
             return $this->fetch();
         }
@@ -228,6 +228,8 @@ class Scene extends HssBase{
 /*        $scene['tag'] = explode('|',(string)$scene['tag']);
         $scene['main_img'] = explode(',',(string)$scene['main_img']);
         $scene['intro'] = $scene['intro'] ? htmlspecialchars_decode($scene['intro']) : $scene['intro'] ;*/
+
+        //微信分享
         $shareInfo = [
             'title'=>$scene['share_title'], //分享的标题
             'shareLink'=>$this->host.$_SERVER['REQUEST_URI'], //分享的url
