@@ -5,19 +5,19 @@
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>分享链接：</label>
             <div class="formControls col-xs-8 col-sm-9">
-                <input type="text" class="input-text" value="{$info.link|default='#'}" placeholder="没有填 #" name="ad_link">
+                <input type="text" class="input-text" value="{$info.link|default='#'}" placeholder="没有填 #" name="link">
             </div>
         </div>
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>分享标题：</label>
             <div class="formControls col-xs-8 col-sm-9">
-                <input type="text" class="input-text" value="{$info.title|default='#'}" placeholder="没有填 #" name="title">
+                <input type="text" class="input-text" value="{$info.title}" placeholder="没有填 #" name="title">
             </div>
         </div>
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>分享描述：</label>
             <div class="formControls col-xs-8 col-sm-9">
-                <input type="text" class="input-text" value="{$info.desc|default='#'}" placeholder="没有填 #" name="desc">
+                <input type="text" class="input-text" value="{$info.desc}" placeholder="没有填 #" name="desc">
             </div>
         </div>
         <div class="row cl">
@@ -38,7 +38,6 @@
         <div class="row cl">
             <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
                 <input type="hidden" name="id" value="{$info.id}">
-                <input type="hidden" name="pid" value="{$pid}">
                 <button class="btn btn-primary radius button_save_black_4" type="button"><i class="Hui-iconfont"></i> 提交</button>
                 <button onclick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
             </div>
