@@ -14,4 +14,11 @@ class WeixinShare extends \common\model\Base {
     protected $connection = 'db_config_1';
 	// 别名
 	protected $alias = 'w';
+
+    public function getShareInfo()
+    {
+        $link = strtolower(request()->module() . '/' . request()->controller() . '/' . request()->action());
+        print_r($link);exit;
+
+	}
 }
