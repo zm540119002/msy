@@ -69,6 +69,7 @@ class WeixinShare extends Base {
                 if(!$result['status']) return $result;
 
             }
+            exit;
             return successMsg('成功');
        }
     }
