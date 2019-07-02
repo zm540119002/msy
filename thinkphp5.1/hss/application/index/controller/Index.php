@@ -83,7 +83,7 @@ class Index extends HssBase {
 
 
         foot_cart_menu();
-
+        strtolower(request()->module() . '/' . request()->controller() . '/' . request()->action());
         //微信分享
         $shareInfo = [
             'title'=>'黑森森采购商城：头部皮肤管理解决方案，百城万店众创平台', //分享的标题
