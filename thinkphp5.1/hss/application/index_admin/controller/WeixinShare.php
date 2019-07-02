@@ -14,7 +14,7 @@ class WeixinShare extends Base {
     ];
 
     protected  function currentModelClass(){
-        $this->obj = new \app\index_admin\model\Shortcut();
+        $this->obj = new \app\index_admin\model\WeixinShare();
     }
 
     public function manage(){
