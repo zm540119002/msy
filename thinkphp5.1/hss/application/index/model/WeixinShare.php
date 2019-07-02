@@ -18,7 +18,7 @@ class WeixinShare extends \common\model\Base {
     public function getShareInfo()
     {
         $link = strtolower(request()->module() . '/' . request()->controller() . '/' . request()->action());
-        print_r($link);exit;
+
 
 	}
 }
