@@ -1,7 +1,7 @@
 {extend name="template/base.html" /}
 {block name="title"}弹窗登录测试{/block}
 {block name="css-customize"}
-<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+<link rel="stylesheet" href="https://unpkg.com/mint-ui/lib/style.css">
 <style>
 	.aaa{
 		border:1px solid #d9d9d9;
@@ -17,35 +17,30 @@
 <div style="height:200px;"></div>
 <div style="height:200px;"></div>
 <div id="app">
-	<el-button @click="open">Button</el-button>
-	<el-dialog :visible.sync="visible" title="Hello world">
-		<p>Try Element</p>
-	</el-dialog>
-</div>
+    <mt-button @click.native="handleClick">按钮</mt-button>
+  </div>
 {/block}
 {block name="footer"}{/block}
 {block name="script"}
- <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script src="https://unpkg.com/mint-ui/lib/index.js"></script>
+<script type="text/javascript" src="vue_js/province_city.js"></script>
 <script>
 	// <input class="aaa" type="text" placeholder="111"/><br/><input class="aaa" type="text" placeholder="222"/>
 	$(function(){
-		new Vue({
+		var content=$('#loginDialogTpl').html();
+		 new Vue({
 			el: '#app',
-			data: function() {
-				return { visible: false }
-			},
 			methods: {
-				open() {
-					this.$alert('这是一段内容', '标题名称', {
-					confirmButtonText: '确定',
-					callback: action => {
-						this.$message({
-						type: 'info',
-						message: `action: ${ action }`
-						});
-					}
+				handleClick: function() {
+					this.$messagebox({
+						title:'',
+						message:content,
+						showConfirmButton:false
 					});
 				}
+			},
+			created:function(){
+				
 			}
 		})
 	})
