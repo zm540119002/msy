@@ -42,13 +42,12 @@ class WeixinShare extends Base {
         }else{
             // 基础处理
             $data = input('post.');
-            process_upload_files($data,['thumb_img'],'shortcut',false);
+            process_upload_files($data,['thumb_img'],'share',false);
 
             htmlspecialchars_addslashes($data,['link']);
 
             $data['update_time'] = time();
             $data['sort'] = input('sort/d');
-            print_r($data);exit;
             if(isset($data['id']) && $id=input('post.id/d')){//修改
                 // 编辑
                 $condition = ['where' => ['id' => $id,]];
