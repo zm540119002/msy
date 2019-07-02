@@ -10,7 +10,7 @@ class Promotion extends HssBase{
             $model = new\app\index\model\Promotion();
             $condition =[
                 'field' => [
-                    'id','name','main_img','tag','intro','title','retail_price',
+                    'id','name','main_img','tag','intro','title','retail_price','thumb_img',
                     'franchise_price','agent_price','remarks','share_title','share_desc'
                 ], 'where' => [
                     ['status', '=', 0],
@@ -43,7 +43,7 @@ class Promotion extends HssBase{
             'title'=>$info['share_title'], //分享的标题
             'shareLink'=>$this->host.$_SERVER['REQUEST_URI'], //分享的url
             'desc'=> $info['share_desc'], //分享的描述
-            'shareImgUrl'=>$this->host.'/'.config('upload_dir.upload_path').'/'.$info['main_img'], //分享的图片
+            'shareImgUrl'=>$this->host.'/'.config('upload_dir.upload_path').'/'.$info['thumb_img'], //分享的图片
             'backUrl'=>$this->host.$_SERVER['REQUEST_URI'] //分享完成后跳转的url
         ];
         $this->assign('shareInfo',$shareInfo);
