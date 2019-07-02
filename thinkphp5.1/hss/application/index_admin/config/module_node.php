@@ -48,11 +48,16 @@ return [
             'sub_menu' => [
                 ['id'=>701,'name'=>'管理','display'=>1,'controller'=>'CityArea','action'=>'manage',],
             ],
-        ],'customer'=>[
-            'id'=>800,'name'=>'客服','type'=>2,
+        ],'weixin_share'=>[
+            'id'=>800,'name'=>'微信分享','type'=>2,
             'sub_menu' => [
-                ['id'=>801,'name'=>'售前','display'=>1,'controller'=>'custom_client','action'=>'beforeSale',],
-                ['id'=>802,'name'=>'售后','display'=>1,'controller'=>'custom_client','action'=>'afterSale',],
+                ['id'=>801,'name'=>'管理','display'=>1,'controller'=>'WeixinShare','action'=>'manage',],
+            ],
+        ],'customer'=>[
+            'id'=>900,'name'=>'客服','type'=>2,
+            'sub_menu' => [
+                ['id'=>901,'name'=>'售前','display'=>1,'controller'=>'custom_client','action'=>'beforeSale',],
+                ['id'=>902,'name'=>'售后','display'=>1,'controller'=>'custom_client','action'=>'afterSale',],
             ],
         ],
     ],

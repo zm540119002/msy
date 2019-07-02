@@ -153,7 +153,7 @@ class Scene extends HssBase{
             if(!$id){
                 $this->error('此项目已下架');
             }
-            $this->displayScene($id);
+            $info = $this->displayScene($id);
 
             Promotion::displayPromotionList($id);
 
@@ -167,7 +167,15 @@ class Scene extends HssBase{
             $this->assign('unlockingFooterCart',json_encode($unlockingFooterCart));
             Cart::getCartTotalNum();*/
             foot_cart_menu();
-
+            //微信分享
+            $shareInfo = [
+                'title'=>$info['share_title'], //分享的标题
+                'shareLink'=>$this->host.$_SERVER['REQUEST_URI'], //分享的url
+                'desc'=> $info['share_desc'], //分享的描述
+                'shareImgUrl'=>$this->host.'/'.config('upload_dir.upload_path').'/'.$info['thumb_img'], //分享的图片
+                'backUrl'=>$this->host.$_SERVER['REQUEST_URI'] //分享完成后跳转的url
+            ];
+            $this->assign('shareInfo',$shareInfo);
             return $this->fetch();
         }
     }
@@ -210,6 +218,7 @@ class Scene extends HssBase{
         $config =[
             'field' => [
                 'id','name','thumb_img','main_img','intro','tag','tag_category','title'
+                ,'share_title','share_desc',
             ],
             'where' => [
                 ['status', '=', 0],
@@ -228,6 +237,7 @@ class Scene extends HssBase{
         $scene['intro'] = $scene['intro'] ? htmlspecialchars_decode($scene['intro']) : $scene['intro'] ;*/
 
         $this->assign('info',$scene);
+        return $scene;
     }
 
 

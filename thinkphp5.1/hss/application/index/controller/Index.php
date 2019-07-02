@@ -86,9 +86,9 @@ class Index extends HssBase {
 
         //微信分享
         $shareInfo = [
-            'title'=>'黑森森-采购商城首页', //分享的标题
+            'title'=>'黑森森采购商城：头部皮肤管理解决方案，百城万店众创平台', //分享的标题
             'shareLink'=>$this->host.$_SERVER['REQUEST_URI'], //分享的url
-            'desc'=> '海量产品、仪器、套餐等您选购！', //分享的描述
+            'desc'=> '激活毛囊细胞，防脱生发、白发转黑。欢迎城市合伙人、加盟店、创业导师等联手共建共创共享头护千亿蓝海市场', //分享的描述
             'shareImgUrl'=>$this->host.'/'.config('upload_dir.upload_path').'/'.$ads['top']['thumb_img'], //分享的图片
             'backUrl'=>$this->host.$_SERVER['REQUEST_URI'] //分享完成后跳转的url
         ];

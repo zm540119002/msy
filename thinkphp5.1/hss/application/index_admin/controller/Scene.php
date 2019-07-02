@@ -34,7 +34,8 @@ class Scene extends Base {
             if($id = input('param.id/d')){
                 $condition = [
                     'field' => [
-                        'id','name','shelf_status','sort','thumb_img','main_img','intro','tag','display_type','tag_category','title','background_img'
+                        'id','name','shelf_status','sort','thumb_img','main_img','intro',
+                        'tag','display_type','tag_category','title','background_img','share_title','share_desc'
                     ], 'where' => [
                         ['id','=',$id]
                     ],
@@ -87,7 +88,7 @@ class Scene extends Base {
                 // 编辑
                 $condition = [
                     'where' => ['id' => $id,],
-                    'field' => ['thumb_img,logo_img,background_img,main_img','intro']
+                    'field' => ['thumb_img,logo_img,background_img,main_img','intro','share_title','share_desc']
                 ];
 
                 $info = $model->getinfo($condition);
