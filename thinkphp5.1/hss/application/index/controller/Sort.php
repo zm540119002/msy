@@ -102,13 +102,13 @@ class Sort extends HssBase{
             Cart::getCartTotalNum();*/
 
             foot_cart_menu();
-            print_r($info);exit;
+
             //微信分享
             $shareInfo = [
-                'title'=>$info['share_title'], //分享的标题
+                'title'=>$info['data']['share_title'], //分享的标题
                 'shareLink'=>$this->host.$_SERVER['REQUEST_URI'], //分享的url
-                'desc'=> $info['share_desc'], //分享的描述
-                'shareImgUrl'=>$this->host.'/'.config('upload_dir.upload_path').'/'.$info['thumb_img'], //分享的图片
+                'desc'=> $info['data']['share_desc'], //分享的描述
+                'shareImgUrl'=>$this->host.'/'.config('upload_dir.upload_path').'/'.$info['data']['thumb_img'], //分享的图片
                 'backUrl'=>$this->host.$_SERVER['REQUEST_URI'] //分享完成后跳转的url
             ];
             $this->assign('shareInfo',$shareInfo);
