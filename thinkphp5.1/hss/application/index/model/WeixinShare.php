@@ -31,7 +31,6 @@ class WeixinShare extends \common\model\Base {
             ]
         ];
         $info = $this -> getInfo($config);
-        print_r($this->getLastSql());
         $shareInfo = [
             'title'=>$info['title'], //分享的标题
             'shareLink'=>$this->host.'/'.$info['link'], //分享的url
