@@ -27,13 +27,6 @@ class WeixinShare extends Base {
      */
     public function edit(){
         $model = $this->obj;
-        $pid = input('param.pid/d');
-        $this->assign('pid',$pid);
-
-        if(!$pid){
-            $this->errorMsg('参数错误');
-        }
-
         if(!request()->isPost()){
             //要修改的方案
             if($id = input('param.id/d')){
