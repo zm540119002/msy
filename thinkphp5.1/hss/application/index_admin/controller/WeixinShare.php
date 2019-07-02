@@ -46,13 +46,11 @@ class WeixinShare extends Base {
             htmlspecialchars_addslashes($data,['link']);
 
             $data['update_time'] = time();
-            $data['ad_position_id'] = input('pid/d');
             $data['sort'] = input('sort/d');
 
             if(isset($data['id']) && $id=input('post.id/d')){//修改
                 // 编辑
                 $condition = ['where' => ['id' => $id,]];
-
                 $info  = $model->getInfo($condition);
                 $result= $model->edit($data,$condition['where']);
                 if(!$result['status']) return $result;
