@@ -47,7 +47,7 @@ class Index extends HssBase {
             'where' => [
                 ['id','>',20]
             ],
-            'limit' => 50,
+            'limit' => 13,
         ];
 
         $list = $modelUser->getList($condition);
