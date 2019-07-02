@@ -31,13 +31,17 @@ class WeixinShare extends \common\model\Base {
             ]
         ];
         $info = $this -> getInfo($config);
-        $shareInfo = [
-            'title'=>$info['title'], //分享的标题
-            'shareLink'=>$this->host.'/'.$info['link'], //分享的url
-            'desc'=> $info['desc'], //分享的描述
-            'shareImgUrl'=>$this->host.'/'.config('upload_dir.upload_path').'/'.$info['thumb_img'], //分享的图片
-            'backUrl'=>$this->host.'/'.$info['link'] //分享完成后跳转的url
-        ];
+        $shareInfo = [];
+        if($info){
+            $shareInfo = [
+                'title'=>$info['title'], //分享的标题
+                'shareLink'=>$this->host.'/'.$info['link'], //分享的url
+                'desc'=> $info['desc'], //分享的描述
+                'shareImgUrl'=>$this->host.'/'.config('upload_dir.upload_path').'/'.$info['thumb_img'], //分享的图片
+                'backUrl'=>$this->host.'/'.$info['link'] //分享完成后跳转的url
+            ];
+        }
+
          return $shareInfo;
 	}
 }
