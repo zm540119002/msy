@@ -42,6 +42,7 @@ class WeixinShare extends Base {
         }else{
             // 基础处理
             $data = input('post.');
+            $data['link'] = strtolower( $data['link']);
             process_upload_files($data,['thumb_img'],'share',false);
 
             htmlspecialchars_addslashes($data,['link']);
