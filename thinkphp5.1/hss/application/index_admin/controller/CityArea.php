@@ -4,23 +4,45 @@ namespace app\index_admin\controller;
 /**
  * 城市合伙人控制器
  */
-class CityPartner extends Base {
+class CityArea extends Base {
+
+    protected $obj;
+
+    protected $beforeActionList = [
+        'currentModelClass'  =>  ['only'=>'manage,edit,getList,setField'],
+    ];
+
+    protected  function currentModelClass(){
+        $this->obj = new \app\index_admin\model\CityArea();
+    }
 
     public function manage(){
 
-        $city_id = input('id/d');
+        //$modelCityArea = new \app\index_admin\model\CityArea();
+        $condition = [
+            'field' => [
+                'province_name','province_code'
+            ],
+            'where' => [
+                ['status','=',0],
+            ],
+            'group' => 'province_code'
+        ];
+        $provinceList = $this->obj->getList($condition);
 
-        if($city_id){
-            $modelCityArea = new \app\index_admin\model\CityArea();
-            $condition = [
-                'where' => [
-                    ['id','=',$city_id]
-                ],
-            ];
-            $info = $modelCityArea->getInfo($condition);
+        $modelCityPartnerMarketInfo = new \app\index_admin\model\CityPartnerMarketInfo();
+        $condition2 = [
+            'field' => [
+                'id','name','amount','earnest'
+            ],
+            'where' => [
+                ['status','=',0]
+            ],
+        ];
+        $marketList = $modelCityPartnerMarketInfo->getList($condition2);
 
-            $this->assign('info',$info);
-        }
+        $this->assign('provinceList',$provinceList);
+        $this->assign('marketList',$marketList);
 
         return $this->fetch();
     }
@@ -30,78 +52,51 @@ class CityPartner extends Base {
      */
     public function getList(){
 
-        $modelCityPartner = new \app\index_admin\model\CityPartner();
+        //$modelCityArea = new \app\index_admin\model\CityArea();
 
         $condition = [
             'field' => [
-                'id','sn','user_id','company_name','applicant','mobile','earnest','amount','payment_time','pay_sn','pay_code','balance_sn','apply_status','create_time','update_time','earnest_sn',
+                'ca.id','ca.province_name','ca.city_name','ca.city_status','ca.alone_amount','ca.alone_earnest',
+                'cpmi.amount','cpmi.earnest','cpmi.name market_name',
+                'cp.company_name','cp.applicant','cp.mobile','cp.user_id'
             ],
-            'where' => [
-                ['status','=',0],
+            'join' => [
+                ['city_partner_market_info cpmi','ca.cpmi_id = cpmi.id','left'],
+                ['city_partner cp','ca.id = cp.city_area_id','left'],
             ],
             'order'=>[
-                'update_time' => 'desc',
+                'ca.id'=>'asc',
             ],
         ];
 
         // 条件
         $keyword = input('get.keyword/s');
-        $city_id = input('get.city_id/d');
-        if($keyword) $condition['where'][] = ['sn','like', '%' . trim($keyword) . '%'];
-        if($city_id) $condition['where'][] = ['city_area_id','=',$city_id];
+        if($keyword) $condition['where'][] = ['ca.city_name','like', '%' . trim($keyword) . '%'];
 
-        $condition['where'][] = ['apply_status','>',1];
-
-        $list = $modelCityPartner->pageQuery($condition);
+        $list = $this->obj->pageQuery($condition);
 
         $this->assign('list',$list);
 
         return view('list_tpl');
     }
 
-    public function setApplyStatus(){
+    public function setField(){
 
         $id  = input('post.id/d');
-        $apply_status = input('post.apply_status/d');
-
-        if (!$id || !$apply_status){
+        if (!$id){
             return errorMsg('失败');
         }
 
-        $modelCityPartner = new \app\index_admin\model\CityPartner();
+        $info= array();
+        // 上下架
+        if (input('?city_status')){
+            $city_status = input('post.city_status/d')==0 ? 1 : 0 ;
 
-        if($apply_status==4){
-            $info = ['apply_status'=>4];
-
-            $where = [
-                ['id','=',$id],
-                ['apply_status','=',3],
-                ['status','=',0],
-            ];
-            $buildSql = $modelCityPartner->where($where)->field('city_area_id')->buildSql();
-
-            $condition = [
-                'field' => [
-                    'cp.id'
-                ],
-                'where' => [
-                    ['cp.status','=',0],
-                    ['cp.apply_status','in','4,5'],
-                    ['cp.city_area_id','EXP','='.$buildSql],
-                ],
-            ];
-            $res = $modelCityPartner->getInfo($condition);
-
-            if($res){
-                return errorMsg('当前城市已有合伙人或有已通过审核通过的合伙人 !');
-            }
-
-        }else{
-            $info = ['apply_status'=>-1];
+            $info = ['city_status'=>$city_status];
         }
 
-
-        $rse = $modelCityPartner->where(['id'=>$id])->setField($info);
+        //$modelCityArea = new \app\index_admin\model\CityArea();
+        $rse = $this->obj->where(['id'=>$id])->setField($info);
 
         if(!$rse){
             return errorMsg('失败');
@@ -109,6 +104,22 @@ class CityPartner extends Base {
         $this->putDataJson();
         return successMsg('成功');
 
+    }
+
+
+    public function editMarket(){
+        $data = input('post.');
+
+        $modelCityPartnerMarketInfo = new \app\index_admin\model\CityPartnerMarketInfo();
+        $data['update_time'] = time();
+        $res = $modelCityPartnerMarketInfo->edit($data);
+        if($res){
+            $this->putDataJson();
+
+            return successMsg();
+        }else{
+            return errorMsg();
+        }
     }
 
 

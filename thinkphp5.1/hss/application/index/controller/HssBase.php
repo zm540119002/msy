@@ -8,7 +8,7 @@ class HssBase extends \common\controller\Base{
     public function __construct(){
         parent::__construct();
         //微信处理
-        if(isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
+        if(isPhoneSide() &&isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
             $weixinUserInfo =  session('weixinUserInfo');
             if(!$weixinUserInfo){
                 $weixnTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
@@ -98,10 +98,22 @@ class HssBase extends \common\controller\Base{
 
             //判断是否关注平台
             if(empty($info) || !$info['subscribe']){
-                 //没有关注
+                //没有关注
                 $this -> assign('subscribe',1);
-            }
-
         }
+
+        //微信分享初始化
+        $weixnTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
+        $signPackage =  $weixnTools->GetSignPackage();
+        $this->assign('signPackage',$signPackage);
+        }
+    }
+
+    public function weiXinShare($shareInfo){
+        $host = isset($_SERVER['HTTP_X_FORWARDED_HOST']) ? $_SERVER['HTTP_X_FORWARDED_HOST'] :
+            (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '');
+        $shareImgUrl = (is_ssl()?'https://':'http://').$host.C('UPLOAD_PATH_PHP').$shareInfo['shareImgUrl'];
+        $shareInfo['shareImgUrl'] = $shareImgUrl;
+        return $shareInfo;
     }
 }

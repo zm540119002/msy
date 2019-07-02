@@ -4,7 +4,7 @@ namespace app\index\controller;
 // 前台首页
 use think\Console;
 
-class Index extends HssBase{
+class Index extends HssBase {
     /**
      * 促销列表，场景列表，商品列表 -ajax
      */
@@ -47,12 +47,22 @@ class Index extends HssBase{
             'where' => [
                 ['id','>',20]
             ],
-            'limit' => 5,
+            'limit' => 13,
         ];
 
         $list = $modelUser->getList($condition);
-        $this->assign('spaceList',$list);
 
+        foreach($list as $k => $v){
+            $time = $k;
+            if(mt_rand(1,10)%2){
+                $time = $time+1;
+            }
+
+            $list[$k]['create_time'] = strtotime("-$time day");
+        }
+
+        $this->assign('spaceList',$list);
+ 
         // 广告
         $ads = [];
         $modelAdPositions = new \app\index\model\AdPositions();
@@ -74,7 +84,15 @@ class Index extends HssBase{
 
         foot_cart_menu();
 
-        //Cart::getCartTotalNum();
+        //微信分享
+        $shareInfo = [
+            'title'=>'黑森森-采购商城首页', //分享的标题
+            'shareLink'=>$this->host.$_SERVER['REQUEST_URI'], //分享的url
+            'desc'=> '海量产品、仪器、套餐等您选购！', //分享的描述
+            'shareImgUrl'=>$this->host.'/'.config('upload_dir.upload_path').'/'.$ads['top']['thumb_img'], //分享的图片
+            'backUrl'=>$this->host.$_SERVER['REQUEST_URI'] //分享完成后跳转的url
+        ];
+        $this->assign('shareInfo',$shareInfo);
 
         return $this->fetch();
     }
@@ -201,6 +219,15 @@ class Index extends HssBase{
 
     // 开放日活动
     public function activity(){
+        //微信分享
+        $shareInfo = [
+            'title'=>'黑森森-总部开放日', //分享的标题
+            'shareLink'=>$this->host.$_SERVER['REQUEST_URI'], //分享的url
+            'desc'=> '黑森森诚邀您参加每周五总部开放日！', //分享的描述
+            'shareImgUrl'=>'https://hss.meishangyun.com/uploads/2019061315524548068.jpeg', //分享的图片
+            'backUrl'=>$this->host.$_SERVER['REQUEST_URI'] //分享完成后跳转的url
+        ];
+        $this->assign('shareInfo',$shareInfo);
         return $this->fetch();
     }
 
