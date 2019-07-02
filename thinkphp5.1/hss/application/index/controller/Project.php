@@ -51,7 +51,8 @@ class Project extends HssBase{
             $model = new \app\index\model\Project();
             $config =[
                 'field' => [
-                    'id','name','main_img','intro','tag','detail_img','video','title','process_img','description','remarks','process','recommend_goods'
+                    'id','name','main_img','intro','tag','detail_img','video','title','process_img','description','remarks','process','recommend_goods',
+                    'thumb_img','share_title','share_desc'
                 ],
                 'where' => [
                     ['p.status', '=', 0],
@@ -108,7 +109,16 @@ class Project extends HssBase{
             Cart::getCartTotalNum();*/
 
             foot_cart_menu();
-
+            //微信分享
+            $info =  $info->toArray();
+            $shareInfo = [
+                'title'=>$info['share_title'], //分享的标题
+                'shareLink'=>$this->host.$_SERVER['REQUEST_URI'], //分享的url
+                'desc'=> $info['share_desc'], //分享的描述
+                'shareImgUrl'=>$this->host.'/'.config('upload_dir.upload_path').'/'.$info['thumb_img'], //分享的图片
+                'backUrl'=>$this->host.$_SERVER['REQUEST_URI'] //分享完成后跳转的url
+            ];
+            $this->assign('shareInfo',$shareInfo);
             return $this->fetch();
         }
     }
