@@ -84,15 +84,16 @@ class Index extends HssBase {
 
         foot_cart_menu();
         $WeixinShareModel = new \app\index\model\WeixinShare();
-        $WeixinShareModel ->getShareInfo();
+        $shareInfo = $WeixinShareModel ->getShareInfo();
+        print_r($shareInfo);exit;
         //微信分享
-        $shareInfo = [
-            'title'=>'黑森森采购商城：头部皮肤管理解决方案，百城万店众创平台', //分享的标题
-            'shareLink'=>$this->host.$_SERVER['REQUEST_URI'], //分享的url
-            'desc'=> '激活毛囊细胞，防脱生发、白发转黑。欢迎城市合伙人、加盟店、创业导师等联手共建共创共享头护千亿蓝海市场', //分享的描述
-            'shareImgUrl'=>$this->host.'/'.config('upload_dir.upload_path').'/'.$ads['top']['thumb_img'], //分享的图片
-            'backUrl'=>$this->host.$_SERVER['REQUEST_URI'] //分享完成后跳转的url
-        ];
+//        $shareInfo = [
+//            'title'=>'黑森森采购商城：头部皮肤管理解决方案，百城万店众创平台', //分享的标题
+//            'shareLink'=>$this->host.$_SERVER['REQUEST_URI'], //分享的url
+//            'desc'=> '激活毛囊细胞，防脱生发、白发转黑。欢迎城市合伙人、加盟店、创业导师等联手共建共创共享头护千亿蓝海市场', //分享的描述
+//            'shareImgUrl'=>$this->host.'/'.config('upload_dir.upload_path').'/'.$ads['top']['thumb_img'], //分享的图片
+//            'backUrl'=>$this->host.$_SERVER['REQUEST_URI'] //分享完成后跳转的url
+//        ];
         $this->assign('shareInfo',$shareInfo);
 
         return $this->fetch();
