@@ -33,7 +33,7 @@ class Promotion extends Base {
                 $condition = [
                     'field' => [
                         'id','name','shelf_status','sort','thumb_img','main_img','intro','tag','title','background_img','retail_price','franchise_price',
-                        'agent_price','remarks','belong_to_member_buy','is_company_info','upgrade_member_level'
+                        'agent_price','remarks','belong_to_member_buy','is_company_info','upgrade_member_level','share_title','share_desc'
                     ], 'where' => [
                         ['id','=',$id]
                     ],

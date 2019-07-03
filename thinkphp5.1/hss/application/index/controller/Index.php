@@ -83,15 +83,9 @@ class Index extends HssBase {
 
 
         foot_cart_menu();
-
         //微信分享
-        $shareInfo = [
-            'title'=>'黑森森-采购商城首页', //分享的标题
-            'shareLink'=>$this->host.$_SERVER['REQUEST_URI'], //分享的url
-            'desc'=> '海量产品、仪器、套餐等您选购！', //分享的描述
-            'shareImgUrl'=>$this->host.'/'.config('upload_dir.upload_path').'/'.$ads['top']['thumb_img'], //分享的图片
-            'backUrl'=>$this->host.$_SERVER['REQUEST_URI'] //分享完成后跳转的url
-        ];
+        $WeixinShareModel = new \app\index\model\WeixinShare();
+        $shareInfo = $WeixinShareModel ->getShareInfo();
         $this->assign('shareInfo',$shareInfo);
 
         return $this->fetch();
@@ -122,6 +116,11 @@ class Index extends HssBase {
             }
             // 底部菜单，见配置文件custom.footer_menu
             $this->assign('currentPage',request()->controller().'/'.request()->action());
+
+            //微信分享
+            $WeixinShareModel = new \app\index\model\WeixinShare();
+            $shareInfo = $WeixinShareModel ->getShareInfo();
+            $this->assign('shareInfo',$shareInfo);
             return $this->fetch('franchise/index');
         }
 
@@ -175,7 +174,10 @@ class Index extends HssBase {
                 $this->assign('apply',$apply);
                 $this->assign('applied',$applied);*/
             }
-
+            //微信分享
+            $WeixinShareModel = new \app\index\model\WeixinShare();
+            $shareInfo = $WeixinShareModel ->getShareInfo();
+            $this->assign('shareInfo',$shareInfo);
             // 底部菜单，见配置文件custom.footer_menu
             $this->assign('currentPage',request()->controller().'/'.request()->action());
             return $this->fetch('city_partner/index');
@@ -206,12 +208,20 @@ class Index extends HssBase {
                 $this->assign('currentPage',request()->controller().'/'.request()->action());
             }
             $this->getCartTotalNum();
+            //微信分享
+            $WeixinShareModel = new \app\index\model\WeixinShare();
+            $shareInfo = $WeixinShareModel ->getShareInfo();
+            $this->assign('shareInfo',$shareInfo);
             return $this->fetch('cart/index');
         }
     }
 
     // 项目优势页
     public function superiority(){
+        //微信分享
+        $WeixinShareModel = new \app\index\model\WeixinShare();
+        $shareInfo = $WeixinShareModel ->getShareInfo();
+        $this->assign('shareInfo',$shareInfo);
         $this->assignStandardBottomButton([21,22]);
 
         return $this->fetch();
@@ -220,13 +230,8 @@ class Index extends HssBase {
     // 开放日活动
     public function activity(){
         //微信分享
-        $shareInfo = [
-            'title'=>'黑森森-总部开放日', //分享的标题
-            'shareLink'=>$this->host.$_SERVER['REQUEST_URI'], //分享的url
-            'desc'=> '黑森森诚邀您参加每周五总部开放日！', //分享的描述
-            'shareImgUrl'=>'https://hss.meishangyun.com/uploads/2019061315524548068.jpeg', //分享的图片
-            'backUrl'=>$this->host.$_SERVER['REQUEST_URI'] //分享完成后跳转的url
-        ];
+        $WeixinShareModel = new \app\index\model\WeixinShare();
+        $shareInfo = $WeixinShareModel ->getShareInfo();
         $this->assign('shareInfo',$shareInfo);
         return $this->fetch();
     }
@@ -249,14 +254,20 @@ class Index extends HssBase {
     // 项目优势页
     public function invited(){
         $this->assignStandardBottomButton([21]);
-
+        //微信分享
+        $WeixinShareModel = new \app\index\model\WeixinShare();
+        $shareInfo = $WeixinShareModel ->getShareInfo();
+        $this->assign('shareInfo',$shareInfo);
         return $this->fetch();
     }
 
     // 项目优势页
     public function recruit(){
         $this->assignStandardBottomButton([22]);
-
+        //微信分享
+        $WeixinShareModel = new \app\index\model\WeixinShare();
+        $shareInfo = $WeixinShareModel ->getShareInfo();
+        $this->assign('shareInfo',$shareInfo);
         return $this->fetch();
     }
 

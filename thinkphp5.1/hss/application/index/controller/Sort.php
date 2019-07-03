@@ -58,7 +58,8 @@ class Sort extends HssBase{
             $model = new \app\index\model\Sort();
             $config =[
                 'field' => [
-                    'id','name','main_img','intro','tag','detail_img','title','process_img','recommend_goods'
+                    'id','name','main_img','intro','tag','detail_img','title','process_img','recommend_goods',
+                    'share_title','share_desc','thumb_img'
                 ],
                 'where' => [
                     ['status', '=', 0],
@@ -75,7 +76,7 @@ class Sort extends HssBase{
             $modelGoods = new \app\index\model\Goods();
             $condition = [
                 'field' => [
-                    'id','name','specification','thumb_img'
+                    'id','name','specification','thumb_img',
                 ],'where' => [
                     ['status','=',0],
                     ['shelf_status','=',3],
@@ -102,6 +103,16 @@ class Sort extends HssBase{
 
             foot_cart_menu();
 
+            //微信分享
+            $info =  $info->toArray();
+            $shareInfo = [
+                'title'=>$info['share_title'], //分享的标题
+                'shareLink'=>$this->host.$_SERVER['REQUEST_URI'], //分享的url
+                'desc'=> $info['share_desc'], //分享的描述
+                'shareImgUrl'=>$this->host.'/'.config('upload_dir.upload_path').'/'.$info['thumb_img'], //分享的图片
+                'backUrl'=>$this->host.$_SERVER['REQUEST_URI'] //分享完成后跳转的url
+            ];
+            $this->assign('shareInfo',$shareInfo);
             return $this->fetch();
         }
     }

@@ -56,8 +56,8 @@ export default {
       display: flex;
       border-radius: 20px 20px 0 0;
       border-bottom: 6px solid #f2f2f2;
-     div{
-       text-align: center;
+       div{
+         text-align: center;
                 flex: 1;
         a{
           margin: 0 auto 0.05rem;
