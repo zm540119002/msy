@@ -10,9 +10,21 @@ import '../static/common/reset.css'
 import '../static/css/mui.min.css'
 import '../static/css/icons-extra.css'
 
+
+// import '../static/js/mui'
+// Vue.prototype.mui = mui
+// Vue.use(mui)
+
+
+import Vant from 'vant';
+import 'vant/lib/index.css';
+
+Vue.use(Vant);
+
 import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
 Vue.use(MintUI)
+
 
 Vue.config.productionTip = false
 

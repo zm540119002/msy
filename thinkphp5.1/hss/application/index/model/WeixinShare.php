@@ -41,7 +41,6 @@ class WeixinShare extends \common\model\Base {
                 'backUrl'=>$this->host.'/'.$info['link'] //分享完成后跳转的url
             ];
         }
-
          return $shareInfo;
 	}
 }

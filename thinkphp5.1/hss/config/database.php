@@ -66,7 +66,7 @@ if(strpos(PHP_OS,"WIN")!==false){
         //数据库配置
         'db_config_1' => [
             'type'        => 'mysql',// 数据库类型
-            'hostname'    => '47.106.79.38',// 服务器地址
+            'hostname'    => '127.0.0.1',// 服务器地址
             'database'    => 'test_hss',// 数据库名
             'username'    => 'root',// 数据库用户名
             'password'    => 'msy',// 数据库密码
