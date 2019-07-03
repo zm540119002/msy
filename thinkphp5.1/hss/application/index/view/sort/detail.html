@@ -28,7 +28,7 @@
 			<div id="item1" class="floor">
 				<div class="floor_item project-list">
 					<!-- 内容 -->
-					<section class="content-padding content_main wy_list">
+					<section class=" wy_list">
 						<!--采购方案列表-->
 						{notempty name="promotionList"}
 						{volist name="promotionList" id="vo"}
@@ -69,6 +69,7 @@
 			<div id="item2" class="floor">
 				<div class="floor_item">	
 					<!-- 品类介绍 -->
+					<p class="content-label">品类介绍</p>
 					<section class="project_item">
 						<p>
 							{volist name="$info.detail_img" id="vo"}
@@ -97,6 +98,7 @@
 			<div id="item3" class="floor">
 				<div class="floor_item" >
 					<!-- 相关培训 -->
+					<p class="content-label">相关培训</p>
 					<section class="project_item">
 						<p>
 							{volist name="$info.process_img" id="vo"}
