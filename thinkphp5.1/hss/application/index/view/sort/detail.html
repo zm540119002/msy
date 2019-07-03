@@ -3,87 +3,114 @@
 {block name="content"}
 <article class="f24">
 	<!-- 项目信息 -->
-	<div id="menu" class="menu">
+	<!--<div id="menu" class="menu">
 		<a href="javascript:void(0);" class="back_prev_page" data-jump_url=""></a>
 		<ul class="columns_flex detail-nav">
 			<li data-item="item1"><a href="javascript:;" class="">品类商品</a></li>
 			<li data-item="item2"><a href="javascript:;" class="">品类介绍</a></li>
 			<li data-item="item3"><a href="javascript:;" class="">相关培训</a></li>
 		</ul>
-	</div>
+	</div>-->
 	<!-- 品类商品 -->
+	<div class="back"><</div>
 	<section class="project_item">
 		{include file="template/scene_detail.html" /}
-		<!-- 内容 -->
-		<section class="content-padding content_main wy_list">
-			<!--采购方案列表-->
-			{notempty name="promotionList"}
-			{volist name="promotionList" id="vo"}
-			<a href="{:url('Promotion/detail',['id'=>$vo.id])}" data-id="{$vo.id}" class="">
-				<div class="applay_p_item columns_flex l-r-sides">
-					<!--			<div>
-                                    <div class="red">¥<price>{$vo.price}</price></div>
-                                    <p>{$vo.name}</p>
-                                    <p class="once-enter">立即进入></p>
-                                </div>
-                                <div class="group_btn50">
-                                    <img class="common_default_img" src="" alt="{$vo.name}">
-                                </div>-->
-					<img class="common_default_img" src="{:show_img_handle($vo.thumb_img)}" alt="{$vo.name}">
-				</div>
-			</a>
-			{/volist}
-			{/notempty}
-			<!--产品列表-->
-			<ul class="goods_list list" id="product-list">
-				<product-select
-						v-for="(productInfo,index) in productList"
-						:key="index"
-						:init_product_id="productInfo.id"
-						:init_deal_price="parseFloat(productInfo.franchise_price)"
-						:init_compare_price="Number(productInfo.retail_price)"
-						:init_product_name="productInfo.headline"
-						:init_product_src="productInfo.thumb_img"
-						:init_quantity="parseInt(init_quantity)"
-						:step_quantity="parseInt(step_quantity)"
-						:init_specification="productInfo.specification"
-						:type="type"
-				></product-select>
-			</ul>
-		</section>
 	</section>
-	<!-- 品类介绍 -->
-	<section class="project_item hide">
-		<p>
-			{volist name="$info.detail_img" id="vo"}
-			<img src="{:show_img_handle($vo)}" alt="" class="common_default_img">
-			{/volist}
-		</p>
-		{notempty name="$info.recommend_goods"}
-		<div class="content-padding content_main ">
-			<p class="content-label">推荐搭配产品</p>
-			<ul class="columns_flex flex-both-side goods-content-list">
-				{volist name="$info.recommend_goods" id="vo"}
-				<li>
-					<a href="{:url('Index/Goods/detail',['id'=>$vo.id])}">
-						<img src="{:show_img_handle($vo.thumb_img)}" alt="{$vo.name}">
-					</a>
-					<p>{$vo.name}</p>
-					<p>规格：{$vo.specification}</p>
-				</li>
-				{/volist}
+	<div class="scrollwrapper">
+		<div id="menu" >
+			<!--<a href="javascript:void(0);" class="back_prev_page" data-jump_url=""></a>-->
+			<ul class="columns_flex detail-nav">
+				<li data-item="item1"><a href="javascript:;" class="">品类商品</a></li>
+				<li data-item="item2"><a href="javascript:;" class="">品类介绍</a></li>
+				<li data-item="item3"><a href="javascript:;" class="">相关培训</a></li>
 			</ul>
 		</div>
-		{/notempty}
-	</section>
-	<!-- 相关培训 -->
-	<section class="project_item hide">
-		<p>
-			{volist name="$info.process_img" id="vo"}
-			<img src="{:show_img_handle($vo)}" alt="" class="common_default_img">
-			{/volist}
-		</p>
-	</section>
+		<div id="content" class="floor-content">
+			<div id="item1" class="floor">
+				<div class="floor_item project-list">
+					<!-- 内容 -->
+					<section class=" wy_list">
+						<!--采购方案列表-->
+						{notempty name="promotionList"}
+						{volist name="promotionList" id="vo"}
+						<a href="{:url('Promotion/detail',['id'=>$vo.id])}" data-id="{$vo.id}" class="">
+							<div class="applay_p_item columns_flex l-r-sides">
+								<!--			<div>
+												<div class="red">¥<price>{$vo.price}</price></div>
+												<p>{$vo.name}</p>
+												<p class="once-enter">立即进入></p>
+											</div>
+											<div class="group_btn50">
+												<img class="common_default_img" src="" alt="{$vo.name}">
+											</div>-->
+								<img class="common_default_img" src="{:show_img_handle($vo.thumb_img)}" alt="{$vo.name}">
+							</div>
+						</a>
+						{/volist}
+						{/notempty}
+						<!--产品列表-->
+						<ul class="goods_list list" id="product-list">
+							<product-select
+									v-for="(productInfo,index) in productList"
+									:key="index"
+									:init_product_id="productInfo.id"
+									:init_deal_price="parseFloat(productInfo.franchise_price)"
+									:init_compare_price="Number(productInfo.retail_price)"
+									:init_product_name="productInfo.headline"
+									:init_product_src="productInfo.thumb_img"
+									:init_quantity="parseInt(init_quantity)"
+									:step_quantity="parseInt(step_quantity)"
+									:init_specification="productInfo.specification"
+									:type="type"
+							></product-select>
+						</ul>
+					</section>
+				</div>
+			</div>
+			<div id="item2" class="floor">
+				<div class="floor_item">	
+					<!-- 品类介绍 -->
+					<p class="content-label">品类介绍</p>
+					<section class="project_item">
+						<p>
+							{volist name="$info.detail_img" id="vo"}
+							<img src="{:show_img_handle($vo)}" alt="" class="common_default_img">
+							{/volist}
+						</p>
+						{notempty name="$info.recommend_goods"}
+						<div class="content-padding content_main ">
+							<p class="content-label">推荐搭配产品</p>
+							<ul class="columns_flex flex-both-side goods-content-list">
+								{volist name="$info.recommend_goods" id="vo"}
+								<li>
+									<a href="{:url('Index/Goods/detail',['id'=>$vo.id])}">
+										<img src="{:show_img_handle($vo.thumb_img)}" alt="{$vo.name}">
+									</a>
+									<p>{$vo.name}</p>
+									<p>规格：{$vo.specification}</p>
+								</li>
+								{/volist}
+							</ul>
+						</div>
+						{/notempty}
+					</section>
+				</div>
+			</div>
+			<div id="item3" class="floor">
+				<div class="floor_item" >
+					<!-- 相关培训 -->
+					<p class="content-label">相关培训</p>
+					<section class="project_item">
+						<p>
+							{volist name="$info.process_img" id="vo"}
+							<img src="{:show_img_handle($vo)}" alt="" class="common_default_img">
+							{/volist}
+						</p>
+					</section>
+				</div>
+			</div>
+		</div>
+	</div>
 </article>
 {/block}
 {block name="common"}
@@ -239,13 +266,82 @@
 				clickable: true
 			}
 		});
+		var height=$('.detail-nav').height();
+		var offsetHeight=$('.detail-nav').offset().top;
+		$(window).on('scroll',function(){
+			var scrollHeight=$(document).scrollTop();
 
-		// 项目信息切换
-		$('.detail-nav li').on('click',function(){
-			$(this).addClass('current').siblings().removeClass('current');
-			$('.project_item').hide().eq($(this).index()).show();
+			if(scrollHeight>offsetHeight){
+				$('.detail-nav').addClass('top-fixed');
+			}else {
+				$('.detail-nav').removeClass('top-fixed');
+			}
 		});
+		//楼层
 
+		var menu = $('#menu');
+		var items = $('#content').find('.floor');
+		var height=$('.detail-nav').height();
+		var offsetHeight=$('.detail-nav').offset().top;
+
+		var _screenHight = window.screen.availHeight;
+		$("#item3").css("min-height",_screenHight+"px");
+
+
+		$(window).scroll(function() {
+			//滚动
+			var top = $(document).scrollTop();
+			var currentId = '';
+			if(top>offsetHeight){
+				$('.detail-nav').addClass('top-fixed');
+			}else {
+				$('.detail-nav').removeClass('top-fixed');
+			}
+			items.each(function(){
+				var m = $(this);
+				var itemTop = m.offset().top;
+
+				if(top + 43>= itemTop ){
+					//currentId = '#' + m.attr('id');
+					currentId = m.attr('id');
+				} else {
+					return false;
+				}
+
+			});
+
+			// 给相应楼层的a 设置 current, 取消其他链接的current
+			var currentLink = menu.find('.active');
+			if(currentId && currentLink.data('item') != currentId) {
+				// currentLink.removeClass('active');
+				menu.find("[data-item='"+ currentId +"']").addClass('active').siblings().removeClass('active');
+                //menu.find("[data-item='"+ currentId +"']").addClass('active');
+			}
+		});
+		// 项目信息切换
+		$('#menu li').on('click',function(){
+		//$(document).ready(function(){
+			var _this=$(this);
+			var id=_this.data('item');
+			items.each(function(){
+				var m = $(this);
+				if(m.attr('id')==id){
+				    var itemTop = m.offset().top;
+					_this.addClass('active').siblings().removeClass('active');
+                    var scrollY=itemTop-40;
+					$('html, body').animate({
+						scrollTop: scrollY
+					},500);
+
+				}else{
+					m.removeClass('active');
+				}
+			});
+		});
+		// 点击返回上一页
+		$('.back').on("click",function(){
+			history.back(-1);
+		})
 		// 分享二维码
 		$('body').on('click', '.url_share', function () {
 			var param_url = window.location.href;
@@ -275,9 +371,6 @@
 		z-index: 10;
 		width: 100%;
 	}
-	.f24{
-		margin-top: 42px;
-	}
 	.project_details{
 		border-bottom: none;
 		margin-bottom: 0;
@@ -285,6 +378,18 @@
 	.l-r-sides{
 		border-bottom: none;
 		margin-bottom: 0;
+	}
+	.back {
+		position: fixed;
+		width: 30px;
+		height: 30px;
+		background: rgba(0, 0, 0, 0.4);
+		z-index: 99;
+		color: #fff;
+		border-radius: 50%;
+		margin: 6px 0 0 8px;
+		text-align: center;
+		line-height: 30px;
 	}
 </style>
 {/block}
