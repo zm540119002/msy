@@ -12,6 +12,7 @@
 		</ul>
 	</div>-->
 	<!-- 品类商品 -->
+	<div class="back"><</div>
 	<section class="project_item">
 		{include file="template/scene_detail.html" /}
 	</section>
@@ -337,7 +338,10 @@
 				}
 			});
 		});
-
+		// 点击返回上一页
+		$('.back').on("click",function(){
+			history.back(-1);
+		})
 		// 分享二维码
 		$('body').on('click', '.url_share', function () {
 			var param_url = window.location.href;
