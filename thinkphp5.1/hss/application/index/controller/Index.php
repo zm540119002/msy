@@ -9,7 +9,6 @@ class Index extends HssBase {
      * 促销列表，场景列表，商品列表 -ajax
      */
     public function index(){
-        p(23);
         // 促销列表 7个
         $modelPromotion = new \app\index\model\Promotion();
         $condition =[
