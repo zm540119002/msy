@@ -2,6 +2,7 @@
 namespace common\model;
 
 class Base extends \think\Model {
+
 	/**编辑单条记录
 	 */
 	public function edit($data,$where=[]){

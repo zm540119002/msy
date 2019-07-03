@@ -42,12 +42,13 @@ class WeixinShare extends Base {
         }else{
             // 基础处理
             $data = input('post.');
-            process_upload_files($data,['thumb_img'],'shortcut',false);
+            $data['link'] = strtolower( $data['link']);
+            process_upload_files($data,['thumb_img'],'share',false);
+
             htmlspecialchars_addslashes($data,['link']);
 
             $data['update_time'] = time();
             $data['sort'] = input('sort/d');
-
             if(isset($data['id']) && $id=input('post.id/d')){//修改
                 // 编辑
                 $condition = ['where' => ['id' => $id,]];
@@ -82,12 +83,6 @@ class WeixinShare extends Base {
         if(!$id=input('post.id/d')) return errorMsg('失败');
 
         $info= array();
-        // 上下架
-        if ($shelf_status = input('post.shelf_status/d')){
-            $shelf_status = $shelf_status==1 ? 3 : 1 ;
-
-            $info = ['shelf_status'=>$shelf_status];
-        }
 
         $rse  = $this->obj->where(['id'=>$id])->setField($info);
 
