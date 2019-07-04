@@ -83,5 +83,7 @@ export default {
   border:1px solid #FF7BAC;
   border-radius: 5px;
 }
-
+.van-field{
+  margin-bottom: 0;
+}
 </style>
