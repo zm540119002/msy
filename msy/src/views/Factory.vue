@@ -44,6 +44,7 @@ export default {
 
 <style lang="less" scoped>
 .aaa{
-  width: 80%;
+  width: 90%;
+  border-radius: 10px;
 }
 </style>
