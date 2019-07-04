@@ -4,8 +4,8 @@
       <van-button type="primary" @click="showPopup"> 登录</van-button>
       <van-popup class="aaa" v-model="show">
           <van-cell-group>
-            <van-field v-model="userName" placeholder="请输入用户名" />
-            <van-field v-model="password" placeholder="密码" />
+            <van-field v-model="postData.userName" placeholder="请输入用户名" />
+            <van-field v-model="postData.password" placeholder="密码" />
           </van-cell-group>
         <van-button @click="loginHandle" type="info">登录</van-button>
       </van-popup>
