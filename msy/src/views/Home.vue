@@ -4,7 +4,7 @@
       <div class="nav">
        11111111111111
       </div>
-      <div class="top_img"><img src="https://msy.meishangyun.com/static/common/img/banner/home-banner1.jpg"></div>
+      <div class="top_img"><img src="../../static/images/home-banner1.jpg"></div>
       <!-- icon -->
       <div class="icon">
         <div><a href=""></a><span>入驻部署</span></div>
