@@ -6,12 +6,20 @@
 				<span class="mui-tab-label">采购商</span>
 			</router-link>
 			<router-link class="mui-tab-item" :to="{name:'about'}" exact>
-				<span class="mui-icon mui-icon-email"></span>
+				<span class="mui-icon mui-icon-personadd"></span>
 				<span class="mui-tab-label">从业人员</span>
 			</router-link>
 			<router-link class="mui-tab-item" to="/factory" exact>
 				<span class="mui-icon mui-icon-contact"></span>
 				<span class="mui-tab-label">供应商</span>
+			</router-link>
+      <router-link class="mui-tab-item" to="/cart" exact>
+				<span class="mui-icon mui-icon-extra mui-icon-extra-cart"></span>
+				<span class="mui-tab-label">采购车</span>
+			</router-link>
+      <router-link class="mui-tab-item" to="/user" exact>
+				<span class="mui-icon mui-icon-contact"></span>
+				<span class="mui-tab-label">我</span>
 			</router-link>
 		</nav>
   </div>
