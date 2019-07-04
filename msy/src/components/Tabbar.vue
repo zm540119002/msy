@@ -13,6 +13,14 @@
 				<span class="mui-icon mui-icon-contact"></span>
 				<span class="mui-tab-label">供应商</span>
 			</router-link>
+      <router-link class="mui-tab-item" to="/cart" exact>
+				<span class="mui-icon mui-icon-contact"></span>
+				<span class="mui-tab-label">采购车</span>
+			</router-link>
+      <router-link class="mui-tab-item" to="/user" exact>
+				<span class="mui-icon mui-icon-contact"></span>
+				<span class="mui-tab-label">我</span>
+			</router-link>
 		</nav>
   </div>
 </template>
