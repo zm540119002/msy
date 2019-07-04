@@ -2,13 +2,11 @@
 {block name="title"}layout{/block}
 {block name="content"}
 <div class="frame">
-
-	<div id="div1">5555555</div>
+	<div id="div1"></div>
 	<div id="div2"></div>
+	<div id="div4"></div>
 </div>
 <div id="div3"></div>
-<div id="div4"></div>
-<div id="div5"></div>
 {/block}
 {block name="common"}{/block}
 {block name="footer"}{/block}
@@ -18,7 +16,6 @@
 </script>
 <style>
 	.frame {
-		position: relative;
 		margin: 50px;
 		width: 400px;
 		height: 300px;
@@ -28,7 +25,8 @@
 		position: absolute;
 		width: 100px;
 		height: 50px;
-		top: 3px;
+		left: 10px;
+		top: 10px;
 		background-color: blue;
 	}
 	#div2 {
@@ -37,19 +35,20 @@
 		background-color: green;
 	}
 	#div3 {
-		width: 200px;
-		height: 100px;
+		position: fixed;
+		width: 20px;
+		height: 10px;
+		left: 10px;
+		top: 10px;
 		background-color: red;
 	}
 	#div4 {
+		position: fixed;
 		width: 200px;
 		height: 100px;
-		background-color: red;
-	}
-	#div5 {
-		width: 200px;
-		height: 100px;
-		background-color: red;
+		left: 20px;
+		right: 20px;
+		background-color: #000000;
 	}
 </style>
 <script type="text/javascript">
