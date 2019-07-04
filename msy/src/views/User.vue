@@ -3,6 +3,7 @@
     <div>     
       <van-button type="primary" @click="showPopup"> 登录</van-button>
       <van-popup class="aaa" v-model="show">
+        <div><img src="" alt=""></div>
         <van-tabs >
           <van-tab title="登录">
              <van-cell-group>
