@@ -3,8 +3,11 @@
     <div>     
       <van-button type="primary" @click="showPopup"> 登录</van-button>
       <van-popup class="aaa" v-model="show">
-        手机号<input type="text">
-        密码<input type="password">
+          <van-cell-group>
+            <van-field v-model="userName" placeholder="请输入用户名" />
+            <van-field v-model="password" placeholder="密码" />
+          </van-cell-group>
+        <van-button @click="loginHandle" type="info">登录</van-button>
       </van-popup>
     </div>
     <Tabbar msg="Welcome to Your Vue.js App" />
@@ -20,13 +23,19 @@ export default {
   },
  data() {
     return {
-      show: false
+      show: false,
+      userName: "",
+      password: ""
     }
   },
 
   methods: {
     showPopup() {
       this.show = true;
+    },
+    loginHandle(){
+      console.log(this.userName)
+      console.log(this.password)
     }
   }
  
