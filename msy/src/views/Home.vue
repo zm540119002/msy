@@ -36,7 +36,6 @@ export default {
   components: {
     Tabbar
   }
-
 }
 </script>
 <style lang="less" scoped>
