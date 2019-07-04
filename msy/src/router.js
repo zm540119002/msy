@@ -16,11 +16,19 @@ export default new Router({
       path: '/about',
       name: 'about',
       component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+    },{
+      path: '/factory',
+      name: 'Factory',
+      component: () => import(/* webpackChunkName: "factory" */ './views/Factory.vue')
+    },{
+      path: '/cart',
+      name: 'Cart',
+      component: () => import(/* webpackChunkName: "factory" */ './views/Cart.vue')
     },
     {
-      path: '/factory',
-      name: 'factory',
-      component: () => import(/* webpackChunkName: "factory" */ './views/Factory.vue')
+      path: '/user',
+      name: 'User',
+      component: () => import(/* webpackChunkName: "factory" */ './views/User.vue')
     }
   ]
 })
