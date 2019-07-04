@@ -2,13 +2,7 @@
   <div class="home">
     <div class="content">
       <div class="nav">
-        <ul>
-          <li><a href="">采购</a></li>
-          <li><a href="">分成</a></li>
-          <li><a href="">加盟</a></li>
-          <li><a href="">店家入驻</a></li>
-          <li><a href="">智慧店务</a></li>
-        </ul>
+       11111111111111
       </div>
       <div class="top_img"><img src="https://msy.meishangyun.com/static/common/img/banner/home-banner1.jpg"></div>
       <!-- icon -->
