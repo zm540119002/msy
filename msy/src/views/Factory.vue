@@ -24,8 +24,10 @@ export default {
  data() {
     return {
       show: false,
-      userName: "",
-      password: ""
+        postData:{
+            userName: "",
+            password: ""
+        }
     }
   },
 
@@ -34,8 +36,7 @@ export default {
       this.show = true;
     },
     loginHandle(){
-      console.log(this.userName)
-      console.log(this.password)
+      console.log(this.postData)
     }
   }
  
