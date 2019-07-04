@@ -2,6 +2,7 @@
   <div>
     <div>     
      购物车
+     <van-icon name="location-o" />
     </div>
     <Tabbar msg="Welcome to Your Vue.js App" />
   </div>
