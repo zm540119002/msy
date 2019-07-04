@@ -6,7 +6,7 @@
 				<span class="mui-tab-label">采购商</span>
 			</router-link>
 			<router-link class="mui-tab-item" :to="{name:'about'}" exact>
-				<span class="mui-icon mui-icon-email"></span>
+				<span class="mui-icon"><van-icon name="friends-o"/></span>
 				<span class="mui-tab-label">从业人员</span>
 			</router-link>
 			<router-link class="mui-tab-item" to="/factory" exact>
