@@ -2,8 +2,8 @@
   <div>
     <div>     
       <van-button type="primary" @click="showPopup"> 登录</van-button>
-      <van-popup class="aaa" v-model="show">
-        <div><img src="" alt=""></div>
+      <van-popup class="card" v-model="show">
+        <div><img src="../../static/images/ucenter_logo.png" alt=""></div>
         <van-tabs >
           <van-tab title="登录">
              <van-cell-group>
@@ -66,19 +66,22 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.aaa{
+.card{
   width: 90%;
   border-radius: 10px;
+  div{
+    text-align:center;
+    img{
+      margin-top: 20px;
+    }
+  }
 }
 .btn{
-  width: 90%;
-  margin-left: 5%;
+  width: 92%;
   margin-bottom: 5%;
   background-color: #FF7BAC;
   border:1px solid #FF7BAC;
   border-radius: 5px;
 }
-.van-field__control{
-  margin-bottom: 0
-}
+
 </style>
