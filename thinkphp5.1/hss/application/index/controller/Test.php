@@ -180,7 +180,7 @@ class Test extends HssBase{
                     'msg' => 'Token验证不通过,用户不存在'
                 ];
             }
-            return $msg;
+            return json_encode($msg);
         } catch (\Firebase\JWT\SignatureInvalidException $e) {
             return json_encode([
                 'status' => 1002,
