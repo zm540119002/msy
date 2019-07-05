@@ -2,7 +2,11 @@
   <div>
     <div>     
       <van-button type="primary" @click="showPopup"> 登录</van-button>
-      <van-popup class="card" v-model="show">
+       <van-cell-group>
+          <van-field v-model="postData.userName" placeholder="请输入用户名" />
+          <van-field v-model="postData.password" placeholder="密码" />
+      </van-cell-group>
+      <!-- <van-popup class="card" v-model="show">
         <div><img src="../../static/images/ucenter_logo.png" alt=""></div>
         <van-tabs >
           <van-tab title="登录">
@@ -21,7 +25,7 @@
             <van-button class="btn" @click="registerHandle" type="info">注册</van-button>
           </van-tab>
         </van-tabs>        
-      </van-popup>
+      </van-popup> -->
     </div>
     <Tabbar msg="Welcome to Your Vue.js App" />
   </div>
