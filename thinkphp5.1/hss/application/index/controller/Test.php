@@ -162,7 +162,37 @@ class Test extends HssBase{
         $jwt = input("token");  //上一步中返回给用户的token
         $key = "huang";  //上一个方法中的 $key 本应该配置在 config文件中的
         $info = JWT::decode($jwt, $key, ["HS256"]); //解密jwt
-        return json($info);
+        try {
+            $authInfo = JWT::decode($jwt, $key, ["HS256"]);
+            //$authInfo = json_decode($jwtAuth, true);
+            $msg = [];
+            if (!empty($authInfo['uid'])) {
+                $msg = [
+                    'status' => 1001,
+                    'msg' => 'Token验证通过'
+                ];
+            } else {
+                $msg = [
+                    'status' => 1002,
+                    'msg' => 'Token验证不通过,用户不存在'
+                ];
+            }
+            return $msg;
+        } catch (\Firebase\JWT\SignatureInvalidException $e) {
+            echo json_encode([
+                'status' => 1002,
+                'msg' => 'Token无效'
+            ]);
+            exit;
+        } catch (\Firebase\JWT\ExpiredException $e) {
+            echo json_encode([
+                'status' => 1003,
+                'msg' => 'Token过期'
+            ]);
+            exit;
+        } catch (Exception $e) {
+            return $e;
+        }
     }
 
 
