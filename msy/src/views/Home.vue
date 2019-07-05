@@ -20,7 +20,11 @@
         <van-tabs v-model="active">
           <van-tab title="关注">关注</van-tab>
           <van-tab title="推荐">
-            <div>aaa</div>
+            <div class="recommend">
+              <div>推荐关注</div>
+              <div>换一批></div>
+            </div>
+            <div>content</div>
           </van-tab>
           <van-tab title="XX">XX</van-tab>
           <van-tab title="XX">XX</van-tab>
@@ -132,6 +136,11 @@ export default {
       background: #fff;
       .van-tab__pane{
         padding: 0 0.25rem;
+        .recommend{
+         display: flex;
+         justify-content: space-between;
+         padding: 0.2rem 0;
+        }
       }
     }
   }
