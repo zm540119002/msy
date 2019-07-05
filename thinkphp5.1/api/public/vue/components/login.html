@@ -190,7 +190,7 @@
         });
     });
 </script>
-<div class="bg"></div>
+<div class="bg" id='bg'></div>
 <div id="loginDialogTpl" class="loginLayer" style="display: none">
     <div id="loginDialogRoot">
         <login></login>
@@ -226,23 +226,15 @@
             }
         });
     }
-    function openwin(openwin){
-        let OpenWindow=window.open(openwin, "newwin", "height=250, width=250,toolbar=no,scrollbars="+scroll+",menubar=no");
-        OpenWindow.document.write("< TITLE>例子< /TITLE>")
-        OpenWindow.document.write("< BODY BGCOLOR=#ffffff>")
-        OpenWindow.document.write("< h1>Hello!< /h1>")
-        OpenWindow.document.write("New window opened!")
-        OpenWindow.document.write("< /BODY>")
-        OpenWindow.document.write("< /HTML>")
-        OpenWindow.document.close()
-    }
     //登录-弹窗触发
     var loginDialogTriggerLayerIndex = 0;
     function loginDialogTrigger(){
         let content = $('#loginDialogTpl').html();
+        $('body,html').animate({ scrollTop: 0 },0);
         document.getElementById('loginDialogTpl').style.display="block";
-        //openwin(content);
-        //return false;
+        document.getElementById('bg').style.display="block";
+        $('body').css({height:($(window).height())+'px'});
+        $('body').addClass('body_fixed');
         // loginDialogTriggerLayerIndex = layer.open({
         //     className:'loginLayer',
         //     skin:'loginLayer',
@@ -367,6 +359,12 @@
             };
             bus.$emit('register',param);
         });
+        $('body').on('click','.bg',function(){
+            document.getElementById('loginDialogTpl').style.display="none";
+            document.getElementById('bg').style.display="none";
+            $('body').attr('style','');
+            $('body').removeClass('body_fixed');
+        })
         //获取验证码
         var timer;
         var requestSign = true;
@@ -474,9 +472,9 @@
         position: fixed;
         width: 100%;
     } */
-    .bg {
-    width: 100vw;
-    height: 100vh;
+.bg {
+    width: 100%;
+    height: 100%;
     background: #000;
     opacity: 0.5;
     z-index: 998;
@@ -486,13 +484,21 @@
     display: none;
 }
 #loginDialogTpl{
-width: 50%;
-  margin: auto;
-  position: absolute;
-  top: 50%; left: 50%;
-  -webkit-transform: translate(-50%,-50%);
-      -ms-transform: translate(-50%,-50%);
-          transform: translate(-50%,-50%);
-z-index:1000;
+    background: #fff;
+    width:85%;
+    margin: auto;
+    position: absolute;
+    top: 50%; left: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    z-index:1000;
+    border-radius:4px;
+}
+.body_fixed{
+    overflow:hidden;
+    position:relative;
+    left:0;
+    top:0;
 }
 </style>

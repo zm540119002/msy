@@ -163,11 +163,13 @@ class Test extends HssBase{
         $key = "huang";  //上一个方法中的 $key 本应该配置在 config文件中的
         //$info = JWT::decode($jwt, $key, ["HS256"]); //解密jwt
         try {
-            $authInfo = JWT::decode($jwt, $key, ["HS256"]);
+            $jwtAuth = json_encode(JWT::decode($jwt, $key, array('HS256')));
+            $authInfo = json_decode($jwtAuth, true);
+//            $jwtAuth = JWT::decode($jwt, $key, ["HS256"]);
+//            $authInfo = json_decode($jwtAuth, true);
             p($authInfo);
-            //$authInfo = json_decode($jwtAuth, true);
             $msg = [];
-            if (!empty($authInfo->uid)) {
+            if (!empty($authInfo['uid'])) {
                 $msg = [
                     'status' => 1001,
                     'msg' => 'Token验证通过'
@@ -178,19 +180,17 @@ class Test extends HssBase{
                     'msg' => 'Token验证不通过,用户不存在'
                 ];
             }
-            return $msg;
-        } catch (\Firebase\JWT\SignatureInvalidException $e) {
-            echo json_encode([
+            p($msg);
+        } catch (\common\component\jwt\BeforeValidException $e) {
+            return json_encode([
                 'status' => 1002,
                 'msg' => 'Token无效'
             ]);
-            exit;
-        } catch (\Firebase\JWT\ExpiredException $e) {
-            echo json_encode([
+        } catch (\common\component\jwt\ExpiredException $e) {
+            return json_encode([
                 'status' => 1003,
                 'msg' => 'Token过期'
             ]);
-            exit;
         } catch (Exception $e) {
             return $e;
         }
