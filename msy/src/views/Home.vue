@@ -89,7 +89,6 @@ export default {
       padding: 0.16rem;
       display: flex;
       text-align: center;
-      color: #fff;
       div:nth-of-type(1){
         text-align: center;
         width: 14%;
@@ -106,9 +105,11 @@ export default {
       }   
       div:nth-of-type(3){
         width:9%; 
+        color: #fff;
       }
        div:nth-of-type(4){
         width:9%;
+        color: #fff;
       }    
     }
     .wel{
