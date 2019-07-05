@@ -17,8 +17,18 @@
         <div><a href=""></a><span>美尚会</span></div>
       </div>
       <div class="wel">
-      欢迎来到供应商管理中心
-    </div>
+        <van-tabs v-model="active">
+          <van-tab title="关注">关注</van-tab>
+          <van-tab title="推荐">
+            <div>aaa</div>
+          </van-tab>
+          <van-tab title="XX">XX</van-tab>
+          <van-tab title="XX">XX</van-tab>
+          <van-tab title="XX">XX</van-tab>
+          <van-tab title="XX">XX</van-tab>
+          <van-tab title="XX">XX</van-tab>
+        </van-tabs>
+      </div>
     </div>
     <Tabbar/>
   </div>
@@ -32,6 +42,11 @@ export default {
   name: 'home',
   components: {
     Tabbar
+  },
+   data() {
+    return {
+      active: 1
+    };
   }
 }
 </script>
@@ -114,7 +129,10 @@ export default {
     }
     .wel{
       height: 200px;
-      background: #fff
+      background: #fff;
+      .van-tab__pane{
+        padding: 0 0.25rem;
+      }
     }
   }
 </style>
