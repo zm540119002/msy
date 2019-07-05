@@ -2,7 +2,11 @@
   <div>
     <div>     
       <van-button type="primary" @click="showPopup"> 登录</van-button>
-      <van-popup class="card" v-model="show">
+       <van-cell-group>
+          <van-field v-model="postData.userName" placeholder="请输入用户名" />
+          <van-field v-model="postData.password" placeholder="密码" />
+      </van-cell-group>
+      <!-- <van-popup class="card" v-model="show">
         <div><img src="../../static/images/ucenter_logo.png" alt=""></div>
         <van-tabs >
           <van-tab title="登录">
@@ -20,9 +24,8 @@
             </van-cell-group>
             <van-button class="btn" @click="registerHandle" type="info">注册</van-button>
           </van-tab>
-        </van-tabs>
-         
-      </van-popup>
+        </van-tabs>        
+      </van-popup> -->
     </div>
     <Tabbar msg="Welcome to Your Vue.js App" />
   </div>
@@ -67,8 +70,9 @@ export default {
 
 <style lang="less" scoped>
 .card{
-  width: 90%;
+  width:92%;
   border-radius: 10px;
+  padding: 5% 0;
   div{
     text-align:center;
     img{
@@ -79,11 +83,16 @@ export default {
 .btn{
   width: 92%;
   margin-bottom: 5%;
+  margin-top: 10px;
   background-color: #FF7BAC;
   border:1px solid #FF7BAC;
   border-radius: 5px;
 }
 .van-field{
-  margin-bottom: 0;
+  padding-bottom: 0;
+}
+.van-popup{
+  background: red;
+  max-width: 92%;
 }
 </style>
