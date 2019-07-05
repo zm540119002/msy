@@ -72,7 +72,12 @@ class Test extends HssBase{
             return $this->fetch();
         }
     }
-
+    public function signUp(){
+        if(request()->isAjax()){
+        }else{
+            return $this->fetch();
+        }
+    }
     public function jin(){
 
         return $this->fetch();
