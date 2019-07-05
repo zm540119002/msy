@@ -54,7 +54,7 @@ export default {
       this.show = true;
     },
     loginHandle(){
-      console.log(this.postData)
+      console.log(this.$http)
     },
     registerHandle(){
       console.log(this.postData2)
