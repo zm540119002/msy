@@ -229,7 +229,9 @@
     //登录-弹窗触发
     var loginDialogTriggerLayerIndex = 0;
     function loginDialogTrigger(){
-        var content = $('#loginDialogTpl').html();
+        let content = $('#loginDialogTpl').html();
+        alert(content);
+        return false;
         loginDialogTriggerLayerIndex = layer.open({
             className:'loginLayer',
             skin:'loginLayer',
