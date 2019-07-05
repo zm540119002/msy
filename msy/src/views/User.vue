@@ -3,7 +3,25 @@
     <div>     
       <van-button type="primary" @click="showPopup"> 登录</van-button>
       <van-popup class="card" v-model="show">
-        111
+        <van-cell-group>
+          <van-field
+            v-model="username"
+            required
+            clearable
+            label="用户名"
+            right-icon="question-o"
+            placeholder="请输入用户名"
+            @click-right-icon="$toast('question')"
+          />
+
+          <van-field
+            v-model="password"
+            type="password"
+            label="密码"
+            placeholder="请输入密码"
+            required
+          />
+        </van-cell-group>
         <!-- <div><img src="../../static/images/ucenter_logo.png" alt=""></div>
         <van-tabs >
           <van-tab title="登录">
