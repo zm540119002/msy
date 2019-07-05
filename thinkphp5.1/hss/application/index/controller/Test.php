@@ -160,6 +160,7 @@ class Test extends HssBase{
     public function check()
     {
         $jwt = input("token");  //上一步中返回给用户的token
+        print_r($jwt);exit;
         $key = "huang";  //上一个方法中的 $key 本应该配置在 config文件中的
         $info = JWT::decode($jwt, $key, ["HS256"]); //解密jwt
         return json($info);
