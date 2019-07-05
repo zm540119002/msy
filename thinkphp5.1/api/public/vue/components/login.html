@@ -251,10 +251,12 @@
     var login_success_callback_common = function(param){
         //localStorage.cartList 入库
         add_localStorage_cartList();
-        layer.close(param.index);
+        document.getElementById('loginDialogTpl').style.display="none";
+        document.getElementById('bg').style.display="none";
     };
     var register_success_callback_common = function(){
-        layer.close(param.index);
+        document.getElementById('loginDialogTpl').style.display="none";
+        document.getElementById('bg').style.display="none";
     };
     //localStorage.cartList 入库
     var add_localStorage_cartList = function() {
