@@ -3,7 +3,8 @@
     <div>     
       <van-button type="primary" @click="showPopup"> 登录</van-button>
       <van-popup class="card" v-model="show">
-        <div><img src="../../static/images/ucenter_logo.png" alt=""></div>
+        111
+        <!-- <div><img src="../../static/images/ucenter_logo.png" alt=""></div>
         <van-tabs >
           <van-tab title="登录">
              <van-cell-group>
@@ -20,8 +21,7 @@
             </van-cell-group>
             <van-button class="btn" @click="registerHandle" type="info">注册</van-button>
           </van-tab>
-        </van-tabs>
-         
+        </van-tabs>         -->
       </van-popup>
     </div>
     <Tabbar msg="Welcome to Your Vue.js App" />
@@ -67,7 +67,7 @@ export default {
 
 <style lang="less" scoped>
 .card{
-  width:200px;
+  width:92%;
   border-radius: 10px;
   div{
     text-align:center;
