@@ -231,9 +231,9 @@
     function loginDialogTrigger(){
         let content = $('#loginDialogTpl').html();
         document.documentElement.scrollTop=0;
-        $('body').css({height:($(window).height())+'px',overflow:'hidden'});
         document.getElementById('loginDialogTpl').style.display="block";
         document.getElementById('bg').style.display="block";
+        $('body').css({height:($(window).height())+'px',overflow:'hidden'});
         // loginDialogTriggerLayerIndex = layer.open({
         //     className:'loginLayer',
         //     skin:'loginLayer',
