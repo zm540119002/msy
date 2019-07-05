@@ -2,16 +2,19 @@
   <div class="home">
     <div class="content">
       <div class="nav">
-       11111111111111
+        <div><img src="../../static/images/index_top.png" alt=""></div>
+        <div><input type="text" placeholder="搜索消息、小视频、视频或文章"></div>
+        <div><span class="mui-icon mui-icon-chat"></span></div>
+        <div><span class="mui-icon mui-icon-camera"></span></div>
       </div>
       <div class="top_img"><img src="../../static/images/home-banner1.jpg"></div>
       <!-- icon -->
       <div class="icon">
-        <div><a href=""></a><span>入驻部署</span></div>
-        <div><a href=""></a><span>店长管理</span></div>
-        <div><a href=""></a><span>店铺运营</span></div>
-        <div><a href=""></a><span>订单客服</span></div>
-        <div><a href=""></a><span>财务结算</span></div>
+        <div><a href=""></a><span>入驻管理</span></div>
+        <div><a href=""></a><span>商家云店</span></div>
+        <div><a href=""></a><span>老板直聘</span></div>
+        <div><a href=""></a><span>美尚课堂</span></div>
+        <div><a href=""></a><span>美尚会</span></div>
       </div>
       <div class="wel">
       欢迎来到供应商管理中心
@@ -80,18 +83,33 @@ export default {
     }
 
     .nav{
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      ul{
-        display: flex;
-        li{
-          margin-right: 5px;
-          a{
-          color: #fff;
-        }
-        }
+      width: 100%;
+      position: fixed;
+      top:0;
+      padding: 0.16rem;
+      display: flex;
+      text-align: center;
+      color: #fff;
+      div:nth-of-type(1){
+        text-align: center;
+        width: 14%;
+        img{
+          width: 76%;
+        }   
+      }   
+      div:nth-of-type(2){
+        width:68%;
+        input{
+          height: 30px;
+          border-radius: 6px;
+        }  
+      }   
+      div:nth-of-type(3){
+        width:9%; 
       }
+       div:nth-of-type(4){
+        width:9%;
+      }    
     }
     .wel{
       height: 200px;
