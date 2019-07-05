@@ -190,8 +190,8 @@
         });
     });
 </script>
-<div class="bg"></div>
-<div id="loginDialogTpl" style="display: none">
+<div class="bg" id='bg'></div>
+<div id="loginDialogTpl" class="loginLayer" style="display: none">
     <div id="loginDialogRoot">
         <login></login>
     </div>
@@ -240,23 +240,25 @@
     var loginDialogTriggerLayerIndex = 0;
     function loginDialogTrigger(){
         let content = $('#loginDialogTpl').html();
-        openwin(content);
-        return false;
-        loginDialogTriggerLayerIndex = layer.open({
-            className:'loginLayer',
-            skin:'loginLayer',
-            type:1,
-            shadeClose:false,
-            content:content,
-            success:function(index){
-                fixedLayer();
-            },yes:function(index){
-                layer.close(index);
-            },
-            end:function(){
-                cancleFixedLayer();
-            }
-        });
+        document.getElementById('loginDialogTpl').style.display="block";
+        document.getElementById('bg').style.display="block";
+        //openwin(content);
+        //return false;
+        // loginDialogTriggerLayerIndex = layer.open({
+        //     className:'loginLayer',
+        //     skin:'loginLayer',
+        //     type:1,
+        //     shadeClose:false,
+        //     content:content,
+        //     success:function(index){
+        //         fixedLayer();
+        //     },yes:function(index){
+        //         layer.close(index);
+        //     },
+        //     end:function(){
+        //         cancleFixedLayer();
+        //     }
+        // });
     }
     var login_success_callback_common = function(param){
         //localStorage.cartList 入库
@@ -473,4 +475,26 @@
         position: fixed;
         width: 100%;
     } */
+    .bg {
+    width: 100vw;
+    height: 100vh;
+    background: #000;
+    opacity: 0.5;
+    z-index: 998;
+    position: fixed;
+    top: 0;
+    cursor: pointer;
+    display: none;
+}
+#loginDialogTpl{
+    background: #fff;
+width: 50%;
+  margin: auto;
+  position: absolute;
+  top: 50%; left: 50%;
+  -webkit-transform: translate(-50%,-50%);
+      -ms-transform: translate(-50%,-50%);
+          transform: translate(-50%,-50%);
+z-index:1000;
+}
 </style>
