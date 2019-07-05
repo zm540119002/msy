@@ -190,7 +190,7 @@
         });
     });
 </script>
-<div class="bg"></div>
+<div class="bg" id='bg'></div>
 <div id="loginDialogTpl" class="loginLayer" style="display: none">
     <div id="loginDialogRoot">
         <login></login>
@@ -241,6 +241,7 @@
     function loginDialogTrigger(){
         let content = $('#loginDialogTpl').html();
         document.getElementById('loginDialogTpl').style.display="block";
+        document.getElementById('bg').style.display="block";
         //openwin(content);
         //return false;
         // loginDialogTriggerLayerIndex = layer.open({
