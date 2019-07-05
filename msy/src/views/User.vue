@@ -108,5 +108,6 @@ export default {
 }
 .van-popup{
   background: red;
+  min-width: 92%;
 }
 </style>
