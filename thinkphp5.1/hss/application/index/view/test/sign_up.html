@@ -51,7 +51,7 @@
             anim:'up',
             content:content,
             btn:['提交'],
-            yes:function(){
+            yes:function(index){
                 var postData = $('.sign_up_form').serializeObject();
                 var content='';
                 if(!postData.name){
@@ -68,7 +68,7 @@
                     type:'post',
                     data:postData,
                     success:function(){
-
+                        layer.close(index);
                     },
                     error:function(){
 
