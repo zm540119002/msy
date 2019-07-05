@@ -9,7 +9,7 @@ class HssBase extends \common\controller\Base{
         parent::__construct();
         //微信处理
         if(isPhoneSide() &&isWxBrowser() && !request()->isAjax()) {//判断是否为微信浏览器
-            $weixinUserInfo =  session('weixinUserInfo');
+            $weixinUserInfo = session('weixinUserInfo');
             if(!$weixinUserInfo){
                 $weixnTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
                 $weixinUserInfo = $weixnTools->getOauthUserInfo();
@@ -95,17 +95,15 @@ class HssBase extends \common\controller\Base{
                     setSession($user);
                 }
             }
-
             //判断是否关注平台
             if(empty($info) || !$info['subscribe']){
                 //没有关注
                 $this -> assign('subscribe',1);
-        }
-
-        //微信分享初始化
-        $weixnTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
-        $signPackage =  $weixnTools->GetSignPackage();
-        $this->assign('signPackage',$signPackage);
+            }
+            //微信分享初始化
+            $weixnTools = new \common\component\payment\weixin\Jssdk(config('wx_config.appid'), config('wx_config.appsecret'));
+            $signPackage =  $weixnTools->GetSignPackage();
+            $this->assign('signPackage',$signPackage);
         }
     }
 
