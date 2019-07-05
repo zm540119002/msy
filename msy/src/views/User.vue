@@ -2,8 +2,9 @@
   <div>
     <div>     
       <van-button type="primary" @click="showPopup"> 登录</van-button>
+       <input type="text" placeholder="普通输入框">
        <van-cell-group>
-          <input type="text" placeholder="普通输入框">
+         
           <van-field v-model="postData.password" placeholder="密码" />
       </van-cell-group>
       <!-- <van-popup class="card" v-model="show">
@@ -69,11 +70,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-body{
-  width: 100vw;
-  height: 100vh;
-  background: #ccc;
-}
+
 .card{
   width:92%;
   border-radius: 10px;
