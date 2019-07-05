@@ -230,11 +230,11 @@
     var loginDialogTriggerLayerIndex = 0;
     function loginDialogTrigger(){
         let content = $('#loginDialogTpl').html();
-        //document.documentElement.scrollTop=0;
-        fixedLayer();
+        document.documentElement.scrollTop=0;
         document.getElementById('loginDialogTpl').style.display="block";
         document.getElementById('bg').style.display="block";
-        $('body').css({height:($(window).height())+'px',overflow:'hidden'});
+        $('body').css({height:($(window).height())+'px'});
+        $('body').addClass('body_fixed');
         // loginDialogTriggerLayerIndex = layer.open({
         //     className:'loginLayer',
         //     skin:'loginLayer',
@@ -493,5 +493,11 @@
     transform: translate(-50%,-50%);
     z-index:1000;
     border-radius:4px;
+}
+.body_fixed{
+    overflow:hidden;
+    position:fixed;
+    left:0;
+    top:0;
 }
 </style>
