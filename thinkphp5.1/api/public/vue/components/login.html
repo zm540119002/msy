@@ -230,8 +230,11 @@
     var loginDialogTriggerLayerIndex = 0;
     function loginDialogTrigger(){
         let content = $('#loginDialogTpl').html();
+        $('body,html').animate({ scrollTop: 0 },0);
         document.getElementById('loginDialogTpl').style.display="block";
         document.getElementById('bg').style.display="block";
+        $('body').css({height:($(window).height())+'px'});
+        $('body').addClass('body_fixed');
         // loginDialogTriggerLayerIndex = layer.open({
         //     className:'loginLayer',
         //     skin:'loginLayer',
@@ -360,7 +363,9 @@
         });
         $('body').on('click','.bg',function(){
             document.getElementById('loginDialogTpl').style.display="none";
-        document.getElementById('bg').style.display="none";
+            document.getElementById('bg').style.display="none";
+            $('body').attr('style','');
+            $('body').removeClass('body_fixed');
         })
         //获取验证码
         var timer;
@@ -469,9 +474,9 @@
         position: fixed;
         width: 100%;
     } */
-    .bg {
-    width: 100vw;
-    height: 100vh;
+.bg {
+    width: 100%;
+    height: 100%;
     background: #000;
     opacity: 0.5;
     z-index: 998;
@@ -482,13 +487,20 @@
 }
 #loginDialogTpl{
     background: #fff;
-width:85%;
-  margin: auto;
-  position: absolute;
-  top: 50%; left: 50%;
-  -webkit-transform: translate(-50%,-50%);
-      -ms-transform: translate(-50%,-50%);
-          transform: translate(-50%,-50%);
-z-index:1000;
+    width:85%;
+    margin: auto;
+    position: absolute;
+    top: 50%; left: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    z-index:1000;
+    border-radius:4px;
+}
+.body_fixed{
+    overflow:hidden;
+    /*position:relative;
+    left:0;
+    top:0;*/
 }
 </style>
