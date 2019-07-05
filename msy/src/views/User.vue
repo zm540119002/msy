@@ -79,11 +79,12 @@ export default {
 .btn{
   width: 92%;
   margin-bottom: 5%;
+  margin-top: 10px;
   background-color: #FF7BAC;
   border:1px solid #FF7BAC;
   border-radius: 5px;
 }
 .van-field{
-  margin-bottom: 0;
+  padding-bottom: 0;
 }
 </style>
