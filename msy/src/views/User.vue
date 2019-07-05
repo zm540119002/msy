@@ -67,7 +67,7 @@ export default {
 
 <style lang="less" scoped>
 .card{
-  width: 7rem;
+  width:350px;
   border-radius: 10px;
   div{
     text-align:center;
