@@ -182,15 +182,16 @@ class Test extends HssBase{
             }
             return $msg;
         } catch (\Firebase\JWT\SignatureInvalidException $e) {
-            return json_encode([
+            return  $msg = [
                 'status' => 1002,
                 'msg' => 'Token无效'
-            ]);
+            ];
+
         } catch (\Firebase\JWT\ExpiredException $e) {
-            return json_encode([
+            return  $msg = [
                 'status' => 1003,
                 'msg' => 'Token过期'
-            ]);
+            ];
         } catch (Exception $e) {
             return $e;
         }
