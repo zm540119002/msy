@@ -46,7 +46,9 @@
     $('body').on('click','.sign_up',function(){
         layer.open({
             title:['在线报名预约','border-bottom:1px solid #d9d9d9'],
-            className:'activityLayer',
+            className:'activityLayer memberRegTpl',
+            type:1,
+            anim:'up',
             content:content,
             btn:['提交'],
             yes:function(){
