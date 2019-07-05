@@ -1,6 +1,15 @@
 {extend name="template/base.html" /}
 {block name="content"}
-
+<section class="sign_up_tpl" style="display: none;">
+    <form class="applicant_form">
+        <div class="apply-items">
+            <input type="text" class="name " name="name" value="" placeholder="姓名(必填)">
+        </div>
+        <div class="apply-items">
+            <input type="tel" class="mobile " name="mobile" value="" placeholder="联系手机号码(必填)">
+        </div>
+    </form>
+</section>
 <article class="f24">
     <div class="scrollwrapper">
         <div id="content" class="floor-content">
@@ -33,7 +42,7 @@
        
     })
    
-    var content=$('.activitycontent').html();
+    var content=$('.sign_up_tpl').html();
     $('body').on('click','.sign_up',function(){
         layer.open({
             title:['开放日参观预约','border-bottom:1px solid #d9d9d9'],
