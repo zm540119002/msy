@@ -360,7 +360,8 @@
         });
         $('body').on('click','.bg',function(){
             document.getElementById('loginDialogTpl').style.display="none";
-        document.getElementById('bg').style.display="none";
+            document.getElementById('bg').style.display="none";
+            $('body').attr('style','');
         })
         //获取验证码
         var timer;
