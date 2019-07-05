@@ -165,6 +165,7 @@ class Test extends HssBase{
         try {
             $jwtAuth = JWT::decode($jwt, $key, ["HS256"]);
             $authInfo = json_decode($jwtAuth, true);
+            p($authInfo);
             $msg = [];
             if (!empty($authInfo->uid)) {
                 $msg = [
