@@ -1,12 +1,12 @@
 <template>
   <div class="home">
     <div class="content">
-      <div class="nav">
+      <!-- <div class="nav">
         <div><img src="../../static/images/index_top.png" alt=""></div>
         <div><input type="text" placeholder="搜索消息、小视频、视频或文章"></div>
         <div><span class="mui-icon mui-icon-chat"></span></div>
         <div><span class="mui-icon mui-icon-camera"></span></div>
-      </div>
+      </div> -->
       <div class="top_img"><img src="../../static/images/home-banner1.jpg"></div>
       <!-- icon -->
       <div class="icon">
