@@ -1,12 +1,12 @@
 <template>
   <div>
     <div>     
-      <van-button type="primary" @click="showPopup"> 登录</van-button>
+      <!-- <van-button type="primary" @click="showPopup"> 登录</van-button> -->
        <input type="text" placeholder="普通输入框">
-       <van-cell-group>
+       <!-- <van-cell-group>
          
           <van-field v-model="postData.password" placeholder="密码" />
-      </van-cell-group>
+      </van-cell-group> -->
       <!-- <van-popup class="card" v-model="show">
         <div><img src="../../static/images/ucenter_logo.png" alt=""></div>
         <van-tabs >
