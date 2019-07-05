@@ -368,6 +368,10 @@
             };
             bus.$emit('register',param);
         });
+        $('body').on('click','.bg',function(){
+            document.getElementById('loginDialogTpl').style.display="none";
+        document.getElementById('bg').style.display="none";
+        })
         //获取验证码
         var timer;
         var requestSign = true;
