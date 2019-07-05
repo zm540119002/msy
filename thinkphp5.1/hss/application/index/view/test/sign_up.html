@@ -25,7 +25,7 @@
 </article>
 {/block}
 {block name="footer"}
-<div class="group_cart_nav f24"><a href="javascript:void(0);" class="bottom_item">立即报名</a></div>
+<div class="group_cart_nav f24"><a href="javascript:void(0);" class="bottom_item sign_up">立即报名</a></div>
 {/block}
 {block name="script"}
 <script>
@@ -34,7 +34,7 @@
     })
    
     var content=$('.activitycontent').html();
-    $('body').on('click','.activity',function(){
+    $('body').on('click','.sign_up',function(){
         layer.open({
             title:['开放日参观预约','border-bottom:1px solid #d9d9d9'],
             className:'activityLayer',
@@ -44,4 +44,10 @@
     });
 
 </script>
+<style scoped>
+.sign_up{
+    display: block;
+    width:100%;
+}
+</style>
 {/block}
