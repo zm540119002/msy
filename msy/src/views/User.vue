@@ -106,4 +106,7 @@ export default {
 .van-field{
   padding-bottom: 0;
 }
+.van-popup{
+  background: red;
+}
 </style>
