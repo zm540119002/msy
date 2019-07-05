@@ -90,6 +90,8 @@ export default {
 }
 .van-field{
   padding-bottom: 0;
+  border:1px solid red;
+  max-width: 92%;
 }
 .van-popup{
   background: red;
