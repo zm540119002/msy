@@ -88,6 +88,7 @@ export default {
 }
 .van-field{
   padding-bottom: 0;
+  max-width: 92%;
 }
 
 </style>
