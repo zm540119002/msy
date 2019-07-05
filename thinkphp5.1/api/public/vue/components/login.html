@@ -235,29 +235,16 @@
         document.getElementById('bg').style.display="block";
         $('body').css({height:($(window).height())+'px'});
         $('body').addClass('body_fixed');
-        // loginDialogTriggerLayerIndex = layer.open({
-        //     className:'loginLayer',
-        //     skin:'loginLayer',
-        //     type:1,
-        //     shadeClose:false,
-        //     content:content,
-        //     success:function(index){
-        //         fixedLayer();
-        //     },yes:function(index){
-        //         layer.close(index);
-        //     },
-        //     end:function(){
-        //         cancleFixedLayer();
-        //     }
-        // });
     }
     var login_success_callback_common = function(param){
         //localStorage.cartList 入库
         add_localStorage_cartList();
-        layer.close(param.index);
+        document.getElementById('loginDialogTpl').style.display="none";
+        document.getElementById('bg').style.display="none";
     };
     var register_success_callback_common = function(){
-        layer.close(param.index);
+        document.getElementById('loginDialogTpl').style.display="none";
+        document.getElementById('bg').style.display="none";
     };
     //localStorage.cartList 入库
     var add_localStorage_cartList = function() {
