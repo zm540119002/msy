@@ -3,7 +3,7 @@
     <div>     
       <van-button type="primary" @click="showPopup"> 登录</van-button>
        <van-cell-group>
-          <van-field v-model="postData.userName" placeholder="请输入用户名" />
+          <input type="text" placeholder="普通输入框">
           <van-field v-model="postData.password" placeholder="密码" />
       </van-cell-group>
       <!-- <van-popup class="card" v-model="show">

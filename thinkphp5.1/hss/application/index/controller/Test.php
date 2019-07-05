@@ -169,7 +169,7 @@ class Test extends HssBase{
 //            $authInfo = json_decode($jwtAuth, true);
             p($authInfo);
             $msg = [];
-            if (!empty($authInfo->uid)) {
+            if (!empty($authInfo['uid'])) {
                 $msg = [
                     'status' => 1001,
                     'msg' => 'Token验证通过'
