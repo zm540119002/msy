@@ -55,6 +55,7 @@ export default {
     },
     loginHandle(){
       console.log(this.$http)
+      console.log(this.postData)
     },
     registerHandle(){
       console.log(this.postData2)
