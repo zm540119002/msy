@@ -230,7 +230,8 @@
     var loginDialogTriggerLayerIndex = 0;
     function loginDialogTrigger(){
         let content = $('#loginDialogTpl').html();
-        document.documentElement.scrollTop=0;
+        //document.documentElement.scrollTop=0;
+        fixedLayer();
         document.getElementById('loginDialogTpl').style.display="block";
         document.getElementById('bg').style.display="block";
         $('body').css({height:($(window).height())+'px',overflow:'hidden'});
