@@ -69,6 +69,11 @@ export default {
 </script>
 
 <style lang="less" scoped>
+body{
+  width: 100vw;
+  height: 100vh;
+  background: #ccc;
+}
 .card{
   width:92%;
   border-radius: 10px;
