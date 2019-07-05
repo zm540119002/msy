@@ -69,6 +69,7 @@ export default {
 .card{
   width:92%;
   border-radius: 10px;
+  padding: 5% 0;
   div{
     text-align:center;
     img{
