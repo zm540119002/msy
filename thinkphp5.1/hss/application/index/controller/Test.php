@@ -163,7 +163,7 @@ class Test extends HssBase{
         $key = "huang";  //上一个方法中的 $key 本应该配置在 config文件中的
         //$info = JWT::decode($jwt, $key, ["HS256"]); //解密jwt
         try {
-            $authInfo = JWT::decode($jwt, $key, ["HS256"]);
+            $authInfo = JWT::decode($jwt, $key, ["HS256"])->toArray();
             p($authInfo);
             //$authInfo = json_decode($jwtAuth, true);
             $msg = [];
