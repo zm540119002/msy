@@ -67,7 +67,8 @@
                     url:'',
                     type:'post',
                     data:postData,
-                    success:function(){
+                    success:function(data){
+                        dialog.success(data.info);
                         layer.close(index);
                     },
                     error:function(){
