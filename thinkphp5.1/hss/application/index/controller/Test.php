@@ -74,6 +74,15 @@ class Test extends HssBase{
     }
     public function signUp(){
         if(request()->isAjax()){
+            $saveData['name'] = trim(input('post.name'));
+            $saveData['mobile'] = trim(input('post.mobile'));
+            $model = new \app\index\model\SignUp();
+            $id = $model -> edit($saveData);
+            if($id){
+                $this -> successMsg('申请预约成功');
+            }else{
+                $this -> errorMsg('失败');
+            }
         }else{
             return $this->fetch();
         }
