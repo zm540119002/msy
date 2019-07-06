@@ -1,0 +1,257 @@
+{extend name="template/base.html" /}
+{block name="title"}{$info.name}{/block}
+{block name="content"}
+<article class="f24">
+	<div class="back"><</div>
+	{include file="template/scene_detail.html" /}
+	<!-- 内容 -->
+	<section class="content-padding content_main wy_list">
+		<div class="">
+			<a href="javascript:;" class="project_details right-arrow">黑森森门店{$info.name}参考方案</a>
+		</div>
+		<!--采购方案列表-->
+		{notempty name="promotionList"}
+			{volist name="promotionList" id="vo"}
+			<a href="{:url('Promotion/detail',['id'=>$vo.id])}" data-id="{$vo.id}" class="">
+				<div class="applay_p_item ">
+		<!--			<div>
+						<div class="red">¥<price>{$vo.price}</price></div>
+						<p>{$vo.name}</p>
+						<p class="once-enter">立即进入></p>
+					</div>
+					<div class="group_btn50">
+						<img class="common_default_img" src="" alt="{$vo.name}">
+					</div>-->
+					<img class="common_default_img" src="{:show_img_handle($vo.thumb_img)}" alt="{$vo.name}">
+				</div>
+			</a>
+			{/volist}
+		{/notempty}
+		<!--产品列表-->
+		<ul class="goods_list list" id="product-list">
+			<product-select
+					v-for="(productInfo,index) in productList"
+					:key="index"
+					:init_product_id="productInfo.id"
+					:init_deal_price="parseFloat(productInfo.franchise_price)"
+					:init_compare_price="Number(productInfo.retail_price)"
+					:init_product_name="productInfo.headline"
+					:init_product_src="productInfo.thumb_img"
+					:init_quantity="parseInt(init_quantity)"
+					:step_quantity="parseInt(step_quantity)"
+					:init_specification="productInfo.specification"
+					:type="type"
+			></product-select>
+		</ul>
+	</section>
+</article>
+{/block}
+{block name="common"}{/block}
+{block name="footer"}
+{include file="../../api/public/vue/components/footer-menu.html" /}
+<div class="bg"></div>
+<div class="dialogCart">
+	<div id="product-list2">
+		<product-select
+				v-for="(productInfo,index) in productList"
+				:key="index"
+				:init_product_id="productInfo.id"
+				:init_product_src="productInfo.thumb_img"
+				:init_deal_price="parseFloat(productInfo.franchise_price)"
+				:init_compare_price="Number(productInfo.retail_price)"
+				:init_quantity="parseInt(init_quantity)"
+				:step_quantity="parseInt(step_quantity)"
+				:init_group="init_group"
+				:type="type"
+		></product-select>
+	</div>
+	<div id="foot_cart_menu">
+			<footer-menu
+					:init_group="init_group"
+					:init_menus="init_menus"
+					:init_cart_num="init_cart_num"
+			></footer-menu>
+	</div>
+</div>
+<script type="text/javascript">
+	$(function(){
+		//数据库里购物车里商品数量
+		let total_num = parseInt("{$total_num|default=0}");
+		//localStorage里商品信息
+		if(localStorage.cartList){
+			let goodsList = (JSON.parse(localStorage.cartList)).data;
+			$.each(goodsList,function(i,goods){
+				total_num += goods['num'];
+			});
+		}
+		if(!total_num){
+			var html = $('.no_cart_data').html();
+			$('#product-list').append(html);
+		}
+		let unlockingFooterCart = '{$unlockingFooterCart|raw}';
+		unlockingFooterCart = JSON.parse(unlockingFooterCart);
+		let param = {
+			init_group:0,
+			init_cart_num:total_num,
+			init_menus:unlockingFooterCart
+		};
+		new Vue({
+			el:'#foot_cart_menu',
+			data:function(){
+				return param;
+			}
+		});
+	})
+</script>
+{include file="../../api/public/vue/components/product-select.html" /}
+<script type="text/javascript">
+	$(function(){
+		let param = {
+			type:6,
+			init_group:0,
+			init_quantity:1,
+			step_quantity:1,
+			productList:[
+				{
+					id:0,
+					franchise_price:0
+				}
+			]
+		};
+		new Vue({
+			el: '#product-list2',
+			data:function(){
+				return param;
+			}
+		});
+	});
+</script>
+<script type="text/javascript">
+	$(function(){
+		let param = {
+			type:5,
+			init_quantity:1,
+			step_quantity:1,
+			productList:[],
+			getJsonListParam:{
+				url:module+'Goods/getRelationGoods',
+				requestEnd:false,
+				loadTrigger:false,
+				postData:{
+					id:'{$info.id}',
+					relation:'{$relation}',
+					pageSize:10,
+					page:1
+				}
+			}
+		};
+		new Vue({
+			el: '#product-list',
+			data:function(){
+				return param;
+			},methods:{
+				getJsonListCallBack:function(data){
+					if(data.status==0){
+						dialog.error(data.info);
+						return false;
+					}
+					let _this = this;
+					$.each(data.data.data,function(i,o){
+						_this.productList.push(o);
+					});
+				}
+			},created:function(){
+				let _thisVue = this;
+				_thisVue.getJsonListParam.callBack = _thisVue.getJsonListCallBack;
+				vueVersionGetJsonList(_thisVue);
+				//下拉加载
+				$(window).on('scroll',function(){
+					if(_thisVue.getJsonListParam.loadTrigger
+							&& $(document).scrollTop()+$(window).height()+200>$(document).height()){
+						//停止触发，去其他地方重新放开
+						_thisVue.getJsonListParam.loadTrigger = false;
+						vueVersionGetJsonList(_thisVue);
+					}
+				});
+			}
+		});
+	});
+</script>
+{/block}
+{block name="script"}
+<script type="text/javascript" src="api_common_js/swiper.min.js"></script>
+<script type="text/javascript" src="index_js/common.js"></script>
+<script type="text/javascript">
+	$(function() {
+		var id = '{$info.id}';
+		//每天活动倒计时
+		var date = new Date(new Date(new Date().toLocaleDateString()).getTime() + 24 * 60 * 60 * 1000 - 1);
+		;
+		countDown(date, $('#countDownBox'));
+		// 后加载简介
+		$('document').ready(function () {
+			$('.intro').html("{$info.intro|raw}");
+		});
+		//轮播
+		var swiper = new Swiper('.swiper-container', {
+			spaceBetween: 30,
+			autoplay: true,
+			pagination: {
+				el: '.swiper-pagination',
+				clickable: true
+			}
+		});
+		// 点击返回上一页
+		$('.back').on("click",function(){
+			history.back(-1)
+		})
+	});
+</script>
+<style scoped>
+	.red{
+		font-size: 18px;
+	}
+	.quantity_wrapper div:nth-of-type(2){
+		margin-right: 14px;
+	}
+	.bg{
+		width: 100vw;
+		height: 100vh;
+		background: #000;
+		opacity: 0.5;
+		z-index: 998;
+		position: fixed;
+		top: 0;
+		display: none;
+	}
+	.product-select div.right {
+		width: 60%;
+	}
+	.back{
+		position:fixed;
+		width: 30px;
+		height: 30px;
+		background: rgba(0, 0, 0, 0.4);
+		z-index: 99;
+		color: #fff;
+		border-radius: 50%;
+		margin: 6px 0 0 8px;
+		text-align: center;
+		line-height: 30px;
+	}
+	.project_details{
+		border-bottom: none;
+		margin-bottom: 0;
+	}
+	.title{
+		font-size: 0.3rem !important;
+	}
+	.l-r-sides{
+		border-bottom: none;
+		margin-bottom: 0;
+	}
+	.applay_p_item{
+		height: auto;
+	}
+</style>
+{/block}

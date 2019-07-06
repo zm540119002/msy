@@ -1,0 +1,56 @@
+{extend name="template/base.html" /}
+{block name="title"}layout{/block}
+{block name="content"}
+<div class="frame">
+	<div id="div1"></div>
+	<div id="div2"></div>
+	<div id="div4"></div>
+</div>
+<div id="div3"></div>
+{/block}
+{block name="common"}{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript">
+
+</script>
+<style>
+	.frame {
+		margin: 50px;
+		width: 400px;
+		height: 300px;
+		background-color: yellow;
+	}
+	#div1 {
+		position: absolute;
+		width: 100px;
+		height: 50px;
+		left: 10px;
+		top: 10px;
+		background-color: blue;
+	}
+	#div2 {
+		width: 200px;
+		height: 100px;
+		background-color: green;
+	}
+	#div3 {
+		position: fixed;
+		width: 20px;
+		height: 10px;
+		left: 10px;
+		top: 10px;
+		background-color: red;
+	}
+	#div4 {
+		position: fixed;
+		width: 200px;
+		height: 100px;
+		left: 20px;
+		right: 20px;
+		background-color: #000000;
+	}
+</style>
+<script type="text/javascript">
+</script>
+{/block}

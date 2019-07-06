@@ -1,0 +1,169 @@
+{extend name="template/base.html" /}
+{block name="content"}
+<section class="no_collection" style="display:none;">
+	<li class="no_data">
+		暂无收藏商品信息
+	</li>
+</section>
+<article class="f24 article_main_content collection_main_content">
+	<section class="header_title separation-line">
+		<a href="javascript:void(0);" class="back_prev_page" data-jump_url=""></a>
+		<h2 class="f24">商品收藏</h2>
+	</section>
+	<section >
+		<ul class="collection_list list" id="list">
+			<product-select
+					v-for="(productInfo,index) in productList"
+					:key="index"
+					:init_product_id="productInfo.id"
+					:init_deal_price="parseFloat(productInfo.franchise_price)"
+					:init_compare_price="Number(productInfo.retail_price)"
+					:init_product_name="productInfo.headline"
+					:init_product_src="productInfo.thumb_img"
+					:init_quantity="parseInt(init_quantity)"
+					:step_quantity="parseInt(step_quantity)"
+					:init_specification="productInfo.specification"
+					:type="type"
+			></product-select>
+		</ul>
+	</section>
+</article>
+{/block}
+{block name="common"}
+
+{/block}
+{block name="footer"}
+{include file="../../api/public/vue/components/product-select.html" /}
+<script type="text/javascript">
+	$(function(){
+		let param = {
+			type:7,
+			init_quantity:1,
+			step_quantity:1,
+			productList:[],
+			getJsonListParam:{
+				url:module+'Goods/getJsonList',
+				requestEnd:false,
+				loadTrigger:false,
+				postData:{
+					pageSize:10,
+					page:1,
+					is_selection:1
+				}
+			}
+		};
+		new Vue({
+			el: '#product-list',
+			data:function(){
+				return param;
+			},methods:{
+				getJsonListCallBack:function(data){
+					if(data.status==0){
+						dialog.error(data.info);
+						return false;
+					}
+					let _this = this;
+					$.each(data.data.data,function(i,o){
+						_this.productList.push(o);
+					});
+				}
+			},created:function(){
+				let _thisVue = this;
+				_thisVue.getJsonListParam.callBack = _thisVue.getJsonListCallBack;
+				vueVersionGetJsonList(_thisVue);
+				//下拉加载
+				$(window).on('scroll',function(){
+					if(_thisVue.getJsonListParam.loadTrigger
+							&& $(document).scrollTop()+$(window).height()+200>$(document).height()){
+						//停止触发，去其他地方重新放开
+						_thisVue.getJsonListParam.loadTrigger = false;
+						vueVersionGetJsonList(_thisVue);
+					}
+				});
+			}
+		});
+	});
+</script>
+{/block}
+{block name="script"}
+<!--<script type="text/javascript">
+	var config = {
+		url:module+'Collection/getList',
+		requestEnd:false,
+		loadTrigger:false,
+		currentPage:1
+	};
+	var postData = {
+		pageSize:10,
+		pageType:'list_tpl'
+	};
+	$(function(){
+		//初始化页面
+		getPagingList(config,postData);
+		//下拉加载
+		$(window).on('scroll',function(){
+			if(config.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
+				config.loadTrigger = false;
+				getPagingList(config,postData);
+			}
+		});
+
+		//删除
+		$('body').on('click','.delete',function(){
+			var _This=$(this);
+			var postData = {};
+/*			var ids = [];
+			$.each($('.list li'),function(){
+				var _this=$(this);
+				if(_this.find('.sign_checkitem').is(':checked')){
+					var id = _this.data('id');
+					ids.push(id);
+				}
+			});*/
+			var id = _This.parents('li').data('goods_id');
+
+			if(!id){
+				dialog.error('请选择需要删除的收藏商品！');
+				return false;
+			}
+			postData.id =id;
+			var url = module + 'Collection/del';
+			_This.addClass("nodisabled");//防止重复提交
+			layer.open({
+				content:'是否删除？',
+				btn:['确定','取消'],
+				yes:function(index){
+					$.ajax({
+						url: url,
+						data: postData,
+						type: 'post',
+						beforeSend: function(){
+							$('.loading').show();
+						},
+						error:function(){
+							$('.loading').hide();
+							dialog.error('AJAX错误');
+						},
+						success: function(data){
+							$('.loading').hide();
+							_This.removeClass("nodisabled");//防止重复提交
+							if(data.status==0){
+								dialog.error(data.info);
+
+							}else {
+
+								dialog.success(data.info);
+								_This.parents('li').remove();
+							}
+						}
+					});
+					layer.close(index);
+				},
+				no:function(){
+					_This.removeClass("nodisabled");//防止重复提交
+				}
+			});
+		});
+	});
+</script>-->
+{/block}

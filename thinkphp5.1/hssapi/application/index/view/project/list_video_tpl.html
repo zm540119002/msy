@@ -1,0 +1,11 @@
+{notempty name="list"}
+{volist name="list" id="info"}
+    <li>
+        <video src="{$info.video}"></video>
+        <div>
+            <p>{$info.name}</p>
+            <p>{$info.update_time}</p>
+        </div>
+    </li>
+{/volist}
+{/notempty}

@@ -1,0 +1,282 @@
+{extend name="template/base.html" /}
+{block name="title"}套餐详情{/block}
+{block name="header"}{/block}
+{block name="content"}
+<article class="f24">
+	<div class="back go-back"><</div>
+	<section class="slider_banner">
+		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
+			<div class="swiper-wrapper">
+				{volist name="$info.main_img" id="vo"}
+				<div class="swiper-slide swiper-slide-active">
+					<img src="{:show_img_handle($vo)}" alt="" class="common_default_img">
+				</div>
+				{/volist}
+			</div>
+			<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
+				<span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span>
+				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 2"></span>
+				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 3"></span>
+				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 4"></span>
+			</div>
+		</div>
+	</section>
+	<section class="module-navigation ">
+		<div >
+			<ul>
+				<li>
+					<div class="top_radius f20 top_module">
+						<div>
+							<div id="product-list">
+								<product-select
+										v-for="(productInfo,index) in productList"
+										:key="index"
+										:init_product_id="productInfo.id"
+										:init_deal_price="parseFloat(productInfo.franchise_price)"
+										:init_compare_price="parseFloat(productInfo.retail_price)"
+										:init_quantity="parseInt(init_quantity)"
+										:step_quantity="parseInt(step_quantity)"
+										:type="type"
+								></product-select>
+							</div>
+							<div class="title">
+								{$info.title}
+							</div>
+							<!--<div class="describe">正常采购价10000元 &nbsp;套餐采购价优惠了1000元</div>-->
+							<div class="describe">{$info.remarks}</div>
+							<div class="intro"></div>
+						</div>
+						<div class="tags_item columns_flex l-r-sides">
+							<div>
+								{notempty name="info.tag"}
+								{volist name="$info.tag" id="tag"}
+								<span>{$tag}</span>
+								{/volist}
+								{/notempty}
+							</div>
+							<div class="tags_item_r">
+								<!--a class="url_share" href="javascript:;"><span class="icon"></span>分享</a>-->
+							</div>
+						</div>
+						<div class="project_details">
+							<a href="javascript:;" class=" right-arrow">领代金券<span>(0/0)</span></a>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="content-padding">
+						<p class="top_b_text wk_notice separation">黑森森每天联合采购日提示：加盟店和城市合伙人采购商可随时下订单，订单结算截止至当天夜里12:00。</p>
+						<div class="columns_flex l-r-sides separation">
+							<div class="mid_module_left">
+								<img src="public_img/wy_dz.png" alt="">
+							</div>
+							<div class="mid_module_right">
+								<div>
+									<span class="left count-down-icons"></span>
+									<div class="d-r">
+										<p class="friday_end">联合采购</p>
+										<div id="countDownBox" class="count_down_box">
+											<!--<span class="day"></span>天-->
+											<span class="hour"></span>:
+											<span class="minute"></span>:
+											<span class="second"></span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- 暂时不需要 -->
+					<!--<div class="goods_star_score">
+                        <div class="five_star">
+                            <div class="star_img">
+                                <img src="/static/common/img/star.png" id="0">
+                                <img src="/static/common/img/star.png" id="1">
+                                <img src="/static/common/img/star.png" id="2">
+                                <img src="/static/common/img/star.png" id="3">
+                                <img src="/static/common/img/star.png" id="4">
+                            </div>
+                            <span class="fraction" data-score="0">0分</span>
+                        </div>
+                        <a href="javascript:void(0);" class="comment_num">0人评论</a>
+                    </div>-->
+				</li>
+			</ul>
+		</div>
+	</section>
+	<section class="content-padding content_main wy_list">
+		<div class="">
+			<span>推荐套餐包含产品</span>
+		</div>
+		<!--产品列表-->
+		<ul class="goods_list list" id="list">
+
+		</ul>
+	</section>
+</article>
+{/block}
+{block name="common"}
+{include file="template/beforehand_register.html" /}
+{/block}
+{block name="footer"}
+{include file="../../api/public/vue/components/product-select.html" /}
+{include file="../../api/public/vue/components/footer-menu.html" /}
+<div id="foot_cart_menu">
+	<footer-menu
+			:init_cart_num="init_cart_num"
+			:init_product_type="parseInt(init_product_type)"
+			:init_menus="init_menus"
+	></footer-menu>
+</div>
+<script type="text/javascript">
+	$(function(){
+		//数据库里购物车里商品数量
+		let total_num = parseInt("{$total_num|default=0}");
+		//localStorage里商品信息
+		if(localStorage.cartList){
+			let goodsList = (JSON.parse(localStorage.cartList)).data;
+			$.each(goodsList,function(i,goods){
+				total_num += goods['num'];
+			});
+		}
+		let unlockingFooterCart = '{$unlockingFooterCart|raw}';
+		unlockingFooterCart = JSON.parse(unlockingFooterCart);
+		let param = {
+			init_cart_num:total_num,
+			init_product_type:2,
+			init_menus:unlockingFooterCart
+		};
+		new Vue({
+			el: '#foot_cart_menu',
+			data:function(){
+				return param;
+			}
+		});
+	});
+</script>
+<script type="text/javascript">
+	$(function(){
+		let param = {
+			type:3,
+			init_quantity:1,
+			step_quantity:1,
+			productList:[
+				{
+					id:"{$info.id}",
+					franchise_price:"{$info.franchise_price}",
+                    retail_price:"{$info.retail_price}"
+				}
+			]
+		};
+		new Vue({
+			el: '#product-list',
+			data:function(){
+				return param;
+			}
+		});
+	});
+</script>
+{/block}
+{block name="script"}
+<script type="text/javascript" src="api_common_js/swiper.min.js"></script>
+<script type="text/javascript" src="index_js/common.js"></script>
+<script type="text/javascript">
+	//初始化分类商品页面
+	/*	$('.nav_menu li:eq(0)').addClass('current');
+	 postData.category_id = $('.nav_menu li.current').data('category-id');
+	 getPagingList(config,postData);*/
+
+	var config = {
+		url:module+'Goods/getPromotionGoods',
+		requestEnd:false,
+		loadTrigger:false,
+		currentPage:1,
+		is_selection:1
+	};
+	var postData = {
+		id:'{$info.id}',
+		pageSize:10,
+		page:1
+	};
+
+	$(function(){
+		//每天活动倒计时
+		var date=new Date(new Date(new Date().toLocaleDateString()).getTime()+24*60*60*1000-1);
+		countDown(date,$('#countDownBox'));
+		// 后加载简介
+		$('document').ready(function(){
+		 	$('.intro').html("{$info.intro|raw}");
+		 });
+
+		//轮播
+		var swiper = new Swiper('.swiper-container', {
+			spaceBetween: 30,
+			autoplay:true,
+			pagination: {
+				el: '.swiper-pagination',
+				clickable: true
+			}
+		});
+
+		//初始化分类商品页面
+		getPagingList(config,postData);
+
+		//下拉加载
+		$(window).on('scroll',function(){
+			if(config.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
+				config.loadTrigger = false;
+				postData.category_id = $('.nav_menu li.current').data('category-id');
+				getPagingList(config,postData);
+			}
+		});
+		// 点击返回上一页
+	$('.go-back').on("click",function(){
+		history.back(-1)
+	})
+	});
+</script>
+<style scoped>
+	
+		.describe{
+			border-bottom: 1px solid #ccc;
+			padding-bottom: 10px;
+		}
+		.title{
+			color: #000;
+			font-size: 0.25rem;
+			margin-top: 4px;
+		}
+		.describe{
+			color: #eb6000;
+			margin-top: 10px;
+		}
+		.intro{
+			margin-top: 10px;
+		}
+		.project_details{
+			border-bottom: none;
+			border-top: 1px solid #ccc;
+			padding-top: 10px;
+			margin-bottom: 0;
+		}
+		
+		.back{
+			position:fixed;
+			width: 30px;
+			height: 30px;
+			background: rgba(0, 0, 0, 0.4);
+			z-index: 99;
+			color: #fff;
+			border-radius: 50%;
+			margin: 6px 0 0 8px;
+			text-align: center;
+			line-height: 30px;
+		}
+	.product_name .two-line-omit{
+		font-size: 0.28rem;
+	}
+	.product_specs .two-line-omit{
+		color: #999;
+	}
+	</style>
+{/block}

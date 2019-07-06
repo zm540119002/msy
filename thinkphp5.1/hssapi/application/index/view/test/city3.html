@@ -1,0 +1,59 @@
+{extend name="template/base.html" /}
+{block name="title"}城市测试3{/block}
+{block name="content"}
+<div id="province_city_linkage">
+	<label class="form-label" @click="toggle">选择地区：</label>
+	<div class="area_address">{{selected_name.province_name}} {{selected_name.city_name}}</div>
+	<city_picker
+			v-show="display"
+			@toggle="toggle"
+			@update_data="update_data"
+			:init_provinces="provinces"
+			:init_selected_code="selected_code"
+	></city_picker>
+</div>
+{/block}
+{block name="common"}
+<script type="text/javascript" src="vue_js/province_city.js"></script>
+{include file="../../api/public/vue/components/province-city.html" /}
+<script type="text/javascript">
+	$(function(){
+		var city_picker_param = {
+			provinces:{provinces},
+			display:false,
+			selected_code:{
+				province_code:102,
+				city_code:102103
+			},
+			selected_name:{}
+		};
+		var city_picker = new Vue({
+			el: "#province_city_linkage",
+			data: function () {
+				return city_picker_param;
+			},methods: {
+				//更新市数据
+				toggle:function(){
+					let _this = this;
+					_this.display = !_this.display;
+				},update_data:function(param){
+					let _this = this;
+					_this.selected_code = param.selected_code;
+					_this.selected_name = param.selected_name;
+				},get:function(){
+					return this.selected_code;
+				}
+			},created:function(){
+				let _this = this;
+			}
+		});
+		//外部获取
+		$('body').on('click','.sure',function(){
+			console.log(city_picker.get());
+		});
+	});
+</script>
+{/block}
+{block name="footer"}
+<a href="javascript:void(0);" class="sure">确定</a>
+{/block}

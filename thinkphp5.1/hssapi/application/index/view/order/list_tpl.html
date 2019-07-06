@@ -1,0 +1,105 @@
+{notempty name="list"}
+{volist name="list" id="info"}
+    <li data-id="{$info.id}" data-order_sn="{$info.sn}" class="order">
+           <a href="{:url('order/detail',['order_sn'=>$info.sn])}">
+                <p><span>订单编号</span>{$info.sn}</p>
+                <p><span>下单日期</span> {$info.create_time}</p>
+                <p><span>商品</span>共{$info.goods_num}个</p>
+                <p><span>金额</span><price class="red">￥{$info.amount}</price></p>
+                <p><span>状态</span><span class="pay">{$Think.config.custom.order_status[$info.order_status]['name']}</span> </p>
+                <p class="tips">提示：超过3天未支付的待付款订单将被系统自动清除</p>
+                <div class="line"></div>
+                <div class="address">
+                        <div class="icon"><img src="public_img/default/weizhi.png" alt=""></div>
+                        <div class="address_detail">
+                            <div >{$info.consignee} {$info.mobile}</div>
+                            <div >收货地址：{$info.complete_address}</div>
+                        </div>
+                </div>
+           </a>
+            <!-- <a href="{:url('order/detail',['order_sn'=>$info.sn])}">
+                {volist name="info.goods_list" id="goods_info"}
+                <div class="order_item" data-id="{$goods_info.goods_id}"
+                     data-brand_id="{$goods_info.brand_id}"  data-brand_name="{$goods_info.brand_name}"  >
+                        <img src="{:show_img_handle($goods_info.thumb_img)}" class="left">
+                    <div class="order_top_r">
+                        <p>{$goods_info.name}</p>
+                        <p>￥<price>{$goods_info.price}</price></p>
+                        <p>X<span class="num">{$goods_info.num}</span></p>
+                    </div>
+                </div>
+                {/volist}
+            </a> -->
+            <!-- <div class="order_bottom">
+                <p>共<span>{$info.goods_num}</span>件商品 <span class="red">￥<price>{$info.amount}</price></span></p> -->
+<!--                <p class="order_operate_btn">
+                    {switch $info.order_status}
+                        {case Think.config.custom.order_status.1.code} &lt;!&ndash;1:待付款&ndash;&gt;
+                            <a href="javascript:void(0);" class="cancel_order" title="取消订单">取消订单</a>
+                        {/case}
+                        {case Think.config.custom.order_status.2.code | Think.config.custom.order_status.3.code } &lt;!&ndash;2:待发货&ndash;&gt; &lt;!&ndash;3:待收货货&ndash;&gt;
+                            <a href="javascript:void(0);" class="refund_application" title="申请退款">申请退款</a>
+                            <a href="javascript:void(0);" class="confirm_receive" title="确认收货">确认收货</a>
+                        {/case}
+                        {case Think.config.custom.order_status.4.code} &lt;!&ndash;4:待评价&ndash;&gt;
+                            <a href="javascript:void(0);" class="apply_after_sales">申请售后</a>
+                            <a href="javascript:void(0);" class="to_evaluate">评价</a>
+                        {/case}
+                        {case Think.config.custom.order_status.5.code} &lt;!&ndash;5:订单已完成&ndash;&gt;
+                            <a href="javascript:void(0);" class="see_evaluation">查看评价</a>
+                            <a href="javascript:void(0);" class="purchase_again">再次购买</a>
+                        {/case}
+                        {case Think.config.custom.order_status.6.code} &lt;!&ndash;6:订单取消&ndash;&gt;
+                            <span class="">已取消</span>
+                        {/case}
+                        {default /}
+                    {/switch}
+                </p>-->
+            <!-- </div> -->
+    </li>
+{/volist}
+{else /}
+{if $currentPage ==1}
+<li class="no_data">
+    <img src="public_img/no-order.png" alt="">
+</li>
+{/if}
+{/notempty}
+<style scoped>
+    li.order{
+        padding: 0.2rem;
+    }
+    li.order p{
+        margin: 4px 0;
+    }
+    .order span{
+        margin-right: 10px;
+    }
+    .tips{
+        color: #ccc;
+    }
+    .line{
+        border-top: 1px solid #ccc;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .address{
+        display: flex;
+    }
+    .address .icon{
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+    }
+    .red, .pay{
+        color: red;
+    }
+    .address .address_detail{
+        flex: 7
+    }
+    .icon img{
+        width: 60%;
+    }
+</style>

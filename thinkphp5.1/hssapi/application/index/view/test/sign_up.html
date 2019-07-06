@@ -1,0 +1,122 @@
+{extend name="template/base.html" /}
+{block name="title"}第2期黑森森众创平台推介会邀请函{/block}
+{block name="content"}
+<section class="sign_up_tpl" style="display: none;">
+    <form class="applicant_form sign_up_form">
+        <div class="apply-items">
+            <input type="text" class="name " name="name" value="" placeholder="姓名(必填)">
+        </div>
+        <div class="apply-items">
+            <input type="tel" class="mobile " name="mobile" value="" placeholder="联系手机号码(必填)">
+        </div>
+    </form>
+</section>
+<article class="f24">
+    <div class="scrollwrapper">
+        <div id="content" class="floor-content">
+            <div id="item1" class="floor">
+                <div class="floor_item project-list">
+                    <div class="">
+                        <img src="public_img/sign_up1.jpg" alt="" class="common_default_img">
+                    </div>
+                    <div class="">
+                        <img src="public_img/sign_up2.jpg" alt="" class="common_default_img">
+                    </div>
+                    <div class="">
+                        <img src="public_img/sign_up3.jpg" alt="" class="common_default_img">
+                    </div>
+                    <div class="">
+                        <img src="public_img/sign_up4.jpg" alt="" class="common_default_img">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
+{/block}
+{block name="footer"}
+<div class="group_cart_nav f24"><a href="javascript:void(0);" class="bottom_item sign_up">立即报名</a></div>
+{/block}
+{block name="script"}
+<script>
+    $(function(){
+       
+    })
+   
+    var content=$('.sign_up_tpl').html();
+    $('body').on('click','.sign_up',function(){
+        layer.open({
+            title:['在线报名','border-bottom:1px solid #d9d9d9'],
+            className:'activityLayer memberRegTpl',
+            type:1,
+            anim:'up',
+            content:content,
+            btn:['提交'],
+            yes:function(index){
+                var postData = $('.sign_up_form').serializeObject();
+                var content='';
+                if(!postData.name){
+                    content='请填写你的姓名';
+                }else if(!register.phoneCheck(postData.mobile)){
+                    content='请填写手机号码';
+                }
+                if(content){
+                    dialog.error(content);
+                    return false;
+                }
+                $.ajax({
+                    url:'',
+                    type:'post',
+                    data:postData,
+                    success:function(data){
+                        layer.open({
+                            className:'success_icons',
+                            content : data.info,
+                            btn:['确定'],
+                            end : function(){
+
+                            },
+                            yes:function(index){
+                                layer.close(index);
+                            }
+                        });
+                        layer.close(index);
+                    },
+                    error:function(){
+
+                    }
+                })
+            }
+        })
+    });
+
+</script>
+<style scoped>
+.group_cart_nav .sign_up{
+    display: block;
+    width:100%;
+    background:#2aabe4;
+    color:#fff;
+}
+.floor:last-child .floor_item{
+    padding-bottom:1rem;
+}
+.activityLayer .sign_up_form{
+    padding:0.25rem 0.15rem 0.15rem;
+}
+.activityLayer .layui-m-layerbtn span[yes]{
+    background:#2aabe4;
+    color:#fff;
+    border-radius:5px;
+}
+.activityLayer .layui-m-layerbtn{
+    width:95%;
+    margin:0.15rem auto 0;
+    border-top:none;
+}
+.success_icons .layui-m-layerbtn span[yes]{
+    background:#2aabe4;
+    color:#fff;
+}
+</style>
+{/block}
