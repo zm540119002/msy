@@ -60,6 +60,7 @@ class SignUp extends Base {
         if($keyword) $condition['where'] = ['name','like', '%' . trim($keyword) . '%'];
 
         $list = $this->obj->pageQuery($condition);
+        p($this->obj->getLastSql);
         $this->assign('list',$list);
 
         return view('list_tpl');
