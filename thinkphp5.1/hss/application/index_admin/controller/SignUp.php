@@ -14,7 +14,7 @@ class SignUp extends Base {
     ];
 
     protected  function currentModelClass(){
-        $this->obj = new \app\index_admin\model\WeixinShare();
+        $this->obj = new \app\index_admin\model\SignUp();
     }
 
     public function manage(){
@@ -35,7 +35,7 @@ class SignUp extends Base {
         ];
 
         $keyword = input('get.keyword/s');
-        if($keyword) $condition['where'] = ['link','like', '%' . trim($keyword) . '%'];
+        if($keyword) $condition['where'] = ['name','like', '%' . trim($keyword) . '%'];
 
         $list = $this->obj->pageQuery($condition);
         $this->assign('list',$list);
