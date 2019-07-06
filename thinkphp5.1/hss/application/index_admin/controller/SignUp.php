@@ -57,9 +57,10 @@ class SignUp extends Base {
         ];
 
         $keyword = input('get.keyword/s');
-        if($keyword) $condition['where'] = ['name','like', '%' . trim($keyword) . '%'];
+        if($keyword) $condition['where'] = ['mobile','like', '%' . trim($keyword) . '%'];
 
         $list = $this->obj->pageQuery($condition);
+
         p($this->obj->getLastSql);
         $this->assign('list',$list);
 
