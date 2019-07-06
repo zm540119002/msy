@@ -69,6 +69,7 @@
                     data:postData,
                     success:function(data){
                         layer.open({
+                            className:'success_icons',
                             content : data.info,
                             btn:['确定'],
                             end : function(){
@@ -111,6 +112,10 @@
     width:95%;
     margin:0.15rem auto 0;
     border-top:none;
+}
+.success_icons .layui-m-layerbtn span[yes]{
+    background:#04a6f1;
+    color:#fff;
 }
 </style>
 {/block}
