@@ -60,7 +60,7 @@ return [
                 ['id'=>902,'name'=>'售后','display'=>1,'controller'=>'custom_client','action'=>'afterSale',],
             ],
         ],'sign_up'=>[
-            'id'=>1000,'name'=>'客服','type'=>2,
+            'id'=>1000,'name'=>'第2期推介会名单','type'=>2,
             'sub_menu' => [
                 ['id'=>1001,'name'=>'管理','display'=>1,'controller'=>'SignUp','action'=>'manage',],
             ],
