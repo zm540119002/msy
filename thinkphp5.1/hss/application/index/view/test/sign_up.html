@@ -68,8 +68,17 @@
                     type:'post',
                     data:postData,
                     success:function(data){
-                        dialog.msg(data);
-                        layer.close(index);
+                        layer.open({
+                            content : data.info,
+                            btn:['确定'],
+                            end : function(){
+
+                            },
+                            yes:function(index){
+                                layer.close(index);
+                            }
+                        });
+
                     },
                     error:function(){
 
