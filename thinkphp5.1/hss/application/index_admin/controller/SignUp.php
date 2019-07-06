@@ -10,7 +10,7 @@ class SignUp extends Base {
     protected $obj;
 
     protected $beforeActionList = [
-        'currentModelClass'  =>  ['only'=>'getList'],
+        'currentModelClass'  =>  ['only'=>'getList,del'],
     ];
 
     protected  function currentModelClass(){
