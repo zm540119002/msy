@@ -28,7 +28,7 @@ class SignUp extends Base {
     public function getList(){
 
         $condition = [
-            'field' => ['id','link','sort','status'],
+            'field' => ['id','name','mobile','status','create_time'],
             'where' => [
                 ['status','=',0],
             ],

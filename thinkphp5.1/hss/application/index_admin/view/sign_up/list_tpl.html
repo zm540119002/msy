@@ -8,6 +8,7 @@
             <th>排序</th>
             <th>名字</th>
             <th>电话</th>
+            <th>申请时间</th>
             <th>操作</th>
         </tr>
         </thead>
@@ -18,6 +19,7 @@
             <td class="w48">{$vo.id}
             <td class="w50pre name"><span title="" class="editable ">{$vo.sort}</span></td>
             <td class="w50pre name"><span title="" class="editable ">{$vo.name}</span></td>
+            <td class="w50pre name"><span title="" class="editable ">{$vo.create_time}</span></td>
             <td class="w96 shelf-status">
                 {if $vo.status == 2}
                 <span class="label label-defaunt radius">已关闭</span>
