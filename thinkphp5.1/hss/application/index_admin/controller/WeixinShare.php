@@ -104,7 +104,9 @@ class WeixinShare extends Base {
         ];
 
         $keyword = input('get.keyword/s');
-        if($keyword) $condition['where'] = ['link','like', '%' . trim($keyword) . '%'];
+        if($keyword){
+            $where[] = ['link','like', '%' . trim($keyword) . '%'];
+        }
 
         $list = $this->obj->pageQuery($condition);
         $this->assign('list',$list);
