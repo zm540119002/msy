@@ -68,7 +68,7 @@
                     type:'post',
                     data:postData,
                     success:function(data){
-                        dialog.success(data.info);
+                        dialog.msg(data);
                         layer.close(index);
                     },
                     error:function(){
