@@ -49,7 +49,7 @@ class Address extends \common\controller\UserBase {
                     ],
                 ];
                 $addressList = $model -> getList($config);
-//                $addressList = $model -> getList();
+                $addressList = $model -> getList();
                 if(empty($addressList)){
                     $data['is_default'] = 1;
                 }
@@ -105,19 +105,21 @@ class Address extends \common\controller\UserBase {
     //地址列表
     public function manage(){
         $model = new \common\model\Address();
-        $config = [
+/*        $config = [
             'where'=>[
                 ['status','=',0],
                 ['user_id','=',$this->user['id']]
             ],
         ];
-        $addressList = $model -> getList($config);
-//        $addressList = $model -> getList();
+        $addressList = $model -> getList($config);*/
+        $addressList = $model -> getList();
         $this->assign('addressList',$addressList);
         $unlockingFooterCart = unlockingFooterCartConfig([8]);
         $this->assign('unlockingFooterCart', $unlockingFooterCart);
         return $this -> fetch();
     }
+
+    //获取
 
     //删除地址
     public function del(){
