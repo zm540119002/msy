@@ -74,7 +74,20 @@ class Test extends HssBase{
     }
     public function signUp(){
         if(request()->isAjax()){
+            $saveData['name'] = trim(input('post.name'));
+            $saveData['mobile'] = trim(input('post.mobile'));
+            $model = new \app\index\model\SignUp();
+            $id = $model -> edit($saveData);
+            if($id){
+                $this -> successMsg('报名预约成功');
+            }else{
+                $this -> errorMsg('失败');
+            }
         }else{
+            //微信分享
+            $WeixinShareModel = new \app\index\model\WeixinShare();
+            $shareInfo = $WeixinShareModel ->getShareInfo();
+            $this->assign('shareInfo',$shareInfo);
             return $this->fetch();
         }
     }
