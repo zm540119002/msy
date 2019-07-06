@@ -79,7 +79,7 @@ class Test extends HssBase{
             $model = new \app\index\model\SignUp();
             $id = $model -> edit($saveData);
             if($id){
-                $this -> successMsg('申请预约成功');
+                $this -> successMsg('报名预约成功');
             }else{
                 $this -> errorMsg('失败');
             }
