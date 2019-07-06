@@ -76,6 +76,7 @@ class Test extends HssBase{
         if(request()->isAjax()){
             $saveData['name'] = trim(input('post.name'));
             $saveData['mobile'] = trim(input('post.mobile'));
+            $saveData['create_time'] = time();
             $model = new \app\index\model\SignUp();
             $id = $model -> edit($saveData);
             if($id){
