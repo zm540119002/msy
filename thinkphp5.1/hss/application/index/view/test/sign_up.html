@@ -90,7 +90,10 @@
             }
         })
     });
-
+    // 关闭层
+    $('body').on('click','.activityLayer .close_layer_pop',function(){
+        $(this).parents('.layui-m-layer').remove();
+    });
 </script>
 <style scoped>
 .group_cart_nav .sign_up{
