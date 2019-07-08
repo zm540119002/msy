@@ -115,6 +115,7 @@ class Address extends \common\controller\UserBase {
         ];
         $addressList = $model -> getList($config);*/
         $addressList = $model -> getList();
+        p($addressList);exit;
         $this->assign('addressList',$addressList);
         $unlockingFooterCart = unlockingFooterCartConfig([8]);
         $this->assign('unlockingFooterCart', $unlockingFooterCart);
