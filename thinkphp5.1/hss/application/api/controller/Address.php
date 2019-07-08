@@ -4,7 +4,7 @@ class Address extends \common\controller\UserBase {
     //增加修改地址页面
     public function edit(){
         if(!request()->isPost()){
-            $this->errorMsg('');
+            $this->errorMsg('请求方式不对');
         }
         $model = new \common\model\Address();
         $model->useGlobalScope(false)->select();
@@ -81,22 +81,6 @@ class Address extends \common\controller\UserBase {
         }
 
 
-    }
-
-    //地址列表
-    public function manage(){
-        $model = new \common\model\Address();
-        $config = [
-            'where'=>[
-                ['status','=',0],
-                ['user_id','=',$this->user['id']]
-            ],
-        ];
-        $addressList = $model -> getList($config);
-        $this->assign('addressList',$addressList);
-        $unlockingFooterCart = unlockingFooterCartConfig([8]);
-        $this->assign('unlockingFooterCart', $unlockingFooterCart);
-        return $this -> fetch();
     }
 
     //获取
