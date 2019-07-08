@@ -20,6 +20,7 @@ class Address extends \common\controller\UserBase {
                     ['user_id','=',$userId],
                 ];
                 $id = $model -> edit($data,$condition);
+                echo $model->getLastSql();
                 echo $id;exit;
                 if( !$id ){
                     $model ->rollback();
