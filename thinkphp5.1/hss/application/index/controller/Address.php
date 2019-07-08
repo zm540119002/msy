@@ -108,10 +108,11 @@ class Address extends \common\controller\UserBase {
             'where'=>[
                 ['status','=',0],
                 ['user_id','=',$this->user['id']]
-            ],
+            ],  'field' => [
+                'id','consignee','detail_address','tel_phone','mobile','is_default','status','province','city','area'
+            ]
         ];
         $addressList = $model -> getList($config);
-//        $addressList = $model -> getList();
         $this->assign('addressList',$addressList);
         $unlockingFooterCart = unlockingFooterCartConfig([8]);
         $this->assign('unlockingFooterCart', $unlockingFooterCart);
