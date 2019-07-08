@@ -15,9 +15,9 @@ class Address extends \common\controller\UserBase {
                 //修改
                 $addressId = input('post.address_id');
                 $condition = [
-                    ['status','=',0],
-                    ['id','=',$addressId],
-                    ['user_id','=',$userId],
+                    'status' => 0,
+                    'id' => $addressId,
+                    'user_id' => $userId,
                 ];
                 $id = $model -> edit($data,$condition);
                 echo $model->getLastSql();
