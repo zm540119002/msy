@@ -11,11 +11,11 @@ class Address extends \common\controller\UserBase {
         $userId = $this->user['id'];
 
         $data = input('post.');
-        if(input('?post.address_id') && !empty(input('post.address_id')) ){
+        if(input('?post.id') && !empty(input('post.id')) ){
             //开启事务
             $model -> startTrans();
             //修改
-            $addressId = input('post.address_id');
+            $addressId = input('post.id');
             $condition = [
                 ['status','=',0],
                 ['id','=',$addressId],
@@ -77,9 +77,7 @@ class Address extends \common\controller\UserBase {
             }
             $model->commit();
             $data['id'] = $addressId;
-            $this -> assign('addressId',$addressId);
-            $this->assign('data', $data);
-            return view('address/info');
+            return $data;
         }
 
 
@@ -88,14 +86,13 @@ class Address extends \common\controller\UserBase {
     //地址列表
     public function manage(){
         $model = new \common\model\Address();
-/*        $config = [
+        $config = [
             'where'=>[
                 ['status','=',0],
                 ['user_id','=',$this->user['id']]
             ],
         ];
-        $addressList = $model -> getList($config);*/
-        $addressList = $model -> getList();
+        $addressList = $model -> getList($config);
         $this->assign('addressList',$addressList);
         $unlockingFooterCart = unlockingFooterCartConfig([8]);
         $this->assign('unlockingFooterCart', $unlockingFooterCart);
@@ -103,7 +100,19 @@ class Address extends \common\controller\UserBase {
     }
 
     //获取
+    public function getList()
+    {
+        $model = new \common\model\Address();
+        $config = [
+            'where'=>[
+                ['status','=',0],
+                ['user_id','=',$this->user['id']]
+            ],
+        ];
+        $addressList = $model -> getList($config);
+        return $addressList;
 
+    }
     //删除地址
     public function del(){
         if(!request()->isAjax()){

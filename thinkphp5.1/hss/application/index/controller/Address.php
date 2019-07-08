@@ -9,6 +9,7 @@ class Address extends \common\controller\UserBase {
         if(request()->isPost()){
             $data = input('post.');
             if(input('?post.address_id') && !empty(input('post.address_id')) ){
+                p($data);exit;
                 //开启事务
                 $model -> startTrans();
                 //修改
