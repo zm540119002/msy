@@ -1,0 +1,395 @@
+{extend name="template/base.html" /}
+{block name="title"}品类详情{/block}
+{block name="content"}
+<article class="f24">
+	<!-- 项目信息 -->
+	<!--<div id="menu" class="menu">
+		<a href="javascript:void(0);" class="back_prev_page" data-jump_url=""></a>
+		<ul class="columns_flex detail-nav">
+			<li data-item="item1"><a href="javascript:;" class="">品类商品</a></li>
+			<li data-item="item2"><a href="javascript:;" class="">品类介绍</a></li>
+			<li data-item="item3"><a href="javascript:;" class="">相关培训</a></li>
+		</ul>
+	</div>-->
+	<!-- 品类商品 -->
+	<div class="back"><</div>
+	<section class="project_item">
+		{include file="template/scene_detail.html" /}
+	</section>
+	<div class="scrollwrapper">
+		<div id="menu" >
+			<!--<a href="javascript:void(0);" class="back_prev_page" data-jump_url=""></a>-->
+			<ul class="columns_flex detail-nav">
+				<li data-item="item1"><a href="javascript:;" class="">品类商品</a></li>
+				<li data-item="item2"><a href="javascript:;" class="">品类介绍</a></li>
+				<li data-item="item3"><a href="javascript:;" class="">相关培训</a></li>
+			</ul>
+		</div>
+		<div id="content" class="floor-content">
+			<div id="item1" class="floor">
+				<div class="floor_item project-list">
+					<!-- 内容 -->
+					<section class=" wy_list">
+						<!--采购方案列表-->
+						{notempty name="promotionList"}
+						{volist name="promotionList" id="vo"}
+						<a href="{:url('Promotion/detail',['id'=>$vo.id])}" data-id="{$vo.id}" class="">
+							<div class="applay_p_item columns_flex l-r-sides">
+								<!--			<div>
+												<div class="red">¥<price>{$vo.price}</price></div>
+												<p>{$vo.name}</p>
+												<p class="once-enter">立即进入></p>
+											</div>
+											<div class="group_btn50">
+												<img class="common_default_img" src="" alt="{$vo.name}">
+											</div>-->
+								<img class="common_default_img" src="{:show_img_handle($vo.thumb_img)}" alt="{$vo.name}">
+							</div>
+						</a>
+						{/volist}
+						{/notempty}
+						<!--产品列表-->
+						<ul class="goods_list list" id="product-list">
+							<product-select
+									v-for="(productInfo,index) in productList"
+									:key="index"
+									:init_product_id="productInfo.id"
+									:init_deal_price="parseFloat(productInfo.franchise_price)"
+									:init_compare_price="Number(productInfo.retail_price)"
+									:init_product_name="productInfo.headline"
+									:init_product_src="productInfo.thumb_img"
+									:init_quantity="parseInt(init_quantity)"
+									:step_quantity="parseInt(step_quantity)"
+									:init_specification="productInfo.specification"
+									:type="type"
+							></product-select>
+						</ul>
+					</section>
+				</div>
+			</div>
+			<div id="item2" class="floor">
+				<div class="floor_item">	
+					<!-- 品类介绍 -->
+					<p class="content-label">品类介绍</p>
+					<section class="project_item">
+						<p>
+							{volist name="$info.detail_img" id="vo"}
+							<img src="{:show_img_handle($vo)}" alt="" class="common_default_img">
+							{/volist}
+						</p>
+						{notempty name="$info.recommend_goods"}
+						<div class="content-padding content_main ">
+							<p class="content-label">推荐搭配产品</p>
+							<ul class="columns_flex flex-both-side goods-content-list">
+								{volist name="$info.recommend_goods" id="vo"}
+								<li>
+									<a href="{:url('Index/Goods/detail',['id'=>$vo.id])}">
+										<img src="{:show_img_handle($vo.thumb_img)}" alt="{$vo.name}">
+									</a>
+									<p>{$vo.name}</p>
+									<p>规格：{$vo.specification}</p>
+								</li>
+								{/volist}
+							</ul>
+						</div>
+						{/notempty}
+					</section>
+				</div>
+			</div>
+			<div id="item3" class="floor">
+				<div class="floor_item" >
+					<!-- 相关培训 -->
+					<p class="content-label">相关培训</p>
+					<section class="project_item">
+						<p>
+							{volist name="$info.process_img" id="vo"}
+							<img src="{:show_img_handle($vo)}" alt="" class="common_default_img">
+							{/volist}
+						</p>
+					</section>
+				</div>
+			</div>
+		</div>
+	</div>
+</article>
+{/block}
+{block name="common"}
+{/block}
+{block name="footer"}
+{include file="../../api/public/vue/components/footer-menu.html" /}
+<div class="bg"></div>
+<div class="dialogCart">
+	<div id="product-list2">
+		<product-select
+				v-for="(productInfo,index) in productList"
+				:key="index"
+				:init_product_id="productInfo.id"
+				:init_product_src="productInfo.thumb_img"
+				:init_deal_price="parseFloat(productInfo.franchise_price)"
+				:init_compare_price="Number(productInfo.retail_price)"
+				:init_quantity="parseInt(init_quantity)"
+				:step_quantity="parseInt(step_quantity)"
+				:init_group="init_group"
+				:type="type"
+		></product-select>
+	</div>
+	<div id="foot_cart_menu">
+		<footer-menu
+				:init_group="init_group"
+				:init_menus="init_menus"
+				:init_cart_num="init_cart_num"
+		></footer-menu>
+	</div>
+</div>
+<script type="text/javascript">
+	$(function(){
+		//数据库里购物车里商品数量
+		let total_num = parseInt("{$total_num|default=0}");
+		//localStorage里商品信息
+		if(localStorage.cartList){
+			let goodsList = (JSON.parse(localStorage.cartList)).data;
+			$.each(goodsList,function(i,goods){
+				total_num += goods['num'];
+			});
+		}
+		if(!total_num){
+			var html = $('.no_cart_data').html();
+			$('#product-list').append(html);
+		}
+		let unlockingFooterCart = '{$unlockingFooterCart|raw}';
+		unlockingFooterCart = JSON.parse(unlockingFooterCart);
+		let param = {
+			init_group:0,
+			init_cart_num:total_num,
+			init_menus:unlockingFooterCart
+		};
+		new Vue({
+			el:'#foot_cart_menu',
+			data:function(){
+				return param;
+			}
+		});
+	})
+</script>
+{include file="../../api/public/vue/components/product-select.html" /}
+<script type="text/javascript">
+	$(function(){
+		let param = {
+			type:6,
+			init_group:0,
+			init_quantity:1,
+			step_quantity:1,
+			productList:[
+				{
+					id:0,
+					franchise_price:0
+				}
+			]
+		};
+		new Vue({
+			el: '#product-list2',
+			data:function(){
+				return param;
+			}
+		});
+	});
+</script><script type="text/javascript">
+	$(function(){
+		let param = {
+			type:5,
+			init_quantity:1,
+			step_quantity:1,
+			productList:[],
+			getJsonListParam:{
+				url:module+'Goods/getRelationGoods',
+				requestEnd:false,
+				loadTrigger:false,
+				postData:{
+					id:'{$info.id}',
+					relation:'{$relation}',
+					pageSize:10,
+					page:1
+				}
+			}
+		};
+		new Vue({
+			el: '#product-list',
+			data:function(){
+				return param;
+			},methods:{
+				getJsonListCallBack:function(data){
+					if(data.status==0){
+						dialog.error(data.info);
+						return false;
+					}
+					let _this = this;
+					$.each(data.data.data,function(i,o){
+						_this.productList.push(o);
+					});
+				}
+			},created:function(){
+				let _thisVue = this;
+				_thisVue.getJsonListParam.callBack = _thisVue.getJsonListCallBack;
+				vueVersionGetJsonList(_thisVue);
+				//下拉加载
+				$(window).on('scroll',function(){
+					if(_thisVue.getJsonListParam.loadTrigger
+							&& $(document).scrollTop()+$(window).height()+200>$(document).height()){
+						//停止触发，去其他地方重新放开
+						_thisVue.getJsonListParam.loadTrigger = false;
+						vueVersionGetJsonList(_thisVue);
+					}
+				});
+			}
+		});
+	});
+</script>
+{/block}
+{block name="script"}
+<script type="text/javascript" src="api_common_js/swiper.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		var id = '{$info.id}';
+		//每天活动倒计时
+		var date=new Date(new Date(new Date().toLocaleDateString()).getTime()+24*60*60*1000-1);
+		countDown(date,$('#countDownBox'));
+		// 后加载简介
+		$('document').ready(function(){
+			$('.intro').html("{$info.intro|raw}");
+		});
+		//轮播
+		var swiper = new Swiper('.swiper-container', {
+			spaceBetween: 30,
+			autoplay:true,
+			pagination: {
+				el: '.swiper-pagination',
+				clickable: true
+			}
+		});
+		var height=$('.detail-nav').height();
+		var offsetHeight=$('.detail-nav').offset().top;
+		$(window).on('scroll',function(){
+			var scrollHeight=$(document).scrollTop();
+
+			if(scrollHeight>offsetHeight){
+				$('.detail-nav').addClass('top-fixed');
+			}else {
+				$('.detail-nav').removeClass('top-fixed');
+			}
+		});
+		//楼层
+
+		var menu = $('#menu');
+		var items = $('#content').find('.floor');
+		var height=$('.detail-nav').height();
+		var offsetHeight=$('.detail-nav').offset().top;
+
+		var _screenHight = window.screen.availHeight;
+		$("#item3").css("min-height",_screenHight+"px");
+
+
+		$(window).scroll(function() {
+			//滚动
+			var top = $(document).scrollTop();
+			var currentId = '';
+			if(top>offsetHeight){
+				$('.detail-nav').addClass('top-fixed');
+			}else {
+				$('.detail-nav').removeClass('top-fixed');
+			}
+			items.each(function(){
+				var m = $(this);
+				var itemTop = m.offset().top;
+
+				if(top + 43>= itemTop ){
+					//currentId = '#' + m.attr('id');
+					currentId = m.attr('id');
+				} else {
+					return false;
+				}
+
+			});
+
+			// 给相应楼层的a 设置 current, 取消其他链接的current
+			var currentLink = menu.find('.active');
+			if(currentId && currentLink.data('item') != currentId) {
+				// currentLink.removeClass('active');
+				menu.find("[data-item='"+ currentId +"']").addClass('active').siblings().removeClass('active');
+                //menu.find("[data-item='"+ currentId +"']").addClass('active');
+			}
+		});
+		// 项目信息切换
+		$('#menu li').on('click',function(){
+		//$(document).ready(function(){
+			var _this=$(this);
+			var id=_this.data('item');
+			items.each(function(){
+				var m = $(this);
+				if(m.attr('id')==id){
+				    var itemTop = m.offset().top;
+					_this.addClass('active').siblings().removeClass('active');
+                    var scrollY=itemTop-40;
+					$('html, body').animate({
+						scrollTop: scrollY
+					},500);
+
+				}else{
+					m.removeClass('active');
+				}
+			});
+		});
+		// 点击返回上一页
+		$('.back').on("click",function(){
+			history.back(-1);
+		})
+		// 分享二维码
+		$('body').on('click', '.url_share', function () {
+			var param_url = window.location.href;
+
+			if (param_url) {
+				$.ajax({
+					url: module + '/TwoDimensionalCode/getUrlQRcode',
+					data: {param_url:param_url},
+					type: 'post',
+					success: function (data) {
+						layer.open({
+							skin: 'shareqrCodeLayer',
+							content: '<img src=' + data.img + ' />',
+							btn: ['X']
+						})
+					}
+				});
+			}
+		});
+
+	});
+</script>
+<style>
+	.menu{
+		position: fixed;
+		top: 0;
+		z-index: 10;
+		width: 100%;
+	}
+	.project_details{
+		border-bottom: none;
+		margin-bottom: 0;
+	}
+	.l-r-sides{
+		border-bottom: none;
+		margin-bottom: 0;
+	}
+	.back {
+		position: fixed;
+		width: 30px;
+		height: 30px;
+		background: rgba(0, 0, 0, 0.4);
+		z-index: 99;
+		color: #fff;
+		border-radius: 50%;
+		margin: 6px 0 0 8px;
+		text-align: center;
+		line-height: 30px;
+	}
+</style>
+{/block}

@@ -1,0 +1,55 @@
+{extend name="template/base.html" /}
+{block name="content"}
+<article class="f24 ">
+    <section class="header_title separation-line">
+        <a href="javascript:void(0);" class="back_prev_page" data-jump_url=""></a>
+		<h2 class="f24">充值记录</h2>
+	</section>
+    <section class="content-padding">
+        <div class="record_top_item columns_flex l-r-sides">
+            <span>充值金额</span>
+            <span>支付方式</span>
+            <span>充值日期</span>
+            <span>备注说明</span>
+        </div>
+
+        <ul class="record_item" id="list">
+
+        </ul>
+
+    </section>
+</article>
+{/block}
+{block name="common"}
+
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript" src="api_common_js/uploadImgToTemp.js"></script>
+<script type="text/javascript">
+    $(function(){
+        var config = {
+            url:module+'Wallet/detailList',
+            requestEnd:false,
+            loadTrigger:false,
+            currentPage:1
+        };
+        var postData = {
+            pageSize:10,
+            type:1
+        };
+
+        // 初始化列表
+        getPagingList(config,postData);
+
+        //下拉加载
+        $(window).on('scroll',function(){
+            if(config.loadTrigger && $(document).scrollTop()+$(window).height()+200>$(document).height()){
+                config.loadTrigger = false;
+                //postData.category_id = $('.nav_menu li.current').data('category-id');
+                getPagingList(config,postData);
+            }
+        });
+    });
+</script>
+{/block}

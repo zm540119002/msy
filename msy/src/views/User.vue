@@ -54,6 +54,7 @@ export default {
       this.show = true;
     },
     loginHandle(){
+      console.log(this.$http)
       console.log(this.postData)
     },
     registerHandle(){
@@ -88,7 +89,5 @@ export default {
 .van-field{
   padding-bottom: 0;
 }
-.van-popup{
-  max-width: 92%;
-}
+
 </style>
