@@ -8,7 +8,6 @@ class Address extends \common\controller\UserBase {
         $userId = $this->user['id'];
         if(request()->isPost()){
             $data = input('post.');
-            p($data);
             if(input('?post.address_id') && !empty(input('post.address_id')) ){
                 //开启事务
                 $model -> startTrans();
@@ -20,8 +19,6 @@ class Address extends \common\controller\UserBase {
                     'user_id' => $userId,
                 ];
                 $id = $model -> edit($data,$condition);
-                echo $model->getLastSql();
-                echo $id;exit;
                 if( !$id ){
                     $model ->rollback();
                     return errorMsg('失败');
