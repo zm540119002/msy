@@ -17,6 +17,7 @@ class Base extends \think\Model {
 				$id = $where['id'];
 			}
 		}else{//新增
+            echo 425;
 			unset($data['id']);
 			$res = $this->allowField(true)->isUpdate(false)->save($data);
 			$id = $this->getAttr('id');
