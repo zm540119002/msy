@@ -55,6 +55,9 @@ export default {
     },
     loginHandle(){
       console.log(this.$http)
+      this.$http.get('/getData1')
+        .then(r => console.log(r)) //接口调用成功返回的数据
+        .catch(err => console.log(err)) //接口调用失败返回的数据
       console.log(this.postData)
     },
     registerHandle(){
