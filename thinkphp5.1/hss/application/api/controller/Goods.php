@@ -1,5 +1,5 @@
 <?php
-namespace app\index\controller;
+namespace app\api\controller;
 
 class Goods extends HssBase{
     /**首页
@@ -17,7 +17,7 @@ class Goods extends HssBase{
         if(!$categoryId){
             $this->error('没有此分类');
         }
-        $modelGoodsCategory = new \app\index\model\GoodsCategory();
+        $modelGoodsCategory = new \app\api\model\GoodsCategory();
         $config =[
             'where' => [
                 ['gc.status', '=', 0],
@@ -33,7 +33,7 @@ class Goods extends HssBase{
         $this->assign('info',$info);
 
         //获取相关的商品
-        $model = new \app\index\model\Goods();
+        $model = new \app\api\model\Goods();
         $config =[
             'where' => [
                 ['g.status', '=', 0],
@@ -57,7 +57,7 @@ class Goods extends HssBase{
         if(!request()->isGet()){
             return errorMsg('请求方式错误');
         }
-        $model = new \app\index\model\Goods();
+        $model = new \app\api\model\Goods();
         $config=[
             'where'=>[
                 ['g.status', '=', 0],
@@ -105,7 +105,7 @@ class Goods extends HssBase{
         if(!request()->isAjax()){
             return errorMsg('请求方式错误');
         }
-        $model = new \app\index\model\Goods();
+        $model = new \app\api\model\Goods();
         $config=[
             'where'=>[
                 ['g.status', '=', 0],
@@ -153,7 +153,7 @@ class Goods extends HssBase{
             $cartList = input('get.cartList');
             $goodsList =  json_decode($cartList,true)['data'];
             $goodsIds = array_column($goodsList,'goods_id');
-            $model = new \app\index\model\Goods();
+            $model = new \app\api\model\Goods();
             $config=[
                 'where'=>[
                     ['g.status', '=', 0],
@@ -177,7 +177,7 @@ class Goods extends HssBase{
             $list['data']=$showGoodsList;
         }else{
             $userId = $user['id'];
-            $model = new \app\index\model\Cart();
+            $model = new \app\api\model\Cart();
             $config=[
                 'where'=>[
                     ['c.user_id','=',$userId],
@@ -215,17 +215,17 @@ class Goods extends HssBase{
         // custom.php relation_type
         switch($relation){
             case config('custom.relation_type.scene'):
-                $model = new \app\index\model\SceneGoods();
+                $model = new \app\api\model\SceneGoods();
                 $field_id = 'sg.scene_id';
                 $goods_id = 'sg.goods_id';
                 break;
             case config('custom.relation_type.project'):
-                $model = new \app\index\model\ProjectGoods();
+                $model = new \app\api\model\ProjectGoods();
                 $field_id = 'pg.project_id';
                 $goods_id = 'pg.goods_id';
                 break;
             case config('custom.relation_type.sort'):
-                $model = new \app\index\model\SortGoods();
+                $model = new \app\api\model\SortGoods();
                 $field_id = 'sg.sort_id';
                 $goods_id = 'sg.goods_id';
                 break;
@@ -256,7 +256,7 @@ class Goods extends HssBase{
         }else{
             // 商品基础处理
             if(!$id=input('id/d')) $this->error('此商品已下架');
-            $model = new \app\index\model\Goods();
+            $model = new \app\api\model\Goods();
             $config =[
                 'where' => [
                     ['g.status', '=', 0],
@@ -282,7 +282,7 @@ class Goods extends HssBase{
                 'name'=>$info['name'],
                 'specification'=>preg_replace('//s*/', '', $info['specification']),
             ]));
-            $modelComment = new \app\index\model\Comment();
+            $modelComment = new \app\api\model\Comment();
             $where = [
                 ['status','=',0],
                 ['goods_id','=',$id],
@@ -296,7 +296,7 @@ class Goods extends HssBase{
             //登录判断是否已收藏
             $user = session('user');
             if(!empty($user)){
-                $modelCollection = new \app\index\model\Collection();
+                $modelCollection = new \app\api\model\Collection();
                 $config = [
                     'where'=>[
                         ['user_id','=',$user['id']],
@@ -341,7 +341,7 @@ class Goods extends HssBase{
         }
         $goodsId = input('get.goods_id/d');
         //相关推荐商品
-        $modelRecommendGoods = new \app\index\model\RecommendGoods();
+        $modelRecommendGoods = new \app\api\model\RecommendGoods();
         $config =[
             'where' => [
                 ['rg.status', '=', 0],
@@ -367,7 +367,7 @@ class Goods extends HssBase{
         }
         if(!$id = input('get.id/d')) return errorMsg('参数有误');
 
-        $model = new \app\index\model\PromotionGoods();
+        $model = new \app\api\model\PromotionGoods();
         $condition = [
             'field' => [
                 'g.id ','g.name','g.headline','g.thumb_img','g.franchise_price','g.retail_price','g.specification','g.minimum_order_quantity',

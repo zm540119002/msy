@@ -1,5 +1,5 @@
 <?php
-namespace app\index\controller;
+namespace app\api\controller;
 class Promotion extends HssBase{
     /**促销详情
      */

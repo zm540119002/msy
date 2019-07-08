@@ -1,5 +1,5 @@
 <?php
-namespace app\index\model;
+namespace model;
 
 class Project extends \common\model\Base {
 	// 设置当前模型对应的完整数据表名称

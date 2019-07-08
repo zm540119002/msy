@@ -1,5 +1,5 @@
 <?php
-namespace app\index\controller;
+namespace app\api\controller;
 
 class TwoDimensionalCode extends \common\controller\UserBase {
     /**
@@ -12,7 +12,7 @@ class TwoDimensionalCode extends \common\controller\UserBase {
         if(!request()->isAjax()){
             $this->errorMsg('请求方式错误');
         }
-        $model = new \app\index\model\TwoDimensionalCode();
+        $model = new \app\api\model\TwoDimensionalCode();
         $config = [
             'where' => [
                 ['status', '=', 0],
@@ -42,7 +42,7 @@ class TwoDimensionalCode extends \common\controller\UserBase {
      * 后台 生成二维码和入库
      */
     public function generatingTwoDimensionalCode(){
-        $model = new \app\index\model\TwoDimensionalCode();
+        $model = new \app\api\model\TwoDimensionalCode();
         $model->compose($this->user);
     }
 

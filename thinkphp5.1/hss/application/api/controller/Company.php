@@ -1,5 +1,5 @@
 <?php
-namespace app\index\controller;
+namespace app\api\controller;
 
 class Company extends \common\controller\UserBase {
     /**首页

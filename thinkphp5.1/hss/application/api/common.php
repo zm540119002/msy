@@ -65,5 +65,5 @@ function foot_cart_menu(){
 
     controller('index')->getCartTotalNum();
 
-    //app\index\controller\Cart::getCartTotalNum();
+    //app\api\controller\Cart::getCartTotalNum();
 }

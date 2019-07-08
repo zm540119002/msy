@@ -1,5 +1,5 @@
 <?php
-namespace app\index\model;
+namespace model;
 
 // 测试数据 可删除
 class UserTest extends \common\model\Base {

@@ -1,5 +1,5 @@
 <?php
-namespace app\index\model;
+namespace app\api\model;
 
 class OrderChild extends \common\model\Base {
 	// 设置当前模型对应的完整数据表名称
@@ -79,7 +79,7 @@ class OrderChild extends \common\model\Base {
                     ['goods_id','=',$goodsId],
                     ['store_id','=',$value['store_id']],
                 ];
-				$modelOrderDetail = new \app\index\model\OrderDetail();
+				$modelOrderDetail = new \app\api\model\OrderDetail();
                 $res = $modelOrderDetail->where($condition)->setField($data);
                 if(false === $res){
                     return errorMsg('失败');

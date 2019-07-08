@@ -1,5 +1,5 @@
 <?php
-namespace app\index\controller;
+namespace app\api\controller;
 
 class Cart extends \common\controller\UserBase {
     /**

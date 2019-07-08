@@ -1,5 +1,5 @@
 <?php
-namespace app\index\model;
+namespace app\api\model;
 
 /**
  * 基础模型器

@@ -1,5 +1,5 @@
 <?php
-namespace app\index\controller;
+namespace app\api\controller;
 
 // 前台首页
 use think\Console;
@@ -10,7 +10,7 @@ class Index extends HssBase {
      */
     public function index(){
         // 促销列表 7个
-        $modelPromotion = new \app\index\model\Promotion();
+        $modelPromotion = new \app\api\model\Promotion();
         $condition =[
             'where' => [
                 ['status', '=', 0],
@@ -25,7 +25,7 @@ class Index extends HssBase {
         $this ->assign('promotionList',$promotionList);
 
         // 场景列表 11个
-        $modelScene = new \app\index\model\Scene();
+        $modelScene = new \app\api\model\Scene();
         $condition =[
             'where' => [
                 ['status', '=', 0],
@@ -40,7 +40,7 @@ class Index extends HssBase {
         $this ->assign('sceneList',$sceneList);
 
         // 众创空间用户
-        $modelUser = new \app\index\model\UserTest();
+        $modelUser = new \app\api\model\UserTest();
 
         $condition = [
             'where' => [
@@ -64,7 +64,7 @@ class Index extends HssBase {
  
         // 广告
         $ads = [];
-        $modelAdPositions = new \app\index\model\AdPositions();
+        $modelAdPositions = new \app\api\model\AdPositions();
         $ads['top'] = reset($modelAdPositions->getAds('index_top'));
         $ads['carousel'] = $modelAdPositions->getAds('index_carousel');
         $this->assign('ads',$ads);
@@ -83,7 +83,7 @@ class Index extends HssBase {
 
         foot_cart_menu();
         //微信分享
-        $WeixinShareModel = new \app\index\model\WeixinShare();
+        $WeixinShareModel = new \app\api\model\WeixinShare();
         $shareInfo = $WeixinShareModel ->getShareInfo();
         $this->assign('shareInfo',$shareInfo);
 
@@ -100,7 +100,7 @@ class Index extends HssBase {
             $user = checkLogin();
             $this->assign('user',$user);
             if($user){
-                $memberMode =  new \app\index\model\Member();
+                $memberMode =  new \app\api\model\Member();
                 $config =[
                     'where' => [
                         ['m.status', '=', 0],
@@ -117,7 +117,7 @@ class Index extends HssBase {
             $this->assign('currentPage',request()->controller().'/'.request()->action());
 
             //微信分享
-            $WeixinShareModel = new \app\index\model\WeixinShare();
+            $WeixinShareModel = new \app\api\model\WeixinShare();
             $shareInfo = $WeixinShareModel ->getShareInfo();
             $this->assign('shareInfo',$shareInfo);
             return $this->fetch('franchise/index');
@@ -134,7 +134,7 @@ class Index extends HssBase {
             $user = checkLogin();
             $this->assign('user',$user);
             if($user){
-                $memberMode =  new \app\index\model\Member();
+                $memberMode =  new \app\api\model\Member();
                 $config =[
                     'where' => [
                         ['m.status', '=', 0],
@@ -146,7 +146,7 @@ class Index extends HssBase {
                 $member = $memberMode->getInfo($config);
                 $this->assign('member',$member);
                 //自己提交的申请
-                /*$modelCityPartner = new \app\index\model\CityPartner();
+                /*$modelCityPartner = new \app\api\model\CityPartner();
                 $condition=[
                     'where'=>[
                         ['cp.status', '=', 0],
@@ -174,7 +174,7 @@ class Index extends HssBase {
                 $this->assign('applied',$applied);*/
             }
             //微信分享
-            $WeixinShareModel = new \app\index\model\WeixinShare();
+            $WeixinShareModel = new \app\api\model\WeixinShare();
             $shareInfo = $WeixinShareModel ->getShareInfo();
             $this->assign('shareInfo',$shareInfo);
             // 底部菜单，见配置文件custom.footer_menu
@@ -208,7 +208,7 @@ class Index extends HssBase {
             }
             $this->getCartTotalNum();
             //微信分享
-            $WeixinShareModel = new \app\index\model\WeixinShare();
+            $WeixinShareModel = new \app\api\model\WeixinShare();
             $shareInfo = $WeixinShareModel ->getShareInfo();
             $this->assign('shareInfo',$shareInfo);
             return $this->fetch('cart/index');
@@ -218,7 +218,7 @@ class Index extends HssBase {
     // 项目优势页
     public function superiority(){
         //微信分享
-        $WeixinShareModel = new \app\index\model\WeixinShare();
+        $WeixinShareModel = new \app\api\model\WeixinShare();
         $shareInfo = $WeixinShareModel ->getShareInfo();
         $this->assign('shareInfo',$shareInfo);
         $this->assignStandardBottomButton([21,22]);
@@ -229,7 +229,7 @@ class Index extends HssBase {
     // 开放日活动
     public function activity(){
         //微信分享
-        $WeixinShareModel = new \app\index\model\WeixinShare();
+        $WeixinShareModel = new \app\api\model\WeixinShare();
         $shareInfo = $WeixinShareModel ->getShareInfo();
         $this->assign('shareInfo',$shareInfo);
         return $this->fetch();
@@ -254,7 +254,7 @@ class Index extends HssBase {
     public function invited(){
         $this->assignStandardBottomButton([21]);
         //微信分享
-        $WeixinShareModel = new \app\index\model\WeixinShare();
+        $WeixinShareModel = new \app\api\model\WeixinShare();
         $shareInfo = $WeixinShareModel ->getShareInfo();
         $this->assign('shareInfo',$shareInfo);
         return $this->fetch();
@@ -264,7 +264,7 @@ class Index extends HssBase {
     public function recruit(){
         $this->assignStandardBottomButton([22]);
         //微信分享
-        $WeixinShareModel = new \app\index\model\WeixinShare();
+        $WeixinShareModel = new \app\api\model\WeixinShare();
         $shareInfo = $WeixinShareModel ->getShareInfo();
         $this->assign('shareInfo',$shareInfo);
         return $this->fetch();
@@ -276,7 +276,7 @@ class Index extends HssBase {
         //统计购物车商品数量
         $user = checkLogin();
         if($user){
-            $modelCart = new \app\index\model\Cart();
+            $modelCart = new \app\api\model\Cart();
             $totalNum = $modelCart
                 ->alias('c')
                 ->join('goods g','c.goods_id = g.id')

@@ -1,5 +1,5 @@
 <?php
-namespace app\index\model;
+namespace model;
 
 /**
  * 促销基础模型器

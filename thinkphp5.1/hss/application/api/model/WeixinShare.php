@@ -1,5 +1,5 @@
 <?php
-namespace app\index\model;
+namespace model;
 
 /**
  * 广告基础模型器

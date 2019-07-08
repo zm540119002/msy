@@ -1,5 +1,5 @@
 <?php
-namespace app\index\model;
+namespace app\api\model;
 
 class Order extends \common\model\Base {
 	// 设置当前模型对应的完整数据表名称
@@ -31,7 +31,7 @@ class Order extends \common\model\Base {
 			return errorMsg('失败');
 		}
 //        //根据订单号查询关联的商品
-//        $modelOrderDetail = new \app\index\model\OrderDetail();
+//        $modelOrderDetail = new \app\api\model\OrderDetail();
 //        $config = [
 //            'where' => [
 //                ['od.status', '=', 0],
@@ -42,7 +42,7 @@ class Order extends \common\model\Base {
 //        ];
 //
 //        $orderDetailList = $modelOrderDetail->getList($config);
-//        $modelOrderChild = new \app\index\model\OrderChild();
+//        $modelOrderChild = new \app\api\model\OrderChild();
 //
 //        //生成子订单
 //        $rse = $modelOrderChild -> createOrderChild($orderDetailList);

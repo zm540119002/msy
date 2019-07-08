@@ -1,5 +1,5 @@
 <?php
-namespace app\index\controller;
+namespace app\api\controller;
 
 class Wallet extends Base {
 
@@ -27,7 +27,7 @@ class Wallet extends Base {
         if (request()->isAjax()) {
         } else {
 
-            $model = new \app\index\model\Wallet();
+            $model = new \app\api\model\Wallet();
             $condition = [
                 'where' => [
                     ['user_id','=',$this->user['id']],
@@ -76,7 +76,7 @@ class Wallet extends Base {
             $data['voucher_img'] = moveImgFromTemp(config('upload_dir.scheme'),$_POST['voucher']);
         }
 
-        $model= new \app\index\model\WalletDetail();
+        $model= new \app\api\model\WalletDetail();
         $model -> startTrans();
         $res  = $model->isUpdate(false)->save($data);
         if(!$res){
@@ -85,7 +85,7 @@ class Wallet extends Base {
 
         }
         //生成支付表的数据
-        $modelPay = new \app\index\model\Pay();
+        $modelPay = new \app\api\model\Pay();
         //增加
         $data = [
             'sn' => $walletDetailSn,
@@ -133,7 +133,7 @@ class Wallet extends Base {
     public function forgetPassword(){
 
         if (request()->isAjax()) {
-            $model = new \app\index\model\Wallet();;
+            $model = new \app\api\model\Wallet();;
             $postData = input('post.');
             $postData['user_id'] = $this->user['id'];
             return $model->resetPassword($postData);
@@ -163,7 +163,7 @@ class Wallet extends Base {
 
         if( $type=input('type/d') )  $condition['where'][] = ['type','=',$type];
 
-        $model = new \app\index\model\WalletDetail();
+        $model = new \app\api\model\WalletDetail();
         $list = $model->pageQuery($condition);
 
         $this->assign('list',$list);
@@ -184,7 +184,7 @@ class Wallet extends Base {
                 return errorMsg('密码格式错误!');
             }
 
-            $modelWallet = new \app\index\model\Wallet();;
+            $modelWallet = new \app\api\model\Wallet();;
 
             $wallet = $modelWallet->checkWalletUser($user_id,$password);
             if(!$wallet){
@@ -197,7 +197,7 @@ class Wallet extends Base {
                 return errorMsg('订单支付失败!');
             }
 
-            $modelOrder = new \app\index\model\Order();
+            $modelOrder = new \app\api\model\Order();
             $condition = [
                 'where' => [
                     ['user_id','=',$user_id],
@@ -217,7 +217,7 @@ class Wallet extends Base {
 
             // 生成订单明细&&更新钱包余额
             $modelOrder ->startTrans();
-            $modelWalletDetail = new \app\index\model\WalletDetail();
+            $modelWalletDetail = new \app\api\model\WalletDetail();
             $orderInfo['pay_sn'] = generateSN();
             $orderInfo['payment_time'] = time();
             $res = $modelWalletDetail->walletPaymentHandle($orderInfo);
@@ -242,7 +242,7 @@ class Wallet extends Base {
 
             // 删除订单关联的购物车的商品
             if(false !== $res){
-                $modelCart = new \app\index\model\Cart();
+                $modelCart = new \app\api\model\Cart();
                 $res = $modelCart->clearCartGoodsByOrder($fatherOrderId,$user_id);
             }
 
@@ -254,7 +254,7 @@ class Wallet extends Base {
             // 会员升级 // 每个平台都有自己的支付后业务 后期修改
             if($orderInfo['type']==2) {
 
-                $modelPromotion = new \app\index\model\Promotion();
+                $modelPromotion = new \app\api\model\Promotion();
                 $condition = [
                     'where' => [
                         ['status', '=', 0],
@@ -277,7 +277,7 @@ class Wallet extends Base {
                         'update_time' => time(),
                     ];
 
-                    $memberModel = new \app\index\model\Member();
+                    $memberModel = new \app\api\model\Member();
 
                     $result = $memberModel->allowField(true)->isUpdate(true)->save($data,$where['where']);
 

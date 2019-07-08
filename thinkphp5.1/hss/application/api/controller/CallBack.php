@@ -1,5 +1,5 @@
 <?php
-namespace app\index\controller;
+namespace app\api\controller;
 class CallBack extends HssBase
 {
     public function weixinBack(){

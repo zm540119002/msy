@@ -1,5 +1,5 @@
 <?php
-namespace app\index\controller;
+namespace app\api\controller;
 
 /**
  * 场景控制器
@@ -21,7 +21,7 @@ class Scene extends HssBase{
         if(!request()->isGet()){
             return errorMsg('请求方式错误');
         }
-        $model = new\app\index\model\Scene();
+        $model = new\app\api\model\Scene();
         $config=[
             'where'=>[
             ],
@@ -62,7 +62,7 @@ class Scene extends HssBase{
             $id = input('id/d');
             if(!$id) $this->error('此项目已下架');
             // 场景信息 主要是获取同组的场景信息
-            $model = new\app\index\model\Scene();
+            $model = new\app\api\model\Scene();
             $condition =[
                 'field' => [
                     'ss.id','ss.name','ss.main_img','ss.tag','ss.intro','ss.tag_category','ss.display_type','ss.title'
@@ -116,7 +116,7 @@ class Scene extends HssBase{
 /*            $id = input('id/d');
             if(!$id) $this->error('此项目已下架');
             // 场景信息 主要是获取同组的场景信息
-            $model = new\app\index\model\Scene();
+            $model = new\app\api\model\Scene();
             $condition =[
                 'field' => [
                     'ss.id','ss.name','ss.main_img','ss.tag','ss.intro','ss.tag_category','ss.display_type','ss.title'
@@ -207,7 +207,7 @@ class Scene extends HssBase{
     // 输出场景信息
     private function displayScene($id){
 
-        $model = new\app\index\model\Scene();
+        $model = new\app\api\model\Scene();
         $config =[
             'field' => [
                 'id','name','thumb_img','main_img','intro','tag','tag_category','title'

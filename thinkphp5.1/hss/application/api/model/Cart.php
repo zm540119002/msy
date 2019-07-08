@@ -1,5 +1,5 @@
 <?php
-namespace app\index\model;
+namespace app\api\model;
 
 class Cart extends \common\model\Base {
 	// 设置当前模型对应的完整数据表名称
@@ -18,7 +18,7 @@ class Cart extends \common\model\Base {
      */
     public function clearCartGoodsByOrder($order_id,$user_id){
         //根据订单号查询关联的购物车的商品
-        $modelOrderDetail = new \app\index\model\OrderDetail();
+        $modelOrderDetail = new \app\api\model\OrderDetail();
         $config = [
             'where' => [
                 ['od.status', '=', 0],

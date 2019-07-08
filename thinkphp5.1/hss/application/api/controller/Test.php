@@ -1,5 +1,5 @@
 <?php
-namespace app\index\controller;
+namespace app\api\controller;
 
 // 前台首页
 use think\Console;
@@ -77,7 +77,7 @@ class Test extends HssBase{
             $saveData['name'] = trim(input('post.name'));
             $saveData['mobile'] = trim(input('post.mobile'));
             $saveData['create_time'] = time();
-            $model = new \app\index\model\SignUp();
+            $model = new \app\api\model\SignUp();
             $id = $model -> edit($saveData);
             if($id){
                 $this -> successMsg('报名预约成功');
@@ -86,7 +86,7 @@ class Test extends HssBase{
             }
         }else{
             //微信分享
-            $WeixinShareModel = new \app\index\model\WeixinShare();
+            $WeixinShareModel = new \app\api\model\WeixinShare();
             $shareInfo = $WeixinShareModel ->getShareInfo();
             $this->assign('shareInfo',$shareInfo);
             return $this->fetch();
@@ -135,7 +135,7 @@ class Test extends HssBase{
         }
         //p($city);
         //exit;
-        $model = new \app\index\model\CityArea();
+        $model = new \app\api\model\CityArea();
 
         $res = $model->getInfo($city);
         if(!$res){

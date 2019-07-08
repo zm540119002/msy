@@ -1,5 +1,5 @@
 <?php
-namespace app\index\validate;
+namespace app\api\validate;
 
 class Franchise extends \think\Validate
 {

@@ -1,8 +1,8 @@
 <?php
-namespace app\index\controller;
+namespace app\api\controller;
 /**
  * Class WechatManage
- * @package app\index\controller
+ * @package app\api\controller
  * 微信处理
  */
 define("TOKEN", "meishangyun");
@@ -104,7 +104,7 @@ class WechatManage extends HssBase {
                 $data['remark'] = $info['remark'];
                 $data['referee'] = $info['qr_scene']; //带参场景关注类型
 
-                $userModel = new \app\index\model\WeixinUser();
+                $userModel = new \app\api\model\WeixinUser();
                 $config = [
                     'where'=>[
                         ['openid','=',$info['openid']]
@@ -125,7 +125,7 @@ class WechatManage extends HssBase {
 
                 break;
             case "unsubscribe":
-                $userModel = new \app\index\model\WeixinUser();
+                $userModel = new \app\api\model\WeixinUser();
                 $data = [
                     'subscribe' => 0
                 ];

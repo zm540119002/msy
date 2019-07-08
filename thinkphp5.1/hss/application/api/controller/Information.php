@@ -1,5 +1,5 @@
 <?php
-namespace app\index\controller;
+namespace app\api\controller;
 
 class Information extends HssBase{
     /**首页
@@ -18,7 +18,7 @@ class Information extends HssBase{
         if(!request()->isGet()){
             return errorMsg('请求方式错误');
         }
-        $model = new\app\index\model\Information();
+        $model = new\app\api\model\Information();
         $config=[
             'where'=>[
             ],
@@ -51,7 +51,7 @@ class Information extends HssBase{
             if(!$id){
                 $this->error('此项目已下架');
             }
-            $model = new\app\index\model\Scene();
+            $model = new\app\api\model\Scene();
             $config =[
                 'where' => [
                     ['status', '=', 0],
@@ -70,7 +70,7 @@ class Information extends HssBase{
             $this->assign('info',$info);
 
             //获取相关的商品
-            $modelSceneGoods = new \app\index\model\SceneGoods();
+            $modelSceneGoods = new \app\api\model\SceneGoods();
             $config =[
                 'where' => [
                     ['sg.status', '=', 0],

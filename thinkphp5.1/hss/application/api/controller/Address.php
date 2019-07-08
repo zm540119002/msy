@@ -1,5 +1,5 @@
 <?php
-namespace app\index\controller;
+namespace app\api\controller;
 class Address extends \common\controller\UserBase {
     //增加修改地址页面
     public function edit(){

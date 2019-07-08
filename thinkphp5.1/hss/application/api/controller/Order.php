@@ -1,11 +1,11 @@
 <?php
-namespace app\index\controller;
+namespace app\api\controller;
 class Order extends \common\controller\UserBase
 {
     //生成订单
     public function generate()
     {
-        $memberModel = new \app\index\model\Member();
+        $memberModel = new \app\api\model\Member();
         if(!$member = $memberModel->getMemberInfo($this->user['id'])){
            $data = [
                 'user_id'=>$this->user['id'],
@@ -37,7 +37,7 @@ class Order extends \common\controller\UserBase
         if( $order_type==2 ){
 
             $promotion = reset($goodsList);
-            $modelPromotionGoods = new \app\index\model\PromotionGoods();
+            $modelPromotionGoods = new \app\api\model\PromotionGoods();
             $config = [
                 'where' => [
                     ['p.status', '=', 0],
@@ -66,7 +66,7 @@ class Order extends \common\controller\UserBase
             
             // 是否需要验证公司信息
             if( ($member['type']==config('custom.member_level.1.level')) && $promotion['is_company_info'] ) {
-                $modelCompany = new \app\index\model\Franchise();
+                $modelCompany = new \app\api\model\Franchise();
 
                 $condition = [
                     'field' => [
@@ -99,7 +99,7 @@ class Order extends \common\controller\UserBase
         ];
 
         //计算订单总价
-        $modeGoods = new \app\index\model\Goods();
+        $modeGoods = new \app\api\model\Goods();
         $goodsListNew = $modeGoods->getList($config);
 
         if(empty($goodsListNew)){
@@ -142,8 +142,8 @@ class Order extends \common\controller\UserBase
             }
         }
 
-        $modelOrder = new \app\index\model\Order();
-        $modelOrderDetail = new \app\index\model\OrderDetail();
+        $modelOrder = new \app\api\model\Order();
+        $modelOrderDetail = new \app\api\model\OrderDetail();
         //开启事务
         $modelOrder->startTrans();
         //订单编号
@@ -224,7 +224,7 @@ class Order extends \common\controller\UserBase
             // 更新订单状态并清除订单里购物车里的商品
             $fatherOrderId = input('post.order_id',0,'int');
 
-            $modelOrder = new \app\index\model\Order();
+            $modelOrder = new \app\api\model\Order();
             $condition = [
                 'where' => [
                     ['user_id','=',$this->user['id']],
@@ -262,7 +262,7 @@ class Order extends \common\controller\UserBase
 
             //根据订单号查询关联的购物车的商品
             if(false !== $res){
-                $model = new \app\index\model\Cart();
+                $model = new \app\api\model\Cart();
                 $res = $model->clearCartGoodsByOrder($fatherOrderId,$this->user['id']);
             }
 
@@ -310,7 +310,7 @@ class Order extends \common\controller\UserBase
                 ],
             ];
 
-            $modelOrder = new \app\index\model\Order();
+            $modelOrder = new \app\api\model\Order();
             $orderGoodsList = $modelOrder->getList($config);
             if(empty($orderGoodsList)){
                 $this->error('没有找到该订单');
@@ -338,7 +338,7 @@ class Order extends \common\controller\UserBase
             return errorMsg('请求方式错误');
         }
         $postData = input('post.');
-        $modelOrder = new \app\index\model\Order();
+        $modelOrder = new \app\api\model\Order();
         $condition = [
             'where' => [
                 ['user_id','=',$this->user['id']],
@@ -350,7 +350,7 @@ class Order extends \common\controller\UserBase
         ];
         $orderInfo  = $modelOrder->getInfo($condition);
         //先查找支付表是否有数据
-        $modelPay = new \app\index\model\Pay();
+        $modelPay = new \app\api\model\Pay();
         $condition = [
             'where' => [
                 ['user_id','=',$this->user['id']],
@@ -413,7 +413,7 @@ class Order extends \common\controller\UserBase
             $orderStatus = input('order_status');
             $this ->assign('order_status',$orderStatus);
         }
-        $modelOrder = new \app\index\model\Order();
+        $modelOrder = new \app\api\model\Order();
         $data = $modelOrder->statusSum($this->user['id']);
         $this->assign('orderStatusSum',$data);
 
@@ -464,7 +464,7 @@ class Order extends \common\controller\UserBase
                 ]
             ];
 
-            $model = new \app\index\model\Order();
+            $model = new \app\api\model\Order();
             $orderInfo = $model->getInfo($where);
 
             $type = true;
@@ -514,7 +514,7 @@ class Order extends \common\controller\UserBase
         if(!request()->isGet()){
             return errorMsg('请求方式错误');
         }
-        $model = new \app\index\model\Order();
+        $model = new \app\api\model\Order();
         $config=[
             'where'=>[
                 ['o.status', '=', 0],
@@ -548,7 +548,7 @@ class Order extends \common\controller\UserBase
         }
 
         $list = $model -> pageQuery($config)->each(function($item, $key){
-            $modelOrderDetail = new \app\index\model\OrderDetail();
+            $modelOrderDetail = new \app\api\model\OrderDetail();
             $config=[
                 'field' => [
                     'od.goods_id','od.price', 'od.num', 'od.buy_type','od.brand_id','od.brand_name',
@@ -604,7 +604,7 @@ class Order extends \common\controller\UserBase
     // 获取钱包余额
     private function assignWalletInfo(){
         //钱包
-        $modelWallet = new \app\index\model\Wallet();
+        $modelWallet = new \app\api\model\Wallet();
         $config = [
             'where' => [
                 ['status', '=', 0],
@@ -643,7 +643,7 @@ class Order extends \common\controller\UserBase
             $config['where'] = $where;
         }
 
-        $model= new \app\index\model\Order();
+        $model= new \app\api\model\Order();
         $info = $model->getInfo($config);
 
         if(empty($info)){
@@ -651,7 +651,7 @@ class Order extends \common\controller\UserBase
         }
 
         $info =  $info!=0?$info->toArray():[];
-        $modelOrderDetail = new \app\index\model\OrderDetail();
+        $modelOrderDetail = new \app\api\model\OrderDetail();
         $config=[
             'where'=>[
                 ['od.status', '=', 0],

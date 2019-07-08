@@ -1,5 +1,5 @@
 <?php
-namespace app\index\model;
+namespace model;
 
 /**
  * 品类促销关联基础模型器

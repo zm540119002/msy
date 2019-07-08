@@ -1,5 +1,5 @@
 <?php
-namespace app\index\controller;
+namespace app\api\controller;
 
 class Consultation extends HssBase{
     /**首页
@@ -16,7 +16,7 @@ class Consultation extends HssBase{
             return errorMsg('请求方式错误');
         }
         $data = input('post.');
-        $model = new \app\index\model\NeedsMessage();
+        $model = new \app\api\model\NeedsMessage();
         $result = $model -> isUpdate(false)->save($data);
         if (!$result){
             return errorMsg('失败');

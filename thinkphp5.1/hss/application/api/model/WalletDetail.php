@@ -1,5 +1,5 @@
 <?php
-namespace app\index\model;
+namespace model;
 
 class WalletDetail extends \common\model\Base {
 	// 设置当前模型对应的完整数据表名称
@@ -16,7 +16,7 @@ class WalletDetail extends \common\model\Base {
 	 */
 	public function rechargeHandle($data,$info)
 	{
-		$modelWalletDetail = new \app\index\model\WalletDetail();
+		$modelWalletDetail = new \model\WalletDetail();
 		$modelWalletDetail->startTrans();
 		//更新订单状态
 		$data2 = [];
@@ -34,7 +34,7 @@ class WalletDetail extends \common\model\Base {
 			//返回状态给微信服务器
 			return errorMsg('失败');
 		}
-		$modelWallet = new \app\index\model\Wallet();
+		$modelWallet = new \model\Wallet();
 		$config = [
 			'where'=>[
 				['user_id', '=', $info['user_id']],
@@ -74,7 +74,7 @@ class WalletDetail extends \common\model\Base {
 	 */
 	public function walletPaymentHandle($data)
 	{
-		$modelWalletDetail = new \app\index\model\WalletDetail();
+		$modelWalletDetail = new \model\WalletDetail();
 		$modelWalletDetail->startTrans();
 		//生成钱包明细
 		$data2 = [];
@@ -92,7 +92,7 @@ class WalletDetail extends \common\model\Base {
 			//返回状态给微信服务器
 			return errorMsg('失败');
 		}
-		$modelWallet = new \app\index\model\Wallet();
+		$modelWallet = new \model\Wallet();
 		$where = [
 			['user_id', '=', $data['user_id']],
 		];

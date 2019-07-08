@@ -1,5 +1,5 @@
 <?php
-namespace app\index\controller;
+namespace app\api\controller;
 
 /**
  * 城市合伙人控制器
@@ -30,7 +30,7 @@ class CityPartner extends \common\controller\UserBase {
                     ['cp.sn','=',$sn],
                 ];
             //自己提交的申请
-/*            $modelCityPartner = new \app\index\model\CityPartner();
+/*            $modelCityPartner = new \app\api\model\CityPartner();
             $condition=[
                 'where'=>[
                     ['cp.status', '=', 0],
@@ -77,7 +77,7 @@ class CityPartner extends \common\controller\UserBase {
                 ];
             }
 
-            $modelCityPartner = new \app\index\model\CityPartner();
+            $modelCityPartner = new \app\api\model\CityPartner();
             $condition = [
                 'field' => [
                     'cp.id','cp.sn','cp.province_code','cp.city_code','cp.company_name','cp.applicant','cp.market_name','cp.mobile','cp.city_level',
@@ -150,7 +150,7 @@ class CityPartner extends \common\controller\UserBase {
             $this->errorMsg('失败');
         }
 
-        $validate = new \app\index\validate\CityPartner();
+        $validate = new \app\api\validate\CityPartner();
         $validateName = 'step'.$postData['step'];
         if(!$validate->scene($validateName)->check($postData)) {
             $this->errorMsg($validate->getError());
@@ -164,7 +164,7 @@ class CityPartner extends \common\controller\UserBase {
 
         ///$data = ['url'=>config('custom.pay_gateway').$paySn,'id'=>$id];
 
-        $modelCityPartner = new \app\index\model\CityPartner();
+        $modelCityPartner = new \app\api\model\CityPartner();
         $modelCityPartner -> startTrans();
 
         $data = [];
@@ -194,7 +194,7 @@ class CityPartner extends \common\controller\UserBase {
                     $this->errorMsg('失败');
                 }
                 //生成支付表数据
-                $modelPay = new \app\index\model\Pay();
+                $modelPay = new \app\api\model\Pay();
                 $data = [
                     'sn' => $paySn,
                     'actually_amount' => $info['earnest'],
@@ -250,7 +250,7 @@ class CityPartner extends \common\controller\UserBase {
                     $this->errorMsg('失败');
                 }
                 //生成支付表数据
-                $modelPay = new \app\index\model\Pay();
+                $modelPay = new \app\api\model\Pay();
                 $data = [
                     'sn' => $paySn,
                     'actually_amount' => (double)($info['amount']-$info['earnest']),
@@ -299,7 +299,7 @@ class CityPartner extends \common\controller\UserBase {
             ],
         ];
 
-        $modelCityPartner = new \app\index\model\CityPartner();
+        $modelCityPartner = new \app\api\model\CityPartner();
         $list = $modelCityPartner->pageQuery($condition);
         //p($condition);
         //exit;

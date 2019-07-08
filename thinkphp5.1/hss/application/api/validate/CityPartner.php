@@ -1,5 +1,5 @@
 <?php
-namespace app\index\validate;
+namespace app\api\validate;
 
 class CityPartner extends \think\Validate
 {
