@@ -17,12 +17,12 @@ class Address extends \common\controller\UserBase {
             //修改
             $addressId = input('post.id');
             $condition = [
-                ['status','=',0],
-                ['id','=',$addressId],
-                ['user_id','=',$userId],
+                'status' => 0 ,
+                'id' => $addressId ,
+                'user_id' => $userId ,
             ];
-            $result = $model -> edit($data,$condition);
-            if( !$result['status'] ){
+            $id = $model -> edit($data,$condition);
+            if( !$id ){
                 $model ->rollback();
                 return errorMsg('失败');
             }
