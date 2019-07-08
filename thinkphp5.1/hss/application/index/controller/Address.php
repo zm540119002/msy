@@ -8,6 +8,7 @@ class Address extends \common\controller\UserBase {
         $userId = $this->user['id'];
         if(request()->isPost()){
             $data = input('post.');
+            p($data);exit;
             if(input('?post.address_id') && !empty(input('post.address_id')) ){
                 p($data);exit;
                 //开启事务
