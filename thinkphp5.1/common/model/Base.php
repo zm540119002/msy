@@ -9,6 +9,7 @@ class Base extends \think\Model {
 		if($data['id'] || (count($where) && intval($where['id'])) ){//修改
 			if($data['id']){
 				$res = $this->allowField(true)->isUpdate(true)->save($data);
+				echo 123;
 				$id = $data['id'];
 			}elseif(count($where) && intval($where['id'])){
 				unset($data['id']);
