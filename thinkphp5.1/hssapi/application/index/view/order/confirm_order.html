@@ -1,0 +1,77 @@
+{extend name="template/base.html" /}
+{block name="nav">确认订单{/block}
+{block name="content"}
+
+<article class="f24 fill_order_wrapper">
+    <section class="header_title separation-line">
+        <a href="javascript:void(0);" class="back_prev_page"></a>
+        <h2 class="f24">提交订单</h2>
+    </section>
+
+    {include file="template/settlement_method.html" /}
+    {include file="template/address_info.html" /}
+
+    <section class="goods_order_form">
+        <input type="hidden" value="{$orderInfo.id}" class="order_id">
+        <input type="hidden" value="{$orderInfo.sn}" class="order_sn">
+        <!--结算显示商品页面-->
+        {notempty name="$orderInfo.goods_list"}
+        <ul class="goods_order_item">
+            {volist name="$orderInfo.goods_list" id="info"}
+            <li id="li-id-{$key}" data-order_detail_id="{$info.order_detail_id}">
+                <a href="{:url('Goods/detail',['id'=>$info.goods_id])}">
+                    <img data-img="" data-isloaded="" src="{:show_img_handle($info.thumb_img)}" alt="" class="c_img left" />
+                </a>
+                <div class="g_order_r">
+                    <p class="headline">{$info.name}</p>
+                    <p>{$info.specification}</p>
+                    <div class="cost_price columns_flex l-r-sides">
+                        <span class="red">￥<price>{$info.price}</price></span>
+                        <span>X{$info.num} </span>
+                    </div>
+                </div>
+            </li>
+            {/volist}
+        </ul>
+        {/notempty}
+    </section>
+    <div class="columns_flex l-r-sides content-padding">
+        <span>商品金额</span>
+        <span class="red">￥<price>{$orderInfo.amount}</price></span>
+    </div>
+</article>
+{/block}
+
+{block name="footer"}
+{include file="../../api/public/vue/components/footer-menu.html" /}
+<div id="foot_menu">
+    <footer-menu
+            :init_total_amount="Number(init_total_amount)"
+            :init_menus="init_menus"
+    ></footer-menu>
+</div>
+<script type="text/javascript">
+    $(function(){
+        let unlockingFooterCart = '{$unlockingFooterCart|raw}';
+        unlockingFooterCart = JSON.parse(unlockingFooterCart);
+        let param = {
+            init_total_amount:"{$orderInfo.actually_amount|default=0}",
+            init_menus:unlockingFooterCart
+        };
+        new Vue({
+            el: '#foot_menu',
+            data:function(){
+                return param;
+            }
+        });
+    });
+</script>
+{/block}
+{block name="script"}
+
+<!--<script type="text/javascript" src="index_js/pay.js"></script>-->
+<script type="text/javascript" src="index_js/pay1.js"></script>
+<script type="text/javascript" src="index_js/wallet.js"></script>
+<script src="api_common_js/jquery.area.js"></script>
+<script type="text/javascript" src="index_js/address.js"></script>
+{/block}

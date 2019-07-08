@@ -119,6 +119,8 @@ class Address extends \common\controller\UserBase {
         return $this -> fetch();
     }
 
+    //获取
+
     //删除地址
     public function del(){
         if(!request()->isAjax()){

@@ -1,0 +1,478 @@
+{extend name="template/base.html" /}
+{block name="title"}商品详情{/block}
+{block name="content"}
+<article class="f24">
+	<div class="back"><</div>
+	<section class="slider_banner">
+		<div class="swiper-container swiper-container-horizontal swiper-container-ios">
+			<div class="swiper-wrapper">
+				{notempty name="info.goods_video"}
+				<div class="swiper-slide swiper-slide-active">
+					<video  src="public_uploads/{$info.goods_video}" autoplay="autoplay"></video>
+				</div>
+				{/notempty}
+
+				{volist name="info.main_img" id="main_img"}
+				<div class="swiper-slide swiper-slide-active">
+					<img src="{:show_img_handle($main_img)}" alt="" class="common_default_img">
+				</div>
+				{/volist}
+
+			</div>
+			<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
+				<span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span>
+				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 2"></span>
+				<span class="swiper-pagination-bul let " tabindex="0" role="button" aria-label="Go to slide 3"></span>
+				<span class="swiper-pagination-bullet " tabindex="0" role="button" aria-label="Go to slide 4"></span>
+			</div>
+		</div>
+	</section>
+	<section class="module-navigation top_detail_module">
+		<div >
+			<ul class="goods_list list">
+				<li data-id='{$info.id}' data-buy_type="1" id="li-id-{$info.id}">
+					<div class="top_radius f20 top_module">
+						<!--产品列表-->
+						<ul class="goods_list list" id="product-list">
+							<product-select
+									v-for="(productInfo,index) in productList"
+									:key="index"
+									:init_product_id="productInfo.id"
+									:init_deal_price="parseFloat(productInfo.franchise_price)"
+									:init_compare_price="Number(productInfo.retail_price)"
+									:init_product_name="productInfo.name"
+									:init_product_src="productInfo.thumb_img"
+									:init_specification="productInfo.specification"
+									:init_specification_unit="productInfo.specification_unit"
+									:init_quantity="parseInt(init_quantity)"
+									:step_quantity="parseInt(step_quantity)"
+									:type="type"
+							></product-select>
+						</ul>
+						<div class="title_name goods_title f28">
+							{$info.headline}
+						</div>
+						<p class="specification_text">{$info.specification}<span style="display: inline-block;float: right;">{$info.purchase_specification_description}</span></p>
+						<p class="product_intro">{$info.intro|raw}</p>
+						<div class="tags_item columns_flex l-r-sides">
+							<div>
+								{volist name="$info.tag" id="tag"}
+								<span>{$tag}</span>
+								{/volist}
+							</div>
+							<div class="tags_item_r">
+								{notempty name="collected"}
+								<a class="collection" href="javascript:;"><span class="icon selected"></span><span class="text">已收藏</span></a>
+								{else /}
+								<a class="collection" href="javascript:;"><span class="icon"></span><span class="text">收藏</span></a>
+								{/notempty}
+								<a class="share" href="javascript:;"><span class="icon"></span>分享</a>
+							</div>
+						</div>
+						<div class="">
+							<a href="javascript:;" class="project_details right-arrow">领代金券<span>(0/0)</span></a>
+						</div>
+					</div>
+					<div class="content-padding">
+						<p class="top_b_text wk_notice separation">黑森森每天联合采购日提示：加盟店和城市合伙人采购商可随时下订单，订单结算截止至当天夜里12:00</p>
+						<div class="columns_flex l-r-sides separation">
+							<div class="mid_module_left">
+								<img src="public_img/wy_dz.png" alt="">
+							</div>
+							<div class="mid_module_right">
+								<div>
+									<span class="left count-down-icons"></span>
+									<div class="d-r">
+										<p class="friday_end">联合采购</p>
+										<div id="countDownBox" class="count_down_box">
+											<!--<span class="day"></span>天-->
+											<span class="hour"></span>:
+											<span class="minute"></span>:
+											<span class="second"></span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</section>
+	<div class="scrollwrapper">
+		<div id="menu">
+			<ul class="columns_flex detail-nav">
+				<li data-item="item1" ><a href="javascript:;" class="">商品参数</a></li>
+				<li data-item="item2" ><a href="javascript:;" class="">商品详情</a></li>
+				<li data-item="item3" ><a href="javascript:;" class="">评分评价</a></li>
+			</ul>
+		</div>
+		<div id="content" class="floor-content">
+			<div id="item1" class="floor">
+				<div class="floor_item">
+					<p>{$info.parameters|raw}</p>
+				</div>
+			</div>
+			<div id="item2" class="floor">
+				<div class="floor_item">
+					<p class="content-label">商品详情</p>
+					{volist name="info.detail_img" id="detail_img"}
+					<div class="">
+						<img src="{:show_img_handle($detail_img)}" alt="" class="common_default_img">
+					</div>
+					{/volist}
+				</div>
+			</div>
+			<div id="item3" class="floor">
+				<div class="floor_item" >
+					<p>评分评价</p>
+					<div class="goods_star_score"  >
+						<div class="five_star">
+							<div class="star_img">
+								<img src="public_img/starred.png" id="0">
+								<img src="public_img/starred.png" id="1">
+								<img src="public_img/starred.png" id="2">
+								<img src="public_img/star.png" id="3">
+								<img src="public_img/star.png" id="4">
+							</div>
+							<span class="fraction" data-score="3.9">{$averageScore}分</span>
+						</div>
+						<a href="javascript:void(0);" class="comment_num">{$total}人评论</a>
+					</div>
+					<ul class="sales_comment_wrapper" id="commentList">
+
+					</ul>
+					<div class="page"><a class="comment-next-page" href="javascript:void(0);" data-page="{$nextPage}">加载更多评论&nbsp;V</a></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="recommendGoodsList" class="recommendGoodsList"></div>
+
+</article>
+<div id="areaMask2" class="mask QR_codes_mask"></div>
+<div class="mcover">
+	<img src="public_img/weixin_share.png" alt="">
+	<a href="javascript:void(0);" class="weixinShare_btn">X</a>
+</div>
+
+{/block}
+{block name="common"}
+{include file="goods/sample_layer" /}
+{include file="brand/set_brand" /}
+{/block}
+{block name="footer"}
+{include file="../../api/public/vue/components/footer-menu.html" /}
+<div id="foot_cart_menu">
+	<footer-menu
+			:init_cart_num="init_cart_num"
+			:init_menus="init_menus"
+	></footer-menu>
+</div>
+<script type="text/javascript">
+	$(function(){
+		//数据库里购物车里商品数量
+		let total_num = parseInt("{$total_num|default=0}");
+		//localStorage里商品信息
+		if(localStorage.cartList){
+			let goodsList = (JSON.parse(localStorage.cartList)).data;
+			$.each(goodsList,function(i,goods){
+				total_num += goods['num'];
+			});
+		}
+		let unlockingFooterCart = '{$unlockingFooterCart|raw}';
+		unlockingFooterCart = JSON.parse(unlockingFooterCart);
+		let param = {
+			init_cart_num:total_num,
+			init_menus:unlockingFooterCart
+		};
+		new Vue({
+			el: '#foot_cart_menu',
+			data:function(){
+				return param;
+			}
+		});
+	});
+</script>
+{include file="../../api/public/vue/components/product-select.html" /}
+<script type="text/javascript">
+	$(function(){
+		let goodsInfo = JSON.parse('{$goodsInfo|raw}');
+		let param = {
+			type:3,
+			init_quantity:1,
+			step_quantity:1,
+			productList:[
+				{
+					'id':goodsInfo.goods_id,
+					'franchise_price':goodsInfo.franchise_price,
+					'headline':goodsInfo.name,
+					'specification':goodsInfo.specification,
+					'specification_unit':goodsInfo.specification_unit,
+					'retail_price':goodsInfo.retail_price,
+					'thumb_img':goodsInfo.thumb_img
+				}
+			]
+		};
+		new Vue({
+			el: '#product-list',
+			data:function(){
+				return param;
+			}
+		});
+	});
+	// 点击返回上一页
+	$('.back').on("click",function(){
+		history.back(-1)
+	})
+</script>
+{/block}
+{block name="script"}
+<script type="text/javascript" src="api_common_js/swiper.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		var id = '{$info.id}';
+		var price=$('.goods_list').find('price').text();
+		$('.amount').find('price').text(price);
+		//轮播
+		var swiper = new Swiper('.swiper-container', {
+			spaceBetween: 30,
+			loop: true,
+			autoplay:true,
+			pagination: {
+				el: '.swiper-pagination',
+				clickable: true
+			}
+		});
+		var height=$('.detail-nav').height();
+		var offsetHeight=$('.detail-nav').offset().top;
+		$(window).on('scroll',function(){
+			var scrollHeight=$(document).scrollTop();
+
+			if(scrollHeight>offsetHeight){
+				$('.detail-nav').addClass('top-fixed');
+			}else {
+				$('.detail-nav').removeClass('top-fixed');
+			}
+		});
+		//楼层
+
+		var menu = $('#menu');
+		var items = $('#content').find('.floor');
+		var height=$('.detail-nav').height();
+		var offsetHeight=$('.detail-nav').offset().top;
+
+		var _screenHight = window.screen.availHeight;
+		$("#item3").css("min-height",_screenHight+"px");
+
+
+		$(window).scroll(function() {
+			//滚动
+			var top = $(document).scrollTop();
+			var currentId = '';
+			if(top>offsetHeight){
+				$('.detail-nav').addClass('top-fixed');
+			}else {
+				$('.detail-nav').removeClass('top-fixed');
+			}
+			items.each(function(){
+				var m = $(this);
+				var itemTop = m.offset().top;
+
+				if(top + 43>= itemTop ){
+					//currentId = '#' + m.attr('id');
+					currentId = m.attr('id');
+				} else {
+					return false;
+				}
+
+			});
+
+			// 给相应楼层的a 设置 current, 取消其他链接的current
+			var currentLink = menu.find('.active');
+			if(currentId && currentLink.data('item') != currentId) {
+				// currentLink.removeClass('active');
+				menu.find("[data-item='"+ currentId +"']").addClass('active').siblings().removeClass('active');
+                //menu.find("[data-item='"+ currentId +"']").addClass('active');
+			}
+
+
+		});
+
+
+
+		$('#menu li').on('click',function(){
+			var _this=$(this);
+			var id=_this.data('item');
+
+			//$("#menu li").find(".active").removeClass("active");
+
+			items.each(function(){
+				var m = $(this);
+				if(m.attr('id')==id){
+				    var itemTop = m.offset().top;
+					_this.addClass('active').siblings().removeClass('active');
+                    var scrollY=itemTop-40;
+					$('html, body').animate({
+						scrollTop: scrollY
+					},500);
+
+				}else{
+					m.removeClass('active');
+				}
+			});
+		});
+	
+		//获取评论
+		var config = {
+			url:module+'Comment/getList',
+			currentPage:1,
+			container:$('#commentList'),
+			type:'click'
+		};
+		var getData = {
+			pageSize:6,
+			goods_id:id
+		};
+		getPagingList(config,getData);
+		//加载更多评论
+		$('body').on('click','.comment-next-page',function (){
+			var page = $(this).data('page');
+			var	pageIndex=parseInt(page)+1;
+			$(this).data('page',pageIndex);
+			config.currentPage = page;
+			getPagingList(config,getData);
+		});
+
+		//获取推荐商品
+		var url = module + 'Goods/getRecommendGoods';
+		$.ajax({
+			url: url,
+			data: {goods_id:id},
+			type: 'get',
+			beforeSend: function(){
+				$('.loading').show();
+			},
+			error:function(){
+				$('.loading').hide();
+				dialog.error('AJAX错误');
+			},
+			success: function(data){
+				$('#recommendGoodsList').html(data);
+			}
+		});
+
+		//打开二维码
+		$('body').on('click','.share',function (){
+			var rq_code_url = "{$info.rq_code_url}";
+			if(rq_code_url){
+				var imgSrc=uploads+rq_code_url;
+				var scrollTop;
+				layer.open({
+					skin:'shareqrCodeLayer',
+					content:'<img src='+imgSrc+' />',
+					btn:['X'],
+					success:function(){
+						fixedLayer();
+					},
+					yes:function(index){
+						cancleFixedLayer();
+						layer.close(index);
+					}
+				})
+			}
+		});
+		//活动倒计时
+		var date=new Date(new Date(new Date().toLocaleDateString()).getTime()+24*60*60*1000-1);
+		countDown(date,$('#countDownBox'));
+		//设置分数
+		var averageScore = '{$averageScore}';
+		$('.five_star').setStar(parseFloat(averageScore));
+		//收藏
+		$('body').on('click','.collection',function(){
+
+			var _this = $(this);
+			if(_this.find('span.icon').hasClass('selected')){
+				var postData = {};
+				var ids=[];
+				var id=_this.parents('li').data('id');
+				ids.push(id);
+				postData.ids=ids;
+				_this.addClass("nodisabled");//防止重复提交
+				var url = module + 'Collection/del';
+				$.ajax({
+					url: url,
+					data: postData,
+					type: 'post',
+					beforeSend: function(){
+						$('.loading').show();
+					},
+					error:function(){
+						$('.loading').hide();
+						dialog.error('AJAX错误');
+					},
+					success: function(data){
+						$('.loading').hide();
+						_this.removeClass("nodisabled");
+						if(data.status==0){
+							dialog.error(data.info);
+						}else {
+							dialog.success(data.info);
+							_this.find('span.icon').removeClass('selected');
+							_this.find('span.text').text('收藏');
+						}
+					}
+				});
+				return false;
+			}
+			_this.find('span.icon').addClass('selected');
+			_this.find('span.text').text('已收藏');
+			var goods_id=_this.parents('li').data('id');
+			var postData ={
+				goods_id:goods_id
+			};
+			_this.addClass("nodisabled");//防止重复提交
+			var url = module + 'Collection/collect';
+			$.ajax({
+				url: url,
+				data: postData,
+				type: 'post',
+				beforeSend: function(){
+					$('.loading').show();
+				},
+				error:function(){
+					$('.loading').hide();
+					dialog.error('AJAX错误');
+				},
+				success: function(data){
+					_this.removeClass("nodisabled");
+					dialog.success(data.info)
+				}
+			});
+		});
+	});
+</script>
+<style scoped>
+	
+	.back{
+		position:fixed;
+		width: 30px;
+		height: 30px;
+		background: rgba(0, 0, 0, 0.4);
+		z-index: 99;
+		color: #fff;
+		border-radius: 50%;
+		margin: 6px 0 0 8px;
+		text-align: center;
+		line-height: 30px;
+	}
+	.project_details{
+		border-bottom: none;
+		margin-bottom: 0;
+	}
+	.l-r-sides{
+		border-bottom: none;
+		margin-bottom: 0;
+	}
+</style>
+{/block}

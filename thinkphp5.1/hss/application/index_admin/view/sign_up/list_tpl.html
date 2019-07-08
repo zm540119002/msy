@@ -1,0 +1,38 @@
+<div class="search-result">
+    {notempty name='list'}
+    <table class="table tb-type2">
+        <thead>
+        <tr class="thead">
+            <th></th>
+            <th>编号</th>
+            <th>名字</th>
+            <th>电话</th>
+            <th>申请时间</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        {volist name="list" id="vo"}
+        <tr class="hover" data-id="{$vo.id}">
+            <td class="w48"><input type="checkbox" class="checkitem" name="checkbox">
+            <td class="w48">{$vo.id}
+            <td class="w50pre name"><span title="" class="editable ">{$vo.name}</span></td>
+            <td class="w50pre name"><span title="" class="editable ">{$vo.mobile}</span></td>
+            <td class="w50pre name"><span title="" class="editable ">{$vo.create_time|date='Y-m-d H:i'}</span></td>
+            <td class="w96">
+                <!--<a href="javascript:void(0);" data-shelf-status="{$vo.status}" class="set-shelf-status" style="text-decoration:none" title="{$vo.status==0 ? '开启': '关闭';}"><i class="Hui-iconfont"></i></a>-->
+                <!--<a href="javascript:void(0);" class="edit" style="text-decoration:none" title="编辑"><i class="Hui-iconfont"></i></a>-->
+                <a href="javascript:void(0);" class="del"  style="text-decoration:none" title="删除"><i class="Hui-iconfont"></i></a>
+            </td>
+        </tr>
+        {/volist}
+        </tbody>
+    </table>
+    {else/}
+    <div>没有数据</div>
+    {/notempty}
+</div>
+{$list|raw}
+
+
+

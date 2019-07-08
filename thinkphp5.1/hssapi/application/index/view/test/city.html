@@ -1,0 +1,60 @@
+{extend name="template/base.html" /}
+{block name="title"}城市测试{/block}
+{block name="content"}
+<article class="f24">
+	<div id="province_city_linkage">
+		<!-- 省 -->
+		<select v-model="postData.selectedProvince" @change="updateCity();">
+			<option v-for='province in provinces' :value="province.code">{{province.name}}</option>
+		</select>
+		<!-- 市 -->
+		<select v-model="postData.selectedCity" v-show="cities.length">
+			<option v-for='city in cities' :value="city.code">{{city.name}}</option>
+		</select>
+		<a href="javascript:void(0);" class="next-step step beforehand-register" @click="test">确定</a>
+	</div>
+</article>
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript" src="vue_js/province_city.js"></script>
+<script type="text/javascript">
+	$(function(){
+		new Vue({
+			el: "#province_city_linkage",
+			data: {
+				provinces: provinces, //所有省份
+				cities:[], //被选择的省对应的市数据
+				postData:{
+					selectedProvince: '', //被选择的省
+					selectedCity:'',  //被选择的市
+					selectedCityLevel:''  //被选择的市的级别
+				}
+			},methods: {
+				//更新市数据
+				updateCity:function(){
+					let _this = this;
+					_this.provinces.map(function(item,index){
+						if(item.code == _this.postData.selectedProvince){
+							_this.cities = item.cities;
+						}
+					});
+					if(_this.cities.length){
+						_this.postData.selectedCity = _this.cities[0].code;
+						_this.postData.selectedCityLevel = _this.cities[0].level;
+					}
+				},test:function(){
+					let _this = this;
+					console.log(_this.postData);
+				}
+			},created:function(){
+				let _this = this;
+			}
+		});
+	});
+</script>
+<script type="text/javascript">
+	$(function(){
+	});
+</script>
+{/block}

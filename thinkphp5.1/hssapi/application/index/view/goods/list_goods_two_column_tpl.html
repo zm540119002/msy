@@ -1,0 +1,27 @@
+{notempty name="list"}
+{volist name="list" id="info"}
+<li data-id="{$info.id}">
+    <a href="{:url('Goods/detail',['id'=>$info.id])}">
+        <img src="{:show_img_handle($info.thumb_img)}" alt="">
+    </a>
+    <div class="p_bottom">
+        <p class="text-intro title_name">{$info.headline}</p>
+        <div class="columns_flex l-r-sides">
+            <span class="pink">￥<price>{$info.franchise_price}</price></span>
+        </div>
+    </div>
+</li>
+{/volist}
+{/notempty}
+
+<style>
+</style>
+<script type="text/javascript">
+    $('.add_cart').on('click',function(){
+        var imgUrl = $(this).parent().parent().parent().find("a img").attr("src");
+        var title = $(this).parent().parent().find(".title_name").html();
+        var price = $(this).parent().find("price").html();
+        $('.dialogCart').show();
+			$('.bg').show();
+    })
+</script>

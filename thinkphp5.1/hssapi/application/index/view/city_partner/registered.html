@@ -1,0 +1,267 @@
+{extend name="template/base.html" /}
+{block name="title"}资格申请{/block}
+{block name="content"}
+<link rel="stylesheet" type="text/css"  href="index_js/mobileSelector/css/mpicker.css">
+<!--<link rel="stylesheet" type="text/css" href="index_js/mobileSelector/css/bootstrap-3.3.4.css">-->
+<style type="text/css">
+	/*自定义样式*/
+	body,html{
+		margin: 0;
+		padding: 0;
+	}
+	.mPicker-header,.mPicker-content li,.mPicker-confirm,.mPicker-cancel{
+		font-size: 12px;
+	}
+	body {
+		font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+		font-size: 14px;
+		line-height: 1.42857143;
+		color: #333;
+		background-color: #fff;
+	}
+
+	.slide-wapper {
+		padding:20px;
+		overflow-y: scroll;
+		/* background: #eee; */
+	}
+	.step {
+		width: 100%;
+		margin: 0;
+	}
+
+</style>
+
+<div class="f24">
+    <section class="f20 header_title separation-line">
+		<a href="javascript:void(0);" class="back_prev_page"></a>
+        <h2 class="">黑森森城市合伙人</h2>
+    </section>
+	<section>
+		<div class="columns_flex l-r-sides" style="padding:0.15rem;border-bottom:1px solid #d9d9d9;">
+			<span class="city-list">
+				已授权城市：<span>暂无</span>
+			</span>
+			<span>
+				<a href="{:url('applicationList')}">资格完款任务 ( <span style="color:red;">{$apply_count>99 ? '99+' : $apply_count}</span> ) ></a>
+			</span>
+		</div>
+		<div id="wizard" class="page-bd">
+			<nav class="apply-data-nav">
+				<ul id="status " class="status f24 weui-flex">
+					<li class="weui-flex-item switch-item current"><span class="search_city"></span><em></em>城市查询</li>
+					<li class="weui-flex-item switch-item "><span class="base_info"></span><em></em>登记资料</li>
+					<li class="weui-flex-item switch-item "><span class="base_money"></span><em></em>席位订金</li>
+					<li class="weui-flex-item switch-item"><span class="opening"></span>资格完款</li>
+				</ul>
+			</nav>
+			<div class="apply-data-content">
+				<div class="apply-module">
+					<form class="applicant_form">
+						<div class="express-area">
+							<a href="javascript:void(0)" class="f24 form-group box-flex">
+								<label class="form-label">选择城市：</label>
+						<!--		<div class="area_address">省 &gt; 市 &gt; 区/县</div>-->
+								<input type="text" class="select-value form-control" value="{$info.province_name}-{$info.city_name}" >
+						<!--		<input type="hidden"  data-key="" name="province" value="" class="area-address-name" >
+								<input type="hidden"  data-key="" name="city" value="" class="area-address-name" >-->
+								<input type="hidden"  data-key="" name="province" value="{$info.province_code}">
+								<input type="hidden"  data-key="" name="city" value="{$info.city_code}">
+								<input type="hidden"  data-key="" name="sn" value="{$info.sn}">
+							</a>
+						</div>
+						<div class="content-padding">
+							<p>申请成为黑森森城市合伙人，分享头部皮肤管理事业财富。</p>
+							<p>请先查询拟申请的城市是否有空缺，如有空缺可填写资料，在线支付城市合伙人订金￥5000.00，黑森森城市合伙人资格审核通过后再补交资格余款，如不通过订金将7天内无息退回；通过后资格款项将转存入用户充值账户，用于采购结算专用。</p>
+							<dl>
+								<dt>黑森森城市合伙人资格政策：</dt>
+								<dd>A类市场城市合伙人：按区域位于中国1线城市或2线城市的申请人，其黑森森城市合伙人资格款29.8万元；</dd>
+								<dd>B类市场城市合伙人：按区域位于中国3线城市或4线城市的申请人，其黑森森城市合伙人资格款19.8万元；</dd>
+								<dd>C类市场城市合伙人：按区域位于中国5线城市或5线以下城市的申请人，其黑森森城市合伙人资格款9.8万元。</dd>
+							</dl>
+						</div>
+						<a href="javascript:void(0);" class="step search-city">查询</a>
+					</form>
+
+				</div>
+				<div class="apply-module hide">
+					<form class="applicant_form">
+                        <div class="apply-items">
+							<input type="text" class="company_name" name="company_name" value="{$info.company_name}" placeholder="企业名称">
+						</div>
+						<div class="apply-items">
+							<input type="text" class="applicant" name="applicant" value="{$info.applicant}" placeholder="姓名">
+						</div>
+						<div class="apply-items">
+							<input type="tel" class="mobile" name="mobile" value="{$info.mobile}" placeholder="手机号码">
+						</div>
+						<a href="javascript:void(0);" class="one-step step">下一步</a>
+					</form>
+				</div>
+				<div class="apply-module hide">
+					<div>
+                        <div>
+							<p>城市名称：<span class="city_name">{$info.city_name}</span></p>
+							<p>城市级别分类：<span class="city_level">{$info.city_level}</span><span>线城市</span></p>
+							<p>合伙人级别：<span class="market_name">{$info.market_name}</span><span>类市场城市合伙人</span></p>
+							<p>合伙人资格款：<span class="amount">￥<price>{$info.amount}</price></span>
+							<p>申请席位订金：<span class="earnest">￥<price>{$info.earnest}</price></span></p>
+						</div>
+                        <dl>
+                            <dt>说明：</dt>
+                            <dd>1、如签约成功订金转为城市合伙人充值款项，待补齐城市合伙人资格余款后正式签约成为黑森森城市合伙人；</dd>
+                            <dd>2、如在咨询申请期所申请的城市合伙人已被他人签约，其交付的席位订金将于发出无法签约通知之日起7天内无息退回；</dd>
+                            <dd>3、黑森森城市合伙人资格款项将转存入合伙人充值账户，用于采购结算专用。</dd>
+                        </dl>
+                        <footer class="f24 group_cart_nav">
+                            <div class="group_btn50 bottom_item">
+                                <span class="earnest">￥<price>{$info.earnest}</price></span>
+                            </div>
+                            <div class="group_btn50 bottom_item">
+                                <a href="javascript:void(0);" class="recharge_money">支付席位订金<span class="total_num"></span></a>
+                            </div>
+                        </footer>
+						<!--<a href="javascript:void(0);" class="two-step step">提交申请</a>-->
+					</div>
+				</div>
+				<div class="apply-module hide">
+					{if $info['apply_status'] == 3}
+					<div style="text-align: center;">待审核</div>
+					{else if $info['apply_status'] == 4}
+					<div class="columns_flex l-r-sides">
+						<div>
+							<p>城市名称：<span class="apply_city">{$info.city_name}</span></p>
+							<p>城市级别分类：<span class="city_level">{$info.city_level}线城市</span></p>
+							<p>合伙人级别：<span class="">{$info.market_name}类市场城市合伙人</span></p>
+							<p>合伙人资格款：<span>¥{$info['amount']}</span></p>
+							<p>已交席位订金：<span>¥{$info['earnest']}</span></p>
+							<p>需补交资格余款：<span>¥{$info['amount']-$info['earnest']}</span></p>
+						</div>
+						<div>
+							<p class="friday_end">支付倒计时</p>
+							<div id="countDownBox" class="count_down_box">
+								<!--<span class="day"></span>天-->
+								<span class="hour"></span>:
+								<span class="minute"></span>:
+								<span class="second"></span>
+							</div>
+						</div>
+					</div>
+					<dl>
+						<dt>说明：</dt>
+						<dd>1、补齐城市合伙人资格余款后正式签约为黑森森城市合伙人；</dd>
+						<dd>2、在规定7天期限内未能补齐资格余款，保留的城市资格将被释放出来，将可能导致所申请的城市合伙人被他人签约，原先缴纳的席位订金可于发出无法签约通知之日起7天内无息退回；</dd>
+						<dd>3、黑森森城市合伙人资格款项将转存入用户充值账户，用于采购结算专用。</dd>
+					</dl>
+					<footer class="f24 group_cart_nav">
+						<div class="group_btn50 bottom_item">
+							<span class="amount">￥<price>{$info['amount']-$info['earnest']}</price></span>
+						</div>
+						<div class="group_btn50 bottom_item">
+							<a href="javascript:void(0);" class="recharge_money">补齐资格款<span class="total_num"></span></a>
+						</div>
+					</footer>
+					{/if}
+
+				</div> 
+			</div>
+		</div>
+	</section>
+</div>
+<!--遮罩层-->
+<div id="areaMask" class="address_mask"></div>
+{include file="template/apply_settlement_method.html" /}
+{/block}
+{block name="common"}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript" >
+	var info = "{$info}";
+	if(info){
+		info = JSON.parse('{$info|raw}');
+		//var time = "{$info.update_time|raw}";
+	}
+
+</script>
+<script type="text/javascript" src="api_common_js/swipe.js"></script>
+<!--<script type="text/javascript" src="public_js/jquery.area.js"></script>-->
+<script type="text/javascript" src="index_js/cityPartner1.js"></script>
+
+<script src="index_js/mobileSelector/js/json2.js?v={:time();}"></script>
+<script src="index_js/mobileSelector/js/jsonExchange.js"></script>
+<script src="index_js/mobileSelector/js/mPicker.js"></script>
+<script type="text/javascript">
+	$(function() {
+
+		/**
+		 * 联动的picker--添加修改后修改数据的效果
+		 * 两级
+		 */
+		$('.express-area .select-value').mPicker({
+			level: 2,
+			dataJson: dataJson,
+			Linkage: true,
+			rows: 6,
+			idDefault: true,
+			splitStr: '-',
+			header:'<div class="mPicker-header">城市选择</div>',
+			param: ['level','class','amount','earnest'],
+			confirm: function (json) {
+
+				area = json.values.split('-');
+				$('input[name="province"]').val(area[0]);
+				$('input[name="city"]').val(area[1]);
+				var select = $('.select-value');
+
+				// 记录选中的城市
+				var cityPartner = {province:area[0],city:area[1],area_address:select.val()};
+				localStorage.setItem('cityPartner',JSON.stringify(cityPartner));
+
+				val = select.val().split('-');
+
+				$('.city_name').html(val[1]);
+				$('.city_level').html(select.data('level2'));
+				$('.market_name').html(select.data('class2'));
+				$('.amount').find('price').html(select.data('amount2'));
+				$('.earnest').find('price').html(select.data('earnest2'));
+
+			},
+			cancel: function (json) {
+			}
+		});
+
+
+		// 已授权城市列表
+		$(document).ready(function() {
+			var city_list = '{:json_encode($auth_city)}';
+			city_list = JSON.parse(city_list);
+
+			if(!$.isEmptyObject(city_list)){
+
+				var city_str = '';
+				$.each(city_list, function(index, value) {
+					city_str += value.city_name+' ';
+				});
+
+				if(city_str.length>8){
+					value = '<span class="selectedcity">查看更多</span>';
+
+					$('body').on('click','.selectedcity',function(){
+						layer.open({
+							content: city_str
+							,skin  : 'footer'
+						});
+					})
+
+				}else{
+					value = city_str;
+				}
+
+				$(".city-list span").html(value);
+			}
+
+		});
+	});
+</script>
+{/block} 
