@@ -3,8 +3,6 @@ namespace app\index\controller;
 class Address extends \common\controller\UserBase {
     //增加修改地址页面
     public function edit(){
-        $data = input('post.');
-        p($data);exit;
         $model = new \common\model\Address();
         $model->useGlobalScope(false)->select();
         $userId = $this->user['id'];
