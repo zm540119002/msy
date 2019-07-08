@@ -7,11 +7,8 @@ class Address extends \common\controller\UserBase {
         $model->useGlobalScope(false)->select();
         $userId = $this->user['id'];
         if(request()->isPost()){
-            echo 11;
             $data = input('post.');
-            p($data);exit;
             if(input('?post.address_id') && !empty(input('post.address_id')) ){
-                p($data);exit;
                 //开启事务
                 $model -> startTrans();
                 //修改
@@ -115,7 +112,6 @@ class Address extends \common\controller\UserBase {
         ];
         $addressList = $model -> getList($config);*/
         $addressList = $model -> getList();
-        p($addressList);exit;
         $this->assign('addressList',$addressList);
         $unlockingFooterCart = unlockingFooterCartConfig([8]);
         $this->assign('unlockingFooterCart', $unlockingFooterCart);
