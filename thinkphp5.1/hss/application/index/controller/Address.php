@@ -8,6 +8,7 @@ class Address extends \common\controller\UserBase {
         $model->useGlobalScope(false)->select();
         $userId = $this->user['id'];
         if(request()->isPost()){
+            echo 11;
             $data = input('post.');
             p($data);exit;
             if(input('?post.address_id') && !empty(input('post.address_id')) ){
