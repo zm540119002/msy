@@ -8,9 +8,10 @@ class Address extends \common\controller\UserBase {
         $userId = $this->user['id'];
         if(request()->isPost()){
             $data = input('post.');
-            p($data);exit;
+            p($data);
             if(input('?post.address_id') && !empty(input('post.address_id')) ){
                 //开启事务
+                p($data);exit;
                 $model -> startTrans();
                 //修改
                 $addressId = input('post.address_id');
