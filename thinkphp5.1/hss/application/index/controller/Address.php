@@ -18,8 +18,8 @@ class Address extends \common\controller\UserBase {
                     ['id','=',$addressId],
                     ['user_id','=',$userId],
                 ];
-                $result = $model -> edit($data,$condition);
-                if( !$result['status'] ){
+                $id = $model -> edit($data,$condition);
+                if( !$id ){
                     $model ->rollback();
                     return errorMsg('失败');
                 }
@@ -48,19 +48,18 @@ class Address extends \common\controller\UserBase {
                         ['user_id','=',$userId]
                     ],
                 ];
-                $addressList = $model -> getList($config);
-                $addressList = $model -> getList();
-                if(empty($addressList)){
+                $addressCount = $model -> where($config['where'])->count('id');
+                if(!$addressCount){
                     $data['is_default'] = 1;
                 }
                 //开启事务
                 $model -> startTrans();
                 $data['user_id'] = $userId;
-                $result = $model->edit($data);
-                if(!$result['status']){
+                $id = $model->edit($data);
+                if(!$id){
                     return errorMsg('失败');
                 }
-                $addressId = $result['id'];
+                $addressId = $id;
                 //修改其他地址不为默认值
                 if($_POST['is_default'] == 1){
                     $where = [
