@@ -104,14 +104,14 @@ class Address extends \common\controller\UserBase {
     //地址列表
     public function manage(){
         $model = new \common\model\Address();
-/*        $config = [
+        $config = [
             'where'=>[
                 ['status','=',0],
                 ['user_id','=',$this->user['id']]
             ],
         ];
-        $addressList = $model -> getList($config);*/
-        $addressList = $model -> getList();
+        $addressList = $model -> getList($config);
+//        $addressList = $model -> getList();
         $this->assign('addressList',$addressList);
         $unlockingFooterCart = unlockingFooterCartConfig([8]);
         $this->assign('unlockingFooterCart', $unlockingFooterCart);
@@ -139,27 +139,6 @@ class Address extends \common\controller\UserBase {
         }
 
     }
-
-//    /**
-//     * 获取地址列表  弹窗
-//     */
-//    public function popGetList(){
-//
-//        $model= new \common\model\Address();
-//
-//        $condition = [
-//            'field' => [
-//                'id','consignee','detail_address','tel_phone','mobile','is_default','status','province','city','area'
-//            ]
-//        ];
-//
-//        $data = $model->getList($condition);
-//
-//        $this->assign('addressList',$data);
-//
-//        return view('pop_list');
-//        //echo  $this->fetch('pop_list');
-//    }
 
 
 }
