@@ -11,7 +11,6 @@ class Address extends \common\controller\UserBase {
             p($data);
             if(input('?post.address_id') && !empty(input('post.address_id')) ){
                 //开启事务
-                p($data);exit;
                 $model -> startTrans();
                 //修改
                 $addressId = input('post.address_id');
@@ -21,6 +20,7 @@ class Address extends \common\controller\UserBase {
                     ['user_id','=',$userId],
                 ];
                 $id = $model -> edit($data,$condition);
+                echo $id;exit;
                 if( !$id ){
                     $model ->rollback();
                     return errorMsg('失败');
