@@ -5,6 +5,7 @@ class UserCenter extends \think\Controller{
      */
     public function login(){
         if (request()->isPost()) {
+            return 235;
             $modelUser = new \common\model\UserCenter();
             $postData = input('post.');
             $res = $modelUser->login($postData);
@@ -14,6 +15,7 @@ class UserCenter extends \think\Controller{
                 $this->successMsg('登录成功！',config('code.success.login'));
             }
         }
+        return 123;
     }
     /**后台登录
      */
