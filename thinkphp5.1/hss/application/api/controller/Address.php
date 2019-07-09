@@ -1,6 +1,6 @@
 <?php
 namespace app\api\controller;
-class Address extends \common\controller\UserBase {
+class Address extends \common\controller\Base {
     //增加修改地址页面
     public function edit(){
         if(!request()->isPost()){
@@ -86,6 +86,7 @@ class Address extends \common\controller\UserBase {
     //获取
     public function getList()
     {
+        return 123;
         $model = new \common\model\Address();
         $config = [
             'where'=>[
