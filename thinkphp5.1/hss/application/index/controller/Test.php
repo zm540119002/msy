@@ -11,6 +11,7 @@ class Test extends HssBase{
     public function index(){
         $a =  strtolower(request()->module() . '/' . request()->controller() . '/' . request()->action());
         if(request()->isAjax()){
+            return $_POST;
         }else{
             return $this->fetch();
         }
