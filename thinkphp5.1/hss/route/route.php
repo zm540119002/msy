@@ -16,3 +16,4 @@ Route::get('think', function () {
 return [
 
 ];
+
