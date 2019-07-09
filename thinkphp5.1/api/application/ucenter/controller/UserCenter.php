@@ -11,6 +11,7 @@ class UserCenter extends \think\Controller{
             if($res['status']==0){
                 $this->errorMsg($res['info']);
             }else{
+                return 123;
                 $this->successMsg('登录成功！',config('code.success.login'));
             }
         }
