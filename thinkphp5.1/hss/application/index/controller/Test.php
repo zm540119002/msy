@@ -9,13 +9,12 @@ class Test extends HssBase{
     /**首页
      */
     public function index(){
-        return '123';
         if(request()->isAjax()){
-
             return '123';
         }else{
             return $this->fetch();
         }
+        return '456';
     }
     /**测试
      */
