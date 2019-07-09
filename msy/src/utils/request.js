@@ -4,8 +4,8 @@ import { Message } from 'element-ui'
 // import store from '../../node_modules/@/store'
 // import { getStore } from '../../node_modules/@/utils'
 
-const baseURL = process.env.NODE_ENV === 'development' ? '/apis' : process.env.BASE_API
-console.log(process.env);
+// const baseURL = process.env.NODE_ENV === 'development' ? '/apis' : process.env.BASE_API
+const baseURL = "https://hss.meishangyun.com"
 const service = axios.create({
   baseURL,
   timeout: 15 * 1000
