@@ -86,7 +86,6 @@ class Address extends \common\controller\Base {
     //获取
     public function getList()
     {
-        return 123;
         $model = new \common\model\Address();
         $config = [
             'where'=>[
@@ -97,7 +96,7 @@ class Address extends \common\controller\Base {
             ]
         ];
         $addressList = $model -> getList($config);
-        return $addressList;
+        return json_encode($addressList);
 
     }
     //删除地址
