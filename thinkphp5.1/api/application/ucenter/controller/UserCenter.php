@@ -14,6 +14,7 @@ class UserCenter extends \think\Controller{
                 $this->successMsg('登录成功！',config('code.success.login'));
             }
         }
+        return 123;
     }
     /**后台登录
      */
