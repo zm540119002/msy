@@ -12,9 +12,9 @@ class Test extends HssBase{
         if(request()->isAjax()){
             return '123';
         }else{
+            return '456';
             return $this->fetch();
         }
-        return '456';
     }
     /**测试
      */
