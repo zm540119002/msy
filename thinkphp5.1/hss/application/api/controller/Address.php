@@ -87,15 +87,15 @@ class Address extends \common\controller\Base {
     public function getList()
     {
         $model = new \common\model\Address();
-        $config = [
-            'where'=>[
-//                ['status','=',0],
-//                ['user_id','=',$this->user['id']]
-            ],'field' => [
-                'id','consignee','detail_address','tel_phone','mobile','is_default','status','province','city','area'
-            ]
-        ];
-        $addressList = $model -> getList($config);
+//        $config = [
+//            'where'=>[
+////                ['status','=',0],
+////                ['user_id','=',$this->user['id']]
+//            ],'field' => [
+//                'id','consignee','detail_address','tel_phone','mobile','is_default','status','province','city','area'
+//            ]
+//        ];
+        $addressList = $model -> getList();
         echo $model->getLastSql();
         print_r($addressList);
         return json_encode($addressList);
