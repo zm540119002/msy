@@ -1,10 +1,11 @@
-import axios from '../../node_modules/axios'
-import { Message } from '../../node_modules/element-ui'
+import axios from 'axios'
+import { Message } from 'element-ui'
 
 // import store from '../../node_modules/@/store'
 // import { getStore } from '../../node_modules/@/utils'
 
 const baseURL = process.env.NODE_ENV === 'development' ? '/apis' : process.env.BASE_API
+console.log(process.env);
 const service = axios.create({
   baseURL,
   timeout: 15 * 1000
