@@ -9,9 +9,10 @@ class Test extends HssBase{
     /**首页
      */
     public function index(){
-        $a =  strtolower(request()->module() . '/' . request()->controller() . '/' . request()->action());
-        return $a;
+
         if(request()->isAjax()){
+            $a =  strtolower(request()->module() . '/' . request()->controller() . '/' . request()->action());
+            return $a;
         }else{
             return $this->fetch();
         }
