@@ -90,7 +90,7 @@ class Address extends \common\controller\UserBase {
         $config = [
             'where'=>[
                 ['status','=',0],
-                ['user_id','=',$this->user['id']]
+//                ['user_id','=',$this->user['id']]
             ],'field' => [
                 'id','consignee','detail_address','tel_phone','mobile','is_default','status','province','city','area'
             ]
