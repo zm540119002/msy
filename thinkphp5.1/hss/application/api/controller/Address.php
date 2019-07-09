@@ -1,6 +1,6 @@
 <?php
 namespace app\api\controller;
-class Address extends \common\controller\UserBase {
+class Address extends \common\controller\Base {
     //增加修改地址页面
     public function edit(){
         if(!request()->isPost()){
@@ -89,14 +89,15 @@ class Address extends \common\controller\UserBase {
         $model = new \common\model\Address();
         $config = [
             'where'=>[
-                ['status','=',0],
-                ['user_id','=',$this->user['id']]
+//                ['status','=',0],
+//                ['user_id','=',$this->user['id']]
             ],'field' => [
                 'id','consignee','detail_address','tel_phone','mobile','is_default','status','province','city','area'
             ]
         ];
         $addressList = $model -> getList($config);
-        return $addressList;
+        print_r($addressList);
+        return json_encode($addressList);
 
     }
     //删除地址
