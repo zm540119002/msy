@@ -11,7 +11,7 @@ class Test extends HssBase{
      */
     public function index(){
 
-        if(Request::isAjax()){
+        if($request->isAjax()){
             $a =  strtolower(request()->module() . '/' . request()->controller() . '/' . request()->action());
             return $a;
         }else{
