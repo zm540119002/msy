@@ -12,6 +12,7 @@
 Route::get('think', function () {
     return 'hello,ThinkPHP555555555555555555555555!';
 });
+Route::post('new/:id','api/Test/index');
 
 return [
 
