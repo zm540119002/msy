@@ -15,6 +15,7 @@ class Test extends HssBase{
             $a =  strtolower(request()->module() . '/' . request()->controller() . '/' . request()->action());
             return $a;
         }else{
+            return 5;
             return $this->fetch();
         }
     }
