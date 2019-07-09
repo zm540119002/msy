@@ -3,14 +3,14 @@
     <div class="content">
       <div class="nav">
         <div><img src="../../static/images/index_top.png" alt=""></div>
-        <div><input type="text" placeholder="搜索消息、小视频、视频或文章"></div>
+        <div @click="search"><input type="text" placeholder="搜索消息、小视频、视频或文章"></div>
         <div><span class="mui-icon mui-icon-chat"></span></div>
         <div><span class="mui-icon mui-icon-camera"></span></div>
       </div>
       <div class="top_img"><img src="../../static/images/home-banner1.jpg"></div>
       <!-- icon -->
       <div class="icon">
-        <div><a href=""></a><span>入驻管理</span></div>
+        <div><a href="javascript:;"></a><span>入驻管理</span></div>
         <div><a href=""></a><span>商家云店</span></div>
         <div><a href=""></a><span>老板直聘</span></div>
         <div><a href=""></a><span>美尚课堂</span></div>
@@ -24,7 +24,32 @@
               <div>推荐关注</div>
               <div>换一批></div>
             </div>
-            <div>content</div>
+            <div class="content1">
+              <div>
+                <div></div>
+                <div>标题标题</div>
+                <div>详情详情</div>
+                <div>+关注</div>
+              </div>
+              <div>
+                <div></div>
+                <div>标题标题</div>
+                <div>详情详情</div>
+                <div>+关注</div>
+              </div>
+              <div>
+                <div></div>
+                <div>标题标题</div>
+                <div>详情详情</div>
+                <div>+关注</div>
+              </div>
+              <div>
+                <div></div>
+                <div>标题标题</div>
+                <div>详情详情</div>
+                <div>+关注</div>
+              </div>
+            </div>
           </van-tab>
           <van-tab title="XX">XX</van-tab>
           <van-tab title="XX">XX</van-tab>
@@ -33,6 +58,54 @@
           <van-tab title="XX">XX</van-tab>
         </van-tabs>
       </div>
+      <div class="details">
+        <div class="top">
+          <div class="left"></div>
+          <div class="center">
+            <div>标题标题标题标题</div>
+            <div>详情详情</div>
+          </div>
+          <div class="right">
+            <div>关注</div>
+            <div>1000人</div>
+          </div>
+        </div>
+        <div class="wenzi">
+          文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字
+        </div>
+        <div class="img">
+          <div><img src="../../static/images/pro1.png" alt=""></div>
+          <div><img src="../../static/images/pro1.png" alt=""></div>
+          <div><img src="../../static/images/pro1.png" alt=""></div>
+          <div><img src="../../static/images/pro1.png" alt=""></div>
+          <div><img src="../../static/images/pro1.png" alt=""></div>
+          <div><img src="../../static/images/pro1.png" alt=""></div>
+        </div>
+      </div> 
+       <div class="details">
+        <div class="top">
+          <div class="left"></div>
+          <div class="center">
+            <div>标题标题标题标题</div>
+            <div>详情详情</div>
+          </div>
+          <div class="right">
+            <div>关注</div>
+            <div>1000人</div>
+          </div>
+        </div>
+        <div class="wenzi">
+          文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字
+        </div>
+        <div class="img">
+          <div><img src="../../static/images/pro1.png" alt=""></div>
+          <div><img src="../../static/images/pro1.png" alt=""></div>
+          <div><img src="../../static/images/pro1.png" alt=""></div>
+          <div><img src="../../static/images/pro1.png" alt=""></div>
+          <div><img src="../../static/images/pro1.png" alt=""></div>
+          <div><img src="../../static/images/pro1.png" alt=""></div>
+        </div>
+      </div> 
     </div>
     <Tabbar/>
   </div>
@@ -51,14 +124,22 @@ export default {
     return {
       active: 1
     };
-  }
+  },
+   methods:{
+     search(){
+        this.$router.push({
+        name: "Search"
+      });
+     }
+   }
 }
 </script>
 <style lang="less" scoped>
   .content{
     width: 100%;
-    height: 100%;
+    height: auto;
     position: relative;
+    margin-bottom: 100px;
     .top_img img{
       width: 100%;
     }
@@ -73,7 +154,7 @@ export default {
       border-bottom: 6px solid #f2f2f2;
        div{
          text-align: center;
-                flex: 1;
+         flex: 1;
         a{
           margin: 0 auto 0.05rem;
           display: block;
@@ -103,7 +184,7 @@ export default {
 
     .nav{
       width: 100%;
-      position: fixed;
+      position: absolute;
       top:0;
       padding: 0.16rem;
       display: flex;
@@ -132,16 +213,119 @@ export default {
       }    
     }
     .wel{
-      height: 200px;
-      background: #fff;
+      height: auto;
+      margin-bottom: 10px;
+      .van-hairline--top-bottom{
+        background: red;
+      }
       .van-tab__pane{
-        padding: 0 0.25rem;
+        padding: 0 0.25rem;      
         .recommend{
          display: flex;
          justify-content: space-between;
          padding: 0.2rem 0;
+         div:nth-of-type(1){
+           color: #999
+         }
+         div:nth-of-type(2){
+           color: #595757
+         }
+        }
+        .content1{
+          display: flex;
+          >div{
+            border: 1px solid #ccc;
+            flex: 1;
+            margin-right: 6px;
+            border-radius: 4px;
+            text-align: center;
+            padding: 10px 0;
+            >div:nth-of-type(1){
+              background: #ccc;
+              width: 1.2rem;
+              height: 1.2rem;
+              margin: 0 auto;
+              border-radius: 50%;
+              background-image: url(../../static/images/11.png)
+            }
+            >div:nth-of-type(2){
+              margin: 6px 0 2px;
+            }
+            >div:nth-of-type(3){
+             color: #999;
+            }
+            >div:nth-of-type(4){
+             border: 1px solid #ccc;
+             width: 60%;
+             margin: 0 auto;
+             border-radius: 6px;
+             color: red;
+            }
+          }
+          div:nth-of-type(4){
+            margin-right: 0;
+            
+          }
         }
       }
     }
+    .details{
+      border-top: 1px solid #eee;
+      margin-bottom: 0.3rem;
+      padding: 0 0.25rem;
+      .top{
+        display: flex;
+        padding-top: 0.2rem;
+        .left{
+          width: 1.2rem;
+          height: 1.2rem;
+          border-radius: 50%;
+          background: #999;
+          margin-right: 0.3rem;
+          background-image: url(../../static/images/11.png)
+        }
+        .center{
+          flex: 1;
+          div:nth-of-type(2){
+            color: #ccc;
+          }
+        }
+        .right{
+          text-align: center;
+          div:nth-of-type(1){
+            padding: 0.06rem 0.4rem;
+            background: red;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            margin-bottom: 0.06rem;
+          }
+        }
+      }
+      .wenzi{
+        margin-top: 0.2rem;
+      }
+      .img{
+          display: flex;
+          flex-direction: row;
+          flex-wrap:wrap;
+          margin-top: 0.2rem;
+        div{
+          width: 32%;
+          margin-right: 2%;
+          img{
+            width: 100%;
+            
+          }
+        }
+        div:nth-of-type(3n){
+          margin-right: 0;
+        }
+        div:nth-of-type(-n+3){
+          margin-bottom: 2%;
+        }
+      }
+    }
+   
   }
 </style>
