@@ -96,6 +96,7 @@ class Address extends \common\controller\Base {
             ]
         ];
         $addressList = $model -> getList($config);
+        p($addressList);
         return json_encode($addressList);
 
     }
