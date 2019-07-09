@@ -34,6 +34,11 @@ export default new Router({
       path: '/search',
       name: 'Search',
       component: () => import(/* webpackChunkName: "search" */ './views/Search.vue')
+    },
+    {
+      path: '/creatorspace',
+      name: 'Creatorspace',
+      component: () => import(/* webpackChunkName: "search" */ './views/Creatorspace.vue')
     }
   ]
 })
