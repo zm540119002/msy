@@ -26,7 +26,7 @@
             </div>
             <div class="content1">
               <div>
-                <div></div>
+                <div  @click="clickspace"></div>
                 <div>标题标题</div>
                 <div>详情详情</div>
                 <div>+关注</div>
@@ -58,54 +58,20 @@
           <van-tab title="XX">XX</van-tab>
         </van-tabs>
       </div>
-      <div class="details">
+     <List1/>
+     <List/>
+      <div  class="video">
         <div class="top">
-          <div class="left"></div>
-          <div class="center">
-            <div>标题标题标题标题</div>
-            <div>详情详情</div>
-          </div>
-          <div class="right">
-            <div>关注</div>
-            <div>1000人</div>
-          </div>
+          <div>精彩小视频></div>
+          <div>小视频分类标签></div>
         </div>
-        <div class="wenzi">
-          文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字
-        </div>
-        <div class="img">
-          <div><img src="../../static/images/pro1.png" alt=""></div>
-          <div><img src="../../static/images/pro1.png" alt=""></div>
-          <div><img src="../../static/images/pro1.png" alt=""></div>
-          <div><img src="../../static/images/pro1.png" alt=""></div>
-          <div><img src="../../static/images/pro1.png" alt=""></div>
-          <div><img src="../../static/images/pro1.png" alt=""></div>
-        </div>
-      </div> 
-       <div class="details">
-        <div class="top">
-          <div class="left"></div>
-          <div class="center">
-            <div>标题标题标题标题</div>
-            <div>详情详情</div>
-          </div>
-          <div class="right">
-            <div>关注</div>
-            <div>1000人</div>
-          </div>
-        </div>
-        <div class="wenzi">
-          文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字
-        </div>
-        <div class="img">
-          <div><img src="../../static/images/pro1.png" alt=""></div>
-          <div><img src="../../static/images/pro1.png" alt=""></div>
-          <div><img src="../../static/images/pro1.png" alt=""></div>
-          <div><img src="../../static/images/pro1.png" alt=""></div>
-          <div><img src="../../static/images/pro1.png" alt=""></div>
-          <div><img src="../../static/images/pro1.png" alt=""></div>
-        </div>
-      </div> 
+        <van-swipe :loop="false" :width="300">
+          <van-swipe-item><img src="../../static/images/video1.png" alt=""></van-swipe-item>
+          <van-swipe-item><img src="../../static/images/video1.png" alt=""></van-swipe-item>
+          <van-swipe-item><img src="../../static/images/video1.png" alt=""></van-swipe-item>
+          <van-swipe-item><img src="../../static/images/video1.png" alt=""></van-swipe-item>
+        </van-swipe>
+      </div>
     </div>
     <Tabbar/>
   </div>
@@ -114,11 +80,15 @@
 <script>
 // @ is an alias to /src
 import Tabbar from '@/components/Tabbar.vue'
+import List1 from '@/components/List1.vue'
+import List from '@/components/List.vue'
 
 export default {
   name: 'home',
   components: {
-    Tabbar
+    Tabbar,
+    List1,
+    List
   },
    data() {
     return {
@@ -129,8 +99,13 @@ export default {
      search(){
         this.$router.push({
         name: "Search"
-      });
-     }
+      })
+     },
+     clickspace(){
+       this.$router.push({
+         name:"Creatorspace"
+       })
+      }
    }
 }
 </script>
@@ -326,6 +301,12 @@ export default {
         }
       }
     }
-   
+    .video{
+      padding: 0 0.25rem;
+      .top{
+        display: flex;
+        justify-content: space-between;
+      }
+    } 
   }
 </style>

@@ -24,7 +24,7 @@ export function saveGoodsImageList (goodsId, images, imgDelIds) {
 // post请求
 export function saveGood (data) {
   return request({
-    url: '/goodsManage/tGoodsImagesRelsOPerate.int.do',
+    url: '/Test/index',
     method: 'post',
     data
   })
