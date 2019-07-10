@@ -19,7 +19,7 @@ service.interceptors.request.use(
     //   config.headers.Authorization = getStore('token')
     //   config.headers.Token = getStore('token')
     // }
-    // config.headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8'
+    config.headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8'
     // config.headers['Content-Type'] = 'multipart/form-data'
     // config.headers['Content-Type'] = 'application/json'
     return config
