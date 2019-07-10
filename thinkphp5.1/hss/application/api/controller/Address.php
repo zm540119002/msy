@@ -39,7 +39,6 @@ class Address extends \common\controller\Base {
                 }
             }
             $model->commit();
-            $data['id'] = $addressId;
             print_r($data);
         }else{
             //增加
