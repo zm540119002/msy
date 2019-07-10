@@ -10,7 +10,7 @@ class Test extends HssBase{
      */
     public function index(){
 //        return json_encode(input('post.'));
-        if(request()->isPost()){
+        if(request()->isAjax()){
             return 123;
         }else{
             return 456;
