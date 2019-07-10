@@ -14,11 +14,11 @@ class Test extends HssBase{
             "age" => 13
         );
 //        return json_encode($data);
-        $request_body = file_get_contents('php://input');
-        return ($request_body);
-        exit;
-        return $data = json_decode($request_body, true);
-        exit;
+//        $request_body = file_get_contents('php://input');
+//        return ($request_body);
+//        exit;
+//        return $data = json_decode($request_body, true);
+//        exit;
         return json_encode($_POST);
         if(request()->isAjax()){
         }else{
