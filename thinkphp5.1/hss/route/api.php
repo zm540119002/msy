@@ -6,4 +6,4 @@
  * Time: 9:41
  */
 
-Route::post('api/test/index','api/test/index');
+//Route::post('api/test/index','api/test/index');
