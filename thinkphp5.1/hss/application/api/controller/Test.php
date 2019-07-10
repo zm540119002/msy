@@ -6,7 +6,7 @@ use think\Console;
 use think\Request;
 use common\component\jwt\JWT;
 
-class Test extends HssBase{
+class Test extends \common\model\Base {
     /**首页
      */
     public function index(){
