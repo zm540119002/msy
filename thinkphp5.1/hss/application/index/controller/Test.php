@@ -9,10 +9,12 @@ class Test extends HssBase{
     /**首页
      */
     public function index(){
+        $postData = input('post.');
+        $postData = $_POST;
         if(request()->isPost()){
-            return json_encode(input('post.'));
+            return json_encode($postData);
         }else{
-            return json_encode(input('get.'));
+            return json_encode($postData);
         }
     }
     /**测试
