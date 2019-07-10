@@ -9,6 +9,7 @@ class Address extends \common\controller\Base {
         $model = new \common\model\Address();
         $userId = 16;
         $data = input('post.');
+        return $data;
         if(input('?post.id') && !empty(input('post.id')) ){
             //开启事务
             $model -> startTrans();
