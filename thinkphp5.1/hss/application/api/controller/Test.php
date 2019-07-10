@@ -10,15 +10,17 @@ class Test extends \common\model\Base {
     /**首页
      */
     public function index(){
-        if(request()->isPost()){
-            return 236;
+
+        $request = Request::instance();
+        if ($request -> isGet()) {
+            echo "是get方法！";
+            $postData = input('get.');
+            return json_encode($postData);
+        }
+        if ($request -> isPost()) {
+            echo "是post方法！";
             $postData = input('post.');
             return json_encode($postData);
-            $a =  strtolower(request()->module() . '/' . request()->controller() . '/' . request()->action());
-            return $a;
-        }else{
-            return 254;
-            return $this->fetch();
         }
     }
     /**测试
