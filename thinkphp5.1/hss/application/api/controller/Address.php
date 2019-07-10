@@ -38,7 +38,7 @@ class Address extends \common\controller\Base {
                 }
             }
             $model->commit();
-            print_r($data);
+            return '修改';
         }else{
             //增加
             $config = [
@@ -83,6 +83,9 @@ class Address extends \common\controller\Base {
     //获取
     public function getList()
     {
+        if(!request()->isGet()){
+            return errorMsg(config('custom.not_ajax'));
+        }
         $model = new \common\model\Address();
         $config = [
             'where'=>[
@@ -96,9 +99,30 @@ class Address extends \common\controller\Base {
         return json_encode($list);
 
     }
+    //获取
+    public function getInfo()
+    {
+        if(!request()->isGet()){
+            return errorMsg(config('custom.not_ajax'));
+        }
+        $model = new \common\model\Address();
+        $id = input('get.id',0,'int');
+        $config = [
+            'where'=>[
+                ['status','=',0],
+                ['user_id','=',16],
+                ['id','=',$id],
+            ],'field' => [
+                'id','consignee','detail_address','tel_phone','mobile','is_default','status','province','city','area'
+            ]
+        ];
+        $info = $model -> getInfo($config);
+        return json_encode($info);
+
+    }
     //删除地址
     public function del(){
-        if(!request()->isAjax()){
+        if(!request()->isPost()){
             return errorMsg(config('custom.not_ajax'));
         }
         $id = input('post.id',0,'int');
@@ -109,9 +133,9 @@ class Address extends \common\controller\Base {
         $result = $model -> del($condition);
 
         if($result['status']){
-            return successMsg('删除成功');
+            return '删除成功';
         }else{
-            return errorMsg('删除失败');
+            return '删除失败';
         }
 
     }

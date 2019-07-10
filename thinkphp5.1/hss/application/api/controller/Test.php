@@ -6,11 +6,14 @@ use think\Console;
 use think\Request;
 use common\component\jwt\JWT;
 
-class Test extends HssBase{
+class Test extends \common\model\Base {
     /**首页
      */
     public function index(){
         if(request()->isPost()){
+            return 236;
+            $postData = input('post.');
+            return json_encode($postData);
             $a =  strtolower(request()->module() . '/' . request()->controller() . '/' . request()->action());
             return $a;
         }else{
