@@ -1,41 +1,33 @@
 <template>
    <div class="details">
-        <div class="top">
-          <div class="left"></div>
-          <div class="center">
-            <div>标题标题标题标题</div>
-            <div>详情详情</div>
-          </div>
-          <div class="right">
-            <div>关注</div>
-            <div>2000人</div>
-          </div>
-        </div>
+        <Userinfo />
         <div class="wenzi">
           文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字
         </div>
         <div class="img">
-          <div><img src="../../static/images/pro1.png" alt=""></div>
-          <div><img src="../../static/images/pro1.png" alt=""></div>
-          <div><img src="../../static/images/pro1.png" alt=""></div>
-          <div><img src="../../static/images/pro1.png" alt=""></div>
-          <div><img src="../../static/images/pro1.png" alt=""></div>
-          <div><img src="../../static/images/pro1.png" alt=""></div>
+          <div><img src="../../../static/images/pro1.png" alt=""></div>
+          <div><img src="../../../static/images/pro1.png" alt=""></div>
+          <div><img src="../../../static/images/pro1.png" alt=""></div>
+          <div><img src="../../../static/images/pro1.png" alt=""></div>
+          <div><img src="../../../static/images/pro1.png" alt=""></div>
+          <div><img src="../../../static/images/pro1.png" alt=""></div>
         </div>
       </div> 
 </template>
 
 <script>
+import Userinfo from '@/components/supplier/Userinfo.vue'
 export default {
-
+name: 'list1',
+  components: {
+    Userinfo
+  },
 }
 </script>
 
 <style lang="less" scoped>
  .details{
-      border-top: 1px solid #eee;
-      margin-bottom: 0.3rem;
-      padding: 0 0.25rem;
+      margin-bottom: 0.3rem;      
       .top{
         display: flex;
         padding-top: 0.2rem;
@@ -45,7 +37,7 @@ export default {
           border-radius: 50%;
           background: #999;
           margin-right: 0.3rem;
-          background-image: url(../../static/images/11.png)
+          background-image: url(../../../static/images/11.png)
         }
         .center{
           flex: 1;
@@ -67,12 +59,14 @@ export default {
       }
       .wenzi{
         margin-top: 0.2rem;
+        padding: 0 0.2rem;
       }
       .img{
           display: flex;
           flex-direction: row;
           flex-wrap:wrap;
           margin-top: 0.2rem;
+          padding: 0 0.2rem;
         div{
           width: 32%;
           margin-right: 2%;

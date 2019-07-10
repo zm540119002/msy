@@ -2,12 +2,12 @@
   <div class="home">
     <div class="content">
       <div class="nav">
-        <div><img src="../../static/images/index_top.png" alt=""></div>
+        <div><img src="../../../static/images/index_top.png" alt=""></div>
         <div @click="search"><input type="text" placeholder="搜索消息、小视频、视频或文章"></div>
         <div><span class="mui-icon mui-icon-chat"></span></div>
         <div><span class="mui-icon mui-icon-camera"></span></div>
       </div>
-      <div class="top_img"><img src="../../static/images/home-banner1.jpg"></div>
+      <div class="top_img"><img src="../../../static/images/home-banner1.jpg"></div>
       <!-- icon -->
       <div class="icon">
         <div><a href="javascript:;"></a><span>入驻管理</span></div>
@@ -59,17 +59,15 @@
         </van-tabs>
       </div>
      <List1/>
+     <Userinfo/>
      <List/>
       <div  class="video">
-        <div class="top">
-          <div>精彩小视频></div>
-          <div>小视频分类标签></div>
-        </div>
+        <Userinfo/>
         <van-swipe :loop="false" :width="300">
-          <van-swipe-item><img src="../../static/images/video1.png" alt=""></van-swipe-item>
-          <van-swipe-item><img src="../../static/images/video1.png" alt=""></van-swipe-item>
-          <van-swipe-item><img src="../../static/images/video1.png" alt=""></van-swipe-item>
-          <van-swipe-item><img src="../../static/images/video1.png" alt=""></van-swipe-item>
+          <van-swipe-item><img src="../../../static/images/video1.png" alt=""></van-swipe-item>
+          <van-swipe-item><img src="../../../static/images/video1.png" alt=""></van-swipe-item>
+          <van-swipe-item><img src="../../../static/images/video1.png" alt=""></van-swipe-item>
+          <van-swipe-item><img src="../../../static/images/video1.png" alt=""></van-swipe-item>
         </van-swipe>
       </div>
     </div>
@@ -79,16 +77,18 @@
 
 <script>
 // @ is an alias to /src
-import Tabbar from '@/components/Tabbar.vue'
-import List1 from '@/components/List1.vue'
-import List from '@/components/List.vue'
+import Tabbar from '@/components/supplier/Tabbar.vue'
+import List1 from '@/components/supplier/List1.vue'
+import List from '@/components/supplier/List.vue'
+import Userinfo from '@/components/supplier/Userinfo.vue'
 
 export default {
   name: 'home',
   components: {
     Tabbar,
     List1,
-    List
+    List,
+    Userinfo
   },
    data() {
     return {
@@ -135,7 +135,7 @@ export default {
           display: block;
           width: 0.8rem;
           height: 0.8rem;
-          background-image:url(../../static/images/store_purchase_type.png);
+          background-image:url(../../../static/images/store_purchase_type.png);
           background-repeat: no-repeat;
           background-size: 0.785rem 3.99rem;
         }
@@ -221,7 +221,7 @@ export default {
               height: 1.2rem;
               margin: 0 auto;
               border-radius: 50%;
-              background-image: url(../../static/images/11.png)
+              background-image: url(../../../static/images/11.png)
             }
             >div:nth-of-type(2){
               margin: 6px 0 2px;
@@ -245,38 +245,7 @@ export default {
       }
     }
     .details{
-      border-top: 1px solid #eee;
       margin-bottom: 0.3rem;
-      padding: 0 0.25rem;
-      .top{
-        display: flex;
-        padding-top: 0.2rem;
-        .left{
-          width: 1.2rem;
-          height: 1.2rem;
-          border-radius: 50%;
-          background: #999;
-          margin-right: 0.3rem;
-          background-image: url(../../static/images/11.png)
-        }
-        .center{
-          flex: 1;
-          div:nth-of-type(2){
-            color: #ccc;
-          }
-        }
-        .right{
-          text-align: center;
-          div:nth-of-type(1){
-            padding: 0.06rem 0.4rem;
-            background: red;
-            color: #fff;
-            text-align: center;
-            border-radius: 6px;
-            margin-bottom: 0.06rem;
-          }
-        }
-      }
       .wenzi{
         margin-top: 0.2rem;
       }
@@ -302,7 +271,9 @@ export default {
       }
     }
     .video{
-      padding: 0 0.25rem;
+      .van-swipe{
+        padding: 0 0.2rem;
+      }
       .top{
         display: flex;
         justify-content: space-between;

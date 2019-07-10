@@ -2,9 +2,9 @@
   <div class="list">
     <div class="wenzi">是非成败转头空，青山依旧在，惯看秋月春风。一壶浊酒喜相逢，古今多少事，滚滚长江东逝水，浪花淘尽英雄。 几度夕阳红。浪花淘尽英雄。 几度夕阳红。白发渔樵江浪花淘尽英雄 几度夕阳...   全文 ></div>
     <div class="img">
-      <div><img src="../../static/images/img1.png"></div>
-      <div><img src="../../static/images/img1.png"></div>
-      <div><img src="../../static/images/img1.png"></div>
+      <div><img src="../../../static/images/img1.png"></div>
+      <div><img src="../../../static/images/img1.png"></div>
+      <div><img src="../../../static/images/img1.png"></div>
     </div>
     <ul class="ctrl">
       <li>20190318 12:12:20</li>
@@ -25,7 +25,7 @@ export default {
 
 <style lang="less" scoped>
  .list{
-   padding: 0 0.2rem;
+   padding: 0 0.2rem 0.3rem;
     .wenzi{
     margin-top: 0.2rem;
   }

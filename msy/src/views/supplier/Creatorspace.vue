@@ -2,17 +2,7 @@
   <div>
     <div class="header">
       <div @click="back" class="back"><van-icon name="arrow-left" /></div>
-      <div class="top">
-        <div class="left"></div>
-        <div class="center">
-          <div>杨凤</div>
-          <div>详情详情</div>
-        </div>
-        <div class="right">
-          <div>关注</div>
-          <div>1000人</div>
-        </div>
-      </div>
+      <Userinfo/>
     </div>
     <div class="details">
       <van-tabs v-model="active">
@@ -30,11 +20,13 @@
 </template>
 
 <script>
-import List from '@/components/List.vue'
+import List from '@/components/supplier/List.vue'
+import Userinfo from '@/components/supplier/Userinfo.vue'
 export default {
   name: 'Creatorspace',
   components: {
-    List
+    List,
+    Userinfo
   },
  data() {
     return {
@@ -58,33 +50,7 @@ export default {
       margin-bottom: 0.4rem;
     }
    .top{
-        display: flex;
-        padding-top: 0.2rem;
-        .left{
-          width: 1.2rem;
-          height: 1.2rem;
-          border-radius: 50%;
-          background: #999;
-          margin-right: 0.3rem;
-          background-image: url(../../static/images/11.png)
-        }
-        .center{
-          flex: 1;
-          div:nth-of-type(2){
-            color: #ccc;
-          }
-        }
-        .right{
-          text-align: center;
-          div:nth-of-type(1){
-            padding: 0.06rem 0.4rem;
-            background: red;
-            color: #fff;
-            text-align: center;
-            border-radius: 6px;
-            margin-bottom: 0.06rem;
-          }
-        }
+        border-top: none;
       }  
   }
   .details{

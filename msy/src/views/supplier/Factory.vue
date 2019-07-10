@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import Tabbar from '@/components/Tabbar.vue'
+import Tabbar from '@/components/supplier/Tabbar.vue'
 export default {
   name: 'home',
   components: {
