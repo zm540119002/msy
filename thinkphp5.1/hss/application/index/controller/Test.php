@@ -23,7 +23,7 @@ class Test extends HssBase{
         if(request()->isPost()){
         }else{
             return $this->fetch();
-    }
+        }
     }
     /**测试-城市
      */
