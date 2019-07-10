@@ -19,7 +19,7 @@ class Test extends HssBase{
 //        exit;
 //        return $data = json_decode($request_body, true);
 //        exit;
-        return json_encode($_POST);
+        return json_encode(input('post.'));
         if(request()->isAjax()){
         }else{
             return $this->fetch();
