@@ -13,7 +13,7 @@
 namespace think;
 print_r( 123 );
 print_r( $_SERVER['REQUEST_METHOD'] );
-print_r( $_SERVER['REMOTE_ADDRESS'] );
+print_r( $_SERVER['REMOTE_ADDR'] );
 exit;
 // 加载基础文件
 require __DIR__ . '/../../framework/base.php';
