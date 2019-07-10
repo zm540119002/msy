@@ -4,13 +4,15 @@ class Address extends \common\controller\Base {
     //增加修改地址页面
     public function edit(){
         if(!request()->isPost()){
-            $this->errorMsg('请求方式不对');
+            return '请求方式不对';
         }
         $model = new \common\model\Address();
         $model->useGlobalScope(false)->select();
-        $userId = $this->user['id'];
+        $userId = 16;
 
         $data = input('post.');
+
+        return $data['consignee'];
         if(input('?post.id') && !empty(input('post.id')) ){
             //开启事务
             $model -> startTrans();
