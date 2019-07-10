@@ -9,10 +9,7 @@ class Address extends \common\controller\Base {
         $model = new \common\model\Address();
         $model->useGlobalScope(false)->select();
         $userId = 16;
-
         $data = input('post.');
-
-        return $data['consignee'];
         if(input('?post.id') && !empty(input('post.id')) ){
             //开启事务
             $model -> startTrans();
