@@ -6,6 +6,6 @@
  * Time: 9:41
  */
 Route::get('new', function () {
-    return 'hello,55555555!';
+    return 'hell55555!';
 });
 Route::post('new/:id','api/Test/index');
