@@ -11,6 +11,8 @@ class Test extends HssBase{
      */
     public function index(){
         if(request()->isPost()){
+            $postData = input('post.');
+            return json_encode($postData);
             $a =  strtolower(request()->module() . '/' . request()->controller() . '/' . request()->action());
             return $a;
         }else{
