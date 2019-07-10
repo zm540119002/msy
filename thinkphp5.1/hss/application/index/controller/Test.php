@@ -9,6 +9,11 @@ class Test extends HssBase{
     /**首页
      */
     public function index(){
+        $data = array(
+            "name" => "jack",
+            "age" => 13
+        );
+        return json_encode($data);
         $request_body = file_get_contents('php://input');
         return $data = json_decode($request_body, true);
         exit;
