@@ -133,9 +133,9 @@ class Address extends \common\controller\Base {
         $result = $model -> del($condition);
 
         if($result['status']){
-            return successMsg('删除成功');
+            return '删除成功';
         }else{
-            return errorMsg('删除失败');
+            return '删除失败';
         }
 
     }
