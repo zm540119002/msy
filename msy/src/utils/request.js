@@ -19,7 +19,8 @@ service.interceptors.request.use(
     //   config.headers.Authorization = getStore('token')
     //   config.headers.Token = getStore('token')
     // }
-    config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
+    // config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
+    config.headers['Content-Type'] = 'multipart/form-data'
     return config
   },
   error => {
