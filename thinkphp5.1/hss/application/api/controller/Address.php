@@ -99,6 +99,27 @@ class Address extends \common\controller\Base {
         return json_encode($list);
 
     }
+    //获取
+    public function getInfo()
+    {
+        if(!request()->isGet()){
+            return errorMsg(config('custom.not_ajax'));
+        }
+        $model = new \common\model\Address();
+        $id = input('get.id',0,'int');
+        $config = [
+            'where'=>[
+                ['status','=',0],
+                ['user_id','=',16],
+                ['id','=',$id],
+            ],'field' => [
+                'id','consignee','detail_address','tel_phone','mobile','is_default','status','province','city','area'
+            ]
+        ];
+        $info = $model -> getInfo($config);
+        return json_encode($info);
+
+    }
     //删除地址
     public function del(){
         if(!request()->isPost()){
