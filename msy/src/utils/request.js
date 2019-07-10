@@ -20,7 +20,8 @@ service.interceptors.request.use(
     //   config.headers.Token = getStore('token')
     // }
     // config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
-    config.headers['Content-Type'] = 'multipart/form-data'
+    // config.headers['Content-Type'] = 'multipart/form-data'
+    config.headers['Content-Type'] = 'application/json'
     return config
   },
   error => {
