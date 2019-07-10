@@ -93,7 +93,7 @@ class Address extends \common\controller\Base {
             ]
         ];
         $addressList = $model -> getList($config);
-        echo $model->getLastSql();
+        echo $model->getLastSql();exit;
         print_r($addressList);
         return json_encode($addressList);
 
