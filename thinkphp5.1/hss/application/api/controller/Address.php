@@ -107,7 +107,6 @@ class Address extends \common\controller\Base {
         }
         $model = new \common\model\Address();
         $id = input('get.id',0,'int');
-        return $id;
         $config = [
             'where'=>[
                 ['status','=',0],
