@@ -40,7 +40,7 @@ class Address extends \common\controller\Base {
             }
             $model->commit();
             $data['id'] = $addressId;
-            return $data;
+            return '修改';
         }else{
             //增加
             $config = [
@@ -76,7 +76,7 @@ class Address extends \common\controller\Base {
             }
             $model->commit();
             $data['id'] = $addressId;
-            return $data;
+            return '增加';
         }
 
 
