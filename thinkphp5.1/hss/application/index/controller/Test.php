@@ -10,7 +10,7 @@ class Test extends HssBase{
      */
     public function index(){
         $request_body = file_get_contents('php://input');
-        return $data = json_encode($request_body);
+        return $data = json_decode($request_body, true);
         exit;
         return json_encode($_POST);
         if(request()->isAjax()){
