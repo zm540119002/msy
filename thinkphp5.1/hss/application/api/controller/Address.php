@@ -105,6 +105,7 @@ class Address extends \common\controller\Base {
             return errorMsg(config('custom.not_ajax'));
         }
         $id = input('post.id',0,'int');
+        return $id;
         $model = new \common\model\Address();
         $condition = [
             ['id','=',$id],
