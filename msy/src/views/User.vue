@@ -7,16 +7,16 @@
         <van-tabs >
           <van-tab title="登录">
              <van-cell-group>
-              <van-field v-model="postData.userName" placeholder="请输入用户名" />
-              <van-field v-model="postData.password" placeholder="密码" />
+              <van-field v-model="loginData.userName" placeholder="请输入用户名" />
+              <van-field v-model="loginData.password" placeholder="密码" />
             </van-cell-group>
             <van-button class="btn" @click="loginHandle" type="info">登录</van-button>
           </van-tab>
           <van-tab title="注册/重置密码">
             <van-cell-group>
-              <van-field v-model="postData2.userName" placeholder="请输入用户名" />
-              <van-field v-model="postData2.captcha" placeholder="请输入收到的验证码" />
-              <van-field v-model="postData2.password" placeholder="设置密码" />
+              <van-field v-model="registerData.userName" placeholder="请输入用户名" />
+              <van-field v-model="registerData.captcha" placeholder="请输入收到的验证码" />
+              <van-field v-model="registerData.password" placeholder="设置密码" />
             </van-cell-group>
             <van-button class="btn" @click="registerHandle" type="info">注册</van-button>
           </van-tab>
@@ -38,11 +38,11 @@ export default {
  data() {
     return {
       show: false,
-        postData:{
+        loginData:{
             userName: "",
             password: ""
         },
-        postData2:{
+        registerData:{
             userName: "",
             password: "",
             captcha:""
@@ -55,13 +55,15 @@ export default {
       this.show = true;
     },
     loginHandle(){
-      saveGood(this.postData)
-        .then(r => console.log(r)) //接口调用成功返回的数据
+      console.log(typeof this.loginData)
+      saveGood(this.loginData)
+        .then(
+          r => console.log(r)
+        ) //接口调用成功返回的数据
         .catch(err => console.log(err)) //接口调用失败返回的数据
-      console.log(this.postData)
     },
     registerHandle(){
-      console.log(this.postData2)
+      console.log(this.registerData)
     }
   }
  
