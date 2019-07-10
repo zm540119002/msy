@@ -11,7 +11,6 @@ class Test extends HssBase{
      */
     public function index(){
         if(request()->isPost()){
-            return 123;
             $a =  strtolower(request()->module() . '/' . request()->controller() . '/' . request()->action());
             return $a;
         }else{
