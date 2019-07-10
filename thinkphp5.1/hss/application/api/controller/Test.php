@@ -3,16 +3,18 @@ namespace app\api\controller;
 
 // 前台首页
 use think\Console;
+use think\Request;
 use common\component\jwt\JWT;
 
 class Test extends HssBase{
     /**首页
      */
     public function index(){
-        $a =  strtolower(request()->module() . '/' . request()->controller() . '/' . request()->action());
-        print_r($a);exit;
-        if(request()->isAjax()){
+        if(request()->isPost()){
+            $a =  strtolower(request()->module() . '/' . request()->controller() . '/' . request()->action());
+            return $a;
         }else{
+            return 254;
             return $this->fetch();
         }
     }

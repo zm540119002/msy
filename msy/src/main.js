@@ -3,9 +3,9 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import axios from 'axios'
-//可以给axios的ajax请求设置统一的主机和端口号
-axios.defaults.baseURL = "http://157.122.54.189:8080/";
-//将axios这个对象添加到Vue的原型对象中，在使用的时候就只需要使用this.对象名就可以了
+// //可以给axios的ajax请求设置统一的主机和端口号
+axios.defaults.baseURL = "https://hss.meishangyun.com";
+// //将axios这个对象添加到Vue的原型对象中，在使用的时候就只需要使用this.对象名就可以了
 Vue.prototype.$http = axios
 
 // 导入初始化文件
