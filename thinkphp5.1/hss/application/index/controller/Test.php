@@ -13,8 +13,10 @@ class Test extends HssBase{
             "name" => "jack",
             "age" => 13
         );
-        return json_encode($data);
+//        return json_encode($data);
         $request_body = file_get_contents('php://input');
+        print_r($request_body);
+        exit;
         return $data = json_decode($request_body, true);
         exit;
         return json_encode($_POST);
