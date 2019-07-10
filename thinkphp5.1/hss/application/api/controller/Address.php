@@ -101,7 +101,7 @@ class Address extends \common\controller\Base {
         if(!request()->isAjax()){
             return errorMsg(config('custom.not_ajax'));
         }
-        $id = input('post.address_id',0,'int');
+        $id = input('post.id',0,'int');
         $model = new \common\model\Address();
         $condition = [
             ['id','=',$id],
