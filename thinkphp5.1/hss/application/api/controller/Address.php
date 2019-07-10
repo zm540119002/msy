@@ -7,7 +7,6 @@ class Address extends \common\controller\Base {
             return '请求方式不对';
         }
         $model = new \common\model\Address();
-        $model->useGlobalScope(false)->select();
         $userId = 16;
         $data = input('post.');
         if(input('?post.id') && !empty(input('post.id')) ){
@@ -85,15 +84,15 @@ class Address extends \common\controller\Base {
     public function getList()
     {
         $model = new \common\model\Address();
-//        $config = [
-//            'where'=>[
-////                ['status','=',0],
-////                ['user_id','=',$this->user['id']]
-//            ],'field' => [
-//                'id','consignee','detail_address','tel_phone','mobile','is_default','status','province','city','area'
-//            ]
-//        ];
-        $addressList = $model -> getList();
+        $config = [
+            'where'=>[
+                ['status','=',0],
+                ['user_id','=',16]
+            ],'field' => [
+                'id','consignee','detail_address','tel_phone','mobile','is_default','status','province','city','area'
+            ]
+        ];
+        $addressList = $model -> getList($config);
         echo $model->getLastSql();
         print_r($addressList);
         return json_encode($addressList);
