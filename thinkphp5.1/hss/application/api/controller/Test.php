@@ -10,8 +10,7 @@ class Test extends HssBase{
     /**首页
      */
     public function index(){
-        if(request()->isAjax()){
-            return 123;
+        if(request()->isPost()){
             $a =  strtolower(request()->module() . '/' . request()->controller() . '/' . request()->action());
             return $a;
         }else{
