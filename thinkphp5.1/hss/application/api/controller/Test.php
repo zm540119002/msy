@@ -6,25 +6,29 @@ use think\Console;
 use think\Request;
 use common\component\jwt\JWT;
 
-class Test extends HssBase{
+class Test extends \common\model\Base {
     /**首页
      */
     public function index(){
-        if(request()->isAjax()){
 
-            $a =  strtolower(request()->module() . '/' . request()->controller() . '/' . request()->action());
-            return $a;
-        }else{
-            return 254;
-            return $this->fetch();
+        if (request()->isGet()) {
+            echo "是get方法！";
+            $postData = input('get.');
+            return json_encode($postData);
+        }
+        if (request()->isPost()) {
+            echo "是post方法！";
+            $postData = input('post.');
+            return json_encode($postData);
         }
     }
     /**测试
      */
     public function test(){
-        if(request()->isAjax()){
+        if(request()->isPost()){
+            return 'post';
         }else{
-            return $this->fetch();
+            return 'get';
         }
     }
     /**测试-城市

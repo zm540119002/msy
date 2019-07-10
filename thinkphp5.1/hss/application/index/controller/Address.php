@@ -4,7 +4,6 @@ class Address extends \common\controller\UserBase {
     //增加修改地址页面
     public function edit(){
         $model = new \common\model\Address();
-        $model->useGlobalScope(false)->select();
         $userId = $this->user['id'];
         if(request()->isPost()){
             $data = input('post.');

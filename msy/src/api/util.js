@@ -22,7 +22,7 @@ export function saveGoodsImageList (goodsId, images, imgDelIds) {
   })
 }
 // post请求
-export function saveGood (data) {
+export function saveUser (data) {
   return request({
     url: 'index/Test/index',
     method: 'post',

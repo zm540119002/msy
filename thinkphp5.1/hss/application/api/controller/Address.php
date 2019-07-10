@@ -4,12 +4,10 @@ class Address extends \common\controller\Base {
     //增加修改地址页面
     public function edit(){
         if(!request()->isPost()){
-            $this->errorMsg('请求方式不对');
+            return '请求方式不对';
         }
         $model = new \common\model\Address();
-        $model->useGlobalScope(false)->select();
-        $userId = $this->user['id'];
-
+        $userId = 16;
         $data = input('post.');
         if(input('?post.id') && !empty(input('post.id')) ){
             //开启事务
@@ -40,8 +38,7 @@ class Address extends \common\controller\Base {
                 }
             }
             $model->commit();
-            $data['id'] = $addressId;
-            return $data;
+            return '修改';
         }else{
             //增加
             $config = [
@@ -77,7 +74,7 @@ class Address extends \common\controller\Base {
             }
             $model->commit();
             $data['id'] = $addressId;
-            return $data;
+            return '增加';
         }
 
 
@@ -86,27 +83,49 @@ class Address extends \common\controller\Base {
     //获取
     public function getList()
     {
+        if(!request()->isGet()){
+            return errorMsg(config('custom.not_ajax'));
+        }
         $model = new \common\model\Address();
-//        $config = [
-//            'where'=>[
-////                ['status','=',0],
-////                ['user_id','=',$this->user['id']]
-//            ],'field' => [
-//                'id','consignee','detail_address','tel_phone','mobile','is_default','status','province','city','area'
-//            ]
-//        ];
-        $addressList = $model -> getList();
-        echo $model->getLastSql();
-        print_r($addressList);
-        return json_encode($addressList);
+        $config = [
+            'where'=>[
+                ['status','=',0],
+                ['user_id','=',16]
+            ],'field' => [
+                'id','consignee','detail_address','tel_phone','mobile','is_default','status','province','city','area'
+            ]
+        ];
+        $list = $model -> getList($config);
+        return json_encode($list);
+
+    }
+    //获取
+    public function getInfo()
+    {
+        if(!request()->isGet()){
+            return errorMsg(config('custom.not_ajax'));
+        }
+        $model = new \common\model\Address();
+        $id = input('get.id',0,'int');
+        $config = [
+            'where'=>[
+                ['status','=',0],
+                ['user_id','=',16],
+                ['id','=',$id],
+            ],'field' => [
+                'id','consignee','detail_address','tel_phone','mobile','is_default','status','province','city','area'
+            ]
+        ];
+        $info = $model -> getInfo($config);
+        return json_encode($info);
 
     }
     //删除地址
     public function del(){
-        if(!request()->isAjax()){
+        if(!request()->isPost()){
             return errorMsg(config('custom.not_ajax'));
         }
-        $id = input('post.address_id',0,'int');
+        $id = input('post.id',0,'int');
         $model = new \common\model\Address();
         $condition = [
             ['id','=',$id],
@@ -114,9 +133,9 @@ class Address extends \common\controller\Base {
         $result = $model -> del($condition);
 
         if($result['status']){
-            return successMsg('删除成功');
+            return '删除成功';
         }else{
-            return errorMsg('删除失败');
+            return '删除失败';
         }
 
     }
