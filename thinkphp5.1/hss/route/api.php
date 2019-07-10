@@ -8,4 +8,4 @@
 Route::get('new', function () {
     return 'hell55555!';
 });
-Route::get('api/blog','api/test/index');
+Route::post('api/blog','api/test/index');
