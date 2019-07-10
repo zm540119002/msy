@@ -116,8 +116,8 @@ class Address extends \common\controller\Base {
                 'id','consignee','detail_address','tel_phone','mobile','is_default','status','province','city','area'
             ]
         ];
-        $list = $model -> getInfo($config);
-        return json_encode($list);
+        $info = $model -> getInfo($config);
+        return json_encode($info);
 
     }
     //删除地址
