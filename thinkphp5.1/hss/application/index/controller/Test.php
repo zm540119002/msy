@@ -9,7 +9,7 @@ class Test extends HssBase{
     /**首页
      */
     public function index(){
-        return $_POST;
+        return json_encode($_POST);
         if(request()->isAjax()){
         }else{
             return $this->fetch();
