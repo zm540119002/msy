@@ -12,7 +12,7 @@ class Address extends \common\controller\Base {
 
         $data = input('post.');
 
-        return $data['city'];
+        return $data['consignee'];
         if(input('?post.id') && !empty(input('post.id')) ){
             //开启事务
             $model -> startTrans();
