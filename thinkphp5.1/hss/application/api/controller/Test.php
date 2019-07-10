@@ -11,7 +11,6 @@ class Test extends \common\model\Base {
      */
     public function index(){
 
-        $request = Request::instance();
         if (Request :: isGet()) {
             echo "是get方法！";
             $postData = input('get.');
