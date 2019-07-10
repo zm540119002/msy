@@ -11,7 +11,8 @@ class Address extends \common\controller\Base {
 //        $userId = $this->user['id'];
 
         $data = input('post.');
-        return json_decode($data);
+
+        return $data['id'];
         if(input('?post.id') && !empty(input('post.id')) ){
             //开启事务
             $model -> startTrans();
