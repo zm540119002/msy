@@ -12,7 +12,7 @@ class Address extends \common\controller\Base {
 
         $data = input('post.');
 
-        return json_decode($data);
+        return $data;
         if(input('?post.id') && !empty(input('post.id')) ){
             //开启事务
             $model -> startTrans();
