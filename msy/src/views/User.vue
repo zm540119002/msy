@@ -55,7 +55,6 @@ export default {
       this.show = true;
     },
     loginHandle(){
-      console.log(typeof this.loginData)
       saveGood(this.loginData)
         .then(
           r => console.log(r)

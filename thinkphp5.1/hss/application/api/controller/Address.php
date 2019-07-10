@@ -4,12 +4,10 @@ class Address extends \common\controller\Base {
     //增加修改地址页面
     public function edit(){
         if(!request()->isPost()){
-            $this->errorMsg('请求方式不对');
+            return '请求方式不对';
         }
         $model = new \common\model\Address();
-        $model->useGlobalScope(false)->select();
-        $userId = $this->user['id'];
-
+        $userId = 16;
         $data = input('post.');
         if(input('?post.id') && !empty(input('post.id')) ){
             //开启事务
@@ -40,8 +38,7 @@ class Address extends \common\controller\Base {
                 }
             }
             $model->commit();
-            $data['id'] = $addressId;
-            return $data;
+            print_r($data);
         }else{
             //增加
             $config = [
@@ -77,7 +74,7 @@ class Address extends \common\controller\Base {
             }
             $model->commit();
             $data['id'] = $addressId;
-            return $data;
+            return '增加';
         }
 
 
@@ -87,18 +84,16 @@ class Address extends \common\controller\Base {
     public function getList()
     {
         $model = new \common\model\Address();
-//        $config = [
-//            'where'=>[
-////                ['status','=',0],
-////                ['user_id','=',$this->user['id']]
-//            ],'field' => [
-//                'id','consignee','detail_address','tel_phone','mobile','is_default','status','province','city','area'
-//            ]
-//        ];
-        $addressList = $model -> getList();
-        echo $model->getLastSql();
-        print_r($addressList);
-        return json_encode($addressList);
+        $config = [
+            'where'=>[
+                ['status','=',0],
+                ['user_id','=',16]
+            ],'field' => [
+                'id','consignee','detail_address','tel_phone','mobile','is_default','status','province','city','area'
+            ]
+        ];
+        $list = $model -> getList($config);
+        return json_encode($list);
 
     }
     //删除地址
@@ -106,7 +101,7 @@ class Address extends \common\controller\Base {
         if(!request()->isAjax()){
             return errorMsg(config('custom.not_ajax'));
         }
-        $id = input('post.address_id',0,'int');
+        $id = input('post.id',0,'int');
         $model = new \common\model\Address();
         $condition = [
             ['id','=',$id],

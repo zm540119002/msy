@@ -9,24 +9,25 @@ class Test extends HssBase{
     /**首页
      */
     public function index(){
-        return json_encode($_POST);
-        if(request()->isAjax()){
+        $postData = input('post.');
+        if(request()->isPost()){
+            return json_encode($postData);
         }else{
-            return $this->fetch();
+            return json_encode($postData);
         }
     }
     /**测试
      */
     public function test(){
-        if(request()->isAjax()){
+        if(request()->isPost()){
         }else{
             return $this->fetch();
-        }
+    }
     }
     /**测试-城市
      */
     public function city(){
-        if(request()->isAjax()){
+        if(request()->isPost()){
         }else{
             return $this->fetch();
         }
@@ -34,7 +35,7 @@ class Test extends HssBase{
     /**测试-城市2
      */
     public function city2(){
-        if(request()->isAjax()){
+        if(request()->isPost()){
         }else{
             return $this->fetch();
         }
@@ -42,7 +43,7 @@ class Test extends HssBase{
     /**测试-城市3
      */
     public function city3(){
-        if(request()->isAjax()){
+        if(request()->isPost()){
         }else{
             return $this->fetch();
         }
@@ -50,7 +51,7 @@ class Test extends HssBase{
     /**测试-布局
      */
     public function layout(){
-        if(request()->isAjax()){
+        if(request()->isPost()){
         }else{
             return $this->fetch();
         }
@@ -58,7 +59,7 @@ class Test extends HssBase{
     /**测试-布局2
      */
     public function layout2(){
-        if(request()->isAjax()){
+        if(request()->isPost()){
         }else{
             return $this->fetch();
         }
@@ -66,13 +67,13 @@ class Test extends HssBase{
     /**测试-布局3
      */
     public function layout3(){
-        if(request()->isAjax()){
+        if(request()->isPost()){
         }else{
             return $this->fetch();
         }
     }
     public function signUp(){
-        if(request()->isAjax()){
+        if(request()->isPost()){
             $saveData['name'] = trim(input('post.name'));
             $saveData['mobile'] = trim(input('post.mobile'));
             $saveData['create_time'] = time();
