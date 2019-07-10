@@ -83,6 +83,9 @@ class Address extends \common\controller\Base {
     //获取
     public function getList()
     {
+        if(!request()->isGet()){
+            return errorMsg(config('custom.not_ajax'));
+        }
         $model = new \common\model\Address();
         $config = [
             'where'=>[
@@ -98,7 +101,7 @@ class Address extends \common\controller\Base {
     }
     //删除地址
     public function del(){
-        if(!request()->isAjax()){
+        if(!request()->isPost()){
             return errorMsg(config('custom.not_ajax'));
         }
         $id = input('post.id',0,'int');
