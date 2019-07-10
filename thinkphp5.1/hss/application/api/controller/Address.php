@@ -3,7 +3,6 @@ namespace app\api\controller;
 class Address extends \common\controller\Base {
     //增加修改地址页面
     public function edit(){
-        print_r( $_SERVER['REQUEST_METHOD'] );exit;
         if(!request()->isPost()){
             return '请求方式不对';
         }
