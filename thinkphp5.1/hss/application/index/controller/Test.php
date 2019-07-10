@@ -12,6 +12,7 @@ class Test extends HssBase{
         $postData = ['test'=>'123'];
         if(request()->isPost()){
             $postData = input('post.');
+            print_r(json_encode($postData));
             return json_encode($postData);
         }else{
             $postData = input('get.');
