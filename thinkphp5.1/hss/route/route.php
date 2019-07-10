@@ -12,9 +12,7 @@
 Route::get('think', function () {
     return 'hello,55555555!';
 });
-Route::get('new', function () {
-    return 'hello!';
-});
+
 
 return [
 
