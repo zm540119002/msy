@@ -21,7 +21,7 @@ class Test extends HssBase{
     /**测试
      */
     public function test(){
-        if(request()->isPost()){
+        if(request()->isAjax()){
             return 'post';
         }else{
             return 'get';
