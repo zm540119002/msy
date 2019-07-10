@@ -35,30 +35,35 @@ export default {
   components: {
     Tabbar
   },
- data() {
+  data(){
     return {
       show: false,
-        loginData:{
-            userName: "",
-            password: ""
-        },
-        registerData:{
-            userName: "",
-            password: "",
-            captcha:""
-        }
+      loginData:{
+        userName: "",
+        password: ""
+      },
+      registerData:{
+        userName: "",
+        password: "",
+        captcha:""
+      }
     }
   },
-
   methods: {
     showPopup() {
       this.show = true;
     },
     loginHandle(){
       saveGood(this.loginData)
-        .then(
-          r => console.log(r)
-        ) //接口调用成功返回的数据
+        .then(res => {
+          console.log(res)
+          const resData = res.data
+          if (resData.flag === 'success') {
+            this.$message.success('验证码已发送')
+          } else {
+            this.$message.error('验证码发送失败')
+          }
+        }) //接口调用成功返回的数据
         .catch(err => console.log(err)) //接口调用失败返回的数据
     },
     registerHandle(){
