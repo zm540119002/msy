@@ -29,7 +29,7 @@
 
 <script>
 import Tabbar from '@/components/Tabbar.vue'
-import { sendIdentifyingCode, saveGoodsImageList, saveGood } from '@/api/util'
+import { sendIdentifyingCode, saveGoodsImageList, saveUser } from '@/api/util'
 export default {
   name: 'home',
   components: {
@@ -54,15 +54,11 @@ export default {
       this.show = true;
     },
     loginHandle(){
-      saveGood(this.loginData)
+      saveUser(this.loginData)
         .then(res => {
           console.log(res)
           const resData = res.data
-          if (resData.flag === 'success') {
-            this.$message.success('验证码已发送')
-          } else {
-            this.$message.error('验证码发送失败')
-          }
+          console.log(res.data)
         }) //接口调用成功返回的数据
         .catch(err => {
           console.log(err)
