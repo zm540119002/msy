@@ -11,12 +11,7 @@
 
 // [ 应用入口文件 ]
 namespace think;
-header('Access-Control-Allow-Origin: *');
-header("Access-Control-Allow-Headers: token,Origin, X-Requested-With, Content-Type, Accept");
-header('Access-Control-Allow-Methods: POST,GET');
-print_r( $_SERVER['REQUEST_METHOD'] );
-print_r( $_SERVER['REMOTE_ADDR'] );
-exit;
+
 // 加载基础文件
 require __DIR__ . '/../../framework/base.php';
 
