@@ -9,20 +9,11 @@ class Test extends HssBase{
     /**首页
      */
     public function index(){
-        $data = array(
-            "name" => "jack",
-            "age" => 13
-        );
-//        return json_encode($data);
-//        $request_body = file_get_contents('php://input');
-//        return ($request_body);
-//        exit;
-//        return $data = json_decode($request_body, true);
-//        exit;
-        return json_encode(input('post.'));
-        if(request()->isAjax()){
+//        return json_encode(input('post.'));
+        if(request()->isPost()){
+            return 123;
         }else{
-            return $this->fetch();
+            return 456;
         }
     }
     /**测试
