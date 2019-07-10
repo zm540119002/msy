@@ -6,9 +6,9 @@ class Address extends \common\controller\Base {
         if(!request()->isPost()){
             return '请求方式不对';
         }
-//        $model = new \common\model\Address();
-//        $model->useGlobalScope(false)->select();
-//        $userId = $this->user['id'];
+        $model = new \common\model\Address();
+        $model->useGlobalScope(false)->select();
+        $userId = 16;
 
         $data = input('post.');
 
