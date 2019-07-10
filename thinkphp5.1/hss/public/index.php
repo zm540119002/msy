@@ -11,6 +11,7 @@
 
 // [ 应用入口文件 ]
 namespace think;
+print_r( 123 );
 print_r( $_SERVER['REQUEST_METHOD'] );
 print_r( $_SERVER['REMOTE_ADDRESS'] );
 exit;
