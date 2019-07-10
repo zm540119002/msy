@@ -10,7 +10,6 @@ class Test extends HssBase{
      */
     public function index(){
         $postData = input('post.');
-        $postData = $_POST;
         if(request()->isPost()){
             return json_encode($postData);
         }else{
