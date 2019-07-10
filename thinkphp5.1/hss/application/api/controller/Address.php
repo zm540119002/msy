@@ -39,7 +39,7 @@ class Address extends \common\controller\Base {
                 }
             }
             $model->commit();
-            print_r($data);
+            return '修改';
         }else{
             //增加
             $config = [
