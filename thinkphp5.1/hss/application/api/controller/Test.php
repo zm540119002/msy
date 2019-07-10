@@ -12,12 +12,12 @@ class Test extends \common\model\Base {
     public function index(){
 
         $request = Request::instance();
-        if ($request -> isGet()) {
+        if (Request :: isGet()) {
             echo "是get方法！";
             $postData = input('get.');
             return json_encode($postData);
         }
-        if ($request -> isPost()) {
+        if (Request :: isPost()) {
             echo "是post方法！";
             $postData = input('post.');
             return json_encode($postData);
