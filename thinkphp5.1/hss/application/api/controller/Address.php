@@ -92,8 +92,8 @@ class Address extends \common\controller\Base {
                 'id','consignee','detail_address','tel_phone','mobile','is_default','status','province','city','area'
             ]
         ];
-        $addressList = $model -> getList($config);
-        return json_encode($addressList);
+        $list = $model -> getList($config);
+        return json_encode($list);
 
     }
     //删除地址
