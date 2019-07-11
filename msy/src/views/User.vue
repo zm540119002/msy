@@ -54,15 +54,16 @@ export default {
       this.show = true;
     },
     loginHandle(){
-      saveUser(this.loginData)
-        .then(res => {
-          console.log(res)
-          const resData = res.data
-          console.log(res.data)
-        }) //接口调用成功返回的数据
-        .catch(err => {
-          console.log(err)
-        }) //接口调用失败返回的数据
+      console.log(this.loginData);
+      // saveUser(this.loginData)
+      //   .then(res => {
+      //     console.log(res)
+      //     const resData = res.data
+      //     console.log(res.data)
+      //   }) //接口调用成功返回的数据
+      //   .catch(err => {
+      //     console.log(err)
+      //   }) //接口调用失败返回的数据
     },
     registerHandle(){
       console.log(this.registerData)
