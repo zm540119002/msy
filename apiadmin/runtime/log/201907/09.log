@@ -1,0 +1,3589 @@
+---------------------------------------------------------------
+[ 2019-07-09T09:22:37+08:00 ] 127.0.0.1 OPTIONS zm.com/admin/Login/index
+[运行时间：0.501029s] [吞吐率：2.00req/s] [内存消耗：1,281.55kb] [文件加载：41]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Miss',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'accept' => '*/*',
+  'access-control-request-headers' => 'apiauth,content-type',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'access-control-request-method' => 'POST',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'admin' => 'Login',
+)
+[ info ] [ RUN ] app\admin\controller\Miss->index[ E:\web\apiadmin\application\admin\controller\Miss.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.002001s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-09T09:22:38+08:00 ] 127.0.0.1 POST zm.com/admin/Login/index
+[运行时间：1.092062s] [吞吐率：0.92req/s] [内存消耗：1,367.79kb] [文件加载：44]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Login',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'content-type' => 'application/json;charset=UTF-8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'accept' => 'application/json, text/plain, */*',
+  'apiauth' => 'null',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '39',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+)
+[ info ] [ PARAM ] array (
+  'username' => 'root',
+  'password' => '123456',
+)
+[ info ] [ CACHE ] INIT Redis
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+[ error ] [0]����Ŀ�����������ܾ����޷����ӡ�
+[E:\web\apiadmin\thinkphp\library\think\cache\driver\Redis.php:53]
+---------------------------------------------------------------
+[ 2019-07-09T09:22:42+08:00 ] 127.0.0.1 GET zm.com/admin/Login/index
+[运行时间：0.024001s] [吞吐率：41.67req/s] [内存消耗：1,280.25kb] [文件加载：41]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Miss',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=ppuk4ev4skqkk4vudp63vi4ob0',
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'admin' => 'Login',
+)
+[ info ] [ RUN ] app\admin\controller\Miss->index[ E:\web\apiadmin\application\admin\controller\Miss.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-09T09:28:16+08:00 ] 127.0.0.1 OPTIONS zm.com/admin/Login/index
+[运行时间：0.023002s] [吞吐率：43.47req/s] [内存消耗：1,281.55kb] [文件加载：41]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Miss',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'accept' => '*/*',
+  'access-control-request-headers' => 'apiauth,content-type',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'access-control-request-method' => 'POST',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'admin' => 'Login',
+)
+[ info ] [ RUN ] app\admin\controller\Miss->index[ E:\web\apiadmin\application\admin\controller\Miss.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-09T09:28:17+08:00 ] 127.0.0.1 POST zm.com/admin/Login/index
+[运行时间：1.025059s] [吞吐率：0.98req/s] [内存消耗：1,367.79kb] [文件加载：44]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Login',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'content-type' => 'application/json;charset=UTF-8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'accept' => 'application/json, text/plain, */*',
+  'apiauth' => 'null',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '39',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+)
+[ info ] [ PARAM ] array (
+  'username' => 'root',
+  'password' => '123456',
+)
+[ info ] [ CACHE ] INIT Redis
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+[ error ] [0]����Ŀ�����������ܾ����޷����ӡ�
+[E:\web\apiadmin\thinkphp\library\think\cache\driver\Redis.php:53]
+---------------------------------------------------------------
+[ 2019-07-09T09:30:47+08:00 ] 127.0.0.1 OPTIONS zm.com/admin/Login/index
+[运行时间：0.043003s] [吞吐率：23.25req/s] [内存消耗：1,281.55kb] [文件加载：41]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Miss',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'accept' => '*/*',
+  'access-control-request-headers' => 'apiauth,content-type',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'access-control-request-method' => 'POST',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'admin' => 'Login',
+)
+[ info ] [ RUN ] app\admin\controller\Miss->index[ E:\web\apiadmin\application\admin\controller\Miss.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.001000s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-09T09:30:47+08:00 ] 127.0.0.1 POST zm.com/admin/Login/index
+[运行时间：0.168010s] [吞吐率：5.95req/s] [内存消耗：2,254.53kb] [文件加载：54]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Login',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'content-type' => 'application/json;charset=UTF-8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'accept' => 'application/json, text/plain, */*',
+  'apiauth' => 'null',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '39',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+)
+[ info ] [ PARAM ] array (
+  'username' => 'root',
+  'password' => '123456',
+)
+[ info ] [ CACHE ] INIT Redis
+[ info ] [ RUN ] app\admin\controller\Login->index[ E:\web\apiadmin\application\admin\controller\Login.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+[ error ] [1045]SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES)[E:\web\apiadmin\thinkphp\library\think\db\Connection.php:295]
+---------------------------------------------------------------
+[ 2019-07-09T09:31:36+08:00 ] 127.0.0.1 OPTIONS zm.com/admin/Login/index
+[运行时间：0.029001s] [吞吐率：34.48req/s] [内存消耗：1,281.55kb] [文件加载：41]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Miss',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'accept' => '*/*',
+  'access-control-request-headers' => 'apiauth,content-type',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'access-control-request-method' => 'POST',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'admin' => 'Login',
+)
+[ info ] [ RUN ] app\admin\controller\Miss->index[ E:\web\apiadmin\application\admin\controller\Miss.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.001000s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-09T09:31:36+08:00 ] 127.0.0.1 POST zm.com/admin/Login/index
+[运行时间：0.099005s] [吞吐率：10.10req/s] [内存消耗：2,336.70kb] [文件加载：56]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Login',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'content-type' => 'application/json;charset=UTF-8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'accept' => 'application/json, text/plain, */*',
+  'apiauth' => 'null',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '39',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+)
+[ info ] [ PARAM ] array (
+  'username' => 'root',
+  'password' => '123456',
+)
+[ info ] [ CACHE ] INIT Redis
+[ info ] [ RUN ] app\admin\controller\Login->index[ E:\web\apiadmin\application\admin\controller\Login.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001000s ] mysql:host=127.0.0.1;dbname=apiadmin;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_user` [ RunTime:0.017001s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_user` WHERE  `username` = 'root'  AND `password` = '912601e4ad1b308c9ae41877cf6ca754' LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_user_data` [ RunTime:0.008001s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_user_data` WHERE  `uid` = '1' LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] UPDATE `admin_user_data`  SET `loginTimes`=1,`lastLoginIp`=2130706433,`lastLoginTime`=1562635896  WHERE  `id` = 1 [ RunTime:0.024001s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_menu` [ RunTime:0.014001s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_menu` WHERE  `hide` = 0 [ RunTime:0.001000s ]
+---------------------------------------------------------------
+[ 2019-07-09T09:34:57+08:00 ] 127.0.0.1 OPTIONS zm.com/admin/Menu/index
+[运行时间：0.023001s] [吞吐率：43.48req/s] [内存消耗：1,280.23kb] [文件加载：41]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Miss',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'accept' => '*/*',
+  'access-control-request-headers' => 'apiauth',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'access-control-request-method' => 'GET',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'admin' => 'Menu',
+)
+[ info ] [ RUN ] app\admin\controller\Miss->index[ E:\web\apiadmin\application\admin\controller\Miss.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-09T09:34:58+08:00 ] 127.0.0.1 GET zm.com/admin/Menu/index
+[运行时间：0.130007s] [吞吐率：7.69req/s] [内存消耗：2,334.92kb] [文件加载：58]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ CACHE ] INIT Redis
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiAuth @ [ RunTime:0.016001s ]
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiPermission @ [ RunTime:0.007001s ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\AdminLog @ [ RunTime:0.069004s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Menu',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'accept' => 'application/json, text/plain, */*',
+  'apiauth' => '285d2622f1e2798a71d977fc93c7d893',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\admin\controller\Menu->index[ E:\web\apiadmin\application\admin\controller\Menu.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000000s ] mysql:host=127.0.0.1;dbname=apiadmin;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_menu` [ RunTime:0.007001s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_menu` WHERE  `url` = 'admin/Menu/index' LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_user_action` [ RunTime:0.025001s ]
+[ sql ] [ SQL ] INSERT INTO `admin_user_action` (`actionName` , `uid` , `nickname` , `addTime` , `url` , `data`) VALUES ('菜单列表' , 1 , 'root' , 1562636098 , 'admin/Menu/index' , '[]') [ RunTime:0.027002s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_menu` ORDER BY `sort` ASC [ RunTime:0.001000s ]
+---------------------------------------------------------------
+[ 2019-07-09T09:35:13+08:00 ] 127.0.0.1 OPTIONS zm.com/admin/Menu/index
+[运行时间：0.018001s] [吞吐率：55.55req/s] [内存消耗：1,280.23kb] [文件加载：41]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Miss',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'accept' => '*/*',
+  'access-control-request-headers' => 'apiauth',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'access-control-request-method' => 'GET',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'admin' => 'Menu',
+)
+[ info ] [ RUN ] app\admin\controller\Miss->index[ E:\web\apiadmin\application\admin\controller\Miss.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-09T09:35:13+08:00 ] 127.0.0.1 GET zm.com/admin/Menu/index
+[运行时间：0.076005s] [吞吐率：13.16req/s] [内存消耗：2,334.92kb] [文件加载：58]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ CACHE ] INIT Redis
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiAuth @ [ RunTime:0.002000s ]
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiPermission @ [ RunTime:0.000000s ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\AdminLog @ [ RunTime:0.052003s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Menu',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'accept' => 'application/json, text/plain, */*',
+  'apiauth' => '285d2622f1e2798a71d977fc93c7d893',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\admin\controller\Menu->index[ E:\web\apiadmin\application\admin\controller\Menu.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000000s ] mysql:host=127.0.0.1;dbname=apiadmin;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_menu` [ RunTime:0.007000s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_menu` WHERE  `url` = 'admin/Menu/index' LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_user_action` [ RunTime:0.007001s ]
+[ sql ] [ SQL ] INSERT INTO `admin_user_action` (`actionName` , `uid` , `nickname` , `addTime` , `url` , `data`) VALUES ('菜单列表' , 1 , 'root' , 1562636113 , 'admin/Menu/index' , '[]') [ RunTime:0.028001s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_menu` ORDER BY `sort` ASC [ RunTime:0.001001s ]
+---------------------------------------------------------------
+[ 2019-07-09T09:35:14+08:00 ] 127.0.0.1 OPTIONS zm.com/admin/User/index?page=1&size=10&type=&keywords=&status=
+[运行时间：0.017001s] [吞吐率：58.82req/s] [内存消耗：1,280.79kb] [文件加载：41]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Miss',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'accept' => '*/*',
+  'access-control-request-headers' => 'apiauth',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'access-control-request-method' => 'GET',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'page' => '1',
+  'size' => '10',
+  'type' => '',
+  'keywords' => '',
+  'status' => '',
+  'admin' => 'User',
+)
+[ info ] [ RUN ] app\admin\controller\Miss->index[ E:\web\apiadmin\application\admin\controller\Miss.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-09T09:35:14+08:00 ] 127.0.0.1 GET zm.com/admin/User/index?page=1&size=10&type=&keywords=&status=
+[运行时间：0.260015s] [吞吐率：3.85req/s] [内存消耗：2,475.90kb] [文件加载：67]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ CACHE ] INIT Redis
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiAuth @ [ RunTime:0.001000s ]
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiPermission @ [ RunTime:0.001000s ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\AdminLog @ [ RunTime:0.056004s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'User',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'accept' => 'application/json, text/plain, */*',
+  'apiauth' => '285d2622f1e2798a71d977fc93c7d893',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'page' => '1',
+  'size' => '10',
+  'type' => '',
+  'keywords' => '',
+  'status' => '',
+)
+[ info ] [ RUN ] app\admin\controller\User->index[ E:\web\apiadmin\application\admin\controller\User.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001000s ] mysql:host=127.0.0.1;dbname=apiadmin;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_menu` [ RunTime:0.006000s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_menu` WHERE  `url` = 'admin/User/index' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_user_action` [ RunTime:0.007001s ]
+[ sql ] [ SQL ] INSERT INTO `admin_user_action` (`actionName` , `uid` , `nickname` , `addTime` , `url` , `data`) VALUES ('用户列表' , 1 , 'root' , 1562636114 , 'admin/User/index' , '{\"page\":\"1\",\"size\":\"10\",\"type\":\"\",\"keywords\":\"\",\"status\":\"\"}') [ RunTime:0.033002s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_user` [ RunTime:0.017001s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `admin_user` LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_user` ORDER BY `regTime` DESC LIMIT 0,10 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_user_data` [ RunTime:0.017001s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_user_data` WHERE  `uid` IN ('1') [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_auth_group_access` [ RunTime:0.029002s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_auth_group_access` WHERE  `uid` IN (1) [ RunTime:0.001000s ]
+[ error ] [2]long2ip() expects parameter 1 to be integer, string given[E:\web\apiadmin\application\admin\controller\User.php:72]
+---------------------------------------------------------------
+[ 2019-07-09T09:35:17+08:00 ] 127.0.0.1 OPTIONS zm.com/admin/Auth/index?page=1&size=10&keywords=&status=
+[运行时间：0.018001s] [吞吐率：55.55req/s] [内存消耗：1,280.79kb] [文件加载：41]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Miss',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'accept' => '*/*',
+  'access-control-request-headers' => 'apiauth',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'access-control-request-method' => 'GET',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'page' => '1',
+  'size' => '10',
+  'keywords' => '',
+  'status' => '',
+  'admin' => 'Auth',
+)
+[ info ] [ RUN ] app\admin\controller\Miss->index[ E:\web\apiadmin\application\admin\controller\Miss.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-09T09:35:17+08:00 ] 127.0.0.1 GET zm.com/admin/Auth/index?page=1&size=10&keywords=&status=
+[运行时间：0.095006s] [吞吐率：10.53req/s] [内存消耗：2,413.73kb] [文件加载：63]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ CACHE ] INIT Redis
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiAuth @ [ RunTime:0.001000s ]
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiPermission @ [ RunTime:0.001000s ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\AdminLog @ [ RunTime:0.052003s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Auth',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'accept' => 'application/json, text/plain, */*',
+  'apiauth' => '285d2622f1e2798a71d977fc93c7d893',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'page' => '1',
+  'size' => '10',
+  'keywords' => '',
+  'status' => '',
+)
+[ info ] [ RUN ] app\admin\controller\Auth->index[ E:\web\apiadmin\application\admin\controller\Auth.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000000s ] mysql:host=127.0.0.1;dbname=apiadmin;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_menu` [ RunTime:0.007000s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_menu` WHERE  `url` = 'admin/Auth/index' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_user_action` [ RunTime:0.006001s ]
+[ sql ] [ SQL ] INSERT INTO `admin_user_action` (`actionName` , `uid` , `nickname` , `addTime` , `url` , `data`) VALUES ('权限列表' , 1 , 'root' , 1562636117 , 'admin/Auth/index' , '{\"page\":\"1\",\"size\":\"10\",\"keywords\":\"\",\"status\":\"\"}') [ RunTime:0.029001s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_auth_group` [ RunTime:0.008001s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `admin_auth_group` WHERE  `name` LIKE '%%' LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_auth_group` WHERE  `name` LIKE '%%' ORDER BY `id` DESC LIMIT 0,10 [ RunTime:0.000000s ]
+---------------------------------------------------------------
+[ 2019-07-09T09:35:18+08:00 ] 127.0.0.1 OPTIONS zm.com/admin/Auth/getRuleList
+[运行时间：0.027002s] [吞吐率：37.03req/s] [内存消耗：1,280.28kb] [文件加载：41]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Miss',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'accept' => '*/*',
+  'access-control-request-headers' => 'apiauth',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'access-control-request-method' => 'GET',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'admin' => 'Auth',
+)
+[ info ] [ RUN ] app\admin\controller\Miss->index[ E:\web\apiadmin\application\admin\controller\Miss.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.001000s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-09T09:35:18+08:00 ] 127.0.0.1 GET zm.com/admin/Auth/getRuleList
+[运行时间：0.070004s] [吞吐率：14.28req/s] [内存消耗：2,354.14kb] [文件加载：58]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ CACHE ] INIT Redis
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiAuth @ [ RunTime:0.002000s ]
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiPermission @ [ RunTime:0.000000s ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\AdminLog @ [ RunTime:0.048003s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Auth',
+    2 => 'getRuleList',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'accept' => 'application/json, text/plain, */*',
+  'apiauth' => '285d2622f1e2798a71d977fc93c7d893',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\admin\controller\Auth->getRuleList[ E:\web\apiadmin\application\admin\controller\Auth.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000000s ] mysql:host=127.0.0.1;dbname=apiadmin;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_menu` [ RunTime:0.007001s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_menu` WHERE  `url` = 'admin/Auth/getRuleList' LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_user_action` [ RunTime:0.007000s ]
+[ sql ] [ SQL ] INSERT INTO `admin_user_action` (`actionName` , `uid` , `nickname` , `addTime` , `url` , `data`) VALUES ('获取组所有的权限列表' , 1 , 'root' , 1562636118 , 'admin/Auth/getRuleList' , '[]') [ RunTime:0.024002s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_menu` ORDER BY `sort` ASC [ RunTime:0.000000s ]
+---------------------------------------------------------------
+[ 2019-07-09T09:35:30+08:00 ] 127.0.0.1 OPTIONS zm.com/admin/Log/index?page=1&size=10&type=&keywords=
+[运行时间：0.018002s] [吞吐率：55.55req/s] [内存消耗：1,280.70kb] [文件加载：41]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Miss',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'accept' => '*/*',
+  'access-control-request-headers' => 'apiauth',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'access-control-request-method' => 'GET',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'page' => '1',
+  'size' => '10',
+  'type' => '',
+  'keywords' => '',
+  'admin' => 'Log',
+)
+[ info ] [ RUN ] app\admin\controller\Miss->index[ E:\web\apiadmin\application\admin\controller\Miss.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-09T09:35:30+08:00 ] 127.0.0.1 GET zm.com/admin/Log/index?page=1&size=10&type=&keywords=
+[运行时间：0.117006s] [吞吐率：8.55req/s] [内存消耗：2,384.90kb] [文件加载：62]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ CACHE ] INIT Redis
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiAuth @ [ RunTime:0.002001s ]
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiPermission @ [ RunTime:0.001000s ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\AdminLog @ [ RunTime:0.063003s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Log',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'accept' => 'application/json, text/plain, */*',
+  'apiauth' => '285d2622f1e2798a71d977fc93c7d893',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'page' => '1',
+  'size' => '10',
+  'type' => '',
+  'keywords' => '',
+)
+[ info ] [ RUN ] app\admin\controller\Log->index[ E:\web\apiadmin\application\admin\controller\Log.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.011001s ] mysql:host=127.0.0.1;dbname=apiadmin;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_menu` [ RunTime:0.007000s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_menu` WHERE  `url` = 'admin/Log/index' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_user_action` [ RunTime:0.007000s ]
+[ sql ] [ SQL ] INSERT INTO `admin_user_action` (`actionName` , `uid` , `nickname` , `addTime` , `url` , `data`) VALUES ('获取操作日志列表' , 1 , 'root' , 1562636130 , 'admin/Log/index' , '{\"page\":\"1\",\"size\":\"10\",\"type\":\"\",\"keywords\":\"\"}') [ RunTime:0.030002s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `admin_user_action` LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_user_action` ORDER BY `addTime` DESC LIMIT 0,10 [ RunTime:0.000000s ]
+---------------------------------------------------------------
+[ 2019-07-09T09:35:39+08:00 ] 127.0.0.1 OPTIONS zm.com/admin/AppGroup/index?page=1&size=10&type=&keywords=&status=
+[运行时间：0.018001s] [吞吐率：55.55req/s] [内存消耗：1,280.81kb] [文件加载：41]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Miss',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'accept' => '*/*',
+  'access-control-request-headers' => 'apiauth',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'access-control-request-method' => 'GET',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'page' => '1',
+  'size' => '10',
+  'type' => '',
+  'keywords' => '',
+  'status' => '',
+  'admin' => 'AppGroup',
+)
+[ info ] [ RUN ] app\admin\controller\Miss->index[ E:\web\apiadmin\application\admin\controller\Miss.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-09T09:35:39+08:00 ] 127.0.0.1 GET zm.com/admin/AppGroup/index?page=1&size=10&type=&keywords=&status=
+[运行时间：0.122007s] [吞吐率：8.20req/s] [内存消耗：2,398.06kb] [文件加载：63]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ CACHE ] INIT Redis
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiAuth @ [ RunTime:0.001000s ]
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiPermission @ [ RunTime:0.001000s ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\AdminLog @ [ RunTime:0.058003s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'AppGroup',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'accept' => 'application/json, text/plain, */*',
+  'apiauth' => '285d2622f1e2798a71d977fc93c7d893',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'page' => '1',
+  'size' => '10',
+  'type' => '',
+  'keywords' => '',
+  'status' => '',
+)
+[ info ] [ RUN ] app\admin\controller\AppGroup->index[ E:\web\apiadmin\application\admin\controller\AppGroup.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.001000s ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001000s ] mysql:host=127.0.0.1;dbname=apiadmin;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_menu` [ RunTime:0.007001s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_menu` WHERE  `url` = 'admin/AppGroup/index' LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_user_action` [ RunTime:0.006000s ]
+[ sql ] [ SQL ] INSERT INTO `admin_user_action` (`actionName` , `uid` , `nickname` , `addTime` , `url` , `data`) VALUES ('应用分组列表' , 1 , 'root' , 1562636139 , 'admin/AppGroup/index' , '{\"page\":\"1\",\"size\":\"10\",\"type\":\"\",\"keywords\":\"\",\"status\":\"\"}') [ RunTime:0.035002s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_app_group` [ RunTime:0.026002s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `admin_app_group` LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_app_group` LIMIT 0,10 [ RunTime:0.000000s ]
+---------------------------------------------------------------
+[ 2019-07-09T09:35:44+08:00 ] 127.0.0.1 OPTIONS zm.com/admin/App/index?page=1&size=10&type=&keywords=&status=
+[运行时间：0.018001s] [吞吐率：55.55req/s] [内存消耗：1,280.78kb] [文件加载：41]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Miss',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'accept' => '*/*',
+  'access-control-request-headers' => 'apiauth',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'access-control-request-method' => 'GET',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'page' => '1',
+  'size' => '10',
+  'type' => '',
+  'keywords' => '',
+  'status' => '',
+  'admin' => 'App',
+)
+[ info ] [ RUN ] app\admin\controller\Miss->index[ E:\web\apiadmin\application\admin\controller\Miss.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-09T09:35:44+08:00 ] 127.0.0.1 GET zm.com/admin/App/index?page=1&size=10&type=&keywords=&status=
+[运行时间：0.102006s] [吞吐率：9.80req/s] [内存消耗：2,408.74kb] [文件加载：63]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ CACHE ] INIT Redis
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiAuth @ [ RunTime:0.001000s ]
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiPermission @ [ RunTime:0.001001s ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\AdminLog @ [ RunTime:0.053003s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'App',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'accept' => 'application/json, text/plain, */*',
+  'apiauth' => '285d2622f1e2798a71d977fc93c7d893',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'page' => '1',
+  'size' => '10',
+  'type' => '',
+  'keywords' => '',
+  'status' => '',
+)
+[ info ] [ RUN ] app\admin\controller\App->index[ E:\web\apiadmin\application\admin\controller\App.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.001001s ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001000s ] mysql:host=127.0.0.1;dbname=apiadmin;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_menu` [ RunTime:0.007000s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_menu` WHERE  `url` = 'admin/App/index' LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_user_action` [ RunTime:0.007001s ]
+[ sql ] [ SQL ] INSERT INTO `admin_user_action` (`actionName` , `uid` , `nickname` , `addTime` , `url` , `data`) VALUES ('应用列表' , 1 , 'root' , 1562636144 , 'admin/App/index' , '{\"page\":\"1\",\"size\":\"10\",\"type\":\"\",\"keywords\":\"\",\"status\":\"\"}') [ RunTime:0.029002s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_app` [ RunTime:0.007000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `admin_app` LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_app` ORDER BY `app_addTime` DESC LIMIT 0,10 [ RunTime:0.000000s ]
+---------------------------------------------------------------
+[ 2019-07-09T09:35:47+08:00 ] 127.0.0.1 OPTIONS zm.com/admin/InterfaceGroup/index?page=1&size=10&type=&keywords=&status=
+[运行时间：0.018001s] [吞吐率：55.55req/s] [内存消耗：1,280.96kb] [文件加载：41]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Miss',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'accept' => '*/*',
+  'access-control-request-headers' => 'apiauth',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'access-control-request-method' => 'GET',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'page' => '1',
+  'size' => '10',
+  'type' => '',
+  'keywords' => '',
+  'status' => '',
+  'admin' => 'InterfaceGroup',
+)
+[ info ] [ RUN ] app\admin\controller\Miss->index[ E:\web\apiadmin\application\admin\controller\Miss.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-09T09:35:47+08:00 ] 127.0.0.1 GET zm.com/admin/InterfaceGroup/index?page=1&size=10&type=&keywords=&status=
+[运行时间：0.120007s] [吞吐率：8.33req/s] [内存消耗：2,403.87kb] [文件加载：63]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ CACHE ] INIT Redis
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiAuth @ [ RunTime:0.001000s ]
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiPermission @ [ RunTime:0.001001s ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\AdminLog @ [ RunTime:0.056003s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'InterfaceGroup',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'accept' => 'application/json, text/plain, */*',
+  'apiauth' => '285d2622f1e2798a71d977fc93c7d893',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'page' => '1',
+  'size' => '10',
+  'type' => '',
+  'keywords' => '',
+  'status' => '',
+)
+[ info ] [ RUN ] app\admin\controller\InterfaceGroup->index[ E:\web\apiadmin\application\admin\controller\InterfaceGroup.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001000s ] mysql:host=127.0.0.1;dbname=apiadmin;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_menu` [ RunTime:0.007000s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_menu` WHERE  `url` = 'admin/InterfaceGroup/index' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_user_action` [ RunTime:0.007000s ]
+[ sql ] [ SQL ] INSERT INTO `admin_user_action` (`actionName` , `uid` , `nickname` , `addTime` , `url` , `data`) VALUES ('接口分组列表' , 1 , 'root' , 1562636147 , 'admin/InterfaceGroup/index' , '{\"page\":\"1\",\"size\":\"10\",\"type\":\"\",\"keywords\":\"\",\"status\":\"\"}') [ RunTime:0.032002s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_group` [ RunTime:0.023001s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `admin_group` LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_group` LIMIT 0,10 [ RunTime:0.000000s ]
+---------------------------------------------------------------
+[ 2019-07-09T09:35:52+08:00 ] 127.0.0.1 OPTIONS zm.com/admin/InterfaceList/index?page=1&size=10&type=&keywords=&status=
+[运行时间：0.018001s] [吞吐率：55.55req/s] [内存消耗：1,280.96kb] [文件加载：41]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Miss',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'accept' => '*/*',
+  'access-control-request-headers' => 'apiauth',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'access-control-request-method' => 'GET',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'page' => '1',
+  'size' => '10',
+  'type' => '',
+  'keywords' => '',
+  'status' => '',
+  'admin' => 'InterfaceList',
+)
+[ info ] [ RUN ] app\admin\controller\Miss->index[ E:\web\apiadmin\application\admin\controller\Miss.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.001000s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-09T09:35:52+08:00 ] 127.0.0.1 GET zm.com/admin/InterfaceList/index?page=1&size=10&type=&keywords=&status=
+[运行时间：0.131007s] [吞吐率：7.63req/s] [内存消耗：2,410.66kb] [文件加载：63]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ CACHE ] INIT Redis
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiAuth @ [ RunTime:0.012001s ]
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiPermission @ [ RunTime:0.001000s ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\AdminLog @ [ RunTime:0.057003s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'InterfaceList',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'accept' => 'application/json, text/plain, */*',
+  'apiauth' => '285d2622f1e2798a71d977fc93c7d893',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'page' => '1',
+  'size' => '10',
+  'type' => '',
+  'keywords' => '',
+  'status' => '',
+)
+[ info ] [ RUN ] app\admin\controller\InterfaceList->index[ E:\web\apiadmin\application\admin\controller\InterfaceList.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.001000s ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001000s ] mysql:host=127.0.0.1;dbname=apiadmin;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_menu` [ RunTime:0.008000s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_menu` WHERE  `url` = 'admin/InterfaceList/index' LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_user_action` [ RunTime:0.007001s ]
+[ sql ] [ SQL ] INSERT INTO `admin_user_action` (`actionName` , `uid` , `nickname` , `addTime` , `url` , `data`) VALUES ('接口列表' , 1 , 'root' , 1562636152 , 'admin/InterfaceList/index' , '{\"page\":\"1\",\"size\":\"10\",\"type\":\"\",\"keywords\":\"\",\"status\":\"\"}') [ RunTime:0.033001s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_list` [ RunTime:0.021001s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `admin_list` LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_list` ORDER BY `id` DESC LIMIT 0,10 [ RunTime:0.000000s ]
+---------------------------------------------------------------
+[ 2019-07-09T09:35:56+08:00 ] 127.0.0.1 OPTIONS zm.com/admin/InterfaceList/refresh
+[运行时间：0.029001s] [吞吐率：34.48req/s] [内存消耗：1,280.38kb] [文件加载：41]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Miss',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'accept' => '*/*',
+  'access-control-request-headers' => 'apiauth',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'access-control-request-method' => 'GET',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'admin' => 'InterfaceList',
+)
+[ info ] [ RUN ] app\admin\controller\Miss->index[ E:\web\apiadmin\application\admin\controller\Miss.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.001000s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-09T09:35:56+08:00 ] 127.0.0.1 GET zm.com/admin/InterfaceList/refresh
+[运行时间：0.128008s] [吞吐率：7.81req/s] [内存消耗：2,338.06kb] [文件加载：59]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ CACHE ] INIT Redis
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiAuth @ [ RunTime:0.002000s ]
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiPermission @ [ RunTime:0.000000s ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\AdminLog @ [ RunTime:0.086005s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'InterfaceList',
+    2 => 'refresh',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'accept' => 'application/json, text/plain, */*',
+  'apiauth' => '285d2622f1e2798a71d977fc93c7d893',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\admin\controller\InterfaceList->refresh[ E:\web\apiadmin\application\admin\controller\InterfaceList.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000000s ] mysql:host=127.0.0.1;dbname=apiadmin;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_menu` [ RunTime:0.007000s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_menu` WHERE  `url` = 'admin/InterfaceList/refresh' LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_user_action` [ RunTime:0.007000s ]
+[ sql ] [ SQL ] INSERT INTO `admin_user_action` (`actionName` , `uid` , `nickname` , `addTime` , `url` , `data`) VALUES ('刷新路由' , 1 , 'root' , 1562636156 , 'admin/InterfaceList/refresh' , '[]') [ RunTime:0.062004s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_list` [ RunTime:0.012000s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_list` WHERE  `status` = 1 [ RunTime:0.000000s ]
+---------------------------------------------------------------
+[ 2019-07-09T09:35:59+08:00 ] 127.0.0.1 OPTIONS zm.com/admin/Menu/index
+[运行时间：0.025001s] [吞吐率：40.00req/s] [内存消耗：1,281.27kb] [文件加载：41]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Miss',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'accept' => '*/*',
+  'access-control-request-headers' => 'apiauth',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'access-control-request-method' => 'GET',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'admin' => 'Menu',
+)
+[ info ] [ RUN ] app\admin\controller\Miss->index[ E:\web\apiadmin\application\admin\controller\Miss.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-09T09:35:59+08:00 ] 127.0.0.1 GET zm.com/admin/Menu/index
+[运行时间：0.074005s] [吞吐率：13.51req/s] [内存消耗：2,335.96kb] [文件加载：58]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ CACHE ] INIT Redis
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiAuth @ [ RunTime:0.001000s ]
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiPermission @ [ RunTime:0.001000s ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\AdminLog @ [ RunTime:0.052003s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Menu',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'accept' => 'application/json, text/plain, */*',
+  'apiauth' => '285d2622f1e2798a71d977fc93c7d893',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\admin\controller\Menu->index[ E:\web\apiadmin\application\admin\controller\Menu.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001000s ] mysql:host=127.0.0.1;dbname=apiadmin;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_menu` [ RunTime:0.006000s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_menu` WHERE  `url` = 'admin/Menu/index' LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_user_action` [ RunTime:0.007000s ]
+[ sql ] [ SQL ] INSERT INTO `admin_user_action` (`actionName` , `uid` , `nickname` , `addTime` , `url` , `data`) VALUES ('菜单列表' , 1 , 'root' , 1562636159 , 'admin/Menu/index' , '[]') [ RunTime:0.030002s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_menu` ORDER BY `sort` ASC [ RunTime:0.001000s ]
+---------------------------------------------------------------
+[ 2019-07-09T09:36:17+08:00 ] 127.0.0.1 OPTIONS zm.com/admin/Menu/changeStatus?status=1&id=67
+[运行时间：0.021001s] [吞吐率：47.62req/s] [内存消耗：1,281.69kb] [文件加载：41]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Miss',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'accept' => '*/*',
+  'access-control-request-headers' => 'apiauth',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'access-control-request-method' => 'GET',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'status' => '1',
+  'id' => '67',
+  'admin' => 'Menu',
+)
+[ info ] [ RUN ] app\admin\controller\Miss->index[ E:\web\apiadmin\application\admin\controller\Miss.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.001000s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-09T09:36:17+08:00 ] 127.0.0.1 GET zm.com/admin/Menu/changeStatus?status=1&id=67
+[运行时间：0.092005s] [吞吐率：10.87req/s] [内存消耗：2,279.08kb] [文件加载：58]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ CACHE ] INIT Redis
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiAuth @ [ RunTime:0.002000s ]
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiPermission @ [ RunTime:0.001000s ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\AdminLog @ [ RunTime:0.052003s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Menu',
+    2 => 'changeStatus',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'accept' => 'application/json, text/plain, */*',
+  'apiauth' => '285d2622f1e2798a71d977fc93c7d893',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'status' => '1',
+  'id' => '67',
+)
+[ info ] [ RUN ] app\admin\controller\Menu->changeStatus[ E:\web\apiadmin\application\admin\controller\Menu.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001000s ] mysql:host=127.0.0.1;dbname=apiadmin;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_menu` [ RunTime:0.006000s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_menu` WHERE  `url` = 'admin/Menu/changeStatus' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_user_action` [ RunTime:0.006001s ]
+[ sql ] [ SQL ] INSERT INTO `admin_user_action` (`actionName` , `uid` , `nickname` , `addTime` , `url` , `data`) VALUES ('菜单状态修改' , 1 , 'root' , 1562636177 , 'admin/Menu/changeStatus' , '{\"status\":\"1\",\"id\":\"67\"}') [ RunTime:0.028001s ]
+[ sql ] [ SQL ] UPDATE `admin_menu`  SET `hide`=1  WHERE  `id` = 67 [ RunTime:0.019001s ]
+---------------------------------------------------------------
+[ 2019-07-09T09:36:18+08:00 ] 127.0.0.1 OPTIONS zm.com/admin/Menu/changeStatus?status=0&id=67
+[运行时间：0.029001s] [吞吐率：34.48req/s] [内存消耗：1,281.69kb] [文件加载：41]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Miss',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'accept' => '*/*',
+  'access-control-request-headers' => 'apiauth',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'access-control-request-method' => 'GET',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'status' => '0',
+  'id' => '67',
+  'admin' => 'Menu',
+)
+[ info ] [ RUN ] app\admin\controller\Miss->index[ E:\web\apiadmin\application\admin\controller\Miss.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-09T09:36:18+08:00 ] 127.0.0.1 GET zm.com/admin/Menu/changeStatus?status=0&id=67
+[运行时间：0.089005s] [吞吐率：11.24req/s] [内存消耗：2,279.08kb] [文件加载：58]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ CACHE ] INIT Redis
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiAuth @ [ RunTime:0.002000s ]
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiPermission @ [ RunTime:0.000000s ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\AdminLog @ [ RunTime:0.046003s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Menu',
+    2 => 'changeStatus',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'accept' => 'application/json, text/plain, */*',
+  'apiauth' => '285d2622f1e2798a71d977fc93c7d893',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'status' => '0',
+  'id' => '67',
+)
+[ info ] [ RUN ] app\admin\controller\Menu->changeStatus[ E:\web\apiadmin\application\admin\controller\Menu.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001000s ] mysql:host=127.0.0.1;dbname=apiadmin;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_menu` [ RunTime:0.006000s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_menu` WHERE  `url` = 'admin/Menu/changeStatus' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_user_action` [ RunTime:0.007001s ]
+[ sql ] [ SQL ] INSERT INTO `admin_user_action` (`actionName` , `uid` , `nickname` , `addTime` , `url` , `data`) VALUES ('菜单状态修改' , 1 , 'root' , 1562636178 , 'admin/Menu/changeStatus' , '{\"status\":\"0\",\"id\":\"67\"}') [ RunTime:0.023001s ]
+[ sql ] [ SQL ] UPDATE `admin_menu`  SET `hide`=0  WHERE  `id` = 67 [ RunTime:0.021001s ]
+---------------------------------------------------------------
+[ 2019-07-09T09:36:18+08:00 ] 127.0.0.1 OPTIONS zm.com/admin/Menu/changeStatus?status=1&id=1
+[运行时间：0.038002s] [吞吐率：26.31req/s] [内存消耗：1,281.69kb] [文件加载：41]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Miss',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'accept' => '*/*',
+  'access-control-request-headers' => 'apiauth',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'access-control-request-method' => 'GET',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'status' => '1',
+  'id' => '1',
+  'admin' => 'Menu',
+)
+[ info ] [ RUN ] app\admin\controller\Miss->index[ E:\web\apiadmin\application\admin\controller\Miss.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-09T09:36:18+08:00 ] 127.0.0.1 GET zm.com/admin/Menu/changeStatus?status=1&id=1
+[运行时间：0.132008s] [吞吐率：7.58req/s] [内存消耗：2,279.08kb] [文件加载：58]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ CACHE ] INIT Redis
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiAuth @ [ RunTime:0.002000s ]
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiPermission @ [ RunTime:0.001000s ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\AdminLog @ [ RunTime:0.048003s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Menu',
+    2 => 'changeStatus',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'accept' => 'application/json, text/plain, */*',
+  'apiauth' => '285d2622f1e2798a71d977fc93c7d893',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'status' => '1',
+  'id' => '1',
+)
+[ info ] [ RUN ] app\admin\controller\Menu->changeStatus[ E:\web\apiadmin\application\admin\controller\Menu.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000000s ] mysql:host=127.0.0.1;dbname=apiadmin;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_menu` [ RunTime:0.007001s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_menu` WHERE  `url` = 'admin/Menu/changeStatus' LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_user_action` [ RunTime:0.007000s ]
+[ sql ] [ SQL ] INSERT INTO `admin_user_action` (`actionName` , `uid` , `nickname` , `addTime` , `url` , `data`) VALUES ('菜单状态修改' , 1 , 'root' , 1562636178 , 'admin/Menu/changeStatus' , '{\"status\":\"1\",\"id\":\"1\"}') [ RunTime:0.025002s ]
+[ sql ] [ SQL ] UPDATE `admin_menu`  SET `hide`=1  WHERE  `id` = 1 [ RunTime:0.062004s ]
+---------------------------------------------------------------
+[ 2019-07-09T09:36:19+08:00 ] 127.0.0.1 OPTIONS zm.com/admin/Menu/changeStatus?status=0&id=1
+[运行时间：0.028002s] [吞吐率：35.71req/s] [内存消耗：1,281.69kb] [文件加载：41]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Miss',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'accept' => '*/*',
+  'access-control-request-headers' => 'apiauth',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'access-control-request-method' => 'GET',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'status' => '0',
+  'id' => '1',
+  'admin' => 'Menu',
+)
+[ info ] [ RUN ] app\admin\controller\Miss->index[ E:\web\apiadmin\application\admin\controller\Miss.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-09T09:36:19+08:00 ] 127.0.0.1 GET zm.com/admin/Menu/changeStatus?status=0&id=1
+[运行时间：0.097006s] [吞吐率：10.31req/s] [内存消耗：2,279.08kb] [文件加载：58]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ CACHE ] INIT Redis
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiAuth @ [ RunTime:0.011001s ]
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiPermission @ [ RunTime:0.001000s ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\AdminLog @ [ RunTime:0.047002s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Menu',
+    2 => 'changeStatus',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'accept' => 'application/json, text/plain, */*',
+  'apiauth' => '285d2622f1e2798a71d977fc93c7d893',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'status' => '0',
+  'id' => '1',
+)
+[ info ] [ RUN ] app\admin\controller\Menu->changeStatus[ E:\web\apiadmin\application\admin\controller\Menu.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.001000s ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001000s ] mysql:host=127.0.0.1;dbname=apiadmin;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_menu` [ RunTime:0.007001s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_menu` WHERE  `url` = 'admin/Menu/changeStatus' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_user_action` [ RunTime:0.006000s ]
+[ sql ] [ SQL ] INSERT INTO `admin_user_action` (`actionName` , `uid` , `nickname` , `addTime` , `url` , `data`) VALUES ('菜单状态修改' , 1 , 'root' , 1562636179 , 'admin/Menu/changeStatus' , '{\"status\":\"0\",\"id\":\"1\"}') [ RunTime:0.025001s ]
+[ sql ] [ SQL ] UPDATE `admin_menu`  SET `hide`=0  WHERE  `id` = 1 [ RunTime:0.019001s ]
+---------------------------------------------------------------
+[ 2019-07-09T09:36:22+08:00 ] 127.0.0.1 OPTIONS zm.com/admin/Menu/changeStatus?status=1&id=2
+[运行时间：0.018001s] [吞吐率：55.55req/s] [内存消耗：1,281.69kb] [文件加载：41]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Miss',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'accept' => '*/*',
+  'access-control-request-headers' => 'apiauth',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'access-control-request-method' => 'GET',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'status' => '1',
+  'id' => '2',
+  'admin' => 'Menu',
+)
+[ info ] [ RUN ] app\admin\controller\Miss->index[ E:\web\apiadmin\application\admin\controller\Miss.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.001000s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-09T09:36:22+08:00 ] 127.0.0.1 GET zm.com/admin/Menu/changeStatus?status=1&id=2
+[运行时间：0.088005s] [吞吐率：11.36req/s] [内存消耗：2,279.08kb] [文件加载：58]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ CACHE ] INIT Redis
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiAuth @ [ RunTime:0.002000s ]
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiPermission @ [ RunTime:0.001000s ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\AdminLog @ [ RunTime:0.047003s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Menu',
+    2 => 'changeStatus',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'accept' => 'application/json, text/plain, */*',
+  'apiauth' => '285d2622f1e2798a71d977fc93c7d893',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'status' => '1',
+  'id' => '2',
+)
+[ info ] [ RUN ] app\admin\controller\Menu->changeStatus[ E:\web\apiadmin\application\admin\controller\Menu.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001000s ] mysql:host=127.0.0.1;dbname=apiadmin;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_menu` [ RunTime:0.007001s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_menu` WHERE  `url` = 'admin/Menu/changeStatus' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_user_action` [ RunTime:0.006000s ]
+[ sql ] [ SQL ] INSERT INTO `admin_user_action` (`actionName` , `uid` , `nickname` , `addTime` , `url` , `data`) VALUES ('菜单状态修改' , 1 , 'root' , 1562636182 , 'admin/Menu/changeStatus' , '{\"status\":\"1\",\"id\":\"2\"}') [ RunTime:0.025002s ]
+[ sql ] [ SQL ] UPDATE `admin_menu`  SET `hide`=1  WHERE  `id` = 2 [ RunTime:0.019001s ]
+---------------------------------------------------------------
+[ 2019-07-09T09:36:24+08:00 ] 127.0.0.1 OPTIONS zm.com/admin/Menu/changeStatus?status=0&id=2
+[运行时间：0.028002s] [吞吐率：35.71req/s] [内存消耗：1,281.69kb] [文件加载：41]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Miss',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'accept' => '*/*',
+  'access-control-request-headers' => 'apiauth',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'access-control-request-method' => 'GET',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'status' => '0',
+  'id' => '2',
+  'admin' => 'Menu',
+)
+[ info ] [ RUN ] app\admin\controller\Miss->index[ E:\web\apiadmin\application\admin\controller\Miss.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.001000s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-09T09:36:24+08:00 ] 127.0.0.1 GET zm.com/admin/Menu/changeStatus?status=0&id=2
+[运行时间：0.096006s] [吞吐率：10.42req/s] [内存消耗：2,279.08kb] [文件加载：58]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ CACHE ] INIT Redis
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiAuth @ [ RunTime:0.002000s ]
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiPermission @ [ RunTime:0.001000s ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\AdminLog @ [ RunTime:0.056003s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Menu',
+    2 => 'changeStatus',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'accept' => 'application/json, text/plain, */*',
+  'apiauth' => '285d2622f1e2798a71d977fc93c7d893',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'status' => '0',
+  'id' => '2',
+)
+[ info ] [ RUN ] app\admin\controller\Menu->changeStatus[ E:\web\apiadmin\application\admin\controller\Menu.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001000s ] mysql:host=127.0.0.1;dbname=apiadmin;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_menu` [ RunTime:0.007001s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_menu` WHERE  `url` = 'admin/Menu/changeStatus' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_user_action` [ RunTime:0.007000s ]
+[ sql ] [ SQL ] INSERT INTO `admin_user_action` (`actionName` , `uid` , `nickname` , `addTime` , `url` , `data`) VALUES ('菜单状态修改' , 1 , 'root' , 1562636184 , 'admin/Menu/changeStatus' , '{\"status\":\"0\",\"id\":\"2\"}') [ RunTime:0.033002s ]
+[ sql ] [ SQL ] UPDATE `admin_menu`  SET `hide`=0  WHERE  `id` = 2 [ RunTime:0.019002s ]
+---------------------------------------------------------------
+[ 2019-07-09T09:36:26+08:00 ] 127.0.0.1 OPTIONS zm.com/admin/Menu/changeStatus?status=1&id=1
+[运行时间：0.018001s] [吞吐率：55.55req/s] [内存消耗：1,281.69kb] [文件加载：41]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Miss',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'accept' => '*/*',
+  'access-control-request-headers' => 'apiauth',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'access-control-request-method' => 'GET',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'status' => '1',
+  'id' => '1',
+  'admin' => 'Menu',
+)
+[ info ] [ RUN ] app\admin\controller\Miss->index[ E:\web\apiadmin\application\admin\controller\Miss.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-09T09:36:26+08:00 ] 127.0.0.1 GET zm.com/admin/Menu/changeStatus?status=1&id=1
+[运行时间：0.098005s] [吞吐率：10.20req/s] [内存消耗：2,279.08kb] [文件加载：58]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ CACHE ] INIT Redis
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiAuth @ [ RunTime:0.002001s ]
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiPermission @ [ RunTime:0.001000s ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\AdminLog @ [ RunTime:0.057003s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Menu',
+    2 => 'changeStatus',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'accept' => 'application/json, text/plain, */*',
+  'apiauth' => '285d2622f1e2798a71d977fc93c7d893',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'status' => '1',
+  'id' => '1',
+)
+[ info ] [ RUN ] app\admin\controller\Menu->changeStatus[ E:\web\apiadmin\application\admin\controller\Menu.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.001000s ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001000s ] mysql:host=127.0.0.1;dbname=apiadmin;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_menu` [ RunTime:0.007000s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_menu` WHERE  `url` = 'admin/Menu/changeStatus' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_user_action` [ RunTime:0.007001s ]
+[ sql ] [ SQL ] INSERT INTO `admin_user_action` (`actionName` , `uid` , `nickname` , `addTime` , `url` , `data`) VALUES ('菜单状态修改' , 1 , 'root' , 1562636186 , 'admin/Menu/changeStatus' , '{\"status\":\"1\",\"id\":\"1\"}') [ RunTime:0.034002s ]
+[ sql ] [ SQL ] UPDATE `admin_menu`  SET `hide`=1  WHERE  `id` = 1 [ RunTime:0.019001s ]
+---------------------------------------------------------------
+[ 2019-07-09T09:36:26+08:00 ] 127.0.0.1 OPTIONS zm.com/admin/Menu/changeStatus?status=0&id=1
+[运行时间：0.018001s] [吞吐率：55.55req/s] [内存消耗：1,281.69kb] [文件加载：41]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Miss',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'accept' => '*/*',
+  'access-control-request-headers' => 'apiauth',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'access-control-request-method' => 'GET',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'status' => '0',
+  'id' => '1',
+  'admin' => 'Menu',
+)
+[ info ] [ RUN ] app\admin\controller\Miss->index[ E:\web\apiadmin\application\admin\controller\Miss.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-09T09:36:27+08:00 ] 127.0.0.1 GET zm.com/admin/Menu/changeStatus?status=0&id=1
+[运行时间：0.096006s] [吞吐率：10.42req/s] [内存消耗：2,279.08kb] [文件加载：58]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ CACHE ] INIT Redis
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiAuth @ [ RunTime:0.002000s ]
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiPermission @ [ RunTime:0.001000s ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\AdminLog @ [ RunTime:0.056003s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Menu',
+    2 => 'changeStatus',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'accept' => 'application/json, text/plain, */*',
+  'apiauth' => '285d2622f1e2798a71d977fc93c7d893',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'status' => '0',
+  'id' => '1',
+)
+[ info ] [ RUN ] app\admin\controller\Menu->changeStatus[ E:\web\apiadmin\application\admin\controller\Menu.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001000s ] mysql:host=127.0.0.1;dbname=apiadmin;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_menu` [ RunTime:0.007000s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_menu` WHERE  `url` = 'admin/Menu/changeStatus' LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_user_action` [ RunTime:0.007001s ]
+[ sql ] [ SQL ] INSERT INTO `admin_user_action` (`actionName` , `uid` , `nickname` , `addTime` , `url` , `data`) VALUES ('菜单状态修改' , 1 , 'root' , 1562636186 , 'admin/Menu/changeStatus' , '{\"status\":\"0\",\"id\":\"1\"}') [ RunTime:0.033001s ]
+[ sql ] [ SQL ] UPDATE `admin_menu`  SET `hide`=0  WHERE  `id` = 1 [ RunTime:0.019001s ]
+---------------------------------------------------------------
+[ 2019-07-09T09:37:02+08:00 ] 127.0.0.1 OPTIONS zm.com/admin/Login/logout
+[运行时间：0.052003s] [吞吐率：19.23req/s] [内存消耗：1,281.29kb] [文件加载：41]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Miss',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'accept' => '*/*',
+  'access-control-request-headers' => 'apiauth',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'access-control-request-method' => 'GET',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'admin' => 'Login',
+)
+[ info ] [ RUN ] app\admin\controller\Miss->index[ E:\web\apiadmin\application\admin\controller\Miss.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-09T09:37:02+08:00 ] 127.0.0.1 GET zm.com/admin/Login/logout
+[运行时间：0.079005s] [吞吐率：12.66req/s] [内存消耗：2,268.96kb] [文件加载：56]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ CACHE ] INIT Redis
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiAuth @ [ RunTime:0.003000s ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\AdminLog @ [ RunTime:0.056003s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Login',
+    2 => 'logout',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'accept' => 'application/json, text/plain, */*',
+  'apiauth' => '285d2622f1e2798a71d977fc93c7d893',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\admin\controller\Login->logout[ E:\web\apiadmin\application\admin\controller\Login.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001001s ] mysql:host=127.0.0.1;dbname=apiadmin;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_menu` [ RunTime:0.007000s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_menu` WHERE  `url` = 'admin/Login/logout' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_user_action` [ RunTime:0.006000s ]
+[ sql ] [ SQL ] INSERT INTO `admin_user_action` (`actionName` , `uid` , `nickname` , `addTime` , `url` , `data`) VALUES ('用户登出' , 1 , 'root' , 1562636222 , 'admin/Login/logout' , '[]') [ RunTime:0.032002s ]
+---------------------------------------------------------------
+[ 2019-07-09T09:37:05+08:00 ] 127.0.0.1 OPTIONS zm.com/admin/Login/index
+[运行时间：0.034002s] [吞吐率：29.41req/s] [内存消耗：1,281.34kb] [文件加载：41]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Miss',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'accept' => '*/*',
+  'access-control-request-headers' => 'apiauth,content-type',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'access-control-request-method' => 'POST',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'admin' => 'Login',
+)
+[ info ] [ RUN ] app\admin\controller\Miss->index[ E:\web\apiadmin\application\admin\controller\Miss.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-09T09:37:05+08:00 ] 127.0.0.1 POST zm.com/admin/Login/index
+[运行时间：0.095005s] [吞吐率：10.53req/s] [内存消耗：2,337.32kb] [文件加载：56]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Login',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'content-type' => 'application/json;charset=UTF-8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'accept' => 'application/json, text/plain, */*',
+  'apiauth' => 'null',
+  'content-length' => '39',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+)
+[ info ] [ PARAM ] array (
+  'username' => 'root',
+  'password' => '123456',
+)
+[ info ] [ CACHE ] INIT Redis
+[ info ] [ RUN ] app\admin\controller\Login->index[ E:\web\apiadmin\application\admin\controller\Login.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001000s ] mysql:host=127.0.0.1;dbname=apiadmin;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_user` [ RunTime:0.007000s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_user` WHERE  `username` = 'root'  AND `password` = '912601e4ad1b308c9ae41877cf6ca754' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_user_data` [ RunTime:0.007001s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_user_data` WHERE  `uid` = '1' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] UPDATE `admin_user_data`  SET `loginTimes`=2,`lastLoginTime`=1562636225  WHERE  `id` = 1 [ RunTime:0.031002s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_menu` [ RunTime:0.006000s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_menu` WHERE  `hide` = 0 [ RunTime:0.001000s ]
+---------------------------------------------------------------
+[ 2019-07-09T09:37:29+08:00 ] 127.0.0.1 GET zm.com/admin/Login/index
+[运行时间：0.046003s] [吞吐率：21.74req/s] [内存消耗：1,281.49kb] [文件加载：41]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Miss',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=ppuk4ev4skqkk4vudp63vi4ob0',
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'max-age=0',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'admin' => 'Login',
+)
+[ info ] [ RUN ] app\admin\controller\Miss->index[ E:\web\apiadmin\application\admin\controller\Miss.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-09T09:37:30+08:00 ] 127.0.0.1 GET zm.com/admin/Login/index
+[运行时间：0.048002s] [吞吐率：20.83req/s] [内存消耗：1,281.49kb] [文件加载：41]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Miss',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=ppuk4ev4skqkk4vudp63vi4ob0',
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'max-age=0',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'admin' => 'Login',
+)
+[ info ] [ RUN ] app\admin\controller\Miss->index[ E:\web\apiadmin\application\admin\controller\Miss.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.001000s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-09T09:37:31+08:00 ] 127.0.0.1 GET zm.com/admin/Login/index
+[运行时间：0.052003s] [吞吐率：19.23req/s] [内存消耗：1,281.49kb] [文件加载：41]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Miss',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=ppuk4ev4skqkk4vudp63vi4ob0',
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'max-age=0',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'admin' => 'Login',
+)
+[ info ] [ RUN ] app\admin\controller\Miss->index[ E:\web\apiadmin\application\admin\controller\Miss.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-09T09:37:31+08:00 ] 127.0.0.1 GET zm.com/admin/Login/index
+[运行时间：0.039002s] [吞吐率：25.64req/s] [内存消耗：1,281.49kb] [文件加载：41]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Miss',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=ppuk4ev4skqkk4vudp63vi4ob0',
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'max-age=0',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'admin' => 'Login',
+)
+[ info ] [ RUN ] app\admin\controller\Miss->index[ E:\web\apiadmin\application\admin\controller\Miss.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.001000s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-09T09:37:31+08:00 ] 127.0.0.1 GET zm.com/admin/Login/index
+[运行时间：0.039003s] [吞吐率：25.64req/s] [内存消耗：1,281.49kb] [文件加载：41]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Miss',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=ppuk4ev4skqkk4vudp63vi4ob0',
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'max-age=0',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'admin' => 'Login',
+)
+[ info ] [ RUN ] app\admin\controller\Miss->index[ E:\web\apiadmin\application\admin\controller\Miss.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-09T09:37:31+08:00 ] 127.0.0.1 GET zm.com/admin/Login/index
+[运行时间：0.045003s] [吞吐率：22.22req/s] [内存消耗：1,281.49kb] [文件加载：41]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Miss',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=ppuk4ev4skqkk4vudp63vi4ob0',
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'max-age=0',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'admin' => 'Login',
+)
+[ info ] [ RUN ] app\admin\controller\Miss->index[ E:\web\apiadmin\application\admin\controller\Miss.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-09T09:37:34+08:00 ] 127.0.0.1 GET zm.com/
+[运行时间：0.040002s] [吞吐率：25.00req/s] [内存消耗：1,004.79kb] [文件加载：32]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-09T09:37:50+08:00 ] 127.0.0.1 GET zm.com/
+[运行时间：0.032002s] [吞吐率：31.25req/s] [内存消耗：1,004.93kb] [文件加载：32]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-09T09:38:12+08:00 ] 127.0.0.1 OPTIONS zm.com/admin/Login/logout
+[运行时间：0.030002s] [吞吐率：33.33req/s] [内存消耗：1,281.29kb] [文件加载：41]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Miss',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'accept' => '*/*',
+  'access-control-request-headers' => 'apiauth',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'access-control-request-method' => 'GET',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'admin' => 'Login',
+)
+[ info ] [ RUN ] app\admin\controller\Miss->index[ E:\web\apiadmin\application\admin\controller\Miss.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-09T09:38:12+08:00 ] 127.0.0.1 GET zm.com/admin/Login/logout
+[运行时间：0.071004s] [吞吐率：14.08req/s] [内存消耗：2,268.96kb] [文件加载：56]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ CACHE ] INIT Redis
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiAuth @ [ RunTime:0.001000s ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\AdminLog @ [ RunTime:0.052003s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Login',
+    2 => 'logout',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'accept' => 'application/json, text/plain, */*',
+  'apiauth' => '450b27169ac9a96c964f722b402b493e',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\admin\controller\Login->logout[ E:\web\apiadmin\application\admin\controller\Login.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000000s ] mysql:host=127.0.0.1;dbname=apiadmin;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_menu` [ RunTime:0.008000s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_menu` WHERE  `url` = 'admin/Login/logout' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_user_action` [ RunTime:0.007000s ]
+[ sql ] [ SQL ] INSERT INTO `admin_user_action` (`actionName` , `uid` , `nickname` , `addTime` , `url` , `data`) VALUES ('用户登出' , 1 , 'root' , 1562636292 , 'admin/Login/logout' , '[]') [ RunTime:0.028002s ]
+---------------------------------------------------------------
+[ 2019-07-09T09:38:14+08:00 ] 127.0.0.1 OPTIONS zm.com/admin/Login/index
+[运行时间：0.032002s] [吞吐率：31.25req/s] [内存消耗：1,281.34kb] [文件加载：41]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Miss',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'accept' => '*/*',
+  'access-control-request-headers' => 'apiauth,content-type',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'access-control-request-method' => 'POST',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'admin' => 'Login',
+)
+[ info ] [ RUN ] app\admin\controller\Miss->index[ E:\web\apiadmin\application\admin\controller\Miss.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-09T09:38:14+08:00 ] 127.0.0.1 POST zm.com/admin/Login/index
+[运行时间：0.115007s] [吞吐率：8.70req/s] [内存消耗：2,337.32kb] [文件加载：56]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Login',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'content-type' => 'application/json;charset=UTF-8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'accept' => 'application/json, text/plain, */*',
+  'apiauth' => 'null',
+  'content-length' => '39',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+)
+[ info ] [ PARAM ] array (
+  'username' => 'root',
+  'password' => '123456',
+)
+[ info ] [ CACHE ] INIT Redis
+[ info ] [ RUN ] app\admin\controller\Login->index[ E:\web\apiadmin\application\admin\controller\Login.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001000s ] mysql:host=127.0.0.1;dbname=apiadmin;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_user` [ RunTime:0.012001s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_user` WHERE  `username` = 'root'  AND `password` = '912601e4ad1b308c9ae41877cf6ca754' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_user_data` [ RunTime:0.013000s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_user_data` WHERE  `uid` = '1' LIMIT 1 [ RunTime:0.001001s ]
+[ sql ] [ SQL ] UPDATE `admin_user_data`  SET `loginTimes`=3,`lastLoginTime`=1562636294  WHERE  `id` = 1 [ RunTime:0.027001s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_menu` [ RunTime:0.007001s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_menu` WHERE  `hide` = 0 [ RunTime:0.000000s ]
+---------------------------------------------------------------
+[ 2019-07-09T09:53:49+08:00 ] 127.0.0.1 OPTIONS zm.com/admin/InterfaceList/index?page=1&size=10&type=&keywords=&status=
+[运行时间：0.023001s] [吞吐率：43.48req/s] [内存消耗：1,282.00kb] [文件加载：41]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Miss',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'accept' => '*/*',
+  'access-control-request-headers' => 'apiauth',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'access-control-request-method' => 'GET',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'page' => '1',
+  'size' => '10',
+  'type' => '',
+  'keywords' => '',
+  'status' => '',
+  'admin' => 'InterfaceList',
+)
+[ info ] [ RUN ] app\admin\controller\Miss->index[ E:\web\apiadmin\application\admin\controller\Miss.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-09T09:53:49+08:00 ] 127.0.0.1 GET zm.com/admin/InterfaceList/index?page=1&size=10&type=&keywords=&status=
+[运行时间：0.091005s] [吞吐率：10.99req/s] [内存消耗：2,411.70kb] [文件加载：63]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ CACHE ] INIT Redis
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiAuth @ [ RunTime:0.002000s ]
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiPermission @ [ RunTime:0.001000s ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\AdminLog @ [ RunTime:0.059004s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'InterfaceList',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'accept' => 'application/json, text/plain, */*',
+  'apiauth' => '81e74a62f6c963c532b67c4fc59a6596',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'page' => '1',
+  'size' => '10',
+  'type' => '',
+  'keywords' => '',
+  'status' => '',
+)
+[ info ] [ RUN ] app\admin\controller\InterfaceList->index[ E:\web\apiadmin\application\admin\controller\InterfaceList.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000000s ] mysql:host=127.0.0.1;dbname=apiadmin;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_menu` [ RunTime:0.007000s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_menu` WHERE  `url` = 'admin/InterfaceList/index' LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_user_action` [ RunTime:0.007001s ]
+[ sql ] [ SQL ] INSERT INTO `admin_user_action` (`actionName` , `uid` , `nickname` , `addTime` , `url` , `data`) VALUES ('接口列表' , 1 , 'root' , 1562637229 , 'admin/InterfaceList/index' , '{\"page\":\"1\",\"size\":\"10\",\"type\":\"\",\"keywords\":\"\",\"status\":\"\"}') [ RunTime:0.035002s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_list` [ RunTime:0.006001s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `admin_list` LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_list` ORDER BY `id` DESC LIMIT 0,10 [ RunTime:0.000000s ]
+---------------------------------------------------------------
+[ 2019-07-09T09:54:02+08:00 ] 127.0.0.1 OPTIONS zm.com/admin/InterfaceGroup/getAll
+[运行时间：0.019001s] [吞吐率：52.63req/s] [内存消耗：1,281.41kb] [文件加载：41]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Miss',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'accept' => '*/*',
+  'access-control-request-headers' => 'apiauth',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'access-control-request-method' => 'GET',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'admin' => 'InterfaceGroup',
+)
+[ info ] [ RUN ] app\admin\controller\Miss->index[ E:\web\apiadmin\application\admin\controller\Miss.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-09T09:54:02+08:00 ] 127.0.0.1 OPTIONS zm.com/admin/InterfaceList/getHash
+[运行时间：0.018001s] [吞吐率：55.55req/s] [内存消耗：1,281.41kb] [文件加载：41]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Miss',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'accept' => '*/*',
+  'access-control-request-headers' => 'apiauth',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'access-control-request-method' => 'GET',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'admin' => 'InterfaceList',
+)
+[ info ] [ RUN ] app\admin\controller\Miss->index[ E:\web\apiadmin\application\admin\controller\Miss.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-09T09:54:02+08:00 ] 127.0.0.1 GET zm.com/admin/InterfaceGroup/getAll
+[运行时间：0.092005s] [吞吐率：10.87req/s] [内存消耗：2,332.17kb] [文件加载：59]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ CACHE ] INIT Redis
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiAuth @ [ RunTime:0.002000s ]
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiPermission @ [ RunTime:0.001001s ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\AdminLog @ [ RunTime:0.064003s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'InterfaceGroup',
+    2 => 'getAll',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'accept' => 'application/json, text/plain, */*',
+  'apiauth' => '81e74a62f6c963c532b67c4fc59a6596',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\admin\controller\InterfaceGroup->getAll[ E:\web\apiadmin\application\admin\controller\InterfaceGroup.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001000s ] mysql:host=127.0.0.1;dbname=apiadmin;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_menu` [ RunTime:0.006000s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_menu` WHERE  `url` = 'admin/InterfaceGroup/getAll' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_user_action` [ RunTime:0.007001s ]
+[ sql ] [ SQL ] INSERT INTO `admin_user_action` (`actionName` , `uid` , `nickname` , `addTime` , `url` , `data`) VALUES ('获取全部有效的接口组' , 1 , 'root' , 1562637242 , 'admin/InterfaceGroup/getAll' , '[]') [ RunTime:0.040002s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_group` [ RunTime:0.006001s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_group` WHERE  `status` = 1 [ RunTime:0.001000s ]
+---------------------------------------------------------------
+[ 2019-07-09T09:54:02+08:00 ] 127.0.0.1 GET zm.com/admin/InterfaceList/getHash
+[运行时间：0.072004s] [吞吐率：13.89req/s] [内存消耗：2,292.29kb] [文件加载：58]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ CACHE ] INIT Redis
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiAuth @ [ RunTime:0.001000s ]
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiPermission @ [ RunTime:0.001000s ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\AdminLog @ [ RunTime:0.051003s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'InterfaceList',
+    2 => 'getHash',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'accept' => 'application/json, text/plain, */*',
+  'apiauth' => '81e74a62f6c963c532b67c4fc59a6596',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\admin\controller\InterfaceList->getHash[ E:\web\apiadmin\application\admin\controller\InterfaceList.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.001000s ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.010001s ] mysql:host=127.0.0.1;dbname=apiadmin;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_menu` [ RunTime:0.007000s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_menu` WHERE  `url` = 'admin/InterfaceList/getHash' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_user_action` [ RunTime:0.007001s ]
+[ sql ] [ SQL ] INSERT INTO `admin_user_action` (`actionName` , `uid` , `nickname` , `addTime` , `url` , `data`) VALUES ('获取接口唯一标识' , 1 , 'root' , 1562637242 , 'admin/InterfaceList/getHash' , '[]') [ RunTime:0.018001s ]
+---------------------------------------------------------------
+[ 2019-07-09T09:55:15+08:00 ] 127.0.0.1 OPTIONS zm.com/admin/Menu/index
+[运行时间：0.018001s] [吞吐率：55.55req/s] [内存消耗：1,281.27kb] [文件加载：41]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Miss',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'accept' => '*/*',
+  'access-control-request-headers' => 'apiauth',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'access-control-request-method' => 'GET',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'admin' => 'Menu',
+)
+[ info ] [ RUN ] app\admin\controller\Miss->index[ E:\web\apiadmin\application\admin\controller\Miss.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-09T09:55:15+08:00 ] 127.0.0.1 GET zm.com/admin/Menu/index
+[运行时间：0.071005s] [吞吐率：14.08req/s] [内存消耗：2,335.96kb] [文件加载：58]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ CACHE ] INIT Redis
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiAuth @ [ RunTime:0.001000s ]
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiPermission @ [ RunTime:0.001000s ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\AdminLog @ [ RunTime:0.048003s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Menu',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'accept' => 'application/json, text/plain, */*',
+  'apiauth' => '81e74a62f6c963c532b67c4fc59a6596',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\admin\controller\Menu->index[ E:\web\apiadmin\application\admin\controller\Menu.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001000s ] mysql:host=127.0.0.1;dbname=apiadmin;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_menu` [ RunTime:0.006000s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_menu` WHERE  `url` = 'admin/Menu/index' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_user_action` [ RunTime:0.008001s ]
+[ sql ] [ SQL ] INSERT INTO `admin_user_action` (`actionName` , `uid` , `nickname` , `addTime` , `url` , `data`) VALUES ('菜单列表' , 1 , 'root' , 1562637315 , 'admin/Menu/index' , '[]') [ RunTime:0.024001s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_menu` ORDER BY `sort` ASC [ RunTime:0.001000s ]
+---------------------------------------------------------------
+[ 2019-07-09T09:55:59+08:00 ] 127.0.0.1 OPTIONS zm.com/admin/Menu/changeStatus?status=1&id=3
+[运行时间：0.022001s] [吞吐率：45.45req/s] [内存消耗：1,281.69kb] [文件加载：41]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Miss',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'accept' => '*/*',
+  'access-control-request-headers' => 'apiauth',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'access-control-request-method' => 'GET',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'status' => '1',
+  'id' => '3',
+  'admin' => 'Menu',
+)
+[ info ] [ RUN ] app\admin\controller\Miss->index[ E:\web\apiadmin\application\admin\controller\Miss.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.001000s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-09T09:55:59+08:00 ] 127.0.0.1 GET zm.com/admin/Menu/changeStatus?status=1&id=3
+[运行时间：0.112007s] [吞吐率：8.93req/s] [内存消耗：2,279.08kb] [文件加载：58]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ CACHE ] INIT Redis
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiAuth @ [ RunTime:0.012001s ]
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiPermission @ [ RunTime:0.001000s ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\AdminLog @ [ RunTime:0.062003s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Menu',
+    2 => 'changeStatus',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'accept' => 'application/json, text/plain, */*',
+  'apiauth' => '81e74a62f6c963c532b67c4fc59a6596',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'status' => '1',
+  'id' => '3',
+)
+[ info ] [ RUN ] app\admin\controller\Menu->changeStatus[ E:\web\apiadmin\application\admin\controller\Menu.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000000s ] mysql:host=127.0.0.1;dbname=apiadmin;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_menu` [ RunTime:0.007001s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_menu` WHERE  `url` = 'admin/Menu/changeStatus' LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_user_action` [ RunTime:0.007000s ]
+[ sql ] [ SQL ] INSERT INTO `admin_user_action` (`actionName` , `uid` , `nickname` , `addTime` , `url` , `data`) VALUES ('菜单状态修改' , 1 , 'root' , 1562637359 , 'admin/Menu/changeStatus' , '{\"status\":\"1\",\"id\":\"3\"}') [ RunTime:0.038002s ]
+[ sql ] [ SQL ] UPDATE `admin_menu`  SET `hide`=1  WHERE  `id` = 3 [ RunTime:0.019001s ]
+---------------------------------------------------------------
+[ 2019-07-09T09:56:03+08:00 ] 127.0.0.1 OPTIONS zm.com/admin/Menu/changeStatus?status=0&id=3
+[运行时间：0.027001s] [吞吐率：37.04req/s] [内存消耗：1,281.69kb] [文件加载：41]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Miss',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'accept' => '*/*',
+  'access-control-request-headers' => 'apiauth',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'access-control-request-method' => 'GET',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'status' => '0',
+  'id' => '3',
+  'admin' => 'Menu',
+)
+[ info ] [ RUN ] app\admin\controller\Miss->index[ E:\web\apiadmin\application\admin\controller\Miss.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.001000s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-09T09:56:03+08:00 ] 127.0.0.1 GET zm.com/admin/Menu/changeStatus?status=0&id=3
+[运行时间：0.093005s] [吞吐率：10.75req/s] [内存消耗：2,279.08kb] [文件加载：58]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ CACHE ] INIT Redis
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiAuth @ [ RunTime:0.001000s ]
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiPermission @ [ RunTime:0.001000s ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\AdminLog @ [ RunTime:0.053003s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Menu',
+    2 => 'changeStatus',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'accept' => 'application/json, text/plain, */*',
+  'apiauth' => '81e74a62f6c963c532b67c4fc59a6596',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'status' => '0',
+  'id' => '3',
+)
+[ info ] [ RUN ] app\admin\controller\Menu->changeStatus[ E:\web\apiadmin\application\admin\controller\Menu.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000000s ] mysql:host=127.0.0.1;dbname=apiadmin;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_menu` [ RunTime:0.006000s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_menu` WHERE  `url` = 'admin/Menu/changeStatus' LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_user_action` [ RunTime:0.007001s ]
+[ sql ] [ SQL ] INSERT INTO `admin_user_action` (`actionName` , `uid` , `nickname` , `addTime` , `url` , `data`) VALUES ('菜单状态修改' , 1 , 'root' , 1562637363 , 'admin/Menu/changeStatus' , '{\"status\":\"0\",\"id\":\"3\"}') [ RunTime:0.030001s ]
+[ sql ] [ SQL ] UPDATE `admin_menu`  SET `hide`=0  WHERE  `id` = 3 [ RunTime:0.019001s ]
+---------------------------------------------------------------
+[ 2019-07-09T09:56:30+08:00 ] 127.0.0.1 OPTIONS zm.com/admin/Auth/index?page=1&size=10&keywords=&status=
+[运行时间：0.019001s] [吞吐率：52.63req/s] [内存消耗：1,281.83kb] [文件加载：41]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Miss',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'accept' => '*/*',
+  'access-control-request-headers' => 'apiauth',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'access-control-request-method' => 'GET',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'page' => '1',
+  'size' => '10',
+  'keywords' => '',
+  'status' => '',
+  'admin' => 'Auth',
+)
+[ info ] [ RUN ] app\admin\controller\Miss->index[ E:\web\apiadmin\application\admin\controller\Miss.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.001000s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-09T09:56:31+08:00 ] 127.0.0.1 GET zm.com/admin/Auth/index?page=1&size=10&keywords=&status=
+[运行时间：0.096006s] [吞吐率：10.42req/s] [内存消耗：2,414.77kb] [文件加载：63]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ CACHE ] INIT Redis
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiAuth @ [ RunTime:0.002000s ]
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiPermission @ [ RunTime:0.001000s ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\AdminLog @ [ RunTime:0.065004s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Auth',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'accept' => 'application/json, text/plain, */*',
+  'apiauth' => '81e74a62f6c963c532b67c4fc59a6596',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'page' => '1',
+  'size' => '10',
+  'keywords' => '',
+  'status' => '',
+)
+[ info ] [ RUN ] app\admin\controller\Auth->index[ E:\web\apiadmin\application\admin\controller\Auth.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001000s ] mysql:host=127.0.0.1;dbname=apiadmin;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_menu` [ RunTime:0.008001s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_menu` WHERE  `url` = 'admin/Auth/index' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_user_action` [ RunTime:0.007000s ]
+[ sql ] [ SQL ] INSERT INTO `admin_user_action` (`actionName` , `uid` , `nickname` , `addTime` , `url` , `data`) VALUES ('权限列表' , 1 , 'root' , 1562637391 , 'admin/Auth/index' , '{\"page\":\"1\",\"size\":\"10\",\"keywords\":\"\",\"status\":\"\"}') [ RunTime:0.039003s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_auth_group` [ RunTime:0.007000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `admin_auth_group` WHERE  `name` LIKE '%%' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_auth_group` WHERE  `name` LIKE '%%' ORDER BY `id` DESC LIMIT 0,10 [ RunTime:0.001000s ]
+---------------------------------------------------------------
+[ 2019-07-09T09:56:34+08:00 ] 127.0.0.1 OPTIONS zm.com/admin/Auth/getRuleList
+[运行时间：0.033002s] [吞吐率：30.30req/s] [内存消耗：1,281.32kb] [文件加载：41]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Miss',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'accept' => '*/*',
+  'access-control-request-headers' => 'apiauth',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'access-control-request-method' => 'GET',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'admin' => 'Auth',
+)
+[ info ] [ RUN ] app\admin\controller\Miss->index[ E:\web\apiadmin\application\admin\controller\Miss.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-09T09:56:35+08:00 ] 127.0.0.1 GET zm.com/admin/Auth/getRuleList
+[运行时间：0.085005s] [吞吐率：11.76req/s] [内存消耗：2,355.18kb] [文件加载：58]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ CACHE ] INIT Redis
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiAuth @ [ RunTime:0.001000s ]
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiPermission @ [ RunTime:0.001000s ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\AdminLog @ [ RunTime:0.062004s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Auth',
+    2 => 'getRuleList',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'accept' => 'application/json, text/plain, */*',
+  'apiauth' => '81e74a62f6c963c532b67c4fc59a6596',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\admin\controller\Auth->getRuleList[ E:\web\apiadmin\application\admin\controller\Auth.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.001000s ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001000s ] mysql:host=127.0.0.1;dbname=apiadmin;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_menu` [ RunTime:0.007000s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_menu` WHERE  `url` = 'admin/Auth/getRuleList' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_user_action` [ RunTime:0.006000s ]
+[ sql ] [ SQL ] INSERT INTO `admin_user_action` (`actionName` , `uid` , `nickname` , `addTime` , `url` , `data`) VALUES ('获取组所有的权限列表' , 1 , 'root' , 1562637394 , 'admin/Auth/getRuleList' , '[]') [ RunTime:0.039002s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_menu` ORDER BY `sort` ASC [ RunTime:0.000000s ]
+---------------------------------------------------------------
+[ 2019-07-09T13:33:43+08:00 ] 127.0.0.1 OPTIONS zm.com/admin/Auth/index?page=1&size=10&keywords=&status=
+[运行时间：0.317018s] [吞吐率：3.15req/s] [内存消耗：1,281.83kb] [文件加载：41]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Miss',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'accept' => '*/*',
+  'access-control-request-headers' => 'apiauth',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'access-control-request-method' => 'GET',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'page' => '1',
+  'size' => '10',
+  'keywords' => '',
+  'status' => '',
+  'admin' => 'Auth',
+)
+[ info ] [ RUN ] app\admin\controller\Miss->index[ E:\web\apiadmin\application\admin\controller\Miss.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-09T13:33:43+08:00 ] 127.0.0.1 GET zm.com/admin/Auth/index?page=1&size=10&keywords=&status=
+[运行时间：0.046002s] [吞吐率：21.74req/s] [内存消耗：1,134.59kb] [文件加载：35]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ CACHE ] INIT Redis
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiAuth @ [ RunTime:0.034002s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'response',
+  'response' => 
+  think\response\Json::__set_state(array(
+     'options' => 
+    array (
+      'json_encode_param' => 256,
+    ),
+     'contentType' => 'application/json',
+     'data' => 
+    array (
+      'code' => -14,
+      'msg' => 'ApiAuth不匹配',
+      'data' => 
+      array (
+      ),
+    ),
+     'charset' => 'utf-8',
+     'code' => 200,
+     'header' => 
+    array (
+      'Content-Type' => 'application/json; charset=utf-8',
+      'Access-Control-Allow-Origin' => '*',
+      'Access-Control-Allow-Methods' => 'POST,PUT,GET,DELETE',
+      'Access-Control-Allow-Headers' => 'version, access-token, user-token, ApiAuth, User-Agent, Keep-Alive, Origin, No-Cache, X-Requested-With, If-Modified-Since, Pragma, Last-Modified, Cache-Control, Expires, Content-Type, X-E4M-With',
+      'Access-Control-Allow-Credentials' => 'true',
+    ),
+     'content' => NULL,
+  )),
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'accept' => 'application/json, text/plain, */*',
+  'apiauth' => '81e74a62f6c963c532b67c4fc59a6596',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'page' => '1',
+  'size' => '10',
+  'keywords' => '',
+  'status' => '',
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-09T13:33:45+08:00 ] 127.0.0.1 OPTIONS zm.com/admin/Login/index
+[运行时间：0.027002s] [吞吐率：37.03req/s] [内存消耗：1,281.34kb] [文件加载：41]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Miss',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'accept' => '*/*',
+  'access-control-request-headers' => 'apiauth,content-type',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'access-control-request-method' => 'POST',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'admin' => 'Login',
+)
+[ info ] [ RUN ] app\admin\controller\Miss->index[ E:\web\apiadmin\application\admin\controller\Miss.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-09T13:33:45+08:00 ] 127.0.0.1 POST zm.com/admin/Login/index
+[运行时间：0.174010s] [吞吐率：5.75req/s] [内存消耗：2,337.32kb] [文件加载：56]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Login',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'content-type' => 'application/json;charset=UTF-8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'accept' => 'application/json, text/plain, */*',
+  'apiauth' => 'null',
+  'content-length' => '39',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+)
+[ info ] [ PARAM ] array (
+  'username' => 'root',
+  'password' => '123456',
+)
+[ info ] [ CACHE ] INIT Redis
+[ info ] [ RUN ] app\admin\controller\Login->index[ E:\web\apiadmin\application\admin\controller\Login.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.001000s ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001000s ] mysql:host=127.0.0.1;dbname=apiadmin;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_user` [ RunTime:0.008001s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_user` WHERE  `username` = 'root'  AND `password` = '912601e4ad1b308c9ae41877cf6ca754' LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_user_data` [ RunTime:0.010000s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_user_data` WHERE  `uid` = '1' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] UPDATE `admin_user_data`  SET `loginTimes`=4,`lastLoginTime`=1562650425  WHERE  `id` = 1 [ RunTime:0.044003s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_menu` [ RunTime:0.015001s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_menu` WHERE  `hide` = 0 [ RunTime:0.000000s ]
+---------------------------------------------------------------
+[ 2019-07-09T17:28:30+08:00 ] 127.0.0.1 OPTIONS zm.com/admin/Menu/index
+[运行时间：0.343019s] [吞吐率：2.92req/s] [内存消耗：1,282.53kb] [文件加载：41]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Miss',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'accept' => '*/*',
+  'access-control-request-headers' => 'apiauth',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'access-control-request-method' => 'GET',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'admin' => 'Menu',
+)
+[ info ] [ RUN ] app\admin\controller\Miss->index[ E:\web\apiadmin\application\admin\controller\Miss.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.002000s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-09T17:28:30+08:00 ] 127.0.0.1 GET zm.com/admin/Menu/index
+[运行时间：0.191011s] [吞吐率：5.24req/s] [内存消耗：1,135.09kb] [文件加载：35]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ CACHE ] INIT Redis
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiAuth @ [ RunTime:0.163009s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'response',
+  'response' => 
+  think\response\Json::__set_state(array(
+     'options' => 
+    array (
+      'json_encode_param' => 256,
+    ),
+     'contentType' => 'application/json',
+     'data' => 
+    array (
+      'code' => -14,
+      'msg' => 'ApiAuth不匹配',
+      'data' => 
+      array (
+      ),
+    ),
+     'charset' => 'utf-8',
+     'code' => 200,
+     'header' => 
+    array (
+      'Content-Type' => 'application/json; charset=utf-8',
+      'Access-Control-Allow-Origin' => '*',
+      'Access-Control-Allow-Methods' => 'POST,PUT,GET,DELETE',
+      'Access-Control-Allow-Headers' => 'version, access-token, user-token, ApiAuth, User-Agent, Keep-Alive, Origin, No-Cache, X-Requested-With, If-Modified-Since, Pragma, Last-Modified, Cache-Control, Expires, Content-Type, X-E4M-With',
+      'Access-Control-Allow-Credentials' => 'true',
+    ),
+     'content' => NULL,
+  )),
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'accept' => 'application/json, text/plain, */*',
+  'apiauth' => '8c6b2ef704a9ef42cb1a6af991445742',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-09T17:28:35+08:00 ] 127.0.0.1 OPTIONS zm.com/admin/Login/index
+[运行时间：0.018001s] [吞吐率：55.55req/s] [内存消耗：1,282.59kb] [文件加载：41]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Miss',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'accept' => '*/*',
+  'access-control-request-headers' => 'apiauth,content-type',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'access-control-request-method' => 'POST',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'admin' => 'Login',
+)
+[ info ] [ RUN ] app\admin\controller\Miss->index[ E:\web\apiadmin\application\admin\controller\Miss.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-09T17:28:35+08:00 ] 127.0.0.1 POST zm.com/admin/Login/index
+[运行时间：0.343020s] [吞吐率：2.92req/s] [内存消耗：2,337.70kb] [文件加载：56]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Login',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'content-type' => 'application/json;charset=UTF-8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'accept' => 'application/json, text/plain, */*',
+  'apiauth' => 'null',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '39',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+)
+[ info ] [ PARAM ] array (
+  'username' => 'root',
+  'password' => '123456',
+)
+[ info ] [ CACHE ] INIT Redis
+[ info ] [ RUN ] app\admin\controller\Login->index[ E:\web\apiadmin\application\admin\controller\Login.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.093006s ] mysql:host=127.0.0.1;dbname=apiadmin;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_user` [ RunTime:0.052003s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_user` WHERE  `username` = 'root'  AND `password` = '912601e4ad1b308c9ae41877cf6ca754' LIMIT 1 [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_user_data` [ RunTime:0.014001s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_user_data` WHERE  `uid` = '1' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] UPDATE `admin_user_data`  SET `loginTimes`=5,`lastLoginTime`=1562664515  WHERE  `id` = 1 [ RunTime:0.024001s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_menu` [ RunTime:0.028001s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_menu` WHERE  `hide` = 0 [ RunTime:0.001001s ]
+---------------------------------------------------------------
+[ 2019-07-09T17:28:46+08:00 ] 127.0.0.1 OPTIONS zm.com/admin/Auth/index?page=1&size=10&keywords=&status=
+[运行时间：0.021001s] [吞吐率：47.62req/s] [内存消耗：1,283.09kb] [文件加载：41]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Miss',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'accept' => '*/*',
+  'access-control-request-headers' => 'apiauth',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'access-control-request-method' => 'GET',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'page' => '1',
+  'size' => '10',
+  'keywords' => '',
+  'status' => '',
+  'admin' => 'Auth',
+)
+[ info ] [ RUN ] app\admin\controller\Miss->index[ E:\web\apiadmin\application\admin\controller\Miss.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2019-07-09T17:28:46+08:00 ] 127.0.0.1 GET zm.com/admin/Auth/index?page=1&size=10&keywords=&status=
+[运行时间：0.168009s] [吞吐率：5.95req/s] [内存消耗：2,416.02kb] [文件加载：63]
+[ info ] [ LANG ] E:\web\apiadmin\thinkphp\lang\zh-cn.php
+[ info ] [ CACHE ] INIT Redis
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiAuth @ [ RunTime:0.001001s ]
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\ApiPermission @ [ RunTime:0.006000s ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ BEHAVIOR ] Run \app\admin\behavior\AdminLog @ [ RunTime:0.078004s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Auth',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://web.zm.com/',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+  'origin' => 'http://web.zm.com',
+  'accept' => 'application/json, text/plain, */*',
+  'apiauth' => '930eadd3680e82e92e32fe57cc0e2b5a',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'connection' => 'keep-alive',
+  'host' => 'zm.com',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+  'page' => '1',
+  'size' => '10',
+  'keywords' => '',
+  'status' => '',
+)
+[ info ] [ RUN ] app\admin\controller\Auth->index[ E:\web\apiadmin\application\admin\controller\Auth.php ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\BuildResponse @response_send [ RunTime:0.000000s ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.010000s ] mysql:host=127.0.0.1;dbname=apiadmin;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_menu` [ RunTime:0.007001s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_menu` WHERE  `url` = 'admin/Auth/index' LIMIT 1 [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_user_action` [ RunTime:0.007000s ]
+[ sql ] [ SQL ] INSERT INTO `admin_user_action` (`actionName` , `uid` , `nickname` , `addTime` , `url` , `data`) VALUES ('权限列表' , 1 , 'root' , 1562664526 , 'admin/Auth/index' , '{\"page\":\"1\",\"size\":\"10\",\"keywords\":\"\",\"status\":\"\"}') [ RunTime:0.037002s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `admin_auth_group` [ RunTime:0.007001s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `admin_auth_group` WHERE  `name` LIKE '%%' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `admin_auth_group` WHERE  `name` LIKE '%%' ORDER BY `id` DESC LIMIT 0,10 [ RunTime:0.001000s ]

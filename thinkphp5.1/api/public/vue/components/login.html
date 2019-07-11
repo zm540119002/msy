@@ -112,6 +112,7 @@
                         },
                         success: function(data){
                             $('.loading').hide();
+                            return;
                             if(data.status==0){
                                 _this.login_failed_call_back(data);
                             }else if(data.status==1){
