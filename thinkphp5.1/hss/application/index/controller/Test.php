@@ -9,6 +9,7 @@ class Test extends \common\controller\Base{
     /**首页
      */
     public function index(){
+        print_r(123);
         print_r(session('user'));
         exit;
         if(request()->isPost()){
