@@ -5,11 +5,11 @@ namespace app\index\controller;
 use think\Console;
 use common\component\jwt\JWT;
 
-class Test extends \common\controller\UserBase{
+class Test extends \common\controller\Base{
     /**首页
      */
     public function index(){
-        print_r($this->user);
+        print_r(session('user'));
         exit;
         if(request()->isPost()){
             $postData = input('post.');
