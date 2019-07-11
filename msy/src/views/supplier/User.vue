@@ -100,16 +100,16 @@
         <van-tabs >
           <van-tab title="登录">
              <van-cell-group>
-              <van-field v-model="postData.userName" placeholder="请输入用户名" />
-              <van-field v-model="postData.password" placeholder="密码" />
+              <van-field v-model="loginData.userName" placeholder="请输入用户名" />
+              <van-field v-model="loginData.password" placeholder="密码" />
             </van-cell-group>
             <van-button class="btn" @click="loginHandle" type="info">登录</van-button>
           </van-tab>
           <van-tab title="注册/重置密码">
             <van-cell-group>
-              <van-field v-model="postData2.userName" placeholder="请输入用户名" />
-              <van-field v-model="postData2.captcha" placeholder="请输入收到的验证码" />
-              <van-field v-model="postData2.password" placeholder="设置密码" />
+              <van-field v-model="registerData.userName" placeholder="请输入用户名" />
+              <van-field v-model="registerData.captcha" placeholder="请输入收到的验证码" />
+              <van-field v-model="registerData.password" placeholder="设置密码" />
             </van-cell-group>
             <van-button class="btn" @click="registerHandle" type="info">注册</van-button>
           </van-tab>
@@ -132,15 +132,15 @@ export default {
  data() {
     return {
       show: false,
-        postData:{
-            userName: "",
-            password: ""
-        },
-        postData2:{
-            userName: "",
-            password: "",
-            captcha:""
-        }
+      loginData:{
+          userName: "",
+          password: ""
+      },
+      registerData:{
+          userName: "",
+          password: "",
+          captcha:""
+      }
     }
   },
 
