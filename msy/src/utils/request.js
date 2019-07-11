@@ -10,7 +10,7 @@ const service = axios.create({
   baseURL,
   timeout: 15 * 1000
 })
-
+//request拦截器==>对请求参数做处理
 service.interceptors.request.use(
   config => {
     // 在发送请求之前做些什么
@@ -29,7 +29,7 @@ service.interceptors.request.use(
     Promise.reject(error)
   }
 )
-// 拦截响应
+//request拦截器==>对响应参数做处理
 service.interceptors.response.use(
   response => response,
   error => {

@@ -9,7 +9,6 @@ class Test extends HssBase{
     /**首页
      */
     public function index(){
-        $postData = ['test'=>'123'];
         if(request()->isPost()){
             $postData = input('post.');
             return json_encode($postData);
@@ -24,7 +23,7 @@ class Test extends HssBase{
         if(request()->isPost()){
         }else{
             return $this->fetch();
-    }
+        }
     }
     /**测试-城市
      */

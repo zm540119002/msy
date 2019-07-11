@@ -29,37 +29,40 @@
 
 <script>
 import Tabbar from '@/components/Tabbar.vue'
-import { sendIdentifyingCode, saveGoodsImageList, saveGood } from '@/api/util'
+import { sendIdentifyingCode, saveGoodsImageList, saveUser } from '@/api/util'
 export default {
   name: 'home',
   components: {
     Tabbar
   },
- data() {
+  data(){
     return {
       show: false,
-        loginData:{
-            userName: "",
-            password: ""
-        },
-        registerData:{
-            userName: "",
-            password: "",
-            captcha:""
-        }
+      loginData:{
+        userName: "",
+        password: ""
+      },
+      registerData:{
+        userName: "",
+        password: "",
+        captcha:""
+      }
     }
   },
-
   methods: {
     showPopup() {
       this.show = true;
     },
     loginHandle(){
-      saveGood(this.loginData)
-        .then(
-          r => console.log(r)
-        ) //接口调用成功返回的数据
-        .catch(err => console.log(err)) //接口调用失败返回的数据
+      saveUser(this.loginData)
+        .then(res => {
+          console.log(res)
+          const resData = res.data
+          console.log(res.data)
+        }) //接口调用成功返回的数据
+        .catch(err => {
+          console.log(err)
+        }) //接口调用失败返回的数据
     },
     registerHandle(){
       console.log(this.registerData)
