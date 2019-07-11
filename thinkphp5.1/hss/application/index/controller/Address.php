@@ -4,7 +4,6 @@ class Address extends \common\controller\UserBase {
     //增加修改地址页面
     public function edit(){
         $model = new \common\model\Address();
-        $model->useGlobalScope(false)->select();
         $userId = $this->user['id'];
         if(request()->isPost()){
             $data = input('post.');
@@ -14,12 +13,12 @@ class Address extends \common\controller\UserBase {
                 //修改
                 $addressId = input('post.address_id');
                 $condition = [
-                    ['status','=',0],
-                    ['id','=',$addressId],
-                    ['user_id','=',$userId],
+                    'status' => 0 ,
+                    'id' => $addressId ,
+                    'user_id' => $userId ,
                 ];
-                $result = $model -> edit($data,$condition);
-                if( !$result['status'] ){
+                $id = $model -> edit($data,$condition);
+                if( !$id ){
                     $model ->rollback();
                     return errorMsg('失败');
                 }
@@ -48,19 +47,18 @@ class Address extends \common\controller\UserBase {
                         ['user_id','=',$userId]
                     ],
                 ];
-                $addressList = $model -> getList($config);
-                $addressList = $model -> getList();
-                if(empty($addressList)){
+                $addressCount = $model -> where($config['where'])->count('id');
+                if(!$addressCount){
                     $data['is_default'] = 1;
                 }
                 //开启事务
                 $model -> startTrans();
                 $data['user_id'] = $userId;
-                $result = $model->edit($data);
-                if(!$result['status']){
+                $id = $model->edit($data);
+                if(!$id){
                     return errorMsg('失败');
                 }
-                $addressId = $result['id'];
+                $addressId = $id;
                 //修改其他地址不为默认值
                 if($_POST['is_default'] == 1){
                     $where = [
@@ -105,19 +103,22 @@ class Address extends \common\controller\UserBase {
     //地址列表
     public function manage(){
         $model = new \common\model\Address();
-/*        $config = [
+        $config = [
             'where'=>[
                 ['status','=',0],
                 ['user_id','=',$this->user['id']]
-            ],
+            ],  'field' => [
+                'id','consignee','detail_address','tel_phone','mobile','is_default','status','province','city','area'
+            ]
         ];
-        $addressList = $model -> getList($config);*/
-        $addressList = $model -> getList();
+        $addressList = $model -> getList($config);
         $this->assign('addressList',$addressList);
         $unlockingFooterCart = unlockingFooterCartConfig([8]);
         $this->assign('unlockingFooterCart', $unlockingFooterCart);
         return $this -> fetch();
     }
+
+    //获取
 
     //删除地址
     public function del(){
@@ -137,27 +138,6 @@ class Address extends \common\controller\UserBase {
             return errorMsg('删除失败');
         }
 
-    }
-
-    /**
-     * 获取地址列表  弹窗
-     */
-    public function popGetList(){
-
-        $model= new \common\model\Address();
-
-        $condition = [
-            'field' => [
-                'id','consignee','detail_address','tel_phone','mobile','is_default','status','province','city','area'
-            ]
-        ];
-
-        $data = $model->getList($condition);
-
-        $this->assign('addressList',$data);
-
-        return view('pop_list');
-        //echo  $this->fetch('pop_list');
     }
 
 
