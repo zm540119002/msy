@@ -1,2 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["factory"],{"96d5":function(e,n,t){"use strict";t.r(n);var a=function(){var e=this,n=e.$createElement,t=e._self._c||n;return t("div",[t("div",[e._v("     \n   供应商\n  ")]),t("Tabbar",{attrs:{msg:"Welcome to Your Vue.js App"}})],1)},o=[],r=t("7d7f"),s={name:"home",components:{Tabbar:r["a"]}},c=s,u=t("2877"),p=Object(u["a"])(c,a,o,!1,null,"661e920d",null);n["default"]=p.exports}}]);
-//# sourceMappingURL=factory.df2f878a.js.map
