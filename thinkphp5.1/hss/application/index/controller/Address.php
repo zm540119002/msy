@@ -139,6 +139,28 @@ class Address extends \common\controller\UserBase {
         }
 
     }
+    /**
+     * 获取地址列表  弹窗
+     */
+    public function popGetList(){
 
+        $model= new \common\model\Address();
+
+        $condition = [
+            'where'=>[
+                ['status','=',0],
+                ['user_id','=',$this->user['id']]
+            ],  'field' => [
+                'id','consignee','detail_address','tel_phone','mobile','is_default','status','province','city','area'
+            ]
+        ];
+
+        $data = $model->getList($condition);
+
+        $this->assign('addressList',$data);
+
+        return view('pop_list');
+        //echo  $this->fetch('pop_list');
+    }
 
 }
