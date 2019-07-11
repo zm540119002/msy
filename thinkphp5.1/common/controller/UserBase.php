@@ -12,7 +12,7 @@ class UserBase extends Base{
         //判断是否登录
         $this->user = checkLogin();
         if (!$this->user) {
-            if(request()->isAjax()){
+            if(request()->isPost()){
                 $this->errorMsg(config('code.error.login.msg'),config('code.error.login'));
             }else{
                 echo $this->fetch('../../api/public/template/login_page.html');

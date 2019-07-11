@@ -5,10 +5,13 @@ namespace app\index\controller;
 use think\Console;
 use common\component\jwt\JWT;
 
-class Test extends HssBase{
+class Test extends \common\controller\Base{
     /**首页
      */
     public function index(){
+        print_r(checkLogin());
+        print_r(123);
+        exit;
         if(request()->isPost()){
             $postData = input('post.');
             return json_encode($postData);

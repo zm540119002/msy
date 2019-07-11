@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
+import Home from './views/supplier/Home.vue'
 Vue.use(Router)
 export default new Router({
   mode: 'history',
@@ -15,30 +15,30 @@ export default new Router({
     {
       path: '/about',
       name: 'about',
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+      component: () => import(/* webpackChunkName: "about" */ './views/supplier/About.vue')
     },{
       path: '/factory',
       name: 'Factory',
-      component: () => import(/* webpackChunkName: "factory" */ './views/Factory.vue')
+      component: () => import(/* webpackChunkName: "factory" */ './views/supplier/Factory.vue')
     },{
       path: '/cart',
       name: 'Cart',
-      component: () => import(/* webpackChunkName: "cart" */ './views/Cart.vue')
+      component: () => import(/* webpackChunkName: "cart" */ './views/supplier/Cart.vue')
     },
     {
       path: '/user',
       name: 'User',
-      component: () => import(/* webpackChunkName: "user" */ './views/User.vue')
+      component: () => import(/* webpackChunkName: "user" */ './views/supplier/User.vue')
     },
     {
       path: '/search',
       name: 'Search',
-      component: () => import(/* webpackChunkName: "search" */ './views/Search.vue')
+      component: () => import(/* webpackChunkName: "search" */ './views/supplier/Search.vue')
     },
     {
       path: '/creatorspace',
       name: 'Creatorspace',
-      component: () => import(/* webpackChunkName: "search" */ './views/Creatorspace.vue')
+      component: () => import(/* webpackChunkName: "search" */ './views/supplier/Creatorspace.vue')
     }
   ]
 })
