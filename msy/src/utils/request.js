@@ -6,6 +6,7 @@ import { Message } from 'element-ui'
 
 // const baseURL = process.env.NODE_ENV === 'development' ? '/apis' : process.env.BASE_API
 const baseURL = "https://hss.meishangyun.com"
+axios.defaults.withCredentials=true
 const service = axios.create({
   baseURL,
   timeout: 15 * 1000
