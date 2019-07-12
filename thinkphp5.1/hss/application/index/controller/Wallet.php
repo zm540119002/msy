@@ -283,7 +283,7 @@ class Wallet extends Base {
                     $memberModel = new \app\index\model\Member();
 
                     $result = $memberModel->allowField(true)->isUpdate(true)->save($data,$where['where']);
-
+                    echo  $memberModel ->getLastSql(); exit ;
                     if (!$result) {
                         $modelOrder->rollback();
                         return errorMsg('失败3');
