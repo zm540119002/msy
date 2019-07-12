@@ -103,6 +103,8 @@
         });
         //充值支付
         $('body').on('click','.pay_btn',function () {
+            console.log(1211);
+            return false;
             var pay_code = $('input[name=pay_code]').val();
             var rechargeMoney = $('input[name=amount]').val();
             if(!rechargeMoney){
