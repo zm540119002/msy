@@ -136,7 +136,10 @@ class Wallet extends Base {
             $model = new \app\index\model\Wallet();;
             $postData = input('post.');
             $postData['user_id'] = $this->user['id'];
-            return $model->resetPassword($postData);
+            $id = $model->resetPassword($postData);
+            if($id){
+                $this ->successMsg('成功');
+            }
 
         } else {
             return $this->fetch();
@@ -281,7 +284,7 @@ class Wallet extends Base {
 
                     $result = $memberModel->allowField(true)->isUpdate(true)->save($data,$where['where']);
 
-                    if (!$result) {
+                    if (false === $result) {
                         $modelOrder->rollback();
                         return errorMsg('失败');
                     }
