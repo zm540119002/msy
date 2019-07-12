@@ -19,5 +19,6 @@ class UserBase extends Base{
                 exit;
             }
         }
+        $this ->assign('user',$this->user);
     }
 }
