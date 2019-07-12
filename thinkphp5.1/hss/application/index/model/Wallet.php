@@ -55,6 +55,7 @@ class Wallet extends \common\model\Base {
             $saveData['password']= md5($saveData['salt'] . $data['password']);//加密
 
             $response = $this->edit($saveData,$where);
+            echo $this->getLastSql();exit;
             if(!$response){
                 return errorMsg('支付密码设置失败！');
             }
