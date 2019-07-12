@@ -136,7 +136,10 @@ class Wallet extends Base {
             $model = new \app\index\model\Wallet();;
             $postData = input('post.');
             $postData['user_id'] = $this->user['id'];
-            return $model->resetPassword($postData);
+            $id = $model->resetPassword($postData);
+            if($id){
+                $this ->successMsg('成功');
+            }
 
         } else {
             return $this->fetch();
