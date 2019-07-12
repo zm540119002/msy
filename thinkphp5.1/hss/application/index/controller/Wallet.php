@@ -106,7 +106,7 @@ class Wallet extends Base {
             case config('custom.recharge_code.WeChatPay.code') :
             case config('custom.recharge_code.Alipay.code') :
             case config('custom.recharge_code.UnionPay.code') :
-                $url = config('custom.pay_recharge').$walletDetailSn;
+                $url = config('custom.pay_gateway').$walletDetailSn;
                 return successMsg($url);
                 break;
 
