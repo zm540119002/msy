@@ -240,7 +240,7 @@ class Wallet extends Base {
             if(!$res['status']){
                 $modelOrder->rollback();
                 //返回状态
-                return errorMsg('失败1');
+                return errorMsg('失败');
             }
 
             // 删除订单关联的购物车的商品
@@ -251,7 +251,7 @@ class Wallet extends Base {
 
             if(false === $res){
                 $modelOrder ->rollback();
-                return errorMsg('失败2');
+                return errorMsg('失败');
             }
 
             // 会员升级 // 每个平台都有自己的支付后业务 后期修改
@@ -283,10 +283,10 @@ class Wallet extends Base {
                     $memberModel = new \app\index\model\Member();
 
                     $result = $memberModel->allowField(true)->isUpdate(true)->save($data,$where['where']);
-                    echo  $memberModel ->getLastSql(); exit ;
-                    if (!$result) {
+
+                    if (false === $result) {
                         $modelOrder->rollback();
-                        return errorMsg('失败3');
+                        return errorMsg('失败');
                     }
                 }
             }
