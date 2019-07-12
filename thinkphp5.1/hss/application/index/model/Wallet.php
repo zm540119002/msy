@@ -47,6 +47,7 @@ class Wallet extends \common\model\Base {
                 $where = array(
                     'status' => 0,
                     'user_id' => $data['user_id'],
+                    'id'=>$wallet['id']
                 );
             }
 
