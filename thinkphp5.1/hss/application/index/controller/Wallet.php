@@ -286,7 +286,7 @@ class Wallet extends Base {
 
                     if (!$result) {
                         $modelOrder->rollback();
-                        return errorMsg('失败');
+                        return errorMsg('失败3');
                     }
                 }
             }
