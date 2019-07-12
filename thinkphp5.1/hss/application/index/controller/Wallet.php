@@ -237,7 +237,6 @@ class Wallet extends Base {
             $data['order_sn'] = $orderInfo['sn'];
 
             $res = $modelOrder->orderHandle($data, $orderInfo);
-            echo $modelOrder ->getLastSql();exit;
             if(!$res['status']){
                 $modelOrder->rollback();
                 //返回状态
