@@ -13,7 +13,7 @@ const package = require('../package.json');
 
 module.exports = merge(webpackBaseConfig, {
     output: {
-        publicPath: 'http://apiadmin.meishangyun.com/dist/',  // 修改 https://iv...admin 这部分为你的服务器域名
+        publicPath: 'https://apiadmin.meishangyun.com/dist/',  // 修改 https://iv...admin 这部分为你的服务器域名
         filename: '[name].[hash].js',
         chunkFilename: '[name].[hash].chunk.js'
     },

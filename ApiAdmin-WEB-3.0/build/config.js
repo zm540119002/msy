@@ -1,5 +1,5 @@
 let config = {
     env: 'development',
-    baseUrl: 'http://apiadminapi.meishangyun.com/admin/'
+    baseUrl: 'https://apiadminapi.meishangyun.com/admin/'
 };
 export default config;
