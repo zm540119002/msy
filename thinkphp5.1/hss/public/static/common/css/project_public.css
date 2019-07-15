@@ -348,6 +348,14 @@ nav .back_prev_page{
 .express-area .select-value{
     width:76%;
 }
+.recharge_form input[type="button"]{
+    height:100%;
+    background: #FF7BAC;
+    color:#fff;
+}
+.recharge_wallet_item{
+    text-indent: 0.18rem;
+}
 /*会员预登记*/
 .memberRegTpl .step{
     background: #00A0E9;
