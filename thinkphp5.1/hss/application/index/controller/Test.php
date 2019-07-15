@@ -2,6 +2,7 @@
 namespace app\index\controller;
 
 // 前台首页
+use phpDocumentor\Reflection\DocBlock\Tags\Formatter\AlignFormatter;
 use think\Console;
 use common\component\jwt\JWT;
 
@@ -9,6 +10,7 @@ class Test extends \common\controller\Base{
     /**首页
      */
     public function index(){
+        phpinfo();exit;
         print_r(checkLogin());
         print_r(123);
         exit;
