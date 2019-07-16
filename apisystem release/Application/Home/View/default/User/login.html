@@ -1,0 +1,141 @@
+<extend name="Base/common" />
+
+<block name="body">
+<link href="/Public/Docapi/css/default.css" rel="stylesheet">
+<section id="login-panel">
+    <div class="span-left">
+        <div class="down-left">
+            <div class="down-big-en">API SYSTEM</div>
+            <div class="down-big-ch">让沟通更简单</div>
+            <div class="down-line"><a href="http://bbs.apisystem.cn/forum.php?mod=viewthread&tid=2&page=1&extra=#pid3/"><span class="  down-btn">下 载 源 码</span></a></div>
+            <div class="down-help"><a href="{:U("/Home/article/index/category/help")}">使用帮助</a>&nbsp;&nbsp;&nbsp;<a href="#">社区论坛</a>
+                <br>
+                <a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=e2e831c8074b5d67688a2f6e78a0bea1ddb36da664ea3c56ba46668c8512807c">QQ群二:460098419</a>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="span12">
+        <if condition="is_login()">
+
+            <div class="container">
+                <h3>已登录用户</h3>
+            </div>
+            <div class="control-group">
+                <div class="controls t-align-center">
+                    <h1>{:get_username()}</h1>
+                    <ul class="countapi">
+                        <li>
+                            <span>接口分类数：</span>{$apiCount.api}
+                        </li>
+                        <li>
+                            <span>接口总个数：</span>{$apiCount.categoryapi}
+                        </li>
+                        <li>
+                            <span>登录次数：</span>{$memberInfo.login}
+                        </li>
+
+                        <li>
+                            <span>最后登录IP：</span>{$memberInfo.last_login_ip|long2ip}
+                        </li>
+                        <li>
+                            <span>登录时间：</span>{$memberInfo.last_login_time|date='y-m-d H:i:s',###}
+                        </li>
+
+                    </ul>
+
+                    <a href="{:U('/Docapi/Index')}" >
+                        <button type="button" class="btn mgb">进入接口管理系统</button>
+                    </a>
+                </div>
+            </div>
+       <else/>
+            <div class="container">
+                <h3>用户登录</h3>
+            </div>
+            <form class="login-form" action="__SELF__" method="post">
+
+              <div class="control-group">
+                <div class="controls">
+                  <input type="text" id="inputEmail" class="span3" placeholder="请输入用户名"  ajaxurl="/member/checkUserNameUnique.html" errormsg="请填写1-16位用户名" nullmsg="请填写用户名" datatype="*1-16" value="" name="username">
+                </div>
+              </div>
+              <div class="control-group">
+                <div class="controls">
+                  <input type="password" id="inputPassword"  class="span3" placeholder="请输入密码"  errormsg="密码为6-20位" nullmsg="请填写密码" datatype="*6-20" name="password">
+                </div>
+              </div>
+              <div class="control-group">
+                <div class="controls">
+                  <input type="text" id="inputPassword" class="span1" placeholder="请输入验证码"  errormsg="请填写5位验证码" nullmsg="请填写验证码" datatype="*5-5" name="verify">
+                  <div class="verify">
+                    <img class="verifyimg reloadverify" alt="点击切换" src="{:U('verify')}" style="cursor:pointer;">
+
+                  </div>
+                </div>
+              </div>
+              <div class="control-group">
+                <div class="controls t-align-left">
+                  <label class="checkbox">
+                    <input type="checkbox" name="autologin"> 自动登陆
+                  </label>
+                  <button type="submit" class="btn">Login</button>
+                    <div class="controls Validform_checktip text-warning"></div>
+                </div>
+              </div>
+              <div class="foot-text clear-float">
+                <div class="pull-right">
+                  <a href="{:U('User/register')}">立即注册</a> |
+                  <a href="#">忘记密码？</a>
+                </div>
+              </div>
+            </form>
+        </div>
+
+    </if>
+</section>
+</block>
+
+<block name="side"> </block>
+<block name="script">
+    <script type="text/javascript">
+
+        $(document)
+            .ajaxStart(function(){
+                $("button:submit").addClass("log-in").attr("disabled", true);
+            })
+            .ajaxStop(function(){
+                $("button:submit").removeClass("log-in").attr("disabled", false);
+            });
+
+            $('body').addClass('cover-bg');
+
+        $("form").submit(function(){
+            var self = $(this);
+            $.post(self.attr("action"), self.serialize(), success, "json");
+            return false;
+
+            function success(data){
+                if(data.status){
+                    window.location.href = data.url;
+                } else {
+                    self.find(".Validform_checktip").text(data.info);
+                    //刷新验证码
+                    $(".reloadverify").click();
+                }
+            }
+        });
+
+        $(function(){
+            var verifyimg = $(".verifyimg").attr("src");
+            $(".reloadverify").click(function(){
+                if( verifyimg.indexOf('?')>0){
+                    $(".verifyimg").attr("src", verifyimg+'&random='+Math.random());
+                }else{
+                    $(".verifyimg").attr("src", verifyimg.replace(/\?.*$/,'')+'?'+Math.random());
+                }
+            });
+        });
+    </script>
+</block>

@@ -1,0 +1,184 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office"
+      xmlns:w="urn:schemas-microsoft-com:office:word" xmlns:m="http://schemas.microsoft.com/office/2004/12/omml"
+      xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+    <title>{:C('WEB_SITE_TITLE')}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="{:C('WEB_SITE_KEYWORDS')}" />
+    <meta name = "description" content="{$SiteInfo.description}" >
+    <style>
+        @font-face {
+            font-family:"Times New Roman";
+        }
+        @font-face {
+            font-family:"&#23435;&#20307;";
+        }
+        @font-face {
+            font-family:"Arial";
+        }
+        body,pre{ font-size: 13px; }
+        pre{
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        table{border-collapse:collapse;border-color:#000;}
+        td{ border-color:#000;  vertical-align:middle;}
+        h1{ text-align:center}
+        h3{ text-align:left;}
+    </style>
+    <!--[if gte mso 9]><xml><w:WordDocument><w:View>Print</w:View><w:TrackMoves>false</w:TrackMoves><w:TrackFormatting/><w:ValidateAgainstSchemas/><w:SaveIfXMLInvalid>false</w:SaveIfXMLInvalid><w:IgnoreMixedContent>false</w:IgnoreMixedContent><w:AlwaysShowPlaceholderText>false</w:AlwaysShowPlaceholderText><w:DoNotPromoteQF/><w:LidThemeOther>EN-US</w:LidThemeOther><w:LidThemeAsian>ZH-CN</w:LidThemeAsian><w:LidThemeComplexScript>X-NONE</w:LidThemeComplexScript><w:Compatibility><w:BreakWrappedTables/><w:SnapToGridInCell/><w:WrapTextWithPunct/><w:UseAsianBreakRules/><w:DontGrowAutofit/><w:SplitPgBreakAndParaMark/><w:DontVertAlignCellWithSp/><w:DontBreakConstrainedForcedTables/><w:DontVertAlignInTxbx/><w:Word11KerningPairs/><w:CachedColBalance/><w:UseFELayout/></w:Compatibility><w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel><m:mathPr><m:mathFont m:val="Cambria Math"/><m:brkBin m:val="before"/><m:brkBinSub m:val="--"/><m:smallFrac m:val="off"/><m:dispDef/><m:lMargin m:val="0"/> <m:rMargin m:val="0"/><m:defJc m:val="centerGroup"/><m:wrapIndent m:val="1440"/><m:intLim m:val="subSup"/><m:naryLim m:val="undOvr"/></m:mathPr></w:WordDocument></xml><![endif]-->
+
+</head>
+<body class="cbp-spmenu-push">
+
+
+
+            <div class="apisys-content-title">
+                <h3>
+                    API列表目录
+                </h3>
+            </div>
+            <div class="apisys-content-catalog">
+                <ul class="nav list-unstyled">
+                <volist name="show_catlist" id="cat" key="k">
+                    <li>
+                        <a href="#p{$cat['id']}">
+                        {$k}. {$cat['name']} <if condition="$cat['childcount'] gt 0">({$cat['childcount']})</if>
+                        </a>
+                        <ul  class="nav-second-level list-unstyled">
+                            <volist name="cat['child']" id="vo" key="k1">
+                                <li>
+                                    <a href="#p{$vo['id']}" >{$k1}. {$vo['name']} <if condition="$vo['childcount'] gt 0">({$vo['childcount']})</if></a>
+                                    <ul class="nav-third-level list-unstyled">
+                                        <volist name="vo['child']" id="voc" key="k2">
+                                            <li>
+                                                <a href="#p{$voc['id']}" >{$k2}. {$voc['title']}</a>
+                                            </li>
+                                        </volist>
+                                    </ul>
+                                </li>
+                            </volist>
+                        </ul>
+                    </li>
+                </volist>
+                </ul>
+            </div>
+            <div class="apisys-content-content">
+
+
+                <volist name="list_data" id="data">
+
+
+                            <h4><a name="p{$data['id']}">{$data['title']}</a>  <a href={:U('Opapi/view?id='.$data['id'])} class=""><i class="fa fa-eye text-danger"></i></a>
+                            <a href={:U('Opapi/edit?id='.$data['id'])} ><i class="fa fa-pencil text-danger"></i></a></h4>
+
+
+                        <table class="table table-bordered table-hover" border="1" cellspacing="0" cellpadding="0" width="100%">
+                            <tbody>
+                            <tr>
+                                <th>接口名称:</th>
+                                <td>{$data['title']}</td>
+                            </tr>
+                            <tr>
+                                <th>接口描述:</th>
+                                <td>{$data['description']}</td>
+                            </tr>
+                            <tr>
+                                <th>关键词:</th>
+                                <td>{$data['keywords']}</td>
+                            </tr>
+                            <tr>
+                                <th>项目分类:</th>
+                                <td>{$data['title']}</td>
+                            </tr>
+                            <tr>
+                                <th>method:</th>
+                                <td>{$data['method']}</td>
+                            </tr>
+                            <tr>
+                                <th>接口地址:</th>
+                                <td>{$data['apiurl']}</td>
+                            </tr>
+                            <tr>
+                                <th>请求字段:</th>
+                                <td>
+                                    <table class="table table-striped" border="1" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <th>字段</th>
+                                            <th>Type</th>
+                                            <th>必传</th>
+                                            <th>描述</th>
+                                            <th>测试值</th>
+
+                                        </tr>
+                                        <volist name="data['request']" id="vo">
+                                            <tr>
+                                                <td>{$vo['key_name']}</td>
+                                                <td>{$vo['key_type']}</td>
+                                                <td><if condition="$vo['key_must'] eq 1">是<else/>否</if></td>
+                                                <td>{$vo['key_description']}</td>
+                                                <td>{$vo['key_value']}</td>
+                                            </tr>
+                                        </volist>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>返回字段:</th>
+                                <td>
+                                    <table class="table table-striped" border="1" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <th>字段</th>
+                                            <th>Type</th>
+                                            <th>描述</th>
+
+
+                                        </tr>
+                                        <volist name="data['response']" id="vo">
+                                            <tr>
+                                                <td>{$vo['key_name']}</td>
+                                                <td>{$vo['key_type']}</td>
+                                                <td>{$vo['key_description']}</td>
+
+                                            </tr>
+                                        </volist>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>返回数据:</th>
+                                <td><pre>{$data['restring']}</pre></td>
+                            </tr>
+                            <tr>
+                                <th>备   注:</th>
+                                <td>{$data['memo']}</td>
+                            </tr>
+                            <tr>
+                                <th>更新日期:</th>
+                                <td>{$data['edit_time']|date='Y-m-d H:i',###}</td>
+                            </tr>
+
+
+                            </tbody>
+                        </table>
+
+
+                </volist>
+
+
+
+                <div class="ibox-content">
+                    <div class="page">
+                        {$_page|default=''}
+                    </div>
+                </div>
+            </div>
+
+
+
+
+<!-- 调用脚本文件 -->
+
+<!-- 调用脚部文件 -->
+<include file = "Public:footer_content"  />

@@ -1,0 +1,290 @@
+<!-- 调用头部文件 -->
+<include file = "Public:header_content" title = "{$title}" />
+
+<div class="main-content">
+    <div class="apisys-content">
+            <div class="apisys-content-title">
+                <h3>
+                    <a href="javascript:window.location.reload();" title="刷新本页"><i class="fa fa-refresh"></i></a> 编辑API接口   <a href={:U('Opapi/view?id='.$data['id'])} target="_blank" class=""><i class="fa fa-eye text-danger"></i></a>
+                    <a href={:U('Opapi/edit?id='.$data['id'])} ><i class="fa fa-pencil text-danger"></i></a>
+                </h3>
+            </div>
+            <div class="apisys-content-content form-body">
+
+
+
+                <form id="form" action="{$post_action}" method="post" class="form-horizontal">
+                    <input type="hidden" class="form-control" id="id" name="id" value="{$data['id']}"
+                           placeholder="ID">
+                    <div class="input-group m-b">
+                        <span class="input-group-btn btn-w-m" >
+                            <h5 class="p-xxs m-l-sm">接口名称 <i class="fa fa-asterisk text-danger"></i></h5>
+                        </span>
+                        <input type="text" class="form-control" id="title" name="title" value="{$data['title']}"
+                               placeholder="接口名称">
+                    </div>
+                    <div class="input-group m-b">
+                        <span class="input-group-btn btn-w-m" >
+                            <h5 class="p-xxs m-l-sm">接口描述 <i class="fa fa-asterisk text-danger"></i></h5>
+                        </span>
+                        <input type="text" class="form-control" id="description" name="description" value="{$data['description']}"
+                               placeholder="接口描述">
+                    </div>
+                    <div class="input-group m-b">
+                        <span class="input-group-btn btn-w-m" >
+                            <h5 class="p-xxs m-l-sm">关键词</h5>
+                        </span>
+                        <input type="text" class="form-control" id="keywords" name="keywords" value="{$data['keywords']}"
+                               placeholder="关键词">
+                    </div>
+                    <div class="input-group m-b">
+                        <span class="input-group-btn btn-w-m" >
+                            <h5 class="p-xxs m-l-sm">项目分类 <i class="fa fa-asterisk text-danger"></i></h5>
+                        </span> </span>
+                        <select id="project_id" name="project_id" class="form-control "   >
+                            <option value="0">项目分类</option>
+                            <volist name="catlist" id="vo">
+                                <option value="{$vo['id']}" <if condition="$vo['id'] eq $data['project_id']">selected="selected"</if> >{$vo.spacer}{$vo.name}</option>
+                            </volist>
+                        </select>
+
+                    </div>
+
+
+                    <div class="input-group m-b">
+                        <span class="input-group-btn btn-w-m" >
+                            <h5 class="p-xxs m-l-sm">接口地址 <i class="fa fa-asterisk text-danger"></i></h5>
+                        </span>
+                        <span class="input-group-btn" >
+                           <h5 class="p-xxs m-l-sm" id="url_str"></h5>
+                        </span><input type="text" class="form-control" style="ime-mode:disabled;" id="apiurl" name="apiurl" value="{$data['apiurl']}"
+                               placeholder="接口地址">
+                    </div>
+                    <div class="input-group m-b">
+                        <span class="input-group-btn btn-w-m" >
+                            <h5 class="p-xxs m-l-sm">method <i class="fa fa-asterisk text-danger"></i></h5>
+                        </span>
+                        <select id="method" name="method" class="form-control "  style="width: 150px;" >
+                            <option value="POST" <if condition="$data[method] eq 'POST'">selected="selected"</if>>POST</option>
+                            <option value="GET" <if condition="$data[method] eq 'GET'">selected="selected"</if>>GET</option>
+                        </select>
+                    </div>
+                    <div class="input-group m-b">
+                   <span class="input-group-btn btn-w-m" style="vertical-align:top;">
+                            <h5 class="p-xxs m-l-sm">请求字段 <i class="fa fa-asterisk text-danger"></i></h5>
+                   </span>
+                        <button type="button" class="btn btn-primary m-l-sm"  id="add-request-btn">  添加请求参数  <i class="fa fa-plus"></i></button>
+
+
+
+                        <div class="input-group">
+                            <div id="add-request-list">
+                                <volist name="data['request']" id="vo">
+                                    <div class="input-inline margin-top add-request-input ">
+                                        <input class="form-control " name="request[key_name][]" value="{$vo['key_name']}" style="width: 100px;ime-mode:disabled;" size="20" placeholder="参数名" type="text">
+                                        <select name="request[key_type][]"  class="form-control" style="width: 110px;">
+                                            <option value="">数据类型</option>
+                                            <option value="int" <if condition="$vo['key_type'] eq 'int'">selected="selected"</if>>int</option>
+                                            <option value="string" <if condition="$vo['key_type'] eq 'string'">selected="selected"</if>>string</option>
+                                            <option value="float" <if condition="$vo['key_type'] eq 'float'">selected="selected"</if>>float</option>
+                                            <option value="file" <if condition="$vo['key_type'] eq 'file'">selected="selected"</if>>file</option>
+                                            <option value="boolen" <if condition="$vo['key_type'] eq 'boolen'">selected="selected"</if>>boolen</option>
+                                        </select>
+                                        <select name="request[key_must][]" class="form-control" style="width: 80px;">
+                                            <option value="1" <if condition="$vo['key_must'] eq '1'">selected="selected"</if>>必传</option>
+                                            <option value="0" <if condition="$vo['key_must'] eq '0'">selected="selected"</if>>选传</option>
+                                        </select>
+                                        <input name="request[key_description][]" value="{$vo['key_description']}"   class="form-control" style="width: 215px;" size="45" placeholder="参数描述" type="text">
+                                        <input name="request[key_value][]" value="{$vo['key_value']}"   class="form-control" style="width: 120px;" size="100" placeholder="参数值(可选)" type="text">
+                                        &nbsp;<button type="button" class="btn btn-danger add-request-remove"><i class="fa fa-remove  text-nowrap"></i></button>
+                                    </div>
+                                </volist>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="input-group m-b">
+                   <span class="input-group-btn btn-w-m" style="vertical-align:top;">
+                            <h5 class="p-xxs m-l-sm">返回字段 <i class="fa fa-asterisk text-danger"></i></h5>
+                   </span>
+                        <button type="button" class="btn btn-primary m-l-sm"  id="add-response-btn">  添加返回字段  <i class="fa fa-plus"></i></button>
+
+
+
+                        <div class="input-group">
+                            <div id="add-response-list">
+                                <volist name="data['response']" id="vo">
+                                    <div class="input-inline margin-top add-response-input ">
+                                        <input class="form-control " name="response[key_name][]" value="{$vo['key_name']}" style="width: 100px;ime-mode:disabled;" size="20" placeholder="参数名" type="text">
+                                        <select name="response[key_type][]"  class="form-control" style="width: 110px;">
+                                            <option value="">数据类型</option>
+                                            <option value="int" <if condition="$vo['key_type'] eq 'int'">selected="selected"</if>>int</option>
+                                            <option value="string" <if condition="$vo['key_type'] eq 'string'">selected="selected"</if>>string</option>
+                                            <option value="float" <if condition="$vo['key_type'] eq 'float'">selected="selected"</if>>float</option>
+                                            <option value="file" <if condition="$vo['key_type'] eq 'file'">selected="selected"</if>>file</option>
+                                            <option value="boolen" <if condition="$vo['key_type'] eq 'boolen'">selected="selected"</if>>boolen</option>
+                                        </select>
+                                        <input name="response[key_description][]" value="{$vo['key_description']}"   class="form-control" style="width: 215px;" size="45" placeholder="参数描述" type="text">
+                                        &nbsp;<button type="button" class="btn btn-danger add-response-remove"><i class="fa fa-remove  text-nowrap"></i></button>
+                                    </div>
+                                </volist>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="input-group m-b">
+                        <span class="input-group-btn btn-w-m " style="vertical-align:top;">
+                            <h5 class="p-xxs m-l-sm">返回参数 <i class="fa fa-asterisk text-danger"></i></h5>
+                            <button type="button" id="request_value" class="btn btn-primary ">获取返回值</button>
+                        </span>
+
+                        <textarea class="form-control" id="restring" name="restring" placeholder="返回参数" style="height: 500px;">{$data['restring']}</textarea>
+                    </div>
+                    <div class="input-group m-b">
+
+                        <span class="input-group-btn btn-w-m " style="vertical-align:top;">
+                            <h5 class="p-xxs m-l-sm">备   注</h5>
+                        </span>
+                        <textarea class="form-control" id="memo" name="memo" placeholder="备注" >{$data['memo']}</textarea>
+                    </div>
+
+
+                    <div style="text-align: center;">
+                        <button type="submit" class="btn btn-primary m-l-sm" ><i class="fa fa-save"></i> 提交保存</button>
+                        <button type="reset" class="btn btn-primary m-l-sm" ><i class="fa fa-remove"></i> 重置</button>
+                    </div>
+
+
+
+
+
+                </form>
+                <!-------->
+                <div class="input-inline margin-top add-request-input hidden">
+                    <input class="form-control " name="request[key_name][]" style="width: 100px;ime-mode:disabled;" size="20" placeholder="参数名" type="text">
+                    <select name="request[key_type][]" class="form-control" style="width: 110px;">
+                        <option value="{$data['id']}">数据类型</option>
+                        <option value="int">int</option>
+                        <option value="string" selected="selected">string</option>
+                        <option value="float">float</option>
+                        <option value="file">file</option>
+                        <option value="boolen">boolen</option>
+                    </select>
+                    <select name="request[key_must][]" class="form-control" style="width: 80px;">
+                        <option value="1">必传</option>
+                        <option value="0">选传</option>
+                    </select>
+                    <input name="request[key_description][]"  class="form-control" style="width: 215px;" size="45" placeholder="参数描述" type="text">
+                    <input name="request[key_value][]"  class="form-control" style="width: 120px;" size="100" placeholder="参数值(可选)" type="text">
+                    &nbsp;<button type="button" class="btn btn-danger add-request-remove"><i class="fa fa-remove  text-nowrap"></i></button>
+                </div>
+                <!---返回zhi--->
+                <div class="input-inline margin-top add-response-input hidden">
+                    <input class="form-control " name="response[key_name][]" style="width: 100px;ime-mode:disabled;" size="20" placeholder="参数名" type="text">
+                    <select name="response[key_type][]" class="form-control" style="width: 110px;">
+                        <option value="{$data['id']}">数据类型</option>
+                        <option value="int">int</option>
+                        <option value="string" selected="selected">string</option>
+                        <option value="float">float</option>
+                        <option value="file">file</option>
+                        <option value="boolen">boolen</option>
+                    </select>
+                    <input name="response[key_description][]"  class="form-control" style="width: 215px;" size="45" placeholder="参数描述" type="text">
+                    &nbsp;<button type="button" class="btn btn-danger add-response-remove"><i class="fa fa-remove  text-nowrap"></i></button>
+                </div>
+                <!-------->
+            </div>
+
+    </div>
+</div>
+
+
+<!-- 调用脚本文件 -->
+<include file = "Public:script"  />
+<script type="text/javascript">
+
+    $(function () {
+        var url_str='';
+        $("#project_id").change(function () {
+            var parject_id = $("#project_id").val();
+            var url = "/index.php?s=/Docapi/Opapi/catUrl/cid/" + parject_id + ".html";  //"{:U('Docapi/Opapi/catUrl?cid=4')}";
+            $.ajax({
+                type: "get",
+                url: url,
+                dataType: "json",
+                success: function (data) {
+                    if (data.status == 1) {
+                        $("#url_str").html(data.catUrl);
+                    }
+                }
+            });
+        });
+
+        $("#request_value").click(function (){
+            //var parject_id = $("input[@name='request']")[key_name].val();
+            //alert(parject_id);
+            //alert(1);
+            var box = $('#add-request-list');
+            var key_name= new Array();
+            var key_value= new Array();
+            var num =box.children('.add-request-input').length;
+
+            for(var i=0;i<num;i++){
+                key_name[i] =  box.find("input[name='request[key_name][]']").eq(i).val();
+                key_value[i] = box.find("input[name='request[key_value][]']").eq(i).val();
+
+            }
+            var api_url=$("#url_str").html() + $("#apiurl").val();
+            var url = "/index.php?s=/Docapi/poststr/startRun.html";
+            $.ajax({
+                type: "post",
+                url: url,
+                data:{key_name:key_name,key_value:key_value,url:api_url},
+                dataType: "json",
+                success: function (data) {
+                    if (data.status == 1) {
+                        $("#restring").val(decodeURIComponent(data.data));
+                    }
+                },
+                error:function(){
+                    alert('error');
+                }
+            });
+        });
+
+
+    });
+
+</script>
+<script>
+    $(document).ready(function () {
+        $("#project_id").change();
+        //request
+        //添加
+        $("#add-request-btn").bind('click', function(event) {
+            //alert('hdshfdsf');
+            $("#add-request-list").append($(".add-request-input.hidden").clone());
+            $("#add-request-list .add-request-input").last().removeClass('hidden');
+        });
+        //删除
+        $("#add-request-list").on("click",".add-request-remove",function(event) {
+            $(this).parent(".add-request-input").remove();
+        });
+        //response
+        //添加
+        $("#add-response-btn").bind('click', function(event) {
+            //alert('hdshfdsf');
+            $("#add-response-list").append($(".add-response-input.hidden").clone());
+            $("#add-response-list .add-response-input").last().removeClass('hidden');
+        });
+        //删除
+        $("#add-response-list").on("click",".add-response-remove",function(event) {
+            $(this).parent(".add-response-input").remove();
+        });
+
+    });
+</script>
+<!-- 调用脚部文件 -->
+<include file = "Public:footer_content"  />

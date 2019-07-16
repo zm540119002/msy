@@ -1,0 +1,209 @@
+<!-- 调用头部文件 -->
+<include file = "Public:header_content" title = "{$title}" />
+
+
+<div class="main-content">
+    <!--left-fixed -navigation-->
+    <div class=" sidebar" role="navigation">
+        <div class="navbar-collapse">
+            <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
+                <ul class="nav" id="side-menu">
+
+                    <li>
+                        <a href="{:U('Opapi/index')}"  target="_apisysContent" ><i class="fa fa-home nav_icon"></i>首  页<span class="fa arrow"></span></a>
+
+                    </li>
+
+                    <volist name="show_catlist" id="cat">
+                    <li>
+                        <a href="#{$cat['id']}">
+                            <i class="fa fa-sitemap nav_icon"></i>{$cat['name']}
+                            <span class="nav-badge-btm">{$cat['childcount']}</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level collapse">
+                            <volist name="cat['child']" id="vo">
+                                <li>
+                                    <a href="#{$vo['id']}"  class="waves-effect">{$vo['name']}<span class="nav-badge-btm">{$vo['childcount']}</span><span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level collapse">
+                                        <volist name="vo['child']" id="voc">
+                                            <li>
+                                                <a href="{:U('Opapi/view?id='.$voc['id'])}" target="_apisysContent"  class="J_menuItem" data-index="{$voc['id']}">{$voc['title']}</a>
+                                            </li>
+                                        </volist>
+                                    </ul>
+                                </li>
+                            </volist>
+                        </ul>
+                    </li>
+                    </volist>
+
+
+                    <li>
+                        <a href="{:U('Opapi/lists')}"  target="_apisysContent" >
+                            <i class="fa fa-cloud-download nav_icon"></i>全部接口下载<span class="fa arrow"></span>
+                        </a>
+
+                    </li>
+
+                </ul>
+                <!-- //sidebar-collapse -->
+            </nav>
+        </div>
+    </div>
+    <!--left-fixed -navigation-->
+    <!-- header-starts -->
+    <div class="sticky-header header-section ">
+        <div class="header-left">
+
+            <!--logo -->
+            <div class="logo">
+                <a href="javascript:window.location.reload();" >
+                    <h1><img src="__IMG__/logo-index.png" height="22" width="161"></h1>
+                    <span>接口文档管理系统</span><!--APIsystem.cn  DOCUMENT MANGEMENT-->
+                </a>
+            </div>
+            <!--//logo-->
+            <!--toggle button start-->
+            <button id="showLeftPush"><i class="fa fa-bars"></i></button>
+            <!--toggle button end-->
+            <!--search-box-->
+            <div class="search-box " style="display: none;">
+                <form class="input">
+                    <input class="sb-search-input input__field--madoka" placeholder="Search..." type="search" id="input-31" />
+                    <label class="input__label" for="input-31">
+                        <svg class="graphic" width="100%" height="100%" viewBox="0 0 404 77" preserveAspectRatio="none">
+                            <path d="m0,0l404,0l0,77l-404,0l0,-77z"/>
+                        </svg>
+                    </label>
+                </form>
+            </div><!--//end-search-box-->
+            <div class="clearfix"> </div>
+        </div>
+        <div class="header-right">
+            <div class="profile_details_left"><!--notifications of menu start -->
+                <ul class="nofitications-dropdown">
+
+                    <li class="dropdown head-dpdn">
+                        <a href="{:U('Opapi/add')}" class="dropdown-toggle" target="_apisysContent" aria-expanded="false" title="添加接口"><i class="fa fa-plus"></i><span class="badge blue">添加</span></a>
+                    </li>
+
+                    <li class="dropdown head-dpdn">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-list"></i><span class="badge blue1">分类</span></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <div class="notification_header">
+                                    <h3>项目分类管理</h3>
+                                </div>
+                            </li>
+
+                            <li><a href="{:U('Docapi/Opapi/catlists')}" target="_apisysContent"><i class="fa fa-list"></i> 分类列表</a></li>
+                            <li><a href="{:U('Docapi/Opapi/catadd')}"  target="_apisysContent"><i class="fa fa-plus"></i> 添加分类</a></li>
+
+                            <li>
+                                <div class="notification_bottom">
+                                    <a href="#"></a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="clearfix"> </div>
+            </div>
+            <!--notification menu end -->
+            <div class="profile_details">
+                <if condition="is_login()">
+                <ul>
+                    <li class="dropdown profile_details_drop">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            <div class="profile_img">
+
+                                <div class="user-name">
+                                    <p>{:get_username()}</p>
+                                    <span>★★★★★</span>
+                                </div>
+                                <i class="fa fa-angle-down lnr"></i>
+                                <i class="fa fa-angle-up lnr"></i>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                        <ul class="dropdown-menu drp-mnu">
+                            <li><a href="{:U('Docapi/Opapi/cache_catlist')}"><i class="fa fa-cog"></i> 刷新列表缓存</a></li>
+                            <li><a href="{:U('Home/User/profile')}"><i class="fa fa-user"></i> 修改密码</a></li>
+                            <li><a href="{:U('Home/User/logout')}"><i class="fa fa-sign-out"></i> 退出</a></li>
+
+                        </ul>
+                    </li>
+                </ul>
+                <else/>
+                    <ul>
+                        <li class="dropdown profile_details_drop">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                <div class="profile_img">
+                                    <span class="prfil-img"><img src="../Public/Docapi/images/user.png" alt=""> </span>
+                                    <div class="user-name">
+                                        <p>未登录</p>
+                                        <span>☆☆☆☆☆</span>
+                                    </div>
+                                    <i class="fa fa-angle-down lnr"></i>
+                                    <i class="fa fa-angle-up lnr"></i>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                            <ul class="dropdown-menu drp-mnu">
+
+                                <a href="{:U('Home/User/login')}"><i class="fa fa-user"></i> 登录</a>
+                                <a href="{:U('Home/User/register')}"><i class="fa fa-user"></i> 注册</a>
+                            </ul>
+                        </li>
+                    </ul>
+                </if>
+
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+    <!-- //header-ends -->
+    <!-- main content start-->
+    <div id="page-wrapper">
+
+        <iframe frameborder="0" name="_apisysContent" id="apiSystemContent" class="apiSystemContent"
+                src="{:U('Opapi/index')}" width="100%" height="100%" scrolling="auto">
+            您的浏览器不支持嵌入式框架，或者当前配置为不显示嵌入式框架。
+        </iframe>
+        <div class="clearfix"> </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 调用脚本文件 -->
+<include file = "Public:script"  />
+<script src="__JS__/custom.js?999"></script>
+<link href="__CSS__/custom.css" rel="stylesheet">
+<!-- 调用脚部文件 -->
+
+<div class="footer1" style="display: none;">
+    <div class="pull-right">
+        Just do it !
+    </div>
+
+    <div class="fl"><strong>Copyright</strong> <a target="_bank" href="http://www.apisystem.cn/">ApiSystem文档管理系统</a> &copy; 2014-2017 ApiSystem.cn V{:C('APISYS_VERSION')}</div>
+</div>
+
+
+</body>
+
+</html>

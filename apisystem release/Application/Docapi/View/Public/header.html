@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{:C('WEB_SITE_TITLE')}</title>
+    <meta name="keywords" content="APISystem文档管理系统,APISystem接口管理系统,Apisystem,接口管理系统,Texren,www.apisystem.cn" />
+    <meta name="description" content="APISystem文档管理系统是一个开源API接口文档管理系统， ApiSystem将原来用word编写API文档流程中解放出来，只需要按照填写文本框即可生成接口文档，管理文档也很轻松，同时还可以配置可见及所得的调试工具，API接口也可以一键导出word文档让你既可以在线分权限分享也可线下分享，是中小企业IT团队开发的福音。" />
+    <meta name="generator" content="www.ApiSystem.cn" />
+    <meta name="author" content="Texren  QQ:174463651 Smith77 QQ:3246932472" />
+    <meta name="copyright" content="ApiSystem文档管理系统 © 2014-2017 ApiSystem.cn V2.3.0118" />
+    <link href="__CSS__/bootstrap.min.css-v=3.3.5.css" rel="stylesheet">
+    <link href="__CSS__/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="__CSS__/plugins/iCheck/custom.css" rel="stylesheet">
+    <!-- morris -->
+    <link href="__CSS__/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
+
+    <!-- fullcalendar -->
+    <link href="__CSS__/plugins/fullcalendar/fullcalendar.css"  rel="stylesheet">
+    <link href="__CSS__/plugins/fullcalendar/fullcalendar.print.css" rel="stylesheet">
+
+    <link href="__CSS__/animate.css" rel="stylesheet">
+    <link href="__CSS__/style.css" rel="stylesheet">
+
+    <!-- Data Tables -->
+    <link href="__CSS__/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="__PUBLIC__/favicon.ico" />
+
+</head>
+
+<body class="mini-navbar">
+
+<div id="wrapper">
+    <!-- 侧边菜单-开始 -->
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav" id="side-menu">
+                <li class="nav-header" style="text-align:center;">
+                    <div class="dropdown profile-element"> <span>
+                        <a href="__APP__">
+                            <img alt="image" class="img-circle" src="__IMG__/img/borrow_log_600x600.png" width="80px;"  height="80px;" />
+                        </a>
+                        </span>
+                        <span class="clear">
+                        <span class="block m-t-xs" style = "color:#fff;">
+                        <strong class="font-bold">API Manager</strong>
+                        </span>
+                            <!-- <span class="text-muted text-xs block">内部使用</span> -->
+                        </span>
+                    </div>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-home"></i>
+                        <span class="nav-label">API管理</span>
+                        <span class="fa arrow"></span>
+                    </a>
+                    <ul class="nav nav-second-level">
+
+                        <li>
+                            <a class="J_menuItem" href="__MODULE__/Opapi/catlists" data-index="0">API分类</a>
+                        </li>
+                        <li>
+                            <a class="J_menuItem" href="__MODULE__/Opapi/lists" data-index="0">API列表</a>
+                        </li>
+                        <li>
+                            <a class="J_menuItem" href="__MODULE__/Opapi/add" data-index="1">添加API</a>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+    <!-- 侧边菜单-结束 -->
+    <!-- 头部导航-开始 -->
+    <div id="page-wrapper" class="gray-bg">
+        <div class="row border-bottom">
+            <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+                </div>
+                <ul class="nav navbar-top-links navbar-left">
+                    <li>
+                        <a class="m-r-lg text-muted welcome-message">{$title}</a>
+                    </li>
+                </ul>
+
+
+
+
+
+
+                <if condition="is_login()">
+                    <ul class="nav navbar-top-links navbar-right" style="margin-right:0" >
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="padding-left:0;padding-right:0">{:get_username()} <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{:U('Docapi/Opapi/cache_catlist')}">刷新列表缓存</a></li>
+                                <li><a href="{:U('Home/User/profile')}">修改密码</a></li>
+                                <li><a href="{:U('Home/User/logout')}">退出</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <else/>
+                    <ul class="nav navbar-top-links navbar-right" style="margin-right:0">
+                        <li>
+                            <a href="{:U('Home/User/login')}">登录</a>
+                        </li>
+                        <li>
+                            <a href="{:U('Home/User/register')}" style="padding-left:0;padding-right:0">注册</a>
+                        </li>
+                    </ul>
+                </if>
+
+            </nav>
+        </div>
+        <!-- 头部导航-结束 -->
+        <div style="padding:10px;"></div>
+

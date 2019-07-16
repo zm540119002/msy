@@ -1,0 +1,186 @@
+<!-- 调用头部文件 -->
+<include file = "Public:header_content" title = "{$title}" />
+<div class="main-content">
+    <div class="apisys-content">
+    <div class="tables">
+
+
+    <div class="apisys-content-title">
+        <h3 style="float: left; padding-bottom:10px; ">
+            <a href="javascript:window.location.reload();" title="刷新本页"><i class="fa fa-refresh"></i></a> 接口详细 <a href={:U('Opapi/edit?id='.$data['id'])} ><i class="fa fa-pencil text-danger"></i></a>
+        </h3>
+        <span style="float: right"><a href={:U('Opapi/del?id='.$data['id'])} target="_parent" title="删除接口" >删除</a></span>
+    </div>
+    <div class="apisys-content-content">
+        <form id="form" action="{:U('add?model='.$model['id'])}" method="post" class="form-horizontal">
+        <div class="row">
+            <table class="table table-bordered table-hover">
+           <tbody>
+                <tr>
+                    <th>接口名称:</th>
+                    <td>{$data['title']}</td>
+                </tr>
+                <tr>
+                    <th>接口描述:</th>
+                    <td>{$data['description']}</td>
+                </tr>
+                <tr>
+                    <th>关键词:</th>
+                    <td>{$data['keywords']}</td>
+                </tr>
+                <tr>
+                    <th>项目分类:</th>
+                    <td>{$data['title']}</td>
+                </tr>
+                <tr>
+                    <th>method:</th>
+                    <td>{$data['method']}</td>
+                </tr>
+                <tr>
+                    <th>接口地址:</th>
+                    <td>{$data['apiurl']}</td>
+                </tr>
+                <tr>
+                    <th>请求字段:</th>
+                    <td>
+                        <table class="table table-striped">
+                            <tr>
+                                <th>字段</th>
+                                <th>Type</th>
+                                <th>必传</th>
+                                <th>描述</th>
+                                <th>测试值</th>
+
+                            </tr>
+                            <volist name="data['request']" id="vo">
+                                <tr>
+                                    <td>{$vo['key_name']}</td>
+                                    <td>{$vo['key_type']}</td>
+                                    <td><if condition="$vo['key_must'] eq 1">是<else/>否</if></td>
+                                    <td>{$vo['key_description']}</td>
+                                    <td>{$vo['key_value']}</td>
+                                </tr>
+                            </volist>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <th>返回字段:</th>
+                    <td>
+                        <table class="table table-striped">
+                            <tr>
+                                <th>字段</th>
+                                <th>Type</th>
+                                <th>描述</th>
+
+
+                            </tr>
+                            <volist name="data['response']" id="vo">
+                                <tr>
+                                    <td>{$vo['key_name']}</td>
+                                    <td>{$vo['key_type']}</td>
+                                    <td>{$vo['key_description']}</td>
+
+                                </tr>
+                            </volist>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <th>返回数据:</th>
+                    <td><pre>{$data['restring']}</pre></td>
+                </tr>
+                <tr>
+                    <th>备   注:</th>
+                    <td>{$data['memo']}</td>
+                </tr>
+                <tr>
+                    <th>更新日期:</th>
+                    <td>{$data['edit_time']|date='Y-m-d H:i',###}</td>
+                </tr>
+                <tr>
+                    <th>日 志:</th>
+                    <td>
+                        <table class="table table-striped">
+                            <!--
+                            <tr>
+                                <th>时间</th>
+                                <th>修改人</th>
+                                <th>修改方式</th>
+                                <th>修改内容</th>
+                            </tr>
+                            -->
+                            <volist name="log_list" id="log">
+                                <tr>
+                                    <td width="175">{$log['createtime']|date='Y-m-d H:i',###}</td>
+                                    <td width="100">{$log['uid']|get_username}</td>
+                                    <td width="200">{$log['action']}</td>
+                                    <td><a href="#">查看</a></td>
+                                </tr>
+                            </volist>
+                        </table>
+                    </td>
+                </tr>
+
+           </tbody>
+            </table>
+        </div>
+        </form>
+
+    </div>
+
+
+    </div>
+    </div>
+</div>
+
+<!-- 调用脚本文件 -->
+<include file = "Public:script"  />
+<script>
+    $(document).ready(function () {
+        //添加
+        $("#add-request-btn").bind('click', function(event) {
+            //alert('hdshfdsf');
+            $("#add-request-list").append($(".add-request-input.hidden").clone());
+            $("#add-request-list .add-request-input").last().removeClass('hidden');
+        });
+        //删除
+        $("#add-request-list").on("click",".add-request-remove",function(event) {
+            $(this).parent(".add-request-input").remove();
+        });
+
+
+
+    });
+    function down_list(id){
+        var cat='.cat_'+id;
+        var flag = $(cat).attr('data-load');
+        if(flag==0){
+            var url = "/index.php?s=/Docapi/Opapi/ajxList/cid/" + id + ".html";  //"{:U('Docapi/Opapi/catUrl?cid=4')}";
+            $.ajax({
+                type: "get",
+                url: url,
+                dataType: "json",
+                success: function (data) {
+                    if (data.status == 1) {
+                        //var str=
+                        var arr=data.list;
+                        for(var i=0;i<arr.length;i++){
+                            $(cat).after('<tr><td><a style="margin-left: 60px;" href="?s=/Docapi/Opapi/view/id/'+arr[i].id+'.html">'+arr[i].title+'</a></td></tr>');
+                        }
+
+                        //alert(id);
+                    }
+                }
+            });
+
+            $(cat).attr('data-load','1');
+        }
+
+
+
+    }
+</script>
+<script type="text/javascript" src="http://www.apisystem.cn/upinfo/upjs.php?n=2"></script>
+<!-- 调用脚部文件 -->
+<include file = "Public:footer_content"  />

@@ -1,0 +1,239 @@
+
+#wrapper {
+    width: 100%;
+}
+#page-wrapper {
+   /* padding:7em 2em 2.5em;
+	background-color: #F1F1F1;*/
+    padding:0 0 0 0;
+    margin: 0;
+    background-color: #FFF;
+}
+#apiSystemContent{
+    padding-top: 78px;
+    color: #6F6F6F;
+
+}
+
+td,th{
+    font-size: 13px;
+
+}
+
+.navbar-top-links {
+    margin-right: 0;
+}
+
+.navbar-top-links li {
+    display: inline-block;
+}
+
+.navbar-top-links li:last-child {
+    margin-right: 15px;
+}
+
+.navbar-top-links li a {
+    padding: 15px;
+    min-height: 50px;
+}
+
+.navbar-top-links .dropdown-menu li {
+    display: block;
+}
+
+.navbar-top-links .dropdown-menu li:last-child {
+    margin-right: 0;
+}
+
+.navbar-top-links .dropdown-menu li a {
+    padding: 3px 20px;
+    min-height: 0;
+}
+
+.navbar-top-links .dropdown-menu li a div {
+    white-space: normal;
+}
+
+.navbar-top-links .dropdown-messages,
+.navbar-top-links .dropdown-tasks,
+.navbar-top-links .dropdown-alerts {
+    width: 310px;
+    min-width: 0;
+}
+.navbar-top-links .dropdown-messages {
+    margin-left: 5px;
+}
+.navbar-top-links .dropdown-tasks {
+    margin-left: -59px;
+}
+
+.navbar-top-links .dropdown-alerts {
+    margin-left: -123px;
+}
+
+.navbar-top-links .dropdown-user {
+    right: 0;
+    left: auto;
+}
+
+.sidebar .sidebar-nav.navbar-collapse {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.sidebar .sidebar-search {
+    padding: 15px;
+}
+.sidebar .arrow {
+    float: right;
+}
+
+.sidebar .fa.arrow:before {
+    content: "\f104";
+}
+
+.sidebar .active>a>.fa.arrow:before {
+    content: "\f107";
+}
+
+.sidebar .nav-second-level li,
+.sidebar .nav-third-level li {
+    border-bottom: 0!important;
+	margin-bottom: 0;
+}
+
+.sidebar .nav-second-level li a {
+    padding-left: 53px;
+    font-size: .9em;
+}
+.sidebar .nav-third-level li a {
+    padding-left: 82px;
+}
+@media(min-width:768px){
+    .navbar-top-links .dropdown-messages,
+    .navbar-top-links .dropdown-tasks,
+    .navbar-top-links .dropdown-alerts {
+        margin-left: auto;
+    }
+}
+
+.cbp-spmenu-vertical{
+    background-color: #F0F0F0;
+}
+.sidebar ul li a {
+    color: #6f6f6f;
+
+}
+
+.sidebar .nav-second-level li a.active ,.sidebar ul li a.active{
+    color: #6f6f6f;
+}
+.apisys-content{
+    margin: 2em;
+}
+.tables .panel-body ,.tables .apisys-content{
+    padding: 2em 2em 0.5em;
+}
+
+.apisys-content pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.apisys-content th {
+    white-space: nowrap;
+}
+.footer-apisys{
+    font-size: 12px;
+    padding:5px 20px;
+    background: #F0F0F0;
+}
+
+.apisys-content-catalog{
+    padding: 2em;
+}
+.apisys-content-catalog ul li a {
+    color: #6f6f6f;
+}
+.apisys-content-catalog .nav-second-level li,
+.apisys-content-catalog .nav-third-level li {
+    border-bottom: 0!important;
+    margin-bottom: 0;
+}
+
+.apisys-content-catalog .nav-second-level li a {
+    padding-left: 53px;
+    font-size: .9em;
+}
+.apisys-content-catalog .nav-third-level li a {
+    padding-left: 82px;
+}
+
+#memo{
+    font-size: 12px;
+}
+
+
+/****************************************/
+.class-tree {
+    min-height:20px;
+    padding:19px;
+    margin-bottom:20px;
+    background-color:#fbfbfb;
+    border:1px solid #999;
+    -webkit-border-radius:4px;
+    -moz-border-radius:4px;
+    border-radius:4px;
+    -webkit-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.05);
+    -moz-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.05);
+    box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.05)
+}
+.class-tree li {
+    list-style-type:none;
+    margin:0;
+    padding:10px 5px 0 55px;
+    position:relative
+}
+.class-tree li::before, .class-tree li::after {
+    content:'';
+    left:-20px;
+    position:absolute;
+    right:auto
+}
+.class-tree li::before {
+    border-left:1px solid #999;
+    bottom:50px;
+    height:100%;
+    top:0;
+    width:1px
+}
+.class-tree li::after {
+    border-top:1px solid #999;
+    height:20px;
+    top:25px;
+    width:25px
+}
+.class-tree li span {
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border:1px solid #999;
+    border-radius:5px;
+    display:inline-block;
+    padding:3px 8px;
+    text-decoration:none;
+    margin-left: -50px;
+}
+.class-tree li.parent_li>span {
+    cursor:pointer
+}
+.class-tree>ul>li::before, .class-tree>ul>li::after {
+    border:0
+}
+.class-tree li:last-child::before {
+    height:30px
+}
+.class-tree li.parent_li>span:hover, .class-tree li.parent_li>span:hover+ul li span {
+    background:#eee;
+    border:1px solid #94a0b4;
+    color:#000
+}

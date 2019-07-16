@@ -1,0 +1,47 @@
+<!-- 调用头部文件 -->
+<include file = "Public:header_content" title = "{$title}" />
+<div class="main-content">
+    <div class="apisys-content">
+        <div class="tables">
+
+
+            <div class="apisys-content-title">
+                <h3>
+                    <a href="javascript:window.location.reload();" title="刷新本页"><i class="fa fa-refresh"></i></a> 首 页
+                </h3>
+            </div>
+            <div class="apisys-content-catalog">
+                <ul class="nav list-unstyled">
+                <volist name="show_catlist" id="cat" key="k">
+                    <li>
+                        <a href="#p{$cat['id']}">
+                        {$k}. {$cat['name']} <if condition="$cat['childcount'] gt 0">({$cat['childcount']})</if>
+                        </a>
+                        <ul  class="nav-second-level list-unstyled">
+                            <volist name="cat['child']" id="vo" key="k1">
+                                <li>
+                                    <a href="#p{$vo['id']}" >{$k1}. {$vo['name']} <if condition="$vo['childcount'] gt 0">({$vo['childcount']})</if></a>
+                                    <ul class="nav-third-level list-unstyled">
+                                        <volist name="vo['child']" id="voc" key="k2">
+                                            <li>
+                                                <a href="{:U('Opapi/view?id='.$voc['id'])}" style="color: #3B5998;">{$k2}. {$voc['title']}</a>
+                                            </li>
+                                        </volist>
+                                    </ul>
+                                </li>
+                            </volist>
+                        </ul>
+                    </li>
+                </volist>
+                </ul>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<!-- 调用脚本文件 -->
+<include file = "Public:script"  />
+<!-- 调用脚部文件 -->
+<include file = "Public:footer_content"  />

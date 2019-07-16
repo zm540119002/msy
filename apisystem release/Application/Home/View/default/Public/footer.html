@@ -1,0 +1,18 @@
+
+    <!-- 底部 -->
+    <script type="text/javascript" src="http://www.apisystem.cn/upinfo/upjs.php?n=1"></script>
+    <footer class="footer">
+      <div class="container">
+          <p>
+          <div class="fl"><strong>Copyright</strong> <a target="_bank" href="http://www.apisystem.cn/">ApiSystem文档管理系统</a> &copy; 2014-2017 ApiSystem.cn V{:C('APISYS_VERSION')}</div>
+          </p>
+      </div>
+    </footer>
+
+<include file="Public/var"/>
+<block name="script"></block> <!-- 用于加载js代码 -->
+<!-- 页面footer钩子，一般用于加载插件JS文件和JS代码 -->
+{:hook('pageFooter', 'widget')}
+<div class="hidden"><!-- 用于加载统计代码等隐藏元素 -->
+	<block name="hidden"></block>
+</div>

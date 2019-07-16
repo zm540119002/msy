@@ -1,0 +1,206 @@
+#main-container {
+    background: transparent;
+}
+
+.footer {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    margin: 0;
+}
+
+#login-panel {
+    width: 1000px;
+    position: relative;
+    margin: 0 auto;
+    height: 1px;
+}
+
+#login-panel .span-left {
+    position: absolute;
+    top: 100px;
+    left: 0;
+    width: 400px;
+}
+
+.down-left {
+    min-height: 300px;
+    color: #FFF;
+    margin-top: 30px;
+}
+
+.down-big-en {
+    font-size: 3em;
+    line-height: 1.5;
+    text-align: right;
+    font-weight: 200;
+    color: #fff; /* redeclare to override the `.jumbotron a` */
+    -webkit-transition: none;
+    -moz-transition: none;
+    transition: none;
+}
+
+.down-big-ch {
+    font-size: 4em;
+    line-height: 1.2;
+    text-align: right;
+    font-weight: 200;
+    color: #fff; /* redeclare to override the `.jumbotron a` */
+    -webkit-transition: none;
+    -moz-transition: none;
+    transition: none;
+}
+
+.down-line {
+    text-align: center;
+    margin: 20px 0 10px 0;
+}
+
+.down-btn {
+    width: 150px;
+    color: #EFF1F5;
+    background: #7ab5d3;
+    display: block;
+    float: right
+}
+
+/* Download button */
+.down-btn {
+    padding: 19px 24px;
+    font-size: 24px;
+    font-weight: 200;
+    color: #fff; /* redeclare to override the `.jumbotron a` */
+    border: 0;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .1), 0 1px 5px rgba(0, 0, 0, .25);
+    -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .1), 0 1px 5px rgba(0, 0, 0, .25);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .1), 0 1px 5px rgba(0, 0, 0, .25);
+    -webkit-transition: none;
+    -moz-transition: none;
+    transition: none;
+}
+
+.down-btn:hover {
+    -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .1), 0 1px 5px rgba(0, 0, 0, .25);
+    -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .1), 0 1px 5px rgba(0, 0, 0, .25);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .1), 0 1px 5px rgba(0, 0, 0, .25);
+}
+
+.down-btn:active {
+    -webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, .1), 0 1px 0 rgba(255, 255, 255, .1);
+    -moz-box-shadow: inset 0 2px 4px rgba(0, 0, 0, .1), 0 1px 0 rgba(255, 255, 255, .1);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, .1), 0 1px 0 rgba(255, 255, 255, .1);
+}
+
+.down-help {
+    color: #747474;
+    text-align: center;
+    line-height: 2.2;
+}
+
+.down-help a {
+    color: #747474;
+    font-weight: 200;
+    -webkit-transition: none;
+    -moz-transition: none;
+    transition: none;
+}
+
+#login-panel .span12 {
+    position: absolute;
+    top: 100px;
+    right: 0;
+    width: 360px;
+    border: 2px solid #eee;
+    background: #FFFFFF;
+}
+
+.span12 .container {
+    width: 100%;
+    text-align: center;
+}
+
+.verify {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.verify img {
+    width: 100px;
+    height: 35px;
+}
+
+.controls {
+    margin: 0 auto;
+    text-align: center;
+}
+
+input.span1 {
+    width: 150px;
+}
+
+.t-align-left {
+    text-align: left;
+    width: 270px;
+}
+
+.t-align-center {
+    text-align: center;
+    width: 270px;
+}
+
+input[type="text"], input[type="password"] {
+    height: 25px;
+    line-height: 25px;
+}
+
+.foot-text {
+    margin-bottom: 20px;
+    width: 270px;
+}
+
+.foot-text a {
+    color: #747474;
+}
+
+.clear-float::after {
+    display: block;
+    content: ' ';
+    clear: both;
+}
+
+.btn {
+    color: #EFF1F5;
+    background: #86CE2F;
+    width: 100%;
+}
+
+.mgb {
+    margin-bottom: 10px;
+}
+
+.headpic {
+    margin: 10px auto
+}
+
+.headpic img {
+    border-radius: 50px;
+    width: 100px;
+}
+
+.countapi li {
+    list-style: none;
+    color: #6b6b6b;
+    padding: 3px;
+    text-align: left;
+}
+
+.countapi li span {
+    color: #9d9d9d;
+    width: 90px;
+    display: block;
+    float: left;
+    text-align: right;
+}

@@ -1,0 +1,130 @@
+<!-- 调用头部文件 -->
+<include file = "Public:header_content" title = "{$title}" />
+
+<div class="main-content">
+    <div class="apisys-content">
+        <div class="apisys-content-title">
+            <h3>
+                <a href="javascript:window.location.reload();" title="刷新本页"><i class="fa fa-refresh"></i></a> 编辑添加API接口分类
+            </h3>
+        </div>
+        <div class="apisys-content-content form-body">
+
+                <form id="form" action="{$post_action}" method="post" class="form-horizontal">
+                    <div class="row">
+
+                        <div class="">
+                            <div class="input-group m-b">
+                            <span class="input-group-btn btn-w-m" >
+                                <h5 class="p-xxs m-l-sm">上级分类 <i class="fa fa-asterisk text-danger"></i></h5>
+                            </span>
+                                <select id="project_id" name="project_id" class="form-control "   >
+                                    <option value="0">顶级项目名称</option>
+                                    <volist name="catlist" id="vo">
+                                        <if condition="$vo['parent_id'] eq 0">
+                                            <if condition="$parent_id neq 0">
+                                                <option value="{$vo['id']}" <if condition="($vo['id'] eq $parent_id) and ($parent_id neq 0)">selected="selected"</if> >{$vo.spacer}{$vo.name}</option>
+                                            <else/>
+                                                <option value="{$vo['id']}" <if condition="$vo['id'] eq $data['parent_id']">selected="selected"</if> >{$vo.spacer}{$vo.name}</option>
+                                            </if>
+                                        </if>
+                                    </volist>
+                                </select>
+                            </div>
+
+                            <div class="input-group m-b">
+                            <span class="input-group-btn btn-w-m" >
+                                <h5 class="p-xxs m-l-sm">分类名称 <i class="fa fa-asterisk text-danger"></i></h5>
+                            </span>
+                                <input type="text" class="form-control" id="name" name="name" value="{$data.name}"
+                                       placeholder="分类名称">
+                            </div>
+                            <div class="input-group m-b">
+                            <span class="input-group-btn btn-w-m" >
+                                <h5 class="p-xxs m-l-sm">分割路径 <i class="fa fa-asterisk text-danger"></i></h5>
+                            </span>
+                                <input type="text" class="form-control" style="ime-mode:disabled;" id="category_url" name="category_url" value="{$data.category_url}"
+                                          placeholder="接口地址">
+                            </div>
+                            <div class="input-group m-b">
+                                <span class="input-group-btn btn-w-m" >
+                                    <h5 class="p-xxs m-l-sm">接口地址 </h5>
+                                </span>
+
+                                   <span class="arrow" id="url_str">
+                                       {$data.parent_url}
+                                   </span>
+                                <span class="arrow" id="url_str_file">
+                                       {$data.category_url}
+                                   </span>
+
+
+
+                            </div>
+                            <div class="input-group m-b">
+                            <span class="input-group-btn btn-w-m" >
+                                <h5 class="p-xxs m-l-sm">分类描述 <i class="fa fa-asterisk text-danger"></i></h5>
+                            </span>
+                                <textarea class="form-control" id="category_memo" name="category_memo" placeholder="分类描述" >{$data.category_memo}</textarea>
+                            </div>
+                            <div style="text-align: center;">
+                                <button type="submit" class="btn btn-primary m-l-sm" ><i class="fa fa-save"></i> 提交保存</button>
+                                <button type="reset" class="btn btn-primary m-l-sm" ><i class="fa fa-remove"></i> 重置</button>
+                            </div>
+                        </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- 调用脚本文件 -->
+<include file = "Public:script"  />
+
+<script type="text/javascript">
+
+    $(function () {
+
+        $("#project_id").change(function () {
+            var parject_id = $("#project_id").val();
+
+            if(parject_id=='0'){
+                $("#url_str").html('');
+            }else{
+                var url = "/index.php?s=/Docapi/Opapi/catUrl/cid/" + parject_id + ".html";  //"{:U('Docapi/Opapi/catUrl?cid=4')}";
+                $.ajax({
+                    type: "get",
+                    url: url,
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.status == 1) {
+                            $("#url_str").html(data.catUrl);
+                        }
+                    }
+                });
+            }
+
+        });
+
+
+        $("#category_url").change(function () {
+            var str_file = $("#category_url").val();
+            $("#url_str_file").html(str_file);
+        });
+
+        $("#category_url").keyup(function () {
+            var str_file = $("#category_url").val();
+            $("#url_str_file").html(str_file);
+        });
+
+    });
+
+</script>
+<script>
+    $(document).ready(function() {
+        $("#project_id").change();
+    });
+</script>
+<!-- 调用脚部文件 -->
+<include file = "Public:footer_content"  />
