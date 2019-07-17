@@ -11,7 +11,8 @@ class Test extends \common\controller\Base{
      */
     public function index(){
 
-        print_r(input('post.'));
+        $data = input('post.');
+        print_r($data['postData']);
         echo 123;exit;
         $redis = new \Redis();
         $redis->connect('127.0.0.1',6379);
