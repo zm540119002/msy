@@ -22,7 +22,6 @@ class Index extends HssBase {
             'limit'=>'7'
         ];
         $promotionList  = $modelPromotion->getList($condition);
-        print_r($promotionList);exit;
         $this ->assign('promotionList',$promotionList);
 
         // 场景列表 11个
